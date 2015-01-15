@@ -18,9 +18,11 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
 	final String cookieFromsearchName = "fromsearch";
 	final String cookieFromsearchValue = "1";
-	final String attributeNameSlot = "data-mon-slot";
-	final String attributeNameModuleType = "data-mon-type";
-	final String adsenseHeaderValue = "advertisement";
+
+	private static final String ATTRIBUTE_NAME_SLOT = "data-mon-slot";
+	private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
+	private static final String ADSENSE_HEADER_VALUE = "advertisement";
+	private static final String SLOT_IN_CONTENT = "in_content";
 
 	@FindBy(css=".adsbygoogle.ad-responsive-ic")
 	private WebElement adsenseInsInContent;
@@ -84,7 +86,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	public void verifyAdsenseUnitSlot() {
 		List<WebElement> listWebElements = driver.findElements(MonetizationModuleAdsenseListBy);
 		for (WebElement elem : listWebElements) {
-			String slotName = elem.getAttribute(attributeNameSlot);
+			String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
 			switch (slotName) {
 				case "above_title":
 					verifyAdsenseUnitShownAboveTitle();
@@ -172,9 +174,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 		int width;
 		List<WebElement> listWebElements = driver.findElements(MonetizationModuleAdsenseListBy);
 		for (WebElement elem : listWebElements) {
-			String slotName = elem.getAttribute(attributeNameSlot);
-			width = elem.findElement(By.cssSelector(".adsbygoogle")).getSize().width;
-			if (slotName.equals("in_content")) {
+			String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+			width = elem.findElement(adsenseIns).getSize().width;
+			if (slotName.equals(SLOT_IN_CONTENT)) {
 				Assertion.assertEquals(width, expectedInContent);
 			} else {
 				Assertion.assertEquals(width, expectedOthers);
@@ -186,9 +188,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	public void verifyAdsenseHeaderShown() {
 		waitForElementByElement(adHeader);
 		Assertion.assertTrue(checkIfElementOnPage(adHeader));
-		Assertion.assertEquals(adsenseHeaderValue.toUpperCase(), adHeader.getText());
+		Assertion.assertEquals(ADSENSE_HEADER_VALUE.toUpperCase(), adHeader.getText());
 		PageObjectLogging.log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
 	}
-
 
 }

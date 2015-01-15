@@ -7,8 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.lang.System;
-
 /**
  * @ownership Monetization
  */
