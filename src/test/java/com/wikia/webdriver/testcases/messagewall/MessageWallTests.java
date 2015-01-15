@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.messagewall;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -13,16 +11,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageW
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Write and edit message,
- * 2. Write and remove message,
- * 3. Write and close message,,
- * 4. Write and quote message,
- * 5. Write and preview message,
- * 6. Write and reply message,
+ *         <p/>
+ *         1. Write and edit message,
+ *         2. Write and remove message,
+ *         3. Write and close message,,
+ *         4. Write and quote message,
+ *         5. Write and preview message,
+ *         6. Write and reply message,
  */
 public class MessageWallTests extends NewTestTemplate {
 
@@ -85,7 +84,7 @@ public class MessageWallTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"MessageWall_004", "MessageWall"})
-	public void MessageWall_004_writeQuote_QAART_368() {
+	public void MessageWall_004_writeQuote() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);
@@ -172,7 +171,7 @@ public class MessageWallTests extends NewTestTemplate {
 	 * 4. QATestsBlockedUser should be able to respond on his MessageWall
 	 */
 	@Test(
-			groups = {"MessageWall_008", "MessageWall"}
+		groups = {"MessageWall_008", "MessageWall"}
 	)
 	public void MessageWall_008_blockedUserPostsOnHisWall() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

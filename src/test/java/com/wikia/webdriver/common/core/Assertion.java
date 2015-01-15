@@ -1,25 +1,26 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Assertion extends Assert {
-	
+
 	public static boolean assertStringContains(String pattern, String current) {
 		String currentEncoded = encodeSpecialChars(current);
 		String patternEncoded = encodeSpecialChars(pattern);
 		try {
-			if (current.contains(pattern)){
+			if (current.contains(pattern)) {
 				PageObjectLogging.log(
-						"assertStringContains",
-						"assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
-						true
+					"assertStringContains",
+					"assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+					true
 				);
 				return true;
 			} else {
@@ -28,9 +29,9 @@ public class Assertion extends Assert {
 		} catch (AssertionError ass) {
 			addVerificationFailure(ass);
 			PageObjectLogging.log(
-					"assertStringContains",
-					"assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
-					false
+				"assertStringContains",
+				"assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+				false
 			);
 			return false;
 		}
@@ -41,41 +42,41 @@ public class Assertion extends Assert {
 		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertEquals(pattern, current);
-		} catch(AssertionError err) {
+		} catch (AssertionError err) {
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertEquals",
 				"assertion failed<br/>pattern: " + patternEncoded
-				+ "<br/>current: " + currentEncoded,
+					+ "<br/>current: " + currentEncoded,
 				false
 			);
 		}
 		PageObjectLogging.log(
 			"assertEquals",
 			"assertion passed<br/>pattern: " + patternEncoded
-			+ "<br/>current: " + currentEncoded,
+				+ "<br/>current: " + currentEncoded,
 			true
 		);
 	}
 
-	public static void assertNotEquals(String pattern, String current){
+	public static void assertNotEquals(String pattern, String current) {
 		String patternEncoded = encodeSpecialChars(pattern);
 		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertNotEquals(pattern, current);
-		} catch(AssertionError err) {
+		} catch (AssertionError err) {
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertNotEquals",
 				"assertion failed<br/>pattern: " + patternEncoded
-				+ "<br/>current: " + currentEncoded,
+					+ "<br/>current: " + currentEncoded,
 				false
 			);
 		}
 		PageObjectLogging.log(
 			"assertNotEquals",
 			"assertion passed<br/>pattern: " + patternEncoded
-			+ "<br/>current: " + currentEncoded,
+				+ "<br/>current: " + currentEncoded,
 			true
 		);
 	}
@@ -84,31 +85,28 @@ public class Assertion extends Assert {
 		try {
 			Assert.assertEquals(expected, actual);
 			PageObjectLogging.log("assertNumber", message + ", expected: "
-					+ expected + ", got: " + actual, true);
+				+ expected + ", got: " + actual, true);
 		} catch (AssertionError ass) {
 			addVerificationFailure(ass);
 			PageObjectLogging.log("assertNumber", message + ", expected: "
-					+ expected + ", got: " + actual, false);
+				+ expected + ", got: " + actual, false);
 		}
 	}
-	
+
 	private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
-	
-	private static void addVerificationFailure(Throwable e) 
-	{
+
+	private static void addVerificationFailure(Throwable e) {
 		List verificationFailures = getVerificationFailures();
 		verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
 		verificationFailures.add(e);
 	}
 
-	public static List getVerificationFailures() 
-	{
+	public static List getVerificationFailures() {
 		List verificationFailures = verificationFailuresMap.get(Reporter.getCurrentTestResult());
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
-	
-	public static List getVerificationFailures(ITestResult result) 
-	{
+
+	public static List getVerificationFailures(ITestResult result) {
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}

@@ -1,16 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
-* @author Michal 'justnpT' Nowierski
-*/
+ * @author Michal 'justnpT' Nowierski
+ */
 public class FacebookUserPageObject extends WikiBasePageObject {
 
 	@FindBy(css = "a[href$='?ref=logo']")

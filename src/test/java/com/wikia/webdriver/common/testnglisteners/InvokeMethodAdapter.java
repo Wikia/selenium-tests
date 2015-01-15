@@ -1,29 +1,25 @@
 package com.wikia.webdriver.common.testnglisteners;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import com.wikia.webdriver.common.core.Assertion;
+import java.util.List;
 
 
 public class InvokeMethodAdapter implements IInvokedMethodListener {
 
 	@Override
-	public void afterInvocation(IInvokedMethod method, ITestResult result)
-	{
+	public void afterInvocation(IInvokedMethod method, ITestResult result) {
 		//Reporter.setCurrentTestResult(result);
-		if (method.isTestMethod())
-		{
+		if (method.isTestMethod()) {
 			List verificationFailures = Assertion.getVerificationFailures(result);
 			//if there are verification failures...
-			if(verificationFailures.size() > 0)
-			{
+			if (verificationFailures.size() > 0) {
 				//set the test to failed
 				result.setStatus(ITestResult.FAILURE);
-				for (Object failure:verificationFailures){
+				for (Object failure : verificationFailures) {
 					result.setThrowable((Throwable) failure);
 				}
 			}

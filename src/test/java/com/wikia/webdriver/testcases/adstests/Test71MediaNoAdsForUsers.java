@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -19,8 +19,8 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	private String testedWiki;
 
 	@Factory(
-		dataProviderClass=GermanAdsDataProvider.class,
-		dataProvider="germanArticles"
+		dataProviderClass = GermanAdsDataProvider.class,
+		dataProvider = "germanArticles"
 	)
 	public Test71MediaNoAdsForUsers(String wikiName, String path) {
 		super();
@@ -38,7 +38,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, testedWiki);
 	}
 
-	@Test (groups={"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
+	@Test(groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
 	public void NoAds71Media_GeoEdgeFree() throws Exception {
 		loginSteps();
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);

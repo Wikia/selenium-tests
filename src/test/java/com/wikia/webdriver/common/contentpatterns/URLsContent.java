@@ -101,7 +101,7 @@ public class URLsContent {
 	public static final String MOST_RECENT = "?sort=recent";
 
 	// WAM Scores page url
-	public static final String WAM_PAGE = "wiki/WAM";
+	public static final String WAM_PAGE = "WAM";
 
 	//Preview url for testing video suggestions
 	public static final String VIDEO_SUGGESTIONS_URL = "http://preview.callofduty.wikia.com/wiki/Frank_Woods";
@@ -145,7 +145,7 @@ public class URLsContent {
 	public static final String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
 
 	//avatars
-	public static final String AVATAR_GENERIC = "150px-Avatar.jpg";
+	public static final String AVATAR_GENERIC = "Avatar.jpg";
 
 	//Urls for VE editor
 	public static final String VE_ENABLED_WIKI = "vetest";

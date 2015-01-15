@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
  * @author Sergey Naumov
+ * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
  * @ownership AdEngineering
  */
 public class TestDfpParamsPresentMobile extends NewTestTemplate {
@@ -19,7 +19,7 @@ public class TestDfpParamsPresentMobile extends NewTestTemplate {
 		dataProvider = "dfpParams",
 		groups = {"TestDfpParamsPresentMobile_GeoEdgeFree", "MobileAds"}
 	)
-	public void TestDfpParamsPresentMobile_GeoEdgeFree (
+	public void TestDfpParamsPresentMobile_GeoEdgeFree(
 		String wikiName, String article, String adUnit, String slot, String lineItemId, String creativeId, List<String> pageParams, List<String> slotParams
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);

@@ -1,13 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ShareToolbarComponentObject extends BasePageObject {
 
@@ -15,25 +14,25 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="a[data-id='shareButton']")
+	@FindBy(css = "a[data-id='shareButton']")
 	private WebElement shareButton;
-	@FindBy(css="iframe.twitter-share-button")
+	@FindBy(css = "iframe.twitter-share-button")
 	private WebElement twitterIframe;
-	@FindBy(css="a#b")
+	@FindBy(css = "a#b")
 	private WebElement twitterButton;
-	@FindBy(css="iframe[title*='fb:like']")
+	@FindBy(css = "iframe[title*='fb:like']")
 	private WebElement fBIframe;
-	@FindBy(css="div.pluginConnectButton .pluginConnectButtonDisconnected button")
+	@FindBy(css = "div.pluginConnectButton .pluginConnectButtonDisconnected button")
 	private WebElement fBLikeButton;
-	@FindBy(css="a.email-link")
+	@FindBy(css = "a.email-link")
 	private WebElement emailButton;
-	@FindBy(css="#ShareEmailModal .primary")
+	@FindBy(css = "#ShareEmailModal .primary")
 	private WebElement emailModalSendButton;
-	@FindBy(css="#ShareEmailModal .secondary")
+	@FindBy(css = "#ShareEmailModal .secondary")
 	private WebElement emailModalCancelButton;
-	@FindBy(css="#ShareEmailModal .close")
+	@FindBy(css = "#ShareEmailModal .close")
 	private WebElement emailModalCloseButton;
-	@FindBy(css="input#lightbox-share-email-text")
+	@FindBy(css = "input#lightbox-share-email-text")
 	private WebElement emailModalEmailInputField;
 
 	public void clickShareButton() {

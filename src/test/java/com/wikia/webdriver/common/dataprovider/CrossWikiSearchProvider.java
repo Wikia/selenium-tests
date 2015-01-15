@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
  * Date: 02.04.13
  * Time: 16:27
  */
+
 /**
  * (query, expected wiki result, hub)
  */
@@ -17,20 +18,20 @@ public class CrossWikiSearchProvider {
 			{
 				"call of duty", "Call of Duty Wiki", "VIDEO GAMES"
 			}, {
-				"call-of-duty", "Call of Duty Wiki", "VIDEO GAMES"
-			}, {
-				"call_of_duty", "Call of Duty Wiki", "VIDEO GAMES"
-			}, {
-				"callofduty", "Call of Duty Wiki", "VIDEO GAMES"
-			}, {
-				"cod", "Call of Duty Wiki", "VIDEO GAMES"
-			},
+			"call-of-duty", "Call of Duty Wiki", "VIDEO GAMES"
+		}, {
+			"call_of_duty", "Call of Duty Wiki", "VIDEO GAMES"
+		}, {
+			"callofduty", "Call of Duty Wiki", "VIDEO GAMES"
+		}, {
+			"cod", "Call of Duty Wiki", "VIDEO GAMES"
+		},
 		};
 	}
 
-/**
- * (query, expected wiki result)
- */
+	/**
+	 * (query, expected wiki result)
+	 */
 	@DataProvider
 	public static final Object[][] getPushToTopQueries() {
 		return new Object[][]{
@@ -44,14 +45,14 @@ public class CrossWikiSearchProvider {
 			{
 				"Red vs. Blue", "Red vs. Blue Wiki"
 			}, {
-				"PlayStation All-Stars FanFiction Royale", "PlayStation All-Stars FanFiction Royale Wiki"
-			}, {
-				"Yu-Gi-Oh!", "Yu-Gi-Oh!"
-			}, {
-				"007", "James Bond Wiki"
-			}, {
-				"lohgame", "Legacy of Heroes Wiki"
-			}
+			"PlayStation All-Stars FanFiction Royale", "PlayStation All-Stars FanFiction Royale Wiki"
+		}, {
+			"Yu-Gi-Oh!", "Yu-Gi-Oh!"
+		}, {
+			"007", "James Bond Wiki"
+		}, {
+			"lohgame", "Legacy of Heroes Wiki"
+		}
 		};
 	}
 }

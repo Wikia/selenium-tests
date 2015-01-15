@@ -1,10 +1,13 @@
 package com.wikia.webdriver.testcases.wampagetests;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
+import java.util.EnumSet;
 
 /**
  * @author Qaga
@@ -23,9 +26,9 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 
 	@Test(groups = {"WamPage001", "WamPageTests"})
 	public void wam_001_verifyDefaultPage() {
-		wam.verifyFirstTabSelected();
+		wam.verifyTabIsSelected(WamTab.ALL);
 		wam.verifyWamIndexIsNotEmpty();
-		wam.verifyWamIndexHasExactRowsNo( wam.DEFAULT_WAM_INDEX_ROWS );
+		wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
 	}
 
 	@Test(groups = {"WamPage002", "WamPageTests"})
@@ -33,17 +36,14 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 		wam.verifyWamIndexIsNotEmpty();
 		wam.verifyWamVerticalFilterOptions();
 
-		for( WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values() ) {
-			wam.selectVertical( verticalId );
+		for (WamTab tab : EnumSet.complementOf(EnumSet.of(WamTab.ALL))) {
+			wam.selectTab(tab);
 			wam.verifyWamIndexIsNotEmpty();
 			wam.verifyVerticalColumnValuesAreTheSame();
 		}
 	}
 
-	/*
-	 * skipped per CON-324 task
-	 */
-	@Test(enabled = false, groups = {"WamPage003", "WamPageTests", "Smoke5"})
+	@Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
 	public void wam_003_verifyPaginationByNextButton() {
 		wam.verifyWamIndexPageFirstColumn(1, 20);
 		wam.clickNextPaginator();
@@ -54,20 +54,14 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 
 	@Test(groups = {"WamPage004", "WamPageTests"})
 	public void wam_004_compareTabAndHeaderName() {
-		wam.selectTab(0);
-		wam.checkTabAndHeaderName();
-		wam.selectTab(1);
-		wam.checkTabAndHeaderName();
-		wam.selectTab(2);
-		wam.checkTabAndHeaderName();
-		wam.selectTab(3);
-		wam.checkTabAndHeaderName();
-		wam.selectTab(4);
-		wam.checkTabAndHeaderName();
+		for (WamTab tab : WamTab.values()) {
+			wam.selectTab(tab);
+			Assertion.assertEquals(wam.getSelectedHeaderName().toUpperCase(), tab.getExpectedHeaderName());
+		}
 	}
 
 	@Test(groups = {"wamPage_005", "WamPageTests"})
-	public void wamPage_005_testDatePicker_QAART_482() {
+	public void wam_005_testDatePicker() {
 		wam.verifyTodayDateInDatePicker();
 		String lastMonthDate = wam.changeDateToLastMonth();
 		wam.verifyDateInDatePicker(lastMonthDate);

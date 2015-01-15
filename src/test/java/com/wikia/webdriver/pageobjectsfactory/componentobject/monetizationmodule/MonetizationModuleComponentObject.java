@@ -1,24 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule;
 
-import java.util.List;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @author Saipetch Kongkatong
  */
 public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
-	final String cookieFromsearchName = "fromsearch";
-	final String cookieFromsearchValue = "1";
-
+	private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";
+	private static final String COOKIE_FROMSEARCH_VALUE = "1";
 	private static final String ATTRIBUTE_NAME_SLOT = "data-mon-slot";
 	private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
 	private static final String ADSENSE_HEADER_VALUE = "advertisement";
@@ -47,16 +45,16 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private By MonetizationModuleListBy = By.cssSelector(".monetization-module");
 	private By MonetizationModuleAdsenseListBy = By.cssSelector(".monetization-module[data-mon-type='adunit']");
 
-	public MonetizationModuleComponentObject (WebDriver driver) {
+	public MonetizationModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
 	public void setCookieFromSearch() {
-		setCookie(cookieFromsearchName, cookieFromsearchValue);
+		setCookie(COOKIE_FROMSEARCH_NAME, COOKIE_FROMSEARCH_VALUE);
 	}
 
 	public void deleteCookieFromSearch() {
-		deleteCookie(cookieFromsearchName);
+		deleteCookie(COOKIE_FROMSEARCH_NAME);
 	}
 
 	public void verifyMonetizationModuleShown() {

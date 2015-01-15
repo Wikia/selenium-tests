@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.commentstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -73,7 +72,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ArticleComments_004", "ArticleComments"})
-	public void ArticleComments_004_deleteComment_MAIN_3055() {
+	public void ArticleComments_004_deleteComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);

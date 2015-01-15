@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 public class MonetizationModuleTests extends NewTestTemplate {
 
-	private static final String TEST_COUNTRY_CODE = "TH";	// country that the ads will be shown
+	private static final String TEST_COUNTRY_CODE = "TH";    // country that the ads will be shown
 	private static final String TEST_TOP_100_WIKI = "muppet";
 	private static final String TEST_TOP_100_ARTICLE = "Kermit_the_Frog";
 	private static final String TEST_TOP_700_WIKI = "th.sktest123";
@@ -24,6 +24,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is shown on article page for anon user (via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
@@ -40,6 +41,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page for anon user (not via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
@@ -56,6 +58,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page for logged in user (via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
@@ -73,6 +76,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page for logged in user (not via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
@@ -88,7 +92,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModule_005")
+	@DataProvider(name = "DataMonetizationModule_005")
 	public static Object[][] DataMonetizationModule_005() {
 		return new Object[][] {
 			{800, 600, 468, 728},
@@ -101,6 +105,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Check the width of the adsense ad in the monetization module
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -122,6 +127,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is shown on article page for anon user (via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
@@ -148,6 +154,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is not shown on article page (not via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
@@ -172,9 +179,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyAdsenseUnitNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_008")
+	@DataProvider(name = "DataMonetizationModuleTest_008")
 	public static Object[][] DataMonetizationModuleTest_008() {
-		return new Object[][] {
+		return new Object[][]{
 			{"JP", true, TEST_WIKI, TEST_ARTICLE},
 			{"JP", false, TEST_WIKI, TEST_ARTICLE},
 			{"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
@@ -186,6 +193,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page for blocked geos (use default blocked countries)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -217,9 +225,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleGeoTestWikis")
+	@DataProvider(name = "DataMonetizationModuleGeoTestWikis")
 	public static Object[][] DataMonetizationModuleGeoTestWikis() {
-		return new Object[][] {
+		return new Object[][]{
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
 			{TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
 		};
@@ -227,6 +235,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is shown on article page for anon user with non-blocked geos (via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -256,6 +265,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page for non-blocked geos (not via search engine)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -283,9 +293,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_011")
+	@DataProvider(name = "DataMonetizationModuleTest_011")
 	public static Object[][] DataMonetizationModuleTest_011() {
-		return new Object[][] {
+		return new Object[][]{
 			{"JP", true}, {"JP", false},
 			{"US", true}, {"US", false},
 			{"GB", true}, {"GB", false},
@@ -297,6 +307,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * The monetization module is not shown on article page on top 100 wikias for blocked geos (set blocked countries per wiki)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -328,9 +339,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_012")
+	@DataProvider(name = "DataMonetizationModuleTest_012")
 	public static Object[][] DataMonetizationModuleTest_012() {
-		return new Object[][] {
+		return new Object[][]{
 			{TEST_WIKI, TEST_ARTICLE},
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
 			{TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
@@ -339,6 +350,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af slots)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -365,7 +377,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_013")
+	@DataProvider(name = "DataMonetizationModuleTest_013")
 	public static Object[][] DataMonetizationModuleTest_013() {
 		return new Object[][] {
 			{"JP"},
@@ -376,6 +388,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is not shown on article page on top 700 wikias for blocked geos (set blocked countries per wiki)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -399,9 +412,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_014")
+	@DataProvider(name = "DataMonetizationModuleTest_014")
 	public static Object[][] DataMonetizationModuleTest_014() {
-		return new Object[][] {
+		return new Object[][]{
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"},
@@ -413,6 +426,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is shown on article page on top 700 wikias and the rest for particular geos (ic/bc/af slots)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -440,7 +454,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
-	@DataProvider(name="DataMonetizationModuleTest_015")
+	@DataProvider(name = "DataMonetizationModuleTest_015")
 	public static Object[][] DataMonetizationModuleTest_015() {
 		return new Object[][] {
 			{"GB"},
@@ -450,6 +464,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	/**
 	 * Adsense: The monetization module is shown on article page on the rest of wikias for particular geos (bc/af slots)
+	 *
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(

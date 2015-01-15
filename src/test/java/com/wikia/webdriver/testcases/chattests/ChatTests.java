@@ -1,20 +1,17 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * @author Bogna 'bognix' Knychala
- *
- * @description
- * 1. Two users enter Chat
+ * @description 1. Two users enter Chat
  * 2. Verify dropdown menu is present when user clicks on another user with right button
  * 3. Verify blocked user dropdown
  * 4. Verify admin user dropdown
@@ -43,10 +40,10 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	private String userStaff = credentials.userNameStaff;
 	private String userStaffPassword = credentials.passwordStaff;
 
-	private final int numberOfPrivateMessages = 10;
+	private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
-	private ChatPageObject openChatForUser (
-			WebDriver driver, String userName, String password
+	private ChatPageObject openChatForUser(
+		WebDriver driver, String userName, String password
 	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(userName, password, wikiURL);
@@ -202,14 +199,14 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
 		switchToWindow(driverTwo);
 		chatUserSix.selectPrivateMessageToUser(userFive);
-		List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(userSix, numberOfPrivateMessages);
+		List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(userSix, NUMBER_OF_PRIVATE_MESSAGES);
 
 		switchToWindow(driverOne);
 		chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
 	}
 
 	@Test(groups = {"Chat_009", "Chat", "Modals"})
-	public void Chat_009_banUser_QAART_410() {
+	public void Chat_009_banUser() {
 		switchToWindow(driverOne);
 		openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);
 

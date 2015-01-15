@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,12 +10,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class FollowPhotosTests extends NewTestTemplate{
+public class FollowPhotosTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	String imageName;
@@ -33,7 +31,7 @@ public class FollowPhotosTests extends NewTestTemplate{
 		special.verifyPageUnfollowed();
 	}
 
-	@Test(groups = "FollowPhoto", dependsOnMethods={"FollowPhoto_001_setup"})
+	@Test(groups = "FollowPhoto", dependsOnMethods = {"FollowPhoto_001_setup"})
 	public void FollowPhoto_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -41,7 +39,7 @@ public class FollowPhotosTests extends NewTestTemplate{
 		file.follow();
 	}
 
-	@Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods={"FollowPhoto_002_follow"})
+	@Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})
 	public void FollowPhoto_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

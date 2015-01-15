@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,24 +11,24 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
  * VE-1202 Select CK from editor preference page then clicking on main article edit would launch CK
  * VE-1202 Select Source from editor preference page then clicking on main article edit would launch source
- * VE-1202 Select Default from editor preference page then clicking on main article edit would launch VE
  */
 public class EditingPreferencesTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String DEFAULT = "0";
-	String SOURCE = "1";
-	String VE = "2";
-	String CK = "3";
+	private static final String SOURCE = "1";
+	private static final String VE = "2";
+	private static final String CK = "3";
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup() {
@@ -77,17 +74,5 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
-
-	@Test(groups = {"EditingPreferencesTest", "EditPreferences_004"})
-	public void EditPreferences_004_selectDefault() {
-		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
-		editPrefPage.selectPreferredEditor(DEFAULT);
-		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
-	}
 }
+

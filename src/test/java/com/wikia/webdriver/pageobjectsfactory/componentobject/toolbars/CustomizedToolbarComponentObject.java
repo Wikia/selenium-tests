@@ -1,43 +1,41 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 
 /**
  * @author Michal 'justnpT' Nowierski
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class CustomizedToolbarComponentObject extends WikiBasePageObject{
+public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
 	public CustomizedToolbarComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
-	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
+	@FindBy(css = "div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
 	private WebElement customizeButton;
-	@FindBy(css="div.msg")
+	@FindBy(css = "div.msg")
 	private WebElement pageWatchlistStatusMessage;
-	@FindBy(css="div.search-box input.search")
+	@FindBy(css = "div.search-box input.search")
 	private WebElement findAToolField;
-	@FindBy(css="#MyToolsRenameItem input.input-box")
+	@FindBy(css = "#MyToolsRenameItem input.input-box")
 	private WebElement renameItemDialogInput;
-	@FindBy(css="#MyToolsRenameItem button.primary")
+	@FindBy(css = "#MyToolsRenameItem button.primary")
 	private WebElement saveItemDialogInput;
-	@FindBy(css="#MyToolsConfigurationWrapper footer button.primary")
+	@FindBy(css = "#MyToolsConfigurationWrapper footer button.primary")
 	private WebElement saveButton;
-	@FindBy(css="span.reset-defaults img")
+	@FindBy(css = "span.reset-defaults img")
 	private WebElement resetDefaultsButton;
-	@FindBy(css=".overflow-menu > .tools-menu li > a[href*=Special]")
+	@FindBy(css = ".overflow-menu > .tools-menu li > a[href*=Special]")
 	private List<WebElement> myToolsList;
 
 	private By toolsList = By.cssSelector("ul.tools li");
@@ -58,6 +56,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
 		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
 	}
+
 	/**
 	 * Clicks on "Customize" button. User must be logged in.
 	 *
@@ -127,9 +126,9 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	 */
 	public void clickSearchSuggestion(String toolName) {
 		scrollAndClick(
-				driver.findElement(
-						By.cssSelector(String.format(searchSuggestionToolCss, toolName))
-				)
+			driver.findElement(
+				By.cssSelector(String.format(searchSuggestionToolCss, toolName))
+			)
 		);
 		PageObjectLogging.log("clickSearchSuggestion", toolName + " selected from search suggestions", true);
 	}
@@ -142,7 +141,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	 */
 	public void clickOnTool(String toolName) {
 		jQueryClick(
-				waitForElementByCss(String.format(toolbarToolCss, toolName))
+			waitForElementByCss(String.format(toolbarToolCss, toolName))
 		);
 		PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
 	}
@@ -223,7 +222,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	public void clickRename(String toolName) {
 		waitForElementByCss(String.format(toolsListToolCss, toolName));
 		jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
-		PageObjectLogging.log("clickRename", "rename button for "+toolName+" clicked", true);
+		PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
 	}
 
 	/**
@@ -240,7 +239,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 
 	public void verifyToolOnToolbar(String toolName) {
 		waitForElementByXPath(String.format(addedToolsPath, toolName));
-		PageObjectLogging.log("verifyToolOnToolbar","tool " + toolName + " visible on toolbar", true);
+		PageObjectLogging.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
 	}
 
 	/**
@@ -251,30 +250,30 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void unfollowIfFollowed() {
-		List<WebElement> List = driver.findElements(toolsList);
-		for (int i = 0; i < List.size(); i++) {
-			if (List.get(i).getText().equals("Following")) {
+		List<WebElement> list = driver.findElements(toolsList);
+		for (int i = 0; i < list.size(); i++) {
+			if ("Following".equals(list.get(i).getText())) {
 				clickOnTool("follow");
 				verifyFollowMessage();
 				waitForTextToBePresentInElementByBy(toolsList, "Follow");
 				PageObjectLogging.log("unfollowIfFollowed",
-						"page was followed, unfollow button clicked", true);
+					"page was followed, unfollow button clicked", true);
 				break;
 			}
 		}
 		PageObjectLogging.log("unfollowIfFollowed",
-				"page was unfollowed", true);
+			"page was unfollowed", true);
 	}
 
 	public void verifyToolRemoved(String toolName) {
 		waitForElementNotPresent(
-				By.xpath(String.format(addedToolsPath, toolName))
+			By.xpath(String.format(addedToolsPath, toolName))
 		);
-		PageObjectLogging.log("verifyToolRemoved",toolName + " removed from toolbar", true);
+		PageObjectLogging.log("verifyToolRemoved", toolName + " removed from toolbar", true);
 	}
 
-	public void addManyItems(String name, Integer count){
-		for (int i=0; i<count; i++){
+	public void addManyItems(String name, Integer count) {
+		for (int i = 0; i < count; i++) {
 			searchTool(name.substring(0, 2));
 			clickSearchSuggestion(name);
 			verifyToolOnList(name);
@@ -284,13 +283,13 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	public void openMoreMenu() {
 		executeScript("$('.overflow-menu').mouseover();");
 		waitForElementByCss(".overflow-menu > .tools-menu");
-		PageObjectLogging.log("openMoreMenu","more menu opened", true);
+		PageObjectLogging.log("openMoreMenu", "more menu opened", true);
 	}
 
 	public void verifyToolInMoreTool(String toolName) {
 		for (WebElement elem : myToolsList) {
 			Assertion.assertEquals(toolName.toLowerCase(), elem.getAttribute("data-name").toLowerCase());
 		}
-		PageObjectLogging.log("verifyToolInMoreTool",toolName + " appears in ToolbarMoreTool.", true);
+		PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
 	}
 }

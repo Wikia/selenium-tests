@@ -1,72 +1,53 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMapDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertTemplateDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorKeyboardShortcutsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReferenceDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReferenceListDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Robert 'rochan' Chan
- *
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
-	public VisualEditorMenu(WebDriver driver) {
-		super(driver);
-	}
+	private static final int styleList = 0;
+	private static final int insertList = 1;
+	private static final int hamburgerList = 2;
 
-	private final int STYLELIST = 0;
-	private final int INSERTLIST = 1;
-	private final int HAMBURGERLIST = 2;
-
-	@FindBy(css=".oo-ui-icon-bold-b")
+	@FindBy(css = ".oo-ui-icon-bold-b")
 	private WebElement boldButton;
-	@FindBy(css=".oo-ui-icon-italic-i")
+	@FindBy(css = ".oo-ui-icon-italic-i")
 	private WebElement italicButton;
-	@FindBy(css=".oo-ui-icon-link")
+	@FindBy(css = ".oo-ui-icon-link")
 	private WebElement linkButton;
-	@FindBy(css=".oo-ui-frame")
+	@FindBy(css = ".oo-ui-frame")
 	protected WebElement linkIframe;
-	@FindBy(css=".oo-ui-icon-code")
+	@FindBy(css = ".oo-ui-icon-code")
 	private WebElement codeButton;
-	@FindBy(css=".oo-ui-icon-clear")
+	@FindBy(css = ".oo-ui-icon-clear")
 	private WebElement clearButton;
-	@FindBy(css=".oo-ui-icon-number-list")
+	@FindBy(css = ".oo-ui-icon-number-list")
 	private WebElement numListButton;
-	@FindBy(css=".oo-ui-icon-bullet-list")
+	@FindBy(css = ".oo-ui-icon-bullet-list")
 	private WebElement bulletListButton;
-	@FindBy(css=".oo-ui-menuToolGroup .oo-ui-indicator-down")
+	@FindBy(css = ".oo-ui-menuToolGroup .oo-ui-indicator-down")
 	private WebElement formattingDropDown;
-	@FindBy(css=".oo-ui-menuToolGroup")
+	@FindBy(css = ".oo-ui-menuToolGroup")
 	private WebElement formattingDropDownItems;
-	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
+	@FindBy(css = ".oo-ui-listToolGroup .oo-ui-indicator-down")
 	private List<WebElement> toolListDropDowns;
-	@FindBy(css=".oo-ui-listToolGroup")
+	@FindBy(css = ".oo-ui-listToolGroup")
 	private List<WebElement> toolListItems;
-	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
+	@FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
 
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
@@ -83,6 +64,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By templateBy = By.cssSelector(".oo-ui-icon-template");
 	private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
 	private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
+	private By galleryBy = By.cssSelector(".oo-ui-icon-gallery");
 	private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
 	private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
 	private By subHeading1By = By.cssSelector(".oo-ui-tool-name-heading3");
@@ -97,9 +79,13 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
 	private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
 
+	public VisualEditorMenu(WebDriver driver) {
+		super(driver);
+	}
+
 	private void clickStyleItemFromDropDown(By styleBy) {
-		WebElement styleList = toolListDropDowns.get(STYLELIST);
-		WebElement styleItems = toolListItems.get(STYLELIST);
+		WebElement styleList = toolListDropDowns.get(this.styleList);
+		WebElement styleItems = toolListItems.get(this.styleList);
 		waitForElementByElement(styleList);
 		Actions actions = new Actions(driver);
 		actions
@@ -130,6 +116,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case UNDERLINE:
 				clickStyleItemFromDropDown(underlineStyleBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing style selected");
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
 	}
@@ -168,6 +156,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case PREFORMATTED:
 				clickFormatting(preformatedBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing format selected");
 		}
 	}
 
@@ -179,6 +169,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case DECREASE:
 				clickStyleItemFromDropDown(outdentBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing indentation selected");
 		}
 	}
 
@@ -220,8 +212,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
 				clickHamburgerItemFromDropDown(sourceEditorBy);
 				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 				return new VisualEditorSourceEditorDialog(driver);
+			case GALLERY:
+				clickInsertItemFromDropDown(galleryBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorInsertGalleryDialog(driver);
 			default:
-				return null;
+				throw new NoSuchElementException("Non-existing dialog selected");
 		}
 	}
 
@@ -238,8 +234,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	private void clickInsertItemFromDropDown(By insertBy) {
-		WebElement insertList = toolListDropDowns.get(INSERTLIST);
-		WebElement insertItems = toolListItems.get(INSERTLIST);
+		WebElement insertList = toolListDropDowns.get(this.insertList);
+		WebElement insertItems = toolListItems.get(this.insertList);
 		waitForElementVisibleByElement(insertList);
 		waitForElementClickableByElement(insertList);
 		Actions actions = new Actions(driver);
@@ -251,16 +247,16 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	private void clickHamburgerItemFromDropDown(By insertBy) {
-		WebElement hamburgerList = toolListDropDowns.get(HAMBURGERLIST);
-		WebElement hamburgerItems = toolListItems.get(HAMBURGERLIST);
+		WebElement hamburgerList = toolListDropDowns.get(this.hamburgerList);
+		WebElement hamburgerItems = toolListItems.get(this.hamburgerList);
 		waitForElementVisibleByElement(hamburgerList);
 		waitForElementClickableByElement(hamburgerList);
 		Actions actions = new Actions(driver);
 		actions
-		.click(hamburgerList)
-		.click(hamburgerItems.findElement(insertBy))
-		.build()
-		.perform();
+			.click(hamburgerList)
+			.click(hamburgerItems.findElement(insertBy))
+			.build()
+			.perform();
 	}
 
 	public VisualEditorHyperLinkDialog clickLinkButton() {

@@ -1,11 +1,10 @@
 package com.wikia.webdriver.common.properties;
 
-import java.io.File;
-
 import com.wikia.webdriver.common.core.XMLFunctions;
 
+import java.io.File;
+
 /**
- *
  * @author Bogna 'bognix' Knychała
  */
 public class Credentials {
