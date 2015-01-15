@@ -57,6 +57,8 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	private WebElement singleImg;
 	@FindBy(css = ".view-map")
 	private WebElement viewMapButton;
+	@FindBy(css = ".linked-gallery-image a")
+	private WebElement linkedImage;
 
 
 	public LightBoxMercuryComponentObject clickGalleryImage(int index) {
@@ -79,6 +81,16 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		PageObjectLogging.log("clickViewReplies", "View replies was clicked", true, driver);
 	}
 
+	public void clickLinkedImage() {
+		waitForElementVisibleByElement(linkedImage);
+		tapOnElement(linkedImage);
+	}
+
+	public String getLinkedImageHref() {
+		waitForElementVisibleByElement(linkedImage);
+		return linkedImage.getAttribute("href");
+	}
+
 	public SearchNavSideMenuComponentObject clickSearchButton() {
 		waitForElementVisibleByElement(searchButton);
 		searchButton.click();
@@ -98,6 +110,11 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		PageObjectLogging.log("clickMapButton", "Map button was clicked", true);
 		return new InteractiveMapsMercuryComponentObject(driver);
 	}
+
+	public void verifyLinkedImageRedirection(String hrefUrl) {
+		Assertion.assertTrue(driver.getCurrentUrl().toString().contains(hrefUrl));
+	}
+
 	public void verifyCommentsAreUncollapsed() {
 		Assertion.assertFalse(commentsHeader.getAttribute("class").contains("collapsed"));
 	}
