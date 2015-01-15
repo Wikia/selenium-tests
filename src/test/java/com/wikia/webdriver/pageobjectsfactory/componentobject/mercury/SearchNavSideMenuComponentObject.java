@@ -110,34 +110,28 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void verifyOpeningArticleInNav(int anchorIndex) {
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
-		if (noChevrons.size() != 0) {
-			noChevrons.get(anchorIndex).click();
-			PageObjectLogging.log("verifyOpeningArticleInNav", "New article opened", true, driver);
-		}
+		noChevrons.get(anchorIndex).click();
+		PageObjectLogging.log("verifyOpeningArticleInNav", "New article opened", true, driver);
 	}
 
 	public void verifyOpeningNextLevelInNav(int anchorIndex) {
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		if (chevrons.size() != 0) {
-			chevrons.get(anchorIndex).click();
-			waitForElementVisibleByElement(backChevron);
-			PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is visible", true, driver);
-		}
+		chevrons.get(anchorIndex).click();
+		waitForElementVisibleByElement(backChevron);
+		PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is visible", true, driver);
 	}
 
 	public void verifyBackLinkFunctionality(int anchorIndex) {
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		if (chevrons.size() != 0) {
-			chevrons.get(anchorIndex).click();
-			waitForElementVisibleByElement(backChevron);
-			backChevron.click();
-			PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
-		}
+		chevrons.get(anchorIndex).click();
+		waitForElementVisibleByElement(backChevron);
+		backChevron.click();
+		PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
 	}
 
 	public void verifyClosingNav() {
 		waitForElementVisibleByElement(overlay);
-//		tapOnElement(overlay);
+//		tapOnElement(overlay);	Waiting for new tap gestures to be implemented
 		PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true, driver);
 	}
 
