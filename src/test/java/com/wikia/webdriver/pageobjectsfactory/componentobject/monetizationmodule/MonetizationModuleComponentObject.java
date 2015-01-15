@@ -18,8 +18,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";
 	private static final String COOKIE_FROMSEARCH_VALUE = "1";
 	private static final String ATTRIBUTE_NAME_SLOT = "data-mon-slot";
-	final String attributeNameModuleType = "data-mon-type";
-	final String adsenseHeaderValue = "advertisement";
+	private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
+	private static final String ADSENSE_HEADER_VALUE = "advertisement";
+	private static final String SLOT_IN_CONTENT = "in_content";
 
 	@FindBy(css = ".monetization-module")
 	private WebElement monetizationModuleContainer;
@@ -188,8 +189,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 		List<WebElement> listWebElements = driver.findElements(MonetizationModuleAdsenseListBy);
 		for (WebElement elem : listWebElements) {
 			String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
-			width = elem.findElement(By.cssSelector(".adsbygoogle")).getSize().width;
-			if (slotName.equals("in_content")) {
+			width = elem.findElement(adsenseIns).getSize().width;
+			if (slotName.equals(SLOT_IN_CONTENT)) {
 				Assertion.assertEquals(width, expectedInContent);
 			} else {
 				Assertion.assertEquals(width, expectedOthers);
@@ -201,9 +202,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	public void verifyAdsenseHeaderShown() {
 		waitForElementByElement(adHeader);
 		Assertion.assertTrue(checkIfElementOnPage(adHeader));
-		Assertion.assertEquals(adsenseHeaderValue.toUpperCase(), adHeader.getText());
+		Assertion.assertEquals(ADSENSE_HEADER_VALUE.toUpperCase(), adHeader.getText());
 		PageObjectLogging.log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
 	}
-
 
 }
