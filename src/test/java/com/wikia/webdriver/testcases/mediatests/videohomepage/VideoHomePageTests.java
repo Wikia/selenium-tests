@@ -1,11 +1,10 @@
 package com.wikia.webdriver.testcases.mediatests.videohomepage;
 
-import org.testng.annotations.Test;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHomePageObject;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import org.testng.annotations.Test;
 
 /**
  * Created by Liz Lee on 6/4/14.

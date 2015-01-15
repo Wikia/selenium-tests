@@ -1,22 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class PreviewEditModePageObject extends EditMode {
 
-	@FindBy(css=".modalWrapper.preview")
+	@FindBy(css = ".modalWrapper.preview")
 	private WebElement previewModal;
-	@FindBy(css=".preview .video-thumbnail")
+	@FindBy(css = ".preview .video-thumbnail")
 	protected WebElement videoArticle;
 
 	By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
@@ -37,7 +35,7 @@ public class PreviewEditModePageObject extends EditMode {
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String position;
 
-		switch(positions) {
+		switch (positions) {
 			case LEFT:
 				position = "left";
 				break;
@@ -52,22 +50,22 @@ public class PreviewEditModePageObject extends EditMode {
 				break;
 		}
 		previewModal.findElement(
-				By.cssSelector(
-						videoPostionSelector.replace("%position%", position)
-				)
+			By.cssSelector(
+				videoPostionSelector.replace("%position%", position)
+			)
 		);
 		PageObjectLogging.log(
-				"verifyVideoAlignment",
-				"video alignment is as exepected " + positions.toString(),
-				true
+			"verifyVideoAlignment",
+			"video alignment is as exepected " + positions.toString(),
+			true
 		);
 	}
 
 	public void verifyVideoWidth(int desiredWidth) {
 		int width = Integer.parseInt(previewModal.findElement(
-				videoWidthSelector
+			videoWidthSelector
 		).getAttribute("width"));
-		Assertion.assertNumber(desiredWidth, width, "width should be " + desiredWidth + " but is "+width);
+		Assertion.assertNumber(desiredWidth, width, "width should be " + desiredWidth + " but is " + width);
 	}
 
 	public void verifyVideoCaption(String desiredCaption) {

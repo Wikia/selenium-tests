@@ -1,26 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
-
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class SpecialCreatePagePageObject extends SpecialPageObject {
 
-	@FindBy (css = "#HiddenFieldsDialog input[name='wpTitle']")
+	@FindBy(css = "#HiddenFieldsDialog input[name='wpTitle']")
 	private WebElement titleInput;
-	@FindBy (css = "#HiddenFieldsDialog #ok")
+	@FindBy(css = "#HiddenFieldsDialog #ok")
 	private WebElement submitTitleInput;
 
-	public SpecialCreatePagePageObject (WebDriver driver) {
+	public SpecialCreatePagePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

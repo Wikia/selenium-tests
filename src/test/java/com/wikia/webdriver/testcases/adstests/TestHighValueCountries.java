@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.W
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import org.testng.annotations.Test;
 
 /**
@@ -24,8 +24,8 @@ public class TestHighValueCountries extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProvider="getWikisWithStandardHVC", dataProviderClass=AdsDataProvider.class,
-		groups= {"HVC", "HVC_Standard"}
+		dataProvider = "getWikisWithStandardHVC", dataProviderClass = AdsDataProvider.class,
+		groups = {"HVC", "HVC_Standard"}
 	)
 	public void TestStandardHVC(String wikiName) {
 		logIn();
@@ -35,11 +35,11 @@ public class TestHighValueCountries extends NewTestTemplate {
 		Object[] variableKeysFromCommunity = wikiFactory.getVariableDefaultValueKeys(
 			WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES
 		);
-		String wgHVC_JSConsole = instantGlobalsPrefix + WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES.toString();
-		Object[] wgHVC_valueInConsole = wikiFactory.getWgVariableKeysFromPage(testedWiki, wgHVC_JSConsole);
+		String wgHVCJSConsole = instantGlobalsPrefix + WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES.toString();
+		Object[] wgHVCValueInConsole = wikiFactory.getWgVariableKeysFromPage(testedWiki, wgHVCJSConsole);
 
 		wikiFactory.verifyWgVariableValuesTheSame(
-			wgHVC_valueInConsole, variableKeysFromCommunity
+			wgHVCValueInConsole, variableKeysFromCommunity
 		);
 	}
 }

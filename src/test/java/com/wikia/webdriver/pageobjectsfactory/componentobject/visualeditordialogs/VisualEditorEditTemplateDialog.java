@@ -1,16 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
@@ -19,9 +18,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	private WebElement getInfoLink;
 	@FindBy(css = ".ve-ui-mwParameterPage")
 	private List<WebElement> templateParams;
-	@FindBy(css=".oo-ui-flaggableElement-primary a")
+	@FindBy(css = ".oo-ui-flaggableElement-primary a")
 	private WebElement doneButton;
-	@FindBy(css=".ve-ui-wikiaTransclusionDialog-cancelButton a")
+	@FindBy(css = ".ve-ui-wikiaTransclusionDialog-cancelButton a")
 	private WebElement cancelButton;
 	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
 	private WebElement templateDialog;
@@ -60,7 +59,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public void typeInParam(String paramName, String text) {
 		switchToIFrame();
-		if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+		if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 			WebElement targetParam = getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
 			WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
 			targetParamInput.sendKeys(text);
@@ -75,7 +74,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickDone() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+			if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(doneButton);
 				doneButton.click();
 			} else {
@@ -90,7 +89,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickCancel() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+			if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(cancelButton);
 				cancelButton.click();
 			} else {

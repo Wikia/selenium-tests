@@ -1,13 +1,12 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapHistoryPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapPageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapHistoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * Created by kenkouot on 3/20/14.
@@ -25,13 +24,13 @@ public class LicensedVideoSwap extends NewTestTemplate {
 		licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
 	}
 
-	@Test(groups =  {"LicensedVideoSwap_001", "LicensedVideoSwap", "Media"})
+	@Test(groups = {"LicensedVideoSwap_001", "LicensedVideoSwap", "Media"})
 	public void LicensedVideoSwap_001_navigateToHistory() {
 		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
 		historyPage.verifyOnHistoryPage();
 	}
 
-	@Test(groups =  {"LicensedVideoSwap_002", "LicensedVideoSwap", "Media"})
+	@Test(groups = {"LicensedVideoSwap_002", "LicensedVideoSwap", "Media"})
 	public void LicensedVideoSwap_002_navigateToHistoryAndBackToLvs() {
 		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
 		historyPage.verifyOnHistoryPage();
@@ -39,7 +38,7 @@ public class LicensedVideoSwap extends NewTestTemplate {
 		licensedVideoSwap.verifyOnLvsPage();
 	}
 
-	@Test(groups =  {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
+	@Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
 	public void LicensedVideoSwap_003_swap() {
 		licensedVideoSwap.verifySwapVideo();
 

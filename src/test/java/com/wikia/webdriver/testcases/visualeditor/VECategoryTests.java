@@ -1,11 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -17,11 +11,16 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1407 Adding category to an article
  * VE-1408 Deleting category from an article
  * VE-1411 New category suggestion when adding category to an article
@@ -109,7 +108,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-	groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
+		groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
 	)
 	public void VECategoryTests_005_AddNewCategoryWithSortKey() {
 		String testCategory2 = "Newstuff";

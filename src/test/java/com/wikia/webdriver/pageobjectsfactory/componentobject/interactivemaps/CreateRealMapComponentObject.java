@@ -1,19 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 ;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
- *
  */
 
 public class CreateRealMapComponentObject extends BasePageObject {

@@ -1,7 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,38 +10,36 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
+import java.util.List;
 
-public class VetAddVideoComponentObject extends WikiBasePageObject{
+public class VetAddVideoComponentObject extends WikiBasePageObject {
 
-	@FindBy(css="#VideoEmbedUrl")
+	@FindBy(css = "#VideoEmbedUrl")
 	private WebElement urlField;
-	@FindBy(css="#VideoEmbedUrlSubmit")
+	@FindBy(css = "#VideoEmbedUrlSubmit")
 	private WebElement addUrlButton;
-	@FindBy(css="#VET-suggestions .carousel li")
+	@FindBy(css = "#VET-suggestions .carousel li")
 	private WebElement libraryLIs;
-	@FindBy(css="#VET-search-field")
+	@FindBy(css = "#VET-search-field")
 	private WebElement findField;
-	@FindBy(css="#VET-search-submit")
+	@FindBy(css = "#VET-search-submit")
 	private WebElement findButton;
-	@FindBys(@FindBy(css="#VET-suggestions .carousel li"))
+	@FindBys(@FindBy(css = "#VET-suggestions .carousel li"))
 	private List<WebElement> videoList;
-	@FindBys(@FindBy(css="#VET-suggestions .video-thumbnail"))
+	@FindBys(@FindBy(css = "#VET-suggestions .video-thumbnail"))
 	private List<WebElement> videoThumbnailsList;
-	@FindBy(css="#VET-video-wrapper .Wikia-video-enabledEmbedCode")
+	@FindBy(css = "#VET-video-wrapper .Wikia-video-enabledEmbedCode")
 	private WebElement videoPlayer;
-	@FindBy(css=".video-thumbnail")
+	@FindBy(css = ".video-thumbnail")
 	private WebElement suggestedVideo;
-	@FindBy(css="a.bottom-close-button")
+	@FindBy(css = "a.bottom-close-button")
 	private WebElement closeButton;
 
 	private By addVideoLibraryLink = By.cssSelector("figure + a");
 
 	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver,  this);
+		PageFactory.initElements(driver, this);
 	}
 
 	private String videoName;
@@ -48,7 +47,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private void typeInUrl(String url) {
 		waitForElementByElement(urlField);
 		urlField.sendKeys(url);
-		PageObjectLogging.log("typeInUrl", url+" typed into url field", true);
+		PageObjectLogging.log("typeInUrl", url + " typed into url field", true);
 	}
 
 	private void clickAddButtonProvider() {
@@ -60,7 +59,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private void typeInSearchQuery(String query) {
 		waitForElementByElement(findField);
 		findField.sendKeys(query);
-		PageObjectLogging.log("typeInSearchQuery", query+" query typed into search video field", true);
+		PageObjectLogging.log("typeInSearchQuery", query + " query typed into search video field", true);
 	}
 
 	private void clickFindButton() {
@@ -75,7 +74,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 		WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
 		String videoName = addVideoLink.getAttribute("title");
 		scrollAndClick(addVideoLink);
-		this.videoName =  videoName;
+		this.videoName = videoName;
 		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked: " + videoName, true, driver);
 	}
 
@@ -128,7 +127,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	public WikiArticleEditMode clickCloseButton() {
 		waitForElementByElement(closeButton);
 		scrollAndClick(closeButton);
-		PageObjectLogging.log("clickCloseButton", "close button clicked",  true);
+		PageObjectLogging.log("clickCloseButton", "close button clicked", true);
 		return new WikiArticleEditMode(driver);
 	}
 }

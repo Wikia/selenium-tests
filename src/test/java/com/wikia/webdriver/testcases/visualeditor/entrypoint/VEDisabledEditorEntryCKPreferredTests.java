@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -12,21 +9,23 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
- *
- * Editor Entry Point Test on wiki that has wgEnabledRTEExt = true, wgVisualEditorUI = false
- * User Editor Preference is set to RTE Editor
- * VE-958 verify CK Editor is loaded when clicking Add Page from the contribution drop down
- * VE-958 verify CK Editor is loaded when clicking the main edit button on the top of the article
- * VE-958 verify CK Editor is loaded when clicking the red link in the article
- * VE-958 verify CK Editor is loaded when clicking the section edit link in the article
- * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
- * VE-898 verify CK Editor is loaded on List namespace
- * VE-898 verify Src Editor is loaded on Category namespace
- * VE-898 verify Src Editor is loaded on Template namespace
- * VE-898 verify CK Editor is loaded when using ?action=edit in the URL
+ *         <p/>
+ *         Editor Entry Point Test on wiki that has wgEnabledRTEExt = true, wgVisualEditorUI = false
+ *         User Editor Preference is set to RTE Editor
+ *         VE-958 verify CK Editor is loaded when clicking Add Page from the contribution drop down
+ *         VE-958 verify CK Editor is loaded when clicking the main edit button on the top of the article
+ *         VE-958 verify CK Editor is loaded when clicking the red link in the article
+ *         VE-958 verify CK Editor is loaded when clicking the section edit link in the article
+ *         VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
+ *         VE-898 verify CK Editor is loaded on List namespace
+ *         VE-898 verify Src Editor is loaded on Category namespace
+ *         VE-898 verify Src Editor is loaded on Template namespace
+ *         VE-898 verify CK Editor is loaded when using ?action=edit in the URL
  */
 
 public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBeforeClass {
@@ -70,7 +69,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -81,7 +80,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();

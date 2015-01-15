@@ -6,11 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
 public @interface GeoEdgeProxy {
-    String country() default "";
+	String country() default "";
 }

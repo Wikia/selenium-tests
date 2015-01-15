@@ -5,9 +5,9 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,7 +26,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	}
 
 	// Test: Ooyala video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001" })
+	@Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
 	public void PlayingVideoTests_001_ooyala() {
 		String providerName = "ooyala";
 		String articleName = "VideoOoyalaAgegateLightbox";
@@ -49,7 +49,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	}
 
 	// Test: Ooyala video in inline
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002" })
+	@Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
 	public void PlayingVideoTests_002_ooyala() {
 		String providerName = "ooyala";
 		String articleName = "VideoOoyalaAgegateInline";
@@ -68,11 +68,11 @@ public class PlayingVideoTests extends NewTestTemplate {
 	}
 
 	// Test: IGN video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004" })
+	@Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
 	public void PlayingVideoTests_004_ign() {
 		int itemNumber = 0;
 		String providerName = "ign";
-		String queryString = "provider="+providerName;
+		String queryString = "provider=" + providerName;
 
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
@@ -87,11 +87,11 @@ public class PlayingVideoTests extends NewTestTemplate {
 	}
 
 	// Test: Anyclip video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005" })
+	@Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
 	public void PlayingVideoTests_005_anyclip() {
 		int itemNumber = 0;
 		String providerName = "anyclip";
-		String queryString = "provider="+providerName;
+		String queryString = "provider=" + providerName;
 
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);

@@ -1,13 +1,13 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.UserAgent;
-import java.lang.reflect.Method;
-
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+import java.lang.reflect.Method;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
@@ -25,7 +25,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 			);
 		}
 
-		if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
+		if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
 			NewDriverProvider.setUnstablePageLoadStrategy(true);
 		}
 

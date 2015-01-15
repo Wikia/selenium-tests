@@ -1,22 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 /**
-* @author Michal 'justnpT' Nowierski
-*/
-public class FacebookSettingsPageObject extends WikiBasePageObject{
+ * @author Michal 'justnpT' Nowierski
+ */
+public class FacebookSettingsPageObject extends WikiBasePageObject {
 
 	@FindBy(css = "#pageLogo")
 	private WebElement pageLogo;
@@ -25,7 +23,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	@FindBy(css = ".pop_container_advanced")
 	private WebElement removeAppConfirmationModal;
 	@FindBy(css = ".fbSettingsList ")
-	private WebElement settingsList ;
+	private WebElement settingsList;
 	@FindBy(css = "#app-settings-page .fbApplicationsList li")
 	private List<WebElement> applicationList;
 
@@ -51,10 +49,10 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	public void removeApp(String appID) {
 		if (isAppPresent(appID)) {
 			WebElement wikiAppRemoveButton = driver.findElement(
-					By.cssSelector(
-							removeAppSelector.replace("%appID%", appID)
-							)
-					);
+				By.cssSelector(
+					removeAppSelector.replace("%appID%", appID)
+				)
+			);
 			waitForElementByElement(wikiAppRemoveButton);
 			wikiAppRemoveButton.click();
 			waitForElementByElement(removeButton);
@@ -63,9 +61,9 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 			waitForElementNotVisibleByElement(wikiAppRemoveButton);
 			waitForElementByElement(settingsList);
 			Assert.assertFalse(isAppPresent(appID));
-			PageObjectLogging.log("removeApp", "App with id "+appID+" removed", true);
+			PageObjectLogging.log("removeApp", "App with id " + appID + " removed", true);
 		} else {
-			PageObjectLogging.log("removeApp", "App with id "+appID+" not found", true);
+			PageObjectLogging.log("removeApp", "App with id " + appID + " not found", true);
 		}
 	}
 

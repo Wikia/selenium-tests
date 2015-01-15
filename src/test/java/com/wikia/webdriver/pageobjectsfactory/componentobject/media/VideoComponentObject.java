@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class VideoComponentObject extends WikiBasePageObject{
+public class VideoComponentObject extends WikiBasePageObject {
 
 	protected WebElement videoEmbed;
 	protected Integer videoWidth;
@@ -32,13 +32,13 @@ public class VideoComponentObject extends WikiBasePageObject{
 	}
 
 	public void verifyVideoEmbedWidth() {
-		Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"), videoWidth+"px");
-		PageObjectLogging.log("verifyVideoEmbedWidth", "Width: "+videoWidth, true);
+		Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"), videoWidth + "px");
+		PageObjectLogging.log("verifyVideoEmbedWidth", "Width: " + videoWidth, true);
 	}
 
 	public void verifyVideoIframeWidth() {
 		Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"), videoWidth.toString());
-		PageObjectLogging.log("verifyVideoIframeWidth", "Width: "+videoWidth, true);
+		PageObjectLogging.log("verifyVideoIframeWidth", "Width: " + videoWidth, true);
 	}
 
 	public void verifyVideoOoyalaAgeGate() {
@@ -77,13 +77,13 @@ public class VideoComponentObject extends WikiBasePageObject{
 		Assertion.assertStringContains(containerId, container.getAttribute("id"));
 
 		WebElement object = container.findElement(By.tagName("object"));
-		waitForElementVisibleByElement( object );
+		waitForElementVisibleByElement(object);
 		Assertion.assertStringContains(object.getAttribute("id"), getVideoPlayerObject().getAttribute("value"));
 		PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
 	}
 
 	public void verifyVideoAutoplay(String providerName, boolean status) {
-		PageObjectLogging.log("verifyVideoAutoplay", "Provider: "+providerName, true);
+		PageObjectLogging.log("verifyVideoAutoplay", "Provider: " + providerName, true);
 
 		String autoplayStr = "";
 		String embedCode = "";

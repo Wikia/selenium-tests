@@ -1,20 +1,17 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Point;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Point;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Bogna 'bognix' Knychala

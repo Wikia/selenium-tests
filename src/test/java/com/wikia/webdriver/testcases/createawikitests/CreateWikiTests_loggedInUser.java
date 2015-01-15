@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -12,17 +10,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
+import org.testng.annotations.Test;
 
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- * 1. Create a wiki and delete
- * 2. Create a wiki for children
- * 3. Create a wiki with changed domain
- * 4. Try to create a wiki which name exists
- * 5. Try to create a wiki which name violates naming policy
- * 6. Try to create a wiki without category
- *
+ *         1. Create a wiki and delete
+ *         2. Create a wiki for children
+ *         3. Create a wiki with changed domain
+ *         4. Try to create a wiki which name exists
+ *         5. Try to create a wiki which name violates naming policy
+ *         6. Try to create a wiki without category
  */
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
@@ -75,8 +73,8 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
 		SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
 		factory.verifyVariableValue(
-				WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-				"true"
+			WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
+			"true"
 		);
 	}
 

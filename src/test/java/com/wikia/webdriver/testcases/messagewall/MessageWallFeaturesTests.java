@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.messagewall;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,17 +12,17 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptions
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallAddLinkComponentObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Write message in source mode,
- * 2. Write message in bold font,
- * 3. Write message in italic font,
- * 4. Write message with internal link,
- * 5. Write message with external link,
- * 6. Write message with image,
- *
+ *         <p/>
+ *         1. Write message in source mode,
+ *         2. Write message in bold font,
+ *         3. Write message in italic font,
+ *         4. Write message with internal link,
+ *         5. Write message with external link,
+ *         6. Write message with image,
  */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
