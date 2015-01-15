@@ -183,26 +183,35 @@ public class LightboxTests extends NewTestTemplate {
 //			System.out.println(lightbox.currentImageSrcPath());
 			System.out.println("zoom");
 			
-			TouchAction ta1 = new TouchAction(mobileDriver);
-			TouchAction ta2 = new TouchAction(mobileDriver);
-			MultiTouchAction mt = new MultiTouchAction(mobileDriver);
 			
-			mobileDriver.context("NATIVE_APP");
-			ta1.press(400, 1000).moveTo(200, 1000).release();
-			ta2.press(500, 1000).moveTo(700, 1000).release();
+			
+			
+			touchAction.ZoomInPointXY(mobileDriver, 50, 50, 100);
+			
+			
+			
+			
+			
+//			TouchAction ta1 = new TouchAction(mobileDriver);
+//			TouchAction ta2 = new TouchAction(mobileDriver);
+//			MultiTouchAction mt = new MultiTouchAction(mobileDriver);
+//			
+//			mobileDriver.context("NATIVE_APP");
+//			ta1.press(400, 1000).moveTo(200, 1000).release();
+//			ta2.press(500, 1000).moveTo(700, 1000).release();
 //			ta2.moveTo(700, 1000);
 //			ta1.perform();
 //			ta2.perform();
 			
 //			mt.add(new TouchAction(mobileDriver).press(400, 1000).moveTo(0, 1000).release());
-//			mt.add(new TouchAction(mobileDriver).press(500, 1000).moveTo(900, 1000).release());
-			mt.add(ta1);
-			mt.add(ta2);
-			mt.perform();
+////			mt.add(new TouchAction(mobileDriver).press(500, 1000).moveTo(900, 1000).release());
+//			mt.add(ta1);
+//			mt.add(ta2);
+//			mt.perform();
 //			mobileDriver.zoom(500, 1000);
 //			touchAction.SwipeFromCenterToDirection(mobileDriver, PerformTouchAction.DIRECTION_LEFT, 200, 300, 0);
 //			touchAction.SwipeFromCenterToDirection(mobileDriver, PerformTouchAction.DIRECTION_RIGHT, 200, 300, 0);
-			mobileDriver.context("WEBVIEW_1");
+//			mobileDriver.context("WEBVIEW_1");
 			
 			
 			

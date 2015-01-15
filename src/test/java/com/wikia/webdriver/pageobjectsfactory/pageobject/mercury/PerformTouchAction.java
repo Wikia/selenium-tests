@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-/*
+/**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
  * @updated: 14 Jan 2015
@@ -92,6 +92,9 @@ public class PerformTouchAction {
 		VarStatus();
 	}
 	
+	/**
+	 * That method return value of all resolution variables.
+	 */
 	public void VarStatus () {
 		System.out.println("=======================================");
 		System.out.println("nativeHeight: " + nativeHeight); //1920
@@ -120,6 +123,14 @@ public class PerformTouchAction {
 		System.out.println("=======================================");
 	}
 	
+	/**
+	 * 
+	 * @param mobileDriver
+	 * @param direction Use public var DIRECTION from that class
+	 * @param pixelPath	From 0 to half of screen X or Y, if path will be too high it will be set to edge of app
+	 * @param duration In milliseconds
+	 * @param waitAfter In milliseconds
+	 */
 	public void SwipeFromCenterToDirection (AndroidDriver mobileDriver, String direction, int pixelPath, int duration, int waitAfter){
 		int centerX = appNativeWidth / 2;
 		int centerY = appNativeHeight / 2;
@@ -178,7 +189,17 @@ public class PerformTouchAction {
 		}
 	}
 	
-	public void SwipeFromPointToPoint (AndroidDriver mobileDriver, int startX, int startY, int endX, int endY, int duration, int waitAfter) {
+	/**
+	 * 
+	 * @param mobileDriver
+	 * @param startX Use value 0-100, it is percent of app width
+	 * @param startY Use value 0-100, it is percent of app height
+	 * @param endX Use value 0-100, it is percent of app width
+	 * @param endY Use value 0-100, it is percent of app height
+	 * @param duration In milliseconds
+	 * @param waitAfter In milliseconds
+	 */
+	public void SwipeFromPointToPoint (AndroidDriver mobileDriver, int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
 		startX = (int)((startX / 100f) * appNativeWidth);
 		startY = (int)((startY / 100f) * appNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
@@ -197,7 +218,16 @@ public class PerformTouchAction {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param mobileDriver
+	 * @param startX Use value 0-100, it is percent of app width
+	 * @param startY Use value 0-100, it is percent of app height
+	 * @param pixelPath From 0 to half of screen X, if path will be too high it will be set to edge of app
+	 */
 	public void ZoomInPointXY (AndroidDriver mobileDriver, int startX, int startY, int pixelPath) {
+		startX = (int)((startX / 100f) * appNativeWidth);
+		startY = (int)((startY / 100f) * appNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
 		TouchAction touchTwo = new TouchAction(mobileDriver);
 		MultiTouchAction multiTouch = new MultiTouchAction(mobileDriver);
@@ -210,10 +240,32 @@ public class PerformTouchAction {
 		} else {
 			halfPath = (appNativeWidth - 2) / 2;
 		}
-		//done
 		endXOne = startX - halfPath;
 		if (endXOne < 0) {
-			
+			offSet = -endXOne;
+			endXOne = 0;
+		}
+		endXTwo = startX + halfPath;
+		if (endXTwo > (appNativeWidth - 2)) {
+			offSet = (appNativeWidth - 2) - endXTwo;
+			endXTwo = (appNativeWidth - 2);
+		}
+		if (offSet > 0) {
+			endXTwo += offSet;
+		}
+		if (offSet < 0) {
+			endXOne += offSet;
+		}
+		if (mobileDriver.getContext() != "NATIVE_APP") {
+			mobileDriver.context("NATIVE_APP");
+		}
+		touchOne.press(startX, startY).moveTo(endXOne, startY).release();
+		touchTwo.press(startX, startY).moveTo(endXTwo, startY).release();
+		multiTouch.add(touchOne);
+		multiTouch.add(touchTwo);
+		multiTouch.perform();
+		if (mobileDriver.getContext() != "WEBVIEW_1") {
+			mobileDriver.context("WEBVIEW_1");
 		}
 	}
 	
