@@ -40,7 +40,7 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 			bannerButton.click();
 			PageObjectLogging.log("clickInstallButton", "Install button was clicked", true);
 		} else {
-			PageObjectLogging.log("clickInstallButton", "Install button were not visible", false, driver);
+			PageObjectLogging.log("clickInstallButton", "Install button was not visible", false, driver);
 		}
 	}
 
