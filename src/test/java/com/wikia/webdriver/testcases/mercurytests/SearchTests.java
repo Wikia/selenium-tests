@@ -29,7 +29,7 @@ public class SearchTests extends NewTestTemplate {
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
 		searchObject.clickSearchField();
-		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS);
+		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS, 3);
 		searchObject.verifySearchSuggestionsWereVisible();
 	}
 
@@ -40,7 +40,7 @@ public class SearchTests extends NewTestTemplate {
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
 		searchObject.clickSearchField();
 		searchObject.verifySearchView();
-		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS);
+		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS, 3);
 		searchObject.verifySearchSuggestionsWereVisible();
 		String redirection = searchObject.getSearchResultHref(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
 		base = searchObject.clickSearchSuggestion(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
@@ -65,7 +65,7 @@ public class SearchTests extends NewTestTemplate {
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
 		searchObject.clickSearchField();
 		searchObject.verifySearchView();
-		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS);
+		searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS, 2);
 		searchObject.verifySearchNotMatch();
 	}
 }

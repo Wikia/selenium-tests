@@ -77,12 +77,12 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 		return searchSuggestions.get(searchPosition).getAttribute("href");
 	}
 
-	public void typeInSearchField(String content) {
+	public void typeInSearchField(String content, int length) {
 		waitForElementVisibleByElement(searchInput);
 		searchInput.sendKeys(content.substring(0, 3));
 		PageObjectLogging.log(
 				"typeInSearchField",
-				"String >>" + content.substring(0, 3) + "<< was typed in string field",
+				"String >>" + content.substring(0, length) + "<< was typed in string field",
 				true
 		);
 	}
