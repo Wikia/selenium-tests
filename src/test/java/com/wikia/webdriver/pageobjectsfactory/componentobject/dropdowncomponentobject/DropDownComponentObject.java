@@ -64,9 +64,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-						new Actions(driver)
-							.moveToElement(driver.findElement(By.cssSelector("#hubsEntryPoint")))
-							.moveToElement(loginDropdownTrigger).perform();
+						new Actions(driver).click(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
