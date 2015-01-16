@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -31,17 +30,18 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_001_deleteImage_QAART_503() {
-		FilePagePageObject file = new FilePagePageObject(driver).openFilePage(wikiURL, PageContent
-			.FILEDELETEANDRESTORE);
-		file.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+	public void ImageStorage_001_deleteImage() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
+		FilePagePageObject file = newFiles.openImage(PageContent.FILE_DELETE_AND_RESTORE, true);
 		imageURL = file.getImageUrl();
 		imageThumbnailURL = file.getImageThumbnailUrl();
-		file.verifyURLStatus(200, imageURL);
-		file.verifyURLStatus(200, imageThumbnailURL);
+		newFiles.verifyURLStatus(200, imageURL);
+		newFiles.verifyURLStatus(200, imageThumbnailURL);
 
-		DeletePageObject delete = file.deletePage();
-		WikiBasePageObject base = delete.submitDeletion();
+		DeletePageObject delete = newFiles.deletePage();
+		base = delete.submitDeletion();
 		base.verifyNotificationMessage();
 
 		base.verifyURLStatus(404, imageURL);
@@ -52,8 +52,8 @@ public class ImageStorageTests extends NewTestTemplate {
 		restore.restorePage();
 		restore.verifyNotificationMessage();
 
-		file.verifyURLStatus(200, imageURL);
-		file.verifyURLStatus(200, imageThumbnailURL);
+		newFiles.verifyURLStatus(200, imageURL);
+		newFiles.verifyURLStatus(200, imageThumbnailURL);
 	}
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
