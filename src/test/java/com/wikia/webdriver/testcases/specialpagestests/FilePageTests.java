@@ -24,7 +24,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage001_tabs", "Media"})
-	public void filePage001_tabs_QARRT_500() {
+	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
 		filePage.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
@@ -47,7 +47,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
-	public void filePage002_tabsLoggedIn_QAART_500() {
+	public void filePage002_tabsLoggedIn() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 
@@ -65,7 +65,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage003_diffPage", "Media"})
-	public void filePage003_diffPage_QAART_499() {
+	public void filePage003_diffPage() {
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.FILENAME_001, wikiURL);
@@ -80,7 +80,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author garth
 	 */
 	@Test(groups = {"FilePage", "filePage004_delete", "Media"})
-	public void filePage004_delete_QAART_478() {
+	public void filePage004_delete() {
 		// Go to Special:Videos to add a video
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -109,7 +109,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author garth
 	 */
 	@Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-	public void filePage005_deleteFromHistory_MAIN_3524() {
+	public void filePage005_deleteFromHistory() {
 		// Go to Special:Videos to add a video
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
