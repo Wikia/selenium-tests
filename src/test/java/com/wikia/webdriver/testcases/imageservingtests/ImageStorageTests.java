@@ -30,7 +30,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_001_deleteImage() {
+	public void ImageStorage_001_deleteImage_QAART_503() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
