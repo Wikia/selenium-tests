@@ -7,7 +7,6 @@ import org.apache.commons.httpclient.HttpMethodBase;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class PurgeMethod extends HttpMethodBase {
 
@@ -16,8 +15,8 @@ public class PurgeMethod extends HttpMethodBase {
 		setFollowRedirects(true);
 	}
 
-	public PurgeMethod(String URL) {
-		super(URL);
+	public PurgeMethod(String url) {
+		super(url);
 		setFollowRedirects(true);
 	}
 

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,19 +7,20 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Ad
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web 
+ * @ownership: Mobile Web
  */
 
 public class PinMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "PinMapTests_001", "PinMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_001_VerifyPinModalContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -37,7 +36,7 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap = pinDialog.clickCancelButton();
 	}
 
-	@Test(groups = { "PinMapTests_002", "PinMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -56,7 +55,7 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPinPopupImageIsVisible();
 	}
 
-	@Test(groups = { "PinMapTests_003", "PinMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_003_VerifyPinCreationErrors() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -74,8 +73,8 @@ public class PinMapTests extends NewTestTemplate {
 		addPinModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "PinMapTests_004", "PinMapTests", "InteractiveMaps" }, 
-			dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+	@Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"},
+		dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
 	public void PinMapTests_004_VerifyPopUpAfterClickPin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -86,8 +85,8 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPopUpVisible();
 	}
 
-	@Test(groups = { "PinMapTests_005", "PinMapTests", "InteractiveMaps" }, 
-			dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+	@Test(groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
+		dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
 	public void PinMapTests_005_VerifyDeletePin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -103,7 +102,7 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPinNotExists(pinName);
 	}
 
-	@Test(groups = { "PinMapTests_006", "PinMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_006_VerifyChangePinData() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -157,9 +156,9 @@ public class PinMapTests extends NewTestTemplate {
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
 		addPinModal.verifyErrorContent(InteractiveMapsContent.ARTICLE_NOT_EXIST_ERROR.replace(
-				"%articlename%",
-				InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST
-				));
+			"%articlename%",
+			InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST
+		));
 	}
 
 	@Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})

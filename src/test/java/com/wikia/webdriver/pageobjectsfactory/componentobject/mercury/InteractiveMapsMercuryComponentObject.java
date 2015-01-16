@@ -1,11 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
 public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject {
 
@@ -25,6 +26,12 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	private WebElement filterBoxHeader;
 	@FindBy(css = ".point-types")
 	private WebElement filterBoxPoints;
+	@FindBy(css = ".leaflet-tile")
+	private WebElement leafletTile;
+	@FindBy(css = ".leaflet-marker-icon")
+	private WebElement poiPin;
+	@FindBy(css = ".leaflet-popup")
+	private WebElement poiPopUp;
 
 	public InteractiveMapsMercuryComponentObject(WebDriver driver) {
 		super(driver);
@@ -39,8 +46,49 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 
 	public void clickFilterBox() {
 		waitForElementVisibleByElement(filterBoxHeader);
-		filterBoxHeader.click();
+		tapOnElement(filterBoxHeader);
 		PageObjectLogging.log("clickFilterBox", "Filter box caption was clicked", true);
+	}
+
+	public void clickZoomIn() {
+		waitForElementVisibleByElement(zoomInButton);
+		tapOnElement(zoomInButton);
+		PageObjectLogging.log("clickZoomIn", "Zoom in button was clicked", true);
+	}
+
+	public void clickZoomIn(int amountOfClicks) {
+		while(amountOfClicks!=0){
+			waitForElementClickableByElement(zoomInButton);
+			tapOnElement(zoomInButton);
+			amountOfClicks--;
+		}
+		PageObjectLogging.log("clickZoomIn", "Zoom in button was clicked", true);
+	}
+
+	public void clickZoomOut() {
+		waitForElementVisibleByElement(zoomOutButton);
+		tapOnElement(zoomOutButton);
+		PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
+	}
+
+
+	public void clickZoomOut(int amountOfClicks) {
+		while(amountOfClicks!=0) {
+			waitForElementClickableByElement(zoomOutButton);
+			tapOnElement(zoomOutButton);
+			amountOfClicks--;
+		}
+		PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
+	}
+
+	public void clickPin() {
+		waitForElementVisibleByElement(poiPin);
+		tapOnElement(poiPin);
+		PageObjectLogging.log("clickPin", "Pin was clicked", true);
+	}
+
+	public String getMapLeafletSrc() {
+		return leafletTile.getAttribute("src");
 	}
 
 	public void verifyFilterBoxWasExpanded() {
@@ -57,5 +105,26 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(mapDiv);
 		Assertion.assertTrue(checkIfElementOnPage(mapDiv));
+	}
+
+	public void verifyMapTitleInHeader() {
+		driver.switchTo().defaultContent();
+		waitForElementVisibleByElement(mapTitle);
+		Assertion.assertFalse(mapTitle.getText().isEmpty());
+	}
+
+	public void verifyMapIdInUrl() {
+		driver.switchTo().defaultContent();
+		Assertion.assertTrue(driver.getCurrentUrl().toString().contains("?map="));
+	}
+
+	public void verifyMapZoomChangedView(String leaflet, String newLeaflet) {
+		Assertion.assertFalse(leaflet.contains(newLeaflet));
+		PageObjectLogging.log("verifyMapZoomChangedView", "Map view was changed", true, driver);
+	}
+
+	public void verifyPinPopUpAppeared() {
+		Assertion.assertTrue(checkIfElementOnPage(poiPopUp));
+		PageObjectLogging.log("verifyPinPopUpAppeared", "Pin popup appeared after click", true, driver);
 	}
 }

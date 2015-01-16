@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
  * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
-@Test (
-	groups={"Ads_Corporate_Page"}
+@Test(
+	groups = {"Ads_Corporate_Page"}
 )
 public class TestAdsOnCorporatePages extends NewTestTemplate {
 
@@ -24,8 +24,8 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 	private String slotName;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="corporatePages"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "corporatePages"
 	)
 	public TestAdsOnCorporatePages(String wikiName, String path, String adUnit, String slotName) {
 		super();
@@ -38,9 +38,9 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="VE")
-	@Test (
-			groups={"TestCorporatePage_VE"}
+	@GeoEdgeProxy(country = "VE")
+	@Test(
+		groups = {"TestCorporatePage_VE"}
 	)
 	public void TestCorporatePage_VE() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
@@ -49,8 +49,8 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 		// Not verifying GPT iframes in low value countries
 	}
 
-	@Test (
-			groups={"TestCorporatePageHVC_GEF"}
+	@Test(
+		groups = {"TestCorporatePageHVC_GEF"}
 	)
 	public void TestCorporatePage_GEF() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);

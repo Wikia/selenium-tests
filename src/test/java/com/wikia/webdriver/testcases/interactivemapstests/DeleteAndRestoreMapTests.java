@@ -1,21 +1,21 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.testng.annotations.Test;
+
 /**
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
  */
 
-public class DeleteAndRestoreMapTests extends NewTestTemplate{
+public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 

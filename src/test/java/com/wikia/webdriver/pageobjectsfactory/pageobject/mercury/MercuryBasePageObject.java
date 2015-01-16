@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -33,8 +34,8 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 	}
 
 	public void tapOnElement(WebElement element) {
-		Actions flick = new Actions(driver);
-		flick.click(element).perform();
+		JavascriptExecutor jsexec = (JavascriptExecutor)driver;
+		jsexec.executeScript("arguments[0].click();", element);
 	}
 
 	public void doubleTapZoom(WebElement element) {

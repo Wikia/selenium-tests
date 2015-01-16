@@ -2,8 +2,8 @@ package com.wikia.webdriver.testcases.globalnavigationtests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 

@@ -1,14 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mobile;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
+import java.util.List;
 
 public class TableOfContentsComponentObject extends MobileBasePageObject {
 
@@ -18,13 +17,13 @@ public class TableOfContentsComponentObject extends MobileBasePageObject {
 
 	private String wikiTOC = "wiki/TOC#";
 
-	@FindBy(css="#wkTOC.active")
+	@FindBy(css = "#wkTOC.active")
 	private WebElement tocSideMenu;
-	@FindBy(css=".toc-list.level")
+	@FindBy(css = ".toc-list.level")
 	private WebElement tocList;
-	@FindBy(css="#wkTOCHandle")
+	@FindBy(css = "#wkTOCHandle")
 	private WebElement closeTOCbutton;
-	@FindBys(@FindBy(css=".toc-list:first-child > li > a"))
+	@FindBys(@FindBy(css = ".toc-list:first-child > li > a"))
 	private List<WebElement> tocLevel1Sections;
 
 	public void verifyTocElements() {

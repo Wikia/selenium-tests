@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -48,9 +48,9 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 
 		File currentFile = shooter.captureWebElement(element, driver);
 		String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
-				.getPath();
+			.getPath();
 
-		String currentFileCopyPath =  ClassLoader.getSystemResource("Baseline/").getPath() +  expectedFileName + "_current.png";
+		String currentFileCopyPath = ClassLoader.getSystemResource("Baseline/").getPath() + expectedFileName + "_current.png";
 
 		currentFile.renameTo(new File(currentFileCopyPath));
 		currentFile = new File(currentFileCopyPath);
@@ -58,12 +58,12 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 		File expectedFile = new File(expectedFilePath);
 		try {
 			Assertion
-					.assertTrue(comparator.areFilesTheSame(currentFile, expectedFile));
+				.assertTrue(comparator.areFilesTheSame(currentFile, expectedFile));
 			return false;
 		} catch (AssertionError e) {
 			PageObjectLogging
-					.log("Design is not as expected for: " + expectedFileName, "Expected: " + expectedFilePath, false,
-							driver);
+				.log("Design is not as expected for: " + expectedFileName, "Expected: " + expectedFilePath, false,
+					driver);
 			return true;
 		}
 	}

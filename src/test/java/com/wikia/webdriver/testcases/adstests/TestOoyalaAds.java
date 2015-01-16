@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 import org.testng.annotations.Test;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Dmytro Rets

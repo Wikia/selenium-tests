@@ -28,7 +28,7 @@ public class ManualConfiguration extends AbstractConfiguration {
 				System.out.println("CAN'T LOCATE CONFIG FILE");
 			}
 		}
-		config = (Map<String, String>)yaml.load(input);
+		config = (Map<String, String>) yaml.load(input);
 	}
 
 	@Override

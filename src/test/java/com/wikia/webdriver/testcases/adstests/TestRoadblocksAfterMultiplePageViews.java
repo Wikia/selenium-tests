@@ -10,13 +10,11 @@ import org.testng.annotations.Test;
 /**
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
- *
- * @description
- * 1. Check if roadblock is present after 3 PV
+ * @description 1. Check if roadblock is present after 3 PV
  */
 public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 
-	private final int pageViewsCount = 5;
+	private static final int PAGE_VIEWS_COUNT = 5;
 
 	public TestRoadblocksAfterMultiplePageViews() {
 		super();
@@ -24,10 +22,10 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="skinLimited",
-		groups={"TestRoadblock_GeoEdgeFree"},
-		invocationCount=3
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "skinLimited",
+		groups = {"TestRoadblock_GeoEdgeFree"},
+		invocationCount = 3
 	)
 	public void TestRoadblock_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,
@@ -35,6 +33,6 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-		wikiPage.verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide, pageViewsCount);
+		wikiPage.verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide, PAGE_VIEWS_COUNT);
 	}
 }

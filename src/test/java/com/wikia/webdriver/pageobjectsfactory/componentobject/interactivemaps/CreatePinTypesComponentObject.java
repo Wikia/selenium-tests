@@ -1,21 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
+import java.util.List;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Lukasz Jedrzejczak
  * @author Łukasz Nowak (Dyktus)
- *
  */
 
 public class CreatePinTypesComponentObject extends BasePageObject {
@@ -95,7 +94,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 	}
 
 	public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
-		for (Integer $i = 0; $i < amountFields; $i++) {
+		for (Integer i = 0; i < amountFields; i++) {
 			clickAddAnotherPinType();
 			waitForElementByElement(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
 			pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);
@@ -124,7 +123,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void deletePinTypes() {
 		waitForElementByElement(deletePinTypeButton);
-		while (pinTypeTitleInputs.size() >1) {
+		while (pinTypeTitleInputs.size() > 1) {
 			deletePinTypeButton.click();
 		}
 		PageObjectLogging.log("deletePinTypes", "Only one pin type is displayed", true);

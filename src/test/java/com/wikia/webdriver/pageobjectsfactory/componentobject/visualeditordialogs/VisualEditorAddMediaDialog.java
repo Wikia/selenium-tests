@@ -1,7 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -9,25 +10,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-textInputWidget-decorated>input")
+	@FindBy(css = ".oo-ui-textInputWidget-decorated>input")
 	private WebElement searchInput;
-	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
+	@FindBy(css = ".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement addMediaButton;
-	@FindBy(css=".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
+	@FindBy(css = ".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
 	private WebElement topUploadButton;
-	@FindBy(css=".oo-ui-window-body")
+	@FindBy(css = ".oo-ui-window-body")
 	private WebElement mediaDialogBody;
-	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
+	@FindBy(css = ".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
 	private WebElement fileUploadInput;
-	@FindBy(css=".oo-ui-fieldsetLayout input")
+	@FindBy(css = ".oo-ui-fieldsetLayout input")
 	private WebElement fileNameInput;
-	@FindBy(css=".ve-ui-wikiaMediaPageWidget-item-license select")
+	@FindBy(css = ".ve-ui-wikiaMediaPageWidget-item-license select")
 	private WebElement imageLicenseDropdown;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
@@ -109,7 +108,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
-		for (int i = 0; i<number; i++) {
+		for (int i = 0; i < number; i++) {
 			WebElement mediaAddIcon = mediaResults.get(i).findElement(mediaAddIconBy);
 			mediaAddIcon.click();
 		}
@@ -202,7 +201,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		List<WebElement> mediaTitles = mediaResultsWidget.findElements(mediaTitlesBy);
 		int i = 0;
 		boolean found = false;
-		while(i<mediaTitles.size() && found == false) {
+		while (i < mediaTitles.size() && found == false) {
 			String mediaTitle = mediaTitles.get(i).getAttribute("title");
 			if (mediaTitle.equals(title)) {
 				found = true;

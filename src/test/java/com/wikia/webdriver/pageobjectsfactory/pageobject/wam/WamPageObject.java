@@ -1,13 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,19 +12,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class WamPageObject extends BasePageObject {
 
-	public final int DEFAULT_WAM_INDEX_ROWS = 21;
+	private static final int FIRST_WAM_TAB_INDEX = 0;
+	public static final int DEFAULT_WAM_INDEX_ROWS = 21;
 
-	@FindBy(className = "wam-verticals-tabs")
-	private WebElement wamVerticalFilterSelect;
-
-	@FindBy(css = ".wam-filtering-tab")
+	@FindBy(css = ".wam-filtering-tab a")
 	private List<WebElement> wamTabs;
 
 	@FindBy(css = "#wam-index table tr")
@@ -59,43 +51,7 @@ public class WamPageObject extends BasePageObject {
 	private WebElement monthInCalendar;
 
 	private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
-
-	/**
-	 * @desc Wikia verticals (hubs)
-	 * @todo think of a better place it might be moved to
-	 */
-	public enum WamTab {
-		VIDEO_GAMES(2), BOOKS(3), LIFESTYLE(5), COMICS(4), ALL(0), TV(1), MOVIES(7), MUSIC(6), ;
-
-		private final int verticalId;
-
-		private WamTab(int id) {
-			verticalId = id;
-		}
-
-		public int getId() {
-			return verticalId;
-		}
-
-		public String getIdAsString() {
-			return Integer.toString(verticalId);
-		}
-
-		/**
-		 * @desc Checks if passed value is in enum
-		 * @param value mostly a select-box option
-		 * @return true if enum has the value; false otherwise
-		 */
-		public static Boolean contains(String value) {
-			for (WamTab vids : WamTab.values()) {
-				if (vids.getIdAsString().equals(value)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
+	private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
 
 	public WamPageObject(WebDriver driver) {
 		super(driver);
@@ -111,26 +67,18 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if first tab has an anchor with "selected" class
-	 */
-	public void verifyFirstTabSelected() {
-		verifyTabIsSelected(WamTab.ALL.getId());
-	}
-
-	/**
+	 * @param tab WamTab enum
 	 * @desc Checks if given tab has an anchor with "selected" class
-	 *
-	 * @param tabIndex number of a tab starting with 0
 	 */
-	public void verifyTabIsSelected(int tabIndex) {
-		WebElement wamTab = wamTabs.get(tabIndex);
-		PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tabIndex + " exist", true);
-		try {
-			wamTab.findElement(By.className("icon-vertical-selected"));
-		}catch (ElementNotFoundException e) {
+	public void verifyTabIsSelected(WamTab tab) {
+		WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
+		PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
+
+		if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
+			PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
+		} else {
 			PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's NOT selected", false);
 		}
-		PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
 	}
 
 	/**
@@ -156,8 +104,8 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 * @param expectedRowsNo the number of expecting table rows
+	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(WAM_INDEX_TABLE);
@@ -172,8 +120,6 @@ public class WamPageObject extends BasePageObject {
 	 * @desc Checks if vertical filter except "All" option has options with our verticals' ids
 	 */
 	public void verifyWamVerticalFilterOptions() {
-		waitForElementByElement(wamVerticalFilterSelect);
-
 		Boolean result = true;
 
 		for (WebElement e : wamTabs) {
@@ -202,23 +148,13 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Selects vertical in vertical select box
-	 * @param verticalId vertical id
-	 */
-	public void selectVertical(WamTab verticalId) {
-		waitForElementByElement(wamVerticalFilterSelect);
-			wamTabs.get(verticalId.getId()).click();
-		waitForElementByBy(WAM_INDEX_TABLE);
-	}
-
-	/**
 	 * @desc Checks if "Vertical" column in WAM index has the same values for each row
 	 */
 	public void verifyVerticalColumnValuesAreTheSame() {
 		waitForElementByBy(WAM_INDEX_TABLE);
 		String selectedValue = tabSelected.getAttribute("data-vertical-id");
 
-		for (int i =1; i<wamIndexRows.size(); ++i) {
+		for (int i = 1; i < wamIndexRows.size(); ++i) {
 			Assertion.assertEquals(wamIndexRows.get(i).getAttribute("data-vertical-id"), selectedValue);
 		}
 	}
@@ -255,32 +191,18 @@ public class WamPageObject extends BasePageObject {
 		);
 	}
 
-	public void selectTab(int tabNumber) {
-		wamTabs.get(tabNumber).click();
-		verifyTabSelected(tabNumber);
+	public void selectTab(WamTab tab) {
+		scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId()))));
+		verifyTabSelected(tab);
 	}
 
-	private void verifyTabSelected(int tabNumber) {
-		WebElement tabSelected = wamTabs.get(tabNumber);
-
-		Assertion.assertTrue(tabSelected.getAttribute("class").contains("selected"));
+	private void verifyTabSelected(WamTab tab) {
+		Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
+			.getAttribute("class").contains("icon-vertical-selected"));
 		waitForElementByElement(tabSelected);
 	}
 
-	public void checkTabAndHeaderName() {
-		String selectedTabName = getSelectedTabName();
-		String selectedHeaderName = getSelectedHeaderName();
-		Assertion.assertEquals(
-			selectedHeaderName.toLowerCase(),
-			selectedTabName.toLowerCase()
-		);
-	}
-
-	private String getSelectedTabName() {
-		return tabSelected.getText();
-	}
-
-	private String getSelectedHeaderName() {
+	public String getSelectedHeaderName() {
 		return selectedHeaderName.getText();
 	}
 
@@ -309,9 +231,9 @@ public class WamPageObject extends BasePageObject {
 		// first day of the current month
 		WebElement firstDay = (WebElement) js.executeScript(
 			"return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-		 	calendarElement
-		 );
-		 firstDay.click();
+			calendarElement
+		);
+		firstDay.click();
 
 		String year = getFormattedDate(date, "YYYY");
 
@@ -340,6 +262,6 @@ public class WamPageObject extends BasePageObject {
 
 	private String getFormattedDate(Date date, String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-	    return dateFormat.format(date);
+		return dateFormat.format(date);
 	}
 }

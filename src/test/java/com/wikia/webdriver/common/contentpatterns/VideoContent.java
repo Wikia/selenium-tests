@@ -13,7 +13,7 @@ public class VideoContent {
 	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "The JET Bicycle - The most dangerous unsafe bike EVER";
 	public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=ewum1Uq2MtU";
 
-	public static final String WIKIA_VIDEO_QUERY = "wikia";
+	public static final String WIKIA_VIDEO_QUERY = "mouse";
 	public static final String WIKIA_VIDEO_URL = "http://mediawiki119.wikia.com/wiki/File:Jimmy_Wales_-_What_is_Wikia%3F";
 	public static final String NON_PREMIUM_VIDEO_URL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";
 

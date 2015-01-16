@@ -23,6 +23,8 @@ public class MercuryContent {
 	public static final String MERCURY_INFOBOX_TEST_ARTICLE = "MercuryInfobox";
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
 	public static final String MERCURY_MAIN_ARTICLE = "MercuryWikiTests_Wiki";
+	public static final String MERCURY_SINGLE_LINKED_IMAGE = "MercuryLinkedImages";
+	public static final String MERCURY_IMAGE_CAPTION = "MercuryImagesCaption";
 
 	//Index variables for Mercury
 	public static final int MERCURY_GALLERY_IMAGE_INDEX = 0;

@@ -20,8 +20,8 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 	private String testedWiki;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="noAdsForUsers"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "noAdsForUsers"
 	)
 	public TestNoAdsLoggedInUsers(String wikiName, String path) {
 		super();
@@ -41,9 +41,9 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 		);
 	}
 
-	@GeoEdgeProxy(country="AU")
-	@Test (
-		groups={"TestNoAdsForUsers_AU"}
+	@GeoEdgeProxy(country = "AU")
+	@Test(
+		groups = {"TestNoAdsForUsers_AU"}
 	)
 	public void TestNoAdsForUsers_AU() {
 		loginSteps();
@@ -51,9 +51,9 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 		wikiPage.verifyNoAdsOnPage();
 	}
 
-	@GeoEdgeProxy(country="VE")
-	@Test (
-		groups={"TestNoAdsForUsers_VE"}
+	@GeoEdgeProxy(country = "VE")
+	@Test(
+		groups = {"TestNoAdsForUsers_VE"}
 	)
 	public void TestNoAdsForUsers_VE() {
 		loginSteps();
@@ -61,8 +61,8 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 		wikiPage.verifyNoAdsOnPage();
 	}
 
-	@Test (
-		groups={"TestNoAdsForUsers_GeoEdgeFree"}
+	@Test(
+		groups = {"TestNoAdsForUsers_GeoEdgeFree"}
 	)
 	public void TestNoAdsForUsers_GeoEdgeFree() throws Exception {
 		loginSteps();

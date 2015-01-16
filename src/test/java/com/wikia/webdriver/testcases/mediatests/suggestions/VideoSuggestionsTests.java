@@ -3,19 +3,17 @@
  */
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VideoSuggestionsTests extends NewTestTemplate {
 
@@ -30,14 +28,14 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 
 	@DataProvider
 	private static final Object[][] wikis() {
-		return new Object[][] {
+		return new Object[][]{
 			{"callofduty", "Frank_Woods"}
 		};
 	}
 
 	@Test(
-		groups = { "VideoSuggestions_001", "VideoSuggestions", "Media" },
-		dataProvider="wikis"
+		groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"},
+		dataProvider = "wikis"
 	)
 	public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
 		wikiURL = urlBuilder.getUrlForWiki(wikiName);

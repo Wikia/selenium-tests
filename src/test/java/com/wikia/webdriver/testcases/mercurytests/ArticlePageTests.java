@@ -44,5 +44,14 @@ public class ArticlePageTests extends NewTestTemplate {
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
 		articlePage.verifyCanonicalUrl();
 	}
+
+	@Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
+	public void MercuryArticleTests_004_VerifySingleLinkedImageRedirect() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
+		String imagehref = articlePage.getLinkedImageHref();
+		articlePage.clickLinkedImage();
+		articlePage.verifyLinkedImageRedirection(imagehref);
+	}
 }
 

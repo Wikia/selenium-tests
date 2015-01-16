@@ -1,13 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
@@ -25,11 +17,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
  * VE-1336 1519 Uploading an image with a new file name

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.admindashboardtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook.WikiArticleMonoBookPageObject;
+import org.testng.annotations.Test;
 
 
 /**
@@ -39,7 +38,6 @@ public class EditingLocalCssTests extends NewTestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-295
 	 * https://wikia-inc.atlassian.net/browse/DAR-296
 	 * https://wikia-inc.atlassian.net/browse/DAR-297
-	 *
 	 */
 	@Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"})
 	public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {

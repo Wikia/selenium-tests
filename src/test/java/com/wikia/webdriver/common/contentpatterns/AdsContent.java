@@ -1,13 +1,9 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsContent {
@@ -23,11 +19,11 @@ public class AdsContent {
 		"top.window.adDriver2ForcedStatus['%s']='success';";
 
 	public static final String SLOT_TWEAKER_HIDESLOT_SCRIPT =
-			"top.window.adDriver2ForcedStatus['%slot%']='success';"
+		"top.window.adDriver2ForcedStatus['%slot%']='success';"
 			+ "varst=top.window.SlotTweaker(top.window.Wikia.log,top.document,top.window);"
 			+ "st.hide('%slot%');";
 
-    //SLOTS NAMES
+	//SLOTS NAMES
 	public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
 	public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
 	public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
@@ -51,6 +47,7 @@ public class AdsContent {
 	public static final String INCONTENT_LB_1 = "INCONTENT_LEADERBOARD_1";
 	public static final String INCONTENT_LB_2 = "INCONTENT_LEADERBOARD_2";
 	public static final String INCONTENT_LB_3 = "INCONTENT_LEADERBOARD_3";
+	public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
 
 
 	//CONTAINERS
@@ -105,6 +102,7 @@ public class AdsContent {
 		SLOTS_SELECTORS.put(INCONTENT_LB_1, "#INCONTENT_LEADERBOARD_1");
 		SLOTS_SELECTORS.put(INCONTENT_LB_2, "#INCONTENT_LEADERBOARD_2");
 		SLOTS_SELECTORS.put(INCONTENT_LB_3, "#INCONTENT_LEADERBOARD_3");
+		SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
 
 	}
 }

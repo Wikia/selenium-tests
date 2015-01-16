@@ -1,27 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.TimeoutException;
-
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -36,6 +32,8 @@ public class AdsComparison {
 	private static final int AD_TIMEOUT_SEC = 15;
 	private Shooter shooter;
 	protected ImageComparison imageComparison;
+	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
+	private static final double CHROME_DRIVER_SCREENSHOT_SCALE = 0.5;
 
 	public AdsComparison() {
 		imageComparison = new ImageComparison();
@@ -111,6 +109,16 @@ public class AdsComparison {
 			backgroundImg.delete();
 		}
 		return true;
+	}
+
+	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {
+		ImageEditor imageEditor = new ImageEditor();
+		Shooter shooter = new Shooter();
+		File page = shooter.capturePage(driver);
+		BufferedImage scaledPage = imageEditor.scaleImage(
+			page, CHROME_DRIVER_SCREENSHOT_SCALE, CHROME_DRIVER_SCREENSHOT_SCALE
+		);
+		return imageEditor.cropImage(element.getLocation(), element.getSize(), scaledPage);
 	}
 
 	private String readFileAndEncodeToBase(File file) throws IOException {

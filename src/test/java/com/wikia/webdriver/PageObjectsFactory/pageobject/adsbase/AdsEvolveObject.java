@@ -1,44 +1,42 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import org.openqa.selenium.*;
-
-import java.util.ArrayList;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
 public class AdsEvolveObject extends AdsBaseObject {
-	private static final String EVOLVE_ERROR_MESSAGE = "Verify Evolve call in ";
 	private static final String EVOLVE_SELECTOR = " script[src*=\"4403ad\"]";
 
 	public AdsEvolveObject(WebDriver driver, String page) {
-		super(driver, page);
+		// INVISIBLE_SKIN works only with big resolution.
+		super(driver, page, new Dimension(1366, 768));
 	}
 
-	public boolean evolveCalledInSlot(String slotName) {
+	public void verifyEvolveInSlot(String slotName) {
 		String slotSelector = AdsContent.getSlotSelector(slotName);
-		ArrayList evolveScripts = (ArrayList) ((JavascriptExecutor) driver).executeScript(
-			"return $(arguments[0] + arguments[1])",
-			slotSelector, EVOLVE_SELECTOR
-		);
-		return !evolveScripts.isEmpty();
+		waitForElementPresenceByBy(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
+		PageObjectLogging.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
+	}
+
+	public void verifyNoEvolveInSlot(String slotName) {
+		String slotSelector = AdsContent.getSlotSelector(slotName);
+		waitForElementNotPresent(slotSelector + EVOLVE_SELECTOR);
+		PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
 	}
 
 	public void verifyEvolveCall() {
-		Assertion.assertTrue(evolveCalledInSlot(AdsContent.TOP_LB),
-			EVOLVE_ERROR_MESSAGE + AdsContent.TOP_LB);
-		Assertion.assertTrue(evolveCalledInSlot(AdsContent.MEDREC),
-			EVOLVE_ERROR_MESSAGE + AdsContent.MEDREC);
-		Assertion.assertTrue(evolveCalledInSlot(AdsContent.LEFT_SKYSCRAPPER_2),
-			EVOLVE_ERROR_MESSAGE + AdsContent.LEFT_SKYSCRAPPER_2);
-		Assertion.assertFalse(evolveCalledInSlot(AdsContent.FLOATING_MEDREC),
-			EVOLVE_ERROR_MESSAGE + AdsContent.FLOATING_MEDREC);
-		Assertion.assertFalse(evolveCalledInSlot(AdsContent.PREFOOTER_LEFT),
-			EVOLVE_ERROR_MESSAGE + AdsContent.PREFOOTER_LEFT);
-		Assertion.assertFalse(evolveCalledInSlot(AdsContent.PREFOOTER_RIGHT),
-			EVOLVE_ERROR_MESSAGE + AdsContent.PREFOOTER_RIGHT);
+		verifyEvolveInSlot(AdsContent.TOP_LB);
+		verifyEvolveInSlot(AdsContent.MEDREC);
+		verifyEvolveInSlot(AdsContent.LEFT_SKYSCRAPPER_2);
+		verifyEvolveInSlot(AdsContent.INVISIBLE_SKIN);
+		verifyNoEvolveInSlot(AdsContent.FLOATING_MEDREC);
+		verifyNoEvolveInSlot(AdsContent.PREFOOTER_LEFT);
+		verifyNoEvolveInSlot(AdsContent.PREFOOTER_RIGHT);
 	}
 }
