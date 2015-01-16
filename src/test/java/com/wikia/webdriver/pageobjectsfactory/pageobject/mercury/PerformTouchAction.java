@@ -319,10 +319,18 @@ public class PerformTouchAction {
 	//IN PROGRESS
 	public void TapOnWebElement (WebDriver driver, AndroidDriver mobileDriver, By locator, int index, int duration, int waitAfter) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
+		WebElement element;
 		//ADD INDEX HANDLE HERE
 		
-		WebElement element = driver.findElement(locator);
+		if (index > 0) {
+			List<WebElement> elements = driver.findElements(locator);
+			element = elements.get(index);
+		} else {
+			element = driver.findElement(locator);
+		}
+		
+		
+		
 		int elementStartPointX = element.getLocation().getX();
 		int elementStartPointY = element.getLocation().getY();
 		int elementHeight = element.getSize().getHeight();

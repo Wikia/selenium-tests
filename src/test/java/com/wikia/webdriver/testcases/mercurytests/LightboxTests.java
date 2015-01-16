@@ -185,7 +185,7 @@ public class LightboxTests extends NewTestTemplate {
 			
 			
 //			touchAction.TapOnPointXY(mobileDriver, 40, 60, 500, 0);
-//			touchAction.TapOnWebElement(driver, mobileDriver, By.cssSelector("img.loaded"), 0, 500, 0);
+			touchAction.TapOnWebElement(driver, mobileDriver, By.cssSelector("img.loaded"), 0, 500, 0);
 			
 //			mobileDriver.context("NATIVE_APP");
 //			mobileDriver.tap(1, 400, 1100, 500);
@@ -194,11 +194,11 @@ public class LightboxTests extends NewTestTemplate {
 			
 //			
 			
-			/*********************** FOR LUDWIK *****************************/
-			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "in", 2000); //It should zoom in center
-			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "out", 0); //It should zoom out but it doesn't
-			
-			
+//			/*********************** FOR LUDWIK *****************************/
+//			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "in", 2000); //It should zoom in center
+//			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "out", 0); //It should zoom out but it doesn't
+//			
+//			
 			
 			
 			
