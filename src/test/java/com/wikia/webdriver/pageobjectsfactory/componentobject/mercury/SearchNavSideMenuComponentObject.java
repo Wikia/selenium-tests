@@ -77,12 +77,12 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 		return searchSuggestions.get(searchPosition).getAttribute("href");
 	}
 
-	public void typeInSearchField(String content, int length) {
+	public void typeInSearchField(String content) {
 		waitForElementVisibleByElement(searchInput);
-		searchInput.sendKeys(content.substring(0, length));
+		searchInput.sendKeys(content.substring(0, 3));
 		PageObjectLogging.log(
 				"typeInSearchField",
-				"String >>" + content.substring(0, length) + "<< was typed in string field",
+				"String >>" + content.substring(0, 3) + "<< was typed in string field",
 				true
 		);
 	}
@@ -138,7 +138,9 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	public void verifyTextEllipsis(int anchorIndex) {
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		if (noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis") && chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis")) {
+		boolean noChevronsEllipsis = noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
+		boolean chevronsEllipsis = chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
+		if (noChevronsEllipsis && chevronsEllipsis) {
 			PageObjectLogging.log("verifyTextEllipsis", "CSS selector is set to ellipsis", true);
 		} else {
 			PageObjectLogging.log("verifyTextEllipsis", "CSS sellector isn't set to ellipsis", false);
