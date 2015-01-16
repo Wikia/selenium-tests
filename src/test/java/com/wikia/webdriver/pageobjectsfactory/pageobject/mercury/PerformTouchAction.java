@@ -17,10 +17,13 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 15 Jan 2015
+ * @updated: 16 Jan 2015
  */
 
 public class PerformTouchAction {
+	
+	private static WebDriver driver;
+	private static AndroidDriver mobileDriver;
 	
 	private static int nativeHeight = 0;
 	private static int nativeWidth = 0;
@@ -49,7 +52,9 @@ public class PerformTouchAction {
 	public static final String ZOOM_WAY_IN = "in";
 	public static final String ZOOM_WAY_OUT = "out";
 	
-	public PerformTouchAction (WebDriver driver, AndroidDriver mobileDriver) {
+	public PerformTouchAction (WebDriver webDriver) {
+		mobileDriver = NewDriverProvider.getMobileDriver();
+		driver = webDriver;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
@@ -115,13 +120,12 @@ public class PerformTouchAction {
 	
 	/**
 	 * 
-	 * @param mobileDriver
 	 * @param direction Use public const DIRECTION from that class
 	 * @param pixelPath	From 0 to half of screen X or Y, if path will be too high it will be set to edge of app
 	 * @param duration In milliseconds
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
-	public void SwipeFromCenterToDirection (AndroidDriver mobileDriver, String direction, int pixelPath, int duration, int waitAfter){
+	public void SwipeFromCenterToDirection (String direction, int pixelPath, int duration, int waitAfter){
 		int centerX = appNativeWidth / 2;
 		int centerY = appNativeHeight / 2;
 		int path = 0;
@@ -181,7 +185,6 @@ public class PerformTouchAction {
 	
 	/**
 	 * 
-	 * @param mobileDriver
 	 * @param startX Use value 0-100, it is percent of app width, Reccomend 10-90
 	 * @param startY Use value 0-100, it is percent of app height, Reccomend 10-90
 	 * @param endX Use value 0-100, it is percent of app width, Reccomend 10-90
@@ -189,7 +192,7 @@ public class PerformTouchAction {
 	 * @param duration In milliseconds
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
-	public void SwipeFromPointToPoint (AndroidDriver mobileDriver, int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
+	public void SwipeFromPointToPoint (int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
 		startX = (int)((startX / 100f) * appNativeWidth);
 		startY = (int)((startY / 100f) * appNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
@@ -210,7 +213,6 @@ public class PerformTouchAction {
 	
 	/**
 	 * It uses two fingers to zoom in.
-	 * @param mobileDriver
 	 * @param startX Use value 0-100, it is percent of app width, Reccomend 50
 	 * @param startY Use value 0-100, it is percent of app height, Reccomend 10-90
 	 * @param fingersSpace Space between two fingers, In pixel, It must be less than pixelPath, Reccomend 20-100
@@ -218,7 +220,7 @@ public class PerformTouchAction {
 	 * @param zoomWay Use public const ZOOM_WAY from that class
 	 * @param waitAfter In milliseconds
 	 */
-	public void ZoomInOutPointXY (AndroidDriver mobileDriver, int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
+	public void ZoomInOutPointXY (int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)((pointY / 100f) * appNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
@@ -293,13 +295,12 @@ public class PerformTouchAction {
 	
 	/**
 	 * 
-	 * @param mobileDriver
 	 * @param pointX Use value 0-100, it is percent of app width, Reccomend 10-90
 	 * @param pointY Use value 0-100, it is percent of app height, Reccomend 10-90
 	 * @param duration In milliseconds, Reccomend 500
 	 * @param waitAfter In milliseconds
 	 */
-	public void TapOnPointXY (AndroidDriver mobileDriver, int pointX, int pointY, int duration, int waitAfter) {
+	public void TapOnPointXY (int pointX, int pointY, int duration, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)((pointY / 100f) * appNativeHeight);
 		if (mobileDriver.getContext() != "NATIVE_APP") {
@@ -316,46 +317,36 @@ public class PerformTouchAction {
 		}
 	}
 	
-	//IN PROGRESS
-	public void TapOnWebElement (WebDriver driver, AndroidDriver mobileDriver, By locator, int index, int duration, int waitAfter) {
+	/**
+	 * It scroll to element then tap on his center.
+	 * It scroll only vertically so if element need to be scrolled horizontally it won't work
+	 * @param locator Use By selector, Example By.cssSelector('img.loaded')
+	 * @param index If locator find more than one element use index to access element you want
+	 * @param duration In milliseconds, Reccomend 500
+	 * @param waitAfter In milliseconds
+	 */
+	public void TapOnWebElement (By locator, int index, int duration, int waitAfter) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		WebElement element;
-		//ADD INDEX HANDLE HERE
-		
 		if (index > 0) {
 			List<WebElement> elements = driver.findElements(locator);
 			element = elements.get(index);
 		} else {
 			element = driver.findElement(locator);
 		}
-		
-		
-		
 		int elementStartPointX = element.getLocation().getX();
 		int elementStartPointY = element.getLocation().getY();
 		int elementHeight = element.getSize().getHeight();
 		int elementWidth = element.getSize().getHeight();
-			
-		System.out.println("=======================================");
-		System.out.println("elementStartPointX: " + elementStartPointX);
-		System.out.println("elementStartPointY: " + elementStartPointY);
-		System.out.println("elementHeight: " + elementHeight);
-		System.out.println("elementWidth: " + elementWidth);
-		System.out.println("=======================================");
-		
 		int offSetY = loadedPageHeight - element.getLocation().getY() - appWebviewHeight;
 		if (offSetY < 0) {
 			offSetY = -offSetY;
 		} else {
 			offSetY = 0;
 		}
-		
 		js.executeScript("window.scrollTo(0, "+element.getLocation().getY()+")");
-		
 		int pointX = (elementStartPointX + (elementWidth / 2)) * ratio;
 		int pointY = (taskbarWebviewHeight + (elementHeight / 2) + offSetY) * ratio; 
-		
-		
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
@@ -368,9 +359,5 @@ public class PerformTouchAction {
 		if (mobileDriver.getContext() != "WEBVIEW_1") {
 			mobileDriver.context("WEBVIEW_1");
 		}
-		
-		
-		
 	}
-	
 }

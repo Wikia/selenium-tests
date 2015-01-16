@@ -17,13 +17,14 @@ public class MercuryContent {
 	//Articles prepared for Mercury
 	public static final String MERCURY_TEST = "MercuryTest";
 	public static final String MERCURY_MAPS = "embedMap";
-	public static final String MERCURY_GALLERY_TEST_ARTICLE= "MercuryGallery";
+	public static final String MERCURY_GALLERY_TEST_ARTICLE = "MercuryGallery";
 	public static final String MERCURY_VIDEO_TEST_ARTICLE = "MercuryVideoTest";
 	public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
 	public static final String MERCURY_CATEGORY_TEST_ARTICLE = "MercuryCategoryTests";
 	public static final String MERCURY_INFOBOX_TEST_ARTICLE = "MercuryInfobox";
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
 	public static final String MERCURY_MAIN_ARTICLE = "MercuryWikiTests_Wiki";
+	public static final String MERCURY_GALLERY_TEST_TWO = "Mercury_Gallery_2";
 
 
 	//Index variables for Mercury
