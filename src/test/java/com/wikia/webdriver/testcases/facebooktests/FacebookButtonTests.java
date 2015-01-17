@@ -20,16 +20,12 @@ public class FacebookButtonTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	// check for FB button on login drop down
-
 	@Test(groups = { "FBButton_001", "FacebookButton" })
 	public void FBButton_001_DropDownButton_Visible() {
 		DropDownComponentObject dropDown = new DropDownComponentObject(driver);
 		dropDown.openDropDown();
-		dropDown.verifyFBButtonVisible();
+		dropDown.verifyDropDownFBButtonVisible();
 	}
-
-	// check for FB button on sign up page
 
 	@Test(groups = { "FBButtont_002", "FacebookButton" })
 	public void FBButton_002_SignUpButton_Visible() {
@@ -38,40 +34,30 @@ public class FacebookButtonTests extends NewTestTemplate {
 		signUpPage.verifyFBButtonVisible();
 	}
 
-	// check for FB button on login page
-
 	@Test(groups = { "FBButton_003", "FacebookButton" })
 	public void FBButton_003_LoginButton_Visible() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
 		login.verifyFBButtonVisible();
-
 	}
-
-	// check for FB button on forced login dialog
 
 	@Test(groups = { "FBButton_004", "FacebookButton" })
 	public void FBButton_004_ForcedLoginButton_Visible() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SpecialNewFilesPageObject specialPage = base
-				.openSpecialNewFiles(wikiURL);
+		SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
 		specialPage.verifySpecialPage();
 		specialPage.addPhoto();
 		specialPage.verifyModalLoginAppeared();
-		base.verifyFBButtonVisible();
+		specialPage.verifyModalFBButtonVisible();
 	}
-
-	// check for FB button on Preferences->Facebook Connect tab
 
 	@Test(groups = { "FBButton_005", "FacebookButton" })
 	public void FBButton_005_PrefsButton_Visible() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		DropDownComponentObject dropDown = new DropDownComponentObject(driver);
 		dropDown.openDropDown();
-		dropDown.logInCookie(credentials.userName, credentials.password,
-				wikiURL);
-		PreferencesPageObject prefsPage = base
-				.openSpecialPreferencesPage(wikiURL);
+		dropDown.logInCookie(credentials.userName, credentials.password, wikiURL);
+		PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
 		prefsPage.selectTab(tabNames.FACEBOOK);
 		prefsPage.verifyFBButtonVisible();
 	}

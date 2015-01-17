@@ -170,7 +170,11 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "#globalNavigation")
 	protected WebElement newGlobalNavigation;
 	@FindBy(css = "#userForceLoginModal .wikia-button-facebook")
-	private WebElement facebookSignUpButton;
+	protected WebElement formConnectWithFbButtonModal;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonBasic;
+	@FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
+	private WebElement formConnectWithFbButtonDropDown;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1216,7 +1220,15 @@ public class WikiBasePageObject extends BasePageObject {
 		return venusGlobalNav;
 	}
 
+	public void verifyModalFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonModal));
+	}
+
 	public void verifyFBButtonVisible() {
-		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonBasic));
+	}
+
+	public void verifyDropDownFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
 	}
 }

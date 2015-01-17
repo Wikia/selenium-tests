@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -27,8 +28,6 @@ public class PreferencesPageObject extends WikiBasePageObject {
 	private WebElement restoreDefaultLink;
 	@FindBy(css = ".global-notification.confirm")
 	private WebElement saveNotfication;
-	@FindBy(css = "#mw-content-text .wikia-button-facebook")
-	private WebElement facebookSignUpButton;
 
 	public enum tabNames {
 		INFO, EMAIL, EDITING, UNDER, FACEBOOK
@@ -101,7 +100,4 @@ public class PreferencesPageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
 	}
 
-	public void verifyFBButtonVisible() {
-		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
-	}
 }

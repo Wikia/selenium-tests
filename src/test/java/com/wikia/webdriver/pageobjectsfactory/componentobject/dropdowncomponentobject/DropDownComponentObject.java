@@ -195,7 +195,4 @@ public class DropDownComponentObject extends WikiBasePageObject {
 		);
 	}
 
-	public void verifyFBButtonVisible() {
-		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButton));
-	}
 }
