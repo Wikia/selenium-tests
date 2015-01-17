@@ -174,7 +174,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "#mw-content-text .wikia-button-facebook")
 	protected WebElement formConnectWithFbButtonBasic;
 	@FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
-	private WebElement formConnectWithFbButtonDropDown;
+	protected WebElement formConnectWithFbButtonDropDown;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
