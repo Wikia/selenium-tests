@@ -64,7 +64,9 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-						new Actions(driver).moveToElement(loginDropdownTrigger).click().perform();
+						new Actions(driver)
+								.moveToElement(driver.findElement(By.cssSelector(".wikia-logo-container")))
+								.moveToElement(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
