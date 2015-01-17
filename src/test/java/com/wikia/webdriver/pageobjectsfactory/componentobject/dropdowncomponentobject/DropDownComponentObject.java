@@ -60,11 +60,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	public DropDownComponentObject openDropDown() {
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 15, 3000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-						new Actions(driver).click(loginDropdownTrigger).perform();
+						new Actions(driver).moveToElement(loginDropdownTrigger).click().perform();
 						return false;
 					}
 					return true;
