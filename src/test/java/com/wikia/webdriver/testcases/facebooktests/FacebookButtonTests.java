@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 /* 
  * Check for facebook button on the page
  */
-
 public class FacebookButtonTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -62,3 +61,4 @@ public class FacebookButtonTests extends NewTestTemplate {
 	}
 
 }
+
