@@ -25,7 +25,7 @@ public class FacebookButtonTests extends NewTestTemplate {
 		dropDown.verifyDropDownFBButtonVisible();
 	}
 
-	@Test(groups = { "FBButtont_002", "FacebookButton" })
+	@Test(groups = { "FBButton_002", "FacebookButton" })
 	public void FBButton_002_SignUpButton_Visible() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUpPage = base.openSpecialSignUpPage(wikiURL);
