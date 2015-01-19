@@ -77,6 +77,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		base = new WikiBasePageObject(driver);
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.typeTextInAllFormat(text);
 		ve.typeTextInAllStyle(text);
 		ve.typeTextInAllList(text);
@@ -99,6 +101,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		deletedWikiTexts.add(removeText);
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.removeText(removeText);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
@@ -114,6 +118,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_003_insertToExistingArticle() {
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.typeTextInAllFormat(text);
 		ve.typeTextInAllStyle(text);
 		ve.typeTextInAllList(text);
@@ -132,6 +138,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
 		veLinkDialog.typeInLinkInput(PageContent.INTERNAL_LINK);
 		veLinkDialog.verifyMatchingPageIsTop();
@@ -162,6 +170,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	public void VisualEditorEditing_005_switchToSourceMode() {
 		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve = ve.typeInSourceEditor(text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
@@ -183,6 +193,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_006_editSummary() {
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.typeTextArea("a");
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		saveDialog.typeEditSummary(text);
@@ -198,6 +210,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	public void VisualEditorEditing_007_minorEdit() {
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.typeTextArea("b");
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		saveDialog.clickMinorEdit();

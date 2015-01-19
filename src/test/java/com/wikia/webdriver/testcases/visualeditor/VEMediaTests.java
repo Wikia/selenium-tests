@@ -61,6 +61,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String providerName = "youtube";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -75,6 +77,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String mediaTitle = "Thomas Wright 1792 - 1849";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -92,6 +96,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
@@ -107,6 +113,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String captionText = "test123";
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -128,6 +136,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -149,6 +159,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		int resizeNumber = 250;
 
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -178,6 +190,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
