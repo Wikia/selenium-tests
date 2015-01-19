@@ -65,7 +65,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-						((JavascriptExecutor) driver).executeScript("$j('.ajaxLogin').trigger('click')");
+						((JavascriptExecutor) driver).executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
 						return false;
 					}
 					return true;
