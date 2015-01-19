@@ -44,7 +44,6 @@ public class SearchTests extends NewTestTemplate {
 		searchObject.verifySearchSuggestionsWereVisible();
 		String redirection = searchObject.getSearchResultHref(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
 		base = searchObject.clickSearchSuggestion(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
-		String link = base.getCurrentUrl();
 		base.waitForStringInURL(redirection);
 	}
 

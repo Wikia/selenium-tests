@@ -13,10 +13,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class SmartBannerComponentObject extends MercuryBasePageObject{
 
-	public SmartBannerComponentObject(WebDriver driver) {
-		super(driver);
-	}
-
 	@FindBy(css = ".sb-close")
 	private WebElement closeButton;
 	@FindBy(css = ".sb-button")
@@ -28,9 +24,14 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 	@FindBy(css = ".sb-title")
 	private WebElement bannerTitle;
 
+	public SmartBannerComponentObject(WebDriver driver) {
+		super(driver);
+	}
+
 	public void clickCloseButton() {
 		waitForElementVisibleByElement(closeButton);
 		closeButton.click();
+		PageObjectLogging.log("clickCloseButton", "Close button was clicked", true, driver);
 	}
 
 	public void clickInstallButton() {
@@ -39,7 +40,7 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 			bannerButton.click();
 			PageObjectLogging.log("clickInstallButton", "Install button was clicked", true);
 		} else {
-			PageObjectLogging.log("clickInstallButton", "Install button were not visible", false, driver);
+			PageObjectLogging.log("clickInstallButton", "Install button was not visible", false, driver);
 		}
 	}
 

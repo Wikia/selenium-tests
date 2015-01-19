@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -10,22 +7,24 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
- *
- * Editor Entry Point Test on wiki that has
- * wgEnabledRTEExt = true, wgVisualEditorUI = false, wgForceVisualEditor = false
- * User Editor Preference is set to Default for Anon
- * VE-983 verify VE Editor is loaded when clicking Add Page from the contribution drop down
- * VE-983 verify VE Editor is loaded when clicking the main edit button on the top of the article
- * VE-983 verify VE Editor is loaded when clicking the red link in the article
- * VE-983 verify VE Editor is loaded when clicking the section edit link in the article
- * VE-983 verify VE Editor is loaded when using ?veaction=edit in the URL
- * VE-983 verify VE Editor is loaded on List namespace
- * VE-983 verify CK Editor is loaded on Category namespace
- * VE-983 verify Src Editor is loaded on Template namespace
- * VE-983 verify CK Editor is loaded when using ?action=edit in the URL
+ *         <p/>
+ *         Editor Entry Point Test on wiki that has
+ *         wgEnabledRTEExt = true, wgVisualEditorUI = false, wgForceVisualEditor = false
+ *         User Editor Preference is set to Default for Anon
+ *         VE-983 verify VE Editor is loaded when clicking Add Page from the contribution drop down
+ *         VE-983 verify VE Editor is loaded when clicking the main edit button on the top of the article
+ *         VE-983 verify VE Editor is loaded when clicking the red link in the article
+ *         VE-983 verify VE Editor is loaded when clicking the section edit link in the article
+ *         VE-983 verify VE Editor is loaded when using ?veaction=edit in the URL
+ *         VE-983 verify VE Editor is loaded on List namespace
+ *         VE-983 verify CK Editor is loaded on Category namespace
+ *         VE-983 verify Src Editor is loaded on Template namespace
+ *         VE-983 verify CK Editor is loaded when using ?action=edit in the URL
  */
 
 public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
@@ -66,7 +65,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -77,7 +76,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();

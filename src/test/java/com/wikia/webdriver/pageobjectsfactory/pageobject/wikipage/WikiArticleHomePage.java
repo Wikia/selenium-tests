@@ -11,17 +11,17 @@ import org.openqa.selenium.support.FindBy;
  */
 public class WikiArticleHomePage extends WikiArticlePageObject {
 
-    @FindBy(css="#HOME_TOP_LEADERBOARD")
-    private WebElement wikiHomePageSpecificElement;
+	@FindBy(css = "#HOME_TOP_LEADERBOARD")
+	private WebElement wikiHomePageSpecificElement;
 
-    public WikiArticleHomePage(WebDriver driver) {
-        super(driver);
-    }
+	public WikiArticleHomePage(WebDriver driver) {
+		super(driver);
+	}
 
-    /**
-     * Check if current page is in fact home page of wiki
-     */
-    public void verifyThisIsWikiHomePage() {
-        waitForElementByElement(wikiHomePageSpecificElement);
-    }
+	/**
+	 * Check if current page is in fact home page of wiki
+	 */
+	public void verifyThisIsWikiHomePage() {
+		waitForElementByElement(wikiHomePageSpecificElement);
+	}
 }

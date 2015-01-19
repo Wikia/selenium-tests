@@ -1,16 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
 
 public class MobileCategoryPageObject extends MobileBasePageObject {
 
@@ -33,7 +32,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL + URLsContent.CATEGORY_PMG);
-		PageObjectLogging.log("openCategory", "category page: "+URLsContent.CATEGORY_PMG+", was opened", true, driver);
+		PageObjectLogging.log("openCategory", "category page: " + URLsContent.CATEGORY_PMG + ", was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -42,19 +41,19 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		showAllButton.click();
 	}
 
-	public void clickHideAllButton () {
+	public void clickHideAllButton() {
 		waitForElementByElement(hideAllButton);
 		hideAllButton.click();
 	}
 
 	public void verifyChevronOpened() {
-		for(WebElement elem:chevronList){
+		for (WebElement elem : chevronList) {
 			Assertion.assertEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
 
 	public void verifyChevronClosed() {
-		for(WebElement elem:chevronList){
+		for (WebElement elem : chevronList) {
 			Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
@@ -80,34 +79,34 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	private List<WebElement> getArticleList(String articlesFirstLetter) {
 		List<WebElement> articlesList = driver.findElements(
-				By.cssSelector(
-						articlesListSelector.replace(
-								"%articlesFirstLetter%", articlesFirstLetter
-								)
-						)
-				);
+			By.cssSelector(
+				articlesListSelector.replace(
+					"%articlesFirstLetter%", articlesFirstLetter
+				)
+			)
+		);
 		return articlesList;
 	}
 
 	private WebElement getLoadMoreButton(String articlesFirstLetter) {
 		WebElement loadMoreButton = driver.findElement(
-				By.cssSelector(
-						loadMoreButtonSelector.replace(
-								"%articlesFirstLetter%", articlesFirstLetter
-								)
-						)
-				);
+			By.cssSelector(
+				loadMoreButtonSelector.replace(
+					"%articlesFirstLetter%", articlesFirstLetter
+				)
+			)
+		);
 		return loadMoreButton;
 	}
 
 	private WebElement getLoadPreviousButton(String articlesFirstLetter) {
 		WebElement loadPeviousButton = driver.findElement(
-				By.cssSelector(
-						loadPeviousButtonSelector.replace(
-								"%articlesFirstLetter%", articlesFirstLetter
-								)
-						)
-				);
+			By.cssSelector(
+				loadPeviousButtonSelector.replace(
+					"%articlesFirstLetter%", articlesFirstLetter
+				)
+			)
+		);
 		return loadPeviousButton;
 	}
 
@@ -120,8 +119,8 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	public String getLastArticleName(String articlesFirstLetter) {
 		List<WebElement> articlesList = getArticleList(articlesFirstLetter);
 		String lastArticle = articlesList
-				.get(articlesList.size()-1)
-				.getText();
+			.get(articlesList.size() - 1)
+			.getText();
 		return lastArticle;
 	}
 
@@ -134,12 +133,14 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	public void showNextArticles(String articlesFirstLetter) {
-		getLoadMoreButton(articlesFirstLetter).click();;
+		getLoadMoreButton(articlesFirstLetter).click();
+		;
 		waitForElementByElement(getLoadPreviousButton(articlesFirstLetter));
 	}
 
 	public void showPreviousArticles(String articlesFirstLetter) {
-		getLoadPreviousButton(articlesFirstLetter).click();;
+		getLoadPreviousButton(articlesFirstLetter).click();
+		;
 		waitForElementByElement(getLoadMoreButton(articlesFirstLetter));
 	}
 

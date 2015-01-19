@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -11,11 +9,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
+import org.testng.annotations.Test;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- * 1. Create wiki in different languages
+ *         1. Create wiki in different languages
  */
 
 public class CreateWikiTests_lang extends NewTestTemplate {
@@ -23,9 +21,9 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		dataProviderClass=CreateNewWikiDataProvider.class,
-		dataProvider="getLangs",
-		groups = {"CreateNewWiki_lang_001","CNW_lang"}
+		dataProviderClass = CreateNewWikiDataProvider.class,
+		dataProvider = "getLangs",
+		groups = {"CreateNewWiki_lang_001", "CNW_lang"}
 	)
 	public void CreateNewWiki_lang_TC001(String lang) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

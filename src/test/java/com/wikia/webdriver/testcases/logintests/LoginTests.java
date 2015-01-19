@@ -1,20 +1,19 @@
 package com.wikia.webdriver.testcases.logintests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Login user using Special:UserLogin page,
- * 2. Login user using drop-down
- * 3. Login staff user using Special:UserLogin page,
- * 4. Login staff user using drop-down
+ *         <p/>
+ *         1. Login user using Special:UserLogin page,
+ *         2. Login user using drop-down
+ *         3. Login staff user using Special:UserLogin page,
+ *         4. Login staff user using drop-down
  */
 public class LoginTests extends NewTestTemplate {
 

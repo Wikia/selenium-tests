@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import io.appium.java_client.MobileDriver;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -18,10 +18,6 @@ import java.util.List;
 * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
 * */
 public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
-
-	public SearchNavSideMenuComponentObject(WebDriver driver) {
-		super(driver);
-	}
 
 	@FindBy(css = ".ember-text-field")
 	private WebElement searchInput;
@@ -55,6 +51,12 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	private WebElement backChevron;
 	@FindBy(css = ".overlay")
 	private WebElement overlay;
+	@FindBy(css = "a[href='/wiki/Special:Random']")
+	private WebElement randomPage;
+
+	public SearchNavSideMenuComponentObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public void clickSearchField() {
 		waitForElementByElement(searchInput);
@@ -73,6 +75,13 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 		cancelSearchCaption.click();
 	}
 
+	public MercuryArticlePageObject clickRandomPage() {
+		waitForElementVisibleByElement(randomPage);
+		tapOnElement(randomPage);
+		PageObjectLogging.log("clickRandomPage", "Random page button was clicked", true);
+		return new MercuryArticlePageObject(driver);
+	}
+
 	public String getSearchResultHref(int searchPosition) {
 		waitForElementVisibleByElement(searchSuggestions.get(searchPosition));
 		return searchSuggestions.get(searchPosition).getAttribute("href");
@@ -80,7 +89,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void typeInSearchField(String content, int length) {
 		waitForElementVisibleByElement(searchInput);
-		searchInput.sendKeys(content.substring(0, length));
+		searchInput.sendKeys(content.substring(0, 3));
 		PageObjectLogging.log(
 				"typeInSearchField",
 				"String >>" + content.substring(0, length) + "<< was typed in string field",
@@ -106,34 +115,28 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void verifySearchNotMatch() {
 		waitForElementByElement(searchAlerts);
-		//PageObjectLogging.log("verifySearchNotMatch", searchAlerts.getText(), true);
 		Assertion.assertTrue(searchAlerts.getText().contains(MercuryContent.MERCURY_SEARCH_NOT_MATCH));
 	}
 
 	public void verifyOpeningArticleInNav(int anchorIndex) {
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
-		if (noChevrons.size() != 0) {
-			noChevrons.get(anchorIndex).click();
-		}
+		noChevrons.get(anchorIndex).click();
+		PageObjectLogging.log("verifyOpeningArticleInNav", "New article opened", true, driver);
 	}
 
 	public void verifyOpeningNextLevelInNav(int anchorIndex) {
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		if (chevrons.size() != 0) {
-			chevrons.get(anchorIndex).click();
-			waitForElementVisibleByElement(backChevron);
-			PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is visible", true, driver);
-		}
+		chevrons.get(anchorIndex).click();
+		waitForElementVisibleByElement(backChevron);
+		PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is visible", true, driver);
 	}
 
 	public void verifyBackLinkFunctionality(int anchorIndex) {
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		if (chevrons.size() != 0) {
-			chevrons.get(anchorIndex).click();
-			waitForElementVisibleByElement(backChevron);
-			backChevron.click();
-			PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is working", true, driver);
-		}
+		chevrons.get(anchorIndex).click();
+		waitForElementVisibleByElement(backChevron);
+		backChevron.click();
+		PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
 	}
 
 	public void verifyClosingNav() {
@@ -145,8 +148,9 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	public void verifyTextEllipsis(int anchorIndex) {
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		//x = noChevrons.get(anchorIndex).getCssValue("text-overflow");		
-		if (noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis") && chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis")) {
+		boolean noChevronsEllipsis = noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
+		boolean chevronsEllipsis = chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis");
+		if (noChevronsEllipsis && chevronsEllipsis) {
 			PageObjectLogging.log("verifyTextEllipsis", "CSS selector is set to ellipsis", true);
 		} else {
 			PageObjectLogging.log("verifyTextEllipsis", "CSS sellector isn't set to ellipsis", false);

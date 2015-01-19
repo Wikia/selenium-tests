@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 public class SpecialPagesForAnons extends NewTestTemplateBeforeClass {
 
 	@Test(
-		dataProviderClass=SpecialPagesDataProvider.class,
-		dataProvider="getSpecialPagesForAnons",
+		dataProviderClass = SpecialPagesDataProvider.class,
+		dataProvider = "getSpecialPagesForAnons",
 		groups = {"SpecialPagesForAnons_001", "SpecialPages"}
 	)
 	public void SpecialPagesForAnons_001_verifyHeaders(String specialPageName, String specialPageHeader) {

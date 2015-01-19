@@ -1,31 +1,29 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-public class SpecialFactoryPageObject extends SpecialPageObject
-{
-	@FindBy(css="a[href*=close]")
+public class SpecialFactoryPageObject extends SpecialPageObject {
+	@FindBy(css = "a[href*=close]")
 	private WebElement closeWikiButton;
-	@FindBy(css="#flag_1")
+	@FindBy(css = "#flag_1")
 	private WebElement dumpCheckBox;
-	@FindBy(css="#flag_2")
+	@FindBy(css = "#flag_2")
 	private WebElement imageArchiveCheckBox;
-	@FindBy(css="input[name='close_saveBtn']")
+	@FindBy(css = "input[name='close_saveBtn']")
 	private WebElement confirmCloseButton;
-	@FindBy(css="a.free")
+	@FindBy(css = "a.free")
 	private WebElement closedWikiaLink;
-	@FindBy(css="select#wk-variable-select")
+	@FindBy(css = "select#wk-variable-select")
 	private WebElement variableList;
-	@FindBy(css="div > div[style*=left] > pre")
+	@FindBy(css = "div > div[style*=left] > pre")
 	private WebElement variableValue;
-	@FindBy(css="div > div[style*=right] > pre")
+	@FindBy(css = "div > div[style*=right] > pre")
 	private WebElement defaultVariableValue;
 
 	public SpecialFactoryPageObject(WebDriver driver) {

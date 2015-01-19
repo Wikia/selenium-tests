@@ -12,7 +12,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] ooyalaAds() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"SyntheticTests/OoyalaVideo/" +
@@ -23,7 +23,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] mainWikiPages() {
-		return new Object[][] {
+		return new Object[][]{
 			{"runescape", "RuneScape_Wiki"},
 			{"yugioh", "Main_Page"},
 			{"naruto", "Narutopedia"},
@@ -41,7 +41,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] popularSites() {
-		return new Object[][] {
+		return new Object[][]{
 			{"elderscrolls", "Skyrim"},
 			{"zh.tos", "Category:%E5%9C%96%E9%91%92"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
@@ -57,7 +57,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] corporatePages() {
-		return new Object[][] {
+		return new Object[][]{
 			{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
 			{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
 			{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
@@ -76,7 +76,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] noAdsForUsers() {
-		return new Object[][] {
+		return new Object[][]{
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
 			{"wikia", "Wikia"},
@@ -84,12 +84,13 @@ public class AdsDataProvider {
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
 			{"adtest-pluto", "VeryLongPage"},
+			{"breakingbad", "File:AARON-PAUL-JACKET.jpg"},
 		};
 	}
 
 	@DataProvider
 	public static final Object[][] noAdsForSonyReferrer() {
-		return new Object[][] {
+		return new Object[][]{
 			// Articles
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
@@ -113,7 +114,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] pagesWithAIC() {
-		return new Object[][] {
+		return new Object[][]{
 			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
 			{"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
@@ -130,7 +131,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] hubsPages() {
-		return new Object[][] {
+		return new Object[][]{
 			{"gameshub", "Games_Hub"},
 			{"movieshub", "Communities"},
 			{"es.filmhub", "Wiki_Películas_Hub"},
@@ -139,8 +140,24 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] specialPages() {
+		return new Object[][]{
+			{"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+			{"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] filePages() {
+		return new Object[][]{
+			{"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+			{"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] gptAdsInToolbar() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest", "Toolbar/320x70",
 				"src/test/resources/adsResources/toolbar320x50",
@@ -155,7 +172,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] skin() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest-fluid", "Skin",
 				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
@@ -180,7 +197,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] skinLimited() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest-fluid", "Skin",
 				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
@@ -193,7 +210,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] adFreeWikis() {
-		return new Object[][] {
+		return new Object[][]{
 			{"api", "Wikia_API_Wiki"},
 			{"sfhomeless", "Glide_Memorial_Church"},
 			{"geekfeminism", "Dickwolves"},
@@ -203,7 +220,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] getWikisWithStandardHVC() {
-		return new Object[][] {
+		return new Object[][]{
 			{"adtest"},
 			{"de.icarly"},
 			{"memory-alpha"}
@@ -212,7 +229,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] adDriverForcedStatusSuccess() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"AdDriver2ForceStatus/Success",
@@ -223,7 +240,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] dfpParams() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"SyntheticTests/DfpParams",
@@ -252,15 +269,22 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] topWamWikis() {
-		return new Object[][] {
+		return new Object[][]{
 			{"pl.assassinscreed", "Ercole_Massimo", true},
 			{"mobileregressiontesting", "PMG", false}
 		};
 	}
 
 	@DataProvider
+	public static final Object[][] spotlights() {
+		return new Object[][]{
+			{"glee", "Rachel"}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] amazonSites() {
-		return new Object[][] {
+		return new Object[][]{
 			{"memory-alpha", "Portal:Main"},
 			{"gameofthrones", "Season_4"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
@@ -274,7 +298,7 @@ public class AdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] extraMarker() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"SyntheticTests/Async/Hop/ExtraMarker?log_level=9&log_group=Wikia.Tracker",
@@ -282,5 +306,10 @@ public class AdsDataProvider {
 				"adType=async;method=hop;pos=TOP_RIGHT_BOXAD;test-marker=42"
 			}
 		};
+	}
+
+	@DataProvider
+	public static final Object[][] evolveTestPage() {
+		return new Object[][]{{"adtest", "Evolve"}};
 	}
 }

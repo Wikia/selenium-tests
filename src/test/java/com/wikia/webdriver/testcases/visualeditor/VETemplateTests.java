@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import java.util.ArrayList;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -18,11 +13,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1413 Verify search suggestion on templates
  * VE-1413 Verify suggested templates appear by default
  * VE-1412 Verify adding template with params and template with no param
@@ -158,7 +158,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VETemplateTests_004"
 	)
 	public void VETemplateTests_006_CheckBlockedTransclusion() {
-		ArrayList<String> templateWikiTexts = new ArrayList<>();
+		List<String> templateWikiTexts = new ArrayList<>();
 		templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.clickBlockTransclusion(0);

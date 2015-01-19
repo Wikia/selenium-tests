@@ -1,13 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.historypage;
 
-import java.util.List;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
+import java.util.List;
 
 public class HistoryPagePageObject extends BasePageObject {
 
@@ -16,10 +15,10 @@ public class HistoryPagePageObject extends BasePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(css=".historysubmit")
+	@FindBy(css = ".historysubmit")
 	private List<WebElement> historySubmit;
 
-	@FindBy(css=".WikiaPageHeaderDiffHistory h1 strong")
+	@FindBy(css = ".WikiaPageHeaderDiffHistory h1 strong")
 	private WebElement diffHeader;
 
 	public DiffPagePageObject goToDiffPageFromHistoryPage() {

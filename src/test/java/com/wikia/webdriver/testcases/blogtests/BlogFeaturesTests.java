@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.blogtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -23,13 +21,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import org.testng.annotations.Test;
 
-public class BlogFeaturesTests extends NewTestTemplate{
+public class BlogFeaturesTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"BlogFeatures_001", "BlogFeaturesTests"})
-	public void BlogFeatures_001_AddingGallery(){
+	@Test(groups = {"BlogFeatures_001", "BlogFeaturesTests"})
+	public void BlogFeatures_001_AddingGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -50,8 +49,8 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		blogPage.verifyGallery();
 	}
 
-	@Test(groups={"BlogFeatures_002", "BlogFeaturesTests"})
-	public void BlogFeatures_002_AddingSlideshow(){
+	@Test(groups = {"BlogFeatures_002", "BlogFeaturesTests"})
+	public void BlogFeatures_002_AddingSlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -69,8 +68,8 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		blogPage.verifySlideshow();
 	}
 
-	@Test(groups={"BlogFeatures_003", "BlogFeaturesTests"})
-	public void BlogFeatures_003_AddingSlider(){
+	@Test(groups = {"BlogFeatures_003", "BlogFeaturesTests"})
+	public void BlogFeatures_003_AddingSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -88,8 +87,8 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		blogPage.verifySlider();
 	}
 
-	@Test(groups={"BlogFeatures_004", "BlogFeaturesTests", "Media"})
-	public void BlogFeatures_004_AddingVideo(){
+	@Test(groups = {"BlogFeatures_004", "BlogFeaturesTests", "Media"})
+	public void BlogFeatures_004_AddingVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -104,8 +103,8 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		blogPage.verifyVideo();
 	}
 
-	@Test(groups={"BlogFeatures_005", "BlogFeaturesTests"})
-	public void BlogFeatures_005_AddingImage(){
+	@Test(groups = {"BlogFeatures_005", "BlogFeaturesTests"})
+	public void BlogFeatures_005_AddingImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);

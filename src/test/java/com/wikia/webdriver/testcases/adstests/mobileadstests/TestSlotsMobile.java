@@ -1,29 +1,27 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
+import org.testng.annotations.Test;
 
 /**
+ * @param wikiName             - name of the wiki
+ * @param article              - name of the article
+ * @param adUnit               - DFP link with ad skin image
+ * @param topleaderboardImgUrl - part of path to file with default wikia topleaderboard ad
+ * @param medrecImgUrl         - part of path to file with default wikia medrec ad
  * @author Sergey Naumov, Piotr PMG Gackowski
  * @ownership AdEngineering
- *
+ * <p/>
  * URL to DFP: https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=111889452
  * Test all slots on mobile skin with different combinations of slots
- * @param wikiName - name of the wiki
- * @param article - name of the article
- * @param adUnit - DFP link with ad skin image
- * @param topleaderboardImgUrl - part of path to file with default wikia topleaderboard ad
- * @param medrecImgUrl - part of path to file with default wikia medrec ad
- *
  */
 public class TestSlotsMobile extends MobileTestTemplate {
 
-	private final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
-	private final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
-	private final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+	private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
+	private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
+	private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
 	@Test(
 		groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
@@ -32,7 +30,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
 	)
 	public void TestAllSlotsOnPage(
 		String wikiName, String article,
-		String adUnit, String topleaderboardImgUrl,String medrecImgUrl) {
+		String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -51,7 +49,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
 	)
 	public void TestLeaderboardAndPrefooterOnPage(
 		String wikiName, String article,
-		String adUnit, String topleaderboardImgUrl,String medrecImgUrl) {
+		String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -68,8 +66,8 @@ public class TestSlotsMobile extends MobileTestTemplate {
 		dataProvider = "leaderboardAndInContentSlots"
 	)
 	public void TestLeaderboardAndInContentOnPage(
-			String wikiName, String article,
-			String adUnit, String topleaderboardImgUrl,String medrecImgUrl) {
+		String wikiName, String article,
+		String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);

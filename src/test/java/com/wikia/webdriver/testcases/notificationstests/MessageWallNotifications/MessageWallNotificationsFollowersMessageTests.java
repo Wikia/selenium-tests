@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,14 +11,14 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.Noti
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. User 5 is following user 6 message wall
- * 2. User 6 is writig a message on his own message wall,
- * 3. User 5 is notified about the message
- *
+ *         <p/>
+ *         1. User 5 is following user 6 message wall
+ *         2. User 6 is writig a message on his own message wall,
+ *         3. User 5 is notified about the message
  */
 public class MessageWallNotificationsFollowersMessageTests extends NewTestTemplate {
 
@@ -29,10 +27,10 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 	String title;
 
 	@Test(
-			groups= {
-					"MessageWallNotificationsFollowersMessageTests_001",
-					"MessageWallNotificationsFollowersMessageTests"
-			}
+		groups = {
+			"MessageWallNotificationsFollowersMessageTests_001",
+			"MessageWallNotificationsFollowersMessageTests"
+		}
 	)
 	public void followerNotificationNewMessage_setup_1() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -44,11 +42,11 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsFollowersMessageTests_002",
-					"MessageWallNotificationsFollowersMessageTests"
-			},
-			dependsOnMethods = "followerNotificationNewMessage_setup_1"
+		groups = {
+			"MessageWallNotificationsFollowersMessageTests_002",
+			"MessageWallNotificationsFollowersMessageTests"
+		},
+		dependsOnMethods = "followerNotificationNewMessage_setup_1"
 	)
 	public void followerNotificationNewMessage_setup_2() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -64,11 +62,11 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsFollowersMessageTests_003",
-					"MessageWallNotificationsFollowersMessageTests"
-			},
-			dependsOnMethods = "followerNotificationNewMessage_setup_2"
+		groups = {
+			"MessageWallNotificationsFollowersMessageTests_003",
+			"MessageWallNotificationsFollowersMessageTests"
+		},
+		dependsOnMethods = "followerNotificationNewMessage_setup_2"
 	)
 	public void followerNotificationNewMessage_verification() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

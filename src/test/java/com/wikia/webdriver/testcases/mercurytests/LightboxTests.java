@@ -9,22 +9,18 @@ import io.appium.java_client.android.AndroidDriver;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject.Orientation;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.interactions.internal.TouchAction;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -42,7 +38,6 @@ public class LightboxTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
-	//MT01
 	@Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_001_TappingImageOpenLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -51,7 +46,6 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 	}
 
-	//MT02
 	@Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_002_TappingCloseButtonCloseLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);

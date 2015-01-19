@@ -1,14 +1,13 @@
 package com.wikia.webdriver.common.properties;
 
-import java.io.File;
-
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.XMLFunctions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.XMLFunctions;
+import java.io.File;
 
 public class Properties {
 

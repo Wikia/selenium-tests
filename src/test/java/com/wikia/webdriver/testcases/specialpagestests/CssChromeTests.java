@@ -1,16 +1,15 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class CssChromeTests extends NewTestTemplate {
 
@@ -51,6 +50,7 @@ public class CssChromeTests extends NewTestTemplate {
 		String cssContent = specialCss.getWikiaCssContent();
 		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
+
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
@@ -103,7 +103,7 @@ public class CssChromeTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
-	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks_QAART_411() {
+	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks() {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved(testedPage);
 		specialCss.clickPublishButtonDropdown();

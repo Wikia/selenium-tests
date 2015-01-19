@@ -8,8 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 /**l
  * @authors: Rodrigo Gomez, Łukasz Nowak
  * @ownership: Mobile Web
@@ -21,7 +19,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
+		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
 	@Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
@@ -47,5 +45,13 @@ public class ArticlePageTests extends NewTestTemplate {
 		articlePage.verifyCanonicalUrl();
 	}
 
+	@Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
+	public void MercuryArticleTests_004_VerifySingleLinkedImageRedirect() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
+		String imagehref = articlePage.getLinkedImageHref();
+		articlePage.clickLinkedImage();
+		articlePage.verifyLinkedImageRedirection(imagehref);
+	}
 }
 

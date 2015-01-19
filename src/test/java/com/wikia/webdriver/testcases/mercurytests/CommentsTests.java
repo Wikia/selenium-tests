@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
@@ -21,7 +20,7 @@ public class CommentsTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
+		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
 	@Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})
@@ -49,7 +48,7 @@ public class CommentsTests extends NewTestTemplate {
 		article.verifyRepliesAreExpanded();
 	}
 
-	@Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
+	@Test(enabled = false, groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
 	public void MercuryCommentsTests_004_VerifyCommentsCounter() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);

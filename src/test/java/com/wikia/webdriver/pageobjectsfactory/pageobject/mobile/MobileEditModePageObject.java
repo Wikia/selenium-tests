@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.MobilePageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class MobileEditModePageObject extends MobileBasePageObject {
 
@@ -14,11 +13,11 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#wkPreview")
+	@FindBy(css = "#wkPreview")
 	private WebElement editPreviewButton;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css = "#wpTextbox1")
 	private WebElement editArea;
-	@FindBy(css="#wkMobileCancel")
+	@FindBy(css = "#wkMobileCancel")
 	private WebElement editCancelButton;
 
 	public MobileArticlePageObject clickCancel() {
@@ -26,7 +25,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		return new MobileArticlePageObject(driver);
 	}
 
-	private String getHeader(){
+	private String getHeader() {
 		return selectedPageHeader.getText();
 	}
 

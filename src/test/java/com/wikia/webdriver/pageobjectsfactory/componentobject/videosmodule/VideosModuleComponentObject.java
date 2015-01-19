@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import java.util.List;
 
@@ -15,14 +14,14 @@ import java.util.List;
  */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
-	@FindBy(css="#videosModule")
+	@FindBy(css = "#videosModule")
 	private WebElement videosModuleContainer;
-	@FindBy(css="#videosModule img")
+	@FindBy(css = "#videosModule img")
 	private List<WebElement> videos;
-	private final int videoCountMin = 3;
-	private final int videoCountMax = 5;
+	private static final int VIDEO_COUNT_MIN = 3;
+	private static final int VIDEO_COUNT_MAX = 5;
 
-	public VideosModuleComponentObject (WebDriver driver) {
+	public VideosModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
@@ -37,7 +36,7 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 	}
 
 	public void verifyDisplayCount() {
-		Assertion.assertTrue(videos.size() >= videoCountMin && videos.size() <= videoCountMax);
+		Assertion.assertTrue(videos.size() >= VIDEO_COUNT_MIN && videos.size() <= VIDEO_COUNT_MAX);
 		PageObjectLogging.log("verifyDisplayCount", "Videos Module showing correct number of videos", true);
 	}
 

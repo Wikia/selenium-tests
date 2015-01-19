@@ -4,17 +4,14 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.ConfigurationNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Bogna 'bognix' Knychala
  */
 public class MobileDriversRegistry {
 
-	private HashMap<String, List<String>> devicesRegistry = new HashMap();
+	private Map<String, List<String>> devicesRegistry = new HashMap();
 	private String mobilePlatform;
 	private String pathToMobileConfig;
 
@@ -33,13 +30,13 @@ public class MobileDriversRegistry {
 			String knownVersions = "";
 			Iterator itr = devicesRegistry.keySet().iterator();
 			while (itr.hasNext()) {
-				knownVersions += itr.next().toString() +  ", " ;
+				knownVersions += itr.next().toString() + ", ";
 			}
 			throw new RuntimeException(
 				String.format(
 					"We don't have any device for provided version.\n" +
-					"Please make sure device with provided version is present in mobile-config.xml file.\n" +
-					"Provided version: %s, Known versions: %s",
+						"Please make sure device with provided version is present in mobile-config.xml file.\n" +
+						"Provided version: %s, Known versions: %s",
 					version,
 					knownVersions
 				)
@@ -59,8 +56,8 @@ public class MobileDriversRegistry {
 			mobilePlatform.toLowerCase()
 		).get(0);
 		List devicesForPlatform = platformNode.getChildren();
-		for (int i=0; i<devicesForPlatform.size(); i++) {
-			ConfigurationNode node = (ConfigurationNode)devicesForPlatform.get(i);
+		for (int i = 0; i < devicesForPlatform.size(); i++) {
+			ConfigurationNode node = (ConfigurationNode) devicesForPlatform.get(i);
 			String version = getAttributeValue("platform-version", node);
 			String uuid = getAttributeValue("uuid", node);
 			appendToDevicesList(version, uuid);
@@ -68,7 +65,7 @@ public class MobileDriversRegistry {
 	}
 
 	private String getAttributeValue(String attributeName, ConfigurationNode node) {
-		for (int i=0; i<node.getAttributeCount(); i++) {
+		for (int i = 0; i < node.getAttributeCount(); i++) {
 			if (node.getAttribute(i).getName().equalsIgnoreCase(attributeName)) {
 				return (String) node.getAttribute(i).getValue();
 			}

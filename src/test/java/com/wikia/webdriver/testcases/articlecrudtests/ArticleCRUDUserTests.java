@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -10,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -19,7 +18,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_001"}
+		groups = {"ArticleCRUDUser", "ArticleCRUDUser_001"}
 	)
 	public void ArticleCRUDUser_001_specialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -29,13 +28,13 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_002"}
+		groups = {"ArticleCRUDUser", "ArticleCRUDUser_002"}
 	)
 	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -44,7 +43,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -52,7 +51,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke1"}
 	)
-	public void ArticleCRUDUser_003_addDropdown() {
+	public void ArticleCRUDUser_003_addDropdown_QAART_354() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.ARTICLE_TEXT;
@@ -77,7 +76,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}

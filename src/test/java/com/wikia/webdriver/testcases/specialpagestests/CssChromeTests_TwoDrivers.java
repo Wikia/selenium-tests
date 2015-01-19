@@ -1,19 +1,18 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
+import org.testng.annotations.Test;
 
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
-	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision_QAART_365() {
+	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
 		//first user opens the special:CSS
 		switchToWindow(driverOne);
 		WikiBasePageObject base1 = new WikiBasePageObject(driverOne);

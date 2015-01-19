@@ -1,26 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 
 public class MercuryArticlePageObject extends MercuryBasePageObject{
-
-	public MercuryArticlePageObject(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
-	}
 
 	@FindBy(css = ".article-gallery img")
 	private List<WebElement> galleryImagesArray;
@@ -60,7 +52,12 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	private WebElement singleImg;
 	@FindBy(css = ".view-map")
 	private WebElement viewMapButton;
+	@FindBy(css = ".linked-gallery-image a")
+	private WebElement linkedImage;
 
+	public MercuryArticlePageObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public LightBoxMercuryComponentObject clickGalleryImage(int index) {
 		scrollToElement(galleryImagesArray.get(index));
@@ -79,17 +76,30 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	public void clickViewReplies() {
 		waitForElementVisibleByElement(showRepliesButtons.get(0));
 		scrollAndClick(showRepliesButtons.get(0));
+		PageObjectLogging.log("clickViewReplies", "View replies was clicked", true, driver);
+	}
+
+	public void clickLinkedImage() {
+		waitForElementVisibleByElement(linkedImage);
+		tapOnElement(linkedImage);
+	}
+
+	public String getLinkedImageHref() {
+		waitForElementVisibleByElement(linkedImage);
+		return linkedImage.getAttribute("href");
 	}
 
 	public SearchNavSideMenuComponentObject clickSearchButton() {
 		waitForElementVisibleByElement(searchButton);
 		searchButton.click();
+		PageObjectLogging.log("clickSearchButton", "Search button was clicked", true, driver);
 		return new SearchNavSideMenuComponentObject(driver);
 	}
 
 	public void clickTocCaption() {
 		waitForElementVisibleByElement(tocCollapsed);
 		scrollAndClick(tocCollapsed);
+		PageObjectLogging.log("clickTocCaption", "Toc was clicked", true, driver);
 	}
 
 	public InteractiveMapsMercuryComponentObject clickViewMapButton() {
@@ -98,6 +108,11 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		PageObjectLogging.log("clickMapButton", "Map button was clicked", true);
 		return new InteractiveMapsMercuryComponentObject(driver);
 	}
+
+	public void verifyLinkedImageRedirection(String hrefUrl) {
+		Assertion.assertTrue(driver.getCurrentUrl().toString().contains(hrefUrl));
+	}
+
 	public void verifyCommentsAreUncollapsed() {
 		Assertion.assertFalse(commentsHeader.getAttribute("class").contains("collapsed"));
 	}

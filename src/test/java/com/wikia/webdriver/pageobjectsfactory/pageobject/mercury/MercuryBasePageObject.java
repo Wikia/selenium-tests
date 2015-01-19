@@ -1,21 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
-import io.appium.java_client.*;
-import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.*;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.TouchScreen;
-import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.interactions.touch.TouchActions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-
-import java.util.HashMap;
 
 public class MercuryBasePageObject extends MobileBasePageObject{
 
@@ -61,5 +54,4 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 		Actions swipeAction = new Actions(driver);
 		swipeAction.dragAndDropBy(element, +100, 0).build().perform();
 	}
-
 }

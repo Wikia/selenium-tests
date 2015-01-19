@@ -22,7 +22,7 @@ public class GalleryTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
+		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
 	@Test(groups = {"MercuryGalleryTests_001", "MercuryGalleryTests", "Mercury"})
@@ -34,8 +34,19 @@ public class GalleryTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 	}
 
-	@Test(groups = {"MercuryGallerYTests_002", "MercuryGalleryTests", "Mercury"})
+	@Test(groups = {"MercuryGalleryTests_002", "MercuryGalleryTests", "Mercury"})
 	public void MercuryGalleryTests_002_VerifyCloseButtonWillCloseLightbox() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+		MercuryArticlePageObject gallery = new MercuryArticlePageObject(driver);
+		LightBoxMercuryComponentObject lightbox = gallery.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		base = lightbox.clickCloseButton();
+		lightbox.verifyLightboxClosed();
+	}
+
+	@Test(groups = {"MercuryGalleryTests_003", "MercuryGalleryTests", "Mercury"})
+	public void MercuryGalleryTests_003_VerifyCloseButtonWillCloseLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
 		MercuryArticlePageObject gallery = new MercuryArticlePageObject(driver);

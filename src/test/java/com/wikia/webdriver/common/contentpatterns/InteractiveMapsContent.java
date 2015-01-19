@@ -4,12 +4,12 @@ package com.wikia.webdriver.common.contentpatterns;
 public class InteractiveMapsContent {
 
 	public static final String PIN_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-			+ " Morbi eget porta eros, a dapibus nulla. Cras quis vulputate mauris, vel aliquam quam. "
-			+ "Praesent lobortis massa a malesuada cursus. Ut ac bibendum metus. Aliquam vitae justo nunc. "
-			+ "Nam metus nulla, lobortis id purus ultrices, pulvinar pellentesque odio. Nunc id ligula "
-			+ "tellus. Duis elementum, arcu et eleifend placerat, mauris est rhoncus turpis, "
-			+ "vitae dapibus augue enim vel lectus. Pellentesque consectetur gravida mi in "
-			+ "lobortis. Aliquam amet";
+		+ " Morbi eget porta eros, a dapibus nulla. Cras quis vulputate mauris, vel aliquam quam. "
+		+ "Praesent lobortis massa a malesuada cursus. Ut ac bibendum metus. Aliquam vitae justo nunc. "
+		+ "Nam metus nulla, lobortis id purus ultrices, pulvinar pellentesque odio. Nunc id ligula "
+		+ "tellus. Duis elementum, arcu et eleifend placerat, mauris est rhoncus turpis, "
+		+ "vitae dapibus augue enim vel lectus. Pellentesque consectetur gravida mi in "
+		+ "lobortis. Aliquam amet";
 
 	public static final String EMBED_MAP_ARTICLE_NAME = "embedMap";
 	public static final int PIN_TYPE_INDEX = 0;

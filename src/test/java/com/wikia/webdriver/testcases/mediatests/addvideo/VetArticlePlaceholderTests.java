@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -15,12 +13,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class VetArticlePlaceholderTests extends NewTestTemplate{
+public class VetArticlePlaceholderTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
@@ -31,7 +29,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -46,7 +44,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
@@ -66,13 +64,13 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}
 
 	@Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
-	public void Placeholders_004_EditModeLibrary() {
+	public void Placeholders_004_EditModeLibrary_QAART_496() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -83,7 +81,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}

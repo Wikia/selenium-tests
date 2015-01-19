@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class UrlBuilder {
@@ -20,7 +19,7 @@ public class UrlBuilder {
 	public String getUrlForPath(String wikiName, String wikiPath) {
 		String url = getUrlForWiki(wikiName);
 		if (!(isWikia)) {
-			url+= "wiki/";
+			url += "wiki/";
 		}
 		url += wikiPath;
 		return url;
@@ -34,7 +33,7 @@ public class UrlBuilder {
 
 		if (isWikia) {
 			//If wikia.com than append www
-			if (wikiName.equals("wikia")) {
+			if ("wikia".equals(wikiName)) {
 				prefix = "www.";
 			} else {
 				//for different languages, for example de.wikia, don't prepend www
@@ -47,9 +46,9 @@ public class UrlBuilder {
 		}
 
 		try {
-			if (env.equals("prod")) {
+			if ("prod".equals(env)) {
 				url += prefix + wikiName + suffix;
-			} else if (env.equals("preview") || env.contains("sandbox")) {
+			} else if ("preview".equals(env) || env.contains("sandbox")) {
 				url += env + "." + prefix + wikiName + suffix;
 			} else if (env.contains("dev")) {
 				String devBoxOwner = env.split("-")[1];

@@ -1,37 +1,35 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
 
 /**
  * @author Robert 'rochan' Chan
  */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-	@FindBy(css=
+	@FindBy(css =
 		".oo-ui-window-foot " +
-		"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
-		".oo-ui-labeledElement-label")
+			"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
+			".oo-ui-labeledElement-label")
 	private WebElement returnToSaveFormButton;
-	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
+	@FindBy(css = ".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
 	private WebElement wikiaAritlceFirstPreview;
-	@FindBy(css=".diff-addedline")
+	@FindBy(css = ".diff-addedline")
 	private List<WebElement> addedLines;
-	@FindBy(css=".diff-deletedline")
+	@FindBy(css = ".diff-deletedline")
 	private List<WebElement> deletedLines;
 
-	private final String diffLineString = ".diffchange-inline";
+	private static final String DIFF_LINE_STRING = ".diffchange-inline";
 
-	private final int DELETE = 0;
-	private final int INSERT = 1;
+	private static final int DELETE = 0;
+	private static final int INSERT = 1;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -46,13 +44,13 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 
-	public void verifyDeletedDiffs(ArrayList<String> targets) {
+	public void verifyDeletedDiffs(List<String> targets) {
 		switchToIFrame();
 		verifyArticleDiffs(targets, DELETE);
 		switchOutOfIFrame();
 	}
 
-	public void verifyAddedDiffs(ArrayList<String> targets) {
+	public void verifyAddedDiffs(List<String> targets) {
 		switchToIFrame();
 		if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
 			verifyNewArticleDiffs(targets);
@@ -62,7 +60,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		switchOutOfIFrame();
 	}
 
-	private void verifyArticleDiffs(ArrayList<String> targets, int mode) {
+	private void verifyArticleDiffs(List<String> targets, int mode) {
 		int count = 0;
 		int expectedCount = 0;
 		List<WebElement> diffLines = null;
@@ -76,12 +74,12 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		for (WebElement currentDiff : diffLines) {
 			String currentText;
 			//Check to see if the current diff line has inline diff
-			if(checkIfElementInElement(diffLineString, currentDiff)) {
-				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(diffLineString));
+			if (checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
+				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
 				//iterate through multiple inline diffs
-				for(WebElement currentInlineDiff : inlineDiffs) {
+				for (WebElement currentInlineDiff : inlineDiffs) {
 					String currentInlineText = currentInlineDiff.getText();
-					if(isDiffFound(targets, currentInlineText)) {
+					if (isDiffFound(targets, currentInlineText)) {
 						targets.remove(currentInlineText);
 						count++;
 					}
@@ -91,7 +89,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 				if (currentText.isEmpty()) {
 					expectedCount--;
 				} else {
-					if(isDiffFound(targets, currentText)) {
+					if (isDiffFound(targets, currentText)) {
 						targets.remove(currentText);
 						count++;
 					}
@@ -104,7 +102,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		}
 	}
 
-	private void verifyNewArticleDiffs(ArrayList<String> targets) {
+	private void verifyNewArticleDiffs(List<String> targets) {
 		String wikiText = wikiaAritlceFirstPreview.getText();
 		for (String target : targets) {
 			verifyNewArticleDiff(target, wikiText);
@@ -115,7 +113,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		Assertion.assertStringContains(target, source);
 	}
 
-	private boolean isDiffFound(ArrayList<String> targets, String source) {
+	private boolean isDiffFound(List<String> targets, String source) {
 		for (String target : targets) {
 			if (source.contains(target)) {
 				return true;

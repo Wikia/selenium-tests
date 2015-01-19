@@ -1,10 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -15,31 +10,35 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @author: Bogna 'bognix' Knychała
  */
 public class EditMode extends WikiBasePageObject {
 
-	@FindBy(css="#wpSave")
+	@FindBy(css = "#wpSave")
 	protected WebElement submitButton;
-	@FindBy(css="#wpPreview")
+	@FindBy(css = "#wpPreview")
 	private WebElement previewButton;
-	@FindBy(css="a.RTEImageButton")
+	@FindBy(css = "a.RTEImageButton")
 	private WebElement photoButton;
-	@FindBy(css="a.RTEVideoButton")
+	@FindBy(css = "a.RTEVideoButton")
 	private WebElement videoButton;
-	@FindBy(css="a.RTEGalleryButton")
+	@FindBy(css = "a.RTEGalleryButton")
 	private WebElement galleryButton;
-	@FindBy(css="a.RTESlideshowButton")
+	@FindBy(css = "a.RTESlideshowButton")
 	private WebElement slideshowButton;
-	@FindBy(css="a.RTESliderButton")
+	@FindBy(css = "a.RTESliderButton")
 	private WebElement sliderButton;
-	@FindBy(css="a.cke_button_ModeWysiwyg > span#cke_23_label")
+	@FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
 	private WebElement visualButton;
-	@FindBy(css="a.cke_button_ModeSource > span#cke_22_label")
+	@FindBy(css = "a.cke_button_ModeSource > span#cke_22_label")
 	private WebElement sourceButton;
-	@FindBy(css="a.cke_off.cke_button_table")
+	@FindBy(css = "a.cke_off.cke_button_table")
 	private WebElement addTableButton;
 
 	private By submitButtonBy = By.cssSelector("#wpSave");
@@ -73,41 +72,41 @@ public class EditMode extends WikiBasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	public PhotoAddComponentObject clickPhotoButton(){
+	public PhotoAddComponentObject clickPhotoButton() {
 		waitForElementByElement(photoButton);
 		scrollAndClick(photoButton);
 		PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
 		return new PhotoAddComponentObject(driver);
 	}
 
-	public VetAddVideoComponentObject clickVideoButton(){
+	public VetAddVideoComponentObject clickVideoButton() {
 		waitForElementByElement(videoButton);
 		scrollAndClick(videoButton);
 		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public TableBuilderComponentObject clickAddTableButton(){
+	public TableBuilderComponentObject clickAddTableButton() {
 		addTableButton.click();
 		PageObjectLogging.log("addTable", "add table button clicked", true);
 		return new TableBuilderComponentObject(driver);
 	}
 
-	public SliderBuilderComponentObject clickSliderButton(){
+	public SliderBuilderComponentObject clickSliderButton() {
 		waitForElementByElement(sliderButton);
 		scrollAndClick(sliderButton);
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderBuilderComponentObject(driver);
 	}
 
-	public SlideshowBuilderComponentObject clickSlideshowButton(){
+	public SlideshowBuilderComponentObject clickSlideshowButton() {
 		waitForElementByElement(slideshowButton);
 		scrollAndClick(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
 		return new SlideshowBuilderComponentObject(driver);
 	}
 
-	public GalleryBuilderComponentObject clickGalleryButton(){
+	public GalleryBuilderComponentObject clickGalleryButton() {
 		waitForElementByElement(galleryButton);
 		scrollAndClick(galleryButton);
 		PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);

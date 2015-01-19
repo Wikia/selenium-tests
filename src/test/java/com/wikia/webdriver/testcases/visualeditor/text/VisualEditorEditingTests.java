@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor.text;
 
-import java.util.ArrayList;
-
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -16,11 +11,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert 'rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * 1. VE-1228 Adding all style text, heading text and list to a new article
  * 2. VE-1228 Removing a piece of text from the article
  * 3. VE-1228 Adding all style text, heading text and list to an existing article
@@ -34,7 +34,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	WikiBasePageObject base;
 
 	private String text = WikiTextContent.TEXT;
-	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
+	private List<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
@@ -64,7 +64,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		firstSourceEditText = new ArrayList<>();
 		firstSourceEditText.add(text);
 		secondSourceEditText = new ArrayList<>();
-		secondSourceEditText.add(text+text);
+		secondSourceEditText.add(text + text);
 
 	}
 
@@ -94,7 +94,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_002_delete() {
 		String removeText = "Lorem";
-		ArrayList<String> deletedWikiTexts;
+		List<String> deletedWikiTexts;
 		deletedWikiTexts = new ArrayList<>();
 		deletedWikiTexts.add(removeText);
 

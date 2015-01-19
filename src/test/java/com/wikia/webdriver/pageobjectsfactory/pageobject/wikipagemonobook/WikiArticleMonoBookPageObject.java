@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook;
 
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 
 /**
  * @author lukaszk
