@@ -110,17 +110,17 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_007_specialPromoteData_QAART_486() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+	public void crossWikiSearch_007_specialPromoteData() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
+		search.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(SearchContent.SEARCH_PHRASE);
 		String searchDescription = search.getFirstDescription();
 		String searchImage = search.getFirstImageText();
 		search.openResult(0);
-		base.openSpecialPromoteOnCurrentWiki();
+		search.openSpecialPromoteOnCurrentWiki();
 		SpecialPromotePageObject promote = new SpecialPromotePageObject(driver);
+
 		promote.verifyCrossWikiSearchDescription(searchDescription);
 		promote.verifyCrossWikiSearchImage(searchImage);
 	}

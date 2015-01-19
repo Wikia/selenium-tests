@@ -8,12 +8,12 @@ public class VideoContent {
 	public static final String YOUTUBE_VIDEO_URL2_FILENAME = "The_Sims_3_Into_the_Future_Producer_Walkthrough";
 	public static final String YOUTUBE_VIDEO2_SELECTOR = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']";
 	public static final String YOUTUBE_VIDEO_URL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
-	public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=bKHz7wOjb9w";
-	public static final String YOUTUBE_VIDEO_URL4_FILENAME = "The_JET_Bicycle_-_The_most_dangerous_unsafe_bike_EVER";
-	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "The JET Bicycle - The most dangerous unsafe bike EVER";
+	public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=DDWqJe1dCgY";
+	public static final String YOUTUBE_VIDEO_URL4_FILENAME = "Chainsaw_Bike";
+	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "Chainsaw Bike";
 	public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=ewum1Uq2MtU";
 
-	public static final String WIKIA_VIDEO_QUERY = "wikia";
+	public static final String WIKIA_VIDEO_QUERY = "mouse";
 	public static final String WIKIA_VIDEO_URL = "http://mediawiki119.wikia.com/wiki/File:Jimmy_Wales_-_What_is_Wikia%3F";
 	public static final String NON_PREMIUM_VIDEO_URL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";
 

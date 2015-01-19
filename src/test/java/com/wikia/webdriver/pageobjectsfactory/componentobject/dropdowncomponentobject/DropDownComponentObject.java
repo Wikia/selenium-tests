@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -25,7 +26,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css = ".ajaxLogin")
+	@FindBy(css = "#AccountNavigation")
 	private WebElement loginDropdownTrigger;
 	@FindBy(css = "#UserLoginDropdown")
 	private WebElement loginDropdown;
@@ -57,20 +58,21 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	 * @return
 	 */
 	public DropDownComponentObject openDropDown() {
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 14, 2000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
-					new Actions(driver).moveToElement(loginDropdownTrigger).perform();
-					if (!loginDropdown.isDisplayed()) {
-						loginDropdownTrigger.click();
+					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
+						new Actions(driver)
+								.moveToElement(driver.findElement(By.cssSelector(".wikia-logo-container")))
+								.moveToElement(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
 				}
 			});
-		} finally {
+		}finally {
 			restoreDeaultImplicitWait();
 		}
 
@@ -78,7 +80,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			"DropdownVisible",
 			"Login dropdown is visible",
 			true, driver
-		);
+							 );
 
 		return this;
 	}

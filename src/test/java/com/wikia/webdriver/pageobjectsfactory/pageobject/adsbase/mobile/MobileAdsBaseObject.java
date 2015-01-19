@@ -37,7 +37,14 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
+	private String getCountry() {
+		return ((String) ((JavascriptExecutor) driver).executeScript(
+			"return Wikia.geo.getCountryCode();"
+		));
+	}
+
 	public void verifyMobileTopLeaderboard() {
+		PageObjectLogging.log("DEBUG GeoEdge", getCountry(), true);
 		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
 		if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {

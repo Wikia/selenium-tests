@@ -52,11 +52,12 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.DefaultBackoffStrategy;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,6 +72,7 @@ import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -816,7 +818,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
-			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpClient httpclient = HttpClientBuilder.create()
+				.setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+				.disableAutomaticRetries()
+				.build();
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
@@ -825,11 +830,9 @@ public class WikiBasePageObject extends BasePageObject {
 			nvps.add(new BasicNameValuePair("lgname", userName));
 			nvps.add(new BasicNameValuePair("lgpassword", password));
 
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 
-			HttpResponse response = null;
-
-			response = httpclient.execute(httpPost);
+			HttpResponse response = httpclient.execute(httpPost);
 
 			HttpEntity entity = response.getEntity();
 			String xmlResponse = null;
@@ -838,13 +841,13 @@ public class WikiBasePageObject extends BasePageObject {
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token;
-			//Insert here for logging responses -- QAART 371
+			//Insert here for logging responses -- QAART 371 -- QAART 501
 			try {
 				token = xmlResponseArr[5];
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new WebDriverException(
-					"No token received from request. HTTP response is " + response.toString() +
-						", xmlReponse is " + xmlResponse);
+					"No token received from request.\n lgname is " + nvps.get(2).getValue() + ".\n HTTP response is " + response.toString() +
+					".\n xmlReponse is " + xmlResponse);
 			}
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
@@ -863,7 +866,7 @@ public class WikiBasePageObject extends BasePageObject {
 				nvps2.add(new BasicNameValuePair("lgtoken", token));
 
 				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-					HTTP.UTF_8));
+						StandardCharsets.UTF_8));
 
 				response = httpclient.execute(httpPost);
 

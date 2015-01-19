@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
@@ -223,13 +224,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		return firstResultDescription.getText();
 	}
 
-	/*
-	 * Method fetches specific string related to an image by storing index start position and
-	 * finish position, and then selects characters in between those indexes by using substring method.
-	 */
 	public String getFirstImageText() {
-		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
-		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
+		return ImageHelper.getImageId(thumbnails.get(0));
 	}
 }

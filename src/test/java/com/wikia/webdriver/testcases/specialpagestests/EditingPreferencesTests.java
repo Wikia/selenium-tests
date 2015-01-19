@@ -75,3 +75,4 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		src.verifySourceOnlyMode();
 	}
 }
+

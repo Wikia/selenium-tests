@@ -30,11 +30,11 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_001_deleteImage_QAART_436() {
+	public void ImageStorage_001_deleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		FilePagePageObject file = newFiles.openImage(PageContent.FILEDELETEANDRESTORE);
+		FilePagePageObject file = newFiles.openImage(PageContent.FILE_DELETE_AND_RESTORE, true);
 		imageURL = file.getImageUrl();
 		imageThumbnailURL = file.getImageThumbnailUrl();
 		newFiles.verifyURLStatus(200, imageURL);
@@ -58,7 +58,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_002_moveImage_QAART_437() {
+	public void ImageStorage_002_moveImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
