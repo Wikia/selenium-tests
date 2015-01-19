@@ -121,10 +121,75 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		}
 	}
 	
+	private boolean verifyChangesInUI (boolean lastDisplayVisibility) {
+		String lightboxHeaderDisplayValue = lightboxHeader.getCssValue("display");
+		String lightboxFooterDisplayValue = lightboxFooter.getCssValue("display");
+		boolean lightboxHeaderDisplay;
+		boolean lightboxFooterDisplay;
+		if (lightboxHeaderDisplayValue.contains("none")) {
+			lightboxHeaderDisplay = false;
+		} else {
+			lightboxHeaderDisplay = true;
+		}
+		if (lightboxFooterDisplayValue.contains("none")) {
+			lightboxFooterDisplay = false;
+		} else {
+			lightboxFooterDisplay = true;
+		}
+		if (lightboxHeaderDisplay == lastDisplayVisibility) {
+			PageObjectLogging.log("verifyChangesInUI", "Lightbox header visibility didn't changed", false);
+		} else {
+			PageObjectLogging.log("verifyChangesInUI", "Lightbox header visibility changed", true);
+		}
+		if (lightboxFooterDisplay == lastDisplayVisibility) {
+			PageObjectLogging.log("verifyChangesInUI", "Lightbox footer visibility didn't changed", false);
+		} else {
+			PageObjectLogging.log("verifyChangesInUI", "Lightbox footer visibility changed", true);
+		}
+		return !lastDisplayVisibility;
+	}
+	
 	public void verifyVisibilityUI (PerformTouchAction touchAction) {
-		System.out.println(lightboxHeader.getAttribute("class"));
-		//touchAction.TapOnPointXY(50, 50, 500, 1000);
-		
+		String LightboxHeaderDisplayValue = lightboxHeader.getCssValue("display");
+		String LightboxFooterDisplayValue = lightboxFooter.getCssValue("display");
+		int duration = 500;
+		int waitAfter = 5000;
+		boolean lastDisplayVisibility = true;
+		if (LightboxHeaderDisplayValue.contains(LightboxFooterDisplayValue)) {
+			if (LightboxHeaderDisplayValue == "none") {
+				PageObjectLogging.log("verifyVisibilityUI", "Lightbox header and footer are not visible", true);
+				lastDisplayVisibility = false;
+			} else {
+				PageObjectLogging.log("verifyVisibilityUI", "Lightbox header and footer are visible", true);
+				lastDisplayVisibility = true;
+			}
+		} else {
+			PageObjectLogging.log("verifyVisibilityUI", "Visibility of lightbox header is different than lightbox footer", false);
+		}
+		touchAction.TapOnPointXY(50, 50, duration, waitAfter);
+		lastDisplayVisibility = verifyChangesInUI(lastDisplayVisibility);
+		touchAction.TapOnPointXY(50, 50, duration, waitAfter);
+		lastDisplayVisibility = verifyChangesInUI(lastDisplayVisibility);
+	}
+	
+	public void verifyTappingOnImageEdge (PerformTouchAction touchAction, String edge) {
+		String currentImageSrc = getCurrentImagePath();
+		String nextImageSrc;
+		int pointX = 25;
+		int duration = 500;
+		int waitAfter = 5000;
+		if (edge == "right") {
+			pointX = 75;
+		} else {
+			edge = "left";
+		}
+		touchAction.TapOnPointXY(pointX, 50, duration, waitAfter);
+		nextImageSrc = getCurrentImagePath();
+		if (!nextImageSrc.contains(currentImageSrc)) {
+			PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge works", true);
+		} else {
+			PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge doesn't work", false);
+		}
 	}
 
 }
