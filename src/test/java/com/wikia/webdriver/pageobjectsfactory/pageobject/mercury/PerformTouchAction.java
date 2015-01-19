@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @authors: Tomasz Napieralski
@@ -44,13 +43,13 @@ public class PerformTouchAction {
 	private static int loadedPageHeight = 0;
 	private static int loadedPageWidth = 0;
 	
-	public static final String DIRECTION_LEFT = "left";
-	public static final String DIRECTION_RIGHT = "right";
-	public static final String DIRECTION_UP = "up";
-	public static final String DIRECTION_DOWN = "down";
+	public final String DIRECTION_LEFT = "left";
+	public final String DIRECTION_RIGHT = "right";
+	public final String DIRECTION_UP = "up";
+	public final String DIRECTION_DOWN = "down";
 	
-	public static final String ZOOM_WAY_IN = "in";
-	public static final String ZOOM_WAY_OUT = "out";
+	public final String ZOOM_WAY_IN = "in";
+	public final String ZOOM_WAY_OUT = "out";
 	
 	public PerformTouchAction (WebDriver webDriver) {
 		mobileDriver = NewDriverProvider.getMobileDriver();
@@ -335,7 +334,6 @@ public class PerformTouchAction {
 			element = driver.findElement(locator);
 		}
 		int elementStartPointX = element.getLocation().getX();
-		int elementStartPointY = element.getLocation().getY();
 		int elementHeight = element.getSize().getHeight();
 		int elementWidth = element.getSize().getHeight();
 		int offSetY = loadedPageHeight - element.getLocation().getY() - appWebviewHeight;

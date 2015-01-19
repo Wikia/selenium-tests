@@ -62,7 +62,7 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyLightboxClosed();
 	}
 
-	//MT03 - NOT COMPLETED YET
+	//MT03
 	@Test(groups = {"MercuryLightboxTests_003", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_003_SwipeChangeImages() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -70,18 +70,8 @@ public class LightboxTests extends NewTestTemplate {
 		PerformTouchAction touchAction = new PerformTouchAction(driver);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
-		System.out.println(lightbox.currentImageSrcPath());
-		touchAction.SwipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
-		System.out.println(lightbox.currentImageSrcPath());
-		touchAction.SwipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
-		System.out.println(lightbox.currentImageSrcPath());
-		touchAction.SwipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
-		System.out.println(lightbox.currentImageSrcPath());
-		touchAction.SwipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
-		System.out.println(lightbox.currentImageSrcPath());
-		touchAction.SwipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
-		System.out.println(lightbox.currentImageSrcPath());
-		
+		lightbox.verifySwiping(touchAction, touchAction.DIRECTION_LEFT, 10);
+		lightbox.verifySwiping(touchAction, touchAction.DIRECTION_RIGHT, 10);
 	}
 
 	
@@ -117,6 +107,18 @@ public class LightboxTests extends NewTestTemplate {
 		}
 
 		
+	}
+	
+	
+	//MT05 - Tap media elements in the center to hide/show UI elements
+	@Test(groups = {"MercuryLightboxTests_003", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_005_TapOnCenterShowHideUI() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
+		PerformTouchAction touchAction = new PerformTouchAction(driver);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyVisibilityUI(touchAction);
 	}
 
 		
