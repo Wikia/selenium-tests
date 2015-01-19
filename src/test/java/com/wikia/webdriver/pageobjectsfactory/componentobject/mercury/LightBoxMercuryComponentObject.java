@@ -187,6 +187,6 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 			PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge doesn't work", false);
 		}
 	}
-
+	
 }
 

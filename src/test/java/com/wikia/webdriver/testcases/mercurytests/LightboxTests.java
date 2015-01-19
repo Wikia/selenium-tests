@@ -1,14 +1,13 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import java.util.List;
-
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MultiTouchAction;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
@@ -16,14 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticleP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.touch.TouchActions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /*
 * @ownership: Mobile Web
