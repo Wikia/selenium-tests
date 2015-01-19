@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.notifications;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsComponentObject extends BasePageObject {
+public class NotificationsComponentObject extends WikiBasePageObject {
 
 	public NotificationsComponentObject(WebDriver driver) {
 		super(driver);
@@ -82,6 +82,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 */
 	public void showNotifications() {
 		waitForNotificationsLoaded();
+		getVenusGlobalNav().openAccountNAvigation();
 		openNotifications();
 		PageObjectLogging.log("#WallNotifications li ul.subnav",
 			"show notifications", true);
@@ -114,12 +115,12 @@ public class NotificationsComponentObject extends BasePageObject {
 	public String getNotificationLink(String text) {
 		for (int i = 0; i < notificationsList.size(); i++) {
 			if (notificationsList.get(i)
-				.findElement(By.cssSelector("div.notification-message")).getText()
+				.findElement(By.cssSelector(".notification-message")).getText()
 				.contains(text)) {
 				PageObjectLogging.log("getNotificationLink",
 					"get addres that of " + i + 1
 						+ " notification points to", true);
-				return notificationsList.get(i).getAttribute("href");
+				return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
 			}
 		}
 		PageObjectLogging.log("getNotificationLink",
