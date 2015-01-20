@@ -25,7 +25,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	}
 
 	@Override
-	protected void setWindowSize() {
+	protected void setWindowSizeAndroid() {
 		try {
 			driver.manage().window().setSize(new Dimension(360, 640));
 		} catch (WebDriverException ex) {
