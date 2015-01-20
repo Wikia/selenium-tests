@@ -78,6 +78,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -835,6 +836,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 			HttpEntity entity = response.getEntity();
 			String xmlResponse = null;
+
+			PageObjectLogging.log("LOGIN COOKIE:", response.toString(),true);
 
 			xmlResponse = EntityUtils.toString(entity);
 
