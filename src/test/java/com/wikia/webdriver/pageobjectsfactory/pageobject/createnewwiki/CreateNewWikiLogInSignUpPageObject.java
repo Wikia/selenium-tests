@@ -29,7 +29,9 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 	WebElement usernameValidationText;
 	@FindBy(css = "form#SignupRedirect input[type='submit']")
 	WebElement signUpSubmitButton;
-	@FindBy(css = "div.UserLoginModal div.input-group div.error-msg")
+
+	private static final String ERROR_MESSAGE_CSS = "div.UserLoginModal div.input-group div.error-msg";
+	@FindBy(css = ERROR_MESSAGE_CSS)
 	WebElement errorMessage;
 
 	public void typeInUserName(String userName) {
@@ -57,22 +59,22 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 	}
 
 	public void verifyEmptyUserNameValidation() {
-		waitForElementByElement(errorMessage);
+		waitForElementByCss(ERROR_MESSAGE_CSS);
 		Assertion.assertEquals(CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyInvalidUserNameValidation() {
-		waitForElementByElement(errorMessage);
+		waitForElementByCss(ERROR_MESSAGE_CSS);
 		Assertion.assertEquals(CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyBlankPasswordValidation() {
-		waitForElementByElement(errorMessage);
+		waitForElementByCss(ERROR_MESSAGE_CSS);
 		Assertion.assertEquals(CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyInvalidPasswordValidation() {
-		waitForElementByElement(errorMessage);
+		waitForElementByCss(ERROR_MESSAGE_CSS);
 		Assertion.assertEquals(CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
 	}
 }
