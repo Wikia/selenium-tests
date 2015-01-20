@@ -55,7 +55,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultBackoffStrategy;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -819,8 +819,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			HttpClient httpclient = HttpClientBuilder.create()
-				.setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-				.disableAutomaticRetries()
+				.setRetryHandler(new DefaultHttpRequestRetryHandler())
 				.build();
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
