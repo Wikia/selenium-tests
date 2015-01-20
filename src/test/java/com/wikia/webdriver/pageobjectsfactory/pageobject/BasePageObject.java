@@ -586,7 +586,12 @@ public class BasePageObject {
 	}
 
 	public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
-		wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {

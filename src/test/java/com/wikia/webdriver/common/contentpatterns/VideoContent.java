@@ -3,9 +3,9 @@ package com.wikia.webdriver.common.contentpatterns;
 public class VideoContent {
 	public static final String YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v=QE32HghV8-I";
 	public static final String YOUTUBE_VIDEO_WIKITEXT = "File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335 px|";
-	public static final String YOUTUBE_VIDEO_URL2 = "http://www.youtube.com/watch?v=stZNi4kyuXE";
-	public static final String YOUTUBE_VIDEO_URL2_NAME = "The Sims 3 Into the Future Producer Walkthrough";
-	public static final String YOUTUBE_VIDEO_URL2_FILENAME = "The_Sims_3_Into_the_Future_Producer_Walkthrough";
+	public static final String YOUTUBE_VIDEO_URL2 = "https://www.youtube.com/watch?v=11YCOtpEnro";
+	public static final String YOUTUBE_VIDEO_URL2_NAME = "The Sims 3 Katy Perry's Sweet Treats Trailer";
+	public static final String YOUTUBE_VIDEO_URL2_FILENAME = "The_Sims_3_Katy_Perry's_Sweet_Treats_Trailer";
 	public static final String YOUTUBE_VIDEO2_SELECTOR = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']";
 	public static final String YOUTUBE_VIDEO_URL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
 	public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=DDWqJe1dCgY";
