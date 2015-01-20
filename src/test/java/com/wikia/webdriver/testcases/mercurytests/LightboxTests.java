@@ -30,6 +30,7 @@ public class LightboxTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
+	//MT01
 	@Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_001_TappingImageOpenLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -38,6 +39,7 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 	}
 
+	//MT02
 	@Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_002_TappingCloseButtonCloseLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -59,42 +61,8 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifySwiping(touchAction, PerformTouchAction.DIRECTION_LEFT, 10);
 		lightbox.verifySwiping(touchAction, PerformTouchAction.DIRECTION_RIGHT, 10);
 	}
-
-	//MT04 - DEPRECATED, BUT IT WORKS
-	@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_000_ZoomThroughPanninAndDoubleTapping() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
-		PerformTouchAction touchAction = new PerformTouchAction(driver);
-		
-		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
-			
-		try {
-			Thread.sleep(5000);
-			System.out.println("Before...");
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-
-		System.out.println("zoom");
-		
-
-		/*********************** FOR LUDWIK *****************************/
-		touchAction.ZoomInOutPointXY(50, 50, 50, 100, "in", 2000); //It should zoom in center
-		touchAction.ZoomInOutPointXY(50, 50, 50, 100, "out", 0); //It should zoom out but it doesn't
 	
-		
-		try {
-			Thread.sleep(5000);
-			System.out.println("After...");
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-
-		
-	}
-	
-	//MT04 - IN PROGRESS
+	//MT04
 	@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_004_ZoomThroughPanninAndDoubleTapping() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -173,11 +141,4 @@ public class LightboxTests extends NewTestTemplate {
 		
 	}
 		
-	@Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_005_DoubleTapZoomImage() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
-		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
-		lightbox.testGestures();
-	}
 }

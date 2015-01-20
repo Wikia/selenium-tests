@@ -126,7 +126,7 @@ public class PerformTouchAction {
 	 */
 	public void SwipeFromCenterToDirection (String direction, int pixelPath, int duration, int waitAfter){
 		int centerX = appNativeWidth / 2;
-		int centerY = appNativeHeight / 2;
+		int centerY = (appNativeHeight / 2) + taskbarNativeHeight;
 		int path = 0;
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
@@ -193,9 +193,9 @@ public class PerformTouchAction {
 	 */
 	public void SwipeFromPointToPoint (int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
 		startX = (int)((startX / 100f) * appNativeWidth);
-		startY = (int)((startY / 100f) * appNativeHeight);
+		startY = (int)(((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
-		endY = (int)((endY / 100f) * appNativeHeight);
+		endY = (int)(((endY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
@@ -300,7 +300,7 @@ public class PerformTouchAction {
 	 */
 	public void TapOnPointXY (int pointX, int pointY, int duration, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
-		pointY = (int)((pointY / 100f) * appNativeHeight);
+		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
