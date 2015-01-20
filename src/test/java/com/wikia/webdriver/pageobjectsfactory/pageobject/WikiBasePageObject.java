@@ -115,8 +115,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement navigationLogoutLink;
 	@FindBy(css = "#userForceLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "a[data-id='login']")
-	protected WebElement loginButton;
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
 	protected WebElement editButton;
 	@FindBy(css = ".msg")
@@ -159,6 +157,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(css = "#globalNavigation")
 	protected WebElement newGlobalNavigation;
+
+	protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -812,7 +812,7 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("logOut",
 				"page loads for more than 30 seconds", true);
 		}
-		waitForElementByElement(loginButton);
+		waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 

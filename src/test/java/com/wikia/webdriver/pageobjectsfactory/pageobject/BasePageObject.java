@@ -498,8 +498,12 @@ public class BasePageObject {
 	 * @param locator The element to be checked
 	 */
 	public void waitForElementPresenceByBy(By locator) {
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	/**
