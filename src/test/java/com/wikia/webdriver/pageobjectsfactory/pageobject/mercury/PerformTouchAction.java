@@ -16,7 +16,7 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 16 Jan 2015
+ * @updated: 20 Jan 2015
  */
 
 public class PerformTouchAction {
@@ -43,13 +43,13 @@ public class PerformTouchAction {
 	private static int loadedPageHeight = 0;
 	private static int loadedPageWidth = 0;
 	
-	public final String DIRECTION_LEFT = "left";
-	public final String DIRECTION_RIGHT = "right";
-	public final String DIRECTION_UP = "up";
-	public final String DIRECTION_DOWN = "down";
+	public static final String DIRECTION_LEFT = "left";
+	public static final String DIRECTION_RIGHT = "right";
+	public static final String DIRECTION_UP = "up";
+	public static final String DIRECTION_DOWN = "down";
 	
-	public final String ZOOM_WAY_IN = "in";
-	public final String ZOOM_WAY_OUT = "out";
+	public static final String ZOOM_WAY_IN = "in";
+	public static final String ZOOM_WAY_OUT = "out";
 	
 	public PerformTouchAction (WebDriver webDriver) {
 		mobileDriver = NewDriverProvider.getMobileDriver();
@@ -211,7 +211,7 @@ public class PerformTouchAction {
 	}
 	
 	/**
-	 * It uses two fingers to zoom in.
+	 * It uses two fingers to zoom in or out.
 	 * @param startX Use value 0-100, it is percent of app width, Reccomend 50
 	 * @param startY Use value 0-100, it is percent of app height, Reccomend 10-90
 	 * @param fingersSpace Space between two fingers, In pixel, It must be less than pixelPath, Reccomend 20-100
@@ -221,7 +221,7 @@ public class PerformTouchAction {
 	 */
 	public void ZoomInOutPointXY (int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
-		pointY = (int)((pointY / 100f) * appNativeHeight);
+		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
 		TouchAction touchTwo = new TouchAction(mobileDriver);
 		MultiTouchAction multiTouch = new MultiTouchAction(mobileDriver);
@@ -273,12 +273,11 @@ public class PerformTouchAction {
 			startXTwo = endXTwo;
 			endXTwo = temp;
 		}
-		System.out.println("startXOne: "+startXOne+", endXOne: "+endXOne+", startXTwo: "+startXTwo+", endXTwo: "+endXTwo+" ");
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
-		touchOne.press(startXOne, pointY).moveTo(endXOne, pointY).release();
-		touchTwo.press(startXTwo, pointY).moveTo(endXTwo, pointY).release();
+		touchOne.press(startXOne, pointY).moveTo(endXOne - startXOne, 0).release();
+		touchTwo.press(startXTwo, pointY).moveTo(endXTwo - startXTwo, 0).release();
 		multiTouch.add(touchOne);
 		multiTouch.add(touchTwo);
 		try {

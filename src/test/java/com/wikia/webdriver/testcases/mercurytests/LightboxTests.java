@@ -56,13 +56,13 @@ public class LightboxTests extends NewTestTemplate {
 		PerformTouchAction touchAction = new PerformTouchAction(driver);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
-		lightbox.verifySwiping(touchAction, touchAction.DIRECTION_LEFT, 10);
-		lightbox.verifySwiping(touchAction, touchAction.DIRECTION_RIGHT, 10);
+		lightbox.verifySwiping(touchAction, PerformTouchAction.DIRECTION_LEFT, 10);
+		lightbox.verifySwiping(touchAction, PerformTouchAction.DIRECTION_RIGHT, 10);
 	}
 
-	//MT04 - NOT COMPLETED YET
+	//MT04 - DEPRECATED, BUT IT WORKS
 	@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_004_ZoomThroughPanninAndDoubleTapping() {
+	public void MercuryLightboxTests_000_ZoomThroughPanninAndDoubleTapping() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
 		PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -94,6 +94,21 @@ public class LightboxTests extends NewTestTemplate {
 		
 	}
 	
+	//MT04 - IN PROGRESS
+	@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_004_ZoomThroughPanninAndDoubleTapping() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
+		PerformTouchAction touchAction = new PerformTouchAction(driver);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyZoomingByGesture(touchAction, LightBoxMercuryComponentObject.ZOOM_METHOD_GESTURE);
+		lightbox.clickCloseButton();
+		lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyZoomingByGesture(touchAction, LightBoxMercuryComponentObject.ZOOM_METHOD_TAP);
+	}
+	
 	//MT05
 	@Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_005_TapOnCenterShowHideUI() {
@@ -113,18 +128,17 @@ public class LightboxTests extends NewTestTemplate {
 		PerformTouchAction touchAction = new PerformTouchAction(driver);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
-		lightbox.verifyTappingOnImageEdge(touchAction, "left");
-		lightbox.verifyTappingOnImageEdge(touchAction, "right");
+		lightbox.verifyTappingOnImageEdge(touchAction, LightBoxMercuryComponentObject.EDGE_LEFT);
+		lightbox.verifyTappingOnImageEdge(touchAction, LightBoxMercuryComponentObject.EDGE_RIGHT);
 	}
 	
 	//MT10 - NOT COMPLETED YET
 	@Test(groups = {"MercuryLightboxTests_010", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_010_RunAllTestInLanscapeMode() {
 		
-		
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
 		AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
+		
+		
 		
 		
 		if (mobileDriver.getContext() != "NATIVE_APP") {
@@ -134,8 +148,18 @@ public class LightboxTests extends NewTestTemplate {
 		if (mobileDriver.getContext() != "WEBVIEW_1") {
 			mobileDriver.context("WEBVIEW_1");
 		}
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
+		
+		try {
+			Thread.sleep(4000);
+		} catch (Exception e) {}
+		
+		
+		
+		
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}

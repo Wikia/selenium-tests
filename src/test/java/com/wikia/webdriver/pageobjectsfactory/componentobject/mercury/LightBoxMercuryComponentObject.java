@@ -1,6 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
+import java.io.File;
+
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.MobileDriver;
@@ -37,6 +42,12 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	private WebElement lightboxHeader;
 	@FindBy(css = ".lightbox-footer")
 	private WebElement lightboxFooter;
+	
+	public static final String EDGE_LEFT = "left";
+	public static final String EDGE_RIGHT = "right";
+	
+	public static final String ZOOM_METHOD_GESTURE = "gesture";
+	public static final String ZOOM_METHOD_TAP = "tap";
 
 	public LightBoxMercuryComponentObject(WebDriver driver) {
 		super(driver);
@@ -185,6 +196,51 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 			PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge works", true);
 		} else {
 			PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge doesn't work", false);
+		}
+	}
+	
+	
+	public void verifyZoomingByGesture (PerformTouchAction touchAction, String zoomMethod) {
+		Shooter shooter = new Shooter();
+		ImageComparison ic = new ImageComparison();
+		ImageEditor ie = new ImageEditor();
+		File beforeZooming = shooter.capturePage(driver);
+		ie.saveImageFile(beforeZooming, "logs/screenshots/beforeZooming"+zoomMethod);
+		switch (zoomMethod) {
+			case "gesture":
+				touchAction.ZoomInOutPointXY(50, 50, 50, 100, touchAction.ZOOM_WAY_IN, 3000);
+				break;
+			case "tap":
+				touchAction.TapOnPointXY(50, 50, 150, 0);
+				touchAction.TapOnPointXY(50, 50, 150, 3000);
+				break;
+			default:
+				break;
+		}
+		File afterZoomIn = shooter.capturePage(driver);
+		ie.saveImageFile(afterZoomIn, "logs/screenshots/afterZoomIn"+zoomMethod);
+		if (!ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " works", true);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " doesn't work", false);
+		}
+		switch (zoomMethod) {
+			case "gesture":
+				touchAction.ZoomInOutPointXY(50, 50, 50, 140, touchAction.ZOOM_WAY_OUT, 3000);
+				break;
+			case "tap":
+				touchAction.TapOnPointXY(50, 50, 150, 0);
+				touchAction.TapOnPointXY(50, 50, 150, 3000);
+				break;
+			default:
+				break;
+		}
+		File afterZoomOut = shooter.capturePage(driver);
+		ie.saveImageFile(afterZoomOut, "logs/screenshots/afterZoomOut"+zoomMethod);
+		if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom out by " + zoomMethod + " works", true);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom out by " + zoomMethod + " doesn't work", false);
 		}
 	}
 	
