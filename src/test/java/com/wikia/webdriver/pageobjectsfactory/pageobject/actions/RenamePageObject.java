@@ -15,6 +15,8 @@ public class RenamePageObject extends ArticlePageObject {
 	private WebElement newNameInput;
 	@FindBy(css = ".mw-submit [name='wpMove']")
 	private WebElement submitRename;
+	@FindBy(css = "input#wpLeaveRedirect")
+	private WebElement leaveRedirect;
 
 	public RenamePageObject(WebDriver driver) {
 		super(driver);
@@ -23,6 +25,7 @@ public class RenamePageObject extends ArticlePageObject {
 	public ArticlePageObject rename(String newName) {
 		newNameInput.clear();
 		newNameInput.sendKeys(newName);
+		leaveRedirect.click();
 		scrollAndClick(submitRename);
 		PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
 		return new ArticlePageObject(driver);
