@@ -533,8 +533,13 @@ public class BasePageObject {
 	}
 
 	public void waitForElementNotVisibleByElement(WebElement element) {
-		wait.until(CommonExpectedConditions
-			.invisibilityOfElementLocated(element));
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions
+				.invisibilityOfElementLocated(element));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
