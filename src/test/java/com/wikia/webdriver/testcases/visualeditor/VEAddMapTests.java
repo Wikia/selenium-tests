@@ -57,7 +57,6 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -66,7 +65,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		VisualEditorPageObject ve= base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		mapDialog.checkIsEmptyState();

@@ -57,7 +57,6 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	@Test(groups = {"ShareToolbar004", "Toolbar"})
 	public void ShareToolbar004_VerifyingLogInModalForAnons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logOut(wikiURL);
 		base.openRandomArticle(wikiURL);
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
