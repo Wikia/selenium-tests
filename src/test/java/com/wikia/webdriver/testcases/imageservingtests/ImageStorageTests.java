@@ -34,7 +34,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		FilePagePageObject file = newFiles.openImage(PageContent.FILEDELETEANDRESTORE);
+		FilePagePageObject file = newFiles.openImage(PageContent.FILE_DELETE_AND_RESTORE, true);
 		imageURL = file.getImageUrl();
 		imageThumbnailURL = file.getImageThumbnailUrl();
 		newFiles.verifyURLStatus(200, imageURL);

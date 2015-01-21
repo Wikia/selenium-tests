@@ -60,13 +60,13 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	public DropDownComponentObject openDropDown() {
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 15, 3000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
 						new Actions(driver)
-							.moveToElement(driver.findElement(By.cssSelector("#hubsEntryPoint")))
-							.moveToElement(loginDropdownTrigger).perform();
+								.moveToElement(driver.findElement(By.cssSelector(".wikia-logo-container")))
+								.moveToElement(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
@@ -197,4 +197,5 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			true
 		);
 	}
+
 }

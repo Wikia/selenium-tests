@@ -45,6 +45,7 @@
 			<class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.testcases.adstests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
+			<class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
@@ -140,6 +141,7 @@
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEEnabledEditorEntrySourcePreferredTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEEnabledEditorEntryVEPreferredTests"/>
 			<class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
+			<class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
 			<class name="com.wikia.webdriver.testcases.specialpagestests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
 			<class name="com.wikia.webdriver.testcases.articlecrudtests.ClicktrackingArticleEditModeTests"/>
