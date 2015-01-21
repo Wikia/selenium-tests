@@ -5,6 +5,7 @@ import java.io.File;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebDriver;
@@ -44,6 +45,11 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	
 	public static final String ZOOM_METHOD_GESTURE = "gesture";
 	public static final String ZOOM_METHOD_TAP = "tap";
+	
+	public static final String DIRECTION_LEFT = "left";
+	public static final String DIRECTION_RIGHT = "right";
+	public static final String DIRECTION_UP = "up";
+	public static final String DIRECTION_DOWN = "down";
 
 	public LightBoxMercuryComponentObject(WebDriver driver) {
 		super(driver);
@@ -233,6 +239,27 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		} else {
 			PageObjectLogging.log("verifyZoomingByGesture", "Zoom out by " + zoomMethod + " doesn't work", false);
 		}
+	}
+	
+	public void verifyMovingImageAfterZoomingToDirection (PerformTouchAction touchAction, String direction) {
+		Shooter shooter = new Shooter();
+		ImageComparison ic = new ImageComparison();
+		File beforeZooming = shooter.capturePage(driver);
+		touchAction.TapOnPointXY(50, 50, 140, 0);
+		touchAction.TapOnPointXY(50, 50, 140, 2000);
+		File afterZooming = shooter.capturePage(driver);
+		if (!ic.areFilesTheSame(beforeZooming, afterZooming)) {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in works", true);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in doesn't work", false);
+		}
+		touchAction.SwipeFromCenterToDirection(direction, 200, 200, 2000);
+		File afterMoving = shooter.capturePage(driver);
+		if (!ic.areFilesTheSame(afterZooming, afterMoving)) {
+			PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " works", true);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " doesn't work", false);
+		}	
 	}
 	
 }

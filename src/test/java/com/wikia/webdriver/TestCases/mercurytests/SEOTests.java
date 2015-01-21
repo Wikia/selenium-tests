@@ -13,13 +13,14 @@ import org.testng.annotations.Test;
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
 * */
-public class OpenGraphTests extends NewTestTemplate {
+public class SEOTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
+	//SEOT01
 	@Test(groups = { "MercuryOpenGraphTest_001", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_001_CheckTypeMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -31,6 +32,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgTypeArticle();
 	}
 
+	//SEOT02
 	@Test(groups = { "MercuryOpenGraphTest_002", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_002_CheckTitleMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -42,6 +44,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgTitleArticlePage();
 	}
 
+	//SEOT03
 	@Test(groups = { "MercuryOpenGraphTest_003", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_003_CheckSiteNameTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -53,6 +56,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgSiteNameExists();
 	}
 
+	//SEOT04 - FAIL
 	@Test(groups = { "MercuryOpenGraphTest_004", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_004_CheckDescriptionTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -69,6 +73,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgDescriptionTagWasChanged(descOne, descTwo);
 	}
 
+	//SEOT05
 	@Test(groups = { "MercuryOpenGraphTest_005", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_005_CheckUrlTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -77,6 +82,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgUrlTag();
 	}
 
+	//SEOT06 - FAIL
 	@Test(groups = { "MercuryOpenGraphTest_006", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_006_CheckImageTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -85,6 +91,7 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgImage();
 	}
 
+	//SEOT07
 	@Test(groups = { "MercuryOpenGraphTest_007", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_007_CheckFbAppTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);

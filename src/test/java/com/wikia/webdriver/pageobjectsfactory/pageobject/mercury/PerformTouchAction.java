@@ -353,8 +353,8 @@ public class PerformTouchAction {
 		try {
 			Thread.sleep(waitAfter);
 		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
-			mobileDriver.context("WEBVIEW_1");
+		if (mobileDriver.getContext() != "NATIVE_APP") {
+			mobileDriver.context("NATIVE_APP");
 		}
 	}
 }

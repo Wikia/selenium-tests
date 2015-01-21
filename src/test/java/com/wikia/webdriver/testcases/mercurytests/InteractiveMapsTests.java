@@ -22,6 +22,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
+	//IMAPT01
 	@Test(groups = {"MercuryInteractiveMaps_001", "MercuryInteractiveMapsTests", "Mercury"})
 	public void MercuryInteractiveMaps_001_VerifyViewButtonWillOpenMapModal() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -30,46 +31,20 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		maps.verifyMapModalIsVisible();
 	}
 
+	//IMAPT02
 	@Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_002_VerifyCloseButtonWillCloseModal() {
+	public void MercuryInteractiveMaps_002_VerifyPoiIsClickable() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
 		maps.verifyMapModalIsVisible();
-		maps.clickCloseButton();
-		maps.verifyMapModalIsNotVisible();
+		maps.clickPin();
+		maps.verifyPinPopUpAppeared();
 	}
-
-	@Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_003_VerifyFilterBoxCanBeExpanded() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
-		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
-		maps.verifyMapModalIsVisible();
-		maps.clickFilterBox();
-		maps.verifyFilterBoxWasExpanded();
-	}
-
+	
+	//IMAPT04
 	@Test(groups = {"MercuryInteractiveMaps_004", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_004_VerifyMapTitleInHeader() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
-		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
-		maps.verifyMapModalIsVisible();
-		maps.verifyMapTitleInHeader();
-	}
-
-	@Test(groups = {"MercuryInteractiveMaps_005", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_005_VerifyMapIdInLink() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
-		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
-		maps.verifyMapModalIsVisible();
-		maps.verifyMapIdInUrl();
-	}
-
-	@Test(groups = {"MercuryInteractiveMaps_006", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_006_VerifyZoomButtons() {
+	public void MercuryInteractiveMaps_004_VerifyZoomButtons() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -83,14 +58,47 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		newLeaflet = maps.getMapLeafletSrc();
 		maps.verifyMapZoomChangedView(leaflet, newLeaflet);
 	}
-
-	@Test(groups = {"MercuryInteractiveMaps_007", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_007_VerifyPoiIsClickable() {
+	
+	//IMAPT05
+	@Test(groups = {"MercuryInteractiveMaps_005", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_005_VerifyFilterBoxCanBeExpanded() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
 		maps.verifyMapModalIsVisible();
-		maps.clickPin();
-		maps.verifyPinPopUpAppeared();
+		maps.clickFilterBox();
+		maps.verifyFilterBoxWasExpanded();
 	}
+	
+	//IMAPT06
+	@Test(groups = {"MercuryInteractiveMaps_006", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_006_VerifyMapTitleInHeader() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.verifyMapTitleInHeader();
+	}
+	
+	//IMAPT08 - FAIL
+	@Test(groups = {"MercuryInteractiveMaps_008", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_008_VerifyCloseButtonWillCloseModal() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.clickCloseButton();
+		maps.verifyMapModalIsNotVisible();
+	}
+
+	//IMAPT09
+	@Test(groups = {"MercuryInteractiveMaps_009", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_009_VerifyMapIdInLink() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.verifyMapIdInUrl();
+	}
+
 }

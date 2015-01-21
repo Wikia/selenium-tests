@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import freemarker.template.utility.Execute;
 import io.appium.java_client.android.AndroidDriver;
 
+import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
@@ -16,6 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.openqa.selenium.ScreenOrientation;
+import org.openqa.selenium.remote.DriverCommand;
 
 /*
 * @ownership: Mobile Web
@@ -100,8 +103,31 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyTappingOnImageEdge(touchAction, LightBoxMercuryComponentObject.EDGE_RIGHT);
 	}
 	
+	//MT08
+	@Test(groups = {"MercuryLightboxTests_008", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_008_MovingImageAfterZooming() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
+		PerformTouchAction touchAction = new PerformTouchAction(driver);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyMovingImageAfterZoomingToDirection(touchAction, LightBoxMercuryComponentObject.DIRECTION_LEFT);
+		lightbox.clickCloseButton();
+		lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyMovingImageAfterZoomingToDirection(touchAction, LightBoxMercuryComponentObject.DIRECTION_RIGHT);
+		lightbox.clickCloseButton();
+		lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyMovingImageAfterZoomingToDirection(touchAction, LightBoxMercuryComponentObject.DIRECTION_UP);
+		lightbox.clickCloseButton();
+		lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.verifyCurrentImageIsVisible();
+		lightbox.verifyMovingImageAfterZoomingToDirection(touchAction, LightBoxMercuryComponentObject.DIRECTION_DOWN);
+	}
+	
 	//MT10 - NOT COMPLETED YET
-	@Test(groups = {"MercuryLightboxTests_010", "MercuryLightboxTests", "Mercury"})
+	@Test(enabled = false, groups = {"MercuryLightboxTests_010", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_010_RunAllTestInLanscapeMode() {
 		
 		AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
