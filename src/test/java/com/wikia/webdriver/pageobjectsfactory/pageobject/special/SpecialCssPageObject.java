@@ -141,6 +141,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 	public void clickPublishButtonDropdown() {
 		scrollAndClick(cssPublishButtonDropdown);
+		mouseOver(cssPublishButtonDropdown);
 		PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
 	}
 
