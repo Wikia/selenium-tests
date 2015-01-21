@@ -57,7 +57,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 
 	@Test(dataProviderClass = IntraWikiSearchProvider.class,
 		dataProvider = "getArticleName",
-		groups = {"IntraWikiSearch_001", "IntraWikiSearchExactMatch", "Search"}
+		groups = {"IntraWikiSearch_001", "IntraWikiSearch", "Search"}
 	)
 	public void IntraWikiSearch_001_exactMatch(String query) {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
