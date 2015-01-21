@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikiSearch.IntraWikiSearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikiSearch.IntraWikiSearchPageObject.sortOptions;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
 import org.testng.annotations.Test;
 
 import java.util.List;

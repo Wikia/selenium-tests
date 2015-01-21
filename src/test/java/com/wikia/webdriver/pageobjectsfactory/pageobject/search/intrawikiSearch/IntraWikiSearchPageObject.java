@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikiSearch;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
