@@ -99,6 +99,10 @@ public class Properties {
 
 	public static String apiToken;
 
+	private Properties() {
+
+	}
+
 	private static void setVariables() {
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");

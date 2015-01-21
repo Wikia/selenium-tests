@@ -37,6 +37,10 @@ public class NewDriverProvider {
 	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
 	private static boolean unstablePageLoadStrategy = false;
 
+	private NewDriverProvider() {
+
+	}
+
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
 

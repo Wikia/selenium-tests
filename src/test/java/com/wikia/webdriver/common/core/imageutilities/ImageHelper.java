@@ -9,6 +9,10 @@ public class ImageHelper {
 	private static final String START_TOKEN = "Wikia-Visualization-Main%2C";
 	private static final String STOP_TOKEN = ".";
 
+	private ImageHelper() {
+
+	}
+
 	/**
 	 * Method fetches specific string related to an image by storing index start position and
 	 * finish position, and then selects characters in between those indexes by using substring method.

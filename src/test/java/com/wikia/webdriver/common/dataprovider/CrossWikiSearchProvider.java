@@ -12,6 +12,11 @@ import org.testng.annotations.DataProvider;
  * (query, expected wiki result, hub)
  */
 public class CrossWikiSearchProvider {
+
+	private CrossWikiSearchProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] getExactMatchQueries() {
 		return new Object[][]{

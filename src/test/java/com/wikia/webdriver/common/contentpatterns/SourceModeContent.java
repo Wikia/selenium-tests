@@ -5,6 +5,10 @@ package com.wikia.webdriver.common.contentpatterns;
  */
 public class SourceModeContent {
 
+	private SourceModeContent() {
+
+	}
+
 	public static final String PLACEHOLDERS =
 		"[[File:Placeholder|video|right|300px]] " +
 			"[[File:Placeholder|right|300px]]";

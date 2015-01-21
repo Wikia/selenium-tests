@@ -9,6 +9,10 @@ import java.util.Arrays;
  */
 public class MobileAdsDataProvider {
 
+	private MobileAdsDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] leaderboardAndPrefooterSlots() {
 		return new Object[][]{

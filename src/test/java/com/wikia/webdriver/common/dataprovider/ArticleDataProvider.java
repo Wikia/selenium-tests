@@ -4,6 +4,10 @@ import org.testng.annotations.DataProvider;
 
 public class ArticleDataProvider {
 
+	private ArticleDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] getArticleName() {
 		return new Object[][]{

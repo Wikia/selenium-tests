@@ -32,4 +32,8 @@ public class InteractiveMapsContent {
 	public static final String ASSOCIATED_ARTICLE_PLACEHOLDER = "Related article name or external URL";
 	public static final String ARTICLE_NOT_EXIST_ERROR = "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";
 	public static final String ESCAPED_FRAGMENT_MAP_ID = "69";
+
+	private InteractiveMapsContent() {
+
+	}
 }

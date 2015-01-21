@@ -8,6 +8,10 @@ import org.testng.annotations.DataProvider;
  */
 public class LoginDataProvider {
 
+	private LoginDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] getUserCredentials() {
 		return new Object[][]{
