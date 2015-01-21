@@ -40,6 +40,9 @@ public class UrlBuilder {
 				prefix = "";
 			}
 			suffix = ".com/";
+		} else if (wikiName.endsWith(".de")) {
+			prefix = "";
+			suffix = "/";
 		} else {
 			prefix = "";
 			suffix = ".wikia.com/";

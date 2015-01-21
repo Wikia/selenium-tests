@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.common.base.Joiner;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -190,5 +192,18 @@ public class AdsGermanObject extends AdsBaseObject {
 			return true;
 		}
 		return false;
+	}
+
+	public void verify71MediaParams(String expectedParams) {
+		String actualParams = Joiner.on("; ").join(get71MediaParams());
+		Assertion.assertEquals(expectedParams, actualParams);
+	}
+
+	private ArrayList<String> get71MediaParams() {
+		return (ArrayList<String>) ((JavascriptExecutor) driver).executeScript(
+			"return ['SOI_SITE: ' + SOI_SITE, 'SOI_SUBSITE: ' + SOI_SUBSITE, 'SOI_SUB2SITE: ' + SOI_SUB2SITE, " +
+				"'SOI_SUB3SITE: ' + SOI_SUB3SITE, 'SOI_CONTENT: ' + SOI_CONTENT, 'SOI_WERBUNG: ' + SOI_WERBUNG, " +
+				"'SOI_KEYWORDS: ' + SOI_KEYWORDS];"
+		);
 	}
 }
