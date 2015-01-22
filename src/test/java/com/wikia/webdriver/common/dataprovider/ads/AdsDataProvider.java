@@ -256,6 +256,7 @@ public class AdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),
