@@ -66,14 +66,11 @@ public class ForumNotificationsTests extends NewTestTemplate {
 	@Test(groups = {"ForumNotificationsTests_004", "ForumNotificationsTests",
 		"NotificationsTests"},
 		dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
-	public void forumNotificationsTests_004_userAVerifiesNotifications_QAART_475() {
+	public void forumNotificationsTests_004_userAVerifiesNotifications() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
-		forumMainPage.openForumMainPage(wikiURL);
-		forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
-		notifications.clickNotifications();
 		String anchoredLink = notifications.getNotificationLink(
 			credentials.userNameStaff + " and " +
 				credentials.userName2 + " replied to your thread on the " +

@@ -53,7 +53,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -72,7 +71,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -92,7 +90,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 
@@ -110,6 +107,5 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 }

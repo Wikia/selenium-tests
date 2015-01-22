@@ -38,7 +38,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 	@Test(groups = {"NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_002_VerifyLoginModalWhenAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logOut(wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		map.verifyLoginModal();
@@ -103,7 +102,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 	@Test(groups = {"NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logOut(wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();

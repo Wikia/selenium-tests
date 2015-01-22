@@ -30,7 +30,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 	public void selectThemeByName(String name) {
 		waitForElementByCss(DATA_THEME_LIST);
 		String themeName = themeLocator.replace("%name%", name);
-		driver.findElement(By.cssSelector(themeName)).click();
+		scrollAndClick(driver.findElement(By.cssSelector(themeName)));
 		PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
 	}
 
