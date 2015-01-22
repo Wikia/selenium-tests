@@ -8,9 +8,9 @@ public class VideoContent {
 	public static final String YOUTUBE_VIDEO_URL2_FILENAME = "The_Sims_3_Katy_Perry's_Sweet_Treats_Trailer";
 	public static final String YOUTUBE_VIDEO2_SELECTOR = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']";
 	public static final String YOUTUBE_VIDEO_URL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
-	public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=DDWqJe1dCgY";
-	public static final String YOUTUBE_VIDEO_URL4_FILENAME = "Chainsaw_Bike";
-	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "Chainsaw Bike";
+	public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=ZO0pAmliyVY";
+	public static final String YOUTUBE_VIDEO_URL4_FILENAME = "Monster_Bike";
+	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "Monster Bike";
 	public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=ewum1Uq2MtU";
 
 	public static final String WIKIA_VIDEO_QUERY = "mouse";
