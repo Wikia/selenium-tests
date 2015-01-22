@@ -87,7 +87,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.7</version>
+			<version>6.8.8</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -140,6 +140,17 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
 			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20080701</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>2.1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
