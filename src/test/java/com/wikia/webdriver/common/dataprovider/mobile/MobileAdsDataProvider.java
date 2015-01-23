@@ -89,4 +89,12 @@ public class MobileAdsDataProvider {
 			}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] testSynthetic() {
+		return new Object[][] {
+			{"adtest", "MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100, 131469612,
+				"mobile", "src/test/resources/adsResources/mobiletl320x100"},
+		};
+	}
 }

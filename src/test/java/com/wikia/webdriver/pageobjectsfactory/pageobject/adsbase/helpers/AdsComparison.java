@@ -86,6 +86,24 @@ public class AdsComparison {
 		return success;
 	}
 
+	public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element, final WebDriver driver) {
+		try {
+			String encodedExpectedScreen = readFileAsString(imageUrl);
+			File capturedScreen = shooter.captureWebElement(element, driver);
+			String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
+			capturedScreen.delete();
+			boolean result = imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
+			if (!result) {
+				// replaceAll - add new line char after each 100 char.
+				PageObjectLogging.log("compareImageWithScreenshot",
+					encodedCapturedScreen.replaceAll("(.{100})", "$1\n"), true);
+			}
+			return result;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public boolean isAdVisible(final WebElement element, final String selector, final WebDriver driver) {
 		hideSlot(selector, driver);
 		final File backgroundImg = shooter.captureWebElement(element, driver);
