@@ -55,17 +55,6 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 	private static final String SEARCH_PHRASE_SUGGESTIONS = "Gon";
 	private static final String SEARCH_WIKI = "Marvel";
 
-	@Test(dataProviderClass = IntraWikiSearchProvider.class,
-		dataProvider = "getArticleName",
-		groups = {"IntraWikiSearch_001", "IntraWikiSearch", "Search"}
-	)
-	public void IntraWikiSearch_001_exactMatch(String query) {
-		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-		search.openWikiPage(testedWiki);
-		search.searchFor(query);
-		search.verifyFirstResult(query);
-	}
-
 	@Test(groups = {"IntraWikiSearch_002", "IntraWikiSearch", "Search"})
 	public void IntraWikiSearch_002_pagination() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
