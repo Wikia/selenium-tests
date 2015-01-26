@@ -500,8 +500,12 @@ public class BasePageObject {
 	 * @param locator The element to be checked
 	 */
 	public void waitForElementPresenceByBy(By locator) {
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	/**
@@ -519,9 +523,14 @@ public class BasePageObject {
 	}
 
 	public WebElement waitForElementByCss(String cssSelector) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-			.cssSelector(cssSelector)));
-		return driver.findElement(By.cssSelector(cssSelector));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector(cssSelector)));
+			return driver.findElement(By.cssSelector(cssSelector));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public WebElement waitForElementByXPath(String xPath) {
@@ -531,8 +540,13 @@ public class BasePageObject {
 	}
 
 	public void waitForElementNotVisibleByElement(WebElement element) {
-		wait.until(CommonExpectedConditions
-			.invisibilityOfElementLocated(element));
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions
+				.invisibilityOfElementLocated(element));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
@@ -584,7 +598,12 @@ public class BasePageObject {
 	}
 
 	public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
-		wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {

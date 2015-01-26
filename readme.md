@@ -25,7 +25,7 @@ The following steps should get you set up for running Selenium tests locally on 
 
 Using Maven, you may now run any tests you want on whatever database and domain you want:
 
-    mvn clean test -Dbrowser=<browser> -Denv=<environment> -Dwiki-name=<wiki> -Dgroups=<group>
+    mvn clean test -Dbrowser=<browser> -Denv=<environment> -Dwiki-name=<wiki> -Dgroups=<group> -DtestSuite=<your_custom_suite.xml>
 
 It is also possible to run mobile tests on real devices (Currently only Android is supported). In case of running tests on real devices additional parameters are supported:
 
