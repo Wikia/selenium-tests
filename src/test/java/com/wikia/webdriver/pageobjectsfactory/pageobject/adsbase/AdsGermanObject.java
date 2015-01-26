@@ -111,7 +111,8 @@ public class AdsGermanObject extends AdsBaseObject {
 				);
 				for (String slotSelector : combinationSlots) {
 					WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-					if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
+					if (hasSkin(slot, slotSelector) ||
+						adsComparison.isAdVisible(slot, slotSelector, driver, false)) {
 						PageObjectLogging.log(
 							"Ad in slot found",
 							"Ad in slot found; CSS: " + slotSelector,

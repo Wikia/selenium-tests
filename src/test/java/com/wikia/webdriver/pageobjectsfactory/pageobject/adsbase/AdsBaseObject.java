@@ -179,7 +179,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
 		verifySlotExpanded(slot);
-		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
+		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver, false);
 		extractLiftiumTagId(slotSelector);
 		extractGptInfo(slotSelector);
 		if (!adVisible) {
@@ -691,13 +691,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slot = waitForElementByCss(spotlightSelector + " img");
 			verifySlotExpanded(slot);
 
-			adsComparison.isAdVisible(slot, spotlightSelector, driver);
+			adsComparison.isAdVisible(slot, spotlightSelector, driver, false);
 		}
 	}
 
 	public AdsBaseObject verifySize(String slotName, int slotWidth, int slotHeight) {
-		String slotSelector = AdsContent.getSlotSelector(slotName);
-		WebElement element = driver.findElement(By.cssSelector(slotSelector));
+		WebElement element = getWebElement(slotName);
 		Dimension size = element.getSize();
 		Assertion.assertEquals(size.getWidth(), slotWidth);
 		Assertion.assertEquals(size.getHeight(), slotHeight);
@@ -710,5 +709,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 		Assertion.assertStringContains(String.valueOf(lineItemId), lineItemParam);
 		PageObjectLogging.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
 		return this;
+	}
+
+	public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
+		WebElement element = getWebElement(slotName);
+		boolean isMobile = src.toUpperCase().equals("MOBILE");
+		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver, isMobile));
+		PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+		return this;
+	}
+
+	private WebElement getWebElement(String slotName) {
+		String slotSelector = AdsContent.getSlotSelector(slotName);
+		return driver.findElement(By.cssSelector(slotSelector));
 	}
 }

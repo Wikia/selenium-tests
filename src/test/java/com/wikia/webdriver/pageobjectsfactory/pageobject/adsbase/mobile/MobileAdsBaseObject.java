@@ -15,12 +15,10 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
 	private static final String FLITE_MASK_SELECTOR = ".flite-mask";
 	private AdsComparison adsComparison;
-	private ImageComparison imageComparison;
 
 	public MobileAdsBaseObject(WebDriver driver, String page) {
 		super(driver, page);
 		adsComparison = new AdsComparison();
-		imageComparison = new ImageComparison();
 		PageObjectLogging.log("", "Page screenshot", true, driver);
 	}
 
@@ -58,7 +56,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
-		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
+		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver, true)) {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 					+ "Most probable ad is not present; CSS "

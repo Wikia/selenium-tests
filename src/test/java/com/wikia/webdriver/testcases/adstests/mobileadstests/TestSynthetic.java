@@ -17,9 +17,11 @@ public class TestSynthetic extends NewTestTemplate {
 	)
 	public void testSynthetic(String wikiPage, String article,
 							  String slotName, int slotWidth, int slotHeight,
-							  int lineItemId, String src) {
+							  int lineItemId, String src,
+							  String imageUrl) {
 		new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiPage, article))
 			.verifyLineItemId(slotName, src, lineItemId)
-			.verifySize(slotName, slotWidth, slotHeight);
+			.verifySize(slotName, slotWidth, slotHeight)
+			.verifyAdImage(slotName, src, imageUrl);
 	}
 }
