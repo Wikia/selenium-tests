@@ -1,6 +1,16 @@
 package com.wikia.webdriver.common.driverprovider;
 
-import com.wikia.webdriver.common.core.Global;
+
+import io.appium.java_client.android.AndroidDriver;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,11 +27,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -36,6 +45,7 @@ public class NewDriverProvider {
 	private static ChromeOptions chromeOptions = new ChromeOptions();
 	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
 	private static boolean unstablePageLoadStrategy = false;
+	private static AndroidDriver mobileDriver;
 
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
@@ -60,7 +70,9 @@ public class NewDriverProvider {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver());
 		} else if ("GHOST".equals(browserName)) {
 			driver = getPhantomJSInstance();
-		} else {
+		} else if (browserName.equals("ANDROID")){
+			driver = getAndroidInstance();
+		}else {
 			throw new RuntimeException("Provided driver is not supported.");
 		}
 
@@ -102,6 +114,20 @@ public class NewDriverProvider {
 		);
 		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		return new EventFiringWebDriver(new InternetExplorerDriver(caps));
+	}
+
+	private static EventFiringWebDriver getAndroidInstance(){
+		DesiredCapabilities destCaps = new DesiredCapabilities();
+		destCaps.setCapability("deviceName", ConfigurationFactory.getConfig().getDeviceName().toString());
+		URL url = null;
+		try {
+			url = new URL("http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
+		} catch (MalformedURLException e) {
+			PageObjectLogging.log("getAndroindInstance", e.getMessage(), false);
+		}
+		mobileDriver = new AndroidDriver(url, destCaps);
+
+		return new EventFiringWebDriver(mobileDriver);
 	}
 
 	private static EventFiringWebDriver getFFInstance() {
@@ -197,6 +223,21 @@ public class NewDriverProvider {
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
 
+		if (osName.contains("MAC OS X")) {
+			chromeBinaryName = "chromedriver";
+
+			File chromeBinary = new File(
+					"." + File.separator
+							+ "src" + File.separator
+							+ "test" + File.separator
+							+ "resources" + File.separator
+							+ "ChromeDriver" + File.separator
+							+ chromeBinaryName
+			);
+
+			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+		}
+
 		//TODO change mobile tests to use @UserAgent annotation
 		if ("CHROMEMOBILE".equals(browserName)) {
 			chromeOptions.addArguments(
@@ -271,5 +312,9 @@ public class NewDriverProvider {
 
 	public static void setUnstablePageLoadStrategy(boolean value) {
 		unstablePageLoadStrategy = value;
+	}
+	
+	public static AndroidDriver getMobileDriver() {
+		return mobileDriver;
 	}
 }

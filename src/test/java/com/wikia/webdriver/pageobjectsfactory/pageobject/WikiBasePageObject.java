@@ -47,6 +47,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHome
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -74,9 +75,13 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -159,6 +164,12 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(css = "#globalNavigation")
 	protected WebElement newGlobalNavigation;
+	@FindBy(css = "#userForceLoginModal .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonModal;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonBasic;
+	@FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
+	protected WebElement formConnectWithFbButtonDropDown;
 
 	protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
 
@@ -846,6 +857,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 			PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
 			PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+
+			setCookies(response);
+
 			try {
 				token = xmlResponseArr[5];
 			} catch (ArrayIndexOutOfBoundsException e) {
@@ -887,20 +901,7 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
 			PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
 
-			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "_session', '" + xmlResponseArr[13]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserName', '" + xmlResponseArr[7]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserID', '" + xmlResponseArr[5]
-				+ "', {'domain': '" + domain + "', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "Token', '" + xmlResponseArr[9]
-				+ "', {'domain': '" + domain + "' , 'path': '/'})");
+			setCookies(response);
 			try {
 				driver.get(wikiURL);
 			} catch (TimeoutException e) {
@@ -927,6 +928,37 @@ public class WikiBasePageObject extends BasePageObject {
 		} catch (IOException e) {
 			PageObjectLogging.log("logInCookie", e.getMessage(), false);
 			return null;
+		}
+	}
+
+	private void setCookies(HttpResponse response) {
+		for(Header cookieHeader : response.getHeaders("Set-Cookie")){
+			String name = getCookieParam(cookieHeader, "", "=");
+			String value = getCookieParam(cookieHeader, "=", ";");
+			String path = getCookieParam(cookieHeader, "path=", ";");
+			String domian = getCookieParam(cookieHeader, "domain=", ";");
+
+			Date expDate = null;
+			String expirationDate = getCookieParam(cookieHeader, "expires=", ";");
+			if(!expirationDate.isEmpty()) {
+				SimpleDateFormat parserSDF = new SimpleDateFormat("dd-MMM-yyyy kk:mm:ss", Locale.ENGLISH);
+				expDate = parserSDF.parse(expirationDate, new ParsePosition(4));
+
+				driver.manage().addCookie(new Cookie(name, value, domian, path, expDate));
+			}else{
+				driver.manage().addCookie(new Cookie(name, value, domian, path, null));
+			}
+		}
+	}
+
+	private String getCookieParam(Header cookieHeader, String startToken, String endToken) {
+		Pattern pattern = Pattern.compile(String.format("%s(.+?)%s", startToken, endToken));
+		Matcher matcher = pattern.matcher(cookieHeader.getValue());
+		matcher.find();
+		try {
+			return matcher.group(1);
+		}catch (IllegalStateException e){
+			return "";
 		}
 	}
 
@@ -1208,5 +1240,17 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 
 		return venusGlobalNav;
+	}
+
+	public void verifyModalFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonModal));
+	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonBasic));
+	}
+
+	public void verifyDropDownFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
 	}
 }

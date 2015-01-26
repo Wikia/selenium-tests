@@ -230,6 +230,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
+		waitForElementByElement(contributeDropdown);
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();

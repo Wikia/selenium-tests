@@ -55,12 +55,14 @@ public class BasePageObject {
 		this.driver = driver;
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		this.setWindowSize();
+		this.setWindowSizeAndroid();
 		urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
 	}
 
-	protected void setWindowSize() {
-		driver.manage().window().maximize();
+	protected void setWindowSizeAndroid() {
+		if(!ConfigurationFactory.getConfig().getBrowser().toString().contains("ANDROID")) {
+			driver.manage().window().maximize();
+		}
 	}
 
 	public static String getAttributeValue(WebElement element, String attributeName) {

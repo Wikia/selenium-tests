@@ -235,4 +235,5 @@ public class SignUpPageObject extends WikiBasePageObject {
 			throw new RuntimeException(e);
 		}
 	}
+
 }

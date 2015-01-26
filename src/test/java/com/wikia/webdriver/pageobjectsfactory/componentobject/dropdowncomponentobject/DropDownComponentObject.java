@@ -196,4 +196,5 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			true
 		);
 	}
+
 }
