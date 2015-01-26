@@ -14,7 +14,7 @@ public class VideoContent {
 	public static final String YOUTUBE_VIDEO_URL4_FILENAME = "Monster_Bike";
 	public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "Monster Bike";
 
-	public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=ewum1Uq2MtU";
+	public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=yvBXsd4P550";
 
 	public static final String WIKIA_VIDEO_QUERY = "mouse";
 	public static final String NON_PREMIUM_VIDEO_URL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";

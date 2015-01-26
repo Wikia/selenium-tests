@@ -93,7 +93,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 	}
 
 	public void verifySubmitButtonDisabled() {
-		Assertion.assertEquals("true", signupButton.getAttribute("disabled"));
+		Assertion.assertEquals("disabled", signupButton.getAttribute("disabled"));
 	}
 
 	public void enterBirthDate(String month, String day, String year) {
