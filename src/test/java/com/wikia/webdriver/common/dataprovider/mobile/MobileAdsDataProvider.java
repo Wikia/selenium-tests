@@ -82,6 +82,7 @@ public class MobileAdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),

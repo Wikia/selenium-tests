@@ -43,7 +43,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		RenamePageObject renamePage = article.renameUsingDropdown();
-		renamePage.rename(articleNewName);
+		renamePage.rename(articleNewName, false);
 		article.verifyNotificationMessage();
 		article.verifyArticleTitle(articleNewName);
 	}

@@ -366,17 +366,14 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
 		scriptText = scriptText.replaceAll("\\s", "");
 
 		for (WebElement scriptNode : element.findElements(By.tagName("script"))) {
-			String result = (String) js.executeScript("return arguments[0].innerHTML", scriptNode);
+			String result = scriptNode.getAttribute("innerHTML");
 			if (result.replaceAll("\\s", "").contains(scriptText)) {
 				return true;
 			}
 		}
-
 		return false;
 	}
 

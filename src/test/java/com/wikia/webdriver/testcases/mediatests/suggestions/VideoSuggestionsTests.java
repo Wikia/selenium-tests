@@ -49,6 +49,5 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 		vetAddingVideo.verifySuggestionsIsDisplayed();
 		WikiArticleEditMode edit = vetAddingVideo.clickCloseButton();
 		edit.clickOnPublishButton();
-		edit.logOut(wikiURL);
 	}
 }

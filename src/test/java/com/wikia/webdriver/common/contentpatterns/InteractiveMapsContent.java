@@ -16,7 +16,7 @@ public class InteractiveMapsContent {
 	public static final int SELECTED_MAP_INDEX = 0;
 	public static final int SELECTED_TEMPLATE_INDEX = 0;
 	public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72, 56};
-	public static final String ASSOCIATED_ARTICLE_NAME = "Test";
+	public static final String ASSOCIATED_ARTICLE_NAME = "MercuryG";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND = "1234567890123123123123213";
 	public static String TEMPLATE_NAME;

@@ -136,10 +136,11 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] hubsPages() {
 		return new Object[][]{
+			{"portail-modedevie", "Portail_mode_de_vie/2014-12-28"},
 			{"gameshub", "Games_Hub"},
-			{"movieshub", "Communities"},
-			{"es.filmhub", "Wiki_Películas_Hub"},
-			{"portail-modedevie", "Mode_de_vie/Failsafe"}
+			{"comicshub","What%27s_Hot"},
+			{"es.filmhub","Wiki_Pel%C3%ADculas_Hub"},
+			{"ja.entertainmenthub", "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}
 		};
 	}
 
@@ -259,6 +260,7 @@ public class AdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),

@@ -104,7 +104,7 @@ public class BlogTests extends NewTestTemplate {
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		RenamePageObject renamePage = blogPage.renameUsingDropdown();
-		renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove);
+		renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
 		blogPage.verifyBlogTitle(blogTitleMove);
 		blogPage.verifyNotificationMessage();
 	}

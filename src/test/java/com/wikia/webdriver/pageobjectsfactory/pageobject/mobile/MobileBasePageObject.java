@@ -17,7 +17,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	}
 
 	@Override
-	protected void setWindowSize() {
+	protected void setWindowSizeAndroid() {
 		try {
 			driver.manage().window().setSize(new Dimension(768, 1280));
 		} catch (WebDriverException ex) {

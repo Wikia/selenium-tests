@@ -133,6 +133,11 @@ public class VenusGlobalNavPageObject {
 		return getAccountNavigation().openDropDown().clickSignUpLink();
 	}
 
+	public DropDownComponentObject openAccountNAvigation() {
+		return getAccountNavigation().openDropDown();
+	}
+
+
 	public boolean isLocalSearchDisabled() {
 		return
 			!ElementStateHelper.isElementVisible(searchSelect, driver) &&
