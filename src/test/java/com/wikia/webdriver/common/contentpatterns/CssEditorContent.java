@@ -11,5 +11,9 @@ public class CssEditorContent {
 	public static final String INVALID_CSS_ERROR = ".testStructure {display: none;";
 	// this css code gives a warning
 	public static final String INVALID_CSS_WARNING = ".testStricture {display: none !important;}";
+
+	private CssEditorContent() {
+
+	}
 }
 

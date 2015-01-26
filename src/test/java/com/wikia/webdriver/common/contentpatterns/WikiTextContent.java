@@ -55,4 +55,7 @@ public class WikiTextContent {
 	public static final String REDLINK_TEXT = LINK_PREFIX + PageContent.REDLINK + LINK_POSTFIX;
 	public static final String REDIRECT_LINK_TEXT = LINK_PREFIX + PageContent.REDIRECT_LINK + LINK_POSTFIX;
 
+	private WikiTextContent() {
+
+	}
 }

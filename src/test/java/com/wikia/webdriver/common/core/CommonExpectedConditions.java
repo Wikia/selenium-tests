@@ -25,6 +25,10 @@ public class CommonExpectedConditions {
 
 	private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
+	private CommonExpectedConditions() {
+
+	}
+
 	/**
 	 * An expectation for checking if the given text is present in the specified
 	 * element.

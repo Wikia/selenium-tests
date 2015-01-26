@@ -22,4 +22,8 @@ public class VEContent {
 			PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL2 + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE2;
 
 	public static final String BOUNDING_SCRIPT = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
+
+	private VEContent() {
+
+	}
 }

@@ -13,6 +13,10 @@ import java.io.File;
  */
 public class PropertiesSetter {
 
+	private PropertiesSetter() {
+
+	}
+
 	/**
 	 * This method is used by Properties.class when developer is running tests using IDE
 	 */

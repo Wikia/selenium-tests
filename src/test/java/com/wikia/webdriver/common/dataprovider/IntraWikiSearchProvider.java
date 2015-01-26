@@ -4,6 +4,10 @@ import org.testng.annotations.DataProvider;
 
 public class IntraWikiSearchProvider {
 
+	private IntraWikiSearchProvider() {
+
+	}
+
 	@DataProvider
 	private static final Object[][] getArticleName() {
 		return new Object[][]{

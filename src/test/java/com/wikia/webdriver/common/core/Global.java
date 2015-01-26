@@ -17,4 +17,8 @@ public class Global {
 	public static boolean JS_ERROR_ENABLED;
 	public static String ENV;
 	public static String QS;
+
+	private Global() {
+
+	}
 }

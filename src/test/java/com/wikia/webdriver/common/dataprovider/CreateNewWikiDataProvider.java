@@ -4,6 +4,10 @@ import org.testng.annotations.DataProvider;
 
 public class CreateNewWikiDataProvider {
 
+	private CreateNewWikiDataProvider() {
+
+	}
+
 	@DataProvider
 	private static final Object[][] getLangs() {
 		return new Object[][]{

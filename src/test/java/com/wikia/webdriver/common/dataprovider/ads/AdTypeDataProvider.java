@@ -7,6 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class AdTypeDataProvider {
 
+	private AdTypeDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] asyncSuccessWithAd() {
 		return new Object[][]{

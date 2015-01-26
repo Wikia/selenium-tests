@@ -7,6 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class FileDataProvider {
 
+	private FileDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] getFileNames() {
 		return new Object[][]{

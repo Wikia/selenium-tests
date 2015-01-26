@@ -23,4 +23,8 @@ public class VideoContent {
 
 	public static final String PREMIUM_VIDEO_URL2 = "http://video.wikia.com/wiki/File:Frozen_-_Olaf%27s_Summer_Song";
 	public static final String PREMIUM_VIDEO_NAME2 = "Frozen - Olaf's Summer Song";
+
+	private VideoContent() {
+
+	}
 }

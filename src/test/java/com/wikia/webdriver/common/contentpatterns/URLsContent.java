@@ -173,4 +173,8 @@ public class URLsContent {
 
 	//Escaped frament URL for Maps
 	public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
+
+	private URLsContent() {
+
+	}
 }

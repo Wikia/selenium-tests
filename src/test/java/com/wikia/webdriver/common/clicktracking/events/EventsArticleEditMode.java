@@ -7,6 +7,10 @@ import javax.json.JsonObject;
 
 public class EventsArticleEditMode {
 
+	private EventsArticleEditMode() {
+
+	}
+
 	public static JsonObject previewEvent = Json.createObjectBuilder()
 		.add("0", Json.createObjectBuilder()
 			.add(EventParameter.ACTION.getEventParameter(), "click")

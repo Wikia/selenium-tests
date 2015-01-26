@@ -21,6 +21,9 @@ import java.util.List;
 
 public class CommonUtils {
 
+	private CommonUtils() {
+
+	}
 
 	/**
 	 * appends given text to specified file

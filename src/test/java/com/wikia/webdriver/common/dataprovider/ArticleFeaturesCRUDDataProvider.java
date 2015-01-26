@@ -8,6 +8,10 @@ import org.testng.annotations.DataProvider;
  */
 public class ArticleFeaturesCRUDDataProvider {
 
+	private ArticleFeaturesCRUDDataProvider() {
+
+	}
+
 	@DataProvider
 	public static final Object[][] getTableProperties() {
 		return new Object[][]{
