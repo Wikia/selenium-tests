@@ -407,17 +407,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Object templateBounding = js.executeScript(VEContent.BOUNDING_SCRIPT, blockTransclusionString, index);
 		Map<String, String> mapBounding = (Map) templateBounding;
-		int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));
-		int tempTop = getMapValueAsInt(String.valueOf(mapBounding.get("top")));
+		int tempLeft = Integer.parseInt(String.valueOf(mapBounding.get("left")));
+		int tempTop = Integer.parseInt(String.valueOf(mapBounding.get("top")));
 		return new Point(tempLeft, tempTop);
-	}
-
-	private int getMapValueAsInt(String input) {
-		try {
-			return Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			return (int) Long.parseLong(input);
-		}
 	}
 
 	public VisualEditorEditTemplateDialog openEditTemplateDialog() {
