@@ -10,6 +10,7 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<mvn.run>true</mvn.run>
+		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
 		<webdriver.version>2.43.1</webdriver.version>
 	</properties>
 	<dependencies>
@@ -185,7 +186,7 @@
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</suiteXmlFile>
+						<suiteXmlFile>${testSuite}</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=1024m</argLine>
 				</configuration>
