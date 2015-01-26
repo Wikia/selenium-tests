@@ -696,18 +696,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public AdsBaseObject verifySize(String slotName, int slotWidth, int slotHeight) {
-		WebElement element = getWebElement(slotName);
+		String slotSelector = AdsContent.getSlotSelector(slotName);
+		WebElement element = driver.findElement(By.cssSelector(slotSelector));
 		Dimension size = element.getSize();
-		Assertion.assertEquals(slotWidth, size.getWidth());
-		Assertion.assertEquals(slotHeight, size.getHeight());
+		Assertion.assertEquals(size.getWidth(), slotWidth);
+		Assertion.assertEquals(size.getHeight(), slotHeight);
 		PageObjectLogging.log("verifySize", slotName + " has size " + size, true, driver);
-		return this;
-	}
-
-	public AdsBaseObject verifyAdImage(String slotName, String imageUrl) {
-		WebElement element = getWebElement(slotName);
-		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
-		PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
 		return this;
 	}
 
@@ -716,10 +710,5 @@ public class AdsBaseObject extends WikiBasePageObject {
 		Assertion.assertStringContains(String.valueOf(lineItemId), lineItemParam);
 		PageObjectLogging.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
 		return this;
-	}
-
-	private WebElement getWebElement(String slotName) {
-		String slotSelector = AdsContent.getSlotSelector(slotName);
-		return driver.findElement(By.cssSelector(slotSelector));
 	}
 }

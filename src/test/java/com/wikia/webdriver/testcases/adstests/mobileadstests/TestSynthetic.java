@@ -11,17 +11,15 @@ import org.testng.annotations.Test;
  */
 public class TestSynthetic extends NewTestTemplate {
 	@Test(
-		groups = {"TestSynthetic"},
 		dataProviderClass = MobileAdsDataProvider.class,
-		dataProvider = "testSynthetic"
+		dataProvider = "testSynthetic",
+		groups = {"TestSynthetic"}
 	)
 	public void testSynthetic(String wikiPage, String article,
 							  String slotName, int slotWidth, int slotHeight,
-							  int lineItemId, String src,
-							  String imageUrl) {
+							  int lineItemId, String src) {
 		new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiPage, article))
-			.verifySize(slotName, slotWidth, slotHeight)
 			.verifyLineItemId(slotName, src, lineItemId)
-			.verifyAdImage(slotName, imageUrl);
+			.verifySize(slotName, slotWidth, slotHeight);
 	}
 }
