@@ -408,12 +408,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Object templateBounding = js.executeScript(VEContent.BOUNDING_SCRIPT, blockTransclusionString, index);
 		Map<String, String> mapBounding = (Map) templateBounding;
-		int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));
-		int tempTop = getMapValueAsInt(String.valueOf(mapBounding.get("top")));
+		int tempLeft = getMapValueAsInt(mapBounding.get("left"));
+		int tempTop = getMapValueAsInt(mapBounding.get("top"));
 		return new Point(tempLeft, tempTop);
 	}
 
-	public int getMapValueAsInt(String input) {
+	private int getMapValueAsInt(String input) {
 		return new BigDecimal(String.valueOf(input)).intValue();
 	}
 
