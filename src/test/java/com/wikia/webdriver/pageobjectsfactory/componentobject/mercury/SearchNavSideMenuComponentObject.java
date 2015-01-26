@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/*
+/**
 * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	@FindBy(css = ".ember-text-field")

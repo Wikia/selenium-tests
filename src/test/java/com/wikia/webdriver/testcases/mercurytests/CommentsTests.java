@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Mobile Web
  */
 

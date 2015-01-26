@@ -8,8 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**l
- * @authors: Rodrigo Gomez, Łukasz Nowak
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Mobile Web
  */
 
@@ -24,7 +24,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
 	//APT01
 	@Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_001_VerifyLogoAndSearchButtonAreVisible() {
+	public void MercuryArticleTests_001_LogoAndSearchButtonAreVisible() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_CATEGORY_TEST_ARTICLE);
 		articlePage.verifyWikiaLogoIsVisible();
@@ -33,7 +33,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
 	//APT03
 	@Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_003_VerifyTopContributorsWikiSection() {
+	public void MercuryArticleTests_003_TopContributorsWikiSection() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_CATEGORY_TEST_ARTICLE);
 		articlePage.verifyTopContributorsSectionIsVisible();
@@ -42,7 +42,7 @@ public class ArticlePageTests extends NewTestTemplate {
 	
 	//APT06 - FAIL
 	@Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_006_VerifySingleLinkedImageRedirect() {
+	public void MercuryArticleTests_006_SingleLinkedImageRedirect() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
 		String imagehref = articlePage.getLinkedImageHref();
@@ -52,7 +52,7 @@ public class ArticlePageTests extends NewTestTemplate {
 		
 	//APT07
 	@Test(groups = {"MercuryArticleTests_007", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_007_VerifyCanonicalTag() {
+	public void MercuryArticleTests_007_CanonicalTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
 		articlePage.verifyCanonicalUrl();

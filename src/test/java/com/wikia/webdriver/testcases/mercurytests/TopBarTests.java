@@ -10,10 +10,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavS
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
-/*
+/**
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 
 public class TopBarTests extends NewTestTemplate {
 

@@ -10,10 +10,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/*
+/**
 * @ownership: Mobile Web
-* @authors: Rodrigo Gomez, Łukasz Nowak
-* */
+* @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+*/
 public class SearchTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -25,7 +25,7 @@ public class SearchTests extends NewTestTemplate {
 
 	//ST02
 	@Test(groups = {"MercurySearchTests_002", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_002_VerifySearchAutosuggestionsAppear() {
+	public void MercurySearchTests_002_SearchAutosuggestionsAppear() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
@@ -36,7 +36,7 @@ public class SearchTests extends NewTestTemplate {
 
 	//ST03
 	@Test(groups = {"MercurySearchTests_003", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_003_VerifyTappingCancelWillDisplayNavBarMenu() {
+	public void MercurySearchTests_003_TappingCancelWillDisplayNavBarMenu() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
@@ -48,7 +48,7 @@ public class SearchTests extends NewTestTemplate {
 	
 	//ST04
 	@Test(groups = {"MercurySearchTests_004", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_004_VerifyClickOnSearchResultWillRedirectUser() {
+	public void MercurySearchTests_004_ClickOnSearchResultWillRedirectUser() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();

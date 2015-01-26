@@ -155,4 +155,5 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	public void verifyRepliesAreExpanded() {
 		Assertion.assertTrue(checkIfElementOnPage(repliesContent.get(0)));
 	}
+	
 }

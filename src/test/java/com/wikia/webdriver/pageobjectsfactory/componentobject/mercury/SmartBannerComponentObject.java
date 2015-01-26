@@ -1,11 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-/*
-* @authors: Łukasz Nowak
-* */
+/**
+* @authors: Łukasz Nowak, Tomasz Napieralski
+*/
 
-import com.wikia.webdriver.common.core.Assertion;
+import java.awt.Color;
+
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
@@ -37,9 +39,7 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 
 	public void clickCloseButton() {
 		waitForElementVisibleByElement(closeButton);
-		System.out.println(smartBanner.getCssValue("display"));
 		closeButton.click();
-		System.out.println(smartBanner.getCssValue("display"));
 		PageObjectLogging.log("clickCloseButton", "Close button was clicked", true, driver);
 	}
 
@@ -72,12 +72,28 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 	
 	public void verifyFixPositionOfSmartBanner(PerformTouchAction touchAction) {
 		int firstPosition = smartBanner.getLocation().getY();
-		touchAction.SwipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
+		touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
 		int secondPosition = smartBanner.getLocation().getY();
 		if (firstPosition == secondPosition) {
 			PageObjectLogging.log("verifyFixPositionOfSmartBanner", "Smart banner is fixed", true);
 		} else {
 			PageObjectLogging.log("verifyFixPositionOfSmartBanner", "Smart banner is floating", false);
+		}
+	}
+	
+	public void verifyThemeColorOnHub(String color) {
+		int[] smartBannerColor = ArticlePageObject.convertRGBAFunctiontoIntTable(smartBanner.getCssValue("border-bottom-color"));
+		int[] smartBannerButtonColor = ArticlePageObject.convertRGBAFunctiontoIntTable(bannerButton.getCssValue("background-color"));
+		Color properColor = Color.decode(color);
+		if ((smartBannerButtonColor[0] == smartBannerColor[0])&&(smartBannerButtonColor[1] == smartBannerColor[1])&&(smartBannerButtonColor[2] == smartBannerColor[2])) {
+			PageObjectLogging.log("verifyThemeColorOnHub", "Smart banner color and smart banner button have the same color", true);
+		} else {
+			PageObjectLogging.log("verifyThemeColorOnHub", "Smart banner color is different than smart banner button", false);
+		}
+		if ((smartBannerButtonColor[0] == properColor.getRed())&&(smartBannerButtonColor[1] == properColor.getGreen())&&(smartBannerButtonColor[2] == properColor.getBlue())) {
+			PageObjectLogging.log("verifyThemeColorOnHub", "Smart banner color theme is proper for that HUB", true);
+		} else {
+			PageObjectLogging.log("verifyThemeColorOnHub", "Smart banner color theme is improper for that HUB", false);
 		}
 	}
  }

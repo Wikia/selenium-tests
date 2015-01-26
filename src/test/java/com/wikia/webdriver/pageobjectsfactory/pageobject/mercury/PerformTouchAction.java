@@ -51,7 +51,7 @@ public class PerformTouchAction {
 	public static final String ZOOM_WAY_IN = "in";
 	public static final String ZOOM_WAY_OUT = "out";
 	
-	public PerformTouchAction (WebDriver webDriver) {
+	public PerformTouchAction(WebDriver webDriver) {
 		mobileDriver = NewDriverProvider.getMobileDriver();
 		driver = webDriver;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -88,13 +88,13 @@ public class PerformTouchAction {
 		taskbarNativeWidth = nativeWidth;
 		appNativeWidth = nativeWidth;
 		appNativeHeight = nativeHeight - taskbarNativeHeight;
-		VarStatus();
+		varStatus();
 	}
 	
 	/**
 	 * That method return value of all resolution variables.
 	 */
-	public void VarStatus () {
+	public void varStatus() {
 		System.out.println("=======================================");
 		System.out.println("nativeHeight: " + nativeHeight); //1920
 		System.out.println("nativeWidth: " + nativeWidth); //1080
@@ -124,7 +124,7 @@ public class PerformTouchAction {
 	 * @param duration In milliseconds
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
-	public void SwipeFromCenterToDirection (String direction, int pixelPath, int duration, int waitAfter){
+	public void swipeFromCenterToDirection(String direction, int pixelPath, int duration, int waitAfter){
 		int centerX = appNativeWidth / 2;
 		int centerY = (appNativeHeight / 2) + taskbarNativeHeight;
 		int path = 0;
@@ -191,7 +191,7 @@ public class PerformTouchAction {
 	 * @param duration In milliseconds
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
-	public void SwipeFromPointToPoint (int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
+	public void swipeFromPointToPoint(int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
 		startX = (int)((startX / 100f) * appNativeWidth);
 		startY = (int)(((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
@@ -219,7 +219,7 @@ public class PerformTouchAction {
 	 * @param zoomWay Use public const ZOOM_WAY from that class
 	 * @param waitAfter In milliseconds
 	 */
-	public void ZoomInOutPointXY (int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
+	public void zoomInOutPointXY(int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
@@ -298,7 +298,7 @@ public class PerformTouchAction {
 	 * @param duration In milliseconds, Reccomend 500
 	 * @param waitAfter In milliseconds
 	 */
-	public void TapOnPointXY (int pointX, int pointY, int duration, int waitAfter) {
+	public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		if (mobileDriver.getContext() != "NATIVE_APP") {
@@ -323,7 +323,7 @@ public class PerformTouchAction {
 	 * @param duration In milliseconds, Reccomend 500
 	 * @param waitAfter In milliseconds
 	 */
-	public void TapOnWebElement (By locator, int index, int duration, int waitAfter) {
+	public void tapOnWebElement(By locator, int index, int duration, int waitAfter) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		WebElement element;
 		if (index > 0) {

@@ -9,10 +9,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageOb
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/*
+/**
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 public class SEOTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
@@ -77,7 +77,7 @@ public class SEOTests extends NewTestTemplate {
 	@Test(groups = { "MercuryOpenGraphTest_005", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_005_CheckUrlTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgUrlTag();
 	}
@@ -86,7 +86,7 @@ public class SEOTests extends NewTestTemplate {
 	@Test(groups = { "MercuryOpenGraphTest_006", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_006_CheckImageTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgImage();
 	}
@@ -95,7 +95,7 @@ public class SEOTests extends NewTestTemplate {
 	@Test(groups = { "MercuryOpenGraphTest_007", "MercuryOpenGraphTests", "Mercury" })
 	public void MercuryOpenGraphTest_007_CheckFbAppTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgFbApp();
 	}

@@ -1,12 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import freemarker.template.utility.Execute;
-import io.appium.java_client.android.AndroidDriver;
-
-import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,13 +11,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticleP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.remote.DriverCommand;
-
-/*
+/**
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 public class LightboxTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -125,46 +116,4 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 		lightbox.verifyMovingImageAfterZoomingToDirection(touchAction, LightBoxMercuryComponentObject.DIRECTION_DOWN);
 	}
-	
-	//MT10 - NOT COMPLETED YET
-	@Test(enabled = false, groups = {"MercuryLightboxTests_010", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_010_RunAllTestInLanscapeMode() {
-		
-		AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
-		
-		
-		
-		
-		if (mobileDriver.getContext() != "NATIVE_APP") {
-			mobileDriver.context("NATIVE_APP");
-		}
-		mobileDriver.rotate(ScreenOrientation.LANDSCAPE);
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
-			mobileDriver.context("WEBVIEW_1");
-		}
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
-		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
-		lightbox.verifyCurrentImageIsVisible();
-		
-		try {
-			Thread.sleep(4000);
-		} catch (Exception e) {}
-		
-		
-		
-		
-		if (mobileDriver.getContext() != "NATIVE_APP") {
-			mobileDriver.context("NATIVE_APP");
-		}
-		mobileDriver.rotate(ScreenOrientation.PORTRAIT);
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
-			mobileDriver.context("WEBVIEW_1");
-		}
-		
-		
-		
-		
-	}
-		
 }

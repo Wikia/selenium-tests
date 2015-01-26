@@ -22,6 +22,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -765,5 +766,29 @@ public class ArticlePageObject extends WikiBasePageObject {
 		viewEmbedMapButton.click();
 		driver.switchTo().activeElement();
 		return new EmbedMapComponentObject(driver);
+	}
+	
+	/**
+	 * @author Tomasz Napieralski
+	 * @param rgba String representing function rgba(int, int, int, int)
+	 * @return int[], where 0='red', 1='green', 2='blue'
+	 */
+	public static int[] convertRGBAFunctiontoIntTable(String rgba) {	
+		int[] extract = new int[3];
+		int start = 0;
+		int end = 0;
+		start = rgba.indexOf("(", 0) + 1;
+		end = rgba.indexOf(",", 0);
+		int red = Integer.parseInt(rgba.substring(start, end)); 
+		start = rgba.indexOf(" ", end + 1) + 1;
+		end = rgba.indexOf(",", end + 1);
+		int green = Integer.parseInt(rgba.substring(start, end)); 
+		start = rgba.indexOf(" ", end + 1) + 1;
+		end = rgba.indexOf(",", end + 1);
+		int blue = Integer.parseInt(rgba.substring(start, end));
+		extract[0] = red;
+		extract[1] = green;
+		extract[2] = blue;
+		return extract;
 	}
 }

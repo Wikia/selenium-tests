@@ -9,10 +9,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 
-/*
+/**
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 public class InteractiveMapsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -24,7 +24,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
 	//IMAPT01
 	@Test(groups = {"MercuryInteractiveMaps_001", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_001_VerifyViewButtonWillOpenMapModal() {
+	public void MercuryInteractiveMaps_001_ViewButtonWillOpenMapModal() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -33,7 +33,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
 	//IMAPT02
 	@Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_002_VerifyPoiIsClickable() {
+	public void MercuryInteractiveMaps_002_PoiIsClickable() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -44,7 +44,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	
 	//IMAPT04
 	@Test(groups = {"MercuryInteractiveMaps_004", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_004_VerifyZoomButtons() {
+	public void MercuryInteractiveMaps_004_ZoomButtons() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -61,7 +61,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	
 	//IMAPT05
 	@Test(groups = {"MercuryInteractiveMaps_005", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_005_VerifyFilterBoxCanBeExpanded() {
+	public void MercuryInteractiveMaps_005_FilterBoxCanBeExpanded() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -72,7 +72,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	
 	//IMAPT06
 	@Test(groups = {"MercuryInteractiveMaps_006", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_006_VerifyMapTitleInHeader() {
+	public void MercuryInteractiveMaps_006_MapTitleInHeader() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -82,7 +82,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	
 	//IMAPT08 - FAIL
 	@Test(groups = {"MercuryInteractiveMaps_008", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_008_VerifyCloseButtonWillCloseModal() {
+	public void MercuryInteractiveMaps_008_CloseButtonWillCloseModal() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
@@ -93,7 +93,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
 	//IMAPT09
 	@Test(groups = {"MercuryInteractiveMaps_009", "MercuryInteractiveMapsTests", "Mercury"})
-	public void MercuryInteractiveMaps_009_VerifyMapIdInLink() {
+	public void MercuryInteractiveMaps_009_MapIdInLink() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
