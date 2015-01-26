@@ -14,6 +14,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -412,12 +413,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		return new Point(tempLeft, tempTop);
 	}
 
-	private int getMapValueAsInt(String input) {
-		try {
-			return Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			return (int) Long.parseLong(input);
-		}
+	public int getMapValueAsInt(String input) {
+		return new BigDecimal(String.valueOf(input)).intValue();
 	}
 
 	public VisualEditorEditTemplateDialog openEditTemplateDialog() {
