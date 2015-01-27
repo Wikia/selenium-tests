@@ -179,7 +179,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
 		verifySlotExpanded(slot);
-		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
+		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver, false);
 		extractLiftiumTagId(slotSelector);
 		extractGptInfo(slotSelector);
 		if (!adVisible) {
@@ -581,6 +581,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyGptIframe", msg, true, driver);
 	}
 
+	private String getGptParams(String slotName, String src, String attr) {
+		WebElement gptIframeWrap = driver.findElement(By.id(slotName + "_" + src));
+		return gptIframeWrap.getAttribute(attr);
+	}
+
 	/**
 	 * Test whether the correct GPT ad parameters are passed
 	 *
@@ -589,12 +594,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	 * @param slotParams List of gpt slot-level params to test
 	 */
 	public void verifyGptParams(String slotName, String src, List<String> pageParams, List<String> slotParams) {
-
-		String gptIframeWrapId = slotName + "_" + src;
-		WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
-
-		String dataGptPageParams = gptIframeWrap.getAttribute("data-gpt-page-params");
-		String dataGptSlotParams = gptIframeWrap.getAttribute("data-gpt-slot-params");
+		String dataGptPageParams = getGptParams(slotName, src, "data-gpt-page-params");
+		String dataGptSlotParams = getGptParams(slotName, src, "data-gpt-slot-params");
 
 		for (String param : pageParams) {
 			Assertion.assertStringContains(param, dataGptPageParams);
@@ -690,7 +691,36 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slot = waitForElementByCss(spotlightSelector + " img");
 			verifySlotExpanded(slot);
 
-			adsComparison.isAdVisible(slot, spotlightSelector, driver);
+			adsComparison.isAdVisible(slot, spotlightSelector, driver, false);
 		}
+	}
+
+	public AdsBaseObject verifySize(String slotName, int slotWidth, int slotHeight) {
+		WebElement element = getWebElement(slotName);
+		Dimension size = element.getSize();
+		Assertion.assertEquals(size.getWidth(), slotWidth);
+		Assertion.assertEquals(size.getHeight(), slotHeight);
+		PageObjectLogging.log("verifySize", slotName + " has size " + size, true, driver);
+		return this;
+	}
+
+	public AdsBaseObject verifyLineItemId(String slotName, String src, int lineItemId) {
+		String lineItemParam = getGptParams(slotName, src, GPT_DATA_ATTRIBUTES[0]);
+		Assertion.assertStringContains(String.valueOf(lineItemId), lineItemParam);
+		PageObjectLogging.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
+		return this;
+	}
+
+	public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
+		WebElement element = getWebElement(slotName);
+		boolean isMobile = "MOBILE".equalsIgnoreCase(src);
+		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver, isMobile));
+		PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+		return this;
+	}
+
+	private WebElement getWebElement(String slotName) {
+		String slotSelector = AdsContent.getSlotSelector(slotName);
+		return driver.findElement(By.cssSelector(slotSelector));
 	}
 }
