@@ -713,7 +713,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
 		WebElement element = getWebElement(slotName);
-		boolean isMobile = src.toUpperCase().equals("MOBILE");
+		boolean isMobile = "MOBILE".equalsIgnoreCase(src);
 		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver, isMobile));
 		PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
 		return this;
