@@ -170,10 +170,10 @@ public class VisualEditorDataProvider {
 			{false, false, EditorPref.VE, Editor.VE},
 			{true, false, EditorPref.CK, Editor.CK},
 			{true, false, EditorPref.SRC, Editor.SRC},
-			{true, false, EditorPref.VE, Editor.CK},
+			{true, false, EditorPref.VE, Editor.VE},
 			{true, true, EditorPref.CK, Editor.CK},
 			{true, true, EditorPref.SRC, Editor.SRC},
-			{true, true, EditorPref.VE, Editor.CK},
+			{true, true, EditorPref.VE, Editor.VE},
 		};
 	}
 
