@@ -35,14 +35,14 @@ public class TestAdsOnSpecial extends NewTestTemplate {
 		dataProviderClass = AdsDataProvider.class,
 		dataProvider = "filePages"
 	)
-	public void TestAdsOnFilePages_GeoEdgeFree(String wikiName, String article, String lineItemId, String adUnit, String leaderboardSlot, String prefooterSlot) throws Exception {
+	public void TestAdsOnFilePages_GeoEdgeFree(String wikiName, String article, String lineItemId, String adUnit, String leaderboardSlot, String medrecSlot) throws Exception {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
 		ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
 		ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
-		ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
-		ads.verifyGptAdInSlot(prefooterSlot, "gpt", lineItemId, "");
+		ads.verifyGptIframe(adUnit, medrecSlot, "gpt");
+		ads.verifyGptAdInSlot(medrecSlot, "gpt", lineItemId, "");
 	}
 
 
