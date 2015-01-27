@@ -107,8 +107,9 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
-		src.verifySourceOnlyMode();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(

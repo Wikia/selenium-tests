@@ -66,9 +66,9 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	public void VEDisabledEditorEntryAnonTestsTests_003_RedlinkEntry() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
-		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
-		ck.verifyContentLoaded();
-		ck.clickPublishButton();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(
@@ -97,9 +97,9 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	public void VEDisabledEditorEntryAnonTestsTests_006_ListNamespace() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
-		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-		ck.verifyContentLoaded();
-		ck.clickPublishButton();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(
@@ -108,9 +108,9 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	public void VEDisabledEditorEntryAnonTestsTests_007_CategoryNamespace() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
-		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-		ck.verifyContentLoaded();
-		ck.clickPublishButton();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(

@@ -108,9 +108,9 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	public void VEEnabledEditorEntryAnonTests_007_CategoryNamespace() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
-		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-		ck.verifyContentLoaded();
-		ck.clickPublishButton();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(
