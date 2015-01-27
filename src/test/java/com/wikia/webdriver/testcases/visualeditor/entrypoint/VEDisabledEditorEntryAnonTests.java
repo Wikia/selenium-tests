@@ -92,7 +92,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_006"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_006", "listEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_006_ListNamespace() {
 		ArticlePageObject article =
@@ -103,7 +103,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_007"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_007", "categoryEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_007_CategoryNamespace() {
 		ArticlePageObject article =
@@ -114,7 +114,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_008"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_008", "templateEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_008_TemplateNamespace() {
 		ArticlePageObject article =
