@@ -18,6 +18,12 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
 	private WebElement cancelButton;
 	@FindBy(css = ".normal.primary")
 	private WebElement addAPageButton;
+	@FindBy (css = "#CreatePageModalDialog section div")
+	private WebElement modalText;
+	@FindBy (css = "#CreatePageModalDialog h3")
+	private WebElement modalTitle;
+	@FindBy (css = "#CreatePageModalDialog")
+	private WebElement modal;
 
 	public VECreateArticleModalComponentObject(WebDriver driver) {
 		super(driver);
@@ -25,6 +31,8 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
 	}
 
 	public void createPage() {
+		waitForElementVisibleByElement(modal);
+		waitForElementClickableByElement(addAPageButton);
 		addAPageButton.click();
 		PageObjectLogging.log("createPage", "Add A Page button is clicked", true);
 	}

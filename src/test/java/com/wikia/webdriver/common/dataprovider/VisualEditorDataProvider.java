@@ -3,6 +3,8 @@ package com.wikia.webdriver.common.dataprovider;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
@@ -139,5 +141,231 @@ public class VisualEditorDataProvider {
 		return new Object[][]{
 			{"vedisabledtest"},
 		};
+	}
+
+	public enum Editor {
+		VE,
+		CK,
+		SRC
+	}
+
+	public enum EditorPref {
+		VE,
+		CK,
+		SRC
+	}
+
+	/**
+	 * Data provider with category main edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] categoryEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.CK},
+		};
+	}
+
+	/**
+	 * Data provider with create a page entry point
+	 */
+	@DataProvider
+	public static final Object[][] createAPageEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with list entry point
+	 */
+	@DataProvider
+	public static final Object[][] listEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with main article edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] mainEditEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with article red link edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] redLinkEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with article section edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] sectionEditEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with template edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] templateEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.SRC},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.SRC},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.SRC},
+			{true, false, EditorPref.CK, Editor.SRC},
+			{true, true, EditorPref.CK, Editor.SRC},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.SRC},
+		};
+	}
+
+	/**
+	 * Data provider with url param action=edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] urlActionEditEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.SRC},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.SRC},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.CK},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.CK},
+		};
+	}
+
+	/**
+	 * Data provider with url param veaction=edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] urlVEActionEditEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.VE},
+			{false, true, EditorPref.SRC, Editor.VE},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.VE},
+			{false, false, EditorPref.SRC, Editor.VE},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.VE},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.VE},
+			{true, true, EditorPref.CK, Editor.VE},
+			{true, true, EditorPref.SRC, Editor.VE},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	public static String getTestWiki(boolean isRTEext, boolean isVEext) {
+		if (isRTEext) {
+			if (isVEext) {
+				return URLsContent.VE_ENABLED_WIKI;
+			} else {
+				return URLsContent.VE_DISABLED_WIKI;
+			}
+		} else {
+			if (isVEext) {
+				return URLsContent.RTE_DISABLED_WIKI;
+			} else {
+				return URLsContent.VE_AND_RTE_DISABLED_WIKI;
+			}
+		}
 	}
 }
