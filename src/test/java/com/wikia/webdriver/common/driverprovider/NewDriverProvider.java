@@ -214,6 +214,12 @@ public class NewDriverProvider {
 			chromeBinaryPath = "/chromedriver_mac32/chromedriver";
 		}else if (osName.contains("LINUX")) {
 			chromeBinaryPath ="/chromedriver_linux32/chromedriver";
+
+			File chromedriver  = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath )
+				.getPath());
+
+			//set application user permissions to 455
+			chromedriver.setExecutable(true);
 		}
 
 		System.setProperty("webdriver.chrome.driver",
