@@ -44,7 +44,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
-	public void wam_003_verifyPaginationByNextButton() {
+	public void wam_003_verifyPaginationByNextButton_MAIN_3566() {
 		wam.verifyWamIndexPageFirstColumn(1, 20);
 		wam.clickNextPaginator();
 		wam.verifyWamIndexPageFirstColumn(21, 40);
