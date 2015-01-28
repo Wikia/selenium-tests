@@ -16,7 +16,7 @@ public class VideosModuleTests extends NewTestTemplate {
 	 * @author James Sutterfield
 	 */
 	@Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-	public void VideosModuleTest_001() {
+	public void VideosModuleTest_001_QAART_508() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
