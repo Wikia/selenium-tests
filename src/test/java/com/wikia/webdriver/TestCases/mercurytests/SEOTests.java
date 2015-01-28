@@ -21,7 +21,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT01
-	@Test(groups = { "MercuryOpenGraphTest_001", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_001", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_001_CheckTypeMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -33,7 +33,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT02
-	@Test(groups = { "MercuryOpenGraphTest_002", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_002", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_002_CheckTitleMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -45,7 +45,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT03
-	@Test(groups = { "MercuryOpenGraphTest_003", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_003", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_003_CheckSiteNameTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -57,7 +57,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT04 - FAIL
-	@Test(groups = { "MercuryOpenGraphTest_004", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_004", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_004_CheckDescriptionTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -74,7 +74,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT05
-	@Test(groups = { "MercuryOpenGraphTest_005", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_005", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_005_CheckUrlTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		base.openMercuryArticleByName(wikiURL, "");
@@ -83,7 +83,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT06 - FAIL
-	@Test(groups = { "MercuryOpenGraphTest_006", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_006", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_006_CheckImageTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		base.openMercuryArticleByName(wikiURL, "");
@@ -92,7 +92,7 @@ public class SEOTests extends NewTestTemplate {
 	}
 
 	//SEOT07
-	@Test(groups = { "MercuryOpenGraphTest_007", "MercuryOpenGraphTests", "Mercury" })
+	@Test(groups = { "MercurySEOTest_007", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_007_CheckFbAppTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		base.openMercuryArticleByName(wikiURL, "");

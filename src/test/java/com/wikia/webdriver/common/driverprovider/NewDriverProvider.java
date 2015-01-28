@@ -223,6 +223,21 @@ public class NewDriverProvider {
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
 
+		if (osName.contains("MAC OS X")) {
+			chromeBinaryName = "chromedriver";
+
+			File chromeBinary = new File(
+					"." + File.separator
+							+ "src" + File.separator
+							+ "test" + File.separator
+							+ "resources" + File.separator
+							+ "ChromeDriver" + File.separator
+							+ chromeBinaryName
+			);
+
+			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+		}
+
 		//TODO change mobile tests to use @UserAgent annotation
 		if ("CHROMEMOBILE".equals(browserName)) {
 			chromeOptions.addArguments(

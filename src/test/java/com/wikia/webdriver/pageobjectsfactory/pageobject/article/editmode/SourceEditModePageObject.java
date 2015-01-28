@@ -11,11 +11,12 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SourceEditModePageObject extends EditMode {
+public class SourceEditModePageObject extends EditMode{
 
 
 	@FindBy(css = "#mw-editbutton-bold")
@@ -334,5 +335,11 @@ public class SourceEditModePageObject extends EditMode {
 		} else {
 			throw new NoSuchElementException("Can not detect the page to be in Edit mode");
 		}
+	}
+
+	public ArticlePageObject clickPublishButton() {
+		waitForElementByElement(submitButton);
+		submitButton.click();
+		return new ArticlePageObject(driver);
 	}
 }

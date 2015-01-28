@@ -151,8 +151,8 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] filePages() {
 		return new Object[][]{
-			{"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
-			{"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+			{"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
+			{"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
 		};
 	}
 
@@ -256,6 +256,7 @@ public class AdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),

@@ -78,6 +78,7 @@ public class MobileAdsDataProvider {
 					"\"dmn\":\"wikiacom\"",
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"ref\":\"direct\"",
 					"\"lang\":\"en\"",
 					"\"esrb\":\"teen\""
 				),
@@ -86,6 +87,14 @@ public class MobileAdsDataProvider {
 					"\"src\":\"mobile\""
 				)
 			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] testSynthetic() {
+		return new Object[][] {
+			{"adtest", "MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100, 131469612, "mobile",
+				"src/test/resources/adsResources/mobiletl320x100"}
 		};
 	}
 }

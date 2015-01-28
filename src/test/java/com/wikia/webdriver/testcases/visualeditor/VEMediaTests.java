@@ -128,7 +128,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -149,7 +148,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -176,7 +174,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -217,7 +214,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@AfterGroups(groups = "VEMediaTests_003")
@@ -228,6 +224,5 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
 		DeletePageObject deletePage = filePage.deleteVersion(1);
 		WikiBasePageObject base = deletePage.submitDeletion();
-		base.logOut(wikiURL);
 	}
 }

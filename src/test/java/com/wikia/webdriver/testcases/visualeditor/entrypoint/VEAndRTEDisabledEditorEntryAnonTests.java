@@ -91,7 +91,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_006"}
+		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_006", "listEntry"}
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_006_ListNamespace() {
 		ArticlePageObject article =
@@ -102,17 +102,18 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_007"}
+		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_007", "categoryEntry"}
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
-		src.verifySourceOnlyMode();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(
-		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_008"}
+		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_008", "templateEntry"}
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
 		ArticlePageObject article =
