@@ -775,10 +775,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	 */
 	public static int[] convertRGBAFunctiontoIntTable(String rgba) {	
 		int[] extract = new int[3];
-		int start = 0;
-		int end = 0;
-		start = rgba.indexOf("(", 0) + 1;
-		end = rgba.indexOf(",", 0);
+		int start = rgba.indexOf("(", 0) + 1;
+		int end = rgba.indexOf(",", 0);
 		int red = Integer.parseInt(rgba.substring(start, end)); 
 		start = rgba.indexOf(" ", end + 1) + 1;
 		end = rgba.indexOf(",", end + 1);

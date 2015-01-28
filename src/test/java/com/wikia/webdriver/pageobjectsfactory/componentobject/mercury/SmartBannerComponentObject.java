@@ -71,10 +71,9 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 	}
 	
 	public void verifyFixPositionOfSmartBanner(PerformTouchAction touchAction) {
-		int firstPosition = smartBanner.getLocation().getY();
+		int lastPosition = smartBanner.getLocation().getY();
 		touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
-		int secondPosition = smartBanner.getLocation().getY();
-		if (firstPosition == secondPosition) {
+		if (lastPosition == smartBanner.getLocation().getY()) {
 			PageObjectLogging.log("verifyFixPositionOfSmartBanner", "Smart banner is fixed", true);
 		} else {
 			PageObjectLogging.log("verifyFixPositionOfSmartBanner", "Smart banner is floating", false);

@@ -100,5 +100,4 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		maps.verifyMapModalIsVisible();
 		maps.verifyMapIdInUrl();
 	}
-
 }

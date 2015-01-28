@@ -107,7 +107,8 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		int endX = 20;
 		int duration = 300;
 		int waitAfter = 5000;
-		if (direction == "right") {
+		int centerY = 50;
+		if ("right".equals(direction)) {
 			int temp = startX;
 			startX = endX;
 			endX = temp;
@@ -115,7 +116,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 			direction = "left";
 		}
 		for (int i = 0; i < attempts; ++i) {
-			touchAction.swipeFromPointToPoint(startX, 50, endX, 50, duration, waitAfter);
+			touchAction.swipeFromPointToPoint(startX, centerY, endX, centerY, duration, waitAfter);
 			nextImageSrc = getCurrentImagePath();
 			if (!nextImageSrc.contains(currentImageSrc)) {
 				imageChanged = true;
@@ -130,19 +131,13 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	}
 	
 	private boolean verifyChangesInUI (boolean lastDisplayVisibility) {
-		String lightboxHeaderDisplayValue = lightboxHeader.getCssValue("display");
-		String lightboxFooterDisplayValue = lightboxFooter.getCssValue("display");
-		boolean lightboxHeaderDisplay;
-		boolean lightboxFooterDisplay;
-		if (lightboxHeaderDisplayValue.contains("none")) {
+		boolean lightboxHeaderDisplay = true;
+		boolean lightboxFooterDisplay = true;
+		if (lightboxHeader.getCssValue("display").contains("none")) {
 			lightboxHeaderDisplay = false;
-		} else {
-			lightboxHeaderDisplay = true;
 		}
-		if (lightboxFooterDisplayValue.contains("none")) {
+		if (lightboxFooter.getCssValue("display").contains("none")) {
 			lightboxFooterDisplay = false;
-		} else {
-			lightboxFooterDisplay = true;
 		}
 		if (lightboxHeaderDisplay == lastDisplayVisibility) {
 			PageObjectLogging.log("verifyChangesInUI", "Lightbox header visibility didn't changed", false);
@@ -164,7 +159,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		int waitAfter = 5000;
 		boolean lastDisplayVisibility = true;
 		if (LightboxHeaderDisplayValue.contains(LightboxFooterDisplayValue)) {
-			if (LightboxHeaderDisplayValue == "none") {
+			if ("none".equals(LightboxHeaderDisplayValue)) {
 				PageObjectLogging.log("verifyVisibilityUI", "Lightbox header and footer are not visible", true);
 				lastDisplayVisibility = false;
 			} else {
@@ -186,7 +181,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		int pointX = 25;
 		int duration = 500;
 		int waitAfter = 5000;
-		if (edge == "right") {
+		if ("right".equals(edge)) {
 			pointX = 75;
 		} else {
 			edge = "left";
@@ -216,10 +211,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 				break;
 		}
 		File afterZoomIn = shooter.capturePage(driver);
-		if (!ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
-			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " works", true);
-		} else {
+		if (ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
 			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " doesn't work", false);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " works", true);
 		}
 		switch (zoomMethod) {
 			case "gesture":
@@ -247,17 +242,17 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		touchAction.tapOnPointXY(50, 50, 140, 0);
 		touchAction.tapOnPointXY(50, 50, 140, 2000);
 		File afterZooming = shooter.capturePage(driver);
-		if (!ic.areFilesTheSame(beforeZooming, afterZooming)) {
-			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in works", true);
-		} else {
+		if (ic.areFilesTheSame(beforeZooming, afterZooming)) {
 			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in doesn't work", false);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Zoom in works", true);
 		}
 		touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
 		File afterMoving = shooter.capturePage(driver);
-		if (!ic.areFilesTheSame(afterZooming, afterMoving)) {
-			PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " works", true);
-		} else {
+		if (ic.areFilesTheSame(afterZooming, afterMoving)) {
 			PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " doesn't work", false);
+		} else {
+			PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " works", true);
 		}	
 	}
 	

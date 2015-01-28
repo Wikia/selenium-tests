@@ -12,36 +12,37 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 20 Jan 2015
+ * @updated: 28 Jan 2015
  */
 
 public class PerformTouchAction {
 	
-	private static WebDriver driver;
-	private static AndroidDriver mobileDriver;
+	private WebDriver driver;
+	private AndroidDriver mobileDriver;
 	
-	private static int nativeHeight = 0;
-	private static int nativeWidth = 0;
-	private static int webviewHeight = 0;
-	private static int webviewWidth = 0;
-	private static int ratio = 0;
+	private int nativeHeight = 0;
+	private int nativeWidth = 0;
+	private int webviewHeight = 0;
+	private int webviewWidth = 0;
+	private int ratio = 0;
 	
-	private static int taskbarNativeHeight = 0;
-	private static int taskbarNativeWidth = 0;
-	private static int taskbarWebviewHeight = 0;
-	private static int taskbarWebviewWidth = 0;
+	private int taskbarNativeHeight = 0;
+	private int taskbarNativeWidth = 0;
+	private int taskbarWebviewHeight = 0;
+	private int taskbarWebviewWidth = 0;
 	
-	private static int appNativeHeight = 0;
-	private static int appNativeWidth = 0;
-	private static int appWebviewHeight = 0;
-	private static int appWebviewWidth = 0;
+	private int appNativeHeight = 0;
+	private int appNativeWidth = 0;
+	private int appWebviewHeight = 0;
+	private int appWebviewWidth = 0;
 	
-	private static int loadedPageHeight = 0;
-	private static int loadedPageWidth = 0;
+	private int loadedPageHeight = 0;
+	private int loadedPageWidth = 0;
 	
 	public static final String DIRECTION_LEFT = "left";
 	public static final String DIRECTION_RIGHT = "right";
@@ -55,7 +56,7 @@ public class PerformTouchAction {
 		mobileDriver = NewDriverProvider.getMobileDriver();
 		driver = webDriver;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		nativeHeight = mobileDriver.manage().window().getSize().height;
@@ -67,11 +68,15 @@ public class PerformTouchAction {
 		int duration = startY - endY;
 		try {
 			mobileDriver.swipe(startX, startY, endX, endY, duration);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			PageObjectLogging.log("PerformTouchAction", e.toString(), false);
+		}
 		try {
 			Thread.sleep(duration * 3);
-		} catch(Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
+		} catch(Exception e) {
+			PageObjectLogging.log("PerformTouchAction", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
 			mobileDriver.context("WEBVIEW_1");
 		}
 		js.executeScript("window.scrollTo(0, 0)");
@@ -88,7 +93,6 @@ public class PerformTouchAction {
 		taskbarNativeWidth = nativeWidth;
 		appNativeWidth = nativeWidth;
 		appNativeHeight = nativeHeight - taskbarNativeHeight;
-		varStatus();
 	}
 	
 	/**
@@ -96,24 +100,24 @@ public class PerformTouchAction {
 	 */
 	public void varStatus() {
 		System.out.println("=======================================");
-		System.out.println("nativeHeight: " + nativeHeight); //1920
-		System.out.println("nativeWidth: " + nativeWidth); //1080
-		System.out.println("webviewHeight: " + webviewHeight); //640
-		System.out.println("webviewWidth: " + webviewWidth); //360
-		System.out.println("ratio (nativeWidth / appWebviewWidth): " + ratio); //3
+		System.out.println("nativeHeight: " + nativeHeight);
+		System.out.println("nativeWidth: " + nativeWidth);
+		System.out.println("webviewHeight: " + webviewHeight);
+		System.out.println("webviewWidth: " + webviewWidth);
+		System.out.println("ratio (nativeWidth / appWebviewWidth): " + ratio);
 		System.out.println("=======================================");
-		System.out.println("taskbarNativeHeight: " + taskbarNativeHeight); //243 should be 75
-		System.out.println("taskbarNativeWidth: " + taskbarNativeWidth); //1080
-		System.out.println("taskbarWebviewHeight: " + taskbarWebviewHeight); //81 should be 25
-		System.out.println("taskbarWebviewWidth: " + taskbarWebviewWidth); //360
+		System.out.println("taskbarNativeHeight: " + taskbarNativeHeight);
+		System.out.println("taskbarNativeWidth: " + taskbarNativeWidth);
+		System.out.println("taskbarWebviewHeight: " + taskbarWebviewHeight);
+		System.out.println("taskbarWebviewWidth: " + taskbarWebviewWidth);
 		System.out.println("=======================================");
-		System.out.println("appNativeWidth: " + appNativeWidth); //1080
-		System.out.println("appNativeHeight: " + appNativeHeight); //1677 should be 1845
-		System.out.println("appWebviewHeight: " + appWebviewHeight); //559 should be 615
-		System.out.println("appWebviewWidth: " + appWebviewWidth); //360
+		System.out.println("appNativeWidth: " + appNativeWidth);
+		System.out.println("appNativeHeight: " + appNativeHeight);
+		System.out.println("appWebviewHeight: " + appWebviewHeight);
+		System.out.println("appWebviewWidth: " + appWebviewWidth);
 		System.out.println("=======================================");
-		System.out.println("loadedPageHeight: " + loadedPageHeight); //2484
-		System.out.println("loadedPageWidth: " + loadedPageWidth); //360
+		System.out.println("loadedPageHeight: " + loadedPageHeight);
+		System.out.println("loadedPageWidth: " + loadedPageWidth);
 		System.out.println("=======================================");
 	}
 	
@@ -128,7 +132,7 @@ public class PerformTouchAction {
 		int centerX = appNativeWidth / 2;
 		int centerY = (appNativeHeight / 2) + taskbarNativeHeight;
 		int path = 0;
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		switch (direction) {
@@ -140,7 +144,9 @@ public class PerformTouchAction {
 				}
 				try {
 					mobileDriver.swipe(centerX, centerY, centerX - path, centerY, duration);
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
+				}
 				break;
 			case "right": 
 				if (pixelPath < centerX) {
@@ -150,7 +156,9 @@ public class PerformTouchAction {
 				}
 				try {
 					mobileDriver.swipe(centerX, centerY, centerX + path, centerY, duration);	
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
+				}
 				break;
 			case "up": 
 				if (pixelPath < centerY) {
@@ -160,7 +168,9 @@ public class PerformTouchAction {
 				}
 				try {
 					mobileDriver.swipe(centerX, centerY, centerX, centerY - path, duration);				
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
+				}
 				break;
 			case "down": 
 				if (pixelPath < centerY) {
@@ -170,14 +180,18 @@ public class PerformTouchAction {
 				}
 				try {						
 					mobileDriver.swipe(centerX, centerY, centerX, centerY + path, duration);	
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
+				}
 				break;
 			default: break;
 		}
 		try {
 			Thread.sleep(waitAfter);
-		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
+		} catch (Exception e) {
+			PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
 			mobileDriver.context("WEBVIEW_1");
 		}
 	}
@@ -196,16 +210,20 @@ public class PerformTouchAction {
 		startY = (int)(((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
 		endY = (int)(((endY / 100f) * appNativeHeight) + taskbarNativeHeight);
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		try {
 			mobileDriver.swipe(startX, startY, endX, endY, duration);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			PageObjectLogging.log("swipeFromPointToPoint", e.toString(), false);
+		}
 		try {
 			Thread.sleep(waitAfter);
-		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
+		} catch (Exception e) {
+			PageObjectLogging.log("swipeFromPointToPoint", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
 			mobileDriver.context("WEBVIEW_1");
 		}
 	}
@@ -264,7 +282,7 @@ public class PerformTouchAction {
 		if (startXTwo >= (appNativeWidth - 2)) {
 			startXTwo = appNativeWidth - 3;
 		}
-		if (zoomWay == "out") {
+		if ("out".equals(zoomWay)) {
 			int temp;
 			temp = startXOne;
 			startXOne = endXOne;
@@ -273,7 +291,7 @@ public class PerformTouchAction {
 			startXTwo = endXTwo;
 			endXTwo = temp;
 		}
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		touchOne.press(startXOne, pointY).moveTo(endXOne - startXOne, 0).release();
@@ -282,11 +300,15 @@ public class PerformTouchAction {
 		multiTouch.add(touchTwo);
 		try {
 			multiTouch.perform();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			PageObjectLogging.log("zoomInOutPointXY", e.toString(), false);
+		}
 		try {
 			Thread.sleep(waitAfter);
-		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
+		} catch (Exception e) {
+			PageObjectLogging.log("zoomInOutPointXY", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
 			mobileDriver.context("WEBVIEW_1");
 		}
 	}
@@ -301,16 +323,20 @@ public class PerformTouchAction {
 	public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		try {
 			mobileDriver.tap(1, pointX, pointY, duration);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
+		}
 		try {
 			Thread.sleep(waitAfter);
-		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "WEBVIEW_1") {
+		} catch (Exception e) {
+			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
 			mobileDriver.context("WEBVIEW_1");
 		}
 	}
@@ -344,17 +370,21 @@ public class PerformTouchAction {
 		js.executeScript("window.scrollTo(0, "+element.getLocation().getY()+")");
 		int pointX = (elementStartPointX + (elementWidth / 2)) * ratio;
 		int pointY = (taskbarWebviewHeight + (elementHeight / 2) + offSetY) * ratio; 
-		if (mobileDriver.getContext() != "NATIVE_APP") {
+		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
 			mobileDriver.context("NATIVE_APP");
 		}
 		try {
 			mobileDriver.tap(1, pointX, pointY, duration);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
+		}
 		try {
 			Thread.sleep(waitAfter);
-		} catch (Exception e) {}
-		if (mobileDriver.getContext() != "NATIVE_APP") {
-			mobileDriver.context("NATIVE_APP");
+		} catch (Exception e) {
+			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
+		}
+		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
+			mobileDriver.context("WEBVIEW_1");
 		}
 	}
 }
