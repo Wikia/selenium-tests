@@ -223,7 +223,7 @@ public class NewDriverProvider {
 		}
 
 		System.setProperty("webdriver.chrome.driver",
-			new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath ).getPath()).getAbsolutePath());
+			new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath ).getPath()).getPath());
 
 		//TODO change mobile tests to use @UserAgent annotation
 		if ("CHROMEMOBILE".equals(browserName)) {
