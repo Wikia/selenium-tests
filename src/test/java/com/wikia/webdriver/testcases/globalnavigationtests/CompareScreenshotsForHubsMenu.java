@@ -46,7 +46,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 
 		ImageComparison comparator = new ImageComparison();
 
-		File currentFile = shooter.captureWebElement(element, driver, false);
+		File currentFile = shooter.captureWebElement(element, driver);
 		String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
 			.getPath();
 

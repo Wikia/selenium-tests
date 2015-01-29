@@ -22,6 +22,6 @@ public class TestSynthetic extends NewTestTemplate {
 		new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiPage, article))
 			.verifyLineItemId(slotName, src, lineItemId)
 			.verifySize(slotName, slotWidth, slotHeight)
-			.verifyAdImage(slotName, src, imageUrl);
+			.verifyAdImage(slotName, imageUrl);
 	}
 }

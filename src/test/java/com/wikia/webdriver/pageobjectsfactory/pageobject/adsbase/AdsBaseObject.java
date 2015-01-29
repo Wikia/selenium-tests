@@ -179,7 +179,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
 		verifySlotExpanded(slot);
-		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver, false);
+		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
 		extractLiftiumTagId(slotSelector);
 		extractGptInfo(slotSelector);
 		if (!adVisible) {
@@ -529,9 +529,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void waitForSlotCollapsed(WebElement slot) {
+		waitForElementToHaveSize(0, 0, slot);
+	}
+
+	private void waitForElementToHaveSize(int width, int height, WebElement element) {
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
-			wait.until(CommonExpectedConditions.elementToHaveSize(slot, 0, 0));
+			wait.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
 		} finally {
 			restoreDeaultImplicitWait();
 		}
@@ -691,12 +695,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slot = waitForElementByCss(spotlightSelector + " img");
 			verifySlotExpanded(slot);
 
-			adsComparison.isAdVisible(slot, spotlightSelector, driver, false);
+			adsComparison.isAdVisible(slot, spotlightSelector, driver);
 		}
 	}
 
 	public AdsBaseObject verifySize(String slotName, int slotWidth, int slotHeight) {
 		WebElement element = getWebElement(slotName);
+		waitForElementToHaveSize(slotWidth, slotHeight, element);
 		Dimension size = element.getSize();
 		Assertion.assertEquals(size.getWidth(), slotWidth);
 		Assertion.assertEquals(size.getHeight(), slotHeight);
@@ -711,10 +716,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return this;
 	}
 
-	public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
+	public AdsBaseObject verifyAdImage(String slotName, String imageUrl) {
 		WebElement element = getWebElement(slotName);
-		boolean isMobile = "MOBILE".equalsIgnoreCase(src);
-		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver, isMobile));
+		Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
 		PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
 		return this;
 	}
