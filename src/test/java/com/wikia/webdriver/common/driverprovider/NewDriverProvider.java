@@ -213,7 +213,7 @@ public class NewDriverProvider {
 		}else if (osName.contains("MAC")) {
 			chromeBinaryPath = "/chromedriver_mac32/chromedriver";
 		}else if (osName.contains("LINUX")) {
-			chromeBinaryPath ="/chromedriver_linux32/chromedriver";
+			chromeBinaryPath ="/chromedriver_linux64/chromedriver";
 
 			File chromedriver  = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath )
 				.getPath());
