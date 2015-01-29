@@ -205,38 +205,25 @@ public class NewDriverProvider {
 	}
 
 	private static EventFiringWebDriver getChromeInstance() {
-		String chromeBinaryName;
+		String chromeBinaryPath = "";
 		String osName = System.getProperty("os.name").toUpperCase();
 
 		if (osName.contains("WINDOWS")) {
-			chromeBinaryName = "chromedriver.exe";
+			chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
+		}else if (osName.contains("MAC")) {
+			chromeBinaryPath = "/chromedriver_mac32/chromedriver";
+		}else if (osName.contains("LINUX")) {
+			chromeBinaryPath ="/chromedriver_linux64/chromedriver";
 
-			File chromeBinary = new File(
-				"." + File.separator
-					+ "src" + File.separator
-					+ "test" + File.separator
-					+ "resources" + File.separator
-					+ "ChromeDriver" + File.separator
-					+ chromeBinaryName
-			);
+			File chromedriver  = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath )
+				.getPath());
 
-			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+			//set application user permissions to 455
+			chromedriver.setExecutable(true);
 		}
 
-		if (osName.contains("MAC OS X")) {
-			chromeBinaryName = "chromedriver";
-
-			File chromeBinary = new File(
-					"." + File.separator
-							+ "src" + File.separator
-							+ "test" + File.separator
-							+ "resources" + File.separator
-							+ "ChromeDriver" + File.separator
-							+ chromeBinaryName
-			);
-
-			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
-		}
+		System.setProperty("webdriver.chrome.driver",
+			new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath ).getPath()).getPath());
 
 		//TODO change mobile tests to use @UserAgent annotation
 		if ("CHROMEMOBILE".equals(browserName)) {
@@ -251,7 +238,6 @@ public class NewDriverProvider {
 		}
 		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
-		//Adding console logging for Chrome browser
 		setBrowserLogging(Level.SEVERE);
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));
