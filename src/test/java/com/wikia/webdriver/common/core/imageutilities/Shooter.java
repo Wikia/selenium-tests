@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.*;
 
 import java.awt.image.BufferedImage;
@@ -43,7 +44,9 @@ public class Shooter {
 			capturePage(driver), CHROME_DRIVER_SCREENSHOT_SCALE, CHROME_DRIVER_SCREENSHOT_SCALE
 		);
 		Object[] rect = getBoundingClientRect(element, driver);
-		return imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], page);
+		File image = imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], page);
+		PageObjectLogging.logImage("Shooter", image, true);
+		return image;
 	}
 
 	private Object[] getBoundingClientRect(WebElement element, WebDriver driver) {

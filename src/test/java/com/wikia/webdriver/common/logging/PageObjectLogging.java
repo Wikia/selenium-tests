@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
@@ -19,6 +21,7 @@ import org.testng.SkipException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,6 +84,22 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(NewDriverProvider.getWebDriver());
+	}
+
+
+	public static void logImage(String command, File image, boolean success) {
+		byte[] bytes = new byte[0];
+		try {
+			bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
+		} catch (IOException e) {
+			log("logImage", e.getMessage(), false);
+		}
+		String imageAsBase64 = new String(bytes, StandardCharsets.UTF_8);
+		imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
+		String className = success ? "success" : "error";
+		CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
+			+ "</td><td>" + imageAsBase64
+			+ "</td><td> <br/> &nbsp;</td></tr>"));
 	}
 
 	@Override
