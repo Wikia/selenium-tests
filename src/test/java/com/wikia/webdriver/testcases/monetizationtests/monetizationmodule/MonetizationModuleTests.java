@@ -147,8 +147,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyAdsenseUnitNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, TEST_ARTICLE);
 		monetizationModule.verifyAdsenseUnitShown();
 	}
 
@@ -174,8 +173,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyAdsenseUnitNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, TEST_ARTICLE);
 		monetizationModule.verifyAdsenseUnitNotShown();
 	}
 
@@ -216,12 +214,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.refreshPage();
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// logged in user
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, testArticle);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
@@ -254,12 +251,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.refreshPage();
 		monetizationModule.verifyMonetizationModuleShown();
 		// logged in user
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, testArticle);
 		monetizationModule.verifyMonetizationModuleShown();
 	}
 
@@ -288,8 +284,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, testArticle);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
@@ -330,12 +325,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.refreshPage();
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// logged in user
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		monetizationModule.logOut(wikiURL, TEST_TOP_100_ARTICLE);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 

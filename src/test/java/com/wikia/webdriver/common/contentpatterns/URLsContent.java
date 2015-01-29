@@ -45,6 +45,7 @@ public class URLsContent {
 	public static final String USER_MESSAGE_WALL = "wiki/Message_Wall:";
 	public static final String SPECIAL_MULTI_WIKI_FINDER = "wiki/Special:Multiwikifinder";
 	public static final String LOGOUT = "wiki/Special:UserLogout?noexternals=1";
+	public static final String LOGOUT_RETURNTO = "wiki/Special:UserLogout?returnto=";
 	public static final String SPECIAL_UNDELETE = "wiki/Special:Undelete";
 	public static final String USER_PROFILE = "wiki/User:%userName%";
 	public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
