@@ -62,7 +62,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -803,8 +802,7 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("logOut",
 				"page loads for more than 30 seconds", true);
 		}
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-			.cssSelector("a[data-id='login']")));
+		waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
