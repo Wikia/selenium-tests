@@ -443,7 +443,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
 		monetizationModule.verifyAdsenseUnitNotShownBelowTitle();
 		// logged in user
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
