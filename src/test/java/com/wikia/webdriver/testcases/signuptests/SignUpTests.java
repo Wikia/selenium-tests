@@ -114,7 +114,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-	public void SignUp_005_forced_signup_CNW_MAIN_3609() {
+	public void SignUp_005_forced_signup_CNW() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openWikiPage(wikiCorporateURL);
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -147,7 +147,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_006", "SignUp"})
-	public void SignUp_006_loginNotVerifiedUser_MAIN_3609() {
+	public void SignUp_006_loginNotVerifiedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
