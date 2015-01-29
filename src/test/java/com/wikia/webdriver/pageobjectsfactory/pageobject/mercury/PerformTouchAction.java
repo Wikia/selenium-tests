@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 import java.util.List;
 
 import io.appium.java_client.MultiTouchAction;
+import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
@@ -17,7 +18,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 28 Jan 2015
+ * @updated: 29 Jan 2015
  */
 
 public class PerformTouchAction {
@@ -36,6 +37,11 @@ public class PerformTouchAction {
 	private int taskbarWebviewHeight = 0;
 	private int taskbarWebviewWidth = 0;
 	
+	private int addressbarNativeHeight = 0;
+	private int addressbarNativeWidth = 0;
+	private int addressbarWebviewHeight = 0;
+	private int addressbarWebviewWidth = 0;
+	
 	private int appNativeHeight = 0;
 	private int appNativeWidth = 0;
 	private int appWebviewHeight = 0;
@@ -52,13 +58,18 @@ public class PerformTouchAction {
 	public static final String ZOOM_WAY_IN = "in";
 	public static final String ZOOM_WAY_OUT = "out";
 	
+	private static final String CONTEXT_NATIVE_APP = "NATIVE_APP";
+	private static final String CONTEXT_WEBVIEW_1 = "WEBVIEW_1";
+	
 	public PerformTouchAction(WebDriver webDriver) {
+		String methodName = "PerformTouchAction";
 		mobileDriver = NewDriverProvider.getMobileDriver();
 		driver = webDriver;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
-		}
+		addressbarWebviewHeight = Integer.parseInt(js.executeScript("return $(window).height()").toString());
+		addressbarWebviewWidth = Integer.parseInt(js.executeScript("return $(window).width()").toString());
+		waitForFinish(5000, methodName);
+		switchToContext(CONTEXT_NATIVE_APP, methodName);		
 		nativeHeight = mobileDriver.manage().window().getSize().height;
 		nativeWidth = mobileDriver.manage().window().getSize().width;
 		int startX = nativeWidth / 2;
@@ -66,24 +77,15 @@ public class PerformTouchAction {
 		int endX = startX;
 		int endY = nativeHeight / 3;
 		int duration = startY - endY;
-		try {
-			mobileDriver.swipe(startX, startY, endX, endY, duration);
-		} catch (Exception e) {
-			PageObjectLogging.log("PerformTouchAction", e.toString(), false);
-		}
-		try {
-			Thread.sleep(duration * 3);
-		} catch(Exception e) {
-			PageObjectLogging.log("PerformTouchAction", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		mobileDriver.swipe(startX, startY, endX, endY, duration);
+		waitForFinish(duration * 3, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
 		js.executeScript("window.scrollTo(0, 0)");
 		appWebviewHeight = Integer.parseInt(js.executeScript("return $(window).height()").toString());
 		appWebviewWidth = Integer.parseInt(js.executeScript("return $(window).width()").toString());
 		loadedPageHeight = Integer.parseInt(js.executeScript("return $(document).height()").toString());
 		loadedPageWidth = Integer.parseInt(js.executeScript("return $(document).width()").toString());
+		addressbarWebviewHeight = appWebviewHeight - addressbarWebviewHeight;
 		ratio = nativeWidth / appWebviewWidth;
 		webviewHeight = nativeHeight / ratio;
 		webviewWidth = appWebviewWidth;
@@ -93,6 +95,8 @@ public class PerformTouchAction {
 		taskbarNativeWidth = nativeWidth;
 		appNativeWidth = nativeWidth;
 		appNativeHeight = nativeHeight - taskbarNativeHeight;
+		addressbarNativeHeight = addressbarWebviewHeight * ratio;
+		addressbarNativeWidth = nativeWidth;
 	}
 	
 	/**
@@ -116,9 +120,40 @@ public class PerformTouchAction {
 		System.out.println("appWebviewHeight: " + appWebviewHeight);
 		System.out.println("appWebviewWidth: " + appWebviewWidth);
 		System.out.println("=======================================");
+		System.out.println("addressbarNativeHeight: " + addressbarNativeHeight);
+		System.out.println("addressbarNativeWidth: " + addressbarNativeWidth);
+		System.out.println("addressbarWebviewHeight: " + addressbarWebviewHeight);
+		System.out.println("addressbarWebviewWidth: " + addressbarWebviewWidth);
+		System.out.println("=======================================");
 		System.out.println("loadedPageHeight: " + loadedPageHeight);
 		System.out.println("loadedPageWidth: " + loadedPageWidth);
 		System.out.println("=======================================");
+	}
+	
+	/**
+	 * 
+	 * @param time In milliseconds
+	 * @param methodName Used in log if fail
+	 */
+	private void waitForFinish(int time, String methodName) {
+		try {
+			Thread.sleep(time);
+		} catch(InterruptedException e) {
+			PageObjectLogging.log(methodName, e.getMessage(), false);
+		}
+	}
+	
+	/**
+	 * Use that method if you want to switch between using app and using touch 
+	 * @param contextName Use NATIVE_APP for touch or WEBVIEW_1 for app
+	 * @param methodName Used in log if fail
+	 */
+	private void switchToContext(String contextName, String methodName) {
+		try {
+			mobileDriver.context(contextName);
+		} catch (NoSuchContextException e) {
+			PageObjectLogging.log(methodName, e.getMessage(), false);
+		}
 	}
 	
 	/**
@@ -129,12 +164,11 @@ public class PerformTouchAction {
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
 	public void swipeFromCenterToDirection(String direction, int pixelPath, int duration, int waitAfter){
+		String methodName = "swipeFromCenterToDirection";
 		int centerX = appNativeWidth / 2;
 		int centerY = (appNativeHeight / 2) + taskbarNativeHeight;
 		int path = 0;
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
-		}
+		switchToContext(CONTEXT_NATIVE_APP, methodName);
 		switch (direction) {
 			case "left": 
 				if (pixelPath < centerX) {
@@ -142,11 +176,7 @@ public class PerformTouchAction {
 				} else {
 					path = centerX - 2;
 				}
-				try {
-					mobileDriver.swipe(centerX, centerY, centerX - path, centerY, duration);
-				} catch (Exception e) {
-					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
-				}
+				mobileDriver.swipe(centerX, centerY, centerX - path, centerY, duration);
 				break;
 			case "right": 
 				if (pixelPath < centerX) {
@@ -154,11 +184,7 @@ public class PerformTouchAction {
 				} else {
 					path = centerX - 2;
 				}
-				try {
-					mobileDriver.swipe(centerX, centerY, centerX + path, centerY, duration);	
-				} catch (Exception e) {
-					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
-				}
+				mobileDriver.swipe(centerX, centerY, centerX + path, centerY, duration);	
 				break;
 			case "up": 
 				if (pixelPath < centerY) {
@@ -166,34 +192,20 @@ public class PerformTouchAction {
 				} else {
 					path = centerY - 2;
 				}
-				try {
-					mobileDriver.swipe(centerX, centerY, centerX, centerY - path, duration);				
-				} catch (Exception e) {
-					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
-				}
+				mobileDriver.swipe(centerX, centerY, centerX, centerY - path, duration);				
 				break;
 			case "down": 
 				if (pixelPath < centerY) {
 					path = pixelPath;
 				} else {
 					path = centerY - 2;
-				}
-				try {						
-					mobileDriver.swipe(centerX, centerY, centerX, centerY + path, duration);	
-				} catch (Exception e) {
-					PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
-				}
+				}					
+				mobileDriver.swipe(centerX, centerY, centerX, centerY + path, duration);	
 				break;
 			default: break;
 		}
-		try {
-			Thread.sleep(waitAfter);
-		} catch (Exception e) {
-			PageObjectLogging.log("swipeFromCenterToDirection", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		waitForFinish(waitAfter, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
 	}
 	
 	/**
@@ -206,26 +218,15 @@ public class PerformTouchAction {
 	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
 	public void swipeFromPointToPoint(int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
+		String methodName = "swipeFromPointToPoint";
 		startX = (int)((startX / 100f) * appNativeWidth);
 		startY = (int)(((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		endX = (int)((endX / 100f) * appNativeWidth);
 		endY = (int)(((endY / 100f) * appNativeHeight) + taskbarNativeHeight);
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
-		}
-		try {
-			mobileDriver.swipe(startX, startY, endX, endY, duration);
-		} catch (Exception e) {
-			PageObjectLogging.log("swipeFromPointToPoint", e.toString(), false);
-		}
-		try {
-			Thread.sleep(waitAfter);
-		} catch (Exception e) {
-			PageObjectLogging.log("swipeFromPointToPoint", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		switchToContext(CONTEXT_NATIVE_APP, methodName);
+		mobileDriver.swipe(startX, startY, endX, endY, duration);
+		waitForFinish(waitAfter, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
 	}
 	
 	/**
@@ -238,6 +239,7 @@ public class PerformTouchAction {
 	 * @param waitAfter In milliseconds
 	 */
 	public void zoomInOutPointXY(int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
+		String methodName = "zoomInOutPointXY";
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
@@ -291,26 +293,14 @@ public class PerformTouchAction {
 			startXTwo = endXTwo;
 			endXTwo = temp;
 		}
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
-		}
+		switchToContext(CONTEXT_NATIVE_APP, methodName);
 		touchOne.press(startXOne, pointY).moveTo(endXOne - startXOne, 0).release();
 		touchTwo.press(startXTwo, pointY).moveTo(endXTwo - startXTwo, 0).release();
 		multiTouch.add(touchOne);
 		multiTouch.add(touchTwo);
-		try {
-			multiTouch.perform();
-		} catch (Exception e) {
-			PageObjectLogging.log("zoomInOutPointXY", e.toString(), false);
-		}
-		try {
-			Thread.sleep(waitAfter);
-		} catch (Exception e) {
-			PageObjectLogging.log("zoomInOutPointXY", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		multiTouch.perform();
+		waitForFinish(waitAfter, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
 	}
 	
 	/**
@@ -321,24 +311,13 @@ public class PerformTouchAction {
 	 * @param waitAfter In milliseconds
 	 */
 	public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
+		String methodName = "tapOnPointXY";
 		pointX = (int)((pointX / 100f) * appNativeWidth);
 		pointY = (int)(((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
-		}
-		try {
-			mobileDriver.tap(1, pointX, pointY, duration);
-		} catch (Exception e) {
-			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
-		}
-		try {
-			Thread.sleep(waitAfter);
-		} catch (Exception e) {
-			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		switchToContext(CONTEXT_NATIVE_APP, methodName);
+		mobileDriver.tap(1, pointX, pointY, duration);
+		waitForFinish(waitAfter, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
 	}
 	
 	/**
@@ -350,6 +329,7 @@ public class PerformTouchAction {
 	 * @param waitAfter In milliseconds
 	 */
 	public void tapOnWebElement(By locator, int index, int duration, int waitAfter) {
+		String methodName = "tapOnWebElement";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		WebElement element;
 		if (index > 0) {
@@ -370,21 +350,21 @@ public class PerformTouchAction {
 		js.executeScript("window.scrollTo(0, "+element.getLocation().getY()+")");
 		int pointX = (elementStartPointX + (elementWidth / 2)) * ratio;
 		int pointY = (taskbarWebviewHeight + (elementHeight / 2) + offSetY) * ratio; 
-		if (!"NATIVE_APP".equals(mobileDriver.getContext())) {
-			mobileDriver.context("NATIVE_APP");
+		switchToContext(CONTEXT_NATIVE_APP, methodName);
+		mobileDriver.tap(1, pointX, pointY, duration);
+		waitForFinish(waitAfter, methodName);
+		switchToContext(CONTEXT_WEBVIEW_1, methodName);
+	}
+	
+	/**
+	 * Use that method to verify presence of addressbar
+	 * @return Boolean
+	 */
+	public boolean isAddressbarPresent() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if ((appWebviewHeight - Integer.parseInt(js.executeScript("return $(window).height()").toString())) == addressbarWebviewHeight) {
+			return true;
 		}
-		try {
-			mobileDriver.tap(1, pointX, pointY, duration);
-		} catch (Exception e) {
-			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
-		}
-		try {
-			Thread.sleep(waitAfter);
-		} catch (Exception e) {
-			PageObjectLogging.log("tapOnPointXY", e.toString(), false);
-		}
-		if (!"WEBVIEW_1".equals(mobileDriver.getContext())) {
-			mobileDriver.context("WEBVIEW_1");
-		}
+		return false;
 	}
 }
