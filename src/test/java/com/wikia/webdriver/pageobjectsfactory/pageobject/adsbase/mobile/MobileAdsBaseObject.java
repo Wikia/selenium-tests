@@ -56,7 +56,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
-		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver, true)) {
+		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 					+ "Most probable ad is not present; CSS "

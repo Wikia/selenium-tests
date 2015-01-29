@@ -87,29 +87,21 @@ public class AdsComparison {
 		return success;
 	}
 
-	public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element,
-											  final WebDriver driver, final boolean isMobile) {
+	public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element, final WebDriver driver) {
 		try {
 			String encodedExpectedScreen = readFileAsString(imageUrl);
-			File capturedScreen = shooter.captureWebElement(element, driver, isMobile);
+			File capturedScreen = shooter.captureWebElement(element, driver);
 			String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
 			capturedScreen.delete();
-			boolean result = imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
-			if (!result) {
-				// replaceAll - add new line char after each 100 char.
-				PageObjectLogging.log("compareImageWithScreenshot",
-					encodedCapturedScreen.replaceAll("(.{100})", "$1\n"), true);
-			}
-			return result;
+			return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public boolean isAdVisible(final WebElement element, final String selector,
-							   final WebDriver driver, final boolean isMobile) {
+	public boolean isAdVisible(final WebElement element, final String selector, final WebDriver driver) {
 		hideSlot(selector, driver);
-		final File backgroundImg = shooter.captureWebElement(element, driver, isMobile);
+		final File backgroundImg = shooter.captureWebElement(element, driver);
 		PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
 		showSlot(selector, driver);
 		try {
@@ -117,7 +109,7 @@ public class AdsComparison {
 			wait.until(new ExpectedCondition<Object>() {
 				@Override
 				public Object apply(WebDriver driver) {
-					File adImg = shooter.captureWebElement(element, driver, isMobile);
+					File adImg = shooter.captureWebElement(element, driver);
 					PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true, driver);
 					boolean areFilesTheSame = imageComparison.areFilesTheSame(backgroundImg, adImg);
 					adImg.delete();

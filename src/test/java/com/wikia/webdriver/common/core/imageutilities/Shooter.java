@@ -14,9 +14,6 @@ import java.util.ArrayList;
  */
 public class Shooter {
 
-	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
-	private static final double CHROME_DRIVER_SCREENSHOT_SCALE = 0.5;
-
 	private ImageEditor imageEditor;
 
 	public Shooter() {
@@ -33,18 +30,17 @@ public class Shooter {
 
 	/**
 	 * Create a screenshot of passed element
-	 * and save screenshot as image file in temp dir
-	 *
+	 * and save screenshot as image file in temp dir.
+	 * <p>
+	 * Notes: Method works properly in Google Chrome only if devicePixelRatio equals 1.
+	 * </p>
 	 * @param element - WebElement you want to capture
-	 * @param driver  - instace of WebDriver
+	 * @param driver  - instance of WebDriver
 	 * @return File path  - file's handler which was saved in given path
 	 */
-	public File captureWebElement(WebElement element, WebDriver driver, boolean isMobile) {
-		BufferedImage page = !isMobile ? imageEditor.fileToImage(capturePage(driver)) : imageEditor.scaleImage(
-			capturePage(driver), CHROME_DRIVER_SCREENSHOT_SCALE, CHROME_DRIVER_SCREENSHOT_SCALE
-		);
+	public File captureWebElement(WebElement element, WebDriver driver) {
 		Object[] rect = getBoundingClientRect(element, driver);
-		File image = imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], page);
+		File image = imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], capturePage(driver));
 		PageObjectLogging.logImage("Shooter", image, true);
 		return image;
 	}
