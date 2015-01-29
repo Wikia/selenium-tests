@@ -10,10 +10,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/*
+/**
 * @ownership: Mobile Web
-* @authors: Rodrigo Gomez, Łukasz Nowak
-* */
+* @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+*/
 public class SearchTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -23,8 +23,9 @@ public class SearchTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
-	@Test(groups = {"MercurySearchTests_001", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_001_VerifySearchAutosuggestionsAppear() {
+	//ST02
+	@Test(groups = {"MercurySearchTests_002", "MercurySearchTests", "Mercury"})
+	public void MercurySearchTests_002_SearchAutosuggestionsAppear() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
@@ -33,8 +34,21 @@ public class SearchTests extends NewTestTemplate {
 		searchObject.verifySearchSuggestionsWereVisible();
 	}
 
-	@Test(groups = {"MercurySearchTests_002", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_002_VerifyClickOnSearchResultWillRedirectUser() {
+	//ST03
+	@Test(groups = {"MercurySearchTests_003", "MercurySearchTests", "Mercury"})
+	public void MercurySearchTests_003_TappingCancelWillDisplayNavBarMenu() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
+		searchObject.clickSearchField();
+		searchObject.verifySearchView();
+		searchObject.clickCancelButton();
+		searchObject.verifyMenuView();
+	}
+	
+	//ST04
+	@Test(groups = {"MercurySearchTests_004", "MercurySearchTests", "Mercury"})
+	public void MercurySearchTests_004_ClickOnSearchResultWillRedirectUser() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
@@ -47,19 +61,9 @@ public class SearchTests extends NewTestTemplate {
 		base.waitForStringInURL(redirection);
 	}
 
-	@Test(groups = {"MercurySearchTests_003", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_003_VerifyTappingCancelWillDisplayNavBarMenu() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
-		searchObject.clickSearchField();
-		searchObject.verifySearchView();
-		searchObject.clickCancelButton();
-		searchObject.verifyMenuView();
-	}
-
-	@Test(groups = {"MercurySearchTests_004", "MercurySearchTests", "Mercury"})
-	public void MercurySearchTests_004_SearchSuggestionsShouldNotBeCalled() {
+	//ST05 - FAIL
+	@Test(groups = {"MercurySearchTests_005", "MercurySearchTests", "Mercury"})
+	public void MercurySearchTests_005_SearchSuggestionsShouldNotBeCalled() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
 		SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();

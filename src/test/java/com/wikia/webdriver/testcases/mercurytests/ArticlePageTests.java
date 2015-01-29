@@ -8,8 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**l
- * @authors: Rodrigo Gomez, Łukasz Nowak
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Mobile Web
  */
 
@@ -22,36 +22,40 @@ public class ArticlePageTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
+	//APT01
 	@Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_001_VerifyLogoAndSearchButtonAreVisible() {
+	public void MercuryArticleTests_001_LogoAndSearchButtonAreVisible() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_CATEGORY_TEST_ARTICLE);
 		articlePage.verifyWikiaLogoIsVisible();
 		articlePage.verifySearchButtonIsVisible();
 	}
 
-	@Test(groups = {"MercuryArticleTests_002", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_002_VerifyTopContributorsWikiSection() {
+	//APT03
+	@Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
+	public void MercuryArticleTests_003_TopContributorsWikiSection() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_CATEGORY_TEST_ARTICLE);
 		articlePage.verifyTopContributorsSectionIsVisible();
 		articlePage.verifyTopContributorsThumb();
 	}
-
-	@Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_003_VerifyCanonicalTag() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
-		articlePage.verifyCanonicalUrl();
-	}
-
-	@Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
-	public void MercuryArticleTests_004_VerifySingleLinkedImageRedirect() {
+	
+	//APT06 - FAIL
+	@Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
+	public void MercuryArticleTests_006_SingleLinkedImageRedirect() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
 		String imagehref = articlePage.getLinkedImageHref();
 		articlePage.clickLinkedImage();
 		articlePage.verifyLinkedImageRedirection(imagehref);
+	}
+		
+	//APT07
+	@Test(groups = {"MercuryArticleTests_007", "MercuryArticleTests", "Mercury"})
+	public void MercuryArticleTests_007_CanonicalTag() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
+		articlePage.verifyCanonicalUrl();
 	}
 }
 

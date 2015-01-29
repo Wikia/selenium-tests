@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/*
+/**
 * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
+*/
 public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	@FindBy(css = ".ember-text-field")
@@ -141,7 +141,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void verifyClosingNav() {
 		waitForElementVisibleByElement(overlay);
-//		tapOnElement(overlay);	Waiting for new tap gestures to be implemented
+		tapOnElement(overlay);
 		PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true, driver);
 	}
 

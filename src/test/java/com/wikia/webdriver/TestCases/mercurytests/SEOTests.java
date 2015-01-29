@@ -9,18 +9,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageOb
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/*
+/**
 * @ownership: Mobile Web
 * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
-* */
-public class OpenGraphTests extends NewTestTemplate {
+*/
+public class SEOTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_001", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT01
+	@Test(groups = { "MercurySEOTest_001", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_001_CheckTypeMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -31,7 +32,8 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgTypeArticle();
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_002", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT02
+	@Test(groups = { "MercurySEOTest_002", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_002_CheckTitleMetaTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -42,7 +44,8 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgTitleArticlePage();
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_003", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT03
+	@Test(groups = { "MercurySEOTest_003", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_003_CheckSiteNameTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -53,7 +56,8 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgSiteNameExists();
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_004", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT04 - FAIL
+	@Test(groups = { "MercurySEOTest_004", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_004_CheckDescriptionTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
@@ -69,26 +73,29 @@ public class OpenGraphTests extends NewTestTemplate {
 		openGraph.verifyOgDescriptionTagWasChanged(descOne, descTwo);
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_005", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT05
+	@Test(groups = { "MercurySEOTest_005", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_005_CheckUrlTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgUrlTag();
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_006", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT06 - FAIL
+	@Test(groups = { "MercurySEOTest_006", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_006_CheckImageTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgImage();
 	}
 
-	@Test(groups = { "MercuryOpenGraphTest_007", "MercuryOpenGraphTests", "Mercury" })
+	//SEOT07
+	@Test(groups = { "MercurySEOTest_007", "MercurySEOTests", "Mercury" })
 	public void MercuryOpenGraphTest_007_CheckFbAppTag() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
+		base.openMercuryArticleByName(wikiURL, "");
 		OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
 		openGraph.verifyOgFbApp();
 	}
