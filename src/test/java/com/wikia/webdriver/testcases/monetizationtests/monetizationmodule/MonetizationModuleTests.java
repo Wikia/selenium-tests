@@ -248,6 +248,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(articleURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.deleteCookieFromSearch();
 		monetizationModule.setCookieFromSearch();
 		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		// anon user
