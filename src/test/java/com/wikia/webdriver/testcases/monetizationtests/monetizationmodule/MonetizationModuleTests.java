@@ -248,7 +248,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(articleURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
-		monetizationModule.deleteCookieFromSearch();
 		monetizationModule.setCookieFromSearch();
 		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		// anon user
@@ -259,8 +258,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
-		base.logOut(wikiURL);
-		base.openArticleByName(wikiURL, testArticle);
+		monetizationModule.logOut(wikiURL, testArticle);
+		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleShown();
 	}
 

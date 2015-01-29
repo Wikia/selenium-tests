@@ -47,23 +47,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHome
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
+import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultBackoffStrategy;
-import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -77,14 +73,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -808,7 +798,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public void logOut(WebDriver driver) {
 		try {
 			driver.manage().deleteAllCookies();
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+			driver.get(Global.DOMAIN + URLsContent.LOGOUT);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logOut",
 				"page loads for more than 30 seconds", true);
@@ -827,6 +817,17 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
+	}
+
+	public void logOut(String wikiURL, String articleName) {
+		try {
+			getUrl(wikiURL + URLsContent.LOGOUT_RETURNTO + articleName);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+				"page loads for more than 30 seconds", true);
+		}
+		waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
+		PageObjectLogging.log("logOut", "user is logged out and returned to article", true, driver);
 	}
 
 	public String logInCookie(String userName, String password, String wikiURL) {
