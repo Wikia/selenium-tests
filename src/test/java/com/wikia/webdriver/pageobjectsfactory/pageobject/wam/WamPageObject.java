@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -221,10 +223,8 @@ public class WamPageObject extends BasePageObject {
 		scrollAndClick(datePickerInput);
 		waitForElementVisibleByElement(calendarElement);
 		previousMonthArrow.click();
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, -1);
-		Date date = calendar.getTime();
-		String previousMonth = getFormattedDate(date, "MMMM");
+		DateTime date = DateTime.now().minusMonths(1);
+		String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);
 		waitForTextToBePresentInElementByElement(monthInCalendar, previousMonth);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -235,7 +235,7 @@ public class WamPageObject extends BasePageObject {
 		);
 		firstDay.click();
 
-		String year = getFormattedDate(date, "YYYY");
+		String year = DateTimeFormat.forPattern("YYYY").print(date);
 
 		return previousMonth + " 1, " + year;
 	}
