@@ -259,7 +259,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 		// anon user
 		base.logOut(wikiURL);
-		base.openWikiPage(articleURL);
+		base.openArticleByName(wikiURL, testArticle);
 		monetizationModule.verifyMonetizationModuleShown();
 	}
 
