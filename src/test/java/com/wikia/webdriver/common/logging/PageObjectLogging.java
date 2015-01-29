@@ -21,6 +21,7 @@ import org.testng.SkipException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,24 +86,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		logJSError(NewDriverProvider.getWebDriver());
 	}
 
+
 	public static void logImage(String command, File image, boolean success) {
-		String imageAsBase64 = "";
-		Base64 coder = new Base64();
-
+		byte[] bytes = new byte[0];
 		try {
-			imageAsBase64 = IOUtils.toString(
-				coder.encode(FileUtils.readFileToByteArray(image)), "UTF-8"
-			);
-			imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
-		} catch (IOException ignore) {
+			bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
+		} catch (IOException e) {
+			log("logImage", e.getMessage(), false);
 		}
-
+		String imageAsBase64 = new String(bytes, StandardCharsets.UTF_8);
+		imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
 		String className = success ? "success" : "error";
-		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"" + className + "\"><td>" + command
+		CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
 			+ "</td><td>" + imageAsBase64
-			+ "</td><td> <br/> &nbsp;</td></tr>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+			+ "</td><td> <br/> &nbsp;</td></tr>"));
 	}
 
 	@Override
