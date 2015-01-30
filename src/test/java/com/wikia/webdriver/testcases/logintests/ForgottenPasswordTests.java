@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
+
 import org.testng.annotations.Test;
 
 
@@ -14,51 +15,55 @@ import org.testng.annotations.Test;
  */
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-	Credentials credentials = config.getCredentials();
+  Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
-	public void ForgottenPassword_001_dropdown() {
-		String userName = credentials.userNameForgottenPassword;
+  @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
+  public void ForgottenPassword_001_dropdown() {
+    String userName = credentials.userNameForgottenPassword;
 
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.openWikiPage(wikiURL);
-		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
-		dropdown.openDropDown();
-		dropdown.remindPassword(userName, credentials.apiToken);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    DropDownComponentObject dropdown = new DropDownComponentObject(driver);
+    dropdown.openDropDown();
+    dropdown.remindPassword(userName, credentials.apiToken);
 
-		dropdown.verifyMessageAboutNewPassword(userName);
-		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
-		dropdown.openDropDown();
-		dropdown.logIn(userName, newPassword);
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		newPassword = login.setNewPassword();
-		login.verifyUserLoggedIn(userName);
+    dropdown.verifyMessageAboutNewPassword(userName);
+    String
+        newPassword =
+        dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+    dropdown.openDropDown();
+    dropdown.logIn(userName, newPassword);
+    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    newPassword = login.setNewPassword();
+    login.verifyUserLoggedIn(userName);
 
-		login.logOut(driver);
-		dropdown.openDropDown();
-		dropdown.logIn(userName, newPassword);
-		dropdown.verifyUserLoggedIn(userName);
-	}
+    login.logOut(driver);
+    dropdown.openDropDown();
+    dropdown.logIn(userName, newPassword);
+    dropdown.verifyUserLoggedIn(userName);
+  }
 
-	@Test(
-		groups = {"ForgottenPassword_002", "ForgottenPassword"}
-	)
-	public void ForgottenPassword_002_specialPage() {
-		String userName = credentials.userNameForgottenPassword2;
+  @Test(
+      groups = {"ForgottenPassword_002", "ForgottenPassword"}
+  )
+  public void ForgottenPassword_002_specialPage() {
+    String userName = credentials.userNameForgottenPassword2;
 
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.openWikiPage(wikiURL);
-		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-		login.remindPassword(userName, credentials.apiToken);
-		login.verifyMessageAboutNewPassword(userName);
-		String newPassword = login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
-		login.login(userName, newPassword);
-		newPassword = login.setNewPassword();
-		login.verifyUserLoggedIn(userName);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    login.remindPassword(userName, credentials.apiToken);
+    login.verifyMessageAboutNewPassword(userName);
+    String
+        newPassword =
+        login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+    login.login(userName, newPassword);
+    newPassword = login.setNewPassword();
+    login.verifyUserLoggedIn(userName);
 
-		login.logOut(wikiURL);
-		login.openSpecialUserLogin(wikiURL);
-		login.login(userName, newPassword);
-		login.verifyUserLoggedIn(userName);
-	}
+    login.logOut(wikiURL);
+    login.openSpecialUserLogin(wikiURL);
+    login.login(userName, newPassword);
+    login.verifyUserLoggedIn(userName);
+  }
 }

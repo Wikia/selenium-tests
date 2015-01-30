@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
  */
 public class MobileTestTemplate extends NewTestTemplate {
 
-	@Override
-	public void startBrowser() {
-		driver = new MobileDriverProvider(config).getDriverInstance();
-	}
+  @Override
+  public void startBrowser() {
+    driver = new MobileDriverProvider(config).getDriverInstance();
+  }
 }
