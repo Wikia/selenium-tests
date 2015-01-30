@@ -7,16 +7,16 @@ import javax.json.JsonObject;
 
 public class EventsArticleEditMode {
 
-	private EventsArticleEditMode() {
+  private EventsArticleEditMode() {
 
-	}
+  }
 
-	public static JsonObject previewEvent = Json.createObjectBuilder()
-		.add("0", Json.createObjectBuilder()
-			.add(EventParameter.ACTION.getEventParameter(), "click")
-			.add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
-			.add(EventParameter.CATEGORY.getEventParameter(), "editor-ck"))
-		.add("1", Json.createObjectBuilder()
-			.add(EventParameter.LABEL.getEventParameter(), "preview"))
-		.build();
+  public static JsonObject previewEvent = Json.createObjectBuilder()
+      .add("0", Json.createObjectBuilder()
+          .add(EventParameter.ACTION.getEventParameter(), "click")
+          .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
+          .add(EventParameter.CATEGORY.getEventParameter(), "editor-ck"))
+      .add("1", Json.createObjectBuilder()
+          .add(EventParameter.LABEL.getEventParameter(), "preview"))
+      .build();
 }

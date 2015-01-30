@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests.mobileadstests;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -14,18 +15,19 @@ import java.util.List;
  */
 public class TestDfpParamsPresentMobile extends NewTestTemplate {
 
-	@Test(
-		dataProviderClass = MobileAdsDataProvider.class,
-		dataProvider = "dfpParams",
-		groups = {"TestDfpParamsPresentMobile_GeoEdgeFree", "MobileAds"}
-	)
-	public void TestDfpParamsPresentMobile_GeoEdgeFree(
-		String wikiName, String article, String adUnit, String slot, String lineItemId, String creativeId, List<String> pageParams, List<String> slotParams
-	) {
-		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-		ads.verifyGptIframe(adUnit, slot, "mobile");
-		ads.verifyGptParams(slot, "mobile", pageParams, slotParams);
-		ads.verifyGptAdInSlot(slot, "mobile", lineItemId, creativeId);
-	}
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "dfpParams",
+      groups = {"TestDfpParamsPresentMobile_GeoEdgeFree", "MobileAds"}
+  )
+  public void TestDfpParamsPresentMobile_GeoEdgeFree(
+      String wikiName, String article, String adUnit, String slot, String lineItemId,
+      String creativeId, List<String> pageParams, List<String> slotParams
+  ) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    ads.verifyGptIframe(adUnit, slot, "mobile");
+    ads.verifyGptParams(slot, "mobile", pageParams, slotParams);
+    ads.verifyGptAdInSlot(slot, "mobile", lineItemId, creativeId);
+  }
 }

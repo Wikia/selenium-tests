@@ -5,16 +5,16 @@ package com.wikia.webdriver.common.core.configuration;
  */
 public class ConfigurationFactory {
 
-	private ConfigurationFactory() {
+  private ConfigurationFactory() {
 
-	}
+  }
 
-	public static AbstractConfiguration getConfig() {
+  public static AbstractConfiguration getConfig() {
 
-		if (System.getProperty("run_mvn") == null || "false".equals(System.getProperty("run_mvn"))) {
-			return new ManualConfiguration();
-		} else {
-			return new POMConfiguration();
-		}
-	}
+    if (System.getProperty("run_mvn") == null || "false".equals(System.getProperty("run_mvn"))) {
+      return new ManualConfiguration();
+    } else {
+      return new POMConfiguration();
+    }
+  }
 }

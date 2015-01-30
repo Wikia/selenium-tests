@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
+
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -27,138 +28,138 @@ import java.lang.reflect.Method;
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
 public class NewTestTemplateCore {
 
-	protected WebDriver driver;
-	protected UrlBuilder urlBuilder;
-	protected AbstractConfiguration config;
-	protected String wikiURL;
-	protected String wikiCorporateURL;
-	protected String wikiCorpSetupURL;
-	private DesiredCapabilities capabilities;
-	protected NetworkTrafficInterceptor networkTrafficIntereceptor;
-	protected boolean isProxyServerRunning = false;
+  protected WebDriver driver;
+  protected UrlBuilder urlBuilder;
+  protected AbstractConfiguration config;
+  protected String wikiURL;
+  protected String wikiCorporateURL;
+  protected String wikiCorpSetupURL;
+  private DesiredCapabilities capabilities;
+  protected NetworkTrafficInterceptor networkTrafficIntereceptor;
+  protected boolean isProxyServerRunning = false;
 
-	public NewTestTemplateCore() {
-		config = ConfigurationFactory.getConfig();
-	}
+  public NewTestTemplateCore() {
+    config = ConfigurationFactory.getConfig();
+  }
 
-	@BeforeSuite(alwaysRun = true)
-	public void beforeSuite() {
-		prepareDirectories();
-	}
+  @BeforeSuite(alwaysRun = true)
+  public void beforeSuite() {
+    prepareDirectories();
+  }
 
-	protected void prepareDirectories() {
-		Properties.setProperties();
-		CommonUtils.deleteDirectory("." + File.separator + "logs");
-		CommonUtils.createDirectory("." + File.separator + "logs");
-	}
+  protected void prepareDirectories() {
+    Properties.setProperties();
+    CommonUtils.deleteDirectory("." + File.separator + "logs");
+    CommonUtils.createDirectory("." + File.separator + "logs");
+  }
 
-	private void printProperties() {
-		System.out.println("Wiki url: " + wikiURL);
-		System.out.println("Wiki corporate url: " + wikiCorporateURL);
-	}
+  private void printProperties() {
+    System.out.println("Wiki url: " + wikiURL);
+    System.out.println("Wiki corporate url: " + wikiCorporateURL);
+  }
 
-	protected void prepareURLs() {
-		urlBuilder = new UrlBuilder(config.getEnv());
-		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
-		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
-		wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
-		printProperties();
-	}
+  protected void prepareURLs() {
+    urlBuilder = new UrlBuilder(config.getEnv());
+    wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
+    wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
+    wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
+    printProperties();
+  }
 
-	protected void startBrowser() {
-		driver = registerDriverListener(
-			NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser())
-		);
-	}
+  protected void startBrowser() {
+    driver = registerDriverListener(
+        NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser())
+    );
+  }
 
-	protected WebDriver startCustomBrowser(String browserName) {
-		driver = registerDriverListener(
-			NewDriverProvider.getDriverInstanceForBrowser(browserName)
-		);
-		return driver;
-	}
+  protected WebDriver startCustomBrowser(String browserName) {
+    driver = registerDriverListener(
+        NewDriverProvider.getDriverInstanceForBrowser(browserName)
+    );
+    return driver;
+  }
 
-	protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
-		driver.register(new PageObjectLogging());
-		return driver;
-	}
+  protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
+    driver.register(new PageObjectLogging());
+    return driver;
+  }
 
-	protected void logOut() {
-		driver.get(wikiURL + URLsContent.LOGOUT);
-	}
+  protected void logOut() {
+    driver.get(wikiURL + URLsContent.LOGOUT);
+  }
 
-	protected void logOutCustomDriver(WebDriver customDriver) {
-		customDriver.get(wikiURL + URLsContent.LOGOUT);
-	}
+  protected void logOutCustomDriver(WebDriver customDriver) {
+    customDriver.get(wikiURL + URLsContent.LOGOUT);
+  }
 
-	protected void stopBrowser() {
-		if (driver != null) {
-			driver.quit();
-		}
-	}
+  protected void stopBrowser() {
+    if (driver != null) {
+      driver.quit();
+    }
+  }
 
-	protected void stopCustomBrowser(WebDriver customDriver) {
-		if (customDriver != null) {
-			customDriver.quit();
-		}
-	}
+  protected void stopCustomBrowser(WebDriver customDriver) {
+    if (customDriver != null) {
+      customDriver.quit();
+    }
+  }
 
-	protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
-		capabilities = new DesiredCapabilities();
-		try {
-			capabilities.setCapability(
-				CapabilityType.PROXY, server.seleniumProxy()
-			);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		return capabilities;
-	}
+  protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
+    capabilities = new DesiredCapabilities();
+    try {
+      capabilities.setCapability(
+          CapabilityType.PROXY, server.seleniumProxy()
+      );
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+    return capabilities;
+  }
 
-	protected void setDriverCapabilities(DesiredCapabilities caps) {
-		NewDriverProvider.setDriverCapabilities(caps);
-	}
+  protected void setDriverCapabilities(DesiredCapabilities caps) {
+    NewDriverProvider.setDriverCapabilities(caps);
+  }
 
-	protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
-		Dimension dimension = new Dimension(width, height);
-		desiredDriver.manage().window().setSize(dimension);
-	}
+  protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
+    Dimension dimension = new Dimension(width, height);
+    desiredDriver.manage().window().setSize(dimension);
+  }
 
-	protected void setBrowserUserAgent(String userAgent) {
-		NewDriverProvider.setBrowserUserAgent(config.getBrowser(), userAgent);
-	}
+  protected void setBrowserUserAgent(String userAgent) {
+    NewDriverProvider.setBrowserUserAgent(config.getBrowser(), userAgent);
+  }
 
-	protected void runProxyServerIfNeeded(Method method) {
-		boolean isGeoEdgeSet = false;
-		boolean isNetworkTrafficDumpSet = false;
-		String countryCode = null;
+  protected void runProxyServerIfNeeded(Method method) {
+    boolean isGeoEdgeSet = false;
+    boolean isNetworkTrafficDumpSet = false;
+    String countryCode = null;
 
-		if (method.getAnnotation(GeoEdgeProxy.class) != null) {
-			isGeoEdgeSet = true;
-			countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
-		}
+    if (method.getAnnotation(GeoEdgeProxy.class) != null) {
+      isGeoEdgeSet = true;
+      countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
+    }
 
-		if (method.getAnnotation(NetworkTrafficDump.class) != null) {
-			isNetworkTrafficDumpSet = true;
-		}
+    if (method.getAnnotation(NetworkTrafficDump.class) != null) {
+      isNetworkTrafficDumpSet = true;
+    }
 
-		if (isGeoEdgeSet || isNetworkTrafficDumpSet) {
-			isProxyServerRunning = true;
-			networkTrafficIntereceptor = new NetworkTrafficInterceptor();
-			networkTrafficIntereceptor.startSeleniumProxyServer();
-		} else {
-			return;
-		}
+    if (isGeoEdgeSet || isNetworkTrafficDumpSet) {
+      isProxyServerRunning = true;
+      networkTrafficIntereceptor = new NetworkTrafficInterceptor();
+      networkTrafficIntereceptor.startSeleniumProxyServer();
+    } else {
+      return;
+    }
 
-		if (isGeoEdgeSet) {
-			GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
-			String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
-			String ip = geoEdgeUtils.getIPForCountry(countryCode);
-			networkTrafficIntereceptor.setProxyServer(ip);
-			networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
-		}
+    if (isGeoEdgeSet) {
+      GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
+      String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
+      String ip = geoEdgeUtils.getIPForCountry(countryCode);
+      networkTrafficIntereceptor.setProxyServer(ip);
+      networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
+    }
 
-		capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
-		setDriverCapabilities(capabilities);
-	}
+    capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
+    setDriverCapabilities(capabilities);
+  }
 }

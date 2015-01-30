@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,69 +14,69 @@ import java.util.Set;
  */
 public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
-	@FindBy(css = "button[name='__CONFIRM__']")
-	private WebElement appTermsConfirmButton;
-	@FindBy(css = ".uiButtonText")
-	private WebElement postingPolicyWindowIndicator;
-	@FindBy(css = "#FacebookSignUp input[name='username']")
-	private WebElement usernameField;
-	@FindBy(css = "#FacebookSignUp input[name='password']")
-	private WebElement passwordField;
-	@FindBy(css = "#FacebookSignUp input[type='submit']")
-	private WebElement createAccountButton;
+  @FindBy(css = "button[name='__CONFIRM__']")
+  private WebElement appTermsConfirmButton;
+  @FindBy(css = ".uiButtonText")
+  private WebElement postingPolicyWindowIndicator;
+  @FindBy(css = "#FacebookSignUp input[name='username']")
+  private WebElement usernameField;
+  @FindBy(css = "#FacebookSignUp input[name='password']")
+  private WebElement passwordField;
+  @FindBy(css = "#FacebookSignUp input[type='submit']")
+  private WebElement createAccountButton;
 
-	String winHandleBefore;
+  String winHandleBefore;
 
-	public FacebookSignupModalComponentObject(WebDriver driver, String winHandleBeforeFBClick) {
-		super(driver);
-		winHandleBefore = winHandleBeforeFBClick;
-	}
+  public FacebookSignupModalComponentObject(WebDriver driver, String winHandleBeforeFBClick) {
+    super(driver);
+    winHandleBefore = winHandleBeforeFBClick;
+  }
 
-	public void acceptWikiaAppPolicy() {
-		// If policies are already accepted, give facebook popup window time to disappear
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			PageObjectLogging.log("acceptWikiaAppPolicy", e.getMessage(), false);
-		}
+  public void acceptWikiaAppPolicy() {
+    // If policies are already accepted, give facebook popup window time to disappear
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("acceptWikiaAppPolicy", e.getMessage(), false);
+    }
 
-		Set<String> handles = driver.getWindowHandles();
+    Set<String> handles = driver.getWindowHandles();
 
-		if (handles.size() > 1) {
-			for (String winHandle : handles) {
-				//Switch to new window opened
-				driver.switchTo().window(winHandle);
-			}
-			waitForElementByElement(appTermsConfirmButton);
-			appTermsConfirmButton.click();
-			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
-			waitForElementByElement(postingPolicyWindowIndicator);
-			waitForElementByElement(appTermsConfirmButton);
-			appTermsConfirmButton.click();
-			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
-			// Switch back to original browser (first window)
-			driver.switchTo().window(winHandleBefore);
-		} else {
-			PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies allready accepted", true);
-		}
-	}
+    if (handles.size() > 1) {
+      for (String winHandle : handles) {
+        //Switch to new window opened
+        driver.switchTo().window(winHandle);
+      }
+      waitForElementByElement(appTermsConfirmButton);
+      appTermsConfirmButton.click();
+      PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
+      waitForElementByElement(postingPolicyWindowIndicator);
+      waitForElementByElement(appTermsConfirmButton);
+      appTermsConfirmButton.click();
+      PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
+      // Switch back to original browser (first window)
+      driver.switchTo().window(winHandleBefore);
+    } else {
+      PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies allready accepted", true);
+    }
+  }
 
-	public void typeUserName(String userName) {
-		waitForElementByElement(usernameField);
-		usernameField.sendKeys(userName);
-		PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
-	}
+  public void typeUserName(String userName) {
+    waitForElementByElement(usernameField);
+    usernameField.sendKeys(userName);
+    PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
+  }
 
-	public void typePassword(String password) {
-		waitForElementByElement(passwordField);
-		passwordField.sendKeys(password);
-		PageObjectLogging.log("typePassword", "password typed into the field", true);
-	}
+  public void typePassword(String password) {
+    waitForElementByElement(passwordField);
+    passwordField.sendKeys(password);
+    PageObjectLogging.log("typePassword", "password typed into the field", true);
+  }
 
-	public void createAccount() {
-		waitForElementByElement(createAccountButton);
-		createAccountButton.click();
-		PageObjectLogging.log("createAccount", "Create account button clicked", true);
-	}
+  public void createAccount() {
+    waitForElementByElement(createAccountButton);
+    createAccountButton.click();
+    PageObjectLogging.log("createAccount", "Create account button clicked", true);
+  }
 
 }

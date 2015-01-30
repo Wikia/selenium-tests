@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.testng.annotations.Test;
 
 /**
@@ -19,34 +20,38 @@ import org.testng.annotations.Test;
  */
 public class VetArticleCommentsTests extends NewTestTemplate {
 
-	Credentials credentials = config.getCredentials();
+  Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
-	public void VetArticleComments_001_Provider() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		MiniEditorComponentObject editor = article.triggerCommentArea();
-		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
-		vetOptions.setCaption(PageContent.CAPTION);
-		vetOptions.submit();
-		article.submitComment();
-		article.verifyCommentVideo(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
-	}
+  @Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
+  public void VetArticleComments_001_Provider_QAART_509() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    MiniEditorComponentObject editor = article.triggerCommentArea();
+    VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
+    VetOptionsComponentObject
+        vetOptions =
+        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
+    vetOptions.setCaption(PageContent.CAPTION);
+    vetOptions.submit();
+    article.submitComment();
+    article.verifyCommentVideo(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
+  }
 
-	@Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})
-	public void VetArticleComments_002_Library() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		MiniEditorComponentObject editor = article.triggerCommentArea();
-		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
-		vetOptions.setCaption(PageContent.CAPTION);
-		String desiredVideoName = vetOptions.getVideoName();
-		vetOptions.submit();
-		article.submitComment();
-		article.verifyCommentVideo(desiredVideoName);
-	}
+  @Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})
+  public void VetArticleComments_002_Library() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    MiniEditorComponentObject editor = article.triggerCommentArea();
+    VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
+    VetOptionsComponentObject
+        vetOptions =
+        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+    vetOptions.setCaption(PageContent.CAPTION);
+    String desiredVideoName = vetOptions.getVideoName();
+    vetOptions.submit();
+    article.submitComment();
+    article.verifyCommentVideo(desiredVideoName);
+  }
 }

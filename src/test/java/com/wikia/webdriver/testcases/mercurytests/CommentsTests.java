@@ -10,48 +10,51 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Mobile Web
  */
 
 public class CommentsTests extends NewTestTemplate {
 
-	Credentials credentials = config.getCredentials();
+  Credentials credentials = config.getCredentials();
 
-	@BeforeMethod(alwaysRun = true)
-	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, wikiURL);
-	}
+  @BeforeMethod(alwaysRun = true)
+  public void optInMercury() {
+    MercuryContent.turnOnMercurySkin(driver, wikiURL);
+  }
 
-	@Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})
-	public void MercuryCommentsTests_001_ClickingCommentsWillUncollapseComments() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-		article.clickCommentsHeader();
-		article.verifyCommentsAreUncollapsed();
-	}
+  //CT01
+  @Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_001_ClickingCommentsWillUncollapseComments() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject
+        article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyCommentsAreUncollapsed();
+  }
 
-	@Test(groups = {"MercuryCommentsTest_002", "MercuryCommentsTests", "Mercury"})
-	public void MercuryCommentsTests_002_CheckCommentElements() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-		article.clickCommentsHeader();
-		article.verifyCommentsElements();
-	}
+  //CT04
+  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_004_ClickViewReplyWillExpandReplies() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject
+        article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.clickViewReplies();
+    article.verifyRepliesAreExpanded();
+  }
 
-	@Test(groups = {"MercuryCommentsTest_003", "MercuryCommentsTests", "Mercury"})
-	public void MercuryCommentsTests_003_ClickViewReplyWillExpandReplies() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-		article.clickCommentsHeader();
-		article.clickViewReplies();
-		article.verifyRepliesAreExpanded();
-	}
+  //CT05
+  @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_005_CheckCommentElements() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject
+        article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    article.clickCommentsHeader();
+    article.verifyCommentsElements();
+  }
 
-	@Test(enabled = false, groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
-	public void MercuryCommentsTests_004_VerifyCommentsCounter() {
-		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-		article.clickCommentsHeader();
-	}
 }

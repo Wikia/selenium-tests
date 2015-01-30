@@ -11,5 +11,6 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
 public @interface NetworkTrafficDump {
-	boolean networkTrafficDump() default true;
+
+  boolean networkTrafficDump() default true;
 }

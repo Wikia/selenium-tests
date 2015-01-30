@@ -14,80 +14,80 @@ import java.util.Map;
 
 public class ManualConfiguration extends AbstractConfiguration {
 
-	private Map<String, String> config;
+  private Map<String, String> config;
 
-	public ManualConfiguration() {
-		Yaml yaml = new Yaml();
-		InputStream input = null;
-		try {
-			input = new FileInputStream(new File("config.yml"));
-		} catch (FileNotFoundException ex) {
-			try {
-				input = new FileInputStream(new File("config_sample.yml"));
-			} catch (FileNotFoundException ex2) {
-				System.out.println("CAN'T LOCATE CONFIG FILE");
-			}
-		}
-		config = (Map<String, String>) yaml.load(input);
-	}
+  public ManualConfiguration() {
+    Yaml yaml = new Yaml();
+    InputStream input = null;
+    try {
+      input = new FileInputStream(new File("config.yml"));
+    } catch (FileNotFoundException ex) {
+      try {
+        input = new FileInputStream(new File("config_sample.yml"));
+      } catch (FileNotFoundException ex2) {
+        System.out.println("CAN'T LOCATE CONFIG FILE");
+      }
+    }
+    config = (Map<String, String>) yaml.load(input);
+  }
 
-	@Override
-	public String getBrowser() {
-		return config.get("browser");
-	}
+  @Override
+  public String getBrowser() {
+    return config.get("browser");
+  }
 
-	@Override
-	public String getEnv() {
-		return config.get("env");
-	}
+  @Override
+  public String getEnv() {
+    return config.get("env");
+  }
 
-	@Override
-	public String getWikiName() {
-		return config.get("wikiName");
-	}
+  @Override
+  public String getWikiName() {
+    return config.get("wikiName");
+  }
 
-	@Override
-	public File getCaptchaFile() {
-		return new File(config.get("captchaPath"));
-	}
+  @Override
+  public File getCaptchaFile() {
+    return new File(config.get("captchaPath"));
+  }
 
-	@Override
-	public String getPlatformVersion() {
-		return config.get("platform-version");
-	}
+  @Override
+  public String getPlatformVersion() {
+    return config.get("platform-version");
+  }
 
-	@Override
-	public String getPlatform() {
-		return config.get("platform");
-	}
+  @Override
+  public String getPlatform() {
+    return config.get("platform");
+  }
 
-	@Override
-	public String getDeviceId() {
-		return config.get("device-id");
-	}
+  @Override
+  public String getDeviceId() {
+    return config.get("device-id");
+  }
 
-	@Override
-	public String geMobileConfig() {
-		return config.get("mobile-config");
-	}
+  @Override
+  public String geMobileConfig() {
+    return config.get("mobile-config");
+  }
 
-	@Override
-	public String getCredentialsFilePath() {
-		return config.get("credentialsPath");
-	}
+  @Override
+  public String getCredentialsFilePath() {
+    return config.get("credentialsPath");
+  }
 
-	@Override
-	public String getQS() {
-		return config.get("qs");
-	}
+  @Override
+  public String getQS() {
+    return config.get("qs");
+  }
 
-	@Override
-	public String getAppiumIp() {
-		return config.get("appium-ip");
-	}
+  @Override
+  public String getAppiumIp() {
+    return config.get("appium-ip");
+  }
 
-	@Override
-	public String getDeviceName() {
-		return config.get("deviceName");
-	}
+  @Override
+  public String getDeviceName() {
+    return config.get("deviceName");
+  }
 }

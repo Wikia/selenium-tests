@@ -7,16 +7,16 @@ import org.testng.annotations.DataProvider;
  */
 public class HubsDataProvider {
 
-	private HubsDataProvider() {
+  private HubsDataProvider() {
 
-	}
+  }
 
-	@DataProvider
-	public static final Object[][] provideHubDBName() {
-		return new Object[][]{
-			{"gameshub"},
-			{"movieshub"},
-			{"lifestylehub"}
-		};
-	}
+  @DataProvider
+  public static final Object[][] provideHubDBName() {
+    return new Object[][]{
+        {"gameshub"},
+        {"movieshub"},
+        {"lifestylehub"}
+    };
+  }
 }
