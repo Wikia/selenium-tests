@@ -147,7 +147,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
 
   public void verifyClosingNav(PerformTouchAction touchAction) {
     waitForElementVisibleByElement(overlay);
-    touchAction.tapOnPointXY(90, 50, 50, 4000);
+    touchAction.tapOnPointXY(90, 50, 500, 4000);
     if (overlay.getCssValue("visibility").equals("hidden")) {
       PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true);
     } else {

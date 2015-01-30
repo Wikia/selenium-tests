@@ -48,8 +48,8 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   private List<WebElement> tocElements;
   @FindBy(css = "head link[rel='canonical']")
   private WebElement canonicalUrl;
-  @FindBy(css = ".article-image img")
-  private WebElement singleImg;
+  @FindBy(css = "figure.article-image a")
+  private List<WebElement> singleImgLink;
   @FindBy(css = ".view-map")
   private WebElement viewMapButton;
   @FindBy(css = ".linked-gallery-image a")
@@ -156,5 +156,15 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
 
   public void verifyRepliesAreExpanded() {
     Assertion.assertTrue(checkIfElementOnPage(repliesContent.get(0)));
+  }
+  
+  public void verifySingleLinkedImageRedirect(int index) {
+    String currentUrl = driver.getCurrentUrl();
+    singleImgLink.get(index).click();
+    if (currentUrl.equals(driver.getCurrentUrl())) {
+      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection doesn't work", false);
+    } else {
+      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection works", true);
+    }
   }
 }

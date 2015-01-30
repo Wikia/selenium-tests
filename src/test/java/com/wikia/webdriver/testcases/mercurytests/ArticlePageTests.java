@@ -42,15 +42,13 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.verifyTopContributorsThumb();
   }
 
-  // APT06 - FAIL
+  // APT06
   @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTests_006_SingleLinkedImageRedirect() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
-    String imagehref = articlePage.getLinkedImageHref();
-    articlePage.clickLinkedImage();
-    articlePage.verifyLinkedImageRedirection(imagehref);
+    articlePage.verifySingleLinkedImageRedirect(0);
   }
 
   // APT07

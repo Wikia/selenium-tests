@@ -17,6 +17,7 @@ public class SEOTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    wikiURL = urlBuilder.getUrlForWiki("muppet");
     MercuryContent.turnOnMercurySkin(driver, wikiURL);
   }
 
@@ -82,7 +83,7 @@ public class SEOTests extends NewTestTemplate {
     openGraph.verifyOgUrlTag();
   }
 
-  // SEOT06 - FAIL
+  // SEOT06
   @Test(groups = {"MercurySEOTest_006", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_006_CheckImageTag() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
