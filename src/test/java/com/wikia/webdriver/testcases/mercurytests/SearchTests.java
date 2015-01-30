@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,12 +22,21 @@ public class SearchTests extends NewTestTemplate {
     MercuryContent.turnOnMercurySkin(driver, wikiURL);
   }
 
-  //ST02
+  // ST01
+  @Test(groups = {"MercurySearchTests_001", "MercurySearchTests", "Mercury"})
+  public void MercurySearchTests_001_ClickOnSearchWillExpandWindow() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
+    searchObject.verifyClickOnSearchWillExpandWindow();
+  }
+
+  // ST02
   @Test(groups = {"MercurySearchTests_002", "MercurySearchTests", "Mercury"})
   public void MercurySearchTests_002_SearchAutosuggestionsAppear() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject
-        article =
+    MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
     searchObject.clickSearchField();
@@ -36,12 +44,11 @@ public class SearchTests extends NewTestTemplate {
     searchObject.verifySearchSuggestionsWereVisible();
   }
 
-  //ST03
+  // ST03
   @Test(groups = {"MercurySearchTests_003", "MercurySearchTests", "Mercury"})
   public void MercurySearchTests_003_TappingCancelWillDisplayNavBarMenu() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject
-        article =
+    MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
     searchObject.clickSearchField();
@@ -50,36 +57,33 @@ public class SearchTests extends NewTestTemplate {
     searchObject.verifyMenuView();
   }
 
-  //ST04
+  // ST04
   @Test(groups = {"MercurySearchTests_004", "MercurySearchTests", "Mercury"})
   public void MercurySearchTests_004_ClickOnSearchResultWillRedirectUser() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject
-        article =
+    MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
     searchObject.clickSearchField();
     searchObject.verifySearchView();
     searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS, 3);
     searchObject.verifySearchSuggestionsWereVisible();
-    String
-        redirection =
+    String redirection =
         searchObject.getSearchResultHref(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
     base = searchObject.clickSearchSuggestion(MercuryContent.MERCURY_SEARCH_CLICK_INDEX);
     base.waitForStringInURL(redirection);
   }
 
-  //ST05 - FAIL
+  // ST05
   @Test(groups = {"MercurySearchTests_005", "MercurySearchTests", "Mercury"})
   public void MercurySearchTests_005_SearchSuggestionsShouldNotBeCalled() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject
-        article =
+    MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     SearchNavSideMenuComponentObject searchObject = article.clickSearchButton();
     searchObject.clickSearchField();
     searchObject.verifySearchView();
     searchObject.typeInSearchField(MercuryContent.MERCURY_SEARCH_PASS, 2);
-    searchObject.verifySearchNotMatch();
+    searchObject.verifySearchNoResult();
   }
 }
