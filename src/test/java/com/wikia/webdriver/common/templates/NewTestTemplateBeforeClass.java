@@ -5,19 +5,19 @@ import org.testng.annotations.BeforeClass;
 
 public class NewTestTemplateBeforeClass extends NewTestTemplateCore {
 
-	public NewTestTemplateBeforeClass() {
-		super();
-	}
+  public NewTestTemplateBeforeClass() {
+    super();
+  }
 
-	@BeforeClass(alwaysRun = true)
-	public void start() {
-		prepareURLs();
-		startBrowser();
-		logOut();
-	}
+  @BeforeClass(alwaysRun = true)
+  public void start() {
+    prepareURLs();
+    startBrowser();
+    logOut();
+  }
 
-	@AfterClass(alwaysRun = true)
-	public void stop() {
-		stopBrowser();
-	}
+  @AfterClass(alwaysRun = true)
+  public void stop() {
+    stopBrowser();
+  }
 }

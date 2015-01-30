@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class SpecialUnusedFilesPageObject extends GalleryBox {
 
-	public SpecialUnusedFilesPageObject(WebDriver driver) {
-		super(driver);
-	}
+  public SpecialUnusedFilesPageObject(WebDriver driver) {
+    super(driver);
+  }
 }

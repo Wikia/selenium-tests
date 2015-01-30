@@ -1,15 +1,9 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
-import io.appium.java_client.android.AndroidDriver;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,9 +21,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
+import io.appium.java_client.android.AndroidDriver;
 
 
 /**
@@ -37,276 +37,282 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  */
 public class NewDriverProvider {
 
-	private static EventFiringWebDriver driver;
-	private static EventFiringWebDriver driverFF;
-	private static String browserName;
-	private static DesiredCapabilities caps = new DesiredCapabilities();
-	private static FirefoxProfile firefoxProfile = new FirefoxProfile();
-	private static ChromeOptions chromeOptions = new ChromeOptions();
-	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
-	private static boolean unstablePageLoadStrategy = false;
-	private static AndroidDriver mobileDriver;
+  private static EventFiringWebDriver driver;
+  private static EventFiringWebDriver driverFF;
+  private static String browserName;
+  private static DesiredCapabilities caps = new DesiredCapabilities();
+  private static FirefoxProfile firefoxProfile = new FirefoxProfile();
+  private static ChromeOptions chromeOptions = new ChromeOptions();
+  private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
+  private static boolean unstablePageLoadStrategy = false;
+  private static AndroidDriver mobileDriver;
 
-	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
-		browserName = browser;
+  public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
+    browserName = browser;
 
-		//If browser equals IE set driver property as IEWebDriver instance
-		if ("IE".equals(browserName)) {
-			driver = getIEInstance();
+    //If browser equals IE set driver property as IEWebDriver instance
+    if ("IE".equals(browserName)) {
+      driver = getIEInstance();
 
-			//If browser contains FF set driver property as FFWebDriver instance
-		} else if ("FF".equals(browserName)) {
-			driver = getFFInstance();
+      //If browser contains FF set driver property as FFWebDriver instance
+    } else if ("FF".equals(browserName)) {
+      driver = getFFInstance();
 
-			//If browser equals CHROME set driver property as ChromeWebDriver instance
-		} else if (browserName.contains("CHROME")) {
-			driver = getChromeInstance();
+      //If browser equals CHROME set driver property as ChromeWebDriver instance
+    } else if (browserName.contains("CHROME")) {
+      driver = getChromeInstance();
 
-			//If browser equals SAFARI set driver property as SafariWebDriver instance
-		} else if ("SAFARI".equals(browserName)) {
-			driver = getSafariInstance();
+      //If browser equals SAFARI set driver property as SafariWebDriver instance
+    } else if ("SAFARI".equals(browserName)) {
+      driver = getSafariInstance();
 
-		} else if ("HTMLUNIT".equals(browserName)) {
-			driver = new EventFiringWebDriver(new HtmlUnitDriver());
-		} else if ("GHOST".equals(browserName)) {
-			driver = getPhantomJSInstance();
-		} else if (browserName.equals("ANDROID")){
-			driver = getAndroidInstance();
-		}else {
-			throw new RuntimeException("Provided driver is not supported.");
-		}
+    } else if ("HTMLUNIT".equals(browserName)) {
+      driver = new EventFiringWebDriver(new HtmlUnitDriver());
+    } else if ("GHOST".equals(browserName)) {
+      driver = getPhantomJSInstance();
+    } else if (browserName.equals("ANDROID")) {
+      driver = getAndroidInstance();
+    } else {
+      throw new RuntimeException("Provided driver is not supported.");
+    }
 
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		return driver;
-	}
+    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    return driver;
+  }
 
-	public static void setBrowserUserAgent(String browser, String userAgent) {
-		switch (browser.toUpperCase()) {
-			case "FF":
-				setFFUserAgent(userAgent);
-				break;
-			case "CHROME":
-				setChromeUserAgent(userAgent);
-				break;
-			default:
-				throw new RuntimeException(
-					"Wrong browser provided. Browser " + browser + " not known"
-				);
-		}
-	}
+  public static void setBrowserUserAgent(String browser, String userAgent) {
+    switch (browser.toUpperCase()) {
+      case "FF":
+        setFFUserAgent(userAgent);
+        break;
+      case "CHROME":
+        setChromeUserAgent(userAgent);
+        break;
+      default:
+        throw new RuntimeException(
+            "Wrong browser provided. Browser " + browser + " not known"
+        );
+    }
+  }
 
-	public static WebDriver getWebDriver() {
-		return driver;
-	}
+  public static WebDriver getWebDriver() {
+    return driver;
+  }
 
-	public static WebDriver getWebDriverFirefox() {
-		return driverFF;
-	}
+  public static WebDriver getWebDriverFirefox() {
+    return driverFF;
+  }
 
-	private static EventFiringWebDriver getIEInstance() {
-		File file = new File(
-			"." + File.separator
-				+ "src" + File.separator
-				+ "test" + File.separator
-				+ "resources" + File.separator
-				+ "IEDriver" + File.separator
-				+ "IEDriverServer.exe"
-		);
-		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		return new EventFiringWebDriver(new InternetExplorerDriver(caps));
-	}
+  private static EventFiringWebDriver getIEInstance() {
+    File file = new File(
+        "." + File.separator
+        + "src" + File.separator
+        + "test" + File.separator
+        + "resources" + File.separator
+        + "IEDriver" + File.separator
+        + "IEDriverServer.exe"
+    );
+    System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+    return new EventFiringWebDriver(new InternetExplorerDriver(caps));
+  }
 
-	private static EventFiringWebDriver getAndroidInstance(){
-		DesiredCapabilities destCaps = new DesiredCapabilities();
-		destCaps.setCapability("deviceName", ConfigurationFactory.getConfig().getDeviceName().toString());
-		URL url = null;
-		try {
-			url = new URL("http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
-		} catch (MalformedURLException e) {
-			PageObjectLogging.log("getAndroindInstance", e.getMessage(), false);
-		}
-		mobileDriver = new AndroidDriver(url, destCaps);
+  private static EventFiringWebDriver getAndroidInstance() {
+    DesiredCapabilities destCaps = new DesiredCapabilities();
+    destCaps.setCapability("deviceName",
+                           ConfigurationFactory.getConfig().getDeviceName().toString());
+    URL url = null;
+    try {
+      url =
+          new URL(
+              "http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
+    } catch (MalformedURLException e) {
+      PageObjectLogging.log("getAndroindInstance", e.getMessage(), false);
+    }
+    mobileDriver = new AndroidDriver(url, destCaps);
 
-		return new EventFiringWebDriver(mobileDriver);
-	}
+    return new EventFiringWebDriver(mobileDriver);
+  }
 
-	private static EventFiringWebDriver getFFInstance() {
-		//Windows 8 requires to set webdriver.firefox.bin system variable
-		//to path where executive file of FF is placed
-		if ("WINDOWS 8".equals(System.getProperty("os.name").toUpperCase())) {
-			System.setProperty(
-				"webdriver.firefox.bin",
-				"c:" + File.separator
-					+ "Program Files (x86)" + File.separator
-					+ "Mozilla Firefox" + File.separator
-					+ "Firefox.exe"
-			);
-		}
+  private static EventFiringWebDriver getFFInstance() {
+    //Windows 8 requires to set webdriver.firefox.bin system variable
+    //to path where executive file of FF is placed
+    if ("WINDOWS 8".equals(System.getProperty("os.name").toUpperCase())) {
+      System.setProperty(
+          "webdriver.firefox.bin",
+          "c:" + File.separator
+          + "Program Files (x86)" + File.separator
+          + "Mozilla Firefox" + File.separator
+          + "Firefox.exe"
+      );
+    }
 
-		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
-		if ("LINUX".equals(System.getProperty("os.name").toUpperCase())) {
-			File homePath = new File(System.getenv("HOME") + File.separator);
-			File mozillaPath = new File(homePath + File.separator + ".mozilla");
-			File tmpFile;
-			if (mozillaPath.exists()) {
-				try {
-					tmpFile = File.createTempFile("webdriver", null, mozillaPath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
-				}
-			} else {
-				try {
-					tmpFile = File.createTempFile("webdriver", null, homePath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
-				}
-			}
-			tmpFile.delete();
-		}
+    //Check if user who is running tests have write access in ~/.mozilla dir and home dir
+    if ("LINUX".equals(System.getProperty("os.name").toUpperCase())) {
+      File homePath = new File(System.getenv("HOME") + File.separator);
+      File mozillaPath = new File(homePath + File.separator + ".mozilla");
+      File tmpFile;
+      if (mozillaPath.exists()) {
+        try {
+          tmpFile = File.createTempFile("webdriver", null, mozillaPath);
+        } catch (IOException ex) {
+          throw new RuntimeException(
+              "Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
+        }
+      } else {
+        try {
+          tmpFile = File.createTempFile("webdriver", null, homePath);
+        } catch (IOException ex) {
+          throw new RuntimeException(
+              "Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
+        }
+      }
+      tmpFile.delete();
+    }
 
-		//If browserName contains CONSOLE activate JSErrorConsole
-		if (browserName.contains("CONSOLE")) {
-			try {
-				File jsErr = new File(
-					"." + File.separator
-						+ "src" + File.separator
-						+ "test" + File.separator
-						+ "resources" + File.separator
-						+ "Firebug" + File.separator
-						+ "JSErrorCollector.xpi"
-				);
-				firefoxProfile.addExtension(jsErr);
-				//TODO!
-				Global.JS_ERROR_ENABLED = true;
-			} catch (FileNotFoundException e) {
-				System.out.println("JS extension file doesn't exist in provided location");
-			} catch (IOException e) {
-				System.out.println("Error with adding firefox extension");
-			}
-		}
+    //If browserName contains CONSOLE activate JSErrorConsole
+    if (browserName.contains("CONSOLE")) {
+      try {
+        File jsErr = new File(
+            "." + File.separator
+            + "src" + File.separator
+            + "test" + File.separator
+            + "resources" + File.separator
+            + "Firebug" + File.separator
+            + "JSErrorCollector.xpi"
+        );
+        firefoxProfile.addExtension(jsErr);
+        //TODO!
+        Global.JS_ERROR_ENABLED = true;
+      } catch (FileNotFoundException e) {
+        System.out.println("JS extension file doesn't exist in provided location");
+      } catch (IOException e) {
+        System.out.println("Error with adding firefox extension");
+      }
+    }
 
-		if (unstablePageLoadStrategy) {
-			firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
-		}
+    if (unstablePageLoadStrategy) {
+      firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
+    }
 
-		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+    caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
 
-		//Adding console logging for FF browser
-		setBrowserLogging(Level.SEVERE);
+    //Adding console logging for FF browser
+    setBrowserLogging(Level.SEVERE);
 
-		return new EventFiringWebDriver(new FirefoxDriver(caps));
-	}
+    return new EventFiringWebDriver(new FirefoxDriver(caps));
+  }
 
-	private static void setFFUserAgent(String userAgent) {
-		firefoxProfile.setPreference(
-			"general.useragent.override",
-			userAgentRegistry.getUserAgent(userAgent)
-		);
-	}
+  private static void setFFUserAgent(String userAgent) {
+    firefoxProfile.setPreference(
+        "general.useragent.override",
+        userAgentRegistry.getUserAgent(userAgent)
+    );
+  }
 
-	private static EventFiringWebDriver getChromeInstance() {
-		String chromeBinaryPath = "";
-		String osName = System.getProperty("os.name").toUpperCase();
+  private static EventFiringWebDriver getChromeInstance() {
+    String chromeBinaryPath = "";
+    String osName = System.getProperty("os.name").toUpperCase();
 
-		if (osName.contains("WINDOWS")) {
-			chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
-		}else if (osName.contains("MAC")) {
-			chromeBinaryPath = "/chromedriver_mac32/chromedriver";
+    if (osName.contains("WINDOWS")) {
+      chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
+    } else if (osName.contains("MAC")) {
+      chromeBinaryPath = "/chromedriver_mac32/chromedriver";
 
-			File chromedriver  = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath )
-				.getPath());
+      File chromedriver = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath)
+                                       .getPath());
 
-			//set application user permissions to 455
-			chromedriver.setExecutable(true);
-		}else if (osName.contains("LINUX")) {
-			chromeBinaryPath ="/chromedriver_linux64/chromedriver";
+      //set application user permissions to 455
+      chromedriver.setExecutable(true);
+    } else if (osName.contains("LINUX")) {
+      chromeBinaryPath = "/chromedriver_linux64/chromedriver";
 
-			File chromedriver  = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath )
-				.getPath());
+      File chromedriver = new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath)
+                                       .getPath());
 
-			//set application user permissions to 455
-			chromedriver.setExecutable(true);
-		}
+      //set application user permissions to 455
+      chromedriver.setExecutable(true);
+    }
 
-		System.setProperty("webdriver.chrome.driver",
-			new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath ).getPath()).getPath());
+    System.setProperty("webdriver.chrome.driver",
+                       new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath)
+                                    .getPath()).getPath());
 
-		//TODO change mobile tests to use @UserAgent annotation
-		if ("CHROMEMOBILE".equals(browserName)) {
-			chromeOptions.addArguments(
-				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone")
-			);
-		}
-		if ("CHROMEMOBILEMERCURY".equals(browserName)) {
-			chromeOptions.addArguments(
-				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
-			);
-		}
-		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+    //TODO change mobile tests to use @UserAgent annotation
+    if ("CHROMEMOBILE".equals(browserName)) {
+      chromeOptions.addArguments(
+          "--user-agent=" + userAgentRegistry.getUserAgent("iPhone")
+      );
+    }
+    if ("CHROMEMOBILEMERCURY".equals(browserName)) {
+      chromeOptions.addArguments(
+          "--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
+      );
+    }
+    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
-		setBrowserLogging(Level.SEVERE);
+    setBrowserLogging(Level.SEVERE);
 
-		return new EventFiringWebDriver(new ChromeDriver(caps));
-	}
+    return new EventFiringWebDriver(new ChromeDriver(caps));
+  }
 
-	private static void setChromeUserAgent(String userAgent) {
-		chromeOptions.addArguments(
-			"--user-agent="
-				+ userAgentRegistry.getUserAgent(userAgent)
-		);
-		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-	}
+  private static void setChromeUserAgent(String userAgent) {
+    chromeOptions.addArguments(
+        "--user-agent="
+        + userAgentRegistry.getUserAgent(userAgent)
+    );
+    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+  }
 
-	private static EventFiringWebDriver getPhantomJSInstance() {
-		String phantomJSBinaryName;
-		String OSName = System.getProperty("os.name").toUpperCase();
+  private static EventFiringWebDriver getPhantomJSInstance() {
+    String phantomJSBinaryName;
+    String OSName = System.getProperty("os.name").toUpperCase();
 
-		if (OSName.contains("WINDOWS")) {
-			phantomJSBinaryName = "phantomjs.exe";
+    if (OSName.contains("WINDOWS")) {
+      phantomJSBinaryName = "phantomjs.exe";
 
-			File phantomJSBinary = new File(
-				"." + File.separator
-					+ "src" + File.separator
-					+ "test" + File.separator
-					+ "resources" + File.separator
-					+ "PhantomJS" + File.separator
-					+ phantomJSBinaryName
-			);
+      File phantomJSBinary = new File(
+          "." + File.separator
+          + "src" + File.separator
+          + "test" + File.separator
+          + "resources" + File.separator
+          + "PhantomJS" + File.separator
+          + phantomJSBinaryName
+      );
 
-			caps.setCapability(
-				PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-				phantomJSBinary.getAbsolutePath()
-			);
-		}
+      caps.setCapability(
+          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+          phantomJSBinary.getAbsolutePath()
+      );
+    }
 
-		return new EventFiringWebDriver(new PhantomJSDriver(caps));
-	}
+    return new EventFiringWebDriver(new PhantomJSDriver(caps));
+  }
 
-	private static EventFiringWebDriver getSafariInstance() {
-		/*
+  private static EventFiringWebDriver getSafariInstance() {
+                /*
 		 * clone following repository
 		 * https://github.com/senthilnayagam/safari-webdriver.git
 		 * webdriver.safari.driver property should be set to path to the SafariDriver.safariextz file
 		 */
-		System.setProperty("webdriver.safari.driver", "");
-		return new EventFiringWebDriver(new SafariDriver());
-	}
+    System.setProperty("webdriver.safari.driver", "");
+    return new EventFiringWebDriver(new SafariDriver());
+  }
 
-	public static void setDriverCapabilities(DesiredCapabilities newCaps) {
-		caps = newCaps;
-	}
+  public static void setDriverCapabilities(DesiredCapabilities newCaps) {
+    caps = newCaps;
+  }
 
-	private static void setBrowserLogging(Level logLevel) {
-		LoggingPreferences loggingprefs = new LoggingPreferences();
-		loggingprefs.enable(LogType.BROWSER, logLevel);
-		caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
-	}
+  private static void setBrowserLogging(Level logLevel) {
+    LoggingPreferences loggingprefs = new LoggingPreferences();
+    loggingprefs.enable(LogType.BROWSER, logLevel);
+    caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+  }
 
-	public static void setUnstablePageLoadStrategy(boolean value) {
-		unstablePageLoadStrategy = value;
-	}
-	
-	public static AndroidDriver getMobileDriver() {
-		return mobileDriver;
-	}
+  public static void setUnstablePageLoadStrategy(boolean value) {
+    unstablePageLoadStrategy = value;
+  }
+
+  public static AndroidDriver getMobileDriver() {
+    return mobileDriver;
+  }
 }
