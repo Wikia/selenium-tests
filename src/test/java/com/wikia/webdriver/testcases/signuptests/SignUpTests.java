@@ -118,7 +118,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"}, invocationCount = 10)
+  @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup_CNW_QAART_513() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
