@@ -55,7 +55,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1C']";
+  private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
 
   // Elements
   @FindBy(css = AdsContent.WIKIA_BAR_SELECTOR)
