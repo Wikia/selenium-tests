@@ -15,8 +15,8 @@ public class TestIncontentBoxad extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "topIncontentBoxad",
-      groups = {"TestTopIncontentBoxad_GeoEdgeFree"}
+      dataProvider = "incontentBoxad",
+      groups = {"TestIncontentBoxad_GeoEdgeFree"}
   )
   public void TestTopIncontentBoxad_GeoEdgeFree(String wikiName, String article,
                                                 Dimension windowResolution) {
