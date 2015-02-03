@@ -19,7 +19,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#searchInput")
   protected WebElement searchInput;
-  @FindBy(css = ".search-submit")
+  @FindBy(css = "#search-v2-button")
   protected WebElement searchButton;
   @FindBy(css = ".Results")
   protected WebElement resultsContainer;
