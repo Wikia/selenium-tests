@@ -7,6 +7,10 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
+<<<<<<< HEAD
+=======
+
+>>>>>>> intra-wiki-search-fix
 import org.testng.annotations.Test;
 
 import java.util.List;
