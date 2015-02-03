@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestTopIncontentBoxad extends NewTestTemplate {
+public class TestIncontentBoxad extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -22,6 +22,6 @@ public class TestTopIncontentBoxad extends NewTestTemplate {
                                                 Dimension windowResolution) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-    wikiPage.checkTopIncontentBoxad();
+    wikiPage.checkIncontentBoxad();
   }
 }
