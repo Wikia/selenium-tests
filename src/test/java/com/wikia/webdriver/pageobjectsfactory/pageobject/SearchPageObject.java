@@ -85,7 +85,8 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void setSearchTab(SearchTab tab) {
-    driver.findElement(tab.getBy()).click();
+	  WebElement tabElem = driver.findElement(tab.getBy());
+	  scrollAndClick(tabElem);
   }
 
   public enum SearchTab {
