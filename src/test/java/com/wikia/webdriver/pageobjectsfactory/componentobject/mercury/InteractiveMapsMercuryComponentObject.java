@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
+import java.io.File;
+
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
@@ -14,7 +18,7 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   private WebElement mapFrame;
   @FindBy(css = "div[id='map']")
   private WebElement mapDiv;
-  @FindBy(css = ".lightbox-close-button")
+  @FindBy(css = ".lightbox-close-wrapper")
   private WebElement closeMapLightbox;
   @FindBy(css = ".lightbox-header-title")
   private WebElement mapTitle;
@@ -126,5 +130,28 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   public void verifyPinPopUpAppeared() {
     Assertion.assertTrue(checkIfElementOnPage(poiPopUp));
     PageObjectLogging.log("verifyPinPopUpAppeared", "Pin popup appeared after click", true, driver);
+  }
+  
+  public void verifyZoomButtons() {
+    String methodName = "verifyZoomButtons";
+    Shooter shooter = new Shooter();
+    ImageComparison ic = new ImageComparison();
+    File beforeZooming = shooter.capturePage(driver);
+    clickZoomOut();
+    waitMillisecons(5000, methodName);
+    File afterZoomOut = shooter.capturePage(driver);
+    clickZoomIn();
+    waitMillisecons(5000, methodName);
+    File afterZoomIn = shooter.capturePage(driver);
+    if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
+      PageObjectLogging.log(methodName, "Zoom out doesn't work", false);
+    } else {
+      PageObjectLogging.log(methodName, "Zoom out works", true);
+    }
+    if (ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
+      PageObjectLogging.log(methodName, "Zoom in works", true);
+    } else {
+      PageObjectLogging.log(methodName, "Zoom in doesn't work", false);
+    }
   }
 }

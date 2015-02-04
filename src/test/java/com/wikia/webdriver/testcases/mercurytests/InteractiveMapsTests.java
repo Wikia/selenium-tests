@@ -52,14 +52,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
     InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
     maps.verifyMapModalIsVisible();
-    String leaflet = maps.getMapLeafletSrc();
-    maps.clickZoomOut(6);
-    String newLeaflet = maps.getMapLeafletSrc();
-    maps.verifyMapZoomChangedView(leaflet, newLeaflet);
-    leaflet = maps.getMapLeafletSrc();
-    maps.clickZoomIn(3);
-    newLeaflet = maps.getMapLeafletSrc();
-    maps.verifyMapZoomChangedView(leaflet, newLeaflet);
+    maps.verifyZoomButtons();
   }
 
   // IMAPT05
