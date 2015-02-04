@@ -7,6 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class VideoUrlProvider {
 
+  private VideoUrlProvider() {
+
+  }
+
   @DataProvider
   private static final Object[][] videoUrl() {
     return new Object[][]{
@@ -56,5 +60,4 @@ public class VideoUrlProvider {
         },
     };
   }
-
 }

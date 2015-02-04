@@ -13,6 +13,10 @@ import org.testng.annotations.DataProvider;
  */
 public class CrossWikiSearchProvider {
 
+  private CrossWikiSearchProvider() {
+
+  }
+
   @DataProvider
   public static final Object[][] getExactMatchQueries() {
     return new Object[][]{

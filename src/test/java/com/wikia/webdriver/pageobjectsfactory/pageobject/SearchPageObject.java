@@ -19,7 +19,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#searchInput")
   protected WebElement searchInput;
-  @FindBy(css = ".search-submit")
+  @FindBy(css = "#search-v2-button")
   protected WebElement searchButton;
   @FindBy(css = ".Results")
   protected WebElement resultsContainer;
@@ -85,7 +85,8 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void setSearchTab(SearchTab tab) {
-    driver.findElement(tab.getBy()).click();
+	  WebElement tabElem = driver.findElement(tab.getBy());
+	  scrollAndClick(tabElem);
   }
 
   public enum SearchTab {

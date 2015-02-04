@@ -15,4 +15,8 @@ public class MobilePageContent {
   public static final String HISTORY_SUMMARY_TEXT = "(This is a sample summary text)";
   public static final String HISTORY_HEADER = "Revision history of";
   public static final String MOBILE_EDIT_TAG = "(Mobile)";
+
+  private MobilePageContent() {
+
+  }
 }

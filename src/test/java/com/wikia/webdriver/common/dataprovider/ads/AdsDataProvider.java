@@ -10,6 +10,10 @@ import java.util.Arrays;
  */
 public class AdsDataProvider {
 
+  private AdsDataProvider() {
+
+  }
+
   @DataProvider
   public static final Object[][] ooyalaAds() {
     return new Object[][]{

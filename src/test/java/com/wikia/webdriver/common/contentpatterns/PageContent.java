@@ -147,4 +147,8 @@ public class PageContent {
   public static final String WIKI_SIGN_UP_BIRTHMONTH = "11";
   public static final String WIKI_SIGN_UP_BIRTHYEAR = "1954";
   public static final int MIN_AGE = 12;
+
+  private PageContent() {
+
+  }
 }

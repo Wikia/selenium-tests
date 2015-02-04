@@ -182,4 +182,8 @@ public class URLsContent {
   //Wikis with smart banners
   public static final String SMART_BANNER_GTA = "gta";
   public static final String SMART_BANNER_GLEE = "glee";
+
+  private URLsContent() {
+
+  }
 }

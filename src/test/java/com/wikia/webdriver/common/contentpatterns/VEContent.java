@@ -24,4 +24,8 @@ public class VEContent {
   public static final String
       BOUNDING_SCRIPT =
       "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
+
+  private VEContent() {
+
+  }
 }
