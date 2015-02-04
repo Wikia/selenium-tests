@@ -8,10 +8,13 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 
+import org.codehaus.plexus.util.FileUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * @author Ludwik Kaźmierczak
@@ -57,8 +60,25 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
         currentFileCopyPath =
         ClassLoader.getSystemResource("Baseline/").getPath() + expectedFileName + "_current.png";
 
-    currentFile.renameTo(new File(currentFileCopyPath));
+    String baselineDirectory = ClassLoader.getSystemResource("Baseline/").getPath();
+    
+    // rename screenshooted file - handles file already exists situation
+    File newFile = new File(currentFile.getParent(), expectedFileName + "_current.png");
+    try {
+		Files.move(currentFile.toPath(), newFile.toPath());
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+    
+    // assign current file for the new path
     currentFile = new File(currentFileCopyPath);
+    
+    // move file to baseline directory
+    try {
+        FileUtils.copyFileToDirectory(currentFile.getAbsolutePath(), baselineDirectory);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
     File expectedFile = new File(expectedFilePath);
     try {
