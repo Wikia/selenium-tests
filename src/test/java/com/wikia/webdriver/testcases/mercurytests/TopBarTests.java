@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 /**
  * @ownership: Mobile Web
@@ -65,15 +64,14 @@ public class TopBarTests extends NewTestTemplate {
     nav.verifyBackLinkFunctionality(0);
   }
 
-  // TBT05 - Change js tap to touch tap
+  // TBT05
   @Test(groups = {"MercuryTopBarTests_005", "MercuryTopBarTests", "Mercury"})
   public void MercuryTopBarTests_005_TappingOutsideCloseNav() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAIN_ARTICLE);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
     SearchNavSideMenuComponentObject nav = article.clickSearchButton();
-    nav.verifyClosingNav(touchAction);
+    nav.verifyClosingNav();
   }
 
   // TBT06

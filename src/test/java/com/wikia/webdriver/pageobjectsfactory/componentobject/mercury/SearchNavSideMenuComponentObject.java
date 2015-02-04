@@ -3,8 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
-
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -145,14 +143,10 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
     PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
   }
 
-  public void verifyClosingNav(PerformTouchAction touchAction) {
+  public void verifyClosingNav() {
     waitForElementVisibleByElement(overlay);
-    touchAction.tapOnPointXY(90, 50, 500, 4000);
-    if (overlay.getCssValue("visibility").equals("hidden")) {
-      PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true);
-    } else {
-      PageObjectLogging.log("verifyClosingNav", "Nav menu is open", false);
-    }
+    tapOnElement(overlay);
+    PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true, driver);
   }
 
   public void verifyTextEllipsis(int anchorIndex) {

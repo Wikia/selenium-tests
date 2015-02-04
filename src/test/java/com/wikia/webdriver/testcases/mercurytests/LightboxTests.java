@@ -1,6 +1,11 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import io.appium.java_client.android.AndroidDriver;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+
+import org.openqa.selenium.remote.DriverCommand;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -107,6 +112,20 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyTappingOnImageEdge(touchAction, LightBoxMercuryComponentObject.EDGE_RIGHT);
   }
 
+  // MT07
+  @Test(groups = {"MercuryLightboxTests_007", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTests_007_BackButtonCloseLightbox() {
+    AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject article =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_TWO);
+    LightBoxMercuryComponentObject lightbox =
+        article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+    lightbox.verifyCurrentImageIsVisible();
+    mobileDriver.execute(DriverCommand.GO_BACK, null);
+    lightbox.verifyLightboxClosed();
+  }
+  
   // MT08
   @Test(groups = {"MercuryLightboxTests_008", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTests_008_MovingImageAfterZooming() {

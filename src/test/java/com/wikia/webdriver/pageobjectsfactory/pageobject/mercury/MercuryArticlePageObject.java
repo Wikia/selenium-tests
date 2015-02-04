@@ -7,6 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMe
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -71,6 +73,9 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   private WebElement commentChevron;
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
+
+  public static final String MEDIA_TYPE_VIDEO = "Video";
+  public static final String MEDIA_TYPE_IMAGE = "Image";
 
   public MercuryArticlePageObject(WebDriver driver) {
     super(driver);
@@ -176,118 +181,131 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   }
 
   public void verifySingleLinkedImageRedirect(int index) {
+    String methodName = "verifySingleLinkedImageRedirect";
     String currentUrl = driver.getCurrentUrl();
     singleImgLink.get(index).click();
     if (currentUrl.equals(driver.getCurrentUrl())) {
-      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection doesn't work", false);
+      PageObjectLogging.log(methodName, "Redirection doesn't work", false);
     } else {
-      PageObjectLogging.log("verifySingleLinkedImageRedirect", "Redirection works", true);
+      PageObjectLogging.log(methodName, "Redirection works", true);
     }
   }
 
   public void verify25CommentsPerPage() {
+    String methodName = "verify25CommentsPerPage";
     if (commentsList.size() == 25) {
-      PageObjectLogging.log("verify25CommentsPerPage", "There are 25 comments per comment page",
-          true);
+      PageObjectLogging.log(methodName, "There are 25 comments per comment page", true);
     } else {
-      PageObjectLogging.log("verify25CommentsPerPage", "There aren't 25 comments per comment page",
-          false);
+      PageObjectLogging.log(methodName, "There aren't 25 comments per comment page", false);
     }
   }
 
   public void verifyNextAndPreviousPageAreVisible() {
+    String methodName = "verifyNextAndPreviousPageAreVisible";
     int numberOfComments =
         Integer.parseInt(showCommentsButton.getText().substring(0,
             showCommentsButton.getText().indexOf(" ")));
     if (numberOfComments - commentsReplies.size() > 25) {
       if (nextCommentPageButton.isDisplayed()) {
-        PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-            "Next page button is displayed", true);
+        PageObjectLogging.log(methodName, "Next page button is displayed", true);
         nextCommentPageButton.click();
         if (previousCommentPageButton.isDisplayed()) {
-          PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-              "Previous page button is displayed", true);
+          PageObjectLogging.log(methodName, "Previous page button is displayed", true);
           previousCommentPageButton.click();
           if (previousCommentPageButton.isDisplayed()) {
-            PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-                "Previous page button is displayed", false);
+            PageObjectLogging.log(methodName, "Previous page button is displayed", false);
           } else {
-            PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-                "Previous page button isn't displayed", true);
+            PageObjectLogging.log(methodName, "Previous page button isn't displayed", true);
           }
         } else {
-          PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-              "Previous page button isn't displayed", false);
+          PageObjectLogging.log(methodName, "Previous page button isn't displayed", false);
         }
       } else {
-        PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-            "Next page button isn't displayed", false);
+        PageObjectLogging.log(methodName, "Next page button isn't displayed", false);
       }
     } else {
-      PageObjectLogging.log("verifyNextAndPreviousPageAreVisible",
-          "There are less than 25 comments on that page", false);
+      PageObjectLogging.log(methodName, "There are less than 25 comments on that page", false);
     }
   }
 
   public void verifyRepliesCounterIsCorrect(int index) {
+    String methodName = "verifyRepliesCounterIsCorrect";
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
     int numberOfReplies =
         Integer.parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
     if (numberOfReplies == commentsRepliesList.get(index).findElements(By.cssSelector("li")).size()) {
-      PageObjectLogging.log("verifyRepliesCounterIsCorrect", "Replies counter works", true);
+      PageObjectLogging.log(methodName, "Replies counter works", true);
     } else {
-      PageObjectLogging.log("verifyRepliesCounterIsCorrect", "Replies counter doesn't work", false);
+      PageObjectLogging.log(methodName, "Replies counter doesn't work", false);
     }
   }
-  
+
   public void verifyTapOnUserRedirectToUserPage(int index) {
+    String methodName = "verifyTapOnUserRedirectToUserPage";
     String userName = commentsUsernames.get(index).getText();
     commentsUsernames.get(index).click();
-    String subUrl = driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/") + 6, driver.getCurrentUrl().length());
+    String subUrl =
+        driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/") + 6,
+            driver.getCurrentUrl().length());
     if (subUrl.equals("User:" + userName)) {
-      PageObjectLogging.log("verifyTapOnUserRedirectToUserPage", "Redirect to user page works", true);
+      PageObjectLogging.log(methodName, "Redirect to user page works", true);
     } else {
-      PageObjectLogging.log("verifyTapOnUserRedirectToUserPage", "Redirect to user page doesn't work", false);
+      PageObjectLogging.log(methodName, "Redirect to user page doesn't work", false);
     }
   }
-  
+
   public void verifyCommentsCounterIsCorrect() {
+    String methodName = "verifyCommentsCounterIsCorrect";
     int numberOfComments =
-        Integer.parseInt(commentsHeader.getText().substring(0, commentsHeader.getText().indexOf(" ")));
+        Integer.parseInt(commentsHeader.getText().substring(0,
+            commentsHeader.getText().indexOf(" ")));
     while (nextCommentPageButton.isDisplayed()) {
       numberOfComments -= allComments.size();
       nextCommentPageButton.click();
     }
     numberOfComments -= allComments.size();
     if (numberOfComments == 0) {
-      PageObjectLogging.log("verifyCommentsCounterIsCorrect", "Comments counter works", true);
+      PageObjectLogging.log(methodName, "Comments counter works", true);
     } else {
-      PageObjectLogging.log("verifyCommentsCounterIsCorrect", "Comments counter doesn't work", false);
+      PageObjectLogging.log(methodName, "Comments counter doesn't work", false);
     }
   }
-  
-  public void verifyImagesAndVideosAreDisplayed() {
-    WebElement videoComment = allComments.get(1).findElement(By.cssSelector("figure.comment-video"));
-    if (videoComment.isDisplayed()) {
-      if (videoComment.findElement(By.cssSelector("img")).isDisplayed()) {
-        PageObjectLogging.log("verifyImagesAndVideosAreDisplayed", "Video thumbnail is displayed", true);
-        if (videoComment.findElement(By.cssSelector("a")).getAttribute("href").contains("/wiki/File:")) {
-          PageObjectLogging.log("verifyImagesAndVideosAreDisplayed", "Video anchor is displayed", true);
+
+  public void verifyMediaInComments(String mediaType, int index) {
+    WebElement mediaInComment;
+    String methodName = "verifyMediaInComments";
+    try {
+      if (mediaType.equals("Video")) {
+        mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
+      } else {
+        mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
+      }
+      if (mediaInComment.findElement(By.cssSelector("img")).isDisplayed()) {
+        PageObjectLogging.log(methodName, mediaType + " thumbnail is displayed", true);
+        if (mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
+            .contains("/wiki/File:")) {
+          PageObjectLogging.log(methodName, mediaType + " anchor is displayed", true);
         } else {
-          PageObjectLogging.log("verifyImagesAndVideosAreDisplayed", "Video anchor isn't displayed", false);
+          PageObjectLogging.log(methodName, mediaType + " anchor isn't displayed", false);
         }
       } else {
-        PageObjectLogging.log("verifyImagesAndVideosAreDisplayed", "Video thumbnail isn't displayed", false);
+        PageObjectLogging.log(methodName, mediaType + " thumbnail isn't displayed", false);
       }
-    } else {
-      PageObjectLogging.log("verifyImagesAndVideosAreDisplayed", "There is no video in that comment", false);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, "There is no " + mediaType + " in that comment", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
     }
-    //image extract method 
-    
   }
-  
+
   public void verifyChevronRotatesWhenTapped() {
-    System.out.println(commentChevron.getCssValue("transform"));
+    String methodName = "verifyChevronRotatesWhenTapped";
+    boolean collapsed = showCommentsButton.getAttribute("class").contains("collapsed");
+    clickCommentsHeader();
+    if (collapsed != showCommentsButton.getAttribute("class").contains("collapsed")) {
+      PageObjectLogging.log(methodName, "Chevron turned", true);
+    } else {
+      PageObjectLogging.log(methodName, "Chevron didn't turn", false);
+    }
   }
 }

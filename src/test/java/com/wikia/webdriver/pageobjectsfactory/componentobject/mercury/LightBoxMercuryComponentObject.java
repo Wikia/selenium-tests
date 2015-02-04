@@ -265,6 +265,5 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
       PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " works", true);
     }
   }
-
 }
 

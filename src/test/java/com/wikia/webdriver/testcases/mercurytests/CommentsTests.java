@@ -104,24 +104,23 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyTapOnUserRedirectToUserPage(0);
   }
   
-  // CT11 - Make sure media elements appear correctly within comments (videos and images)
+  // CT11
   @Test(groups = {"MercuryCommentsTests_011", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_011_ImagesAndVideosAreDisplayed() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     article.clickCommentsHeader();
-    article.verifyImagesAndVideosAreDisplayed();
+    article.verifyMediaInComments(MercuryArticlePageObject.MEDIA_TYPE_VIDEO, 1);
+    article.verifyMediaInComments(MercuryArticlePageObject.MEDIA_TYPE_IMAGE, 3);
   }
   
-  // CT12 - Verify chevron rotates when tapping on comments
+  // CT12
   @Test(groups = {"MercuryCommentsTests_012", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_012_ChevronRotatesWhenTapped() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
-    article.verifyChevronRotatesWhenTapped();
-    article.clickCommentsHeader();
     article.verifyChevronRotatesWhenTapped();
   }
 }
