@@ -151,8 +151,7 @@ public class VenusGlobalNavPageObject {
 
   public boolean isLocalSearchDisabled() {
     return
-        !ElementStateHelper.isElementVisible(searchSelect, driver) &&
-        ElementStateHelper.isElementVisible(inlineSearch, driver);
+        !ElementStateHelper.isElementVisible(searchSelect, driver);
   }
 
   private DropDownComponentObject getAccountNavigation() {
