@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.gson.Gson;
-
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -94,7 +92,6 @@ import org.openqa.selenium.support.PageFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,6 +108,8 @@ import javax.json.JsonReader;
 public class WikiBasePageObject extends BasePageObject {
 
   protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
+  private static final String
+      LOGGED_IN_USER_SELECTOR_VENUS = ".AccountNavigation a[href*=%userName%]";
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -194,7 +193,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
   private VenusGlobalNavPageObject venusGlobalNav;
@@ -614,7 +612,8 @@ public class WikiBasePageObject extends BasePageObject {
       //Venus
       driver.findElement(
           By.cssSelector(
-              loggedInUserSelectorVenus.replace("%userName%", userName)));// only for verification
+              LOGGED_IN_USER_SELECTOR_VENUS
+                  .replace("%userName%", userName)));// only for verification
     }
     PageObjectLogging.log(
         "verifyUserLoggedIn",
@@ -895,7 +894,7 @@ public class WikiBasePageObject extends BasePageObject {
 
       HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
       httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
-                                                  StandardCharsets.UTF_8));
+                                                   StandardCharsets.UTF_8));
 
       response = httpclient.execute(httpPost4);
 
