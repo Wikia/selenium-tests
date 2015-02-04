@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 public class TestHubLinksInGlobalNav extends NewTestTemplate {
 
   @Test(
-      groups = {"TestHubLinksInGlobalNav_001"}
+      groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"}
 
   )
   public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
