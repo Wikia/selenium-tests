@@ -19,6 +19,7 @@ public class AdTypeDataProvider {
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183292
         }
     };
   }
@@ -30,6 +31,7 @@ public class AdTypeDataProvider {
             "adtest", "SyntheticTests/Async/Hop",
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER", "MOBILE_IN_CONTENT"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183652
         }
     };
   }
@@ -41,6 +43,7 @@ public class AdTypeDataProvider {
             "adtest", "SyntheticTests/Async/Success/NoAd",
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98184132
         }
     };
   }
@@ -52,6 +55,20 @@ public class AdTypeDataProvider {
             "adtest", "SyntheticTests/Async/Hop/WithAd",
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183772
+        }
+    };
+  }
+
+  @DataProvider
+  public static final Object[][] asyncHopWithSpecialProvider() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Async/Hop/WithAd",
+            "wka.ent/_adtest//article",
+            "MOBILE_TOP_LEADERBOARD"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=298558332&lineItemId=98336052
         }
     };
   }
@@ -64,7 +81,9 @@ public class AdTypeDataProvider {
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183292
             "MOBILE_IN_CONTENT"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98333172
         }
     };
   }
@@ -76,6 +95,7 @@ public class AdTypeDataProvider {
             "adtest", "SyntheticTests/AdType/ForcedSuccess",
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98186892
         }
     };
   }
@@ -88,28 +108,7 @@ public class AdTypeDataProvider {
             "wka.ent/_adtest//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
-        }
-    };
-  }
-
-  @DataProvider
-  public static final Object[][] inspectIframeSpecialAdProvider() {
-    return new Object[][]{
-        {
-            "adtest", "SyntheticTests/CELTRA",
-            "wka.ent/_adtest//article",
-            "MOBILE_TOP_LEADERBOARD"
-        }
-    };
-  }
-
-  @DataProvider
-  public static final Object[][] asyncHopWithSpecialProvider() {
-    return new Object[][]{
-        {
-            "adtest", "SyntheticTests/Async/Hop/WithAd",
-            "wka.ent/_adtest//article",
-            "MOBILE_TOP_LEADERBOARD"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98187732
         }
     };
   }
