@@ -26,6 +26,7 @@ public class MercuryContent {
   public static final String MERCURY_GALLERY_TEST_TWO = "Mercury_Gallery_2";
   public static final String MERCURY_SINGLE_LINKED_IMAGE = "MercuryLinkedImages";
   public static final String MERCURY_IMAGE_CAPTION = "MercuryImagesCaption";
+  public static final String MERCURY_ARTICLE_WITHOUT_TOC = "MercuryTOCWithoutH2";
 
   //Index variables for Mercury
   public static final int MERCURY_GALLERY_IMAGE_INDEX = 0;
