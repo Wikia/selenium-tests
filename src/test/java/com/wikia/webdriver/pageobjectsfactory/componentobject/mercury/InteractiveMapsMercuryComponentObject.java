@@ -44,6 +44,7 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void clickCloseButton() {
+//    driver.switchTo().activeElement();
     waitForElementVisibleByElement(closeMapLightbox);
     closeMapLightbox.click();
     PageObjectLogging.log("clickCloseButton", "Close button was clicked", true);
@@ -102,22 +103,24 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void verifyMapModalIsNotVisible() {
+//    driver.switchTo().activeElement();
     Assertion.assertFalse(checkIfElementOnPage(lightbox));
   }
 
   public void verifyMapModalIsVisible() {
+//    driver.switchTo().frame(mapFrame);
     waitForElementByElement(lightbox);
     Assertion.assertTrue(checkIfElementOnPage(lightbox));
   }
 
   public void verifyMapTitleInHeader() {
-//    driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
     waitForElementVisibleByElement(mapTitle);
     Assertion.assertFalse(mapTitle.getText().isEmpty());
   }
 
   public void verifyMapIdInUrl() {
-//    driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
     Assertion.assertTrue(driver.getCurrentUrl().toString().contains("?map="));
   }
 
