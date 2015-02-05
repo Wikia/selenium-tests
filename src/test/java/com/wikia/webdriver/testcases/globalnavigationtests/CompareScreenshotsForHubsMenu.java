@@ -26,7 +26,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
    * Test is taking screenshots of of hubs menu in global navigation and comparing to the expected
    * designs from resources folder located in 'Baseline' folder
    */
-  @Test(groups = {"HubsMenu_001", "GlobalNav"})
+  @Test(groups = {"HubsMenu_001"})
   public void HubsMenu_001_compareScreenshotForHubsMenu() {
 
     HomePageObject homePage = new HomePageObject(driver);
@@ -56,30 +56,6 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
     String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
         .getPath();
 
-    String
-        currentFileCopyPath =
-        ClassLoader.getSystemResource("Baseline/").getPath() + expectedFileName + "_current.png";
-
-    String baselineDirectory = ClassLoader.getSystemResource("Baseline/").getPath();
-    
-    // rename screenshooted file - handles file already exists situation
-    File newFile = new File(currentFile.getParent(), expectedFileName + "_current.png");
-    try {
-		Files.move(currentFile.toPath(), newFile.toPath());
-	} catch (IOException e1) {
-		e1.printStackTrace();
-	}
-    
-    // assign current file for the new path
-    currentFile = new File(currentFileCopyPath);
-    
-    // move file to baseline directory
-    try {
-        FileUtils.copyFileToDirectory(currentFile.getAbsolutePath(), baselineDirectory);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
     File expectedFile = new File(expectedFilePath);
     try {
       Assertion
@@ -88,7 +64,8 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
     } catch (AssertionError e) {
       PageObjectLogging
           .log("Design is not as expected for: " + expectedFileName,
-               "Expected: " + expectedFilePath, false,
+               "Expected: " + expectedFilePath + 
+               ".  You can find the captured screenshot file here: "+currentFile.getAbsolutePath(), false,
                driver);
       return true;
     }
