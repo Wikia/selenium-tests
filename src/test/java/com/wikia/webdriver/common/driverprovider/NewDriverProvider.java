@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -252,6 +253,11 @@ public class NewDriverProvider {
           "--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
       );
     }
+
+    if (StringUtils.isNotBlank(System.getProperty("chromeSwitches"))) {
+      chromeOptions.addArguments(System.getProperty("chromeSwitches"));
+    }
+
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
     setBrowserLogging(Level.SEVERE);
@@ -293,12 +299,11 @@ public class NewDriverProvider {
   }
 
   private static EventFiringWebDriver getSafariInstance() {
-                /*
->>>>>>> origin/master
-		 * clone following repository
-		 * https://github.com/senthilnayagam/safari-webdriver.git
-		 * webdriver.safari.driver property should be set to path to the SafariDriver.safariextz file
-		 */
+    /*
+    * clone following repository
+    * https://github.com/senthilnayagam/safari-webdriver.git
+    * webdriver.safari.driver property should be set to path to the SafariDriver.safariextz file
+    */
     System.setProperty("webdriver.safari.driver", "");
     return new EventFiringWebDriver(new SafariDriver());
   }

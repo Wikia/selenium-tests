@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -106,7 +107,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void searchFor(String query) {
     searchField.sendKeys(query);
-    searchButton.click();
+    searchField.sendKeys(Keys.ENTER);
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
   }
 

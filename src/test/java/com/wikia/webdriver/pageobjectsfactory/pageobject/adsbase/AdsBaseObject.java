@@ -55,7 +55,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
+  private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
 
   // Elements
   @FindBy(css = AdsContent.WIKIA_BAR_SELECTOR)
@@ -72,8 +72,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentMedrec;
   @FindBy(css = "div[id*='TOP_LEADERBOARD_gpt']")
   protected WebElement presentLeaderboardGpt;
-  @FindBy(css = TOP_INCONTENT_BOXAD_SELECTOR)
-  protected WebElement topIncontentBoxad;
+  @FindBy(css = INCONTENT_BOXAD_SELECTOR)
+  protected WebElement incontentBoxad;
 
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
@@ -187,8 +187,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     checkAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void checkTopIncontentBoxad() {
-    checkAdVisibleInSlot(TOP_INCONTENT_BOXAD_SELECTOR, topIncontentBoxad);
+  public void checkIncontentBoxad() {
+    checkAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
   }
 
   protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
