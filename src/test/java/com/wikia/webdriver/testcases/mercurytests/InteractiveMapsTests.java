@@ -78,7 +78,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.verifyMapTitleInHeader();
   }
 
-  // IMAPT08 - FAIL
+  // IMAPT08
   @Test(groups = {"MercuryInteractiveMaps_008", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMaps_008_CloseButtonWillCloseModal() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
