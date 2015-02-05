@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.google.gson.Gson;
-
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -194,8 +193,13 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
+  @FindBy(css = ".avatar-container.logged-avatar")
+  private WebElement navigationAvatar;
+  @FindBy(css = ".avatar-container.logged-avatar-placeholder")
+  private WebElement navigationAvatarPlaceholder;
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
 
   private VenusGlobalNavPageObject venusGlobalNav;
 
@@ -596,6 +600,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new LicensedVideoSwapPageObject(driver);
   }
 
+  @Deprecated
   public void verifyAvatarPresent() {
     waitForElementByElement(userProfileAvatar);
     PageObjectLogging.log(
@@ -1254,6 +1259,21 @@ public class WikiBasePageObject extends BasePageObject {
     Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
   }
 
+  public void verifyAvatarPlaceholder() {
+	  waitForElementByElement(navigationAvatarPlaceholder);
+	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
+  }
+  
+  public void verifyAvatarNotPresent() {
+	  waitForElementNotVisibleByElement(navigationAvatar);
+	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
+  }
+  
+  public void verifyAvatarVisible() {
+	  waitForElementByElement(navigationAvatar);
+	  PageObjectLogging.log("verifyAvatar", "desired avatar is visible on navbar", true);
+	  }
+  
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }

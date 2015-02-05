@@ -28,6 +28,7 @@ public class UserAvatarTests extends NewTestTemplate {
     avatar.uploadAvatar(PageContent.FILE);
     avatar.saveProfile();
     profile.verifyAvatar(credentials.userNameStaffId);
+    profile.verifyAvatarVisible();
     String avatarURL = profile.getAvatarUrl();
     profile.verifyURLStatus(200, avatarURL);
   }
@@ -42,5 +43,8 @@ public class UserAvatarTests extends NewTestTemplate {
     UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
     profile.clickRemoveAvatar();
     profile.verifyAvatar(URLsContent.AVATAR_GENERIC);
+    profile.verifyAvatarPlaceholder();
+    profile.logOut(driver);
+    profile.verifyAvatarNotPresent();
   }
 }
