@@ -114,13 +114,13 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void verifyMapTitleInHeader() {
-    driver.switchTo().defaultContent();
+//    driver.switchTo().defaultContent();
     waitForElementVisibleByElement(mapTitle);
     Assertion.assertFalse(mapTitle.getText().isEmpty());
   }
 
   public void verifyMapIdInUrl() {
-    driver.switchTo().defaultContent();
+//    driver.switchTo().defaultContent();
     Assertion.assertTrue(driver.getCurrentUrl().toString().contains("?map="));
   }
 
