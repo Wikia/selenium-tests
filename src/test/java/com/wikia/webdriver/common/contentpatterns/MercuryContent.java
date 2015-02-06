@@ -6,7 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SpecialMercuryP
 import org.openqa.selenium.WebDriver;
 
 /**
- * @author: Rodrigo Gomez, Łukasz Nowak
+ * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  */
 public class MercuryContent {
 

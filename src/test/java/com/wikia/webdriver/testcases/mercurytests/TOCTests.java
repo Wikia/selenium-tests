@@ -9,6 +9,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
+/**
+ * @author Tomasz Napieralski
+ */
 public class TOCTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
@@ -45,12 +48,21 @@ public class TOCTests extends NewTestTemplate {
     toc.verifyTOCUnderArticleName();
   }
   
-  // TOCT04 - Tapping an item will scroll to section in article and display header of that section
+  // TOCT04
   @Test(groups = {"MercuryTOCTests_004", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_004_TapOnElementScrollToSection() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.verifyTapOnElementScrollToSection(1);
+  }
+  
+  // TOCT05
+  @Test(groups = {"MercuryTOCTests_005", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTests_005_TapOnTOCCollapseOrExpandMenu() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.verifyTapOnTOCCollapseOrExpandMenu();
   }
 }
