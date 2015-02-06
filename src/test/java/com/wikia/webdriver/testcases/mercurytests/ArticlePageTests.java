@@ -42,6 +42,15 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.verifyTopContributorsThumb();
   }
 
+  // APT04
+  @Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_004_FooterElements() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject articlePage =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
+    articlePage.verifyFooterElements();
+  }
+  
   // APT06
   @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTests_006_SingleLinkedImageRedirect() {
@@ -58,5 +67,14 @@ public class ArticlePageTests extends NewTestTemplate {
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
     articlePage.verifyCanonicalUrl();
+  }
+  
+  // APT10 - Verify tapping user avatar from top contributors redirects to user page
+  @Test(groups = {"MercuryArticleTests_010", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_010_() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject articlePage =
+        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
+    articlePage.verifyFooterElements();
   }
 }

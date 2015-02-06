@@ -72,6 +72,10 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   private WebElement commentChevron;
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
+  @FindBy(css = "svg.logo")
+  private WebElement footerLogo;
+  @FindBy(css = "ul.footer-links a")
+  private List<WebElement> footerLinks;
 
   public static final String MEDIA_TYPE_VIDEO = "Video";
   public static final String MEDIA_TYPE_IMAGE = "Image";
@@ -305,6 +309,35 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
       PageObjectLogging.log(methodName, "Chevron turned", true);
     } else {
       PageObjectLogging.log(methodName, "Chevron didn't turn", false);
+    }
+  }
+  
+  public void verifyFooterElements() {
+    String methodName = "verifyFooterElements";
+    int elementCounter = 0;
+    try {
+      waitForElementByElement(footerLogo);
+      if (footerLogo.isDisplayed()) {
+        PageObjectLogging.log(methodName, "Wikia logo is displayed", true);
+      } else {
+        PageObjectLogging.log(methodName, "Wikia logo isn't displayed", false);
+      }
+      for (WebElement element : footerLinks) {
+        if (element.isDisplayed()) {
+          PageObjectLogging.log(methodName, element.getText() + " is displayed", true);
+        } else {
+          PageObjectLogging.log(methodName, element.getText() + " isn't displayed", false);
+        }
+        ++elementCounter;
+      }
+      if (elementCounter == 11) {
+        PageObjectLogging.log(methodName, "All elements are displayed", true);
+      } else {
+        PageObjectLogging.log(methodName, "Some elements aren't displayed", false);
+      }
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, "Some elements are missing", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
 }
