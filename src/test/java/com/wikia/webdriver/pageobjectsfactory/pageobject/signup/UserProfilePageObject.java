@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -111,5 +112,10 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	  waitForElementByCss(avatarSelector.replace("%imageName%", fileName));
 	  PageObjectLogging.log("verifyAvatar", "desired avatar is visible on user profile page", true);
   }
-  
+
+public void verifyProfilePage(String userName) {
+	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName));
+	PageObjectLogging.log("verifyProfilePage", userName +" user profile page verified", true);
+}
+
 }
