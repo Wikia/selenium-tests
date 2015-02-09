@@ -25,6 +25,7 @@ public class TestParamValue extends NewTestTemplate {
                                          String paramName, String paramValue) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-      wikiPage.verifyParamValue(paramName, paramValue, paramPresent);
+
+    wikiPage.verifyParamValue(paramName, paramValue, paramPresent);
   }
 }
