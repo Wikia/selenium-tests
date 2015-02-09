@@ -57,10 +57,9 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void clickZoomIn(int amountOfClicks) {
-    while (amountOfClicks != 0) {
+    for (int i = amountOfClicks; i != 0; i--) {
       waitForElementClickableByElement(zoomInButton);
       tapOnElement(zoomInButton);
-      amountOfClicks--;
     }
     PageObjectLogging.log("clickZoomIn", "Zoom in button was clicked", true);
   }
@@ -73,10 +72,9 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 
 
   public void clickZoomOut(int amountOfClicks) {
-    while (amountOfClicks != 0) {
+    for (int i = amountOfClicks; i != 0; i--) {
       waitForElementClickableByElement(zoomOutButton);
       tapOnElement(zoomOutButton);
-      amountOfClicks--;
     }
     PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
   }

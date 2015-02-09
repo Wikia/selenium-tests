@@ -76,14 +76,14 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
-    articleTitle = articleTitle + base.getTimeStamp();
+    String randomArticleTitle = articleTitle + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.navigateToArticleEditPageCK(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
-    article.verifyArticleTitle(articleTitle);
+    article.verifyArticleTitle(randomArticleTitle);
   }
 
   @Test(

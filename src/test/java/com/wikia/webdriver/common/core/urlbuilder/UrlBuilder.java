@@ -25,9 +25,10 @@ public class UrlBuilder {
     return url;
   }
 
-  public String getUrlForWiki(String wikiName) {
+  public String getUrlForWiki(String inputWikiName) {
     String prefix;
     String suffix;
+    String wikiName = inputWikiName;
     isWikia = wikiName.endsWith("wikia");
     String url = "http://";
 

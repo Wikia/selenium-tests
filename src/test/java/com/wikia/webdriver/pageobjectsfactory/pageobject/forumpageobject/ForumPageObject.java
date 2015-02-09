@@ -87,20 +87,20 @@ public class ForumPageObject extends WikiArticlePageObject {
   public ForumBoardPageObject openForumBoard(String forumBoardTitle) {
     int forumNumber = 0;
     List<String> forumNames = getForumNamesList();
-    forumBoardTitle = forumBoardTitle.replace("_", " ");
+    String formattedForumBoardTitle = forumBoardTitle.replace("_", " ");
     for (int i = 0; i < forumNames.size(); i++) {
-      if (forumNames.get(i).contains(forumBoardTitle)) {
+      if (forumNames.get(i).contains(formattedForumBoardTitle)) {
         forumNumber = i + 1;
       }
     }
     if (forumNumber == 0) {
       PageObjectLogging.log("openForumBoard",
-                            "didn't find forum Board with title " + forumBoardTitle,
+                            "didn't find forum Board with title " + formattedForumBoardTitle,
                             true, driver);
       return null;
     } else {
       PageObjectLogging.log("openForumBoard",
-                            "click on the forum Board with title " + forumBoardTitle,
+                            "click on the forum Board with title " + formattedForumBoardTitle,
                             true, driver);
       return openForumBoard();
     }
