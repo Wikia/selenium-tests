@@ -13,9 +13,9 @@ public class VideoContent {
 
   public static final String YOUTUBE_VIDEO_URL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
 
-  public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=ZO0pAmliyVY";
-  public static final String YOUTUBE_VIDEO_URL4_FILENAME = "Monster_Bike";
-  public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "Monster Bike";
+  public static final String YOUTUBE_VIDEO_URL4 = "https://www.youtube.com/watch?v=4H5Q0T90Qi4";
+  public static final String YOUTUBE_VIDEO_URL4_FILENAME = "BlaBla_-_Ludovik";
+  public static final String YOUTUBE_VIDEO_URL4_FILE_TITLE = "BlaBla - Ludovik";
 
   public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=yvBXsd4P550";
 

@@ -18,14 +18,12 @@ public class SmartBannerTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  private static final String[]
-      DIFFERENT_HUBS_WIKIS =
-      {"destiny", "cocktails", "thehungergames", "marvel", "tardis", "starwars", "lego"};
-  private static final String[]
-      DIFFERENT_HUBS_COLORS =
-      {"#94d11f", "#8ca038", "#ff7f26", "#ff5400", "#00b7e0", "#09d3bf", "#ffd000"};
+  private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
+      "marvel", "tardis", "starwars", "lego"};
+  private static final String[] DIFFERENT_HUBS_COLORS = {"#94d11f", "#8ca038", "#ff7f26",
+      "#ff5400", "#00b7e0", "#09d3bf", "#ffd000"};
 
-  //SBT01
+  // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_001_UserCanCloseSmartBanner() {
     MercuryContent.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
@@ -36,7 +34,7 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.verifySmartBannerWasClosed();
   }
 
-  //SBT02
+  // SBT02
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_FixPositionOfSmartBanner() {
     MercuryContent.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
@@ -47,7 +45,7 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.verifyFixPositionOfSmartBanner(touchAction);
   }
 
-  //SBT03
+  // SBT03
   @Test(groups = {"MercurySmartBannerTest_003", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_003_AndroidUserSeeInstallButton() {
     MercuryContent.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
@@ -57,7 +55,7 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.verifyButtonName(SmartBannerComponentObject.BUTTON_NAME_FOR_ANDROID);
   }
 
-  //SBT04
+  // SBT04
   @Test(groups = {"MercurySmartBannerTest_004", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_004_IOSUserSeeGETButton() {
     MercuryContent.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
@@ -67,7 +65,7 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.verifyButtonName(SmartBannerComponentObject.BUTTON_NAME_FOR_IOS);
   }
 
-  //SBT06
+  // SBT06
   @Test(groups = {"MercurySmartBannerTest_006", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_006_ThemeColorOnDifferentHubs() {
     MercuryBasePageObject base;

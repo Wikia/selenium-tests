@@ -61,15 +61,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultBackoffStrategy;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -92,13 +93,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -110,30 +107,17 @@ import javax.json.JsonReader;
 
 public class WikiBasePageObject extends BasePageObject {
 
+  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
+  private static final String
+      LOGGED_IN_USER_SELECTOR_VENUS = ".AccountNavigation a[href*=%userName%]";
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = "a.ajaxRegister")
-  private WebElement signUpLink;
-  @FindBy(css = "input#wpConfirmB")
-  private WebElement deleteConfirmationButton;
-  @FindBy(css = ".global-notification div.msg a")
-  private WebElement undeleteLink;
-  @FindBy(css = ".global-notification")
-  private WebElement flashMessage;
-  @FindBy(css = "input#mw-undelete-submit")
-  private WebElement restoreButton;
-  @FindBy(css = "input#wpReason")
-  private WebElement deleteCommentReasonField;
-  @FindBy(css = "div.permissions-errors")
-  private WebElement premissionErrorMessage;
   @FindBy(css = ".UserLoginModal input[type='submit']")
   protected WebElement modalLoginSubmit;
   @FindBy(css = ".UserLoginModal input[name='password']")
   protected WebElement modalPasswordInput;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
-  private WebElement specialUserLoginLink;
   @FindBy(css = ".UserLoginModal input[name='username']")
   protected WebElement modalUserNameInput;
   @FindBy(css = "#AccountNavigation > li > a > .avatar")
@@ -190,39 +174,37 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement formConnectWithFbButtonBasic;
   @FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
   protected WebElement formConnectWithFbButtonDropDown;
-
-  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
-
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
-
   protected String modalWrapper = "#WikiaConfirm";
-
-  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
+  @FindBy(css = "a.ajaxRegister")
+  private WebElement signUpLink;
+  @FindBy(css = "input#wpConfirmB")
+  private WebElement deleteConfirmationButton;
+  @FindBy(css = ".global-notification div.msg a")
+  private WebElement undeleteLink;
+  @FindBy(css = ".global-notification")
+  private WebElement flashMessage;
+  @FindBy(css = "input#mw-undelete-submit")
+  private WebElement restoreButton;
+  @FindBy(css = "input#wpReason")
+  private WebElement deleteCommentReasonField;
+  @FindBy(css = "div.permissions-errors")
+  private WebElement premissionErrorMessage;
+  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
+  private WebElement specialUserLoginLink;
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
   private VenusGlobalNavPageObject venusGlobalNav;
 
-  public String getWikiUrl() {
-    String currentURL = driver.getCurrentUrl();
-    return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
-  }
-
-  public enum PositionsVideo {
-    LEFT, CENTER, RIGHT
-  }
-
-  public enum StyleVideo {
-    CAPTION, NOCAPTION;
-  }
-
-  public enum HubName {
-    VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
-  }
-
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public String getWikiUrl() {
+    String currentURL = driver.getCurrentUrl();
+    return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
   }
 
   public String resetForgotPasswordTime(String userName, String apiToken) {
@@ -305,13 +287,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialBlockListPageObject(driver);
   }
 
-
   public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNBLOCK);
     PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
     return new SpecialUnblockPageObject(driver);
   }
-
 
   public SpecialBlockPageObject openSpecialBlockPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_BLOCK);
@@ -632,7 +612,8 @@ public class WikiBasePageObject extends BasePageObject {
       //Venus
       driver.findElement(
           By.cssSelector(
-              loggedInUserSelectorVenus.replace("%userName%", userName)));// only for verification
+              LOGGED_IN_USER_SELECTOR_VENUS
+                  .replace("%userName%", userName)));// only for verification
     }
     PageObjectLogging.log(
         "verifyUserLoggedIn",
@@ -714,7 +695,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_CHAT);
     return new ChatPageObject(driver);
   }
-
 
   public ArticlePageObject openRandomArticle(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
@@ -880,78 +860,71 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String logInCookie(String userName, String password, String wikiURL) {
     try {
+      CookieStore cookieStore = new BasicCookieStore();
+
       HttpClient httpclient = HttpClientBuilder.create()
           .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+          .setDefaultCookieStore(cookieStore)
           .disableAutomaticRetries()
           .build();
-      HttpPost httpPost = new HttpPost(wikiURL + "api.php");
+      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
       List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-      nvps.add(new BasicNameValuePair("action", "login"));
-      nvps.add(new BasicNameValuePair("format", "xml"));
-      nvps.add(new BasicNameValuePair("lgname", userName));
-      nvps.add(new BasicNameValuePair("lgpassword", password));
+      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
+      nvps.add(new BasicNameValuePair("format", "json"));
+      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
 
       httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 
       HttpResponse response = httpclient.execute(httpPost);
-
       HttpEntity entity = response.getEntity();
-      String xmlResponse = null;
 
-      xmlResponse = EntityUtils.toString(entity);
-
-      String[] xmlResponseArr = xmlResponse.split("\"");
-      String token;
+      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
 
       PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
 
-      setCookies(response);
-
-      try {
-        token = xmlResponseArr[5];
-      } catch (ArrayIndexOutOfBoundsException e) {
-        throw new WebDriverException(
-            "No token received from request.\n lgname is " + nvps.get(2).getValue()
-            + ".\n HTTP response is " + response.toString() +
-            ".\n xmlReponse is " + xmlResponse);
-      }
+      String token = responseValue.getString("loginToken");
 
       List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
-      nvps2.add(new BasicNameValuePair("action", "login"));
-      nvps2.add(new BasicNameValuePair("format", "xml"));
-      nvps2.add(new BasicNameValuePair("lgname", userName));
-      nvps2.add(new BasicNameValuePair("lgpassword", password));
-      nvps2.add(new BasicNameValuePair("lgtoken", token));
+      nvps2.add(new BasicNameValuePair("username", userName));
+      nvps2.add(new BasicNameValuePair("password", password));
+      nvps2.add(new BasicNameValuePair("loginToken", token));
 
-      httpPost.reset();
-      httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-                                                  StandardCharsets.UTF_8));
+      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
+      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
+                                                   StandardCharsets.UTF_8));
 
-      for (int i = 0; i < 10; i++) {
-        response = httpclient.execute(httpPost);
+      response = httpclient.execute(httpPost4);
 
-        entity = response.getEntity();
-
-        xmlResponse = EntityUtils.toString(entity);
-
-        xmlResponseArr = xmlResponse.split("\"");
-
-        if (xmlResponse.contains("WrongPass")) {
-          throw new WebDriverException("Incorrect password provided for user: " + userName);
-        }
-
-        if (xmlResponseArr.length >= 11) {
-          break;
-        }
-      }
+//      entity = response.getEntity();
+//      for (int i = 0; i < 10; i++) {
+//
+//
+//        xmlResponse = EntityUtils.toString(entity);
+//
+//        xmlResponseArr = xmlResponse.split("\"");
+//
+//        if (xmlResponse.contains("WrongPass")) {
+//          throw new WebDriverException("Incorrect password provided for user: " + userName);
+//        }
+//
+//        if (xmlResponseArr.length >= 11) {
+//          break;
+//        }
+//      }
 
       PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+//      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
 
-      setCookies(response);
+      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
+        System.out.println(cookie.toString());
+        driver.manage().addCookie(
+            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
+                       cookie.getExpiryDate(), false));
+      }
+
       try {
         driver.get(wikiURL);
       } catch (TimeoutException e) {
@@ -963,7 +936,7 @@ public class WikiBasePageObject extends BasePageObject {
 
       PageObjectLogging.log("loginCookie",
                             "user was logged in by cookie", true, driver);
-      return xmlResponseArr[11];
+      return token;
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("logInCookie",
                             "UnsupportedEncodingException", false);
@@ -978,37 +951,9 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (IOException e) {
       PageObjectLogging.log("logInCookie", e.getMessage(), false);
       return null;
-    }
-  }
-
-  private void setCookies(HttpResponse response) {
-    for (Header cookieHeader : response.getHeaders("Set-Cookie")) {
-      String name = getCookieParam(cookieHeader, "", "=");
-      String value = getCookieParam(cookieHeader, "=", ";");
-      String path = getCookieParam(cookieHeader, "path=", ";");
-      String domian = getCookieParam(cookieHeader, "domain=", ";");
-
-      Date expDate = null;
-      String expirationDate = getCookieParam(cookieHeader, "expires=", ";");
-      if (!expirationDate.isEmpty()) {
-        SimpleDateFormat parserSDF = new SimpleDateFormat("dd-MMM-yyyy kk:mm:ss", Locale.ENGLISH);
-        expDate = parserSDF.parse(expirationDate, new ParsePosition(4));
-
-        driver.manage().addCookie(new Cookie(name, value, domian, path, expDate));
-      } else {
-        driver.manage().addCookie(new Cookie(name, value, domian, path, null));
-      }
-    }
-  }
-
-  private String getCookieParam(Header cookieHeader, String startToken, String endToken) {
-    Pattern pattern = Pattern.compile(String.format("%s(.+?)%s", startToken, endToken));
-    Matcher matcher = pattern.matcher(cookieHeader.getValue());
-    matcher.find();
-    try {
-      return matcher.group(1);
-    } catch (IllegalStateException e) {
-      return "";
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return null;
     }
   }
 
@@ -1306,5 +1251,17 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyDropDownFBButtonVisible() {
     Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
+  }
+
+  public enum PositionsVideo {
+    LEFT, CENTER, RIGHT
+  }
+
+  public enum StyleVideo {
+    CAPTION, NOCAPTION;
+  }
+
+  public enum HubName {
+    VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
   }
 }
