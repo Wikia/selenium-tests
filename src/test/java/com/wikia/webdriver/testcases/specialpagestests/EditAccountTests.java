@@ -29,6 +29,7 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(groups = "EditAccountTest")
   public void EditAccount_001_closeAccount() {
+    driver.get(testedWiki);
     new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
         .logIn(credentials.userNameStaff, credentials.passwordStaff);
     EditAccount editAccount =
@@ -47,6 +48,7 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_002_verifyAccountClosed")
   public void EditAccount_003_reopenAccount() {
+    driver.get(testedWiki);
     new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
         .logIn(credentials.userNameStaff, credentials.passwordStaff);
     EditAccount editAccount =
