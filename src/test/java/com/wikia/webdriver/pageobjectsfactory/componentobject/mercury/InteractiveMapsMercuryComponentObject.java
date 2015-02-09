@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,13 +45,13 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void clickCloseButton() {
-//    driver.switchTo().activeElement();
     waitForElementVisibleByElement(closeMapLightbox);
     closeMapLightbox.click();
     PageObjectLogging.log("clickCloseButton", "Close button was clicked", true);
   }
 
   public void clickFilterBox() {
+    driver.switchTo().frame(mapFrame);
     waitForElementVisibleByElement(filterBoxHeader);
     tapOnElement(filterBoxHeader);
     PageObjectLogging.log("clickFilterBox", "Filter box caption was clicked", true);
@@ -88,9 +89,16 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void clickPin() {
-    waitForElementVisibleByElement(poiPin);
-    tapOnElement(poiPin);
-    PageObjectLogging.log("clickPin", "Pin was clicked", true);
+    String methodName = "clickPin";
+    try {
+      driver.switchTo().frame(mapFrame);
+      waitForElementVisibleByElement(poiPin);
+      tapOnElement(poiPin);
+      PageObjectLogging.log("clickPin", "Pin was clicked", true);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, "There is no pins, add them manualy", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
   }
 
   public String getMapLeafletSrc() {
@@ -103,24 +111,20 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void verifyMapModalIsNotVisible() {
-//    driver.switchTo().activeElement();
     Assertion.assertFalse(checkIfElementOnPage(lightbox));
   }
 
   public void verifyMapModalIsVisible() {
-//    driver.switchTo().frame(mapFrame);
     waitForElementByElement(lightbox);
     Assertion.assertTrue(checkIfElementOnPage(lightbox));
   }
 
   public void verifyMapTitleInHeader() {
-//    driver.switchTo().defaultContent();
     waitForElementVisibleByElement(mapTitle);
     Assertion.assertFalse(mapTitle.getText().isEmpty());
   }
 
   public void verifyMapIdInUrl() {
-//    driver.switchTo().defaultContent();
     Assertion.assertTrue(driver.getCurrentUrl().toString().contains("?map="));
   }
 
@@ -135,6 +139,7 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
   
   public void verifyZoomButtons() {
+    driver.switchTo().frame(mapFrame);
     String methodName = "verifyZoomButtons";
     Shooter shooter = new Shooter();
     ImageComparison ic = new ImageComparison();
