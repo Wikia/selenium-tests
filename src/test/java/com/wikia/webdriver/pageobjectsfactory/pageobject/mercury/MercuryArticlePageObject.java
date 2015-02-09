@@ -76,6 +76,10 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   private WebElement footerLogo;
   @FindBy(css = "ul.footer-links a")
   private List<WebElement> footerLinks;
+  @FindBy(css = "div.contributors a")
+  private List<WebElement> topContributorsLinks;
+  @FindBy(css = "nav.article-categories-list button")
+  private WebElement categoryButton;
 
   public static final String MEDIA_TYPE_VIDEO = "Video";
   public static final String MEDIA_TYPE_IMAGE = "Image";
@@ -337,6 +341,37 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
       }
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "Some elements are missing", false);
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
+  }
+  
+  public void verifyTapContributorRedirectToUserPage(int index) {
+    String methodName = "verifyTapContributorRedirectToUserPage";
+    topContributorsLinks.get(index).click();
+    String newUrl = driver.getCurrentUrl();
+    if (newUrl.contains("/wiki/User:")) {
+      PageObjectLogging.log(methodName, "Redirection to user page works", true);
+    } else {
+      PageObjectLogging.log(methodName, "Redirection to user page doesn't work", false);
+    }
+  }
+  
+  public void verifyChevronRotation() {
+    String methodName = "verifyChevronRotation";
+    try {
+      waitForElementByElement(categoryButton);
+      if (categoryButton.getAttribute("class").contains("collapsed")) {
+        PageObjectLogging.log(methodName, "Chevron is collapsed", true);
+      } else {
+        PageObjectLogging.log(methodName, "Chevron isn't collapsed", false);
+      }
+      categoryButton.click();
+      if (categoryButton.getAttribute("class").contains("collapsed")) {
+        PageObjectLogging.log(methodName, "Chevron is collapsed", false);
+      } else {
+        PageObjectLogging.log(methodName, "Chevron isn't collapsed", true);
+      }
+    } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }

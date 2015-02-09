@@ -69,12 +69,21 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.verifyCanonicalUrl();
   }
   
-  // APT10 - Verify tapping user avatar from top contributors redirects to user page
-  @Test(groups = {"MercuryArticleTests_010", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_010_() {
+  // APT09
+  @Test(groups = {"MercuryArticleTests_009", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_009_ChevronRotation() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
-    articlePage.verifyFooterElements();
+        base.openMercuryArticleByName(wikiURL, "");
+    articlePage.verifyChevronRotation();
+  }
+  
+  // APT10
+  @Test(groups = {"MercuryArticleTests_010", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_010_TapContributorRedirectToUserPage() {
+    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+    MercuryArticlePageObject articlePage =
+        base.openMercuryArticleByName(wikiURL, "");
+    articlePage.verifyTapContributorRedirectToUserPage(0);
   }
 }
