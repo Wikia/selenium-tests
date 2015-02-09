@@ -30,6 +30,9 @@ public class VenusGlobalNavPageObject {
   @FindBy(css = "#hubs")
   private WebElement hubsMenu;
 
+  @FindBy(css = "#hubs .hub-list")
+  private WebElement hubsMenuList;
+
   @FindBy(css = ".gamestar-logo")
   private WebElement gameStarLink;
 
@@ -112,7 +115,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public WebElement getMenuScreenShotArea() {
-    return hubsMenu;
+    return hubsMenuList;
   }
 
   public HomePageObject clickWikiaLogo() {
@@ -148,8 +151,7 @@ public class VenusGlobalNavPageObject {
 
   public boolean isLocalSearchDisabled() {
     return
-        !ElementStateHelper.isElementVisible(searchSelect, driver) &&
-        ElementStateHelper.isElementVisible(inlineSearch, driver);
+        !ElementStateHelper.isElementVisible(searchSelect, driver);
   }
 
   private DropDownComponentObject getAccountNavigation() {
