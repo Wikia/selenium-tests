@@ -241,7 +241,8 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
       nextCommentPageButton.click();
     }
     numberOfComments -= allComments.size();
-    Assertion.assertTrue(numberOfComments == 0, "There are untracked comments");
+    Assertion.assertTrue(numberOfComments == 0, "There are "
+        + numberOfComments + " untracked comments");
   }
 
   public void verifyMediaInComments(String mediaType, int index) {
