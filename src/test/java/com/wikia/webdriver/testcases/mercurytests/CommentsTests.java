@@ -74,9 +74,9 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyCommentsElements();
   }
   
-  // CT08
-  @Test(groups = {"MercuryCommentsTest_008", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_008_CommentsCounterIsCorrect() {
+  // CT06
+  @Test(groups = {"MercuryCommentsTest_006", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_006_CommentsCounterIsCorrect() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
@@ -84,9 +84,9 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyCommentsCounterIsCorrect();
   }
   
-  // CT09
-  @Test(groups = {"MercuryCommentsTests_009", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_009_RepliesCounterIsCorrect() {
+  // CT07
+  @Test(groups = {"MercuryCommentsTests_007", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_007_RepliesCounterIsCorrect() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
@@ -94,9 +94,9 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyRepliesCounterIsCorrect(1);
   }
   
-  // CT10
-  @Test(groups = {"MercuryCommentsTests_010", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_010_TapOnUserRedirectToUserPage() {
+  // CT08
+  @Test(groups = {"MercuryCommentsTests_008", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_008_TapOnUserRedirectToUserPage() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
@@ -104,9 +104,9 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyTapOnUserRedirectToUserPage(0);
   }
   
-  // CT11
-  @Test(groups = {"MercuryCommentsTests_011", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_011_ImagesAndVideosAreDisplayed() {
+  // CT09
+  @Test(groups = {"MercuryCommentsTests_009", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_009_ImagesAndVideosAreDisplayed() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
@@ -115,9 +115,9 @@ public class CommentsTests extends NewTestTemplate {
     article.verifyMediaInComments(MercuryArticlePageObject.MEDIA_TYPE_IMAGE, 3);
   }
   
-  // CT12
-  @Test(groups = {"MercuryCommentsTests_012", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_012_ChevronRotatesWhenTapped() {
+  // CT10
+  @Test(groups = {"MercuryCommentsTests_010", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTests_010_ChevronRotatesWhenTapped() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);

@@ -65,9 +65,9 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.verifyButtonName(SmartBannerComponentObject.BUTTON_NAME_FOR_IOS);
   }
 
-  // SBT06
-  @Test(groups = {"MercurySmartBannerTest_006", "MercurySmartBannerTests", "Mercury"})
-  public void MercurySmartBannerTest_006_ThemeColorOnDifferentHubs() {
+  // SBT05
+  @Test(groups = {"MercurySmartBannerTest_005", "MercurySmartBannerTests", "Mercury"})
+  public void MercurySmartBannerTest_005_ThemeColorOnDifferentHubs() {
     MercuryBasePageObject base;
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {

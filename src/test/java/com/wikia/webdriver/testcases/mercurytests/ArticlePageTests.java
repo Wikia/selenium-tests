@@ -51,36 +51,36 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.verifyFooterElements();
   }
   
-  // APT06
-  @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_006_SingleLinkedImageRedirect() {
+  // APT05
+  @Test(groups = {"MercuryArticleTests_005", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_005_SingleLinkedImageRedirect() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_SINGLE_LINKED_IMAGE);
     articlePage.verifySingleLinkedImageRedirect(0);
   }
 
-  // APT07
-  @Test(groups = {"MercuryArticleTests_007", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_007_CanonicalTag() {
+  // APT06
+  @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_006_CanonicalTag() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
     articlePage.verifyCanonicalUrl();
   }
   
-  // APT09
-  @Test(groups = {"MercuryArticleTests_009", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_009_ChevronRotation() {
+  // APT07
+  @Test(groups = {"MercuryArticleTests_007", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_007_ChevronRotation() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, "");
     articlePage.verifyChevronRotation();
   }
   
-  // APT10
-  @Test(groups = {"MercuryArticleTests_010", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_010_TapContributorRedirectToUserPage() {
+  // APT08
+  @Test(groups = {"MercuryArticleTests_008", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_008_TapContributorRedirectToUserPage() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, "");
