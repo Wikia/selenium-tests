@@ -8,10 +8,13 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 
+import org.codehaus.plexus.util.FileUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * @author Ludwik Kaźmierczak
@@ -23,7 +26,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
    * Test is taking screenshots of of hubs menu in global navigation and comparing to the expected
    * designs from resources folder located in 'Baseline' folder
    */
-  @Test(groups = {"HubsMenu_001", "GlobalNav"})
+  @Test(groups = {"HubsMenu_001"})
   public void HubsMenu_001_compareScreenshotForHubsMenu() {
 
     HomePageObject homePage = new HomePageObject(driver);
@@ -53,13 +56,6 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
     String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
         .getPath();
 
-    String
-        currentFileCopyPath =
-        ClassLoader.getSystemResource("Baseline/").getPath() + expectedFileName + "_current.png";
-
-    currentFile.renameTo(new File(currentFileCopyPath));
-    currentFile = new File(currentFileCopyPath);
-
     File expectedFile = new File(expectedFilePath);
     try {
       Assertion
@@ -68,7 +64,8 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
     } catch (AssertionError e) {
       PageObjectLogging
           .log("Design is not as expected for: " + expectedFileName,
-               "Expected: " + expectedFilePath, false,
+               "Expected: " + expectedFilePath + 
+               ".  You can find the captured screenshot file here: "+currentFile.getAbsolutePath(), false,
                driver);
       return true;
     }

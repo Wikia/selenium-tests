@@ -57,6 +57,9 @@ public class AdsContent {
   //SLOTS SELECTORS
   public static final String WIKIA_BAR_SELECTOR = "#" + WIKIA_BAR;
 
+  private AdsContent() {
+
+  }
 
   public static String getSlotSelector(String slotName) {
     return SLOTS_SELECTORS.get(slotName);

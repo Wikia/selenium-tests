@@ -22,6 +22,10 @@ import javax.mail.Store;
  */
 public class MailFunctions {
 
+  private MailFunctions() {
+
+  }
+
   public static String getFirstEmailContent(String userName, String password) {
     try {
       //establishing connections

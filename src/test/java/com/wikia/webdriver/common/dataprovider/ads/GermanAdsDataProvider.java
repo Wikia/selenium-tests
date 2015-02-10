@@ -7,6 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class GermanAdsDataProvider {
 
+  private GermanAdsDataProvider() {
+
+  }
+
   @DataProvider
   public static final Object[][] popularGermanArticles() {
     return new Object[][]{

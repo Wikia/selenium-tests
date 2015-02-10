@@ -68,7 +68,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSpotlights"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestTopIncontentBoxad"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumBoardTests"/>
@@ -87,11 +87,11 @@
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.IntraWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests"/>
-            <class name="com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications.MessageWallNotificationsFollowersMessageTests"/>
-            <class name="com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications.MessageWallNotificationsFollowersResponseTests"/>
-            <class name="com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications.MessageWallNotificationsOwnerTests"/>
-            <class name="com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications.MessageWallNotificationsThreadCreatorTests"/>
-            <class name="com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications.MessageWallNotificationsThreadParticipantTests"/>
+            <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersMessageTests"/>
+            <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersResponseTests"/>
+            <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsOwnerTests"/>
+            <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadCreatorTests"/>
+            <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.lightboxtests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests"/>

@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications;
+package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;

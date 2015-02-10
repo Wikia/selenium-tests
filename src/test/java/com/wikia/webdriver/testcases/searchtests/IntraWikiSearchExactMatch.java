@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.searchtests;
 
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikiSearch.IntraWikiSearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.testng.annotations.Test;
 

@@ -7,4 +7,7 @@ public class ApiActions {
       API_ACTION_FORGOT_PASSWORD_RESPONSE =
       "{\"resetpasswordtime\":{\"success\":true}}";
 
+	private ApiActions() {
+
+	}
 }

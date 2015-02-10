@@ -16,4 +16,8 @@ public class PathsContent {
       NET_EXPORT_PATH =
       "src" + File.separator + "test" + File.separator + "resources" + File.separator + "Firebug"
       + File.separator + "netExport-0.8b13.xpi";
+
+  private PathsContent() {
+
+  }
 }

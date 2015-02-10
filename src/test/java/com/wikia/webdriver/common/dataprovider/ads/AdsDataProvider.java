@@ -10,6 +10,10 @@ import java.util.Arrays;
  */
 public class AdsDataProvider {
 
+  private AdsDataProvider() {
+
+  }
+
   @DataProvider
   public static final Object[][] ooyalaAds() {
     return new Object[][]{
@@ -302,7 +306,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] topIncontentBoxad() {
+  public static final Object[][] incontentBoxad() {
     return new Object[][]{
         {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
   }

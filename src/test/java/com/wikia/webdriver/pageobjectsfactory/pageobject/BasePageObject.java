@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   public WebDriver driver;
-  protected int timeOut = 45;
+  protected int timeOut = 30;
   public WebDriverWait wait;
   public Actions builder;
   protected UrlBuilder urlBuilder;
@@ -260,7 +260,7 @@ public class BasePageObject {
     js.executeScript("$(arguments[0]).focus()", element);
   }
         /*
-	 * Url helpers
+         * Url helpers
 	 */
 
   public boolean verifyTitle(String title) {
@@ -742,8 +742,6 @@ public class BasePageObject {
         CommonExpectedConditions.newWindowPresent()
     );
   }
-
-  ;
 
   public void enableWikiaTracker() {
     driver.get(

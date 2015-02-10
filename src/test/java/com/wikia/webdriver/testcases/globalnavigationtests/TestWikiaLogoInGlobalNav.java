@@ -24,7 +24,7 @@ public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"TestWikiaLogoInGlobalNav_001"},
+      groups = {"TestWikiaLogoInGlobalNav_001", "GlobalNav"},
       dataProvider = "getCentralWikiaUrlForWiki"
   )
   public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,

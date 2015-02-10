@@ -28,4 +28,8 @@ public class SourceModeContent {
       "|\n" +
       "|\n" +
       "|}";
+
+  private SourceModeContent() {
+
+  }
 }

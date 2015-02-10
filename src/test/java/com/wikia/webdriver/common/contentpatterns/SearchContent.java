@@ -11,4 +11,8 @@ public class SearchContent {
   public static final String SEARCH_PHRASE_ROMAN_NUMBER = "GTA V";
   public static final String WIKI_NAME = "GTA V";
   public static final String SEARCH_PHRASE_NEW_SUGGESTIONS = "Council";
+
+  private SearchContent() {
+
+  }
 }

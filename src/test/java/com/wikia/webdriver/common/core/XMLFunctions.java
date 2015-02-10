@@ -6,6 +6,10 @@ import java.io.File;
 
 public class XMLFunctions {
 
+  private XMLFunctions() {
+
+  }
+
   /**
    * method used to get credentials from configuration xml
    *
