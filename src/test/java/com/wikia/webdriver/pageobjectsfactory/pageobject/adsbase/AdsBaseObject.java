@@ -683,26 +683,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return dataGptPageParams.contains(gptParamPattern);
   }
 
-  public void verifyParamValueNotPresent(String paramName, String paramValue) {
-    Assertion.assertFalse(isGptParamPresent(paramName, paramValue), /* error msg: */
-                          "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log(
-        "verifyParamState",
-        "parameter \"" + paramName + "\" not found",
-        true,
-        driver
-    );
-  }
-
-  public void verifyParamValuePresent(String paramName, String paramValue) {
-    Assertion.assertTrue(isGptParamPresent(paramName, paramValue), /* error msg: */
-                         "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log(
-        "verifyParamState",
-        "parameter \"" + paramName + "\" found with value \"" + paramValue +"\"",
-        true,
-        driver
-    );
+  public void verifyParamValue(String paramName, String paramValue, boolean expected) {
+    Assertion.assertEquals(isGptParamPresent(paramName, paramValue), expected,
+                           "parameter \"" + paramName + "\" not found");
+    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
+                                              + expected, true, driver);
   }
 
   public void checkSpotlights() {
