@@ -66,7 +66,6 @@ public class AdsComparison {
     } catch (IOException ex) {
       throw new RuntimeException(ex);
     }
-    Shooter shooter = new Shooter();
     File capturedScreen = shooter.capturePageAndCrop(
         startPoint, screenshotSize, driver
     );

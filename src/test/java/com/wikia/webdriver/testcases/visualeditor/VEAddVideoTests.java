@@ -58,8 +58,8 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
       groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
   )
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -76,8 +76,8 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
       groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
   )
   public void VEAddExternalVideoTests_003_AddExistingVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =

@@ -65,8 +65,8 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     int initialNumOfMedia = 7;
     int expectedNumOfMedia = initialNumOfMedia;
 
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertGalleryDialog galleryDialog =
@@ -96,9 +96,9 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
       groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
   )
   public void VEGalleryTests_003_PreviewOnTitle() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
-    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertGalleryDialog galleryDialog =
@@ -113,9 +113,9 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
       groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
   )
   public void VEGalleryTests_004_PreviewOnMetadata() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
-    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertGalleryDialog galleryDialog =

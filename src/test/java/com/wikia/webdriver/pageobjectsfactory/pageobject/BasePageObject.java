@@ -81,8 +81,8 @@ public class BasePageObject {
 
   public void clickActions(WebElement pageElem) {
     try {
-      Actions builder = new Actions(driver);
-      Actions click = builder.click(pageElem);
+      Actions actionBuilder = new Actions(driver);
+      Actions click = actionBuilder.click(pageElem);
       click.perform();
     } catch (Exception e) {
       PageObjectLogging.log("clickActions", e.toString(), false);
@@ -829,7 +829,7 @@ public class BasePageObject {
    * check if current HTTP status of given URL is the same as expected
    */
   public void verifyURLStatus(int desiredStatus, String url) {
-    int timeOut = 500;
+    int waitTime = 500;
     int statusCode = 0;
     boolean status = false;
     while (!status) {
@@ -839,9 +839,9 @@ public class BasePageObject {
           status = true;
         } else {
           Thread.sleep(500);
-          timeOut += 500;
+          waitTime += 500;
         }
-        if (timeOut > 20000) {
+        if (waitTime > 20000) {
           break;
         }
       } catch (InterruptedException e) {
