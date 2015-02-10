@@ -138,7 +138,7 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     Assertion.assertTrue(checkIfElementOnPage(poiPopUp));
     PageObjectLogging.log("verifyPinPopUpAppeared", "Pin popup appeared after click", true, driver);
   }
-  
+
   public void verifyZoomButtons() {
     driver.switchTo().frame(mapFrame);
     String methodName = "verifyZoomButtons";
@@ -146,49 +146,32 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     ImageComparison ic = new ImageComparison();
     File beforeZooming = shooter.capturePage(driver);
     clickZoomOut();
-    waitMillisecons(5000, methodName);
+    waitMilliseconds(5000, methodName);
     File afterZoomOut = shooter.capturePage(driver);
     clickZoomIn();
-    waitMillisecons(5000, methodName);
+    waitMilliseconds(5000, methodName);
     File afterZoomIn = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
-      PageObjectLogging.log(methodName, "Zoom out doesn't work", false);
-    } else {
-      PageObjectLogging.log(methodName, "Zoom out works", true);
-    }
-    if (ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
-      PageObjectLogging.log(methodName, "Zoom in works", true);
-    } else {
-      PageObjectLogging.log(methodName, "Zoom in doesn't work", false);
-    }
+    Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZoomOut), "Zoom out doesn't work");
+    Assertion.assertTrue(ic.areFilesTheSame(beforeZooming, afterZoomIn), "Zoom in doesn't work");
   }
-  
+
   public void verifyZoomByGesture(PerformTouchAction touchAction) {
     driver.switchTo().frame(mapFrame);
     String methodName = "verifyZoomByGesture";
     try {
-      if (zoomInButton.getAttribute("class").contains("disabled")) {
-        PageObjectLogging.log(methodName, "Zoom in button is disabled", true);
-      } else {
-        PageObjectLogging.log(methodName, "Zoom in button is enabled", false);
-      }
+      Assertion.assertTrue(zoomInButton.getAttribute("class").contains("disabled"),
+          "Zoom in button is enabled");
       touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
-      if (zoomInButton.getAttribute("class").contains("disabled")) {
-        PageObjectLogging.log(methodName, "Zoom in button is disabled", false);
-      } else {
-        PageObjectLogging.log(methodName, "Zoom in button is enabled", true);
-      }
+      Assertion.assertFalse(zoomInButton.getAttribute("class").contains("disabled"),
+          "Zoom in button is disabled");
       touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
-      if (zoomInButton.getAttribute("class").contains("disabled")) {
-        PageObjectLogging.log(methodName, "Zoom in button is disabled", true);
-      } else {
-        PageObjectLogging.log(methodName, "Zoom in button is enabled", false);
-      }
+      Assertion.assertTrue(zoomInButton.getAttribute("class").contains("disabled"),
+          "Zoom in button is enabled");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
-  
+
   public void verifyScrollableFilterList(PerformTouchAction touchAction) {
     String methodName = "verifyScrollableFilterList";
     Shooter shooter = new Shooter();
@@ -199,11 +182,8 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
       Thread.sleep(5000);
       touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
       File afterScrolling = shooter.capturePage(driver);
-      if (ic.areFilesTheSame(beforeScrolling, afterScrolling)) {
-        PageObjectLogging.log(methodName, "Scrolling in filter box doesn't work", false);
-      } else {
-        PageObjectLogging.log(methodName, "Scrolling in filter box works", true);
-      }
+      Assertion.assertFalse(ic.areFilesTheSame(beforeScrolling, afterScrolling),
+          "Scrolling in filter box doesn't work");
     } catch (InterruptedException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     } catch (NoSuchElementException e) {

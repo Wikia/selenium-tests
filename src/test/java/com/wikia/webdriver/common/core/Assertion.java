@@ -118,7 +118,7 @@ public class Assertion extends Assert {
    * Special characters are changed to characters entities
    *
    * @param   String pattern
-   * @rerturn String pattern - with characters entities
+   * @return String pattern - with characters entities
    */
   private static String encodeSpecialChars(String pattern) {
     if (pattern.contains("<") || pattern.contains(">")) {

@@ -40,7 +40,7 @@ public class CommentsTests extends NewTestTemplate {
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
     article.clickCommentsHeader();
-    article.verify25CommentsPerPage();
+    article.verifyCommentsPerPage(25);
   }
   
   // CT03

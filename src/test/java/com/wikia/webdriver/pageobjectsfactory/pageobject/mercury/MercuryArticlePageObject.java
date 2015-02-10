@@ -188,82 +188,51 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   }
 
   public void verifySingleLinkedImageRedirect(int index) {
-    String methodName = "verifySingleLinkedImageRedirect";
     String currentUrl = driver.getCurrentUrl();
     singleImgLink.get(index).click();
-    if (currentUrl.equals(driver.getCurrentUrl())) {
-      PageObjectLogging.log(methodName, "Redirection doesn't work", false);
-    } else {
-      PageObjectLogging.log(methodName, "Redirection works", true);
-    }
+    Assertion.assertFalse(currentUrl.equals(driver.getCurrentUrl()), "Redirection doesn't work");
   }
 
-  public void verify25CommentsPerPage() {
-    String methodName = "verify25CommentsPerPage";
-    if (commentsList.size() == 25) {
-      PageObjectLogging.log(methodName, "There are 25 comments per comment page", true);
-    } else {
-      PageObjectLogging.log(methodName, "There aren't 25 comments per comment page", false);
-    }
+  public void verifyCommentsPerPage(int expectedNumber) {
+    Assertion.assertNumber(expectedNumber, commentsList.size(), "Number of comments per page");
   }
 
   public void verifyNextAndPreviousPageAreVisible() {
-    String methodName = "verifyNextAndPreviousPageAreVisible";
     int numberOfComments =
         Integer.parseInt(showCommentsButton.getText().substring(0,
             showCommentsButton.getText().indexOf(" ")));
-    if (numberOfComments - commentsReplies.size() > 25) {
-      if (nextCommentPageButton.isDisplayed()) {
-        PageObjectLogging.log(methodName, "Next page button is displayed", true);
-        nextCommentPageButton.click();
-        if (previousCommentPageButton.isDisplayed()) {
-          PageObjectLogging.log(methodName, "Previous page button is displayed", true);
-          previousCommentPageButton.click();
-          if (previousCommentPageButton.isDisplayed()) {
-            PageObjectLogging.log(methodName, "Previous page button is displayed", false);
-          } else {
-            PageObjectLogging.log(methodName, "Previous page button isn't displayed", true);
-          }
-        } else {
-          PageObjectLogging.log(methodName, "Previous page button isn't displayed", false);
-        }
-      } else {
-        PageObjectLogging.log(methodName, "Next page button isn't displayed", false);
-      }
-    } else {
-      PageObjectLogging.log(methodName, "There are less than 25 comments on that page", false);
-    }
+    Assertion.assertTrue(numberOfComments - commentsReplies.size() > 25,
+        "There is less than 25 on that page");
+    Assertion.assertTrue(nextCommentPageButton.isDisplayed(), "Next page button isn't displayed");
+    nextCommentPageButton.click();
+    Assertion.assertTrue(previousCommentPageButton.isDisplayed(),
+        "Previous page button isn't displayed");
+    previousCommentPageButton.click();
+    Assertion.assertFalse(previousCommentPageButton.isDisplayed(),
+        "Previous page button is displayed");
   }
 
   public void verifyRepliesCounterIsCorrect(int index) {
-    String methodName = "verifyRepliesCounterIsCorrect";
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
     int numberOfReplies =
         Integer.parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
-    if (numberOfReplies == commentsRepliesList.get(index).findElements(By.cssSelector("li")).size()) {
-      PageObjectLogging.log(methodName, "Replies counter works", true);
-    } else {
-      PageObjectLogging.log(methodName, "Replies counter doesn't work", false);
-    }
+    Assertion
+        .assertTrue(
+            numberOfReplies == commentsRepliesList.get(index).findElements(By.cssSelector("li"))
+                .size(), "Replies counter doesn't work");
   }
 
   public void verifyTapOnUserRedirectToUserPage(int index) {
-    String methodName = "verifyTapOnUserRedirectToUserPage";
     String userName = commentsUsernames.get(index).getText();
     commentsUsernames.get(index).click();
     String subUrl =
         driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/") + 6,
             driver.getCurrentUrl().length());
-    if (subUrl.equals("User:" + userName)) {
-      PageObjectLogging.log(methodName, "Redirect to user page works", true);
-    } else {
-      PageObjectLogging.log(methodName, "Redirect to user page doesn't work", false);
-    }
+    Assertion.assertTrue(subUrl.equals("User:" + userName), "Url doesn't contain user page");
   }
 
   public void verifyCommentsCounterIsCorrect() {
-    String methodName = "verifyCommentsCounterIsCorrect";
     int numberOfComments =
         Integer.parseInt(commentsHeader.getText().substring(0,
             commentsHeader.getText().indexOf(" ")));
@@ -272,11 +241,7 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
       nextCommentPageButton.click();
     }
     numberOfComments -= allComments.size();
-    if (numberOfComments == 0) {
-      PageObjectLogging.log(methodName, "Comments counter works", true);
-    } else {
-      PageObjectLogging.log(methodName, "Comments counter doesn't work", false);
-    }
+    Assertion.assertTrue(numberOfComments == 0, "There are untracked comments");
   }
 
   public void verifyMediaInComments(String mediaType, int index) {
@@ -288,17 +253,10 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
       } else {
         mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
       }
-      if (mediaInComment.findElement(By.cssSelector("img")).isDisplayed()) {
-        PageObjectLogging.log(methodName, mediaType + " thumbnail is displayed", true);
-        if (mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
-            .contains("/wiki/File:")) {
-          PageObjectLogging.log(methodName, mediaType + " anchor is displayed", true);
-        } else {
-          PageObjectLogging.log(methodName, mediaType + " anchor isn't displayed", false);
-        }
-      } else {
-        PageObjectLogging.log(methodName, mediaType + " thumbnail isn't displayed", false);
-      }
+      Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("img")).isDisplayed(),
+          mediaType + " thumbnail isn't displayed");
+      Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
+          .contains("/wiki/File:"), mediaType + " anchor isn't displayed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "There is no " + mediaType + " in that comment", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
@@ -306,71 +264,45 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   }
 
   public void verifyChevronRotatesWhenTapped() {
-    String methodName = "verifyChevronRotatesWhenTapped";
     boolean collapsed = showCommentsButton.getAttribute("class").contains("collapsed");
     clickCommentsHeader();
-    if (collapsed != showCommentsButton.getAttribute("class").contains("collapsed")) {
-      PageObjectLogging.log(methodName, "Chevron turned", true);
-    } else {
-      PageObjectLogging.log(methodName, "Chevron didn't turn", false);
-    }
+    Assertion.assertFalse(
+        collapsed == showCommentsButton.getAttribute("class").contains("collapsed"),
+        "Chevron didn't turn");
   }
-  
+
   public void verifyFooterElements() {
     String methodName = "verifyFooterElements";
     int elementCounter = 0;
     try {
       waitForElementByElement(footerLogo);
-      if (footerLogo.isDisplayed()) {
-        PageObjectLogging.log(methodName, "Wikia logo is displayed", true);
-      } else {
-        PageObjectLogging.log(methodName, "Wikia logo isn't displayed", false);
-      }
+      Assertion.assertTrue(footerLogo.isDisplayed(), "Wikia logo isn't displayed");
       for (WebElement element : footerLinks) {
-        if (element.isDisplayed()) {
-          PageObjectLogging.log(methodName, element.getText() + " is displayed", true);
-        } else {
-          PageObjectLogging.log(methodName, element.getText() + " isn't displayed", false);
-        }
+        Assertion.assertTrue(element.isDisplayed(), element.getText() + " isn't displayed");
         ++elementCounter;
       }
-      if (elementCounter == 11) {
-        PageObjectLogging.log(methodName, "All elements are displayed", true);
-      } else {
-        PageObjectLogging.log(methodName, "Some elements aren't displayed", false);
-      }
+      Assertion.assertTrue(elementCounter == 11, "Some elements aren't displayed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "Some elements are missing", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
-  
+
   public void verifyTapContributorRedirectToUserPage(int index) {
-    String methodName = "verifyTapContributorRedirectToUserPage";
     topContributorsLinks.get(index).click();
     String newUrl = driver.getCurrentUrl();
-    if (newUrl.contains("/wiki/User:")) {
-      PageObjectLogging.log(methodName, "Redirection to user page works", true);
-    } else {
-      PageObjectLogging.log(methodName, "Redirection to user page doesn't work", false);
-    }
+    Assertion.assertTrue(newUrl.contains("/wiki/User:"), "Redirection to user page doesn't work");
   }
-  
+
   public void verifyChevronRotation() {
     String methodName = "verifyChevronRotation";
     try {
       waitForElementByElement(categoryButton);
-      if (categoryButton.getAttribute("class").contains("collapsed")) {
-        PageObjectLogging.log(methodName, "Chevron is collapsed", true);
-      } else {
-        PageObjectLogging.log(methodName, "Chevron isn't collapsed", false);
-      }
+      Assertion.assertTrue(categoryButton.getAttribute("class").contains("collapsed"),
+          "Chevron isn't collapsed");
       categoryButton.click();
-      if (categoryButton.getAttribute("class").contains("collapsed")) {
-        PageObjectLogging.log(methodName, "Chevron is collapsed", false);
-      } else {
-        PageObjectLogging.log(methodName, "Chevron isn't collapsed", true);
-      }
+      Assertion.assertFalse(categoryButton.getAttribute("class").contains("collapsed"),
+          "Chevron is collapsed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }

@@ -55,7 +55,7 @@ public class MercuryBasePageObject extends MobileBasePageObject {
     swipeAction.dragAndDropBy(element, +100, 0).build().perform();
   }
   
-  public void waitMillisecons(int time, String methodName) {
+  public void waitMilliseconds(int time, String methodName) {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {

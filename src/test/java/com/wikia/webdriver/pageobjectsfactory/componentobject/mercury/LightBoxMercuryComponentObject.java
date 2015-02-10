@@ -83,8 +83,8 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     doubleTapZoom(lightboxInner);
     doubleTapZoom(lightboxContent);
     doubleTapZoom(pageWrapper);
-    PageObjectLogging
-        .log("testGestures", "Double tap zoom was correctly simulated 4 times", true, driver);
+    PageObjectLogging.log("testGestures", "Double tap zoom was correctly simulated 4 times", true,
+        driver);
   }
 
   public void verifyImageWasChanged(String imageOnePath, String imageTwoPath) {
@@ -123,11 +123,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
       }
     }
-    if (imageChanged) {
-      PageObjectLogging.log("verifySwiping", "Swiping to " + direction + " works", true);
-    } else {
-      PageObjectLogging.log("verifySwiping", "Swiping to " + direction + " doesn't work", false);
-    }
+    Assertion.assertTrue(imageChanged, "Swiping to " + direction + " doesn't work");
   }
 
   private boolean verifyChangesInUI(boolean lastDisplayVisibility) {
@@ -139,18 +135,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     if (lightboxFooter.getCssValue("display").contains("none")) {
       lightboxFooterDisplay = false;
     }
-    if (lightboxHeaderDisplay == lastDisplayVisibility) {
-      PageObjectLogging
-          .log("verifyChangesInUI", "Lightbox header visibility didn't changed", false);
-    } else {
-      PageObjectLogging.log("verifyChangesInUI", "Lightbox header visibility changed", true);
-    }
-    if (lightboxFooterDisplay == lastDisplayVisibility) {
-      PageObjectLogging
-          .log("verifyChangesInUI", "Lightbox footer visibility didn't changed", false);
-    } else {
-      PageObjectLogging.log("verifyChangesInUI", "Lightbox footer visibility changed", true);
-    }
+    Assertion.assertFalse(lightboxHeaderDisplay == lastDisplayVisibility,
+        "Lightbox header visibility didn't changed");
+    Assertion.assertFalse(lightboxFooterDisplay == lastDisplayVisibility,
+        "Lightbox footer visibility didn't changed");
     return !lastDisplayVisibility;
   }
 
@@ -160,24 +148,17 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     int duration = 500;
     int waitAfter = 5000;
     boolean lastDisplayVisibility = true;
-    if (LightboxHeaderDisplayValue.contains(LightboxFooterDisplayValue)) {
-      if ("none".equals(LightboxHeaderDisplayValue)) {
-        PageObjectLogging
-            .log("verifyVisibilityUI", "Lightbox header and footer are not visible", true);
-        lastDisplayVisibility = false;
-      } else {
-        PageObjectLogging.log("verifyVisibilityUI", "Lightbox header and footer are visible", true);
-        lastDisplayVisibility = true;
-      }
+    Assertion.assertTrue(LightboxHeaderDisplayValue.contains(LightboxFooterDisplayValue),
+        "Visibility of lightbox header is different than lightbox footer");
+    if ("none".equals(LightboxHeaderDisplayValue)) {
+      lastDisplayVisibility = false;
     } else {
-      PageObjectLogging.log("verifyVisibilityUI",
-                            "Visibility of lightbox header is different than lightbox footer",
-                            false);
+      lastDisplayVisibility = true;
     }
     touchAction.tapOnPointXY(50, 50, duration, waitAfter);
     lastDisplayVisibility = verifyChangesInUI(lastDisplayVisibility);
     touchAction.tapOnPointXY(50, 50, duration, waitAfter);
-    lastDisplayVisibility = verifyChangesInUI(lastDisplayVisibility);
+    verifyChangesInUI(lastDisplayVisibility);
   }
 
   public void verifyTappingOnImageEdge(PerformTouchAction touchAction, String edge) {
@@ -193,12 +174,8 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     }
     touchAction.tapOnPointXY(pointX, 50, duration, waitAfter);
     nextImageSrc = getCurrentImagePath();
-    if (!nextImageSrc.contains(currentImageSrc)) {
-      PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge works", true);
-    } else {
-      PageObjectLogging
-          .log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge doesn't work", false);
-    }
+    Assertion.assertFalse(nextImageSrc.contains(currentImageSrc), "Tapping on " + edge
+        + " edge doesn't work");
   }
 
   public void verifyZoomingByGesture(PerformTouchAction touchAction, String zoomMethod) {
@@ -217,12 +194,8 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
     }
     File afterZoomIn = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
-      PageObjectLogging
-          .log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " doesn't work", false);
-    } else {
-      PageObjectLogging.log("verifyZoomingByGesture", "Zoom in by " + zoomMethod + " works", true);
-    }
+    Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZoomIn), "Zoom in by "
+        + zoomMethod + " doesn't work");
     switch (zoomMethod) {
       case "gesture":
         touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
@@ -235,35 +208,22 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
     }
     File afterZoomOut = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
-      PageObjectLogging.log("verifyZoomingByGesture", "Zoom out by " + zoomMethod + " works", true);
-    } else {
-      PageObjectLogging
-          .log("verifyZoomingByGesture", "Zoom out by " + zoomMethod + " doesn't work", false);
-    }
+    Assertion.assertTrue(ic.areFilesTheSame(beforeZooming, afterZoomOut), "Zoom out by "
+        + zoomMethod + " doesn't work");
   }
 
   public void verifyMovingImageAfterZoomingToDirection(PerformTouchAction touchAction,
-                                                       String direction) {
+      String direction) {
     Shooter shooter = new Shooter();
     ImageComparison ic = new ImageComparison();
     File beforeZooming = shooter.capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     File afterZooming = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("verifyZoomingByGesture", "Zoom in doesn't work", false);
-    } else {
-      PageObjectLogging.log("verifyZoomingByGesture", "Zoom in works", true);
-    }
+    Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZooming), "Zoom in doesn't work");
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     File afterMoving = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(afterZooming, afterMoving)) {
-      PageObjectLogging
-          .log("verifyZoomingByGesture", "Move to " + direction + " doesn't work", false);
-    } else {
-      PageObjectLogging.log("verifyZoomingByGesture", "Move to " + direction + " works", true);
-    }
+    Assertion.assertFalse(ic.areFilesTheSame(afterZooming, afterMoving), "Move to " + direction
+        + " doesn't work");
   }
 }
-
