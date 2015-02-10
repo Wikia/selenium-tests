@@ -161,6 +161,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestParamValue" />
         </classes>
     </test>
 </suite>
