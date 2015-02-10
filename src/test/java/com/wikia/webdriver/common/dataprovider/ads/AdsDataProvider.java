@@ -279,10 +279,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] topWamWikis() {
+  public static final Object[][] parameterValueProvider() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", true},
-        {"mobileregressiontesting", "PMG", false}
+        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
+        {"mobileregressiontesting", "PMG", "top", "1k" , false},
+        {"assassinscreed", "Tunguska", "esrb", "mature", true},
+        {"101dalmatians", "Jewel", "esrb", "ec" , true},
+        {"tardis", "Mang", "esrb", "teen", true}
     };
   }
 

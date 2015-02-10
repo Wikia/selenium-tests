@@ -21,8 +21,8 @@ public class TestParamValue extends NewTestTemplate {
       dataProvider = "parameterValueProvider", dataProviderClass = AdsDataProvider.class,
       groups = {"paramValue_GEF"}
   )
-  public void TestParamValue_GeoEdgeFree(String wikiName, String article, Boolean paramPresent,
-                                         String paramName, String paramValue) {
+  public void TestParamValue_GeoEdgeFree(String wikiName, String article, String paramName,
+                                         String paramValue, Boolean paramPresent) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 
