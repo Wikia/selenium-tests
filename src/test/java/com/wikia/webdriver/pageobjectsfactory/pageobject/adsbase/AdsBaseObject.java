@@ -681,31 +681,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return dataGptPageParams.contains(gptParamPattern);
   }
 
-  /**
-   * Test whether the top=1k parameter is passed (or not passed) to DART
-   *
-   * @param isTop1k should the top=1k parameter be passed to DART
-   */
-  public void verifyTop1kParamState(Boolean isTop1k) {
-    if (isTop1k) {
-      Assertion.assertTrue(isGptParamPresent("top", "1k"), /* error msg: */
-                           "parameter top=1k not found");
-      PageObjectLogging.log(
-          "verifyTop1kParamState",
-          "parameter top=1k found",
-          true,
-          driver
-      );
-    } else {
-      Assertion
-          .assertFalse(isGptParamPresent("top", "1k"), /* error msg: */ "parameter top=1k found");
-      PageObjectLogging.log(
-          "verifyTop1kParamState",
-          "parameter top=1k not found",
-          true,
-          driver
-      );
-    }
+  public void verifyParamValue(String paramName, String paramValue, boolean expected) {
+    Assertion.assertEquals(isGptParamPresent(paramName, paramValue), expected,
+                           "parameter \"" + paramName + "\" not found");
+    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
+                                              + expected, true, driver);
   }
 
   public void checkSpotlights() {
