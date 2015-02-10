@@ -669,9 +669,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   protected boolean isGptParamPresent(String key, String value) {
     waitForElementByElement(presentMedrec);
-    String
-        dataGptPageParams =
-        presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
+    String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 
     PageObjectLogging.log(
@@ -683,26 +681,31 @@ public class AdsBaseObject extends WikiBasePageObject {
     return dataGptPageParams.contains(gptParamPattern);
   }
 
-  public void verifyParamValueNotPresent(String paramName, String paramValue) {
-    Assertion.assertFalse(isGptParamPresent(paramName, paramValue), /* error msg: */
-                          "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log(
-        "verifyParamState",
-        "parameter \"" + paramName + "\" not found",
-        true,
-        driver
-    );
-  }
-
-  public void verifyParamValuePresent(String paramName, String paramValue) {
-    Assertion.assertTrue(isGptParamPresent(paramName, paramValue), /* error msg: */
-                         "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log(
-        "verifyParamState",
-        "parameter \"" + paramName + "\" found with value \"" + paramValue +"\"",
-        true,
-        driver
-    );
+  /**
+   * Test whether the top=1k parameter is passed (or not passed) to DART
+   *
+   * @param isTop1k should the top=1k parameter be passed to DART
+   */
+  public void verifyTop1kParamState(Boolean isTop1k) {
+    if (isTop1k) {
+      Assertion.assertTrue(isGptParamPresent("top", "1k"), /* error msg: */
+                           "parameter top=1k not found");
+      PageObjectLogging.log(
+          "verifyTop1kParamState",
+          "parameter top=1k found",
+          true,
+          driver
+      );
+    } else {
+      Assertion
+          .assertFalse(isGptParamPresent("top", "1k"), /* error msg: */ "parameter top=1k found");
+      PageObjectLogging.log(
+          "verifyTop1kParamState",
+          "parameter top=1k not found",
+          true,
+          driver
+      );
+    }
   }
 
   public void checkSpotlights() {
