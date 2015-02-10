@@ -669,7 +669,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   protected boolean isGptParamPresent(String key, String value) {
     waitForElementByElement(presentMedrec);
-    String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
+    String dataGptPageParams =
+      presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 
     PageObjectLogging.log(
