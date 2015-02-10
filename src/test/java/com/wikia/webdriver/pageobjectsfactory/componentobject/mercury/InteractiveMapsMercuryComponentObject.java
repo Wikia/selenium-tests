@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -159,6 +160,54 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
       PageObjectLogging.log(methodName, "Zoom in works", true);
     } else {
       PageObjectLogging.log(methodName, "Zoom in doesn't work", false);
+    }
+  }
+  
+  public void verifyZoomByGesture(PerformTouchAction touchAction) {
+    driver.switchTo().frame(mapFrame);
+    String methodName = "verifyZoomByGesture";
+    try {
+      if (zoomInButton.getAttribute("class").contains("disabled")) {
+        PageObjectLogging.log(methodName, "Zoom in button is disabled", true);
+      } else {
+        PageObjectLogging.log(methodName, "Zoom in button is enabled", false);
+      }
+      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
+      if (zoomInButton.getAttribute("class").contains("disabled")) {
+        PageObjectLogging.log(methodName, "Zoom in button is disabled", false);
+      } else {
+        PageObjectLogging.log(methodName, "Zoom in button is enabled", true);
+      }
+      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
+      if (zoomInButton.getAttribute("class").contains("disabled")) {
+        PageObjectLogging.log(methodName, "Zoom in button is disabled", true);
+      } else {
+        PageObjectLogging.log(methodName, "Zoom in button is enabled", false);
+      }
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
+  }
+  
+  public void verifyScrollableFilterList(PerformTouchAction touchAction) {
+    String methodName = "verifyScrollableFilterList";
+    Shooter shooter = new Shooter();
+    ImageComparison ic = new ImageComparison();
+    File beforeScrolling = shooter.capturePage(driver);
+    try {
+      clickFilterBox();
+      Thread.sleep(5000);
+      touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
+      File afterScrolling = shooter.capturePage(driver);
+      if (ic.areFilesTheSame(beforeScrolling, afterScrolling)) {
+        PageObjectLogging.log(methodName, "Scrolling in filter box doesn't work", false);
+      } else {
+        PageObjectLogging.log(methodName, "Scrolling in filter box works", true);
+      }
+    } catch (InterruptedException e) {
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
 }

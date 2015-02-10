@@ -15,7 +15,7 @@ public class MercuryContent {
 
   //Articles prepared for Mercury
   public static final String MERCURY_TEST = "MercuryTest";
-  public static final String MERCURY_MAPS = "embedMap";
+  public static final String MERCURY_MAPS = "MercuryMapTest";
   public static final String MERCURY_GALLERY_TEST_ARTICLE = "MercuryGallery";
   public static final String MERCURY_VIDEO_TEST_ARTICLE = "MercuryVideoTest";
   public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
