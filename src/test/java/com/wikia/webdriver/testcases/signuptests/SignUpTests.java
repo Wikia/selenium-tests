@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
-  public void SignUp_001_wrongBlurryWord() {
+  public void SignUp_001_wrongBlurryWord_MAIN_3822() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
