@@ -95,7 +95,7 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
       driver.switchTo().frame(mapFrame);
       waitForElementVisibleByElement(poiPin);
       tapOnElement(poiPin);
-      PageObjectLogging.log("clickPin", "Pin was clicked", true);
+      PageObjectLogging.log(methodName, "Pin was clicked", true);
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "There is no pins, add them manualy", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
