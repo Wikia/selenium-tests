@@ -49,9 +49,10 @@ public class UserAvatarTests extends NewTestTemplate {
   }
 
   @Test(
-		  groups = {"AvatarTest", "AvatarTest_002"},
-		  dependsOnMethods = "AvatarTest_001_uploadAvatar"
-		  )
+	  groups = {"AvatarTest", "AvatarTest_002"},
+	  dependsOnMethods = "AvatarTest_001_uploadAvatar",
+	  invocationCount = 10
+  )
   public void AvatarTest_002_clickAvatar() {
 	  WikiBasePageObject base = new WikiBasePageObject(driver);
 	  base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -61,7 +62,8 @@ public class UserAvatarTests extends NewTestTemplate {
   
   @Test(
       groups = {"AvatarTest", "AvatarTest_003"},
-      dependsOnMethods = "AvatarTest_001_uploadAvatar"
+      dependsOnMethods = "AvatarTest_001_uploadAvatar",
+      invocationCount = 10
   )
   public void AvatarTest_003_removeAvatar() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
