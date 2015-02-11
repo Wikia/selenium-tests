@@ -227,10 +227,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
             + "<style>td { border-top: 1px solid grey; } </style></head><body>"
             + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
             + "<p>Date: "
-            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss  ZZ").print(DateTime.now())
+            + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
+                DateTime.now(DateTimeZone.UTC))
             + "</p>"
             + "<p>Polish Time: "
-            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss  ZZ").print(
+            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
                 DateTime.now().withZone(
                     DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
             + "<p>Browser: " + Global.BROWSER + "</p>" + "<p>OS: " + System.getProperty("os.name")
