@@ -25,8 +25,8 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   protected WebElement notificationsBubbles;
   @FindBys(@FindBy(css = ".notification.unread"))
   private List<WebElement> notificationsList;
-  @FindBy(css = "#AccountNavigation .subnav")
-  private WebElement notificationsSubnav;
+  @FindBy(css = "#notificationsContainer")
+  private WebElement notificationsDropdown;
   @FindBy(css = ".bubbles-count")
   private WebElement bubblesCount;
   @FindBy(css = "#wall-notifications-markasread-sub")
@@ -35,9 +35,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private WebElement markNotificationsAsReadAllWikis;
   @FindBy(css = "#wall-notifications-markasread-this-wiki")
   private WebElement markNotificationsAsReadThisWiki;
-  @FindBy(css = "#AccountNavigation .bubbles")
+  @FindBy(css = "#notificationsEntryPoint .bubbles")
   private WebElement emptyNumberOfUnreadNotifications;
-  @FindBy(css = "#AccountNavigation")
+  @FindBy(css = "#notificationsEntryPoint")
   private WebElement accountNavigationEntryPoint;
   @FindBy(css = "#notifications .notification-message")
   private WebElement notificationsMessage;
@@ -57,7 +57,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver webDriver) {
-        if (!notificationsSubnav.isDisplayed()) {
+        if (!notificationsDropdown.isDisplayed()) {
           accountNavigationEntryPoint.click();
 
           return false;
@@ -72,7 +72,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * request. This method waits until this requests completes.
    */
   private void waitForNotificationsMessagesToLoad() {
-    waitForElementVisibleByElement(notificationsSubnav);
+    waitForElementVisibleByElement(notificationsDropdown);
     waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
     waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
   }
@@ -82,7 +82,6 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    */
   public void showNotifications() {
     waitForNotificationsLoaded();
-    getVenusGlobalNav().openAccountNAvigation();
     openNotifications();
     PageObjectLogging.log("#WallNotifications li ul.subnav",
                           "show notifications", true);
@@ -150,6 +149,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     for (int i = 0; i < this.notificationsList.size(); i++) {
       WebElement n = this.notificationsList.get(i);
       WebElement nTitle = n.findElement(By.cssSelector(".notification-message h4"));
+      String text = nTitle.getText();
       if (n != null && title.equals(nTitle.getText())) {
         notifications.add(n);
       }
