@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.common.base.Joiner;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -18,7 +20,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -49,6 +53,12 @@ public class AdsBaseObject extends WikiBasePageObject {
       "#SPOTLIGHT_FOOTER_1",
       "#SPOTLIGHT_FOOTER_2",
       "#SPOTLIGHT_FOOTER_3",
+  };
+
+  private static final String[] PROVIDERS = {
+      "gpt",
+      "remnant",
+      "Liftium",
   };
 
   // Selectors
@@ -736,4 +746,54 @@ public class AdsBaseObject extends WikiBasePageObject {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     return driver.findElement(By.cssSelector(slotSelector));
   }
+
+  public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
+    Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
+    return this;
+  }
+
+  private List<String> getProvidersChain(String slotName) {
+    List<String> providersChain = new ArrayList<>();
+    String slotSelector = AdsContent.getSlotSelector(slotName);
+    for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
+      String providerSlotName = providerSlot.getAttribute("id");
+      String provider = null;
+      for (String providerName : PROVIDERS) {
+        if (providerSlotName.contains(providerName)) {
+          provider = providerName;
+          break;
+        }
+      }
+      providersChain.add(provider != null ? provider : providerSlotName);
+    }
+    return providersChain;
+  }
+
+  public AdsBaseObject refresh(int times) {
+    for (int i = 0; i < times; i++) {
+      refreshPage();
+    }
+    return this;
+  }
+
+  public AdsBaseObject waitPageLoaded() {
+    waitOnReadyEvent();
+    return this;
+  }
+
+  private void waitOnReadyEvent() {
+    wait.until(new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        return ((JavascriptExecutor) driver).executeScript("return document.readyState")
+            .equals("complete");
+      }
+    });
+  }
+
+  public String getCountry() {
+    return ((String) ((JavascriptExecutor) driver).executeScript(
+        "return Wikia.geo.getCountryCode();"
+    ));
+  }
+
 }
