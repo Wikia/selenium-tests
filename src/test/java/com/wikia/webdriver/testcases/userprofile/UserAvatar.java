@@ -14,15 +14,15 @@ import org.testng.annotations.Test;
  * @author Karol 'kkarolk' Kujawiak
  * @author Michal 'justnpT' Nowierski
  * 
- * Test 01
+ * Test uploadAvatar
  * 1. Open user profile page User:Username and add avatar
  * 2. Verify that avatar appeared on user  page, and on global navigation
  * 
- * Test 02
+ * Test clickAvatar
  * 1. Open wikia page and click user avatar on global navigation
  * 2. Make sure you were redirected to User page
  * 
- * Test 03
+ * Test removeAvatar
  * 1. Open user profile page User:Username and remove avatar
  * 2. Verify that avatar was removed from user page, and placeholder appeared on global navigation
  * 3. Log out and verify that avatar is not visible on global navigation
