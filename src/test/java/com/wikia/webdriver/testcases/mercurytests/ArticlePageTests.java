@@ -48,7 +48,7 @@ public class ArticlePageTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject articlePage =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
-    articlePage.verifyFooterElements();
+    articlePage.verifyFooterElements(11);
   }
   
   // APT05

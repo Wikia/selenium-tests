@@ -41,6 +41,8 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   @FindBy(css = ".lightbox-content")
   private WebElement lightbox;
 
+  private int waitTime = 5000;
+
   public InteractiveMapsMercuryComponentObject(WebDriver driver) {
     super(driver);
   }
@@ -95,11 +97,11 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
       driver.switchTo().frame(mapFrame);
       waitForElementVisibleByElement(poiPin);
       tapOnElement(poiPin);
-      PageObjectLogging.log(methodName, "Pin was clicked", true);
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "There is no pins, add them manualy", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
+    PageObjectLogging.log(methodName, "Pin was clicked", true);
   }
 
   public String getMapLeafletSrc() {
@@ -146,10 +148,10 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     ImageComparison ic = new ImageComparison();
     File beforeZooming = shooter.capturePage(driver);
     clickZoomOut();
-    waitMilliseconds(5000, methodName);
+    waitMilliseconds(waitTime, methodName);
     File afterZoomOut = shooter.capturePage(driver);
     clickZoomIn();
-    waitMilliseconds(5000, methodName);
+    waitMilliseconds(waitTime, methodName);
     File afterZoomIn = shooter.capturePage(driver);
     Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZoomOut), "Zoom out doesn't work");
     Assertion.assertTrue(ic.areFilesTheSame(beforeZooming, afterZoomIn), "Zoom in doesn't work");
@@ -161,10 +163,10 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     try {
       Assertion.assertTrue(zoomInButton.getAttribute("class").contains("disabled"),
           "Zoom in button is enabled");
-      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
+      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, waitTime);
       Assertion.assertFalse(zoomInButton.getAttribute("class").contains("disabled"),
           "Zoom in button is disabled");
-      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
+      touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, waitTime);
       Assertion.assertTrue(zoomInButton.getAttribute("class").contains("disabled"),
           "Zoom in button is enabled");
     } catch (NoSuchElementException e) {
@@ -179,13 +181,11 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     File beforeScrolling = shooter.capturePage(driver);
     try {
       clickFilterBox();
-      Thread.sleep(5000);
-      touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
+      waitMilliseconds(waitTime, methodName);
+      touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, waitTime);
       File afterScrolling = shooter.capturePage(driver);
       Assertion.assertFalse(ic.areFilesTheSame(beforeScrolling, afterScrolling),
           "Scrolling in filter box doesn't work");
-    } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }

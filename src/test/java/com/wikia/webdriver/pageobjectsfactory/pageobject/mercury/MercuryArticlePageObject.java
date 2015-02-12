@@ -160,7 +160,7 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
     scrollToElement(topContributorsSection);
     Assertion.assertTrue(checkIfElementOnPage(topContributorsSection));
     PageObjectLogging.log("verifyTopContributorsSectionIsVisible",
-        "Top contributors section is visible", true);
+                          "Top contributors section is visible", true);
   }
 
   public void verifyTopContributorsThumb() {
@@ -200,16 +200,17 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   public void verifyNextAndPreviousPageAreVisible() {
     int numberOfComments =
         Integer.parseInt(showCommentsButton.getText().substring(0,
-            showCommentsButton.getText().indexOf(" ")));
+                                                                showCommentsButton.getText()
+                                                                    .indexOf(" ")));
     Assertion.assertTrue(numberOfComments - commentsReplies.size() > 25,
-        "There is less than 25 on that page");
+                         "There is less than 25 on that page");
     Assertion.assertTrue(nextCommentPageButton.isDisplayed(), "Next page button isn't displayed");
     nextCommentPageButton.click();
     Assertion.assertTrue(previousCommentPageButton.isDisplayed(),
-        "Previous page button isn't displayed");
+                         "Previous page button isn't displayed");
     previousCommentPageButton.click();
     Assertion.assertFalse(previousCommentPageButton.isDisplayed(),
-        "Previous page button is displayed");
+                          "Previous page button is displayed");
   }
 
   public void verifyRepliesCounterIsCorrect(int index) {
@@ -228,21 +229,21 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
     commentsUsernames.get(index).click();
     String subUrl =
         driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/") + 6,
-            driver.getCurrentUrl().length());
+                                         driver.getCurrentUrl().length());
     Assertion.assertTrue(subUrl.equals("User:" + userName), "Url doesn't contain user page");
   }
 
   public void verifyCommentsCounterIsCorrect() {
     int numberOfComments =
         Integer.parseInt(commentsHeader.getText().substring(0,
-            commentsHeader.getText().indexOf(" ")));
+                                                            commentsHeader.getText().indexOf(" ")));
     while (nextCommentPageButton.isDisplayed()) {
       numberOfComments -= allComments.size();
       nextCommentPageButton.click();
     }
     numberOfComments -= allComments.size();
     Assertion.assertTrue(numberOfComments == 0, "There are "
-        + numberOfComments + " untracked comments");
+                                                + numberOfComments + " untracked comments");
   }
 
   public void verifyMediaInComments(String mediaType, int index) {
@@ -255,9 +256,9 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
         mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
       }
       Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("img")).isDisplayed(),
-          mediaType + " thumbnail isn't displayed");
+                           mediaType + " thumbnail isn't displayed");
       Assertion.assertTrue(mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
-          .contains("/wiki/File:"), mediaType + " anchor isn't displayed");
+                               .contains("/wiki/File:"), mediaType + " anchor isn't displayed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "There is no " + mediaType + " in that comment", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
@@ -272,7 +273,7 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
         "Chevron didn't turn");
   }
 
-  public void verifyFooterElements() {
+  public void verifyFooterElements(int expectedNumberOfElementsInFooter) {
     String methodName = "verifyFooterElements";
     int elementCounter = 0;
     try {
@@ -282,7 +283,8 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
         Assertion.assertTrue(element.isDisplayed(), element.getText() + " isn't displayed");
         ++elementCounter;
       }
-      Assertion.assertTrue(elementCounter == 11, "Some elements aren't displayed");
+      Assertion.assertTrue(elementCounter == expectedNumberOfElementsInFooter,
+                           "Some elements aren't displayed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, "Some elements are missing", false);
       PageObjectLogging.log(methodName, e.getMessage(), false);
@@ -300,10 +302,10 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
     try {
       waitForElementByElement(categoryButton);
       Assertion.assertTrue(categoryButton.getAttribute("class").contains("collapsed"),
-          "Chevron isn't collapsed");
+                           "Chevron isn't collapsed");
       categoryButton.click();
       Assertion.assertFalse(categoryButton.getAttribute("class").contains("collapsed"),
-          "Chevron is collapsed");
+                            "Chevron is collapsed");
     } catch (NoSuchElementException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }

@@ -99,15 +99,13 @@ public class TableOfContentPageObject extends MercuryBasePageObject {
               .toString());
       int windowYPos =
           Integer.parseInt(js.executeScript("return $(window).scrollTop()").toString());
-      String temp =
+      String h2PaddingString =
           js.executeScript("return $('h2').eq(" + index + ").css('padding-top')").toString();
-      temp = temp.substring(0, temp.length() - 2);
-      int h2Padding = Integer.parseInt(temp);
+      h2PaddingString = h2PaddingString.substring(0, h2PaddingString.length() - 2);
+      int h2Padding = Integer.parseInt(h2PaddingString);
       Assertion.assertTrue(h2Pos == windowYPos, "User wasn't moved to right section");
       Assertion.assertTrue(h2Padding >= 40, "Header padding top is < 40");
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
-    } catch (ElementNotVisibleException e) {
+    } catch (NoSuchElementException | ElementNotVisibleException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
@@ -129,9 +127,7 @@ public class TableOfContentPageObject extends MercuryBasePageObject {
       logVisibilityOfTOCMenu(true, methodName);
       tocAll.click();
       logVisibilityOfTOCMenu(true, methodName);
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
-    } catch (ElementNotVisibleException e) {
+    } catch (NoSuchElementException | ElementNotVisibleException e) {
       PageObjectLogging.log(methodName, e.getMessage(), false);
     }
   }
