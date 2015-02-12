@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 
@@ -13,6 +12,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Michal 'justnpT' Nowierski
  * 
  * Test 01
  * 1. Open user profile page User:Username and add avatar
