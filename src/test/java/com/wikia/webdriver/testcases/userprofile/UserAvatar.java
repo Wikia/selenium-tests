@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.userprofiletests;
+package com.wikia.webdriver.testcases.userprofile;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -28,14 +28,14 @@ import org.testng.annotations.Test;
  * 3. Log out and verify that avatar is not visible on global navigation
  * 
  */
-public class UserAvatarTests extends NewTestTemplate {
+public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
   @Test(
       groups = {"AvatarTest", "AvatarTest_001"}
   )
-  public void AvatarTest_001_uploadAvatar() {
+  public void uploadAvatar() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
@@ -50,10 +50,9 @@ public class UserAvatarTests extends NewTestTemplate {
 
   @Test(
 	  groups = {"AvatarTest", "AvatarTest_002"},
-	  dependsOnMethods = "AvatarTest_001_uploadAvatar",
-	  invocationCount = 10
+	  dependsOnMethods = "uploadAvatar"
   )
-  public void AvatarTest_002_clickAvatar() {
+  public void clickAvatar() {
 	  WikiBasePageObject base = new WikiBasePageObject(driver);
 	  base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 	  UserProfilePageObject profile = base.clickOnAvatar();
@@ -62,10 +61,9 @@ public class UserAvatarTests extends NewTestTemplate {
   
   @Test(
       groups = {"AvatarTest", "AvatarTest_003"},
-      dependsOnMethods = "AvatarTest_001_uploadAvatar",
-      invocationCount = 10
+      dependsOnMethods = "uploadAvatar"
   )
-  public void AvatarTest_003_removeAvatar() {
+  public void removeAvatar() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);

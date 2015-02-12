@@ -200,8 +200,9 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".avatar-container.logged-avatar img")
   private WebElement globalNavigationAvatar;
-  @FindBy(css = ".avatar-container.logged-avatar-placeholder")
-  private WebElement globalNavigationAvatarPlaceholder;
+  @FindBy(css = ".links-container .chevron")
+  private WebElement globalNavigationUserChevron;
+  private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
   protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
@@ -1265,7 +1266,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyAvatarPlaceholder() {
-	  waitForElementByElement(globalNavigationAvatarPlaceholder);
+	  // prevent http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp
+	  WebElement placeholder = driver.findElement(By.cssSelector(globalNavigationAvatarPlaceholder));
+	  waitForElementByElement(placeholder);
 	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
   }
   
@@ -1280,8 +1283,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
   
   public UserProfilePageObject clickOnAvatar() {
-	  waitForElementClickableByElement(globalNavigationAvatar);
-	  globalNavigationAvatar.click();
+	  waitForElementClickableByElement(globalNavigationUserChevron);
+	  globalNavigationUserChevron.click();
 	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
 	  globalNavigationAvatar.click();
