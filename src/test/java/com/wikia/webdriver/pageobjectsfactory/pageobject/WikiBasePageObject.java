@@ -1220,6 +1220,10 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
 
+  public Dimension getWindowSize() {
+    return driver.manage().window().getSize();
+  }
+
   public void resizeWindow(int width, int height) {
     try {
       driver.manage().window().setSize(new Dimension(width, height));

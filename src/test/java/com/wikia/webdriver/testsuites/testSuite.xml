@@ -66,6 +66,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnSonyReferrer"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
@@ -161,6 +162,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestParamValue" />
         </classes>
     </test>
 </suite>

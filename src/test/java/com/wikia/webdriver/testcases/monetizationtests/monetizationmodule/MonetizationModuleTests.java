@@ -105,11 +105,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @DataProvider(name = "DataMonetizationModule_005")
   public static Object[][] DataMonetizationModule_005() {
     return new Object[][]{
-        {800, 600, 468, 728},
+        {800, 600, 320, 728},
+        {850, 600, 418, 728},
         {1024, 600, 320, 690},
-        {1440, 600, 468, 728},
-        {1665, 600, 690, 728},
-        {1700, 600, 728, 728},
+        {1440, 600, 418, 728},
+        {1665, 600, 630, 728},
+        {1700, 600, 678, 728},
     };
   }
 
@@ -135,7 +136,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.resizeWindow(width, height);
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitShown();
-    monetizationModule.verifyAdsenseUnitWidth(expectedInContent, expectedOthers);
+    if (monetizationModule.verifyWindowWidth(width)) {
+      monetizationModule.verifyAdsenseUnitWidth(expectedInContent, expectedOthers);
+    }
   }
 
   /**
