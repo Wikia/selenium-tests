@@ -49,7 +49,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   private WebElement birthDayField;
   @FindBy(css = "select[name='birthyear']")
   private WebElement birthYearField;
-  @FindBy(css = ".error-msg")
+  @FindBy(css = "#g-recaptcha-response")
   private WebElement captchaField;
   @FindBy(css = "#wpCaptchaId")
   private WebElement blurryWordHidden;
