@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychała
  * @ownership Consumer
  */
-public class TestHubLinksInGlobalNav extends NewTestTemplate {
+public class GlobalNavigationHubLinks extends NewTestTemplate {
 
   @Test(
       groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"}
