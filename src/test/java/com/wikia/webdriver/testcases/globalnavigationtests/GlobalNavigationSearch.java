@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership Consumer
  */
-public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
+public class GlobalNavigationSearch extends NewTestTemplate {
 
   private Credentials credentials = config.getCredentials();
 
