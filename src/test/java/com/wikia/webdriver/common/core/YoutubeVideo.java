@@ -11,8 +11,8 @@ public class YoutubeVideo implements Video {
 
   public YoutubeVideo(String title, String url) {
     this.url = url;
-    this.title = title;
-    this.fileName = transformTitleToFileName(title);
+    this.title = title.replace("| ", "").replace("|","");
+    this.fileName = transformTitleToFileName(this.title);
   }
 
   @Override
