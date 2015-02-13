@@ -47,7 +47,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   /**
    * This method removes Wikia App from facebook Apps.
    */
-  public void removeApp() {
+  public void removeAppIfPresent() {
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
