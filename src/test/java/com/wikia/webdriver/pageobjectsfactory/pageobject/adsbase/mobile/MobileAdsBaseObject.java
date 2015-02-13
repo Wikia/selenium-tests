@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -25,18 +23,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   private AdsComparison adsComparison;
 
   public MobileAdsBaseObject(WebDriver driver, String page) {
-    super(driver, updateUrl(page));
+    super(driver, page);
     adsComparison = new AdsComparison();
     PageObjectLogging.log("", "Page screenshot", true, driver);
-  }
-
-  private static String updateUrl(String page) {
-    String browserName = ConfigurationFactory.getConfig().getBrowser().toLowerCase();
-    if (!browserName.contains("mercury")) {
-      // Colon in url prevents mercury skin.
-      return new UrlBuilder().appendQueryStringToURL(page, "mercury=force:no");
-    }
-    return page;
   }
 
   @Override
