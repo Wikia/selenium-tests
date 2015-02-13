@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -27,16 +28,16 @@ public class TOCTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.verifyNoH2NoTOC();
+    Assertion.assertFalse(toc.isH2AndTOC(), "TOC is displayed");
   }
-  
+
   // TOCT02
   @Test(groups = {"MercuryTOCTests_002", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_002_IfH2ThenTOC() {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.verifyIfH2ThenTOC();
+    Assertion.assertTrue(toc.isH2AndTOC(), "TOC isn't displayed");
   }
   
   // TOCT03
@@ -45,7 +46,7 @@ public class TOCTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.verifyTOCUnderArticleName();
+    Assertion.assertTrue(toc.isTOCUnderArticleName(), "TOC isn't under article name");
   }
   
   // TOCT04
@@ -54,7 +55,9 @@ public class TOCTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.verifyTapOnElementScrollToSection(1);
+    toc.clickOnTOC();
+    Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
+    Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, 40), "Header padding top is improper");
   }
   
   // TOCT05
@@ -63,6 +66,10 @@ public class TOCTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.verifyTapOnTOCCollapseOrExpandMenu();
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
+    toc.clickOnTOC();
+    Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu isn't visible");
+    toc.clickOnTOC();
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
   }
 }
