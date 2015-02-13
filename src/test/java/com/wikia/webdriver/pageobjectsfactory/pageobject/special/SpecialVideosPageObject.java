@@ -1,12 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +11,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.YoutubeVideo;
+import com.wikia.webdriver.common.core.YoutubeVideoProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 /**
  * @author Garth Webb
@@ -44,7 +45,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   @FindBy(css = "#sorting-dropdown")
   private WebElement sortDropdown;
 
-  private By newestVideoBy = By.cssSelector(".special-videos-grid li:nth-child(1) .title");
+  private By newestVideoBy = By.cssSelector(".special-videos-grid li:nth-child(1) .title a");
 
   public SpecialVideosPageObject(WebDriver driver) {
     super(driver);
@@ -62,13 +63,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
-    getUrl(
-        wikiURL +
-        URLsContent.WIKI_DIR +
-        URLsContent.FILE_NAMESPACE +
-        videoName +
-        "?action=unwatch"
-    );
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + videoName
+        + "?action=unwatch");
     return new WatchPageObject(driver);
   }
 
@@ -99,8 +95,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public void verifyVideoAdded(String videoTitle) {
     waitForTextToBePresentInElementLocatedBy(newestVideoBy, videoTitle);
     PageObjectLogging.log("verifyVideoAdded",
-                          "verify that video with following description was added: " + videoTitle,
-                          true);
+        "verify that video with following description was added: " + videoTitle, true);
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
@@ -109,8 +104,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public String getFileUrl(String wikiURL, int itemNumber) {
-    String
-        fileUrl =
+    String fileUrl =
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getVideoKey(itemNumber);
     PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
     return fileUrl;
@@ -137,24 +131,26 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void verifyDeleteViaGlobalNotifications() {
-    addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
+
+    addVideoViaAjax(video.getUrl());
     deleteVideo();
-    String
-        deletedVideo =
-        "\"File:" + VideoContent.YOUTUBE_VIDEO_URL2_NAME + "\" has been deleted. (undelete)";
+    String deletedVideo =
+        "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
     Assertion.assertEquals(deletedVideo, getFlashMessageText());
-    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications",
-                          "verify video " + deletedVideo + " was deleted", true);
+    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
+        + " was deleted", true);
   }
 
   public void verifyDeleteViaVideoNotPresent() {
-    addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
+
+    addVideoViaAjax(video.getUrl());
     deleteVideo();
     verifyNotificationMessage();
-    Assertion.assertNotEquals(VideoContent.YOUTUBE_VIDEO_URL2_NAME, getNewestVideoTitle());
-    PageObjectLogging.log("verifyDeleteVideoNotPresent",
-                          "verify video " + VideoContent.YOUTUBE_VIDEO_URL2_NAME + " was deleted",
-                          true);
+    Assertion.assertNotEquals(video.getTitle(), getNewestVideoTitle());
+    PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video "
+        + video.getTitle() + " was deleted", true);
   }
 
   public void verifyElementsOnPage() {
@@ -166,6 +162,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
     verifyNewestVideo();
     PageObjectLogging.log("verifyElementsOnPage",
-                          "verify that there is at least one video present", true);
+        "verify that there is at least one video present", true);
   }
 }
