@@ -190,14 +190,10 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
              true);
   }
 
-  public boolean verifyWindowWidth(int width) {
-    if (getWindowSize().width != width) {
-      PageObjectLogging.log("verifyWindowWidth",
-                            "The width of the window is invalid (width="
-                            + getWindowSize().width + ")", true);
-      return false;
-    }
-    return true;
+  public boolean verifyWindowWidth(int expectedWidth) {
+    int windowWidth = getWindowSize().width;
+    PageObjectLogging.log("verifyWindowWidth", "The width of the window is " + windowWidth, true);
+    return (windowWidth == expectedWidth);
   }
 
   public void verifyAdsenseUnitWidth(int expectedInContent, int expectedOthers) {
