@@ -21,7 +21,7 @@ public class TOCTests extends NewTestTemplate {
   public void optInMercury() {
     MercuryContent.turnOnMercurySkin(driver, wikiURL);
   }
-  
+
   // TOCT01
   @Test(groups = {"MercuryTOCTests_001", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_001_NoH2NoTOC() {
@@ -39,7 +39,7 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isH2AndTOC(), "TOC isn't displayed");
   }
-  
+
   // TOCT03
   @Test(groups = {"MercuryTOCTests_003", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_003_TOCUnderArticleName() {
@@ -48,7 +48,7 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCUnderArticleName(), "TOC isn't under article name");
   }
-  
+
   // TOCT04
   @Test(groups = {"MercuryTOCTests_004", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_004_TapOnElementScrollToSection() {
@@ -59,7 +59,7 @@ public class TOCTests extends NewTestTemplate {
     Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
     Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, 40), "Header padding top is improper");
   }
-  
+
   // TOCT05
   @Test(groups = {"MercuryTOCTests_005", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_005_TapOnTOCCollapseOrExpandMenu() {

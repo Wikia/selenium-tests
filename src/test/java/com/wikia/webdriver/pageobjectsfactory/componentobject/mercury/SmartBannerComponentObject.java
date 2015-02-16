@@ -18,12 +18,6 @@ public class SmartBannerComponentObject extends MercuryBasePageObject {
   private WebElement closeButton;
   @FindBy(css = ".sb-button")
   private WebElement bannerButton;
-  @FindBy(css = ".system-android")
-  private WebElement androidBanner;
-  @FindBy(css = ".smart-banner-visible")
-  private WebElement smartBannerDiv;
-  @FindBy(css = ".sb-title")
-  private WebElement bannerTitle;
   @FindBy(css = "div.smart-banner")
   private WebElement smartBanner;
 
