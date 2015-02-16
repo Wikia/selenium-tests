@@ -1,12 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,16 +9,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.Properties;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class DropDownComponentObject extends WikiBasePageObject {
-
-  public DropDownComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "#AccountNavigation")
   private WebElement loginDropdownTrigger;
@@ -50,6 +46,13 @@ public class DropDownComponentObject extends WikiBasePageObject {
   private WebElement messagePlaceholder;
   @FindBy(css = "a.ajaxRegister")
   private WebElement signUpLink;
+  @FindBy(css = "a[data-id='logout']")
+  private WebElement logOutButton;
+
+
+  public DropDownComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   /**
    * Open dropdown - we need to move mouse outside the element and move back to element to trigger
@@ -58,12 +61,12 @@ public class DropDownComponentObject extends WikiBasePageObject {
   public DropDownComponentObject openDropDown() {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
+      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
           if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-            ((JavascriptExecutor) driver).executeScript(
-                "$j('.ajaxLogin .avatar-container').trigger('click')");
+            ((JavascriptExecutor) driver)
+                .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
             return false;
           }
           return true;
@@ -73,18 +76,20 @@ public class DropDownComponentObject extends WikiBasePageObject {
       restoreDeaultImplicitWait();
     }
 
-    PageObjectLogging.log(
-        "DropdownVisible",
-        "Login dropdown is visible",
-        true, driver
-    );
+    PageObjectLogging.log("DropdownVisible", "Login dropdown is visible", true, driver);
+
+    return this;
+  }
+
+
+  public DropDownComponentObject logOut() {
+    logOutButton.click();
 
     return this;
   }
 
   public void remindPassword(String userName, String apiToken) {
-    Assertion.assertEquals(
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
+    Assertion.assertEquals(ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
         resetForgotPasswordTime(userName, apiToken));
     fillUserNameInput(userName);
     waitForElementByElement(formForgotPasswordLink);
@@ -95,87 +100,47 @@ public class DropDownComponentObject extends WikiBasePageObject {
     fillUserNameInput(userName);
     fillPasswordInput(password);
     scrollAndClick(formSubmitButton);
-    PageObjectLogging.log(
-        "LoginFormSubmitted",
-        "Login form is submitted",
-        true
-    );
+    PageObjectLogging.log("LoginFormSubmitted", "Login form is submitted", true);
   }
 
   public void fillUserNameInput(String userName) {
     waitForElementByElement(formUsernameInput);
     formUsernameInput.clear();
     sendKeys(formUsernameInput, userName);
-    PageObjectLogging.log(
-        "UsernameTyped",
-        "UserName input is filled",
-        true
-    );
+    PageObjectLogging.log("UsernameTyped", "UserName input is filled", true);
   }
 
   public void fillPasswordInput(String password) {
     waitForElementByElement(formPassowrdInput);
     formPassowrdInput.clear();
     sendKeys(formPassowrdInput, password);
-    PageObjectLogging.log(
-        "PasswordTyped",
-        "Password input is filled",
-        true
-    );
+    PageObjectLogging.log("PasswordTyped", "Password input is filled", true);
   }
 
   public void logInViaFacebook() {
     scrollAndClick(formConnectWithFbButton);
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "facebook button clicked",
-        true
-    );
+    PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
     waitForNewWindow();
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "facebook popup window detected",
-        true
-    );
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "switching to facebook pop-up window",
-        true
-    );
+    PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
+    PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
 
     waitForElementByElement(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(Properties.emailFB);
-    PageObjectLogging.log(
-        "fillLogin",
-        "Login field on facebook form filled",
-        true
-    );
+    PageObjectLogging.log("fillLogin", "Login field on facebook form filled", true);
 
     waitForElementByElement(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(Properties.passwordFB);
-    PageObjectLogging.log(
-        "fillPassword",
-        "Password field on facebook form filled",
-        true
-    );
+    PageObjectLogging.log("fillPassword", "Password field on facebook form filled", true);
 
     scrollAndClick(facebookSubmitButton);
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "facebook log in submit button clicked",
-        true
-    );
+    PageObjectLogging.log("logInDropDownFB", "facebook log in submit button clicked", true);
 
     driver.switchTo().window(windows[0].toString());
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "switching to main window",
-        true
-    );
+    PageObjectLogging.log("logInDropDownFB", "switching to main window", true);
   }
 
   public SignUpPageObject clickSignUpLink() {
@@ -188,11 +153,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
     waitForElementByElement(messagePlaceholder);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
-    PageObjectLogging.log(
-        "MessageAboutPasswordSent",
-        "Message about new password sent present",
-        true
-    );
+    PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
+        true);
   }
 
 }

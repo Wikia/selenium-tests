@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.EncoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -40,7 +42,7 @@ public class YoutubeVideoProvider {
     nvps.add(new BasicNameValuePair("maxResults", "10"));
     nvps.add(new BasicNameValuePair("q", searchQuerry));
     nvps.add(new BasicNameValuePair("publishedAfter", DateTime.now(DateTimeZone.forID("UTC"))
-        .minusMinutes(20).toString()));
+        .minusMinutes(60).toString()));
 
     HttpGet httpPost =
         new HttpGet("https://www.googleapis.com/youtube/v3/search?"
@@ -69,9 +71,13 @@ public class YoutubeVideoProvider {
       e.printStackTrace();
     }
 
-    PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-    PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+    String videoUrl = null;
+    try {
+      videoUrl = new URLCodec().encode("https://www.youtube.com/watch?v=" + videoId);
+    } catch (EncoderException e) {
+      e.printStackTrace();
+    }
 
-    return new YoutubeVideo(title, "https://www.youtube.com/watch?v=" + videoId);
+    return new YoutubeVideo(title, videoUrl);
   }
 }

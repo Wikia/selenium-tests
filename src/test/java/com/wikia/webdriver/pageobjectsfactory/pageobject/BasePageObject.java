@@ -570,9 +570,14 @@ public class BasePageObject {
 
   public void waitForValueToBePresentInElementsAttributeByCss(
       String selector, String attribute, String value) {
-    wait.until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(By.cssSelector(selector),
-                                                        attribute, value));
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .valueToBePresentInElementsAttribute(By.cssSelector(selector),
+              attribute, value));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(
