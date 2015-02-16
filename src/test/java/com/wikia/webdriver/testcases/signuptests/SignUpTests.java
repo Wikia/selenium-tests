@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
-  public void SignUp_001_wrongBlurryWord_MAIN_3822() {
+  public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -49,7 +49,6 @@ public class SignUpTests extends NewTestTemplate {
         PageContent.WIKI_SIGN_UP_BIRTHDAY,
         PageContent.WIKI_SIGN_UP_BIRTHYEAR
     );
-    signUp.typeCaptcha(signUp.getTimeStamp());
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
     signUp.verifySubmitButtonDisabled();

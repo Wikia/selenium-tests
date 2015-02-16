@@ -149,11 +149,7 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VisualEditorEditingTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VECopyAndPasteTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGameStarLogo"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.CompareScreenshotsForHubsMenu"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestHubLinksInGlobalNav"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestWikiaLogoInGlobalNav"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGlobalSearchInGlobalNav"/>
             <class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
