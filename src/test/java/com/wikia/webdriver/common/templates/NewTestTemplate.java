@@ -20,7 +20,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     runProxyServerIfNeeded(method);
-    if (method.getAnnotation(UserAgent.class) != null) {
+    if (method.isAnnotationPresent(UserAgent.class)) {
       setBrowserUserAgent(
           method.getAnnotation(UserAgent.class).userAgent()
       );

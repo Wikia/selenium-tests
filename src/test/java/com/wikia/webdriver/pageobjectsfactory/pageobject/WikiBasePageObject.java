@@ -193,6 +193,10 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
+  @FindBy(css = "#WikiaFooter")
+  private WebElement footer;
+  @FindBy(css = "#globalNavigation")
+  private WebElement globalNavigationBar;
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
   private VenusGlobalNavPageObject venusGlobalNav;
@@ -1216,6 +1220,10 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
 
+  public Dimension getWindowSize() {
+    return driver.manage().window().getSize();
+  }
+
   public void resizeWindow(int width, int height) {
     try {
       driver.manage().window().setSize(new Dimension(width, height));
@@ -1231,6 +1239,17 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void resizeWindow(Dimension resolution) {
     resizeWindow(resolution.width, resolution.height);
+  }
+  
+  public void scrollToFooter() {
+	  waitForElementByElement(footer);
+	  scrollToElement(footer);
+	  PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+  }
+  
+  public void verifyGlobalNavigation() {
+	  waitForElementByElement(globalNavigationBar);
+	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
   public VenusGlobalNavPageObject getVenusGlobalNav() {

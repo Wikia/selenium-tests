@@ -81,7 +81,7 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
-  public void filePage004_delete() {
+  public void filePage004_delete_QAART_518() {
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -112,7 +112,7 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-  public void filePage005_deleteFromHistory() {
+  public void filePage005_deleteFromHistory_QAART_518() {
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

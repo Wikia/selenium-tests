@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychała
  * @ownership Consumer
  */
-public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
+public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {

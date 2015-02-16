@@ -279,10 +279,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] topWamWikis() {
+  public static final Object[][] parameterValueProvider() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", true},
-        {"mobileregressiontesting", "PMG", false}
+        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
+        {"mobileregressiontesting", "PMG", "top", "1k" , false},
+        {"assassinscreed", "Tunguska", "esrb", "mature", true},
+        {"101dalmatians", "Jewel", "esrb", "ec" , true},
+        {"tardis", "Mang", "esrb", "teen", true}
     };
   }
 
@@ -322,6 +325,37 @@ public class AdsDataProvider {
 
   @DataProvider
   public static final Object[][] evolveTestPage() {
-    return new Object[][]{{"adtest", "Evolve"}};
+    return new Object[][]{{"adtest", "SyntheticTests/Evolve"}};
   }
+
+  @DataProvider
+  public static final Object[][] testProvidersChain() {
+    return new Object[][]{
+        {
+            "DE", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
+        },
+        {
+            "DE", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 3
+        },
+        {
+            "UA", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "gpt; Liftium", 0
+        },
+        {
+            "UA", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "gpt; Liftium", 2
+        },
+        {
+            "VE", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "Liftium", 0
+        },
+        {
+            "VE", "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "Liftium", 3
+        },
+    };
+  }
+
 }
