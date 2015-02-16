@@ -46,7 +46,6 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private By emptyNotificationDropdownForCurrentWiki = By
       .cssSelector(
           "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
-  private By notificationTitle = By.cssSelector("div.msg-title");
   private By unreadNotificationReddot = By
       .cssSelector("#WallNotifications > li > div.reddot");
 
@@ -150,7 +149,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
       WebElement n = this.notificationsList.get(i);
       WebElement nTitle = n.findElement(By.cssSelector(".notification-message h4"));
       String text = nTitle.getText();
-      if (n != null && title.equals(nTitle.getText())) {
+      if (n != null && text.equals(title)) {
         notifications.add(n);
       }
     }
