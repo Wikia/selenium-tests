@@ -153,7 +153,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser() {
+  public void SignUp_006_loginNotVerifiedUser_main_3877() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
