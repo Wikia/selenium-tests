@@ -223,12 +223,12 @@ public class PerformTouchAction {
   public void swipeFromPointToPoint(int startX, int startY, int endX, int endY, int duration,
                                     int waitAfter) {
     String methodName = "swipeFromPointToPoint";
-    startX = (int) ((startX / 100f) * appNativeWidth);
-    startY = (int) (((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
-    endX = (int) ((endX / 100f) * appNativeWidth);
-    endY = (int) (((endY / 100f) * appNativeHeight) + taskbarNativeHeight);
+    int appStartX = (int) ((startX / 100f) * appNativeWidth);
+    int appStartY = (int) (((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
+    int appEndX = (int) ((endX / 100f) * appNativeWidth);
+    int appEndY = (int) (((endY / 100f) * appNativeHeight) + taskbarNativeHeight);
     switchToContext(CONTEXT_NATIVE_APP, methodName);
-    mobileDriver.swipe(startX, startY, endX, endY, duration);
+    mobileDriver.swipe(appStartX, appStartY, appEndX, appEndY, duration);
     waitForFinish(waitAfter, methodName);
     switchToContext(CONTEXT_WEBVIEW_1, methodName);
   }
@@ -248,8 +248,8 @@ public class PerformTouchAction {
   public void zoomInOutPointXY(int pointX, int pointY, int fingersSpace, int pixelPath,
                                String zoomWay, int waitAfter) {
     String methodName = "zoomInOutPointXY";
-    pointX = (int) ((pointX / 100f) * appNativeWidth);
-    pointY = (int) (((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
+    int appPointX = (int) ((pointX / 100f) * appNativeWidth);
+    int appPointY = (int) (((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
     TouchAction touchOne = new TouchAction(mobileDriver);
     TouchAction touchTwo = new TouchAction(mobileDriver);
     MultiTouchAction multiTouch = new MultiTouchAction(mobileDriver);
@@ -259,21 +259,22 @@ public class PerformTouchAction {
     int offSet = 0;
     int startXOne = 0;
     int startXTwo = 0;
+    int appFingersSpace = 0;
     if (fingersSpace >= pixelPath) {
-      fingersSpace = pixelPath - 2;
+      appFingersSpace = pixelPath - 2;
     }
-    fingersSpace /= 2;
+    appFingersSpace = fingersSpace / 2;
     if (pixelPath < appNativeWidth) {
       halfPath = pixelPath / 2;
     } else {
       halfPath = (appNativeWidth - 2) / 2;
     }
-    endXOne = pointX - halfPath;
+    endXOne = appPointX - halfPath;
     if (endXOne < 0) {
       offSet = -endXOne;
       endXOne = 0;
     }
-    endXTwo = pointX + halfPath;
+    endXTwo = appPointX + halfPath;
     if (endXTwo > (appNativeWidth - 2)) {
       offSet = (appNativeWidth - 2) - endXTwo;
       endXTwo = (appNativeWidth - 2);
@@ -284,11 +285,11 @@ public class PerformTouchAction {
     if (offSet < 0) {
       endXOne += offSet;
     }
-    startXOne = pointX - fingersSpace;
+    startXOne = appPointX - appFingersSpace;
     if (startXOne <= 0) {
       startXOne = 1;
     }
-    startXTwo = pointX + fingersSpace;
+    startXTwo = appPointX + appFingersSpace;
     if (startXTwo >= (appNativeWidth - 2)) {
       startXTwo = appNativeWidth - 3;
     }
@@ -302,8 +303,8 @@ public class PerformTouchAction {
       endXTwo = temp;
     }
     switchToContext(CONTEXT_NATIVE_APP, methodName);
-    touchOne.press(startXOne, pointY).moveTo(endXOne - startXOne, 0).release();
-    touchTwo.press(startXTwo, pointY).moveTo(endXTwo - startXTwo, 0).release();
+    touchOne.press(startXOne, appPointY).moveTo(endXOne - startXOne, 0).release();
+    touchTwo.press(startXTwo, appPointY).moveTo(endXTwo - startXTwo, 0).release();
     multiTouch.add(touchOne);
     multiTouch.add(touchTwo);
     multiTouch.perform();
@@ -319,10 +320,10 @@ public class PerformTouchAction {
    */
   public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
     String methodName = "tapOnPointXY";
-    pointX = (int) ((pointX / 100f) * appNativeWidth);
-    pointY = (int) (((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
+    int appPointX = (int) ((pointX / 100f) * appNativeWidth);
+    int appPointY = (int) (((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
     switchToContext(CONTEXT_NATIVE_APP, methodName);
-    mobileDriver.tap(1, pointX, pointY, duration);
+    mobileDriver.tap(1, appPointX, appPointY, duration);
     waitForFinish(waitAfter, methodName);
     switchToContext(CONTEXT_WEBVIEW_1, methodName);
   }

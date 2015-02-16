@@ -49,12 +49,12 @@ public class BlogTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
-    blogTitle += blogTitle + base.getTimeStamp();
+    String randomBlogTitle = blogTitle + base.getTimeStamp();
     SpecialCreatePagePageObject createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
-    VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
+    VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(randomBlogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.verifyBlogTitle(randomBlogTitle);
     blogPage.verifyContent(blogContent);
   }
 

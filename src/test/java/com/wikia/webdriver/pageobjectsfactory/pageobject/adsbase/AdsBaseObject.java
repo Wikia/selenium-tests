@@ -396,11 +396,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
-    scriptText = scriptText.replaceAll("\\s", "");
+    String formattedScriptText = scriptText.replaceAll("\\s", "");
 
     for (WebElement scriptNode : element.findElements(By.tagName("script"))) {
       String result = scriptNode.getAttribute("innerHTML");
-      if (result.replaceAll("\\s", "").contains(scriptText)) {
+      if (result.replaceAll("\\s", "").contains(formattedScriptText)) {
         return true;
       }
     }
