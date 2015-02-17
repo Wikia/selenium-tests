@@ -14,10 +14,10 @@ import java.util.List;
 
 public class PreferencesPageObject extends WikiBasePageObject {
 
-  @FindBy(css = "#fbConnectDisconnect")
+  @FindBy(css = ".fb-disconnect")
   private WebElement facebookDisconnect;
-  @FindBy(css = "#fbDisconnectDone")
-  private WebElement disconnectDone;
+  @FindBy(css = "#fbConnectPreferences .wikia-button-facebook")
+  private WebElement fbConnect;
   @FindBy(css = "#preftoc li")
   private List<WebElement> tabs;
   @FindBy(css = "#mw-htmlform-email-me-v2 td.mw-input")
@@ -79,7 +79,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public void disconnectFromFacebook() {
     waitForElementByElement(facebookDisconnect);
     scrollAndClick(facebookDisconnect);
-    waitForElementByElement(disconnectDone);
+    waitForElementByElement(fbConnect);
     PageObjectLogging.log("disconnectFromFacebook",
                           "account has been disconnected from Facebook", true);
   }

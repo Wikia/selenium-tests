@@ -15,7 +15,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] ooyalaAds() {
+  public static Object[][] ooyalaAds() {
     return new Object[][]{
         {
             "adtest",
@@ -26,7 +26,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] mainWikiPages() {
+  public static Object[][] mainWikiPages() {
     return new Object[][]{
         {"runescape", "RuneScape_Wiki"},
         {"yugioh", "Main_Page"},
@@ -44,7 +44,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] popularSites() {
+  public static Object[][] popularSites() {
     return new Object[][]{
         {"elderscrolls", "Skyrim"},
         {"zh.tos", "Category:%E5%9C%96%E9%91%92"},
@@ -60,7 +60,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] corporatePages() {
+  public static Object[][] corporatePages() {
     return new Object[][]{
         {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
         {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
@@ -79,7 +79,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] noAdsForUsers() {
+  public static Object[][] noAdsForUsers() {
     return new Object[][]{
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
         {"it.creepypastaitalia", "Categoria:Creepypasta"},
@@ -93,7 +93,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] noAdsForSonyReferrer() {
+  public static Object[][] noAdsForSonyReferrer() {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
@@ -117,7 +117,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] pagesWithAIC() {
+  public static Object[][] pagesWithAIC() {
     return new Object[][]{
         {"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
         {"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
@@ -134,7 +134,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] hubsPages() {
+  public static Object[][] hubsPages() {
     return new Object[][]{
         {"portail-modedevie", "Portail_mode_de_vie/2014-12-28"},
         {"gameshub", "Games_Hub"},
@@ -146,7 +146,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] specialPages() {
+  public static Object[][] specialPages() {
     return new Object[][]{
         {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD"},
@@ -156,7 +156,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] filePages() {
+  public static Object[][] filePages() {
     return new Object[][]{
         {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
          "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
@@ -166,7 +166,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] gptAdsInToolbar() {
+  public static Object[][] gptAdsInToolbar() {
     return new Object[][]{
         {
             "adtest", "Toolbar/320x70",
@@ -181,7 +181,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] skin() {
+  public static Object[][] skin() {
     return new Object[][]{
         {
             "adtest-fluid", "Skin",
@@ -206,7 +206,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] skinLimited() {
+  public static Object[][] skinLimited() {
     return new Object[][]{
         {
             "adtest-fluid", "Skin",
@@ -219,7 +219,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] adFreeWikis() {
+  public static Object[][] adFreeWikis() {
     return new Object[][]{
         {"api", "Wikia_API_Wiki"},
         {"sfhomeless", "Glide_Memorial_Church"},
@@ -229,7 +229,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] getWikisWithStandardHVC() {
+  public static Object[][] getWikisWithStandardHVC() {
     return new Object[][]{
         {"adtest"},
         {"de.icarly"},
@@ -238,7 +238,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] adDriverForcedStatusSuccess() {
+  public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{
         {
             "adtest",
@@ -249,7 +249,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] dfpParams() {
+  public static Object[][] dfpParams() {
     return new Object[][]{
         {
             "adtest",
@@ -279,25 +279,25 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] parameterValueProvider() {
+  public static Object[][] parameterValueProvider() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
-        {"mobileregressiontesting", "PMG", "top", "1k" , false},
+        {"mobileregressiontesting", "PMG", "top", "1k", false},
         {"assassinscreed", "Tunguska", "esrb", "mature", true},
-        {"101dalmatians", "Jewel", "esrb", "ec" , true},
+        {"101dalmatians", "Jewel", "esrb", "ec", true},
         {"tardis", "Mang", "esrb", "teen", true}
     };
   }
 
   @DataProvider
-  public static final Object[][] spotlights() {
+  public static Object[][] spotlights() {
     return new Object[][]{
         {"glee", "Rachel"}
     };
   }
 
   @DataProvider
-  public static final Object[][] amazonSites() {
+  public static Object[][] amazonSites() {
     return new Object[][]{
         {"memory-alpha", "Portal:Main"},
         {"gameofthrones", "Season_4"},
@@ -306,13 +306,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] incontentBoxad() {
+  public static Object[][] incontentBoxad() {
     return new Object[][]{
         {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
   }
 
   @DataProvider
-  public static final Object[][] extraMarker() {
+  public static Object[][] extraMarker() {
     return new Object[][]{
         {
             "adtest",
@@ -324,12 +324,12 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] evolveTestPage() {
+  public static Object[][] evolveTestPage() {
     return new Object[][]{{"adtest", "SyntheticTests/Evolve"}};
   }
 
   @DataProvider
-  public static final Object[][] testProvidersChain() {
+  public static Object[][] testProvidersChain() {
     return new Object[][]{
         {
             "DE", "adtest", "SyntheticTests/ProvidersChain",
@@ -354,6 +354,16 @@ public class AdsDataProvider {
         {
             "VE", "adtest", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "Liftium", 3
+        },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] testDisableGptAds() {
+    return new Object[][]{
+        {
+            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", "Liftium"
         },
     };
   }
