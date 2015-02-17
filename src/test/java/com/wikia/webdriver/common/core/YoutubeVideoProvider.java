@@ -9,7 +9,6 @@ import org.apache.commons.codec.net.URLCodec;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -25,22 +24,30 @@ import com.jayway.jsonpath.ReadContext;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
- * Created by Ludwik on 2015-02-12.
+ * Created by Ludwik Kaźmierczak on 2015-02-12.
  */
 public class YoutubeVideoProvider {
 
-  public static YoutubeVideo getLatestVideoForQuery(String searchQuerry) {
+  /**
+   * This method returns latest youtube video(added no longer then hour ago) for a specified query.
+   * This one is using a YouTube Data API (v3) - see for reference -
+   * https://developers.google.com/youtube/v3/
+   *
+   * @param searchQuery
+   * @return
+   */
+  public static YoutubeVideo getLatestVideoForQuery(String searchQuery) {
     HttpClient httpclient =
         HttpClientBuilder.create().setConnectionBackoffStrategy(new DefaultBackoffStrategy())
             .disableAutomaticRetries().build();
 
-    List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+    List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("key", "AIzaSyDmRJPcPgPMvxHU2xqjj9xIAsM2nY8PPTw"));
     nvps.add(new BasicNameValuePair("part", "snippet"));
     nvps.add(new BasicNameValuePair("order", "date"));
     nvps.add(new BasicNameValuePair("maxResults", "10"));
-    nvps.add(new BasicNameValuePair("q", searchQuerry));
+    nvps.add(new BasicNameValuePair("q", searchQuery));
     nvps.add(new BasicNameValuePair("publishedAfter", DateTime.now(DateTimeZone.forID("UTC"))
         .minusMinutes(60).toString()));
 
@@ -48,36 +55,26 @@ public class YoutubeVideoProvider {
         new HttpGet("https://www.googleapis.com/youtube/v3/search?"
             + URLEncodedUtils.format(nvps, "utf-8"));
 
-    HttpResponse response = null;
+    String videoTitle = null;
+    String videoUrl = null;
 
-    ReadContext responseValue = null;
-
-    String videoId = null;
-    String title = null;
     try {
-      response = httpclient.execute(httpPost);
-
+      HttpResponse response = httpclient.execute(httpPost);
 
       HttpEntity entity = response.getEntity();
 
-      responseValue = JsonPath.parse(EntityUtils.toString(entity));
+      ReadContext responseValue = JsonPath.parse(EntityUtils.toString(entity));
 
-      title = responseValue.read("$.items[0].snippet.title");
-      videoId = responseValue.read("$.items[0].id.videoId");
+      videoTitle = responseValue.read("$.items[0].snippet.title");
+      String videoId = responseValue.read("$.items[0].id.videoId");
 
-    } catch (ClientProtocolException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    String videoUrl = null;
-    try {
       videoUrl = new URLCodec().encode("https://www.youtube.com/watch?v=" + videoId);
-    } catch (EncoderException e) {
-      e.printStackTrace();
+
+    } catch (IOException | EncoderException e) {
+      PageObjectLogging.log("A problem occurred while receiving a YouTube video", e.getMessage(),
+          false);
     }
 
-    return new YoutubeVideo(title, videoUrl);
+    return new YoutubeVideo(videoTitle, videoUrl);
   }
 }

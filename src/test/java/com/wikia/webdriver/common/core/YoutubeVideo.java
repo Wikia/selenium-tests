@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Ludwik on 2015-02-12.
+ * Created by Ludwik Kaźmierczak on 2015-02-12.
  */
 public class YoutubeVideo implements Video {
 
@@ -17,6 +17,7 @@ public class YoutubeVideo implements Video {
       put("[", " ");
       put("]", " ");
       put("/", " ");
+      put("_", " ");
     }
   };
   private String url;
