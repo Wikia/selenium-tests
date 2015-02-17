@@ -55,6 +55,8 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
   private WebElement resultField;
   @FindBy(css = ".local-nav-menu")
   private WebElement menuField;
+  @FindBy(css = ".nav")
+  private WebElement searchButton;
 
   public SearchNavSideMenuComponentObject(WebDriver driver) {
     super(driver);
@@ -64,6 +66,11 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject {
     waitForElementByElement(searchInput);
     searchInput.click();
     PageObjectLogging.log("clickSearchField", "Search field was clicked", true);
+  }
+
+  public void clickSearchButton() {
+    waitForElementVisibleByElement(searchButton);
+    searchButton.click();
   }
 
   public MercuryBasePageObject clickSearchSuggestion(int index) {

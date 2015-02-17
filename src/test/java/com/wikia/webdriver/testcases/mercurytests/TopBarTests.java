@@ -30,8 +30,9 @@ public class TopBarTests extends NewTestTemplate {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     MercuryArticlePageObject article =
         base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAIN_ARTICLE);
-    SearchNavSideMenuComponentObject nav = article.clickSearchButton();
-    nav.verifyMenuView();
+//    SearchNavSideMenuComponentObject nav = article.clickSearchButton();
+//    nav.verifyMenuView();
+//    nav.clickSearchButton();
   }
 
   // TBT02
