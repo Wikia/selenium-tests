@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 import java.util.List;
 
@@ -26,10 +27,8 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement removeAppConfirmationModal;
   @FindBy(css = ".fbSettingsList ")
   private WebElement settingsList;
-  @FindBy(css = "#app-settings-page .fbApplicationsList li")
-  private List<WebElement> applicationList;
-
-  String removeAppSelector = "#application-li-%appID% .uiCloseButtonSmall";
+  @FindBy(css = "._4bl7")
+  private List<WebElement> pageElementList;
 
   public FacebookSettingsPageObject(WebDriver driver) {
     super(driver);
@@ -46,40 +45,37 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   }
 
   /**
-   * This method removes App from facebook Apps, based on its ID.
+   * This method removes Wikia App from facebook Apps.
    */
-  public void removeApp(String appID) {
-    if (isAppPresent(appID)) {
-      WebElement wikiAppRemoveButton = driver.findElement(
-          By.cssSelector(
-              removeAppSelector.replace("%appID%", appID)
-          )
-      );
-      waitForElementByElement(wikiAppRemoveButton);
-      wikiAppRemoveButton.click();
-      waitForElementByElement(removeButton);
-      removeButton.click();
-      waitForElementNotVisibleByElement(removeAppConfirmationModal);
-      waitForElementNotVisibleByElement(wikiAppRemoveButton);
-      waitForElementByElement(settingsList);
-      Assert.assertFalse(isAppPresent(appID));
-      PageObjectLogging.log("removeApp", "App with id " + appID + " removed", true);
-    } else {
-      PageObjectLogging.log("removeApp", "App with id " + appID + " not found", true);
+  public void removeApp() {
+    if (isAppPresent()) {
+      for (WebElement element : pageElementList) {
+        if (element.getText().toString().matches("^Wikia.*\n?.*")) {
+          waitForElementByElement(element);
+          element.click();
+          WebElement AppRemoveButton = element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
+          if (AppRemoveButton != null) {
+            waitForElementByElement(AppRemoveButton);
+            AppRemoveButton.click();
+            waitForElementNotVisibleByElement(removeAppConfirmationModal);
+            waitForElementNotVisibleByElement(removeButton);
+            removeButton.click();
+            PageObjectLogging.log("removeApp", "Wikia App remove button clicked", true);
+          }
+        }
+      }
     }
+    PageObjectLogging.log("removeApp", "Wikia App removed", true);
   }
 
   /**
-   * This method verifies if App is present on facebook apps list. It searches for uniqe App id.
+   * This method verifies if App is present on facebook apps list. It searches for Wikia string.
    */
-  private boolean isAppPresent(String appID) {
+  private boolean isAppPresent() {
     boolean isPresent = false;
-    if (!applicationList.isEmpty()) {
-      for (WebElement elem : applicationList) {
-        String elemId = elem.getAttribute("id");
-        if (elemId.contains(appID)) {
-          isPresent = true;
-        }
+    for (WebElement element : pageElementList) {
+      if (element.getText().toString().matches("^Wikia.*\n?.*")) {
+        isPresent = true;
       }
     }
     return isPresent;
