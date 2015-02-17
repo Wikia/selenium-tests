@@ -13,7 +13,7 @@ public class YoutubeVideo implements Video {
     this.url = url;
     this.title =
         title.replace("| ", "").replace("|", "").replace("{", " ").replace("}", " ")
-            .replace("[", " ").replace("]", " ");
+            .replace("[", " ").replace("]", " ").replace("/", " ");
 
     this.fileName = transformTitleToFileName(this.title);
   }
