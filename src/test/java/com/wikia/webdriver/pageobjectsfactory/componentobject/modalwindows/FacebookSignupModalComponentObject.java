@@ -16,13 +16,11 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "button[name='__CONFIRM__']")
   private WebElement appTermsConfirmButton;
-  @FindBy(css = ".uiButtonText")
-  private WebElement postingPolicyWindowIndicator;
-  @FindBy(css = "#FacebookSignUp input[name='username']")
+  @FindBy(css = ".UserLoginFacebookLeft input[name='username']")
   private WebElement usernameField;
-  @FindBy(css = "#FacebookSignUp input[name='password']")
+  @FindBy(css = ".UserLoginFacebookLeft input[name='password']")
   private WebElement passwordField;
-  @FindBy(css = "#FacebookSignUp input[type='submit']")
+  @FindBy(css = ".UserLoginFacebookLeft input[type='submit']")
   private WebElement createAccountButton;
 
   String winHandleBefore;
@@ -50,10 +48,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
       waitForElementByElement(appTermsConfirmButton);
       appTermsConfirmButton.click();
       PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
-      waitForElementByElement(postingPolicyWindowIndicator);
-      waitForElementByElement(appTermsConfirmButton);
-      appTermsConfirmButton.click();
-      PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
       // Switch back to original browser (first window)
       driver.switchTo().window(winHandleBefore);
     } else {
