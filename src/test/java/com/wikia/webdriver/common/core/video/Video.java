@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core;
+package com.wikia.webdriver.common.core.video;
 
 /**
  * Created by Ludwik Kaźmierczak on 2015-02-12.

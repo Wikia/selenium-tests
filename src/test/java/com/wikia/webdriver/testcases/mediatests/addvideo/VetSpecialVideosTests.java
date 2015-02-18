@@ -6,8 +6,8 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.YoutubeVideo;
-import com.wikia.webdriver.common.core.YoutubeVideoProvider;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;

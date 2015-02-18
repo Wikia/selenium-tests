@@ -24,7 +24,7 @@
 			<artifactId>phantomjs-qunit-runner</artifactId>
 			<version>1.0.14</version>
 		</dependency>
-		<!-- QAART-397 Overriding jetty-server version that browser-proxy uses -->
+		<!-- QAART-397 Overriding jetty-server version that browsermob-proxy uses -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>

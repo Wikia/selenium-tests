@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core;
+package com.wikia.webdriver.common.core.video;
 
 import java.util.HashMap;
 import java.util.Map;

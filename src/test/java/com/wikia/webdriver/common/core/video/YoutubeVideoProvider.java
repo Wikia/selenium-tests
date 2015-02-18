@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core;
+package com.wikia.webdriver.common.core.video;
 
 import java.io.IOException;
 import java.util.ArrayList;
