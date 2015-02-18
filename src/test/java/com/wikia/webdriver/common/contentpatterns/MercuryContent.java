@@ -41,7 +41,6 @@ public class MercuryContent {
   public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
     MercuryBasePageObject base = new MercuryBasePageObject(driver);
     SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-    mercuryPage
-        .clickMercuryButton(); //Uncomment this line after temporary solution won`t be needed any more
+    mercuryPage.clickMercuryButton();
   }
 }

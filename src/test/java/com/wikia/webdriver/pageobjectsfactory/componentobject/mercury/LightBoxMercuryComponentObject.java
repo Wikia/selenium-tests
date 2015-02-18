@@ -1,17 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -21,22 +22,16 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
 
   @FindBy(css = ".lightbox-close-wrapper")
   private WebElement closeLightboxButton;
-  @FindBy(css = ".lightbox-header-title")
-  private WebElement imagesCounter;
   @FindBy(css = ".current")
   private WebElement currentImage;
-  @FindBy(css = ".media-lightbox")
-  private WebElement lightboxWrapper;
-  @FindBy(css = ".lightbox-content-inner")
-  private WebElement lightboxInner;
   @FindBy(css = ".lightbox-content")
   private WebElement lightboxContent;
-  @FindBy(css = ".page-wrapper")
-  private WebElement pageWrapper;
   @FindBy(css = ".lightbox-header")
   private WebElement lightboxHeader;
   @FindBy(css = ".lightbox-footer")
   private WebElement lightboxFooter;
+  @FindBy(css = ".article-gallery img")
+  private List<WebElement> galleryImagesArray;
 
   public static final String EDGE_LEFT = "left";
   public static final String EDGE_RIGHT = "right";
@@ -53,53 +48,42 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     super(driver);
   }
 
-  public MercuryBasePageObject clickCloseButton() {
+  public void clickCloseButton() {
     waitForElementVisibleByElement(closeLightboxButton);
     closeLightboxButton.click();
-    return new MercuryBasePageObject(driver);
+  }
+
+  public void clickGalleryImage(int index) {
+    waitForElementByElement(galleryImagesArray.get(index));
+    scrollToElement(galleryImagesArray.get(index));
+    galleryImagesArray.get(index).click();
+    PageObjectLogging.log("clickGalleryImage", "Image was clicked by test", true);
   }
 
   public String getCurrentImagePath() {
     return currentImage.getAttribute("src");
   }
 
-  public void verifyCurrentImageIsVisible() {
+  public boolean isLightboxOpened() {
+    try {
+      waitForElementByElement(lightboxContent);
+      if (checkIfElementOnPage(lightboxContent)) {
+        return true;
+      }
+      return false;
+    } catch (NoSuchElementException e) {}
+    return false;
+  }
+
+  public boolean isCurrentImageVisible() {
     waitForElementVisibleByElement(currentImage);
-    Assertion.assertTrue(checkIfElementOnPage(currentImage));
+    if (checkIfElementOnPage(currentImage)) {
+      return true;
+    }
+    return false;
   }
 
-  public void swipeImageLeft() {
-    swipeLeft(lightboxContent);
-    PageObjectLogging.log("swipeImageLeft", "Swipe left was simulated", true, driver);
-  }
-
-  public void swipeImageRight() {
-    swipeRight(lightboxContent);
-    PageObjectLogging.log("swipeImageRight", "Swipe right was simulated", true, driver);
-  }
-
-  public void testGestures() {
-    doubleTapZoom(lightboxWrapper);
-    doubleTapZoom(lightboxInner);
-    doubleTapZoom(lightboxContent);
-    doubleTapZoom(pageWrapper);
-    PageObjectLogging.log("testGestures", "Double tap zoom was correctly simulated 4 times", true,
-        driver);
-  }
-
-  public void verifyImageWasChanged(String imageOnePath, String imageTwoPath) {
-    Assertion.assertFalse(imageOnePath.equals(imageTwoPath), "Image in lightbox was changed");
-  }
-
-  public void verifyLightboxClosed() {
-    Assertion.assertFalse(checkIfElementOnPage(currentImage));
-  }
-
-  public String currentImageSrcPath() {
-    return currentImage.getAttribute("src");
-  }
-
-  public void verifySwiping(PerformTouchAction touchAction, String direction, int attempts) {
+  public boolean isDifferentImageAfterSwiping(PerformTouchAction touchAction, String direction, int attempts) {
     String currentImageSrc = getCurrentImagePath();
     String nextImageSrc;
     boolean imageChanged = false;
@@ -123,45 +107,25 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
       }
     }
-    Assertion.assertTrue(imageChanged, "Swiping to " + direction + " doesn't work");
+    return imageChanged;
   }
 
-  private boolean verifyChangesInUI(boolean lastDisplayVisibility) {
-    boolean lightboxHeaderDisplay = true;
-    boolean lightboxFooterDisplay = true;
+  public boolean isLightboxHeaderDisplayed() {
     if (lightboxHeader.getCssValue("display").contains("none")) {
-      lightboxHeaderDisplay = false;
+      return false;
     }
+    return true;
+  }
+
+  public boolean isLightboxFooterDisplayed() {
     if (lightboxFooter.getCssValue("display").contains("none")) {
-      lightboxFooterDisplay = false;
+      return false;
     }
-    Assertion.assertFalse(lightboxHeaderDisplay == lastDisplayVisibility,
-        "Lightbox header visibility didn't changed");
-    Assertion.assertFalse(lightboxFooterDisplay == lastDisplayVisibility,
-        "Lightbox footer visibility didn't changed");
-    return !lastDisplayVisibility;
+    return true;
   }
 
-  public void verifyVisibilityUI(PerformTouchAction touchAction) {
-    String LightboxHeaderDisplayValue = lightboxHeader.getCssValue("display");
-    String LightboxFooterDisplayValue = lightboxFooter.getCssValue("display");
-    int duration = 500;
-    int waitAfter = 5000;
-    boolean lastDisplayVisibility = true;
-    Assertion.assertTrue(LightboxHeaderDisplayValue.contains(LightboxFooterDisplayValue),
-        "Visibility of lightbox header is different than lightbox footer");
-    if ("none".equals(LightboxHeaderDisplayValue)) {
-      lastDisplayVisibility = false;
-    } else {
-      lastDisplayVisibility = true;
-    }
-    touchAction.tapOnPointXY(50, 50, duration, waitAfter);
-    lastDisplayVisibility = verifyChangesInUI(lastDisplayVisibility);
-    touchAction.tapOnPointXY(50, 50, duration, waitAfter);
-    verifyChangesInUI(lastDisplayVisibility);
-  }
-
-  public void verifyTappingOnImageEdge(PerformTouchAction touchAction, String edge) {
+  public boolean isTappingOnImageEdgeChangeImage(PerformTouchAction touchAction, String edge) {
+    waitForElementByElement(currentImage);
     String currentImageSrc = getCurrentImagePath();
     String nextImageSrc;
     int pointX = 25;
@@ -174,11 +138,14 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     }
     touchAction.tapOnPointXY(pointX, 50, duration, waitAfter);
     nextImageSrc = getCurrentImagePath();
-    Assertion.assertFalse(nextImageSrc.contains(currentImageSrc), "Tapping on " + edge
-        + " edge doesn't work");
+    if (nextImageSrc.contains(currentImageSrc)) {
+      return false;
+    }
+    return true;
   }
 
-  public void verifyZoomingByGesture(PerformTouchAction touchAction, String zoomMethod) {
+  public boolean isZoomingByGestureWorking(PerformTouchAction touchAction, String zoomMethod) {
+    waitForElementByElement(currentImage);
     Shooter shooter = new Shooter();
     ImageComparison ic = new ImageComparison();
     File beforeZooming = shooter.capturePage(driver);
@@ -194,8 +161,9 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
     }
     File afterZoomIn = shooter.capturePage(driver);
-    Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZoomIn), "Zoom in by "
-        + zoomMethod + " doesn't work");
+    if (ic.areFilesTheSame(beforeZooming, afterZoomIn)) {
+      return false;
+    }
     switch (zoomMethod) {
       case "gesture":
         touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
@@ -208,22 +176,29 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
     }
     File afterZoomOut = shooter.capturePage(driver);
-    Assertion.assertTrue(ic.areFilesTheSame(beforeZooming, afterZoomOut), "Zoom out by "
-        + zoomMethod + " doesn't work");
+    if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
+      return true;
+    }
+    return false;
   }
 
-  public void verifyMovingImageAfterZoomingToDirection(PerformTouchAction touchAction,
-      String direction) {
+  public boolean isImageMovedToDirectionAfterZoomIn(PerformTouchAction touchAction,
+                                                 String direction) {
+    waitForElementByElement(currentImage);
     Shooter shooter = new Shooter();
     ImageComparison ic = new ImageComparison();
     File beforeZooming = shooter.capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     File afterZooming = shooter.capturePage(driver);
-    Assertion.assertFalse(ic.areFilesTheSame(beforeZooming, afterZooming), "Zoom in doesn't work");
+    if (ic.areFilesTheSame(beforeZooming, afterZooming)) {
+      return false;
+    }
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     File afterMoving = shooter.capturePage(driver);
-    Assertion.assertFalse(ic.areFilesTheSame(afterZooming, afterMoving), "Move to " + direction
-        + " doesn't work");
+    if (ic.areFilesTheSame(afterZooming, afterMoving)) {
+      return false;
+    }
+    return true;
   }
 }
