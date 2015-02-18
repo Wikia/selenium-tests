@@ -19,7 +19,7 @@ public class NavigationBar extends WikiBasePageObject {
 
 	@FindBy(css = "#searchInput")
 	private WebElement searchInput;
-	@FindBys(@FindBy(css = ".autocomplete"))
+	@FindBys(@FindBy(css = ".autocomplete div"))
 	private List<WebElement> suggestionsList;
 	
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
@@ -37,22 +37,25 @@ public class NavigationBar extends WikiBasePageObject {
 	
 	public void verifySuggestions(String suggestion) {
 		waitForElementByElement(suggestionsList.get(0));
+		String allSuggestions = "";
 		for (int i = 0; i < suggestionsList.size(); i++) {
-			Assertion.assertStringContains(suggestion, suggestionsList.get(i).getText());
+			allSuggestions += suggestionsList.get(i).getAttribute("title");
 		}
+		Assertion.assertStringContains(suggestion, allSuggestions);
 	}
 
 	public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestion) {
 		waitForElementByElement(suggestionsList.get(0));
 		for (int i = 0; i < suggestionsList.size(); i++) {
 			WebElement currentSuggestion = suggestionsList.get(i);
+			searchInput.sendKeys(Keys.ARROW_DOWN);
 			if (currentSuggestion.getText().contains(suggestion)) {
-				currentSuggestion.sendKeys(Keys.ENTER);
+				searchInput.sendKeys(Keys.ENTER);
 				PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion" +suggestion+ "and clicked enter", true);
 				return new ArticlePageObject(driver);
 			}
 			else {
-				currentSuggestion.sendKeys(Keys.ARROW_DOWN);
+				searchInput.sendKeys(Keys.ARROW_DOWN);
 			}
 		}
 		PageObjectLogging.log("ArrowDownToSuggestion", "didn't find suggestion: "+suggestion, true);
