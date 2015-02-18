@@ -17,3 +17,5 @@ captcha.txt
 config.xml
 src/test/java/com/wikia/webdriver/Common/Properties/PropertiesSetter.java
 config.yml
+.gradle/
+build/
