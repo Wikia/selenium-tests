@@ -65,16 +65,18 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
-    description = escapeHtml(description);
+    String escapedDescription = escapeHtml(description);
 
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
-      builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command
-          + "</td><td>" + description + "</td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"" + className + " lowLevelAction"
+                     + "\"><td>" + command + "</td><td>" + escapedDescription
+                     + "</td><td> <br/> &nbsp;</td></tr>");
     } else {
-      builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
-          + "</td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"" + className + "\"><td>" + command
+                     + "</td><td>" + escapedDescription
+                     + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(NewDriverProvider.getWebDriver());

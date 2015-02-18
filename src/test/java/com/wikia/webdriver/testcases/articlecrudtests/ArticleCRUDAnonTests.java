@@ -71,14 +71,14 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleContent = PageContent.ARTICLE_TEXT;
-    articleTitle = articleTitle + base.getTimeStamp();
+    String randomArticleTitle = articleTitle + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.navigateToArticleEditPageCK(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
-    article.verifyArticleTitle(articleTitle);
+    article.verifyArticleTitle(randomArticleTitle);
   }
 
   @Test(
