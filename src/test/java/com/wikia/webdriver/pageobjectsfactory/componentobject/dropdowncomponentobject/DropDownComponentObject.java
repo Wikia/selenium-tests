@@ -50,6 +50,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
   private WebElement messagePlaceholder;
   @FindBy(css = "a.ajaxRegister")
   private WebElement signUpLink;
+  @FindBy(css = "a[data-id='logout']")
+  private WebElement logOutButton;
 
   /**
    * Open dropdown - we need to move mouse outside the element and move back to element to trigger
@@ -58,7 +60,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
   public DropDownComponentObject openDropDown() {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
+      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
           if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
@@ -70,11 +72,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
         }
       });
     } finally {
-      restoreDeaultImplicitWait();
+        restoreDeaultImplicitWait();
     }
 
-    PageObjectLogging.log(
-        "DropdownVisible",
+      PageObjectLogging.log(
+          "DropdownVisible",
         "Login dropdown is visible",
         true, driver
     );
@@ -100,6 +102,12 @@ public class DropDownComponentObject extends WikiBasePageObject {
         "Login form is submitted",
         true
     );
+  }
+
+  public DropDownComponentObject logOut() {
+    logOutButton.click();
+
+    return this;
   }
 
   public void fillUserNameInput(String userName) {
