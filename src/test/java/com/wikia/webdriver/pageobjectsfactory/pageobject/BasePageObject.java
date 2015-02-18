@@ -301,16 +301,10 @@ public class BasePageObject {
     }
     if (makeScreenshot) {
       PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
+          "Take screenshot",
+          String.format("Screenshot After Navigation to: %s", url),
           true,
           driver
-      );
-    } else {
-      PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
-          true
       );
     }
   }
@@ -571,8 +565,8 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByCss(
       String selector, String attribute, String value) {
     wait.until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(By.cssSelector(selector),
-                                                        attribute, value));
+        .valueToBePresentInElementsAttribute(By.cssSelector(selector),
+            attribute, value));
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(
