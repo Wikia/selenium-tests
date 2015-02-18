@@ -111,16 +111,20 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
   }
 
-  public void verifySuggestions(String query) {
-    searchField.click();
-    waitForElementByBy(jqueryAutocompleteBy);
-    searchField.sendKeys(query);
+  public void verifySuggestions(String suggestion) {
     waitForElementByElement(suggestionsList.get(0));
     for (int i = 0; i < suggestionsList.size(); i++) {
-      Assertion.assertStringContains(query, suggestionsList.get(i).getText());
+      Assertion.assertStringContains(suggestion, suggestionsList.get(i).getText());
     }
   }
 
+  public void triggerSuggestions(String query) {
+	    searchField.click();
+	    waitForElementByBy(jqueryAutocompleteBy);
+	    searchField.sendKeys(query);
+	    waitForElementByElement(suggestionsList.get(0));	
+  }
+  
   private void verifyLanguageTranslation(WebElement element) {
     Assertion.assertTrue(element.getText().startsWith("("), "some phrases are not translatable");
     Assertion.assertTrue(element.getText().endsWith(")"), "some phrases are not translatable");
@@ -360,4 +364,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
   }
+
+
 }
