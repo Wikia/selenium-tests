@@ -3,8 +3,11 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
+import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
 
@@ -13,6 +16,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /*
+ *  anonSearch: As anon basic search action and verify you are on search result page. This also prevents goSearch being active by default.
+ *  userSearch: As user do basic search action and verify you are on search result page. This also prevents goSearch being active by default.
  *  1. Search for different phrases and verify if they give correct first result
  *  2. Check search page pagination
  *  3. Verify number of results on page
@@ -34,7 +39,13 @@ import java.util.List;
  *  16. Verify push to top is working in community.wikia.com
  */
 
+/**
+ * @author wikia
+ *
+ */
 public class BasicActions extends NewTestTemplate {
+
+  protected Credentials credentials = config.getCredentials();
 
   protected String testedWiki;
   protected String communityWiki;
@@ -56,6 +67,25 @@ public class BasicActions extends NewTestTemplate {
   protected static final String SEARCH_ARTICLE = "Gonzo";
   protected static final String SEARCH_WIKI = "Marvel";
 
+  @Test(groups = {"anonSearch", "IntraWikiSearch", "Search"})
+  public void anonSearch() {
+      WikiBasePageObject base = new WikiBasePageObject(driver);
+	  base.openWikiPage(testedWiki);
+	  NavigationBar navigation = new NavigationBar(driver);
+	  IntraWikiSearchPageObject search = navigation.searchFor(SEARCH_PHRASE_RESULTS);
+	  search.verifyFirstArticleNameTheSame(SEARCH_PHRASE_RESULTS);
+  }
+  
+  @Test(groups = {"userSearch", "IntraWikiSearch", "Search"})
+  public void userSearch() {
+      WikiBasePageObject base = new WikiBasePageObject(driver);
+      base.openWikiPage(testedWiki);
+      base.logInCookie(credentials.userName, credentials.password, wikiURL);
+      NavigationBar navigation = new NavigationBar(driver);
+      IntraWikiSearchPageObject search = navigation.searchFor(SEARCH_PHRASE_RESULTS);
+      search.verifyFirstArticleNameTheSame(SEARCH_PHRASE_RESULTS);
+  }
+  
   @Test(groups = {"IntraWikiSearch_002", "IntraWikiSearch", "Search"})
   public void pagination() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);

@@ -14,11 +14,14 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 public class NavigationBar extends WikiBasePageObject {
 
 	@FindBy(css = "#searchInput")
 	private WebElement searchInput;
+	@FindBy(css = "#searchSubmit")
+	private WebElement searchSubmit;
 	@FindBys(@FindBy(css = ".autocomplete div"))
 	private List<WebElement> suggestionsList;
 	
@@ -61,5 +64,22 @@ public class NavigationBar extends WikiBasePageObject {
 		PageObjectLogging.log("ArrowDownToSuggestion", "didn't find suggestion: "+suggestion, true);
 		return null;
 	}
+
+	public IntraWikiSearchPageObject searchFor(String query) {
+	    searchInput.sendKeys(query);
+	    searchSubmit.click();
+	    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+	    return new IntraWikiSearchPageObject(driver);
+	}
+	
+	 /**
+	 * method will return article page object if invoked by user with goSearch preference turned on
+	 */
+	public ArticlePageObject goSearchFor(String query) {
+	     searchInput.sendKeys(query);
+	     searchSubmit.click();
+	     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+	     return new ArticlePageObject(driver);
+	 }
 
 }
