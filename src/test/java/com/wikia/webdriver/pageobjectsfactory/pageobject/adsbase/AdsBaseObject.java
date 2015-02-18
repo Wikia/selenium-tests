@@ -5,7 +5,9 @@ import com.google.common.base.Joiner;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -56,6 +58,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   };
 
   private static final String[] PROVIDERS = {
+      "mobile_remnant",
+      "mobile",
       "gpt",
       "remnant",
       "Liftium",
@@ -97,8 +101,18 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
     AdsContent.setSlotsSelectors();
-    getUrl(page, true);
+    getUrl(updateUrl(page), true);
     setSlots();
+  }
+
+  // TODO Remove this hack when https://wikia-inc.atlassian.net/browse/CONCF-85 will be done
+  private String updateUrl(String page) {
+    String browserName = ConfigurationFactory.getConfig().getBrowser().toLowerCase();
+    if (browserName.equalsIgnoreCase("CHROMEMOBILE")) {
+      // Colon in url prevents mercury skin.
+      return new UrlBuilder().appendQueryStringToURL(page, "mercury=force:no");
+    }
+    return page;
   }
 
   public AdsBaseObject(
@@ -680,7 +694,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected boolean isGptParamPresent(String key, String value) {
     waitForElementByElement(presentMedrec);
     String dataGptPageParams =
-      presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
+        presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 
     PageObjectLogging.log(
@@ -795,6 +809,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     return ((String) ((JavascriptExecutor) driver).executeScript(
         "return Wikia.geo.getCountryCode();"
     ));
+  }
+
+  public AdsBaseObject addToUrl(String param) {
+    appendToUrl(param);
+    waitPageLoaded();
+    return this;
   }
 
 }

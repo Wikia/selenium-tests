@@ -121,7 +121,7 @@ public class Assertion extends Assert {
    * @rerturn String pattern - with characters entities
    */
   private static String encodeSpecialChars(String pattern) {
-    String encodedPattern = null;
+    String encodedPattern = pattern;
     if (pattern.contains("<") || pattern.contains(">")) {
       String tmp = pattern.replaceAll("<", "&lt");
       encodedPattern = tmp.replaceAll(">", "&gt");

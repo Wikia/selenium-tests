@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.gson.Gson;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -11,6 +13,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -86,6 +89,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.MoveToOffsetAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -124,6 +128,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement userProfileAvatar;
   @FindBy(css = "#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
   protected WebElement navigationLogoutLink;
+  @FindBy(css = "#AccountNavigation .subnav")
+  protected WebElement userMenuDropdown;
   @FindBy(css = "#userForceLoginModal")
   protected WebElement logInModal;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
@@ -193,11 +199,18 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
+  @FindBy(css = ".avatar-container.logged-avatar img")
+  private WebElement globalNavigationAvatar;
+  @FindBy(css = ".links-container .chevron")
+  private WebElement globalNavigationUserChevron;
   @FindBy(css = "#WikiaFooter")
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
+  private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
+  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
 
   private VenusGlobalNavPageObject venusGlobalNav;
 
@@ -598,6 +611,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new LicensedVideoSwapPageObject(driver);
   }
 
+  @Deprecated
   public void verifyAvatarPresent() {
     waitForElementByElement(userProfileAvatar);
     PageObjectLogging.log(
@@ -1272,6 +1286,33 @@ public class WikiBasePageObject extends BasePageObject {
     Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
   }
 
+  public void verifyAvatarPlaceholder() {
+	  // prevent http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp
+	  WebElement placeholder = driver.findElement(By.cssSelector(globalNavigationAvatarPlaceholder));
+	  waitForElementByElement(placeholder);
+	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
+  }
+  
+  public void verifyAvatarNotPresent() {
+	  waitForElementNotVisibleByElement(globalNavigationAvatar);
+	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
+  }
+  
+  public void verifyAvatarVisible() {
+	  waitForElementByElement(globalNavigationAvatar);
+	  PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
+  }
+  
+  public UserProfilePageObject clickOnAvatar() {
+	  waitForElementClickableByElement(globalNavigationUserChevron);
+	  globalNavigationUserChevron.click();
+	  waitForElementByElement(userMenuDropdown);
+	  waitForElementClickableByElement(globalNavigationAvatar);
+	  globalNavigationAvatar.click();
+	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
+	  return new UserProfilePageObject(driver);
+  }
+  
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
