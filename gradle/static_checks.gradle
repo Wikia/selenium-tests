@@ -1,0 +1,7 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = "6.3"
+    ignoreFailures = project.hasProperty('ignoreCheckFailures') ? ignoreCheckFailures : false
+    config = rootProject.resources.text.fromFile("gradle/google_checks.xml")
+}

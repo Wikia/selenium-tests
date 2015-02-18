@@ -1,11 +1,13 @@
 apply plugin: 'java'
 group = 'com.wikia.qa'
 version = '1.0.0'
+sourceCompatibility = 1.7
+apply from: rootProject.file('gradle/static_checks.gradle')
 
 repositories {
     jcenter()
 }
-sourceCompatibility = 1.7
+
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
