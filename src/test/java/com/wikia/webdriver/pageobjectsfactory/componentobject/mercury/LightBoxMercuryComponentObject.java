@@ -101,6 +101,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
 
   public void verifySwiping(PerformTouchAction touchAction, String direction, int attempts) {
     String currentImageSrc = getCurrentImagePath();
+    String swipeDirection = direction;
     String nextImageSrc;
     boolean imageChanged = false;
     int startX = 70;
@@ -108,12 +109,13 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     int duration = 300;
     int waitAfter = 5000;
     int centerY = 50;
-    if ("right".equals(direction)) {
+
+    if ("right".equals(swipeDirection)) {
       int temp = startX;
       startX = endX;
       endX = temp;
     } else {
-      direction = "left";
+      swipeDirection = "left";
     }
     for (int i = 0; i < attempts; ++i) {
       touchAction.swipeFromPointToPoint(startX, centerY, endX, centerY, duration, waitAfter);
@@ -124,9 +126,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
       }
     }
     if (imageChanged) {
-      PageObjectLogging.log("verifySwiping", "Swiping to " + direction + " works", true);
+      PageObjectLogging.log("verifySwiping", "Swiping to " + swipeDirection + " works", true);
     } else {
-      PageObjectLogging.log("verifySwiping", "Swiping to " + direction + " doesn't work", false);
+      PageObjectLogging
+          .log("verifySwiping", "Swiping to " + swipeDirection + " doesn't work", false);
     }
   }
 
@@ -182,22 +185,24 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
 
   public void verifyTappingOnImageEdge(PerformTouchAction touchAction, String edge) {
     String currentImageSrc = getCurrentImagePath();
+    String imgEdge = edge;
     String nextImageSrc;
     int pointX = 25;
     int duration = 500;
     int waitAfter = 5000;
-    if ("right".equals(edge)) {
+    if ("right".equals(imgEdge)) {
       pointX = 75;
     } else {
-      edge = "left";
+      imgEdge = "left";
     }
     touchAction.tapOnPointXY(pointX, 50, duration, waitAfter);
     nextImageSrc = getCurrentImagePath();
     if (!nextImageSrc.contains(currentImageSrc)) {
-      PageObjectLogging.log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge works", true);
+      PageObjectLogging
+          .log("verifyTappingOnImageEdge", "Tapping on " + imgEdge + " edge works", true);
     } else {
       PageObjectLogging
-          .log("verifyTappingOnImageEdge", "Tapping on " + edge + " edge doesn't work", false);
+          .log("verifyTappingOnImageEdge", "Tapping on " + imgEdge + " edge doesn't work", false);
     }
   }
 
