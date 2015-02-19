@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Dmytro Rets
@@ -55,7 +56,12 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public void waitForKrux() {
     waitPageLoaded();
-    wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void setKruxUserCookie(String userId) {

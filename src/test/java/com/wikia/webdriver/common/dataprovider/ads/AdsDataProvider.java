@@ -368,6 +368,7 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
   public static Object[][] kruxRealTimeSegment() {
     return new Object[][]{
         {
@@ -388,7 +389,7 @@ public class AdsDataProvider {
                           "http://glee.wikia.com/wiki/Rachel_Berry"),
             "mf20tfg50",
             true,
-            "JpSWxdE4", // segment: mf20tfg50
+            "JpSWxdE4",
         },
         {
             Arrays.asList("http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_1",
@@ -396,7 +397,7 @@ public class AdsDataProvider {
                           "http://glee.wikia.com/wiki/Kurt_Hummel"),
             "mf20tfg50",
             false,
-            "JpYqU4Qn", // segment: pbgtv842h
+            "JpYqU4Qn",
         }
     };
   }
