@@ -37,12 +37,21 @@
 			<version>8.1.15.v20140411</version>
 		</dependency>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.10</version>
+		</dependency>
+		<dependency>
 			<groupId>biz.neustar</groupId>
 			<artifactId>browsermob-proxy</artifactId>
 			<version>2.0-beta-7</version>
 			<!-- QAART-397 Added exclusions as browsermob-proxy uses version 7.3.0.v20110203 -->
 			<!-- which no longer return http 200 -->
 			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-server</artifactId>
@@ -157,6 +166,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 	<build>
