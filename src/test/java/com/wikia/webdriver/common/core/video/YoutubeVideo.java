@@ -1,27 +1,28 @@
 package com.wikia.webdriver.common.core.video;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Created by Ludwik Kaźmierczak on 2015-02-12.
  */
 public class YoutubeVideo implements Video {
 
-  static final Map<String, String> TITLE_SPECIAL_CHARS_TO_REPLACE = new HashMap<String, String>() {
-    {
-      put("| ", "");
-      put("|", "");
-      put("{", " ");
-      put("}", " ");
-      put("[", " ");
-      put("]", " ");
-      put("/", " ");
-      put("_", " ");
-    }
-  };
+  private static final ImmutableMap<String, String> TITLE_SPECIAL_CHARS_TO_REPLACE =
+      new ImmutableMap.Builder<String, String>()
+          .put("| ", "")
+          .put("|", "")
+          .put("{", " ")
+          .put("}", " ")
+          .put("[", " ")
+          .put("]", " ")
+          .put("/", " ")
+          .put("_", " ")
+          .build();
+
   private String url;
   private String title;
   private String fileName;
@@ -62,6 +63,6 @@ public class YoutubeVideo implements Video {
   }
 
   private String capitaliseFirstWord(String sentence) {
-    return StringUtils.capitalize(sentence.substring(0,1)) + sentence.substring(1);
+    return StringUtils.capitalize(sentence.substring(0, 1)) + sentence.substring(1);
   }
 }
