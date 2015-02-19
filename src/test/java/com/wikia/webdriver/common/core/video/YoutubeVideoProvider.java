@@ -21,12 +21,16 @@ import org.joda.time.DateTimeZone;
 
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by Ludwik Kaźmierczak on 2015-02-12.
  */
 public class YoutubeVideoProvider {
+
+  private static final String API_KEY =
+      ConfigurationFactory.getConfig().getCredentials().youTubeApiKey;
 
   /**
    * This method returns latest youtube video(added no longer then hour ago) for a specified query.
@@ -43,7 +47,7 @@ public class YoutubeVideoProvider {
 
     List<NameValuePair> nvps = new ArrayList<>();
 
-    nvps.add(new BasicNameValuePair("key", "AIzaSyDmRJPcPgPMvxHU2xqjj9xIAsM2nY8PPTw"));
+    nvps.add(new BasicNameValuePair("key", API_KEY));
     nvps.add(new BasicNameValuePair("part", "snippet"));
     nvps.add(new BasicNameValuePair("order", "date"));
     nvps.add(new BasicNameValuePair("maxResults", "10"));
