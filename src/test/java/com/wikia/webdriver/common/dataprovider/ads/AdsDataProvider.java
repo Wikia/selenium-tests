@@ -380,7 +380,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxStandartSegment() {
+  public static Object[][] kruxStandardSegment() {
     return new Object[][]{
         {
             Arrays.asList("http://pokemon.wikia.com/wiki/Barry%27s_Roserade",

@@ -32,7 +32,7 @@ public class TestKruxSegment extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandartSegment",
+      dataProvider = "kruxStandardSegment",
       groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
   )
   public void testStandardSegment(List<String> pages, String segment, boolean isPresent,
