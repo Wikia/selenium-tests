@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.video;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public class YoutubeVideo implements Video {
 
   public YoutubeVideo(String title, String url) {
     this.url = url;
-    this.title = escapeSpecialCharactersFromTitle(title);
+    this.title = capitaliseFirstWord(escapeSpecialCharactersFromTitle(title));
 
     this.fileName = transformTitleToFileName(this.title);
   }
@@ -57,5 +59,9 @@ public class YoutubeVideo implements Video {
 
   private String transformTitleToFileName(String title) {
     return title.replace(" ", "_");
+  }
+
+  private String capitaliseFirstWord(String sentence) {
+    return StringUtils.capitalize(sentence.substring(0,1)) + sentence.substring(1);
   }
 }

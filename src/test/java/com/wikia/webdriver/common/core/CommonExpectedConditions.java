@@ -42,9 +42,13 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
-          return elementsAttributeValue.contains(value);
-        } catch (StaleElementReferenceException | NullPointerException e) {
-          return null;
+          if (elementsAttributeValue == null){
+            return false;
+          }else {
+            return elementsAttributeValue.contains(value);
+          }
+        } catch (StaleElementReferenceException e) {
+          return false;
         }
       }
 
