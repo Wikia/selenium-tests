@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 public class MercuryBasePageObject extends MobileBasePageObject {
 
@@ -38,21 +37,6 @@ public class MercuryBasePageObject extends MobileBasePageObject {
   public void tapOnElement(WebElement element) {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);
-  }
-
-  public void doubleTapZoom(WebElement element) {
-    Actions doubleTapZoom = new Actions(driver);
-    doubleTapZoom.doubleClick(element).perform();
-  }
-
-  public void swipeLeft(WebElement element) {
-    Actions swipeAction = new Actions(driver);
-    swipeAction.dragAndDropBy(element, -100, 0).build().perform();
-  }
-
-  public void swipeRight(WebElement element) {
-    Actions swipeAction = new Actions(driver);
-    swipeAction.dragAndDropBy(element, +100, 0).build().perform();
   }
   
   public void waitMilliseconds(int time, String methodName) {
