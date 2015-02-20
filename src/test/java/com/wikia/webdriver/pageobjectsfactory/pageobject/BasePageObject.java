@@ -626,7 +626,7 @@ public class BasePageObject {
                           "detected and closed alert with text " + alertText, true);
   }
 
-  public String getTimeStamp() {
+  public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);

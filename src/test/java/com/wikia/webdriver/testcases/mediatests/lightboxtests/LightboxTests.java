@@ -38,8 +38,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 
   @Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
   public void LightboxTest_001_latestPhotos() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     LatestPhotosComponentObject latestPhotos = new LatestPhotosComponentObject(driver);
     LightboxComponentObject lightbox = latestPhotos.openLightboxForImage(0);
     lightbox.verifyLightboxPopup();
@@ -83,7 +82,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
   public void LightboxTest_008_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
 
@@ -20,7 +21,7 @@ public class VideosModuleTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     videosModule.verifyVideosModuleShowing();
     base.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
     videosModule.verifyVideosModuleShowing();
@@ -53,9 +54,8 @@ public class VideosModuleTests extends NewTestTemplate {
   @Test(groups = {"VideosModule", "VideosModuleTest_003", "Media"})
   public void VideosModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     videosModule.verifyDisplayCount();
   }
 
@@ -67,9 +67,8 @@ public class VideosModuleTests extends NewTestTemplate {
   @Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
   public void VideosModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     videosModule.verifyNoDuplicates();
   }
 }

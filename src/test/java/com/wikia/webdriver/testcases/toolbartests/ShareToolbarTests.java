@@ -1,9 +1,12 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
+import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.ShareToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
 
@@ -13,15 +16,13 @@ import org.testng.annotations.Test;
  *         share by email, 5. Verify email modal for logged in user when attempting to share by
  *         email.
  */
+@Test(groups = {"Toolbar"})
 public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 
-  Credentials credentials = config.getCredentials();
-
-  @Test(groups = {"ShareToolbar001", "Toolbar", "Smoke4"})
+  @Test(groups = {"ShareToolbar001", "Smoke4"})
+  @ExecuteAs(user = User.USER_2)
   public void ShareToolbar001_VerifyingElements() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
     share.clickShareButton();
     share.verifyTwitterIframeVisibility();
@@ -29,11 +30,10 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
     share.verifyEmailButtonVisibility();
   }
 
-  @Test(groups = {"ShareToolbar002", "Toolbar"})
+  @Test(groups = {"ShareToolbar002"})
+  @ExecuteAs(user = User.USER_2)
   public void ShareToolbar002_VerifyingTwitterModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
     share.clickShareButton();
     share.navigteTweetButtonUrl();
@@ -41,32 +41,28 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
   }
 
   //SecurityError: Blocked a frame with origin "http://mediawiki119.wikia.com" from accessing a cross-origin frame.
-  @Test(enabled = false, groups = {"ShareToolbar003", "Toolbar"})
+  @Test(enabled = false, groups = {"ShareToolbar003"})
   public void ShareToolbar003_VerifyingFBModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
     share.clickShareButton();
     share.clickFBLikeButton();
     share.verifyFBModalURL();
   }
 
-  @Test(groups = {"ShareToolbar004", "Toolbar"})
+  @Test(groups = {"ShareToolbar004"})
   public void ShareToolbar004_VerifyingLogInModalForAnons() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
     share.clickShareButton();
     share.clickEmailButton();
-    base.verifyModalLoginAppeared();
+    new WikiBasePageObject(driver).verifyModalLoginAppeared();
   }
 
-  @Test(groups = {"ShareToolbar005", "Toolbar"})
-  public void ShareToolbar005_VerifyingEmailModalElements() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    base.openRandomArticle(wikiURL);
+  @Test(groups = {"ShareToolbar005"})
+  @ExecuteAs(user = User.USER_2)
+    public void ShareToolbar005_VerifyingEmailModalElements() {
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
     ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
     share.clickShareButton();
     share.clickEmailButton();

@@ -1,27 +1,29 @@
 package com.wikia.webdriver.testcases.commentstests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
  */
+@Test(groups = {"ArticleComments"})
 public class ArticleCommentsTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"ArticleComments_001", "ArticleComments", "Smoke2"})
+  @Test(groups = {"ArticleComments_001", "Smoke2"})
+  @ExecuteAs(user = User.USER)
   public void ArticleComments_001_editComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -35,12 +37,11 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = {"ArticleComments_002", "ArticleComments"})
+  @Test(groups = {"ArticleComments_002"})
+  @ExecuteAs(user = User.USER)
   public void ArticleComments_002_replyComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
-    String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    String comment = PageContent.COMMENT_TEXT +  DateTime.now().getMillis();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
     article.submitComment();
@@ -54,10 +55,9 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyReplyCreator(credentials.userName);
   }
 
-  @Test(groups = {"ArticleComments_003", "ArticleComments"})
+  @Test(groups = {"ArticleComments_003"})
   public void ArticleComments_003_anonReplyComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -72,11 +72,10 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
   }
 
-  @Test(groups = {"ArticleComments_004", "ArticleComments"})
+  @Test(groups = {"ArticleComments_004"})
+  @ExecuteAs(user = User.STAFF)
   public void ArticleComments_004_deleteComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);

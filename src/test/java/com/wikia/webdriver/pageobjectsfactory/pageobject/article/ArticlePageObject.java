@@ -174,6 +174,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   }
 
+  public ArticlePageObject openRandomArticle(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
+    return this;
+  }
+
   public void verifyArticleTitle(String title) {
     waitForElementVisibleByElement(articleHeader);
     Assertion.assertEquals(articleHeader.getText(), title);

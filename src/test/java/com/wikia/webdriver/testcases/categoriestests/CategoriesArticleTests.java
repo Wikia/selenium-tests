@@ -4,6 +4,8 @@
 package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
@@ -19,14 +21,12 @@ import org.testng.annotations.Test;
 public class CategoriesArticleTests extends NewTestTemplate {
 
 	/*
-         * Add category to article as anon
+   * Add category to article as anon
 	 * Add category to article from suggestion list as anon
 	 * Add category to article as user
 	 * Add category to article from suggestion list as user
 	 * Add category to article as anon edit, delete
 	 */
-
-  Credentials credentials = config.getCredentials();
 
   @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
   public void CategoriesTestsArticle_001_anon() {
@@ -53,10 +53,9 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
+  @ExecuteAs(user = User.USER)
   public void CategoriesTestsArticle_003_user() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
@@ -64,12 +63,11 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
+  @ExecuteAs(user = User.USER)
   public void CategoriesTestsArticle_004_userSuggestions() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(
+    VisualEditModePageObject visualEditMode = new WikiBasePageObject(driver).navigateToArticleEditPageCK(
         wikiURL,
-        PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp()
+        PageContent.ARTICLE_NAME_PREFIX + WikiBasePageObject.getTimeStamp()
     );
     visualEditMode.addContent(PageContent.ARTICLE_TEXT);
     ArticlePageObject article = visualEditMode.submitArticle();
@@ -80,8 +78,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_005_anonEdit() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     EditCategoryComponentObject editCategory = article.editCategory(categoryName);

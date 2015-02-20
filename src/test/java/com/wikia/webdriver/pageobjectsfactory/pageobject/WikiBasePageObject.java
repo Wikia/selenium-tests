@@ -714,11 +714,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new ChatPageObject(driver);
   }
 
-  public ArticlePageObject openRandomArticle(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
-    return new ArticlePageObject(driver);
-  }
-
   public void verifyPermissionsErrorsPresent() {
     waitForElementByElement(premissionErrorMessage);
     PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",

@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -50,11 +52,10 @@ public class FilePageTests extends NewTestTemplate {
    * @author "Liz Lee"
    */
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
+//  @ExecuteAs(user = User.USER)
   public void filePage002_tabsLoggedIn() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-
-    FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.FILENAME_001);
+    FilePagePageObject filePage =
+        new FilePagePageObject(driver).openFilePage(wikiURL, URLsContent.FILENAME_001);
 
     filePage.refreshAndVerifyTabs(0);
     filePage.refreshAndVerifyTabs(1);

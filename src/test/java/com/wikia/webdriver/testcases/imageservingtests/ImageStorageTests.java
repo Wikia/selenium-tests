@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 /**
@@ -63,7 +64,7 @@ public class ImageStorageTests extends NewTestTemplate {
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     FilePagePageObject file = newFiles.openImage(PageContent.FILERENAME, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
-    String imageNewName = renamePage.getTimeStamp() + PageContent.FILERENAME;
+    String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
