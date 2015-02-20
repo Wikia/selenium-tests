@@ -22,6 +22,10 @@ import javax.mail.Store;
  */
 public class MailFunctions {
 
+  private MailFunctions() {
+
+  }
+
   public static String getFirstEmailContent(String userName, String password) {
     try {
       //establishing connections
@@ -106,8 +110,9 @@ public class MailFunctions {
     }
   }
 
-  public static String getActivationLinkFromEmailContent(String content) {
-    content = content.replace("=", ""); //mail content contain '=' chars, which has to be removed
+  public static String getActivationLinkFromEmailContent(String mailContent) {
+    //mail content contain '=' chars, which has to be removed
+    String content = mailContent.replace("=", "");
     Pattern
         p =
         Pattern.compile(
@@ -122,8 +127,8 @@ public class MailFunctions {
     }
   }
 
-  public static String getPasswordFromEmailContent(String content) {
-    content = content.replace("\"", "\n");
+  public static String getPasswordFromEmailContent(String mailContent) {
+    String content = mailContent.replace("\"", "\n");
     String[] lines = content.split("\n");
     return lines[1];
   }

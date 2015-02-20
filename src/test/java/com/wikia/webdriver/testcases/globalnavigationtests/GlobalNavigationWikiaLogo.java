@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychała
  * @ownership Consumer
  */
-public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
+public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {
@@ -24,7 +24,7 @@ public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"TestWikiaLogoInGlobalNav_001"},
+      groups = {"TestWikiaLogoInGlobalNav_001", "GlobalNav"},
       dataProvider = "getCentralWikiaUrlForWiki"
   )
   public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,

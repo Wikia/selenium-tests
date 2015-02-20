@@ -121,11 +121,12 @@ public class Assertion extends Assert {
    * @return  String pattern - with characters entities
    */
   private static String encodeSpecialChars(String pattern) {
+    String encodedPattern = pattern;
     if (pattern.contains("<") || pattern.contains(">")) {
       String tmp = pattern.replaceAll("<", "&lt");
-      pattern = tmp.replaceAll(">", "&gt");
+      encodedPattern = tmp.replaceAll(">", "&gt");
     }
-    return pattern;
+    return encodedPattern;
   }
 
   public static void assertStringNotEmpty(String current) {

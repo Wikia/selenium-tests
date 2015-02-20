@@ -134,32 +134,34 @@ public class NewTestTemplateCore {
     boolean isNetworkTrafficDumpSet = false;
     String countryCode = null;
 
-    if (method.getAnnotation(GeoEdgeProxy.class) != null) {
+    if (method.isAnnotationPresent(GeoEdgeProxy.class)) {
       isGeoEdgeSet = true;
       countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
     }
 
-    if (method.getAnnotation(NetworkTrafficDump.class) != null) {
+    if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
       isNetworkTrafficDumpSet = true;
     }
 
-    if (isGeoEdgeSet || isNetworkTrafficDumpSet) {
-      isProxyServerRunning = true;
-      networkTrafficIntereceptor = new NetworkTrafficInterceptor();
-      networkTrafficIntereceptor.startSeleniumProxyServer();
-    } else {
+    if (!isGeoEdgeSet && !isNetworkTrafficDumpSet) {
       return;
     }
 
-    if (isGeoEdgeSet) {
-      GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
-      String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
-      String ip = geoEdgeUtils.getIPForCountry(countryCode);
-      networkTrafficIntereceptor.setProxyServer(ip);
-      networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
+    isProxyServerRunning = true;
+    networkTrafficIntereceptor = new NetworkTrafficInterceptor();
+    networkTrafficIntereceptor.startSeleniumProxyServer();
+    if (isGeoEdgeSet && !countryCode.isEmpty()) {
+      setGeoEdge(countryCode);
     }
-
     capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
     setDriverCapabilities(capabilities);
+  }
+
+  public void setGeoEdge(String countryCode) {
+    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
+    String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
+    String ip = geoEdgeUtils.getIPForCountry(countryCode);
+    networkTrafficIntereceptor.setProxyServer(ip);
+    networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
   }
 }

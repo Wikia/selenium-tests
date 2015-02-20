@@ -27,7 +27,6 @@ public class FacebookTests extends NewTestTemplate {
     userFB.verifyPageLogo();
     FacebookSettingsPageObject settingsFB = userFB.fbOpenSettings();
     settingsFB.openApps();
-    settingsFB.removeApp(URLsContent.FACEBOOK_WIKIA_APP_ID);
-    settingsFB.removeApp(URLsContent.FACEBOOK_WIKIA_APP_DEV_ID);
+    settingsFB.removeAppIfPresent();
   }
 }

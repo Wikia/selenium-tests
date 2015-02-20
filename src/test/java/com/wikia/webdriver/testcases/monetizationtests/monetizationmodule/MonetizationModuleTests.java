@@ -14,12 +14,14 @@ import org.testng.annotations.Test;
 public class MonetizationModuleTests extends NewTestTemplate {
 
   private static final String TEST_COUNTRY_CODE = "TH";    // country that the ads will be shown
-  private static final String TEST_TOP_100_WIKI = "muppet";
-  private static final String TEST_TOP_100_ARTICLE = "Kermit_the_Frog";
+  private static final String TEST_TOP_100_WIKI = "cardfight";
+  private static final String TEST_TOP_100_ARTICLE = "Standard_Fight_Rules";
   private static final String TEST_TOP_700_WIKI = "th.sktest123";
   private static final String TEST_TOP_700_ARTICLE = "Style-5H2-10H3";
   private static final String TEST_WIKI = "sktest123";
   private static final String TEST_ARTICLE = "Style-5H2-10H3";
+  private static final String TEST_WIKI_AMAZON_VIDEO = "muppet";
+  private static final String TEST_ARTICLE_AMAZON_VIDEO = "Kermit_the_Frog";
 
   Credentials credentials = config.getCredentials();
 
@@ -105,11 +107,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @DataProvider(name = "DataMonetizationModule_005")
   public static Object[][] DataMonetizationModule_005() {
     return new Object[][]{
-        {800, 600, 468, 728},
+        {800, 600, 320, 728},
+        {850, 600, 418, 728},
         {1024, 600, 320, 690},
-        {1440, 600, 468, 728},
-        {1665, 600, 690, 728},
-        {1700, 600, 728, 728},
+        {1440, 600, 418, 728},
+        {1665, 600, 630, 728},
+        {1700, 600, 678, 728},
     };
   }
 
@@ -135,7 +138,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.resizeWindow(width, height);
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitShown();
-    monetizationModule.verifyAdsenseUnitWidth(expectedInContent, expectedOthers);
+    if (monetizationModule.verifyWindowWidth(width)) {
+      monetizationModule.verifyAdsenseUnitWidth(expectedInContent, expectedOthers);
+    }
   }
 
   /**

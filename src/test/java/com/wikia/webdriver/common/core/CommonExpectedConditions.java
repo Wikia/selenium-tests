@@ -26,6 +26,10 @@ public class CommonExpectedConditions {
 
   private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
+  private CommonExpectedConditions() {
+
+  }
+
   /**
    * An expectation for checking if the given text is present in the specified element.
    *
@@ -38,9 +42,13 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
-          return elementsAttributeValue.contains(value);
+          if (elementsAttributeValue == null){
+            return false;
+          }else {
+            return elementsAttributeValue.contains(value);
+          }
         } catch (StaleElementReferenceException e) {
-          return null;
+          return false;
         }
       }
 

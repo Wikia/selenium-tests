@@ -5,6 +5,10 @@ package com.wikia.webdriver.common.core.configuration;
  */
 public class ConfigurationFactory {
 
+  private ConfigurationFactory() {
+
+  }
+
   public static AbstractConfiguration getConfig() {
 
     if (System.getProperty("run_mvn") == null || "false".equals(System.getProperty("run_mvn"))) {

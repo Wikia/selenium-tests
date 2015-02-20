@@ -11,6 +11,10 @@ public class ElementStateHelper {
 
   public static final int TIMEOUT = 30;
 
+  private ElementStateHelper() {
+
+  }
+
   public static boolean isElementVisible(WebElement element, WebDriver webDriver) {
     webDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 

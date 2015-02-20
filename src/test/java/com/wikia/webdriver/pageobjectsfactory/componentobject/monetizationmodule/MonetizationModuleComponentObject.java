@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -187,6 +188,12 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     PageObjectLogging
         .log("verifyAdsenseUnitNotShownAboveFooter", "Adsense unit is not shown above footer",
              true);
+  }
+
+  public boolean verifyWindowWidth(int expectedWidth) {
+    int windowWidth = getWindowSize().width;
+    PageObjectLogging.log("verifyWindowWidth", "The width of the window is " + windowWidth, true);
+    return (windowWidth == expectedWidth);
   }
 
   public void verifyAdsenseUnitWidth(int expectedInContent, int expectedOthers) {

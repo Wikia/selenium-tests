@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   public WebDriver driver;
-  protected int timeOut = 45;
+  protected int timeOut = 30;
   public WebDriverWait wait;
   public Actions builder;
   protected UrlBuilder urlBuilder;
@@ -260,7 +260,7 @@ public class BasePageObject {
     js.executeScript("$(arguments[0]).focus()", element);
   }
         /*
-	 * Url helpers
+         * Url helpers
 	 */
 
   public boolean verifyTitle(String title) {
@@ -301,16 +301,10 @@ public class BasePageObject {
     }
     if (makeScreenshot) {
       PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
+          "Take screenshot",
+          String.format("Screenshot After Navigation to: %s", url),
           true,
           driver
-      );
-    } else {
-      PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
-          true
       );
     }
   }
@@ -570,9 +564,14 @@ public class BasePageObject {
 
   public void waitForValueToBePresentInElementsAttributeByCss(
       String selector, String attribute, String value) {
-    wait.until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(By.cssSelector(selector),
-                                                        attribute, value));
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .valueToBePresentInElementsAttribute(By.cssSelector(selector),
+              attribute, value));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(
@@ -742,8 +741,6 @@ public class BasePageObject {
         CommonExpectedConditions.newWindowPresent()
     );
   }
-
-  ;
 
   public void enableWikiaTracker() {
     driver.get(

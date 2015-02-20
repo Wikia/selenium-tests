@@ -61,4 +61,7 @@ public class WikiTextContent {
       REDIRECT_LINK_TEXT =
       LINK_PREFIX + PageContent.REDIRECT_LINK + LINK_POSTFIX;
 
+	private WikiTextContent() {
+
+	}
 }

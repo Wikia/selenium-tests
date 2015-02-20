@@ -25,4 +25,8 @@ public class CreateWikiMessages {
   public static final String WIKI_CATEGORY = "TV";
   public static final String WIKI_THEME = "carbon";
   public static final String CATEGORY_ERROR_MESSAGE = "Please choose a category";
+
+  private CreateWikiMessages() {
+
+  }
 }

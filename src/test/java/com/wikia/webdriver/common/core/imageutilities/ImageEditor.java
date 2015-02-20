@@ -23,11 +23,12 @@ public class ImageEditor {
   public void saveImageFile(File imageFile, String path) {
     Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
     Matcher matcher = pattern.matcher(path);
+    String newPath = null;
     if (!matcher.matches()) {
-      path += ".png";
+      newPath = path + ".png";
     }
     try {
-      FileUtils.copyFile(imageFile, new File(path));
+      FileUtils.copyFile(imageFile, new File(newPath));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

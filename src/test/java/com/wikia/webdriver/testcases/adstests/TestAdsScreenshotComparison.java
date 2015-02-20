@@ -74,6 +74,14 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
     checkAds();
   }
 
+  @GeoEdgeProxy(country = "NZ")
+  @Test(
+      groups = {"Ads_Screenshot_NZ"}
+  )
+  public void Ads_Screenshot_NZ() throws Exception {
+    checkAds();
+  }
+
   @GeoEdgeProxy(country = "CA")
   @Test(
       groups = {"Ads_Screenshot_CA"}

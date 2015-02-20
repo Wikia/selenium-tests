@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
-  public void SignUp_001_wrongBlurryWord() {
+  public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -49,7 +49,6 @@ public class SignUpTests extends NewTestTemplate {
         PageContent.WIKI_SIGN_UP_BIRTHDAY,
         PageContent.WIKI_SIGN_UP_BIRTHYEAR
     );
-    signUp.typeCaptcha(signUp.getTimeStamp());
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
     signUp.verifySubmitButtonDisabled();
@@ -154,7 +153,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser() {
+  public void SignUp_006_loginNotVerifiedUser_main_3877() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -180,15 +179,15 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   /**
-   * Jira ticket: CONN-78 <p/> pre-conditions: Facebook_001 test removes Wikia and Wikia Development
-   * App from Facebook Facebokk_001 test stored in TestCases/FacebookTests/FacebookTests.java path
-   * <p/> Steps: 1. Log in to Facebook 2. Open finish signup with facebook modal 3. create and
+   * pre-conditions: Facebook_001 test removes Wikia and Wikia Development
+   * App from Facebook Facebook_001 test stored in TestCases/FacebookTests/FacebookTests.java path
+   * Steps: 1. Log in to Facebook 2. Open finish signup with facebook modal 3. create and
    * verify account 4. disconnect created account from facebook
    */
   @Test(
       groups = {"SignUp_007", "SignUp", "Modals"},
       dependsOnGroups = "Facebook_001",
-      enabled = false
+      enabled = true
   )
   public void SignUp_007_signUpWithFacebook() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -199,11 +198,14 @@ public class SignUpTests extends NewTestTemplate {
     SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
     fbModal.acceptWikiaAppPolicy();
-    String userName = "QATestAccount" + signUp.getTimeStamp();
+    String userName = "QA" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
+    signUp.verifyUserLoggedIn(userName);
+    signUp.logOut(driver);
+    signUp.logInCookie(userName, password, wikiURL);
     signUp.verifyUserLoggedIn(userName);
     PreferencesPageObject preferences;
     preferences = signUp.openSpecialPreferencesPage(wikiURL);

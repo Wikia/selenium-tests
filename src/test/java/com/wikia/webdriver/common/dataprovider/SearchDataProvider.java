@@ -7,6 +7,10 @@ import java.util.List;
 
 public class SearchDataProvider {
 
+  private SearchDataProvider() {
+
+  }
+
   @DataProvider
   public static final Object[][] getOnWikiHostsTermsAndMatchUrls() {
     return new Object[][]{

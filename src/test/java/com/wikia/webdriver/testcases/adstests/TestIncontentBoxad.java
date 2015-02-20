@@ -11,17 +11,17 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestTopIncontentBoxad extends NewTestTemplate {
+public class TestIncontentBoxad extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "topIncontentBoxad",
-      groups = {"TestTopIncontentBoxad_GeoEdgeFree"}
+      dataProvider = "incontentBoxad",
+      groups = {"TestIncontentBoxad_GeoEdgeFree"}
   )
   public void TestTopIncontentBoxad_GeoEdgeFree(String wikiName, String article,
                                                 Dimension windowResolution) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-    wikiPage.checkTopIncontentBoxad();
+    wikiPage.checkIncontentBoxad();
   }
 }
