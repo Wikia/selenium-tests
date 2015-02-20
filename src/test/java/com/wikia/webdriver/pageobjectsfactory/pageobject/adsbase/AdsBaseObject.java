@@ -797,12 +797,18 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void waitOnReadyEvent() {
-    wait.until(new ExpectedCondition<Boolean>() {
-      public Boolean apply(WebDriver driver) {
-        return ((JavascriptExecutor) driver).executeScript("return document.readyState")
-            .equals("complete");
-      }
-    });
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(new ExpectedCondition<Boolean>() {
+        public Boolean apply(WebDriver driver) {
+          return ((JavascriptExecutor) driver)
+              .executeScript("return document.readyState")
+              .equals("complete");
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public String getCountry() {

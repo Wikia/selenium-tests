@@ -3,13 +3,17 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.testng.annotations.Test;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -20,12 +24,25 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   public void SpecialVideos_001_Provider_qaart_518() {
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("review");
+
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
-    specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
+    vetAddingVideo.addVideoByUrl(video.getUrl());
+    specialVideos.verifyVideoAdded(video.getTitle());
+
+    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+
+    filePage.getVenusGlobalNav().openAccountNAvigation().logOut();
+    filePage.getVenusGlobalNav().openAccountNAvigation()
+        .logIn(credentials.userNameStaff, credentials.passwordStaff);
+    DeletePageObject deletePage = filePage.deletePage();
+    deletePage.submitDeletion();
+
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    filePage.verifyEmptyFilePage();
   }
 
   @Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
