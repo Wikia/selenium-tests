@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @author Tomasz Napieralski
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  */
-public class TableOfContentPageObject extends MercuryBasePageObject {
+public class TableOfContentPageObject extends BasePageObject {
 
   @FindBy(css = "nav.table-of-contents")
   private WebElement tocAll;
@@ -30,24 +30,15 @@ public class TableOfContentPageObject extends MercuryBasePageObject {
   }
 
   public boolean isTOCDisplayed() {
-    if (tocAll.isDisplayed()) {
-      return true;
-    }
-    return false;
+    return tocAll.isDisplayed();
   }
 
   public boolean isH2OnPage() {
-    if (allH2.size() > 0) {
-      return true;
-    }
-    return false;
+    return allH2.size() > 0;
   }
 
   public boolean isH2AndTOC() {
-    if (isH2OnPage() && isTOCDisplayed()) {
-      return true;
-    }
-    return false;
+    return isH2OnPage() && isTOCDisplayed();
   }
 
   public boolean isTOCUnderArticleName() {
@@ -88,10 +79,7 @@ public class TableOfContentPageObject extends MercuryBasePageObject {
     int h2Pos = Integer.parseInt(h2PosString);
     int windowYPos =
         Integer.parseInt(js.executeScript("return $(window).scrollTop()").toString());
-    if (h2Pos == windowYPos) {
-      return true;
-    }
-    return false;
+    return h2Pos == windowYPos;
   }
 
   public boolean isH2PaddingTopMoreThan(int index, int value) {
@@ -100,16 +88,10 @@ public class TableOfContentPageObject extends MercuryBasePageObject {
         js.executeScript("return $('h2').eq(" + index + ").css('padding-top')").toString();
     h2PaddingString = h2PaddingString.substring(0, h2PaddingString.length() - 2);
     int h2Padding = Integer.parseInt(h2PaddingString);
-    if (h2Padding >= value) {
-      return true;
-    }
-    return false;
+    return h2Padding >= value;
   }
 
   public boolean isTOCMenuVisible() {
-    if (TOCMenu.getCssValue("display").equals("none")) {
-      return false;
-    }
-    return true;
+    return !TOCMenu.getCssValue("display").equals("none");
   }
 }

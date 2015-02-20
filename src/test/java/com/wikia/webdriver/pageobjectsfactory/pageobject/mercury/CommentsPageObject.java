@@ -7,7 +7,10 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class CommentsPageObject extends MercuryBasePageObject {
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ */
+public class CommentsPageObject extends BasePageObject {
 
   @FindBy(css = ".article-gallery img")
   private List<WebElement> galleryImagesArray;
@@ -45,9 +48,6 @@ public class CommentsPageObject extends MercuryBasePageObject {
   private WebElement previousCommentPageButton;
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
-
-  public static final String MEDIA_TYPE_VIDEO = "Video";
-  public static final String MEDIA_TYPE_IMAGE = "Image";
 
   public CommentsPageObject(WebDriver driver) {
     super(driver);
@@ -116,59 +116,35 @@ public class CommentsPageObject extends MercuryBasePageObject {
   }
 
   public boolean isCommmentsListCollapsed() {
-    if (commentsHeader.getAttribute("class").contains("collapsed")) {
-      return true;
-    }
-    return false;
+    return commentsHeader.getAttribute("class").contains("collapsed");
   }
 
   public boolean isUserAvatarInComment(int index) {
-    if (checkIfElementOnPage(commentsAvatars.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(commentsAvatars.get(index));
   }
 
   public boolean isUserUsernameInComment(int index) {
-    if (checkIfElementOnPage(commentsUsernames.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(commentsUsernames.get(index));
   }
 
   public boolean isTimeStampInComment(int index) {
-    if (checkIfElementOnPage(commentsTimeStamps.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(commentsTimeStamps.get(index));
   }
 
   public boolean isContentInComment(int index) {
-    if (checkIfElementOnPage(commentsContent.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(commentsContent.get(index));
   }
 
   public boolean isRepliesListExpanded(int index) {
-    if (checkIfElementOnPage(repliesContent.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(repliesContent.get(index));
   }
 
   public boolean isNextCommentPageButtonDisplayed() {
-    if (nextCommentPageButton.isDisplayed()) {
-      return true;
-    }
-    return false;
+    return nextCommentPageButton.isDisplayed();
   }
 
   public boolean isPreviousCommentPageButtonDisplayed() {
-    if (previousCommentPageButton.isDisplayed()) {
-      return true;
-    }
-    return false;
+    return previousCommentPageButton.isDisplayed();
   }
 
   public boolean isMediaThumbnailInComment(String mediaType, int index) {
@@ -178,10 +154,7 @@ public class CommentsPageObject extends MercuryBasePageObject {
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
     }
-    if (mediaInComment.findElement(By.cssSelector("img")).isDisplayed()) {
-      return true;
-    }
-    return false;
+    return mediaInComment.findElement(By.cssSelector("img")).isDisplayed();
   }
 
   public boolean isMediaLinkInComment(String mediaType, int index) {
@@ -191,10 +164,7 @@ public class CommentsPageObject extends MercuryBasePageObject {
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
     }
-    if (mediaInComment.findElement(By.cssSelector("a")).getAttribute("href").contains("/wiki/File:")) {
-      return true;
-    }
-    return false;
+    return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href").contains("/wiki/File:");
   }
 
   public boolean isChevronCollapsed() {

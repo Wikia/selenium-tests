@@ -1,35 +1,33 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CommentsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Mobile Web
  */
-
 public class CommentsTests extends NewTestTemplate {
-
-  Credentials credentials = config.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
-    MercuryContent.turnOnMercurySkin(driver, wikiURL);
+    BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
+
+  private static final String MEDIA_TYPE_VIDEO = "Video";
+  private static final String MEDIA_TYPE_IMAGE = "Image";
+  private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
 
   // CT01
   @Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_001_ClickingCommentsWillUncollapseComments() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     Assertion.assertFalse(comments.isCommmentsListCollapsed(), "Comments are collapsed");
@@ -37,19 +35,19 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT02
   @Test(groups = {"MercuryCommentsTests_002", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_002_25CommentsPerPage() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+  public void MercuryCommentsTests_002_CommentsPerPage() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
-    Assertion.assertNumber(25, comments.getNumberOfCommentsPerPage(), "Number of comments per page");
+    Assertion.assertNumber(NUMBER_OF_COMMENTS_PER_PAGE, comments.getNumberOfCommentsPerPage(), "Number of comments per page");
   }
   
   // CT03
   @Test(groups = {"MercuryCommentsTests_003", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_003_NextAndPreviousPageAreVisible() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     int numberOfComments = comments.getNumberOfCommentsFromHeader();
@@ -66,8 +64,8 @@ public class CommentsTests extends NewTestTemplate {
   // CT04
   @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_004_ClickViewReplyWillExpandReplies() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     comments.clickViewReplies(0);
@@ -77,8 +75,8 @@ public class CommentsTests extends NewTestTemplate {
   // CT05
   @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_005_CheckCommentElements() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     Assertion.assertTrue(comments.isUserAvatarInComment(0), "User avatar isn't displayed");
@@ -90,8 +88,8 @@ public class CommentsTests extends NewTestTemplate {
   // CT06
   @Test(groups = {"MercuryCommentsTest_006", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_006_CommentsCounterIsCorrect() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     int numberOfComments = comments.getNumberOfCommentsFromHeader();
@@ -107,8 +105,8 @@ public class CommentsTests extends NewTestTemplate {
   // CT07
   @Test(groups = {"MercuryCommentsTests_007", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_007_RepliesCounterIsCorrect() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     Assertion.assertTrue(comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0), "Replies counter doesn't work");
@@ -117,8 +115,8 @@ public class CommentsTests extends NewTestTemplate {
   // CT08
   @Test(groups = {"MercuryCommentsTests_008", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_008_TapOnUserRedirectToUserPage() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     String username = comments.getUserUsername(0);
@@ -129,24 +127,23 @@ public class CommentsTests extends NewTestTemplate {
   // CT09
   @Test(groups = {"MercuryCommentsTests_009", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_009_ImagesAndVideosAreDisplayed() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     Assertion.assertTrue(
-        comments.isMediaThumbnailInComment(MercuryArticlePageObject.MEDIA_TYPE_VIDEO, 1),
+        comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, 1),
         "Video thumbnail isn't displayed");
-    Assertion.assertTrue(comments.isMediaLinkInComment(MercuryArticlePageObject.MEDIA_TYPE_VIDEO, 1), "Video doesn't have link");
-    Assertion.assertTrue(comments.isMediaThumbnailInComment(
-        MercuryArticlePageObject.MEDIA_TYPE_IMAGE, 3), "Image thumbnail isn't displayed");
-    Assertion.assertTrue(comments.isMediaLinkInComment(MercuryArticlePageObject.MEDIA_TYPE_IMAGE, 3), "Image doesn't have link");
+    Assertion.assertTrue(comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, 1), "Video doesn't have link");
+    Assertion.assertTrue(comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, 3), "Image thumbnail isn't displayed");
+    Assertion.assertTrue(comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, 3), "Image doesn't have link");
   }
   
   // CT10
   @Test(groups = {"MercuryCommentsTests_010", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTests_010_ChevronRotatesWhenTapped() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_COMMENTS_TEST_ARTICLE);
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     Assertion.assertTrue(comments.isChevronCollapsed(), "Chevron isn't collapsed");
     comments.clickCommentsHeader();

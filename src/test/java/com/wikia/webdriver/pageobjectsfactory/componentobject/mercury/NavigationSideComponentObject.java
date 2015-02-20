@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  */
-public class NavigationSideComponentObject extends MercuryBasePageObject {
+public class NavigationSideComponentObject extends BasePageObject {
 
   @FindBy(css = ".ember-text-field")
   private WebElement searchInput;
@@ -91,63 +91,42 @@ public class NavigationSideComponentObject extends MercuryBasePageObject {
   public boolean isSuggestionListDisplayed() {
     try {
       waitForElementByElement(searchSuggestions.get(0));
-      if (searchSuggestions.get(0).isDisplayed()) {
-        return true;
-      }
-      return false;
+      return searchSuggestions.get(0).isDisplayed();
     } catch (NoSuchElementException|IndexOutOfBoundsException e) {}
     return false;
   }
 
   public boolean isNavMenuVisible() {
-    if (menuView.getAttribute("class").contains("collapsed")) {
-      return false;
-    }
-    return true;
+    return !menuView.getAttribute("class").contains("collapsed");
   }
 
   public boolean isBackLinkDisplayed() {
     try {
-      if (backChevron.isDisplayed()) {
-        return true;
-      }
-      return false;
+      return backChevron.isDisplayed();
     } catch (NoSuchElementException e) {}
     return false;
   }
 
   public boolean isLinkWithChevronEllipsized(int index) {
     waitForElementVisibleByElement(chevrons.get(index));
-    if (chevrons.get(index).getCssValue("text-overflow").equals("ellipsis")) {
-      return true;
-    }
-    return false;
+    return chevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
   }
 
   public boolean isLinkWithoutChevronEllipsized(int index) {
     waitForElementVisibleByElement(noChevrons.get(index));
-    if (noChevrons.get(index).getCssValue("text-overflow").equals("ellipsis")) {
-      return true;
-    }
-    return false;
+    return noChevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
   }
 
   public boolean isMenuFieldVisible() {
-    if (menuField.getCssValue("visibility").equals("visible")) {
-      return true;
-    }
-    return false;
+    return menuField.getCssValue("visibility").equals("visible");
   }
 
   public boolean isResultFieldVisible() {
-    if (resultField.getCssValue("visibility").equals("visible")) {
-      return true;
-    }
-    return false;
+    return resultField.getCssValue("visibility").equals("visible");
   }
 
-  public void typeInSearchField(String content, int length) {
+  public void typeInSearchField(String content) {
     waitForElementVisibleByElement(searchInput);
-    searchInput.sendKeys(content.substring(0, length));
+    searchInput.sendKeys(content);
   }
 }

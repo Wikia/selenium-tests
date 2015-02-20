@@ -1,18 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-/**
- * @authors: Łukasz Nowak, Tomasz Napieralski
- */
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.awt.*;
 
-public class SmartBannerComponentObject extends MercuryBasePageObject {
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ */
+public class SmartBannerComponentObject extends BasePageObject {
 
   @FindBy(css = ".sb-close")
   private WebElement closeButton;
@@ -20,9 +19,6 @@ public class SmartBannerComponentObject extends MercuryBasePageObject {
   private WebElement bannerButton;
   @FindBy(css = "div.smart-banner")
   private WebElement smartBanner;
-
-  public static String BUTTON_NAME_FOR_ANDROID = "Install";
-  public static String BUTTON_NAME_FOR_IOS = "GET";
 
   public SmartBannerComponentObject(WebDriver driver) {
     super(driver);
@@ -34,10 +30,7 @@ public class SmartBannerComponentObject extends MercuryBasePageObject {
   }
 
   public boolean isSmartBannerVisible() {
-    if (smartBanner.getCssValue("display").equals("none")) {
-      return false;
-    }
-    return true;
+    return !smartBanner.getCssValue("display").equals("none");
   }
 
   public String getButtonName() {
@@ -54,11 +47,8 @@ public class SmartBannerComponentObject extends MercuryBasePageObject {
     int[] smartBannerColor =
         ArticlePageObject.convertRGBAFunctiontoIntTable(smartBanner
                                                             .getCssValue("border-bottom-color"));
-    if ((smartBannerColor[0] == properColor.getRed()) && (smartBannerColor[1] == properColor
-        .getGreen()) && (smartBannerColor[2] == properColor.getBlue())) {
-      return true;
-    }
-    return false;
+    return  (smartBannerColor[0] == properColor.getRed()) && (smartBannerColor[1] == properColor
+        .getGreen()) && (smartBannerColor[2] == properColor.getBlue());
   }
 
   public boolean isSmartBannerButtonColorCorrect(String color) {
@@ -66,11 +56,8 @@ public class SmartBannerComponentObject extends MercuryBasePageObject {
     int[] smartBannerButtonColor =
         ArticlePageObject.convertRGBAFunctiontoIntTable(bannerButton
                                                             .getCssValue("background-color"));
-    if ((smartBannerButtonColor[0] == properColor.getRed()) && (smartBannerButtonColor[1]
+    return (smartBannerButtonColor[0] == properColor.getRed()) && (smartBannerButtonColor[1]
                                                                 == properColor.getGreen()) && (
-            smartBannerButtonColor[2] == properColor.getBlue())) {
-      return true;
-    }
-    return false;
+            smartBannerButtonColor[2] == properColor.getBlue());
   }
 }

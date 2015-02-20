@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.openqa.selenium.TimeoutException;
@@ -12,7 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject {
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ */
+public class InteractiveMapsComponentObject extends BasePageObject {
 
   @FindBy(css = ".current")
   private WebElement mapFrame;
@@ -37,9 +40,9 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   @FindBy(css = ".view-map")
   private WebElement viewMapButton;
 
-  private int waitTime = 5000;
+  private final static int WAIT_TIME = 5000;
 
-  public InteractiveMapsMercuryComponentObject(WebDriver driver) {
+  public InteractiveMapsComponentObject(WebDriver driver) {
     super(driver);
   }
 
@@ -69,51 +72,35 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
   }
 
   public void clickPin() {
-    waitForElementByElement(lightbox);
-    driver.switchTo().frame(mapFrame);
+    switchToMapFrame();
     waitForElementVisibleByElement(poiPin);
     tapOnElement(poiPin);
   }
 
   public boolean isFilterBoxWasExpanded() {
     waitForElementVisibleByElement(filterBoxPoints);
-    if (checkIfElementOnPage(filterBoxPoints)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(filterBoxPoints);
   }
 
   public boolean isMapModalVisible() {
     try {
       waitForElementByElement(lightbox);
-      if (checkIfElementOnPage(lightbox)) {
-        return true;
-      }
-      return false;
+      return checkIfElementOnPage(lightbox);
     } catch (TimeoutException e) {}
     return false;
   }
 
   public boolean isTextInMapTitleHeader() {
     waitForElementVisibleByElement(mapTitle);
-    if (mapTitle.getText().isEmpty()) {
-      return false;
-    }
-    return true;
+    return !mapTitle.getText().isEmpty();
   }
 
   public boolean isMapIdInUrl() {
-    if (driver.getCurrentUrl().toString().contains("?map=")) {
-      return true;
-    }
-    return false;
+    return driver.getCurrentUrl().toString().contains("?map=");
   }
 
   public boolean isPinPopUp() {
-    if (checkIfElementOnPage(poiPopUp)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(poiPopUp);
   }
 
   public boolean isZoomButtonWorking(String zoomWay) {
@@ -125,19 +112,13 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     } else {
       clickZoomOut();
     }
-    waitMilliseconds(waitTime, "waitMilliseconds");
+    waitMilliseconds(WAIT_TIME, "waitMilliseconds");
     File afterZooming = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZooming)) {
-      return false;
-    }
-    return true;
+    return !ic.areFilesTheSame(beforeZooming, afterZooming);
   }
 
   public boolean isZoomInButtonEnabled() {
-    if (zoomInButton.getAttribute("class").contains("disabled")) {
-      return false;
-    }
-    return true;
+    return !zoomInButton.getAttribute("class").contains("disabled");
   }
 
   public boolean isFilterListScrollable(PerformTouchAction touchAction) {
@@ -146,13 +127,10 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
     ImageComparison ic = new ImageComparison();
     File beforeScrolling = shooter.capturePage(driver);
     clickFilterBox();
-    waitMilliseconds(waitTime, methodName);
-    touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, waitTime);
+    waitMilliseconds(WAIT_TIME, methodName);
+    touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, WAIT_TIME);
     File afterScrolling = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeScrolling, afterScrolling)) {
-      return false;
-    }
-    return true;
+    return !ic.areFilesTheSame(beforeScrolling, afterScrolling);
   }
 
   public void switchToMapFrame() {

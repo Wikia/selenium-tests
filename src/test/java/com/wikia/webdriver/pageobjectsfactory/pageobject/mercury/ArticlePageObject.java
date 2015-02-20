@@ -6,7 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MercuryArticlePageObject extends MercuryBasePageObject {
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ */
+public class ArticlePageObject extends BasePageObject {
 
   @FindBy(css = ".wikia-logo")
   private WebElement wikiaLogo;
@@ -29,10 +32,7 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   @FindBy(css = "nav.article-categories-list button")
   private WebElement categoryButton;
 
-  public static final String MEDIA_TYPE_VIDEO = "Video";
-  public static final String MEDIA_TYPE_IMAGE = "Image";
-
-  public MercuryArticlePageObject(WebDriver driver) {
+  public ArticlePageObject(WebDriver driver) {
     super(driver);
   }
 
@@ -46,79 +46,49 @@ public class MercuryArticlePageObject extends MercuryBasePageObject {
   }
 
   public boolean isWikiaLogoVisible() {
-    if (checkIfElementOnPage(wikiaLogo)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(wikiaLogo);
   }
 
   public boolean isSearchButtonVisible() {
-    if (checkIfElementOnPage(searchButton)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(searchButton);
   }
 
   public boolean isTopContributorsSectionVisible() {
     scrollToElement(topContributorsSection);
-    if (checkIfElementOnPage(topContributorsSection)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(topContributorsSection);
   }
 
   public boolean isTopContributorsThumbVisible(int index) {
-    if (checkIfElementOnPage(topContributorsThumbs.get(index))) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(topContributorsThumbs.get(index));
   }
 
   public boolean isUrlCanonical() {
     waitForElementInViewPort(canonicalUrl);
-    if (driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"))) {
-      return true;
-    }
-    return false;
+    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 
   public boolean isSingleLinkedImageRedirectionWorking(int index) {
     String currentUrl = driver.getCurrentUrl();
     singleImgLink.get(index).click();
     waitForElementByElement(footerLogo);
-    if (currentUrl.equals(driver.getCurrentUrl())) {
-      return false;
-    }
-    return true;
+    return !currentUrl.equals(driver.getCurrentUrl());
   }
 
   public boolean isFooterLogoVisible() {
     waitForElementByElement(footerLogo);
-    if (footerLogo.isDisplayed()) {
-      return true;
-    }
-    return false;
+    return footerLogo.isDisplayed();
   }
 
   public boolean isElementInFooterVisible(String elementName, int index) {
     waitForElementByElement(footerLinks.get(index));
-    if (footerLinks.get(index).getText().equals(elementName)) {
-      return true;
-    }
-    return false;
+    return footerLinks.get(index).getText().equals(elementName);
   }
 
   public boolean isUrlContainingUserPage() {
-    if (driver.getCurrentUrl().contains("/wiki/User:")) {
-      return true;
-    }
-    return false;
+    return driver.getCurrentUrl().contains("/wiki/User:");
   }
 
   public boolean isChevronCollapsed() {
-    if (categoryButton.getAttribute("class").contains("collapsed")) {
-      return true;
-    }
-    return false;
+    return categoryButton.getAttribute("class").contains("collapsed");
   }
 }

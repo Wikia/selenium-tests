@@ -8,13 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @author: Łukasz Nowak, Tomasz Napieralski
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  */
 public class OpenGraphPageObject extends MobileBasePageObject {
-
-  public OpenGraphPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -33,73 +29,50 @@ public class OpenGraphPageObject extends MobileBasePageObject {
   @FindBy(css = "link[rel='canonical']")
   private WebElement canonicalUrl;
 
+  public OpenGraphPageObject(WebDriver driver) {
+    super(driver);
+  }
+
   public String getDescription() {
     return ogDescription.getAttribute("content");
   }
 
   public boolean isOgTypeWebsite() {
-    if (ogType.getAttribute("content").contains("website")) {
-      return true;
-    }
-    return false;
+    return ogType.getAttribute("content").contains("website");
   }
 
   public boolean isOgTypeArticle() {
-    if (ogType.getAttribute("content").contains("article")) {
-      return true;
-    }
-    return false;
+    return ogType.getAttribute("content").contains("article");
   }
 
   public boolean isOgTitleMainPage() {
-    if (ogTitle.getAttribute("content").contains("Wiki")) {
-      return true;
-    }
-    return false;
+    return ogTitle.getAttribute("content").contains("Wiki");
   }
 
   public boolean isOgTitleArticlePage() {
-    if (ogTitle.getAttribute("content").isEmpty()) {
-      return false;
-    }
-    return true;
+    return !ogTitle.getAttribute("content").isEmpty();
   }
 
   public boolean isOgSiteName() {
     try {
-      if (ogSiteName.getAttribute("content").isEmpty()) {
-        return false;
-      }
-      return true;
+      return !ogSiteName.getAttribute("content").isEmpty();
     } catch (NoSuchElementException e) {}
     return false;
   }
 
   public boolean isOgDescription() {
-    if (ogDescription.getAttribute("content").isEmpty()) {
-      return false;
-    }
-    return true;
+    return !ogDescription.getAttribute("content").isEmpty();
   }
 
   public boolean isOgUrlTag() {
-    if (ogUrl.getAttribute("content").equals(canonicalUrl.getAttribute("href"))) {
-      return true;
-    }
-    return false;
+    return ogUrl.getAttribute("content").equals(canonicalUrl.getAttribute("href"));
   }
 
   public boolean isOgImage() {
-    if (ogImage.getAttribute("content").isEmpty()) {
-      return false;
-    }
-    return true;
+    return !ogImage.getAttribute("content").isEmpty();
   }
 
   public boolean isOgFbApp() {
-    if (ogFbApp.getAttribute("content").isEmpty()) {
-      return false;
-    }
-    return true;
+    return !ogFbApp.getAttribute("content").isEmpty();
   }
 }

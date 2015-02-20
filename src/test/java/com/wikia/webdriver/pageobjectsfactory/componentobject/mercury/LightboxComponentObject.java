@@ -2,8 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -18,7 +17,7 @@ import java.util.List;
  * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  */
 
-public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
+public class LightboxComponentObject extends BasePageObject {
 
   @FindBy(css = ".lightbox-close-wrapper")
   private WebElement closeLightboxButton;
@@ -33,18 +32,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
   @FindBy(css = ".article-gallery img")
   private List<WebElement> galleryImagesArray;
 
-  public static final String EDGE_LEFT = "left";
-  public static final String EDGE_RIGHT = "right";
-
-  public static final String ZOOM_METHOD_GESTURE = "gesture";
-  public static final String ZOOM_METHOD_TAP = "tap";
-
-  public static final String DIRECTION_LEFT = "left";
-  public static final String DIRECTION_RIGHT = "right";
-  public static final String DIRECTION_UP = "up";
-  public static final String DIRECTION_DOWN = "down";
-
-  public LightBoxMercuryComponentObject(WebDriver driver) {
+  public LightboxComponentObject(WebDriver driver) {
     super(driver);
   }
 
@@ -57,7 +45,6 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     waitForElementByElement(galleryImagesArray.get(index));
     scrollToElement(galleryImagesArray.get(index));
     galleryImagesArray.get(index).click();
-    PageObjectLogging.log("clickGalleryImage", "Image was clicked by test", true);
   }
 
   public String getCurrentImagePath() {
@@ -67,20 +54,14 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
   public boolean isLightboxOpened() {
     try {
       waitForElementByElement(lightboxContent);
-      if (checkIfElementOnPage(lightboxContent)) {
-        return true;
-      }
-      return false;
+      return checkIfElementOnPage(lightboxContent);
     } catch (NoSuchElementException e) {}
     return false;
   }
 
   public boolean isCurrentImageVisible() {
     waitForElementVisibleByElement(currentImage);
-    if (checkIfElementOnPage(currentImage)) {
-      return true;
-    }
-    return false;
+    return checkIfElementOnPage(currentImage);
   }
 
   public boolean isDifferentImageAfterSwiping(PerformTouchAction touchAction, String direction, int attempts) {
@@ -111,17 +92,11 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
   }
 
   public boolean isLightboxHeaderDisplayed() {
-    if (lightboxHeader.getCssValue("display").contains("none")) {
-      return false;
-    }
-    return true;
+    return !lightboxHeader.getCssValue("display").contains("none");
   }
 
   public boolean isLightboxFooterDisplayed() {
-    if (lightboxFooter.getCssValue("display").contains("none")) {
-      return false;
-    }
-    return true;
+    return !lightboxFooter.getCssValue("display").contains("none");
   }
 
   public boolean isTappingOnImageEdgeChangeImage(PerformTouchAction touchAction, String edge) {
@@ -138,10 +113,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     }
     touchAction.tapOnPointXY(pointX, 50, duration, waitAfter);
     nextImageSrc = getCurrentImagePath();
-    if (nextImageSrc.contains(currentImageSrc)) {
-      return false;
-    }
-    return true;
+    return !nextImageSrc.contains(currentImageSrc);
   }
 
   public boolean isZoomingByGestureWorking(PerformTouchAction touchAction, String zoomMethod) {
@@ -176,10 +148,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
         break;
     }
     File afterZoomOut = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(beforeZooming, afterZoomOut)) {
-      return true;
-    }
-    return false;
+    return ic.areFilesTheSame(beforeZooming, afterZoomOut);
   }
 
   public boolean isImageMovedToDirectionAfterZoomIn(PerformTouchAction touchAction,
@@ -196,9 +165,6 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject {
     }
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     File afterMoving = shooter.capturePage(driver);
-    if (ic.areFilesTheSame(afterZooming, afterMoving)) {
-      return false;
-    }
-    return true;
+    return !ic.areFilesTheSame(afterZooming, afterMoving);
   }
 }
