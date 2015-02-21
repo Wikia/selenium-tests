@@ -57,6 +57,8 @@ public class SignUpPageObject extends WikiBasePageObject {
   private WebElement signupButton;
   @FindBy(css = "#mw-content-text .wikia-button-facebook")
   private WebElement facebookSignUpButton;
+  @FindBy(css = ".ConfirmEmail")
+  private WebElement emailConfirmationMessage;
 
   private By errorMsgBy = By.className("error-msg");
 
@@ -241,4 +243,12 @@ public class SignUpPageObject extends WikiBasePageObject {
     }
   }
 
+  public void verifyEmailNotConfirmed() {
+    if (checkIfElementOnPage(emailConfirmationMessage)) {
+      PageObjectLogging.log("email unconfirmed", "verifyEmailNotConfirmed()", true);
+    } else {
+      PageObjectLogging.log("email confirmed", "verifyEmailNotConfirmed()", false);
+      Assertion.assertFalse(emailConfirmationMessage.isDisplayed());
+    }
+  }
 }

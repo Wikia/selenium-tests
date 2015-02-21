@@ -29,6 +29,8 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement settingsList;
   @FindBy(css = "._4bl7")
   private List<WebElement> pageElementList;
+  @FindBy(css = "#u_jsonp_2_4")
+  private WebElement settings;
 
   public FacebookSettingsPageObject(WebDriver driver) {
     super(driver);
@@ -64,14 +66,19 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
           }
         }
       }
+      PageObjectLogging.log("removeApp", "Wikia App removed", true);
     }
-    PageObjectLogging.log("removeApp", "Wikia App removed", true);
   }
 
   /**
    * This method verifies if App is present on facebook apps list. It searches for Wikia string.
    */
   private boolean isAppPresent() {
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("noEmailPerms", e.getMessage(), false);
+    }
     boolean isPresent = false;
     for (WebElement element : pageElementList) {
       if (element.getText().toString().matches("^Wikia.*\n?.*")) {
