@@ -47,6 +47,9 @@ public class NavigationBar extends WikiBasePageObject {
 		Assertion.assertStringContains(suggestion, allSuggestions);
 	}
 
+	/**
+    * This method will arrow down through suggestions until it finds given suggestion, then it clicks enter.
+	*/
 	public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestion) {
 		waitForElementByElement(suggestionsList.get(0));
 		for (int i = 0; i < suggestionsList.size(); i++) {
