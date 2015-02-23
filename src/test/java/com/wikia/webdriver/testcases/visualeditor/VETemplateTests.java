@@ -111,6 +111,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //AT04
