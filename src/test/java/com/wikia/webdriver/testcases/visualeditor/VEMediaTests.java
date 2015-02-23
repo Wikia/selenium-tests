@@ -50,6 +50,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
   }
 
+  //AM04
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_001", "VEPreviewVideo"}
   )
@@ -69,6 +70,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     ve.verifyPreviewVideoPlay(providerName);
   }
 
+  //AM05
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_002", "VEPreviewImage"}
   )
@@ -85,6 +87,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     ve.verifyPreviewImage();
   }
 
+  //AM06
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
   )
@@ -103,8 +106,10 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //MS01
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_004", "VEPreviewVideo"}
   )
@@ -149,6 +154,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //MS02
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
   )
@@ -175,6 +181,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //MS03
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_007", "VEAlignMedia"}
   )
