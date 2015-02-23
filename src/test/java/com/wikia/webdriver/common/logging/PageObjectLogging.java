@@ -30,6 +30,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -112,14 +113,27 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   @Override
-  public void beforeNavigateTo(String url, WebDriver driver) {}
+  public void beforeNavigateTo(String url, WebDriver driver) {
+      StringBuilder builder = new StringBuilder();
+      builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
+          + "</td><td> <br/> &nbsp;</td></tr>");
+      CommonUtils.appendTextToFile(logPath, builder.toString());
+      logJSError(driver);
+  }
 
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
-        + "</td><td> <br/> &nbsp;</td></tr>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+      if(url.equals(driver.getCurrentUrl())){
+          builder.append("<tr class=\"success\"><td>Url after navigation</td><td>" + driver.getCurrentUrl()
+              + "</td><td> <br/> &nbsp;</td></tr>");
+          CommonUtils.appendTextToFile(logPath, builder.toString());
+      }else{
+          builder.append("<tr class=\"warning\"><td>Url after navigation</td><td>" + driver.getCurrentUrl()
+              + "</td><td> <br/> &nbsp;</td></tr>");
+          CommonUtils.appendTextToFile(logPath, builder.toString());
+      }
+
     logJSError(driver);
   }
 
@@ -223,6 +237,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         .append("<html><style>"
             + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
             + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
+            + "tr.warning{color:black;background-color:#FEE01E;}"
             + "tr.error{color:black;background-color:#FFCCCC;}"
             + "tr.step{color:white;background:grey}"
             + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"

@@ -10,6 +10,7 @@ import java.io.File;
  */
 public class Credentials {
 
+  public final String youTubeApiKey;
   public String userName;
   public String password;
 
@@ -257,6 +258,8 @@ public class Credentials {
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiasysop.password");
 
     apiToken = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.token");
+
+    youTubeApiKey = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.youtube.key");
   }
 
   public String getUserBaseOnEditorPref(EditorPref editorPref) {

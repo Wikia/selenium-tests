@@ -877,102 +877,104 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String logInCookie(String userName, String password, String wikiURL) {
-    try {
-      CookieStore cookieStore = new BasicCookieStore();
-
-      HttpClient httpclient = HttpClientBuilder.create()
-          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-          .setDefaultCookieStore(cookieStore)
-          .disableAutomaticRetries()
-          .build();
-      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
-      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
-      nvps.add(new BasicNameValuePair("format", "json"));
-      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
-
-      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
-
-      HttpResponse response = httpclient.execute(httpPost);
-      HttpEntity entity = response.getEntity();
-
-      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-
-      String token = responseValue.getString("loginToken");
-
-      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-
-      nvps2.add(new BasicNameValuePair("username", userName));
-      nvps2.add(new BasicNameValuePair("password", password));
-      nvps2.add(new BasicNameValuePair("loginToken", token));
-
-      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
-      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
-                                                   StandardCharsets.UTF_8));
-
-      response = httpclient.execute(httpPost4);
-
-//      entity = response.getEntity();
-//      for (int i = 0; i < 10; i++) {
+    getVenusGlobalNav().openAccountNAvigation().logIn(userName, password);
+//    try {
+//      CookieStore cookieStore = new BasicCookieStore();
 //
+//      HttpClient httpclient = HttpClientBuilder.create()
+//          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+//          .setDefaultCookieStore(cookieStore)
+//          .disableAutomaticRetries()
+//          .build();
+//      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
+//      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 //
-//        xmlResponse = EntityUtils.toString(entity);
+//      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
+//      nvps.add(new BasicNameValuePair("format", "json"));
+//      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
 //
-//        xmlResponseArr = xmlResponse.split("\"");
+//      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 //
-//        if (xmlResponse.contains("WrongPass")) {
-//          throw new WebDriverException("Incorrect password provided for user: " + userName);
-//        }
+//      HttpResponse response = httpclient.execute(httpPost);
+//      HttpEntity entity = response.getEntity();
 //
-//        if (xmlResponseArr.length >= 11) {
-//          break;
-//        }
+//      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+//
+//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+//      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+//
+//      String token = responseValue.getString("loginToken");
+//
+//      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+//
+//      nvps2.add(new BasicNameValuePair("username", userName));
+//      nvps2.add(new BasicNameValuePair("password", password));
+//      nvps2.add(new BasicNameValuePair("loginToken", token));
+//
+//      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
+//      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
+//                                                   StandardCharsets.UTF_8));
+//
+//      response = httpclient.execute(httpPost4);
+//
+////      entity = response.getEntity();
+////      for (int i = 0; i < 10; i++) {
+////
+////
+////        xmlResponse = EntityUtils.toString(entity);
+////
+////        xmlResponseArr = xmlResponse.split("\"");
+////
+////        if (xmlResponse.contains("WrongPass")) {
+////          throw new WebDriverException("Incorrect password provided for user: " + userName);
+////        }
+////
+////        if (xmlResponseArr.length >= 11) {
+////          break;
+////        }
+////      }
+//
+//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+////      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+//
+//      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
+//        System.out.println(cookie.toString());
+//        driver.manage().addCookie(
+//            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
+//                       cookie.getExpiryDate(), false));
 //      }
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-//      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
-
-      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
-        System.out.println(cookie.toString());
-        driver.manage().addCookie(
-            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
-                       cookie.getExpiryDate(), false));
-      }
-
-      try {
-        driver.get(wikiURL);
-      } catch (TimeoutException e) {
-        PageObjectLogging.log("loginCookie",
-                              "page timeout after login by cookie", true);
-      }
-
-      verifyUserLoggedIn(userName);
-
-      PageObjectLogging.log("loginCookie",
-                            "user was logged in by cookie", true, driver);
-      return token;
-    } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("logInCookie",
-                            "UnsupportedEncodingException", false);
-      return null;
-    } catch (ClientProtocolException e) {
-      PageObjectLogging.log("logInCookie", "ClientProtocolException",
-                            false);
-      return null;
-    } catch (ParseException e) {
-      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-      return null;
-    } catch (IOException e) {
-      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-      return null;
-    } catch (JSONException e) {
-      e.printStackTrace();
-      return null;
-    }
+//
+//      try {
+//        driver.get(wikiURL);
+//      } catch (TimeoutException e) {
+//        PageObjectLogging.log("loginCookie",
+//                              "page timeout after login by cookie", true);
+//      }
+//
+//      verifyUserLoggedIn(userName);
+//
+//      PageObjectLogging.log("loginCookie",
+//                            "user was logged in by cookie", true, driver);
+//      return token;
+//    } catch (UnsupportedEncodingException e) {
+//      PageObjectLogging.log("logInCookie",
+//                            "UnsupportedEncodingException", false);
+//      return null;
+//    } catch (ClientProtocolException e) {
+//      PageObjectLogging.log("logInCookie", "ClientProtocolException",
+//                            false);
+//      return null;
+//    } catch (ParseException e) {
+//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
+//      return null;
+//    } catch (IOException e) {
+//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
+//      return null;
+//    } catch (JSONException e) {
+//      e.printStackTrace();
+//      return null;
+//    }
+    return "";
   }
 
   public void openWikiPage(String wikiURL) {

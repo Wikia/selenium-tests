@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -83,26 +85,28 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
   public void filePage004_delete_QAART_518() {
     // Go to Special:Videos to add a video
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
+
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL4);
+    vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there
-    specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL4_FILE_TITLE);
+    specialVideos.verifyVideoAdded(video.getTitle());
 
     // Now delete the video
     FilePagePageObject
         filePage =
-        specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+        specialVideos.openFilePage(wikiURL,video.getWikiFileName());
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 
@@ -113,6 +117,9 @@ public class FilePageTests extends NewTestTemplate {
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory_QAART_518() {
+
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
+
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -120,20 +127,21 @@ public class FilePageTests extends NewTestTemplate {
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL4);
+    vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there
-    specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL4_FILE_TITLE);
+    specialVideos.verifyVideoAdded(video.getTitle());
 
     // Go to the history tab and add a second video to test deleting a version
     FilePagePageObject
         filePage =
-        specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+        specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.selectHistoryTab();
+
     filePage.replaceVideo(VideoContent.YOUTUBE_VIDEO_URL5);
 
     // Load the file page again, should have the same name
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmbeddedVideoIsPresent();
 
     // Go to the history tab and verify there are at least two videos
@@ -145,7 +153,7 @@ public class FilePageTests extends NewTestTemplate {
     deletePage.submitDeletion();
 
     // Load the file page again, should have the same name
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmbeddedVideoIsPresent();
 
     // Delete the first version and thus the whole page
@@ -153,7 +161,7 @@ public class FilePageTests extends NewTestTemplate {
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 }

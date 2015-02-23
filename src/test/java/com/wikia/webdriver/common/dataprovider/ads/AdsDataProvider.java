@@ -368,4 +368,38 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] kruxRealTimeSegment() {
+    return new Object[][]{
+        {
+            Arrays.asList("http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_1",
+                          "http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_2",
+                          "http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_3"),
+            "o8l9bis26"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegment() {
+    return new Object[][]{
+        {
+            Arrays.asList("http://pokemon.wikia.com/wiki/Barry%27s_Roserade",
+                          "http://glee.wikia.com/wiki/Glee_TV_Show_Wiki",
+                          "http://glee.wikia.com/wiki/Rachel_Berry"),
+            "mf20tfg50",
+            true,
+            "JpSWxdE4",
+        },
+        {
+            Arrays.asList("http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_1",
+                          "http://glee.wikia.com/wiki/Glee_TV_Show_Wiki",
+                          "http://glee.wikia.com/wiki/Kurt_Hummel"),
+            "mf20tfg50",
+            false,
+            "JpYqU4Qn",
+        }
+    };
+  }
+
 }

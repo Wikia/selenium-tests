@@ -1,13 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,10 +10,17 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.ElementStateHelper;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+
 public class VenusGlobalNavPageObject {
 
-  private static final String
-      HUBS_XPATH_FORMAT =
+  private static final String HUBS_XPATH_FORMAT =
       ".//a[./span[@class='label'][contains(text(),'%s')]]";
 
   @FindBy(css = ".hubs-entry-point")
@@ -61,19 +60,13 @@ public class VenusGlobalNavPageObject {
   public WebElement openHub(Hub hub) {
     openHubsMenu();
 
-    final WebElement destinationHub = hubsMenu.findElement(By
-                                                               .xpath(String
-                                                                          .format(HUBS_XPATH_FORMAT,
-                                                                                  hub.getLabelText())));
+    final WebElement destinationHub =
+        hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
 
-    new Actions(driver)
-        .moveToElement(destinationHub).
-        perform();
+    new Actions(driver).moveToElement(destinationHub).perform();
 
-    new WebDriverWait(driver, 5, 150)
-        .until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(destinationHub, "class",
-                                                        "active"));
+    new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
+        .valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
 
     return destinationHub;
   }
@@ -98,9 +91,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public VenusGlobalNavPageObject openHubsMenuViaHover() {
-    new Actions(driver)
-        .moveToElement(menuButton)
-        .perform();
+    new Actions(driver).moveToElement(menuButton).perform();
 
     new WebDriverWait(driver, 5).until(CommonExpectedConditions.elementVisible(hubsMenu));
     return this;
@@ -122,10 +113,8 @@ public class VenusGlobalNavPageObject {
     String environment = ConfigurationFactory.getConfig().getEnv();
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
-      wait.until(
-          CommonExpectedConditions.valueToBePresentInElementsAttribute(
-              wikiaLogo, "href", environment)
-      );
+      wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
+          environment));
     }
 
     wikiaLogo.click();
@@ -133,8 +122,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public SearchPageObject searchGlobally(String query) {
-    new Select(searchSelect)
-        .selectByValue("global");
+    new Select(searchSelect).selectByValue("global");
     searchInput.sendKeys(query);
     searchInput.submit();
     return new SearchPageObject(driver);
@@ -148,10 +136,12 @@ public class VenusGlobalNavPageObject {
     return getAccountNavigation().openDropDown();
   }
 
+  public DropDownComponentObject logOut() {
+    return getAccountNavigation().openDropDown().logOut();
+  }
 
   public boolean isLocalSearchDisabled() {
-    return
-        !ElementStateHelper.isElementVisible(searchSelect, driver);
+    return !ElementStateHelper.isElementVisible(searchSelect, driver);
   }
 
   private DropDownComponentObject getAccountNavigation() {
@@ -162,8 +152,8 @@ public class VenusGlobalNavPageObject {
   }
 
   public enum Hub {
-    COMICS("Comics"), TV("TV"), MOVIES("Movies"), MUSIC("Music"),
-    BOOKS("Books"), GAMES("Games"), LIFESTYLE("Lifestyle");
+    COMICS("Comics"), TV("TV"), MOVIES("Movies"), MUSIC("Music"), BOOKS("Books"), GAMES("Games"), LIFESTYLE(
+        "Lifestyle");
 
     private final String labelText;
 
