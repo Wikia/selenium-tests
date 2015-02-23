@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -11,10 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettin
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import org.testng.annotations.Test;
 
 public class FacebookTests extends NewTestTemplate {
@@ -22,8 +17,10 @@ public class FacebookTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   /**
-   * dependent method: Signup_007_signUpWithFacebook <p/> Steps: 1. Log in to facebook 2. Open
-   * Facebook settings 3. Remove Wikia and Wikia Development App
+   * dependent method: Signup_007_signUpWithFacebook and Facebook_002_noEmailPerms
+   * Steps: 1. Log in to facebook
+   * 2. Open Facebook settings
+   * 3. Remove Wikia and Wikia Development App
    */
   @Test(groups = {"Facebook_001", "Facebook"})
   public void Facebook_001_removeWikiaApps() {
@@ -37,44 +34,42 @@ public class FacebookTests extends NewTestTemplate {
     settingsFB.removeAppIfPresent();
   }
 
-  @Test(groups = {"Facebook_002", "Facebook"})
+  /**
+   * depends on method Facebook_001_removeWikiaApps
+   * Steps:
+   * 1. Log in to facebook
+   * 2. Click facebook login on signup page
+   * 3. Deny permission to user's facebook email address
+   * 4. manually enter email address and create account
+   * 5. confirm account and login,
+   * 6. Verify user can login via facebook
+   */
+  @Test(
+          groups = {"Facebook_002", "Facebook"},
+          dependsOnMethods = {"Facebook_001_removeWikiaApps"}
+  )
+
   public void Facebook_002_noEmailPerms() {
+
     WikiBasePageObject base = new WikiBasePageObject(driver);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-    FacebookUserPageObject userFB;
-    userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
+    FacebookUserPageObject userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
+
     SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
-    fbModal.acceptWikiaAppPolicyNoEmail();
+
     String userName = "QA" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
-    MailFunctions.deleteAllEmails(email, emailPassword);
-    fbModal.typeUserName(userName);
-    fbModal.typePassword(password);
-    fbModal.typeEmail(email);
-    fbModal.createAccount();
+    fbModal.createAccountNoEmail(email, emailPassword, userName, password);
     signUp.verifyUserLoggedIn(userName);
-    signUp.verifyEmailNotConfirmed();
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("noEmailPerms", e.getMessage(), false);
-    }
+
     AlmostTherePageObject almostThere = new AlmostTherePageObject(driver);
-    ConfirmationPageObject confirmation = almostThere.enterActivationLink(email, emailPassword, wikiURL);
-    confirmation.typeInUserName(userName);
-    confirmation.typeInPassword(password);
-    UserProfilePageObject
-            userProfile =
-            confirmation.clickSubmitButton(email, emailPassword);
-    userProfile.verifyUserLoggedIn(userName);
-    userProfile.logOut(driver);
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-    login.login(userName, password);
-    login.logOut(driver);
+    almostThere.confirmAccountAndLogin(email, emailPassword, userName, password, wikiURL);
+    almostThere.logOut(driver);
+
     SignUpPageObject signUp2 = userFB.openSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal2 = signUp2.clickFacebookSignUp();
     signUp2.verifyUserLoggedIn(userName);
