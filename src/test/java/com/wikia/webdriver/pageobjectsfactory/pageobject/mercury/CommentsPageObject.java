@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -115,7 +116,10 @@ public class CommentsPageObject extends BasePageObject {
     return commentsReplies.size();
   }
 
-  public boolean isCommmentsListCollapsed() {
+  public boolean isCommmentsListCollapsed() throws WebDriverException {
+    if (commentsHeader.getAttribute("class") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return commentsHeader.getAttribute("class").contains("collapsed");
   }
 
@@ -157,17 +161,23 @@ public class CommentsPageObject extends BasePageObject {
     return mediaInComment.findElement(By.cssSelector("img")).isDisplayed();
   }
 
-  public boolean isMediaLinkInComment(String mediaType, int index) {
+  public boolean isMediaLinkInComment(String mediaType, int index) throws WebDriverException {
     WebElement mediaInComment;
     if (mediaType.equals("Video")) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
     }
+    if (mediaInComment.findElement(By.cssSelector("a")).getAttribute("href") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href").contains("/wiki/File:");
   }
 
-  public boolean isChevronCollapsed() {
+  public boolean isChevronCollapsed() throws WebDriverException {
+    if (showCommentsButton.getAttribute("class") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return showCommentsButton.getAttribute("class").contains("collapsed");
   }
 }

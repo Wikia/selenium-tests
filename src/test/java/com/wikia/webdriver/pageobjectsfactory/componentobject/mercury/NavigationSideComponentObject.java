@@ -4,6 +4,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -90,13 +91,18 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSuggestionListDisplayed() {
     try {
-      waitForElementByElement(searchSuggestions.get(0));
-      return searchSuggestions.get(0).isDisplayed();
-    } catch (NoSuchElementException|IndexOutOfBoundsException e) {}
+      if (searchSuggestions.size() > 0) {
+        waitForElementByElement(searchSuggestions.get(0));
+        return searchSuggestions.get(0).isDisplayed();
+      }
+    } catch (NoSuchElementException e) {}
     return false;
   }
 
-  public boolean isNavMenuVisible() {
+  public boolean isNavMenuVisible() throws WebDriverException {
+    if (menuView.getAttribute("class") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !menuView.getAttribute("class").contains("collapsed");
   }
 

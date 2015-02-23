@@ -4,6 +4,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -33,46 +34,76 @@ public class OpenGraphPageObject extends MobileBasePageObject {
     super(driver);
   }
 
-  public String getDescription() {
+  public String getDescription() throws WebDriverException {
+    if (ogDescription.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return ogDescription.getAttribute("content");
   }
 
-  public boolean isOgTypeWebsite() {
+  public boolean isOgTypeWebsite() throws WebDriverException {
+    if (ogType.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return ogType.getAttribute("content").contains("website");
   }
 
-  public boolean isOgTypeArticle() {
+  public boolean isOgTypeArticle() throws WebDriverException {
+    if (ogType.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return ogType.getAttribute("content").contains("article");
   }
 
-  public boolean isOgTitleMainPage() {
+  public boolean isOgTitleMainPage() throws WebDriverException {
+    if (ogTitle.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return ogTitle.getAttribute("content").contains("Wiki");
   }
 
-  public boolean isOgTitleArticlePage() {
+  public boolean isOgTitleArticlePage() throws WebDriverException {
+    if (ogTitle.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !ogTitle.getAttribute("content").isEmpty();
   }
 
-  public boolean isOgSiteName() {
+  public boolean isOgSiteName() throws WebDriverException {
+    if (ogSiteName.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     try {
       return !ogSiteName.getAttribute("content").isEmpty();
     } catch (NoSuchElementException e) {}
     return false;
   }
 
-  public boolean isOgDescription() {
+  public boolean isOgDescription() throws WebDriverException {
+    if (ogDescription.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !ogDescription.getAttribute("content").isEmpty();
   }
 
-  public boolean isOgUrlTag() {
+  public boolean isOgUrlTag() throws WebDriverException {
+    if (ogUrl.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return ogUrl.getAttribute("content").equals(canonicalUrl.getAttribute("href"));
   }
 
-  public boolean isOgImage() {
+  public boolean isOgImage() throws WebDriverException {
+    if (ogImage.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !ogImage.getAttribute("content").isEmpty();
   }
 
-  public boolean isOgFbApp() {
+  public boolean isOgFbApp() throws WebDriverException {
+    if (ogFbApp.getAttribute("content") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !ogFbApp.getAttribute("content").isEmpty();
   }
 }

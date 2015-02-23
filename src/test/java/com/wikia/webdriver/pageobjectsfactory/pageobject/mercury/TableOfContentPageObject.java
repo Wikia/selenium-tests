@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,14 +17,14 @@ public class TableOfContentPageObject extends BasePageObject {
   private WebElement tocAll;
   @FindBy(css = "section.article-body h2")
   private List<WebElement> allH2;
-  @FindBy(css = "section.article-body > *")
-  private List<WebElement> articleBodyTags;
   @FindBy(css = "nav.table-of-contents a")
   private List<WebElement> listOfLinks;
   @FindBy(css = "nav.table-of-contents ol")
   private WebElement TOCMenu;
   @FindBy(css = "nav.table-of-contents button")
   private WebElement tocButton;
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[1]")
+  private WebElement tocUnderH1;
 
   public TableOfContentPageObject(WebDriver driver) {
     super(driver);
@@ -41,26 +42,9 @@ public class TableOfContentPageObject extends BasePageObject {
     return isH2OnPage() && isTOCDisplayed();
   }
 
-  public boolean isTOCUnderArticleName() {
-    int h1Pos = 0;
-    boolean h1Found = false;
-    int index = 0;
-    if (isH2AndTOC()) {
-      for (WebElement element : articleBodyTags) {
-        if (element.getTagName().equals("h1") && !h1Found) {
-          h1Pos = index++;
-          h1Found = true;
-          continue;
-        }
-        if (element.getTagName().equals("nav")
-            && element.getAttribute("class").contains("table-of-content")
-            && index > 0 && h1Found && h1Pos + 1 == index) {
-          return true;
-        }
-        ++index;
-      }
-    }
-    return false;
+  public boolean isTOCUnderArticleName() throws WebDriverException {
+    waitForElementByElement(tocUnderH1);
+    return tocUnderH1.isDisplayed() && tocUnderH1.getTagName().equals("nav");
   }
 
   public void clickOnTOC() {

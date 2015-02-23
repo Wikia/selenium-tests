@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -117,7 +118,10 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     return !ic.areFilesTheSame(beforeZooming, afterZooming);
   }
 
-  public boolean isZoomInButtonEnabled() {
+  public boolean isZoomInButtonEnabled() throws WebDriverException {
+    if (zoomInButton.getAttribute("class") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return !zoomInButton.getAttribute("class").contains("disabled");
   }
 

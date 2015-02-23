@@ -7,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -47,7 +48,10 @@ public class LightboxComponentObject extends BasePageObject {
     galleryImagesArray.get(index).click();
   }
 
-  public String getCurrentImagePath() {
+  public String getCurrentImagePath() throws WebDriverException {
+    if (currentImage.getAttribute("src") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return currentImage.getAttribute("src");
   }
 

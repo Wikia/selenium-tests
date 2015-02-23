@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -62,8 +63,11 @@ public class ArticlePageObject extends BasePageObject {
     return checkIfElementOnPage(topContributorsThumbs.get(index));
   }
 
-  public boolean isUrlCanonical() {
+  public boolean isUrlCanonical() throws WebDriverException {
     waitForElementInViewPort(canonicalUrl);
+    if (canonicalUrl.getAttribute("href") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 
@@ -88,7 +92,10 @@ public class ArticlePageObject extends BasePageObject {
     return driver.getCurrentUrl().contains("/wiki/User:");
   }
 
-  public boolean isChevronCollapsed() {
+  public boolean isChevronCollapsed() throws WebDriverException {
+    if (categoryButton.getAttribute("class") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
     return categoryButton.getAttribute("class").contains("collapsed");
   }
 }
