@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -108,4 +109,12 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("createAccount", "Create account button clicked", true);
   }
 
+  public void createAccountNoEmail(String email, String emailPassword, String userName, String password) {
+    acceptWikiaAppPolicyNoEmail();
+    MailFunctions.deleteAllEmails(email, emailPassword);
+    typeUserName(userName);
+    typePassword(password);
+    typeEmail(email);
+    createAccount();
+  }
 }
