@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 public class goSearchFeature extends BasicActions {
 	
 	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"})
-	public void goSearchAnon() {
+	public void AnonFromSuggestion() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(testedWiki);
 		NavigationBar navigation = new NavigationBar(driver);
@@ -28,7 +28,7 @@ public class goSearchFeature extends BasicActions {
 	}
 	
 	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"})
-	public void goSearchUser() {
+	public void UserFromSuggestion() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(testedWiki);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -41,14 +41,14 @@ public class goSearchFeature extends BasicActions {
 	}
 	
    @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"})
-       public void goSearchPreference() {
-	        WikiBasePageObject base = new WikiBasePageObject(driver);
-	        base.openWikiPage(testedWiki);
-	        base.logInCookie(credentials.userNameGoSearchPreferred, credentials.passwordGoSearchPreferred, wikiURL);
-	        NavigationBar navigation = new NavigationBar(driver);
-	        ArticlePageObject article = navigation.goSearchFor(SEARCH_ARTICLE);
-	        article.verifyArticleName(SEARCH_ARTICLE);
-	    }
+   public void goSearchPreference() {
+        WikiBasePageObject base = new WikiBasePageObject(driver);
+        base.openWikiPage(testedWiki);
+        base.logInCookie(credentials.userNameGoSearchPreferred, credentials.passwordGoSearchPreferred, wikiURL);
+        NavigationBar navigation = new NavigationBar(driver);
+        ArticlePageObject article = navigation.goSearchFor(SEARCH_ARTICLE);
+        article.verifyArticleName(SEARCH_ARTICLE);
+    }
 
 	
 }
