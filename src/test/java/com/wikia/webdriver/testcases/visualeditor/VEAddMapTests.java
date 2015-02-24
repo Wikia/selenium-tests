@@ -71,6 +71,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
     VisualEditorAddMapDialog mapDialog =
         (VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
     mapDialog.checkIsEmptyState();
+    mapDialog.logOut(wikiURL);
   }
 
   @Test(
