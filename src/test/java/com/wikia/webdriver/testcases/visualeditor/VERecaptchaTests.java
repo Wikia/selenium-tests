@@ -24,6 +24,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
     base = new WikiBasePageObject(driver);
   }
 
+  //RC01
   @Test(
       groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
   )
