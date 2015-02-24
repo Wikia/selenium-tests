@@ -14,7 +14,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] leaderboardAndPrefooterSlots() {
+  public static Object[][] leaderboardAndPrefooterSlots() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
@@ -26,7 +26,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] leaderboardAndInContentSlots() {
+  public static Object[][] leaderboardAndInContentSlots() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in_content",
@@ -38,7 +38,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] allSlots() {
+  public static Object[][] allSlots() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
@@ -50,7 +50,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] articlesWithTopLeaderboard() {
+  public static Object[][] articlesWithTopLeaderboard() {
     return new Object[][]{
         {"elderscrolls", "Skyrim"},
         {"it.creepypastaitalia", "Slenderman"},
@@ -66,7 +66,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] dfpParams() {
+  public static Object[][] dfpParams() {
     return new Object[][]{
         {
             "adtest",
@@ -95,10 +95,21 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] testSynthetic() {
+  public static Object[][] testSynthetic() {
     return new Object[][]{
-        {"adtest", "MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100, 131469612, "mobile",
-         "src/test/resources/adsResources/mobiletl320x100"}
+        {"adtest", "SyntheticTests/MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100,
+         131469612,
+         "mobile", "src/test/resources/adsResources/mobiletl320x100"}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] testDisableGptAds() {
+    return new Object[][]{
+        {
+            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
+            "MOBILE_TOP_LEADERBOARD", "mobile; mobile_remnant", ""
+        },
     };
   }
 }

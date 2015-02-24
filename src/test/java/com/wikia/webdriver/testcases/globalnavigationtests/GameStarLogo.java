@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  *
  * @ownership Consumer
  */
-public class TestGameStarLogo extends NewTestTemplate {
+public class GameStarLogo extends NewTestTemplate {
 
   private final static String deWikiName = "de.gta";
   private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1400, 720);

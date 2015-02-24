@@ -10,15 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @author Piotr PMG Gackowski
- * @ownership AdEngineering Below test cases are prepared to check status of parameters allowing
- * targeting ads to Top 1000 WAM Wikis. 1. TestTopWamWikis_GeoEdgeFree - go to two wikis and check
- * that first of them have correct parameter and second don`t have parameter. 2.
- * TestTopWamWikisWikifactory_GeoEdgeFree - go to Special:WhereIsMyExtension and check how many
- * wikis have set wgAdDriverWikiIsTop1000 variable. Need in settings wikiName=community
- */
-
 public class TestTopWamWikis extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
@@ -28,16 +19,6 @@ public class TestTopWamWikis extends NewTestTemplate {
   public TestTopWamWikis() {
     super();
     urlBuilder = new UrlBuilder(config.getEnv());
-  }
-
-  @Test(
-      dataProvider = "topWamWikis", dataProviderClass = AdsDataProvider.class,
-      groups = {"TopWamWikis"}
-  )
-  public void TestTopWamWikis_GeoEdgeFree(String wikiName, String article, Boolean isTop) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyTop1kParamState(isTop);
   }
 
   @Test(groups = {"TopWamWikisWhereIsMyExtension"})

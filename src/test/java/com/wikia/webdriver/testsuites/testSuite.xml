@@ -58,6 +58,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparison"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestDisableGptAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestHighValueCountries"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
@@ -66,6 +67,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnSonyReferrer"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
@@ -115,7 +117,6 @@
             <class name="com.wikia.webdriver.testcases.followingtests.FollowVideosTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
-            <class name="com.wikia.webdriver.testcases.userprofiletests.UserAvatarTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEAddVideoTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VECategoryTests"/>
@@ -148,11 +149,7 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VisualEditorEditingTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VECopyAndPasteTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGameStarLogo"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.CompareScreenshotsForHubsMenu"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestHubLinksInGlobalNav"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestWikiaLogoInGlobalNav"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGlobalSearchInGlobalNav"/>
             <class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
@@ -161,6 +158,8 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestParamValue" />
+            <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
         </classes>
     </test>
 </suite>

@@ -22,8 +22,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   private WebElement publishButton;
   @FindBy(css = "#recaptcha_area")
   private WebElement recaptchaArea;
-  @FindBy(css = "#recaptcha_challenge_image")
-  private WebElement recaptchaImage;
+  @FindBy(css = "#ve-ui-mwSaveDialog-captcha iframe")
+  private WebElement recaptchaContainer;
   @FindBy(css = ".secondary .oo-ui-labeledElement-label")
   private WebElement reviewChangesButton;
   @FindBy(css = ".oo-ui-window-body")
@@ -61,7 +61,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public void verifyRecaptchaIsVisible() {
     switchToIFrame();
-    waitForElementVisibleByElement(recaptchaArea);
+    waitForElementVisibleByElement(recaptchaContainer);
     driver.switchTo().defaultContent();
     PageObjectLogging
         .log("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
@@ -69,8 +69,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public String getRecaptchaImageSrc() {
     switchToIFrame();
-    waitForElementVisibleByElement(recaptchaImage);
-    String imageSrc = recaptchaImage.getAttribute("src");
+    waitForElementVisibleByElement(recaptchaContainer);
+    String imageSrc = recaptchaContainer.getAttribute("src");
     PageObjectLogging
         .log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
     driver.switchTo().defaultContent();
@@ -81,8 +81,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     switchToIFrame();
     waitForElementClickableByElement(publishButton);
     if (checkIfElementOnPage(recaptchaArea)) {
-      recaptchaImage = saveDialogBody.findElement(recaptchaImageBy);
-      waitForElementVisibleByElement(recaptchaImage);
+      recaptchaContainer = saveDialogBody.findElement(recaptchaImageBy);
+      waitForElementVisibleByElement(recaptchaContainer);
     }
     publishButton.click();
     PageObjectLogging.log("clickSaveWithRecaptcha", "The 2nd Publish Button is clicked", true);

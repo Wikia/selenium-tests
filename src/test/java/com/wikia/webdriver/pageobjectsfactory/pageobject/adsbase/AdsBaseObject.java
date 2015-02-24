@@ -1,9 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.common.base.Joiner;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -18,7 +22,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -49,6 +55,14 @@ public class AdsBaseObject extends WikiBasePageObject {
       "#SPOTLIGHT_FOOTER_1",
       "#SPOTLIGHT_FOOTER_2",
       "#SPOTLIGHT_FOOTER_3",
+  };
+
+  private static final String[] PROVIDERS = {
+      "mobile_remnant",
+      "mobile",
+      "gpt",
+      "remnant",
+      "Liftium",
   };
 
   // Selectors
@@ -87,8 +101,18 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
     AdsContent.setSlotsSelectors();
-    getUrl(page, true);
+    getUrl(updateUrl(page), true);
     setSlots();
+  }
+
+  // TODO Remove this hack when https://wikia-inc.atlassian.net/browse/CONCF-85 will be done
+  private String updateUrl(String page) {
+    String browserName = ConfigurationFactory.getConfig().getBrowser().toLowerCase();
+    if (browserName.equalsIgnoreCase("CHROMEMOBILE")) {
+      // Colon in url prevents mercury skin.
+      return new UrlBuilder().appendQueryStringToURL(page, "mercury=force:no");
+    }
+    return page;
   }
 
   public AdsBaseObject(
@@ -669,7 +693,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   protected boolean isGptParamPresent(String key, String value) {
     waitForElementByElement(presentMedrec);
-    String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
+    String dataGptPageParams =
+        presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 
     PageObjectLogging.log(
@@ -681,31 +706,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return dataGptPageParams.contains(gptParamPattern);
   }
 
-  /**
-   * Test whether the top=1k parameter is passed (or not passed) to DART
-   *
-   * @param isTop1k should the top=1k parameter be passed to DART
-   */
-  public void verifyTop1kParamState(Boolean isTop1k) {
-    if (isTop1k) {
-      Assertion.assertTrue(isGptParamPresent("top", "1k"), /* error msg: */
-                           "parameter top=1k not found");
-      PageObjectLogging.log(
-          "verifyTop1kParamState",
-          "parameter top=1k found",
-          true,
-          driver
-      );
-    } else {
-      Assertion
-          .assertFalse(isGptParamPresent("top", "1k"), /* error msg: */ "parameter top=1k found");
-      PageObjectLogging.log(
-          "verifyTop1kParamState",
-          "parameter top=1k not found",
-          true,
-          driver
-      );
-    }
+  public void verifyParamValue(String paramName, String paramValue, boolean expected) {
+    Assertion.assertEquals(isGptParamPresent(paramName, paramValue), expected,
+                           "parameter \"" + paramName + "\" not found");
+    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
+                                              + expected, true, driver);
   }
 
   public void checkSpotlights() {
@@ -755,4 +760,67 @@ public class AdsBaseObject extends WikiBasePageObject {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     return driver.findElement(By.cssSelector(slotSelector));
   }
+
+  public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
+    PageObjectLogging.log("GeoEdge", getCountry(), true);
+    Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
+    return this;
+  }
+
+  private List<String> getProvidersChain(String slotName) {
+    List<String> providersChain = new ArrayList<>();
+    String slotSelector = AdsContent.getSlotSelector(slotName);
+    for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
+      String providerSlotName = providerSlot.getAttribute("id");
+      String provider = null;
+      for (String providerName : PROVIDERS) {
+        if (providerSlotName.contains(providerName)) {
+          provider = providerName;
+          break;
+        }
+      }
+      providersChain.add(provider != null ? provider : providerSlotName);
+    }
+    return providersChain;
+  }
+
+  public AdsBaseObject refresh(int times) {
+    for (int i = 0; i < times; i++) {
+      refreshPage();
+    }
+    return this;
+  }
+
+  public AdsBaseObject waitPageLoaded() {
+    waitOnReadyEvent();
+    return this;
+  }
+
+  private void waitOnReadyEvent() {
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(new ExpectedCondition<Boolean>() {
+        public Boolean apply(WebDriver driver) {
+          return ((JavascriptExecutor) driver)
+              .executeScript("return document.readyState")
+              .equals("complete");
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public String getCountry() {
+    return ((String) ((JavascriptExecutor) driver).executeScript(
+        "return Wikia.geo.getCountryCode();"
+    ));
+  }
+
+  public AdsBaseObject addToUrl(String param) {
+    appendToUrl(param);
+    waitPageLoaded();
+    return this;
+  }
+
 }
