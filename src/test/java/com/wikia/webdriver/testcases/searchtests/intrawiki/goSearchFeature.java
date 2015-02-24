@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 
 public class goSearchFeature extends BasicActions {
 	
-	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"})
+	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"}, invocationCount=25)
 	public void AnonFromSuggestion() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(testedWiki);
@@ -27,7 +27,7 @@ public class goSearchFeature extends BasicActions {
     	article.verifyArticleName(SEARCH_ARTICLE);
 	}
 	
-	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"})
+	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchAnon"}, invocationCount=25)
 	public void UserFromSuggestion() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(testedWiki);
@@ -40,7 +40,7 @@ public class goSearchFeature extends BasicActions {
     	article.verifyArticleName(SEARCH_ARTICLE);
 	}
 	
-   @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"})
+   @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"}, invocationCount=25)
    public void goSearchPreference() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage(testedWiki);

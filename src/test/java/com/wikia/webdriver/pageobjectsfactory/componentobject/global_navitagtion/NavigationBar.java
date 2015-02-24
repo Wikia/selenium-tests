@@ -22,6 +22,8 @@ public class NavigationBar extends WikiBasePageObject {
 	private WebElement searchInput;
 	@FindBy(css = "#searchSubmit")
 	private WebElement searchSubmit;
+	@FindBy(css = ".autocomplete div")
+	private WebElement suggestion;
 	@FindBys(@FindBy(css = ".autocomplete div"))
 	private List<WebElement> suggestionsList;
 	
@@ -35,6 +37,7 @@ public class NavigationBar extends WikiBasePageObject {
 	    searchInput.click();
 	    waitForElementByBy(jqueryAutocompleteBy);
 	    searchInput.sendKeys(query);
+	    waitForElementByElement(suggestion);		
 	    waitForElementByElement(suggestionsList.get(0));		
 	}
 	

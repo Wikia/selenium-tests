@@ -466,10 +466,18 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param by The By class defined for the
+   * Checks if the element is present on browser <p/> * @param by The By class defined for the
    * element
    */
   public WebElement waitForElementByBy(By by) {
+    wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    return driver.findElement(by);
+  }
+  
+  /**
+   * Checks if the element is visible on browser <p/> 
+   */
+  public WebElement waitForElementVisibleByBy(By by) {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));
     return driver.findElement(by);
   }
