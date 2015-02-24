@@ -68,6 +68,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
     ve.verifyPreviewVideoPlay(providerName);
+    ve.logOut(wikiURL);
   }
 
   //AM05
@@ -85,6 +86,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
     ve.verifyPreviewImage();
+    ve.logOut(wikiURL);
   }
 
   //AM06
@@ -106,7 +108,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   //MS01
@@ -132,6 +133,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -152,6 +154,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //MS02
@@ -179,6 +182,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //MS03
@@ -220,6 +224,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   @AfterGroups(groups = "VEMediaTests_003")
