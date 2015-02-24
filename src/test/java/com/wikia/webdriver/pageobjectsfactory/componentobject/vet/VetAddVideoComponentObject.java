@@ -38,12 +38,12 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   private By addVideoLibraryLink = By.cssSelector("figure + a");
 
+  private String videoName;
+
   public VetAddVideoComponentObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
-
-  private String videoName;
 
   private void typeInUrl(String url) {
     waitForElementByElement(urlField);
@@ -74,11 +74,10 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     WebElement listElem = videoList.get(videoListItem);
     waitForElementByElement(listElem);
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
-    String videoName = addVideoLink.getAttribute("title");
+    this.videoName = addVideoLink.getAttribute("title");
     scrollAndClick(addVideoLink);
-    this.videoName = videoName;
     PageObjectLogging.log("clickAddVideoLibrary",
-                          "add video button clicked: " + videoName, true, driver);
+                          "add video button clicked: " + this.videoName, true, driver);
   }
 
   private void checkIfLibraryIsPresent() {

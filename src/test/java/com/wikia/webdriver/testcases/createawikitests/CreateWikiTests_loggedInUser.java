@@ -21,7 +21,6 @@ import org.testng.annotations.Test;
  */
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
-  String wikiName;
   String wikiDomain;
   Credentials credentials = config.getCredentials();
 
@@ -54,7 +53,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    wikiName = cnw1.getWikiName();
+    String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
@@ -80,7 +79,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    wikiName = cnw1.getWikiName();
+    String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.typeInWikiDomain(wikiDomain);
@@ -120,7 +119,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    wikiName = cnw1.getWikiName();
+    String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.typeInWikiDomain(wikiDomain);
