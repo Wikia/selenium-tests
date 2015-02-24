@@ -195,8 +195,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     wikiTexts.add("|centre");
     wikiTexts.add("|left");
 
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
@@ -234,6 +234,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     filePage.selectHistoryTab();
     filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
     DeletePageObject deletePage = filePage.deleteVersion(1);
-    WikiBasePageObject base = deletePage.submitDeletion();
+    deletePage.submitDeletion();
   }
 }

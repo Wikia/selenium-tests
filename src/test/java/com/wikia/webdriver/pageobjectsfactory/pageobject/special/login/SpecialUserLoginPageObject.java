@@ -99,16 +99,16 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   public String setNewPassword() {
-    String password = Properties.password + getTimeStamp();
-    typeInNewPassword(password);
-    retypeInNewPassword(password);
+    String randomPassword = Properties.password + getTimeStamp();
+    typeInNewPassword(randomPassword);
+    retypeInNewPassword(randomPassword);
     clickLoginButton();
     PageObjectLogging.log(
         "setNewPassword",
         "new password is set",
         true, driver
     );
-    return password;
+    return randomPassword;
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
