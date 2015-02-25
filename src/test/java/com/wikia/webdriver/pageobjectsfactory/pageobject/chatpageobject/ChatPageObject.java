@@ -51,7 +51,7 @@ public class ChatPageObject extends WikiBasePageObject {
   private List<WebElement> adminDropDownActionsElements;
   @FindBy(css = "#Rail h1.private")
   private WebElement privateMessagesHeader;
-  @FindBy(css = "#Rail img.wordmark")
+  @FindBy(css = "#Rail h1.wordmark")
   private WebElement chatWordmarkImage;
   @FindBy(css = "#WikiChatList li")
   private WebElement chatLoadedIndicator;
