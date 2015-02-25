@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileEditModePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileEditPreviewPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileHistoryPageObject;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -26,11 +27,15 @@ public class MobileEditModeTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @BeforeMethod(alwaysRun = true)
+  public void logIn() {
+    new MobileBasePageObject(driver).loginDropDown(credentials.userName, credentials.password);
+  }
+
   @Test(groups = {"MobileEdit_001", "MobileEdit", "Mobile"})
   public void MobileEdit_001_signedInCanEdit() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
-    mobile.loginDropDown(credentials.userName, credentials.password);
     MobileEditModePageObject mobileEdit =
         mobile.openNewArticleEditMode(wikiURL);
     mobileEdit.verifyModeName();
@@ -40,7 +45,6 @@ public class MobileEditModeTests extends NewTestTemplate {
   public void MobileEdit_002_editAndSummaryRetain() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
-    mobile.loginDropDown(credentials.userName, credentials.password);
     MobileEditModePageObject mobileEdit =
         mobile.openNewArticleEditMode(wikiURL);
     mobileEdit.typIntoEditArea(PageContent.ARTICLE_TEXT);
@@ -58,7 +62,6 @@ public class MobileEditModeTests extends NewTestTemplate {
   public void MobileEdit_003_publishHistory() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
-    mobile.loginDropDown(credentials.userName, credentials.password);
     MobileEditModePageObject mobileEdit =
         mobile.openNewArticleEditMode(wikiURL);
     String articleName = mobile.getCurrentUrl();
