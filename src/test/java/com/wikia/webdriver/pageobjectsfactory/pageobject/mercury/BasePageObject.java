@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
@@ -8,26 +8,25 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
-public class MercuryBasePageObject extends MobileBasePageObject {
+public class BasePageObject extends MobileBasePageObject {
 
-  public MercuryBasePageObject(WebDriver driver) {
+  public BasePageObject(WebDriver driver) {
     super(driver);
   }
 
   public SpecialMercuryPageObject openSpecialMercury(String wikiURL) {
-    getUrl(wikiURL + MercuryContent.MERCURY_SPECIAL_PAGE);
+    getUrl(wikiURL + MercuryArticles.MERCURY_SPECIAL_PAGE);
     PageObjectLogging
-        .log("openSpecialMercury", MercuryContent.MERCURY_SPECIAL_PAGE + " opened", true);
+        .log("openSpecialMercury", MercuryArticles.MERCURY_SPECIAL_PAGE + " opened", true);
     return new SpecialMercuryPageObject(driver);
   }
 
-  public MercuryArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
+  public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
-    return new MercuryArticlePageObject(driver);
+    return new ArticlePageObject(driver);
   }
 
   public void openMercuryWiki(String wikiName) {
@@ -39,19 +38,18 @@ public class MercuryBasePageObject extends MobileBasePageObject {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);
   }
-
-  public void doubleTapZoom(WebElement element) {
-    Actions doubleTapZoom = new Actions(driver);
-    doubleTapZoom.doubleClick(element).perform();
+  
+  public void waitMilliseconds(int time, String methodName) {
+    try {
+      Thread.sleep(time);
+    } catch (InterruptedException e) {
+      PageObjectLogging.log(methodName, e.getMessage(), false);
+    }
   }
 
-  public void swipeLeft(WebElement element) {
-    Actions swipeAction = new Actions(driver);
-    swipeAction.dragAndDropBy(element, -100, 0).build().perform();
-  }
-
-  public void swipeRight(WebElement element) {
-    Actions swipeAction = new Actions(driver);
-    swipeAction.dragAndDropBy(element, +100, 0).build().perform();
+  public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
+    BasePageObject base = new BasePageObject(driver);
+    SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
+    mercuryPage.clickMercuryButton();
   }
 }

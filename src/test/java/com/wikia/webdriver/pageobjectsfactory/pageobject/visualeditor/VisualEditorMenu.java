@@ -35,9 +35,9 @@ import java.util.List;
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
-  private static final int styleList = 0;
-  private static final int insertList = 1;
-  private static final int hamburgerList = 2;
+  private static final int STYLE_LIST = 0;
+  private static final int INSERT_LIST = 1;
+  private static final int HAMBURGER_LIST = 2;
 
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
@@ -102,12 +102,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickStyleItemFromDropDown(By styleBy) {
-    WebElement styleList = toolListDropDowns.get(this.styleList);
-    WebElement styleItems = toolListItems.get(this.styleList);
-    waitForElementByElement(styleList);
+    WebElement styleListElement = toolListDropDowns.get(STYLE_LIST);
+    WebElement styleItems = toolListItems.get(STYLE_LIST);
+    waitForElementByElement(styleListElement);
     Actions actions = new Actions(driver);
     actions
-        .click(styleList)
+        .click(styleListElement)
         .click(styleItems.findElement(styleBy))
         .build()
         .perform();
@@ -252,8 +252,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickInsertItemFromDropDown(By insertBy) {
-    WebElement insertList = toolListDropDowns.get(this.insertList);
-    WebElement insertItems = toolListItems.get(this.insertList);
+    WebElement insertList = toolListDropDowns.get(this.INSERT_LIST);
+    WebElement insertItems = toolListItems.get(this.INSERT_LIST);
     waitForElementVisibleByElement(insertList);
     waitForElementClickableByElement(insertList);
     Actions actions = new Actions(driver);
@@ -265,8 +265,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickHamburgerItemFromDropDown(By insertBy) {
-    WebElement hamburgerList = toolListDropDowns.get(this.hamburgerList);
-    WebElement hamburgerItems = toolListItems.get(this.hamburgerList);
+    WebElement hamburgerList = toolListDropDowns.get(this.HAMBURGER_LIST);
+    WebElement hamburgerItems = toolListItems.get(this.HAMBURGER_LIST);
     waitForElementVisibleByElement(hamburgerList);
     waitForElementClickableByElement(hamburgerList);
     Actions actions = new Actions(driver);

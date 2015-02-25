@@ -18,7 +18,7 @@ import io.appium.java_client.android.AndroidDriver;
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 29 Jan 2015
+ * @updated: 9 Feb 2015
  */
 
 public class PerformTouchAction {
@@ -163,7 +163,7 @@ public class PerformTouchAction {
    * @param pixelPath From 0 to half of screen X or Y, if path will be too high it will be set to
    *                  edge of app
    * @param duration  In milliseconds
-   * @param waitAfter In milliseconds, Reccomend 2*duration
+   * @param waitAfter In milliseconds, Recommend 2*duration
    */
   public void swipeFromCenterToDirection(String direction, int pixelPath, int duration,
                                          int waitAfter) {
@@ -213,12 +213,12 @@ public class PerformTouchAction {
   }
 
   /**
-   * @param startX    Use value 0-100, it is percent of app width, Reccomend 10-90
-   * @param startY    Use value 0-100, it is percent of app height, Reccomend 10-90
-   * @param endX      Use value 0-100, it is percent of app width, Reccomend 10-90
-   * @param endY      Use value 0-100, it is percent of app height, Reccomend 10-90
+   * @param startX    Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param startY    Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param endX      Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param endY      Use value 0-100, it is percent of app height, Recommend 10-90
    * @param duration  In milliseconds
-   * @param waitAfter In milliseconds, Reccomend 2*duration
+   * @param waitAfter In milliseconds, Recommend 2*duration
    */
   public void swipeFromPointToPoint(int startX, int startY, int endX, int endY, int duration,
                                     int waitAfter) {
@@ -236,10 +236,10 @@ public class PerformTouchAction {
   /**
    * It uses two fingers to zoom in or out.
    *
-   * @param startX       Use value 0-100, it is percent of app width, Reccomend 50
-   * @param startY       Use value 0-100, it is percent of app height, Reccomend 10-90
+   * @param pointX       Use value 0-100, it is percent of app width, Recommend 50
+   * @param pointY       Use value 0-100, it is percent of app height, Recommend 10-90
    * @param fingersSpace Space between two fingers, In pixel, It must be less than pixelPath,
-   *                     Reccomend 20-100
+   *                     Recommend 20-100
    * @param pixelPath    From 0 to half of screen X, if path will be too high it will be set to edge
    *                     of app
    * @param zoomWay      Use public const ZOOM_WAY from that class
@@ -313,9 +313,9 @@ public class PerformTouchAction {
   }
 
   /**
-   * @param pointX    Use value 0-100, it is percent of app width, Reccomend 10-90
-   * @param pointY    Use value 0-100, it is percent of app height, Reccomend 10-90
-   * @param duration  In milliseconds, Reccomend 500
+   * @param pointX    Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param pointY    Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param duration  In milliseconds, Recommend 500
    * @param waitAfter In milliseconds
    */
   public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
@@ -334,7 +334,7 @@ public class PerformTouchAction {
    *
    * @param locator   Use By selector, Example By.cssSelector('img.loaded')
    * @param index     If locator find more than one element use index to access element you want
-   * @param duration  In milliseconds, Reccomend 500
+   * @param duration  In milliseconds, Recommend 500
    * @param waitAfter In milliseconds
    */
   public void tapOnWebElement(By locator, int index, int duration, int waitAfter) {

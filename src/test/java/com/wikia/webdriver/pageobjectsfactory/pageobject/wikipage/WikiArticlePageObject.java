@@ -57,10 +57,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
   public WikiArticleEditMode createNewArticle(String wikiURL,
                                               WikiArticlePageObject article) {
-    String pageName = article.getPageName();
+    String articlePageName = article.getPageName();
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
-                                             + pageName, URLsContent.ACTION_EDIT));
-    String pageNameEnc = pageName.replace("_", " ");
+                                             + articlePageName, URLsContent.ACTION_EDIT));
+    String pageNameEnc = articlePageName.replace("_", " ");
     waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
                                                               + pageNameEnc + "']")));
 
