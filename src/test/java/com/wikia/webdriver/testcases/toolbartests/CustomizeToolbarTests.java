@@ -138,7 +138,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
   }
 
   @Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"})
-  public void CustomizeToolbar007_MoreButton_QAART_510() {
+  public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.addManyItems(toolPreferences, 5);

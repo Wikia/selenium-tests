@@ -25,7 +25,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
-  public void VetArticleComments_001_Provider_QAART_509() {
+  public void VetArticleComments_001_Provider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     ArticlePageObject article = base.openRandomArticle(wikiURL);
