@@ -44,7 +44,7 @@ public class ImageServingTests extends NewTestTemplate {
       dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames"
   )
-  public void ImageServing_002_SpecialUploadTest(String fileName) {
+  public void ImageServing_002_SpecialUploadTest_DAT_2564(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
