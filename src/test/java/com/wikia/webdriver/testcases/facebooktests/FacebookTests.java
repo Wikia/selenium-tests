@@ -71,7 +71,7 @@ public class FacebookTests extends NewTestTemplate {
     almostThere.logOut(driver);
 
     SignUpPageObject signUp2 = userFB.openSpecialSignUpPage(wikiURL);
-    FacebookSignupModalComponentObject fbModal2 = signUp2.clickFacebookSignUp();
+    signUp2.clickFacebookSignUp();
     signUp2.verifyUserLoggedIn(userName);
   }
 }
