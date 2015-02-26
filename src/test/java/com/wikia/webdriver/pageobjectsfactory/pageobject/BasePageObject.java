@@ -1013,4 +1013,24 @@ public class BasePageObject {
     }
     return result;
   }
+  
+  /**
+  * Send keys at the speed of good typist human.
+  * based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
+  * "A professional or good typist hits around 325 to 335 CPM (chars per minute)"
+  * This means 60 000 / 330 = 182ms
+  */
+  public void sendKeysHumanSpeed(WebElement input, String keys) {
+      int interval = 182;
+      for(char c : keys.toCharArray()) {
+          String character = String.valueOf(c);
+          input.sendKeys(character);
+          try {
+            Thread.sleep(interval);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+      }
+  }
+  
 }
