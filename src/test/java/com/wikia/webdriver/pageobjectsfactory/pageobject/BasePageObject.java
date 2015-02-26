@@ -466,8 +466,7 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is present on browser <p/> * @param by The By class defined for the
-   * element
+   * Checks if the element is present in browser DOM
    */
   public WebElement waitForElementByBy(By by) {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -475,7 +474,7 @@ public class BasePageObject {
   }
   
   /**
-   * Checks if the element is visible on browser <p/> 
+   * Checks if the element is visible on the browser
    */
   public WebElement waitForElementVisibleByBy(By by) {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));

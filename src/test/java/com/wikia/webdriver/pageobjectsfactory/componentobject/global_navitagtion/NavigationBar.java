@@ -51,7 +51,8 @@ public class NavigationBar extends WikiBasePageObject {
 	}
 
 	/**
-    * This method will arrow down through suggestions until it finds given suggestion, then it clicks enter.
+    * This method will arrow down through suggestions 
+    * until it finds given suggestion, then it clicks enter.
 	*/
 	public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestion) {
 		waitForElementByElement(suggestionsList.get(0));
@@ -60,7 +61,9 @@ public class NavigationBar extends WikiBasePageObject {
 			searchInput.sendKeys(Keys.ARROW_DOWN);
 			if (currentSuggestion.getText().contains(suggestion)) {
 				searchInput.sendKeys(Keys.ENTER);
-				PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion" +suggestion+ "and clicked enter", true);
+				PageObjectLogging.log("ArrowDownToSuggestion", 
+				        "arrowed down to desired suggestion" +suggestion+"and clicked enter",
+				        true);
 				return new ArticlePageObject(driver);
 			}
 			else {
@@ -79,7 +82,7 @@ public class NavigationBar extends WikiBasePageObject {
 	}
 	
 	 /**
-	 * method will return article page object if invoked by user with goSearch preference turned on
+	 * Returns article page object if invoked by user with goSearch preference turned on
 	 */
 	public ArticlePageObject goSearchFor(String query) {
 	     searchInput.sendKeys(query);
