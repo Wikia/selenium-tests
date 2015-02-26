@@ -22,6 +22,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ARTICLE = "Style-5H2-10H3";
   private static final String TEST_WIKI_AMAZON_VIDEO = "muppet";
   private static final String TEST_ARTICLE_AMAZON_VIDEO = "Kermit_the_Frog";
+  private static final String TEST_AMAZON_WIKI = "dragonball";
+  private static final String TEST_AMAZON_ARTICLE = "Goku";
+
 
   Credentials credentials = config.getCredentials();
 
@@ -553,4 +556,95 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAdsenseHeaderShown();
   }
 
+  @DataProvider(name = "MonetizationModuleTest_017")
+  public static Object[][] DataMonetizationModuleTest_017() {
+    return new Object[][]{
+        {"US", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+        {"US", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+    };
+  }
+
+  /**
+   * MON-323
+   * Amazon: The monetization module is shown on article page on the rest for
+   * particular geos (ic/bc/af slots)
+   *
+   * @author Robert Chan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModuleTest_017",
+      groups = {"MonetizationModule", "MonetizationModuleTest_017", "Monetization"}
+  )
+  public void MonetizationModuleTest_017(String countryCode, Boolean isFromsearch, String testWiki,
+                                         String testArticle) {
+
+    wikiURL = urlBuilder.getUrlForWiki(testWiki);
+    String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(articleURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    if (isFromsearch) {
+      monetizationModule.setCookieFromSearch();
+    } else {
+      monetizationModule.deleteCookieFromSearch();
+    }
+    monetizationModule.setCookieGeo(countryCode);
+    // anon user
+    base.refreshPage();
+    monetizationModule.verifyMonetizationModuleShown();
+    monetizationModule.verifyAmazonUnitShown();
+    monetizationModule.verifyAmazonUnitSlot();
+    monetizationModule.verifyAmazonUnitNotShownAboveTitle();
+    monetizationModule.verifyAmazonUnitNotShownBelowTitle();
+    // logged in user
+    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.openWikiPage(articleURL);
+    monetizationModule.verifyMonetizationModuleNotShown();
+  }
+
+  @DataProvider(name = "MonetizationModuleTest_018")
+  public static Object[][] DataMonetizationModuleTest_018() {
+    return new Object[][]{
+        {"JP", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+        {"JP", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+    };
+  }
+
+  /**
+   * MON-323
+   * Amazon: The monetization module is NOT shown on article page on the rest for
+   * particular geos (ic/bc/af slots)
+   *
+   * @author Robert Chan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModuleTest_018",
+      groups = {"MonetizationModule", "MonetizationModuleTest_018", "Monetization"}
+  )
+  public void MonetizationModuleTest_018(String countryCode, Boolean isFromsearch, String testWiki,
+                                         String testArticle) {
+
+    wikiURL = urlBuilder.getUrlForWiki(testWiki);
+    String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(articleURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    if (isFromsearch) {
+      monetizationModule.setCookieFromSearch();
+    } else {
+      monetizationModule.deleteCookieFromSearch();
+    }
+    monetizationModule.setCookieGeo(countryCode);
+    // anon user
+    base.refreshPage();
+    monetizationModule.verifyMonetizationModuleNotShown();
+    // logged in user
+    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.openWikiPage(articleURL);
+    monetizationModule.verifyMonetizationModuleNotShown();
+  }
 }
