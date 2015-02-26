@@ -25,7 +25,7 @@ public class goSearchFeature extends BasicActions {
     	article.verifyArticleName(SEARCH_ARTICLE);
 	}
 	
-	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "UserFromSuggestion"}, invocationCount=25)
+	@Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "UserFromSuggestion"})
 	public void UserFromSuggestion() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(testedWiki);
