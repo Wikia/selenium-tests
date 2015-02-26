@@ -18,12 +18,12 @@ import java.util.List;
  *  anonSearch: As anon basic search action and verify you are on search result page. This also prevents goSearch being active by default.
  *  userSearch: As user do basic search action and verify you are on search result page. This also prevents goSearch being active by default.
  *  1. Search for different phrases and verify if they give correct first result
- *  2. Check search page pagination
- *  3. Verify number of results on page
- *  4. Search for not existing phrase and verify there is no results
- *  5. Search for some phrase and verify filtering options work correctly and give correct results
- *  6. Search for some phrase and verify sorting options for video give correct results
- *  7. Search for some phrase and verify sorting options for images give correct results
+ *  2. pagination:  Check search page pagination
+ *  3. resultsCount: Verify number of results on page
+ *  4. noResults: Search for not existing phrase and verify there is no results
+ *  5. filtering: Search for some phrase and verify filtering options work correctly and give correct results
+ *  6. sortingVideos: Search for some phrase and verify sorting options for video give correct results
+ *  7. sortingImages: Search for some phrase and verify sorting options for images give correct results
  *  9. Verify search page hubs and titles are translatable
  *  10. Select photos only option and verify there are only photos,
  *		then select videos only option and verify:
@@ -39,8 +39,7 @@ import java.util.List;
  */
 
 /**
- * @author wikia
- * 
+ * @author  
  */
 public class BasicActions extends NewTestTemplate {
 
