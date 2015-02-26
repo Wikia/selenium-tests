@@ -70,7 +70,7 @@ public class FacebookTests extends NewTestTemplate {
 
     AlmostTherePageObject almostThere = new AlmostTherePageObject(driver);
     almostThere.confirmAccountAndLogin(email, emailPassword, userName, password, wikiURL);
-    almostThere.logOut(driver);
+    almostThere.logOut(wikiURL);
 
     SignUpPageObject signUp2 = userFB.openSpecialSignUpPage(wikiURL);
     signUp2.clickFacebookSignUp();
