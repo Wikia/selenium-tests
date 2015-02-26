@@ -28,6 +28,7 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -276,6 +277,19 @@ public class BasePageObject {
     Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
     PageObjectLogging.log("verifyURLcontains",
                           "current url is the same as expetced url", true);
+  }
+
+  public void verifyURLcontains(final String givenString, int timeOut) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
+        }
+      });
+    }finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void verifyURL(String givenURL) {
