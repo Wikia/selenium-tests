@@ -294,4 +294,30 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
         .log("verifyAdsenseUnitNotShownBelowTitle", "Adsense unit is not shown below the title",
              true);
   }
+
+  public void verifyAmazonUnitWidth(int expectedInContent, int expectedOthers) {
+    WebElement elem = redirectUntilDesiredSlotShown();
+    String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+    int width = elem.getSize().width;
+    PageObjectLogging.log("verifyAmazonUnitWidth",
+                          "Verify the width of the AMAZON unit for " + slotName + " (width="
+                          + width + ")", true, driver);
+    Assertion.assertEquals(width, expectedInContent);
+  }
+
+  private WebElement redirectUntilDesiredSlotShown() {
+    boolean found = false;
+    WebElement foundElem = null;
+    while(!found) {
+      List<WebElement> listWebElements = driver.findElements(MonetizationModuleAmazonListBy);
+      for (int i = 0; i<listWebElements.size(); i++) {
+        String slotName = listWebElements.get(i).getAttribute(ATTRIBUTE_NAME_SLOT);
+        if (slotName.equals(SLOT_IN_CONTENT)) {
+          return listWebElements.get(i);
+        }
+      }
+      redirectToAnotherRandomArticle();
+    }
+    return foundElem;
+  }
 }

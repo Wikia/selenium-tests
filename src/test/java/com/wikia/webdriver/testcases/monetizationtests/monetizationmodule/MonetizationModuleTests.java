@@ -647,4 +647,31 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
+
+  /**
+   * Mon-344
+   * Check the width of the Amazon ad in the monetization module
+   *
+   * @author Rochan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModule_005",
+      groups = {"MonetizationModule", "MonetizationModuleTest_019", "Monetization"}
+  )
+  public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
+                                         int expectedOthers) {
+    wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    monetizationModule.setCookieGeo("US");
+    monetizationModule.resizeWindow(width, height);
+    base.refreshPage();
+    monetizationModule.verifyAmazonUnitShown();
+    if (monetizationModule.verifyWindowWidth(width)) {
+      monetizationModule.verifyAmazonUnitWidth(expectedInContent, expectedOthers);
+    }
+  }
 }
