@@ -27,7 +27,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement createAccountButton;
   @FindBy(css = "#u_0_4")
   private WebElement editInfoProvided;
-  @FindBy(css = "input[type='checkbox'][value='email']")
+  @FindBy(xpath = "//input[@type='checkbox'][@value='email']/..")
   private WebElement emailCheckbox;
 
   String winHandleBefore;

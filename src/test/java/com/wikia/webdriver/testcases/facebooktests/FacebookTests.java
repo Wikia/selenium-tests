@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -23,6 +24,7 @@ public class FacebookTests extends NewTestTemplate {
    * 3. Remove Wikia and Wikia Development App
    */
   @Test(groups = {"Facebook_001", "Facebook"})
+  @UseUnstablePageLoadStrategy
   public void Facebook_001_removeWikiaApps() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
@@ -48,7 +50,7 @@ public class FacebookTests extends NewTestTemplate {
           groups = {"Facebook_002", "Facebook"},
           dependsOnMethods = {"Facebook_001_removeWikiaApps"}
   )
-
+@UseUnstablePageLoadStrategy
   public void Facebook_002_noEmailPerms() {
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
