@@ -65,6 +65,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyUserLoggedIn(credentials.userName);
     String newWikiURL = article.getWikiUrl();
+    logOut();
     article.logOut(newWikiURL);
     article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
     SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
