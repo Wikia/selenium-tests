@@ -36,7 +36,7 @@ public class NavigationBar extends WikiBasePageObject {
 	public void triggerSuggestions(String query) {
 	    searchInput.click();
 	    waitForElementByBy(jqueryAutocompleteBy);
-	    searchInput.sendKeys(query);
+	    sendKeysHumanSpeed(searchInput, query);
 	    waitForElementByElement(suggestion);		
 	    waitForElementByElement(suggestionsList.get(0));		
 	}
