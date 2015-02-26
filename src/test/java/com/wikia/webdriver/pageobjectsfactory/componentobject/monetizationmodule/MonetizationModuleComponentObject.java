@@ -57,10 +57,13 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       MonetizationModuleAmazonListBy =
       By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
   private By slotInContentAmazon = By.cssSelector("#monetization-amazon_video-in_content");
+  private By slotAboveFooterAmazon = By.cssSelector("#monetization-amazon_video-above_footer");
   private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
-  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
   private By slotAboveTitleAmazon = By.cssSelector("#monetization-amazon-above_title");
   private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
+
+  //Ecommerce
+  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
 
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
@@ -261,8 +264,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyAmazonUnitShownAboveFooter() {
-    waitForElementByElementLocatedBy(slotAboveFooterEcommerce);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterEcommerce));
+    waitForElementByElementLocatedBy(slotAboveFooterAmazon);
+    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAmazon));
     PageObjectLogging
         .log("verifyAmazonUnitShownAboveFooter", "Amazon unit is visible above footer", true);
   }
