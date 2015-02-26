@@ -296,27 +296,37 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAmazonUnitWidth(int expectedInContent, int expectedOthers) {
-    WebElement elem = redirectUntilDesiredSlotShown();
-    String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
-    int width = elem.getSize().width;
-    PageObjectLogging.log("verifyAmazonUnitWidth",
-                          "Verify the width of the AMAZON unit for " + slotName + " (width="
-                          + width + ")", true, driver);
-    Assertion.assertEquals(width, expectedInContent);
+    WebElement elem =
+        redirectUntilDesiredSlotShown(MonetizationModuleAmazonListBy, SLOT_IN_CONTENT);
+    String slotName = null;
+    int width = -1;
+    try {
+      slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+      width = elem.getSize().width;
+      PageObjectLogging.log("verifyAmazonUnitWidth",
+                            "Verify the width of the AMAZON unit for " + slotName + " (width="
+                            + width + ")", true, driver);
+      Assertion.assertEquals(width, expectedInContent);
+    } catch (NullPointerException e) {
+      PageObjectLogging.log("verifyAmazonUnitWidth",
+                            "Unable to find " + SLOT_IN_CONTENT + "after " + NUM_OF_REDIRECT
+                            + " redirects", false, driver);
+    }
   }
 
-  private WebElement redirectUntilDesiredSlotShown() {
-    boolean found = false;
+  private WebElement redirectUntilDesiredSlotShown(By adSlotBy, String adSlotName) {
+    int numOfRedirect = 0;
     WebElement foundElem = null;
-    while(!found) {
-      List<WebElement> listWebElements = driver.findElements(MonetizationModuleAmazonListBy);
-      for (int i = 0; i<listWebElements.size(); i++) {
+    while (numOfRedirect < NUM_OF_REDIRECT) {
+      List<WebElement> listWebElements = driver.findElements(adSlotBy);
+      for (int i = 0; i < listWebElements.size(); i++) {
         String slotName = listWebElements.get(i).getAttribute(ATTRIBUTE_NAME_SLOT);
-        if (slotName.equals(SLOT_IN_CONTENT)) {
+        if (slotName.equals(adSlotName)) {
           return listWebElements.get(i);
         }
       }
       redirectToAnotherRandomArticle();
+      numOfRedirect++;
     }
     return foundElem;
   }
