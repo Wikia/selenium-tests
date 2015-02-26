@@ -444,6 +444,17 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName);
     return new FilePagePageObject(driver);
   }
+  
+  public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
+    String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+    if (noRedirect) {
+      String parameter = "redirect=no";
+      url = urlBuilder.appendQueryStringToURL(url, parameter);
+    }
+    getUrl(url);
+
+    return new FilePagePageObject(driver);
+  }
 
   public NewMessageWall openMessageWall(String userName, String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_MESSAGE_WALL + userName);
