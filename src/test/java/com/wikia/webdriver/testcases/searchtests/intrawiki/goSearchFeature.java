@@ -2,11 +2,9 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 /*
 *  AnonFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for anonymous
