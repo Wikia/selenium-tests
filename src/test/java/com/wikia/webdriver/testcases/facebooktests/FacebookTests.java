@@ -50,7 +50,7 @@ public class FacebookTests extends NewTestTemplate {
           groups = {"Facebook_002", "Facebook"},
           dependsOnMethods = {"Facebook_001_removeWikiaApps"}
   )
-@UseUnstablePageLoadStrategy
+  @UseUnstablePageLoadStrategy
   public void Facebook_002_noEmailPerms() {
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
