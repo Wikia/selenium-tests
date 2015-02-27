@@ -158,6 +158,7 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestParamValue" />
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
+            <class name="com.wikia.webdriver.testcases.mobile.MobileInteractiveMapsTests" />
         </classes>
     </test>
 </suite>
