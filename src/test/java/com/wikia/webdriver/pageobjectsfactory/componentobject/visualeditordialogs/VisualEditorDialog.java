@@ -14,8 +14,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class VisualEditorDialog extends WikiBasePageObject {
 
-  @FindBy(css = ".oo-ui-window-ready .oo-ui-frame")
-  private WebElement iframe;
+  @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
+  private WebElement frame;
   @FindBy(css = ".oo-ui-window-ready")
   private WebElement dialog;
   @FindBy(css = ".oo-ui-icon-close")
@@ -25,28 +25,29 @@ public class VisualEditorDialog extends WikiBasePageObject {
     super(driver);
   }
 
+  @Deprecated
   public void switchToIFrame() {
     waitForElementByElement(dialog);
     waitForElementVisibleByElement(dialog);
-    driver.switchTo().frame(iframe);
+    driver.switchTo().frame(frame);
   }
 
+  @Deprecated
   public void switchOutOfIFrame() {
     waitForElementNotVisibleByElement(dialog);
     driver.switchTo().defaultContent();
   }
 
+  @Deprecated
   public void switchOutOfAllIFrame() {
     driver.switchTo().defaultContent();
     waitForElementNotVisibleByElement(dialog);
   }
 
   public VisualEditorPageObject closeDialog() {
-    switchToIFrame();
     waitForElementClickableByElement(closeButton);
     closeButton.click();
     PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
-    switchOutOfIFrame();
     return new VisualEditorPageObject(driver);
   }
 }

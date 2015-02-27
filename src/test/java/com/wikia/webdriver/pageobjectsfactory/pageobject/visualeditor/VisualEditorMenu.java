@@ -95,7 +95,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By categoriesBy = By.cssSelector(".oo-ui-icon-tag");
   private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
   private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
-  private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
+  private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
 
   public VisualEditorMenu(WebDriver driver) {
     super(driver);
