@@ -35,9 +35,9 @@ import java.util.List;
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
-  private static final int STYLE_LIST = 0;
-  private static final int INSERT_LIST = 1;
-  private static final int HAMBURGER_LIST = 2;
+  private static final int STYLE_LIST = 1;
+  private static final int INSERT_LIST = 2;
+  private static final int HAMBURGER_LIST = 0;
 
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
