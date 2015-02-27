@@ -3,9 +3,11 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.events.EventsArticleEditMode;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
 import org.testng.annotations.Test;
 
@@ -15,6 +17,8 @@ import java.util.List;
 import javax.json.JsonObject;
 
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
+    
+  String script = "window.onbeforeunload = function () {return 'blocking redirect - performing clicktracking test';}";
 
   @Test(groups = {
       "ClickTracking",
@@ -23,6 +27,10 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
   })
   public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openMainPage(wikiURL);
+    NavigationBar navbar = new NavigationBar(driver);
+    navbar.executeScript(script);
+    
     ArticlePageObject article = base.openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.verifyContentLoaded();

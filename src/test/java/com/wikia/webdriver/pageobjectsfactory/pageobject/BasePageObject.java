@@ -1033,4 +1033,14 @@ public class BasePageObject {
       }
   }
   
+  public void acceptPopupWindow() {
+      Alert alert = driver.switchTo().alert();
+      alert.accept();
+  }
+  
+  public void dismissPopupWindow() {
+      Alert alert = driver.switchTo().alert();
+      alert.dismiss();
+  }
+  
 }
