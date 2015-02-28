@@ -304,7 +304,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     VisualEditorSourceEditorDialog veSrcDialog =
         (VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
     veSrcDialog.typeInEditArea(text);
-    return new VisualEditorPageObject(driver);
+    return veSrcDialog.clickApplyChangesButton();
   }
 
   public void verifyPreviewVideoPlay(String providerName) {
