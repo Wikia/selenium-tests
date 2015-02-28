@@ -17,8 +17,8 @@ public class VisualEditorDialog extends WikiBasePageObject {
   @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
   private WebElement frame;
   @FindBy(css = ".oo-ui-window-ready")
-  private WebElement dialog;
-  @FindBy(css = ".oo-ui-icon-close")
+  protected WebElement dialog;
+  @FindBy(css = ".oo-ui-window-ready .oo-ui-icon-close")
   private WebElement closeButton;
 
   public VisualEditorDialog(WebDriver driver) {
@@ -32,10 +32,19 @@ public class VisualEditorDialog extends WikiBasePageObject {
     driver.switchTo().frame(frame);
   }
 
+  public void waitForDialogVisible() {
+    waitForElementByElement(dialog);
+    waitForElementVisibleByElement(dialog);
+  }
+
   @Deprecated
   public void switchOutOfIFrame() {
     waitForElementNotVisibleByElement(dialog);
     driver.switchTo().defaultContent();
+  }
+
+  public void waitForDialogNotVisible() {
+    waitForElementNotVisibleByElement(dialog);
   }
 
   @Deprecated
@@ -48,6 +57,8 @@ public class VisualEditorDialog extends WikiBasePageObject {
     waitForElementClickableByElement(closeButton);
     closeButton.click();
     PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
+    waitForElementNotVisibleByElement(dialog);
+    PageObjectLogging.log("closeDialog", "Dialog is closed", true);
     return new VisualEditorPageObject(driver);
   }
 }
