@@ -27,19 +27,21 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
 	
     /** search test flow: action - expected event
     *  navigate to main page
+    *  
+    *  search for query
+    *  click search button - search-button
+    *  click enter button - search-enter
+    *  
     *  trigger suggestion - search-suggest-show
     *  click enter on suggestion - search-suggest-enter
     *  click enter after suggestion - search-after-suggest-enter
     *  clear suggestion
+    *  
     *  trigger suggestion
     *  mouse click on suggestion - search-suggest
     *  click search after suggestion - search-after-suggest-button
     *  clear suggestion
-    *  search for query
-    *  click search button - search-button
-    *  click enter button - search-enter
-    */
-	
+    */	
     @Test(
         groups = {"TestGlobalSearchInGlobalNav_001", "ClickTracking", "GlobalNav"}
     )
@@ -49,23 +51,31 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
         NavigationBar navbar = new NavigationBar(driver);
         navbar.executeScript(ClickTrackingScriptsProvider.REDIRECT_BLOCK);
         navbar.executeScript(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
-        try {
-			navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-       
-        try {
-        	navbar.searchFor("asd");
-		} catch (UnhandledAlertException e) {
-			navbar.dismissPopupWindow();
-		}
+	
+    	navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
+		navbar.clickSearchButton();
+		navbar.dismissPopupWindow();
+    	navbar.clickEnterToSearch();
+    	navbar.dismissPopupWindow();
         
+        navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
+		navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
+		navbar.dismissPopupWindow();
+    	navbar.clickEnterToSearch();
+    	navbar.dismissPopupWindow();
+    	
+        navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
+		navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
+		navbar.dismissPopupWindow();
+    	navbar.clickSearchButton();
+    	navbar.dismissPopupWindow();
+    	
         List<JsonObject> expectedEvents = Arrays.asList(
                 EventsGlobalNavigation.searchButtonClick
             );
         
         navbar.compareTrackedEventsTo(expectedEvents);
-   
     }
 }
