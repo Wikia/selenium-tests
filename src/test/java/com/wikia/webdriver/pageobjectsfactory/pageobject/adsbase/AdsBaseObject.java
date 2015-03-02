@@ -84,7 +84,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
-  @FindBy(css = "[id*='gpt/TOP_LEADERBOARD']")
+  @FindBy(css = "div[id*='TOP_LEADERBOARD_gpt']")
   protected WebElement presentLeaderboardGpt;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
@@ -617,7 +617,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    */
   public void verifyGptIframe(String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
+    String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_" + src + "_0";
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     waitForElementPresenceByBy(cssSelector);
@@ -632,11 +632,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private String getGptParams(String slotName, String src, String attr) {
-    return getIframe(slotName, src).getAttribute(attr);
-  }
-
-  private WebElement getIframe(String slotName, String src) {
-    return driver.findElement(By.cssSelector("[id*='" + src + "/" + slotName + "']"));
+    WebElement gptIframeWrap = driver.findElement(By.id(slotName + "_" + src));
+    return gptIframeWrap.getAttribute(attr);
   }
 
   /**
@@ -677,10 +674,13 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public void verifyGptAdInSlot(String slotName, String src, String lineItemId, String creativeId) {
 
-    Assertion.assertEquals(getGptParams(slotName, src, "data-gpt-line-item-id"), lineItemId);
+    String gptIframeWrapId = slotName + "_" + src;
+    WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
+
+    Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-line-item-id"), lineItemId);
 
     if (creativeId.length() > 0) {
-      Assertion.assertEquals(getGptParams(slotName, src, "data-gpt-creative-id"), creativeId);
+      Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-creative-id"), creativeId);
     }
 
     PageObjectLogging.log(
