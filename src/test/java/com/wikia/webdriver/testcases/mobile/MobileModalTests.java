@@ -1,10 +1,13 @@
 package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileModalComponentObject;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -17,6 +20,13 @@ import org.testng.annotations.Test;
  */
 
 public class MobileModalTests extends NewTestTemplate {
+
+  Credentials credentials = config.getCredentials();
+
+  @BeforeMethod(alwaysRun = true)
+  public void logIn() {
+    new MobileBasePageObject(driver).loginDropDown(credentials.userName, credentials.password);
+  }
 
   @Test(groups = {"MobileModal_001", "MobileModal", "Mobile"})
   public void MobileModal_001_nextImage() {

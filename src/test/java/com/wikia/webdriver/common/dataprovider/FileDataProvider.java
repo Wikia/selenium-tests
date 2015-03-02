@@ -14,7 +14,7 @@ public class FileDataProvider {
   @DataProvider
   public static final Object[][] getFileNames() {
     return new Object[][]{
-        {"文件名óśłżźćńę%?.jpg"},
+        {"文件名óśłżźćńę?.jpg"},
         {"Image001.jpg"},
     };
   }

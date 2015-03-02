@@ -30,7 +30,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -71,13 +71,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
-      builder.append("<tr class=\"" + className + " lowLevelAction"
-                     + "\"><td>" + command + "</td><td>" + escapedDescription
-                     + "</td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command
+          + "</td><td>" + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     } else {
-      builder.append("<tr class=\"" + className + "\"><td>" + command
-                     + "</td><td>" + escapedDescription
-                     + "</td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>"
+          + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(NewDriverProvider.getWebDriver());
@@ -114,25 +112,32 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
-      StringBuilder builder = new StringBuilder();
-      builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
-          + "</td><td> <br/> &nbsp;</td></tr>");
-      CommonUtils.appendTextToFile(logPath, builder.toString());
-      logJSError(driver);
+    StringBuilder builder = new StringBuilder();
+    builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
+        + "</td><td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+    logJSError(driver);
   }
 
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
-      if(url.equals(driver.getCurrentUrl())){
-          builder.append("<tr class=\"success\"><td>Url after navigation</td><td>" + driver.getCurrentUrl()
-              + "</td><td> <br/> &nbsp;</td></tr>");
-          CommonUtils.appendTextToFile(logPath, builder.toString());
-      }else{
-          builder.append("<tr class=\"warning\"><td>Url after navigation</td><td>" + driver.getCurrentUrl()
-              + "</td><td> <br/> &nbsp;</td></tr>");
-          CommonUtils.appendTextToFile(logPath, builder.toString());
+    if (!AlertHandler.isAlertPresent(driver)) {
+      if (url.equals(driver.getCurrentUrl())) {
+        builder.append("<tr class=\"success\"><td>Url after navigation</td><td>"
+            + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
+        CommonUtils.appendTextToFile(logPath, builder.toString());
+      } else {
+        builder.append("<tr class=\"warning\"><td>Url after navigation</td><td>"
+            + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
+        CommonUtils.appendTextToFile(logPath, builder.toString());
       }
+    } else {
+      builder
+          .append("<tr class=\"warning\"><td>Url after navigation</td><td>Unable to check URL after navigation - alert present</td><td> <br/> &nbsp;</td></tr>");
+      CommonUtils.appendTextToFile(logPath, builder.toString());
+    }
+
 
     logJSError(driver);
   }

@@ -155,11 +155,10 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.ArticlePageTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestParamValue" />
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
+            <class name="com.wikia.webdriver.testcases.mobile.MobileInteractiveMapsTests" />
         </classes>
     </test>
 </suite>

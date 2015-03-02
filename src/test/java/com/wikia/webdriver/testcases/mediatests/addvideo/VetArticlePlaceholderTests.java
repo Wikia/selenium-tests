@@ -85,7 +85,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
-  public void Placeholders_004_EditModeLibrary_QAART_496() {
+  public void Placeholders_004_EditModeLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     base.openRandomArticle(wikiURL);

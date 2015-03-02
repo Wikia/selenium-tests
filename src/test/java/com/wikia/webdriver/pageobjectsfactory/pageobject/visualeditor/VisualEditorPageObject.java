@@ -206,7 +206,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyGalleries(int expected) {
-    waitForElementVisibleByElement(galleryNode);
+    if (expected > 0) {
+      waitForElementVisibleByElement(galleryNode);
+    }
     Assertion.assertNumber(expected, galleryNodes.size(),
                            "Checking the correct number of gallery nodes added");
     PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.codec.EncoderException;
-import org.apache.commons.codec.net.URLCodec;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -72,9 +70,9 @@ public class YoutubeVideoProvider {
       videoTitle = responseValue.read("$.items[0].snippet.title");
       String videoId = responseValue.read("$.items[0].id.videoId");
 
-      videoUrl = new URLCodec().encode("https://www.youtube.com/watch?v=" + videoId);
+      videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
-    } catch (IOException | EncoderException e) {
+    } catch (IOException e) {
       PageObjectLogging.log("A problem occurred while receiving a YouTube video", e.getMessage(),
           false);
     }

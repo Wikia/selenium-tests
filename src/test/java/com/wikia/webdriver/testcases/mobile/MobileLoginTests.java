@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSpecialUserLogin;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -19,13 +20,17 @@ public class MobileLoginTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @BeforeMethod(alwaysRun = true)
+  public void logIn() {
+    new MobileBasePageObject(driver).loginDropDown(credentials.userName, credentials.password);
+  }
+
   @Test(groups = {"MobileLogin_001", "MobileLogin", "Mobile"})
   public void MobileLogin_001_successLoginDropDown() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
     mobile.openRandomPage();
     String url = driver.getCurrentUrl();
-    mobile.loginDropDown(credentials.userName, credentials.password);
     mobile.verifyURLcontains(url);
   }
 
@@ -34,6 +39,7 @@ public class MobileLoginTests extends NewTestTemplate {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
     mobile.openRandomPage();
+    mobile.logOutMobile(wikiURL);
     MobileSpecialUserLogin login =
         mobile.loginFailedDropDown(credentials.userName12, mobile.getTimeStamp());
     login.verifyWrongPasswordErrorMessage();
@@ -44,6 +50,7 @@ public class MobileLoginTests extends NewTestTemplate {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
     mobile.openRandomPage();
+    mobile.logOutMobile(wikiURL);
     MobileSpecialUserLogin login =
         mobile.loginFailedDropDown(mobile.getTimeStamp(), mobile.getTimeStamp());
     login.verifyWrongLoginErrorMessage();
@@ -54,6 +61,7 @@ public class MobileLoginTests extends NewTestTemplate {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
     mobile.openRandomPage();
+    mobile.logOutMobile(wikiURL);
     MobileSpecialUserLogin login = mobile.loginFailedDropDown(credentials.userName12, "");
     login.verifyEmptyPasswordErrorMessage();
   }
@@ -66,5 +74,4 @@ public class MobileLoginTests extends NewTestTemplate {
     mobile.clickLoginFBButton();
     mobile.verifyFBLogin();
   }
-
 }

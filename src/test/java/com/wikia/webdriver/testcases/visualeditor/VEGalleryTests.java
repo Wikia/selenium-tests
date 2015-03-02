@@ -31,6 +31,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     article.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
+  //AG01
   @Test(
       groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"}
   )
@@ -53,8 +54,10 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
     article = saveChangesDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AG02
   @Test(
       groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
   )
@@ -92,6 +95,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
   }
 
+  //AG03
   @Test(
       groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
   )
@@ -109,6 +113,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     ve.verifyPreviewImage();
   }
 
+  //AG04
   @Test(
       groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
   )
@@ -135,6 +140,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.deleteGallery(0);
+    ve.verifyGalleries(0);
     VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
     article = saveChangesDialog.savePage();
     article.verifyVEPublishComplete();

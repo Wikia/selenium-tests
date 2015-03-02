@@ -45,4 +45,13 @@ public class AlmostTherePageObject extends WikiBasePageObject {
     return new ConfirmationPageObject(driver);
   }
 
+  public void confirmAccountAndLogin(String email, String emailPassword, String userName, String password, String wikiURL) {
+    verifyAlmostTherePage();
+    ConfirmationPageObject confirmation = enterActivationLink(email, emailPassword, wikiURL);
+    confirmation.typeInUserName(userName);
+    confirmation.typeInPassword(password);
+    UserProfilePageObject userProfile = confirmation.clickSubmitButton(email, emailPassword);
+    userProfile.verifyUserLoggedIn(userName);
+  }
+
 }

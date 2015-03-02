@@ -33,6 +33,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
+  //AM01
   @Test(
       groups = {
           "VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
@@ -52,8 +53,10 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AM02
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
   )
@@ -72,6 +75,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //AM03
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
   )
