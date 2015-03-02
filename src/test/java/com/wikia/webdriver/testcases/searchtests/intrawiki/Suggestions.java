@@ -17,8 +17,8 @@ public class Suggestions extends BasicActions {
 	  public void dropDownSuggestions() {
 	    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 	    search.openWikiPage(testedWiki);
-	    search.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
-	    search.verifySuggestions(SEARCH_ARTICLE);
+	    search.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+	    search.verifySuggestions(SearchContent.SEARCH_ARTICLE);
 	    
 	  }
 	  

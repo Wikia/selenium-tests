@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
+import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -56,23 +57,14 @@ public class BasicActions extends NewTestTemplate {
         searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
     }
 
-    protected static final int RESULTS_PER_PAGE = 25;
-    protected static final String SEARCH_PHRASE_RESULTS = "a";
-    protected static final String SEARCH_PAGINATION_RESULTS = "what";
-    protected static final String SEARCH_RESULT_WITH_EXTENSION = "betweenlions";
-    protected static final String SEARCH_PHRASE_NO_RESULTS = "qazwsxedcrfvtgb";
-    protected static final String SEARCH_SUGGESTION_PHRASE = "Gon";
-    protected static final String SEARCH_ARTICLE = "Gonzo";
-    protected static final String SEARCH_WIKI = "Marvel";
-
     @Test(groups = { "anonSearch", "IntraWikiSearch", "Search" })
     public void anonSearch() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage(testedWiki);
         NavigationBar navigation = new NavigationBar(driver);
         IntraWikiSearchPageObject search = navigation
-                .searchFor(SEARCH_PHRASE_RESULTS);
-        search.verifyFirstArticleNameTheSame(SEARCH_PHRASE_RESULTS);
+                .searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
+        search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
     }
 
     @Test(groups = { "userSearch", "IntraWikiSearch", "Search" })
@@ -82,15 +74,15 @@ public class BasicActions extends NewTestTemplate {
         base.logInCookie(credentials.userName, credentials.password, wikiURL);
         NavigationBar navigation = new NavigationBar(driver);
         IntraWikiSearchPageObject search = navigation
-                .searchFor(SEARCH_PHRASE_RESULTS);
-        search.verifyFirstArticleNameTheSame(SEARCH_PHRASE_RESULTS);
+                .searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
+        search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
     }
 
     @Test(groups = { "IntraWikiSearch_002", "IntraWikiSearch", "Search" })
     public void pagination() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PAGINATION_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PAGINATION_RESULTS);
         String firstResult = search.getTitleInnerText();
         search.verifyPagination();
         search.clickNextPaginator();
@@ -106,17 +98,17 @@ public class BasicActions extends NewTestTemplate {
     public void resultsCount() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
-        search.verifyResultsCount(RESULTS_PER_PAGE);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
+        search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE_HIGH);
         search.clickNextPaginator();
-        search.verifyResultsCount(RESULTS_PER_PAGE);
+        search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE_HIGH);
     }
 
     @Test(groups = { "IntraWikiSearch_004", "IntraWikiSearch", "Search" })
     public void noResults() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_NO_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_NO_RESULTS_2);
         search.verifyNoResults();
     }
 
@@ -124,22 +116,22 @@ public class BasicActions extends NewTestTemplate {
     public void filtering() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.selectPhotosVideos();
         search.verifyTitlesNotEmpty();
         search.selectPhotosOnly();
         search.verifyTitlesNotEmpty();
-        search.verifyAllResultsImages(RESULTS_PER_PAGE);
+        search.verifyAllResultsImages(SearchContent.RESULTS_PER_PAGE_HIGH);
         search.selectVideosOnly();
         search.verifyTitlesNotEmpty();
-        search.verifyAllResultsVideos(RESULTS_PER_PAGE);
+        search.verifyAllResultsVideos(SearchContent.RESULTS_PER_PAGE_HIGH);
     }
 
     @Test(groups = { "IntraWikiSearch_006", "IntraWikiSearch", "Search" })
     public void sortingVideos() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.selectPhotosVideos();
         search.selectVideosOnly();
         search.verifyTitlesNotEmpty();
@@ -158,7 +150,7 @@ public class BasicActions extends NewTestTemplate {
     public void sortingImages() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.selectPhotosVideos();
         search.selectPhotosOnly();
         search.verifyTitlesNotEmpty();
@@ -173,7 +165,7 @@ public class BasicActions extends NewTestTemplate {
     public void languageTranslation() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.addQqxUselang();
         search.verifyLanguageTranslation();
     }
@@ -182,7 +174,7 @@ public class BasicActions extends NewTestTemplate {
     public void selectImagesOrVideos() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.selectPhotosVideos();
         search.selectPhotosOnly();
         search.verifyPhotosOnly();
@@ -194,7 +186,7 @@ public class BasicActions extends NewTestTemplate {
     public void defaultNamespaces() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.clickAdvancedButton();
         search.verifyDefaultNamespaces();
     }
@@ -203,9 +195,9 @@ public class BasicActions extends NewTestTemplate {
     public void noFileExtensionNeed() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_RESULT_WITH_EXTENSION);
+        search.searchFor(SearchContent.SEARCH_RESULT_WITH_EXTENSION);
         search.selectPhotosVideos();
-        search.verifyFirstResultExtension(SEARCH_RESULT_WITH_EXTENSION);
+        search.verifyFirstResultExtension(SearchContent.SEARCH_RESULT_WITH_EXTENSION);
     }
 
     @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getNamespaces", groups = {
@@ -233,7 +225,7 @@ public class BasicActions extends NewTestTemplate {
     public void topModule() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
-        search.searchFor(SEARCH_PHRASE_RESULTS);
+        search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
         search.verifyTopModule();
     }
 
@@ -241,8 +233,8 @@ public class BasicActions extends NewTestTemplate {
     public void communityPushToTopWikiResult() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(communityWiki);
-        search.searchForInGlobalNavIfPresent(SEARCH_WIKI);
-        search.verifyPushToTopWikiTitle(SEARCH_WIKI);
+        search.searchForInGlobalNavIfPresent(SearchContent.SEARCH_WIKI);
+        search.verifyPushToTopWikiTitle(SearchContent.SEARCH_WIKI);
         search.verifyPushToTopWikiThumbnail();
     }
 
