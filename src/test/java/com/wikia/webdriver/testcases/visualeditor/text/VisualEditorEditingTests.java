@@ -95,6 +95,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
       dependsOnGroups = "VisualEditorEditing_001"
   )
   public void VisualEditorEditing_002_delete() {
+
     String removeText = "Lorem";
     List<String> deletedWikiTexts;
     deletedWikiTexts = new ArrayList<>();
@@ -168,7 +169,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
   )
   public void VisualEditorEditing_005_switchToSourceMode() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve = ve.typeInSourceEditor(text);
@@ -191,16 +192,19 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
       groups = {"VisualEditorEditing", "VisualEditorEditing_006"}
   )
   public void VisualEditorEditing_006_editSummary() {
+    String summaryText =
+        "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
+
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea("a");
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-    saveDialog.typeEditSummary(text);
+    saveDialog.typeEditSummary(summaryText);
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
-    historyPage.verifyLatestEditSummary(text);
+    historyPage.verifyLatestEditSummary(summaryText);
   }
 
   @Test(

@@ -23,6 +23,7 @@ public class VisualEditorDialog extends WikiBasePageObject {
 
   public VisualEditorDialog(WebDriver driver) {
     super(driver);
+    waitForDialogVisible();
   }
 
   @Deprecated
