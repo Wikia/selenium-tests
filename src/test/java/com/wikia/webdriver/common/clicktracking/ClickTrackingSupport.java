@@ -9,21 +9,17 @@ import javax.json.JsonObject;
 
 public class ClickTrackingSupport {
 
-  public void compare(List<JsonObject> expectedEventList, List<JsonObject> currentEventList) {
+  public void compare(List<JsonObject> expectedEventList, List<JsonObject> trackedEventList) {
     for (JsonObject expectedEvent : expectedEventList) {
       Boolean equals = false;
-      for (JsonObject currentEvent : currentEventList) {
-        PageObjectLogging.log("compare",
-                              "comparing clicktracked events to expected event: \n"
-                              + "expected event: " + expectedEvent.toString() + "\n"
-                              + "compared event: " + currentEvent.toString(), true);
+      for (JsonObject currentEvent : trackedEventList) {
         equals = currentEvent.equals(expectedEvent);
         if (equals) {
           PageObjectLogging.log("compare",
                                 "match for expected event found: \n"
                                 + "expected event: " + expectedEvent.toString() + "\n"
                                 + "compared event: " + currentEvent.toString(), true);
-          currentEventList.remove(currentEvent);
+          trackedEventList.remove(currentEvent);
           break;
         }
       }

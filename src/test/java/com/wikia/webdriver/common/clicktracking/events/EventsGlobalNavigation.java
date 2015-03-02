@@ -22,7 +22,7 @@ public class EventsGlobalNavigation {
     *  click enter button - search-enter
     */	
     
-    public static JsonObject searchSuggest = Json.createObjectBuilder()
+    public static JsonObject searchSuggestionClick = Json.createObjectBuilder()
             .add("0", Json.createObjectBuilder()
                 .add(EventParameter.ACTION.getEventParameter(), "click")
                 .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
@@ -33,10 +33,11 @@ public class EventsGlobalNavigation {
     
     public static JsonObject searchSuggestShow = Json.createObjectBuilder()
             .add("0", Json.createObjectBuilder()
-                .add(EventParameter.ACTION.getEventParameter(), "view")
+                .add(EventParameter.ACTION.getEventParameter(), "click")
                 .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
                 .add(EventParameter.CATEGORY.getEventParameter(), "search"))
             .add("1", Json.createObjectBuilder()
+            		.add(EventParameter.ACTION.getEventParameter(), "view")
                 .add(EventParameter.LABEL.getEventParameter(), "search-suggest-show"))
             .build();
     

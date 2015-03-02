@@ -58,6 +58,13 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     	navbar.clickEnterToSearch();
     	navbar.dismissPopupWindow();
         
+    	navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+    	navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
+    	navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
+    	navbar.dismissPopupWindow();
+    	navbar.clickSearchButton();
+    	navbar.dismissPopupWindow();
+    	
         navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
 		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
 		navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
@@ -65,15 +72,14 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     	navbar.clickEnterToSearch();
     	navbar.dismissPopupWindow();
     	
-        navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
-		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
-		navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
-		navbar.dismissPopupWindow();
-    	navbar.clickSearchButton();
-    	navbar.dismissPopupWindow();
-    	
         List<JsonObject> expectedEvents = Arrays.asList(
-                EventsGlobalNavigation.searchButtonClick
+                EventsGlobalNavigation.searchButtonClick,
+                EventsGlobalNavigation.searchEnter,
+                EventsGlobalNavigation.searchSuggestShow,
+                EventsGlobalNavigation.searchSuggestionEnter,
+                EventsGlobalNavigation.searchAfterSuggestionEnter,
+                EventsGlobalNavigation.searchSuggestionClick,
+                EventsGlobalNavigation.searchAfterSuggestionButtonClick
             );
         
         navbar.compareTrackedEventsTo(expectedEvents);
