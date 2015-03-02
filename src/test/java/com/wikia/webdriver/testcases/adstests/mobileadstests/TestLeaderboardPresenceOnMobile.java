@@ -27,6 +27,14 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
     testedPage = urlBuilder.getUrlForPath(wikiName, article);
   }
 
+  @GeoEdgeProxy(country = "JP")
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"}
+  )
+  public void TopLeaderboardPresenceTest_JP() {
+    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  }
+
   @GeoEdgeProxy(country = "VE")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_VE"}
