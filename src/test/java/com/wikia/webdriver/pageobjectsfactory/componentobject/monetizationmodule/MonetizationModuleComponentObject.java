@@ -22,6 +22,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
   private static final String ADSENSE_HEADER_VALUE = "advertisement";
   private static final String SLOT_IN_CONTENT = "in_content";
+  private static final int NUM_OF_REDIRECT = 5;
 
   @FindBy(css = ".adsbygoogle.ad-responsive-ic")
   private WebElement adsenseInsInContent;
@@ -56,10 +57,13 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       MonetizationModuleAmazonListBy =
       By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
   private By slotInContentAmazon = By.cssSelector("#monetization-amazon_video-in_content");
+  private By slotAboveFooterAmazon = By.cssSelector("#monetization-amazon_video-above_footer");
   private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
-  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
   private By slotAboveTitleAmazon = By.cssSelector("#monetization-amazon-above_title");
   private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
+
+  //Ecommerce
+  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
 
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
@@ -260,8 +264,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyAmazonUnitShownAboveFooter() {
-    waitForElementByElementLocatedBy(slotAboveFooterEcommerce);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterEcommerce));
+    waitForElementByElementLocatedBy(slotAboveFooterAmazon);
+    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAmazon));
     PageObjectLogging
         .log("verifyAmazonUnitShownAboveFooter", "Amazon unit is visible above footer", true);
   }
@@ -295,27 +299,37 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAmazonUnitWidth(int expectedInContent, int expectedOthers) {
-    WebElement elem = redirectUntilDesiredSlotShown();
-    String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
-    int width = elem.getSize().width;
-    PageObjectLogging.log("verifyAmazonUnitWidth",
-                          "Verify the width of the AMAZON unit for " + slotName + " (width="
-                          + width + ")", true, driver);
-    Assertion.assertEquals(width, expectedInContent);
+    WebElement elem =
+        redirectUntilDesiredSlotShown(MonetizationModuleAmazonListBy, SLOT_IN_CONTENT);
+    String slotName = null;
+    int width = -1;
+    try {
+      slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+      width = elem.getSize().width;
+      PageObjectLogging.log("verifyAmazonUnitWidth",
+                            "Verify the width of the AMAZON unit for " + slotName + " (width="
+                            + width + ")", true, driver);
+      Assertion.assertEquals(width, expectedInContent);
+    } catch (NullPointerException e) {
+      PageObjectLogging.log("verifyAmazonUnitWidth",
+                            "Unable to find " + SLOT_IN_CONTENT + "after " + NUM_OF_REDIRECT
+                            + " redirects", false, driver);
+    }
   }
 
-  private WebElement redirectUntilDesiredSlotShown() {
-    boolean found = false;
+  private WebElement redirectUntilDesiredSlotShown(By adSlotBy, String adSlotName) {
+    int numOfRedirect = 0;
     WebElement foundElem = null;
-    while(!found) {
-      List<WebElement> listWebElements = driver.findElements(MonetizationModuleAmazonListBy);
-      for (int i = 0; i<listWebElements.size(); i++) {
+    while (numOfRedirect < NUM_OF_REDIRECT) {
+      List<WebElement> listWebElements = driver.findElements(adSlotBy);
+      for (int i = 0; i < listWebElements.size(); i++) {
         String slotName = listWebElements.get(i).getAttribute(ATTRIBUTE_NAME_SLOT);
-        if (slotName.equals(SLOT_IN_CONTENT)) {
+        if (slotName.equals(adSlotName)) {
           return listWebElements.get(i);
         }
       }
       redirectToAnotherRandomArticle();
+      numOfRedirect++;
     }
     return foundElem;
   }
