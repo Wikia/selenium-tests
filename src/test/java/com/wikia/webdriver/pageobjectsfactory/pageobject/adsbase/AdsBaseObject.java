@@ -208,6 +208,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
+    if (!checkIfSlotExpanded(presentLeaderboard) && checkIfElementOnPage("#jpsuperheader")) {
+      PageObjectLogging.log("checkTopLeaderboard",
+                            "Page has Gotham campaign (lineItemId=137707812)", true);
+      return;
+    }
     checkAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
