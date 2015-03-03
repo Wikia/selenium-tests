@@ -40,7 +40,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public void verifyCallToAmazonIssued() {
     if (networkTrafficInterceptor.searchRequestUrlInHar(AMAZON_SCRIPT_URL)) {
-      PageObjectLogging.log("RequestToAmazonIssued", "Request to amazon issued", true);
+      PageObjectLogging.log("RequestToAmazonIssued", "Request to Amazon issued", true);
     } else {
       throw new NoSuchElementException("Request to Amazon not issued");
     }
@@ -56,7 +56,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public void verifyGPTParams() {
     if (slotsWithAmazonParams.size() > 0) {
-      PageObjectLogging.log("AmazonAdFound", "Slot with amazon ad found", true);
+      PageObjectLogging.log("AmazonAdFound", "Slot with Amazon ad found", true);
     } else {
       throw new NoSuchElementException("Amazon Ad not found on page");
     }
