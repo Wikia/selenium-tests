@@ -63,7 +63,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
     firstSourceEditText = new ArrayList<>();
     firstSourceEditText.add(text);
     secondSourceEditText = new ArrayList<>();
-    secondSourceEditText.add(text + text);
+    secondSourceEditText.add(text + "\n" + text);
 
   }
 
