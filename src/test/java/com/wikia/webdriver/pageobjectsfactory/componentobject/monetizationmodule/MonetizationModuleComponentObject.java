@@ -51,20 +51,6 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       MonetizationModuleAdsenseListBy =
       By.cssSelector(".monetization-module[data-mon-type='adunit']");
 
-  //Amazon
-  private By amazonContainer = By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
-  private By
-      MonetizationModuleAmazonListBy =
-      By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
-  private By slotInContentAmazon = By.cssSelector("#monetization-amazon_video-in_content");
-  private By slotAboveFooterAmazon = By.cssSelector("#monetization-amazon_video-above_footer");
-  private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
-  private By slotAboveTitleAmazon = By.cssSelector("#monetization-amazon-above_title");
-  private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
-
-  //Ecommerce
-  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
-
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
   }
@@ -233,104 +219,5 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     Assertion.assertEquals(ADSENSE_HEADER_VALUE.toUpperCase(), adHeader.getText());
     PageObjectLogging
         .log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
-  }
-
-  public void verifyAmazonUnitShown() {
-    waitForElementByElementLocatedBy(amazonContainer);
-    Assertion.assertTrue(checkIfElementOnPage(amazonContainer));
-    PageObjectLogging.log("verifyAmazonUnitShown", "Amazon unit is visible", true);
-  }
-
-  public void verifyAmazonUnitSlot() {
-    List<WebElement> listWebElements = driver.findElements(MonetizationModuleAmazonListBy);
-    for (WebElement elem : listWebElements) {
-      String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
-      switch (slotName) {
-        case "in_content":
-          verifyAmazonUnitShownInContent();
-          break;
-        case "below_category":
-          verifyAmazonUnitShownBelowCategory();
-          break;
-        case "above_footer":
-          verifyAmazonUnitShownAboveFooter();
-          break;
-        default:
-          PageObjectLogging
-              .log("verifyAmazonUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
-          break;
-      }
-    }
-  }
-
-  private void verifyAmazonUnitShownAboveFooter() {
-    waitForElementByElementLocatedBy(slotAboveFooterAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAmazon));
-    PageObjectLogging
-        .log("verifyAmazonUnitShownAboveFooter", "Amazon unit is visible above footer", true);
-  }
-
-  private void verifyAmazonUnitShownBelowCategory() {
-    waitForElementByElementLocatedBy(slotBelowCategoryAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotBelowCategoryAmazon));
-    PageObjectLogging
-        .log("verifyAmazonUnitShownBelowCategory", "Amazon unit is visible below category", true);
-  }
-
-  private void verifyAmazonUnitShownInContent() {
-    waitForElementByElementLocatedBy(slotInContentAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotInContentAmazon));
-    PageObjectLogging
-        .log("verifyAmazonUnitShownInContent", "Amazon unit is visible in content", true);
-  }
-
-  public void verifyAmazonUnitNotShownAboveTitle() {
-    waitForElementNotPresent(slotAboveTitleAmazon);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownAboveTitle", "Adsense unit is not shown above the title",
-             true);
-  }
-
-  public void verifyAmazonUnitNotShownBelowTitle() {
-    waitForElementNotPresent(slotBelowTitleAmazon);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownBelowTitle", "Adsense unit is not shown below the title",
-             true);
-  }
-
-  public void verifyAmazonUnitWidth(int expectedInContent, int expectedOthers) {
-    WebElement elem =
-        redirectUntilDesiredSlotShown(MonetizationModuleAmazonListBy, SLOT_IN_CONTENT);
-    String slotName = null;
-    int width = -1;
-    try {
-      slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
-      width = elem.getSize().width;
-      PageObjectLogging.log("verifyAmazonUnitWidth",
-                            "Verify the width of the AMAZON unit for " + slotName + " (width="
-                            + width + ")", true, driver);
-      Assertion.assertEquals(width, expectedInContent);
-    } catch (NullPointerException e) {
-      PageObjectLogging.log("verifyAmazonUnitWidth",
-                            "Unable to find " + SLOT_IN_CONTENT + "after " + NUM_OF_REDIRECT
-                            + " redirects", false, driver);
-    }
-  }
-
-  private WebElement redirectUntilDesiredSlotShown(By adSlotBy, String adSlotName) {
-    int numOfRedirect = 0;
-    WebElement foundElem = null;
-    while (numOfRedirect < NUM_OF_REDIRECT) {
-      List<WebElement> listWebElements = driver.findElements(adSlotBy);
-      for (int i = 0; i < listWebElements.size(); i++) {
-        String slotName = listWebElements.get(i).getAttribute(ATTRIBUTE_NAME_SLOT);
-        if (slotName.equals(adSlotName)) {
-          return listWebElements.get(i);
-        }
-      }
-      redirectToAnotherRandomArticle();
-      numOfRedirect++;
-    }
-    return foundElem;
   }
 }

@@ -35,9 +35,9 @@ import java.util.List;
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
-  private static final int STYLE_LIST = 1;
-  private static final int INSERT_LIST = 2;
-  private static final int HAMBURGER_LIST = 0;
+  private static final int STYLE_LIST = 0;
+  private static final int INSERT_LIST = 1;
+  private static final int HAMBURGER_LIST = 2;
 
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
@@ -95,7 +95,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By categoriesBy = By.cssSelector(".oo-ui-icon-tag");
   private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
   private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
-  private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
+  private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
 
   public VisualEditorMenu(WebDriver driver) {
     super(driver);
@@ -304,6 +304,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
+    driver.switchTo().defaultContent();
     waitForElementNotPresent(publishButtonDisabled);
     waitForElementVisibleByElement(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
