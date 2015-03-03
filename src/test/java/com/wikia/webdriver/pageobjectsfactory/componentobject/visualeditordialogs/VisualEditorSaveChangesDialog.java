@@ -15,13 +15,16 @@ import org.openqa.selenium.support.FindBy;
  */
 public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
-  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
+  @FindBy(
+      css =
+          ".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"
+  )
   private WebElement publishButton;
   @FindBy(css = "#recaptcha_area")
   private WebElement recaptchaArea;
   @FindBy(css = "#ve-ui-mwSaveDialog-captcha iframe")
   private WebElement recaptchaContainer;
-  @FindBy(css = ".oo-ui-processDialog-actions-other .oo-ui-labelElement-label")
+  @FindBy(css = ".secondary .oo-ui-labeledElement-label")
   private WebElement reviewChangesButton;
   @FindBy(css = ".oo-ui-window-body")
   private WebElement saveDialogBody;
@@ -29,8 +32,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   private WebElement editSummary;
   @FindBy(css = "#wpMinoredit")
   private WebElement minorEdit;
-  @FindBy(css = ".ve-ui-mwSaveDialog-savePanel")
-  private WebElement savePanel;
 
   private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
 
@@ -38,16 +39,28 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     super(driver);
   }
 
+  @Override
+  public void switchToIFrame() {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("switchToIFrame", e.getMessage(), false);
+    }
+    super.switchToIFrame();
+  }
+
   public ArticlePageObject savePage() {
+    switchToIFrame();
     waitForElementInViewPort(editSummary);
-    waitForElementInViewPort(reviewChangesButton);
-    waitForElementVisibleByElement(savePanel);
+    waitForElementClickableByElement(publishButton);
     publishButton.click();
     PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);
+    switchOutOfIFrame();
     return new ArticlePageObject(driver);
   }
 
   public void verifyRecaptchaIsVisible() {
+    switchToIFrame();
     waitForElementVisibleByElement(recaptchaContainer);
     driver.switchTo().defaultContent();
     PageObjectLogging
@@ -55,6 +68,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public String getRecaptchaImageSrc() {
+    switchToIFrame();
     waitForElementVisibleByElement(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
     PageObjectLogging
@@ -64,6 +78,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
+    switchToIFrame();
     waitForElementClickableByElement(publishButton);
     if (checkIfElementOnPage(recaptchaArea)) {
       recaptchaContainer = saveDialogBody.findElement(recaptchaImageBy);
@@ -71,6 +86,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     }
     publishButton.click();
     PageObjectLogging.log("clickSaveWithRecaptcha", "The 2nd Publish Button is clicked", true);
+    switchOutOfIFrame();
     return new VisualEditorSaveChangesDialog(driver);
   }
 
@@ -81,10 +97,12 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorReviewChangesDialog clickReviewYourChanges() {
+    switchToIFrame();
     waitForElementVisibleByElement(reviewChangesButton);
     waitForElementClickableByElement(reviewChangesButton);
     reviewChangesButton.click();
     PageObjectLogging.log("clickReviewYourChanges", "Review Your Changes Button is clicked", true);
+    switchOutOfIFrame();
     return new VisualEditorReviewChangesDialog(driver);
   }
 
@@ -94,13 +112,17 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void typeEditSummary(String text) {
+    switchToIFrame();
     waitForElementVisibleByElement(editSummary);
     editSummary.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editSummary, "value", text);
+    switchOutOfIFrame();
   }
 
   public void clickMinorEdit() {
+    switchToIFrame();
     waitForElementClickableByElement(minorEdit);
     minorEdit.click();
+    switchOutOfIFrame();
   }
 }

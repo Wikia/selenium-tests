@@ -63,7 +63,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
     firstSourceEditText = new ArrayList<>();
     firstSourceEditText.add(text);
     secondSourceEditText = new ArrayList<>();
-    secondSourceEditText.add(text + "\n" + text);
+    secondSourceEditText.add(text + text);
 
   }
 
@@ -95,7 +95,6 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
       dependsOnGroups = "VisualEditorEditing_001"
   )
   public void VisualEditorEditing_002_delete() {
-
     String removeText = "Lorem";
     List<String> deletedWikiTexts;
     deletedWikiTexts = new ArrayList<>();
@@ -133,32 +132,28 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
   }
 
   @Test(
-      groups = {"VisualEditorLinks", "VisualEditorEditing_004"}
+      groups = {"VisualEditorEditing", "VisualEditorEditing_004"}
   )
   public void VisualEditorEditing_004_insertLinks() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-
     base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.INTERNAL_LINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyMatchingPageIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyMatchingPageIsTop();
+    ve = veLinkDialog.clickLinkResult();
     ve.typeReturn();
     veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.REDLINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyNewPageIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyNewPageIsTop();
+    ve = veLinkDialog.clickLinkResult();
     ve.typeReturn();
     veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.EXTERNAL_LINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyExternalLinkIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyExternalLinkIsTop();
+    ve = veLinkDialog.clickLinkResult();
     ve.typeReturn();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
@@ -173,7 +168,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
   )
   public void VisualEditorEditing_005_switchToSourceMode() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve = ve.typeInSourceEditor(text);
@@ -196,19 +191,16 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
       groups = {"VisualEditorEditing", "VisualEditorEditing_006"}
   )
   public void VisualEditorEditing_006_editSummary() {
-    String summaryText =
-        "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
-
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea("a");
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-    saveDialog.typeEditSummary(summaryText);
+    saveDialog.typeEditSummary(text);
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
-    historyPage.verifyLatestEditSummary(summaryText);
+    historyPage.verifyLatestEditSummary(text);
   }
 
   @Test(
