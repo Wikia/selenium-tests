@@ -22,22 +22,23 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private WebElement previousButton;
   @FindBy(css = ".ve-ui-mwLinkTargetInputWidget input")
   private WebElement linkInput;
-  @FindBy(css = ".oo-ui-texture-pending")
+  @FindBy(css = ".oo-ui-pendingElement-pending")
   private WebElement inputPending;
   @FindBy(css = ".oo-ui-optionWidget-selected")
   private WebElement selectedResult;
   @FindBy(css = ".ve-ui-desktopContext")
   private WebElement desktopContext;
-  @FindBy(css = ".oo-ui-window-title")
+  @FindBy(css = ".oo-ui-processDialog-title.oo-ui-labelElement")
   private WebElement title;
   @FindBy(css = ".oo-ui-window.ve-ui-inspector")
-  private WebElement dialog;
+  private WebElement inspector;
 
   private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
   private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
   private By linkResultsBy = By.cssSelector("li");
   private By linkCategoryBy = By.cssSelector(".oo-ui-labeledElement-label span");
   private By highlightedResultsBy = By.cssSelector(".oo-ui-optionWidget-highlighted");
+  private By doneButtonBy = By.cssSelector(".oo-ui-window-foot .oo-ui-buttonElement-button");
 
   private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
@@ -55,17 +56,21 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     pageCategoryIndex[REDIRECT_PAGE_INDEX] = -1;
   }
 
+  public void clickDoneButton() {
+    waitForDialogVisible();
+    WebElement doneButton = dialog.findElement(doneButtonBy);
+    doneButton.click();
+    waitForDialogNotVisible();
+  }
+
   public void typeInLinkInput(String text) {
-    waitForElementVisibleByElement(dialog);
-    switchToIFrame();
     waitForElementVisibleByElement(linkInput);
     waitForElementClickableByElement(linkInput);
     linkInput.sendKeys(text);
+    waitForElementNotVisibleByElement(inputPending);
     waitForValueToBePresentInElementsAttributeByElement(linkInput, "value", text);
     //Due to fast typing, refocus on the input to force type ahead suggestion to refresh
     title.click();
-    linkInput.click();
-    driver.switchTo().defaultContent();
   }
 
   private void viewLinkResults() {
@@ -165,7 +170,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     waitForElementClickableByElement(previousButton);
     previousButton.click();
     switchOutOfIFrame();
-    waitForElementNotVisibleByElement(dialog);
+    waitForElementNotVisibleByElement(inspector);
     return new VisualEditorPageObject(driver);
   }
 }
