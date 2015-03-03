@@ -111,7 +111,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void selectText(int from, int to) {
     String
         showSelectiontJS =
-        "ve.instances[0].model.change( null, new ve.Range( " + from + ", " + to + " ) );";
+        "ve.init.target.getSurface().getModel().change(" +
+        "null, new ve.dm.LinearSelection(" +
+        "ve.init.target.getSurface().getModel().getDocument(),new ve.Range(" +
+        from + "," + to + " )));";
     ((JavascriptExecutor) driver).executeScript(showSelectiontJS);
   }
 
@@ -137,11 +140,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void removeText(String text) {
-    int[] indexes = getTextIndex(text);
-    String script = "ve.instances[0].model.change("
-                    + "ve.dm.Transaction.newFromRemoval(ve.instances[0].model.documentModel,"
-                    + "new ve.Range(arguments[0],arguments[1])));";
-    ((JavascriptExecutor) driver).executeScript(script, indexes[0], indexes[1]);
+    selectText(text);
+    new Actions(driver).sendKeys(Keys.DELETE).build().perform();
   }
 
   public void verifyNumList(List<String> elements) {
@@ -304,7 +304,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     VisualEditorSourceEditorDialog veSrcDialog =
         (VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
     veSrcDialog.typeInEditArea(text);
-    return new VisualEditorPageObject(driver);
+    return veSrcDialog.clickApplyChangesButton();
   }
 
   public void verifyPreviewVideoPlay(String providerName) {
