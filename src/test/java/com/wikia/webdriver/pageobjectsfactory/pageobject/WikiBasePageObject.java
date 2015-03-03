@@ -1305,11 +1305,6 @@ public class WikiBasePageObject extends BasePageObject {
 	  return new UserProfilePageObject(driver);
   }
 
-  public void redirectToAnotherRandomArticle() {
-    String wikiURL = getCurrentUrl().substring(0,getCurrentUrl().indexOf("wiki/"));
-    getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
-  }
-  
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }

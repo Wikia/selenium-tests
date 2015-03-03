@@ -51,17 +51,6 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       MonetizationModuleAdsenseListBy =
       By.cssSelector(".monetization-module[data-mon-type='adunit']");
 
-  //Amazon
-  private By amazonContainer = By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
-  private By
-      MonetizationModuleAmazonListBy =
-      By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
-  private By slotInContentAmazon = By.cssSelector("#monetization-amazon_video-in_content");
-  private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
-  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
-  private By slotAboveTitleAmazon = By.cssSelector("#monetization-amazon-above_title");
-  private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
-
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
   }
