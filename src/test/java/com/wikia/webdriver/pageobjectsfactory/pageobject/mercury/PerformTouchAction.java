@@ -19,8 +19,8 @@ import io.appium.java_client.android.AndroidDriver;
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
  * @updated: 9 Feb 2015
+ * @ownership: Content - Mercury mobile
  */
-
 public class PerformTouchAction {
 
   private WebDriver driver;

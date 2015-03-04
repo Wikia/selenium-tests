@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class ArticlePageObject extends BasePageObject {
 
