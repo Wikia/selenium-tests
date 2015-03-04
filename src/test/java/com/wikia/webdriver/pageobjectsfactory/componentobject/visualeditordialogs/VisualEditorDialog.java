@@ -56,8 +56,8 @@ public class VisualEditorDialog extends WikiBasePageObject {
   public VisualEditorPageObject closeDialog() {
     waitForElementClickableByElement(closeButton);
     closeButton.click();
-    PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
     waitForElementNotVisibleByElement(dialog);
+    PageObjectLogging.log("closeDialog", "Dialog is closed", true);
     return new VisualEditorPageObject(driver);
   }
 }
