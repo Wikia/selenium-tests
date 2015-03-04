@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import java.io.File;
-
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -13,8 +11,11 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class InteractiveMapsComponentObject extends BasePageObject {
 
@@ -87,7 +88,8 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     try {
       waitForElementByElement(lightbox);
       return checkIfElementOnPage(lightbox);
-    } catch (TimeoutException e) {}
+    } catch (TimeoutException e) {
+    }
     return false;
   }
 

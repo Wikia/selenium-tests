@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class OpenGraphPageObject extends MobileBasePageObject {
 
@@ -75,7 +76,8 @@ public class OpenGraphPageObject extends MobileBasePageObject {
     }
     try {
       return !ogSiteName.getAttribute("content").isEmpty();
-    } catch (NoSuchElementException e) {}
+    } catch (NoSuchElementException e) {
+    }
     return false;
   }
 

@@ -9,6 +9,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
+ */
 public class BasePageObject extends MobileBasePageObject {
 
   public BasePageObject(WebDriver driver) {
@@ -38,7 +42,7 @@ public class BasePageObject extends MobileBasePageObject {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);
   }
-  
+
   public void waitMilliseconds(int time, String methodName) {
     try {
       Thread.sleep(time);

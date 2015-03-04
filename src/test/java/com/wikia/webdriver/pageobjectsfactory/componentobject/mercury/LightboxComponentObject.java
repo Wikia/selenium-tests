@@ -16,8 +16,8 @@ import java.util.List;
 
 /**
  * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
-
 public class LightboxComponentObject extends BasePageObject {
 
   @FindBy(css = ".lightbox-close-wrapper")
@@ -59,7 +59,8 @@ public class LightboxComponentObject extends BasePageObject {
     try {
       waitForElementByElement(lightboxContent);
       return checkIfElementOnPage(lightboxContent);
-    } catch (NoSuchElementException e) {}
+    } catch (NoSuchElementException e) {
+    }
     return false;
   }
 
@@ -68,7 +69,8 @@ public class LightboxComponentObject extends BasePageObject {
     return checkIfElementOnPage(currentImage);
   }
 
-  public boolean isDifferentImageAfterSwiping(PerformTouchAction touchAction, String direction, int attempts) {
+  public boolean isDifferentImageAfterSwiping(PerformTouchAction touchAction, String direction,
+                                              int attempts) {
     String currentImageSrc = getCurrentImagePath();
     String nextImageSrc;
     boolean imageChanged = false;
@@ -156,7 +158,7 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public boolean isImageMovedToDirectionAfterZoomIn(PerformTouchAction touchAction,
-                                                 String direction) {
+                                                    String direction) {
     waitForElementByElement(currentImage);
     Shooter shooter = new Shooter();
     ImageComparison ic = new ImageComparison();

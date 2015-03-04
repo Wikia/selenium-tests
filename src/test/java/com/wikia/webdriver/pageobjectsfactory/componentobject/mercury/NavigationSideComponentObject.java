@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class NavigationSideComponentObject extends BasePageObject {
 
@@ -95,7 +96,8 @@ public class NavigationSideComponentObject extends BasePageObject {
         waitForElementByElement(searchSuggestions.get(0));
         return searchSuggestions.get(0).isDisplayed();
       }
-    } catch (NoSuchElementException e) {}
+    } catch (NoSuchElementException e) {
+    }
     return false;
   }
 
@@ -109,7 +111,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   public boolean isBackLinkDisplayed() {
     try {
       return backChevron.isDisplayed();
-    } catch (NoSuchElementException e) {}
+    } catch (NoSuchElementException e) {
+    }
     return false;
   }
 
