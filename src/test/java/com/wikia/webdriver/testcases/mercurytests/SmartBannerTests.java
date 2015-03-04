@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class SmartBannerTests extends NewTestTemplate {
 
