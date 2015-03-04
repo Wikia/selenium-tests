@@ -43,7 +43,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     waitForElementInViewPort(reviewChangesButton);
     waitForElementVisibleByElement(savePanel);
     publishButton.click();
-    PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);
     return new ArticlePageObject(driver);
   }
 

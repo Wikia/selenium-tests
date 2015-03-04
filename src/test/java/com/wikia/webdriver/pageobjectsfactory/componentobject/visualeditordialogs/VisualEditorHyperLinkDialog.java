@@ -64,7 +64,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   }
 
   public void typeInLinkInput(String text) {
-    waitForElementVisibleByElement(linkInput);
+    waitForDialogVisible();
     waitForElementClickableByElement(linkInput);
     linkInput.sendKeys(text);
     waitForElementNotVisibleByElement(inputPending);

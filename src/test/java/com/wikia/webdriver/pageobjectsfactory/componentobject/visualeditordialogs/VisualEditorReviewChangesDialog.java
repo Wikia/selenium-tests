@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,8 +35,6 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   public VisualEditorSaveChangesDialog clickReturnToSaveFormButton() {
     waitForElementClickableByElement(returnToSaveFormButton);
     returnToSaveFormButton.click();
-    PageObjectLogging
-        .log("clickReturnToSaveFormButton", "Return To Save Form button clicked", true);
     return new VisualEditorSaveChangesDialog(driver);
   }
 

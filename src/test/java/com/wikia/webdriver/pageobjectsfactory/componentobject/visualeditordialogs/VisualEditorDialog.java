@@ -34,7 +34,6 @@ public class VisualEditorDialog extends WikiBasePageObject {
   }
 
   public void waitForDialogVisible() {
-    waitForElementByElement(dialog);
     waitForElementVisibleByElement(dialog);
   }
 
@@ -59,7 +58,6 @@ public class VisualEditorDialog extends WikiBasePageObject {
     closeButton.click();
     PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
     waitForElementNotVisibleByElement(dialog);
-    PageObjectLogging.log("closeDialog", "Dialog is closed", true);
     return new VisualEditorPageObject(driver);
   }
 }
