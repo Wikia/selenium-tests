@@ -124,7 +124,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     );
   }
 
-  public void logInViaFacebook() {
+  public void logInViaFacebook(String email, String password) {
     scrollAndClick(formConnectWithFbButton);
     PageObjectLogging.log(
         "logInDropDownFB",
@@ -147,7 +147,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     waitForElementByElement(facebookEmailInput);
     facebookEmailInput.clear();
-    facebookEmailInput.sendKeys(Properties.emailFB);
+    facebookEmailInput.sendKeys(email);
     PageObjectLogging.log(
         "fillLogin",
         "Login field on facebook form filled",
@@ -156,7 +156,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     waitForElementByElement(facebookPasswordInput);
     facebookPasswordInput.clear();
-    facebookPasswordInput.sendKeys(Properties.passwordFB);
+    facebookPasswordInput.sendKeys(password);
     PageObjectLogging.log(
         "fillPassword",
         "Password field on facebook form filled",

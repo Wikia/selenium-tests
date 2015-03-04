@@ -23,12 +23,20 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement passwordField;
   @FindBy(css = ".UserLoginFacebookLeft input[name='email']")
   private WebElement emailField;
+  @FindBy(css = ".UserLoginFacebookRight input[name='username']")
+  private WebElement existingUsernameField;
+  @FindBy(css = ".UserLoginFacebookRight input[name='password']")
+  private WebElement existingPasswordField;
   @FindBy(css = ".UserLoginFacebookLeft input[type='submit']")
   private WebElement createAccountButton;
+  @FindBy(css = ".UserLoginFacebookRight input[type='submit']")
+  private WebElement loginExistingButton;
   @FindBy(css = "#u_0_4")
   private WebElement editInfoProvided;
   @FindBy(xpath = "//input[@type='checkbox'][@value='email']/..")
   private WebElement emailCheckbox;
+  @FindBy(css = ".global-notification .msg")
+  private WebElement notification;
 
   String winHandleBefore;
 
@@ -117,4 +125,16 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     typeEmail(email);
     createAccount();
   }
+
+  public void loginExistingAccount(String userName, String password) {
+    waitForElementByElement(existingUsernameField);
+    existingUsernameField.sendKeys(userName);
+    PageObjectLogging.log("loginExistingAccount", "username " + userName + " typed into the field", true);
+    waitForElementByElement(existingPasswordField);
+    existingPasswordField.sendKeys(password);
+    PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field", true);
+    loginExistingButton.click();
+    PageObjectLogging.log("loginExistingAccount", "login button clicked", true);
+  }
+
 }
