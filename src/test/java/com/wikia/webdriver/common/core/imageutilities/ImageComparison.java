@@ -67,4 +67,26 @@ public class ImageComparison {
     }
     return true;
   }
+
+  /**
+   * @param threshold in percentage between 0 and 100.
+   */
+  public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
+    int sameCount = 0;
+    if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
+      throw new RuntimeException("Images have different sizes");
+    }
+    int count = image1.getHeight() * image1.getWidth();
+    for (int row = 0; row < image1.getWidth(); row++) {
+      for (int column = 0; column < image1.getHeight(); column++) {
+        if (image1.getRGB(row, column) == image2.getRGB(row, column)) {
+          sameCount += 1;
+        }
+      }
+      if (sameCount > ((100 - threshold) * count) / 100D) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

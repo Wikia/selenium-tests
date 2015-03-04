@@ -34,9 +34,7 @@ public class ImageEditor {
     }
   }
 
-  public BufferedImage scaleImage(
-      File inputFile, double scaleX, double scaleY
-  ) {
+  public BufferedImage scaleImage(File inputFile, double scaleX, double scaleY) {
     BufferedImage inputImage = null;
     try {
       inputImage = ImageIO.read(inputFile);

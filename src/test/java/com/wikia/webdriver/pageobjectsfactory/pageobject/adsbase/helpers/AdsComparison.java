@@ -31,6 +31,7 @@ public class AdsComparison {
   private static final int MILLIS_IN_SEC = 1000;
   private static final int DURATION_ACCURACY_PERCENT = 70;
   public static final int IMAGE_ACCURACY_PERCENT = 70;
+  public static final int IMAGES_THRESHOLD_PERCENT = 55;
   private static final int TIME_STEP_MILLS = 1000;
   private static final int MAX_ATTEMPTS = 600;
   private static final int AD_TIMEOUT_SEC = 15;
@@ -103,7 +104,7 @@ public class AdsComparison {
   public boolean isAdVisible(final WebElement element, final String selector,
                              final WebDriver driver) {
     hideSlot(selector, driver);
-    final File backgroundImg = shooter.captureWebElement(element, driver);
+    final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
     PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
     showSlot(selector, driver);
     try {
@@ -111,17 +112,13 @@ public class AdsComparison {
       wait.until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver driver) {
-          File adImg = shooter.captureWebElement(element, driver);
+          BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true, driver);
-          boolean areFilesTheSame = imageComparison.areFilesTheSame(backgroundImg, adImg);
-          adImg.delete();
-          return !areFilesTheSame;
+          return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);
         }
       });
     } catch (TimeoutException e) {
       return false;
-    } finally {
-      backgroundImg.delete();
     }
     return true;
   }
@@ -151,7 +148,6 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
       PageObjectLogging.log("verifyColorAd", e.getMessage(), false, driver);
