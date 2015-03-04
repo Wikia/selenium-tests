@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Saipetch Kongkatong
- * 1. Open lightbox from Special:UnusedFiles page 
+ * 1. Open lightbox from Special:UnusedFiles page
  * 2. Open lightbox from Special:UnusedVideos page 
  * 3. Open lightbox from Special:UncategorizedFiles page 
  * 4. Open lightbox from Special:MostLinkedFiles page
