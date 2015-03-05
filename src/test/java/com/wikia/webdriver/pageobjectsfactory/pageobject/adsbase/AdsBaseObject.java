@@ -113,6 +113,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return page;
   }
 
+  public void getUrl(String wikiName, String article) {
+    String url = urlBuilder.getUrlForPath(wikiName, article);
+    getUrl(updateUrl(url), false);
+  }
+
   public AdsBaseObject(
       WebDriver driver, String page,
       NetworkTrafficInterceptor networkTrafficInterceptor
