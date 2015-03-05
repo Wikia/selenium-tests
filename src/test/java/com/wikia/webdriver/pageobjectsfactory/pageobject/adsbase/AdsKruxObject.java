@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,7 +52,8 @@ public class AdsKruxObject extends AdsBaseObject {
     waitForKrux();
     String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
     Assertion.assertStringNotEmpty(kruxUser);
-    Assertion.assertTrue(isGptParamPresent("u", kruxUser));
+    WebElement iframe = driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper/5441']"));
+    Assertion.assertTrue(isGptParamPresent(iframe, "u", kruxUser));
   }
 
   public void waitForKrux() {

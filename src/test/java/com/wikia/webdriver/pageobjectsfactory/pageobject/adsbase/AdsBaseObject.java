@@ -84,8 +84,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
-  @FindBy(css = "[id*='gpt/TOP_LEADERBOARD']")
-  protected WebElement presentLeaderboardGpt;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
 
@@ -696,23 +694,19 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  protected boolean isGptParamPresent(String key, String value) {
-    waitForElementByElement(presentMedrec);
-    String dataGptPageParams =
-        presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
+  protected boolean isGptParamPresent(WebElement slot, String key, String value) {
+    String dataGptPageParams = slot.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
-
     PageObjectLogging.log(
         "GPT parameter search",
         "searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
         true
     );
-
     return dataGptPageParams.contains(gptParamPattern);
   }
 
   public void verifyParamValue(String paramName, String paramValue, boolean expected) {
-    Assertion.assertEquals(isGptParamPresent(paramName, paramValue), expected,
+    Assertion.assertEquals(isGptParamPresent(presentLeaderboardGpt, paramName, paramValue), expected,
                            "parameter \"" + paramName + "\" not found");
     PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
                                               + expected, true, driver);
