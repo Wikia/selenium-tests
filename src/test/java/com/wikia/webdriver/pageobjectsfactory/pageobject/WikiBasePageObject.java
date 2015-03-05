@@ -1320,7 +1320,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyAvatarNotPresent() {
-	  waitForElementNotVisibleByElement(globalNavigationAvatar);
+	  waitForElementNotPresent("a[data-id='userpage']");
 	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
 
