@@ -49,8 +49,7 @@ public class UserAvatar extends NewTestTemplate {
   }
 
   @Test(
-	  groups = {"AvatarTest", "AvatarTest_002"},
-	  dependsOnMethods = "uploadAvatar"
+	  groups = {"AvatarTest", "AvatarTest_002"}
   )
   public void clickAvatar() {
 	  WikiBasePageObject base = new WikiBasePageObject(driver);

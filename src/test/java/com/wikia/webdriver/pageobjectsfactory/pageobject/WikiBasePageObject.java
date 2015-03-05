@@ -89,6 +89,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveToOffsetAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -184,6 +185,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
+  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
   @FindBy(css = "a.ajaxRegister")
   private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
@@ -200,7 +202,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = "a[data-id='userpage']")
+  @FindBy(css = ".avatar-container")
   private WebElement globalNavigationAvatar;
   @FindBy(css = ".links-container .chevron")
   private WebElement globalNavigationUserChevron;
@@ -211,8 +213,6 @@ public class WikiBasePageObject extends BasePageObject {
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -445,7 +445,7 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName);
     return new FilePagePageObject(driver);
   }
-  
+
   public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
     String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
@@ -845,7 +845,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementByElement(cssSource);
     String source = cssSource.getText();
     PageObjectLogging.log("cssSource",
-                          "the following text was get from Wikia.css: " + source, true);
+        "the following text was get from Wikia.css: " + source, true);
     return source;
   }
 
@@ -1280,13 +1280,13 @@ public class WikiBasePageObject extends BasePageObject {
   public void resizeWindow(Dimension resolution) {
     resizeWindow(resolution.width, resolution.height);
   }
-  
+
   public void scrollToFooter() {
 	  waitForElementByElement(footer);
 	  scrollToElement(footer);
 	  PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
-  
+
   public void verifyGlobalNavigation() {
 	  waitForElementByElement(globalNavigationBar);
 	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
@@ -1318,27 +1318,27 @@ public class WikiBasePageObject extends BasePageObject {
 	  waitForElementByElement(placeholder);
 	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
   }
-  
+
   public void verifyAvatarNotPresent() {
 	  waitForElementNotVisibleByElement(globalNavigationAvatar);
 	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
-  
+
   public void verifyAvatarVisible() {
 	  waitForElementByElement(globalNavigationAvatar);
 	  PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
   }
-  
+
   public UserProfilePageObject clickOnAvatar() {
 	  waitForElementClickableByElement(globalNavigationUserChevron);
 	  globalNavigationUserChevron.click();
 	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
-	  globalNavigationAvatar.click();
+    globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
 	  return new UserProfilePageObject(driver);
   }
-  
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
