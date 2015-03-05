@@ -2,11 +2,13 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.tuple.Triple;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -24,8 +26,8 @@ public class ImageComparison {
    * @return boolean   - if images are the same
    */
   public boolean areFilesTheSame(File file1, File file2) {
-    byte[] fileInBytes1 = null;
-    byte[] fileInBytes2 = null;
+    byte[] fileInBytes1;
+    byte[] fileInBytes2;
     try {
       fileInBytes1 = FileUtils.readFileToByteArray(file1);
       fileInBytes2 = FileUtils.readFileToByteArray(file2);
@@ -55,9 +57,9 @@ public class ImageComparison {
     int count = image.getHeight() * image.getWidth();
     ;
     int diffCount = 0;
-    for (int row = 0; row < image.getWidth(); row++) {
-      for (int column = 0; column < image.getHeight(); column++) {
-        if (image.getRGB(row, column) != color.getRGB()) {
+    for (int x = 0; x < image.getWidth(); x++) {
+      for (int y = 0; y < image.getHeight(); y++) {
+        if (image.getRGB(x, y) != color.getRGB()) {
           diffCount += 1;
         }
       }
@@ -77,9 +79,9 @@ public class ImageComparison {
       throw new RuntimeException("Images have different sizes");
     }
     int count = image1.getHeight() * image1.getWidth();
-    for (int row = 0; row < image1.getWidth(); row++) {
-      for (int column = 0; column < image1.getHeight(); column++) {
-        if (image1.getRGB(row, column) == image2.getRGB(row, column)) {
+    for (int x = 0; x < image1.getWidth(); x++) {
+      for (int y = 0; y < image1.getHeight(); y++) {
+        if (image1.getRGB(x, y) == image2.getRGB(x, y)) {
           sameCount += 1;
         }
       }
@@ -88,5 +90,41 @@ public class ImageComparison {
       }
     }
     return true;
+  }
+
+  public Triple getRgbVariance(BufferedImage image) {
+    ArrayList<Color> pixels = new ArrayList<>();
+    for (int x = 0; x < image.getWidth(); x++) {
+      for (int y = 0; y < image.getHeight(); y++) {
+        pixels.add(new Color(image.getRGB(x, y)));
+      }
+    }
+    ArrayList<Integer> red = new ArrayList<>();
+    for (Color pixel : pixels) {
+      red.add(pixel.getRed());
+    }
+    ArrayList<Integer> green = new ArrayList<>();
+    for (Color pixel : pixels) {
+      green.add(pixel.getGreen());
+    }
+    ArrayList<Integer> blue = new ArrayList<>();
+    for (Color pixel : pixels) {
+      blue.add(pixel.getBlue());
+    }
+    return Triple.of(getVariance(red), getVariance(green), getVariance(blue));
+  }
+
+  private double getVariance(java.util.List<Integer> numbers) {
+    double sum = 0;
+    int size = numbers.size();
+    for (Integer number : numbers) {
+      sum += number;
+    }
+    double average = sum / size;
+    sum = 0;
+    for (int number : numbers) {
+      sum += Math.abs(number - average);
+    }
+    return sum / size;
   }
 }

@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -30,8 +31,7 @@ public class AdsComparison {
 
   private static final int MILLIS_IN_SEC = 1000;
   private static final int DURATION_ACCURACY_PERCENT = 70;
-  public static final int IMAGE_ACCURACY_PERCENT = 70;
-  public static final int IMAGES_THRESHOLD_PERCENT = 55;
+  public static final int IMAGES_THRESHOLD_PERCENT = 35;
   private static final int TIME_STEP_MILLS = 1000;
   private static final int MAX_ATTEMPTS = 600;
   private static final int AD_TIMEOUT_SEC = 15;
@@ -113,7 +113,11 @@ public class AdsComparison {
         @Override
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
-          PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true, driver);
+          PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
+          Triple rgb = imageComparison.getRgbVariance(adImg);
+          PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
+          PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
+          PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);
           return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);
         }
       });
@@ -148,6 +152,7 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
+        PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
       PageObjectLogging.log("verifyColorAd", e.getMessage(), false, driver);
@@ -156,16 +161,16 @@ public class AdsComparison {
 
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
-    if (imageComparison.isColorImage(image, color, IMAGE_ACCURACY_PERCENT)) {
+    if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
       PageObjectLogging.log(
           "verifyColorAd",
-          "At least " + IMAGE_ACCURACY_PERCENT + " percents of Ad has " + color,
+          "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,
           driver
       );
     } else {
       throw new NoSuchElementException(
-          "At least " + (100 - IMAGE_ACCURACY_PERCENT) + " percents of Ad does not have " + color
+          "At least " + (100 - IMAGES_THRESHOLD_PERCENT) + " percents of Ad does not have " + color
       );
     }
   }
