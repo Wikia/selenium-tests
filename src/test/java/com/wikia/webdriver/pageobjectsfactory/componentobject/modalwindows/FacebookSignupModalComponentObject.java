@@ -134,7 +134,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     existingPasswordField.sendKeys(password);
     PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field", true);
     loginExistingButton.click();
-    PageObjectLogging.log("loginExistingAccount", "login button clicked", true);
   }
 
 }
