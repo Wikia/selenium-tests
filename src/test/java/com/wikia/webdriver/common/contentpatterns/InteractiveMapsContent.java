@@ -31,7 +31,7 @@ public class InteractiveMapsContent {
   public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
   public static final String
       MAP_DELETE_ERROR =
-      "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
+      "You are not allowed to execute the action you have requested.";
   public static final String MAP_DELETED_MSG = "This map is deleted";
   public static final String EXTERNAL_LINK = "http://www.gazeta.pl/0,0.html";
   public static final String
