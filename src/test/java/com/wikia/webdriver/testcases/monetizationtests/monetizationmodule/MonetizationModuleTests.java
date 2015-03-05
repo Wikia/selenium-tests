@@ -24,6 +24,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ARTICLE_AMAZON_VIDEO = "Kermit_the_Frog";
   private static final String TEST_AMAZON_WIKI = "dragonball";
   private static final String TEST_AMAZON_ARTICLE = "Goku";
+  private static final String TEST_AMAZON_PRIME_WIKI = "degrassi";
+  private static final String TEST_AMAZON_PRIME_ARTICLE = "Can't Stop This Thing We Started";
 
 
   Credentials credentials = config.getCredentials();
@@ -673,5 +675,53 @@ public class MonetizationModuleTests extends NewTestTemplate {
     if (monetizationModule.verifyWindowWidth(width)) {
       monetizationModule.verifyAmazonUnitWidth(expectedInContent, expectedOthers);
     }
+  }
+
+  @DataProvider(name = "MonetizationModuleTest_020")
+  public static Object[][] DataMonetizationModuleTest_020() {
+    return new Object[][]{
+        {"US", true, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},
+        {"US", false, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},
+    };
+  }
+
+  /**
+   * MON-323
+   * Amazon: The monetization module with prime video is shown on article page on the rest for
+   * particular geos (ic slot)
+   *
+   * @author Robert Chan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModuleTest_020",
+      groups = {"MonetizationModule", "MonetizationModuleTest_020", "Monetization"}
+  )
+  public void MonetizationModuleTest_020(String countryCode, Boolean isFromsearch, String testWiki,
+                                         String testArticle) {
+
+    wikiURL = urlBuilder.getUrlForWiki(testWiki);
+    String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(articleURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    if (isFromsearch) {
+      monetizationModule.setCookieFromSearch();
+    } else {
+      monetizationModule.deleteCookieFromSearch();
+    }
+    monetizationModule.setCookieGeo(countryCode);
+    // anon user
+    base.refreshPage();
+    monetizationModule.verifyMonetizationModuleShown();
+    monetizationModule.verifyAmazonUnitShown();
+    monetizationModule.verifyAmazonPrimeUnitSlot();
+    monetizationModule.verifyAmazonUnitNotShownAboveTitle();
+    monetizationModule.verifyAmazonUnitNotShownBelowTitle();
+    // logged in user
+    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.openWikiPage(articleURL);
+    monetizationModule.verifyMonetizationModuleNotShown();
   }
 }
