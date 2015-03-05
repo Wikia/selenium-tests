@@ -114,7 +114,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   private void checkVideoPreviewAppearing() {
     waitForElementByElement(videoPlayer);
-    waitForValueToBePresentInElementsAttributeByCss("#VET-preview", "display", "block");
+    waitForValueToBePresentInElementsCssByCss("#VET-preview", "display", "block");
     PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
   }
 

@@ -475,4 +475,28 @@ public class CommonExpectedConditions {
       }
     };
   }
+
+  /**
+   * @param bySelector
+   * @return
+   */
+  public static ExpectedCondition<Boolean> cssValuePresentForElement(
+      final By bySelector,
+      final String cssProperty,
+      final String expectedValue
+  ) {
+    return new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver driver) {
+        return expectedValue.equals(driver.findElement(bySelector).getCssValue(cssProperty));
+      }
+
+      @Override
+      public String toString() {
+        return String.format(
+            "Element with provided selector still present!"
+        );
+      }
+    };
+  }
 }
