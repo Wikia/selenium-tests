@@ -270,6 +270,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyMapOpened() {
     waitForElementVisibleByElement(mapFrame);
+    scrollToElement(mapFrame);
+    driver.switchTo().frame(mapFrame);
+    driver.switchTo().defaultContent();
+    PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
+  }
+
+  public void verifyMapOpenedForDeleteMapTests() {
+    waitForElementVisibleByElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("verifyMapOpened", "Map was opened", true);

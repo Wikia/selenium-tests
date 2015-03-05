@@ -40,7 +40,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
   }
 
@@ -64,7 +64,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
   }
@@ -76,7 +76,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
   }
 }
