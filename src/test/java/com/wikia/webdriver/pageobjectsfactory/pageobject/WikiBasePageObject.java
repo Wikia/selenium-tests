@@ -200,7 +200,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = ".avatar-container.logged-avatar img")
+  @FindBy(css = "a[data-id='userpage']")
   private WebElement globalNavigationAvatar;
   @FindBy(css = ".links-container .chevron")
   private WebElement globalNavigationUserChevron;
@@ -1330,9 +1330,6 @@ public class WikiBasePageObject extends BasePageObject {
   }
   
   public UserProfilePageObject clickOnAvatar() {
-	  waitForElementClickableByElement(globalNavigationUserChevron);
-	  globalNavigationUserChevron.click();
-	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
 	  globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
