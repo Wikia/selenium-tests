@@ -92,6 +92,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.MoveToOffsetAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -632,17 +633,29 @@ public class WikiBasePageObject extends BasePageObject {
     );
   }
 
-  public void verifyUserLoggedIn(String userName) {
-    if (body.getAttribute("class").contains("skin-monobook")) {
-      driver.findElement(
-          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
-              " ", "_"))));// only for verification
-    } else {
-      //Venus
-      driver.findElement(
-          By.cssSelector(
+  public void verifyUserLoggedIn(final String userName) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          return driver.findElements(By.cssSelector(
               LOGGED_IN_USER_SELECTOR_VENUS
-                  .replace("%userName%", userName)));// only for verification
+                  .replace("%userName%", userName))).size() > 0;
+        }
+      });
+      //    if (body.getAttribute("class").contains("skin-monobook")) {
+      //      driver.findElement(
+      //          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
+      //              " ", "_"))));// only for verification
+      //    } else {
+      //      //Venus
+      //      driver.findElement(
+      //          By.cssSelector(
+      //              LOGGED_IN_USER_SELECTOR_VENUS
+      //                  .replace("%userName%", userName)));// only for verification
+      //    }
+    }finally {
+      restoreDeaultImplicitWait();
     }
     PageObjectLogging.log(
         "verifyUserLoggedIn",
