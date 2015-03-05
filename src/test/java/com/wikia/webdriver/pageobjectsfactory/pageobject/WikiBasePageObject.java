@@ -1330,6 +1330,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
   
   public UserProfilePageObject clickOnAvatar() {
+	  waitForElementClickableByElement(globalNavigationUserChevron);
+	  globalNavigationUserChevron.click();
+	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
 	  globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
