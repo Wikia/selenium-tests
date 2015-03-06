@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.clicktracking.events.EventsArticleEditMode;
 import com.wikia.webdriver.common.clicktracking.events.EventsGlobalNavigation;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
@@ -43,7 +44,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     *  clear suggestion
     */	
     @Test(
-        groups = {"TestGlobalSearchInGlobalNav_001", "ClickTracking", "GlobalNav"}
+        groups = {"TestGlobalSearchInGlobalNav_001", "ClickTracking", "GlobalNav"}, invocationCount=15
     )
     public void search() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -53,21 +54,23 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
         navbar.executeScript(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
 	
     	navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
-		navbar.clickSearchButton();
-		navbar.dismissPopupWindow();
     	navbar.clickEnterToSearch();
     	navbar.dismissPopupWindow();
+    	
+    	navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
+		navbar.clickSearchButton();
+		navbar.dismissPopupWindow();
         
     	navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
     	navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
-    	navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
+    	navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
     	navbar.dismissPopupWindow();
     	navbar.clickSearchButton();
     	navbar.dismissPopupWindow();
     	
         navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
 		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
-		navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
+		navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
 		navbar.dismissPopupWindow();
     	navbar.clickEnterToSearch();
     	navbar.dismissPopupWindow();
@@ -78,7 +81,6 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
                 EventsGlobalNavigation.searchSuggestShow,
                 EventsGlobalNavigation.searchSuggestionEnter,
                 EventsGlobalNavigation.searchAfterSuggestionEnter,
-                EventsGlobalNavigation.searchSuggestionClick,
                 EventsGlobalNavigation.searchAfterSuggestionButtonClick
             );
         
