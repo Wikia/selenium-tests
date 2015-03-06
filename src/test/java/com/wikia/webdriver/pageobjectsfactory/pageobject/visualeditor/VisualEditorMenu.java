@@ -114,7 +114,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void selectStyle(Style style) {
-
     switch (style) {
       case BOLD:
         boldButton.click();
@@ -137,7 +136,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing style selected");
     }
-    PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
   }
 
   public void clickFormatting(By formatBy) {
@@ -151,7 +149,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void selectFormatting(Formatting format) {
-
     switch (format) {
       case PARAGRAPH:
         clickFormatting(paragraphBy);
@@ -282,14 +279,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   public void clickClearButton() {
     clearButton.click();
-  }
-
-  public void clickNumListButton() {
-    numListButton.click();
-  }
-
-  public void clickBullListButton() {
-    bulletListButton.click();
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {

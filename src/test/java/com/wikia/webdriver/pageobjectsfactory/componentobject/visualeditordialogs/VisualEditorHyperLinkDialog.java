@@ -76,11 +76,8 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private void viewLinkResults() {
     waitForElementNotVisibleByElement(inputPending);
     waitForElementVisibleByElement(desktopContext);
-    WebElement highlightedResult = desktopContext.findElement(highlightedResultsBy);
-    waitForElementByElement(highlightedResult);
-    WebElement linkResultMenu = desktopContext.findElement(linkResultMenuBy);
-    waitForElementVisibleByElement(linkResultMenu);
-    List<WebElement> linkResults = linkResultMenu.findElements(linkResultsBy);
+    List<WebElement> linkResults =
+        desktopContext.findElement(linkResultMenuBy).findElements(linkResultsBy);
     for (int i = 0; i < linkResults.size(); i++) {
       WebElement linkResult = linkResults.get(i);
       String elementClassName = linkResult.getAttribute("class");
@@ -117,22 +114,18 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   public void isNewPage() {
     Assertion.assertTrue(isCategoryResult(NEW_PAGE_INDEX), "New page index not found");
-    PageObjectLogging.log("isNewPage", "New page index found", true);
   }
 
   public void isMatchingPage() {
     Assertion.assertTrue(isCategoryResult(MATCHING_PAGE_INDEX), "Matching page index not found");
-    PageObjectLogging.log("isMatchingPage", "Matching page index found", true);
   }
 
   public void isExternalLink() {
     Assertion.assertTrue(isCategoryResult(EXTERNAL_LINK_INDEX), "External link index not found");
-    PageObjectLogging.log("isExternalLink", "External link index found", true);
   }
 
   public void isRedirectPage() {
     Assertion.assertTrue(isCategoryResult(REDIRECT_PAGE_INDEX), "Redirect page index not found");
-    PageObjectLogging.log("isRedirectPage", "Redirect page index found", true);
   }
 
   public void verifyNewPageIsTop() {
@@ -163,7 +156,6 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     waitForElementNotVisibleByElement(inputPending);
     waitForElementByElement(selectedResult);
     WebElement matchingResult = desktopContext.findElement(matchingResultBy);
-    waitForElementByElement(matchingResult);
     waitForElementClickableByElement(matchingResult);
     matchingResult.click();
     switchToIFrame();

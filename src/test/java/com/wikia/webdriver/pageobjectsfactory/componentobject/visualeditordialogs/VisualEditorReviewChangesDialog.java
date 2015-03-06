@@ -95,12 +95,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   private void verifyNewArticleDiffs(List<String> targets) {
     String wikiText = wikiaAritlceFirstPreview.getText();
     for (String target : targets) {
-      verifyNewArticleDiff(target, wikiText);
+      Assertion.assertStringContains(target, wikiText);
     }
-  }
-
-  private void verifyNewArticleDiff(String target, String source) {
-    Assertion.assertStringContains(target, source);
   }
 
   private boolean isDiffFound(List<String> targets, String source) {
