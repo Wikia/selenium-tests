@@ -638,22 +638,18 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       wait.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
-          return driver.findElements(By.cssSelector(
-              LOGGED_IN_USER_SELECTOR_VENUS
-                  .replace("%userName%", userName))).size() > 0;
-        }
-      });
-      //    if (body.getAttribute("class").contains("skin-monobook")) {
-      //      driver.findElement(
-      //          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
-      //              " ", "_"))));// only for verification
-      //    } else {
-      //      //Venus
-      //      driver.findElement(
-      //          By.cssSelector(
-      //              LOGGED_IN_USER_SELECTOR_VENUS
-      //                  .replace("%userName%", userName)));// only for verification
-      //    }
+          if (body.getAttribute("class").contains("skin-monobook")) {
+            return driver.findElements(
+                By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
+                    " ", "_")))).size()>0;// only for verification
+          } else {
+            //Venus
+            return driver.findElements(
+                By.cssSelector(
+                    LOGGED_IN_USER_SELECTOR_VENUS
+                        .replace("%userName%", userName))).size()>0;// only for verification
+          }
+      }});
     }finally {
       restoreDeaultImplicitWait();
     }
