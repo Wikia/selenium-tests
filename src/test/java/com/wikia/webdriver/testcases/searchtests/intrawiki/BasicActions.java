@@ -38,9 +38,6 @@ import java.util.List;
  *  16. Verify push to top is working in community.wikia.com
  */
 
-/**
- * @author  
- */
 public class BasicActions extends NewTestTemplate {
 
     protected Credentials credentials = config.getCredentials();
