@@ -103,7 +103,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     );
   }
 
-  public DropDownComponentObject logOut() {
+  public DropDownComponentObject clickLogOut() {
     logOutButton.click();
 
     return this;
