@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
@@ -72,11 +71,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
         }
       });
     } finally {
-        restoreDeaultImplicitWait();
+      restoreDeaultImplicitWait();
     }
 
-      PageObjectLogging.log(
-          "DropdownVisible",
+    PageObjectLogging.log(
+        "DropdownVisible",
         "Login dropdown is visible",
         true, driver
     );
@@ -133,7 +132,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public void logInViaFacebook(String email, String password) {
-    scrollAndClick(formConnectWithFbButton);
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    waitForElementVisibleByElement(formConnectWithFbButton);
+    //When clicking via selenium dropdown disappears
+    js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
     PageObjectLogging.log(
         "logInDropDownFB",
         "facebook button clicked",
