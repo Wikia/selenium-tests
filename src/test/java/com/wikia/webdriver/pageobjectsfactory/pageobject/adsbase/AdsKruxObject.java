@@ -89,5 +89,4 @@ public class AdsKruxObject extends AdsBaseObject {
     return (String) js.executeScript("return localStorage.kxkuid;");
   }
 
-
 }
