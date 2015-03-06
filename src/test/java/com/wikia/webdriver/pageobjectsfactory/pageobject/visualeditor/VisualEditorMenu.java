@@ -252,55 +252,44 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickInsertItemFromDropDown(By insertBy) {
-    WebElement insertList = toolListDropDowns.get(this.INSERT_LIST);
-    WebElement insertItems = toolListItems.get(this.INSERT_LIST);
-    waitForElementVisibleByElement(insertList);
-    waitForElementClickableByElement(insertList);
-    Actions actions = new Actions(driver);
-    actions
-        .click(insertList)
-        .click(insertItems.findElement(insertBy))
-        .build()
-        .perform();
+    clickItemFromDropDown(toolListDropDowns.get(this.INSERT_LIST),
+                          toolListItems.get(this.INSERT_LIST), insertBy);
   }
 
   private void clickHamburgerItemFromDropDown(By insertBy) {
-    WebElement hamburgerList = toolListDropDowns.get(this.HAMBURGER_LIST);
-    WebElement hamburgerItems = toolListItems.get(this.HAMBURGER_LIST);
-    waitForElementVisibleByElement(hamburgerList);
-    waitForElementClickableByElement(hamburgerList);
+    clickItemFromDropDown(toolListDropDowns.get(this.HAMBURGER_LIST),
+                          toolListItems.get(this.HAMBURGER_LIST), insertBy);
+  }
+
+  private void clickItemFromDropDown(WebElement list, WebElement item, By insertBy) {
+    waitForElementClickableByElement(list);
     Actions actions = new Actions(driver);
     actions
-        .click(hamburgerList)
-        .click(hamburgerItems.findElement(insertBy))
+        .click(list)
+        .click(item.findElement(insertBy))
         .build()
         .perform();
   }
 
   public VisualEditorHyperLinkDialog clickLinkButton() {
     linkButton.click();
-    PageObjectLogging.log("clickLinkButton", "link button clicked", true);
     return new VisualEditorHyperLinkDialog(driver);
   }
 
   public void clickCodeButton() {
     codeButton.click();
-    PageObjectLogging.log("clickCodeButton", "code button clicked", true);
   }
 
   public void clickClearButton() {
     clearButton.click();
-    PageObjectLogging.log("clickClearButton", "clear styles button clicked", true);
   }
 
   public void clickNumListButton() {
     numListButton.click();
-    PageObjectLogging.log("clickNumListButton", "numered list button clicked", true);
   }
 
   public void clickBullListButton() {
     bulletListButton.click();
-    PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
@@ -309,8 +298,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
     waitForElementClickableByElement(publishButton);
     publishButton.click();
-    PageObjectLogging
-        .log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);
     return new VisualEditorSaveChangesDialog(driver);
   }
 

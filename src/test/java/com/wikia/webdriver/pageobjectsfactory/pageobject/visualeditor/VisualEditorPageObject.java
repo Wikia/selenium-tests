@@ -119,6 +119,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void selectText(String text) {
+    waitForElementVisibleByElement(editArea);
     String textDump = editArea.getText();
     int
         from =
@@ -177,14 +178,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return new ArticlePageObject(driver);
   }
 
-  public void verifyVideo() {
-    waitForElementByElement(mediaNode);
-    waitForElementVisibleByElement(mediaNode);
-    PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
-  }
-
   public void verifyMapPresent() {
-    waitForElementByElement(mapNode);
     waitForElementVisibleByElement(mapNode);
     PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
   }
@@ -198,7 +192,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideos(int expected) {
-    waitForElementByElement(mediaNode);
     waitForElementVisibleByElement(mediaNode);
     Assertion.assertNumber(expected, videoNodes.size(),
                            "Checking the correct number of video nodes added");
@@ -322,7 +315,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideoCaption(String caption) {
-    waitForElementByElement(mediaNode);
     waitForElementVisibleByElement(mediaNode);
     waitForElementByElement(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");

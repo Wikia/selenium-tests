@@ -69,7 +69,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
       waitForElementVisibleByElement(recaptchaContainer);
     }
     publishButton.click();
-    PageObjectLogging.log("clickSaveWithRecaptcha", "The 2nd Publish Button is clicked", true);
     return new VisualEditorSaveChangesDialog(driver);
   }
 
@@ -83,7 +82,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     waitForElementVisibleByElement(reviewChangesButton);
     waitForElementClickableByElement(reviewChangesButton);
     reviewChangesButton.click();
-    PageObjectLogging.log("clickReviewYourChanges", "Review Your Changes Button is clicked", true);
     return new VisualEditorReviewChangesDialog(driver);
   }
 
