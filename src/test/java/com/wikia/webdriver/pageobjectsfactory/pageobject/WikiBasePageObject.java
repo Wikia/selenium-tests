@@ -128,7 +128,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement modalUserNameInput;
   @FindBy(css = "#AccountNavigation > li > a > .avatar")
   protected WebElement userProfileAvatar;
-  @FindBy(css = "#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+  @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#AccountNavigation .subnav")
   protected WebElement userMenuDropdown;
@@ -859,6 +859,22 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
+    }
+  }
+
+  /**
+   * Logout by navigating to 'logout' button href attribute value;
+   */
+  public void logOut(){
+    try {
+      if(navigationLogoutLink.getAttribute("href")!=null){
+        driver.get(navigationLogoutLink.getAttribute("href"));
+      }else {
+        throw new WebDriverException("No logout link provided");
+      }
+    }catch (TimeoutException e) {
+      PageObjectLogging.log("logOut",
+          "page loads for more than 30 seconds", true);
     }
   }
 
