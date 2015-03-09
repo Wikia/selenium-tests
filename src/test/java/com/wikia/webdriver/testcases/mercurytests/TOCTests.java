@@ -1,16 +1,17 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class TOCTests extends NewTestTemplate {
 
@@ -56,7 +57,8 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.clickOnTOC();
     Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
-    Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP), "Header padding top is improper");
+    Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP),
+                         "Header padding top is improper");
   }
 
   // TOCT05

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -23,7 +24,7 @@ import org.testng.annotations.Test;
  *         CK Editor is loaded when using ?action=edit in the URL
  */
 
-public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
+public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   WikiBasePageObject base;
   String wikiURL;

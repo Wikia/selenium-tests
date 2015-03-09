@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -184,7 +185,8 @@ public class WamPageObject extends BasePageObject {
   public void verifyTodayDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
     String todayDate =
-        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH).print(DateTime.now());
+        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
+            .print(DateTime.now().withZone(DateTimeZone.UTC));
     Assertion.assertEquals(todayDate, currentDate, "Current date and today date are not the same");
   }
 

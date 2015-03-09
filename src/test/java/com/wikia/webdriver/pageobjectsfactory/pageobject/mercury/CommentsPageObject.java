@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class CommentsPageObject extends BasePageObject {
 
@@ -82,7 +83,8 @@ public class CommentsPageObject extends BasePageObject {
   public int getNumberOfRepliesFromHeader(int index) {
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
-    return Integer.parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
+    return Integer
+        .parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
   }
 
   public int getNumberOfRepliesFromList(int index) {
@@ -95,7 +97,8 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public String getUsernameFromUrl() {
-    return driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11, driver.getCurrentUrl().length());
+    return driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11,
+                                            driver.getCurrentUrl().length());
   }
 
   public int getNumberOfAllCommentsOnPage() {
@@ -171,7 +174,8 @@ public class CommentsPageObject extends BasePageObject {
     if (mediaInComment.findElement(By.cssSelector("a")).getAttribute("href") == null) {
       throw new WebDriverException("Expected String but got null");
     }
-    return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href").contains("/wiki/File:");
+    return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
+        .contains("/wiki/File:");
   }
 
   public boolean isChevronCollapsed() throws WebDriverException {

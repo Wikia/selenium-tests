@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,7 @@ import java.awt.*;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class SmartBannerComponentObject extends BasePageObject {
 
@@ -47,7 +49,7 @@ public class SmartBannerComponentObject extends BasePageObject {
     int[] smartBannerColor =
         ArticlePageObject.convertRGBAFunctiontoIntTable(smartBanner
                                                             .getCssValue("border-bottom-color"));
-    return  (smartBannerColor[0] == properColor.getRed()) && (smartBannerColor[1] == properColor
+    return (smartBannerColor[0] == properColor.getRed()) && (smartBannerColor[1] == properColor
         .getGreen()) && (smartBannerColor[2] == properColor.getBlue());
   }
 
@@ -57,7 +59,7 @@ public class SmartBannerComponentObject extends BasePageObject {
         ArticlePageObject.convertRGBAFunctiontoIntTable(bannerButton
                                                             .getCssValue("background-color"));
     return (smartBannerButtonColor[0] == properColor.getRed()) && (smartBannerButtonColor[1]
-                                                                == properColor.getGreen()) && (
-            smartBannerButtonColor[2] == properColor.getBlue());
+                                                                   == properColor.getGreen()) && (
+               smartBannerButtonColor[2] == properColor.getBlue());
   }
 }
