@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
+  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
@@ -52,8 +52,7 @@ public class AdsKruxObject extends AdsBaseObject {
     waitForKrux();
     String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
     Assertion.assertStringNotEmpty(kruxUser);
-    WebElement iframe = driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper/5441']"));
-    Assertion.assertTrue(isGptParamPresent(iframe, "u", kruxUser));
+    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", kruxUser));
   }
 
   public void waitForKrux() {

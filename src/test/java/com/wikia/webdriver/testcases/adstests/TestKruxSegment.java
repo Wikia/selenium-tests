@@ -26,7 +26,8 @@ public class TestKruxSegment extends NewTestTemplate {
   public void testRealTimeSegment(List<Pair> pages, String segmentId) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
     for (Pair page : pages) {
-      adsKruxObject.getUrl((String) page.getLeft(), (String) page.getRight());
+      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
+      adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
     }
     Assertion.assertStringContains(segmentId, adsKruxObject.getKruxSegments());
@@ -42,7 +43,8 @@ public class TestKruxSegment extends NewTestTemplate {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
     adsKruxObject.setKruxUserCookie(cookie);
     for (Pair page : pages) {
-      adsKruxObject.getUrl((String) page.getLeft(), (String) page.getRight());
+      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
+      adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
       PageObjectLogging.log("DEBUG kxsegs", adsKruxObject.getKxsegs(), true);
       PageObjectLogging.log("DEBUG kxkuid", adsKruxObject.getKxkuid(), true);
