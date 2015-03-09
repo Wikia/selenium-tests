@@ -2,13 +2,11 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.Triple;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -92,39 +90,4 @@ public class ImageComparison {
     return true;
   }
 
-  public Triple getRgbVariance(BufferedImage image) {
-    ArrayList<Color> pixels = new ArrayList<>();
-    for (int x = 0; x < image.getWidth(); x++) {
-      for (int y = 0; y < image.getHeight(); y++) {
-        pixels.add(new Color(image.getRGB(x, y)));
-      }
-    }
-    ArrayList<Integer> red = new ArrayList<>();
-    for (Color pixel : pixels) {
-      red.add(pixel.getRed());
-    }
-    ArrayList<Integer> green = new ArrayList<>();
-    for (Color pixel : pixels) {
-      green.add(pixel.getGreen());
-    }
-    ArrayList<Integer> blue = new ArrayList<>();
-    for (Color pixel : pixels) {
-      blue.add(pixel.getBlue());
-    }
-    return Triple.of(getVariance(red), getVariance(green), getVariance(blue));
-  }
-
-  private double getVariance(java.util.List<Integer> numbers) {
-    double sum = 0;
-    int size = numbers.size();
-    for (Integer number : numbers) {
-      sum += number;
-    }
-    double average = sum / size;
-    sum = 0;
-    for (int number : numbers) {
-      sum += Math.abs(number - average);
-    }
-    return sum / size;
-  }
 }

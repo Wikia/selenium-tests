@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -114,7 +115,7 @@ public class AdsComparison {
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
-          Triple rgb = imageComparison.getRgbVariance(adImg);
+          Triple rgb = ImageHelper.getRgbVariance(adImg);
           PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
           PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
           PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);

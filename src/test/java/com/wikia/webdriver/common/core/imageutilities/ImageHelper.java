@@ -1,6 +1,11 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.WebElement;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by Ludwik Kazmierczak
@@ -25,5 +30,45 @@ public class ImageHelper {
     int indexComparisonFinish = imageUrl.substring(indexComparisonStart).indexOf(STOP_TOKEN);
 
     return imageUrl.substring(indexComparisonStart, indexComparisonStart + indexComparisonFinish);
+  }
+
+  /**
+   * Method calculates RGB variance of an image
+   * @return R variance, G variance, B variance
+   */
+  public static Triple getRgbVariance(BufferedImage image) {
+    ArrayList<Color> pixels = new ArrayList<>();
+    for (int x = 0; x < image.getWidth(); x++) {
+      for (int y = 0; y < image.getHeight(); y++) {
+        pixels.add(new Color(image.getRGB(x, y)));
+      }
+    }
+    ArrayList<Integer> red = new ArrayList<>();
+    for (Color pixel : pixels) {
+      red.add(pixel.getRed());
+    }
+    ArrayList<Integer> green = new ArrayList<>();
+    for (Color pixel : pixels) {
+      green.add(pixel.getGreen());
+    }
+    ArrayList<Integer> blue = new ArrayList<>();
+    for (Color pixel : pixels) {
+      blue.add(pixel.getBlue());
+    }
+    return Triple.of(getVariance(red), getVariance(green), getVariance(blue));
+  }
+
+  private static double getVariance(java.util.List<Integer> numbers) {
+    double sum = 0;
+    int size = numbers.size();
+    for (Integer number : numbers) {
+      sum += number;
+    }
+    double average = sum / size;
+    sum = 0;
+    for (int number : numbers) {
+      sum += Math.abs(number - average);
+    }
+    return sum / size;
   }
 }
