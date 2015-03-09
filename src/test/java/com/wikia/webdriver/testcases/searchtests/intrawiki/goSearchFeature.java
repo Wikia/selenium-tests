@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
  *  goSearchPreference: Make sure clicking search button after typing article name to the search field takes you to destination page when user has the preference enabled
  */
 
-public class goSearchFeature extends BasicActions {
+public class goSearchFeature extends IntraWiki {
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "AnonFromSuggestion"})
     public void AnonFromSuggestion() {

@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
-    private String photoExtension = ".jpg";
-    private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
+    final private String photoExtension = ".jpg";
+    final private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
 
     @FindBy(css = ".photos-and-videos")
     private WebElement photosVideos;
@@ -91,7 +91,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     @FindBy(id = "searchForm")
     private WebElement searchFormInGlobalNav;
 
-    private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
+    final private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
     public IntraWikiSearchPageObject(WebDriver driver) {
         super(driver);

@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -38,29 +39,7 @@ import java.util.List;
  *  16. Verify push to top is working in community.wikia.com
  */
 
-public class BasicActions extends NewTestTemplate {
-
-    protected Credentials credentials = config.getCredentials();
-
-    protected String testedWiki;
-    protected String communityWiki;
-    protected String searchSuggestionsWiki;
-
-    public BasicActions() {
-        UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
-        testedWiki = urlBuilder.getUrlForWiki("muppet");
-        communityWiki = urlBuilder.getUrlForWiki("community");
-        searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
-    }
-
-    protected static final int RESULTS_PER_PAGE = 25;
-    protected static final String SEARCH_PHRASE_RESULTS = "a";
-    protected static final String SEARCH_PAGINATION_RESULTS = "what";
-    protected static final String SEARCH_RESULT_WITH_EXTENSION = "betweenlions";
-    protected static final String SEARCH_PHRASE_NO_RESULTS = "qazwsxedcrfvtgb";
-    protected static final String SEARCH_SUGGESTION_PHRASE = "Gon";
-    protected static final String SEARCH_ARTICLE = "Gonzo";
-    protected static final String SEARCH_WIKI = "Marvel";
+public class BasicActions extends IntraWiki {
 
     @Test(groups = { "anonSearch", "IntraWikiSearch", "Search" })
     public void anonSearch() {

@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 /*
@@ -11,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 *  searchSuggestionsVisibility: Verify Image and text is shown next to every suggestion
 */
 
-public class Suggestions extends BasicActions {
+public class Suggestions extends IntraWiki {
 
 	  @Test(groups = {"dropDownSuggestions", "IntraWikiSearch", "Search"})
 	  public void dropDownSuggestions() {
