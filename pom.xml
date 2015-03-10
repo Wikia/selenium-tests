@@ -11,7 +11,7 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<mvn.run>true</mvn.run>
 		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
-		<webdriver.version>2.44.0</webdriver.version>
+		<webdriver.version>2.43.1</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>
