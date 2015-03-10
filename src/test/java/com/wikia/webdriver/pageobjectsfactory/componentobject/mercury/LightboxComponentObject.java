@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -60,7 +61,7 @@ public class LightboxComponentObject extends BasePageObject {
     try {
       waitForElementByElement(lightboxContent);
       return checkIfElementOnPage(lightboxContent);
-    } catch (NoSuchElementException|TimeoutException e) {
+    } catch (NoSuchElementException|TimeoutException|StaleElementReferenceException e) {
       return false;
     }
   }
