@@ -30,9 +30,8 @@ import java.util.List;
  *  11. Verify if there are correct advanced option set as a default
  *  12. Search for some image without typing extension (.jpg) and verify photo is found
  *  13. Search for different phrases and verify there are correct namespaces in result titles
- *  14. Search for empty field and verify if search page is opened
- *  15. Verify top module
- *  16. Verify push to top is working in community.wikia.com
+ *  14. Verify top module
+ *  15. Verify push to top is working in community.wikia.com
  */
 
 public class IntraWikiSearchTests extends NewTestTemplate {
@@ -200,24 +199,17 @@ public class IntraWikiSearchTests extends NewTestTemplate {
     search.verifyNamespace(namespace);
   }
 
-  @Test(groups = {"IntraWikiSearch_014", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_014_searchPageOpened() {
-    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-    search.openWikiPage(testedWiki);
-    search.searchFor("");
-    search.verifySearchPageOpened();
-  }
 
-  @Test(groups = {"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_015_topModule() {
+  @Test(groups = {"IntraWikiSearch_014", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_014_topModule() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
     search.searchFor(SEARCH_PHRASE_RESULTS);
     search.verifyTopModule();
   }
 
-  @Test(groups = {"IntraWikiSearch_016", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_016_communityPushToTopWikiResult() {
+  @Test(groups = {"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_015_communityPushToTopWikiResult() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(communityWiki);
     search.searchForInGlobalNavIfPresent(SEARCH_WIKI);
@@ -225,8 +217,8 @@ public class IntraWikiSearchTests extends NewTestTemplate {
     search.verifyPushToTopWikiThumbnail();
   }
 
-  @Test(enabled = false, groups = {"IntraWikiSearch_017", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_017_searchSuggestionsVisibility() {
+  @Test(enabled = false, groups = {"IntraWikiSearch_016", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_016_searchSuggestionsVisibility() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(searchSuggestionsWiki);
     search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
