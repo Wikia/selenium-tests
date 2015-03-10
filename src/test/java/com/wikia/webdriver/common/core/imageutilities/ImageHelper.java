@@ -67,7 +67,7 @@ public class ImageHelper {
     double average = sum / size;
     sum = 0;
     for (int number : numbers) {
-      sum += Math.abs(number - average);
+      sum += Math.pow(number - average, 2);
     }
     return sum / size;
   }
