@@ -278,8 +278,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyMapOpenedForDeleteMapTests() {
     waitForElementVisibleByElement(mapFrame);
-    driver.switchTo().frame(mapFrame);
-    driver.switchTo().defaultContent();
     PageObjectLogging.log("verifyMapOpenedForDeleteMapTests", "Map was opened", true);
   }
 
