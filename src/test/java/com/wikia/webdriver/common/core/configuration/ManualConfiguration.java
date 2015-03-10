@@ -88,6 +88,6 @@ public class ManualConfiguration extends AbstractConfiguration {
 
   @Override
   public String getDeviceName() {
-    return config.get("deviceName");
+    return config.get("device-name");
   }
 }
