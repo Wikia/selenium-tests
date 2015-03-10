@@ -777,14 +777,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
       String providerSlotName = providerSlot.getAttribute("id");
-      String provider = null;
+      String provider = "";
       for (String providerName : PROVIDERS) {
-        if (providerSlotName.contains(providerName)) {
+        String providerSearch = providerName.equals("Liftium") ? providerName : "/" + providerName + "/";
+        if (providerSlotName.contains(providerSearch)) {
           provider = providerName;
           break;
         }
       }
-      providersChain.add(provider != null ? provider : providerSlotName);
+      providersChain.add(provider.isEmpty() ? providerSlotName : provider);
     }
     return providersChain;
   }
