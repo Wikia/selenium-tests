@@ -30,9 +30,8 @@ import java.util.List;
  *  11. Verify if there are correct advanced option set as a default
  *  12. Search for some image without typing extension (.jpg) and verify photo is found
  *  13. Search for different phrases and verify there are correct namespaces in result titles
- *  14. Search for empty field and verify if search page is opened
- *  15. Verify top module
- *  16. Verify push to top is working in community.wikia.com
+ *  14. Verify top module
+ *  15. Verify push to top is working in community.wikia.com
  */
 
 public class IntraWikiSearchTests extends NewTestTemplate {
