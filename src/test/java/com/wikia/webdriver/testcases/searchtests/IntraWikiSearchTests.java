@@ -200,24 +200,17 @@ public class IntraWikiSearchTests extends NewTestTemplate {
     search.verifyNamespace(namespace);
   }
 
-  @Test(groups = {"IntraWikiSearch_014", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_014_searchPageOpened() {
-    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-    search.openWikiPage(testedWiki);
-    search.searchFor("");
-    search.verifySearchPageOpened();
-  }
 
-  @Test(groups = {"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_015_topModule() {
+  @Test(groups = {"IntraWikiSearch_014", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_014_topModule() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
     search.searchFor(SEARCH_PHRASE_RESULTS);
     search.verifyTopModule();
   }
 
-  @Test(groups = {"IntraWikiSearch_016", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_016_communityPushToTopWikiResult() {
+  @Test(groups = {"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_015_communityPushToTopWikiResult() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(communityWiki);
     search.searchForInGlobalNavIfPresent(SEARCH_WIKI);
@@ -225,8 +218,8 @@ public class IntraWikiSearchTests extends NewTestTemplate {
     search.verifyPushToTopWikiThumbnail();
   }
 
-  @Test(enabled = false, groups = {"IntraWikiSearch_017", "IntraWikiSearch", "Search"})
-  public void IntraWikiSearch_017_searchSuggestionsVisibility() {
+  @Test(enabled = false, groups = {"IntraWikiSearch_016", "IntraWikiSearch", "Search"})
+  public void IntraWikiSearch_016_searchSuggestionsVisibility() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(searchSuggestionsWiki);
     search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
