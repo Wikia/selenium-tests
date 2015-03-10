@@ -59,7 +59,7 @@ public class NewTestTemplateCore {
   }
 
   protected void prepareURLs() {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());
     wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
     wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");

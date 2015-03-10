@@ -68,6 +68,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   // Selectors
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
+  private static final String LEADERBOARD_GPT_SELECTOR = "div[id*='gpt/TOP_LEADERBOARD']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
 
@@ -84,8 +85,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
-  @FindBy(css = "[id*='gpt/TOP_LEADERBOARD']")
-  protected WebElement presentLeaderboardGpt;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
 
@@ -101,18 +100,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
     AdsContent.setSlotsSelectors();
-    getUrl(updateUrl(page), true);
+    getUrl(page, true);
     setSlots();
-  }
-
-  // TODO Remove this hack when https://wikia-inc.atlassian.net/browse/CONCF-85 will be done
-  private String updateUrl(String page) {
-    String browserName = ConfigurationFactory.getConfig().getBrowser().toLowerCase();
-    if (browserName.equalsIgnoreCase("CHROMEMOBILE")) {
-      // Colon in url prevents mercury skin.
-      return new UrlBuilder().appendQueryStringToURL(page, "mercury=force:no");
-    }
-    return page;
   }
 
   public AdsBaseObject(
@@ -696,23 +685,20 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  protected boolean isGptParamPresent(String key, String value) {
-    waitForElementByElement(presentMedrec);
-    String dataGptPageParams =
-        presentLeaderboardGpt.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
+  protected boolean isGptParamPresent(String slotName, String key, String value) {
+    WebElement slot = driver.findElement(By.cssSelector(slotName));
+    String dataGptPageParams = slot.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
-
     PageObjectLogging.log(
         "GPT parameter search",
         "searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
         true
     );
-
     return dataGptPageParams.contains(gptParamPattern);
   }
 
   public void verifyParamValue(String paramName, String paramValue, boolean expected) {
-    Assertion.assertEquals(isGptParamPresent(paramName, paramValue), expected,
+    Assertion.assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue), expected,
                            "parameter \"" + paramName + "\" not found");
     PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
                                               + expected, true, driver);
