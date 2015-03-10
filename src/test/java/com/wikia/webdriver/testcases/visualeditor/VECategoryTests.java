@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
@@ -25,7 +26,7 @@ import java.util.List;
  * categories suggestion when adding category to an article
  */
 
-public class VECategoryTests extends NewTestTemplateBeforeClass {
+public class VECategoryTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   WikiBasePageObject base;
@@ -42,6 +43,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
   }
 
+  //CA01
   @Test(
       groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
   )
@@ -61,6 +63,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //CA02
   @Test(
       groups = {"VECategoryTests", "VECategoryTests_002", "VERemoveCategory"},
       dependsOnGroups = "VECategoryTests_001"
@@ -81,6 +84,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //CA03
   @Test(
       groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"}
   )
@@ -93,6 +97,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.NEW);
   }
 
+  //CA04
   @Test(
       groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"}
   )
@@ -105,6 +110,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
   }
 
+  //CA05
   @Test(
       groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
   )

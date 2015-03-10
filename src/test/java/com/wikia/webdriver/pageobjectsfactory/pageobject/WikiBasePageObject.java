@@ -89,9 +89,11 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveToOffsetAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -126,7 +128,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement modalUserNameInput;
   @FindBy(css = "#AccountNavigation > li > a > .avatar")
   protected WebElement userProfileAvatar;
-  @FindBy(css = "#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+  @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#AccountNavigation .subnav")
   protected WebElement userMenuDropdown;
@@ -183,6 +185,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
+  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
   @FindBy(css = "a.ajaxRegister")
   private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
@@ -199,7 +202,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = ".avatar-container.logged-avatar img")
+  @FindBy(css = ".avatar-container")
   private WebElement globalNavigationAvatar;
   @FindBy(css = ".links-container .chevron")
   private WebElement globalNavigationUserChevron;
@@ -210,8 +213,6 @@ public class WikiBasePageObject extends BasePageObject {
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -445,6 +446,17 @@ public class WikiBasePageObject extends BasePageObject {
     return new FilePagePageObject(driver);
   }
 
+  public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
+    String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+    if (noRedirect) {
+      String parameter = "redirect=no";
+      url = urlBuilder.appendQueryStringToURL(url, parameter);
+    }
+    getUrl(url);
+
+    return new FilePagePageObject(driver);
+  }
+
   public NewMessageWall openMessageWall(String userName, String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_MESSAGE_WALL + userName);
     return new NewMessageWall(driver);
@@ -621,17 +633,25 @@ public class WikiBasePageObject extends BasePageObject {
     );
   }
 
-  public void verifyUserLoggedIn(String userName) {
-    if (body.getAttribute("class").contains("skin-monobook")) {
-      driver.findElement(
-          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
-              " ", "_"))));// only for verification
-    } else {
-      //Venus
-      driver.findElement(
-          By.cssSelector(
-              LOGGED_IN_USER_SELECTOR_VENUS
-                  .replace("%userName%", userName)));// only for verification
+  public void verifyUserLoggedIn(final String userName) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          if (body.getAttribute("class").contains("skin-monobook")) {
+            return driver.findElements(
+                By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
+                    " ", "_")))).size()>0;// only for verification
+          } else {
+            //Venus
+            return driver.findElements(
+                By.cssSelector(
+                    LOGGED_IN_USER_SELECTOR_VENUS
+                        .replace("%userName%", userName))).size()>0;// only for verification
+          }
+      }});
+    }finally {
+      restoreDeaultImplicitWait();
     }
     PageObjectLogging.log(
         "verifyUserLoggedIn",
@@ -826,7 +846,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementByElement(cssSource);
     String source = cssSource.getText();
     PageObjectLogging.log("cssSource",
-                          "the following text was get from Wikia.css: " + source, true);
+        "the following text was get from Wikia.css: " + source, true);
     return source;
   }
 
@@ -844,6 +864,22 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
+    }
+  }
+
+  /**
+   * Logout by navigating to 'logout' button href attribute value;
+   */
+  public void logOut(){
+    try {
+      if(navigationLogoutLink.getAttribute("href")!=null){
+        driver.get(navigationLogoutLink.getAttribute("href"));
+      }else {
+        throw new WebDriverException("No logout link provided");
+      }
+    }catch (TimeoutException e) {
+      PageObjectLogging.log("logOut",
+          "page loads for more than 30 seconds", true);
     }
   }
 
@@ -882,102 +918,104 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String logInCookie(String userName, String password, String wikiURL) {
-    try {
-      CookieStore cookieStore = new BasicCookieStore();
-
-      HttpClient httpclient = HttpClientBuilder.create()
-          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-          .setDefaultCookieStore(cookieStore)
-          .disableAutomaticRetries()
-          .build();
-      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
-      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
-      nvps.add(new BasicNameValuePair("format", "json"));
-      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
-
-      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
-
-      HttpResponse response = httpclient.execute(httpPost);
-      HttpEntity entity = response.getEntity();
-
-      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-
-      String token = responseValue.getString("loginToken");
-
-      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-
-      nvps2.add(new BasicNameValuePair("username", userName));
-      nvps2.add(new BasicNameValuePair("password", password));
-      nvps2.add(new BasicNameValuePair("loginToken", token));
-
-      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
-      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
-                                                   StandardCharsets.UTF_8));
-
-      response = httpclient.execute(httpPost4);
-
-//      entity = response.getEntity();
-//      for (int i = 0; i < 10; i++) {
+    getVenusGlobalNav().openAccountNAvigation().logIn(userName, password);
+//    try {
+//      CookieStore cookieStore = new BasicCookieStore();
 //
+//      HttpClient httpclient = HttpClientBuilder.create()
+//          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+//          .setDefaultCookieStore(cookieStore)
+//          .disableAutomaticRetries()
+//          .build();
+//      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
+//      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 //
-//        xmlResponse = EntityUtils.toString(entity);
+//      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
+//      nvps.add(new BasicNameValuePair("format", "json"));
+//      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
 //
-//        xmlResponseArr = xmlResponse.split("\"");
+//      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 //
-//        if (xmlResponse.contains("WrongPass")) {
-//          throw new WebDriverException("Incorrect password provided for user: " + userName);
-//        }
+//      HttpResponse response = httpclient.execute(httpPost);
+//      HttpEntity entity = response.getEntity();
 //
-//        if (xmlResponseArr.length >= 11) {
-//          break;
-//        }
+//      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+//
+//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+//      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+//
+//      String token = responseValue.getString("loginToken");
+//
+//      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+//
+//      nvps2.add(new BasicNameValuePair("username", userName));
+//      nvps2.add(new BasicNameValuePair("password", password));
+//      nvps2.add(new BasicNameValuePair("loginToken", token));
+//
+//      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
+//      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
+//                                                   StandardCharsets.UTF_8));
+//
+//      response = httpclient.execute(httpPost4);
+//
+////      entity = response.getEntity();
+////      for (int i = 0; i < 10; i++) {
+////
+////
+////        xmlResponse = EntityUtils.toString(entity);
+////
+////        xmlResponseArr = xmlResponse.split("\"");
+////
+////        if (xmlResponse.contains("WrongPass")) {
+////          throw new WebDriverException("Incorrect password provided for user: " + userName);
+////        }
+////
+////        if (xmlResponseArr.length >= 11) {
+////          break;
+////        }
+////      }
+//
+//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+////      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
+//
+//      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
+//        System.out.println(cookie.toString());
+//        driver.manage().addCookie(
+//            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
+//                       cookie.getExpiryDate(), false));
 //      }
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-//      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
-
-      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
-        System.out.println(cookie.toString());
-        driver.manage().addCookie(
-            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
-                       cookie.getExpiryDate(), false));
-      }
-
-      try {
-        driver.get(wikiURL);
-      } catch (TimeoutException e) {
-        PageObjectLogging.log("loginCookie",
-                              "page timeout after login by cookie", true);
-      }
-
+//
+//      try {
+//        driver.get(wikiURL);
+//      } catch (TimeoutException e) {
+//        PageObjectLogging.log("loginCookie",
+//                              "page timeout after login by cookie", true);
+//      }
+//
       verifyUserLoggedIn(userName);
-
-      PageObjectLogging.log("loginCookie",
-                            "user was logged in by cookie", true, driver);
-      return token;
-    } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("logInCookie",
-                            "UnsupportedEncodingException", false);
-      return null;
-    } catch (ClientProtocolException e) {
-      PageObjectLogging.log("logInCookie", "ClientProtocolException",
-                            false);
-      return null;
-    } catch (ParseException e) {
-      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-      return null;
-    } catch (IOException e) {
-      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-      return null;
-    } catch (JSONException e) {
-      e.printStackTrace();
-      return null;
-    }
+//
+//      PageObjectLogging.log("loginCookie",
+//                            "user was logged in by cookie", true, driver);
+//      return token;
+//    } catch (UnsupportedEncodingException e) {
+//      PageObjectLogging.log("logInCookie",
+//                            "UnsupportedEncodingException", false);
+//      return null;
+//    } catch (ClientProtocolException e) {
+//      PageObjectLogging.log("logInCookie", "ClientProtocolException",
+//                            false);
+//      return null;
+//    } catch (ParseException e) {
+//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
+//      return null;
+//    } catch (IOException e) {
+//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
+//      return null;
+//    } catch (JSONException e) {
+//      e.printStackTrace();
+//      return null;
+//    }
+    return "";
   }
 
   public void openWikiPage(String wikiURL) {
@@ -1259,13 +1297,13 @@ public class WikiBasePageObject extends BasePageObject {
   public void resizeWindow(Dimension resolution) {
     resizeWindow(resolution.width, resolution.height);
   }
-  
+
   public void scrollToFooter() {
 	  waitForElementByElement(footer);
 	  scrollToElement(footer);
 	  PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
-  
+
   public void verifyGlobalNavigation() {
 	  waitForElementByElement(globalNavigationBar);
 	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
@@ -1297,27 +1335,27 @@ public class WikiBasePageObject extends BasePageObject {
 	  waitForElementByElement(placeholder);
 	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
   }
-  
+
   public void verifyAvatarNotPresent() {
-	  waitForElementNotVisibleByElement(globalNavigationAvatar);
+	  waitForElementNotPresent("a[data-id='userpage']");
 	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
-  
+
   public void verifyAvatarVisible() {
 	  waitForElementByElement(globalNavigationAvatar);
 	  PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
   }
-  
+
   public UserProfilePageObject clickOnAvatar() {
 	  waitForElementClickableByElement(globalNavigationUserChevron);
 	  globalNavigationUserChevron.click();
 	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
-	  globalNavigationAvatar.click();
+    globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
 	  return new UserProfilePageObject(driver);
   }
-  
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }

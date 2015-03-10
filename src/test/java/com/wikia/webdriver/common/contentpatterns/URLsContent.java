@@ -145,7 +145,7 @@ public class URLsContent {
   //Facebook
   public static final String FACEBOOK_MAINPAGE = "http://www.facebook.com/";
   public static final String FACEBOOK_SETTINGSPAGE = "http://www.facebook.com/settings";
-  public static final String FACEBOOK_SETTINGS_APP_TAB = "tab=applications";
+  public static final String FACEBOOK_SETTINGS_APP_TAB = "http://www.facebook.com/settings?tab=applications";
   public static final String FACEBOOK_WIKIA_APP_ID = "112328095453510";
   public static final String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
 

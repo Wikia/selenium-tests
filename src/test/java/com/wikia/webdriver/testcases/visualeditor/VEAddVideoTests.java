@@ -33,6 +33,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
+  //AM01
   @Test(
       groups = {
           "VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
@@ -52,14 +53,16 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AM02
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
   )
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -72,12 +75,13 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //AM03
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
   )
   public void VEAddExternalVideoTests_003_AddExistingVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =

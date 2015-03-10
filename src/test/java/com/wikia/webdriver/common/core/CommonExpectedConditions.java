@@ -42,9 +42,13 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
-          return elementsAttributeValue.contains(value);
+          if (elementsAttributeValue == null){
+            return false;
+          }else {
+            return elementsAttributeValue.contains(value);
+          }
         } catch (StaleElementReferenceException e) {
-          return null;
+          return false;
         }
       }
 
@@ -468,6 +472,30 @@ public class CommonExpectedConditions {
       @Override
       public Boolean apply(WebDriver driver) {
         return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript);
+      }
+    };
+  }
+
+  /**
+   * @param bySelector
+   * @return
+   */
+  public static ExpectedCondition<Boolean> cssValuePresentForElement(
+      final By bySelector,
+      final String cssProperty,
+      final String expectedValue
+  ) {
+    return new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver driver) {
+        return expectedValue.equals(driver.findElement(bySelector).getCssValue(cssProperty));
+      }
+
+      @Override
+      public String toString() {
+        return String.format(
+            "Element with provided selector still present!"
+        );
       }
     };
   }

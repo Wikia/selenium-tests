@@ -35,15 +35,17 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private WebElement suggestedVideo;
   @FindBy(css = "a.bottom-close-button")
   private WebElement closeButton;
+  @FindBy(css = "#VET-add-from-preview")
+  private WebElement addFromPreviewButton;
 
   private By addVideoLibraryLink = By.cssSelector("figure + a");
+
+  private String videoName;
 
   public VetAddVideoComponentObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
-
-  private String videoName;
 
   private void typeInUrl(String url) {
     waitForElementByElement(urlField);
@@ -74,11 +76,10 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     WebElement listElem = videoList.get(videoListItem);
     waitForElementByElement(listElem);
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
-    String videoName = addVideoLink.getAttribute("title");
-    scrollAndClick(addVideoLink);
-    this.videoName = videoName;
+    this.videoName = addVideoLink.getAttribute("title");
+    scrollAndClick(addFromPreviewButton);
     PageObjectLogging.log("clickAddVideoLibrary",
-                          "add video button clicked: " + videoName, true, driver);
+                          "add video button clicked: " + this.videoName, true, driver);
   }
 
   private void checkIfLibraryIsPresent() {
@@ -115,6 +116,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   private void checkVideoPreviewAppearing() {
     waitForElementByElement(videoPlayer);
+    waitForValueToBePresentInElementsCssByCss("#VET-preview", "display", "block");
     PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
   }
 

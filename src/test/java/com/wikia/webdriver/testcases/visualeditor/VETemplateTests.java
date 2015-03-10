@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
@@ -28,7 +28,7 @@ import java.util.List;
  * insert template as block node VE-1414 Verify deleting template from an article
  */
 
-public class VETemplateTests extends NewTestTemplateBeforeClass {
+public class VETemplateTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   WikiBasePageObject base;
@@ -41,6 +41,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
+  //AT01
   @Test(
       groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"}
   )
@@ -68,6 +69,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     templateDialog.verifyIsResultTemplate();
   }
 
+  //AT02
   @Test(
       groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"}
   )
@@ -82,6 +84,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     templateDialog.verifyIsSuggestedTemplate();
   }
 
+  //AT03
   @Test(
       groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"}
   )
@@ -108,8 +111,10 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AT04
   @Test(
       groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
                 "VETemplateTests_006"}
@@ -141,6 +146,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   @Test(
@@ -161,11 +167,12 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
     article.verifyVEPublishComplete();
   }
 
+  //ET01
   @Test(
       groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
       dependsOnGroups = "VETemplateTests_004"
   )
-  public void VETemplateTests_006_CheckBlockedTransclusion() {
+  public void VETemplateTests_006_EditTemplate() {
     List<String> templateWikiTexts = new ArrayList<>();
     templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);

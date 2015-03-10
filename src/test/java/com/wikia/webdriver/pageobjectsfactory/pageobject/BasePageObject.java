@@ -28,6 +28,7 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -81,8 +82,8 @@ public class BasePageObject {
 
   public void clickActions(WebElement pageElem) {
     try {
-      Actions builder = new Actions(driver);
-      Actions click = builder.click(pageElem);
+      Actions actionBuilder = new Actions(driver);
+      Actions click = actionBuilder.click(pageElem);
       click.perform();
     } catch (Exception e) {
       PageObjectLogging.log("clickActions", e.toString(), false);
@@ -278,6 +279,19 @@ public class BasePageObject {
                           "current url is the same as expetced url", true);
   }
 
+  public void verifyURLcontains(final String givenString, int timeOut) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
+        }
+      });
+    }finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public void verifyURL(String givenURL) {
     Assertion.assertEquals(givenURL, driver.getCurrentUrl());
   }
@@ -301,16 +315,10 @@ public class BasePageObject {
     }
     if (makeScreenshot) {
       PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
+          "Take screenshot",
+          String.format("Screenshot After Navigation to: %s", url),
           true,
           driver
-      );
-    } else {
-      PageObjectLogging.log(
-          "NavigateTo",
-          String.format("Navigate to %s", url),
-          true
       );
     }
   }
@@ -577,9 +585,26 @@ public class BasePageObject {
 
   public void waitForValueToBePresentInElementsAttributeByCss(
       String selector, String attribute, String value) {
-    wait.until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(By.cssSelector(selector),
-                                                        attribute, value));
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .valueToBePresentInElementsAttribute(By.cssSelector(selector),
+              attribute, value));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void waitForValueToBePresentInElementsCssByCss(
+      String selector, String cssProperty, String expectedValue) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .cssValuePresentForElement(By.cssSelector(selector),
+              cssProperty, expectedValue));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(
@@ -836,7 +861,7 @@ public class BasePageObject {
    * check if current HTTP status of given URL is the same as expected
    */
   public void verifyURLStatus(int desiredStatus, String url) {
-    int timeOut = 500;
+    int waitTime = 500;
     int statusCode = 0;
     boolean status = false;
     while (!status) {
@@ -846,9 +871,9 @@ public class BasePageObject {
           status = true;
         } else {
           Thread.sleep(500);
-          timeOut += 500;
+          waitTime += 500;
         }
-        if (timeOut > 20000) {
+        if (waitTime > 20000) {
           break;
         }
       } catch (InterruptedException e) {

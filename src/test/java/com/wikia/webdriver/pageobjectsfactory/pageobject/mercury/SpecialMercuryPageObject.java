@@ -8,7 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by Lukasz N. on 2014-11-20.
+ * @authors: Lukasz Nowak
+ * @ownership: Content - Mercury mobile
  */
 public class SpecialMercuryPageObject extends MobileBasePageObject {
 

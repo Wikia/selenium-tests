@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Dmytro Rets
@@ -19,14 +21,17 @@ import java.util.List;
  */
 public class AdsKruxObject extends AdsBaseObject {
 
-  private static final String
-      KRUX_CONTROL_TAG_URL_PREFIX =
-      "http://cdn.krxd.net/controltag?confid=";
+  private static final String KRUX_CDN = "http://cdn.krxd.net/";
+  private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
 
   public AdsKruxObject(WebDriver driver, String page) {
     super(driver, page);
+  }
+
+  public AdsKruxObject(WebDriver driver) {
+    super(driver);
   }
 
   /**
@@ -49,16 +54,37 @@ public class AdsKruxObject extends AdsBaseObject {
     Assertion.assertTrue(isGptParamPresent("u", kruxUser));
   }
 
-  public void verifyKruxSegment(String segId) {
-    waitForKrux();
-    List
-        segments =
-        (ArrayList) ((JavascriptExecutor) driver).executeScript("return Krux.segments;");
-    String current = Joiner.on("\t").join(segments);
-    Assertion.assertStringContains(segId, current);
+  public void waitForKrux() {
+    waitPageLoaded();
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
-  private void waitForKrux() {
-    wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+  public void setKruxUserCookie(String userId) {
+    getUrl(KRUX_CDN);
+    waitPageLoaded();
+    setCookie("_kuid_", userId);
   }
+
+  public String getKruxSegments() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    List segments = (ArrayList) js.executeScript("return Krux.segments;");
+    PageObjectLogging.log("getKruxSegments", segments.toString(), true);
+    return Joiner.on("\t").join(segments);
+  }
+
+  public String getKxsegs() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return (String) js.executeScript("return localStorage.kxsegs;");
+  }
+
+  public String getKxkuid() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return (String) js.executeScript("return localStorage.kxkuid;");
+  }
+
 }

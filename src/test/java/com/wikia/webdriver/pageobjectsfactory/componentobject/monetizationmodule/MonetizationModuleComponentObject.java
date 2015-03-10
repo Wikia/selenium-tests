@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +22,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
   private static final String ADSENSE_HEADER_VALUE = "advertisement";
   private static final String SLOT_IN_CONTENT = "in_content";
+  private static final int NUM_OF_REDIRECT = 5;
 
   @FindBy(css = ".adsbygoogle.ad-responsive-ic")
   private WebElement adsenseInsInContent;
@@ -220,5 +220,4 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     PageObjectLogging
         .log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
   }
-
 }

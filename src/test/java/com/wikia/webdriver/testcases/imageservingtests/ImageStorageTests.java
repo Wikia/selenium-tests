@@ -29,17 +29,16 @@ public class ImageStorageTests extends NewTestTemplate {
 
   @Test(groups = {"ImageStorageTests", "ImageStorage_001"})
   @UseUnstablePageLoadStrategy
-  public void ImageStorage_001_deleteImage() {
+  public void ImageStorage_001_deleteImage_QAART_521() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-    FilePagePageObject file = newFiles.openImage(PageContent.FILE_DELETE_AND_RESTORE, true);
+    FilePagePageObject file = new  SpecialNewFilesPageObject(driver).openFilePage(wikiURL, PageContent.FILE_DELETE_AND_RESTORE, true);
     imageURL = file.getImageUrl();
     imageThumbnailURL = file.getImageThumbnailUrl();
-    newFiles.verifyURLStatus(200, imageURL);
-    newFiles.verifyURLStatus(200, imageThumbnailURL);
+    file.verifyURLStatus(200, imageURL);
+    file.verifyURLStatus(200, imageThumbnailURL);
 
-    DeletePageObject delete = newFiles.deletePage();
+    DeletePageObject delete = file.deletePage();
     base = delete.submitDeletion();
     base.verifyNotificationMessage();
 
@@ -51,8 +50,8 @@ public class ImageStorageTests extends NewTestTemplate {
     restore.restorePage();
     restore.verifyNotificationMessage();
 
-    newFiles.verifyURLStatus(200, imageURL);
-    newFiles.verifyURLStatus(200, imageThumbnailURL);
+    file.verifyURLStatus(200, imageURL);
+    file.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
@@ -60,14 +59,13 @@ public class ImageStorageTests extends NewTestTemplate {
   public void ImageStorage_002_moveImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-    FilePagePageObject file = newFiles.openImage(PageContent.FILERENAME, true);
+    FilePagePageObject file = base.openFilePage(wikiURL, PageContent.FILERENAME, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
     String imageNewName = renamePage.getTimeStamp() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = newFiles.openFilePage(wikiURL, imageNewName);
+    file = base.openFilePage(wikiURL, imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(PageContent.FILERENAME, true);
     file.verifyNotificationMessage();

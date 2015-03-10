@@ -43,17 +43,17 @@ public class AdsComparison {
   }
 
   public void hideSlot(String selector, WebDriver driver) {
-    changeVisibility(selector, "hidden", driver);
+    changeOpacity(selector, 0, driver);
   }
 
   public void showSlot(String selector, WebDriver driver) {
-    changeVisibility(selector, "visible", driver);
+    changeOpacity(selector, 100, driver);
   }
 
-  private void changeVisibility(String selector, String visibility, WebDriver driver) {
+  private void changeOpacity(String selector, int value, WebDriver driver) {
     ((JavascriptExecutor) driver).executeScript(
-        "$(arguments[0]).css('visibility', arguments[1]);",
-        selector, visibility
+        "$(arguments[0]).css('opacity', arguments[1]);",
+        selector, Integer.toString(value)
     );
   }
 
@@ -66,7 +66,6 @@ public class AdsComparison {
     } catch (IOException ex) {
       throw new RuntimeException(ex);
     }
-    Shooter shooter = new Shooter();
     File capturedScreen = shooter.capturePageAndCrop(
         startPoint, screenshotSize, driver
     );

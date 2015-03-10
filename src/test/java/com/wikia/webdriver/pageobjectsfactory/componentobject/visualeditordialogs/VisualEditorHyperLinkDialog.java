@@ -37,7 +37,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
   private By linkResultsBy = By.cssSelector("li");
   private By linkCategoryBy = By.cssSelector(".oo-ui-labeledElement-label span");
-  private By selectedResultsBy = By.cssSelector(".oo-ui-optionWidget-highlighted");
+  private By highlightedResultsBy = By.cssSelector(".oo-ui-optionWidget-highlighted");
 
   private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
@@ -71,8 +71,8 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private void viewLinkResults() {
     waitForElementNotVisibleByElement(inputPending);
     waitForElementVisibleByElement(desktopContext);
-    WebElement selectedResult = desktopContext.findElement(selectedResultsBy);
-    waitForElementByElement(selectedResult);
+    WebElement highlightedResult = desktopContext.findElement(highlightedResultsBy);
+    waitForElementByElement(highlightedResult);
     WebElement linkResultMenu = desktopContext.findElement(linkResultMenuBy);
     waitForElementVisibleByElement(linkResultMenu);
     List<WebElement> linkResults = linkResultMenu.findElements(linkResultsBy);
