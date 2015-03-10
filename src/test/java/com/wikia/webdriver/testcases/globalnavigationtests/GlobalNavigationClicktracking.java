@@ -5,19 +5,13 @@ import java.util.List;
 
 import javax.json.JsonObject;
 
-import org.openqa.selenium.UnhandledAlertException;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.common.clicktracking.events.EventsArticleEditMode;
 import com.wikia.webdriver.common.clicktracking.events.EventsGlobalNavigation;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
@@ -25,7 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  */
 public class GlobalNavigationClicktracking extends NewTestTemplate {
 
-	
     /** search test flow: action - expected event
     *  navigate to main page
     *  
@@ -44,7 +37,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     *  clear suggestion
     */	
     @Test(
-        groups = {"TestGlobalSearchInGlobalNav_001", "ClickTracking", "GlobalNav"}, invocationCount=15
+        groups = {"TestGlobalSearchInGlobalNav_001", "ClickTracking", "GlobalNav"}
     )
     public void search() {
         WikiBasePageObject base = new WikiBasePageObject(driver);

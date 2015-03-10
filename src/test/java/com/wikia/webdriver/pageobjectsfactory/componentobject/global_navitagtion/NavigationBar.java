@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.thoughtworks.xstream.alias.ClassMapper.Null;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,7 +17,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 
 public class NavigationBar extends WikiBasePageObject {
 
-	@FindBy(css = "#searchInput")
+	public NavigationBar(WebDriver driver) {
+        super(driver);
+    }
+
+    @FindBy(css = "#searchInput")
 	private WebElement searchInput;
 	@FindBy(css = "#searchSubmit")
 	private WebElement searchSubmit;
@@ -28,11 +31,7 @@ public class NavigationBar extends WikiBasePageObject {
 	private List<WebElement> suggestionsList;
 	private String suggestionCss = ".autocomplete div"; 
 	
-	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
-
-	public NavigationBar(WebDriver driver) {
-		super(driver);
-	}
+    private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
 	public void triggerSuggestions(String query) {
 		waitForElementByElement(searchInput);

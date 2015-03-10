@@ -1,19 +1,17 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
+import java.util.List;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
-
-import org.testng.annotations.Test;
-
-import java.util.List;
 
 /*
  *  anonSearch: As anon basic search action and verify you are on search result page. This also prevents goSearch being active by default.
@@ -39,23 +37,7 @@ import java.util.List;
  *  16. Verify push to top is working in community.wikia.com
  */
 
-/**
- * @author  
- */
-public class BasicActions extends NewTestTemplate {
-
-    protected Credentials credentials = config.getCredentials();
-
-    protected String testedWiki;
-    protected String communityWiki;
-    protected String searchSuggestionsWiki;
-
-    public BasicActions() {
-        UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
-        testedWiki = urlBuilder.getUrlForWiki("muppet");
-        communityWiki = urlBuilder.getUrlForWiki("community");
-        searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
-    }
+public class BasicActions extends IntraWiki {
 
     @Test(groups = { "anonSearch", "IntraWikiSearch", "Search" })
     public void anonSearch() {
