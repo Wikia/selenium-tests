@@ -29,10 +29,6 @@ public class UrlBuilder {
       url += "wiki/";
     }
     url += wikiPath;
-    return updateUrl(url);
-  }
-
-  private String updateUrl(String url) {
     if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
       return appendQueryStringToURL(url, "useskin=wikiamobile");
     } else if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
