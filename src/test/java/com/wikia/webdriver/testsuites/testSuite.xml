@@ -131,6 +131,10 @@
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadCreatorTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
+            <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
+            <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
+            <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.GoSearchFeature"/>
+            <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.Suggestions"/>
             <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests_TwoDrivers"/>

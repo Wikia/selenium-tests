@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
  *  goSearchPreference: Make sure clicking search button after typing article name to the search field takes you to destination page when user has the preference enabled
  */
 
-public class goSearchFeature extends IntraWiki {
+public class GoSearchFeature extends IntraWiki {
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "AnonFromSuggestion"})
     public void AnonFromSuggestion() {
