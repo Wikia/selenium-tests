@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
   private static final String ADSENSE_HEADER_VALUE = "advertisement";
   private static final String SLOT_IN_CONTENT = "in_content";
+  private static final String SLOT_BELOW_CATEGORY = "below_category";
+  private static final String SLOT_ABOVE_FOOTER = "above_footer";
   private static final int NUM_OF_REDIRECT = 5;
 
   @FindBy(css = ".adsbygoogle.ad-responsive-ic")
@@ -63,6 +66,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
   private By primeProductPriceBy = By.cssSelector(".product-price");
   private By productThumbBy = By.cssSelector(".product-thumb");
+  private By productThumbImgBy = By.cssSelector(".product-thumb img");
 
   //Ecommerce
   private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
@@ -250,15 +254,18 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       switch (slotName) {
         case "in_content":
           verifyAmazonUnitShownInContent();
-          verifyProductThumbInvisible();
+          verifyProductThumbInvisible(slotInContent);
+          verifyProductThumbImageSize(slotInContent);
           break;
         case "below_category":
           verifyAmazonUnitShownBelowCategory();
-          verifyProductThumbVisible();
+          verifyProductThumbVisible(slotBelowCategory);
+          verifyProductThumbImageSize(slotBelowCategory);
           break;
         case "above_footer":
           verifyAmazonUnitShownAboveFooter();
-          verifyProductThumbVisible();
+          verifyProductThumbVisible(slotAboveFooterAmazon);
+          verifyProductThumbImageSize(slotAboveFooterAmazon);
           break;
         default:
           PageObjectLogging
@@ -276,17 +283,17 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
         case "in_content":
           verifyAmazonUnitShownInContent();
           verifyAmazonPrimeShownInContent();
-          verifyProductThumbInvisible();
+          verifyProductThumbInvisible(slotInContent);
           break;
         case "below_category":
           verifyAmazonUnitShownBelowCategory();
           verifyAmazonPrimeShownBelowCategory();
-          verifyProductThumbVisible();
+          verifyProductThumbVisible(slotBelowCategory);
           break;
         case "above_footer":
           verifyAmazonUnitShownAboveFooter();
           verifyAmazonPrimeShownAboveFooter();
-          verifyProductThumbVisible();
+          verifyProductThumbVisible(slotAboveFooterAmazon);
           break;
         default:
           PageObjectLogging
@@ -313,6 +320,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyAmazonUnitShownBelowCategory() {
+//    redirectUntilDesiredSlotShown(MonetizationModuleListBy, SLOT_BELOW_CATEGORY);
     waitForElementByElementLocatedBy(slotBelowCategoryAmazon);
     Assertion.assertTrue(checkIfElementOnPage(slotBelowCategoryAmazon));
     scrollToElement(slotBelowCategoryAmazon);
@@ -401,17 +409,32 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     return driver.findElement(slotBy).findElement(primeProductPriceBy);
   }
 
-  private void verifyProductThumbInvisible() {
+  private void verifyProductThumbInvisible(By slotBy) {
     waitForElementNotVisibleByElement(
-        driver.findElement(slotInContentAmazon).findElement(productThumbBy));
+        driver.findElement(slotBy).findElement(productThumbBy));
     PageObjectLogging
         .log("verifyProductThumbInvisible", "Product thumbnail is NOT visible in content", true);
   }
 
-  private void verifyProductThumbVisible() {
+  private void verifyProductThumbVisible(By slotBy) {
     waitForElementVisibleByElement(
-        driver.findElement(slotInContentAmazon).findElement(productThumbBy));
+        driver.findElement(slotBy).findElement(productThumbBy));
     PageObjectLogging
         .log("verifyProductThumbInvisible", "Product thumbnail is visible in content", true);
+  }
+
+  private void verifyProductThumbImageSize(By slotBy) {
+    WebElement thumbImg = driver.findElement(slotBy).findElement(productThumbImgBy);
+    Dimension imgDimension = thumbImg.getSize();
+    int imgHeight = imgDimension.getHeight();
+    int imgWidth = imgDimension.getWidth();
+    String maxHeightStr = thumbImg.getCssValue("max-height");
+    String maxWidthStr = thumbImg.getCssValue("max-width");
+    int maxHeight = Integer.parseInt(maxHeightStr.substring(0, maxHeightStr.indexOf("px")));
+    int maxWidth = Integer.parseInt(maxWidthStr.substring(0, maxWidthStr.indexOf("px")));
+    Assertion.assertTrue(imgHeight <= maxHeight,
+                         "img height: " + imgHeight + "is bigger than max height: " + maxHeight);
+    Assertion.assertTrue(imgWidth <= maxWidth,
+                         "img width: " + imgWidth + " is bigger than max width: " + maxHeight);
   }
 }

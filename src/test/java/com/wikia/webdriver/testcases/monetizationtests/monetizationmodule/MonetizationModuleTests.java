@@ -24,6 +24,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ARTICLE_AMAZON_VIDEO = "Kermit_the_Frog";
   private static final String TEST_AMAZON_WIKI = "dragonball";
   private static final String TEST_AMAZON_ARTICLE = "Goku";
+  private static final String TEST_AMAZON_BIGIMG_WIKI = "starwars";
+  private static final String TEST_AMAZON_BIGIMG_ARTICLE = "Battle_of_Altyr_V_(Galactic_Civil_War)";
   private static final String TEST_AMAZON_PRIME_WIKI = "degrassi";
   private static final String TEST_AMAZON_PRIME_ARTICLE = "Can't Stop This Thing We Started";
 
@@ -561,6 +563,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @DataProvider(name = "MonetizationModuleTest_017")
   public static Object[][] DataMonetizationModuleTest_017() {
     return new Object[][]{
+        {"US", true, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
+        {"US", false, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
         {"US", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
         {"US", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
     };
