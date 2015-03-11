@@ -71,14 +71,14 @@ public class OpenGraphPageObject extends MobileBasePageObject {
   }
 
   public boolean isOgSiteName() throws WebDriverException {
-    if (ogSiteName.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
     try {
+      if (ogSiteName.getAttribute("content") == null) {
+        throw new WebDriverException("Expected String but got null");
+      }
       return !ogSiteName.getAttribute("content").isEmpty();
     } catch (NoSuchElementException e) {
+      return false;
     }
-    return false;
   }
 
   public boolean isOgDescription() throws WebDriverException {

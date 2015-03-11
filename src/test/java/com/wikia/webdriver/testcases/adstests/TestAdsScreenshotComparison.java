@@ -115,7 +115,7 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 
   private void checkAds() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.checkTopLeaderboard();
     wikiPage.checkMedrec();
+    wikiPage.checkTopLeaderboard();
   }
 }

@@ -66,7 +66,7 @@ public class POMConfiguration extends AbstractConfiguration {
 
   @Override
   public String getDeviceId() {
-    return System.getProperty("deviceId");
+    return System.getProperty("device-id");
   }
 
   @Override
@@ -86,11 +86,11 @@ public class POMConfiguration extends AbstractConfiguration {
 
   @Override
   public String getAppiumIp() {
-    return System.getProperty("appiumIP");
+    return System.getProperty("appium-ip");
   }
 
   @Override
   public String getDeviceName() {
-    return System.getProperty("deviceName");
+    return System.getProperty("device-name");
   }
 }
