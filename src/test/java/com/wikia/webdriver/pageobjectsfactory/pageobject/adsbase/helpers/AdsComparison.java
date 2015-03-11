@@ -32,7 +32,7 @@ public class AdsComparison {
 
   private static final int MILLIS_IN_SEC = 1000;
   private static final int DURATION_ACCURACY_PERCENT = 70;
-  public static final int IMAGES_THRESHOLD_PERCENT = 35;
+  public static final int IMAGES_THRESHOLD_PERCENT = 12;
   private static final int TIME_STEP_MILLS = 1000;
   private static final int MAX_ATTEMPTS = 600;
   private static final int AD_TIMEOUT_SEC = 15;
