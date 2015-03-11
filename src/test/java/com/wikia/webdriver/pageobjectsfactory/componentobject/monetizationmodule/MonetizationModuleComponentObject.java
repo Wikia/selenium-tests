@@ -68,9 +68,6 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By productThumbBy = By.cssSelector(".product-thumb");
   private By productThumbImgBy = By.cssSelector(".product-thumb img");
 
-  //Ecommerce
-  private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
-
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
   }
@@ -253,17 +250,17 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
       switch (slotName) {
         case "in_content":
-          verifyAmazonUnitShownInContent();
-          verifyProductThumbInvisible(slotInContent);
-          verifyProductThumbImageSize(slotInContent);
+          verifyAmazonUnitShown(slotInContentAmazon);
+          verifyProductThumbInvisible(slotInContentAmazon);
+          verifyProductThumbImageSize(slotInContentAmazon);
           break;
         case "below_category":
-          verifyAmazonUnitShownBelowCategory();
-          verifyProductThumbVisible(slotBelowCategory);
-          verifyProductThumbImageSize(slotBelowCategory);
+          verifyAmazonUnitShown(slotBelowCategoryAmazon);
+          verifyProductThumbVisible(slotBelowCategoryAmazon);
+          verifyProductThumbImageSize(slotBelowCategoryAmazon);
           break;
         case "above_footer":
-          verifyAmazonUnitShownAboveFooter();
+          verifyAmazonUnitShown(slotAboveFooterAmazon);
           verifyProductThumbVisible(slotAboveFooterAmazon);
           verifyProductThumbImageSize(slotAboveFooterAmazon);
           break;
@@ -281,18 +278,18 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
       switch (slotName) {
         case "in_content":
-          verifyAmazonUnitShownInContent();
-          verifyAmazonPrimeShownInContent();
-          verifyProductThumbInvisible(slotInContent);
+          verifyAmazonUnitShown(slotInContentAmazon);
+          verifyAmazonPrimeShown(slotInContentAmazon);
+          verifyProductThumbInvisible(slotInContentAmazon);
           break;
         case "below_category":
-          verifyAmazonUnitShownBelowCategory();
-          verifyAmazonPrimeShownBelowCategory();
-          verifyProductThumbVisible(slotBelowCategory);
+          verifyAmazonUnitShown(slotBelowCategoryAmazon);
+          verifyAmazonPrimeShown(slotBelowCategoryAmazon);
+          verifyProductThumbVisible(slotBelowCategoryAmazon);
           break;
         case "above_footer":
-          verifyAmazonUnitShownAboveFooter();
-          verifyAmazonPrimeShownAboveFooter();
+          verifyAmazonUnitShown(slotAboveFooterAmazon);
+          verifyAmazonPrimeShown(slotAboveFooterAmazon);
           verifyProductThumbVisible(slotAboveFooterAmazon);
           break;
         default:
@@ -303,56 +300,19 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     }
   }
 
-  private void verifyAmazonUnitShownAboveFooter() {
-    waitForElementByElementLocatedBy(slotAboveFooterAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAmazon));
-    scrollToElement(slotAboveFooterAmazon);
-    PageObjectLogging
-        .log("verifyAmazonUnitShownAboveFooter", "Amazon unit is visible above footer", true);
-  }
-
-  private void verifyAmazonPrimeShownAboveFooter() {
-    WebElement priceElem = findPriceElementFromSlot(slotAboveFooterAmazon);
+  private void verifyAmazonPrimeShown(By slotBy) {
+    WebElement priceElem = findPriceElementFromSlot(slotBy);
     waitForElementVisibleByElement(priceElem);
     scrollToElement(priceElem);
     PageObjectLogging
-        .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true);
+        .log("verifyAmazonPrimeShown", "Amazon prime unit is visible", true);
   }
 
-  private void verifyAmazonUnitShownBelowCategory() {
-//    redirectUntilDesiredSlotShown(MonetizationModuleListBy, SLOT_BELOW_CATEGORY);
-    waitForElementByElementLocatedBy(slotBelowCategoryAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotBelowCategoryAmazon));
-    scrollToElement(slotBelowCategoryAmazon);
-    PageObjectLogging
-        .log("verifyAmazonUnitShownBelowCategory", "Amazon unit is visible below category", true,
-             driver);
-  }
-
-  private void verifyAmazonPrimeShownBelowCategory() {
-    WebElement priceElem = findPriceElementFromSlot(slotBelowCategoryAmazon);
-    waitForElementVisibleByElement(priceElem);
-    scrollToElement(priceElem);
-    PageObjectLogging
-        .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true,
-             driver);
-  }
-
-  private void verifyAmazonUnitShownInContent() {
-    waitForElementByElementLocatedBy(slotInContentAmazon);
-    Assertion.assertTrue(checkIfElementOnPage(slotInContentAmazon));
-    scrollToElement(slotInContentAmazon);
-    PageObjectLogging
-        .log("verifyAmazonUnitShownInContent", "Amazon unit is visible in content", true, driver);
-  }
-
-  private void verifyAmazonPrimeShownInContent() {
-    WebElement priceElem = findPriceElementFromSlot(slotInContentAmazon);
-    waitForElementVisibleByElement(priceElem);
-    scrollToElement(priceElem);
-    PageObjectLogging
-        .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true,
-             driver);
+  private void verifyAmazonUnitShown(By slotBy) {
+    waitForElementByElementLocatedBy(slotBy);
+    Assertion.assertTrue(checkIfElementOnPage(slotBy));
+    scrollToElement(slotBy);
+    PageObjectLogging.log("verifyAmazonUnitShown", "Amazon unit is visible", true, driver);
   }
 
   public void verifyAmazonUnitNotShownAboveTitle() {
