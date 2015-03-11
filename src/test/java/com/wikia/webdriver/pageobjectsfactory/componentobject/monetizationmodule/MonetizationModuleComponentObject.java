@@ -61,6 +61,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
   private By slotAboveTitleAmazon = By.cssSelector("#monetization-amazon-above_title");
   private By slotBelowTitleAmazon = By.cssSelector("#monetization-amazon-below_title");
+  private By primeProductPriceBy = By.cssSelector(".product-price");
 
   //Ecommerce
   private By slotAboveFooterEcommerce = By.cssSelector("#monetization-ecommerce-above_footer");
@@ -296,19 +297,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyAmazonPrimeShownAboveFooter() {
-    By primeProductPriceBy = By.cssSelector(".product-price");
-    WebElement priceElem =
-        driver.findElement(slotAboveFooterAmazon).findElement(primeProductPriceBy);
-    waitForElementVisibleByElement(priceElem);
-    PageObjectLogging
-        .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true);
-  }
-
-  private void verifyAmazonPrimeShownBelowCategory() {
-    By primeProductPriceBy = By.cssSelector(".product-price");
-    WebElement priceElem =
-        driver.findElement(slotBelowCategoryAmazon).findElement(primeProductPriceBy);
-    waitForElementVisibleByElement(priceElem);
+    waitForElementVisibleByElement(findPriceElementFromSlot(slotAboveFooterAmazon));
     PageObjectLogging
         .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true);
   }
@@ -320,17 +309,22 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
         .log("verifyAmazonUnitShownBelowCategory", "Amazon unit is visible below category", true);
   }
 
+  private void verifyAmazonPrimeShownBelowCategory() {
+    waitForElementVisibleByElement(findPriceElementFromSlot(slotBelowCategoryAmazon));
+    PageObjectLogging
+        .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true);
+  }
+
   private void verifyAmazonUnitShownInContent() {
     waitForElementByElementLocatedBy(slotInContentAmazon);
     Assertion.assertTrue(checkIfElementOnPage(slotInContentAmazon));
     PageObjectLogging
         .log("verifyAmazonUnitShownInContent", "Amazon unit is visible in content", true);
+
   }
 
   private void verifyAmazonPrimeShownInContent() {
-    By primeProductPriceBy = By.cssSelector(".product-price");
-    WebElement priceElem = driver.findElement(slotInContentAmazon).findElement(primeProductPriceBy);
-    waitForElementVisibleByElement(priceElem);
+    waitForElementVisibleByElement(findPriceElementFromSlot(slotInContentAmazon));
     PageObjectLogging
         .log("verifyAmazonPrimeShownInContent", "Amazon prime unit is visible in content", true);
   }
@@ -383,5 +377,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       numOfRedirect++;
     }
     return foundElem;
+  }
+
+  private WebElement findPriceElementFromSlot(By slotBy) {
+    return driver.findElement(slotBy).findElement(primeProductPriceBy);
   }
 }
