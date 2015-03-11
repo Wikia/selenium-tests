@@ -237,6 +237,23 @@ public class BasePageObject {
     }
   }
 
+  protected void scrollToElement(By elementBy) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 60));",
+          driver.findElement(elementBy)
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log(
+            "JSError", "JQuery is not defined", false
+        );
+      }
+    }
+  }
+
   public void jQueryClick(String cssSelector) {
     executeScript("$('" + cssSelector + "').click()");
   }
