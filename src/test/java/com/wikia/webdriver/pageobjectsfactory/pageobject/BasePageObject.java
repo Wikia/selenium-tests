@@ -605,6 +605,18 @@ public class BasePageObject {
     }
   }
 
+  public void waitForValueToBePresentInElementsCssByCss(
+      String selector, String cssProperty, String expectedValue) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .cssValuePresentForElement(By.cssSelector(selector),
+              cssProperty, expectedValue));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public void waitForValueToBePresentInElementsAttributeByElement(
       WebElement element, String attribute, String value) {
     wait.until(CommonExpectedConditions

@@ -174,7 +174,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyAdsenseUnitNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, TEST_ARTICLE);
+    monetizationModule.logOut();
     monetizationModule.verifyAdsenseUnitShown();
   }
 
@@ -202,7 +202,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyAdsenseUnitNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, TEST_ARTICLE);
+    monetizationModule.logOut();
     monetizationModule.verifyAdsenseUnitNotShown();
   }
 
@@ -251,7 +251,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, testArticle);
+    monetizationModule.logOut();
     monetizationModule.verifyMonetizationModuleNotShown();
   }
 
@@ -291,7 +291,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, testArticle);
+    monetizationModule.logOut();
     monetizationModule.verifyMonetizationModuleShown();
   }
 
@@ -323,7 +323,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, testArticle);
+    monetizationModule.logOut();
     monetizationModule.verifyMonetizationModuleNotShown();
   }
 
@@ -371,7 +371,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
-    monetizationModule.logOut(wikiURL, TEST_TOP_100_ARTICLE);
+    monetizationModule.logOut();
     monetizationModule.verifyMonetizationModuleNotShown();
   }
 

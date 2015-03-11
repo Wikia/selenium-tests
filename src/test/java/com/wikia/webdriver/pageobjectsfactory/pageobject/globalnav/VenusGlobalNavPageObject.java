@@ -137,7 +137,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public DropDownComponentObject logOut() {
-    return getAccountNavigation().openDropDown().logOut();
+    return getAccountNavigation().openDropDown().clickLogOut();
   }
 
   public boolean isLocalSearchDisabled() {
