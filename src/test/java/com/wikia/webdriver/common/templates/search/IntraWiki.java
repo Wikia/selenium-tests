@@ -20,7 +20,7 @@ public class IntraWiki extends NewTestTemplate {
     }
 
     protected static final int RESULTS_PER_PAGE = 25;
-    protected static final String SEARCH_PHRASE_RESULTS = "a";
+    protected static final String SEARCH_PHRASE_RESULTS = "A";
     protected static final String SEARCH_PAGINATION_RESULTS = "what";
     protected static final String SEARCH_RESULT_WITH_EXTENSION = "betweenlions";
     protected static final String SEARCH_PHRASE_NO_RESULTS = "qazwsxedcrfvtgb";
