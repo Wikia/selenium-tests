@@ -30,7 +30,7 @@ public class ImageStorageTests extends NewTestTemplate {
   String imageURL;
   String imageThumbnailURL;
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_001"}, invocationCount = 15)
+  @Test(groups = {"ImageStorageTests", "ImageStorage_001"})
   @UseUnstablePageLoadStrategy
   public void ImageStorage_001_deleteImage_QAART_521() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
