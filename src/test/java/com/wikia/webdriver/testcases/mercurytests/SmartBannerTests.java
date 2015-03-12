@@ -6,13 +6,21 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBanne
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
  */
 public class SmartBannerTests extends NewTestTemplate {
+
+  @BeforeMethod(alwaysRun = true)
+  public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+  }
 
   private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
                                                         "marvel", "tardis", "starwars", "lego"};
