@@ -40,7 +40,7 @@ public class TestKruxSegment extends NewTestTemplate {
   )
   public void testStandardSegmentOasis(List<Pair> pages, String segment, boolean isPresent,
                                        String cookie) {
-    testStandartSegment(pages, segment, isPresent, cookie);
+    testStandardSegment(pages, segment, isPresent, cookie);
   }
 
   @Test(
@@ -50,7 +50,7 @@ public class TestKruxSegment extends NewTestTemplate {
   )
   public void testStandardSegmentWikiaMobile(List<Pair> pages, String segment, boolean isPresent,
                                              String cookie) {
-    testStandartSegment(pages, segment, isPresent, cookie);
+    testStandardSegment(pages, segment, isPresent, cookie);
   }
 
   @Test(
@@ -60,10 +60,10 @@ public class TestKruxSegment extends NewTestTemplate {
   )
   public void testStandardSegmentMercury(List<Pair> pages, String segment, boolean isPresent,
                                          String cookie) {
-    testStandartSegment(pages, segment, isPresent, cookie);
+    testStandardSegment(pages, segment, isPresent, cookie);
   }
 
-  private void testStandartSegment(List<Pair> pages, String segment, boolean isPresent,
+  private void testStandardSegment(List<Pair> pages, String segment, boolean isPresent,
                                    String cookie) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
     adsKruxObject.setKruxUserCookie(cookie);
