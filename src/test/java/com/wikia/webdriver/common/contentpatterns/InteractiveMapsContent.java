@@ -18,7 +18,7 @@ public class InteractiveMapsContent {
   public static final int SELECTED_MAP_INDEX = 0;
   public static final int SELECTED_TEMPLATE_INDEX = 0;
   public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72};
-  public static final String ASSOCIATED_ARTICLE_NAME = "1362388878614";
+  public static final String ASSOCIATED_ARTICLE_NAME = "File:400x200.png";
   public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
   public static final String
       TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND =
