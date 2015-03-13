@@ -10,6 +10,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
@@ -18,6 +20,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
