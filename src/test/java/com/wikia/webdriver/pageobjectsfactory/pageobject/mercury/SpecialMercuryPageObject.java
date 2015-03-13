@@ -22,7 +22,7 @@ public class SpecialMercuryPageObject extends MobileBasePageObject {
 
   public void clickMercuryButton() {
     waitForElementVisibleByElement(optInButton);
-    if ("out".equals(optInButton.getAttribute("value"))) {
+    if ("in".equals(optInButton.getAttribute("value"))) {
       optInButton.click();
     }
   }
