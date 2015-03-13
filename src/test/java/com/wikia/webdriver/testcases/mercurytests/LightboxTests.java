@@ -1,27 +1,30 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import io.appium.java_client.android.AndroidDriver;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-
-import org.openqa.selenium.remote.DriverCommand;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
+import org.openqa.selenium.remote.DriverCommand;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
+import io.appium.java_client.android.AndroidDriver;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class LightboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
@@ -156,6 +159,7 @@ public class LightboxTests extends NewTestTemplate {
                          "Moving up doesn't work");
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
-    Assertion.assertTrue(lightbox.isImageMovedToDirectionAfterZoomIn(touchAction, DIRECTION_DOWN), "Moving down doesn't work");
+    Assertion.assertTrue(lightbox.isImageMovedToDirectionAfterZoomIn(touchAction, DIRECTION_DOWN),
+                         "Moving down doesn't work");
   }
 }

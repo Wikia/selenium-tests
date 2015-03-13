@@ -5,16 +5,21 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageObject;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class SEOTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki("muppet");
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
@@ -70,7 +75,8 @@ public class SEOTests extends NewTestTemplate {
     leftNav.clickSearchButton();
     leftNav.clickRandomPage();
     Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()), "og:description tags are the same");
+    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
+                          "og:description tags are the same");
   }
 
   // SEOT05

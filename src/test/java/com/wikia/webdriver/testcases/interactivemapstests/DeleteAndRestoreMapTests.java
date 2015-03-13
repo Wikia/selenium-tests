@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 import org.testng.annotations.Test;
 
 /**
- * @author: Lukasz Nowak
+ * @author: Lukasz Nowak and RodriGomez
  * @ownership: Mobile Web
  */
 
@@ -40,7 +40,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
   }
 
@@ -64,7 +64,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
   }
@@ -76,30 +76,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject
         selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
-    selectedMap.verifyMapOpened();
-    selectedMap.restoreMap();
-  }
-
-  @Test(groups = {"DeleteAndRestoreMapTests_006", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_006_SysOpCanDeleteMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameSysop, credentials.passwordSysop, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
-        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[3]);
-    selectedMap.verifyMapOpened();
-    DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
-    InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-  }
-
-  @Test(groups = {"DeleteAndRestoreMapTests_007", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_007_SysOpCanRestoreMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameSysop, credentials.passwordSysop, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
-        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[3]);
-    selectedMap.verifyMapOpened();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
   }
 }

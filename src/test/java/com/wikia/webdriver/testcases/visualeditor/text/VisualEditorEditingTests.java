@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
@@ -27,7 +28,7 @@ import java.util.List;
  * in source more then publish
  */
 
-public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
+public class VisualEditorEditingTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   WikiBasePageObject base;

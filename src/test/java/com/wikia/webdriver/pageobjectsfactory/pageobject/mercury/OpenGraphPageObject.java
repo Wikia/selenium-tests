@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class OpenGraphPageObject extends MobileBasePageObject {
 
@@ -70,13 +71,14 @@ public class OpenGraphPageObject extends MobileBasePageObject {
   }
 
   public boolean isOgSiteName() throws WebDriverException {
-    if (ogSiteName.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
     try {
+      if (ogSiteName.getAttribute("content") == null) {
+        throw new WebDriverException("Expected String but got null");
+      }
       return !ogSiteName.getAttribute("content").isEmpty();
-    } catch (NoSuchElementException e) {}
-    return false;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
   }
 
   public boolean isOgDescription() throws WebDriverException {

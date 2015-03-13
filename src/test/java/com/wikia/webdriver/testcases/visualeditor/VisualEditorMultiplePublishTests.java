@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  *         same article in one logged in session
  */
 
-public class VisualEditorMultiplePublishTests extends NewTestTemplateBeforeClass {
+public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   VisualEditorPageObject ve;

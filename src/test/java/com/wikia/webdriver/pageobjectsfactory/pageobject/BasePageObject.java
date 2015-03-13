@@ -474,10 +474,17 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param by The By class defined for the
-   * element
+   * Checks if the element is present in browser DOM
    */
   public WebElement waitForElementByBy(By by) {
+    wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    return driver.findElement(by);
+  }
+  
+  /**
+   * Checks if the element is visible on the browser
+   */
+  public WebElement waitForElementVisibleByBy(By by) {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));
     return driver.findElement(by);
   }
@@ -583,6 +590,18 @@ public class BasePageObject {
       wait.until(CommonExpectedConditions
           .valueToBePresentInElementsAttribute(By.cssSelector(selector),
               attribute, value));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void waitForValueToBePresentInElementsCssByCss(
+      String selector, String cssProperty, String expectedValue) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .cssValuePresentForElement(By.cssSelector(selector),
+              cssProperty, expectedValue));
     }finally {
       restoreDeaultImplicitWait();
     }
@@ -1019,4 +1038,24 @@ public class BasePageObject {
     }
     return result;
   }
+  
+  /**
+  * Send keys at the speed of good typist human.
+  * based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
+  * "A professional or good typist hits around 325 to 335 CPM (chars per minute)"
+  * This means 60 000 / 330 = 182ms
+  */
+  public void sendKeysHumanSpeed(WebElement input, String keys) {
+      int interval = 182;
+      for(char c : keys.toCharArray()) {
+          String character = String.valueOf(c);
+          input.sendKeys(character);
+          try {
+            Thread.sleep(interval);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+      }
+  }
+  
 }

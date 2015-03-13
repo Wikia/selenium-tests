@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -372,32 +373,76 @@ public class AdsDataProvider {
   public static Object[][] kruxRealTimeSegment() {
     return new Object[][]{
         {
-            Arrays.asList("http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_1",
-                          "http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_2",
-                          "http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_3"),
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("adtest", "SyntheticTests/Krux/Page_2"),
+                          Pair.of("adtest", "SyntheticTests/Krux/Page_3")),
             "o8l9bis26"
         }
     };
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegment() {
+  public static Object[][] kruxStandardSegmentOasis() {
     return new Object[][]{
         {
-            Arrays.asList("http://pokemon.wikia.com/wiki/Barry%27s_Roserade",
-                          "http://glee.wikia.com/wiki/Glee_TV_Show_Wiki",
-                          "http://glee.wikia.com/wiki/Rachel_Berry"),
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JpSWxdE4",
+            "JpSWxdE4"
         },
         {
-            Arrays.asList("http://adtest.wikia.com/wiki/SyntheticTests/Krux/Page_1",
-                          "http://glee.wikia.com/wiki/Glee_TV_Show_Wiki",
-                          "http://glee.wikia.com/wiki/Kurt_Hummel"),
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
             "mf20tfg50",
             false,
-            "JpYqU4Qn",
+            "JpYqU4Qn"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegmentWikiaMobile() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
+            "mf20tfg50",
+            true,
+            "JsJ8VJC8"
+        },
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
+            "mf20tfg50",
+            false,
+            "JsJ9_bf5"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegmentMercury() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
+            "mf20tfg50",
+            true,
+            "JsJ-_GLH"
+        },
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
+            "mf20tfg50",
+            false,
+            "JsJ_0XFq"
         }
     };
   }

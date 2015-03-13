@@ -6,9 +6,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 
 /**
  * @author Dmytro Rets
@@ -19,12 +21,13 @@ public class TestKruxSegment extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxRealTimeSegment",
-      groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
+      groups = {"KruxRealtimeSegment", "Ads"}
   )
-  public void testRealTimeSegment(List<String> pages, String segmentId) {
+  public void testRealTimeSegment(List<Pair> pages, String segmentId) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
-    for (String page : pages) {
-      adsKruxObject.getUrl(page);
+    for (Pair page : pages) {
+      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
+      adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
     }
     Assertion.assertStringContains(segmentId, adsKruxObject.getKruxSegments());
@@ -32,15 +35,41 @@ public class TestKruxSegment extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandardSegment",
-      groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
+      dataProvider = "kruxStandardSegmentOasis",
+      groups = {"KruxSegmentDesktop", "Ads"}
   )
-  public void testStandardSegment(List<String> pages, String segment, boolean isPresent,
-                                  String cookie) {
+  public void testStandardSegmentOasis(List<Pair> pages, String segment, boolean isPresent,
+                                       String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "kruxStandardSegmentWikiaMobile",
+      groups = {"KruxSegmentWikiaMobile", "Ads"}
+  )
+  public void testStandardSegmentWikiaMobile(List<Pair> pages, String segment, boolean isPresent,
+                                             String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "kruxStandardSegmentMercury",
+      groups = {"KruxSegmentMercury", "Ads"}
+  )
+  public void testStandardSegmentMercury(List<Pair> pages, String segment, boolean isPresent,
+                                         String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  private void testStandardSegment(List<Pair> pages, String segment, boolean isPresent,
+                                   String cookie) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
     adsKruxObject.setKruxUserCookie(cookie);
-    for (String page : pages) {
-      adsKruxObject.getUrl(page);
+    for (Pair page : pages) {
+      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
+      adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
       PageObjectLogging.log("DEBUG kxsegs", adsKruxObject.getKxsegs(), true);
       PageObjectLogging.log("DEBUG kxkuid", adsKruxObject.getKxkuid(), true);
