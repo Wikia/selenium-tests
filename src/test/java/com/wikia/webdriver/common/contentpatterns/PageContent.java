@@ -66,7 +66,7 @@ public class PageContent {
   public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
   //image storage
   public static final String FILE_DELETE_AND_RESTORE = "Constantine_test.png";
-  public static final String FILERENAME = "HongKongHarbour.jpg";
+  public static final String FILERENAME = "Image003.jpg";
   public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
   public static final String[] LIST_OF_FILES = {

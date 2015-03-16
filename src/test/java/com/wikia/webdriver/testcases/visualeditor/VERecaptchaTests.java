@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * @ownership Contribution <p/> VE-1233 Testing Anon adding external link would prompt recaptcha
  */
 
-public class VERecaptchaTests extends NewTestTemplateBeforeClass {
+public class VERecaptchaTests extends NewTestTemplate {
 
   WikiBasePageObject base;
 

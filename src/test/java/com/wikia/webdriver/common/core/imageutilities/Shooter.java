@@ -63,11 +63,7 @@ public class Shooter {
   }
 
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
-    File screen = capturePage(driver);
-    Point start = element.getLocation();
-    Dimension size = element.getSize();
-    BufferedImage image = imageEditor.fileToImage(screen);
-    return image.getSubimage(start.getX(), start.getY(), size.width, size.height);
+    return imageEditor.fileToImage(captureWebElement(element, driver));
   }
 
   public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {

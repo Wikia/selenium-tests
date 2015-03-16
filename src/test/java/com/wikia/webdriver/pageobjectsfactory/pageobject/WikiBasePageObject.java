@@ -13,7 +13,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.NotificationsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -128,7 +128,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement modalUserNameInput;
   @FindBy(css = "#AccountNavigation > li > a > .avatar")
   protected WebElement userProfileAvatar;
-  @FindBy(css = "#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+  @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#AccountNavigation .subnav")
   protected WebElement userMenuDropdown;
@@ -638,22 +638,18 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       wait.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
-          return driver.findElements(By.cssSelector(
-              LOGGED_IN_USER_SELECTOR_VENUS
-                  .replace("%userName%", userName))).size() > 0;
-        }
-      });
-      //    if (body.getAttribute("class").contains("skin-monobook")) {
-      //      driver.findElement(
-      //          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
-      //              " ", "_"))));// only for verification
-      //    } else {
-      //      //Venus
-      //      driver.findElement(
-      //          By.cssSelector(
-      //              LOGGED_IN_USER_SELECTOR_VENUS
-      //                  .replace("%userName%", userName)));// only for verification
-      //    }
+          if (body.getAttribute("class").contains("skin-monobook")) {
+            return driver.findElements(
+                By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
+                    " ", "_")))).size()>0;// only for verification
+          } else {
+            //Venus
+            return driver.findElements(
+                By.cssSelector(
+                    LOGGED_IN_USER_SELECTOR_VENUS
+                        .replace("%userName%", userName))).size()>0;// only for verification
+          }
+      }});
     }finally {
       restoreDeaultImplicitWait();
     }
@@ -863,6 +859,22 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
+    }
+  }
+
+  /**
+   * Logout by navigating to 'logout' button href attribute value;
+   */
+  public void logOut(){
+    try {
+      if(navigationLogoutLink.getAttribute("href")!=null){
+        driver.get(navigationLogoutLink.getAttribute("href"));
+      }else {
+        throw new WebDriverException("No logout link provided");
+      }
+    }catch (TimeoutException e) {
+      PageObjectLogging.log("logOut",
+          "page loads for more than 30 seconds", true);
     }
   }
 

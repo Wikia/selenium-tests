@@ -22,7 +22,8 @@ public class SpecialMercuryPageObject extends MobileBasePageObject {
 
   public void clickMercuryButton() {
     waitForElementVisibleByElement(optInButton);
-    optInButton.click();
-    PageObjectLogging.log("clickMercuryButton", "Mercury button was clicked", true);
+    if ("in".equals(optInButton.getAttribute("value"))) {
+      optInButton.click();
+    }
   }
 }

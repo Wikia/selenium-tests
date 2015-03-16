@@ -59,7 +59,7 @@ public class NewTestTemplateCore {
   }
 
   protected void prepareURLs() {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());
     wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
     wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
@@ -93,6 +93,10 @@ public class NewTestTemplateCore {
   }
 
   protected void stopBrowser() {
+    if (NewDriverProvider.getMobileDriver() != null
+        && NewDriverProvider.getMobileDriver().getSessionId() != null) {
+      NewDriverProvider.getMobileDriver().quit();
+    }
     if (driver != null) {
       driver.quit();
     }

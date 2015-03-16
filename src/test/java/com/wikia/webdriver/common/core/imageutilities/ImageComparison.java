@@ -24,8 +24,8 @@ public class ImageComparison {
    * @return boolean   - if images are the same
    */
   public boolean areFilesTheSame(File file1, File file2) {
-    byte[] fileInBytes1 = null;
-    byte[] fileInBytes2 = null;
+    byte[] fileInBytes1;
+    byte[] fileInBytes2;
     try {
       fileInBytes1 = FileUtils.readFileToByteArray(file1);
       fileInBytes2 = FileUtils.readFileToByteArray(file2);
@@ -55,9 +55,9 @@ public class ImageComparison {
     int count = image.getHeight() * image.getWidth();
     ;
     int diffCount = 0;
-    for (int row = 0; row < image.getWidth(); row++) {
-      for (int column = 0; column < image.getHeight(); column++) {
-        if (image.getRGB(row, column) != color.getRGB()) {
+    for (int x = 0; x < image.getWidth(); x++) {
+      for (int y = 0; y < image.getHeight(); y++) {
+        if (image.getRGB(x, y) != color.getRGB()) {
           diffCount += 1;
         }
       }
@@ -67,4 +67,27 @@ public class ImageComparison {
     }
     return true;
   }
+
+  /**
+   * @param threshold in percentage between 0 and 100.
+   */
+  public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
+    int sameCount = 0;
+    if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
+      throw new RuntimeException("Images have different sizes");
+    }
+    int count = image1.getHeight() * image1.getWidth();
+    for (int x = 0; x < image1.getWidth(); x++) {
+      for (int y = 0; y < image1.getHeight(); y++) {
+        if (image1.getRGB(x, y) == image2.getRGB(x, y)) {
+          sameCount += 1;
+        }
+      }
+      if (sameCount > ((100 - threshold) * count) / 100D) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 }

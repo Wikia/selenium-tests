@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
@@ -72,11 +71,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
         }
       });
     } finally {
-        restoreDeaultImplicitWait();
+      restoreDeaultImplicitWait();
     }
 
-      PageObjectLogging.log(
-          "DropdownVisible",
+    PageObjectLogging.log(
+        "DropdownVisible",
         "Login dropdown is visible",
         true, driver
     );
@@ -104,7 +103,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     );
   }
 
-  public DropDownComponentObject logOut() {
+  public DropDownComponentObject clickLogOut() {
     logOutButton.click();
 
     return this;
@@ -132,8 +131,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
     );
   }
 
-  public void logInViaFacebook() {
-    scrollAndClick(formConnectWithFbButton);
+  public void logInViaFacebook(String email, String password) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    waitForElementVisibleByElement(formConnectWithFbButton);
+    //When clicking via selenium dropdown disappears
+    js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
     PageObjectLogging.log(
         "logInDropDownFB",
         "facebook button clicked",
@@ -155,7 +157,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     waitForElementByElement(facebookEmailInput);
     facebookEmailInput.clear();
-    facebookEmailInput.sendKeys(Properties.emailFB);
+    facebookEmailInput.sendKeys(email);
     PageObjectLogging.log(
         "fillLogin",
         "Login field on facebook form filled",
@@ -164,7 +166,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     waitForElementByElement(facebookPasswordInput);
     facebookPasswordInput.clear();
-    facebookPasswordInput.sendKeys(Properties.passwordFB);
+    facebookPasswordInput.sendKeys(password);
     PageObjectLogging.log(
         "fillPassword",
         "Password field on facebook form filled",
