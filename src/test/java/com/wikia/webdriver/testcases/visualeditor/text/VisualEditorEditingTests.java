@@ -69,7 +69,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   @Test(
       groups = {
           "VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
-          "VisualEditorEditing_003"
+          "VisualEditorEditing_003", "VisualEditorDelete"
       }
   )
   public void VisualEditorEditing_001_insertToNewArticle() {
