@@ -38,6 +38,8 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private List<WebElement> imagesNewFiles;
   @FindBy(css = ".wikia-gallery div.wikia-gallery-item a.image")
   private List<WebElement> galleryImageBox;
+  @FindBy(css = "input[name='wpDestFile']")
+  private WebElement fileNameInput;
 
   public SpecialNewFilesPageObject(WebDriver driver) {
     super(driver);
@@ -61,8 +63,14 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     );
   }
 
+  public void setFileName(String fileName) {
+    fileNameInput.clear();
+    fileNameInput.sendKeys(fileName);
+  }
+
   public void clickOnMoreOrFewerOptions() {
-    scrollAndClick(moreOrFewerOptions);
+    moreOrFewerOptions.click();
+    waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
     PageObjectLogging.log(
         "ClickOnMoreOrFewerOptions",
         "Click on More or Fewer options (depends on which of those two is currently visible)",
@@ -72,7 +80,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void checkIgnoreAnyWarnings() {
     waitForElementByElement(ignoreAnyWarnings);
-    scrollAndClick(ignoreAnyWarnings);
+    ignoreAnyWarnings.click();
     PageObjectLogging.log(
         "CheckIgnoreAnyWarnings",
         "Check 'Ignore Any Warnings' option",
@@ -84,6 +92,9 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     browseForFileInput.sendKeys(
         getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
     );
+
+    waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
+
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 

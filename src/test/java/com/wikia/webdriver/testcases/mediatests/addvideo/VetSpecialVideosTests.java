@@ -35,7 +35,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
     FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
 
-    filePage.getVenusGlobalNav().openAccountNAvigation().logOut();
+    filePage.getVenusGlobalNav().openAccountNAvigation().clickLogOut();
     filePage.getVenusGlobalNav().openAccountNAvigation()
         .logIn(credentials.userNameStaff, credentials.passwordStaff);
     DeletePageObject deletePage = filePage.deletePage();

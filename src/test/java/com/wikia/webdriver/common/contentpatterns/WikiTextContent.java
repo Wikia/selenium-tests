@@ -32,6 +32,9 @@ public class WikiTextContent {
   public static final String LINK_PREFIX = "[[";
   public static final String LINK_POSTFIX = "]]";
 
+  public static final String EXT_LINK_PREFIX = "[";
+  public static final String EXT_LINK_POSTFIX = "]";
+
   public static final String TEXT = PageContent.ARTICLE_TEXT;
 
   public static final String PARAGRAPH_TEXT = TEXT;
@@ -55,13 +58,13 @@ public class WikiTextContent {
   public static final String BLUELINK_TEXT = LINK_PREFIX + PageContent.INTERNAL_LINK + LINK_POSTFIX;
   public static final String
       EXTERNAL_LINK_TEXT =
-      LINK_PREFIX + PageContent.EXTERNAL_LINK + LINK_POSTFIX;
+      EXT_LINK_PREFIX + PageContent.EXTERNAL_LINK + EXT_LINK_POSTFIX;
   public static final String REDLINK_TEXT = LINK_PREFIX + PageContent.REDLINK + LINK_POSTFIX;
   public static final String
       REDIRECT_LINK_TEXT =
       LINK_PREFIX + PageContent.REDIRECT_LINK + LINK_POSTFIX;
 
-	private WikiTextContent() {
+  private WikiTextContent() {
 
-	}
+  }
 }

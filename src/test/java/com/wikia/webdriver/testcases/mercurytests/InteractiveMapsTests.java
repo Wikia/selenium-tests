@@ -7,16 +7,20 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.Interactiv
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class InteractiveMapsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
@@ -44,7 +48,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickPin();
     Assertion.assertTrue(maps.isPinPopUp(), "Pin popup doesn't appear");
   }
-  
+
   // IMAPT03
   @Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMaps_003_ZoomByGesture() {
@@ -94,7 +98,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isTextInMapTitleHeader(), "Map title header is empty");
   }
-  
+
   // IMAPT07
   @Test(groups = {"MercuryInteractiveMaps_007", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMaps_007_ScrollableFilterList() {

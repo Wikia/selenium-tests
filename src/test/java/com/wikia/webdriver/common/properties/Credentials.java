@@ -115,11 +115,15 @@ public class Credentials {
 
   public String userNameDefaultPreferred;
   public String passwordDefaultPreferred;
+  
+  public String userNameGoSearchPreferred;
+  public String passwordGoSearchPreferred;
 
   public String userNameSysop;
   public String passwordSysop;
 
   public String apiToken;
+
 
   public Credentials(File credentialsFile) {
     userName = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular.username");
@@ -251,6 +255,11 @@ public class Credentials {
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.defaultPreferredUser.username");
     passwordDefaultPreferred =
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.defaultPreferredUser.password");
+    
+    userNameGoSearchPreferred =
+            XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.goSearchPreferredUser.username");
+    passwordGoSearchPreferred =
+            XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.goSearchPreferredUser.password");
 
     userNameSysop =
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiasysop.username");

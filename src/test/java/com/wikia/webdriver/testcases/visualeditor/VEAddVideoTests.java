@@ -48,7 +48,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorAddMediaDialog mediaDialog =
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
-    veNew.verifyVideo();
+    veNew.verifyVideos(0);
     veNew.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
@@ -68,7 +68,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorAddMediaDialog mediaDialog =
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.PREMIUM_VIDEO_URL);
-    veNew.verifyVideo();
+    veNew.verifyVideos(0);
     veNew.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();

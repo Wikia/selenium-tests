@@ -6,7 +6,13 @@ package com.wikia.webdriver.common.core.urlbuilder;
 public class UrlBuilder {
 
   private String env;
+  private String browser;
   private Boolean isWikia;
+
+  public UrlBuilder(String environment, String browser) {
+    this.env = environment;
+    this.browser = browser;
+  }
 
   public UrlBuilder(String environment) {
     env = environment;
@@ -16,12 +22,18 @@ public class UrlBuilder {
     env = null;
   }
 
+
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     if (!(isWikia)) {
       url += "wiki/";
     }
     url += wikiPath;
+    if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
+      return appendQueryStringToURL(url, "useskin=wikiamobile");
+    } else if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
+      return appendQueryStringToURL(url, "useskin=mercury");
+    }
     return url;
   }
 

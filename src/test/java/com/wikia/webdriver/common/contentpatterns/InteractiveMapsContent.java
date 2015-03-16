@@ -17,8 +17,8 @@ public class InteractiveMapsContent {
   public static final int PIN_TYPE_INDEX = 0;
   public static final int SELECTED_MAP_INDEX = 0;
   public static final int SELECTED_TEMPLATE_INDEX = 0;
-  public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72, 56};
-  public static final String ASSOCIATED_ARTICLE_NAME = "1362388878614";
+  public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72};
+  public static final String ASSOCIATED_ARTICLE_NAME = "File:400x200.png";
   public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
   public static final String
       TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND =
@@ -31,7 +31,7 @@ public class InteractiveMapsContent {
   public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
   public static final String
       MAP_DELETE_ERROR =
-      "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
+      "You are not allowed to execute the action you have requested.";
   public static final String MAP_DELETED_MSG = "This map is deleted";
   public static final String EXTERNAL_LINK = "http://www.gazeta.pl/0,0.html";
   public static final String

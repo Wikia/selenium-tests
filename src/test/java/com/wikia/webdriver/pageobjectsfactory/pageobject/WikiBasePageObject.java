@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.gson.Gson;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -13,7 +11,6 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -64,20 +61,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.DefaultBackoffStrategy;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -89,14 +72,11 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.MoveToOffsetAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -126,7 +106,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement modalUserNameInput;
   @FindBy(css = "#AccountNavigation > li > a > .avatar")
   protected WebElement userProfileAvatar;
-  @FindBy(css = "#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+  @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#AccountNavigation .subnav")
   protected WebElement userMenuDropdown;
@@ -183,13 +163,14 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
+  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
   @FindBy(css = "a.ajaxRegister")
   private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".global-notification div.msg a")
   private WebElement undeleteLink;
-  @FindBy(css = ".global-notification")
+  @FindBy(css = ".banner-notification")
   private WebElement flashMessage;
   @FindBy(css = "input#mw-undelete-submit")
   private WebElement restoreButton;
@@ -199,7 +180,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = ".avatar-container.logged-avatar img")
+  @FindBy(css = ".avatar-container")
   private WebElement globalNavigationAvatar;
   @FindBy(css = ".links-container .chevron")
   private WebElement globalNavigationUserChevron;
@@ -210,8 +191,6 @@ public class WikiBasePageObject extends BasePageObject {
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -444,7 +423,7 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName);
     return new FilePagePageObject(driver);
   }
-  
+
   public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
     String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
@@ -632,17 +611,25 @@ public class WikiBasePageObject extends BasePageObject {
     );
   }
 
-  public void verifyUserLoggedIn(String userName) {
-    if (body.getAttribute("class").contains("skin-monobook")) {
-      driver.findElement(
-          By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
-              " ", "_"))));// only for verification
-    } else {
-      //Venus
-      driver.findElement(
-          By.cssSelector(
-              LOGGED_IN_USER_SELECTOR_VENUS
-                  .replace("%userName%", userName)));// only for verification
+  public void verifyUserLoggedIn(final String userName) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          if (body.getAttribute("class").contains("skin-monobook")) {
+            return driver.findElements(
+                By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
+                    " ", "_")))).size()>0;// only for verification
+          } else {
+            //Venus
+            return driver.findElements(
+                By.cssSelector(
+                    LOGGED_IN_USER_SELECTOR_VENUS
+                        .replace("%userName%", userName))).size()>0;// only for verification
+          }
+      }});
+    }finally {
+      restoreDeaultImplicitWait();
     }
     PageObjectLogging.log(
         "verifyUserLoggedIn",
@@ -832,7 +819,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementByElement(cssSource);
     String source = cssSource.getText();
     PageObjectLogging.log("cssSource",
-                          "the following text was get from Wikia.css: " + source, true);
+        "the following text was get from Wikia.css: " + source, true);
     return source;
   }
 
@@ -850,6 +837,22 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
+    }
+  }
+
+  /**
+   * Logout by navigating to 'logout' button href attribute value;
+   */
+  public void logOut(){
+    try {
+      if(navigationLogoutLink.getAttribute("href")!=null){
+        driver.get(navigationLogoutLink.getAttribute("href"));
+      }else {
+        throw new WebDriverException("No logout link provided");
+      }
+    }catch (TimeoutException e) {
+      PageObjectLogging.log("logOut",
+          "page loads for more than 30 seconds", true);
     }
   }
 
@@ -1267,13 +1270,13 @@ public class WikiBasePageObject extends BasePageObject {
   public void resizeWindow(Dimension resolution) {
     resizeWindow(resolution.width, resolution.height);
   }
-  
+
   public void scrollToFooter() {
 	  waitForElementByElement(footer);
 	  scrollToElement(footer);
 	  PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
-  
+
   public void verifyGlobalNavigation() {
 	  waitForElementByElement(globalNavigationBar);
 	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
@@ -1305,27 +1308,27 @@ public class WikiBasePageObject extends BasePageObject {
 	  waitForElementByElement(placeholder);
 	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
   }
-  
+
   public void verifyAvatarNotPresent() {
-	  waitForElementNotVisibleByElement(globalNavigationAvatar);
+	  waitForElementNotPresent("a[data-id='userpage']");
 	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
-  
+
   public void verifyAvatarVisible() {
 	  waitForElementByElement(globalNavigationAvatar);
 	  PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
   }
-  
+
   public UserProfilePageObject clickOnAvatar() {
 	  waitForElementClickableByElement(globalNavigationUserChevron);
 	  globalNavigationUserChevron.click();
 	  waitForElementByElement(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
-	  globalNavigationAvatar.click();
+    globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
 	  return new UserProfilePageObject(driver);
   }
-  
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }

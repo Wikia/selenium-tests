@@ -35,9 +35,9 @@ import java.util.List;
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
-  private static final int STYLE_LIST = 0;
-  private static final int INSERT_LIST = 1;
-  private static final int HAMBURGER_LIST = 2;
+  private static final int STYLE_LIST = 1;
+  private static final int INSERT_LIST = 2;
+  private static final int HAMBURGER_LIST = 0;
 
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
@@ -95,7 +95,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By categoriesBy = By.cssSelector(".oo-ui-icon-tag");
   private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
   private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
-  private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
+  private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
 
   public VisualEditorMenu(WebDriver driver) {
     super(driver);
@@ -114,7 +114,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void selectStyle(Style style) {
-
     switch (style) {
       case BOLD:
         boldButton.click();
@@ -137,7 +136,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing style selected");
     }
-    PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
   }
 
   public void clickFormatting(By formatBy) {
@@ -151,7 +149,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void selectFormatting(Formatting format) {
-
     switch (format) {
       case PARAGRAPH:
         clickFormatting(paragraphBy);
@@ -252,66 +249,44 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickInsertItemFromDropDown(By insertBy) {
-    WebElement insertList = toolListDropDowns.get(this.INSERT_LIST);
-    WebElement insertItems = toolListItems.get(this.INSERT_LIST);
-    waitForElementVisibleByElement(insertList);
-    waitForElementClickableByElement(insertList);
-    Actions actions = new Actions(driver);
-    actions
-        .click(insertList)
-        .click(insertItems.findElement(insertBy))
-        .build()
-        .perform();
+    clickItemFromDropDown(toolListDropDowns.get(this.INSERT_LIST),
+                          toolListItems.get(this.INSERT_LIST), insertBy);
   }
 
   private void clickHamburgerItemFromDropDown(By insertBy) {
-    WebElement hamburgerList = toolListDropDowns.get(this.HAMBURGER_LIST);
-    WebElement hamburgerItems = toolListItems.get(this.HAMBURGER_LIST);
-    waitForElementVisibleByElement(hamburgerList);
-    waitForElementClickableByElement(hamburgerList);
+    clickItemFromDropDown(toolListDropDowns.get(this.HAMBURGER_LIST),
+                          toolListItems.get(this.HAMBURGER_LIST), insertBy);
+  }
+
+  private void clickItemFromDropDown(WebElement list, WebElement item, By insertBy) {
+    waitForElementClickableByElement(list);
     Actions actions = new Actions(driver);
     actions
-        .click(hamburgerList)
-        .click(hamburgerItems.findElement(insertBy))
+        .click(list)
+        .click(item.findElement(insertBy))
         .build()
         .perform();
   }
 
   public VisualEditorHyperLinkDialog clickLinkButton() {
     linkButton.click();
-    PageObjectLogging.log("clickLinkButton", "link button clicked", true);
     return new VisualEditorHyperLinkDialog(driver);
   }
 
   public void clickCodeButton() {
     codeButton.click();
-    PageObjectLogging.log("clickCodeButton", "code button clicked", true);
   }
 
   public void clickClearButton() {
     clearButton.click();
-    PageObjectLogging.log("clickClearButton", "clear styles button clicked", true);
-  }
-
-  public void clickNumListButton() {
-    numListButton.click();
-    PageObjectLogging.log("clickNumListButton", "numered list button clicked", true);
-  }
-
-  public void clickBullListButton() {
-    bulletListButton.click();
-    PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
-    driver.switchTo().defaultContent();
     waitForElementNotPresent(publishButtonDisabled);
     waitForElementVisibleByElement(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
     waitForElementClickableByElement(publishButton);
     publishButton.click();
-    PageObjectLogging
-        .log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);
     return new VisualEditorSaveChangesDialog(driver);
   }
 

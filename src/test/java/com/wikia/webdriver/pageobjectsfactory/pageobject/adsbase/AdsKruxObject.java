@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
+  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
@@ -51,7 +52,7 @@ public class AdsKruxObject extends AdsBaseObject {
     waitForKrux();
     String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
     Assertion.assertStringNotEmpty(kruxUser);
-    Assertion.assertTrue(isGptParamPresent("u", kruxUser));
+    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", kruxUser));
   }
 
   public void waitForKrux() {

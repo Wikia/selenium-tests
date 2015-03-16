@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.searchtests;
+package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Ludwik on 2015-01-23.
  */
-public class IntraWikiSearchExactMatch extends NewTestTemplate {
+public class ExactMatch extends NewTestTemplate {
 
   @Test(dataProviderClass = IntraWikiSearchProvider.class,
       dataProvider = "getArticleName",

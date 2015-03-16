@@ -6,12 +6,21 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBanne
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class SmartBannerTests extends NewTestTemplate {
+
+  @BeforeMethod(alwaysRun = true)
+  public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+  }
 
   private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
                                                         "marvel", "tardis", "starwars", "lego"};
@@ -60,7 +69,7 @@ public class SmartBannerTests extends NewTestTemplate {
   }
 
   // SBT04
-  @Test(groups = {"MercurySmartBannerTest_004", "MercurySmartBannerTests", "Mercury"})
+  @Test(groups = {"MercurySmartBannerTest_004", "MercurySmartBannerTests", "Mercury"}, enabled = false)
   public void MercurySmartBannerTest_004_IOSUserSeeGETButton() {
     BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
     BasePageObject base = new BasePageObject(driver);
@@ -74,16 +83,9 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT05
   @Test(groups = {"MercurySmartBannerTest_005", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_005_ThemeColorOnDifferentHubs() {
-    BasePageObject base;
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/");
-      base = new BasePageObject(driver);
-      if (DIFFERENT_HUBS_WIKIS[i].contains("marvel")) {
-        driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
-      } else {
-        base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[i]);
-      }
+      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?useskin=mercury");
       banner = new SmartBannerComponentObject(driver);
       Assertion.assertTrue(banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i]),
                            "Smart banner color is wrong");
