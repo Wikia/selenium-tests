@@ -93,10 +93,10 @@ public class NewTestTemplateCore {
   }
 
   protected void stopBrowser() {
-    if (NewDriverProvider.getMobileDriver() != null
+    /*if (NewDriverProvider.getMobileDriver() != null
         && NewDriverProvider.getMobileDriver().getSessionId() != null) {
       NewDriverProvider.getMobileDriver().quit();
-    }
+    }*/
     if (driver != null) {
       driver.quit();
     }
