@@ -89,7 +89,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_002"},
+      groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
   public void VisualEditorEditing_002_delete() {
