@@ -3,6 +3,9 @@
  */
 package com.wikia.webdriver.testcases.imageservingtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,11 +17,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
-import org.testng.annotations.Test;
-
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Delete image, verify 404 status, restore image, verify
- *         200 status 2. Move image, verify status
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. Delete image, verify 404 status, restore image, verify 200 status 2. Move image,
+ *         verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -32,7 +35,19 @@ public class ImageStorageTests extends NewTestTemplate {
   public void ImageStorage_001_deleteImage_QAART_521() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    FilePagePageObject file = new  SpecialNewFilesPageObject(driver).openFilePage(wikiURL, PageContent.FILE_DELETE_AND_RESTORE, true);
+
+    SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
+    filesPage.addPhoto();
+    filesPage.selectFileToUpload(PageContent.FILE);
+    String fileName = DateTime.now().getMillis() + PageContent.FILE;
+    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.setFileName(fileName);
+    filesPage.checkIgnoreAnyWarnings();
+    filesPage.clickUploadButton();
+    filesPage.verifyFileUploaded(fileName);
+
+    FilePagePageObject file =
+        new SpecialNewFilesPageObject(driver).openFilePage(wikiURL, fileName, true);
     imageURL = file.getImageUrl();
     imageThumbnailURL = file.getImageThumbnailUrl();
     file.verifyURLStatus(200, imageURL);
@@ -52,6 +67,9 @@ public class ImageStorageTests extends NewTestTemplate {
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
+
+    file.deletePage();
+    delete.submitDeletion();
   }
 
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})

@@ -276,7 +276,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended", "RTE_extended_019"})
-  public void RTE_019_MoreSympolsTools() {
+  public void RTE_019_MoreSympolsTools_QAART_537() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
