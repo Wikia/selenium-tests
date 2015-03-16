@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
@@ -13,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -37,10 +36,9 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   private List<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
   private String articleName;
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setup() {
     base = new WikiBasePageObject(driver);
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     wikiTexts = new ArrayList<>();
     wikiTexts.add(WikiTextContent.PARAGRAPH_TEXT);
     wikiTexts.add(WikiTextContent.HEADING_TEXT);
@@ -75,7 +73,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       }
   )
   public void VisualEditorEditing_001_insertToNewArticle() {
-    base = new WikiBasePageObject(driver);
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
