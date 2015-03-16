@@ -142,7 +142,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void removeText(String text) {
     selectText(text);
-    new Actions(driver).sendKeys(Keys.DELETE).build().perform();
+    editArea.sendKeys(Keys.DELETE);
   }
 
   public void verifyNumList(List<String> elements) {
