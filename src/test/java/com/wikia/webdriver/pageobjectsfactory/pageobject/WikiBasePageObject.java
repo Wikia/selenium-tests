@@ -192,7 +192,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".global-notification div.msg a")
   private WebElement undeleteLink;
-  @FindBy(css = ".global-notification")
+  @FindBy(css = ".banner-notification")
   private WebElement flashMessage;
   @FindBy(css = "input#mw-undelete-submit")
   private WebElement restoreButton;
