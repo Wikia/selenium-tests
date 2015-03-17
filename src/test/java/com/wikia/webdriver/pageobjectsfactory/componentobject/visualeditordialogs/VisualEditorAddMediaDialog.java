@@ -15,11 +15,11 @@ import java.util.List;
 
 public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
-  @FindBy(css = ".oo-ui-textInputWidget-decorated>input")
+  @FindBy(css = ".oo-ui-textInputWidget input")
   private WebElement searchInput;
-  @FindBy(css = ".oo-ui-window-foot .oo-ui-labeledElement-label")
+  @FindBy(css = ".oo-ui-window-foot .oo-ui-labelElement-label")
   private WebElement addMediaButton;
-  @FindBy(css = ".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
+  @FindBy(css = ".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labelElement-label")
   private WebElement topUploadButton;
   @FindBy(css = ".oo-ui-window-body")
   private WebElement mediaDialogBody;
@@ -31,7 +31,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private WebElement imageLicenseDropdown;
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
-  private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
+  private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget");
   private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
   private By
       mediaTitlesBy =
@@ -71,16 +71,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     super(driver);
   }
 
-  @Override
-  public void switchToIFrame() {
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("switchToIFrame", e.getMessage(), false);
-    }
-    super.switchToIFrame();
-  }
-
   private void typeInSearchTextField(String input) {
     waitForElementByElement(searchInput);
     searchInput.sendKeys(input);
@@ -88,29 +78,27 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private void clickAddMediaButton() {
     waitForElementVisibleByElement(addMediaButton);
-    waitForElementClickableByElement(addMediaButton);
     addMediaButton.click();
   }
 
   public VisualEditorPageObject addMediaByURL(String url) {
-    switchToIFrame();
+    waitForDialogVisible();
     typeInSearchTextField(url);
     waitForElementVisibleByElement(topUploadButton);
     waitForElementClickableByElement(topUploadButton);
     clickAddMediaButton();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditorAddMediaDialog searchMedia(String searchText) {
-    switchToIFrame();
+    waitForDialogVisible();
     typeInSearchTextField(searchText);
-    switchOutOfIFrame();
     return new VisualEditorAddMediaDialog(driver);
   }
 
   public VisualEditorPageObject addExistingMedia(int number) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
@@ -119,26 +107,26 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
       mediaAddIcon.click();
     }
     clickAddMediaButton();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditorPageObject uploadImage(String fileName) {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFileToUpload(fileName);
     waitForElementVisibleByElement(topUploadButton);
     clickAddMediaButton();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName) {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFileToUpload(fileName);
     waitForElementVisibleByElement(topUploadButton);
     typeNewFileName(newFileName);
     clickAddMediaButton();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
@@ -152,13 +140,13 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName,
                                             ImageLicense imageLicense) {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFileToUpload(fileName);
     waitForElementVisibleByElement(topUploadButton);
     typeNewFileName(newFileName);
     selectImageLicense(imageLicense);
     clickAddMediaButton();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
@@ -174,12 +162,12 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   public VisualEditorPageObject previewExistingMediaByIndex(int index) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     waitForElementVisibleByElement(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
     targetMedia.click();
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
@@ -195,11 +183,11 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 

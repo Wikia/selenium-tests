@@ -73,6 +73,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //AM03
@@ -93,6 +94,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
 
@@ -102,7 +104,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
   )
   public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
-    ;
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.selectMediaAndDelete();
@@ -110,5 +111,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }
