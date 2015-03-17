@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,17 +24,6 @@ import java.util.List;
 public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = config.getCredentials();
-  private String userStaff = credentials.userNameStaff;
-  private String userStaffPassword = credentials.passwordStaff;
-  private String userStaff2 = credentials.userNameStaff2;
-  private String userStaffPassword2 = credentials.passwordStaff2;
-  private String userOne = credentials.userName;
-  private String userOnePassword = credentials.password;
-  private String userTwo = credentials.userName2;
-  private String userTwoPassword = credentials.password2;
-
-
-  private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
   private ChatPageObject openChatForUser(
       WebDriver driver, String userName, String password
@@ -48,42 +38,41 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
   public void ChatPreview_001_twoUserEnterChat() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
-        driverOne, userStaff, userStaffPassword
+        driverOne, credentials.userNameStaff, credentials.passwordStaff
     );
     chatUserOne.verifyChatPage();
 
     switchToWindow(driverTwo);
     ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, userStaff2, userStaffPassword2
+        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
     );
     chatUserTwo.verifyChatPage();
     switchToWindow(driverOne);
 
-    chatUserOne.verifyUserJoinToChatMessage(userStaff2);
+    chatUserOne.verifyUserJoinToChatMessage(credentials.userNameStaff2);
   }
 
-
   @Test(groups = {"ChatPreview_002", "ChatPreview"})
-  public void Chat_002_verifySwitchingBetweenMainAndPrivateSections() {
+  public void ChatPreview_002_verifySwitchingBetweenMainAndPrivateSections() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
-        driverOne, userStaff, userStaffPassword
+        driverOne, credentials.userNameStaff, credentials.passwordStaff
     );
 
     switchToWindow(driverTwo);
     ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, userStaff2, userStaffPassword2
+        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
     );
 
-    String userTwoMessage = chatUserTwo.generateMessageFromUser(userStaff2);
+    String userTwoMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
     chatUserTwo.writeOnChat(userTwoMessage);
 
     switchToWindow(driverOne);
     chatUserOne.verifyMessageOnChat(userTwoMessage);
 
-    chatUserOne.selectPrivateMessageToUser(userStaff2);
+    chatUserOne.selectPrivateMessageToUser(credentials.userNameStaff2);
     chatUserOne.verifyPrivateMessageHeader();
-    chatUserOne.verifyPrivateMessageIsHighlighted(userStaff2);
+    chatUserOne.verifyPrivateMessageIsHighlighted(credentials.userNameStaff2);
     chatUserOne.verifyPrivateChatTitle();
 
     chatUserOne.clickOnMainChat();
@@ -92,32 +81,32 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
   }
 
   @Test(groups = {"ChatPreview_003", "ChatPreview"})
-  public void Chat_003_sendPrivateMessage() {
+  public void ChatPreview_003_sendPrivateMessage() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
-        driverOne, userStaff, userStaffPassword
+        driverOne, credentials.userNameStaff, credentials.passwordStaff
     );
 
     switchToWindow(driverTwo);
     ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, userStaff2, userStaffPassword2
+        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
     );
 
-    String userTwoPublicMessage = chatUserTwo.generateMessageFromUser(userStaff2);
+    String userTwoPublicMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
     chatUserTwo.writeOnChat(userTwoPublicMessage);
 
     switchToWindow(driverOne);
     chatUserOne.verifyMessageOnChat(userTwoPublicMessage);
 
     switchToWindow(driverTwo);
-    String userTwoPrivateMessage = chatUserTwo.generateMessageFromUser(userStaff2);
-    chatUserTwo.selectPrivateMessageToUser(userStaff);
+    String userTwoPrivateMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
+    chatUserTwo.selectPrivateMessageToUser(credentials.userNameStaff);
     chatUserTwo.writeOnChat(userTwoPrivateMessage);
 
     switchToWindow(driverOne);
     chatUserOne.verifyPrivateMessageHeader();
     chatUserOne.verifyPrivateMessageNotification();
-    chatUserOne.clickOnUserInPrivateMessageSection(userStaff2);
+    chatUserOne.clickOnUserInPrivateMessageSection(credentials.userNameStaff2);
     chatUserOne.verifyMessageOnChat(userTwoPrivateMessage);
   }
 
@@ -126,14 +115,9 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
 
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
-            driverOne, userOne, userOnePassword
+            driverOne, credentials.userName, credentials.password
     );
-    WebElement permissionError = driverOne.findElement(By.cssSelector(".WikiaPageHeader"));
-    PageObjectLogging.log(
-            "basicUserPermissions",
-            "User doesn't have permission to chat",
-            permissionError.getText().toString().matches("Permissions error.*\n?.*")
-    );
+    SpecialPageObject special = new SpecialPageObject(driver);
+    special.verifyPageHeader("Permissions error");
   }
-
 }
