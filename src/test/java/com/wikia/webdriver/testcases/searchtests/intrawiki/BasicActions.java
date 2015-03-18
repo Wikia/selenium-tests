@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
@@ -11,6 +7,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
+
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /*
  *  anonSearch: As anon basic search action and verify you are on search result page. This also prevents goSearch being active by default.
@@ -151,7 +151,7 @@ public class BasicActions extends IntraWiki {
     }
 
     @Test(groups = { "IntraWikiSearch_010", "IntraWikiSearch", "Search" })
-    public void selectImagesOrVideos() {
+    public void selectImagesOrVideos_MAIN_4153() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
         search.searchFor(SEARCH_PHRASE_RESULTS);
