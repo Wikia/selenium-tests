@@ -21,7 +21,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-outlineWidget li")
   private List<WebElement> outlineMenuItems;
-  @FindBy(css = ".oo-ui-window-foot .oo-ui-labeledElement-label")
+  @FindBy(css = ".oo-ui-window-foot .oo-ui-labelElement-label")
   private WebElement applyChangesButton;
   @FindBy(css = ".ve-ui-mwCategoryWidget input")
   private WebElement categoriesInput;
@@ -37,33 +37,33 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   private WebElement categoryDownIndicator;
   @FindBy(css = ".ve-ui-mwCategoryPopupWidget-content .oo-ui-icon-remove")
   private WebElement categoryRemoveButton;
-  @FindBy(css = ".ve-ui-mwCategoryInputWidget-menu li")
+  @FindBy(css = ".ve-ui-mwCategoryInputWidget-menu div")
   private List<WebElement> categorySuggestions;
 
-  private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
+  private By labeledElementBy = By.cssSelector(".oo-ui-labelElement-label");
 
-  private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
+  private String menuSectionItemText = "oo-ui-menuSectionOptionWidget";
 
   public VisualEditorOptionsDialog(WebDriver driver) {
     super(driver);
   }
 
   public void selectPageSettings() {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFromOutlineMenu(PAGESETTINGS);
     PageObjectLogging.log("selectPageSettings", "Page settings is selected", true);
     driver.switchTo().defaultContent();
   }
 
   public void selectCategories() {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFromOutlineMenu(CATEGORIES);
     PageObjectLogging.log("selectCategories", "Categories is selected", true);
     driver.switchTo().defaultContent();
   }
 
   public void selectLanguages() {
-    switchToIFrame();
+    waitForDialogVisible();
     selectFromOutlineMenu(LANGUAGES);
     PageObjectLogging.log("selectLanguages", "Languages is selected", true);
     driver.switchTo().defaultContent();
@@ -76,7 +76,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   }
 
   public VisualEditorPageObject clickApplyChangesButton() {
-    switchToIFrame();
+    waitForDialogVisible();
     waitForElementVisibleByElement(applyChangesButton);
     waitForElementClickableByElement(applyChangesButton);
     applyChangesButton.click();
@@ -86,7 +86,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   }
 
   public void addCategory(String cat) {
-    switchToIFrame();
+    waitForDialogVisible();
     typeCategory(cat);
     clickLinkResult();
     waitForElementByElement(categoryItem);
@@ -110,7 +110,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   }
 
   public void removeCategory(String searchStr) {
-    switchToIFrame();
+    waitForDialogVisible();
     waitForElementByElement(categoryItem);
     WebElement elementToRemove = getElementByText(categoryItems, searchStr);
     waitForElementClickableByElement(elementToRemove);
@@ -122,7 +122,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   }
 
   public void addSortKeyToCategory(String cat, String key) {
-    switchToIFrame();
+    waitForDialogVisible();
     waitForElementByElement(categoryItem);
     WebElement elementToRemove = getElementByText(categoryItems, cat);
     waitForElementClickableByElement(elementToRemove);
@@ -138,7 +138,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     List<WebElement> foundResults = new ArrayList<>();
     boolean isMatchingCategory = false;
 
-    switchToIFrame();
+    waitForDialogVisible();
     typeCategory(searchStr);
 
     switch (resultType) {
@@ -156,7 +156,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
       WebElement linkResult = categorySuggestions.get(i);
       String elementClassName = linkResult.getAttribute("class");
       if (elementClassName.contains(menuSectionItemText)) {
-        String linkCategory = linkResult.findElement(labeledElementBy).getAttribute("title");
+        String linkCategory = linkResult.findElement(labeledElementBy).getText();
         if (linkCategory.equals(matchCategoryStr)) {
           isMatchingCategory = true;
         } else {
@@ -180,17 +180,15 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
         "Found " + foundResults.size() + " result(s) under '" + matchCategoryStr + "'",
         true
     );
-    switchOutOfIFrame();
     return foundResults;
   }
 
   public void verifyLinkSuggestions(String searchStr, CategoryResultType resultType) {
     List<WebElement> results = getLinkResults(searchStr, resultType);
-    switchToIFrame();
+    waitForDialogVisible();
     for (WebElement result : results) {
       verifyLinkSuggestion(result, searchStr);
     }
-    switchOutOfIFrame();
   }
 
   private void verifyLinkSuggestion(WebElement linkResult, String searchStr) {

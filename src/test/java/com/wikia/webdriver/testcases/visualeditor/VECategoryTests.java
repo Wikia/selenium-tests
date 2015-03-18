@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Category
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
@@ -13,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -33,14 +32,13 @@ public class VECategoryTests extends NewTestTemplate {
   String articleName, testCategory, categorySearchStr;
   List<String> categoryWikiTexts;
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setup() {
     testCategory = "Ca";
     categorySearchStr = "abcd";
     categoryWikiTexts = new ArrayList<>();
     categoryWikiTexts.add("[[Category:" + testCategory + "]]");
     base = new WikiBasePageObject(driver);
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
   }
 
   //CA01
@@ -48,6 +46,7 @@ public class VECategoryTests extends NewTestTemplate {
       groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
   )
   public void VECategoryTests_001_AddNewCategory() {
+    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -89,7 +88,8 @@ public class VECategoryTests extends NewTestTemplate {
       groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"}
   )
   public void VECategoryTests_003_NewCategorySuggestions() {
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorOptionsDialog optionsDialog =
@@ -102,7 +102,8 @@ public class VECategoryTests extends NewTestTemplate {
       groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"}
   )
   public void VECategoryTests_004_MatchingCategorySuggestions() {
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorOptionsDialog optionsDialog =
@@ -121,7 +122,7 @@ public class VECategoryTests extends NewTestTemplate {
     categoryWithSortKeyWikiTexts.add("[[Category:" + testCategory2 + "|" + sortKey + "]]");
 
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorOptionsDialog optionsDialog =
