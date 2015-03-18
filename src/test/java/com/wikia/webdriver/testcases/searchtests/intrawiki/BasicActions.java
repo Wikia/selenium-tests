@@ -1,9 +1,6 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
@@ -34,9 +31,8 @@ import java.util.List;
  *  11. Verify if there are correct advanced option set as a default
  *  12. Search for some image without typing extension (.jpg) and verify photo is found
  *  13. Search for different phrases and verify there are correct namespaces in result titles
- *  14. Search for empty field and verify if search page is opened
- *  15. Verify top module
- *  16. Verify push to top is working in community.wikia.com
+ *  14. Verify top module
+ *  15. Verify push to top is working in community.wikia.com
  */
 
 public class BasicActions extends IntraWiki {
@@ -155,7 +151,7 @@ public class BasicActions extends IntraWiki {
     }
 
     @Test(groups = { "IntraWikiSearch_010", "IntraWikiSearch", "Search" })
-    public void selectImagesOrVideos() {
+    public void selectImagesOrVideos_MAIN_4153() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
         search.searchFor(SEARCH_PHRASE_RESULTS);
@@ -198,14 +194,6 @@ public class BasicActions extends IntraWiki {
     }
 
     @Test(groups = { "IntraWikiSearch_014", "IntraWikiSearch", "Search" })
-    public void searchPageOpened() {
-        IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-        search.openWikiPage(testedWiki);
-        search.searchFor("");
-        search.verifySearchPageOpened();
-    }
-
-    @Test(groups = { "IntraWikiSearch_015", "IntraWikiSearch", "Search" })
     public void topModule() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
@@ -213,7 +201,7 @@ public class BasicActions extends IntraWiki {
         search.verifyTopModule();
     }
 
-    @Test(groups = { "IntraWikiSearch_016", "IntraWikiSearch", "Search" })
+    @Test(groups = { "IntraWikiSearch_015", "IntraWikiSearch", "Search" })
     public void communityPushToTopWikiResult() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(communityWiki);

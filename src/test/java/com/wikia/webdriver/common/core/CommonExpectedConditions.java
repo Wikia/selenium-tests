@@ -490,13 +490,6 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver driver) {
         return expectedValue.equals(driver.findElement(bySelector).getCssValue(cssProperty));
       }
-
-      @Override
-      public String toString() {
-        return String.format(
-            "Element with provided selector still present!"
-        );
-      }
     };
   }
 }

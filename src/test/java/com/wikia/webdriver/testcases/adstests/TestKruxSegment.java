@@ -21,7 +21,7 @@ public class TestKruxSegment extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxRealTimeSegment",
-      groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
+      groups = {"KruxRealtimeSegment", "Ads"}
   )
   public void testRealTimeSegment(List<Pair> pages, String segmentId) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
@@ -35,11 +35,36 @@ public class TestKruxSegment extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandardSegment",
-      groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
+      dataProvider = "kruxStandardSegmentOasis",
+      groups = {"KruxSegmentDesktop", "Ads"}
   )
-  public void testStandardSegment(List<Pair> pages, String segment, boolean isPresent,
-                                  String cookie) {
+  public void testStandardSegmentOasis(List<Pair> pages, String segment, boolean isPresent,
+                                       String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "kruxStandardSegmentWikiaMobile",
+      groups = {"KruxSegmentWikiaMobile", "Ads"}
+  )
+  public void testStandardSegmentWikiaMobile(List<Pair> pages, String segment, boolean isPresent,
+                                             String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "kruxStandardSegmentMercury",
+      groups = {"KruxSegmentMercury", "Ads"}
+  )
+  public void testStandardSegmentMercury(List<Pair> pages, String segment, boolean isPresent,
+                                         String cookie) {
+    testStandardSegment(pages, segment, isPresent, cookie);
+  }
+
+  private void testStandardSegment(List<Pair> pages, String segment, boolean isPresent,
+                                   String cookie) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
     adsKruxObject.setKruxUserCookie(cookie);
     for (Pair page : pages) {

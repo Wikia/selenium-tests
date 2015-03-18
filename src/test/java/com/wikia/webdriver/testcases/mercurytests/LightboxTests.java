@@ -12,6 +12,8 @@ import org.openqa.selenium.remote.DriverCommand;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import io.appium.java_client.android.AndroidDriver;
 
 /**
@@ -22,6 +24,7 @@ public class LightboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void optInMercury() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
