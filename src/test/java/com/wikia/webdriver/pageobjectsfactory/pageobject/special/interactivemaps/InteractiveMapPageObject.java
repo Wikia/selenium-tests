@@ -276,6 +276,11 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
   }
 
+  public void verifyMapOpenedForDeleteMapTests() {
+    waitForElementVisibleByElement(mapFrame);
+    PageObjectLogging.log("verifyMapOpenedForDeleteMapTests", "Map was opened", true);
+  }
+
   public void verifyCreatedMapTitle(String mapTitle) {
     waitForElementByElement(createdMapTitle);
     Assertion.assertEquals(mapTitle, createdMapTitle.getText());
