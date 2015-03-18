@@ -66,7 +66,7 @@ public class MobileLoginTests extends NewTestTemplate {
     login.verifyEmptyPasswordErrorMessage();
   }
 
-  @Test(groups = {"MobileLogin_005", "MobileLogin", "Mobile"})
+  @Test(groups = {"MobileLogin_005", "MobileLogin", "Mobile"}, enabled = false)
   public void MobileLogin_005_facebookLogin() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);

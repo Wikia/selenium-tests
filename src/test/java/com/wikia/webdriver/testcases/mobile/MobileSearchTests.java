@@ -71,7 +71,7 @@ public class MobileSearchTests extends NewTestTemplate {
     search.verifyNextPageButtonIsVisible();
   }
 
-  @Test(groups = {"MobileSearch_005", "MobileSearch", "Mobile"})
+  @Test(groups = {"MobileSearch_005", "MobileSearch", "Mobile"}, enabled = false)
   public void MobileSearch_005_SearchPageResults() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);

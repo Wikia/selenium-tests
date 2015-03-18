@@ -73,7 +73,7 @@ public class MobileModalTests extends NewTestTemplate {
     modal.verifyModalClosed();
   }
 
-  @Test(groups = {"MobileModal_005", "MobileModal", "Mobile"})
+  @Test(groups = {"MobileModal_005", "MobileModal", "Mobile"}, enabled = false)
   public void MobileModal_005_positionAfterCloseModal() {
     MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
     mobile.openModals(wikiURL);
