@@ -26,6 +26,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private static final String SLOT_BELOW_CATEGORY = "below_category";
   private static final String SLOT_ABOVE_FOOTER = "above_footer";
   private static final int NUM_OF_REDIRECT = 5;
+  private static final int SINGLE = 0;
+  private static final int MULTI = 1;
 
   @FindBy(css = ".adsbygoogle.ad-responsive-ic")
   private WebElement adsenseInsInContent;
@@ -67,6 +69,20 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By primeProductPriceBy = By.cssSelector(".product-price");
   private By productThumbBy = By.cssSelector(".product-thumb");
   private By productThumbImgBy = By.cssSelector(".product-thumb img");
+  private By moduleTitleBy = By.cssSelector(".module-title");
+
+  //Ecommerce
+  private By ecommerceContainer = By.cssSelector(".monetization-module[data-mon-type='ecommerce']");
+  private By
+      MonetizationModuleEcommerceListBy =
+      By.cssSelector(".monetization-module[data-mon-type='ecommerce']");
+  private By slotInContentEcommerceBy = By.cssSelector("#monetization-ecommerce-in_content");
+  private By slotAboveFooterEcommerceBy = By.cssSelector("#monetization-ecommerce-above_footer");
+  private By slotBelowCategoryEcommerceBy = By.cssSelector("#monetization-ecommerce-below_category");
+  private By slotAboveTitleEcommerceBy = By.cssSelector("#monetization-ecommerce-above_title");
+  private By slotBelowTitleEcommerceBy = By.cssSelector("#monetization-ecommerce-below_title");
+  private By eCommerceMultipleProductBy = By.cssSelector(".ecommerce-multiple-product");
+  private By eCommerceSingleProductBy = By.cssSelector(".ecommerce-single-product");
 
   public MonetizationModuleComponentObject(WebDriver driver) {
     super(driver);
@@ -81,7 +97,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMonetizationModuleShown() {
-    waitForElementByElementLocatedBy(monetizationModuleContainer);
+    waitForElementByBy(monetizationModuleContainer);
     Assertion.assertTrue(checkIfElementOnPage(monetizationModuleContainer));
     PageObjectLogging.log("verifyMonetizationModuleShown", "Monetization module is visible", true);
   }
@@ -346,6 +362,89 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
                             "Unable to find " + SLOT_IN_CONTENT + "after " + NUM_OF_REDIRECT
                             + " redirects", false, driver);
     }
+  }
+
+  public void verifyEcommerceUnitShown() {
+    waitForElementByElementLocatedBy(ecommerceContainer);
+    Assertion.assertTrue(checkIfElementOnPage(ecommerceContainer));
+    PageObjectLogging.log("verifyEcommerceUnitShown", "Ecommerce unit is visible", true);
+  }
+
+  public void verifyEcommerceUnitSlot(int isMulti) {
+    List<WebElement> listWebElements = driver.findElements(MonetizationModuleEcommerceListBy);
+    for (WebElement elem : listWebElements) {
+      String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
+      if (isMulti == MULTI) {
+        switch (slotName) {
+          case "in_content":
+            verifyEcommerceUnitShown(slotInContentEcommerceBy, eCommerceMultipleProductBy);
+            break;
+          case "below_category":
+            verifyEcommerceUnitShown(slotBelowCategoryEcommerceBy, eCommerceMultipleProductBy);
+            break;
+          case "above_footer":
+            verifyEcommerceUnitShown(slotAboveFooterEcommerceBy, eCommerceMultipleProductBy);
+            break;
+          default:
+            PageObjectLogging
+                .log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+            break;
+        }
+        verifyNumOfProductThumbVisible(eCommerceMultipleProductBy);
+      } else {
+        switch (slotName) {
+          case "in_content":
+            verifyEcommerceUnitShown(slotInContentEcommerceBy, eCommerceSingleProductBy);
+            break;
+          case "below_category":
+            verifyEcommerceUnitShown(slotBelowCategoryEcommerceBy, eCommerceSingleProductBy);
+            break;
+          case "above_footer":
+            verifyEcommerceUnitShown(slotAboveFooterEcommerceBy, eCommerceSingleProductBy);
+            break;
+          default:
+            PageObjectLogging
+                .log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+            break;
+        }
+        verifyNumOfProductThumbVisible(eCommerceSingleProductBy);
+      }
+    }
+  }
+
+  private void verifyNumOfProductThumbVisible(By numOfProductBy) {
+    List<WebElement> thumbElemsList = driver.findElement(numOfProductBy).findElements(productThumbBy);
+    if (numOfProductBy.equals(eCommerceMultipleProductBy)) {
+      Assertion.assertTrue(thumbElemsList.size() > 1,
+                           "Expecting more than 1 product thumb image. Found: "
+                           + thumbElemsList.size());
+    } else {
+      Assertion.assertTrue(thumbElemsList.size() == 1,
+                           "Expecting more than 1 product thumb image. Found: "
+                           + thumbElemsList.size());
+    }
+  }
+
+  private void verifyEcommerceUnitShown(By slotBy, By numOfProductBy) {
+    waitForElementByElementLocatedBy(slotBy);
+    waitForElementByElementLocatedBy(numOfProductBy);
+    scrollToElement(numOfProductBy);
+    Assertion.assertTrue(checkIfElementOnPage(numOfProductBy));
+    PageObjectLogging.log("verifyEcommerceUnitShown", "Ecommerce unit is visible", true, driver);
+  }
+
+  public void verifyEcommerceUnitNotShownAboveTitle() {
+    waitForElementNotPresent(slotAboveTitleEcommerceBy);
+    PageObjectLogging
+        .log("verifyEcommerceUnitNotShownAboveTitle", "Ecommerce unit is not shown above the title",
+             true);
+  }
+
+  public void verifyEcommerceUnitNotShownBelowTitle() {
+    waitForElementNotPresent(slotBelowTitleEcommerceBy);
+    PageObjectLogging
+        .log("verifyEcommerceUnitNotShownBelowTitle", "Ecommerce unit is not shown below the title",
+             true);
   }
 
   private WebElement redirectUntilDesiredSlotShown(By adSlotBy, String adSlotName) {
