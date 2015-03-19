@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.events.EventsGlobalNavigation;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
+import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -48,25 +49,25 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
 	
     	navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
     	navbar.clickEnterToSearch();
-    	navbar.dismissPopupWindow();
+    	AlertHandler.dismissPopupWindow(driver);
     	
     	navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
 		navbar.clickSearchButton();
-		navbar.dismissPopupWindow();
+		AlertHandler.dismissPopupWindow(driver);
         
     	navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
     	navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
     	navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
-    	navbar.dismissPopupWindow();
+    	AlertHandler.dismissPopupWindow(driver);
     	navbar.clickSearchButton();
-    	navbar.dismissPopupWindow();
+    	AlertHandler.dismissPopupWindow(driver);
     	
         navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
 		navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
 		navbar.clickSuggestion(SearchContent.SEARCH_ARTICLE);
-		navbar.dismissPopupWindow();
+		AlertHandler.dismissPopupWindow(driver);
     	navbar.clickEnterToSearch();
-    	navbar.dismissPopupWindow();
+    	AlertHandler.dismissPopupWindow(driver);
     	
         List<JsonObject> expectedEvents = Arrays.asList(
                 EventsGlobalNavigation.searchButtonClick,
