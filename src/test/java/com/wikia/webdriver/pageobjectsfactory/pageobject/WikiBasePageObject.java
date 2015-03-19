@@ -190,9 +190,9 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
-  @FindBy(css = ".global-notification div.msg a")
+  @FindBy(css = ".banner-notification div.msg a")
   private WebElement undeleteLink;
-  @FindBy(css = ".global-notification")
+  @FindBy(css = ".banner-notification")
   private WebElement flashMessage;
   @FindBy(css = "input#mw-undelete-submit")
   private WebElement restoreButton;

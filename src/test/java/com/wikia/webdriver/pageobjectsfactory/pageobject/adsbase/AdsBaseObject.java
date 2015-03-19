@@ -382,27 +382,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   }
 
-  private boolean checkTagsPresent(WebElement slotElement) {
-    try {
-      waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
-      PageObjectLogging.log(
-          "IFrameOrImageFound",
-          "Image or iframe was found in slot in less then 30 seconds",
-          true,
-          driver
-      );
-      return true;
-    } catch (TimeoutException e) {
-      PageObjectLogging.log(
-          "IFrameOrImgNotFound",
-          "Nor image or iframe was found in slot for 30 seconds",
-          false,
-          driver
-      );
-      return false;
-    }
-  }
-
   protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
     String formattedScriptText = scriptText.replaceAll("\\s", "");
 
@@ -468,30 +447,6 @@ public class AdsBaseObject extends WikiBasePageObject {
             true
         );
       }
-    }
-  }
-
-  protected void verifyAdsFromProvider(String providerName, List<WebElement> slots) {
-    String providerSpecificSelector = AdsContent.getElementForProvider(providerName);
-    for (WebElement slot : slots) {
-      if (!checkIfElementInElement(providerSpecificSelector, slot)) {
-        PageObjectLogging.log(
-            "NoAdsFromProvider",
-            "Ads from " + providerName
-            + " not found in slot: " + slot.getAttribute("id"),
-            false
-        );
-        throw new NoSuchElementException(
-            "Call to provider: " + providerName
-            + " in slot: " + slot.getAttribute("id") + " not found!"
-        );
-      }
-      PageObjectLogging.log(
-          "AdsFromProviderFound",
-          "Ads from " + providerName
-          + " found in slot: " + slot.getAttribute("id"),
-          true
-      );
     }
   }
 
@@ -626,11 +581,12 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private String getGptParams(String slotName, String src, String attr) {
-    return getIframe(slotName, src).getAttribute(attr);
+    WebElement adsDiv = driver.findElement(By.cssSelector("[id*='" + src + "/" + slotName + "']"));
+    return adsDiv.getAttribute(attr);
   }
 
   private WebElement getIframe(String slotName, String src) {
-    return driver.findElement(By.cssSelector("[id*='" + src + "/" + slotName + "']"));
+    return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
   /**
@@ -698,8 +654,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyParamValue(String paramName, String paramValue, boolean expected) {
-    Assertion.assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue), expected,
-                           "parameter \"" + paramName + "\" not found");
+    Assertion
+        .assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue), expected,
+                      "parameter \"" + paramName + "\" not found");
     PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
                                               + expected, true, driver);
   }
@@ -722,8 +679,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject verifySize(String slotName, int slotWidth, int slotHeight) {
-    WebElement element = getWebElement(slotName);
+  public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
+    WebElement element = getIframe(slotName, src);
     waitForElementToHaveSize(slotWidth, slotHeight, element);
     Dimension size = element.getSize();
     Assertion.assertEquals(size.getWidth(), slotWidth);
@@ -740,16 +697,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public AdsBaseObject verifyAdImage(String slotName, String imageUrl) {
-    WebElement element = getWebElement(slotName);
+  public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
+    WebElement element = getIframe(slotName, src);
     Assertion.assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
     PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
     return this;
-  }
-
-  private WebElement getWebElement(String slotName) {
-    String slotSelector = AdsContent.getSlotSelector(slotName);
-    return driver.findElement(By.cssSelector(slotSelector));
   }
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
@@ -765,7 +717,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       String providerSlotName = providerSlot.getAttribute("id");
       String provider = "";
       for (String providerName : PROVIDERS) {
-        String providerSearch = providerName.equals("Liftium") ? providerName : "/" + providerName + "/";
+        String
+            providerSearch =
+            providerName.equals("Liftium") ? providerName : "/" + providerName + "/";
         if (providerSlotName.contains(providerSearch)) {
           provider = providerName;
           break;

@@ -152,7 +152,7 @@ public class BasicActions extends IntraWiki {
     }
 
     @Test(groups = { "IntraWikiSearch_010", "IntraWikiSearch", "Search" })
-    public void selectImagesOrVideos() {
+    public void selectImagesOrVideos_MAIN_4153() {
         IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
         search.openWikiPage(testedWiki);
         search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);

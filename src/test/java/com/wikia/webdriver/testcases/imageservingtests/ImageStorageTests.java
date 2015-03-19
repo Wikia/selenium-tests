@@ -77,16 +77,30 @@ public class ImageStorageTests extends NewTestTemplate {
   public void ImageStorage_002_moveImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    FilePagePageObject file = base.openFilePage(wikiURL, PageContent.FILERENAME, true);
+
+    SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
+    filesPage.addPhoto();
+    filesPage.selectFileToUpload(PageContent.FILE);
+    String fileName = DateTime.now().getMillis() + PageContent.FILE;
+    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.setFileName(fileName);
+    filesPage.checkIgnoreAnyWarnings();
+    filesPage.clickUploadButton();
+    filesPage.verifyFileUploaded(fileName);
+
+    FilePagePageObject file = base.openFilePage(wikiURL, fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
-    String imageNewName = renamePage.getTimeStamp() + PageContent.FILERENAME;
+    String imageNewName = renamePage.getTimeStamp() + fileName;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
     file = base.openFilePage(wikiURL, imageNewName, true);
     renamePage = file.renameUsingDropdown();
-    renamePage.rename(PageContent.FILERENAME, true);
+    renamePage.rename(fileName, true);
     file.verifyNotificationMessage();
-    file.verifyHeader(PageContent.FILERENAME);
+    file.verifyHeader(fileName);
+
+    DeletePageObject delete = file.deletePage();
+    delete.submitDeletion();
   }
 }

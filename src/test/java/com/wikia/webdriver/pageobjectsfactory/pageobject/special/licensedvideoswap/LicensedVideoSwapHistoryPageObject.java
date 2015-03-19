@@ -19,7 +19,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
   private WebElement backToLvsBtn;
   @FindBy(css = ".undo-link")
   private WebElement firstUndoLink;
-  @FindBy(css = ".global-notification .msg")
+  @FindBy(css = ".banner-notifications-wrapper .msg")
   private WebElement notification;
 
   public LicensedVideoSwapHistoryPageObject(WebDriver driver) {
