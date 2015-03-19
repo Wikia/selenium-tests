@@ -793,4 +793,54 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
+
+  @DataProvider(name = "MonetizationModuleTest_021")
+  public static Object[][] DataMonetizationModuleTest_022() {
+    return new Object[][]{
+        {"JP", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
+        {"DE", false, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
+        {"CA", true, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
+        {"GB", false, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
+        {"GB", true, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
+        {"CA", false, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
+        {"DE", true, TEST_ECOMMERCE_MULTI_LIGHT_WIKI, TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE, MULTI},
+        {"JP", false, TEST_ECOMMERCE_MULTI_LIGHT_WIKI, TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE, MULTI},
+    };
+  }
+
+  /**
+   * MON-284
+   * Ecommerce: The monetization module single or multiple product is NOT shown on article page on
+   * the rest for particular geos (ic/bc/af slots)
+   *
+   * @author Robert Chan
+   */
+  @Test(
+      dataProvider = "DataMonetizationModuleTest_022",
+      groups = {"MonetizationModule", "DataMonetizationModuleTest_022", "Monetization"}
+  )
+  public void MonetizationModuleTest_022(String countryCode, Boolean isFromsearch, String testWiki,
+                                         String testArticle, int isMulti) {
+
+    wikiURL = urlBuilder.getUrlForWiki(testWiki);
+    String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(articleURL);
+    MonetizationModuleComponentObject
+        monetizationModule =
+        new MonetizationModuleComponentObject(driver);
+    if (isFromsearch) {
+      monetizationModule.setCookieFromSearch();
+    } else {
+      monetizationModule.deleteCookieFromSearch();
+    }
+    monetizationModule.setCookieGeo(countryCode);
+    // anon user
+    base.refreshPage();
+    monetizationModule.verifyMonetizationModuleNotShown();
+    // logged in user
+    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
+    base.openWikiPage(articleURL);
+    monetizationModule.verifyMonetizationModuleNotShown();
+  }
 }

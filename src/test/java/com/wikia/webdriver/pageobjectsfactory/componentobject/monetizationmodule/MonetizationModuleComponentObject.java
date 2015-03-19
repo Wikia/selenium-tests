@@ -35,6 +35,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private WebElement adsenseInsOthers;
   @FindBy(css = ".ad-header")
   private WebElement adHeader;
+  @FindBy(css = ".monetization-module")
+  private WebElement monetizationModuleContainerElem;
 
   private By monetizationModuleContainer = By.cssSelector(".monetization-module");
   private By slotAboveTitle = By.cssSelector(".monetization-module[data-mon-slot='above_title']");
@@ -103,7 +105,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMonetizationModuleNotShown() {
-    waitForElementNotPresent(monetizationModuleContainer);
+    waitForElementNotVisibleByElement(monetizationModuleContainerElem);
     PageObjectLogging
         .log("verifyMonetizationModuleNotShown", "Monetization module is not shown", true);
   }
