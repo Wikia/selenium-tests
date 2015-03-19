@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -11,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,6 +37,7 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
+    waitPageLoaded();
     String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
     Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
   }
@@ -49,17 +46,23 @@ public class AdsKruxObject extends AdsBaseObject {
    * Test whether the Krux user id is not empty and added to GPT calls
    */
   public void verifyKruxUserParam() {
+    String script = "return localStorage.kxuser;";
     waitForKrux();
-    String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
-    Assertion.assertStringNotEmpty(kruxUser);
-    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", kruxUser));
+    String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    refreshPage();
+    waitForKrux();
+    String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
+                         isGptParamPresent(SLOT_SELECTOR, "u", user2));
   }
 
   public void waitForKrux() {
     waitPageLoaded();
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+      String script =
+          "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
+      wait.until(CommonExpectedConditions.scriptReturnsTrue(script));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -71,21 +74,18 @@ public class AdsKruxObject extends AdsBaseObject {
     setCookie("_kuid_", userId);
   }
 
-  public String getKruxSegments() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    List segments = (ArrayList) js.executeScript("return Krux.segments;");
-    PageObjectLogging.log("getKruxSegments", segments.toString(), true);
-    return Joiner.on("\t").join(segments);
-  }
-
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (String) js.executeScript("return localStorage.kxsegs;");
+    String segments = (String) js.executeScript("return localStorage.kxsegs;");
+    PageObjectLogging.log("krux segments: ", segments, true, driver);
+    return segments;
   }
 
   public String getKxkuid() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (String) js.executeScript("return localStorage.kxkuid;");
+    String kxkuid = (String) js.executeScript("return localStorage.kxkuid;");
+    PageObjectLogging.log("krux kuid: ", kxkuid, true, driver);
+    return kxkuid;
   }
 
 }
