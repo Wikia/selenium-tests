@@ -51,7 +51,8 @@ public class NavigationBar extends WikiBasePageObject {
         String allSuggestionTexts = "";
         for (int i = 0; i < suggestionsList.size(); i++) {
             if (suggestionsList.get(i).getAttribute("title") != null) {
-                allSuggestionTexts += suggestionsList.get(i).getAttribute("title");
+                allSuggestionTexts += suggestionsList.get(i).getAttribute(
+                        "title");
             }
         }
         Assertion.assertStringContains(suggestionText, allSuggestionTexts);
@@ -114,9 +115,9 @@ public class NavigationBar extends WikiBasePageObject {
     }
 
     public IntraWikiSearchPageObject searchFor(String query) {
-        typeQuery(query);
         PageObjectLogging.log("searchFor", "searching for query: " + query,
                 true, driver);
+        typeQuery(query);
         return clickSearchButton();
     }
 
