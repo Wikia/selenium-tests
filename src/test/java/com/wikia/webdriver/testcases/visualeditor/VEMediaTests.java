@@ -94,11 +94,10 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
       groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
   )
   public void VEMediaTests_003_uploadImageWithCustomFileName() {
-    String testFileUploadName = "TestFile";
+    String testFileUploadName = "TestFileVEMediaTests003";
     testFullFileName = testFileUploadName + ".png";
     testImageLicense = ImageLicense.CCBYSA;
 
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -108,6 +107,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //MS01
@@ -229,6 +229,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   @AfterGroups(groups = "VEMediaTests_003")
   public void delete_Image() {
+    base.logOut(wikiURL);
+    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
     filePage.verifyImageLicense(testImageLicense);
     filePage.selectHistoryTab();
