@@ -21,15 +21,16 @@ public class NavigationBar extends WikiBasePageObject {
         super(driver);
     }
 
-    @FindBy(css = "#searchInput")
+	final private String suggestionCss = ".autocomplete div"; 
+
+	@FindBy(css = "#searchInput")
 	private WebElement searchInput;
 	@FindBy(css = "#searchSubmit")
 	private WebElement searchSubmit;
-	@FindBy(css = ".autocomplete div")
+	@FindBy(css = suggestionCss)
 	private WebElement suggestion;
-	@FindBys(@FindBy(css = ".autocomplete div"))
+	@FindBys(@FindBy(css = suggestionCss))
 	private List<WebElement> suggestionsList;
-	private String suggestionCss = ".autocomplete div"; 
 	
     private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -56,24 +57,31 @@ public class NavigationBar extends WikiBasePageObject {
 	/**
     * Arrow down through suggestions, and click enter on the desired one
 	*/
-	public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestion) {
-		waitForElementByElement(suggestionsList.get(0));
-		for (int i = 0; i < suggestionsList.size(); i++) {
-			WebElement currentSuggestion = suggestionsList.get(i);
-			searchInput.sendKeys(Keys.ARROW_DOWN);
-			if (currentSuggestion.getText().contains(suggestion)) {
-				searchInput.sendKeys(Keys.ENTER);
-				PageObjectLogging.log("ArrowDownToSuggestion", 
-				        "arrowed down to desired suggestion" +suggestion+"and clicked enter",
-				        true);
-				return new ArticlePageObject(driver);
-			}
-			else {
-				searchInput.sendKeys(Keys.ARROW_DOWN);
-			}
-		}
-		PageObjectLogging.log("ArrowDownToSuggestion", "didn't find suggestion: "+suggestion, false);
-		return null;
+	public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestionText) {
+	    waitForElementByElement(suggestionsList.get(0));
+
+	    int position = 0;
+	    for (WebElement suggestion : suggestionsList) {
+            if (suggestion.getText().contains(suggestionText)) {
+                position++;
+            }
+        }
+	    
+	    Assertion.assertNotEquals(0, position, "suggestion "+suggestionText+"not found");
+	    
+	    if (position!=0) {
+	        for (int i = 0; i < position; i++) {
+	            searchInput.sendKeys(Keys.ARROW_DOWN);
+	        }
+	        searchInput.sendKeys(Keys.ENTER);
+	        PageObjectLogging.log("ArrowDownToSuggestion", 
+	                "arrowed down to desired suggestion" 
+                    +suggestionText+"and clicked enter", true);
+	        return new ArticlePageObject(driver);
+        }
+	    else {
+	        return null;
+        }
 	}
 	
 	/**
