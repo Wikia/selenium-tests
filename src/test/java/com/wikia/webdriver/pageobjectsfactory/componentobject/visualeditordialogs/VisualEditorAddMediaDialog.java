@@ -35,7 +35,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
   private By
       mediaTitlesBy =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li>.oo-ui-labeledElement-label");
+      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
 
   public enum ImageLicense {
     NONESELECTED("None selected", ""),
@@ -187,7 +187,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement media = findMediaByTitle(title);
     media.click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
