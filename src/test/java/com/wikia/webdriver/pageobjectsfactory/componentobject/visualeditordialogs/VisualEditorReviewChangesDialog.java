@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +14,9 @@ import java.util.List;
  */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-  @FindBy(css =
-      ".oo-ui-window-foot " +
-      "div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
-      ".oo-ui-labeledElement-label")
+  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement returnToSaveFormButton;
-  @FindBy(css = ".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
+  @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
   private WebElement wikiaAritlceFirstPreview;
   @FindBy(css = ".diff-addedline")
   private List<WebElement> addedLines;
@@ -37,29 +33,21 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorSaveChangesDialog clickReturnToSaveFormButton() {
-    switchToIFrame();
     waitForElementClickableByElement(returnToSaveFormButton);
     returnToSaveFormButton.click();
-    PageObjectLogging
-        .log("clickReturnToSaveFormButton", "Return To Save Form button clicked", true);
-    switchOutOfIFrame();
     return new VisualEditorSaveChangesDialog(driver);
   }
 
   public void verifyDeletedDiffs(List<String> targets) {
-    switchToIFrame();
     verifyArticleDiffs(targets, DELETE);
-    switchOutOfIFrame();
   }
 
   public void verifyAddedDiffs(List<String> targets) {
-    switchToIFrame();
     if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
       verifyNewArticleDiffs(targets);
     } else {
       verifyArticleDiffs(targets, INSERT);
     }
-    switchOutOfIFrame();
   }
 
   private void verifyArticleDiffs(List<String> targets, int mode) {
@@ -107,12 +95,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   private void verifyNewArticleDiffs(List<String> targets) {
     String wikiText = wikiaAritlceFirstPreview.getText();
     for (String target : targets) {
-      verifyNewArticleDiff(target, wikiText);
+      Assertion.assertStringContains(target, wikiText);
     }
-  }
-
-  private void verifyNewArticleDiff(String target, String source) {
-    Assertion.assertStringContains(target, source);
   }
 
   private boolean isDiffFound(List<String> targets, String source) {
