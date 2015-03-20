@@ -67,9 +67,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mediaCaption;
   @FindBy(css = ".ve-ce-resizableNode-swHandle")
   private WebElement swResizeHandle;
-  @FindBy(css = ".ve-ui-desktopContext .oo-ui-popupWidget")
+  @FindBy(css = ".ve-ui-desktopContext .oo-ui-popupWidget-popup")
   private WebElement contextMenu;
-  @FindBy(css = ".ve-ce-node-focused")
+  @FindBy(css = ".ve-ui-wikiaFocusWidget")
   private WebElement focusedNode;
   @FindBy(css = ".mw-body-content")
   private WebElement mainContent;
@@ -80,8 +80,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
 
-  private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
-  private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
+  private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
+  private By contextEditBy = By.cssSelector(".oo-ui-labelElement-label");
   private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
   private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
 
