@@ -52,6 +52,7 @@ public class AdsKruxObject extends AdsBaseObject {
     refreshPage();
     waitForKrux();
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
     Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
                          isGptParamPresent(SLOT_SELECTOR, "u", user2));
   }
