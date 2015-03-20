@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
@@ -30,7 +29,7 @@ public class TestKruxSegment extends NewTestTemplate {
       adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
     }
-    Assertion.assertStringContains(segmentId, adsKruxObject.getKruxSegments());
+    Assertion.assertStringContains(segmentId, adsKruxObject.getKxsegs());
   }
 
   @Test(
@@ -71,10 +70,10 @@ public class TestKruxSegment extends NewTestTemplate {
       String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
       adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
-      PageObjectLogging.log("DEBUG kxsegs", adsKruxObject.getKxsegs(), true);
-      PageObjectLogging.log("DEBUG kxkuid", adsKruxObject.getKxkuid(), true);
+      adsKruxObject.getKxsegs();
+      adsKruxObject.getKxkuid();
     }
-    String segments = adsKruxObject.getKruxSegments();
+    String segments = adsKruxObject.getKxsegs();
     Assertion.assertEquals(segments.contains(segment), isPresent);
   }
 }
