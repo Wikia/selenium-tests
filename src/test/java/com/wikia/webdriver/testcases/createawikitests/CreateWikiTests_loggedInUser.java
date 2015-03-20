@@ -25,7 +25,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
-  public void CreateNewWiki_001_createDeleteWiki() {
+  public void CreateNewWiki_001_createDeleteWiki_QAART_541() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
