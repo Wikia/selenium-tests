@@ -92,6 +92,11 @@ public class VisualEditorDataProvider {
     ADVANCED
   }
 
+  public enum ImageSize {
+    WIDTH,
+    HEIGHT
+  }
+
   /**
    * Data provider with text formatting
    */
