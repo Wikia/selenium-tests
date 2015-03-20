@@ -91,6 +91,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
   }
 
   //AM06
+  //This test would fail on FF: https://wikia-inc.atlassian.net/browse/VE-1370
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
   )
