@@ -23,9 +23,6 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     /**
      * search test flow: action - expected event navigate to main page
      * 
-     * search for query click search button - search-button click enter button -
-     * search-enter
-     * 
      * trigger suggestion - search-suggest-show click enter on suggestion -
      * search-suggest-enter click enter after suggestion -
      * search-after-suggest-enter clear suggestion
@@ -42,14 +39,6 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
         navbar.executeScript(ClickTrackingScriptsProvider.REDIRECT_BLOCK);
         navbar.executeScript(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
 
-        navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
-        navbar.clickEnterToSearch();
-        AlertHandler.dismissPopupWindow(driver);
-
-        navbar.typeQuery(SearchContent.SEARCH_ARTICLE);
-        navbar.clickSearchButton();
-        AlertHandler.dismissPopupWindow(driver);
-
         navbar.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
         navbar.verifySuggestions(SearchContent.SEARCH_ARTICLE);
         navbar.ArrowDownAndEnterSuggestion(SearchContent.SEARCH_ARTICLE);
@@ -65,8 +54,6 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
         AlertHandler.dismissPopupWindow(driver);
 
         List<JsonObject> expectedEvents = Arrays.asList(
-                EventsGlobalNavigation.searchButtonClick,
-                EventsGlobalNavigation.searchEnter,
                 EventsGlobalNavigation.searchSuggestShow,
                 EventsGlobalNavigation.searchSuggestionEnter,
                 EventsGlobalNavigation.searchAfterSuggestionEnter,

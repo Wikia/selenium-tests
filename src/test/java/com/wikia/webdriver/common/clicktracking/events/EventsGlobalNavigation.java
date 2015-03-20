@@ -41,15 +41,6 @@ public class EventsGlobalNavigation {
                 .add(EventParameter.LABEL.getEventParameter(), "search-suggest-show"))
             .build();
     
-    public static JsonObject searchButtonClick = Json.createObjectBuilder()
-            .add("0", Json.createObjectBuilder()
-                .add(EventParameter.ACTION.getEventParameter(), "click")
-                .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
-                .add(EventParameter.CATEGORY.getEventParameter(), "search"))
-            .add("1", Json.createObjectBuilder()
-                .add(EventParameter.LABEL.getEventParameter(), "search-button"))
-            .build();
-    
     public static JsonObject searchAfterSuggestionButtonClick = Json.createObjectBuilder()
             .add("0", Json.createObjectBuilder()
                 .add(EventParameter.ACTION.getEventParameter(), "click")
@@ -58,16 +49,7 @@ public class EventsGlobalNavigation {
             .add("1", Json.createObjectBuilder()
                 .add(EventParameter.LABEL.getEventParameter(), "search-after-suggest-button"))
             .build();
-    
-    public static JsonObject searchEnter = Json.createObjectBuilder()
-            .add("0", Json.createObjectBuilder()
-                .add(EventParameter.ACTION.getEventParameter(), "click")
-                .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
-                .add(EventParameter.CATEGORY.getEventParameter(), "search"))
-            .add("1", Json.createObjectBuilder()
-                .add(EventParameter.LABEL.getEventParameter(), "search-enter"))
-            .build();
-    
+       
     public static JsonObject searchAfterSuggestionEnter = Json.createObjectBuilder()
             .add("0", Json.createObjectBuilder()
                 .add(EventParameter.ACTION.getEventParameter(), "click")
