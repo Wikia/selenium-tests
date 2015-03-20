@@ -182,7 +182,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyVideoResized(source);
     source = ve.getVideoDimension();
-    ve.selectMedia();
     mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     //change height of video to 250
