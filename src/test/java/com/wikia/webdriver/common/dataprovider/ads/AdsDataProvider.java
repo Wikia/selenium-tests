@@ -390,7 +390,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JpSWxdE4"
+            "JtL6ozVw"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
@@ -412,7 +412,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JsJ8VJC8"
+            "JtL70cvM"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
@@ -434,7 +434,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JsJ-_GLH"
+            "JtL7NnTV"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
