@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
@@ -67,6 +67,7 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
     templateDialog.verifyIsResultTemplate();
+    templateDialog.logOut(wikiURL);
   }
 
   //AT02
@@ -82,6 +83,7 @@ public class VETemplateTests extends NewTestTemplate {
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     templateDialog.verifyNoResultTemplate();
     templateDialog.verifyIsSuggestedTemplate();
+    templateDialog.logOut(wikiURL);
   }
 
   //AT03
@@ -134,21 +136,22 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorEditTemplateDialog editTemplateDialog =
         templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
     ve = editTemplateDialog.clickDone();
-    ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
+    ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
     templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     editTemplateDialog =
         templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
     ve = editTemplateDialog.clickDone();
-    ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
+    ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     article.logOut(wikiURL);
   }
 
+  //ES05
   @Test(
       groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
       dependsOnGroups = "VETemplateTests_004"
@@ -159,12 +162,13 @@ public class VETemplateTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
     int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
-    ve.deleteBlockTransclusion(1);
-    ve.verifyNumberOfBlockTransclusion(--numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+    ve.deleteTransclusion(1, Transclusion.INLINE);
+    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
+    ve.verifyNumberOfInlineTransclusion(--numInlineTransclusion);
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //ET01
@@ -178,7 +182,7 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    ve.clickBlockTransclusion(0);
+    ve.clickTransclusion(0, Transclusion.INLINE);
     VisualEditorEditTemplateDialog editTemplateDialog = ve.openEditTemplateDialog();
     editTemplateDialog
         .typeInParam(VEContent.TEMPLATE_PARAM_LABEL1, VEContent.TEMPLATE_PARAM_VALUE1);
@@ -191,5 +195,6 @@ public class VETemplateTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }
