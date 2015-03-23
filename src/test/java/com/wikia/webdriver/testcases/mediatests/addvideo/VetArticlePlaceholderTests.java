@@ -24,7 +24,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
-  public void Placeholders_001_PublishedProvider_QAART_544() {
+  public void Placeholders_001_PublishedProvider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);
