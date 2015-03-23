@@ -30,7 +30,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      * trigger suggestion mouse click on suggestion - search-suggest click
      * search after suggestion - search-after-suggest-button clear suggestion
      */
-    @Test(groups = { "TestGlobalSearchInGlobalNav_001", "ClickTracking",
+    @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
             "GlobalNav" })
     public void search() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
