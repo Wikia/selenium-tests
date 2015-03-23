@@ -84,6 +84,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public int getNumberOfResultTemplates() {
+    waitForElementVisibleByElement(resultWidget);
     return getNumOfElementOnPage(resulteTemplateBy);
   }
 
