@@ -41,7 +41,7 @@ public class MobileEditModeTests extends NewTestTemplate {
     mobileEdit.verifyModeName();
   }
 
-  @Test(groups = {"MobileEdit_002", "MobileEdit", "Mobile"})
+  @Test(groups = {"MobileEdit_002", "MobileEdit", "Mobile"}, enabled = false)
   public void MobileEdit_002_editAndSummaryRetain() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);

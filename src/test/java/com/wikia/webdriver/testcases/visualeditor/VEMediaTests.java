@@ -124,7 +124,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.addExistingMedia(1);
-    ve.verifyVideo();
+    ve.verifyVideos(0);
     ve.selectMedia();
     VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.typeCaption(captionText);
