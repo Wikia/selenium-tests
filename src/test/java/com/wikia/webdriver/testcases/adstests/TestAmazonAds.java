@@ -38,7 +38,6 @@ public class TestAmazonAds extends NewTestTemplate {
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
     amazonAds.verifyAmazonScriptIncluded();
     amazonAds.verifyCallToAmazonIssued();
-    amazonAds.verifyResponseFromAmazonPresent();
   }
 
   @GeoEdgeProxy(country = "GB")
@@ -48,7 +47,6 @@ public class TestAmazonAds extends NewTestTemplate {
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
     amazonAds.verifyAmazonScriptIncluded();
     amazonAds.verifyCallToAmazonIssued();
-    amazonAds.verifyResponseFromAmazonPresent();
   }
 
   @NetworkTrafficDump
@@ -59,7 +57,7 @@ public class TestAmazonAds extends NewTestTemplate {
     amazonAds.verifyAmazonScriptIncluded();
     amazonAds.verifyCallToAmazonIssued();
     amazonAds.verifyGPTParams();
-    amazonAds.verifyResponseFromAmazonPresent();
+    amazonAds.verifyAdFromAmazonPresent();
   }
 
   @GeoEdgeProxy(country = "GB")
@@ -71,6 +69,6 @@ public class TestAmazonAds extends NewTestTemplate {
     amazonAds.verifyAmazonScriptIncluded();
     amazonAds.verifyCallToAmazonIssued();
     amazonAds.verifyGPTParams();
-    amazonAds.verifyResponseFromAmazonPresent();
+    amazonAds.verifyAdFromAmazonPresent();
   }
 }
