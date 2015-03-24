@@ -34,9 +34,9 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private WebElement inspector;
 
   private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
-  private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
-  private By linkResultsBy = By.cssSelector("li");
-  private By linkCategoryBy = By.cssSelector(".oo-ui-labeledElement-label span");
+  private By selectedResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
+  private By linkCategoryBy =
+      By.cssSelector(".oo-ui-menuSectionOptionWidget .oo-ui-labelElement-label");
   private By highlightedResultsBy = By.cssSelector(".oo-ui-optionWidget-highlighted");
   private By doneButtonBy = By.cssSelector(".oo-ui-window-foot .oo-ui-buttonElement-button");
 
@@ -56,11 +56,12 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     pageCategoryIndex[REDIRECT_PAGE_INDEX] = -1;
   }
 
-  public void clickDoneButton() {
+  public VisualEditorPageObject clickDoneButton() {
     waitForDialogVisible();
     WebElement doneButton = dialog.findElement(doneButtonBy);
     doneButton.click();
     waitForDialogNotVisible();
+    return new VisualEditorPageObject(driver);
   }
 
   public void typeInLinkInput(String text) {
@@ -69,46 +70,38 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     linkInput.sendKeys(text);
     waitForElementNotVisibleByElement(inputPending);
     waitForValueToBePresentInElementsAttributeByElement(linkInput, "value", text);
-    //Due to fast typing, refocus on the input to force type ahead suggestion to refresh
-    title.click();
   }
 
-  private void viewLinkResults() {
+  private void indexLinkCategories() {
     waitForElementNotVisibleByElement(inputPending);
-    waitForElementVisibleByElement(desktopContext);
-    List<WebElement> linkResults =
-        desktopContext.findElement(linkResultMenuBy).findElements(linkResultsBy);
-    for (int i = 0; i < linkResults.size(); i++) {
-      WebElement linkResult = linkResults.get(i);
-      String elementClassName = linkResult.getAttribute("class");
-      if (elementClassName.contains(menuSectionItemText)) {
-        String linkCategory = linkResult.findElement(linkCategoryBy).getText();
-        switch (linkCategory) {
-          case "New page":
-            pageCategoryIndex[NEW_PAGE_INDEX] = i;
-            break;
-          case "Matching page":
-            pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
-            break;
-          case "Matching pages":
-            pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
-            break;
-          case "Redirect page":
-            pageCategoryIndex[REDIRECT_PAGE_INDEX] = i;
-            break;
-          case "External link":
-            pageCategoryIndex[EXTERNAL_LINK_INDEX] = i;
-            break;
-          default:
-            throw new NoSuchElementException("Non-existing link category selected");
-        }
+    List<WebElement> linkCategories = driver.findElement(linkResultMenuBy).findElements(linkCategoryBy);
+    for (int i = 0; i < linkCategories.size(); i++) {
+      String categoryName = linkCategories.get(i).getAttribute("title");
+      switch (categoryName) {
+        case "New page":
+          pageCategoryIndex[NEW_PAGE_INDEX] = i;
+          break;
+        case "Matching page":
+          pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
+          break;
+        case "Matching pages":
+          pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
+          break;
+        case "Redirect page":
+          pageCategoryIndex[REDIRECT_PAGE_INDEX] = i;
+          break;
+        case "External link":
+          pageCategoryIndex[EXTERNAL_LINK_INDEX] = i;
+          break;
+        default:
+          throw new NoSuchElementException("Non-existing link category selected");
       }
     }
     PageObjectLogging.log("viewResults", "Category indexes sorted", true);
   }
 
   private boolean isCategoryResult(int category) {
-    viewLinkResults();
+    indexLinkCategories();
     return (pageCategoryIndex[category] == -1);
   }
 
@@ -129,40 +122,34 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   }
 
   public void verifyNewPageIsTop() {
-    viewLinkResults();
+    indexLinkCategories();
     Assertion.assertNumber(0, pageCategoryIndex[NEW_PAGE_INDEX],
                            "Checking New Page is on the top of the results.");
   }
 
   public void verifyMatchingPageIsTop() {
-    viewLinkResults();
+    indexLinkCategories();
     Assertion.assertNumber(0, pageCategoryIndex[MATCHING_PAGE_INDEX],
                            "Checking Matching Page is on the top of the results.");
   }
 
   public void verifyExternalLinkIsTop() {
-    viewLinkResults();
+    indexLinkCategories();
     Assertion.assertNumber(0, pageCategoryIndex[EXTERNAL_LINK_INDEX],
                            "Checking External Link is on the top of the results.");
   }
 
   public void verifyRedirectPageIsTop() {
-    viewLinkResults();
+    indexLinkCategories();
     Assertion.assertNumber(0, pageCategoryIndex[REDIRECT_PAGE_INDEX],
                            "Checking Redirect Page is on the top of the results.");
   }
 
-  public VisualEditorPageObject clickLinkResult() {
+  public void clickLinkResult() {
     waitForElementNotVisibleByElement(inputPending);
-    waitForElementByElement(selectedResult);
-    WebElement matchingResult = desktopContext.findElement(matchingResultBy);
+    waitForElementVisibleByElement(selectedResult);
+    WebElement matchingResult = driver.findElement(selectedResultBy);
     waitForElementClickableByElement(matchingResult);
     matchingResult.click();
-    switchToIFrame();
-    waitForElementClickableByElement(previousButton);
-    previousButton.click();
-    switchOutOfIFrame();
-    waitForElementNotVisibleByElement(inspector);
-    return new VisualEditorPageObject(driver);
   }
 }
