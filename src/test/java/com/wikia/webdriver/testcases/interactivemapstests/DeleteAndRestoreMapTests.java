@@ -71,7 +71,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"DeleteAndRestoreMapTests_005", "DeleteAndRestoreMapTests", "InteractiveMaps"},
-      dependsOnMethods = {"DeleteAndRestoreMapTests_001_DeleteMapAsAMapOwner"})
+      dependsOnMethods = {"DeleteAndRestoreMapTests_004_StaffUserCanDeleteMap"})
   public void DeleteAndRestoreMapTests_005_StaffUserCanRestoreMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
