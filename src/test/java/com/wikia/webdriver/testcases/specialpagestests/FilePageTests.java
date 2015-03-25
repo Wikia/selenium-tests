@@ -82,7 +82,7 @@ public class FilePageTests extends NewTestTemplate {
    *
    * @author garth
    */
-  @Test(groups = {"FilePage", "filePage004_delete", "Media"})
+  @Test(groups = {"FilePage", "filePage004_delete", "Media"}, invocationCount = 20)
   public void filePage004_delete_QAART_518() {
     // Go to Special:Videos to add a video
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
