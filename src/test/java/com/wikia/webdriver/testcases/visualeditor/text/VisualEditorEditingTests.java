@@ -142,21 +142,21 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.INTERNAL_LINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyMatchingPageIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyMatchingPageIsTop();
+    veLinkDialog.clickLinkResult();
+    ve = veLinkDialog.clickDoneButton();
     ve.typeReturn();
     veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.REDLINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyNewPageIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyNewPageIsTop();
+    veLinkDialog.clickLinkResult();
+    ve = veLinkDialog.clickDoneButton();
     ve.typeReturn();
     veLinkDialog = ve.clickLinkButton();
     veLinkDialog.typeInLinkInput(PageContent.EXTERNAL_LINK);
-    veLinkDialog.clickDoneButton();
-//    veLinkDialog.verifyExternalLinkIsTop(); //VE-1820 link suggestion is broken
-//    ve = veLinkDialog.clickLinkResult();
+    veLinkDialog.verifyExternalLinkIsTop();
+    veLinkDialog.clickLinkResult();
+    ve = veLinkDialog.clickDoneButton();
     ve.typeReturn();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
@@ -164,6 +164,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   @Test(

@@ -18,24 +18,29 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   private WebElement searchClearButton;
   @FindBy(css = ".ve-ui-wikiaTemplateSearchWidget-suggestions")
   private WebElement suggestedWidget;
-  @FindBy(css = ".ve-ui-wikiaTemplateSearchWidget-suggestions ul li")
+  @FindBy(css = ".ve-ui-wikiaTemplateSearchWidget-suggestions .ve-ui-wikiaTemplateOptionWidget")
   private List<WebElement> suggestedTemplates;
   @FindBy(css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)")
   private WebElement resultWidget;
-  @FindBy(css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) ul li")
+  @FindBy(
+      css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) " +
+            ".ve-ui-wikiaTemplateOptionWidget")
   private List<WebElement> resultTemplates;
 
-  private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
+  private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
   private By
       suggestedTemplatesBy =
-      By.cssSelector(".ve-ui-wikiaTemplateSearchWidget-suggestions ul li");
+      By.cssSelector(".ve-ui-wikiaTemplateSearchWidget-suggestions div");
+  private By resulteTemplateBy =
+      By.cssSelector(".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)"
+                   + " .ve-ui-wikiaTemplateOptionWidget");
 
   public VisualEditorInsertTemplateDialog(WebDriver driver) {
     super(driver);
   }
 
   public void typeInSearchInput(String searchString) {
-    switchToIFrame();
+    waitForDialogVisible();
     waitForElementByElement(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
@@ -44,71 +49,46 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
         "Typed '" + searchString + "' into the template search textfield",
         true
     );
-    switchOutOfIFrame();
   }
 
   public void clearSearchInput() {
-    switchToIFrame();
-    waitForElementVisibleByElement(searchClearButton);
-    searchClearButton.click();
+    searchInput.clear();
     PageObjectLogging.log("clearSearchInput", "Cleared the template search input field", true);
-    switchOutOfIFrame();
   }
 
   public VisualEditorEditTemplateDialog selectSuggestedTemplate(int index) {
-    switchToIFrame();
-    try {
-      waitForElementVisibleByElement(suggestedWidget);
-      WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
-      selected.click();
-      PageObjectLogging.log(
-          "selectSuggestedTemplate",
-          "Suggested template selected: " + selected.getText(),
-          true
-      );
-      return new VisualEditorEditTemplateDialog(driver);
-    } finally {
-      switchOutOfIFrame();
-    }
+    waitForDialogVisible();
+    waitForElementVisibleByElement(suggestedWidget);
+    WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
+    selected.click();
+    PageObjectLogging.log(
+        "selectSuggestedTemplate",
+        "Suggested template selected: " + selected.getText(),
+        true
+    );
+    return new VisualEditorEditTemplateDialog(driver);
   }
 
   public VisualEditorEditTemplateDialog selectResultTemplate(String searchString, int index) {
     typeInSearchInput(searchString);
-    switchToIFrame();
-    try {
-      waitForElementVisibleByElement(resultWidget);
-      WebElement selected = resultTemplates.get(index).findElement(labelBy);
-      selected.click();
-      PageObjectLogging.log(
-          "selectResultTemplate",
-          "Search result template selected: " + selected.getText(),
-          true
-      );
-      return new VisualEditorEditTemplateDialog(driver);
-    } finally {
-      switchOutOfIFrame();
-    }
+    waitForDialogVisible();
+    waitForElementVisibleByElement(resultWidget);
+    WebElement selected = resultTemplates.get(index).findElement(labelBy);
+    selected.click();
+    PageObjectLogging.log(
+        "selectResultTemplate",
+        "Search result template selected: " + selected.getText(),
+        true
+    );
+    return new VisualEditorEditTemplateDialog(driver);
   }
 
   public int getNumberOfResultTemplates() {
-    switchToIFrame();
-    try {
-      if (resultTemplates.isEmpty()) {
-        return 0;
-      } else {
-        return resultTemplates.size();
-      }
-    } finally {
-      PageObjectLogging.log(
-          "getNumberOfResultTemplates",
-          "Number of result templates found: " + resultTemplates.size(),
-          true
-      );
-      switchOutOfIFrame();
-    }
+    return getNumOfElementOnPage(resulteTemplateBy);
   }
 
   public void verifyIsResultTemplate() {
+    waitForElementVisibleByElement(resultWidget);
     Assertion.assertTrue(getNumberOfResultTemplates() > 0, "No result template shown.");
     PageObjectLogging.log("verifyIsResultTemplate", "Result templates found", true);
   }
@@ -119,10 +99,8 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public void verifyIsSuggestedTemplate() {
-    switchToIFrame();
     Assertion
         .assertTrue(checkIfElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
     PageObjectLogging.log("verifyIsSuggestedTemplate", "Suggested templates found", true);
-    switchOutOfIFrame();
   }
 }
