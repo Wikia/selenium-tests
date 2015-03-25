@@ -9,24 +9,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
+
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
   private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
-  private final static String AMAZON_SCRIPT = "script[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
-  private final static String AMAZON_IFRAME = "iframe[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
+  private final static String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
   private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
-  @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
+  @FindBy(css = "div[id*=_gpt][id*=TOP][data-gpt-slot-params*=amznslots], "
+                + "div[id*=_gpt][id*=LEFT_SKYSCRAPER_2][data-gpt-slot-params*=amznslots]")
   private WebElement slotWithAmazon;
 
-  public AdsAmazonObject(
-      WebDriver driver,
-      String testedPage,
-      NetworkTrafficInterceptor networkTrafficInterceptor
-  ) {
+  public AdsAmazonObject(WebDriver driver, String testedPage,
+                         NetworkTrafficInterceptor networkTrafficInterceptor) {
     super(driver, testedPage, networkTrafficInterceptor);
   }
 
@@ -47,7 +48,9 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   public void verifyAdFromAmazonPresent() {
-    driver.switchTo().frame(slotWithAmazon.findElement(By.cssSelector("div > iframe")));
+    WebElement amazonIframe = slotWithAmazon.findElement(
+        By.cssSelector("div[id*=__container__] > iframe"));
+    driver.switchTo().frame(amazonIframe);
     if (checkIfElementOnPage(AMAZON_IFRAME)) {
       PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
     } else {

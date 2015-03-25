@@ -19,8 +19,8 @@ public class ImageComparison {
   /**
    * Compare two images after converting them into byte arrays
    *
-   * @param File file1 - file containing first image
-   * @param File file2 - file containing second image
+   * @param file1 - file containing first image
+   * @param file2 - file containing second image
    * @return boolean   - if images are the same
    */
   public boolean areFilesTheSame(File file1, File file2) {
