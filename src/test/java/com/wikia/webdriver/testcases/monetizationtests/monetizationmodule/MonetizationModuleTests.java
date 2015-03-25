@@ -655,11 +655,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.setCookieGeo(countryCode);
     // anon user
     base.refreshPage();
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyAmazonUnitNotShown();
     // logged in user
     base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
     base.openWikiPage(articleURL);
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyAmazonUnitNotShown();
   }
 
   /**
@@ -734,7 +734,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     // logged in user
     base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
     base.openWikiPage(articleURL);
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyAmazonUnitNotShown();
   }
 
   private static final int SINGLE = 0;
@@ -791,10 +791,10 @@ public class MonetizationModuleTests extends NewTestTemplate {
     // logged in user
     base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
     base.openWikiPage(articleURL);
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyEcommerceUnitNotShown();
   }
 
-  @DataProvider(name = "MonetizationModuleTest_021")
+  @DataProvider(name = "MonetizationModuleTest_022")
   public static Object[][] DataMonetizationModuleTest_022() {
     return new Object[][]{
         {"JP", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
@@ -837,10 +837,10 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.setCookieGeo(countryCode);
     // anon user
     base.refreshPage();
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyEcommerceUnitNotShown();
     // logged in user
     base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
     base.openWikiPage(articleURL);
-    monetizationModule.verifyMonetizationModuleNotShown();
+    monetizationModule.verifyEcommerceUnitNotShown();
   }
 }
