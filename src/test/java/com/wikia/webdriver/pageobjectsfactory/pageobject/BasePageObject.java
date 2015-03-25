@@ -1,14 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
-import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -32,14 +31,15 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Karol
@@ -1074,5 +1074,6 @@ public class BasePageObject {
         }
       }
   }
+  
   
 }

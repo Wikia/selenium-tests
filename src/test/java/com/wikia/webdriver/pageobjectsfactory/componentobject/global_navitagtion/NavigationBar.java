@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.thoughtworks.xstream.alias.ClassMapper.Null;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,76 +17,135 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 
 public class NavigationBar extends WikiBasePageObject {
 
-    @FindBy(css = "#searchInput")
-    private WebElement searchInput;
-    @FindBy(css = "#searchSubmit")
-    private WebElement searchSubmit;
-    @FindBy(css = ".autocomplete div")
-    private WebElement suggestion;
-    @FindBys(@FindBy(css = ".autocomplete div"))
-    private List<WebElement> suggestionsList;
-
-    private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
-
     public NavigationBar(WebDriver driver) {
         super(driver);
     }
 
+    final private String suggestionCss = ".autocomplete div";
+
+    @FindBy(css = "#searchInput")
+    private WebElement searchInput;
+    @FindBy(css = "#searchSubmit")
+    private WebElement searchSubmit;
+    @FindBy(css = suggestionCss)
+    private WebElement suggestion;
+    @FindBys(@FindBy(css = suggestionCss))
+    private List<WebElement> suggestionsList;
+
+    private By jqueryAutocompleteBy = By
+            .cssSelector("[src*='jquery.autocomplete']");
+
     public void triggerSuggestions(String query) {
+        waitForElementByElement(searchInput);
+        searchInput.clear();
+        waitForElementClickableByElement(searchInput);
         searchInput.click();
         waitForElementByBy(jqueryAutocompleteBy);
         sendKeysHumanSpeed(searchInput, query);
-        waitForElementByElement(suggestion);		
-        waitForElementByElement(suggestionsList.get(0));		
+        waitForElementByCss(suggestionCss);
+        waitForElementByElement(suggestionsList.get(0));
     }
 
-    public void verifySuggestions(String suggestion) {
+    public void verifySuggestions(String suggestionText) {
         waitForElementByElement(suggestionsList.get(0));
-        String allSuggestions = "";
+        String allSuggestionTexts = "";
         for (int i = 0; i < suggestionsList.size(); i++) {
-            allSuggestions += suggestionsList.get(i).getAttribute("title");
+            if (suggestionsList.get(i).getAttribute("title") != null) {
+                allSuggestionTexts += suggestionsList.get(i).getAttribute(
+                        "title");
+            }
         }
-        Assertion.assertStringContains(suggestion, allSuggestions);
+        Assertion.assertStringContains(suggestionText, allSuggestionTexts);
     }
 
     /**
-     * This method will arrow down through suggestions 
-     * until it finds given suggestion, then it clicks enter.
+     * Arrow down through suggestions, and click enter on the desired one
      */
-    public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestion) {
+    public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestionText) {
+        waitForElementByElement(suggestionsList.get(0));
+
+        int position = 0;
+        for (WebElement suggestion : suggestionsList) {
+            if (suggestion.getText().contains(suggestionText)) {
+                position++;
+            }
+        }
+
+        Assertion.assertNotEquals(0, position, "suggestion " + suggestionText
+                + "not found");
+
+        if (position != 0) {
+            for (int i = 0; i < position; i++) {
+                searchInput.sendKeys(Keys.ARROW_DOWN);
+            }
+            searchInput.sendKeys(Keys.ENTER);
+            PageObjectLogging.log("ArrowDownToSuggestion",
+                    "arrowed down to desired suggestion" + suggestionText
+                            + "and clicked enter", true);
+            return new ArticlePageObject(driver);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * click on desired suggestion
+     */
+    public ArticlePageObject clickSuggestion(String suggestion) {
         waitForElementByElement(suggestionsList.get(0));
         for (int i = 0; i < suggestionsList.size(); i++) {
             WebElement currentSuggestion = suggestionsList.get(i);
-            searchInput.sendKeys(Keys.ARROW_DOWN);
             if (currentSuggestion.getText().contains(suggestion)) {
-                searchInput.sendKeys(Keys.ENTER);
-                PageObjectLogging.log("ArrowDownToSuggestion", 
-                        "arrowed down to desired suggestion" +suggestion+"and clicked enter",
-                        true);
+                currentSuggestion.click();
+                PageObjectLogging.log("clickSuggestion",
+                        "clicked on desired suggestion" + suggestion, true);
                 return new ArticlePageObject(driver);
             }
-            else {
-                searchInput.sendKeys(Keys.ARROW_DOWN);
-            }
         }
-        PageObjectLogging.log("ArrowDownToSuggestion", "didn't find suggestion: "+suggestion, true);
+        PageObjectLogging.log("clickSuggestion", "didn't find suggestion: "
+                + suggestion, false);
         return null;
     }
 
-    public IntraWikiSearchPageObject searchFor(String query) {
+    public void typeQuery(String query) {
+        waitForElementByElement(searchInput);
+        searchInput.clear();
         searchInput.sendKeys(query);
+        PageObjectLogging.log("typeQuery", "typed query: " + query, true);
+    }
+
+    public IntraWikiSearchPageObject searchFor(String query) {
+        PageObjectLogging.log("searchFor", "searching for query: " + query,
+                true, driver);
+        typeQuery(query);
+        return clickSearchButton();
+    }
+
+    public IntraWikiSearchPageObject clickEnterToSearch() {
+        waitForElementClickableByElement(searchInput);
+        searchInput.sendKeys(Keys.ENTER);
+        PageObjectLogging.log("clickEnterInSearch", "clicked enter in search",
+                true);
+        return new IntraWikiSearchPageObject(driver);
+    }
+
+    public IntraWikiSearchPageObject clickSearchButton() {
+        waitForElementClickableByElement(searchSubmit);
         searchSubmit.click();
-        PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+        PageObjectLogging.log("clickSearchButton", "clicked on search button",
+                true);
         return new IntraWikiSearchPageObject(driver);
     }
 
     /**
-     * Returns article page object if invoked by user with goSearch preference turned on
+     * Returns article page object if invoked by user with goSearch preference
+     * turned on
      */
     public ArticlePageObject goSearchFor(String query) {
         searchInput.sendKeys(query);
         searchSubmit.click();
-        PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+        PageObjectLogging.log("searchFor", "searching for query: " + query,
+                true, driver);
         return new ArticlePageObject(driver);
     }
 

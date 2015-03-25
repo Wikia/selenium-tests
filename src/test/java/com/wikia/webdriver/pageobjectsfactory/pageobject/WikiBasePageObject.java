@@ -716,6 +716,11 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
     return new ArticlePageObject(driver);
   }
+  
+  public ArticlePageObject openMainPage(String wikiURL) {
+      getUrl(wikiURL);
+      return new ArticlePageObject(driver);
+  }
 
   public void verifyPermissionsErrorsPresent() {
     waitForElementByElement(premissionErrorMessage);
@@ -1345,4 +1350,5 @@ public class WikiBasePageObject extends BasePageObject {
   public enum HubName {
     VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
   }
+
 }
