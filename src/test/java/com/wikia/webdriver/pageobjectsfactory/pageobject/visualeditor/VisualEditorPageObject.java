@@ -80,6 +80,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
+  @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
+  private WebElement focusedHighlight;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -397,8 +399,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void deleteGallery(int index) {
     selectGallery(index);
-    Actions actions2 = new Actions(driver);
-    actions2.sendKeys(Keys.DELETE).build().perform();
+    //wait for highlight
+    waitForElementByElement(focusedHighlight);
+    //TODO check if any future webdriver upgrade would resolve having to use separate logic
+    if("Chrome".equalsIgnoreCase(getBrowser())) {
+      Actions actions2 = new Actions(driver);
+      actions2.sendKeys(Keys.DELETE).build().perform();
+    } else {
+      editArea.sendKeys(Keys.DELETE);
+    }
   }
 
   public void deleteTransclusion(int index, Transclusion transclusion) {
