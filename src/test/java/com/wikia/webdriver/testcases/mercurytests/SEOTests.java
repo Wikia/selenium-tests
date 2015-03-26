@@ -33,7 +33,7 @@ public class SEOTests extends NewTestTemplate {
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
     Assertion.assertTrue(openGraph.isOgTypeWebsite(), "og:type meta tag is wrong");
     leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
+    leftNav.clickNavListElement(0);
     Assertion.assertTrue(openGraph.isOgTypeArticle(), "og:type meta tag is wrong");
   }
 
@@ -46,7 +46,7 @@ public class SEOTests extends NewTestTemplate {
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
     Assertion.assertTrue(openGraph.isOgTitleMainPage(), "og:title meta tag is wrong");
     leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
+    leftNav.clickNavListElement(0);
     Assertion.assertTrue(openGraph.isOgTitleArticlePage(), "og:title meta tag is wrong");
   }
 
@@ -59,7 +59,7 @@ public class SEOTests extends NewTestTemplate {
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
     Assertion.assertFalse(openGraph.isOgSiteName(), "og:site_name is in DOM");
     leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
+    leftNav.clickNavListElement(0);
     Assertion.assertTrue(openGraph.isOgSiteName(), "og:site_name isn't in DOM");
   }
 
@@ -73,7 +73,7 @@ public class SEOTests extends NewTestTemplate {
     Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
     String lastDesc = openGraph.getDescription();
     leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
+    leftNav.clickNavListElement(0);
     Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
     Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
                           "og:description tags are the same");

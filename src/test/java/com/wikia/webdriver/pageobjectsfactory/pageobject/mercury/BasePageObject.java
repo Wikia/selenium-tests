@@ -43,11 +43,11 @@ public class BasePageObject extends MobileBasePageObject {
     jsexec.executeScript("arguments[0].click();", element);
   }
 
-  public void waitMilliseconds(int time, String methodName) {
+  public void waitMilliseconds(int time, String message) {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(message, e.getMessage(), false);
     }
   }
 

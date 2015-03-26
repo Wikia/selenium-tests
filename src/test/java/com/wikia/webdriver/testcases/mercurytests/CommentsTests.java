@@ -61,9 +61,11 @@ public class CommentsTests extends NewTestTemplate {
     Assertion.assertTrue(comments.isNextCommentPageButtonDisplayed(),
                          "Next page button isn't displayed");
     comments.clickNextCommentPageButton();
+    comments.waitMilliseconds(2000, "Wait after click on 'Next page' button");
     Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
                          "Previous page button isn't displayed");
     comments.clickPreviousCommentPageButton();
+    comments.waitMilliseconds(2000, "Wait after click on 'Previous page' button");
     Assertion.assertFalse(comments.isPreviousCommentPageButtonDisplayed(),
                           "Previous page button is displayed");
   }
@@ -103,6 +105,7 @@ public class CommentsTests extends NewTestTemplate {
     while (comments.isNextCommentPageButtonDisplayed()) {
       numberOfComments -= comments.getNumberOfAllCommentsOnPage();
       comments.clickNextCommentPageButton();
+      comments.waitMilliseconds(2000, "Wait after click on 'Next page' button");
     }
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
     Assertion.assertTrue(numberOfComments == 0, "There are "

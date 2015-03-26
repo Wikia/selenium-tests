@@ -23,15 +23,11 @@ public class NavigationSideComponentObject extends BasePageObject {
   @FindBy(css = ".local-wikia-search a")
   private List<WebElement> searchSuggestions;
   @FindBy(css = ".local-nav-menu > li > div")
-  private List<WebElement> chevrons;
-  @FindBy(css = ".local-nav-menu > li > a")
-  private List<WebElement> noChevrons;
+  private List<WebElement> navList;
   @FindBy(css = ".back")
   private WebElement backChevron;
   @FindBy(css = ".overlay")
   private WebElement overlay;
-  @FindBy(css = "a[href='/wiki/Special:Random']")
-  private WebElement randomPage;
   @FindBy(css = ".local-wikia-search")
   private WebElement resultField;
   @FindBy(css = ".local-nav-menu")
@@ -65,24 +61,14 @@ public class NavigationSideComponentObject extends BasePageObject {
     cancelSearchCaption.click();
   }
 
-  public void clickRandomPage() {
-    waitForElementVisibleByElement(randomPage);
-    randomPage.click();
-  }
-
   public void clickSuggestion(int index) {
     waitForElementByElement(searchSuggestions.get(index));
     searchSuggestions.get(index).click();
   }
 
-  public void clickLinkWithoutChevron(int index) {
-    waitForElementVisibleByElement(noChevrons.get(index));
-    noChevrons.get(index).click();
-  }
-
-  public void clickLinkWithChevron(int index) {
-    waitForElementVisibleByElement(chevrons.get(index));
-    chevrons.get(index).click();
+  public void clickNavListElement(int index) {
+    waitForElementVisibleByElement(navList.get(index));
+    navList.get(index).click();
   }
 
   public void clickOverlay() {
@@ -116,14 +102,9 @@ public class NavigationSideComponentObject extends BasePageObject {
     return false;
   }
 
-  public boolean isLinkWithChevronEllipsized(int index) {
-    waitForElementVisibleByElement(chevrons.get(index));
-    return chevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
-  }
-
-  public boolean isLinkWithoutChevronEllipsized(int index) {
-    waitForElementVisibleByElement(noChevrons.get(index));
-    return noChevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
+  public boolean isNavListElementEllipsized(int index) {
+    waitForElementVisibleByElement(navList.get(index));
+    return navList.get(index).getCssValue("text-overflow").equals("ellipsis");
   }
 
   public boolean isMenuFieldVisible() {

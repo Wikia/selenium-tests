@@ -46,7 +46,7 @@ public class NavigationSideTests extends NewTestTemplate {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();
-    nav.clickLinkWithoutChevron(0);
+    nav.clickNavListElement(0);
     Assertion.assertFalse(oldUrl.equals(driver.getCurrentUrl()), "Redirection doesn't work");
   }
 
@@ -58,7 +58,7 @@ public class NavigationSideTests extends NewTestTemplate {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
-    nav.clickLinkWithChevron(0);
+    nav.clickNavListElement(1);
     Assertion.assertTrue(nav.isBackLinkDisplayed(), "Back link isn't displayed");
   }
 
@@ -69,7 +69,7 @@ public class NavigationSideTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAIN_ARTICLE);
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
-    nav.clickLinkWithChevron(0);
+    nav.clickNavListElement(1);
     nav.clickBackChevron();
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
   }
@@ -93,8 +93,8 @@ public class NavigationSideTests extends NewTestTemplate {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
     Assertion
-        .assertTrue(nav.isLinkWithoutChevronEllipsized(0), "Link without chevron isn't ellipsized");
-    Assertion.assertTrue(nav.isLinkWithChevronEllipsized(0), "Link with chevron isn't ellipsized");
+        .assertTrue(nav.isNavListElementEllipsized(0), "Link without chevron isn't ellipsized");
+    Assertion.assertTrue(nav.isNavListElementEllipsized(1), "Link with chevron isn't ellipsized");
   }
 
   // NST07
