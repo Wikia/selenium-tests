@@ -135,11 +135,10 @@ public class VEGalleryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"}//,
-//      dependsOnGroups = "VEGalleryTests_001"
+      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
+      dependsOnGroups = "VEGalleryTests_001"
   )
   public void VEGalleryTests_005_Remove() {
-    String articleName = "QAarticle1427405967781";
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();

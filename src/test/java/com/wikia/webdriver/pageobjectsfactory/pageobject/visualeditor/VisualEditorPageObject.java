@@ -395,7 +395,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     waitForElementClickableByElement(selectedGallery);
-    editArea.sendKeys("aaa");
     selectedGallery.click();
 
   }
@@ -404,8 +403,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     selectGallery(index);
     //wait for highlight
     waitForElementByElement(focusedHighlight);
-    Actions actions2 = new Actions(driver);
-    actions2.sendKeys(Keys.DELETE).build().perform();
+    //TODO check if any future webdriver upgrade would resolve having to use separate logic
+    if("Chrome".equalsIgnoreCase(getBrowser())) {
+      Actions actions2 = new Actions(driver);
+      actions2.sendKeys(Keys.DELETE).build().perform();
+    } else {
+      editArea.sendKeys(Keys.DELETE);
+    }
   }
 
   public void deleteTransclusion(int index, Transclusion transclusion) {
