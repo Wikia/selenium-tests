@@ -1,0 +1,11 @@
+HTTP/1.1 500 Server Error
+Access-Control-Allow-Origin: *
+Content-Type: text/html
+Date: Wed, 25 Mar 2015 23:55:52 GMT
+Server: Apache
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Vary: Accept-Encoding
+X-Frame-Options: SAMEORIGIN
+Content-Length: 19
+Connection: keep-alive
+

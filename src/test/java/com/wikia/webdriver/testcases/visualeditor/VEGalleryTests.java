@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -94,6 +93,7 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
+    galleryDialog.logOut(wikiURL);
   }
 
   //AG03
@@ -112,6 +112,7 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickTitleToPreview(7);
     ve.verifyPreviewImage();
+    ve.logOut(wikiURL);
   }
 
   //AG04
@@ -130,13 +131,15 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickMetaDataToPreview(3);
     ve.verifyPreviewImage();
+    ve.logOut(wikiURL);
   }
 
   @Test(
-      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
-      dependsOnGroups = "VEGalleryTests_001"
+      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"}//,
+//      dependsOnGroups = "VEGalleryTests_001"
   )
   public void VEGalleryTests_005_Remove() {
+    String articleName = "QAarticle1427405967781";
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -145,5 +148,6 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
     article = saveChangesDialog.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }

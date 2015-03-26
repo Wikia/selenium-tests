@@ -15,11 +15,11 @@ import java.util.List;
 
 public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
-  @FindBy(css = ".oo-ui-textInputWidget-decorated>input")
+  @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget input")
   private WebElement searchInput;
-  @FindBy(css = ".secondary .oo-ui-labeledElement-label")
+  @FindBy(css = ".secondary .oo-ui-labelElement-label")
   private WebElement cancelButton;
-  @FindBy(css = ".oo-ui-flaggableElement-primary .oo-ui-labeledElement-label")
+  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement doneButton;
   @FindBy(css = ".oo-ui-clearableTextInputWidget-clearButton")
   private WebElement clearInputButton;
@@ -33,17 +33,17 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement listViewButton;
   @FindBy(css = ".oo-ui-widget-enabled.ve-ui-wikiaSingleMediaCartWidget")
   private WebElement cart;
-  @FindBy(css = ".ve-ui-wikiaSingleMediaCartWidget li")
+  @FindBy(css = ".ve-ui-wikiaSingleMediaCartOptionWidget")
   private List<WebElement> cartItems;
 
   private static final By
       MEDIA_RESULTS_WIDGET_BY =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
-  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
+      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-selectWidget-depressed");
+  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-mwMediaResultWidget-done");
   private static final By MEDIA_ADD_ICON_BY = By.cssSelector(".oo-ui-icon-unchecked");
   private static final By
       MEDIA_TITLES_BY =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li>.oo-ui-labeledElement-label");
+      By.cssSelector(".ve-ui-mwMediaResultWidget-done>.oo-ui-labelElement-label");
   private static final By MEDIA_CHECKED_ICON_BY = By.cssSelector(".oo-ui-icon-checked");
   private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
 
@@ -52,7 +52,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   }
 
   private void typeInSearchTextField(String input) {
-    waitForElementByElement(searchInput);
+    waitForElementClickableByElement(searchInput);
     searchInput.sendKeys(input);
     PageObjectLogging.log("typeInSearchTextField", "Typed " + input + " in the search field", true);
   }
@@ -61,7 +61,6 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     if (clearInputButton.isDisplayed()) {
       waitForElementClickableByElement(clearInputButton);
       clearInputButton.click();
-      PageObjectLogging.log("clickClearInputButton", "'x' button clicked to clear search", true);
     }
   }
 
@@ -69,19 +68,18 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     waitForElementVisibleByElement(doneButton);
     waitForElementClickableByElement(doneButton);
     doneButton.click();
-    PageObjectLogging.log("clickAddGalleryButton", "'Done' button clicked", true);
   }
 
   public VisualEditorInsertGalleryDialog searchMedia(String searchText) {
-    switchToIFrame();
-    clickClearInputButton();
+    waitForDialogVisible();
+    waitForElementClickableByElement(searchInput);
+    searchInput.clear();
     typeInSearchTextField(searchText);
-    switchOutOfIFrame();
     return new VisualEditorInsertGalleryDialog(driver);
   }
 
   public VisualEditorPageObject addExistingMedia(int number) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
@@ -90,68 +88,56 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
       mediaAddIcon.click();
     }
     clickAddGalleryButton();
-    switchOutOfIFrame();
     return new VisualEditorPageObject(driver);
   }
 
   public void removeMediaFromCart(int number) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_CHECKED_ICON_BY);
     for (int i = 0; i < number; i++) {
       mediaResults.get(i).click();
-      PageObjectLogging.log("removeMediaFromCart", "1 item unchecked from grid", true);
     }
-    switchOutOfIFrame();
   }
 
   public void verifyNumOfCartItems(int expected) {
-    switchToIFrame();
+    waitForDialogVisible();
     Assertion.assertNumber(expected, cartItems.size(), "Verify number of items in cart");
-    switchOutOfIFrame();
   }
 
   public void addMediaToCart(int number) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_ADD_ICON_BY);
     for (int i = 0; i < number; i++) {
       mediaResults.get(i).click();
-      PageObjectLogging.log("addMediaToCart", "1 item checked from grid", true);
     }
-    switchOutOfIFrame();
   }
 
   public VisualEditorPageObject clickTitleToPreview(int index) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    waitForElementByElement(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_TITLES_BY).get(index);
-    targetMedia.click();
-    PageObjectLogging.log("clickTitleToPreview", "Media title clicked", true);
-    switchOutOfIFrame();
+    scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditorPageObject clickMetaDataToPreview(int index) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_META_BY).get(index);
-    targetMedia.click();
-    PageObjectLogging.log("clickMetaDataToPreview", "Media metadata clicked", true);
-    switchOutOfIFrame();
+    scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.click();
-    PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    switchOutOfIFrame();
     return new VisualEditorPageObject(driver);
   }
 

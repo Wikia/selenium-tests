@@ -76,10 +76,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mainContent;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
   private WebElement galleryNode;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
+  @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
+  private WebElement focusedHighlight;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -201,9 +203,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     if (expected > 0) {
       waitForElementVisibleByElement(galleryNode);
     }
-    Assertion.assertNumber(expected, galleryNodes.size(),
-                           "Checking the correct number of gallery nodes added");
-    PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);
+    Assertion.assertNumber(
+        expected,
+        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")),
+        "Checking the correct number of gallery nodes");
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -392,11 +395,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     waitForElementClickableByElement(selectedGallery);
+    editArea.sendKeys("aaa");
     selectedGallery.click();
+
   }
 
   public void deleteGallery(int index) {
     selectGallery(index);
+    //wait for highlight
+    waitForElementByElement(focusedHighlight);
     Actions actions2 = new Actions(driver);
     actions2.sendKeys(Keys.DELETE).build().perform();
   }
