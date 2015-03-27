@@ -23,7 +23,7 @@ public class FacebookTests extends NewTestTemplate {
    * dependent method: Signup_007_signUpWithFacebook and Facebook_002_noEmailPerms Steps: 1. Log in
    * to facebook 2. Open Facebook settings 3. Remove Wikia and Wikia Development App
    */
-  @Test(groups = {"Facebook_001", "Facebook"})
+  @Test(groups = {"Facebook_001", "Facebook", "SignUp_007", "SignUp", "Modals"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_removeWikiaApps() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
