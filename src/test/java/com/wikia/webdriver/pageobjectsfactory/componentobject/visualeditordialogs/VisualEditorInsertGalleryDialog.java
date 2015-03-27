@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -132,34 +131,5 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_META_BY).get(index);
     scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);
-  }
-
-  public VisualEditorPageObject previewExistingMediaByTitle(String title) {
-    waitForDialogVisible();
-    WebElement media = findMediaByTitle(title);
-    media.click();
-    return new VisualEditorPageObject(driver);
-  }
-
-  private WebElement findMediaByTitle(String title) {
-    WebElement elementFound = null;
-    WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
-    List<WebElement> mediaTitles = mediaResultsWidget.findElements(MEDIA_TITLES_BY);
-    int i = 0;
-    boolean found = false;
-    while (i < mediaTitles.size() && found == false) {
-      String mediaTitle = mediaTitles.get(i).getAttribute("title");
-      if (mediaTitle.equals(title)) {
-        found = true;
-        elementFound = mediaTitles.get(i);
-        PageObjectLogging.log("findMediaByTitle", title + " found from media dialog", true);
-      }
-      i++;
-    }
-    if (found == false) {
-      throw new NoSuchElementException("Media with the title: " + title + " is not found");
-    }
-    return elementFound;
   }
 }
