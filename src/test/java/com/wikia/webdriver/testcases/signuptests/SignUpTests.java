@@ -204,7 +204,7 @@ public class SignUpTests extends NewTestTemplate {
     fbModal.typePassword(password);
     fbModal.createAccount();
     signUp.verifyUserLoggedIn(userName);
-    signUp.logOut(driver);
+    signUp.logOut(wikiURL);
     signUp.logInCookie(userName, password, wikiURL);
     signUp.verifyUserLoggedIn(userName);
     PreferencesPageObject preferences;
