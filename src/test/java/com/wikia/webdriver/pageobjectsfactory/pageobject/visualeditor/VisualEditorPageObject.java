@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentat
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
@@ -81,16 +82,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement toggler;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
-  private By contextEditBy = By.cssSelector(".oo-ui-labelElement-label");
-  private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
-  private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
-
-  private String blockTransclusionString = ".ve-ce-mwTransclusionBlockNode";
+  private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
+  private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
+  private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public void selectMediaAndDelete() {
-    waitForElementByElement(editArea);
+    waitForElementVisibleByElement(editArea);
     editArea.click();
-    waitForElementByElement(mediaNode);
+    waitForElementVisibleByElement(mediaNode);
     mediaNode.click();
     Actions actions2 = new Actions(driver);
     actions2.sendKeys(Keys.DELETE).build().perform();
@@ -402,14 +401,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     actions2.sendKeys(Keys.DELETE).build().perform();
   }
 
-  public void deleteBlockTransclusion(int index) {
-    clickBlockTransclusion(index);
+  public void deleteTransclusion(int index, Transclusion transclusion) {
+    clickTransclusion(index, transclusion);
     Actions actions2 = new Actions(driver);
     actions2.sendKeys(Keys.DELETE).build().perform();
   }
 
-  public void clickBlockTransclusion(int index) {
-    Point tempLocation = getBlockTransclusionLocation(index);
+  public void clickTransclusion(int index, Transclusion transclusion) {
+    Point tempLocation = getTransclusionLocation(index, transclusion);
     int xOffset = 10;
     int yOffset = 10;
     int tempLeft = tempLocation.x + xOffset;
@@ -421,15 +420,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     waitForElementVisibleByElement(contextEdit);
     PageObjectLogging
-        .log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
+        .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
              driver);
   }
 
-  private Point getBlockTransclusionLocation(int index) {
+  private Point getTransclusionLocation(int index, Transclusion transclusion) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     Object
         templateBounding =
-        js.executeScript(VEContent.BOUNDING_SCRIPT, blockTransclusionString, index);
+        js.executeScript(VEContent.BOUNDING_SCRIPT, transclusion.getCssSelector(), index);
     Map<String, String> mapBounding = (Map) templateBounding;
     int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));
     int tempTop = getMapValueAsInt(String.valueOf(mapBounding.get("top")));
@@ -441,8 +440,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorEditTemplateDialog openEditTemplateDialog() {
-    waitForElementByElement(editArea);
-    waitForElementByElement(focusedNode);
+    waitForElementVisibleByElement(editArea);
+    waitForElementVisibleByElement(focusedNode);
     clickContextMenu();
     return new VisualEditorEditTemplateDialog(driver);
   }

@@ -21,6 +21,7 @@ public class YoutubeVideo implements Video {
           .put("]", " ")
           .put("/", " ")
           .put("_", " ")
+          .put(":", "")
           .build();
 
   private String url;

@@ -71,4 +71,7 @@ public class ClickTrackingScriptsProvider {
   public static final String EVENTS_CAPTURE_INSTALLATION =
       windowSeleniumGetEventsFunction
       + windowSeleniumPopEventsFunction;
+  
+  public static final String REDIRECT_BLOCK =
+      "window.onbeforeunload = function () {return 'blocking redirect - performing clicktracking test';}";
 }

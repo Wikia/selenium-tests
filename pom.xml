@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>4.4</version>
+			<version>4.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>net.kennychua</groupId>
@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.4</version>
+			<version>4.3.6</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>

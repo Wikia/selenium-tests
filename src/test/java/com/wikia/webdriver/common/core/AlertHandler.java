@@ -1,9 +1,10 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
-
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 
 public class AlertHandler {
 
@@ -18,4 +19,15 @@ public class AlertHandler {
       return false;
     }
   }
+  
+  public static void acceptPopupWindow(WebDriver driver) {
+      Alert alert = driver.switchTo().alert();
+      alert.accept();
+  }
+  
+  public static void dismissPopupWindow(WebDriver driver) {
+      Alert alert = driver.switchTo().alert();
+      alert.dismiss();
+  }
+  
 }
