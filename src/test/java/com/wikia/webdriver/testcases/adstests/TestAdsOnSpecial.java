@@ -28,9 +28,9 @@ public class TestAdsOnSpecial extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
     ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
-    ads.verifyGptAdInSlot(prefooterSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(prefooterSlot, lineItemId, "");
   }
 
   @Test(
@@ -45,9 +45,9 @@ public class TestAdsOnSpecial extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
     ads.verifyGptIframe(adUnit, medrecSlot, "gpt");
-    ads.verifyGptAdInSlot(medrecSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(medrecSlot, lineItemId, "");
   }
 
 

@@ -27,7 +27,7 @@ public class TestDfpParamsPresentMobile extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "mobile");
-    ads.verifyGptParams(slot, "mobile", pageParams, slotParams);
-    ads.verifyGptAdInSlot(slot, "mobile", lineItemId, creativeId);
+    ads.verifyGptParams(slot, pageParams, slotParams);
+    ads.verifyGptAdInSlot(slot, lineItemId, creativeId);
   }
 }
