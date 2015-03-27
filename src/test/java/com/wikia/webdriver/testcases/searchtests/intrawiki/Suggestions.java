@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
@@ -18,8 +17,8 @@ public class Suggestions extends IntraWiki {
 	  public void dropDownSuggestions() {
 	    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 	    search.openWikiPage(testedWiki);
-	    search.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
-	    search.verifySuggestions(SEARCH_ARTICLE);
+	    search.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+	    search.verifySuggestions(SearchContent.SEARCH_ARTICLE);
 	    
 	  }
 	  
