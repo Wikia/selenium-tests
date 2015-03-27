@@ -191,24 +191,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private WebElement findMediaByTitle(String title) {
-    WebElement elementFound = null;
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     waitForElementVisibleByElement(mediaResultsWidget);
-    List<WebElement> mediaTitles = mediaResultsWidget.findElements(mediaTitlesBy);
-    int i = 0;
-    boolean found = false;
-    while (i < mediaTitles.size() && found == false) {
-      String mediaTitle = mediaTitles.get(i).getAttribute("title");
-      if (mediaTitle.equals(title)) {
-        found = true;
-        elementFound = mediaTitles.get(i);
-        PageObjectLogging.log("findMediaByTitle", title + " found from media dialog", true);
-      }
-      i++;
-    }
-    if (found == false) {
-      throw new NoSuchElementException("Media with the title: " + title + " is not found");
-    }
-    return elementFound;
+    return getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title", title);
   }
 }
