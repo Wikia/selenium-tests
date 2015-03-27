@@ -27,7 +27,7 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
       groups = {"TestWikiaLogoInGlobalNav_001", "GlobalNav"},
       dataProvider = "getCentralWikiaUrlForWiki"
   )
-  public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,
+  public void TestWikiaLogoInGlobalNav_001_centralWikiExists_MAIN_4224(String wikiName,
                                                              String expectedCentralUrl) {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));

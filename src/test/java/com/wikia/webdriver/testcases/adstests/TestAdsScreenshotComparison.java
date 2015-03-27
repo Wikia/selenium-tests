@@ -113,6 +113,14 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
     checkAds();
   }
 
+  @GeoEdgeProxy(country = "NO")
+  @Test(
+      groups = {"Ads_Screenshot_NO"}
+  )
+  public void Ads_Screenshot_NO() throws Exception {
+    checkAds();
+  }
+
   private void checkAds() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.checkMedrec();
