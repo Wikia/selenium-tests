@@ -342,19 +342,11 @@ public class AdsDataProvider {
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 0
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 2
-        },
-        {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 0
-        },
-        {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 3
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
         },
     };
   }
