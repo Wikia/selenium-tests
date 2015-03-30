@@ -269,6 +269,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public VisualEditorHyperLinkDialog clickLinkButton() {
+    waitForElementClickableByElement(linkButton);
     linkButton.click();
     return new VisualEditorHyperLinkDialog(driver);
   }

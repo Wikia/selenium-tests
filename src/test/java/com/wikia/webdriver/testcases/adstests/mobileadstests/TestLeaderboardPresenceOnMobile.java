@@ -105,4 +105,12 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
   public void TopLeaderboardPresenceTest_GEF() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
   }
+
+  @GeoEdgeProxy(country = "NO")
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"}
+  )
+  public void TopLeaderboardPresenceTest_NO() {
+    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  }
 }

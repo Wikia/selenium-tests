@@ -101,7 +101,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void verifyForumDeletedText(String deletedName) {
-    waitForElementByXPath("//div[@class='global-notification confirm']" +
+    waitForElementByXPath("//div[@class='banner-notification confirm']" +
                           "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
                           + "\" has been deleted.')]");
     PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);

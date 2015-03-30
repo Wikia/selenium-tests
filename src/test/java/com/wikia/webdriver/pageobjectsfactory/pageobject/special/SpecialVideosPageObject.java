@@ -76,7 +76,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   protected void verifyAddVideoButton() {
-    waitForElementByElement(addVideo);
     waitForElementClickableByElement(addVideo);
   }
 
@@ -87,7 +86,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public VetAddVideoComponentObject clickAddAVideo() {
     verifyAddVideoButton();
     scrollAndClick(addVideo);
-    PageObjectLogging.log("clickAddAVideo", "click on 'add a video' button", true, driver);
     return new VetAddVideoComponentObject(driver);
   }
 

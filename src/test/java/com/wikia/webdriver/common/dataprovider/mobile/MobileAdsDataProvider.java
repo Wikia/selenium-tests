@@ -53,7 +53,7 @@ public class MobileAdsDataProvider {
   public static Object[][] articlesWithTopLeaderboard() {
     return new Object[][]{
         {"elderscrolls", "Skyrim"},
-        {"it.creepypastaitalia", "Slenderman"},
+        {"it.creepypasta", "Slenderman"},
         {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
         {"wowwiki", "Portal:Main"},
         {"muppet", "Kermit"},

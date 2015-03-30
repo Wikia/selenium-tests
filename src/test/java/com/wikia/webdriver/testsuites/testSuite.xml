@@ -75,6 +75,12 @@
             <class name="com.wikia.webdriver.testcases.forumtests.ForumEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumThreadTests"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.CompareScreenshotsForHubsMenu"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GameStarLogo"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationClicktracking"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationHubLinks"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationScrollAction"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationSearch"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationWikiaLogo"/>
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>

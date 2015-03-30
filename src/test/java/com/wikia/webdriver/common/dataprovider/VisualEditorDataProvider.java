@@ -92,6 +92,26 @@ public class VisualEditorDataProvider {
     ADVANCED
   }
 
+  public enum ImageSize {
+    WIDTH,
+    HEIGHT
+  }
+
+  public enum Transclusion {
+    INLINE("span[typeof='mw:Transclusion']"),
+    BLOCKED("div[typeof='mw:Transclusion']");
+
+    private String cssSelector;
+
+    private Transclusion(String cssSelector) {
+      this.cssSelector = cssSelector;
+    }
+
+    public String getCssSelector() {
+      return cssSelector;
+    }
+  }
+
   /**
    * Data provider with text formatting
    */

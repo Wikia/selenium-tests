@@ -16,7 +16,7 @@ public class GlobalNavigationScrollAction extends NewTestTemplate{
 	 * 2. Make sure that navbar is still attached on the top
 	 */
 	@Test(
-		groups = {"globalNav", "globalNav_scrollDown"}
+		groups = {"GlobalNav", "GlobalNav_scrollDown"}
 	)
 	public void scrollDown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
