@@ -76,6 +76,7 @@ public class VECategoryTests extends NewTestTemplate {
         (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
     optionsDialog.removeCategory(testCategory);
     ve = optionsDialog.clickApplyChangesButton();
+    ve.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyDeletedDiffs(categoryWikiTexts);

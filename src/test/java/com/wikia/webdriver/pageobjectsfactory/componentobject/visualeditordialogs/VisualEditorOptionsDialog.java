@@ -104,26 +104,26 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     matchingResult.click();
   }
 
-  public void removeCategory(String searchStr) {
-    waitForDialogVisible();
-    waitForElementByElement(categoryItem);
-    WebElement elementToRemove = getElementByText(categoryItems, searchStr);
-    WebElement categoryDownIndicator = elementToRemove.findElement(downIndicatorBy);
-    categoryDownIndicator.click();
-    waitForElementVisibleByElement(categoryPopUp);
+  public void removeCategory(String categoryStr) {
+    clickCategory(categoryStr);
     categoryRemoveButton.click();
-    PageObjectLogging.log("removeCategory", "Category: " + searchStr + " is removed", true, driver);
+    waitForElementNotVisibleByElement(categoryPopUp);
+    PageObjectLogging.log("removeCategory", "Category: " + categoryStr + " is removed", true, driver);
   }
 
-  public void addSortKeyToCategory(String cat, String key) {
+  public void addSortKeyToCategory(String categoryStr, String key) {
+    clickCategory(categoryStr);
+    WebElement sortKeyInput = categoryPopUp.findElement(By.cssSelector("input"));
+    sortKeyInput.sendKeys(key);
+  }
+
+  private void clickCategory(String searchCategory) {
     waitForDialogVisible();
     waitForElementByElement(categoryItem);
-    WebElement elementFound = getElementByText(categoryItems, cat);
+    WebElement elementFound = getElementByText(categoryItems, searchCategory);
     WebElement categoryDownIndicator = elementFound.findElement(downIndicatorBy);
     categoryDownIndicator.click();
     waitForElementVisibleByElement(categoryPopUp);
-    WebElement sortKeyInput = categoryPopUp.findElement(By.cssSelector("input"));
-    sortKeyInput.sendKeys(key);
   }
 
   public List<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {
