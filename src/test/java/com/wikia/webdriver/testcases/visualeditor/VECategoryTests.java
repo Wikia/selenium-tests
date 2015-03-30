@@ -34,7 +34,7 @@ public class VECategoryTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
-    testCategory = "Ca";
+    testCategory = "BC";
     categorySearchStr = "abcd";
     categoryWikiTexts = new ArrayList<>();
     categoryWikiTexts.add("[[Category:" + testCategory + "]]");
@@ -54,6 +54,7 @@ public class VECategoryTests extends NewTestTemplate {
         (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
     optionsDialog.addCategory(testCategory);
     ve = optionsDialog.clickApplyChangesButton();
+    ve.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyAddedDiffs(categoryWikiTexts);
@@ -130,6 +131,7 @@ public class VECategoryTests extends NewTestTemplate {
     optionsDialog.addCategory(testCategory2);
     optionsDialog.addSortKeyToCategory(testCategory2, sortKey);
     ve = optionsDialog.clickApplyChangesButton();
+    ve.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyAddedDiffs(categoryWithSortKeyWikiTexts);
