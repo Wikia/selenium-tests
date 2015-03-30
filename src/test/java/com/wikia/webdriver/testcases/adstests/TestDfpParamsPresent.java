@@ -27,8 +27,8 @@ public class TestDfpParamsPresent extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
-    ads.verifyGptParams(slot, "gpt", pageParams, slotParams);
-    ads.verifyGptAdInSlot(slot, "gpt", lineItemId, creativeId);
+    ads.verifyGptParams(slot, pageParams, slotParams);
+    ads.verifyGptAdInSlot(slot, lineItemId, creativeId);
 
   }
 }

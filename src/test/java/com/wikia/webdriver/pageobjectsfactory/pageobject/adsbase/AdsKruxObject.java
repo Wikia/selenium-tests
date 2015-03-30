@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
+  private static final int MAX_SEGS_NUMBER_GPT = 27;
   private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
@@ -87,6 +89,19 @@ public class AdsKruxObject extends AdsBaseObject {
     String kxkuid = (String) js.executeScript("return localStorage.kxkuid;");
     PageObjectLogging.log("krux kuid: ", kxkuid, true, driver);
     return kxkuid;
+  }
+
+  public String getKsgmntPattern(String segmentsLocalStorage) {
+    String ksgmnt = "\"ksgmnt\":[";
+    String[] segments = segmentsLocalStorage.split(",");
+    if (segments.length > MAX_SEGS_NUMBER_GPT) {
+      segments = Arrays.copyOfRange(segmentsLocalStorage.split(","), 0, MAX_SEGS_NUMBER_GPT);
+    }
+    for (String segment : segments) {
+      ksgmnt += String.format("\"%s\",", segment);
+    }
+    ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
+    return ksgmnt;
   }
 
 }
