@@ -103,13 +103,16 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-    ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
-    VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
+    //Excluding FF on running this VE-1370
+    if (!"ff".equalsIgnoreCase(ve.getBrowser())) {
+      VisualEditorAddMediaDialog mediaDialog =
+          (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+      ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
+      VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+      ArticlePageObject article = save.savePage();
+      article.verifyVEPublishComplete();
+    }
+    base.logOut(wikiURL);
   }
 
   //MS01
@@ -242,14 +245,17 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   @AfterGroups(groups = "VEMediaTests_003")
   public void delete_Image() {
-    base.logOut(wikiURL);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
-    filePage.verifyImageLicense(testImageLicense);
-    filePage.selectHistoryTab();
-    filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
-    DeletePageObject deletePage = filePage.deleteVersion(1);
-    deletePage.submitDeletion();
-    deletePage.logOut(wikiURL);
+    //Excluding FF on running this VE-1370
+    if (!"ff".equalsIgnoreCase(base.getBrowser())) {
+      base.logOut(wikiURL);
+      base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+      filePage.verifyImageLicense(testImageLicense);
+      filePage.selectHistoryTab();
+      filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
+      DeletePageObject deletePage = filePage.deleteVersion(1);
+      deletePage.submitDeletion();
+      deletePage.logOut(wikiURL);
+    }
   }
 }
