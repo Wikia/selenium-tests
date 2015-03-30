@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -9,7 +7,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.rightrail.LatestPhotosComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
@@ -21,10 +18,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
 
+import org.testng.annotations.Test;
+
 /**
  * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong 
- * 1. Open lightbox from Special:UnusedFiles page 
+ * @author Saipetch Kongkatong
+ * 1. Open lightbox from Special:UnusedFiles page
  * 2. Open lightbox from Special:UnusedVideos page 
  * 3. Open lightbox from Special:UncategorizedFiles page 
  * 4. Open lightbox from Special:MostLinkedFiles page
@@ -37,6 +36,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
  * 
  * 9. Open lightbox from Special:NewFiles, verify title url and
  *  verify file page (logged-in user)
+ * @author Saipetch Kongkatong
+ * 
+ *         1. Open lightbox from latest photo, 3. Open lightbox from Special:UnusedFiles page 4.
+ *         Open lightbox from Special:UnusedVideos page 5. Open lightbox from
+ *         Special:UncategorizedFiles page 6. Open lightbox from Special:MostLinkedFiles page 7.
+ *         Open lightbox from article image and verify social buttons 8. Open lightbox from article
+ *         image and verify carousel 9. Open lightbox from Special:Videos and verify video 10. Open
+ *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
+ *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
+ *         user)
  */
 public class LightboxTests extends NewTestTemplate {
 

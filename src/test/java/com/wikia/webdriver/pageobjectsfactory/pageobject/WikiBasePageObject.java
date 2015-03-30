@@ -168,7 +168,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
-  @FindBy(css = ".global-notification div.msg a")
+  @FindBy(css = ".banner-notification div.msg a")
   private WebElement undeleteLink;
   @FindBy(css = ".banner-notification")
   private WebElement flashMessage;
@@ -715,6 +715,11 @@ public class WikiBasePageObject extends BasePageObject {
   public ArticlePageObject openRandomArticle(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
     return new ArticlePageObject(driver);
+  }
+  
+  public ArticlePageObject openMainPage(String wikiURL) {
+      getUrl(wikiURL);
+      return new ArticlePageObject(driver);
   }
 
   public void verifyPermissionsErrorsPresent() {
@@ -1329,6 +1334,11 @@ public class WikiBasePageObject extends BasePageObject {
 	  return new UserProfilePageObject(driver);
   }
 
+  public void redirectToAnotherRandomArticle() {
+    String wikiURL = getCurrentUrl().substring(0,getCurrentUrl().indexOf("wiki/"));
+    getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
+  }
+  
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
@@ -1340,4 +1350,5 @@ public class WikiBasePageObject extends BasePageObject {
   public enum HubName {
     VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
   }
+
 }

@@ -16,7 +16,7 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
   private void testIVW2(String wikiName, String article, String ivw2Param) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage, networkTrafficIntereceptor);
+    AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage, networkTrafficInterceptor);
     wikiPage.verifyCallToIVW2Issued();
     wikiPage.verifyParamFromIVW2Present(ivw2Param);
   }

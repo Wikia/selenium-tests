@@ -11,34 +11,34 @@ import com.google.common.collect.ImmutableMap;
  */
 public class YoutubeVideo implements Video {
 
-  private static final ImmutableMap<String, String> TITLE_SPECIAL_CHARS_TO_REPLACE =
-      new ImmutableMap.Builder<String, String>()
-          .put("| ", "")
-          .put("|", "")
-          .put("{", " ")
-          .put("}", " ")
-          .put("[", " ")
-          .put("]", " ")
-          .put("/", " ")
-          .put("_", " ")
-          .build();
+  private static final ImmutableMap<String, String> TITLE_SPECIAL_CHARS_TO_REPLACE_WITH_SPACE =
+      new ImmutableMap.Builder<String, String>().put("/", " ").put("#", " ").put(":", " ").build();
 
-  private String url;
-  private String title;
-  private String fileName;
+  private final String url;
+  private final String title;
+  private final String fileName;
 
   public YoutubeVideo(String title, String url) {
     this.url = url;
-    this.title = capitaliseFirstWord(escapeSpecialCharactersFromTitle(title));
+    this.title = capitaliseFirstWord(escapeSpecialCharactersAndReduceSpacesFromTitle(title));
 
     this.fileName = transformTitleToFileName(this.title);
   }
 
-  private static final String escapeSpecialCharactersFromTitle(String title) {
+  private static String escapeSpecialCharactersAndReduceSpacesFromTitle(String title) {
     String titleAfterEscape = title;
-    for (Map.Entry<String, String> entry : TITLE_SPECIAL_CHARS_TO_REPLACE.entrySet()) {
+
+    for (Map.Entry<String, String> entry : TITLE_SPECIAL_CHARS_TO_REPLACE_WITH_SPACE.entrySet()) {
       titleAfterEscape = titleAfterEscape.replace(entry.getKey(), entry.getValue());
     }
+    titleAfterEscape =
+        titleAfterEscape
+            .replaceAll(
+                "[^ %!\"$&'()*,\\-./0-9:;=?@A-Z\\\\^_`a-z~\\x80-\\xFF+]|%[0-9A-Fa-f]{2}|&[A-Za-z0-9\\x80-\\xff]+;|&#[0-9]+;|&#x[0-9A-Fa-f]+;/S",
+                "");
+
+    titleAfterEscape =
+        titleAfterEscape.replaceAll("^\\s+", "").replaceAll("$\\s+", "").replaceAll("\\s+", " ");
 
     return titleAfterEscape;
   }
@@ -62,7 +62,7 @@ public class YoutubeVideo implements Video {
     return title.replace(" ", "_");
   }
 
-  private String capitaliseFirstWord(String sentence) {
-    return StringUtils.capitalize(sentence.substring(0, 1)) + sentence.substring(1);
+  private String capitaliseFirstWord(String title) {
+    return StringUtils.capitalize(title.substring(0, 1)) + title.substring(1);
   }
 }

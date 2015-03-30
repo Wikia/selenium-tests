@@ -21,62 +21,42 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_001_DeleteMapAsAMapOwner() {
+  public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-    selectedMap =
-        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
+    selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
+    selectedMap.verifyMapOpenedForDeleteMapTests();
+    selectedMap.restoreMap();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
   }
 
   @Test(groups = {"DeleteAndRestoreMapTests_002", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_002_RestoreMapAsAMapOwner() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
-        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
-    selectedMap.verifyMapOpenedForDeleteMapTests();
-    selectedMap.restoreMap();
-  }
-
-  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_003_DeleteMapByNotOwner() {
+  public void DeleteAndRestoreMapTests_002_DeleteMapByNotOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[1]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     deleteMapModal.clickDeleteMap();
-    Assertion
-        .assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
+    Assertion.assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
   }
 
-  @Test(groups = {"DeleteAndRestoreMapTests_004", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_004_StaffUserCanDeleteMap() {
+  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"})
+  public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-  }
-
-  @Test(groups = {"DeleteAndRestoreMapTests_005", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_005_StaffUserCanRestoreMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
-        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
+    selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
+    selectedMap.verifyMapOpenedForDeleteMapTests();
   }
 }

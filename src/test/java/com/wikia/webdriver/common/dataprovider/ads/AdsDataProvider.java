@@ -51,7 +51,7 @@ public class AdsDataProvider {
         {"zh.tos", "Category:%E5%9C%96%E9%91%92"},
         {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Slenderman"},
+        {"it.creepypasta", "Slenderman"},
         {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
         {"wowwiki", "Portal:Main"},
         {"gameofthrones", "Season_4"},
@@ -83,7 +83,7 @@ public class AdsDataProvider {
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Categoria:Creepypasta"},
+        {"it.creepypasta", "Categoria:Creepypasta"},
         {"wikia", "Wikia"},
         {"wikia", "Video_Games/Lizzunchbox"},
         {"monsterhunter", "MH3U:_Monsters"},
@@ -98,7 +98,7 @@ public class AdsDataProvider {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Categoria:Creepypasta"},
+        {"it.creepypasta", "Categoria:Creepypasta"},
         {"monsterhunter", "MH3U:_Monsters"},
         {"monsterhunter", "Portal:MH3U"},
 
@@ -300,9 +300,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"memory-alpha", "Portal:Main"},
-        {"gameofthrones", "Season_4"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
+        {"adtest", "SyntheticTests/Amazon"},
     };
   }
 
@@ -342,19 +340,11 @@ public class AdsDataProvider {
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 0
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 2
-        },
-        {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 0
-        },
-        {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 3
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
         },
     };
   }
@@ -390,7 +380,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JpSWxdE4"
+            "JtL6ozVw"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
@@ -412,7 +402,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JsJ8VJC8"
+            "JtL70cvM"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
@@ -434,7 +424,7 @@ public class AdsDataProvider {
                           Pair.of("glee", "Rachel_Berry")),
             "mf20tfg50",
             true,
-            "JsJ-_GLH"
+            "JtL7NnTV"
         },
         {
             Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),

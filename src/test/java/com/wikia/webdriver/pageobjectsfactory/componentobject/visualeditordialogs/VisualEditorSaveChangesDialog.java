@@ -19,7 +19,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   private WebElement publishButton;
   @FindBy(css = "#recaptcha_area")
   private WebElement recaptchaArea;
-  @FindBy(css = "#ve-ui-mwSaveDialog-captcha iframe")
+  @FindBy(css = ".ve-ui-mwSaveDialog-captcha iframe")
   private WebElement recaptchaContainer;
   @FindBy(css = ".oo-ui-processDialog-actions-other .oo-ui-labelElement-label")
   private WebElement reviewChangesButton;

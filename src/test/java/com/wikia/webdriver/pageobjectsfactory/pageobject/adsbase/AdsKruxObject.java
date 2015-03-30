@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -11,8 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
+  private static final int MAX_SEGS_NUMBER_GPT = 27;
   private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
@@ -41,6 +39,7 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
+    waitPageLoaded();
     String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
     Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
   }
@@ -49,17 +48,24 @@ public class AdsKruxObject extends AdsBaseObject {
    * Test whether the Krux user id is not empty and added to GPT calls
    */
   public void verifyKruxUserParam() {
+    String script = "return localStorage.kxuser;";
     waitForKrux();
-    String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
-    Assertion.assertStringNotEmpty(kruxUser);
-    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", kruxUser));
+    String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    refreshPage();
+    waitForKrux();
+    String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
+    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
+                         isGptParamPresent(SLOT_SELECTOR, "u", user2));
   }
 
   public void waitForKrux() {
     waitPageLoaded();
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.scriptReturnsTrue("return !!window.Krux"));
+      String script =
+          "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
+      wait.until(CommonExpectedConditions.scriptReturnsTrue(script));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -71,21 +77,31 @@ public class AdsKruxObject extends AdsBaseObject {
     setCookie("_kuid_", userId);
   }
 
-  public String getKruxSegments() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    List segments = (ArrayList) js.executeScript("return Krux.segments;");
-    PageObjectLogging.log("getKruxSegments", segments.toString(), true);
-    return Joiner.on("\t").join(segments);
-  }
-
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (String) js.executeScript("return localStorage.kxsegs;");
+    String segments = (String) js.executeScript("return localStorage.kxsegs;");
+    PageObjectLogging.log("krux segments: ", segments, true, driver);
+    return segments;
   }
 
   public String getKxkuid() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (String) js.executeScript("return localStorage.kxkuid;");
+    String kxkuid = (String) js.executeScript("return localStorage.kxkuid;");
+    PageObjectLogging.log("krux kuid: ", kxkuid, true, driver);
+    return kxkuid;
+  }
+
+  public String getKsgmntPattern(String segmentsLocalStorage) {
+    String ksgmnt = "\"ksgmnt\":[";
+    String[] segments = segmentsLocalStorage.split(",");
+    if (segments.length > MAX_SEGS_NUMBER_GPT) {
+      segments = Arrays.copyOfRange(segmentsLocalStorage.split(","), 0, MAX_SEGS_NUMBER_GPT);
+    }
+    for (String segment : segments) {
+      ksgmnt += String.format("\"%s\",", segment);
+    }
+    ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
+    return ksgmnt;
   }
 
 }

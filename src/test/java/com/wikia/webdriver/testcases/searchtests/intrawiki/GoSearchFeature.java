@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -45,8 +46,8 @@ public class GoSearchFeature extends IntraWiki {
         base.openWikiPage(testedWiki);
         base.logInCookie(credentials.userNameGoSearchPreferred, credentials.passwordGoSearchPreferred, wikiURL);
         NavigationBar navigation = new NavigationBar(driver);
-        ArticlePageObject article = navigation.goSearchFor(SEARCH_ARTICLE);
-        article.verifyArticleName(SEARCH_ARTICLE);
+        ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
+        article.verifyArticleName(SearchContent.SEARCH_ARTICLE);
     }
 
 
