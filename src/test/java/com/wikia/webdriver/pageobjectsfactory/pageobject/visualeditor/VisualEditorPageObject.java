@@ -76,7 +76,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mainContent;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
   private WebElement galleryNode;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
@@ -203,9 +203,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     if (expected > 0) {
       waitForElementVisibleByElement(galleryNode);
     }
-    Assertion.assertNumber(expected, galleryNodes.size(),
-                           "Checking the correct number of gallery nodes added");
-    PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);
+    Assertion.assertNumber(
+        expected,
+        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")),
+        "Checking the correct number of gallery nodes");
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -395,6 +396,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement selectedGallery = galleryNodes.get(index);
     waitForElementClickableByElement(selectedGallery);
     selectedGallery.click();
+
   }
 
   public void deleteGallery(int index) {
