@@ -17,8 +17,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
 
     @Test(groups = { "ClickTracking", "ClickTrackingArticleEditModeTests",
-            "ClickTrackingArticleEditMode_001" })
-    public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
+            "ClickTrackingArticleEditMode_001"}, enabled = false)
+    public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents_QAART_555() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         ArticlePageObject article = base.openRandomArticle(wikiURL);
         VisualEditModePageObject visualEditMode = article

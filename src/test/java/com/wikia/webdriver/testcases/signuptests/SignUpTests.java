@@ -51,7 +51,6 @@ public class SignUpTests extends NewTestTemplate {
     );
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_002", "SignUp"})
@@ -69,7 +68,6 @@ public class SignUpTests extends NewTestTemplate {
         Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE)
     );
     signUp.verifyTooYoungMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_003", "SignUp"})
@@ -78,7 +76,6 @@ public class SignUpTests extends NewTestTemplate {
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
