@@ -33,6 +33,7 @@ import org.testng.SkipException;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
@@ -222,9 +223,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestSkipped(ITestResult result) {
-    result.setStatus(ITestResult.FAILURE);
-    result.setThrowable(new SkipException("TEST SKIPPED"));
-    onTestFailure(result);
+    if(result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(DontRun.class)) {
+      log("Test SKIPPED", "this test is not supported in this environment", true);
+      result.setStatus(ITestResult.SUCCESS);
+      onTestSuccess(result);
+    } else {
+      result.setStatus(ITestResult.FAILURE);
+      result.setThrowable(new SkipException("TEST SKIPPED"));
+      onTestFailure(result);
+    }
   }
 
   @Override
