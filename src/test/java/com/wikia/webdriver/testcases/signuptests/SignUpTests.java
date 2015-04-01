@@ -79,7 +79,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void SignUp_004_signup() {
+  public void SignUp_004_signup_SOC_599() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -150,7 +150,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser_main_3877() {
+  public void SignUp_006_loginNotVerifiedUser_SOC_603() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
