@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by rcunningham on 3/31/15.
+ * This annotation allows a test to be skipped based testing environment
+ * env is either "preview", "prod", or "dev-name"
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})
