@@ -58,7 +58,7 @@
             <class name="com.wikia.webdriver.testcases.categoriestests.CategoriesArticleTests"/>
             <class name="com.wikia.webdriver.testcases.categoriestests.CategoriesTestsEditMode"/>
             <class name="com.wikia.webdriver.testcases.chattests.ChatTests"/>
-            <class name="com.wikia.webdriver.testcases.chattests.ChatTests"/>
+            <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.commentstests.BlogCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
