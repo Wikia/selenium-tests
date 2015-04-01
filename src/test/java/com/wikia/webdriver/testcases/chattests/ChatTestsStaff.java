@@ -1,27 +1,23 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 /**
- * @author Rebekah Cunningham (modified from ChatTests to work on preview environment only)
- * @description 1. Two staff users enter Chat 2. Verify switching between main and private
- * message sections when one of the users has written public message 6. Verify switching
- * between main and private message sections when one of the users has written private message
- * 7. Verify non-staff users do not have permission to chat.
+ * @author Rebekah Cunningham (modified from ChatTests to test only Staff functionality)
+ * @description 1. Two staff users enter Chat 2. Verify switching between main and private message
+ * sections when one of the users has written public message 6. Verify switching between main and
+ * private message sections when one of the users has written private message 7. Verify non-staff
+ * users do not have permission to chat.
  */
-public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
+public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = config.getCredentials();
 
@@ -34,8 +30,8 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
   }
 
 
-  @Test(groups = {"ChatPreview_001", "ChatPreview"})
-  public void ChatPreview_001_twoUserEnterChat() {
+  @Test(groups = {"ChatTestsStaff_001", "ChatStaff"})
+  public void ChatTestsStaff_001_twoUserEnterChat() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
         driverOne, credentials.userNameStaff, credentials.passwordStaff
@@ -52,8 +48,8 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyUserJoinToChatMessage(credentials.userNameStaff2);
   }
 
-  @Test(groups = {"ChatPreview_002", "ChatPreview"})
-  public void ChatPreview_002_verifySwitchingBetweenMainAndPrivateSections() {
+  @Test(groups = {"ChatTestsStaff_002", "ChatStaff"})
+  public void ChatTestsStaff_002_verifySwitchingBetweenMainAndPrivateSections() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
         driverOne, credentials.userNameStaff, credentials.passwordStaff
@@ -80,8 +76,8 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyMessageOnChat(userTwoMessage);
   }
 
-  @Test(groups = {"ChatPreview_003", "ChatPreview"})
-  public void ChatPreview_003_sendPrivateMessage() {
+  @Test(groups = {"ChatTestsStaff_003", "ChatStaff"})
+  public void ChatTestsStaff_003_sendPrivateMessage() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
         driverOne, credentials.userNameStaff, credentials.passwordStaff
@@ -110,12 +106,13 @@ public class ChatTestsPreview extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyMessageOnChat(userTwoPrivateMessage);
   }
 
-  @Test(groups = {"ChatPreview_004", "ChatPreview"})
-  public void ChatPreview_004_basicUserChatFails() {
+  @DontRun(env = {"prod"})
+  @Test(groups = {"ChatTestsStaff_004", "ChatStaff"})
+  public void ChatTestsStaff_004_basicUserChatFails() {
 
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
-            driverOne, credentials.userName, credentials.password
+        driverOne, credentials.userName, credentials.password
     );
     SpecialPageObject special = new SpecialPageObject(driver);
     special.verifyPageHeader("Permissions error");
