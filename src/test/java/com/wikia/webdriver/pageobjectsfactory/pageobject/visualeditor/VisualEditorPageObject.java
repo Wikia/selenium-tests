@@ -89,8 +89,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public void selectMediaAndDelete() {
-    waitForElementVisibleByElement(editArea);
-    editArea.click();
+    if("chrome".equalsIgnoreCase(getBrowser())) {
+      waitForElementVisibleByElement(editArea);
+      editArea.click();
+    }
     waitForElementVisibleByElement(mediaNode);
     mediaNode.click();
     Actions actions2 = new Actions(driver);
