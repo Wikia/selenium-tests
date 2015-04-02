@@ -67,9 +67,12 @@ public class FacebookTests extends NewTestTemplate {
     almostThere.confirmAccountAndLogin(email, emailPassword, userName, password, wikiURL);
     almostThere.logOut(wikiURL);
 
-    SignUpPageObject signUp2 = userFB.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp2 = base.openSpecialSignUpPage(wikiURL);
     signUp2.clickFacebookSignUp();
     signUp2.verifyUserLoggedIn(userName);
+    PreferencesPageObject prefsPage = signUp2.openSpecialPreferencesPage(wikiURL);
+    prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    prefsPage.disconnectFromFacebook();
   }
 
   /**
@@ -86,6 +89,7 @@ public class FacebookTests extends NewTestTemplate {
     String winHandleBefore = driver.getWindowHandle();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
+    dropDown.openWikiPage(wikiURL);
     dropDown.openDropDown();
     dropDown.logInViaFacebook(credentials.emailFB, credentials.passwordFB);
 
@@ -99,10 +103,31 @@ public class FacebookTests extends NewTestTemplate {
 
     driver.switchTo().window(winHandleBefore);
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logOut(driver);
+    base.logOut(wikiURL);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.disconnectFromFacebook();
+  }
+
+  @Test(
+      groups = {"Facebook_004", "Facebook"},
+      dependsOnMethods = {"Facebook_003_linkFBwithWikia"}
+  )
+  @UseUnstablePageLoadStrategy
+  public void Facebook_004_connectFBfromPrefs() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
+    prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    prefsPage.connectFacebook(credentials.emailFB, credentials.passwordFB);
+    prefsPage.verifyFBButtonVisible();
+    base.logOut(wikiURL);
+    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    signUp.clickFacebookSignUp();
+    base.verifyUserLoggedIn(credentials.userName);
+    PreferencesPageObject prefsPage2 = signUp.openSpecialPreferencesPage(wikiURL);
+    prefsPage2.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    prefsPage2.disconnectFromFacebook();
   }
 }

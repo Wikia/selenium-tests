@@ -28,10 +28,12 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement restoreDefaultLink;
   @FindBy(css = ".global-notification.confirm")
   private WebElement saveNotfication;
-
-  public enum tabNames {
-    INFO, EMAIL, EDITING, UNDER, FACEBOOK
-  }
+  @FindBy(css = "#facebook #email")
+  private WebElement facebookEmailInput;
+  @FindBy(css = "#facebook #pass")
+  private WebElement facebookPasswordInput;
+  @FindBy(css = "#facebook input[name='login']")
+  private WebElement facebookSubmitButton;
 
   public PreferencesPageObject(WebDriver driver) {
     super(driver);
@@ -100,6 +102,70 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public void verifySaveNotification() {
     waitForElementVisibleByElement(saveNotfication);
     PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
+  }
+
+  public void connectFacebook(String email, String password) {
+    waitForElementByElement(fbConnect);
+    scrollAndClick(fbConnect);
+
+    PageObjectLogging.log("disconnectFromFacebook",
+                          "account has been disconnected from Facebook", true);
+    waitForNewWindow();
+    Object[] windows = driver.getWindowHandles().toArray();
+    driver.switchTo().window(windows[1].toString());
+    PageObjectLogging.log(
+        "logInDropDownFB",
+        "facebook popup window detected",
+        true
+    );
+    PageObjectLogging.log(
+        "logInDropDownFB",
+        "switching to facebook pop-up window",
+        true
+    );
+
+    waitForElementByElement(facebookEmailInput);
+    facebookEmailInput.clear();
+    facebookEmailInput.sendKeys(email);
+    PageObjectLogging.log(
+        "fillLogin",
+        "Login field on facebook form filled",
+        true
+    );
+
+    waitForElementByElement(facebookPasswordInput);
+    facebookPasswordInput.clear();
+    facebookPasswordInput.sendKeys(password);
+    PageObjectLogging.log(
+        "fillPassword",
+        "Password field on facebook form filled",
+        true
+    );
+
+    scrollAndClick(facebookSubmitButton);
+    PageObjectLogging.log(
+        "logInDropDownFB",
+        "facebook log in submit button clicked",
+        true
+    );
+
+    driver.switchTo().window(windows[0].toString());
+    PageObjectLogging.log(
+        "logInDropDownFB",
+        "switching to main window",
+        true
+    );
+
+    waitForElementByElement(facebookDisconnect);
+    PageObjectLogging.log(
+        "logInDropDownFB",
+        "fb disconnect button",
+        facebookDisconnect.isDisplayed()
+    );
+  }
+
+  public enum tabNames {
+    INFO, EMAIL, EDITING, UNDER, FACEBOOK
   }
 
 }
