@@ -35,7 +35,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
   private By
       mediaTitlesBy =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li>.oo-ui-labeledElement-label");
+      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
 
   public enum ImageLicense {
     NONESELECTED("None selected", ""),
@@ -187,29 +187,12 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement media = findMediaByTitle(title);
     media.click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
   private WebElement findMediaByTitle(String title) {
-    WebElement elementFound = null;
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     waitForElementVisibleByElement(mediaResultsWidget);
-    List<WebElement> mediaTitles = mediaResultsWidget.findElements(mediaTitlesBy);
-    int i = 0;
-    boolean found = false;
-    while (i < mediaTitles.size() && found == false) {
-      String mediaTitle = mediaTitles.get(i).getAttribute("title");
-      if (mediaTitle.equals(title)) {
-        found = true;
-        elementFound = mediaTitles.get(i);
-        PageObjectLogging.log("findMediaByTitle", title + " found from media dialog", true);
-      }
-      i++;
-    }
-    if (found == false) {
-      throw new NoSuchElementException("Media with the title: " + title + " is not found");
-    }
-    return elementFound;
+    return getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title", title);
   }
 }

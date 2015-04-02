@@ -31,8 +31,8 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      * search after suggestion - search-after-suggest-button clear suggestion
      */
     @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
-            "GlobalNav" })
-    public void search() {
+            "GlobalNav" }, enabled = false)
+    public void search_QAART_555() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openMainPage(wikiURL);
         NavigationBar navbar = new NavigationBar(driver);

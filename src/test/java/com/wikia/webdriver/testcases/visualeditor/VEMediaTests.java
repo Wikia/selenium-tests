@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -90,15 +91,15 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
   }
 
   //AM06
+  //This test would fail on FF: https://wikia-inc.atlassian.net/browse/VE-1370
   @Test(
       groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
   )
   public void VEMediaTests_003_uploadImageWithCustomFileName() {
-    String testFileUploadName = "TestFile";
+    String testFileUploadName = "TestFileVEMediaTests003";
     testFullFileName = testFileUploadName + ".png";
     testImageLicense = ImageLicense.CCBYSA;
 
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -108,6 +109,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
   //MS01
@@ -124,7 +126,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.addExistingMedia(1);
-    ve.verifyVideos(0);
+    ve.verifyVideos(1);
     ve.selectMedia();
     VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.typeCaption(captionText);
@@ -176,7 +178,15 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     ve.selectMedia();
     VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    mediaSettingsDialog.setCustomSize(resizeNumber);
+    //change width of video to 250
+    mediaSettingsDialog.setCustomSize(resizeNumber, ImageSize.WIDTH);
+    mediaSettingsDialog.clickApplyChangesButton();
+    ve.verifyVideoResized(source);
+    source = ve.getVideoDimension();
+    mediaSettingsDialog = ve.openMediaSettings();
+    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+    //change height of video to 250
+    mediaSettingsDialog.setCustomSize(resizeNumber, ImageSize.HEIGHT);
     mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyVideoResized(source);
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
@@ -213,11 +223,14 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     mediaSettingsDialog.clickAlignment(Alignment.LEFT);
     ve = mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyVEToolBarPresent();
+    ve.verifyEditorSurfacePresent();
     ve.selectMediaByIndex(0);
     mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.CENTER);
     ve = mediaSettingsDialog.clickApplyChangesButton();
+    ve.verifyVEToolBarPresent();
+    ve.verifyEditorSurfacePresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyAddedDiffs(wikiTexts);
@@ -229,11 +242,14 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   @AfterGroups(groups = "VEMediaTests_003")
   public void delete_Image() {
+    base.logOut(wikiURL);
+    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
     filePage.verifyImageLicense(testImageLicense);
     filePage.selectHistoryTab();
     filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
     DeletePageObject deletePage = filePage.deleteVersion(1);
     deletePage.submitDeletion();
+    deletePage.logOut(wikiURL);
   }
 }

@@ -92,6 +92,11 @@ public class VisualEditorDataProvider {
     ADVANCED
   }
 
+  public enum ImageSize {
+    WIDTH,
+    HEIGHT
+  }
+
   public enum Transclusion {
     INLINE("span[typeof='mw:Transclusion']"),
     BLOCKED("div[typeof='mw:Transclusion']");
