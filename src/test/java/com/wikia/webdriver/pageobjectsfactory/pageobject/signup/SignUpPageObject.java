@@ -97,10 +97,6 @@ public class SignUpPageObject extends WikiBasePageObject {
     Assertion.assertEquals(message, PageContent.SIGN_UP_TOO_YOUNG_MESSAGE);
   }
 
-  public void verifySubmitButtonDisabled() {
-    Assertion.assertEquals("true", signupButton.getAttribute("disabled"));
-  }
-
   public void enterBirthDate(String month, String day, String year) {
     try {
       monthSelect.selectByVisibleText(month);

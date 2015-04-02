@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
-  public void SignUp_001_captchaNotChecked_QAART_550() {
+  public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -51,11 +51,10 @@ public class SignUpTests extends NewTestTemplate {
     );
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_002", "SignUp"})
-  public void SignUp_002_tooYoungUser_QAART_550() {
+  public void SignUp_002_tooYoungUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -69,20 +68,18 @@ public class SignUpTests extends NewTestTemplate {
         Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE)
     );
     signUp.verifyTooYoungMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_003", "SignUp"})
-  public void SignUp_003_existingUserName_QAART_550() {
+  public void SignUp_003_existingUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
-    signUp.verifySubmitButtonDisabled();
   }
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void SignUp_004_signup_QAART_550() {
+  public void SignUp_004_signup_SOC_599() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -153,7 +150,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser_main_3877() {
+  public void SignUp_006_loginNotVerifiedUser_SOC_603() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -175,7 +172,7 @@ public class SignUpTests extends NewTestTemplate {
 
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.login(userName, password);
-    almostTherePage.verifyAlmostTherePage();
+    almostTherePage.verifyUserLoggedIn(userName);
   }
 
   /**
@@ -205,10 +202,10 @@ public class SignUpTests extends NewTestTemplate {
     fbModal.createAccount();
     signUp.verifyUserLoggedIn(userName);
     signUp.logOut(wikiURL);
+    signUp.openWikiPage(wikiURL);
     signUp.logInCookie(userName, password, wikiURL);
     signUp.verifyUserLoggedIn(userName);
-    PreferencesPageObject preferences;
-    preferences = signUp.openSpecialPreferencesPage(wikiURL);
+    PreferencesPageObject preferences = signUp.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.FACEBOOK);
     preferences.disconnectFromFacebook();
   }

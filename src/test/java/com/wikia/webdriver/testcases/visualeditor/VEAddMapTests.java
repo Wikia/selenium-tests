@@ -98,10 +98,6 @@ public class VEAddMapTests extends NewTestTemplate {
     createdMap.verifyMapOpened();
     mapID = createdMap.getEmbedMapID();
     createdMap.verifyControlButtonsAreVisible();
-//    //commenting out the next few lines - Defect VE-1557
-//    mapDialog = createdMap.switchBackToVETab();
-//    //the next line would fail
-//    mapDialog.verifyNumOfMaps(expectedMapNum);
     delete_Map();
   }
 
