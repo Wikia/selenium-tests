@@ -150,9 +150,9 @@ public class AdsDataProvider {
   public static Object[][] specialPages() {
     return new Object[][]{
         {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD"},
+         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD"},
+         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
   }
 
@@ -160,9 +160,9 @@ public class AdsDataProvider {
   public static Object[][] filePages() {
     return new Object[][]{
         {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
-         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
+         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
-         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
+         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
     };
   }
 
