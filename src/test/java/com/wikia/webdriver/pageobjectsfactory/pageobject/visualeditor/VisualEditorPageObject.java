@@ -52,7 +52,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement veEditorSurface;
   @FindBy(css = ".image.video.video-thumbnail.medium")
   private List<WebElement> videoNodes;
-  @FindBy(css = "figure.ve-ce-branchNode a")
+  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
   @FindBy(css = "figure.ve-ce-branchNode a")
   private List<WebElement> mediaNodes;
