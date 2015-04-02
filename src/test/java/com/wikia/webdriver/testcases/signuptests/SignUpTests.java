@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
@@ -21,6 +22,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 import com.wikia.webdriver.testcases.facebooktests.FacebookTests;
 
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -38,6 +40,8 @@ public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   File captchaFile = config.getCaptchaFile();
+  private static String userName;
+  private static String password;
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
@@ -185,11 +189,11 @@ public class SignUpTests extends NewTestTemplate {
    */
   @Test(
       groups = {"SignUp_007", "SignUp", "Modals"},
-      invocationCount = 25
+      invocationCount = 1
   )
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-                                                         credentials.passwordFB);
+        credentials.passwordFB);
     stopBrowser();
     startBrowser();
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -198,20 +202,26 @@ public class SignUpTests extends NewTestTemplate {
     FacebookUserPageObject userFB;
     userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
-    SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
     fbModal.acceptWikiaAppPolicy();
-    String userName = "QA" + signUp.getTimeStamp();
-    String password = "Pass" + signUp.getTimeStamp();
+    userName = "QA" + signUp.getTimeStamp();
+    password = "Pass" + signUp.getTimeStamp();
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
     signUp.verifyUserLoggedIn(userName);
     signUp.logOut(wikiURL);
-    signUp.openWikiPage(wikiURL);
-    signUp.logInCookie(userName, password, wikiURL);
-    signUp.verifyUserLoggedIn(userName);
-    PreferencesPageObject preferences = signUp.openSpecialPreferencesPage(wikiURL);
+  }
+
+  @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
+  public void dissconnectFromFB(){
+    startBrowser();
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    base.logInCookie(userName, password, wikiURL);
+    base.verifyUserLoggedIn(userName);
+    PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.FACEBOOK);
     preferences.disconnectFromFacebook();
   }
