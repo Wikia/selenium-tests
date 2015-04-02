@@ -47,7 +47,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName9, credentials.password9, wikiURL);
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
   }
 

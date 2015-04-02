@@ -216,7 +216,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
   )
   public void VisualEditorEditing_007_minorEdit() {
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
