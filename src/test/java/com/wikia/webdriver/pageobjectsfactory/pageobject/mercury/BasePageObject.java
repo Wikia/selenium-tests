@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,13 +18,6 @@ public class BasePageObject extends MobileBasePageObject {
 
   public BasePageObject(WebDriver driver) {
     super(driver);
-  }
-
-  public SpecialMercuryPageObject openSpecialMercury(String wikiURL) {
-    getUrl(wikiURL + MercuryArticles.MERCURY_SPECIAL_PAGE);
-    PageObjectLogging
-        .log("openSpecialMercury", MercuryArticles.MERCURY_SPECIAL_PAGE + " opened", true);
-    return new SpecialMercuryPageObject(driver);
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
@@ -53,7 +47,11 @@ public class BasePageObject extends MobileBasePageObject {
 
   public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
     BasePageObject base = new BasePageObject(driver);
-    SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-    mercuryPage.clickMercuryButton();
+    base.openArticleByName(wikiURL, "Special:Mercury");
+    WebElement optInButton = driver.findElement(By.cssSelector("button[name=opt]"));
+    base.waitForElementVisibleByElement(optInButton);
+    if ("in".equals(optInButton.getAttribute("value"))) {
+      optInButton.click();
+    }
   }
 }
