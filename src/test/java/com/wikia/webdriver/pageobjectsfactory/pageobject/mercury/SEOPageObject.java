@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
  */
-public class OpenGraphPageObject extends MobileBasePageObject {
+public class SEOPageObject extends MobileBasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -31,7 +31,7 @@ public class OpenGraphPageObject extends MobileBasePageObject {
   @FindBy(css = "link[rel='canonical']")
   private WebElement canonicalUrl;
 
-  public OpenGraphPageObject(WebDriver driver) {
+  public SEOPageObject(WebDriver driver) {
     super(driver);
   }
 

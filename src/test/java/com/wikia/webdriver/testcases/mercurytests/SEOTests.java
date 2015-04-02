@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,25 +29,25 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_001_CheckMetaTagsAndCanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isLinkRelCanonical(), "Url isn't canonical");
-    Assertion.assertTrue(openGraph.isOgFbApp(), "fb:app_id is wrong");
-    Assertion.assertTrue(openGraph.isOgImage(), "og:image is wrong");
-    Assertion.assertTrue(openGraph.isOgUrlTag(), "og:url meta tag is wrong");
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(openGraph.isOgSiteName(), "og:site_name is in DOM");
-    Assertion.assertTrue(openGraph.isOgTitleMainPage(), "og:title meta tag is wrong");
-    Assertion.assertTrue(openGraph.isOgTypeWebsite(), "og:type meta tag is wrong");
-    String lastDesc = openGraph.getDescription();
+    Assertion.assertTrue(seo.isLinkRelCanonical(), "Url isn't canonical");
+    Assertion.assertTrue(seo.isOgFbApp(), "fb:app_id is wrong");
+    Assertion.assertTrue(seo.isOgImage(), "og:image is wrong");
+    Assertion.assertTrue(seo.isOgUrlTag(), "og:url meta tag is wrong");
+    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
+    Assertion.assertFalse(seo.isOgSiteName(), "og:site_name is in DOM");
+    Assertion.assertTrue(seo.isOgTitleMainPage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTypeWebsite(), "og:type meta tag is wrong");
+    String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
+    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
+    Assertion.assertFalse(lastDesc.equals(seo.getDescription()),
             "og:description tags are the same");
-    Assertion.assertTrue(openGraph.isOgSiteName(), "og:site_name isn't in DOM");
-    Assertion.assertTrue(openGraph.isOgTitleArticlePage(), "og:title meta tag is wrong");
-    Assertion.assertTrue(openGraph.isOgTypeArticle(), "og:type meta tag is wrong");
+    Assertion.assertTrue(seo.isOgSiteName(), "og:site_name isn't in DOM");
+    Assertion.assertTrue(seo.isOgTitleArticlePage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTypeArticle(), "og:type meta tag is wrong");
   }
 
   // SEOT01
@@ -55,12 +55,12 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_001_CheckTypeMetaTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgTypeWebsite(), "og:type meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTypeWebsite(), "og:type meta tag is wrong");
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    Assertion.assertTrue(openGraph.isOgTypeArticle(), "og:type meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTypeArticle(), "og:type meta tag is wrong");
   }
 
   // SEOT02
@@ -68,12 +68,12 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_002_CheckTitleMetaTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgTitleMainPage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTitleMainPage(), "og:title meta tag is wrong");
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    Assertion.assertTrue(openGraph.isOgTitleArticlePage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(seo.isOgTitleArticlePage(), "og:title meta tag is wrong");
   }
 
   // SEOT03
@@ -81,12 +81,12 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_003_CheckSiteNameTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertFalse(openGraph.isOgSiteName(), "og:site_name is in DOM");
+    Assertion.assertFalse(seo.isOgSiteName(), "og:site_name is in DOM");
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    Assertion.assertTrue(openGraph.isOgSiteName(), "og:site_name isn't in DOM");
+    Assertion.assertTrue(seo.isOgSiteName(), "og:site_name isn't in DOM");
   }
 
   // SEOT04
@@ -94,14 +94,14 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_004_CheckDescriptionTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    String lastDesc = openGraph.getDescription();
+    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
+    String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
+    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
+    Assertion.assertFalse(lastDesc.equals(seo.getDescription()),
             "og:description tags are the same");
   }
 
@@ -110,8 +110,8 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_005_CheckUrlTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgUrlTag(), "og:url meta tag is wrong");
+    SEOPageObject seo = new SEOPageObject(driver);
+    Assertion.assertTrue(seo.isOgUrlTag(), "og:url meta tag is wrong");
   }
 
   // SEOT06
@@ -119,8 +119,8 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_006_CheckImageTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgImage(), "og:image is wrong");
+    SEOPageObject seo = new SEOPageObject(driver);
+    Assertion.assertTrue(seo.isOgImage(), "og:image is wrong");
   }
 
   // SEOT07
@@ -128,7 +128,7 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_007_CheckFbAppTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgFbApp(), "fb:app_id is wrong");
+    SEOPageObject seo = new SEOPageObject(driver);
+    Assertion.assertTrue(seo.isOgFbApp(), "fb:app_id is wrong");
   }
 }
