@@ -26,6 +26,31 @@ public class SEOTests extends NewTestTemplate {
 
   // SEOT01
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_001_CheckMetaTags() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, "");
+    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
+    Assertion.assertTrue(openGraph.isOgFbApp(), "fb:app_id is wrong");
+    Assertion.assertTrue(openGraph.isOgImage(), "og:image is wrong");
+    Assertion.assertTrue(openGraph.isOgUrlTag(), "og:url meta tag is wrong");
+    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
+    Assertion.assertFalse(openGraph.isOgSiteName(), "og:site_name is in DOM");
+    Assertion.assertTrue(openGraph.isOgTitleMainPage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(openGraph.isOgTypeWebsite(), "og:type meta tag is wrong");
+    String lastDesc = openGraph.getDescription();
+    leftNav.clickSearchButton();
+    leftNav.clickNavListElement(0);
+    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
+    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
+            "og:description tags are the same");
+    Assertion.assertTrue(openGraph.isOgSiteName(), "og:site_name isn't in DOM");
+    Assertion.assertTrue(openGraph.isOgTitleArticlePage(), "og:title meta tag is wrong");
+    Assertion.assertTrue(openGraph.isOgTypeArticle(), "og:type meta tag is wrong");
+  }
+
+  // SEOT01
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_001_CheckTypeMetaTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -38,7 +63,7 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT02
-  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_002_CheckTitleMetaTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -51,7 +76,7 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT03
-  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_003_CheckSiteNameTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -64,7 +89,7 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT04
-  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_004_CheckDescriptionTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -76,11 +101,11 @@ public class SEOTests extends NewTestTemplate {
     leftNav.clickNavListElement(0);
     Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
     Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
-                          "og:description tags are the same");
+            "og:description tags are the same");
   }
 
   // SEOT05
-  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_005_CheckUrlTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -89,7 +114,7 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT06
-  @Test(groups = {"MercurySEOTest_006", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_006", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_006_CheckImageTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -98,7 +123,7 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT07
-  @Test(groups = {"MercurySEOTest_007", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_007", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_007_CheckFbAppTag() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
