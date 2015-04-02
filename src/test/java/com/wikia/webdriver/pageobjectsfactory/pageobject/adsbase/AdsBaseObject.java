@@ -342,16 +342,19 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyNoLiftiumAdsOnPage() {
+  public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    verifyNoLiftiumAds();
-    PageObjectLogging.log(
-        "verifyNoLiftiumAdsOnPage",
-        "No ads detected",
-        true,
-        driver
-    );
+    if (checkIfElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
+      String iframeSrc = liftiumIframes.get(0).getAttribute("src");
+      if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
+        PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found except WikiaBar", true);
+      } else {
+        throw new WebDriverException("Liftium ads found!");
+      }
+    } else {
+      PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
+    }
   }
 
   public void verifyNoAdsOnPage() {
@@ -444,14 +447,6 @@ public class AdsBaseObject extends WikiBasePageObject {
             true
         );
       }
-    }
-  }
-
-  private void verifyNoLiftiumAds() {
-    if (checkIfElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
-      throw new WebDriverException("Liftium ads found!");
-    } else {
-      PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
     }
   }
 
