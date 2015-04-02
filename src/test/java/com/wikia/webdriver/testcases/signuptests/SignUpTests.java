@@ -186,8 +186,10 @@ public class SignUpTests extends NewTestTemplate {
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
-    fbModal.verifyUserLoggedIn(userName);
-    fbModal.logOut(wikiURL);
+    base.openWikiPage(wikiURL);
+    base.appendToUrl("noads=1");
+    base.verifyUserLoggedIn(userName);
+    base.logOut(wikiURL);
   }
 
   @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
