@@ -89,17 +89,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public void selectMediaAndDelete() {
-    if("chrome".equalsIgnoreCase(getBrowser())) {
-      waitForElementVisibleByElement(editArea);
-      editArea.click();
-    }
+    waitForElementVisibleByElement(editArea);
+    editArea.click();
     waitForElementVisibleByElement(mediaNode);
     mediaNode.click();
-    waitForElementVisibleByElement(focusedHighlight);
-    waitForElementVisibleByElement(contextMenu);
-    Actions actions2 = new Actions(driver);
-    actions2.sendKeys(Keys.DELETE).build().perform();
+    deleteMediaNode();
     PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+  }
+
+  private void deleteMediaNode() {
+    executeScript("$(\"figure\").trigger($.Event(\"keydown\", {keyCode: 46}))");
   }
 
   public void typeTextArea(String text) {
