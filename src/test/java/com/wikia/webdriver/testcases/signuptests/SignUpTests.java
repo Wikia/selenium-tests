@@ -186,8 +186,8 @@ public class SignUpTests extends NewTestTemplate {
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
-    signUp.verifyUserLoggedIn(userName);
-    signUp.logOut(wikiURL);
+    fbModal.verifyUserLoggedIn(userName);
+    fbModal.logOut(wikiURL);
   }
 
   @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
@@ -204,5 +204,6 @@ public class SignUpTests extends NewTestTemplate {
     } else {
       stopBrowser();
     }
+    driver.quit();
   }
 }
