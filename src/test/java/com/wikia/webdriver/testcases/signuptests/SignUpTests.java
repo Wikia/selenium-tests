@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -18,6 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
+import com.wikia.webdriver.testcases.facebooktests.FacebookTests;
 
 import org.testng.annotations.Test;
 
@@ -183,11 +185,15 @@ public class SignUpTests extends NewTestTemplate {
    */
   @Test(
       groups = {"SignUp_007", "SignUp", "Modals"},
-      dependsOnGroups = "Facebook_001",
       invocationCount = 25
   )
   public void SignUp_007_signUpWithFacebook() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
+                                                         credentials.passwordFB);
+    stopBrowser();
+    startBrowser();
     WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB;
     userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
