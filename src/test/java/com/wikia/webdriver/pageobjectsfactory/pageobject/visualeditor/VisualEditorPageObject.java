@@ -95,6 +95,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     }
     waitForElementVisibleByElement(mediaNode);
     mediaNode.click();
+    waitForElementVisibleByElement(focusedHighlight);
     Actions actions2 = new Actions(driver);
     actions2.sendKeys(Keys.DELETE).build().perform();
     PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
