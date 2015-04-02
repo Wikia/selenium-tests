@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class PreferencesPageObject extends WikiBasePageObject {
 
@@ -73,8 +73,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public void verifyEmailMeSection() {
     for (WebElement elem : emailMeSectionRows) {
       PageObjectLogging.log("verifyEmailSection", "verifying " + elem.getText(), true);
-      Assertion.assertEquals("true", elem.findElement(By.cssSelector("input"))
-          .getAttribute("checked"));
+      Assertion.assertEquals("true",
+          elem.findElement(By.cssSelector("input")).getAttribute("checked"));
     }
   }
 
@@ -82,8 +82,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
     waitForElementByElement(facebookDisconnect);
     scrollAndClick(facebookDisconnect);
     waitForElementByElement(fbConnect);
-    PageObjectLogging.log("disconnectFromFacebook",
-                          "account has been disconnected from Facebook", true);
+    PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook",
+        true);
   }
 
   public PreferencesPageObject clickSaveButton() {
@@ -105,63 +105,27 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public void connectFacebook(String email, String password) {
+    PageObjectLogging.log("connectFacebook", "Connecting FB via FB login dialog", true);
+
     waitForElementByElement(fbConnect);
     scrollAndClick(fbConnect);
 
-    PageObjectLogging.log("disconnectFromFacebook",
-                          "account has been disconnected from Facebook", true);
     waitForNewWindow();
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "facebook popup window detected",
-        true
-    );
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "switching to facebook pop-up window",
-        true
-    );
 
     waitForElementByElement(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
-    PageObjectLogging.log(
-        "fillLogin",
-        "Login field on facebook form filled",
-        true
-    );
 
     waitForElementByElement(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
-    PageObjectLogging.log(
-        "fillPassword",
-        "Password field on facebook form filled",
-        true
-    );
 
     scrollAndClick(facebookSubmitButton);
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "facebook log in submit button clicked",
-        true
-    );
 
     driver.switchTo().window(windows[0].toString());
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "switching to main window",
-        true
-    );
-
     waitForElementByElement(facebookDisconnect);
-    PageObjectLogging.log(
-        "logInDropDownFB",
-        "fb disconnect button",
-        facebookDisconnect.isDisplayed()
-    );
   }
 
   public enum tabNames {
