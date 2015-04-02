@@ -184,7 +184,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(
       groups = {"SignUp_007", "SignUp", "Modals"},
       dependsOnGroups = "Facebook_001",
-      enabled = true
+      invocationCount = 25
   )
   public void SignUp_007_signUpWithFacebook() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
