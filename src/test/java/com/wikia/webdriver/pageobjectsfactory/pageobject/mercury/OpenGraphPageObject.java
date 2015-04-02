@@ -108,4 +108,12 @@ public class OpenGraphPageObject extends MobileBasePageObject {
     }
     return !ogFbApp.getAttribute("content").isEmpty();
   }
+
+  public boolean isLinkRelCanonical() throws WebDriverException {
+    waitForElementInViewPort(canonicalUrl);
+    if (canonicalUrl.getAttribute("href") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
+    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
+  }
 }

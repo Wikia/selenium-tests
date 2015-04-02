@@ -21,8 +21,6 @@ public class ArticlePageObject extends BasePageObject {
   private WebElement topContributorsSection;
   @FindBy(css = ".contributors img")
   private List<WebElement> topContributorsThumbs;
-  @FindBy(css = "head link[rel='canonical']")
-  private WebElement canonicalUrl;
   @FindBy(css = "figure.article-image a")
   private List<WebElement> singleImgLink;
   @FindBy(css = "svg.logo")
@@ -62,14 +60,6 @@ public class ArticlePageObject extends BasePageObject {
 
   public boolean isTopContributorsThumbVisible(int index) {
     return checkIfElementOnPage(topContributorsThumbs.get(index));
-  }
-
-  public boolean isUrlCanonical() throws WebDriverException {
-    waitForElementInViewPort(canonicalUrl);
-    if (canonicalUrl.getAttribute("href") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 
   public boolean isSingleLinkedImageRedirectionWorking(int index) {

@@ -26,11 +26,12 @@ public class SEOTests extends NewTestTemplate {
 
   // SEOT01
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_001_CheckMetaTags() {
+  public void MercurySEOTest_001_CheckMetaTagsAndCanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
+    Assertion.assertTrue(openGraph.isLinkRelCanonical(), "Url isn't canonical");
     Assertion.assertTrue(openGraph.isOgFbApp(), "fb:app_id is wrong");
     Assertion.assertTrue(openGraph.isOgImage(), "og:image is wrong");
     Assertion.assertTrue(openGraph.isOgUrlTag(), "og:url meta tag is wrong");
