@@ -9,7 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponento
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
@@ -36,7 +35,7 @@ public class FacebookTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   public void Facebook_002_noEmailPerms() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-                                                         credentials.passwordFB);
+        credentials.passwordFB);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
@@ -73,7 +72,7 @@ public class FacebookTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   public void Facebook_003_linkFBwithWikia() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-                                                         credentials.passwordFB);
+        credentials.passwordFB);
     String winHandleBefore = driver.getWindowHandle();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
