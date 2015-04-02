@@ -172,7 +172,7 @@ public class SignUpTests extends NewTestTemplate {
 
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.login(userName, password);
-    almostTherePage.verifyAlmostTherePage();
+    almostTherePage.verifyUserLoggedIn(userName);
   }
 
   /**
@@ -202,10 +202,10 @@ public class SignUpTests extends NewTestTemplate {
     fbModal.createAccount();
     signUp.verifyUserLoggedIn(userName);
     signUp.logOut(wikiURL);
+    signUp.openWikiPage(wikiURL);
     signUp.logInCookie(userName, password, wikiURL);
     signUp.verifyUserLoggedIn(userName);
-    PreferencesPageObject preferences;
-    preferences = signUp.openSpecialPreferencesPage(wikiURL);
+    PreferencesPageObject preferences = signUp.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.FACEBOOK);
     preferences.disconnectFromFacebook();
   }
