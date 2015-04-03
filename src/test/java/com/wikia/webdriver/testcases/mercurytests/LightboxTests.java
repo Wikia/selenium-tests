@@ -39,8 +39,21 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_UP = "up";
   private static final String DIRECTION_DOWN = "down";
 
-  // MT01
+  // MT0-1,2
   @Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTests_000_TappingImageOpenLightbox() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
+
+    lightbox.clickGalleryImage(0);
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Current image isn't visible");
+    lightbox.clickCloseButton();
+    Assertion.assertFalse(lightbox.isLightboxOpened(), "Lightbox is opened");
+  }
+
+  // MT01
+  @Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"}, enabled = false)
   public void MercuryLightboxTests_001_TappingImageOpenLightbox() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
@@ -50,7 +63,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT02
-  @Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"})
+  @Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"}, enabled = false)
   public void MercuryLightboxTests_002_TappingCloseButtonCloseLightbox() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
