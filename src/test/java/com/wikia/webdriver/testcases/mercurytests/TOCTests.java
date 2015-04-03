@@ -34,8 +34,27 @@ public class TOCTests extends NewTestTemplate {
     Assertion.assertFalse(toc.isH2AndTOC(), "TOC is displayed");
   }
 
-  // TOCT02
+  // TOCT0-2,3,4,5
   @Test(groups = {"MercuryTOCTests_002", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTests_000_IfH2ThenTOC() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    Assertion.assertTrue(toc.isH2AndTOC(), "TOC isn't displayed");
+    Assertion.assertTrue(toc.isTOCUnderArticleName(), "TOC isn't under article name");
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
+    toc.clickOnTOC();
+    Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu isn't visible");
+    toc.clickOnTOC();
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
+    toc.clickOnTOC();
+    Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
+    Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP),
+                         "Header padding top is improper");
+  }
+
+  // TOCT02
+  @Test(groups = {"MercuryTOCTests_002", "MercuryTOCTests", "Mercury"}, enabled = false)
   public void MercuryTOCTests_002_IfH2ThenTOC() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
@@ -44,7 +63,7 @@ public class TOCTests extends NewTestTemplate {
   }
 
   // TOCT03
-  @Test(groups = {"MercuryTOCTests_003", "MercuryTOCTests", "Mercury"})
+  @Test(groups = {"MercuryTOCTests_003", "MercuryTOCTests", "Mercury"}, enabled = false)
   public void MercuryTOCTests_003_TOCUnderArticleName() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
@@ -53,7 +72,7 @@ public class TOCTests extends NewTestTemplate {
   }
 
   // TOCT04
-  @Test(groups = {"MercuryTOCTests_004", "MercuryTOCTests", "Mercury"})
+  @Test(groups = {"MercuryTOCTests_004", "MercuryTOCTests", "Mercury"}, enabled = false)
   public void MercuryTOCTests_004_TapOnElementScrollToSection() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
@@ -65,7 +84,7 @@ public class TOCTests extends NewTestTemplate {
   }
 
   // TOCT05
-  @Test(groups = {"MercuryTOCTests_005", "MercuryTOCTests", "Mercury"})
+  @Test(groups = {"MercuryTOCTests_005", "MercuryTOCTests", "Mercury"}, enabled = false)
   public void MercuryTOCTests_005_TapOnTOCCollapseOrExpandMenu() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
