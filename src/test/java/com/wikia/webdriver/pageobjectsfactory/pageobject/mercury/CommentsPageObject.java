@@ -14,10 +14,6 @@ import java.util.List;
  */
 public class CommentsPageObject extends BasePageObject {
 
-  @FindBy(css = ".article-gallery img")
-  private List<WebElement> galleryImagesArray;
-  @FindBy(css = ".nav")
-  private WebElement searchButton;
   @FindBy(css = ".article-comments > button")
   private WebElement commentsHeader;
   @FindBy(css = ".avatar")
@@ -32,10 +28,6 @@ public class CommentsPageObject extends BasePageObject {
   private List<WebElement> showRepliesButtons;
   @FindBy(css = ".expanded > .article-comment > .content")
   private List<WebElement> repliesContent;
-  @FindBy(css = "figure.article-image a")
-  private List<WebElement> singleImgLink;
-  @FindBy(css = ".view-map")
-  private WebElement viewMapButton;
   @FindBy(css = "ul.comments > li")
   private List<WebElement> commentsList;
   @FindBy(css = "ul.comments > li li")
@@ -176,12 +168,5 @@ public class CommentsPageObject extends BasePageObject {
     }
     return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
         .contains("/wiki/File:");
-  }
-
-  public boolean isChevronCollapsed() throws WebDriverException {
-    if (showCommentsButton.getAttribute("class") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return showCommentsButton.getAttribute("class").contains("collapsed");
   }
 }

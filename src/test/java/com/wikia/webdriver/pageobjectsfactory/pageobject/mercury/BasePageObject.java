@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;

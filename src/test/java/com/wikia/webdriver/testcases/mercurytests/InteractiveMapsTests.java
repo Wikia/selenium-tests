@@ -31,9 +31,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private static final String ZOOM_WAY_IN = "in";
   private static final String ZOOM_WAY_OUT = "out";
 
-  // IMAPT0-1,2,6,8,9
-  @Test(groups = {"MercuryInteractiveMaps_000", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_000_MapIdInLink() {
+  // IMAPT01
+  @Test(groups = {"MercuryInteractiveMaps_001", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMaps_001_MapModalUrlTitlePinPopUpClose() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
@@ -49,9 +49,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertFalse(maps.isMapModalVisible(), "Map modal is visible");
   }
 
-  // IMAPT0-3,4
-  @Test(groups = {"MercuryInteractiveMaps_000", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_000_ZoomByGesture() {
+  // IMAPT02
+  @Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMaps_002_ZoomByGestureAndButtons() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -87,9 +87,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
   }
 
-  // IMAPT0-5,7
-  @Test(groups = {"MercuryInteractiveMaps_000", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_000_FilterBoxCanBeExpanded() {
+  // IMAPT03
+  @Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMaps_003_FilterBoxListScroll() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -104,111 +104,5 @@ public class InteractiveMapsTests extends NewTestTemplate {
     File afterScrolling = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling),
                           "Scrolling in filter box doesn't work");
-  }
-
-  // IMAPT01
-  @Test(groups = {"MercuryInteractiveMaps_001", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_001_ViewButtonWillOpenMapModal() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
-  }
-
-  // IMAPT02
-  @Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_002_PoiIsClickable() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.switchToMapFrame();
-    maps.clickPin();
-    Assertion.assertTrue(maps.isPinPopUp(), "Pin popup doesn't appear");
-  }
-
-  // IMAPT03
-  @Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_003_ZoomByGesture() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.switchToMapFrame();
-    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, WAIT_TIME);
-    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, WAIT_TIME);
-    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
-  }
-
-  // IMAPT04
-  @Test(groups = {"MercuryInteractiveMaps_004", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_004_ZoomButtons() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.switchToMapFrame();
-    Assertion.assertTrue(maps.isZoomButtonWorking(ZOOM_WAY_OUT), "Zoom out doesn't work");
-    Assertion.assertTrue(maps.isZoomButtonWorking(ZOOM_WAY_IN), "Zoom in doesn't work");
-  }
-
-  // IMAPT05
-  @Test(groups = {"MercuryInteractiveMaps_005", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_005_FilterBoxCanBeExpanded() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.switchToMapFrame();
-    maps.clickFilterBox();
-    Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
-  }
-
-  // IMAPT06
-  @Test(groups = {"MercuryInteractiveMaps_006", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_006_MapTitleInHeader() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    Assertion.assertTrue(maps.isTextInMapTitleHeader(), "Map title header is empty");
-  }
-
-  // IMAPT07
-  @Test(groups = {"MercuryInteractiveMaps_007", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_007_ScrollableFilterList() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.switchToMapFrame();
-    Assertion.assertTrue(maps.isFilterListScrollable(touchAction),
-                         "Scrolling in filter box doesn't work");
-  }
-
-  // IMAPT08
-  @Test(groups = {"MercuryInteractiveMaps_008", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_008_CloseButtonWillCloseModal() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    maps.clickCloseButton();
-    Assertion.assertFalse(maps.isMapModalVisible(), "Map modal is visible");
-  }
-
-  // IMAPT09
-  @Test(groups = {"MercuryInteractiveMaps_009", "MercuryInteractiveMapsTests", "Mercury"}, enabled = false)
-  public void MercuryInteractiveMaps_009_MapIdInLink() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.clickViewMapButton();
-    Assertion.assertTrue(maps.isMapIdInUrl(), "Url doesn't contain map");
   }
 }

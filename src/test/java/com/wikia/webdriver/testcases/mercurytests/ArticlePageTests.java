@@ -28,9 +28,9 @@ public class ArticlePageTests extends NewTestTemplate {
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
        "Privacy Policy", "Feedback"};
 
-  // APT0-4,3,1
-  @Test(groups = {"MercuryArticleTests_000", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_000_LogoSearchFooterAreVisible() {
+  // APT01
+  @Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_001_LogoSearchTopContributorsFooterElementsAreVisible() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -45,16 +45,6 @@ public class ArticlePageTests extends NewTestTemplate {
       Assertion.assertTrue(articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i),
                            FOOTER_ELEMENTS[i] + " isn't displayed");
     }
-  }
-
-  // APT01
-  @Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"}, enabled = false)
-  public void MercuryArticleTests_001_LogoAndSearchButtonAreVisible() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    ArticlePageObject articlePage = new ArticlePageObject(driver);
-    Assertion.assertTrue(articlePage.isWikiaLogoVisible(), "Wikia logo isn't visible");
-    Assertion.assertTrue(articlePage.isSearchButtonVisible(), "Search button isn't visible");
   }
 
   // APT02
@@ -68,33 +58,8 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT03
-  @Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"}, enabled = false)
-  public void MercuryArticleTests_003_TopContributorsWikiSection() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    ArticlePageObject articlePage = new ArticlePageObject(driver);
-    Assertion.assertTrue(articlePage.isTopContributorsSectionVisible(),
-                         "Top contributors section isn't visible");
-    Assertion.assertTrue(articlePage.isTopContributorsThumbVisible(0),
-                         "Top contributors thumb isn't visible");
-  }
-
-  // APT04
-  @Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"}, enabled = false)
-  public void MercuryArticleTests_004_FooterElements() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    ArticlePageObject articlePage = new ArticlePageObject(driver);
-    Assertion.assertTrue(articlePage.isFooterLogoVisible(), "Wikia footer logo isn't displayed");
-    for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
-      Assertion.assertTrue(articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i),
-                           FOOTER_ELEMENTS[i] + " isn't displayed");
-    }
-  }
-
-  // APT05
-  @Test(groups = {"MercuryArticleTests_005", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_005_SingleLinkedImageRedirect() {
+  @Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_003_SingleLinkedImageRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -102,9 +67,9 @@ public class ArticlePageTests extends NewTestTemplate {
                          "Redirection doesn't work");
   }
 
-  // APT06
-  @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_006_ChevronRotation() {
+  // APT04
+  @Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_004_ChevronRotation() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);

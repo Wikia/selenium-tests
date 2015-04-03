@@ -61,7 +61,7 @@ public class LightboxComponentObject extends BasePageObject {
     try {
       waitForElementByElement(lightboxContent);
       return checkIfElementOnPage(lightboxContent);
-    } catch (NoSuchElementException|TimeoutException|StaleElementReferenceException e) {
+    } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
   }
@@ -85,8 +85,6 @@ public class LightboxComponentObject extends BasePageObject {
       int temp = startX;
       startX = endX;
       endX = temp;
-    } else {
-      direction = "left";
     }
     for (int i = 0; i < attempts; ++i) {
       touchAction.swipeFromPointToPoint(startX, centerY, endX, centerY, duration, waitAfter);

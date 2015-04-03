@@ -1,18 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import com.google.sitebricks.client.Web;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.io.File;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -42,8 +36,6 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   private WebElement lightbox;
   @FindBy(css = ".view-map")
   private WebElement viewMapButton;
-
-  private final static int WAIT_TIME = 5000;
 
   public InteractiveMapsComponentObject(WebDriver driver) {
     super(driver);
@@ -106,37 +98,11 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     return checkIfElementOnPage(poiPopUp);
   }
 
-  public boolean isZoomButtonWorking(String zoomWay) {
-    Shooter shooter = new Shooter();
-    ImageComparison ic = new ImageComparison();
-    File beforeZooming = shooter.capturePage(driver);
-    if (zoomWay.equals("in")) {
-      clickZoomIn();
-    } else {
-      clickZoomOut();
-    }
-    waitMilliseconds(WAIT_TIME, "waitMilliseconds");
-    File afterZooming = shooter.capturePage(driver);
-    return !ic.areFilesTheSame(beforeZooming, afterZooming);
-  }
-
   public boolean isZoomInButtonEnabled() throws WebDriverException {
     if (zoomInButton.getAttribute("class") == null) {
       throw new WebDriverException("Expected String but got null");
     }
     return !zoomInButton.getAttribute("class").contains("disabled");
-  }
-
-  public boolean isFilterListScrollable(PerformTouchAction touchAction) {
-    String methodName = "isFilterListScrollable";
-    Shooter shooter = new Shooter();
-    ImageComparison ic = new ImageComparison();
-    File beforeScrolling = shooter.capturePage(driver);
-    clickFilterBox();
-    waitMilliseconds(WAIT_TIME, methodName);
-    touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, WAIT_TIME);
-    File afterScrolling = shooter.capturePage(driver);
-    return !ic.areFilesTheSame(beforeScrolling, afterScrolling);
   }
 
   public void switchToMapFrame() {

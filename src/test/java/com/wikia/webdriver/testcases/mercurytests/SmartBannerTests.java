@@ -31,16 +31,16 @@ public class SmartBannerTests extends NewTestTemplate {
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
 
-  // SBT0-1,2,3,4
-  @Test(groups = {"MercurySmartBannerTest_000", "MercurySmartBannerTests", "Mercury"})
-  public void MercurySmartBannerTest_000_FixPositionOfSmartBanner() {
+  // SBT01
+  @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
+  public void MercurySmartBannerTest_001_ButtonNameFixPositionClose() {
     BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
-    if(config.getPlatform().equals("ANDROID")) {
+    if (config.getPlatform().equals("ANDROID")) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
@@ -56,58 +56,9 @@ public class SmartBannerTests extends NewTestTemplate {
     Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
   }
 
-  // SBT01
-  @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"}, enabled = false)
-  public void MercurySmartBannerTest_001_UserCanCloseSmartBanner() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    banner.clickCloseButton();
-    Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
-  }
-
   // SBT02
-  @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"}, enabled = false)
-  public void MercurySmartBannerTest_002_FixPositionOfSmartBanner() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
-    int lastSmartBannerPosition = banner.getSmartBannerPosition();
-    touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
-    Assertion.assertTrue(lastSmartBannerPosition == banner.getSmartBannerPosition(),
-                         "Smart banner is floating");
-  }
-
-  // SBT03
-  @Test(groups = {"MercurySmartBannerTest_003", "MercurySmartBannerTests", "Mercury"}, enabled = false)
-  public void MercurySmartBannerTest_003_AndroidUserSeeInstallButton() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    Assertion.assertTrue(
-        banner.getButtonName().equals(BUTTON_NAME_FOR_ANDROID),
-        "Smart banner has different name");
-  }
-
-  // SBT04
-  @Test(groups = {"MercurySmartBannerTest_004", "MercurySmartBannerTests", "Mercury"}, enabled = false)
-  public void MercurySmartBannerTest_004_IOSUserSeeGETButton() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    Assertion
-        .assertTrue(banner.getButtonName().equals(BUTTON_NAME_FOR_IOS),
-                    "Smart banner has different name");
-  }
-
-  // SBT05
-  @Test(groups = {"MercurySmartBannerTest_005", "MercurySmartBannerTests", "Mercury"})
-  public void MercurySmartBannerTest_005_ThemeColorOnDifferentHubs() {
+  @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
+  public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
       driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?useskin=mercury");
