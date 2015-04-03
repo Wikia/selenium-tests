@@ -26,6 +26,8 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
       css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) " +
             ".ve-ui-wikiaTemplateOptionWidget")
   private List<WebElement> resultTemplates;
+  @FindBy(css = ".oo-ui-searchWidget-query .oo-ui-pendingElement-pending")
+  private WebElement queryPending;
 
   private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
   private By
@@ -89,11 +91,13 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void verifyIsResultTemplate() {
     waitForElementVisibleByElement(resultWidget);
+    waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() > 0, "No result template shown.");
     PageObjectLogging.log("verifyIsResultTemplate", "Result templates found", true);
   }
 
   public void verifyNoResultTemplate() {
+    waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() == 0, "There is result template shown.");
     PageObjectLogging.log("verifyNoResultTemplate", "No result templates found", true);
   }
