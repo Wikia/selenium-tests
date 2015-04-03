@@ -83,7 +83,7 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
-  public void filePage004_delete_QAART_518() {
+  public void filePage004_delete_MAIN_4294() {
     // Go to Special:Videos to add a video
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
@@ -116,7 +116,7 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-  public void filePage005_deleteFromHistory_QAART_518() {
+  public void filePage005_deleteFromHistory_MAIN_4294() {
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
 
