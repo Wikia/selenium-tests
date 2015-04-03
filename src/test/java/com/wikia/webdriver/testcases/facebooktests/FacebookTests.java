@@ -9,8 +9,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponento
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
@@ -23,18 +23,7 @@ public class FacebookTests extends NewTestTemplate {
    * dependent method: Signup_007_signUpWithFacebook and Facebook_002_noEmailPerms Steps: 1. Log in
    * to facebook 2. Open Facebook settings 3. Remove Wikia and Wikia Development App
    */
-  @Test(groups = {"Facebook_001", "Facebook", "SignUp_007", "SignUp", "Modals"})
-  @UseUnstablePageLoadStrategy
-  public void Facebook_001_removeWikiaApps() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-    FacebookUserPageObject userFB;
-    userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
-    userFB.verifyPageLogo();
-    FacebookSettingsPageObject settingsFB = userFB.fbOpenSettings();
-    settingsFB.openApps();
-    settingsFB.removeAppIfPresent();
-  }
+
 
   /**
    * depends on method Facebook_001_removeWikiaApps Steps: 1. Log in to facebook 2. Click facebook
@@ -42,9 +31,11 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @Test(groups = {"Facebook_002", "Facebook"}, dependsOnMethods = {"Facebook_001_removeWikiaApps"})
+  @Test(groups = {"Facebook_002", "Facebook"})
   @UseUnstablePageLoadStrategy
   public void Facebook_002_noEmailPerms() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
+        credentials.passwordFB);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
@@ -77,9 +68,11 @@ public class FacebookTests extends NewTestTemplate {
    * 2. Enter existing wikia credentials to link facebook and wikia accounts 3. login 4. Verify user
    * can login via wikia username/pwd 5. Disconnect facebook via prefs for cleanup
    */
-  @Test(groups = {"Facebook_003", "Facebook"}, dependsOnMethods = {"Facebook_001_removeWikiaApps"})
+  @Test(groups = {"Facebook_003", "Facebook", "Facebook_004"})
   @UseUnstablePageLoadStrategy
   public void Facebook_003_linkFBwithWikia() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
+        credentials.passwordFB);
     String winHandleBefore = driver.getWindowHandle();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
