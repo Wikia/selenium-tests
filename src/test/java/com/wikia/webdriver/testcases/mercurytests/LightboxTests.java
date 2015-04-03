@@ -40,12 +40,11 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
 
   // MT0-1,2
-  @Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
+  @Test(groups = {"MercuryLightboxTests_000", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTests_000_TappingImageOpenLightbox() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Current image isn't visible");
     lightbox.clickCloseButton();

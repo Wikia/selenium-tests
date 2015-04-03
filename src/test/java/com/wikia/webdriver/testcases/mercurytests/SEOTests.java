@@ -25,8 +25,8 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT01
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_001_CheckMetaTagsAndCanonicalLink() {
+  @Test(groups = {"MercurySEOTest_000", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_000_CheckMetaTagsAndCanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     SEOPageObject seo = new SEOPageObject(driver);

@@ -31,19 +31,8 @@ public class SmartBannerTests extends NewTestTemplate {
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
 
-  // SBT01
-  @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"}, enabled = false)
-  public void MercurySmartBannerTest_001_UserCanCloseSmartBanner() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    banner.clickCloseButton();
-    Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
-  }
-
   // SBT0-1,2,3,4
-  @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
+  @Test(groups = {"MercurySmartBannerTest_000", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_000_FixPositionOfSmartBanner() {
     BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
     BasePageObject base = new BasePageObject(driver);
@@ -63,6 +52,17 @@ public class SmartBannerTests extends NewTestTemplate {
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
     Assertion.assertTrue(lastSmartBannerPosition == banner.getSmartBannerPosition(),
                          "Smart banner is floating");
+    banner.clickCloseButton();
+    Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
+  }
+
+  // SBT01
+  @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"}, enabled = false)
+  public void MercurySmartBannerTest_001_UserCanCloseSmartBanner() {
+    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
+    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     banner.clickCloseButton();
     Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
   }

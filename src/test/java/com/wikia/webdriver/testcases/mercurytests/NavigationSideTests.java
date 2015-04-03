@@ -28,7 +28,7 @@ public class NavigationSideTests extends NewTestTemplate {
   private final static String SEARCH_FAIL = "te";
 
   // NST0-1,3,4,5,6
-  @Test(groups = {"NavigationSideTests_003", "NavigationSideTests", "Mercury"})
+  @Test(groups = {"NavigationSideTests_000", "NavigationSideTests", "Mercury"})
   public void NavigationSideTests_000_ClickingOptionWithChevronOpensNextLevel() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -49,7 +49,7 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST0-7,9,11
-  @Test(groups = {"NavigationSideTests_007", "NavigationSideTests", "Mercury"})
+  @Test(groups = {"NavigationSideTests_000", "NavigationSideTests", "Mercury"})
   public void NavigationSideTests_000_ClickOnSearchWillExpandWindow() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -66,7 +66,7 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST-8,10
-  @Test(groups = {"NavigationSideTests_010", "NavigationSideTests", "Mercury"})
+  @Test(groups = {"NavigationSideTests_000", "NavigationSideTests", "Mercury"})
   public void NavigationSideTests_000_ClickOnSearchResultWillOpenArticle() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");

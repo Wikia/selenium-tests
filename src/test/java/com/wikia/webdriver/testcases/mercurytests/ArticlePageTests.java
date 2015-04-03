@@ -29,8 +29,8 @@ public class ArticlePageTests extends NewTestTemplate {
        "Privacy Policy", "Feedback"};
 
   // APT0-4,3,1
-  @Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_001_LogoSearchFooterAreVisible() {
+  @Test(groups = {"MercuryArticleTests_000", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTests_000_LogoSearchFooterAreVisible() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);

@@ -25,17 +25,8 @@ public class TOCTests extends NewTestTemplate {
 
   private final static int H2_PADDING_TOP = 40;
 
-  // TOCT01
-  @Test(groups = {"MercuryTOCTests_001", "MercuryTOCTests", "Mercury"})
-  public void MercuryTOCTests_001_NoH2NoTOC() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    Assertion.assertFalse(toc.isH2AndTOC(), "TOC is displayed");
-  }
-
   // TOCT0-2,3,4,5
-  @Test(groups = {"MercuryTOCTests_002", "MercuryTOCTests", "Mercury"})
+  @Test(groups = {"MercuryTOCTests_000", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTests_000_IfH2ThenTOC() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
@@ -51,6 +42,15 @@ public class TOCTests extends NewTestTemplate {
     Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
     Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP),
                          "Header padding top is improper");
+  }
+
+  // TOCT01
+  @Test(groups = {"MercuryTOCTests_001", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTests_001_NoH2NoTOC() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    Assertion.assertFalse(toc.isH2AndTOC(), "TOC is displayed");
   }
 
   // TOCT02
