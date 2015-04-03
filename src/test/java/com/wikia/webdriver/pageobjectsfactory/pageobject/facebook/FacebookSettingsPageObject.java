@@ -32,7 +32,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement settingsContent;
   @FindBy(css = "#userNavigationLabel")
   private WebElement fbDropDown;
-  @FindBy(css = "#uiLinkButtonInput")
+  @FindBy(css = ".uiLinkButtonInput")
   private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {
