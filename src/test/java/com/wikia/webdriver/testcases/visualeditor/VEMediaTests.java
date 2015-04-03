@@ -212,14 +212,13 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.addExistingMedia(numOfMedia);
     ve.verifyMedias(numOfMedia);
     ve.verifyVEToolBarPresent();
+    ve.verifyEditorSurfacePresent();
     ve.selectMediaByIndex(2);
     VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
