@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
+import com.google.sitebricks.client.Web;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -74,7 +75,6 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public void clickPin() {
-    switchToMapFrame();
     waitForElementVisibleByElement(poiPin);
     tapOnElement(poiPin);
   }
@@ -142,5 +142,9 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   public void switchToMapFrame() {
     waitForElementByElement(lightbox);
     driver.switchTo().frame(mapFrame);
+  }
+
+  public void switchToDefaultFrame() {
+    driver.switchTo().defaultContent();
   }
 }

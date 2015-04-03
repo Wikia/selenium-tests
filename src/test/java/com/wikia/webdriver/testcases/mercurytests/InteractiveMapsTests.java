@@ -41,8 +41,10 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
     Assertion.assertTrue(maps.isMapIdInUrl(), "Url doesn't contain map");
     Assertion.assertTrue(maps.isTextInMapTitleHeader(), "Map title header is empty");
+    maps.switchToMapFrame();
     maps.clickPin();
     Assertion.assertTrue(maps.isPinPopUp(), "Pin popup doesn't appear");
+    maps.switchToDefaultFrame();
     maps.clickCloseButton();
     Assertion.assertFalse(maps.isMapModalVisible(), "Map modal is visible");
   }
@@ -121,6 +123,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.clickViewMapButton();
+    maps.switchToMapFrame();
     maps.clickPin();
     Assertion.assertTrue(maps.isPinPopUp(), "Pin popup doesn't appear");
   }

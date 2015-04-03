@@ -45,8 +45,6 @@ public class SmartBannerTests extends NewTestTemplate {
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
     }
-    System.out.println("Config: "+buttonName);
-    System.out.println("Real: "+banner.getButtonName());
     Assertion.assertTrue(
         banner.getButtonName().equals(buttonName),
         "Smart banner has different name");
