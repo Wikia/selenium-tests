@@ -33,6 +33,10 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement settings;
   @FindBy(css = "#SettingsPage_Content")
   private WebElement settingsContent;
+  @FindBy(css = "#userNavigationLabel")
+  private WebElement fbDropDown;
+  @FindBy(css = ".uiLinkButtonInput")
+  private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {
     super(driver);
@@ -63,7 +67,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             AppRemoveButton.click();
             waitForElementByElement(removeButton);
             removeButton.click();
-            waitForElementNotVisibleByElement(removeButton);
+            waitForElementNotVisibleByElement(removeAppConfirmationModal);
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
           }
         } else {
@@ -89,5 +93,12 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
       }
     }
     return isPresent;
+  }
+
+  public void logOutFB() {
+    waitForElementByElement(fbDropDown);
+    fbDropDown.click();
+    waitForElementByElement(fbLogOut);
+    fbLogOut.click();
   }
 }

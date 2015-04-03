@@ -22,6 +22,8 @@ public class RemoveFacebookPageObject extends FacebookMainPageObject {
     FacebookSettingsPageObject settingsFB = userFB.fbOpenSettings();
     settingsFB.openApps();
     settingsFB.removeAppIfPresent();
+    settingsFB.openApps();
+    settingsFB.logOutFB();
   }
 
 }

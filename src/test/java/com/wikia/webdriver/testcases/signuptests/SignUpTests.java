@@ -170,8 +170,6 @@ public class SignUpTests extends NewTestTemplate {
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB);
-    stopBrowser();
-    startBrowser();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
