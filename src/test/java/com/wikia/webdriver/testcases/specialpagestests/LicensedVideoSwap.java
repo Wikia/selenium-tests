@@ -47,6 +47,5 @@ public class LicensedVideoSwap extends NewTestTemplate {
     historyPage.verifyUndoSucceeded();
     historyPage.navigateToLvsPage();
     licensedVideoSwap.verifySwapVideo();
-
   }
 }
