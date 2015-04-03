@@ -82,7 +82,8 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
-    for (int i = 0; i < number; i++) {
+    //only selects available number of media
+    for (int i = 0; i < Math.min(number, mediaResults.size()); i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(MEDIA_ADD_ICON_BY);
       mediaAddIcon.click();
     }
