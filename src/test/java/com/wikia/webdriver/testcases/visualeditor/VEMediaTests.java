@@ -53,7 +53,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //AM04
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_001", "VEPreviewVideo"}
+      groups = {"VEMediaTests", "VEMediaTests_001", "VEMediaPreview"}
   )
   public void VEMediaTests_001_previewVideo() {
     String
@@ -74,7 +74,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //AM05
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_002", "VEPreviewImage"}
+      groups = {"VEMediaTests", "VEMediaTests_002", "VEMediaPreview"}
   )
   public void VEMediaTests_002_previewImage() {
     String mediaTitle = "Thomas Wright 1792 - 1849";
@@ -117,7 +117,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //MS01
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_004", "VEPreviewVideo"}
+      groups = {"VEMediaTests", "VEMediaTests_004", "VEMediaSetting"}
   )
   public void VEMediaTests_004_editCaption() {
     String captionText = "test123";
@@ -142,7 +142,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
   }
 
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
+      groups = {"VEMediaTests", "VEMediaTests_005", "VEMediaResize"}
   )
   public void VEMediaTests_005_resizeVideoWithHandle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -164,7 +164,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //MS02
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
+      groups = {"VEMediaTests", "VEMediaTests_006", "VEMediaResize"}
   )
   public void VEMediaTests_006_resizeVideoWithSetting() {
     int resizeNumber = 250;
@@ -200,7 +200,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //MS03
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_007", "VEAlignMedia"}
+      groups = {"VEMediaTests", "VEMediaTests_007", "VEMediaSetting"}
   )
   public void VEMediaTests_007_changeAlignment() {
     int numOfMedia = 3;
@@ -217,22 +217,22 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     mediaDialog = mediaDialog.searchMedia("h");
     ve = mediaDialog.addExistingMedia(numOfMedia);
     ve.verifyMedias(numOfMedia);
-    ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
+    ve.verifyVEToolBarPresent();
     ve.selectMediaByIndex(2);
     VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.LEFT);
     ve = mediaSettingsDialog.clickApplyChangesButton();
-    ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
+    ve.verifyVEToolBarPresent();
     ve.selectMediaByIndex(0);
     mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.CENTER);
     ve = mediaSettingsDialog.clickApplyChangesButton();
-    ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
+    ve.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyAddedDiffs(wikiTexts);
@@ -242,7 +242,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     article.logOut(wikiURL);
   }
 
-  @AfterGroups(groups = "VEMediaTests_003")
+  @AfterGroups(groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"})
   public void delete_Image() {
     //Excluding FF on running this VE-1370
     if (!"ff".equalsIgnoreCase(base.getBrowser())) {
