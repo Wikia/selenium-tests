@@ -40,7 +40,7 @@ public class LicensedVideoSwap extends NewTestTemplate {
   }
 
   @Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
-  public void LicensedVideoSwap_003_swap_QAART_560() {
+  public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();
     historyPage.clickUndoSwapLink();
