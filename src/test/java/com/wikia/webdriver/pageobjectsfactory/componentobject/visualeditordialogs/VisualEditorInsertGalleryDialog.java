@@ -24,6 +24,8 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement clearInputButton;
   @FindBy(css = ".oo-ui-window-body")
   private WebElement dialogBody;
+  @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget .oo-ui-pendingElement-pending")
+  private WebElement queryPending;
 
   //Cart
   @FindBy(css = ".oo-ui-icon-cart-grid")
@@ -74,6 +76,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     waitForElementClickableByElement(searchInput);
     searchInput.clear();
     typeInSearchTextField(searchText);
+    waitForElementNotVisibleByElement(queryPending);
     return new VisualEditorInsertGalleryDialog(driver);
   }
 

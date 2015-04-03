@@ -244,10 +244,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement contextEdit;
     try {
       contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
-      scrollAndClick(contextEdit);
+      contextEdit.click();
     } catch (StaleElementReferenceException e) {
       contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
-      scrollAndClick(contextEdit);
+      contextEdit.click();
     }
   }
 
