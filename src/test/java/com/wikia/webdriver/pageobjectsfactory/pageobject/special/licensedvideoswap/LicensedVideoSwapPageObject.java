@@ -23,6 +23,8 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
   private WebElement firstSwapButton;
   @FindBy(css = ".count")
   private WebElement swapCount;
+  @FindBy (css = ".video-wrapper title-thumbnail")
+  private WebElement videoThumbnail;
 
   public LicensedVideoSwapPageObject(WebDriver driver) {
     super(driver);
@@ -62,4 +64,3 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
     PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
   }
 }
-
