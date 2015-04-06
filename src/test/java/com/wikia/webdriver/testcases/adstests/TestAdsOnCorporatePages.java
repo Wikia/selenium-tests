@@ -45,7 +45,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
   )
   public void TestCorporatePage_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoLiftiumAdsOnPage();
+    wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
     // Not verifying GPT iframes in low value countries
   }
@@ -55,7 +55,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
   )
   public void TestCorporatePage_GEF() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoLiftiumAdsOnPage();
+    wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
     // Verifying GPT iframes in high value countries:
     wikiPage.verifyGptIframe(adUnit, slotName, "gpt");

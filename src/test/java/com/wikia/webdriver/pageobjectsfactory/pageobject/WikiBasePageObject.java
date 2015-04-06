@@ -310,6 +310,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new SignUpPageObject(driver);
   }
 
+  public SignUpPageObject navigateToSpecialSignUpPage(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
+    return new SignUpPageObject(driver);
+  }
+
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
