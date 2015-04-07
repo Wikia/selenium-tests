@@ -34,7 +34,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private WebElement ignoreAnyWarnings;
   @FindBy(css = "div.wikia-gallery div.wikia-gallery-item img")
   private WebElement wikiaPreviewImg;
-  @FindBy(css = "div.wikia-gallery div.wikia-gallery-item img:first")
+  @FindBy(css = "div.wikia-gallery div.wikia-gallery-item:first-child img")
   private WebElement latestWikiaPreviewImg;
   @FindBys(@FindBy(css = "#mw-content-text img"))
   private List<WebElement> imagesNewFiles;
