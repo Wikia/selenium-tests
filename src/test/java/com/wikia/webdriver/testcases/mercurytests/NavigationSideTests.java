@@ -81,7 +81,7 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST04
-  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"}, invocationCount = 25)
+  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -90,7 +90,6 @@ public class NavigationSideTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     nav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    //base.waitMilliseconds(5000, "Wait for page to be loaded");
     Assertion.assertFalse(oldUrl.equals(driver.getCurrentUrl()), "Redirection doesn't work");
   }
 }
