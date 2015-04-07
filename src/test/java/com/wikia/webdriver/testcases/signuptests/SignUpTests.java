@@ -166,7 +166,7 @@ public class SignUpTests extends NewTestTemplate {
    * Facebook 2. Open finish signup with facebook modal 3. create and verify account 4. disconnect
    * created account from facebook
    */
-  @Test(groups = {"SignUp_007", "SignUp", "Modals"}, invocationCount = 25)
+  @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB);
