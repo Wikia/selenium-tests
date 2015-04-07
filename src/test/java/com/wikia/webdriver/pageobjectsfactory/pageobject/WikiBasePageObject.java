@@ -601,6 +601,13 @@ public class WikiBasePageObject extends BasePageObject {
     return new LicensedVideoSwapPageObject(driver);
   }
 
+  public ModularMainPageObject openModularMainPageWiki(String wikiURL) {
+    getUrl(wikiURL + URLsContent.HERO_MODULE_WIKI);
+    PageObjectLogging.log(
+        "openModularMainPageWiki", "Navigate to Hero Module wiki " + wikiURL, true);
+    return new ModularMainPageObject(driver);
+  }
+
   @Deprecated
   public void verifyAvatarPresent() {
     waitForElementByElement(userProfileAvatar);
