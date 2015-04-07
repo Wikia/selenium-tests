@@ -39,8 +39,8 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
 
   // MT01
-  @Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_001_LightboxOpenClose() {
+  @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_001_LightboxOpenClose() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
@@ -51,8 +51,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT02
-  @Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_002_SwipeChangeImages() {
+  @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_002_SwipeChangeImages() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -67,8 +67,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT03
-  @Test(groups = {"MercuryLightboxTests_003", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_003_ZoomByGestureAndDoubleTap() {
+  @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_003_ZoomByGestureAndDoubleTap() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -83,8 +83,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT04
-  @Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_004_UIShowHide() {
+  @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_004_UIShowHide() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -103,8 +103,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT05
-  @Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_005_TapOnEdgeChangeImage() {
+  @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_005_TapOnEdgeChangeImage() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -117,8 +117,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT06
-  @Test(groups = {"MercuryLightboxTests_006", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_006_BackButtonCloseLightbox() {
+  @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_006_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
@@ -130,8 +130,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT07
-  @Test(groups = {"MercuryLightboxTests_007", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTests_007_MovingOnZoomedImage() {
+  @Test(groups = {"MercuryLightboxTest_007", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_007_MovingOnZoomedImage() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);

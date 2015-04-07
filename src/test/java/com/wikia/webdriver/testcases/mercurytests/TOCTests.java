@@ -26,8 +26,8 @@ public class TOCTests extends NewTestTemplate {
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
-  @Test(groups = {"MercuryTOCTests_001", "MercuryTOCTests", "Mercury"})
-  public void MercuryTOCTests_001_TOCPresenceListRedirection() {
+  @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTest_001_TOCPresenceListRedirection() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
@@ -45,8 +45,8 @@ public class TOCTests extends NewTestTemplate {
   }
 
   // TOCT02
-  @Test(groups = {"MercuryTOCTests_002", "MercuryTOCTests", "Mercury"})
-  public void MercuryTOCTests_002_NoH2NoTOC() {
+  @Test(groups = {"MercuryTOCTest_002", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTest_002_NoH2NoTOC() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);

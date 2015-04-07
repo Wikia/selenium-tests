@@ -27,8 +27,8 @@ public class NavigationSideTests extends NewTestTemplate {
   private final static String SEARCH_FAIL = "te";
 
   // NST01
-  @Test(groups = {"NavigationSideTests_001", "NavigationSideTests", "Mercury"})
-  public void NavigationSideTests_001_OpenNavigateClose() {
+  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
+  public void MercuryNavigationSideTest_001_OpenNavigateClose() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
@@ -48,8 +48,8 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST02
-  @Test(groups = {"NavigationSideTests_002", "NavigationSideTests", "Mercury"})
-  public void NavigationSideTests_002_SearchInvalidSuggestionCancel() {
+  @Test(groups = {"MercuryNavigationSideTest_002", "MercuryNavigationSideTests", "Mercury"})
+  public void MercuryNavigationSideTest_002_SearchInvalidSuggestionCancel() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
@@ -65,8 +65,8 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST03
-  @Test(groups = {"NavigationSideTests_003", "NavigationSideTests", "Mercury"})
-  public void NavigationSideTests_003_ValidSuggestionRedirect() {
+  @Test(groups = {"MercuryNavigationSideTest_003", "MercuryNavigationSideTests", "Mercury"})
+  public void MercuryNavigationSideTest_003_ValidSuggestionRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
@@ -81,8 +81,8 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST04
-  @Test(groups = {"NavigationSideTests_004", "NavigationSideTests", "Mercury"})
-  public void NavigationSideTests_004_RandomPageRedirect() {
+  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"})
+  public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);

@@ -28,8 +28,8 @@ public class CommentsTests extends NewTestTemplate {
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
 
   // CT01
-  @Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_001_CommentsListAvatarUsernameTimeStampContent() {
+  @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTest_001_CommentsListAvatarUsernameTimeStampContent() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -46,7 +46,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT02
   @Test(groups = {"MercuryCommentsTest_002", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_002_CommentsCounterNextPreviousButton() {
+  public void MercuryCommentsTest_002_CommentsCounterNextPreviousButton() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -74,7 +74,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT03
   @Test(groups = {"MercuryCommentsTest_003", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_003_RepliesListCounter() {
+  public void MercuryCommentsTest_003_RepliesListCounter() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -87,8 +87,8 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   // CT04
-  @Test(groups = {"MercuryCommentsTests_004", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_004_TapOnUserRedirect() {
+  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTest_004_TapOnUserRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -100,8 +100,8 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   // CT05
-  @Test(groups = {"MercuryCommentsTests_005", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTests_005_ImagesAndVideosAreDisplayed() {
+  @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
+  public void MercuryCommentsTest_005_ImagesAndVideosAreDisplayed() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);

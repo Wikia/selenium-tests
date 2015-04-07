@@ -32,8 +32,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private static final String ZOOM_WAY_OUT = "out";
 
   // IMAPT01
-  @Test(groups = {"MercuryInteractiveMaps_001", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_001_MapModalUrlTitlePinPopUpClose() {
+  @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMapsTest_001_MapModalUrlTitlePinPopUpClose() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
@@ -50,8 +50,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   // IMAPT02
-  @Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_002_ZoomByGestureAndButtons() {
+  @Test(groups = {"MercuryInteractiveMapsTest_002", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMapsTest_002_ZoomByGestureAndButtons() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -88,8 +88,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   // IMAPT03
-  @Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
-  public void MercuryInteractiveMaps_003_FilterBoxListScroll() {
+  @Test(groups = {"MercuryInteractiveMapsTest_003", "MercuryInteractiveMapsTests", "Mercury"})
+  public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
     PerformTouchAction touchAction = new PerformTouchAction(driver);

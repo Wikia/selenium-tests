@@ -29,8 +29,8 @@ public class ArticlePageTests extends NewTestTemplate {
        "Privacy Policy", "Feedback"};
 
   // APT01
-  @Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_001_LogoSearchTopContributorsFooterElementsAreVisible() {
+  @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_001_LogoSearchTopContributorsFooterElementsAreVisible() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -48,8 +48,8 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT02
-  @Test(groups = {"MercuryArticleTests_002", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_002_TapContributorRedirectToUserPage() {
+  @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -58,8 +58,8 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT03
-  @Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_003_SingleLinkedImageRedirect() {
+  @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -68,8 +68,8 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT04
-  @Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_004_ChevronRotation() {
+  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_004_ChevronRotation() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
