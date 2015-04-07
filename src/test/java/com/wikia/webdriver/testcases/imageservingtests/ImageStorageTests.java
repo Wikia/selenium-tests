@@ -3,9 +3,6 @@
  */
 package com.wikia.webdriver.testcases.imageservingtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -16,6 +13,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -34,7 +34,7 @@ public class ImageStorageTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   public void ImageStorage_001_deleteImage_QAART_521() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
 
     SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
     filesPage.addPhoto();

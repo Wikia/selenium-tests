@@ -34,6 +34,8 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private WebElement ignoreAnyWarnings;
   @FindBy(css = "div.wikia-gallery div.wikia-gallery-item img")
   private WebElement wikiaPreviewImg;
+  @FindBy(css = "div.wikia-gallery div.wikia-gallery-item img:first")
+  private WebElement latestWikiaPreviewImg;
   @FindBys(@FindBy(css = "#mw-content-text img"))
   private List<WebElement> imagesNewFiles;
   @FindBy(css = ".wikia-gallery div.wikia-gallery-item a.image")
@@ -101,7 +103,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   public void verifyFileUploaded(String fileName) {
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(
-        wikiaPreviewImg,
+        latestWikiaPreviewImg,
         "src",
         fileName);
     PageObjectLogging.log(
