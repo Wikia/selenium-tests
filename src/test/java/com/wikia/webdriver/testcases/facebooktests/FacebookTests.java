@@ -31,7 +31,7 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @Test(groups = {"Facebook_001", "Facebook"}, invocationCount = 25)
+  @Test(groups = {"Facebook_001", "Facebook"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_noEmailPerms() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
@@ -99,7 +99,7 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.disconnectFromFacebook();
   }
 
-  @Test(groups = {"Facebook_003", "Facebook"}, dependsOnMethods = {"Facebook_002_linkFBwithWikia"}, invocationCount = 25)
+  @Test(groups = {"Facebook_003", "Facebook"}, dependsOnMethods = {"Facebook_002_linkFBwithWikia"})
   @UseUnstablePageLoadStrategy
   public void Facebook_003_connectFBfromPrefs() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
