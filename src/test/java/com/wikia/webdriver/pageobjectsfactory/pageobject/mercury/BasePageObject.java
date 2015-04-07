@@ -8,12 +8,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
  */
 public class BasePageObject extends MobileBasePageObject {
+
+  @FindBy(css = ".loading-overlay")
+  private WebElement loadingSpinner;
 
   public BasePageObject(WebDriver driver) {
     super(driver);
@@ -52,5 +56,10 @@ public class BasePageObject extends MobileBasePageObject {
     if ("in".equals(optInButton.getAttribute("value"))) {
       optInButton.click();
     }
+  }
+
+  public void waitForLoadingSpinnerToFinishReloadingPage() {
+    waitForElementByElement(loadingSpinner);
+    waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
   }
 }
