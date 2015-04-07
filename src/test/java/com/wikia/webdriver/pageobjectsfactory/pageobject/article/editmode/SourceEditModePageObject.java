@@ -68,6 +68,8 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeLoadingIndicator;
   @FindBy(css = ".editpage-editarea")
   private WebElement sourceOnlyModeTextArea;
+  @FindBy(css = "body.modalShown")
+  private WebElement editorModal;
 
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
@@ -287,6 +289,7 @@ public class SourceEditModePageObject extends EditMode {
       driver.findElement(
           By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
           .click();
+      waitForElementNotVisibleByElement(editorModal);
       checkSourceContent(content);
     }
   }
