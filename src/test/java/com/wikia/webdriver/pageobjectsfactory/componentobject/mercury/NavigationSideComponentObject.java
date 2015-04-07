@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   @FindBy(css = ".cancel")
   private WebElement cancelSearchCaption;
   @FindBy(css = ".local-wikia-search a")
-  private List<WebElement> searchSuggestions;
+  private WebElement searchSuggestion;
   @FindBy(css = ".local-nav-menu > li > div")
   private List<WebElement> navList;
   @FindBy(css = ".back")
@@ -62,8 +63,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickSuggestion(int index) {
-    waitForElementByElement(searchSuggestions.get(index));
-    searchSuggestions.get(index).click();
+    waitForElementByElement(searchSuggestion);
+    searchSuggestion.click();
   }
 
   public void clickNavListElement(int index) {
@@ -78,13 +79,11 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSuggestionListDisplayed() {
     try {
-      if (searchSuggestions.size() > 0) {
-        waitForElementByElement(searchSuggestions.get(0));
-        return searchSuggestions.get(0).isDisplayed();
-      }
-    } catch (NoSuchElementException e) {
+      waitForElementVisibleByElementCustomTimeOut(searchSuggestion, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   public boolean isNavMenuVisible() throws WebDriverException {
@@ -96,10 +95,11 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isBackLinkDisplayed() {
     try {
-      return backChevron.isDisplayed();
-    } catch (NoSuchElementException e) {
+      waitForElementVisibleByElementCustomTimeOut(backChevron, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   public boolean isNavListElementEllipsized(int index) {

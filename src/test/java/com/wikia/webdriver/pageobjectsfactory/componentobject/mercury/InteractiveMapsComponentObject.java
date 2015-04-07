@@ -78,11 +78,11 @@ public class InteractiveMapsComponentObject extends BasePageObject {
 
   public boolean isMapModalVisible() {
     try {
-      waitForElementByElement(lightbox);
-      return checkIfElementOnPage(lightbox);
+      waitForElementVisibleByElementCustomTimeOut(lightbox, 5, 1000);
     } catch (TimeoutException e) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   public boolean isTextInMapTitleHeader() {
@@ -91,7 +91,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public boolean isMapIdInUrl() {
-    return driver.getCurrentUrl().toString().contains("?map=");
+    return driver.getCurrentUrl().contains("?map=");
   }
 
   public boolean isPinPopUp() {

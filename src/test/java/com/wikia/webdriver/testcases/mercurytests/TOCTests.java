@@ -31,7 +31,7 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    Assertion.assertTrue(toc.isH2AndTOC(), "TOC isn't displayed");
+    Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
     Assertion.assertTrue(toc.isTOCUnderArticleName(), "TOC isn't under article name");
     Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
     toc.clickOnTOC();
@@ -50,6 +50,6 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    Assertion.assertFalse(toc.isH2AndTOC(), "TOC is displayed");
+    Assertion.assertFalse(toc.isTOCDisplayed(), "TOC is displayed");
   }
 }

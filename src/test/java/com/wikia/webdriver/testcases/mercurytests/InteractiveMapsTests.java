@@ -28,8 +28,6 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   private static final int WAIT_TIME = 5000;
-  private static final String ZOOM_WAY_IN = "in";
-  private static final String ZOOM_WAY_OUT = "out";
 
   // IMAPT01
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})

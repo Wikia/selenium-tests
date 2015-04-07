@@ -59,11 +59,11 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isLightboxOpened() {
     try {
-      waitForElementByElement(lightboxContent);
-      return checkIfElementOnPage(lightboxContent);
+      waitForElementVisibleByElementCustomTimeOut(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
+    return true;
   }
 
   public boolean isCurrentImageVisible() {

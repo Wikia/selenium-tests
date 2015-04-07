@@ -42,6 +42,7 @@ public class SEOTests extends NewTestTemplate {
     String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
+    base.waitForLoadingSpinnerToFinishReloadingPage();
     Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
     Assertion.assertFalse(lastDesc.equals(seo.getDescription()),
                           "og:description tags are the same");
