@@ -31,9 +31,9 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @Test(groups = {"Facebook_002", "Facebook"})
+  @Test(groups = {"Facebook_001", "Facebook", "Facebook_002"})
   @UseUnstablePageLoadStrategy
-  public void Facebook_002_noEmailPerms() {
+  public void Facebook_001_noEmailPerms() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -54,6 +54,7 @@ public class FacebookTests extends NewTestTemplate {
     AlmostTherePageObject almostThere = new AlmostTherePageObject(driver);
     almostThere.confirmAccountAndLogin(email, emailPassword, userName, password, wikiURL);
     almostThere.logOut(wikiURL);
+    base.appendToUrl("noads=1");
 
     SignUpPageObject verifyAccountSignup = base.openSpecialSignUpPage(wikiURL);
     verifyAccountSignup.clickFacebookSignUp();
@@ -68,15 +69,16 @@ public class FacebookTests extends NewTestTemplate {
    * 2. Enter existing wikia credentials to link facebook and wikia accounts 3. login 4. Verify user
    * can login via wikia username/pwd 5. Disconnect facebook via prefs for cleanup
    */
-  @Test(groups = {"Facebook_003", "Facebook", "Facebook_004"})
+  @Test(groups = {"Facebook_002", "Facebook", "Facebook_003"}, dependsOnMethods = {"Facebook_001_noEmailPerms"})
   @UseUnstablePageLoadStrategy
-  public void Facebook_003_linkFBwithWikia() {
+  public void Facebook_002_linkFBwithWikia() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB);
     String winHandleBefore = driver.getWindowHandle();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openWikiPage(wikiURL);
+    dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
     dropDown.logInViaFacebook(credentials.emailFB, credentials.passwordFB);
 
@@ -90,15 +92,16 @@ public class FacebookTests extends NewTestTemplate {
     driver.switchTo().window(winHandleBefore);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logOut(wikiURL);
+    base.appendToUrl("noads=1");
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.disconnectFromFacebook();
   }
 
-  @Test(groups = {"Facebook_004", "Facebook"}, dependsOnMethods = {"Facebook_003_linkFBwithWikia"})
+  @Test(groups = {"Facebook_003", "Facebook"}, dependsOnMethods = {"Facebook_002_linkFBwithWikia"})
   @UseUnstablePageLoadStrategy
-  public void Facebook_004_connectFBfromPrefs() {
+  public void Facebook_003_connectFBfromPrefs() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
