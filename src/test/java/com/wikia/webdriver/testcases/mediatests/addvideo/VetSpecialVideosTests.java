@@ -22,8 +22,9 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
-  public void SpecialVideos_001_Provider_qaart_518() {
+  @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"},
+        enabled = false)
+  public void SpecialVideos_001_Provider_MAIN_4294() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("review");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);

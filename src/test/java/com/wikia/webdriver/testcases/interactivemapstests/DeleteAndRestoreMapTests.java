@@ -21,7 +21,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
+  public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner_QAART_557() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     InteractiveMapPageObject selectedMap =
@@ -45,8 +45,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     Assertion.assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
   }
 
-  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {
+  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"},
+        enabled=false)
+  public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap_QAART_557() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     InteractiveMapPageObject selectedMap =

@@ -1,11 +1,5 @@
 package com.wikia.webdriver.testcases.signuptests;
 
-import java.io.File;
-import java.util.Calendar;
-
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -26,6 +20,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.Calendar;
+
 /*
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
@@ -39,7 +39,7 @@ public class SignUpTests extends NewTestTemplate {
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
-  public void SignUp_001_captchaNotChecked() {
+  public void SignUp_001_captchaNotChecked_QAART_563() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -167,7 +167,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
-  public void SignUp_007_signUpWithFacebook() {
+  public void SignUp_007_signUpWithFacebook_QAART_564() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB);
     WikiBasePageObject base = new WikiBasePageObject(driver);

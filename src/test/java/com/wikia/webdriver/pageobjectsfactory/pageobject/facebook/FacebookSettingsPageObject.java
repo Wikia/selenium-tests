@@ -1,18 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import junit.framework.Assert;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Michal 'justnpT' Nowierski
@@ -61,7 +58,8 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
           waitForElementByElement(element);
           element.click();
-          WebElement AppRemoveButton = element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
+          WebElement AppRemoveButton =
+              element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
           if (AppRemoveButton != null) {
             waitForElementByElement(AppRemoveButton);
             AppRemoveButton.click();
