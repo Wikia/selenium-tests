@@ -196,6 +196,7 @@ public class SignUpTests extends NewTestTemplate {
     if (userName != null) {
       WikiBasePageObject base = new WikiBasePageObject(driver);
       base.openWikiPage(wikiURL);
+      base.appendToUrl("noads=1");
       base.logInCookie(userName, password, wikiURL);
       base.verifyUserLoggedIn(userName);
       PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
