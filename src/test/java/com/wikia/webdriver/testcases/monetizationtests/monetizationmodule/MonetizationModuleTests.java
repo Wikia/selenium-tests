@@ -34,8 +34,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Guthix";
   private static final String TEST_ECOMMERCE_MULTI_DARK_WIKI = "elderscrolls";
   private static final String TEST_ECOMMERCE_MULTI_DARK_ARTICLE = "Skyrim";
-  private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "finalfantasy";
-  private static final String TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE = "Final_Fantasy_IX";
+  private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "es.pokemon";
+  private static final String TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE = "Aegislash";
 
 
   Credentials credentials = config.getCredentials();
