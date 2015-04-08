@@ -75,36 +75,41 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     maps.switchToMapFrame();
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
+    PageObjectLogging.log("Zoom in button", "is disabled", true);
     File beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomOut();
     base.waitMilliseconds(WAIT_TIME, "Wait after zoom out");
     File afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
-    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
     PageObjectLogging.log("Zoom out by click", "works", true);
+    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
+    PageObjectLogging.log("Zoom in button", "is enabled", true);
     beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomIn();
     base.waitMilliseconds(WAIT_TIME, "Wait after zoom in");
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
-    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
     PageObjectLogging.log("Zoom in by click", "works", true);
+    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
+    PageObjectLogging.log("Zoom in button", "is disabled", true);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, WAIT_TIME);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
-    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
     PageObjectLogging.log("Zoom out by gesture", "works", true);
+    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
+    PageObjectLogging.log("Zoom in button", "is enabled", true);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, WAIT_TIME);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
-    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
     PageObjectLogging.log("Zoom in by gesture", "works", true);
+    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
+    PageObjectLogging.log("Zoom in button", "is disabled", true);
   }
 
   // IMAPT03
