@@ -41,7 +41,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
@@ -54,7 +54,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_002", "SignUp"})
   public void SignUp_002_tooYoungUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
@@ -70,7 +70,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_003", "SignUp"})
   public void SignUp_003_existingUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
@@ -78,7 +78,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
@@ -140,7 +140,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
