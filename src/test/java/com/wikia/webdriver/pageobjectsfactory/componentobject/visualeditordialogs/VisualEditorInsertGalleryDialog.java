@@ -122,7 +122,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickTitleToPreview(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementByElement(mediaResultsWidget);
+    waitForElementVisibleByElement(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_TITLES_BY).get(index);
     scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);
