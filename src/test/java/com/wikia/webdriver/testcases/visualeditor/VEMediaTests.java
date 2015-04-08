@@ -221,14 +221,14 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
     ve.selectMediaByIndex(0);
-    mediaSettingsDialog = ve.openMediaSettings();
+    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.CENTER);
     ve = mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
     ve.selectMediaByIndex(2);
-    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+    mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.LEFT);
     ve = mediaSettingsDialog.clickApplyChangesButton();
