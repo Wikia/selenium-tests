@@ -200,7 +200,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
   //MS03
   @Test(
-      groups = {"VEMediaTests", "VEMediaTests_007", "VEMediaSetting"}
+      groups = {"VEMediaTests", "VEMediaTests_007", "VEMediaSetting"},
+      invocationCount = 10
   )
   public void VEMediaTests_007_changeAlignment() {
     int numOfMedia = 3;
@@ -219,17 +220,17 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
     ve.verifyMedias(numOfMedia);
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
-    ve.selectMediaByIndex(2);
-    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
-    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    mediaSettingsDialog.clickAlignment(Alignment.LEFT);
-    ve = mediaSettingsDialog.clickApplyChangesButton();
-    ve.verifyEditorSurfacePresent();
-    ve.verifyVEToolBarPresent();
     ve.selectMediaByIndex(0);
     mediaSettingsDialog = ve.openMediaSettings();
     mediaSettingsDialog.selectSettings(Setting.ADVANCED);
     mediaSettingsDialog.clickAlignment(Alignment.CENTER);
+    ve = mediaSettingsDialog.clickApplyChangesButton();
+    ve.verifyEditorSurfacePresent();
+    ve.verifyVEToolBarPresent();
+    ve.selectMediaByIndex(2);
+    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+    mediaSettingsDialog.clickAlignment(Alignment.LEFT);
     ve = mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
