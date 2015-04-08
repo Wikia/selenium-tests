@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -37,14 +38,31 @@ public class InteractiveMapsTests extends NewTestTemplate {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
-    Assertion.assertTrue(maps.isMapIdInUrl(), "Url doesn't contain map");
-    Assertion.assertTrue(maps.isTextInMapTitleHeader(), "Map title header is empty");
+    PageObjectLogging.log("Map modal", "is visible", true);
+    if (maps.isMapIdInUrl()) {
+      PageObjectLogging.log("Url", "match pattern ?map=", true);
+    } else {
+      PageObjectLogging.log("Url", "does not match pattern ?map=", false);
+    }
+    if (maps.isTextInMapTitleHeader()) {
+      PageObjectLogging.log("Map title in header", "is displayed", true);
+    } else {
+      PageObjectLogging.log("Map title in header", "is not displayed", false);
+    }
     maps.switchToMapFrame();
     maps.clickPin();
-    Assertion.assertTrue(maps.isPinPopUp(), "Pin popup doesn't appear");
+    if (maps.isPinPopUp()) {
+      PageObjectLogging.log("Pin popup", "appears", true);
+    } else {
+      PageObjectLogging.log("Pin popup", "does not appear", false);
+    }
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
-    Assertion.assertFalse(maps.isMapModalVisible(), "Map modal is visible");
+    if (maps.isMapModalVisible()) {
+      PageObjectLogging.log("Map modal", "is visible", false);
+    } else {
+      PageObjectLogging.log("Map modal", "is hidden", true);
+    }
   }
 
   // IMAPT02
@@ -64,6 +82,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
     Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
+    PageObjectLogging.log("Zoom out by click", "works", true);
     beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomIn();
     base.waitMilliseconds(WAIT_TIME, "Wait after zoom in");
@@ -71,18 +90,21 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
+    PageObjectLogging.log("Zoom in by click", "works", true);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, WAIT_TIME);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
     Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
+    PageObjectLogging.log("Zoom out by gesture", "works", true);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, WAIT_TIME);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
+    PageObjectLogging.log("Zoom in by gesture", "works", true);
   }
 
   // IMAPT03
@@ -97,10 +119,14 @@ public class InteractiveMapsTests extends NewTestTemplate {
     File beforeScrolling = new Shooter().capturePage(driver);
     maps.clickFilterBox();
     Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
+    PageObjectLogging.log("Filter box", "is expanded", true);
     base.waitMilliseconds(WAIT_TIME, "Wait fo filterbox to be scrollable");
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, WAIT_TIME);
     File afterScrolling = new Shooter().capturePage(driver);
-    Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling),
-                          "Scrolling in filter box doesn't work");
+    if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) {
+      PageObjectLogging.log("Scrolling in filter box", "does not work", false);
+    } else {
+      PageObjectLogging.log("Scrolling in filter box", "works", true);
+    }
   }
 }

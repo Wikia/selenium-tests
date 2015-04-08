@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -45,9 +46,19 @@ public class LightboxTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);
-    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Current image isn't visible");
+    Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
+    PageObjectLogging.log("Lightbox", "is opened", true);
+    if (lightbox.isCurrentImageVisible()) {
+      PageObjectLogging.log("Current image", "is visible", true);
+    } else {
+      PageObjectLogging.log("Current image", "is not visible", false);
+    }
     lightbox.clickCloseButton();
-    Assertion.assertFalse(lightbox.isLightboxOpened(), "Lightbox is opened");
+    if (lightbox.isLightboxOpened()) {
+      PageObjectLogging.log("Lightbox", "is opened", false);
+    } else {
+      PageObjectLogging.log("Lightbox", "is closed", true);
+    }
   }
 
   // MT02
@@ -64,6 +75,7 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(
         lightbox.isDifferentImageAfterSwiping(touchAction, PerformTouchAction.DIRECTION_RIGHT, 10),
         "Swiping to right doesn't work");
+    PageObjectLogging.log("Changing image by gesture", "is working", true);
   }
 
   // MT03
@@ -76,10 +88,12 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isZoomingByGestureWorking(touchAction, ZOOM_METHOD_GESTURE),
                          "Zoom by gesture doesn't work");
+    PageObjectLogging.log("Zooming by gesture", "is working", true);
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isZoomingByGestureWorking(touchAction, ZOOM_METHOD_TAP),
                          "Zoom by tap doesn't work");
+    PageObjectLogging.log("Zooming by tap", "is working", true);
   }
 
   // MT04
@@ -114,6 +128,7 @@ public class LightboxTests extends NewTestTemplate {
                          "Tapping left edge doesn't change image");
     Assertion.assertTrue(lightbox.isTappingOnImageEdgeChangeImage(touchAction, EDGE_RIGHT),
                          "Tapping right edge doesn't change image");
+    PageObjectLogging.log("Changing image by tap", "is working", true);
   }
 
   // MT06
