@@ -45,7 +45,8 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     Assertion.assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
   }
 
-  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"})
+  @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"},
+        enabled=false)
   public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap_QAART_557() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

@@ -65,7 +65,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             AppRemoveButton.click();
             waitForElementByElement(removeButton);
             removeButton.click();
-            waitForElementNotVisibleByElement(removeButton);
+            waitForElementNotVisibleByElement(removeAppConfirmationModal);
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
           }
         } else {
