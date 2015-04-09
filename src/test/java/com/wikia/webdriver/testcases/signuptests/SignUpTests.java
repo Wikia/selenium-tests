@@ -193,16 +193,19 @@ public class SignUpTests extends NewTestTemplate {
   @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
   public void disconnectFromFB() {
     startBrowser();
-    if (userName != null) {
-      WikiBasePageObject base = new WikiBasePageObject(driver);
-      base.openWikiPage(wikiURL);
-      base.appendToUrl("noads=1");
-      base.logInCookie(userName, password, wikiURL);
-      base.verifyUserLoggedIn(userName);
-      PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
-      preferences.selectTab(tabNames.FACEBOOK);
-      preferences.disconnectFromFacebook();
+    try {
+      if (userName != null) {
+        WikiBasePageObject base = new WikiBasePageObject(driver);
+        base.openWikiPage(wikiURL);
+        base.appendToUrl("noads=1");
+        base.logInCookie(userName, password, wikiURL);
+        base.verifyUserLoggedIn(userName);
+        PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
+        preferences.selectTab(tabNames.FACEBOOK);
+        preferences.disconnectFromFacebook();
+      }
+    } finally {
+      stopBrowser();
     }
-    stopBrowser();
   }
 }
