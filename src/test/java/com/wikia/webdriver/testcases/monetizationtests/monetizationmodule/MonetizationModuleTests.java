@@ -47,6 +47,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_001() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -66,6 +67,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_002() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -85,6 +87,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -106,6 +109,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -141,6 +145,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModule_005",
       groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_005(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -165,6 +170,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_006() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -193,6 +199,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_007() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -316,6 +323,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleGeoTestWikis",
       groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_010(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -562,6 +570,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_016() {
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -682,6 +691,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModule_005",
       groups = {"MonetizationModule", "MonetizationModuleTest_019", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
