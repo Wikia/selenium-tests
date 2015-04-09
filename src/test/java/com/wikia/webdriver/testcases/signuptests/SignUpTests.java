@@ -107,7 +107,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void SignUp_005_forced_signup_CNW_QAART_513() {
+  public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
     CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
