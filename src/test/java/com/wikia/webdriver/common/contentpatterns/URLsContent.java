@@ -169,7 +169,6 @@ public class URLsContent {
   //Other wikis to test on
   public static final String VIDEO_TEST_WIKI = "sktest123";
   public static final String COMMUNITY_WIKI = "community";
-  public static final String HERO_MODULE_WIKI = "momrod2";
 
   //External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";

@@ -144,4 +144,3 @@ public class HubsTests extends NewTestTemplateBeforeClass {
     hub.verifyHubTitle(hubName);
   }
 }
-
