@@ -45,6 +45,10 @@ public class ArticlePageObject extends BasePageObject {
     categoryButton.click();
   }
 
+  public void clickOnImage(int index) {
+    singleImgLink.get(index).click();
+  }
+
   public boolean isWikiaLogoVisible() {
     return checkIfElementOnPage(wikiaLogo);
   }
@@ -60,13 +64,6 @@ public class ArticlePageObject extends BasePageObject {
 
   public boolean isTopContributorsThumbVisible(int index) {
     return checkIfElementOnPage(topContributorsThumbs.get(index));
-  }
-
-  public boolean isSingleLinkedImageRedirectionWorking(int index) {
-    String currentUrl = driver.getCurrentUrl();
-    singleImgLink.get(index).click();
-    waitForElementByElement(footerLogo);
-    return !currentUrl.equals(driver.getCurrentUrl());
   }
 
   public boolean isFooterLogoVisible() {

@@ -101,11 +101,13 @@ public class ArticlePageTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    if (articlePage.isSingleLinkedImageRedirectionWorking(0)) {
-      PageObjectLogging.log("Redirection", "works", true);
-    } else {
-      PageObjectLogging.log("Redirection", "does not works", false);
+    String oldUrl = driver.getCurrentUrl();
+    articlePage.clickOnImage(0);
+    if (driver.getCurrentUrl().equals(oldUrl)) {
+      PageObjectLogging.log("Redirection", "does not work", false);
       failTest = true;
+    } else {
+      PageObjectLogging.log("Redirection", "works", true);
     }
     base.failTest(failTest);
   }
