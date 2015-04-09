@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.monetizationtests.monetizationmodule;
 
+import com.wikia.webdriver.common.driverprovider.DisableFlash;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule.MonetizationModuleComponentObject;
@@ -46,6 +47,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_001() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -65,6 +67,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_002() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -84,6 +87,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -105,6 +109,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -140,6 +145,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModule_005",
       groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_005(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -164,6 +170,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_006() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -192,6 +199,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_007() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -236,6 +244,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_008",
       groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
@@ -281,6 +290,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleGeoTestWikis",
       groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_009(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -313,6 +323,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleGeoTestWikis",
       groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_010(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -357,6 +368,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_011",
       groups = {"MonetizationModule", "MonetizationModuleTest_011", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_100_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE);
@@ -402,6 +414,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_012",
       groups = {"MonetizationModule", "MonetizationModuleTest_012", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_012(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -443,6 +456,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_013",
       groups = {"MonetizationModule", "MonetizationModuleTest_013", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_013(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
@@ -484,6 +498,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_014",
       groups = {"MonetizationModule", "MonetizationModuleTest_014", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_014(String testWiki, String testArticle, String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -525,6 +540,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_015",
       groups = {"MonetizationModule", "MonetizationModuleTest_015", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_015(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
@@ -554,6 +570,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
+  @DisableFlash
   public void MonetizationModuleTest_016() {
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -589,6 +606,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_017",
       groups = {"MonetizationModule", "MonetizationModuleTest_017", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_017(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle) {
 
@@ -637,6 +655,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_018",
       groups = {"MonetizationModule", "MonetizationModuleTest_018", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_018(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle) {
 
@@ -672,6 +691,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModule_005",
       groups = {"MonetizationModule", "MonetizationModuleTest_019", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
@@ -708,6 +728,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_020",
       groups = {"MonetizationModule", "MonetizationModuleTest_020", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_020(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle) {
 
@@ -765,6 +786,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_021",
       groups = {"MonetizationModule", "MonetizationModuleTest_021", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_021(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle, int isMulti) {
 
@@ -819,6 +841,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
       dataProvider = "DataMonetizationModuleTest_022",
       groups = {"MonetizationModule", "DataMonetizationModuleTest_022", "Monetization"}
   )
+  @DisableFlash
   public void MonetizationModuleTest_022(String countryCode, Boolean isFromsearch, String testWiki,
                                          String testArticle, int isMulti) {
 

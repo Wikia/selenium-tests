@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.UserAgent;
+import com.wikia.webdriver.common.driverprovider.DisableFlash;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
@@ -28,6 +29,10 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
       NewDriverProvider.setUnstablePageLoadStrategy(true);
+    }
+
+    if (method.isAnnotationPresent(DisableFlash.class)) {
+      NewDriverProvider.setDisableFlash(true);
     }
 
     startBrowser();
