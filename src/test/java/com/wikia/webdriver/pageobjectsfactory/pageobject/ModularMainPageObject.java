@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -20,8 +19,8 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement heroPublishedDescription;
   @FindBy(css = ".title-edit-btn")
   private WebElement editDescriptionButton;
-  @FindBy(css = ".update-text")
-  private WebElement updateCoverImageButton;
+  @FindBy(css = ".upload-group input")
+  private WebElement updateCoverImageInput;
   @FindBy(css = ".image-save-bar .new-btn.save-btn")
   private WebElement imagePublishButton;
   @FindBy(css = ".image-save-bar .new-btn.discard-btn")
@@ -38,6 +37,8 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement coverImageInformativeText;
   @FindBy (css = ".position-text")
   private WebElement dragToRepositionText;
+  @FindBy (css = ".update-btn")
+  private WebElement updateCoverImageLink;
 
   public ModularMainPageObject(WebDriver driver) {
     super(driver);
@@ -50,12 +51,13 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void clickUpdateCoverImageLink() {
-    waitForElementByElement(updateCoverImageButton);
-    updateCoverImageButton.click();
+    waitForElementByElement(updateCoverImageInput);
+    updateCoverImageInput.click();
   }
 
   public void selectFileToUpload(String file) {
-    updateCoverImageButton.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+      updateCoverImageInput.sendKeys(getAbsolutePathForFile(
+          ClassLoader.getSystemResource("ImagesForUploadTests/" + file).getPath()).toString());
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 
@@ -76,6 +78,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void typeMoMDescription(String momDescription) {
     waitForElementByElement(descriptionEditField);
+    descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
     PageObjectLogging.log("typeMoMDescription",
                           momDescription + "MoM description was typed in", true);
@@ -92,18 +95,18 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void verifyAdminStaffButtons() {
-    waitForElementByElement(updateCoverImageButton);
+    waitForElementByElement(updateCoverImageLink);
     waitForElementByElement(editDescriptionButton);
   }
 
   public void verifyNoAdminStaffButtons() {
-    waitForElementNotVisibleByElement(updateCoverImageButton);
+    waitForElementNotVisibleByElement(updateCoverImageLink);
     waitForElementNotVisibleByElement(editDescriptionButton);
   }
 
   public String getMoMSrc() {
     waitForElementByElement(heroImageModule);
-    return heroImageModule.getText();
+    return heroImageModule.getAttribute("src");
   }
 
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
