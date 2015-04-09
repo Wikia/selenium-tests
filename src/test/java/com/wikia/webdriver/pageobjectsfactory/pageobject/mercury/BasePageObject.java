@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -84,5 +85,9 @@ public class BasePageObject extends MobileBasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void failTest(boolean fail) {
+    Assertion.assertFalse(fail, "Test logged some errors");
   }
 }

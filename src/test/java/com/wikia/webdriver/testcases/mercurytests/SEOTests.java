@@ -27,11 +27,6 @@ public class SEOTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
-  @AfterMethod(alwaysRun = true)
-  public void failCheck() {
-    Assertion.assertFalse(failTest, "Test logged some errors");
-  }
-
   private boolean failTest = false;
 
   // SEOT01
@@ -128,5 +123,6 @@ public class SEOTests extends NewTestTemplate {
       PageObjectLogging.log("meta[property='og:type']", "is wrong", false);
       failTest = true;
     }
+    base.failTest(failTest);
   }
 }
