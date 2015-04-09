@@ -114,7 +114,7 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
-  public void PinMapTests_006_VerifyChangePinData() {
+  public void PinMapTests_006_VerifyChangePinData_MAIN_4304() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
