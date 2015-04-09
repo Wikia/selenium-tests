@@ -59,9 +59,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
     if (maps.isMapModalVisible()) {
-      PageObjectLogging.log("Map modal", "is visible", false);
+      PageObjectLogging.log("Map modal", "is opened", false);
     } else {
-      PageObjectLogging.log("Map modal", "is hidden", true);
+      PageObjectLogging.log("Map modal", "is closed", true);
     }
   }
 
@@ -122,6 +122,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     maps.switchToMapFrame();
     File beforeScrolling = new Shooter().capturePage(driver);
+    Assertion.assertFalse(maps.isFilterBoxWasExpanded(), "Filter box is expanded");
+    PageObjectLogging.log("Filter box", "is collapsed", true);
     maps.clickFilterBox();
     Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
     PageObjectLogging.log("Filter box", "is expanded", true);

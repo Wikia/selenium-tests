@@ -41,6 +41,7 @@ public class SmartBannerTests extends NewTestTemplate {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
+    Assertion.assertTrue(banner.isSmartBannerVisible(), "Smart banner is closed");
     if (config.getPlatform().equals("ANDROID")) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {

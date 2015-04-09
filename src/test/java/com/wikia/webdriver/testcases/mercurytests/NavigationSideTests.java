@@ -105,7 +105,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.clickSearchField();
     searchObject.typeInSearchField(SEARCH_PASS);
     Assertion.assertTrue(searchObject.isSuggestionListDisplayed(), "Search suggestions are hidden");
-    PageObjectLogging.log("Search suggestions", "are displayed", false);
+    PageObjectLogging.log("Search suggestions", "are displayed", true);
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
     base.waitMilliseconds(WAIT_TIME, "waitMilliseconds");

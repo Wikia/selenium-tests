@@ -44,6 +44,7 @@ public class TOCTests extends NewTestTemplate {
     toc.clickOnTOC();
     Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu is collapsed");
     PageObjectLogging.log("TOC menu", "is expanded", true);
+    toc.clickOnTOCListElement(1);
     if (toc.isUserMovedToRightSection(1)) {
       PageObjectLogging.log("TOC redirection", "works", true);
     } else {

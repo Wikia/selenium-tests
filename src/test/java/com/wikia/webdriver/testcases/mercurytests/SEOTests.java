@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -58,9 +59,9 @@ public class SEOTests extends NewTestTemplate {
       PageObjectLogging.log("meta[property='og:description']", "is empty", false);
     }
     if (seo.isOgSiteName()) {
-      PageObjectLogging.log("meta[property='og:site_name']", "is filled", true);
+      PageObjectLogging.log("meta[property='og:site_name']", "is filled", false);
     } else {
-      PageObjectLogging.log("meta[property='og:site_name']", "is empty", false);
+      PageObjectLogging.log("meta[property='og:site_name']", "is empty", true);
     }
     if (seo.isOgTitleWithWiki()) {
       PageObjectLogging.log("meta[property='og:title']", "contains Wiki", true);
@@ -76,6 +77,11 @@ public class SEOTests extends NewTestTemplate {
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
+    PageObjectLogging.appendTextToLogFile(new StringBuilder()
+                                              .append(
+                                                  "<tr class=\"warning\"><td>Site status</td>"
+                                                  + "<td>Page was reloaded asynchronously</td>"
+                                                  + "<td> <br/> &nbsp;</td></tr>"));
     if (seo.isOgDescription()) {
       PageObjectLogging.log("meta[property='og:description']", "is filled", true);
     } else {

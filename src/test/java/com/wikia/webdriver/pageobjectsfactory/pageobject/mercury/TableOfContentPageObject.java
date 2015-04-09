@@ -49,10 +49,13 @@ public class TableOfContentPageObject extends BasePageObject {
     tocButton.click();
   }
 
-  public boolean isUserMovedToRightSection(int index) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
+  public void clickOnTOCListElement(int index) {
     waitForElementVisibleByElement(listOfLinks.get(index));
     listOfLinks.get(index).click();
+  }
+
+  public boolean isUserMovedToRightSection(int index) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
     String h2PosString =
         js.executeScript(
             "return Math.floor($('section.article-body h2').eq(" + index + ").offset().top)")
