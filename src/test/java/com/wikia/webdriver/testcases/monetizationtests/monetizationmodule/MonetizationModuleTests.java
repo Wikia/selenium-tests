@@ -28,14 +28,14 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_AMAZON_BIGIMG_ARTICLE = "Battle_of_Altyr_V_(Galactic_Civil_War)";
   private static final String TEST_AMAZON_PRIME_WIKI = "degrassi";
   private static final String TEST_AMAZON_PRIME_ARTICLE = "Can't Stop This Thing We Started";
-  private static final String TEST_ECOMMERCE_SINGLE_DARK_WIKI = "diablo";
-  private static final String TEST_ECOMMERCE_SINGLE_DARK_ARTICLE = "Barbarian_(Diablo_III)";
-  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_WIKI = "runescape";
-  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Guthix";
+  private static final String TEST_ECOMMERCE_SINGLE_DARK_WIKI = "masseffect";
+  private static final String TEST_ECOMMERCE_SINGLE_DARK_ARTICLE = "Combat";
+  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_WIKI = "fallout";
+  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Crocket";
   private static final String TEST_ECOMMERCE_MULTI_DARK_WIKI = "elderscrolls";
   private static final String TEST_ECOMMERCE_MULTI_DARK_ARTICLE = "Skyrim";
-  private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "finalfantasy";
-  private static final String TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE = "Final_Fantasy_IX";
+  private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "es.pokemon";
+  private static final String TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE = "Aegislash";
 
 
   Credentials credentials = config.getCredentials();
