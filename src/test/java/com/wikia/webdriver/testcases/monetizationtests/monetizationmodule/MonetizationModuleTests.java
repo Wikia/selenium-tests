@@ -30,8 +30,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_AMAZON_PRIME_ARTICLE = "Can't Stop This Thing We Started";
   private static final String TEST_ECOMMERCE_SINGLE_DARK_WIKI = "masseffect";
   private static final String TEST_ECOMMERCE_SINGLE_DARK_ARTICLE = "Combat";
-  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_WIKI = "finalfantasy";
-  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Final_Fantasy_XI";
+  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_WIKI = "fallout";
+  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Crocket";
   private static final String TEST_ECOMMERCE_MULTI_DARK_WIKI = "elderscrolls";
   private static final String TEST_ECOMMERCE_MULTI_DARK_ARTICLE = "Skyrim";
   private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "es.pokemon";
