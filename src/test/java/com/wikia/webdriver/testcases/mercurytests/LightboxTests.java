@@ -28,6 +28,8 @@ public class LightboxTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private static final String EDGE_LEFT = "left";
   private static final String EDGE_RIGHT = "right";
 
@@ -59,6 +61,7 @@ public class LightboxTests extends NewTestTemplate {
     } else {
       PageObjectLogging.log("Lightbox", "is closed", true);
     }
+    base.failTest(failTest);
   }
 
   // MT02
@@ -76,6 +79,7 @@ public class LightboxTests extends NewTestTemplate {
         lightbox.isDifferentImageAfterSwiping(touchAction, PerformTouchAction.DIRECTION_RIGHT, 10),
         "Swiping to right doesn't work");
     PageObjectLogging.log("Changing image by gesture", "is working", true);
+    base.failTest(failTest);
   }
 
   // MT03
@@ -94,6 +98,7 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isZoomingByGestureWorking(touchAction, ZOOM_METHOD_TAP),
                          "Zoom by tap doesn't work");
     PageObjectLogging.log("Zooming by tap", "is working", true);
+    base.failTest(failTest);
   }
 
   // MT04
@@ -114,6 +119,7 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, duration, waitAfter);
     Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
     Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
+    base.failTest(failTest);
   }
 
   // MT05
@@ -129,6 +135,7 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isTappingOnImageEdgeChangeImage(touchAction, EDGE_RIGHT),
                          "Tapping right edge doesn't change image");
     PageObjectLogging.log("Changing image by tap", "is working", true);
+    base.failTest(failTest);
   }
 
   // MT06
@@ -142,6 +149,7 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
     mobileDriver.execute(DriverCommand.GO_BACK, null);
     Assertion.assertFalse(lightbox.isLightboxOpened(), "Lightbox is opened");
+    base.failTest(failTest);
   }
 
   // MT07
@@ -166,5 +174,6 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isImageMovedToDirectionAfterZoomIn(touchAction, DIRECTION_DOWN),
                          "Moving down doesn't work");
+    base.failTest(failTest);
   }
 }

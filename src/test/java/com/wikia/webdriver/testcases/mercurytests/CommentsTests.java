@@ -24,6 +24,8 @@ public class CommentsTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private static final String MEDIA_TYPE_VIDEO = "Video";
   private static final String MEDIA_TYPE_IMAGE = "Image";
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
@@ -43,27 +45,33 @@ public class CommentsTests extends NewTestTemplate {
       PageObjectLogging.log("Number of comments per page", "is correct", true);
     } else {
       PageObjectLogging.log("Number of comments per page", "is incorrect", false);
+      failTest = true;
     }
     if (comments.isUserAvatarInComment(0)) {
       PageObjectLogging.log("User avatar", "is displayed", true);
     } else {
       PageObjectLogging.log("User avatar", "is not displayed", false);
+      failTest = true;
     }
     if (comments.isUserUsernameInComment(0)) {
       PageObjectLogging.log("User username", "is displayed", true);
     } else {
       PageObjectLogging.log("User username", "is not displayed", false);
+      failTest = true;
     }
     if (comments.isTimeStampInComment(0)) {
       PageObjectLogging.log("Time stamp", "is displayed", true);
     } else {
       PageObjectLogging.log("Time stamp", "is not displayed", false);
+      failTest = true;
     }
     if (comments.isContentInComment(0)) {
       PageObjectLogging.log("Comment content", "is displayed", true);
     } else {
       PageObjectLogging.log("Comment content", "is not displayed", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // CT02
@@ -90,6 +98,7 @@ public class CommentsTests extends NewTestTemplate {
     } else {
       PageObjectLogging.log("Comments counter", "There are "
                                                 + numberOfComments + " untracked comments", false);
+      failTest = true;
     }
     Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
                          "Previous page button isn't displayed");
@@ -98,9 +107,11 @@ public class CommentsTests extends NewTestTemplate {
     comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
     if (comments.isPreviousCommentPageButtonDisplayed()) {
       PageObjectLogging.log("Previous page button", "is displayed", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Previous page button", "is not displayed", true);
     }
+    base.failTest(failTest);
   }
 
   // CT03
@@ -119,7 +130,9 @@ public class CommentsTests extends NewTestTemplate {
       PageObjectLogging.log("Replies counter", "is correct", true);
     } else {
       PageObjectLogging.log("Replies counter", "is incorrect", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // CT04
@@ -135,7 +148,9 @@ public class CommentsTests extends NewTestTemplate {
       PageObjectLogging.log("Url", "match pattern /wiki/User:", true);
     } else {
       PageObjectLogging.log("Url", "does not match pattern /wiki/User:", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // CT05
@@ -149,21 +164,26 @@ public class CommentsTests extends NewTestTemplate {
       PageObjectLogging.log("Video thumbnail", "is displayed", true);
     } else {
       PageObjectLogging.log("Video thumbnail", "is not displayed", false);
+      failTest = true;
     }
     if (comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, 1)) {
       PageObjectLogging.log("Video link", "is present", true);
     } else {
       PageObjectLogging.log("Video link", "is not present", false);
+      failTest = true;
     }
     if (comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, 3)) {
       PageObjectLogging.log("Image thumbnail", "is displayed", true);
     } else {
       PageObjectLogging.log("Image thumbnail", "is not displayed", false);
+      failTest = true;
     }
     if (comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, 3)) {
       PageObjectLogging.log("Image link", "is present", true);
     } else {
       PageObjectLogging.log("Image link", "is not present", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 }

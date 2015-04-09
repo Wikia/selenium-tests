@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,6 +25,8 @@ public class ArticlePageTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private static final String[]
       FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
@@ -39,34 +42,41 @@ public class ArticlePageTests extends NewTestTemplate {
       PageObjectLogging.log("Wikia logo", "is visible", true);
     } else {
       PageObjectLogging.log("Wikia logo", "is not visible", false);
+      failTest = true;
     }
     if (articlePage.isSearchButtonVisible()) {
       PageObjectLogging.log("Search button", "is visible", true);
     } else {
       PageObjectLogging.log("Search button", "is not visible", false);
+      failTest = true;
     }
     if (articlePage.isTopContributorsSectionVisible()) {
       PageObjectLogging.log("Top contributors section", "is visible", true);
     } else {
       PageObjectLogging.log("Top contributors section", "is not visible", false);
+      failTest = true;
     }
     if (articlePage.isTopContributorsThumbVisible(0)) {
       PageObjectLogging.log("Top contributors thumb", "is visible", true);
     } else {
       PageObjectLogging.log("Top contributors thumb", "is not visible", false);
+      failTest = true;
     }
     if (articlePage.isFooterLogoVisible()) {
       PageObjectLogging.log("Footer Wikia logo", "is visible", true);
     } else {
       PageObjectLogging.log("Footer Wikia logo", "is not visible", false);
+      failTest = true;
     }
     for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
       if (articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i)) {
         PageObjectLogging.log("Footer link " + FOOTER_ELEMENTS[i], "is visible", true);
       } else {
         PageObjectLogging.log("Footer link " + FOOTER_ELEMENTS[i], "is not visible", false);
+        failTest = true;
       }
     }
+    base.failTest(failTest);
   }
 
   // APT02
@@ -80,7 +90,9 @@ public class ArticlePageTests extends NewTestTemplate {
       PageObjectLogging.log("Url", "match pattern /wiki/User:", true);
     } else {
       PageObjectLogging.log("Url", "does not match pattern /wiki/User:", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // APT03
@@ -93,7 +105,9 @@ public class ArticlePageTests extends NewTestTemplate {
       PageObjectLogging.log("Redirection", "works", true);
     } else {
       PageObjectLogging.log("Redirection", "does not works", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // APT04
@@ -107,8 +121,10 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.clickCategoryButton();
     if (articlePage.isChevronCollapsed()) {
       PageObjectLogging.log("Category list", "is collapsed", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Category list", "is expanded", true);
     }
+    base.failTest(failTest);
   }
 }

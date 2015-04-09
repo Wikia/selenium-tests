@@ -24,6 +24,8 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
@@ -38,6 +40,7 @@ public class TOCTests extends NewTestTemplate {
       PageObjectLogging.log("TOC position", "is under article name", true);
     } else {
       PageObjectLogging.log("TOC position", "is not under article name", false);
+      failTest = true;
     }
     Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
     PageObjectLogging.log("TOC menu", "is collapsed", true);
@@ -49,12 +52,15 @@ public class TOCTests extends NewTestTemplate {
       PageObjectLogging.log("TOC redirection", "works", true);
     } else {
       PageObjectLogging.log("TOC redirection", "does not work", false);
+      failTest = true;
     }
     if (toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)) {
       PageObjectLogging.log("Header padding", "is correct", true);
     } else {
       PageObjectLogging.log("TOC redirection", "is wrong", false);
+      failTest = true;
     }
+    base.failTest(failTest);
   }
 
   // TOCT02
@@ -65,8 +71,10 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     if (toc.isTOCDisplayed()) {
       PageObjectLogging.log("TOC", "is displayed", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("TOC", "is hidden", true);
     }
+    base.failTest(failTest);
   }
 }

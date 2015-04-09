@@ -28,6 +28,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private static final int WAIT_TIME = 5000;
 
   // IMAPT01
@@ -43,11 +45,13 @@ public class InteractiveMapsTests extends NewTestTemplate {
       PageObjectLogging.log("Url", "match pattern ?map=", true);
     } else {
       PageObjectLogging.log("Url", "does not match pattern ?map=", false);
+      failTest = true;
     }
     if (maps.isTextInMapTitleHeader()) {
       PageObjectLogging.log("Map title in header", "is displayed", true);
     } else {
       PageObjectLogging.log("Map title in header", "is not displayed", false);
+      failTest = true;
     }
     maps.switchToMapFrame();
     maps.clickPin();
@@ -55,14 +59,17 @@ public class InteractiveMapsTests extends NewTestTemplate {
       PageObjectLogging.log("Pin popup", "appears", true);
     } else {
       PageObjectLogging.log("Pin popup", "does not appear", false);
+      failTest = true;
     }
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
     if (maps.isMapModalVisible()) {
       PageObjectLogging.log("Map modal", "is opened", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Map modal", "is closed", true);
     }
+    base.failTest(failTest);
   }
 
   // IMAPT02
@@ -110,6 +117,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     PageObjectLogging.log("Zoom in by gesture", "works", true);
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
     PageObjectLogging.log("Zoom in button", "is disabled", true);
+    base.failTest(failTest);
   }
 
   // IMAPT03
@@ -132,8 +140,10 @@ public class InteractiveMapsTests extends NewTestTemplate {
     File afterScrolling = new Shooter().capturePage(driver);
     if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) {
       PageObjectLogging.log("Scrolling in filter box", "does not work", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Scrolling in filter box", "works", true);
     }
+    base.failTest(failTest);
   }
 }

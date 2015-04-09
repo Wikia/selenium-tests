@@ -23,6 +23,8 @@ public class NavigationSideTests extends NewTestTemplate {
     BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
+  private boolean failTest = false;
+
   private final static int WAIT_TIME = 5000;
   private final static String SEARCH_PASS = "test";
   private final static String SEARCH_FAIL = "te";
@@ -42,11 +44,13 @@ public class NavigationSideTests extends NewTestTemplate {
       PageObjectLogging.log("Link without chevron", "is ellipsized", true);
     } else {
       PageObjectLogging.log("Link without chevron", "is not ellipsized", false);
+      failTest = true;
     }
     if (nav.isNavListElementEllipsized(1)) {
       PageObjectLogging.log("Link with chevron", "is ellipsized", true);
     } else {
       PageObjectLogging.log("Link with chevron", "is not ellipsized", false);
+      failTest = true;
     }
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
     PageObjectLogging.log("Back link", "is hidden", true);
@@ -59,9 +63,11 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickOverlay();
     if (nav.isNavMenuVisible()) {
       PageObjectLogging.log("Navigation menu", "is visible", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Navigation menu", "is hidden", true);
     }
+    base.failTest(failTest);
   }
 
   // NST02
@@ -79,6 +85,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
     if (searchObject.isSuggestionListDisplayed()) {
       PageObjectLogging.log("Search suggestions", "are displayed", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Search suggestions", "are hidden", true);
     }
@@ -87,12 +94,15 @@ public class NavigationSideTests extends NewTestTemplate {
       PageObjectLogging.log("Menu field", "is visible", true);
     } else {
       PageObjectLogging.log("Menu field", "is hidden", false);
+      failTest = true;
     }
     if (searchObject.isResultFieldVisible()) {
       PageObjectLogging.log("Result field", "is visible", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Result field", "is hidden", true);
     }
+    base.failTest(failTest);
   }
 
   // NST03
@@ -111,9 +121,11 @@ public class NavigationSideTests extends NewTestTemplate {
     base.waitMilliseconds(WAIT_TIME, "waitMilliseconds");
     if (oldUrl.equals(driver.getCurrentUrl())) {
       PageObjectLogging.log("Redirection", "does not work", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Redirection", "works", true);
     }
+    base.failTest(failTest);
   }
 
   // NST04
@@ -128,8 +140,10 @@ public class NavigationSideTests extends NewTestTemplate {
     base.waitForLoadingSpinnerToFinishReloadingPage();
     if (oldUrl.equals(driver.getCurrentUrl())) {
       PageObjectLogging.log("Redirection", "does not work", false);
+      failTest = true;
     } else {
       PageObjectLogging.log("Redirection", "works", true);
     }
+    base.failTest(failTest);
   }
 }
