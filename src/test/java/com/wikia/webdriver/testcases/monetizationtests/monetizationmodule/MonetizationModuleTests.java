@@ -31,7 +31,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_ECOMMERCE_SINGLE_DARK_WIKI = "masseffect";
   private static final String TEST_ECOMMERCE_SINGLE_DARK_ARTICLE = "Combat";
   private static final String TEST_ECOMMERCE_SINGLE_LIGHT_WIKI = "fallout";
-  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Crocket";
+  private static final String TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE = "Fallout_2_characters";
   private static final String TEST_ECOMMERCE_MULTI_DARK_WIKI = "elderscrolls";
   private static final String TEST_ECOMMERCE_MULTI_DARK_ARTICLE = "Skyrim";
   private static final String TEST_ECOMMERCE_MULTI_LIGHT_WIKI = "es.pokemon";
