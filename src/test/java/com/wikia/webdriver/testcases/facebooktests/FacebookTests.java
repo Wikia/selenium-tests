@@ -56,10 +56,10 @@ public class FacebookTests extends NewTestTemplate {
     almostThere.logOut(wikiURL);
     base.appendToUrl("noads=1");
 
-    SignUpPageObject verifyAccountSignup = base.openSpecialSignUpPage(wikiURL);
-    verifyAccountSignup.clickFacebookSignUp();
-    verifyAccountSignup.verifyUserLoggedIn(userName);
-    PreferencesPageObject prefsPage = verifyAccountSignup.openSpecialPreferencesPage(wikiURL);
+    base.navigateToSpecialSignUpPage(wikiURL);
+    new SignUpPageObject(driver).clickFacebookSignUp();
+    base.verifyUserLoggedIn(userName);
+    PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.disconnectFromFacebook();
   }
