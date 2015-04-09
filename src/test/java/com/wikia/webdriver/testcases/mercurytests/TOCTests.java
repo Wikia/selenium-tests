@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
@@ -32,16 +33,27 @@ public class TOCTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
-    Assertion.assertTrue(toc.isTOCUnderArticleName(), "TOC isn't under article name");
-    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
+    PageObjectLogging.log("TOC", "is displayed", true);
+    if (toc.isTOCUnderArticleName()) {
+      PageObjectLogging.log("TOC position", "is under article name", true);
+    } else {
+      PageObjectLogging.log("TOC position", "is not under article name", false);
+    }
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
+    PageObjectLogging.log("TOC menu", "is collapsed", true);
     toc.clickOnTOC();
-    Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu isn't visible");
-    toc.clickOnTOC();
-    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is visible");
-    toc.clickOnTOC();
-    Assertion.assertTrue(toc.isUserMovedToRightSection(1), "User wasn't moved to right section");
-    Assertion.assertTrue(toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP),
-                         "Header padding top is improper");
+    Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu is collapsed");
+    PageObjectLogging.log("TOC menu", "is expanded", true);
+    if (toc.isUserMovedToRightSection(1)) {
+      PageObjectLogging.log("TOC redirection", "works", true);
+    } else {
+      PageObjectLogging.log("TOC redirection", "does not work", false);
+    }
+    if (toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)) {
+      PageObjectLogging.log("Header padding", "is correct", true);
+    } else {
+      PageObjectLogging.log("TOC redirection", "is wrong", false);
+    }
   }
 
   // TOCT02
@@ -50,6 +62,10 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    Assertion.assertFalse(toc.isTOCDisplayed(), "TOC is displayed");
+    if (toc.isTOCDisplayed()) {
+      PageObjectLogging.log("TOC", "is displayed", false);
+    } else {
+      PageObjectLogging.log("TOC", "is hidden", true);
+    }
   }
 }

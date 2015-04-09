@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -31,23 +32,74 @@ public class SEOTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, "");
     SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(seo.isLinkRelCanonical(), "Url isn't canonical");
-    Assertion.assertTrue(seo.isOgFbApp(), "fb:app_id is wrong");
-    Assertion.assertTrue(seo.isOgImage(), "og:image is wrong");
-    Assertion.assertTrue(seo.isOgUrlTag(), "og:url meta tag is wrong");
-    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(seo.isOgSiteName(), "og:site_name is in DOM");
-    Assertion.assertTrue(seo.isOgTitleMainPage(), "og:title meta tag is wrong");
-    Assertion.assertTrue(seo.isOgTypeWebsite(), "og:type meta tag is wrong");
+    if (seo.isLinkRelCanonical()) {
+      PageObjectLogging.log("link[rel='canonical']", "contains current url", true);
+    } else {
+      PageObjectLogging.log("link[rel='canonical']", "contains wrong url", false);
+    }
+    if (seo.isOgFbApp()) {
+      PageObjectLogging.log("meta[property='fb:app_id']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='fb:app_id']", "is empty", false);
+    }
+    if (seo.isOgImage()) {
+      PageObjectLogging.log("meta[property='og:image']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:image']", "is empty", false);
+    }
+    if (seo.isOgUrlTag()) {
+      PageObjectLogging.log("meta[property='og:url']", "contains current url", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:url']", "contains wrong url", false);
+    }
+    if (seo.isOgDescription()) {
+      PageObjectLogging.log("meta[property='og:description']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is empty", false);
+    }
+    if (seo.isOgSiteName()) {
+      PageObjectLogging.log("meta[property='og:site_name']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:site_name']", "is empty", false);
+    }
+    if (seo.isOgTitleWithWiki()) {
+      PageObjectLogging.log("meta[property='og:title']", "contains Wiki", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:title']", "is wrong", false);
+    }
+    if (seo.isOgTypeWebsite()) {
+      PageObjectLogging.log("meta[property='og:type']", "contains website", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:type']", "is wrong", false);
+    }
     String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    Assertion.assertTrue(seo.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(lastDesc.equals(seo.getDescription()),
-                          "og:description tags are the same");
-    Assertion.assertTrue(seo.isOgSiteName(), "og:site_name isn't in DOM");
-    Assertion.assertTrue(seo.isOgTitleArticlePage(), "og:title meta tag is wrong");
-    Assertion.assertTrue(seo.isOgTypeArticle(), "og:type meta tag is wrong");
+    if (seo.isOgDescription()) {
+      PageObjectLogging.log("meta[property='og:description']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is empty", false);
+    }
+    if (lastDesc.equals(seo.getDescription())) {
+      PageObjectLogging.log("meta[property='og:description']", "does not changed", false);
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is different", true);
+    }
+    if (seo.isOgSiteName()) {
+      PageObjectLogging.log("meta[property='og:site_name']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:site_name']", "is empty", false);
+    }
+    if (seo.isOgTitleWithWiki()) {
+      PageObjectLogging.log("meta[property='og:title']", "contains Wiki", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:title']", "is wrong", false);
+    }
+    if (seo.isOgTypeArticle()) {
+      PageObjectLogging.log("meta[property='og:type']", "contains article", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:type']", "is wrong", false);
+    }
   }
 }

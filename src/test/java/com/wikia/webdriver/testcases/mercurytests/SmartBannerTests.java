@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -45,15 +46,24 @@ public class SmartBannerTests extends NewTestTemplate {
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
     }
-    Assertion.assertTrue(
-        banner.getButtonName().equals(buttonName),
-        "Smart banner has different name");
+    if (banner.getButtonName().equals(buttonName)) {
+      PageObjectLogging.log("Button name", "is correct", true);
+    } else {
+      PageObjectLogging.log("Button name", "is incorrect", false);
+    }
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
-    Assertion.assertTrue(lastSmartBannerPosition == banner.getSmartBannerPosition(),
-                         "Smart banner is floating");
+    if (lastSmartBannerPosition == banner.getSmartBannerPosition()) {
+      PageObjectLogging.log("Position", "is fixed", true);
+    } else {
+      PageObjectLogging.log("Position", "is floated", false);
+    }
     banner.clickCloseButton();
-    Assertion.assertFalse(banner.isSmartBannerVisible(), "Smart banner is visible");
+    if (banner.isSmartBannerVisible()) {
+      PageObjectLogging.log("Smart banner", "is visible", false);
+    } else {
+      PageObjectLogging.log("Smart banner", "is closed", true);
+    }
   }
 
   // SBT02
@@ -63,10 +73,16 @@ public class SmartBannerTests extends NewTestTemplate {
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
       driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?useskin=mercury");
       banner = new SmartBannerComponentObject(driver);
-      Assertion.assertTrue(banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i]),
-                           "Smart banner color is wrong");
-      Assertion.assertTrue(banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i]),
-                           "Smart banner button color is wrong");
+      if (banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) {
+        PageObjectLogging.log("Smart banner color", "is correct", true);
+      } else {
+        PageObjectLogging.log("Smart banner color", "is wrong", false);
+      }
+      if (banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i])) {
+        PageObjectLogging.log("Smart banner button color", "is correct", true);
+      } else {
+        PageObjectLogging.log("Smart banner button color", "is wrong", false);
+      }
     }
   }
 }

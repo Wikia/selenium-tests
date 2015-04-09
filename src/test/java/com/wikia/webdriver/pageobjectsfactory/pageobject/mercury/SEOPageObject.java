@@ -56,18 +56,11 @@ public class SEOPageObject extends MobileBasePageObject {
     return ogType.getAttribute("content").contains("article");
   }
 
-  public boolean isOgTitleMainPage() throws WebDriverException {
+  public boolean isOgTitleWithWiki() throws WebDriverException {
     if (ogTitle.getAttribute("content") == null) {
       throw new WebDriverException("Expected String but got null");
     }
     return ogTitle.getAttribute("content").contains("Wiki");
-  }
-
-  public boolean isOgTitleArticlePage() throws WebDriverException {
-    if (ogTitle.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return !ogTitle.getAttribute("content").isEmpty();
   }
 
   public boolean isOgSiteName() throws WebDriverException {
