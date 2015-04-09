@@ -47,6 +47,7 @@ public class NewDriverProvider {
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
   private static AndroidDriver mobileDriver;
+  private static boolean disableFlash = false;
 
   private NewDriverProvider() {
 
@@ -199,6 +200,10 @@ public class NewDriverProvider {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
+    if (disableFlash) {
+      firefoxProfile.setPreference("plugin.state.flash", 0);
+    }
+
     caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
 
     //Adding console logging for FF browser
@@ -320,6 +325,10 @@ public class NewDriverProvider {
 
   public static void setUnstablePageLoadStrategy(boolean value) {
     unstablePageLoadStrategy = value;
+  }
+
+  public static void setDisableFlash(boolean value) {
+    disableFlash = value;
   }
 
   public static AndroidDriver getMobileDriver() {
