@@ -139,6 +139,8 @@ public class PinMapTests extends NewTestTemplate {
     pinModal.typePinDescription(base.getTimeStamp());
     selectedMap = pinModal.clickSaveButton();
     selectedMap.verifyPinDataWasChanged(pinTitle, pinDescription);
+    selectedMap.refreshPage();
+    selectedMap.clickOnPin(0);
   }
 
   @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
