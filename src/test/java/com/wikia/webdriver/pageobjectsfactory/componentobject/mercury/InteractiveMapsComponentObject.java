@@ -2,6 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -26,8 +28,8 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   private WebElement zoomOutButton;
   @FindBy(css = ".filter-menu-header")
   private WebElement filterBoxHeader;
-  @FindBy(css = ".point-types")
-  private WebElement filterBoxPoints;
+  @FindBy(css = ".filter-menu.shown-box")
+  private WebElement filterBox;
   @FindBy(css = ".leaflet-marker-icon")
   private WebElement poiPin;
   @FindBy(css = ".leaflet-popup")
@@ -72,8 +74,12 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public boolean isFilterBoxWasExpanded() {
-    waitForElementVisibleByElement(filterBoxPoints);
-    return checkIfElementOnPage(filterBoxPoints);
+    try {
+      waitForElementVisibleByElementCustomTimeOut(filterBox, 5, 1000);
+    } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
+      return false;
+    }
+    return true;
   }
 
   public boolean isMapModalVisible() {

@@ -1,6 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -27,7 +30,7 @@ public class CommentsPageObject extends BasePageObject {
   @FindBy(css = ".show-reply-btn")
   private List<WebElement> showRepliesButtons;
   @FindBy(css = ".expanded > .article-comment > .content")
-  private List<WebElement> repliesContent;
+  private WebElement repliesContent;
   @FindBy(css = "ul.comments > li")
   private List<WebElement> commentsList;
   @FindBy(css = "ul.comments > li li")
@@ -134,8 +137,13 @@ public class CommentsPageObject extends BasePageObject {
     return checkIfElementOnPage(commentsContent.get(index));
   }
 
-  public boolean isRepliesListExpanded(int index) {
-    return checkIfElementOnPage(repliesContent.get(index));
+  public boolean isRepliesListExpanded() {
+    try {
+      waitForElementVisibleByElementCustomTimeOut(repliesContent, 5, 1000);
+    } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
+      return false;
+    }
+    return true;
   }
 
   public boolean isNextCommentPageButtonDisplayed() {

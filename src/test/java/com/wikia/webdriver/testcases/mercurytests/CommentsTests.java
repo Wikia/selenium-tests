@@ -121,10 +121,10 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
-    Assertion.assertFalse(comments.isRepliesListExpanded(0), "Replies list is expanded");
+    Assertion.assertFalse(comments.isRepliesListExpanded(), "Replies list is expanded");
     PageObjectLogging.log("Replies list", "is collapsed", true);
     comments.clickViewReplies(0);
-    Assertion.assertTrue(comments.isRepliesListExpanded(0), "Replies list is collapsed");
+    Assertion.assertTrue(comments.isRepliesListExpanded(), "Replies list is collapsed");
     PageObjectLogging.log("Replies list", "is expanded", true);
     if (comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0)) {
       PageObjectLogging.log("Replies counter", "is correct", true);
