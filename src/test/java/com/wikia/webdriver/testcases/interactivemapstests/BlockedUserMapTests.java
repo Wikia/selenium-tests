@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -44,7 +43,6 @@ public class BlockedUserMapTests extends NewTestTemplate {
     editPinTypes.verifyErrorExists();
   }
 
-  @RelatedIssue(issueID = "QAART-476")
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
