@@ -23,9 +23,8 @@ import java.util.concurrent.TimeUnit;
 public class InteractiveMapsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
   private boolean failTest = false;

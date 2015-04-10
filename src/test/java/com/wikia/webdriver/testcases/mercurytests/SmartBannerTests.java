@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class SmartBannerTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
@@ -37,7 +37,6 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_001_ButtonNameFixPositionClose() {
-    BasePageObject.turnOnMercurySkin(driver, "http://" + DIFFERENT_HUBS_WIKIS[0] + ".wikia.com/");
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
@@ -79,7 +78,8 @@ public class SmartBannerTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?useskin=mercury");
+      //base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[i]);
+      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
       banner = new SmartBannerComponentObject(driver);
       if (banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) {
         PageObjectLogging.log("Smart banner color", "is correct", true);

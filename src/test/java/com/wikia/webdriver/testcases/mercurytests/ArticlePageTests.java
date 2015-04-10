@@ -20,9 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class ArticlePageTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
   private boolean failTest = false;
@@ -103,6 +102,7 @@ public class ArticlePageTests extends NewTestTemplate {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
+    base.waitForLoadingSpinnerToFinishReloadingPage();
     if (driver.getCurrentUrl().equals(oldUrl)) {
       PageObjectLogging.log("Redirection", "does not work", false);
       failTest = true;

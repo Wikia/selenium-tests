@@ -53,16 +53,6 @@ public class BasePageObject extends MobileBasePageObject {
     }
   }
 
-  public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
-    BasePageObject base = new BasePageObject(driver);
-    base.openArticleByName(wikiURL, "Special:Mercury");
-    WebElement optInButton = driver.findElement(By.cssSelector("button[name=opt]"));
-    base.waitForElementVisibleByElement(optInButton);
-    if ("in".equals(optInButton.getAttribute("value"))) {
-      optInButton.click();
-    }
-  }
-
   /**
    * First waits for spinner to be visible and then waits for spinner to be hidden
    */
