@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -11,6 +9,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
+
+import org.testng.annotations.Test;
 
 /*
  * Documentation: https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
@@ -22,7 +22,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
-  public void VetAddVideo_001_MessageWallProvider_QAART_481() {
+  public void VetAddVideo_001_MessageWallProvider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);

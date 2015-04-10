@@ -37,7 +37,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
       groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"},
       dataProvider = "wikis"
   )
-  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed_QAART_536(String wikiName, String articleName) {
+  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
     wikiURL = urlBuilder.getUrlForWiki(wikiName);
 
     ArticlePageObject article = new ArticlePageObject(driver);

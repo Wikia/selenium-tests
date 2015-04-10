@@ -44,7 +44,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
-  public void BlockedUserMapTests_002_VerifyUserCannotAddPin_QAART_476() {
+  public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
                      wikiURL);

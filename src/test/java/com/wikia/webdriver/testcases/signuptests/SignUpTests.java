@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.signuptests;
 
+import java.io.File;
+import java.util.Calendar;
+
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,12 +25,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.Calendar;
 
 /*
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
@@ -107,7 +107,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void SignUp_005_forced_signup_CNW_QAART_513() {
+  public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
     CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -193,18 +193,19 @@ public class SignUpTests extends NewTestTemplate {
   @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
   public void disconnectFromFB() {
     startBrowser();
-    if (userName != null) {
-      WikiBasePageObject base = new WikiBasePageObject(driver);
-      base.openWikiPage(wikiURL);
-      base.appendToUrl("noads=1");
-      base.logInCookie(userName, password, wikiURL);
-      base.verifyUserLoggedIn(userName);
-      PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
-      preferences.selectTab(tabNames.FACEBOOK);
-      preferences.disconnectFromFacebook();
-    } else {
+    try {
+      if (userName != null) {
+        WikiBasePageObject base = new WikiBasePageObject(driver);
+        base.openWikiPage(wikiURL);
+        base.appendToUrl("noads=1");
+        base.logInCookie(userName, password, wikiURL);
+        base.verifyUserLoggedIn(userName);
+        PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
+        preferences.selectTab(tabNames.FACEBOOK);
+        preferences.disconnectFromFacebook();
+      }
+    } finally {
       stopBrowser();
     }
-    driver.quit();
   }
 }

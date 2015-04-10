@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
@@ -20,8 +21,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @RelatedIssue(issueID = "QAART-557")
   @Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
-  public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner_QAART_557() {
+  public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     InteractiveMapPageObject selectedMap =
@@ -45,9 +47,10 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     Assertion.assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
   }
 
+  @RelatedIssue(issueID = "QAART-557")
   @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"},
         enabled=false)
-  public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap_QAART_557() {
+  public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     InteractiveMapPageObject selectedMap =
