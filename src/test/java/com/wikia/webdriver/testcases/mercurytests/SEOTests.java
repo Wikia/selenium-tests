@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -29,7 +30,8 @@ public class SEOTests extends NewTestTemplate {
   private boolean failTest = false;
 
   // SEOT01
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
+  @RelatedIssue(issueID = "CONCF-412")
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_001_CheckMetaTagsAndCanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");

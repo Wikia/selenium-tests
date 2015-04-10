@@ -7,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,8 +58,10 @@ public class BasePageObject extends MobileBasePageObject {
    * First waits for spinner to be visible and then waits for spinner to be hidden
    */
   public void waitForLoadingSpinnerToFinishReloadingPage() {
-    waitForElementByElement(loadingSpinner);
-    waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+    try {
+      waitForElementByElement(loadingSpinner);
+      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+    } catch (TimeoutException e){}
   }
 
   /**
