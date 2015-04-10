@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -39,13 +40,14 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
+  @RelatedIssue(issueID = "QAART-562")
   @Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
-  public void LicensedVideoSwap_003_swap_QAART_560() {
-    licensedVideoSwap.verifySwapVideo();
-
+  public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();
     historyPage.clickUndoSwapLink();
     historyPage.verifyUndoSucceeded();
+    historyPage.navigateToLvsPage();
+    licensedVideoSwap.verifySwapVideo();
   }
 }

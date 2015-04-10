@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -23,8 +24,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
-  public void Placeholders_001_PublishedProvider_MAIN_4191() {
+  public void Placeholders_001_PublishedProvider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);

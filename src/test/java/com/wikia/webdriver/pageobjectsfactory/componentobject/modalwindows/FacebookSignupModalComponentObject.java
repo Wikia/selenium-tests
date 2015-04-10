@@ -82,6 +82,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
       waitForElementByElement(editInfoProvided);
       editInfoProvided.click();
       PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "editing info provided", true);
+      waitForElementByElement(emailCheckbox);
       emailCheckbox.click();
       PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", true);
       waitForElementByElement(appTermsConfirmButton);
@@ -115,6 +116,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementByElement(createAccountButton);
     createAccountButton.click();
     PageObjectLogging.log("createAccount", "Create account button clicked", true);
+    waitForElementNotVisibleByElement(createAccountButton);
   }
 
   public void createAccountNoEmail(String email, String emailPassword, String userName, String password) {

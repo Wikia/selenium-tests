@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.signuptests;
 
+import java.io.File;
+import java.util.Calendar;
+
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,6 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -19,36 +26,27 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.Calendar;
-
 /*
- * 1. Attempt to sign up wrong blurry word,
- * 2. Attempt to sign up of too young user,
- * 3. Attempt to sign up with existing user name,
- * 4. Sign up,
- * 5. Sign up during CNW process,
- * 6. Login in using not verified user
+ * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
+ * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
+ * verified user
  */
 public class SignUpTests extends NewTestTemplate {
 
+  private static String userName;
+  private static String password;
   Credentials credentials = config.getCredentials();
   File captchaFile = config.getCaptchaFile();
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
-    signUp.enterBirthDate(
-        PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-        PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR
-    );
+    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
   }
@@ -56,7 +54,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_002", "SignUp"})
   public void SignUp_002_tooYoungUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
@@ -65,23 +63,22 @@ public class SignUpTests extends NewTestTemplate {
         // +1 because months are numerated from 0
         Integer.toString(currentDate.get(Calendar.MONTH) + 1),
         Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE)
-    );
+        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
   @Test(groups = {"SignUp_003", "SignUp"})
   public void SignUp_003_existingUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void SignUp_004_signup_SOC_599() {
+  public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
@@ -91,20 +88,15 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(email);
     signUp.typeUserName(userName);
     signUp.typePassword(password);
-    signUp.enterBirthDate(
-        PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-        PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR
-    );
+    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
-    ConfirmationPageObject
-        confirmPageAlmostThere =
+    ConfirmationPageObject confirmPageAlmostThere =
         almostTherePage.enterActivationLink(email, emailPassword, wikiURL);
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
-    UserProfilePageObject
-        userProfile =
+    UserProfilePageObject userProfile =
         confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
     userProfile.verifyUserLoggedIn(userName);
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
@@ -115,7 +107,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void SignUp_005_forced_signup_CNW_QAART_513() {
+  public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
     CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -133,15 +125,11 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(email);
     signUp.typeUserName(userName);
     signUp.typePassword(password);
-    signUp.enterBirthDate(
-        PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-        PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR
-    );
+    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
-    ConfirmationPageObject
-        confirmPageAlmostThere =
+    ConfirmationPageObject confirmPageAlmostThere =
         almostTherePage.enterActivationLink(email, emailPassword, wikiCorporateURL);
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
@@ -150,9 +138,9 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser_SOC_603() {
+  public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
@@ -162,51 +150,62 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(email);
     signUp.typeUserName(userName);
     signUp.typePassword(password);
-    signUp.enterBirthDate(
-        PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-        PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR
-    );
+    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.login(userName, password);
-    almostTherePage.verifyAlmostTherePage();
+    almostTherePage.verifyUserLoggedIn(userName);
   }
 
   /**
-   * pre-conditions: Facebook_001 test removes Wikia and Wikia Development
-   * App from Facebook Facebook_001 test stored in TestCases/FacebookTests/FacebookTests.java path
-   * Steps: 1. Log in to Facebook 2. Open finish signup with facebook modal 3. create and
-   * verify account 4. disconnect created account from facebook
+   * pre-conditions: Facebook_001 test removes Wikia and Wikia Development App from Facebook
+   * Facebook_001 test stored in TestCases/FacebookTests/FacebookTests.java path Steps: 1. Log in to
+   * Facebook 2. Open finish signup with facebook modal 3. create and verify account 4. disconnect
+   * created account from facebook
    */
-  @Test(
-      groups = {"SignUp_007", "SignUp", "Modals"},
-      dependsOnGroups = "Facebook_001",
-      enabled = true
-  )
+  @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
+        credentials.passwordFB);
     WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB;
     userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
-    SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
     fbModal.acceptWikiaAppPolicy();
-    String userName = "QA" + signUp.getTimeStamp();
-    String password = "Pass" + signUp.getTimeStamp();
+    userName = "QA" + signUp.getTimeStamp();
+    password = "Pass" + signUp.getTimeStamp();
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
-    signUp.verifyUserLoggedIn(userName);
-    signUp.logOut(wikiURL);
-    signUp.logInCookie(userName, password, wikiURL);
-    signUp.verifyUserLoggedIn(userName);
-    PreferencesPageObject preferences;
-    preferences = signUp.openSpecialPreferencesPage(wikiURL);
-    preferences.selectTab(tabNames.FACEBOOK);
-    preferences.disconnectFromFacebook();
+    base.openWikiPage(wikiURL);
+    base.appendToUrl("noads=1");
+    base.verifyUserLoggedIn(userName);
+    base.logOut(wikiURL);
+  }
+
+  @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
+  public void disconnectFromFB() {
+    startBrowser();
+    try {
+      if (userName != null) {
+        WikiBasePageObject base = new WikiBasePageObject(driver);
+        base.openWikiPage(wikiURL);
+        base.appendToUrl("noads=1");
+        base.logInCookie(userName, password, wikiURL);
+        base.verifyUserLoggedIn(userName);
+        PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
+        preferences.selectTab(tabNames.FACEBOOK);
+        preferences.disconnectFromFacebook();
+      }
+    } finally {
+      stopBrowser();
+    }
   }
 }

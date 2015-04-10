@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,8 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
-import org.testng.annotations.Test;
-//https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
+// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Upload file using Special:NewFiles page 2. Upload file using
@@ -39,12 +41,10 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
-  @Test(
-      groups = {"ImageServing_002", "ImageServing"},
-      dataProviderClass = FileDataProvider.class,
-      dataProvider = "getFileNames"
-  )
-  public void ImageServing_002_SpecialUploadTest_DAT_2564(String fileName) {
+  @RelatedIssue(issueID = "DAT-2564")
+  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
+      dataProvider = "getFileNames")
+  public void ImageServing_002_SpecialUploadTest(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);

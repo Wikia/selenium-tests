@@ -1,17 +1,12 @@
 package com.wikia.webdriver.common.logging;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -30,12 +25,19 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -45,6 +47,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static String screenPath = screenDirPath + "screenshot";
   private static String logFileName = "log.html";
   private static String logPath = reportPath + logFileName;
+  private static String jiraPath = "https://wikia-inc.atlassian.net/browse/";
   private By lastFindBy;
   private WebDriver driver;
 
@@ -175,9 +178,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder = new StringBuilder();
     String testName = result.getName().toString();
     String className = result.getTestClass().getName().toString();
-    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>"
-        + "<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
-        + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+
+    Method testMethod = result.getMethod().getConstructorOrMethod().getMethod();
+
+    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
+    if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
+      String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
+      String jiraUrl = jiraPath + issueID;
+      builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
+                     + "<a href=\"" + jiraUrl + "\">" + issueID + "</a>"
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+    } else {
+      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+    }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     System.out.println(className + " " + testName);
   }
@@ -197,6 +211,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (driver == null) {
       driver = NewDriverProvider.getWebDriver();
     }
+
     if (Global.LOG_ENABLED) {
       try {
         new Shooter().savePageScreenshot(screenPath + imageCounter, driver);

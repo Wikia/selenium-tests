@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -51,10 +52,11 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     article.verifyArticleTitle(articleTitle);
   }
 
+  @RelatedIssue(issueID = "QAART-354")
   @Test(
       groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke1"}
   )
-  public void ArticleCRUDUser_003_addDropdown_QAART_354() {
+  public void ArticleCRUDUser_003_addDropdown() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;

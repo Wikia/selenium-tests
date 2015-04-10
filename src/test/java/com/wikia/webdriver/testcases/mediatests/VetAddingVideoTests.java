@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -21,8 +22,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @RelatedIssue(issueID = "QAART-481")
   @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
-  public void VetAddVideo_001_MessageWallProvider_QAART_481() {
+  public void VetAddVideo_001_MessageWallProvider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);

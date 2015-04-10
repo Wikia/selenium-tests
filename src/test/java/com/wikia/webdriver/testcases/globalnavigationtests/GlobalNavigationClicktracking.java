@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.events.EventsGlobalNavigation;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -30,9 +31,10 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      * trigger suggestion mouse click on suggestion - search-suggest click
      * search after suggestion - search-after-suggest-button clear suggestion
      */
+    @RelatedIssue(issueID = "QAART-555")
     @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
             "GlobalNav" }, enabled = false)
-    public void search_QAART_555() {
+    public void search() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openMainPage(wikiURL);
         NavigationBar navbar = new NavigationBar(driver);

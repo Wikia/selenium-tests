@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -24,8 +25,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   String wikiDomain;
   Credentials credentials = config.getCredentials();
 
+  @RelatedIssue(issueID = "QAART-541")
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
-  public void CreateNewWiki_001_createDeleteWiki_QAART_541() {
+  public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
