@@ -3,6 +3,7 @@
  */
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -33,11 +34,12 @@ public class VideoSuggestionsTests extends NewTestTemplate {
     };
   }
 
+  @RelatedIssue(issueID = "QAART-536")
   @Test(
       groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"},
       dataProvider = "wikis"
   )
-  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed_QAART_536(String wikiName, String articleName) {
+  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
     wikiURL = urlBuilder.getUrlForWiki(wikiName);
 
     ArticlePageObject article = new ArticlePageObject(driver);
