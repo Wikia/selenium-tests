@@ -6,6 +6,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -22,9 +23,9 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"},
-        enabled = false)
-  public void SpecialVideos_001_Provider_MAIN_4294() {
+  @RelatedIssue(issueID = "MAIN-4294")
+  @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"}, enabled = false)
+  public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("review");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
