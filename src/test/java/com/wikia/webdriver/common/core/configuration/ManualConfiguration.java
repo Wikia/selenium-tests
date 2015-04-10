@@ -90,4 +90,9 @@ public class ManualConfiguration extends AbstractConfiguration {
   public String getDeviceName() {
     return config.get("device-name");
   }
+
+  @Override
+  public String getDisableFlash() {
+    return config.get("disable-flash");
+  }
 }

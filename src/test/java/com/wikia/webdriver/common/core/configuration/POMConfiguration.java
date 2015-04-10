@@ -93,4 +93,9 @@ public class POMConfiguration extends AbstractConfiguration {
   public String getDeviceName() {
     return System.getProperty("device-name");
   }
+
+  @Override
+  public String getDisableFlash() {
+    return System.getProperty("disable-flash");
+  }
 }

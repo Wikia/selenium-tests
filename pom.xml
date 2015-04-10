@@ -203,6 +203,7 @@
 						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
+						<disable-flash>${disable-flash}</disable-flash>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>${testSuite}</suiteXmlFile>

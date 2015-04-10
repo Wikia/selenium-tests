@@ -33,6 +33,8 @@ public abstract class AbstractConfiguration {
 
   public abstract String getCredentialsFilePath();
 
+  public abstract String getDisableFlash();
+
   public Credentials getCredentials() {
     return new Credentials(new File(this.getCredentialsFilePath()));
   }
