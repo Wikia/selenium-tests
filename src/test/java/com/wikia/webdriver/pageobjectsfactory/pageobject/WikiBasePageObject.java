@@ -812,13 +812,14 @@ public class WikiBasePageObject extends BasePageObject {
     String newPassword = MailFunctions.getPasswordFromEmailContent((
                                                                        MailFunctions
                                                                            .getFirstEmailContent(
-                                                                               email, password
+                                                                               email, password,
+                                                                               "Forgotten password request"
                                                                            )
                                                                    )
     );
     PageObjectLogging.log(
         "NewPasswordRecived",
-        "New password recived from mail",
+        "New password recived from mail: " + newPassword,
         true
     );
 
