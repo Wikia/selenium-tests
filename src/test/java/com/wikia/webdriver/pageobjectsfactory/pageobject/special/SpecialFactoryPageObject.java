@@ -81,17 +81,9 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
     Assertion.assertEquals(expectedValue, variableValue.getText());
   }
 
-  public String getVariableDefaultValue(WikiFactoryVariables variableName) {
-    selectVariableByVisibleText(variableName);
-    return defaultVariableValue.getText();
-  }
-
   private void selectVariableByVisibleText(WikiFactoryVariables variableName) {
     Select select = new Select(variableList);
     select.selectByVisibleText(variableName.toString());
   }
 
-  public Object[] getVariableDefaultValueKeys(WikiFactoryVariables wgHighValueCountries) {
-    return extractKeysFromWgVariable(getVariableDefaultValue(wgHighValueCountries));
-  }
 }

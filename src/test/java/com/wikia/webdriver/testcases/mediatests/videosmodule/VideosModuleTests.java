@@ -16,7 +16,6 @@ public class VideosModuleTests extends NewTestTemplate {
    *
    * @author James Sutterfield
    */
-  @RelatedIssue(issueID = "QAART-508")
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
   public void VideosModuleTest_001() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
