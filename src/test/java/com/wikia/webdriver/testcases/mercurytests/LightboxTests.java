@@ -64,7 +64,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT02
   @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_002_SwipeChangeImages() {
+  public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -73,7 +73,28 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
     PageObjectLogging.log("Current image", "is visible", true);
     String currentImageSrc = lightbox.getCurrentImagePath();
-    String nextImageSrc;
+    touchAction.tapOnPointXY(25, 50, 500, 5000);
+    String nextImageSrc = lightbox.getCurrentImagePath();
+    if (currentImageSrc.equals(nextImageSrc)) {
+      PageObjectLogging.log("Change image by tap left edge", "doesn't work", false);
+      failTest = true;
+    } else {
+      PageObjectLogging.log("Change image by tap left edge", "works", true);
+    }
+    currentImageSrc = lightbox.getCurrentImagePath();
+    touchAction.tapOnPointXY(75, 50, 500, 5000);
+    nextImageSrc = lightbox.getCurrentImagePath();
+    if (currentImageSrc.equals(nextImageSrc)) {
+      PageObjectLogging.log("Change image by tap right edge", "doesn't work", false);
+      failTest = true;
+    } else {
+      PageObjectLogging.log("Change image by tap right edge", "works", true);
+    }
+    lightbox.clickCloseButton();
+    lightbox.clickGalleryImage(0);
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
+    PageObjectLogging.log("Current image", "is visible", true);
+    currentImageSrc = lightbox.getCurrentImagePath();
     boolean imageChanged = false;
     for (int i = 0; i < 10; ++i) {
       touchAction.swipeFromPointToPoint(70, 50, 20, 50, 300, 5000);
@@ -89,8 +110,6 @@ public class LightboxTests extends NewTestTemplate {
       PageObjectLogging.log("Change image by swipe left", "does not work", false);
       failTest = true;
     }
-    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
-    PageObjectLogging.log("Current image", "is visible", true);
     currentImageSrc = lightbox.getCurrentImagePath();
     imageChanged = false;
     for (int i = 0; i < 10; ++i) {
@@ -107,6 +126,7 @@ public class LightboxTests extends NewTestTemplate {
       PageObjectLogging.log("Change image by swipe right", "does not work", false);
       failTest = true;
     }
+
     base.failTest(failTest);
   }
 
@@ -186,36 +206,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT05
   @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_005_TapOnEdgesChangeImages() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.clickGalleryImage(0);
-    String currentImageSrc = lightbox.getCurrentImagePath();
-    touchAction.tapOnPointXY(25, 50, 500, 5000);
-    String nextImageSrc = lightbox.getCurrentImagePath();
-    if (currentImageSrc.equals(nextImageSrc)) {
-      PageObjectLogging.log("Change image by tap", "left edge doesn't work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Change image by tap", "left edge works", true);
-    }
-    currentImageSrc = lightbox.getCurrentImagePath();
-    touchAction.tapOnPointXY(75, 50, 500, 5000);
-    nextImageSrc = lightbox.getCurrentImagePath();
-    if (currentImageSrc.equals(nextImageSrc)) {
-      PageObjectLogging.log("Change image by tap", "right edge doesn't work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Change image by tap", "right edge works", true);
-    }
-    base.failTest(failTest);
-  }
-
-  // MT06
-  @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_006_BackButtonCloseLightbox() {
+  public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
@@ -227,9 +218,9 @@ public class LightboxTests extends NewTestTemplate {
     base.failTest(failTest);
   }
 
-  // MT07
-  @Test(groups = {"MercuryLightboxTest_007", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_007_MovingOnZoomedImage() {
+  // MT06
+  @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
+  public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
