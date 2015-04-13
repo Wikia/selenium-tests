@@ -93,7 +93,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = base.openArticleByName(wikiURL, "Article to edit by URL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
