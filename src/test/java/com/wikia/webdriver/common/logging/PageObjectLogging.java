@@ -97,7 +97,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+                                           + "</td><td>" + imageAsBase64
+                                           + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   private static void logJSError(WebDriver driver) {
@@ -199,8 +200,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void onTestSuccess(ITestResult result) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>STOP LOGGING METHOD  "
-        + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
-        + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
+                   + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
+                   + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -305,5 +306,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
+  }
+
+  public static void appendTextToLogFile(StringBuilder builder) {
+    CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 }

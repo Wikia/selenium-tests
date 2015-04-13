@@ -1,10 +1,11 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,91 +19,108 @@ import java.util.concurrent.TimeUnit;
 public class SEOTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki("muppet");
-    BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
+
+  private boolean failTest = false;
 
   // SEOT01
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_001_CheckTypeMetaTag() {
+  @RelatedIssue(issueID = "CONCF-412")
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
+  public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
+    SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgTypeWebsite(), "og:type meta tag is wrong");
+    if (seo.isLinkRelCanonical()) {
+      PageObjectLogging.log("link[rel='canonical']", "contains current url", true);
+    } else {
+      PageObjectLogging.log("link[rel='canonical']", "contains wrong url", false);
+      failTest = true;
+    }
+    if (seo.isOgFbApp()) {
+      PageObjectLogging.log("meta[property='fb:app_id']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='fb:app_id']", "is empty", false);
+      failTest = true;
+    }
+    if (seo.isOgImage()) {
+      PageObjectLogging.log("meta[property='og:image']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:image']", "is empty", false);
+      failTest = true;
+    }
+    if (seo.isOgUrlTag()) {
+      PageObjectLogging.log("meta[property='og:url']", "contains current url", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:url']", "contains wrong url", false);
+      failTest = true;
+    }
+    if (seo.isOgDescription()) {
+      PageObjectLogging.log("meta[property='og:description']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is empty", false);
+      failTest = true;
+    }
+    if (seo.isOgSiteName()) {
+      PageObjectLogging.log("meta[property='og:site_name']", "is filled", false);
+      failTest = true;
+    } else {
+      PageObjectLogging.log("meta[property='og:site_name']", "is empty", true);
+    }
+    if (seo.isOgTitleWithWiki()) {
+      PageObjectLogging.log("meta[property='og:title']", "contains Wiki", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:title']", "is wrong", false);
+      failTest = true;
+    }
+    if (seo.isOgTypeWebsite()) {
+      PageObjectLogging.log("meta[property='og:type']", "contains website", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:type']", "is wrong", false);
+      failTest = true;
+    }
+    String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
-    Assertion.assertTrue(openGraph.isOgTypeArticle(), "og:type meta tag is wrong");
-  }
-
-  // SEOT02
-  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_002_CheckTitleMetaTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgTitleMainPage(), "og:title meta tag is wrong");
-    leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
-    Assertion.assertTrue(openGraph.isOgTitleArticlePage(), "og:title meta tag is wrong");
-  }
-
-  // SEOT03
-  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_003_CheckSiteNameTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertFalse(openGraph.isOgSiteName(), "og:site_name is in DOM");
-    leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
-    Assertion.assertTrue(openGraph.isOgSiteName(), "og:site_name isn't in DOM");
-  }
-
-  // SEOT04
-  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_004_CheckDescriptionTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    String lastDesc = openGraph.getDescription();
-    leftNav.clickSearchButton();
-    leftNav.clickRandomPage();
-    Assertion.assertTrue(openGraph.isOgDescription(), "og:description isn't in DOM");
-    Assertion.assertFalse(lastDesc.equals(openGraph.getDescription()),
-                          "og:description tags are the same");
-  }
-
-  // SEOT05
-  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_005_CheckUrlTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgUrlTag(), "og:url meta tag is wrong");
-  }
-
-  // SEOT06
-  @Test(groups = {"MercurySEOTest_006", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_006_CheckImageTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgImage(), "og:image is wrong");
-  }
-
-  // SEOT07
-  @Test(groups = {"MercurySEOTest_007", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_007_CheckFbAppTag() {
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    Assertion.assertTrue(openGraph.isOgFbApp(), "fb:app_id is wrong");
+    leftNav.clickNavListElement(0);
+    base.waitForLoadingSpinnerToFinishReloadingPage();
+    PageObjectLogging.appendTextToLogFile(new StringBuilder()
+                                              .append(
+                                                  "<tr class=\"warning\"><td>Site status</td>"
+                                                  + "<td>Page was reloaded asynchronously</td>"
+                                                  + "<td> <br/> &nbsp;</td></tr>"));
+    if (seo.isOgDescription()) {
+      PageObjectLogging.log("meta[property='og:description']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is empty", false);
+      failTest = true;
+    }
+    if (lastDesc.equals(seo.getDescription())) {
+      PageObjectLogging.log("meta[property='og:description']", "does not changed", false);
+      failTest = true;
+    } else {
+      PageObjectLogging.log("meta[property='og:description']", "is different", true);
+    }
+    if (seo.isOgSiteName()) {
+      PageObjectLogging.log("meta[property='og:site_name']", "is filled", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:site_name']", "is empty", false);
+      failTest = true;
+    }
+    if (seo.isOgTitleWithWiki()) {
+      PageObjectLogging.log("meta[property='og:title']", "contains Wiki", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:title']", "is wrong", false);
+      failTest = true;
+    }
+    if (seo.isOgTypeArticle()) {
+      PageObjectLogging.log("meta[property='og:type']", "contains article", true);
+    } else {
+      PageObjectLogging.log("meta[property='og:type']", "is wrong", false);
+      failTest = true;
+    }
+    base.failTest(failTest);
   }
 }
