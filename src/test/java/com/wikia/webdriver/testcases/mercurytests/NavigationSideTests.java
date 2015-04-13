@@ -24,7 +24,6 @@ public class NavigationSideTests extends NewTestTemplate {
 
   private boolean failTest = false;
 
-  private final static int WAIT_TIME = 5000;
   private final static String SEARCH_PASS = "test";
   private final static String SEARCH_FAIL = "te";
 
@@ -117,7 +116,7 @@ public class NavigationSideTests extends NewTestTemplate {
     PageObjectLogging.log("Search suggestions", "are displayed", true);
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
-    base.waitMilliseconds(WAIT_TIME, "waitMilliseconds");
+    base.waitMilliseconds(5000, "waitMilliseconds");
     if (oldUrl.equals(driver.getCurrentUrl())) {
       PageObjectLogging.log("Redirection", "does not work", false);
       failTest = true;

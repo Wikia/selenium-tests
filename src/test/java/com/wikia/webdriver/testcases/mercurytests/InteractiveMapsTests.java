@@ -29,8 +29,6 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
   private boolean failTest = false;
 
-  private static final int WAIT_TIME = 5000;
-
   // IMAPT01
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
@@ -84,7 +82,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     PageObjectLogging.log("Zoom in button", "is disabled", true);
     File beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomOut();
-    base.waitMilliseconds(WAIT_TIME, "Wait after zoom out");
+    base.waitMilliseconds(5000, "Wait after zoom out");
     File afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
@@ -93,7 +91,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     PageObjectLogging.log("Zoom in button", "is enabled", true);
     beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomIn();
-    base.waitMilliseconds(WAIT_TIME, "Wait after zoom in");
+    base.waitMilliseconds(5000, "Wait after zoom in");
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
@@ -101,7 +99,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
     PageObjectLogging.log("Zoom in button", "is disabled", true);
     beforeZooming = new Shooter().capturePage(driver);
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, WAIT_TIME);
+    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom out doesn't work");
@@ -109,7 +107,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
     PageObjectLogging.log("Zoom in button", "is enabled", true);
     beforeZooming = new Shooter().capturePage(driver);
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, WAIT_TIME);
+    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
     afterZooming = new Shooter().capturePage(driver);
     Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
                           "Zoom in doesn't work");
@@ -134,8 +132,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickFilterBox();
     Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
     PageObjectLogging.log("Filter box", "is expanded", true);
-    base.waitMilliseconds(WAIT_TIME, "Wait fo filterbox to be scrollable");
-    touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, WAIT_TIME);
+    base.waitMilliseconds(5000, "Wait fo filterbox to be scrollable");
+    touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
     if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) {
       PageObjectLogging.log("Scrolling in filter box", "does not work", false);
