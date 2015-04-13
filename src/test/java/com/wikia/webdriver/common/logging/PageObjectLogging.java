@@ -211,6 +211,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       driver = NewDriverProvider.getWebDriver();
     }
 
+    imageCounter += 1;
     if (Global.LOG_ENABLED) {
       try {
         new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
@@ -230,7 +231,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
           + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
-      imageCounter += 1;
       logJSError(driver);
       onTestSuccess(result);
     }
