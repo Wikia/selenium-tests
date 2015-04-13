@@ -61,16 +61,19 @@ public class BasePageObject extends MobileBasePageObject {
     try {
       waitForElementByElement(loadingSpinner);
       waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
-    } catch (TimeoutException e){}
+    } catch (TimeoutException e) {
+    }
   }
 
   /**
    * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
-   * @param element WebElement
-   * @param timeOutInSec int
+   *
+   * @param element            WebElement
+   * @param timeOutInSec       int
    * @param checkOutInMilliSec int
    */
-  public void waitForElementVisibleByElementCustomTimeOut(WebElement element, int timeOutInSec, int checkOutInMilliSec) {
+  public void waitForElementVisibleByElementCustomTimeOut(WebElement element, int timeOutInSec,
+                                                          int checkOutInMilliSec) {
     WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
     driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
     try {

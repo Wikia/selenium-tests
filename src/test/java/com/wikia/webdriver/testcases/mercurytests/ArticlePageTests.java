@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,7 +32,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
   // APT01
   @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTest_001_LogoSearchTopContributorsFooterElementsAreVisible() {
+  public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -114,7 +113,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
   // APT04
   @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTest_004_ChevronRotation() {
+  public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);

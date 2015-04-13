@@ -32,12 +32,6 @@ public class LightboxTests extends NewTestTemplate {
 
   private boolean failTest = false;
 
-  private static final String EDGE_LEFT = "left";
-  private static final String EDGE_RIGHT = "right";
-
-  private static final String ZOOM_METHOD_GESTURE = "gesture";
-  private static final String ZOOM_METHOD_TAP = "tap";
-
   private static final String DIRECTION_LEFT = "left";
   private static final String DIRECTION_RIGHT = "right";
   private static final String DIRECTION_UP = "up";
@@ -45,7 +39,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_001_LightboxOpenClose() {
+  public void MercuryLightboxTest_001_Open_Close() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
@@ -118,7 +112,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT03
   @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_003_ZoomByGestureAndDoubleTap() {
+  public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -171,7 +165,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT04
   @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_004_UIShowHide() {
+  public void MercuryLightboxTest_004_UIShow_UIHide() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
@@ -192,7 +186,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT05
   @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"})
-  public void MercuryLightboxTest_005_TapOnEdgeChangeImage() {
+  public void MercuryLightboxTest_005_TapOnEdgesChangeImages() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
     PerformTouchAction touchAction = new PerformTouchAction(driver);

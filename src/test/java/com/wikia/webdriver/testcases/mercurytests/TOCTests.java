@@ -29,7 +29,7 @@ public class TOCTests extends NewTestTemplate {
 
   // TOCT01
   @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
-  public void MercuryTOCTest_001_TOCPresenceListRedirection() {
+  public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);

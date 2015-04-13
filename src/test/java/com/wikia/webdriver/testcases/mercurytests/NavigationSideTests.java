@@ -30,7 +30,7 @@ public class NavigationSideTests extends NewTestTemplate {
 
   // NST01
   @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
-  public void MercuryNavigationSideTest_001_OpenNavigateClose() {
+  public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
@@ -71,7 +71,7 @@ public class NavigationSideTests extends NewTestTemplate {
 
   // NST02
   @Test(groups = {"MercuryNavigationSideTest_002", "MercuryNavigationSideTests", "Mercury"})
-  public void MercuryNavigationSideTest_002_SearchInvalidSuggestionCancel() {
+  public void MercuryNavigationSideTest_002_SearchInvalidSuggestion_Cancel() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);

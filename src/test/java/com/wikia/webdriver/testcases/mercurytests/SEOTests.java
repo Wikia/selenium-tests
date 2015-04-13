@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,7 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.Navigation
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -32,7 +29,7 @@ public class SEOTests extends NewTestTemplate {
   // SEOT01
   @RelatedIssue(issueID = "CONCF-412")
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
-  public void MercurySEOTest_001_CheckMetaTagsAndCanonicalLink() {
+  public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     SEOPageObject seo = new SEOPageObject(driver);

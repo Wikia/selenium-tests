@@ -36,7 +36,7 @@ public class SmartBannerTests extends NewTestTemplate {
 
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
-  public void MercurySmartBannerTest_001_ButtonNameFixPositionClose() {
+  public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
@@ -78,7 +78,6 @@ public class SmartBannerTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      //base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[i]);
       driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
       banner = new SmartBannerComponentObject(driver);
       if (banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) {

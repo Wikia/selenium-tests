@@ -31,14 +31,14 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT01
   @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTest_001_CommentsListAvatarUsernameTimeStampContent() {
+  public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
-    Assertion.assertTrue(comments.isCommmentsListCollapsed(), "Comments are expanded");
+    Assertion.assertTrue(comments.isCommentsListCollapsed(), "Comments are expanded");
     PageObjectLogging.log("Comments list", "is collapsed", true);
     comments.clickCommentsHeader();
-    Assertion.assertFalse(comments.isCommmentsListCollapsed(), "Comments are collapsed");
+    Assertion.assertFalse(comments.isCommentsListCollapsed(), "Comments are collapsed");
     PageObjectLogging.log("Comments list", "is expanded", true);
     if (comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE) {
       PageObjectLogging.log("Number of comments per page", "is correct", true);
@@ -75,7 +75,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT02
   @Test(groups = {"MercuryCommentsTest_002", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTest_002_CommentsCounterNextPreviousButton() {
+  public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -136,7 +136,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT04
   @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTest_004_TapOnUserRedirect() {
+  public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -154,7 +154,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT05
   @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
-  public void MercuryCommentsTest_005_ImagesAndVideosAreDisplayed() {
+  public void MercuryCommentsTest_005_Images_Videos() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);

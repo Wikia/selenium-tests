@@ -33,7 +33,7 @@ public class TableOfContentPageObject extends BasePageObject {
   public boolean isTOCDisplayed() {
     try {
       waitForElementVisibleByElementCustomTimeOut(tocAll, 5, 1000);
-    } catch(TimeoutException e) {
+    } catch (TimeoutException e) {
       return false;
     }
     return true;

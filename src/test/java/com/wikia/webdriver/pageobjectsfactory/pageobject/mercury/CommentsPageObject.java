@@ -114,7 +114,7 @@ public class CommentsPageObject extends BasePageObject {
     return commentsReplies.size();
   }
 
-  public boolean isCommmentsListCollapsed() throws WebDriverException {
+  public boolean isCommentsListCollapsed() throws WebDriverException {
     if (commentsHeader.getAttribute("class") == null) {
       throw new WebDriverException("Expected String but got null");
     }
