@@ -81,6 +81,7 @@
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationScrollAction"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationSearch"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationWikiaLogo"/>
+            <class name="com.wikia.webdriver.testcases.heromoduletests.HeroModuleTests"/>
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
