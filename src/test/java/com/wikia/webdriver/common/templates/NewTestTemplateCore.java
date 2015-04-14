@@ -26,7 +26,7 @@ import org.testng.annotations.Listeners;
 import java.io.File;
 import java.lang.reflect.Method;
 
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;
