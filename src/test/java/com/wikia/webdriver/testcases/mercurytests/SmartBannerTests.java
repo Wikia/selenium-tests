@@ -43,32 +43,21 @@ public class SmartBannerTests extends NewTestTemplate {
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
     Assertion.assertTrue(banner.isSmartBannerVisible(), "Smart banner is closed");
-    if (config.getPlatform().equals("ANDROID")) {
+    if(config.getPlatform().equals("ANDROID")) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
     }
-    if (banner.getButtonName().equals(buttonName)) {
-      PageObjectLogging.log("Button name", "is correct", true);
-    } else {
-      PageObjectLogging.log("Button name", "is incorrect", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Button name", "is correct", "is incorrect", banner.getButtonName().equals(buttonName));
+    if(! banner.getButtonName().equals(buttonName)) failTest = true;
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
-    if (lastSmartBannerPosition == banner.getSmartBannerPosition()) {
-      PageObjectLogging.log("Position", "is fixed", true);
-    } else {
-      PageObjectLogging.log("Position", "is floated", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Position", "is fixed", "is floated",
+                          lastSmartBannerPosition == banner.getSmartBannerPosition());
+    if(! (lastSmartBannerPosition == banner.getSmartBannerPosition())) failTest = true;
     banner.clickCloseButton();
-    if (banner.isSmartBannerVisible()) {
-      PageObjectLogging.log("Smart banner", "is visible", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Smart banner", "is closed", true);
-    }
+    PageObjectLogging.log("Smart banner", "is closed", "is visible", ! banner.isSmartBannerVisible());
+    if(banner.isSmartBannerVisible()) failTest = true;
     base.failTest(failTest);
   }
 
@@ -80,18 +69,10 @@ public class SmartBannerTests extends NewTestTemplate {
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
       driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
       banner = new SmartBannerComponentObject(driver);
-      if (banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) {
-        PageObjectLogging.log("Smart banner color", "is correct", true);
-      } else {
-        PageObjectLogging.log("Smart banner color", "is wrong", false);
-        failTest = true;
-      }
-      if (banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i])) {
-        PageObjectLogging.log("Smart banner button color", "is correct", true);
-      } else {
-        PageObjectLogging.log("Smart banner button color", "is wrong", false);
-        failTest = true;
-      }
+      PageObjectLogging.log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i]));
+      if(! banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) failTest = true;
+      PageObjectLogging.log("Smart banner button color", "is correct", "is wrong", banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i]));
+      if(! banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i])) failTest = true;
     }
     base.failTest(failTest);
   }

@@ -38,34 +38,19 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
     PageObjectLogging.log("Map modal", "is visible", true);
-    if (maps.isMapIdInUrl()) {
-      PageObjectLogging.log("Url", "match pattern ?map=", true);
-    } else {
-      PageObjectLogging.log("Url", "does not match pattern ?map=", false);
-      failTest = true;
-    }
-    if (maps.isTextInMapTitleHeader()) {
-      PageObjectLogging.log("Map title in header", "is displayed", true);
-    } else {
-      PageObjectLogging.log("Map title in header", "is not displayed", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Url", "match pattern ?map=", "does not match pattern ?map=", maps.isMapIdInUrl());
+    if (! maps.isMapIdInUrl()) failTest = true;
+    PageObjectLogging.log("Map title in header", "is displayed", "is not displayed",
+                          maps.isTextInMapTitleHeader());
+    if (! maps.isTextInMapTitleHeader()) failTest = true;
     maps.switchToMapFrame();
     maps.clickPin();
-    if (maps.isPinPopUp()) {
-      PageObjectLogging.log("Pin popup", "appears", true);
-    } else {
-      PageObjectLogging.log("Pin popup", "does not appear", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Pin popup", "appears", "does not appear", maps.isPinPopUp());
+    if (! maps.isPinPopUp()) failTest = true;
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
-    if (maps.isMapModalVisible()) {
-      PageObjectLogging.log("Map modal", "is opened", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Map modal", "is closed", true);
-    }
+    PageObjectLogging.log("Map modal", "is closed", "is opened", ! maps.isMapModalVisible());
+    if (maps.isMapModalVisible()) failTest = true;
     base.failTest(failTest);
   }
 
@@ -135,12 +120,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     base.waitMilliseconds(5000, "Wait fo filterbox to be scrollable");
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) {
-      PageObjectLogging.log("Scrolling in filter box", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Scrolling in filter box", "works", true);
-    }
+    PageObjectLogging.log("Scrolling in filter box", "works", "does not work", ! new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling));
+    if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) failTest = true;
     base.failTest(failTest);
   }
 }

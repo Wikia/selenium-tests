@@ -38,18 +38,11 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickSearchButton();
     Assertion.assertTrue(nav.isNavMenuVisible(), "Navigation menu isn't visible");
     PageObjectLogging.log("Navigation menu", "is visible", true);
-    if (nav.isNavListElementEllipsized(0)) {
-      PageObjectLogging.log("Link without chevron", "is ellipsized", true);
-    } else {
-      PageObjectLogging.log("Link without chevron", "is not ellipsized", false);
-      failTest = true;
-    }
-    if (nav.isNavListElementEllipsized(1)) {
-      PageObjectLogging.log("Link with chevron", "is ellipsized", true);
-    } else {
-      PageObjectLogging.log("Link with chevron", "is not ellipsized", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Link without chevron", "is ellipsized", "is not ellipsized", nav.isNavListElementEllipsized(0));
+    if (! nav.isNavListElementEllipsized(0)) failTest = true;
+    PageObjectLogging.log("Link with chevron", "is ellipsized", "is not ellipsized",
+                          nav.isNavListElementEllipsized(1));
+    if (! nav.isNavListElementEllipsized(1)) failTest = true;
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
     PageObjectLogging.log("Back link", "is hidden", true);
     nav.clickNavListElement(1);
@@ -59,12 +52,8 @@ public class NavigationSideTests extends NewTestTemplate {
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
     PageObjectLogging.log("Back link", "works", true);
     nav.clickOverlay();
-    if (nav.isNavMenuVisible()) {
-      PageObjectLogging.log("Navigation menu", "is visible", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Navigation menu", "is hidden", true);
-    }
+    PageObjectLogging.log("Navigation menu", "is hidden", "is visible", ! nav.isNavMenuVisible());
+    if (nav.isNavMenuVisible()) failTest = true;
     base.failTest(failTest);
   }
 
@@ -81,25 +70,14 @@ public class NavigationSideTests extends NewTestTemplate {
     Assertion.assertTrue(searchObject.isResultFieldVisible(), "Result field is hidden");
     PageObjectLogging.log("Result field", "is visible", true);
     searchObject.typeInSearchField(SEARCH_FAIL);
-    if (searchObject.isSuggestionListDisplayed()) {
-      PageObjectLogging.log("Search suggestions", "are displayed", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Search suggestions", "are hidden", true);
-    }
+    PageObjectLogging.log("Search suggestions", "are hidden", "are displayed",
+                          !searchObject.isSuggestionListDisplayed());
+    if (searchObject.isSuggestionListDisplayed()) failTest = true;
     searchObject.clickCancelButton();
-    if (searchObject.isMenuFieldVisible()) {
-      PageObjectLogging.log("Menu field", "is visible", true);
-    } else {
-      PageObjectLogging.log("Menu field", "is hidden", false);
-      failTest = true;
-    }
-    if (searchObject.isResultFieldVisible()) {
-      PageObjectLogging.log("Result field", "is visible", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Result field", "is hidden", true);
-    }
+    PageObjectLogging.log("Menu field", "is visible", "is hidden", searchObject.isMenuFieldVisible());
+    if (! searchObject.isMenuFieldVisible()) failTest = true;
+    PageObjectLogging.log("Result field", "is hidden", "is visible", ! searchObject.isResultFieldVisible());
+    if (searchObject.isResultFieldVisible()) failTest = true;
     base.failTest(failTest);
   }
 
@@ -117,12 +95,8 @@ public class NavigationSideTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
     base.waitMilliseconds(5000, "waitMilliseconds");
-    if (oldUrl.equals(driver.getCurrentUrl())) {
-      PageObjectLogging.log("Redirection", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Redirection", "works", true);
-    }
+    PageObjectLogging.log("Redirection", "works", "does not work", ! oldUrl.equals(driver.getCurrentUrl()));
+    if (oldUrl.equals(driver.getCurrentUrl())) failTest = true;
     base.failTest(failTest);
   }
 
@@ -136,12 +110,8 @@ public class NavigationSideTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     nav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    if (oldUrl.equals(driver.getCurrentUrl())) {
-      PageObjectLogging.log("Redirection", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Redirection", "works", true);
-    }
+    PageObjectLogging.log("Redirection", "works", "does not work", ! oldUrl.equals(driver.getCurrentUrl()));
+    if (oldUrl.equals(driver.getCurrentUrl())) failTest = true;
     base.failTest(failTest);
   }
 }

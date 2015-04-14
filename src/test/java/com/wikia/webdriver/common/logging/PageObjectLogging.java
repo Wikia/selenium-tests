@@ -69,6 +69,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, false);
   }
 
+  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail, boolean success) {
+    String description = descriptionOnFail;
+    if(success) {
+      description = descriptionOnSuccess;
+    }
+    log(command, description, success, false);
+  }
+
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
     String escapedDescription = escapeHtml(description);
 

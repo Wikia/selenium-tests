@@ -35,30 +35,19 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
     PageObjectLogging.log("TOC", "is displayed", true);
-    if (toc.isTOCUnderArticleName()) {
-      PageObjectLogging.log("TOC position", "is under article name", true);
-    } else {
-      PageObjectLogging.log("TOC position", "is not under article name", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("TOC position", "is under article name", "is not under article name",
+                          toc.isTOCUnderArticleName());
+    if(! toc.isTOCUnderArticleName()) failTest = true;
     Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
     PageObjectLogging.log("TOC menu", "is collapsed", true);
     toc.clickOnTOC();
     Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu is collapsed");
     PageObjectLogging.log("TOC menu", "is expanded", true);
     toc.clickOnTOCListElement(1);
-    if (toc.isUserMovedToRightSection(1)) {
-      PageObjectLogging.log("TOC redirection", "works", true);
-    } else {
-      PageObjectLogging.log("TOC redirection", "does not work", false);
-      failTest = true;
-    }
-    if (toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)) {
-      PageObjectLogging.log("Header padding", "is correct", true);
-    } else {
-      PageObjectLogging.log("TOC redirection", "is wrong", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("TOC redirection", "works", "does not work", toc.isUserMovedToRightSection(1));
+    if(! toc.isUserMovedToRightSection(1)) failTest = true;
+    PageObjectLogging.log("Header padding", "is correct", "is wrong", toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP));
+    if(! toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)) failTest = true;
     base.failTest(failTest);
   }
 
@@ -68,12 +57,8 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    if (toc.isTOCDisplayed()) {
-      PageObjectLogging.log("TOC", "is displayed", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("TOC", "is hidden", true);
-    }
+    PageObjectLogging.log("TOC", "is hidden", "is displayed", ! toc.isTOCDisplayed());
+    if(toc.isTOCDisplayed()) failTest = true;
     base.failTest(failTest);
   }
 }

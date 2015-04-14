@@ -56,33 +56,27 @@ public class BasePageObject extends MobileBasePageObject {
 
   /**
    * First waits for spinner to be visible and then waits for spinner to be hidden
+   * Spinner presence is optional, when it occurs it must be hidden later
    */
   public void waitForLoadingSpinnerToFinishReloadingPage() {
+    boolean spinnerPresent = false;
     try {
-      waitForElementByElement(loadingSpinner);
-      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+      waitForElementVisibleByElement(loadingSpinner, 4, 1000);
+      spinnerPresent = true;
     } catch (TimeoutException e) {
+      PageObjectLogging.log("Loading spinner", "is not present", true);
+    }
+    if(spinnerPresent) {
+      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
     }
   }
 
+  //TODO: when QAART-576 will be solved, remove that method and all connections
   /**
-   * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
-   *
-   * @param element            WebElement
-   * @param timeOutInSec       int
-   * @param checkOutInMilliSec int
+   * It will fail TestNG if fail=true is set
+   * It is temporary solution for QAART-576
+   * @param fail
    */
-  public void waitForElementVisibleByElementCustomTimeOut(WebElement element, int timeOutInSec,
-                                                          int checkOutInMilliSec) {
-    WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
-    driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
-    try {
-      wait.until(ExpectedConditions.visibilityOf(element));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
   public void failTest(boolean fail) {
     Assertion.assertFalse(fail, "Test logged some errors");
   }
