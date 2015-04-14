@@ -48,10 +48,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static String logFileName = "log.html";
   private static String logPath = reportPath + logFileName;
   private static String jiraPath = "https://wikia-inc.atlassian.net/browse/";
+  private static ArrayList<Boolean> logsResults = new ArrayList<>();
   private By lastFindBy;
   private WebDriver driver;
 
   public static void log(String command, String description, boolean success, WebDriver driver) {
+    logsResults.add(success);
     imageCounter += 1;
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
     CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", driver.getPageSource());
@@ -78,6 +80,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
+    logsResults.add(success);
     String escapedDescription = escapeHtml(description);
 
     String className = success ? "success" : "error";
@@ -121,6 +124,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         CommonUtils.appendTextToFile(logPath, builder.toString());
       }
     }
+  }
+
+  public static List<Boolean> getVerificationStack() {
+    return logsResults;
   }
 
   @Override
@@ -183,6 +190,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestStart(ITestResult result) {
+    logsResults.clear();
     StringBuilder builder = new StringBuilder();
     String testName = result.getName().toString();
     String className = result.getTestClass().getName().toString();
