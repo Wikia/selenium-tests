@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -11,10 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -55,8 +50,8 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   /**
-   * First waits for spinner to be visible and then waits for spinner to be hidden
-   * Spinner presence is optional, when it occurs it must be hidden later
+   * First waits for spinner to be visible and then waits for spinner to be hidden Spinner presence
+   * is optional, when it occurs it must be hidden later
    */
   public void waitForLoadingSpinnerToFinishReloadingPage() {
     boolean spinnerPresent = false;
@@ -66,18 +61,8 @@ public class BasePageObject extends MobileBasePageObject {
     } catch (TimeoutException e) {
       PageObjectLogging.log("Loading spinner", "is not present", true);
     }
-    if(spinnerPresent) {
+    if (spinnerPresent) {
       waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
     }
-  }
-
-  //TODO: when QAART-576 will be solved, remove that method and all connections
-  /**
-   * It will fail TestNG if fail=true is set
-   * It is temporary solution for QAART-576
-   * @param fail
-   */
-  public void failTest(boolean fail) {
-    Assertion.assertFalse(fail, "Test logged some errors");
   }
 }

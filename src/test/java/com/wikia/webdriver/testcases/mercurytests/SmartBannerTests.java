@@ -23,8 +23,6 @@ public class SmartBannerTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
                                                         "marvel", "tardis", "starwars", "lego"};
   private static final String[] DIFFERENT_HUBS_COLORS = {"#94d11f", "#8ca038", "#ff7f26",
@@ -43,37 +41,34 @@ public class SmartBannerTests extends NewTestTemplate {
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
     Assertion.assertTrue(banner.isSmartBannerVisible(), "Smart banner is closed");
-    if(config.getPlatform().equals("ANDROID")) {
+    if (config.getPlatform().equals("ANDROID")) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
     }
-    PageObjectLogging.log("Button name", "is correct", "is incorrect", banner.getButtonName().equals(buttonName));
-    if(! banner.getButtonName().equals(buttonName)) failTest = true;
+    PageObjectLogging.log("Button name", "is correct", "is incorrect",
+                          banner.getButtonName().equals(buttonName));
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
     PageObjectLogging.log("Position", "is fixed", "is floated",
                           lastSmartBannerPosition == banner.getSmartBannerPosition());
-    if(! (lastSmartBannerPosition == banner.getSmartBannerPosition())) failTest = true;
     banner.clickCloseButton();
-    PageObjectLogging.log("Smart banner", "is closed", "is visible", ! banner.isSmartBannerVisible());
-    if(banner.isSmartBannerVisible()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging
+        .log("Smart banner", "is closed", "is visible", !banner.isSmartBannerVisible());
   }
 
   // SBT02
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
-    BasePageObject base = new BasePageObject(driver);
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
       driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
       banner = new SmartBannerComponentObject(driver);
-      PageObjectLogging.log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i]));
-      if(! banner.isSmartBannerColorCorrect(DIFFERENT_HUBS_COLORS[i])) failTest = true;
-      PageObjectLogging.log("Smart banner button color", "is correct", "is wrong", banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i]));
-      if(! banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i])) failTest = true;
+      PageObjectLogging
+          .log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(
+              DIFFERENT_HUBS_COLORS[i]));
+      PageObjectLogging.log("Smart banner button color", "is correct", "is wrong",
+                            banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i]));
     }
-    base.failTest(failTest);
   }
 }

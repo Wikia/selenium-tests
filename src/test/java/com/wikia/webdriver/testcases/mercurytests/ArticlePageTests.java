@@ -23,8 +23,6 @@ public class ArticlePageTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private static final String[]
       FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
@@ -36,21 +34,20 @@ public class ArticlePageTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    PageObjectLogging.log("Wikia logo", "is visible", "is not visible", articlePage.isWikiaLogoVisible());
-    if(! articlePage.isWikiaLogoVisible()) failTest = true;
-    PageObjectLogging.log("Search button", "is visible", "is not visible", articlePage.isSearchButtonVisible());
-    if (! articlePage.isSearchButtonVisible()) failTest = true;
-    PageObjectLogging.log("Top contributors section", "is visible", "is not visible", articlePage.isTopContributorsSectionVisible());
-    if (! articlePage.isTopContributorsSectionVisible()) failTest = true;
-    PageObjectLogging.log("Top contributors thumb", "is visible", "is not visible", articlePage.isTopContributorsThumbVisible(0));
-    if (! articlePage.isTopContributorsThumbVisible(0)) failTest = true;
-    PageObjectLogging.log("Footer Wikia logo", "is visible", "is not visible", articlePage.isFooterLogoVisible());
-    if (! articlePage.isFooterLogoVisible()) failTest = true;
+    PageObjectLogging
+        .log("Wikia logo", "is visible", "is not visible", articlePage.isWikiaLogoVisible());
+    PageObjectLogging
+        .log("Search button", "is visible", "is not visible", articlePage.isSearchButtonVisible());
+    PageObjectLogging.log("Top contributors section", "is visible", "is not visible",
+                          articlePage.isTopContributorsSectionVisible());
+    PageObjectLogging.log("Top contributors thumb", "is visible", "is not visible",
+                          articlePage.isTopContributorsThumbVisible(0));
+    PageObjectLogging.log("Footer Wikia logo", "is visible", "is not visible",
+                          articlePage.isFooterLogoVisible());
     for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
-      PageObjectLogging.log("Footer link " + FOOTER_ELEMENTS[i], "is visible", "is not visible", articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i));
-      if (! articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i)) failTest = true;
+      PageObjectLogging.log("Footer link " + FOOTER_ELEMENTS[i], "is visible", "is not visible",
+                            articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i));
     }
-    base.failTest(failTest);
   }
 
   // APT02
@@ -60,9 +57,8 @@ public class ArticlePageTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, "");
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.clickTopContributor(0);
-    PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:", articlePage.isUrlContainingUserPage());
-    if (! articlePage.isUrlContainingUserPage()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:",
+                          articlePage.isUrlContainingUserPage());
   }
 
   // APT03
@@ -74,9 +70,8 @@ public class ArticlePageTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    PageObjectLogging.log("Redirection", "works", "does not work", ! driver.getCurrentUrl().equals(oldUrl));
-    if (driver.getCurrentUrl().equals(oldUrl)) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Redirection", "works", "does not work",
+                          !driver.getCurrentUrl().equals(oldUrl));
   }
 
   // APT04
@@ -88,8 +83,7 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertTrue(articlePage.isChevronCollapsed(), "Chevron isn't collapsed");
     PageObjectLogging.log("Category list", "is collapsed", true);
     articlePage.clickCategoryButton();
-    PageObjectLogging.log("Category list", "is expanded", "is collapsed", ! articlePage.isChevronCollapsed());
-    if (articlePage.isChevronCollapsed()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Category list", "is expanded", "is collapsed",
+                          !articlePage.isChevronCollapsed());
   }
 }

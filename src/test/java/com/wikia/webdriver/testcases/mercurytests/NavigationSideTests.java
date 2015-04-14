@@ -22,8 +22,6 @@ public class NavigationSideTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private final static String SEARCH_PASS = "test";
   private final static String SEARCH_FAIL = "te";
 
@@ -38,11 +36,10 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickSearchButton();
     Assertion.assertTrue(nav.isNavMenuVisible(), "Navigation menu isn't visible");
     PageObjectLogging.log("Navigation menu", "is visible", true);
-    PageObjectLogging.log("Link without chevron", "is ellipsized", "is not ellipsized", nav.isNavListElementEllipsized(0));
-    if (! nav.isNavListElementEllipsized(0)) failTest = true;
+    PageObjectLogging.log("Link without chevron", "is ellipsized", "is not ellipsized",
+                          nav.isNavListElementEllipsized(0));
     PageObjectLogging.log("Link with chevron", "is ellipsized", "is not ellipsized",
                           nav.isNavListElementEllipsized(1));
-    if (! nav.isNavListElementEllipsized(1)) failTest = true;
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
     PageObjectLogging.log("Back link", "is hidden", true);
     nav.clickNavListElement(1);
@@ -52,9 +49,7 @@ public class NavigationSideTests extends NewTestTemplate {
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
     PageObjectLogging.log("Back link", "works", true);
     nav.clickOverlay();
-    PageObjectLogging.log("Navigation menu", "is hidden", "is visible", ! nav.isNavMenuVisible());
-    if (nav.isNavMenuVisible()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Navigation menu", "is hidden", "is visible", !nav.isNavMenuVisible());
   }
 
   // NST02
@@ -72,13 +67,11 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
     PageObjectLogging.log("Search suggestions", "are hidden", "are displayed",
                           !searchObject.isSuggestionListDisplayed());
-    if (searchObject.isSuggestionListDisplayed()) failTest = true;
     searchObject.clickCancelButton();
-    PageObjectLogging.log("Menu field", "is visible", "is hidden", searchObject.isMenuFieldVisible());
-    if (! searchObject.isMenuFieldVisible()) failTest = true;
-    PageObjectLogging.log("Result field", "is hidden", "is visible", ! searchObject.isResultFieldVisible());
-    if (searchObject.isResultFieldVisible()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging
+        .log("Menu field", "is visible", "is hidden", searchObject.isMenuFieldVisible());
+    PageObjectLogging.log("Result field", "is hidden", "is visible",
+                          !searchObject.isResultFieldVisible());
   }
 
   // NST03
@@ -95,9 +88,8 @@ public class NavigationSideTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
     base.waitMilliseconds(5000, "waitMilliseconds");
-    PageObjectLogging.log("Redirection", "works", "does not work", ! oldUrl.equals(driver.getCurrentUrl()));
-    if (oldUrl.equals(driver.getCurrentUrl())) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Redirection", "works", "does not work",
+                          !oldUrl.equals(driver.getCurrentUrl()));
   }
 
   // NST04
@@ -110,8 +102,7 @@ public class NavigationSideTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     nav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    PageObjectLogging.log("Redirection", "works", "does not work", ! oldUrl.equals(driver.getCurrentUrl()));
-    if (oldUrl.equals(driver.getCurrentUrl())) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Redirection", "works", "does not work",
+                          !oldUrl.equals(driver.getCurrentUrl()));
   }
 }

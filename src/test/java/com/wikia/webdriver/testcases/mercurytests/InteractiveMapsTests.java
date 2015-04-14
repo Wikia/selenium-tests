@@ -27,8 +27,6 @@ public class InteractiveMapsTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   // IMAPT01
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
@@ -38,20 +36,16 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
     PageObjectLogging.log("Map modal", "is visible", true);
-    PageObjectLogging.log("Url", "match pattern ?map=", "does not match pattern ?map=", maps.isMapIdInUrl());
-    if (! maps.isMapIdInUrl()) failTest = true;
+    PageObjectLogging
+        .log("Url", "match pattern ?map=", "does not match pattern ?map=", maps.isMapIdInUrl());
     PageObjectLogging.log("Map title in header", "is displayed", "is not displayed",
                           maps.isTextInMapTitleHeader());
-    if (! maps.isTextInMapTitleHeader()) failTest = true;
     maps.switchToMapFrame();
     maps.clickPin();
     PageObjectLogging.log("Pin popup", "appears", "does not appear", maps.isPinPopUp());
-    if (! maps.isPinPopUp()) failTest = true;
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
-    PageObjectLogging.log("Map modal", "is closed", "is opened", ! maps.isMapModalVisible());
-    if (maps.isMapModalVisible()) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Map modal", "is closed", "is opened", !maps.isMapModalVisible());
   }
 
   // IMAPT02
@@ -99,7 +93,6 @@ public class InteractiveMapsTests extends NewTestTemplate {
     PageObjectLogging.log("Zoom in by gesture", "works", true);
     Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
     PageObjectLogging.log("Zoom in button", "is disabled", true);
-    base.failTest(failTest);
   }
 
   // IMAPT03
@@ -120,8 +113,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     base.waitMilliseconds(5000, "Wait fo filterbox to be scrollable");
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
-    PageObjectLogging.log("Scrolling in filter box", "works", "does not work", ! new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling));
-    if (new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)) failTest = true;
-    base.failTest(failTest);
+    PageObjectLogging.log("Scrolling in filter box", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling));
   }
 }

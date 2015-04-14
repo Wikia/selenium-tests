@@ -24,47 +24,42 @@ public class SEOTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
   }
 
-  private boolean failTest = false;
-
   // SEOT01
   @RelatedIssue(issueID = "CONCF-412")
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    PageObjectLogging.log("link[rel='canonical']", "contains current url", "contains wrong url", seo.isLinkRelCanonical());
-    //if(! seo.isLinkRelCanonical()) failTest = true;
+    PageObjectLogging.log("link[rel='canonical']", "contains current url", "contains wrong url",
+                          seo.isLinkRelCanonical());
     PageObjectLogging.log("meta[property='fb:app_id']", "is filled", "is empty", seo.isOgFbApp());
-    //if(! seo.isOgFbApp()) failTest = true;
     PageObjectLogging.log("meta[property='og:image']", "is filled", "is empty", seo.isOgImage());
-    //if(! seo.isOgImage()) failTest = true;
-    PageObjectLogging.log("meta[property='og:url']", "contains current url", "contains wrong url", seo.isOgUrlTag());
-    //if(! seo.isOgUrlTag()) failTest = true;
-    PageObjectLogging.log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
-    //if(! seo.isOgDescription()) failTest = true;
-    PageObjectLogging.log("meta[property='og:site_name']", "is empty", "is filled", ! seo.isOgSiteName());
-    //if(seo.isOgSiteName()) failTest = true;
-    PageObjectLogging.log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
-    //if(! seo.isOgTitleWithWiki()) failTest = true;
-    PageObjectLogging.log("meta[property='og:type']", "contains website", "is wrong", seo.isOgTypeWebsite());
-    //if(! seo.isOgTypeWebsite()) failTest = true;
+    PageObjectLogging.log("meta[property='og:url']", "contains current url", "contains wrong url",
+                          seo.isOgUrlTag());
+    PageObjectLogging
+        .log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
+    PageObjectLogging
+        .log("meta[property='og:site_name']", "is empty", "is filled", !seo.isOgSiteName());
+    PageObjectLogging
+        .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
+    PageObjectLogging
+        .log("meta[property='og:type']", "contains website", "is wrong", seo.isOgTypeWebsite());
     String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
     PageObjectLogging.logWarning("Site status", "Page was reloaded asynchronously");
-    PageObjectLogging.log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
-    //if(! seo.isOgDescription()) failTest = true;
-    PageObjectLogging.log("meta[property='og:description']", "is different", "does not changed", ! lastDesc.equals(seo.getDescription()));
-    //if(lastDesc.equals(seo.getDescription())) failTest = true;
-    PageObjectLogging.log("meta[property='og:site_name']", "is filled", "is empty", seo.isOgSiteName());
-    //if(! seo.isOgSiteName()) failTest = true;
-    PageObjectLogging.log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
-    //if(! seo.isOgTitleWithWiki()) failTest = true;
-    PageObjectLogging.log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());
-    //if(! seo.isOgTypeArticle()) failTest = true;
-    //base.failTest(failTest);
+    PageObjectLogging
+        .log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
+    PageObjectLogging.log("meta[property='og:description']", "is different", "does not changed",
+                          !lastDesc.equals(seo.getDescription()));
+    PageObjectLogging
+        .log("meta[property='og:site_name']", "is filled", "is empty", seo.isOgSiteName());
+    PageObjectLogging
+        .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
+    PageObjectLogging
+        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());
   }
 }
