@@ -54,11 +54,7 @@ public class SEOTests extends NewTestTemplate {
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
-    PageObjectLogging.appendTextToLogFile(new StringBuilder()
-                                              .append(
-                                                  "<tr class=\"warning\"><td>Site status</td>"
-                                                  + "<td>Page was reloaded asynchronously</td>"
-                                                  + "<td> <br/> &nbsp;</td></tr>"));
+    PageObjectLogging.logWarning("Site status", "Page was reloaded asynchronously");
     PageObjectLogging.log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
     if(! seo.isOgDescription()) failTest = true;
     PageObjectLogging.log("meta[property='og:description']", "is different", "does not changed", ! lastDesc.equals(seo.getDescription()));
