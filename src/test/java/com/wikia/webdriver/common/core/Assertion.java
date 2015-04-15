@@ -16,82 +16,70 @@ public class Assertion extends Assert {
   public static boolean assertStringContains(String pattern, String current) {
     String currentEncoded = encodeSpecialChars(current);
     String patternEncoded = encodeSpecialChars(pattern);
+    boolean assertion = true;
     try {
-      if (current.contains(pattern)) {
-        PageObjectLogging.log(
-            "assertStringContains",
-            "assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
-            true
-        );
-        return true;
-      } else {
+      if (!current.contains(pattern)) {
         throw new AssertionError();
       }
     } catch (AssertionError ass) {
       addVerificationFailure(ass);
-      PageObjectLogging.log(
-          "assertStringContains",
-          "assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
-          false
-      );
-      return false;
+      assertion = false;
     }
+    PageObjectLogging.log(
+        "assertStringContains",
+        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
+        + patternEncoded + "\"",
+        assertion
+    );
+    return assertion;
   }
 
   public static void assertEquals(String pattern, String current) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
+    boolean assertion = true;
     try {
       Assert.assertEquals(pattern, current);
     } catch (AssertionError err) {
       addVerificationFailure(err);
-      PageObjectLogging.log(
-          "assertEquals",
-          "assertion failed<br/>pattern: " + patternEncoded
-          + "<br/>current: " + currentEncoded,
-          false
-      );
+      assertion = false;
     }
     PageObjectLogging.log(
         "assertEquals",
-        "assertion passed<br/>pattern: " + patternEncoded
-        + "<br/>current: " + currentEncoded,
-        true
+        "assertion " + assertion + "! Pattern: \"" + patternEncoded
+        + "\" Current: \"" + currentEncoded + "\"",
+        assertion
     );
   }
 
   public static void assertNotEquals(String pattern, String current) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
+    boolean assertion = true;
     try {
       Assert.assertNotEquals(pattern, current);
     } catch (AssertionError err) {
       addVerificationFailure(err);
-      PageObjectLogging.log(
-          "assertNotEquals",
-          "assertion failed<br/>pattern: " + patternEncoded
-          + "<br/>current: " + currentEncoded,
-          false
-      );
+      assertion = false;
     }
     PageObjectLogging.log(
         "assertNotEquals",
-        "assertion passed<br/>pattern: " + patternEncoded
-        + "<br/>current: " + currentEncoded,
-        true
+        "assertion " + assertion + "! Pattern: \"" + patternEncoded
+        + "\" Current: \"" + currentEncoded + "\"",
+        assertion
     );
   }
 
   public static void assertNumber(Number expected, Number actual, String message) {
+    boolean assertion = true;
     try {
       Assert.assertEquals(expected, actual);
-      PageObjectLogging.log("assertNumber", message + ", expected: "
-                                            + expected + ", got: " + actual, true);
     } catch (AssertionError ass) {
       addVerificationFailure(ass);
-      PageObjectLogging.log("assertNumber", message + ", expected: "
-                                            + expected + ", got: " + actual, false);
+      assertion = false;
     }
+    PageObjectLogging.log("assertNumber", message + ", expected: "
+                                          + expected + ", got: " + actual, assertion);
   }
 
   private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
@@ -131,20 +119,17 @@ public class Assertion extends Assert {
 
   public static void assertStringNotEmpty(String current) {
     String currentEncoded = encodeSpecialChars(current);
+    boolean assertion = true;
     try {
       Assert.assertNotEquals("", current);
     } catch (AssertionError err) {
       addVerificationFailure(err);
-      PageObjectLogging.log(
-          "assertStringNotEmpty",
-          "assertion failed. String is empty",
-          false
-      );
+      assertion = false;
     }
     PageObjectLogging.log(
         "assertStringNotEmpty",
-        "assertion passed<br/>current: " + currentEncoded,
-        true
+        "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
+        assertion
     );
   }
 }

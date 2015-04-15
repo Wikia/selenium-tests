@@ -86,6 +86,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
+  @RelatedIssue(issueID = "MAIN-4325")
   @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_004_EditModeLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

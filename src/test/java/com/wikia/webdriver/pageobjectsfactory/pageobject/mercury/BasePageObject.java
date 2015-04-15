@@ -1,13 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -15,15 +22,11 @@ import org.openqa.selenium.WebElement;
  */
 public class BasePageObject extends MobileBasePageObject {
 
+  @FindBy(css = ".loading-overlay")
+  private WebElement loadingSpinner;
+
   public BasePageObject(WebDriver driver) {
     super(driver);
-  }
-
-  public SpecialMercuryPageObject openSpecialMercury(String wikiURL) {
-    getUrl(wikiURL + MercuryArticles.MERCURY_SPECIAL_PAGE);
-    PageObjectLogging
-        .log("openSpecialMercury", MercuryArticles.MERCURY_SPECIAL_PAGE + " opened", true);
-    return new SpecialMercuryPageObject(driver);
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
@@ -43,17 +46,44 @@ public class BasePageObject extends MobileBasePageObject {
     jsexec.executeScript("arguments[0].click();", element);
   }
 
-  public void waitMilliseconds(int time, String methodName) {
+  public void waitMilliseconds(int time, String message) {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(message, e.getMessage(), false);
     }
   }
 
-  public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
-    BasePageObject base = new BasePageObject(driver);
-    SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-    mercuryPage.clickMercuryButton();
+  /**
+   * First waits for spinner to be visible and then waits for spinner to be hidden
+   */
+  public void waitForLoadingSpinnerToFinishReloadingPage() {
+    try {
+      waitForElementByElement(loadingSpinner);
+      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+    } catch (TimeoutException e) {
+    }
+  }
+
+  /**
+   * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
+   *
+   * @param element            WebElement
+   * @param timeOutInSec       int
+   * @param checkOutInMilliSec int
+   */
+  public void waitForElementVisibleByElementCustomTimeOut(WebElement element, int timeOutInSec,
+                                                          int checkOutInMilliSec) {
+    WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
+    driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(ExpectedConditions.visibilityOf(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void failTest(boolean fail) {
+    Assertion.assertFalse(fail, "Test logged some errors");
   }
 }

@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -21,17 +22,13 @@ public class NavigationSideComponentObject extends BasePageObject {
   @FindBy(css = ".cancel")
   private WebElement cancelSearchCaption;
   @FindBy(css = ".local-wikia-search a")
-  private List<WebElement> searchSuggestions;
+  private WebElement searchSuggestion;
   @FindBy(css = ".local-nav-menu > li > div")
-  private List<WebElement> chevrons;
-  @FindBy(css = ".local-nav-menu > li > a")
-  private List<WebElement> noChevrons;
+  private List<WebElement> navList;
   @FindBy(css = ".back")
   private WebElement backChevron;
   @FindBy(css = ".overlay")
   private WebElement overlay;
-  @FindBy(css = "a[href='/wiki/Special:Random']")
-  private WebElement randomPage;
   @FindBy(css = ".local-wikia-search")
   private WebElement resultField;
   @FindBy(css = ".local-nav-menu")
@@ -65,24 +62,14 @@ public class NavigationSideComponentObject extends BasePageObject {
     cancelSearchCaption.click();
   }
 
-  public void clickRandomPage() {
-    waitForElementVisibleByElement(randomPage);
-    randomPage.click();
-  }
-
   public void clickSuggestion(int index) {
-    waitForElementByElement(searchSuggestions.get(index));
-    searchSuggestions.get(index).click();
+    waitForElementByElement(searchSuggestion);
+    searchSuggestion.click();
   }
 
-  public void clickLinkWithoutChevron(int index) {
-    waitForElementVisibleByElement(noChevrons.get(index));
-    noChevrons.get(index).click();
-  }
-
-  public void clickLinkWithChevron(int index) {
-    waitForElementVisibleByElement(chevrons.get(index));
-    chevrons.get(index).click();
+  public void clickNavListElement(int index) {
+    waitForElementVisibleByElement(navList.get(index));
+    navList.get(index).click();
   }
 
   public void clickOverlay() {
@@ -92,13 +79,11 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSuggestionListDisplayed() {
     try {
-      if (searchSuggestions.size() > 0) {
-        waitForElementByElement(searchSuggestions.get(0));
-        return searchSuggestions.get(0).isDisplayed();
-      }
-    } catch (NoSuchElementException e) {
+      waitForElementVisibleByElementCustomTimeOut(searchSuggestion, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   public boolean isNavMenuVisible() throws WebDriverException {
@@ -110,20 +95,16 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isBackLinkDisplayed() {
     try {
-      return backChevron.isDisplayed();
-    } catch (NoSuchElementException e) {
+      waitForElementVisibleByElementCustomTimeOut(backChevron, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
     }
-    return false;
+    return true;
   }
 
-  public boolean isLinkWithChevronEllipsized(int index) {
-    waitForElementVisibleByElement(chevrons.get(index));
-    return chevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
-  }
-
-  public boolean isLinkWithoutChevronEllipsized(int index) {
-    waitForElementVisibleByElement(noChevrons.get(index));
-    return noChevrons.get(index).getCssValue("text-overflow").equals("ellipsis");
+  public boolean isNavListElementEllipsized(int index) {
+    waitForElementVisibleByElement(navList.get(index));
+    return navList.get(index).getCssValue("text-overflow").equals("ellipsis");
   }
 
   public boolean isMenuFieldVisible() {

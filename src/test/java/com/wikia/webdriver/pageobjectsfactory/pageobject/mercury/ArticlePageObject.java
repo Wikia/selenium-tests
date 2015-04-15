@@ -21,8 +21,6 @@ public class ArticlePageObject extends BasePageObject {
   private WebElement topContributorsSection;
   @FindBy(css = ".contributors img")
   private List<WebElement> topContributorsThumbs;
-  @FindBy(css = "head link[rel='canonical']")
-  private WebElement canonicalUrl;
   @FindBy(css = "figure.article-image a")
   private List<WebElement> singleImgLink;
   @FindBy(css = "svg.logo")
@@ -47,6 +45,10 @@ public class ArticlePageObject extends BasePageObject {
     categoryButton.click();
   }
 
+  public void clickOnImage(int index) {
+    singleImgLink.get(index).click();
+  }
+
   public boolean isWikiaLogoVisible() {
     return checkIfElementOnPage(wikiaLogo);
   }
@@ -62,21 +64,6 @@ public class ArticlePageObject extends BasePageObject {
 
   public boolean isTopContributorsThumbVisible(int index) {
     return checkIfElementOnPage(topContributorsThumbs.get(index));
-  }
-
-  public boolean isUrlCanonical() throws WebDriverException {
-    waitForElementInViewPort(canonicalUrl);
-    if (canonicalUrl.getAttribute("href") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
-  }
-
-  public boolean isSingleLinkedImageRedirectionWorking(int index) {
-    String currentUrl = driver.getCurrentUrl();
-    singleImgLink.get(index).click();
-    waitForElementByElement(footerLogo);
-    return !currentUrl.equals(driver.getCurrentUrl());
   }
 
   public boolean isFooterLogoVisible() {
