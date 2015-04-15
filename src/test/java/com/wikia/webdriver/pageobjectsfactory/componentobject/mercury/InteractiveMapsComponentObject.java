@@ -75,7 +75,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
 
   public boolean isFilterBoxWasExpanded() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(filterBox, 5, 1000);
+      waitForElementVisibleByElement(filterBox, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -84,7 +84,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
 
   public boolean isMapModalVisible() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(lightbox, 5, 1000);
+      waitForElementVisibleByElement(lightbox, 5, 1000);
     } catch (TimeoutException e) {
       return false;
     }
