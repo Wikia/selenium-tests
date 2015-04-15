@@ -30,8 +30,6 @@ public class LightboxTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private static final String DIRECTION_LEFT = "left";
   private static final String DIRECTION_RIGHT = "right";
   private static final String DIRECTION_UP = "up";
@@ -46,20 +44,10 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
     PageObjectLogging.log("Lightbox", "is opened", true);
-    if (lightbox.isCurrentImageVisible()) {
-      PageObjectLogging.log("Current image", "is visible", true);
-    } else {
-      PageObjectLogging.log("Current image", "is not visible", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Current image", "is visible", "is not visible",
+                          lightbox.isCurrentImageVisible());
     lightbox.clickCloseButton();
-    if (lightbox.isLightboxOpened()) {
-      PageObjectLogging.log("Lightbox", "is opened", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Lightbox", "is closed", true);
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Lightbox", "is closed", "is opened", !lightbox.isLightboxOpened());
   }
 
   // MT02
@@ -75,21 +63,13 @@ public class LightboxTests extends NewTestTemplate {
     String currentImageSrc = lightbox.getCurrentImagePath();
     touchAction.tapOnPointXY(25, 50, 500, 5000);
     String nextImageSrc = lightbox.getCurrentImagePath();
-    if (currentImageSrc.equals(nextImageSrc)) {
-      PageObjectLogging.log("Change image by tap left edge", "doesn't work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Change image by tap left edge", "works", true);
-    }
+    PageObjectLogging.log("Change image by tap left edge", "works", "doesn't work",
+                          !currentImageSrc.equals(nextImageSrc));
     currentImageSrc = lightbox.getCurrentImagePath();
     touchAction.tapOnPointXY(75, 50, 500, 5000);
     nextImageSrc = lightbox.getCurrentImagePath();
-    if (currentImageSrc.equals(nextImageSrc)) {
-      PageObjectLogging.log("Change image by tap right edge", "doesn't work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Change image by tap right edge", "works", true);
-    }
+    PageObjectLogging.log("Change image by tap right edge", "works", "doesn't work",
+                          !currentImageSrc.equals(nextImageSrc));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
@@ -104,12 +84,7 @@ public class LightboxTests extends NewTestTemplate {
         break;
       }
     }
-    if (imageChanged) {
-      PageObjectLogging.log("Change image by swipe left", "works", true);
-    } else {
-      PageObjectLogging.log("Change image by swipe left", "does not work", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Change image by swipe left", "works", "does not work", imageChanged);
     currentImageSrc = lightbox.getCurrentImagePath();
     imageChanged = false;
     for (int i = 0; i < 10; ++i) {
@@ -120,14 +95,7 @@ public class LightboxTests extends NewTestTemplate {
         break;
       }
     }
-    if (imageChanged) {
-      PageObjectLogging.log("Change image by swipe right", "works", true);
-    } else {
-      PageObjectLogging.log("Change image by swipe right", "does not work", false);
-      failTest = true;
-    }
-
-    base.failTest(failTest);
+    PageObjectLogging.log("Change image by swipe right", "works", "does not work", imageChanged);
   }
 
   // MT03
@@ -143,20 +111,12 @@ public class LightboxTests extends NewTestTemplate {
     File beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 3000);
     File afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in by gesture", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in by gesture", "works", true);
-    }
+    PageObjectLogging.log("Zooming in by gesture", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming out by gesture", "works", true);
-    } else {
-      PageObjectLogging.log("Zooming out by gesture", "does not work", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Zooming out by gesture", "works", "does not work",
+                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
@@ -165,22 +125,13 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in by double tap", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in by double tap", "works", true);
-    }
+    PageObjectLogging.log("Zooming in by double tap", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming out by double tap", "works", true);
-    } else {
-      PageObjectLogging.log("Zooming out by double tap", "does not work", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Zooming out by double tap", "works", "does not work",
+                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
   }
 
   // MT04
@@ -193,15 +144,12 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
     Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
-    int duration = 500;
-    int waitAfter = 5000;
-    touchAction.tapOnPointXY(50, 50, duration, waitAfter);
+    touchAction.tapOnPointXY(50, 50, 500, 5000);
     Assertion.assertFalse(lightbox.isLightboxHeaderDisplayed(), "Lightbox header is displayed");
     Assertion.assertFalse(lightbox.isLightboxFooterDisplayed(), "Lightbox footer is displayed");
-    touchAction.tapOnPointXY(50, 50, duration, waitAfter);
+    touchAction.tapOnPointXY(50, 50, 500, 5000);
     Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
     Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
-    base.failTest(failTest);
   }
 
   // MT05
@@ -215,7 +163,6 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
     mobileDriver.execute(DriverCommand.GO_BACK, null);
     Assertion.assertFalse(lightbox.isLightboxOpened(), "Lightbox is opened");
-    base.failTest(failTest);
   }
 
   // MT06
@@ -233,21 +180,12 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     File afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in", "works", true);
-    }
+    PageObjectLogging.log("Zooming in", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     File afterMoving = new Shooter().capturePage(driver);
-
-    if (new ImageComparison().areFilesTheSame(afterZooming, afterMoving)) {
-      PageObjectLogging.log("Moving " + direction, "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Moving " + direction, "works", true);
-    }
+    PageObjectLogging.log("Moving " + direction, "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(afterZooming, afterMoving));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_RIGHT;
@@ -257,20 +195,12 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in", "works", true);
-    }
+    PageObjectLogging.log("Zooming in", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(afterZooming, afterMoving)) {
-      PageObjectLogging.log("Moving " + direction, "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Moving " + direction, "works", true);
-    }
+    PageObjectLogging.log("Moving " + direction, "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(afterZooming, afterMoving));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_UP;
@@ -280,20 +210,12 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in", "works", true);
-    }
+    PageObjectLogging.log("Zooming in", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(afterZooming, afterMoving)) {
-      PageObjectLogging.log("Moving " + direction, "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Moving " + direction, "works", true);
-    }
+    PageObjectLogging.log("Moving " + direction, "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(afterZooming, afterMoving));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_DOWN;
@@ -303,21 +225,11 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
     afterZooming = new Shooter().capturePage(driver);
-    if (new ImageComparison().areFilesTheSame(beforeZooming, afterZooming)) {
-      PageObjectLogging.log("Zooming in", "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Zooming in", "works", true);
-    }
+    PageObjectLogging.log("Zooming in", "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
-
-    if (new ImageComparison().areFilesTheSame(afterZooming, afterMoving)) {
-      PageObjectLogging.log("Moving " + direction, "does not work", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Moving " + direction, "works", true);
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Moving " + direction, "works", "does not work",
+                          !new ImageComparison().areFilesTheSame(afterZooming, afterMoving));
   }
 }
