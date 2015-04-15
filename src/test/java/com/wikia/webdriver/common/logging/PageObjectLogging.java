@@ -71,6 +71,28 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, false);
   }
 
+  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail, boolean success) {
+    String description = descriptionOnFail;
+    if(success) {
+      description = descriptionOnSuccess;
+    }
+    log(command, description, success, false);
+  }
+
+  /**
+   * This method will log warning to log file (line in yellow color)
+   *
+   * @param command
+   * @param description
+   */
+  public static void logWarning(String command, String description) {
+    StringBuilder builder = new StringBuilder().append("<tr class=\"warning\">"
+                                                       + "<td>" + command + "</td>"
+                                                       + "<td>" + description + "</td>"
+                                                       + "<td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
+
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
     logsResults.add(success);
     String escapedDescription = escapeHtml(description);
@@ -140,17 +162,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
             + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(logPath, builder.toString());
       } else {
-        builder.append("<tr class=\"warning\"><td>Url after navigation</td><td>"
-            + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
-        CommonUtils.appendTextToFile(logPath, builder.toString());
+        logWarning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
-      builder
-          .append("<tr class=\"warning\"><td>Url after navigation</td><td>Unable to check URL after navigation - alert present</td><td> <br/> &nbsp;</td></tr>");
-      CommonUtils.appendTextToFile(logPath, builder.toString());
+      logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
-
-
     logJSError(driver);
   }
 
@@ -168,7 +184,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterClickOn(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
-        + "</td><td> <br/> &nbsp;</td></tr>");
+                   + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -176,7 +192,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterChangeValueOf(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>"
-        + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
+                   + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -271,26 +287,27 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder = new StringBuilder();
     builder
         .append("<html><style>"
-            + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
-            + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
-            + "tr.warning{color:black;background-color:#FEE01E;}"
-            + "tr.error{color:black;background-color:#FFCCCC;}"
-            + "tr.step{color:white;background:grey}"
-            + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-            + "<style>td { border-top: 1px solid grey; } </style></head><body>"
-            + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
-            + "<p>Date: "
-            + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
-                DateTime.now(DateTimeZone.UTC))
-            + "</p>"
-            + "<p>Polish Time: "
-            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
-                DateTime.now().withZone(
-                    DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
-            + "<p>Browser: " + Global.BROWSER + "</p>" + "<p>OS: " + System.getProperty("os.name")
-            + "</p>" + "<p>Testing environment: " + Global.DOMAIN + "</p>"
-            + "<p>Testing environment: " + Global.LIVE_DOMAIN + "</p>" + "<p>Tested version: "
-            + Global.WIKI_VERSION + "</p>" + "<div id='toc'></div>");
+                + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
+                + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
+                + "tr.warning{color:black;background-color:#FEE01E;}"
+                + "tr.error{color:black;background-color:#FFCCCC;}"
+                + "tr.step{color:white;background:grey}"
+                + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
+                + "<style>td { border-top: 1px solid grey; } </style></head><body>"
+                + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
+                + "<p>Date: "
+                + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
+            DateTime.now(DateTimeZone.UTC))
+                + "</p>"
+                + "<p>Polish Time: "
+                + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
+            DateTime.now().withZone(
+                DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
+                + "<p>Browser: " + Global.BROWSER + "</p>" + "<p>OS: " + System
+                    .getProperty("os.name")
+                + "</p>" + "<p>Testing environment: " + Global.DOMAIN + "</p>"
+                + "<p>Testing environment: " + Global.LIVE_DOMAIN + "</p>" + "<p>Tested version: "
+                + Global.WIKI_VERSION + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     appendShowHideButtons();
     try {
@@ -314,9 +331,5 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
-  }
-
-  public static void appendTextToLogFile(StringBuilder builder) {
-    CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 }
