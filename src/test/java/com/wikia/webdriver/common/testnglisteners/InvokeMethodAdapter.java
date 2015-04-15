@@ -7,7 +7,7 @@ import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.exceptions.TestFailed;
+import com.wikia.webdriver.common.core.exceptions.TestFailedException;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 
@@ -20,7 +20,7 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
       // if there are verification failures...
       if (PageObjectLogging.getVerificationStack().contains(false)) {
         result.setStatus(ITestResult.FAILURE);
-        result.setThrowable(new TestFailed());
+        result.setThrowable(new TestFailedException());
       }
       if (verificationFailures.size() > 0) {
         // set the test to failed
