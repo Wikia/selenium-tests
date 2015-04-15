@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -39,6 +40,8 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement dragToRepositionText;
   @FindBy (css = ".update-btn")
   private WebElement updateCoverImageLink;
+  @FindBy (css = "button.sg-sub[disabled=disabled]")
+  private WebElement publishButtonDisabled;
 
   public ModularMainPageObject(WebDriver driver) {
     super(driver);
@@ -112,5 +115,40 @@ public class ModularMainPageObject extends WikiBasePageObject{
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
     waitForElementByElement(heroImageModule);
     Assertion.assertNotEquals(imgSrc, newImgSrc);
+  }
+
+  public void deleteDescriptionEditorContent() {
+    waitForElementByElement(editBox);
+    editBox.clear();
+  }
+
+  public void verifyWikiaPromotionalMessage() {
+    String promoteMessage = descriptionEditField.getAttribute("placeholder");
+    Assertion.assertEquals(promoteMessage, PageContent.WIKIA_HERO_PROMOTE_MESSAGE);
+  }
+
+  public void verifyPublishButtonDisability() {
+    waitForElementByElement(editBox);
+    waitForElementByElement(publishButtonDisabled);
+  }
+
+  public String getDescriptionText() {
+    waitForElementByElement(editBox);
+    return heroPublishedDescription.getText();
+  }
+
+  public void addRandomTextToDescriptionField(String randomText) {
+    waitForElementByElement(editBox);
+    editBox.sendKeys(randomText);
+  }
+
+  public void verifyPublishedTextAndEditor(String publishedText) {
+    waitForElementByElement(heroPublishedDescription);
+    Assertion.assertEquals(publishedText, heroPublishedDescription.getText());
+  }
+
+  public void clickDiscardButton() {
+    waitForElementByElement(descriptionDiscardButton);
+    descriptionDiscardButton.click();
   }
 }

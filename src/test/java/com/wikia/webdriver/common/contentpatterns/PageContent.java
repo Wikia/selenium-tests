@@ -148,6 +148,9 @@ public class PageContent {
   public static final String WIKI_SIGN_UP_BIRTHYEAR = "1954";
   public static final int MIN_AGE = 12;
 
+  //Hero Module edit field default message
+  public static final String WIKIA_HERO_PROMOTE_MESSAGE = "Add a summary that will promote your wikia in searches and on hubs."
+
   private PageContent() {
 
   }

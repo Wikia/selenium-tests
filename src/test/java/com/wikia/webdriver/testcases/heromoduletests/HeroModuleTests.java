@@ -16,6 +16,10 @@ import org.testng.annotations.Test;
  * TC09: Make,publish and verify changes for description fields are visible immediately
  * TC15: check anons and regular users cant modify MoM
  * TC06: verify discarding an image will display previous state
+ * TC05: verify dragging to reposition image is working
+ * TC10: delete description field and then verify a promotional message and Publish button disability
+ * TC11: delete text from desc field and click discard to view previous state
+ * TC12: delete text from desc field and populate the field with a character to check Publish button is enabled
  */
 public class HeroModuleTests extends NewTestTemplate {
 
@@ -85,5 +89,34 @@ public class HeroModuleTests extends NewTestTemplate {
     mom.clickPublishButton();
     String newImgSrc = mom.getMoMSrc();
     mom.verifySrcTxtAreDifferent(imgSrc, newImgSrc);
+  }
+
+  @Test(groups = {"HeroModuleTests", "HeroModuleTests_006"})
+  public void HeroModuleTests_006_VerifyDraggingToRepositionFunctionality() {
+
+  }
+
+  @Test(groups = {"HeroModuleTests", "HeroModuleTests_007"})
+  public void HeroModuleTests_007_DeleteDescriptionAndCheckPublishButton() {
+    ModularMainPageObject mom = new ModularMainPageObject(driver);
+    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
+    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.clickEditDescriptionLink();
+    mom.deleteDescriptionEditorContent();
+    mom.verifyPublishButtonDisability();
+    mom.verifyWikiaPromotionalMessage();
+  }
+
+  @Test(groups = {"HeroModuleTests", "HeroModuleTests_008"})
+  public void HeroModuleTests_008_DescriptionFieldDiscardChanges() {
+    ModularMainPageObject mom = new ModularMainPageObject(driver);
+    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
+    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    String publishedText = mom.getDescriptionText();
+    mom.clickEditDescriptionLink();
+    String randomString = mom.getRandomDigits(9);
+    mom.addRandomTextToDescriptionField(randomString);
+    mom.clickDiscardButton();
+    mom.verifyPublishedTextAndEditor(publishedText);
   }
 }
