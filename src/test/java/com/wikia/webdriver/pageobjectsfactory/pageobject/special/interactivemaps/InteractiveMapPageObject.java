@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.De
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -166,9 +167,11 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
   }
 
-  public void clickOnPin(Integer pinListPosition) {
-    waitForElementVisibleByElement(mapFrame);
-    driver.switchTo().frame(mapFrame);
+  public void clickOnPin(Integer pinListPosition, boolean ...noFrame) {
+    if(noFrame.length == 0) {
+        waitForElementVisibleByElement(mapFrame);
+        driver.switchTo().frame(mapFrame);
+    }
     waitForElementVisibleByElement(pinCollection.get(pinListPosition));
     scrollToElement(pinCollection.get(pinListPosition));
     Actions actions = new Actions(driver);
@@ -230,9 +233,11 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("clickOnFilterBoxTitle", "Filter box title was clicked", true);
   }
 
-  public void clickOpenPinTitle() {
-    waitForElementVisibleByElement(mapFrame);
-    driver.switchTo().frame(mapFrame);
+  public void clickOpenPinTitle(boolean ...noFrame) {
+    if(noFrame.length == 0) {
+        waitForElementVisibleByElement(mapFrame);
+        driver.switchTo().frame(mapFrame);
+    }
     poiArticleLink.click();
     driver.switchTo().defaultContent();
   }
@@ -502,5 +507,13 @@ public class InteractiveMapPageObject extends BasePageObject {
     waitForElementByElement(poiDescriptionSection);
     PageObjectLogging.log("verifyPoiPointDescription",
                           "Poi description section is displayed", true);
+  }
+
+  public void verifyPontoGetRequest(NetworkTrafficInterceptor networkTab) {
+    if(networkTab.searchRequestUrlInHar("maps.wikia-services.com")) {
+        PageObjectLogging.log("verifyPontoGetRequest", "Ponto request came", true);
+    } else {
+        throw new NoSuchElementException("Request from ponto did not come");
+    }
   }
 }
