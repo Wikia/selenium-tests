@@ -52,6 +52,7 @@ public class SmartBannerTests extends NewTestTemplate {
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
     PageObjectLogging.log("Position", "is fixed", "is floated",
                           lastSmartBannerPosition == banner.getSmartBannerPosition());
+    banner.scrollToTopAndWaitForShareBarToBeHidden();
     banner.clickCloseButton();
     PageObjectLogging
         .log("Smart banner", "is closed", "is visible", !banner.isSmartBannerVisible());

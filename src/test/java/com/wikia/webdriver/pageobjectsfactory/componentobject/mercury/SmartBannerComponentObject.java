@@ -3,6 +3,8 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,10 +33,6 @@ public class SmartBannerComponentObject extends BasePageObject {
     closeButton.click();
   }
 
-  public boolean isSmartBannerVisible() {
-    return !smartBanner.getCssValue("display").equals("none");
-  }
-
   public String getButtonName() {
     waitForElementVisibleByElement(bannerButton);
     return bannerButton.getText();
@@ -42,6 +40,16 @@ public class SmartBannerComponentObject extends BasePageObject {
 
   public int getSmartBannerPosition() {
     return smartBanner.getLocation().getY();
+  }
+
+  public void scrollToTopAndWaitForShareBarToBeHidden() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("window.scrollTo(0, 0)");
+    waitForElementPresenceByBy(By.cssSelector(".share-feature.pinned.headroom--top"));
+  }
+
+  public boolean isSmartBannerVisible() {
+    return !smartBanner.getCssValue("display").equals("none");
   }
 
   public boolean isSmartBannerColorCorrect(String color) {
