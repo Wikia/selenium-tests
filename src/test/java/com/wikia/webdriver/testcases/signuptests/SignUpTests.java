@@ -61,10 +61,10 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typePassword(signUp.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     signUp.enterBirthDate(
-        // +1 because months are numerated from 0
-        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+            // +1 because months are numerated from 0
+            Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+            Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+            Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
@@ -77,7 +77,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void SignUp_004_signup() {
+  public void SignUp_004_signup - QAART-577() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -108,7 +108,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void SignUp_005_forced_signup() {
+  public void SignUp_005_forced_signup - QAART-577() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
     CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -139,7 +139,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser() {
+  public void SignUp_006_loginNotVerifiedUser - QAART-577() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
