@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateACustomMapComponentObject;
@@ -146,5 +148,17 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiCategoryTitle();
     selectedMap.verifyPoiPointTitle();
     selectedMap.verifyPoiPointDescription();
+  }
+
+  @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
+  @NetworkTrafficDump
+  public void NonSpecificMapTests_012_VerifyLinkedArticlePontoRequest() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.getUrl(InteractiveMapsContent.MOBILE_APPS_MAP);
+    InteractiveMapPageObject map = new InteractiveMapPageObject(driver);
+    map.clickOnPin(0, true);
+    networkTrafficInterceptor.startIntercepting(InteractiveMapsContent.MOBILE_APPS_MAP);
+    map.clickOpenPinTitle(true);
+    map.verifyPontoGetRequest(networkTrafficInterceptor);
   }
 }
