@@ -50,11 +50,11 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
-
+  @RelatedIssue(issueID = "QAART-578")
   @Test(
       groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke1"}
   )
-  public void ArticleCRUDUser_003_addDropdown_QAART_578() {
+  public void ArticleCRUDUser_003_addDropdown() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;

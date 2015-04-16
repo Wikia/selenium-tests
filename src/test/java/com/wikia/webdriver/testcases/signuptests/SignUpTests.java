@@ -75,9 +75,9 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
-
+  @RelatedIssue(issueID = "QAART-577")
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void SignUp_004_signup_QAART_577() {
+  public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -106,9 +106,9 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-
+  @RelatedIssue(issueID = "QAART-577")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void SignUp_005_forced_signup_QAART_577() {
+  public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
     CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -137,9 +137,9 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
-
+  @RelatedIssue(issueID = "QAART-577")
   @Test(groups = {"SignUp_006", "SignUp"})
-  public void SignUp_006_loginNotVerifiedUser_QAART_577() {
+  public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
