@@ -168,7 +168,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickOnPin(Integer pinListPosition, boolean ...noFrame) {
-    if(!noFrame[0]) {
+    if(noFrame.length == 0) {
         waitForElementVisibleByElement(mapFrame);
         driver.switchTo().frame(mapFrame);
     }
@@ -234,7 +234,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickOpenPinTitle(boolean ...noFrame) {
-    if(!noFrame[0]) {
+    if(noFrame.length == 0) {
         waitForElementVisibleByElement(mapFrame);
         driver.switchTo().frame(mapFrame);
     }
