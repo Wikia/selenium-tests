@@ -50,7 +50,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
-  @RelatedIssue(issueID = "QAART-578")
+
   @Test(
       groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke1"}
   )
