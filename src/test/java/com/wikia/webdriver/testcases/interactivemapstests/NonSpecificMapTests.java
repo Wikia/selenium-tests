@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateACustomMapComponentObject;
