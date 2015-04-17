@@ -312,7 +312,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       testLogging.addSteps(new TestStepsLogging("error", "error", exception, false, screenPath + imageCounter +".png"));
 
-      imageCounter += 1;
       logJSError(driver);
       onTestSuccess(result);
     }
