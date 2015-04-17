@@ -93,6 +93,6 @@ public class ManualConfiguration extends AbstractConfiguration {
 
   @Override
   public String getDisableFlash() {
-    return config.get("disable-flash");
+    return String.valueOf(config.get("disable-flash"));
   }
 }

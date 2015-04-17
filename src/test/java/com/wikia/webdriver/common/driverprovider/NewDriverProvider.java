@@ -199,7 +199,7 @@ public class NewDriverProvider {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
-    if (StringUtils.isNotBlank(ConfigurationFactory.getConfig().getDisableFlash().toString())) {
+    if (StringUtils.isNotBlank(ConfigurationFactory.getConfig().getDisableFlash())) {
       firefoxProfile.setPreference("plugin.state.flash", 0);
     }
 
