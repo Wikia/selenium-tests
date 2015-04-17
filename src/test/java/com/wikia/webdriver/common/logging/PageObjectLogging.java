@@ -260,6 +260,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + "<a href=\"" + jiraUrl + "\">" + issueID + "</a>"
                      + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
 
+      testLogging.setRelatedIssueID(issueID);
       testLogging.addSteps(new TestStepsLogging("step", "Known failure", jiraUrl, true));
     } else {
       builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName

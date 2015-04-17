@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class TestLogging {
 
+  private String relatedIssueID;
   private String testName;
   private String className;
   private List<TestStepsLogging> testSteps;
@@ -31,4 +32,6 @@ public class TestLogging {
   public void setClassName(String className) {
     this.className = className;
   }
+
+  public void setRelatedIssueID(String relatedIssueID) { this.relatedIssueID = relatedIssueID; }
 }
