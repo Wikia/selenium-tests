@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -41,7 +42,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.submit();
     wall.verifyPostedMessageVideo(title);
   }
-
+    @RelatedIssue(issueID = "MAIN-4324")
   @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
   public void VetAddVideo_002_MessageWallLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

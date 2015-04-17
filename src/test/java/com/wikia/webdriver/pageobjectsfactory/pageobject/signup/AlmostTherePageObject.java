@@ -33,7 +33,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 
   private String getActivationLinkFromMail(String email, String password) {
     String www = MailFunctions.getActivationLinkFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password));
+        MailFunctions.getFirstEmailContent(email, password, "Almost there! Confirm your Wikia account"));
     PageObjectLogging.log("getActivationLinkFromMail",
                           "activation link is visible in email content: " + www, true);
     return www;

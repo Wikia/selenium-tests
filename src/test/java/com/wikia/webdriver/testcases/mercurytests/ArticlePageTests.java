@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -18,9 +19,8 @@ import java.util.concurrent.TimeUnit;
 public class ArticlePageTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    BasePageObject.turnOnMercurySkin(driver, wikiURL);
   }
 
   private static final String[]
@@ -29,77 +29,61 @@ public class ArticlePageTests extends NewTestTemplate {
        "Privacy Policy", "Feedback"};
 
   // APT01
-  @Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_001_LogoAndSearchButtonAreVisible() {
+  @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_CATEGORY_TEST_ARTICLE);
-    Assertion.assertTrue(articlePage.isWikiaLogoVisible(), "Wikia logo isn't visible");
-    Assertion.assertTrue(articlePage.isSearchButtonVisible(), "Search button isn't visible");
-  }
-
-  // APT02
-  @Test(groups = {"MercuryArticleTests_002", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_002_TapContributorRedirectToUserPage() {
-    BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, "");
-    articlePage.clickTopContributor(0);
-    Assertion.assertTrue(articlePage.isUrlContainingUserPage(), "Url doesn't contain user page");
-  }
-
-  // APT03
-  @Test(groups = {"MercuryArticleTests_003", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_003_TopContributorsWikiSection() {
-    BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_CATEGORY_TEST_ARTICLE);
-    Assertion.assertTrue(articlePage.isTopContributorsSectionVisible(),
-                         "Top contributors section isn't visible");
-    Assertion.assertTrue(articlePage.isTopContributorsThumbVisible(0),
-                         "Top contributors thumb isn't visible");
-  }
-
-  // APT04
-  @Test(groups = {"MercuryArticleTests_004", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_004_FooterElements() {
-    BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TEST);
-    Assertion.assertTrue(articlePage.isFooterLogoVisible(), "Wikia footer logo isn't displayed");
+    base.openMercuryArticleByName(wikiURL, "");
+    ArticlePageObject articlePage = new ArticlePageObject(driver);
+    PageObjectLogging
+        .log("Wikia logo", "is visible", "is not visible", articlePage.isWikiaLogoVisible());
+    PageObjectLogging
+        .log("Search button", "is visible", "is not visible", articlePage.isSearchButtonVisible());
+    PageObjectLogging.log("Top contributors section", "is visible", "is not visible",
+                          articlePage.isTopContributorsSectionVisible());
+    PageObjectLogging.log("Top contributors thumb", "is visible", "is not visible",
+                          articlePage.isTopContributorsThumbVisible(0));
+    PageObjectLogging.log("Footer Wikia logo", "is visible", "is not visible",
+                          articlePage.isFooterLogoVisible());
     for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
-      Assertion.assertTrue(articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i),
-                           FOOTER_ELEMENTS[i] + " isn't displayed");
+      PageObjectLogging.log("Footer link " + FOOTER_ELEMENTS[i], "is visible", "is not visible",
+                            articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i));
     }
   }
 
-  // APT05
-  @Test(groups = {"MercuryArticleTests_005", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_005_SingleLinkedImageRedirect() {
+  // APT02
+  @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
-    Assertion.assertTrue(articlePage.isSingleLinkedImageRedirectionWorking(0),
-                         "Redirection doesn't work");
+    base.openMercuryArticleByName(wikiURL, "");
+    ArticlePageObject articlePage = new ArticlePageObject(driver);
+    articlePage.clickTopContributor(0);
+    PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:",
+                          articlePage.isUrlContainingUserPage());
   }
 
-  // APT06
-  @Test(groups = {"MercuryArticleTests_006", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_006_CanonicalTag() {
+  // APT03
+  @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TEST);
-    Assertion.assertTrue(articlePage.isUrlCanonical(), "Url isn't canonical");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
+    ArticlePageObject articlePage = new ArticlePageObject(driver);
+    String oldUrl = driver.getCurrentUrl();
+    articlePage.clickOnImage(0);
+    base.waitForLoadingSpinnerToFinishReloadingPage();
+    PageObjectLogging.log("Redirection", "works", "does not work",
+                          !driver.getCurrentUrl().equals(oldUrl));
   }
 
-  // APT07
-  @Test(groups = {"MercuryArticleTests_007", "MercuryArticleTests", "Mercury"})
-  public void MercuryArticleTests_007_ChevronRotation() {
+  // APT04
+  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
+  public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     BasePageObject base = new BasePageObject(driver);
-    ArticlePageObject articlePage =
-        base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, "");
+    ArticlePageObject articlePage = new ArticlePageObject(driver);
     Assertion.assertTrue(articlePage.isChevronCollapsed(), "Chevron isn't collapsed");
+    PageObjectLogging.log("Category list", "is collapsed", true);
     articlePage.clickCategoryButton();
-    Assertion.assertFalse(articlePage.isChevronCollapsed(), "Chevron is collapsed");
+    PageObjectLogging.log("Category list", "is expanded", "is collapsed",
+                          !articlePage.isChevronCollapsed());
   }
 }

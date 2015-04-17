@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
  */
-public class OpenGraphPageObject extends MobileBasePageObject {
+public class SEOPageObject extends MobileBasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -31,7 +31,7 @@ public class OpenGraphPageObject extends MobileBasePageObject {
   @FindBy(css = "link[rel='canonical']")
   private WebElement canonicalUrl;
 
-  public OpenGraphPageObject(WebDriver driver) {
+  public SEOPageObject(WebDriver driver) {
     super(driver);
   }
 
@@ -56,18 +56,11 @@ public class OpenGraphPageObject extends MobileBasePageObject {
     return ogType.getAttribute("content").contains("article");
   }
 
-  public boolean isOgTitleMainPage() throws WebDriverException {
+  public boolean isOgTitleWithWiki() throws WebDriverException {
     if (ogTitle.getAttribute("content") == null) {
       throw new WebDriverException("Expected String but got null");
     }
     return ogTitle.getAttribute("content").contains("Wiki");
-  }
-
-  public boolean isOgTitleArticlePage() throws WebDriverException {
-    if (ogTitle.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return !ogTitle.getAttribute("content").isEmpty();
   }
 
   public boolean isOgSiteName() throws WebDriverException {
@@ -107,5 +100,13 @@ public class OpenGraphPageObject extends MobileBasePageObject {
       throw new WebDriverException("Expected String but got null");
     }
     return !ogFbApp.getAttribute("content").isEmpty();
+  }
+
+  public boolean isLinkRelCanonical() throws WebDriverException {
+    waitForElementInViewPort(canonicalUrl);
+    if (canonicalUrl.getAttribute("href") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
+    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 }

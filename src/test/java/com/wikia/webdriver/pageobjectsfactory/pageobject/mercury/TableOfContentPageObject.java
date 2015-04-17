@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -16,8 +17,6 @@ public class TableOfContentPageObject extends BasePageObject {
 
   @FindBy(css = "nav.table-of-contents")
   private WebElement tocAll;
-  @FindBy(css = "section.article-body h2")
-  private List<WebElement> allH2;
   @FindBy(css = "nav.table-of-contents a")
   private List<WebElement> listOfLinks;
   @FindBy(css = "nav.table-of-contents ol")
@@ -32,15 +31,12 @@ public class TableOfContentPageObject extends BasePageObject {
   }
 
   public boolean isTOCDisplayed() {
-    return tocAll.isDisplayed();
-  }
-
-  public boolean isH2OnPage() {
-    return allH2.size() > 0;
-  }
-
-  public boolean isH2AndTOC() {
-    return isH2OnPage() && isTOCDisplayed();
+    try {
+      waitForElementVisibleByElement(tocAll, 5, 1000);
+    } catch (TimeoutException e) {
+      return false;
+    }
+    return true;
   }
 
   public boolean isTOCUnderArticleName() throws WebDriverException {
@@ -53,10 +49,13 @@ public class TableOfContentPageObject extends BasePageObject {
     tocButton.click();
   }
 
-  public boolean isUserMovedToRightSection(int index) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
+  public void clickOnTOCListElement(int index) {
     waitForElementVisibleByElement(listOfLinks.get(index));
     listOfLinks.get(index).click();
+  }
+
+  public boolean isUserMovedToRightSection(int index) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
     String h2PosString =
         js.executeScript(
             "return Math.floor($('section.article-body h2').eq(" + index + ").offset().top)")

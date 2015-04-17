@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
@@ -34,6 +35,7 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
+  @RelatedIssue(issueID = "MAIN-4322")
   @Test(groups = {"Facebook_001", "Facebook", "Facebook_002"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_noEmailPerms() {

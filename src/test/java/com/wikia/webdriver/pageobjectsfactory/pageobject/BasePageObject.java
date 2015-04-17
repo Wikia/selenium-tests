@@ -560,6 +560,24 @@ public class BasePageObject {
     }
   }
 
+  /**
+   * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
+   *
+   * @param element
+   * @param timeOutInSec
+   * @param checkOutInMilliSec
+   */
+  public void waitForElementVisibleByElement(WebElement element, int timeOutInSec,
+                                                          int checkOutInMilliSec) {
+    WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
+    driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(ExpectedConditions.visibilityOf(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public WebElement waitForElementByCss(String cssSelector) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
