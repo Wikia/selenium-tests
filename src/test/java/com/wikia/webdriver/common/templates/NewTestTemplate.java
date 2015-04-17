@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -31,6 +32,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     startBrowser();
+    PageObjectLogging.start();
     //Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
     logOut();
@@ -42,5 +44,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
       networkTrafficInterceptor.stop();
     }
     stopBrowser();
+    PageObjectLogging.clear();
   }
 }

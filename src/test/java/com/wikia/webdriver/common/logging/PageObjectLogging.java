@@ -55,8 +55,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static Gson gson;
   private static String jsonFileName = "log.json";
   private static String jsonPath = reportPath + jsonFileName;
-  private static TestLogging testLogging = new TestLogging();
+  private static TestLogging testLogging;
   private static TestSuiteLogging testSuiteLogging;
+
+  public static void start() {
+    testLogging = new TestLogging();
+  }
+
+  public static void clear() {
+    testLogging = null;
+  }
 
   public static void log(String command, String description, boolean success, WebDriver driver) {
     imageCounter += 1;
@@ -209,7 +217,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
     builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
 
-    testLogging = new TestLogging();
     testLogging.setClassName(className);
     testLogging.setTestName(testName);
 
