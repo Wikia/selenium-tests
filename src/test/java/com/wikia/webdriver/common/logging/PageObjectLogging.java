@@ -118,6 +118,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
         + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+
+    testLogging.addSteps(new TestStepsLogging(className, command, imageAsBase64, success));
   }
 
   private static void logJSError(WebDriver driver) {
@@ -275,6 +277,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
           + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
+
+      testLogging.addSteps(new TestStepsLogging("error", "error", exception, false, screenPath + imageCounter +".png"));
+
       imageCounter += 1;
       logJSError(driver);
       onTestSuccess(result);
