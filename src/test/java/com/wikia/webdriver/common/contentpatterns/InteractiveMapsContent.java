@@ -44,6 +44,7 @@ public class InteractiveMapsContent {
       ARTICLE_NOT_EXIST_ERROR =
       "Error: either there is no %articlename% article on this wikia, or the URL entered is invalid.";
   public static final String ESCAPED_FRAGMENT_MAP_ID = "69";
+  public static final String MOBILE_APPS_MAP = "http://maps.wikia-services.com/api/v1/render/77/?hideAttr=1&isEmbeddedInWikiaApp&uselang=en&noexternals=1";
 
   private InteractiveMapsContent() {
 

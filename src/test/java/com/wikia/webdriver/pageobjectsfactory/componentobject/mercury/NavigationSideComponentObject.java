@@ -79,7 +79,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSuggestionListDisplayed() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(searchSuggestion, 5, 1000);
+      waitForElementVisibleByElement(searchSuggestion, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }
@@ -95,7 +95,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isBackLinkDisplayed() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(backChevron, 5, 1000);
+      waitForElementVisibleByElement(backChevron, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }

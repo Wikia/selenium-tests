@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -11,10 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
@@ -55,35 +50,19 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   /**
-   * First waits for spinner to be visible and then waits for spinner to be hidden
+   * First waits for spinner to be visible and then waits for spinner to be hidden Spinner presence
+   * is optional, when it occurs it must be hidden later
    */
   public void waitForLoadingSpinnerToFinishReloadingPage() {
+    boolean spinnerPresent = false;
     try {
-      waitForElementByElement(loadingSpinner);
-      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+      waitForElementVisibleByElement(loadingSpinner, 4, 1000);
+      spinnerPresent = true;
     } catch (TimeoutException e) {
+      PageObjectLogging.log("Loading spinner", "is not present", true);
     }
-  }
-
-  /**
-   * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
-   *
-   * @param element            WebElement
-   * @param timeOutInSec       int
-   * @param checkOutInMilliSec int
-   */
-  public void waitForElementVisibleByElementCustomTimeOut(WebElement element, int timeOutInSec,
-                                                          int checkOutInMilliSec) {
-    WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
-    driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
-    try {
-      wait.until(ExpectedConditions.visibilityOf(element));
-    } finally {
-      restoreDeaultImplicitWait();
+    if (spinnerPresent) {
+      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
     }
-  }
-
-  public void failTest(boolean fail) {
-    Assertion.assertFalse(fail, "Test logged some errors");
   }
 }

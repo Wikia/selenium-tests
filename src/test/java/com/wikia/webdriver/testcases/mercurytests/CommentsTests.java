@@ -23,8 +23,6 @@ public class CommentsTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private static final String MEDIA_TYPE_VIDEO = "Video";
   private static final String MEDIA_TYPE_IMAGE = "Image";
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
@@ -40,37 +38,16 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     Assertion.assertFalse(comments.isCommentsListCollapsed(), "Comments are collapsed");
     PageObjectLogging.log("Comments list", "is expanded", true);
-    if (comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE) {
-      PageObjectLogging.log("Number of comments per page", "is correct", true);
-    } else {
-      PageObjectLogging.log("Number of comments per page", "is incorrect", false);
-      failTest = true;
-    }
-    if (comments.isUserAvatarInComment(0)) {
-      PageObjectLogging.log("User avatar", "is displayed", true);
-    } else {
-      PageObjectLogging.log("User avatar", "is not displayed", false);
-      failTest = true;
-    }
-    if (comments.isUserUsernameInComment(0)) {
-      PageObjectLogging.log("User username", "is displayed", true);
-    } else {
-      PageObjectLogging.log("User username", "is not displayed", false);
-      failTest = true;
-    }
-    if (comments.isTimeStampInComment(0)) {
-      PageObjectLogging.log("Time stamp", "is displayed", true);
-    } else {
-      PageObjectLogging.log("Time stamp", "is not displayed", false);
-      failTest = true;
-    }
-    if (comments.isContentInComment(0)) {
-      PageObjectLogging.log("Comment content", "is displayed", true);
-    } else {
-      PageObjectLogging.log("Comment content", "is not displayed", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Number of comments per page", "is correct", "is incorrect",
+                          comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE);
+    PageObjectLogging
+        .log("User avatar", "is displayed", "is not displayed", comments.isUserAvatarInComment(0));
+    PageObjectLogging.log("User username", "is displayed", "is not displayed",
+                          comments.isUserUsernameInComment(0));
+    PageObjectLogging
+        .log("Time stamp", "is displayed", "is not displayed", comments.isTimeStampInComment(0));
+    PageObjectLogging.log("Comment content", "is displayed", "is not displayed",
+                          comments.isContentInComment(0));
   }
 
   // CT02
@@ -92,25 +69,17 @@ public class CommentsTests extends NewTestTemplate {
       comments.waitMilliseconds(2500, "Wait after click on 'Next page' button");
     }
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
-    if (numberOfComments == 0) {
-      PageObjectLogging.log("Comments counter", "is correct", true);
-    } else {
-      PageObjectLogging.log("Comments counter", "There are "
-                                                + numberOfComments + " untracked comments", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("Comments counter", "is correct", "There are "
+                                                            + numberOfComments
+                                                            + " untracked comments",
+                          numberOfComments == 0);
     Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
                          "Previous page button isn't displayed");
     PageObjectLogging.log("Previous page button", "is displayed", true);
     comments.clickPreviousCommentPageButton();
     comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
-    if (comments.isPreviousCommentPageButtonDisplayed()) {
-      PageObjectLogging.log("Previous page button", "is displayed", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("Previous page button", "is not displayed", true);
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Previous page button", "is not displayed", "is displayed",
+                          !comments.isPreviousCommentPageButtonDisplayed());
   }
 
   // CT03
@@ -125,13 +94,9 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickViewReplies(0);
     Assertion.assertTrue(comments.isRepliesListExpanded(), "Replies list is collapsed");
     PageObjectLogging.log("Replies list", "is expanded", true);
-    if (comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0)) {
-      PageObjectLogging.log("Replies counter", "is correct", true);
-    } else {
-      PageObjectLogging.log("Replies counter", "is incorrect", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Replies counter", "is correct", "is incorrect",
+                          comments.getNumberOfRepliesFromHeader(0) == comments
+                              .getNumberOfRepliesFromList(0));
   }
 
   // CT04
@@ -143,13 +108,8 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
-    if (username.equals(comments.getUsernameFromUrl())) {
-      PageObjectLogging.log("Url", "match pattern /wiki/User:", true);
-    } else {
-      PageObjectLogging.log("Url", "does not match pattern /wiki/User:", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:",
+                          username.equals(comments.getUsernameFromUrl()));
   }
 
   // CT05
@@ -159,30 +119,14 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
-    if (comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, 1)) {
-      PageObjectLogging.log("Video thumbnail", "is displayed", true);
-    } else {
-      PageObjectLogging.log("Video thumbnail", "is not displayed", false);
-      failTest = true;
-    }
-    if (comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, 1)) {
-      PageObjectLogging.log("Video link", "is present", true);
-    } else {
-      PageObjectLogging.log("Video link", "is not present", false);
-      failTest = true;
-    }
-    if (comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, 3)) {
-      PageObjectLogging.log("Image thumbnail", "is displayed", true);
-    } else {
-      PageObjectLogging.log("Image thumbnail", "is not displayed", false);
-      failTest = true;
-    }
-    if (comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, 3)) {
-      PageObjectLogging.log("Image link", "is present", true);
-    } else {
-      PageObjectLogging.log("Image link", "is not present", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("Video thumbnail", "is displayed", "is not displayed",
+                          comments.isMediaThumbnailInComment(
+                              MEDIA_TYPE_VIDEO, 1));
+    PageObjectLogging.log("Video link", "is present", "is not present",
+                          comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, 1));
+    PageObjectLogging.log("Image thumbnail", "is displayed", "is not displayed",
+                          comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, 3));
+    PageObjectLogging.log("Image link", "is present", "is not present",
+                          comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, 3));
   }
 }

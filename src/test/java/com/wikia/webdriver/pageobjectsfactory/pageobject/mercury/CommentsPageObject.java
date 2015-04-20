@@ -139,7 +139,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public boolean isRepliesListExpanded() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(repliesContent, 5, 1000);
+      waitForElementVisibleByElement(repliesContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }

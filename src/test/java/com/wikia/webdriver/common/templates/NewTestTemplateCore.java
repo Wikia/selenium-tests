@@ -13,8 +13,8 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 
-import net.lightbody.bmp.proxy.ProxyServer;
 
+import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -26,7 +26,7 @@ import org.testng.annotations.Listeners;
 import java.io.File;
 import java.lang.reflect.Method;
 
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;

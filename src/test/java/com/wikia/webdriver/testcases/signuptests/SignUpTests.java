@@ -61,10 +61,10 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typePassword(signUp.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     signUp.enterBirthDate(
-        // +1 because months are numerated from 0
-        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+            // +1 because months are numerated from 0
+            Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+            Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+            Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
@@ -75,7 +75,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
-
+  @RelatedIssue(issueID = "SOC-683")
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -106,7 +106,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-
+  @RelatedIssue(issueID = "SOC-683")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
@@ -137,7 +137,7 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
-
+  @RelatedIssue(issueID = "SOC-683")
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
