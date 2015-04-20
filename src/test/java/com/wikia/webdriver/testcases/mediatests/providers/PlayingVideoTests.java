@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -27,6 +28,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   // Test: Ooyala video in lightbox
+  @RelatedIssue(issueID = "QAART-581")
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
@@ -50,6 +52,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   // Test: Ooyala video in inline
+  @RelatedIssue(issueID = "QAART-581")
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
