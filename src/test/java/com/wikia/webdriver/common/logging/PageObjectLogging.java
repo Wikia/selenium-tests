@@ -82,7 +82,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     logJSError(driver);
 
     String screenshotPath = screenPath + imageCounter + ".png";
-    testLogging.addSteps(new TestStepsLogging(className, command, description, success, screenshotPath));
+    String htmlPath = screenPath + imageCounter + ".html";
+    testLogging.addSteps(
+        new TestStepsLogging(className, command, description, success, screenshotPath, htmlPath));
   }
 
   public static void log(String command, String description, boolean success) {
@@ -260,6 +262,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + "<a href=\"" + jiraUrl + "\">" + issueID + "</a>"
                      + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
 
+      testLogging.setRelatedIssueID(issueID);
       testLogging.addSteps(new TestStepsLogging("step", "Known failure", jiraUrl, true));
     } else {
       builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
@@ -310,7 +313,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
 
-      testLogging.addSteps(new TestStepsLogging("error", "error", exception, false, screenPath + imageCounter +".png"));
+      String screenshotPath = screenPath + imageCounter + ".png";
+      String htmlPath = screenPath + imageCounter + ".html";
+
+      testLogging.addSteps(
+          new TestStepsLogging("error", "error", exception, false, screenshotPath, htmlPath));
 
       logJSError(driver);
       onTestSuccess(result);

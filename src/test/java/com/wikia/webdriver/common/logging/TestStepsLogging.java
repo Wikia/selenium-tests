@@ -10,6 +10,17 @@ public class TestStepsLogging {
   private String description;
   private boolean success;
   private String screenshot;
+  private String htmlSource;
+
+  public TestStepsLogging(String className, String command, String description, boolean success,
+                          String screenshot, String htmlSource) {
+    this.className = className;
+    this.command = command;
+    this.description = description;
+    this.success = success;
+    this.screenshot = screenshot;
+    this.htmlSource = htmlSource;
+  }
 
   public TestStepsLogging(String className, String command, String description, boolean success,
                           String screenshot) {
