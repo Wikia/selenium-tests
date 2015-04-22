@@ -696,6 +696,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("GeoEdge", getCountry(), true);
+    PageObjectLogging.log("SlotName", slotName, true);
     Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
     return this;
   }

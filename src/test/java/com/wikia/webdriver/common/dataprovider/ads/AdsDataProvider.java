@@ -351,6 +351,10 @@ public class AdsDataProvider {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
         },
+        {
+            "GB", "adtest", "SyntheticTests/ProvidersChain",
+            "INVISIBLE_SKIN", "gpt; remnant", 0
+        }
     };
   }
 
