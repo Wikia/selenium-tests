@@ -43,6 +43,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   }
 
   public void verifyAddedDiffs(List<String> targets) {
+    waitForDialogVisible();
     if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
       verifyNewArticleDiffs(targets);
     } else {

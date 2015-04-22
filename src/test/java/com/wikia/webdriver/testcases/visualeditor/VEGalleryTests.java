@@ -28,7 +28,7 @@ public class VEGalleryTests extends NewTestTemplate {
   public void setup_VEPreferred() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
     article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    article.logInCookie(credentials.userName10, credentials.password10, wikiURL);
   }
 
   //AG01

@@ -24,6 +24,8 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement clearInputButton;
   @FindBy(css = ".oo-ui-window-body")
   private WebElement dialogBody;
+  @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget .oo-ui-pendingElement-pending")
+  private WebElement queryPending;
 
   //Cart
   @FindBy(css = ".oo-ui-icon-cart-grid")
@@ -74,6 +76,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     waitForElementClickableByElement(searchInput);
     searchInput.clear();
     typeInSearchTextField(searchText);
+    waitForElementNotVisibleByElement(queryPending);
     return new VisualEditorInsertGalleryDialog(driver);
   }
 
@@ -82,7 +85,8 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
-    for (int i = 0; i < number; i++) {
+    //only selects available number of media
+    for (int i = 0; i < Math.min(number, mediaResults.size()); i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(MEDIA_ADD_ICON_BY);
       mediaAddIcon.click();
     }
@@ -118,7 +122,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickTitleToPreview(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementByElement(mediaResultsWidget);
+    waitForElementVisibleByElement(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_TITLES_BY).get(index);
     scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);

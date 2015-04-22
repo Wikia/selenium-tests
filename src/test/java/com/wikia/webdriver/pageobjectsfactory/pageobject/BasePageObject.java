@@ -224,6 +224,11 @@ public class BasePageObject {
     element.click();
   }
 
+  protected void scrollAndClick(WebElement element, int offset) {
+    scrollToElement(element, offset);
+    element.click();
+  }
+
   protected void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
@@ -231,6 +236,23 @@ public class BasePageObject {
           "var x = $(arguments[0]);"
           + "window.scroll(0,parseInt(x.offset().top - 60));",
           element
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log(
+            "JSError", "JQuery is not defined", false
+        );
+      }
+    }
+  }
+
+  protected void scrollToElement(WebElement element, int offset) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
+          element, offset
       );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
