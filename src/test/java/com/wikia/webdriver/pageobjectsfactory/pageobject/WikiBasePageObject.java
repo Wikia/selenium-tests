@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -61,6 +62,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultBackoffStrategy;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -76,7 +90,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -721,7 +739,7 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
     return new ArticlePageObject(driver);
   }
-  
+
   public ArticlePageObject openMainPage(String wikiURL) {
       getUrl(wikiURL);
       return new ArticlePageObject(driver);
@@ -902,104 +920,72 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String logInCookie(String userName, String password, String wikiURL) {
-    getVenusGlobalNav().openAccountNAvigation().logIn(userName, password);
-//    try {
-//      CookieStore cookieStore = new BasicCookieStore();
-//
-//      HttpClient httpclient = HttpClientBuilder.create()
-//          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-//          .setDefaultCookieStore(cookieStore)
-//          .disableAutomaticRetries()
-//          .build();
-//      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
-//      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-//
-//      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
-//      nvps.add(new BasicNameValuePair("format", "json"));
-//      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
-//
-//      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
-//
-//      HttpResponse response = httpclient.execute(httpPost);
-//      HttpEntity entity = response.getEntity();
-//
-//      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
-//
-//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-//      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-//
-//      String token = responseValue.getString("loginToken");
-//
-//      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-//
-//      nvps2.add(new BasicNameValuePair("username", userName));
-//      nvps2.add(new BasicNameValuePair("password", password));
-//      nvps2.add(new BasicNameValuePair("loginToken", token));
-//
-//      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
-//      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
-//                                                   StandardCharsets.UTF_8));
-//
-//      response = httpclient.execute(httpPost4);
-//
-////      entity = response.getEntity();
-////      for (int i = 0; i < 10; i++) {
-////
-////
-////        xmlResponse = EntityUtils.toString(entity);
-////
-////        xmlResponseArr = xmlResponse.split("\"");
-////
-////        if (xmlResponse.contains("WrongPass")) {
-////          throw new WebDriverException("Incorrect password provided for user: " + userName);
-////        }
-////
-////        if (xmlResponseArr.length >= 11) {
-////          break;
-////        }
-////      }
-//
-//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-////      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
-//
-//      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
-//        System.out.println(cookie.toString());
-//        driver.manage().addCookie(
-//            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
-//                       cookie.getExpiryDate(), false));
-//      }
-//
-//      try {
-//        driver.get(wikiURL);
-//      } catch (TimeoutException e) {
-//        PageObjectLogging.log("loginCookie",
-//                              "page timeout after login by cookie", true);
-//      }
-//
+    String client_id = HeliosConfig.getClientId();
+    String client_secret = HeliosConfig.getClientSecret();
+    String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
+
+    try {
+      CookieStore cookieStore = new BasicCookieStore();
+
+      HttpClient httpclient = HttpClientBuilder.create()
+          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+          .setDefaultCookieStore(cookieStore)
+          .disableAutomaticRetries()
+          .build();
+      HttpPost httpPost = new HttpPost(heliosBaseUrl);
+      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+      nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
+      nvps.add(new BasicNameValuePair("client_id", client_id));
+      nvps.add(new BasicNameValuePair("client_secret", client_secret));
+      nvps.add(new BasicNameValuePair("username", userName));
+      nvps.add(new BasicNameValuePair("password", password));
+
+      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+
+      HttpResponse response = httpclient.execute(httpPost);
+      HttpEntity entity = response.getEntity();
+
+      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+
+      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+
+      String token = responseValue.getString("access_token");
+      String refreshToken = responseValue.getString("refresh_token");
+      System.out.println("access_token: " + token);
+      System.out.println("refresh_token: " + refreshToken);
+
+      driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
+
+      try {
+        driver.get("http://wikia.com");
+        System.out.println("cookie: " + driver.manage().getCookieNamed("access_token"));
+
+      } catch (TimeoutException e) {
+        PageObjectLogging.log("loginCookie",
+                              "page timeout after login by cookie", true);
+      }
+
       verifyUserLoggedIn(userName);
-//
-//      PageObjectLogging.log("loginCookie",
-//                            "user was logged in by cookie", true, driver);
-//      return token;
-//    } catch (UnsupportedEncodingException e) {
-//      PageObjectLogging.log("logInCookie",
-//                            "UnsupportedEncodingException", false);
-//      return null;
-//    } catch (ClientProtocolException e) {
-//      PageObjectLogging.log("logInCookie", "ClientProtocolException",
-//                            false);
-//      return null;
-//    } catch (ParseException e) {
-//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-//      return null;
-//    } catch (IOException e) {
-//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-//      return null;
-//    } catch (JSONException e) {
-//      e.printStackTrace();
-//      return null;
-//    }
-    return "";
+      PageObjectLogging.log("loginCookie",
+                            "user was logged in by cookie", true, driver);
+      return token;
+    } catch (UnsupportedEncodingException e) {
+      PageObjectLogging.log("logInCookie",
+                            "UnsupportedEncodingException", false);
+      return null;
+    } catch (ClientProtocolException e) {
+      PageObjectLogging.log("logInCookie", "ClientProtocolException",
+                            false);
+      return null;
+    } catch (IOException e) {
+      PageObjectLogging.log("logInCookie", e.getMessage(), false);
+      return null;
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public void openWikiPage(String wikiURL) {
@@ -1138,8 +1124,8 @@ public class WikiBasePageObject extends BasePageObject {
   public void addVideoViaAjax(String videoURL) {
     executeScript(
         "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
-        "data: {url: '" + videoURL + "'}," +
-        "type: 'POST' } );");
+            "data: {url: '" + videoURL + "'}," +
+            "type: 'POST' } );");
   }
 
   /**
@@ -1344,7 +1330,7 @@ public class WikiBasePageObject extends BasePageObject {
     String wikiURL = getCurrentUrl().substring(0,getCurrentUrl().indexOf("wiki/"));
     getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
   }
-  
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
