@@ -959,7 +959,7 @@ public class WikiBasePageObject extends BasePageObject {
       driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
 
       try {
-        driver.get("http://wikia.com");
+        driver.get(wikiURL);
         System.out.println("cookie: " + driver.manage().getCookieNamed("access_token"));
 
       } catch (TimeoutException e) {
