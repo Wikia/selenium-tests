@@ -42,6 +42,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
