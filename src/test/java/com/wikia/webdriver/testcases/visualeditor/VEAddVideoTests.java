@@ -30,7 +30,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName11, credentials.password11, wikiURL);
   }
 
   //AM01

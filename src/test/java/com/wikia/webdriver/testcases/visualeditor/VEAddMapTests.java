@@ -38,7 +38,7 @@ public class VEAddMapTests extends NewTestTemplate {
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
   }
 
   @Test(

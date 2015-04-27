@@ -33,7 +33,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   WikiBasePageObject base;
 
   private String text = WikiTextContent.TEXT;
-  private List<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
+  private List<String> wikiTexts, firstSourceEditText, secondSourceEditText;
   private String articleName;
 
   @BeforeMethod(alwaysRun = true)
@@ -55,10 +55,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     wikiTexts.add(WikiTextContent.SUPERSCRIPT_TEXT);
     wikiTexts.add(WikiTextContent.BULLET_LIST_TEXT);
     wikiTexts.add(WikiTextContent.NUMBERED_LIST_TEXT);
-    linkWikiTexts = new ArrayList<>();
-    linkWikiTexts.add(WikiTextContent.BLUELINK_TEXT);
-    linkWikiTexts.add(WikiTextContent.REDLINK_TEXT);
-    linkWikiTexts.add(WikiTextContent.EXTERNAL_LINK_TEXT);
+
     firstSourceEditText = new ArrayList<>();
     firstSourceEditText.add(text);
     secondSourceEditText = new ArrayList<>();
@@ -135,6 +132,10 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   )
   public void VisualEditorEditing_004_insertLinks() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    ArrayList<String> linkWikiTexts = new ArrayList<>();
+    linkWikiTexts.add(WikiTextContent.BLUELINK_TEXT);
+    linkWikiTexts.add(WikiTextContent.REDLINK_TEXT);
+    linkWikiTexts.add(WikiTextContent.EXTERNAL_LINK_TEXT);
 
     base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
@@ -216,7 +217,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
   )
   public void VisualEditorEditing_007_minorEdit() {
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
