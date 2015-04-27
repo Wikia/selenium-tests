@@ -23,8 +23,6 @@ public class TOCTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private boolean failTest = false;
-
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
@@ -35,31 +33,19 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
     PageObjectLogging.log("TOC", "is displayed", true);
-    if (toc.isTOCUnderArticleName()) {
-      PageObjectLogging.log("TOC position", "is under article name", true);
-    } else {
-      PageObjectLogging.log("TOC position", "is not under article name", false);
-      failTest = true;
-    }
+    PageObjectLogging.log("TOC position", "is under article name", "is not under article name",
+                          toc.isTOCUnderArticleName());
     Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
     PageObjectLogging.log("TOC menu", "is collapsed", true);
     toc.clickOnTOC();
     Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu is collapsed");
     PageObjectLogging.log("TOC menu", "is expanded", true);
     toc.clickOnTOCListElement(1);
-    if (toc.isUserMovedToRightSection(1)) {
-      PageObjectLogging.log("TOC redirection", "works", true);
-    } else {
-      PageObjectLogging.log("TOC redirection", "does not work", false);
-      failTest = true;
-    }
-    if (toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)) {
-      PageObjectLogging.log("Header padding", "is correct", true);
-    } else {
-      PageObjectLogging.log("TOC redirection", "is wrong", false);
-      failTest = true;
-    }
-    base.failTest(failTest);
+    PageObjectLogging
+        .log("TOC redirection", "works", "does not work", toc.isUserMovedToRightSection(
+            1));
+    PageObjectLogging.log("Header padding", "is correct", "is wrong",
+                          toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP));
   }
 
   // TOCT02
@@ -68,12 +54,6 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_ARTICLE_WITHOUT_TOC);
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    if (toc.isTOCDisplayed()) {
-      PageObjectLogging.log("TOC", "is displayed", false);
-      failTest = true;
-    } else {
-      PageObjectLogging.log("TOC", "is hidden", true);
-    }
-    base.failTest(failTest);
+    PageObjectLogging.log("TOC", "is hidden", "is displayed", !toc.isTOCDisplayed());
   }
 }

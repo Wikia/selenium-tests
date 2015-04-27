@@ -56,7 +56,7 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isLightboxOpened() {
     try {
-      waitForElementVisibleByElementCustomTimeOut(lightboxContent, 5, 1000);
+      waitForElementVisibleByElement(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
