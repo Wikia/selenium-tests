@@ -93,18 +93,27 @@ public class HeroModuleTests extends NewTestTemplate {
 
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_006"})
   public void HeroModuleTests_006_VerifyDraggingToRepositionFunctionality() {
-
+    ModularMainPageObject mom = new ModularMainPageObject(driver);
+    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
+    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    String imgSrc = mom.getMoMSrc();
+    mom.selectFileToUpload(PageContent.FILE);
+    mom.verifyDragToRepositionText();
+    String firstTopValue = mom.getTopAttribute();
+    mom.moveCoverImage();
+    String secondTopValue = mom.getTopAttribute();
+    mom.compareTopValues(firstTopValue, secondTopValue);
   }
 
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_007"})
-  public void HeroModuleTests_007_DeleteDescriptionAndCheckPublishButton() {
+  public void HeroModuleTests_007_DeleteDescriptionAndCheckPublishButtonAvailability() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
-    mom.deleteDescriptionEditorContent();
-    mom.verifyPublishButtonDisability();
+    mom.deleteDescriptionEditorContent(); //How to view the text?
     mom.verifyWikiaPromotionalMessage();
+    mom.verifyPublishButtonDisability();
   }
 
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_008"})
@@ -118,5 +127,17 @@ public class HeroModuleTests extends NewTestTemplate {
     mom.addRandomTextToDescriptionField(randomString);
     mom.clickDiscardButton();
     mom.verifyPublishedTextAndEditor(publishedText);
+  }
+
+  @Test(groups = {"HeroModuleTests", "HeroModuleTests_009"})
+  public void HeroModuleTests_009_AddDescriptionAndCheckPublishButtonAvailability() {
+    ModularMainPageObject mom = new ModularMainPageObject(driver);
+    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
+    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.clickEditDescriptionLink();
+    mom.deleteDescriptionEditorContent();
+    String randomString = mom.getRandomDigits(9);
+    mom.addRandomTextToDescriptionField(randomString);
+    mom.clickDescriptionPublishButton();
   }
 }

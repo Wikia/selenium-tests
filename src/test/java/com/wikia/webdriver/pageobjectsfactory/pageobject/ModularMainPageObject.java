@@ -4,8 +4,11 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -118,8 +121,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void deleteDescriptionEditorContent() {
-    waitForElementByElement(editBox);
-    editBox.clear();
+      descriptionEditField.clear();
   }
 
   public void verifyWikiaPromotionalMessage() {
@@ -133,13 +135,14 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public String getDescriptionText() {
-    waitForElementByElement(editBox);
+    waitForElementByElement(heroPublishedDescription);
     return heroPublishedDescription.getText();
   }
 
   public void addRandomTextToDescriptionField(String randomText) {
     waitForElementByElement(editBox);
-    editBox.sendKeys(randomText);
+    descriptionEditField.click();
+    descriptionEditField.sendKeys(randomText);
   }
 
   public void verifyPublishedTextAndEditor(String publishedText) {
@@ -150,5 +153,23 @@ public class ModularMainPageObject extends WikiBasePageObject{
   public void clickDiscardButton() {
     waitForElementByElement(descriptionDiscardButton);
     descriptionDiscardButton.click();
+  }
+
+  public void moveCoverImage() {
+    Actions actions = new Actions(driver);
+    actions.clickAndHold(driver.findElement(By.cssSelector(".image-window")));
+    actions.clickAndHold().moveByOffset(-200, -200).release().perform();
+  }
+
+  public String getTopAttribute() {
+    if(StringUtils.isNotBlank(heroImageModule.getAttribute("style"))){
+      return heroImageModule.getAttribute("style");
+    }else {
+      return "";
+    }
+  }
+
+  public void compareTopValues(String firstTopValue, String secondTopValue) {
+    Assertion.assertNotEquals(firstTopValue, secondTopValue);
   }
 }
