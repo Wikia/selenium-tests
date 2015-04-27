@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,7 +64,7 @@ public class SmartBannerTests extends NewTestTemplate {
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
+      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?cb=" + new Timestamp(System.currentTimeMillis()).getTime());
       banner = new SmartBannerComponentObject(driver);
       PageObjectLogging
           .log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(

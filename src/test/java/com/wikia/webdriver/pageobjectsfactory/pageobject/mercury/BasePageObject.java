@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.sql.Timestamp;
+
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership: Content - Mercury mobile
@@ -25,7 +27,7 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + new Timestamp(System.currentTimeMillis()).getTime());
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
@@ -33,7 +35,7 @@ public class BasePageObject extends MobileBasePageObject {
 
   public void openMercuryWiki(String wikiName) {
     String mercuryWiki = urlBuilder.getUrlForWiki(wikiName);
-    getUrl(mercuryWiki);
+    getUrl(mercuryWiki + "?cb=" + new Timestamp(System.currentTimeMillis()).getTime());
   }
 
   public void tapOnElement(WebElement element) {
