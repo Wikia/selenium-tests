@@ -33,11 +33,6 @@ public class BasePageObject extends MobileBasePageObject {
     return new ArticlePageObject(driver);
   }
 
-  public void openMercuryWiki(String wikiName) {
-    String mercuryWiki = urlBuilder.getUrlForWiki(wikiName);
-    getUrl(mercuryWiki + "?cb=" + new Timestamp(System.currentTimeMillis()).getTime());
-  }
-
   public void tapOnElement(WebElement element) {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);

@@ -10,7 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,8 +35,9 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
+    wikiURL = urlBuilder.getUrlForWiki(DIFFERENT_HUBS_WIKIS[0]);
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
+    base.openMercuryArticleByName(wikiURL, "");
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
@@ -62,9 +62,11 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT02
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
+    BasePageObject base = new BasePageObject(driver);
     SmartBannerComponentObject banner;
     for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/?cb=" + new Timestamp(System.currentTimeMillis()).getTime());
+      wikiURL = urlBuilder.getUrlForWiki(DIFFERENT_HUBS_WIKIS[i]);
+      base.openMercuryArticleByName(wikiURL, "");
       banner = new SmartBannerComponentObject(driver);
       PageObjectLogging
           .log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(
