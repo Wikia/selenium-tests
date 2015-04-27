@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -45,6 +45,9 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement updateCoverImageLink;
   @FindBy (css = "button.sg-sub[disabled=disabled]")
   private WebElement publishButtonDisabled;
+  @FindBy (css = ".image-window")
+  private WebElement imageWindowDragging;
+
 
   public ModularMainPageObject(WebDriver driver) {
     super(driver);
@@ -121,7 +124,9 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void deleteDescriptionEditorContent() {
-      descriptionEditField.clear();
+    descriptionEditField.clear();
+    descriptionEditField.sendKeys("a");
+    descriptionEditField.sendKeys(Keys.BACK_SPACE);
   }
 
   public void verifyWikiaPromotionalMessage() {
@@ -152,12 +157,13 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void clickDiscardButton() {
     waitForElementByElement(descriptionDiscardButton);
+    waitForElementClickableByElement(descriptionDiscardButton);
     descriptionDiscardButton.click();
   }
 
   public void moveCoverImage() {
     Actions actions = new Actions(driver);
-    actions.clickAndHold(driver.findElement(By.cssSelector(".image-window")));
+    actions.clickAndHold(imageWindowDragging);
     actions.clickAndHold().moveByOffset(-200, -200).release().perform();
   }
 

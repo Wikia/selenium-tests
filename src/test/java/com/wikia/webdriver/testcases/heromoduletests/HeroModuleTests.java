@@ -111,7 +111,7 @@ public class HeroModuleTests extends NewTestTemplate {
     mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
-    mom.deleteDescriptionEditorContent(); //How to view the text?
+    mom.deleteDescriptionEditorContent();
     mom.verifyWikiaPromotionalMessage();
     mom.verifyPublishButtonDisability();
   }
