@@ -58,7 +58,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 
   //AM02
   @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}, invocationCount = 20
+      groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
   )
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

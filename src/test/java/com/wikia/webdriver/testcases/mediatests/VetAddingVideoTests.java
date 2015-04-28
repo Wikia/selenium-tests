@@ -43,7 +43,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.verifyPostedMessageVideo(title);
   }
     @RelatedIssue(issueID = "MAIN-4324")
-  @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
+  @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"}, invocationCount = 20)
   public void VetAddVideo_002_MessageWallLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
