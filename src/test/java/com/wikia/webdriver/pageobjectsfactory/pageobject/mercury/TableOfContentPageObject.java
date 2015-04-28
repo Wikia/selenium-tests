@@ -21,7 +21,7 @@ public class TableOfContentPageObject extends BasePageObject {
   private List<WebElement> listOfLinks;
   @FindBy(css = "nav.table-of-contents ol")
   private WebElement TOCMenu;
-  @FindBy(css = "nav.table-of-contents button")
+  @FindBy(css = "nav.table-of-contents div")
   private WebElement tocButton;
   @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
   private WebElement tocUnderH1;

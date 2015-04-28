@@ -33,7 +33,7 @@ public class TOCTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
     // Temporary solution
-    driver.get("http://mediawiki119.wikia.com/wiki/MercuryToc");
+    driver.get(urlBuilder.getUrlForWiki("mediawiki119") + "wiki/MercuryToc");
     //
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
