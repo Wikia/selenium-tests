@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.searchtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
@@ -10,6 +8,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
+
+import org.testng.annotations.Test;
 
 /**
  * Author: Artur Dwornik & Rodrigo Molinero Gomez Date: 29.03.13 Time: 11:22 STAPI01: Verify that
@@ -98,6 +98,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoPagination();
   }
 
+  @RelatedIssue(issueID = "DAT-2753")
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
       groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
