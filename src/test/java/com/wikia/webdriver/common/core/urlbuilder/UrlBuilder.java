@@ -52,7 +52,6 @@ public class UrlBuilder {
                  (String) customWikiNames.get(wikiName).getLeft();
     }
     return composeUrl(prefix, wikiName, suffix);
-
   }
 
   public String appendQueryStringToURL(String url, String qs) {
