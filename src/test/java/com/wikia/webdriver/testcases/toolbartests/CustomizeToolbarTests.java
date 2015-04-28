@@ -140,7 +140,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
   }
 
   @RelatedIssue(issueID = "MAIN-4323")
-  @Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"})
+  @Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"}, invocationCount = 20)
   public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
