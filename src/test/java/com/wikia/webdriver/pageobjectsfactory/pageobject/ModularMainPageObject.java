@@ -66,7 +66,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void selectFileToUpload(String file) {
       updateCoverImageInput.sendKeys(getAbsolutePathForFile(
-          ClassLoader.getSystemResource("ImagesForUploadTests/" + file).getPath()).toString());
+          ClassLoader.getSystemResource("ImagesForUploadTests/" + file).getPath()));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 
@@ -163,8 +163,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void moveCoverImage() {
     Actions actions = new Actions(driver);
-    actions.clickAndHold(imageWindowDragging);
-    actions.clickAndHold().moveByOffset(-200, -200).release().perform();
+    actions.clickAndHold(imageWindowDragging).clickAndHold().moveByOffset(-200, -200).release().perform();
   }
 
   public String getTopAttribute() {

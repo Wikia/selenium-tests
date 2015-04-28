@@ -96,7 +96,6 @@ public class HeroModuleTests extends NewTestTemplate {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    String imgSrc = mom.getMoMSrc();
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
     String firstTopValue = mom.getTopAttribute();
