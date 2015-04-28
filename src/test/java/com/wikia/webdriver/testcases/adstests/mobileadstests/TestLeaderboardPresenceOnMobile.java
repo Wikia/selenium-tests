@@ -23,8 +23,16 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
       dataProvider = "articlesWithTopLeaderboard"
   )
   public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());
     testedPage = urlBuilder.getUrlForPath(wikiName, article);
+  }
+
+  @GeoEdgeProxy(country = "JP")
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"}
+  )
+  public void TopLeaderboardPresenceTest_JP() {
+    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
   }
 
   @GeoEdgeProxy(country = "VE")
@@ -95,6 +103,14 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
       groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF"}
   )
   public void TopLeaderboardPresenceTest_GEF() {
+    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  }
+
+  @GeoEdgeProxy(country = "NO")
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"}
+  )
+  public void TopLeaderboardPresenceTest_NO() {
     new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
   }
 }

@@ -30,9 +30,10 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.logInCookie(credentials.userName11, credentials.password11, wikiURL);
   }
 
+  //AM01
   @Test(
       groups = {
           "VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
@@ -47,37 +48,41 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorAddMediaDialog mediaDialog =
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
-    veNew.verifyVideo();
+    veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AM02
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
   )
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
         (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.PREMIUM_VIDEO_URL);
-    veNew.verifyVideo();
+    veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
+  //AM03
   @Test(
       groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
   )
   public void VEAddExternalVideoTests_003_AddExistingVid() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -89,6 +94,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 
 
@@ -98,7 +104,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
   )
   public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
-    ;
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.selectMediaAndDelete();
@@ -106,5 +111,6 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
+    article.logOut(wikiURL);
   }
 }

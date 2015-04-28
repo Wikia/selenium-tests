@@ -44,7 +44,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
   @AfterMethod(alwaysRun = true)
   public void stop() {
     if (isProxyServerRunning) {
-      networkTrafficIntereceptor.stop();
+      networkTrafficInterceptor.stop();
     }
     stopBrowser();
   }

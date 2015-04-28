@@ -19,12 +19,14 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   private WebElement getInfoLink;
   @FindBy(css = ".ve-ui-mwParameterPage")
   private List<WebElement> templateParams;
-  @FindBy(css = ".oo-ui-flaggableElement-primary a")
+  @FindBy(css = ".oo-ui-processDialog-actions-primary a")
   private WebElement doneButton;
   @FindBy(css = ".ve-ui-wikiaTransclusionDialog-cancelButton a")
   private WebElement cancelButton;
   @FindBy(css = ".ve-ui-mwTemplateDialog-ready")
   private WebElement templateDialog;
+  @FindBy(css = ".ve-ui-wikiaFocusWidget-node")
+  private WebElement templateFocusedMode;
 
   private static final By PARAM_LABEL_BY = By.cssSelector(".ve-ui-mwParameterPage-label");
   private static final By PARAM_INPUT_BY = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
@@ -35,31 +37,31 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   }
 
   @Override
-  public void switchToIFrame() {
-    waitForElementVisibleByElement(templateDialog);
-    super.switchToIFrame();
+  public void waitForDialogVisible() {
+    super.waitForDialogVisible();
+    waitForElementVisibleByElement(templateFocusedMode);
   }
 
   @Override
-  public void switchOutOfIFrame() {
-    waitForElementNotVisibleByElement(templateDialog);
-    super.switchOutOfIFrame();
+  public void waitForDialogNotVisible() {
+    super.waitForDialogNotVisible();
+    waitForElementNotVisibleByElement(templateFocusedMode);
   }
 
   public ArticlePageObject clickGetInfoLink() {
-    switchToIFrame();
+    waitForDialogVisible();
     try {
       waitForElementByElement(getInfoLink);
       //Opens new tab to Template namespace
       getInfoLink.click();
       return new ArticlePageObject(driver);
     } finally {
-      switchOutOfIFrame();
+      waitForDialogNotVisible();
     }
   }
 
   public void typeInParam(String paramName, String text) {
-    switchToIFrame();
+    waitForDialogVisible();
     if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
       WebElement targetParam = getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
       WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
@@ -70,11 +72,10 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
     }
     PageObjectLogging
         .log("typeInParam", "Type " + text + " in the " + paramName + " field.", true, driver);
-    switchOutOfIFrame();
   }
 
   public VisualEditorPageObject clickDone() {
-    switchToIFrame();
+    waitForDialogVisible();
     try {
       if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
         waitForElementClickableByElement(doneButton);
@@ -84,12 +85,12 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
       }
       return new VisualEditorPageObject(driver);
     } finally {
-      switchOutOfIFrame();
+      waitForDialogNotVisible();
     }
   }
 
   public VisualEditorPageObject clickCancel() {
-    switchToIFrame();
+    waitForDialogVisible();
     try {
       if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
         waitForElementClickableByElement(cancelButton);
@@ -99,7 +100,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
       }
       return new VisualEditorPageObject(driver);
     } finally {
-      switchOutOfIFrame();
+      waitForDialogNotVisible();
     }
   }
 }

@@ -1,23 +1,24 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.ExecuteAs;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.ShareToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-import org.testng.annotations.Test;
-
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Verify share toolbar elements, 2. Verify twitter modal,
- *         3. (Skipped) Verify facebook modal, 4. Verify login modal for anon when attempting to
- *         share by email, 5. Verify email modal for logged in user when attempting to share by
- *         email.
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. Verify share toolbar elements, 2. Verify twitter modal, 3. (Skipped) Verify facebook
+ *         modal, 4. Verify login modal for anon when attempting to share by email, 5. Verify email
+ *         modal for logged in user when attempting to share by email.
  */
 @Test(groups = {"Toolbar"})
-public class ShareToolbarTests extends NewTestTemplateBeforeClass {
+public class ShareToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"ShareToolbar001", "Smoke4"})
   @ExecuteAs(user = User.USER_2)
@@ -40,7 +41,8 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
     share.verifyTwitterModalURL();
   }
 
-  //SecurityError: Blocked a frame with origin "http://mediawiki119.wikia.com" from accessing a cross-origin frame.
+  // SecurityError: Blocked a frame with origin "http://mediawiki119.wikia.com" from accessing a
+  // cross-origin frame.
   @Test(enabled = false, groups = {"ShareToolbar003"})
   public void ShareToolbar003_VerifyingFBModal() {
     new ArticlePageObject(driver).openRandomArticle(wikiURL);

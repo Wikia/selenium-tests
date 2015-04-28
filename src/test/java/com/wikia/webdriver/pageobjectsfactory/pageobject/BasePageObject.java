@@ -28,6 +28,7 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -75,14 +76,18 @@ public class BasePageObject {
     }
   }
 
+  public String getBrowser() {
+    return ConfigurationFactory.getConfig().getBrowser().toString();
+  }
+
   public static String getAttributeValue(WebElement element, String attributeName) {
     return element.getAttribute(attributeName);
   }
 
   public void clickActions(WebElement pageElem) {
     try {
-      Actions builder = new Actions(driver);
-      Actions click = builder.click(pageElem);
+      Actions actionBuilder = new Actions(driver);
+      Actions click = actionBuilder.click(pageElem);
       click.perform();
     } catch (Exception e) {
       PageObjectLogging.log("clickActions", e.toString(), false);
@@ -219,6 +224,11 @@ public class BasePageObject {
     element.click();
   }
 
+  protected void scrollAndClick(WebElement element, int offset) {
+    scrollToElement(element, offset);
+    element.click();
+  }
+
   protected void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
@@ -226,6 +236,40 @@ public class BasePageObject {
           "var x = $(arguments[0]);"
           + "window.scroll(0,parseInt(x.offset().top - 60));",
           element
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log(
+            "JSError", "JQuery is not defined", false
+        );
+      }
+    }
+  }
+
+  protected void scrollToElement(WebElement element, int offset) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
+          element, offset
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log(
+            "JSError", "JQuery is not defined", false
+        );
+      }
+    }
+  }
+
+  protected void scrollToElement(By elementBy) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 60));",
+          driver.findElement(elementBy)
       );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
@@ -276,6 +320,19 @@ public class BasePageObject {
     Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
     PageObjectLogging.log("verifyURLcontains",
                           "current url is the same as expetced url", true);
+  }
+
+  public void verifyURLcontains(final String givenString, int timeOut) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
+        @Override public Boolean apply(WebDriver driver) {
+          return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
+        }
+      });
+    }finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public void verifyURL(String givenURL) {
@@ -460,10 +517,17 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param by The By class defined for the
-   * element
+   * Checks if the element is present in browser DOM
    */
   public WebElement waitForElementByBy(By by) {
+    wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    return driver.findElement(by);
+  }
+  
+  /**
+   * Checks if the element is visible on the browser
+   */
+  public WebElement waitForElementVisibleByBy(By by) {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));
     return driver.findElement(by);
   }
@@ -513,6 +577,24 @@ public class BasePageObject {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
       wait.until(CommonExpectedConditions.elementVisible(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Example: wait 10 sec for element and check each 0.5 for that element (10 / 0.5 = 20 attempts)
+   *
+   * @param element
+   * @param timeOutInSec
+   * @param checkOutInMilliSec
+   */
+  public void waitForElementVisibleByElement(WebElement element, int timeOutInSec,
+                                                          int checkOutInMilliSec) {
+    WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
+    driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(ExpectedConditions.visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -569,6 +651,18 @@ public class BasePageObject {
       wait.until(CommonExpectedConditions
           .valueToBePresentInElementsAttribute(By.cssSelector(selector),
               attribute, value));
+    }finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void waitForValueToBePresentInElementsCssByCss(
+      String selector, String cssProperty, String expectedValue) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      wait.until(CommonExpectedConditions
+          .cssValuePresentForElement(By.cssSelector(selector),
+              cssProperty, expectedValue));
     }finally {
       restoreDeaultImplicitWait();
     }
@@ -828,7 +922,7 @@ public class BasePageObject {
    * check if current HTTP status of given URL is the same as expected
    */
   public void verifyURLStatus(int desiredStatus, String url) {
-    int timeOut = 500;
+    int waitTime = 500;
     int statusCode = 0;
     boolean status = false;
     while (!status) {
@@ -838,9 +932,9 @@ public class BasePageObject {
           status = true;
         } else {
           Thread.sleep(500);
-          timeOut += 500;
+          waitTime += 500;
         }
-        if (timeOut > 20000) {
+        if (waitTime > 20000) {
           break;
         }
       } catch (InterruptedException e) {
@@ -1005,4 +1099,25 @@ public class BasePageObject {
     }
     return result;
   }
+  
+  /**
+  * Send keys at the speed of good typist human.
+  * based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
+  * "A professional or good typist hits around 325 to 335 CPM (chars per minute)"
+  * This means 60 000 / 330 = 182ms
+  */
+  public void sendKeysHumanSpeed(WebElement input, String keys) {
+      int interval = 182;
+      for(char c : keys.toCharArray()) {
+          String character = String.valueOf(c);
+          input.sendKeys(character);
+          try {
+            Thread.sleep(interval);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+      }
+  }
+  
+  
 }

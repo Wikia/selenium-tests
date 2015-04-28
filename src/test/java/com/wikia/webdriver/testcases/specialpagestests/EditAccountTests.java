@@ -19,21 +19,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
-  private String testedWiki;
-
-  public EditAccountTests() {
-    super();
-    UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
-    testedWiki = urlBuilder.getUrlForWiki("community");
-  }
+  UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+  private String testedWiki = urlBuilder.getUrlForWiki("community");
 
   @Test(groups = "EditAccountTest")
   public void EditAccount_001_closeAccount() {
-    driver.get(testedWiki);
+    EditAccount editAccount =
+        new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
+
     new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
         .logIn(credentials.userNameStaff, credentials.passwordStaff);
-    EditAccount editAccount =
-        new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
+    editAccount.goToAccountManagement(credentials.userNameClosedAccount);
     editAccount.closeAccount(PageContent.CAPTION);
     editAccount.verifyAccountClosedMessage();
   }
@@ -48,11 +44,12 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_002_verifyAccountClosed")
   public void EditAccount_003_reopenAccount() {
-    driver.get(testedWiki);
+    EditAccount editAccount =
+        new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
     new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
         .logIn(credentials.userNameStaff, credentials.passwordStaff);
-    EditAccount editAccount =
-        new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
+
+    editAccount.goToAccountManagement(credentials.userNameClosedAccount);
     editAccount.reopenAccount(credentials.passwordClosedAccount);
     editAccount.verifyAccountReopenedMessage();
   }

@@ -11,42 +11,53 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @author Robert 'rochan' Chan
  */
-
 public class VisualEditorDialog extends WikiBasePageObject {
 
-  @FindBy(css = ".oo-ui-window-ready .oo-ui-frame")
-  private WebElement iframe;
+  @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
+  private WebElement frame;
   @FindBy(css = ".oo-ui-window-ready")
-  private WebElement dialog;
-  @FindBy(css = ".oo-ui-icon-close")
+  protected WebElement dialog;
+  @FindBy(css = ".oo-ui-window-ready .oo-ui-icon-close")
   private WebElement closeButton;
 
   public VisualEditorDialog(WebDriver driver) {
     super(driver);
+    waitForDialogVisible();
   }
 
+  @Deprecated
   public void switchToIFrame() {
     waitForElementByElement(dialog);
     waitForElementVisibleByElement(dialog);
-    driver.switchTo().frame(iframe);
+    driver.switchTo().frame(frame);
   }
 
+  public void waitForDialogVisible() {
+    waitForElementVisibleByElement(dialog);
+  }
+
+  @Deprecated
   public void switchOutOfIFrame() {
     waitForElementNotVisibleByElement(dialog);
     driver.switchTo().defaultContent();
   }
 
+  public void waitForDialogNotVisible() {
+    waitForElementNotVisibleByElement(dialog);
+  }
+
+  @Deprecated
   public void switchOutOfAllIFrame() {
     driver.switchTo().defaultContent();
     waitForElementNotVisibleByElement(dialog);
   }
 
   public VisualEditorPageObject closeDialog() {
-    switchToIFrame();
+    waitForDialogVisible();
     waitForElementClickableByElement(closeButton);
     closeButton.click();
-    PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
+    PageObjectLogging.log("closeDialog", "Dialog is closed", true);
     return new VisualEditorPageObject(driver);
   }
 }

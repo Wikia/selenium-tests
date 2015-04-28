@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
  * area
  */
 
-public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
+public class VECopyAndPasteTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   WikiBasePageObject base;

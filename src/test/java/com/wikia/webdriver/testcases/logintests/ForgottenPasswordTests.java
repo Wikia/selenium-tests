@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
@@ -16,7 +17,8 @@ import org.testng.annotations.Test;
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
-
+    
+  @RelatedIssue(issueID = "PLATFORM-624")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;

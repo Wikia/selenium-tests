@@ -16,7 +16,7 @@ public class CreateWikiMessages {
   public static final String INVALID_PASSWORD_ERROR_MESSAGE =
       "Oops, wrong password. Make sure caps lock is off and try again.";
   public static final String WIKINAME_VIOLATES_POLICY =
-      "This wiki name contains a word that violates our naming policy";
+      "This wikia name contains a word that violates our naming policy";
   public static final String WIKINAME_PREFIX = "QATestWiki";
   public static final String WIKI_TOPIC =
       "Duis quam ante, fringilla at cursus tristique, laoreet vel elit. " +

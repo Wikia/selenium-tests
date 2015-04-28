@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -113,6 +114,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPinNotExists(pinName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4304")
   @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_006_VerifyChangePinData() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -137,6 +139,8 @@ public class PinMapTests extends NewTestTemplate {
     pinModal.typePinDescription(base.getTimeStamp());
     selectedMap = pinModal.clickSaveButton();
     selectedMap.verifyPinDataWasChanged(pinTitle, pinDescription);
+    selectedMap.refreshPage();
+    selectedMap.clickOnPin(0);
   }
 
   @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})

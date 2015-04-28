@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.chattests;
 
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -49,6 +50,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     return base.openChat(wikiURL);
   }
 
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = {"Chat_001", "Chat"})
   public void Chat_001_twoUserEnterChat() {
     switchToWindow(driverOne);
@@ -67,6 +69,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyUserJoinToChatMessage(userTwo);
   }
 
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = {"Chat_002", "Chat"})
   public void Chat_002_dropDownMenuForRegularUser() {
     switchToWindow(driverOne);
@@ -81,6 +84,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyNormalUserDropdown(userTwo);
   }
 
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = {"Chat_003", "Chat"})
   public void Chat_003_dropDownMenuForBlockedUser() {
     switchToWindow(driverOne);
@@ -103,23 +107,9 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserOne.allowPrivateMessageFromUser(userTwo);
   }
 
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = {"Chat_004", "Chat"})
-  public void Chat_004_verifyAdminDropDown() {
-    switchToWindow(driverOne);
-    ChatPageObject chatStaffUser = openChatForUser(
-        driverOne, userStaff, userStaffPassword
-    );
-
-    switchToWindow(driverTwo);
-    openChatForUser(driverTwo, userTwo, userTwoPassword);
-
-    switchToWindow(driverOne);
-    chatStaffUser.verifyChatPage();
-    chatStaffUser.verifyAdminUserDropdown(userTwo);
-  }
-
-  @Test(groups = {"Chat_005", "Chat"})
-  public void Chat_005_verifySwitchingBetweenMainAndPrivateSections() {
+  public void Chat_004_verifySwitchingBetweenMainAndPrivateSections() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
         driverOne, userOne, userOnePassword
@@ -146,8 +136,9 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyMessageOnChat(userTwoMessage);
   }
 
-  @Test(groups = {"Chat_006", "Chat"})
-  public void Chat_006_sendPrivateMessage() {
+  @DontRun(env = {"preview", "dev"})
+  @Test(groups = {"Chat_005", "Chat"})
+  public void Chat_005_sendPrivateMessage() {
     switchToWindow(driverOne);
     ChatPageObject chatUserThree = openChatForUser(
         driverOne, userThree, userThreePassword
@@ -176,8 +167,9 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserThree.verifyMessageOnChat(userFourPrivateMessage);
   }
 
-  @Test(groups = {"Chat_007", "Chat"})
-  public void Chat_007_multipleNotifications() {
+  @DontRun(env = {"preview", "dev"})
+  @Test(groups = {"Chat_006", "Chat"})
+  public void Chat_006_multipleNotifications() {
     switchToWindow(driverOne);
     ChatPageObject chatUserFive = openChatForUser(
         driverOne, userFive, userFivePassword
@@ -206,8 +198,9 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
     chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
   }
 
-  @Test(groups = {"Chat_009", "Chat", "Modals"})
-  public void Chat_009_banUser() {
+  @DontRun(env = {"preview", "dev"})
+  @Test(groups = {"Chat_007", "Chat", "Modals"})
+  public void Chat_007_banUser() {
     switchToWindow(driverOne);
     openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);
 

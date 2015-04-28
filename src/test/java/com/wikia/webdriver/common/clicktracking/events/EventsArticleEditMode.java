@@ -17,6 +17,6 @@ public class EventsArticleEditMode {
           .add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
           .add(EventParameter.CATEGORY.getEventParameter(), "editor-ck"))
       .add("1", Json.createObjectBuilder()
-          .add(EventParameter.LABEL.getEventParameter(), "preview"))
+          .add(EventParameter.LABEL.getEventParameter(), "preview-desktop"))
       .build();
 }

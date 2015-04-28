@@ -23,11 +23,11 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   private WebElement emptyStateDialogHeadline;
   @FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-text")
   private WebElement emptyStateDialogText;
-  @FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labeledElement-label")
+  @FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labelElement-label")
   private WebElement emptyStateCreateAMapButton;
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
-  private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
+  private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget.map");
 
   public VisualEditorAddMapDialog(WebDriver driver) {
     super(driver);
@@ -39,7 +39,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   }
 
   public CreateAMapComponentObject clickCreateAMapButton() {
-    switchToIFrame();
+    waitForDialogVisible();
     if (checkIfElementOnPage(emptyStateCreateAMapButton)) {
       waitForElementClickableByElement(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
@@ -55,7 +55,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   }
 
   public VisualEditorPageObject addExistingMap(int number) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     if (checkIfElementOnPage(mediaResultsWidget)) {
       waitForElementVisibleByElement(mediaResultsWidget);
@@ -66,12 +66,12 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
       throw new NoSuchElementException(
           "The dialog is in empty state, the wiki needs to contain map.");
     }
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
   }
 
   public void checkIsEmptyState() {
-    switchToIFrame();
+    waitForDialogVisible();
     if (checkIfElementOnPage(emptyStateDialogHeadline)) {
       waitForElementVisibleByElement(emptyStateDialogHeadline);
       waitForElementVisibleByElement(emptyStateDialogText);
@@ -85,12 +85,12 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   }
 
   public void verifyNumOfMaps(int num) {
-    switchToIFrame();
+    waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     waitForElementVisibleByElement(mediaResultsWidget);
     List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
     Assertion
         .assertEquals(maps.size(), num, "Expecting " + num + " of maps. Actual is " + maps.size());
-    switchOutOfIFrame();
+    waitForDialogNotVisible();
   }
 }

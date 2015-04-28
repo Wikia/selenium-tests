@@ -25,7 +25,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @ExecuteAs(user = User.USER)
-  public void VetArticleComments_001_Provider_QAART_509() {
+  public void VetArticleComments_001_Provider() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();

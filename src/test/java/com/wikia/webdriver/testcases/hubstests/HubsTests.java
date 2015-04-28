@@ -103,6 +103,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
     hub.verifySuggestVideoOrArticleButtonNotClickable();
     hub.closeSuggestAVideoOrArticleCancelButton();
     hub.verifySuggestAVideoOrArticleModalDisappeared();
+    logOut();
   }
 
   /**

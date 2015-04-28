@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests.providers;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.ExecuteAs;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
@@ -17,10 +18,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
  */
 public class VetProvidersTests extends NewTestTemplate {
 
+
+  @RelatedIssue(issueID = "MAIN-3413")
+  @ExecuteAs(user = User.USER)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
       "VetProvidersArticle", "VetProvidersTests_001", "Media"})
-  @ExecuteAs(user = User.USER)
-  public void VetProvidersTests_001_article_MAIN_3413(String videoUrl, String videoName) {
+  public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     PageObjectLogging.log("", videoUrl, true);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();

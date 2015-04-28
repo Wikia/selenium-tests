@@ -52,7 +52,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @ExecuteAs(user = User.USER)
-  public void ArticleCRUDUser_003_addDropdown_QAART_354() {
+  public void ArticleCRUDUser_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
@@ -81,7 +81,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @ExecuteAs(user = User.USER)
   public void ArticleCRUDUser_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article =
+        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by URL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -92,7 +93,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @ExecuteAs(user = User.USER)
   public void ArticleCRUDUser_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article =
+        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by Dropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();

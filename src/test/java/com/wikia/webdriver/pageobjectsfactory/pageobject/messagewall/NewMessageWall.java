@@ -52,7 +52,7 @@ public class NewMessageWall extends WikiBasePageObject {
       newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
-  private String closeButton = ".close-thread";
+  private String closeButtonString = ".close-thread";
 
   By messageTitleBy = By.cssSelector(".msg-title");
   By messageBodyBy = By.cssSelector(".msg-body");
@@ -64,7 +64,7 @@ public class NewMessageWall extends WikiBasePageObject {
   By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
   By editButtonBy = By.cssSelector(".edit-message");
   By removeButtonBy = By.cssSelector(".remove-message");
-  By closeButtonBy = By.cssSelector(firstMessageMenu + closeButton);
+  By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
   By reopenButtonBy = By.cssSelector(".reopen-thread");
   By quoteButtonBy = By.cssSelector(".quote-button.secondary");
   By quoteMessageBy = By.cssSelector(".replies p");

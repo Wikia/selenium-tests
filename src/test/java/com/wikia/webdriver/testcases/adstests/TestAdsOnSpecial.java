@@ -4,7 +4,9 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
+
 
 /**
  * @author Sergey Naumov
@@ -23,14 +25,15 @@ public class TestAdsOnSpecial extends NewTestTemplate {
   )
   public void TestAdsOnSpecialPages_GeoEdgeFree(String wikiName, String article, String lineItemId,
                                                 String adUnit, String leaderboardSlot,
-                                                String prefooterSlot) throws Exception {
+                                                String prefooterSlot,
+                                                Dimension resolution) throws Exception {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, resolution);
 
     ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
     ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
-    ads.verifyGptAdInSlot(prefooterSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(prefooterSlot, lineItemId, "");
   }
 
   @Test(
@@ -40,14 +43,15 @@ public class TestAdsOnSpecial extends NewTestTemplate {
   )
   public void TestAdsOnFilePages_GeoEdgeFree(String wikiName, String article, String lineItemId,
                                              String adUnit, String leaderboardSlot,
-                                             String medrecSlot) throws Exception {
+                                             String medrecSlot,
+                                             Dimension resolution) throws Exception {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, resolution);
 
     ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
     ads.verifyGptIframe(adUnit, medrecSlot, "gpt");
-    ads.verifyGptAdInSlot(medrecSlot, "gpt", lineItemId, "");
+    ads.verifyGptAdInSlot(medrecSlot, lineItemId, "");
   }
 
 

@@ -48,4 +48,17 @@ public class TestEvolveAds extends NewTestTemplate {
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
     wikiPage.verifyEvolveCall();
   }
+
+  @GeoEdgeProxy(country = "CA")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      groups = {"TestEvolveAds"},
+      dataProvider = "evolveHopTestPage"
+  )
+  public void testEvolveHop_CA(String wikiName, String article, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
+    wikiPage.verifyEvolveInSlot(slotName);
+    wikiPage.verifyEvolveHopInSlot(slotName);
+  }
 }

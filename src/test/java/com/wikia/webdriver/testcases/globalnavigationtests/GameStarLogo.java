@@ -19,7 +19,8 @@ public class GameStarLogo extends NewTestTemplate {
   private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1400, 720);
   private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
 
-  @Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"})
+  @Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"},
+        enabled = false)
   public void TestGameStarLogo_001_gameStarLogoPresentOnBigResolution() {
     HomePageObject homePage = new HomePageObject(driver);
     VenusGlobalNavPageObject globalNav = new VenusGlobalNavPageObject(driver);

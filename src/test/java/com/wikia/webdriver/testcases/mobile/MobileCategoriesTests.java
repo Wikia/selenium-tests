@@ -1,8 +1,11 @@
 package com.wikia.webdriver.testcases.mobile;
 
+import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileCategoryPageObject;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -12,6 +15,13 @@ import org.testng.annotations.Test;
  *         entries
  */
 public class MobileCategoriesTests extends NewTestTemplate {
+
+  Credentials credentials = config.getCredentials();
+
+  @BeforeMethod(alwaysRun = true)
+  public void logIn() {
+    new MobileBasePageObject(driver).loginDropDown(credentials.userName, credentials.password);
+  }
 
   @Test(groups = {"MobileCategory_001", "MobileCategories", "Mobile"})
   public void MobileCategory_001_checkCategoryExhibitionButtons() {

@@ -17,8 +17,8 @@ public class InteractiveMapsContent {
   public static final int PIN_TYPE_INDEX = 0;
   public static final int SELECTED_MAP_INDEX = 0;
   public static final int SELECTED_TEMPLATE_INDEX = 0;
-  public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72, 56};
-  public static final String ASSOCIATED_ARTICLE_NAME = "MercuryG";
+  public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72};
+  public static final String ASSOCIATED_ARTICLE_NAME = "File:400x200.png";
   public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
   public static final String
       TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND =
@@ -31,7 +31,7 @@ public class InteractiveMapsContent {
   public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
   public static final String
       MAP_DELETE_ERROR =
-      "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
+      "You are not allowed to execute the action you have requested.";
   public static final String MAP_DELETED_MSG = "This map is deleted";
   public static final String EXTERNAL_LINK = "http://www.gazeta.pl/0,0.html";
   public static final String
@@ -42,8 +42,9 @@ public class InteractiveMapsContent {
       "Related article name or external URL";
   public static final String
       ARTICLE_NOT_EXIST_ERROR =
-      "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";
+      "Error: either there is no %articlename% article on this wikia, or the URL entered is invalid.";
   public static final String ESCAPED_FRAGMENT_MAP_ID = "69";
+  public static final String MOBILE_APPS_MAP = "http://maps.wikia-services.com/api/v1/render/77/?hideAttr=1&isEmbeddedInWikiaApp&uselang=en&noexternals=1";
 
   private InteractiveMapsContent() {
 
