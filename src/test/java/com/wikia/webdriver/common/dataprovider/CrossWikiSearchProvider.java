@@ -56,8 +56,6 @@ public class CrossWikiSearchProvider {
             "Yu-Gi-Oh!", "Yu-Gi-Oh!"
         }, {
             "007", "James Bond Wiki"
-        }, {
-            "lohgame", "Legacy of Heroes Wiki"
         }
     };
   }
