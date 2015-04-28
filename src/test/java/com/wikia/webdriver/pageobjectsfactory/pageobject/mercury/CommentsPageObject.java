@@ -177,4 +177,8 @@ public class CommentsPageObject extends BasePageObject {
     return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
         .contains("/wiki/File:");
   }
+
+  public void waitForFirstCommentToBeVisible() {
+    waitForElementVisibleByElement(allComments.get(0), 5, 500);
+  }
 }

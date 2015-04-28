@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -26,10 +27,14 @@ public class TOCTests extends NewTestTemplate {
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
+  @RelatedIssue(issueID = "HG-612")
   @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
+    // Temporary solution
+    driver.get("http://mediawiki119.wikia.com/wiki/MercuryToc");
+    //
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
     PageObjectLogging.log("TOC", "is displayed", true);

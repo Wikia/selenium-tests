@@ -23,7 +23,7 @@ public class TableOfContentPageObject extends BasePageObject {
   private WebElement TOCMenu;
   @FindBy(css = "nav.table-of-contents button")
   private WebElement tocButton;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[1]")
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
   private WebElement tocUnderH1;
 
   public TableOfContentPageObject(WebDriver driver) {
