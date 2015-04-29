@@ -14,7 +14,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSlotsMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSynthetic"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
-            <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAdsOnRedirects"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
@@ -42,6 +41,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
