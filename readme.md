@@ -73,7 +73,7 @@ The following are valid test parameters:
 
 * `-Dbrowser` - Which browser to use, for example "CHROME"
 * `-Dbase-address` - (Deprecated) The base URL to run in the browser, for example "http://yourname.wikia-dev.com/"
-* `-Denv` - The environment on which the test(s) should be run in, for example "prod", "preview", "dev-<name>", "sandbox-<number>"
+* `-Denv` - The environment on which the test(s) should be run in, for example `prod`, `preview`, `dev-<name>`, `sandbox-<number>`,
 * `-Dwiki-name` - The wiki where the test(s) should be run on, for example "mediawiki119", "muppet"
 * `-Dgroups` - (Optional) Which test groups to run, for example "Chat". Optional. Uses all tests if omitted
 * `-Dlive-domain` - (Optional) The base URL to run in the browser, for example "http://www.wikia.com/". Only required for Hubs tests
