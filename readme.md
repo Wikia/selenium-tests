@@ -85,6 +85,8 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 * FF
 * CHROME
+* CHROMEMOBILE
+* CHROMEMOBILEMERCURY
 * IE
 * GHOST (phantomjs)
 
