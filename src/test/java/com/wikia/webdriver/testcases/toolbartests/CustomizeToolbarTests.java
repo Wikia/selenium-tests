@@ -137,8 +137,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
     toolbar.clickResetDefaults();
     toolbar.clickSave();
   }
-
-
+    
   @Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"})
   public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
