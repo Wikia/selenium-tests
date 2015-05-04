@@ -10,6 +10,11 @@ import org.apache.commons.lang3.tuple.Pair;
  */
 public class UrlBuilder {
 
+  final String XIPIO_ADDRESS_FORMAT = ".%s:%d";
+
+  final String XIPIO_DEFAULT_DOMAIN = "127.0.0.1.xip.io";
+  final int XIPIO_DEFAULT_PORT = 8000;
+
   private String browser;
   private String env;
 
@@ -34,21 +39,28 @@ public class UrlBuilder {
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+
     if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
       return appendQueryStringToURL(url, "useskin=wikiamobile");
     }
+
     return url + separator + wikiPath;
   }
 
   public String getUrlForWiki(String wikiName) {
     String prefix = getUrlPrefix(wikiName);
     String suffix = getUrlSuffix(wikiName);
+
     if (customWikiNames.containsKey(wikiName)) {
-      prefix = suffix = "";
-      wikiName = env.contains("dev") ?
-                 (String) customWikiNames.get(wikiName).getRight() :
-                 (String) customWikiNames.get(wikiName).getLeft();
+      if (env.contains("dev")) {
+        prefix = "";
+        wikiName = (String) customWikiNames.get(wikiName).getRight();
+      } else {
+        prefix = suffix = "";
+        wikiName = (String) customWikiNames.get(wikiName).getLeft();
+      }
     }
+
     return composeUrl(prefix, wikiName, suffix);
   }
 
@@ -62,7 +74,20 @@ public class UrlBuilder {
   }
 
   private String getUrlSuffix(String wikiName) {
+    if (env.contains("dev") && isMercuryBrowser()) {
+      return String.format(XIPIO_ADDRESS_FORMAT, XIPIO_DEFAULT_DOMAIN, XIPIO_DEFAULT_PORT);
+    }
+
+    if (env.contains("dev")) {
+      String devBoxOwner = env.split("-")[1];
+      return "." + devBoxOwner + "." + "wikia-dev.com";
+    }
+
     return wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
+  }
+
+  private Boolean isMercuryBrowser() {
+    return browser != null && browser.equalsIgnoreCase("CHROMEMOBILEMERCURY");
   }
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
@@ -70,14 +95,12 @@ public class UrlBuilder {
       if (!env.contains("dev") && !env.equals("prod")) {
         prefix = env + "." + prefix;
       }
-      if (env.contains("dev")) {
-        if (wikiName.endsWith("wikia")) {
-          wikiName = "wikiaglobal";
-        }
-        String devBoxOwner = env.split("-")[1];
-        suffix = "." + devBoxOwner + "." + "wikia-dev.com";
+
+      if (env.contains("dev") && !isMercuryBrowser() && wikiName.endsWith("wikia")) {
+        wikiName = "wikiaglobal";
       }
     }
+
     return "http://" + prefix + wikiName + suffix + "/";
   }
 }
