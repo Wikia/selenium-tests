@@ -176,6 +176,7 @@ public class LightboxTests extends NewTestTemplate {
     String direction = DIRECTION_LEFT;
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
     PageObjectLogging.log("Current image", "is visible", true);
+    touchAction.tapOnPointXY(50, 50, 500, 2000);
     File beforeZooming = new Shooter().capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
@@ -191,6 +192,7 @@ public class LightboxTests extends NewTestTemplate {
     direction = DIRECTION_RIGHT;
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
     PageObjectLogging.log("Current image", "is visible", true);
+    touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
@@ -206,6 +208,7 @@ public class LightboxTests extends NewTestTemplate {
     direction = DIRECTION_UP;
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
     PageObjectLogging.log("Current image", "is visible", true);
+    touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
@@ -221,6 +224,7 @@ public class LightboxTests extends NewTestTemplate {
     direction = DIRECTION_DOWN;
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
     PageObjectLogging.log("Current image", "is visible", true);
+    touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 2000);
