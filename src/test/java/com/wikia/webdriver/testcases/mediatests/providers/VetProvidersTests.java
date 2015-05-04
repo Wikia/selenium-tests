@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 public class VetProvidersTests extends NewTestTemplate {
 
 
-  @RelatedIssue(issueID = "MAIN-3413")
+  @RelatedIssue(issueID = "QAART-585")
   @ExecuteAs(user = User.USER)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
       "VetProvidersArticle", "VetProvidersTests_001", "Media"})
