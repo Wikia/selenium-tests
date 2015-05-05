@@ -182,6 +182,27 @@ public class Credentials {
         userName13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.username");
         password13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.password");
 
+        userNameEnglish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language1.username");
+        passwordEnglish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language1.password");
+        userNameJapanese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language2.username");
+        passwordJapanese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language2.password");
+        userNameBrazilianPortuguese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language3.username");
+        passwordBrazilianPortuguese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language3.password");
+        userNameChinese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language4.username");
+        passwordChinese = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language4.password");
+        userNameGerman = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language5.username");
+        passwordGerman = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language5.password");
+        userNameFrench = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language6.username");
+        passwordFrench = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language6.password");
+        userNameSpanish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language7.username");
+        passwordSpanish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language7.password");
+        userNameRussian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language8.username");
+        passwordRussian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language8.password");
+        userNamePolish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language9.username");
+        passwordPolish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language9.password");
+        userNameItalian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language10.username");
+        passwordItalian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language10.password");
+
         userNameNonLatin =
                 XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.username");
         userNameNonLatinEncoded =
@@ -298,6 +319,8 @@ public class Credentials {
         apiToken = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.token");
 
         youTubeApiKey = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.youtube.key");
+
+
     }
 
     public String getUserBaseOnEditorPref(EditorPref editorPref) {
