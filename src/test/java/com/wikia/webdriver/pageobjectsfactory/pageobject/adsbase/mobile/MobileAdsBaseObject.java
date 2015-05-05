@@ -75,7 +75,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   public void verifyNoSlotPresent(String slotName) {
     if (checkIfElementOnPage("#" + slotName)) {
-      throw new NoSuchElementException("No slot found as expected");
+      throw new NoSuchElementException("No slot found as expected (" + slotName + ")");
     }
     PageObjectLogging.log("AdInSlot", "Slot is added to the page", true);
   }
