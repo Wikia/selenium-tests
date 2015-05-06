@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
 import com.google.common.collect.ImmutableMap;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 
@@ -10,10 +9,10 @@ import org.apache.commons.lang3.tuple.Pair;
  */
 public class UrlBuilder {
 
-  final String XIPIO_ADDRESS_FORMAT = ".%s:%d";
+  private static final String XIPIO_ADDRESS_FORMAT = ".%s:%d";
 
-  final String XIPIO_DEFAULT_DOMAIN = "127.0.0.1.xip.io";
-  final int XIPIO_DEFAULT_PORT = 8000;
+  private static final String XIPIO_DEFAULT_DOMAIN = "127.0.0.1.xip.io";
+  private static final int XIPIO_DEFAULT_PORT = 8000;
 
   private String browser;
   private String env;

@@ -27,6 +27,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_001_PublishedProvider() {
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);
