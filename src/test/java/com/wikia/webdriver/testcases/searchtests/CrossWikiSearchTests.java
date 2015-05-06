@@ -139,8 +139,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
-  @RelatedIssue(issueID = "PLA-1245")
-  @Test(enabled = false, groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
+  @Test( groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
