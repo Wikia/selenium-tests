@@ -73,7 +73,6 @@ public class ImageStorageTests extends NewTestTemplate {
     delete.submitDeletion();
   }
 
-  @RelatedIssue(issueID = "QAART-575")
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
   public void ImageStorage_002_moveImage() {
