@@ -17,8 +17,9 @@ import org.testng.annotations.Test;
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
-    
-  
+
+
+  @RelatedIssue(issueID = "SOC-762")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
