@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-public class TestNoAdsLoggedInUsers extends NewTestTemplate {
+public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
 
   private String testedPage;
   private String testedWiki;

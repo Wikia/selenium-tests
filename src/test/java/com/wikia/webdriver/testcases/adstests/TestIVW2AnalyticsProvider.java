@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  */
 
-public class TestIVW2AnalyticsProvider extends NewTestTemplate {
+public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
 
   private void testIVW2(String wikiName, String article, String ivw2Param) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);

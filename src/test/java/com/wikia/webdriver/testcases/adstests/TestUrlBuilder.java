@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestUrlBuilder extends NewTestTemplate {
+public class TestUrlBuilder extends TemplateDontLogout {
 
   private static Object[][] TEST_DATA = new Object[][]{
       {"runescape", "RuneScape_Wiki", "http://runescape.wikia.com/wiki/RuneScape_Wiki",

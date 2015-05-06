@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  * @description 1. Check if roadblock is present after 3 PV
  */
-public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
+public class TestRoadblocksAfterMultiplePageViews extends TemplateDontLogout {
 
   private static final int PAGE_VIEWS_COUNT = 5;
 
