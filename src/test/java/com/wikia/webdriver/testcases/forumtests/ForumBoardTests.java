@@ -98,7 +98,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "MAIN-2106")
-  @Test(groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"}, enabled = false)
+  @Test(groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

@@ -23,7 +23,6 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   public void SpecialVideos_001_Provider() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
