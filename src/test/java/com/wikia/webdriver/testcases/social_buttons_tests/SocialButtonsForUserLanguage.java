@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.social_buttons_tests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.social_buttons.SocialButtonsComponentObject;
@@ -37,9 +38,9 @@ public class SocialButtonsForUserLanguage extends NewTestTemplate {
             String currentSocialNetwork = currentSocialNetworks[i];
             String expectedSocialNetwork = expectedSocialNetworks[i];
             Assertion.assertEquals(currentSocialNetwork, expectedSocialNetwork,
-                    "Expected network not found on its position. " +
-                    "Note that the order of social buttons is also important, " +
-                    "as defined in requirements. Missing network:" + expectedSocialNetwork);
+                      "Expected network not found on its position. " +
+                      "Note that the order of social buttons is also important, " +
+                      "as defined in requirements. Missing network:" + expectedSocialNetwork);
         }
   }
 
