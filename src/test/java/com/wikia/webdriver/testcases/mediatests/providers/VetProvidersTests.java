@@ -19,8 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 public class VetProvidersTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
-
-  @RelatedIssue(issueID = "QAART-585")
+    
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
       "VetProvidersArticle", "VetProvidersTests_001", "Media"})
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
