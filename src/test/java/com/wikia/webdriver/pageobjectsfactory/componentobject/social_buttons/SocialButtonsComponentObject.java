@@ -37,8 +37,9 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
     }
 
     public String[] getShareButtonTitles() {
-        String[] titles = null;
-        for (int i = 0; i < shareButtonLinks.size(); i++) {
+        int numberOfShareButtons = shareButtonLinks.size();
+        String[] titles = new String[numberOfShareButtons];
+        for (int i = 0; i < numberOfShareButtons; i++) {
             WebElement link = shareButtonLinks.get(i);
             waitForElementByElement(link);
             titles[i] = link.getAttribute("title");

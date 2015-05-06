@@ -37,7 +37,7 @@ public class SocialButtonsForUserLanguage extends NewTestTemplate {
             String currentSocialNetwork = currentSocialNetworks[i];
             String expectedSocialNetwork = expectedSocialNetworks[i];
             Assertion.assertEquals(currentSocialNetwork, expectedSocialNetwork,
-                    "expected network not found on its position. " +
+                    "Expected network not found on its position. " +
                     "Note that the order of social buttons is also important, " +
                     "as defined in requirements. Missing network:" + expectedSocialNetwork);
         }
