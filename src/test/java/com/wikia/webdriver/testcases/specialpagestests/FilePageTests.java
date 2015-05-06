@@ -116,7 +116,6 @@ public class FilePageTests extends NewTestTemplate {
    *
    * @author garth
    */
-  @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
