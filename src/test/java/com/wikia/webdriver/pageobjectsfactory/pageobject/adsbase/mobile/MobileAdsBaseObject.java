@@ -148,7 +148,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       for(WebElement link : links) {
         String href = link.getAttribute("href");
         Boolean isArticle = !href.matches(notArticlePattern);
-        Boolean isMainPage = !href.equals(getMercuryMainPageHref());
+        Boolean isMainPage = href.equals(getMercuryMainPageHref());
 
         if (isArticle && !isMainPage) {
           PageObjectLogging.log(
