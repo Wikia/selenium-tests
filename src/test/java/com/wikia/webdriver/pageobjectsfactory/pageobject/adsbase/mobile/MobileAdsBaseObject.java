@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 /**
  * Bogna 'bognix' Knychala
  */
@@ -20,6 +22,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
   private static final String FLITE_MASK_SELECTOR = ".flite-mask";
+  private static final String MERCURY_WIKI_TITLE_SELECTOR = ".wiki-title a";
+  private static final String WIKI_LINK_SELECTOR = "a[href^='/wiki/']";
+
   private AdsComparison adsComparison;
 
   public MobileAdsBaseObject(WebDriver driver, String page) {
@@ -100,6 +105,80 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
     PageObjectLogging.log("AdInSlot", "Ad found in slot", true, driver);
+  }
+
+  /**
+   * Scrolls to the main page link (to hide top bars) and clicks the link
+   */
+  public void mercuryNavigateToMainPage() {
+    if (checkIfElementOnPage(MERCURY_WIKI_TITLE_SELECTOR)) {
+      WebElement mainPageLink = driver.findElement(By.cssSelector(MERCURY_WIKI_TITLE_SELECTOR));
+      scrollToElement(mainPageLink);
+
+      PageObjectLogging.log(
+        "mercuryNavigateToMainPage()",
+        String.format(
+          "Clicking main page link: %s (%s)",
+          mainPageLink.getText(),
+          mainPageLink.getAttribute("href")
+        ),
+        true,
+        driver
+      );
+
+      mainPageLink.click();
+    }
+  }
+
+  /**
+   * Gets list of /wiki/* links on page and clicks the first valid
+   */
+  public void mercuryNavigateToAnArticle() {
+    if (checkIfElementOnPage(WIKI_LINK_SELECTOR)) {
+      String notArticlePattern = ".*\\/wiki\\/.*\\:.*";
+      List<WebElement> links = driver.findElements(By.cssSelector(WIKI_LINK_SELECTOR));
+
+      PageObjectLogging.log(
+        "mercuryNavigateToAnArticle()",
+        "Found " + links.size() + " internal links",
+        true,
+        driver
+      );
+
+      for(WebElement link : links) {
+        String href = link.getAttribute("href");
+        Boolean isArticle = !href.matches(notArticlePattern);
+        Boolean isMainPage = !href.equals(getMercuryMainPageHref());
+
+        if (isArticle && !isMainPage) {
+          PageObjectLogging.log(
+            "mercuryNavigateToAnArticle()",
+            String.format(
+              "Link found, clicking: %s (%s)",
+              link.getText(),
+              link.getAttribute("href")
+            ),
+            true,
+            driver
+          );
+
+          scrollToElement(link);
+          link.click();
+          return;
+        }
+      }
+    } else {
+      PageObjectLogging.logWarning("mercuryNavigateToAnArticle()", "No links on main page!");
+    }
+  }
+
+  private String getMercuryMainPageHref() {
+    if (checkIfElementOnPage(MERCURY_WIKI_TITLE_SELECTOR)) {
+      WebElement mainPageLink = driver.findElement(By.cssSelector(MERCURY_WIKI_TITLE_SELECTOR));
+      return mainPageLink.getAttribute("href");
+    }
+
+    return "";
   }
 
   private void removeSmartBanner() {
