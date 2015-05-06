@@ -82,7 +82,6 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.clickPostButton();
   }
 
-  @RelatedIssue(issueID = "QAART_545")
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_006_followDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);

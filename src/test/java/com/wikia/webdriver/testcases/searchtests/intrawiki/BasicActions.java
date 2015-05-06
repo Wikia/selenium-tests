@@ -146,8 +146,7 @@ public class BasicActions extends IntraWiki {
     search.verifyLanguageTranslation();
   }
 
-  @RelatedIssue(issueID = "MAIN-4153")
-  @Test(groups = {"IntraWikiSearch_010", "IntraWikiSearch", "Search"})
+ @Test(groups = {"IntraWikiSearch_010", "IntraWikiSearch", "Search"})
   public void selectImagesOrVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);

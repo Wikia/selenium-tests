@@ -24,7 +24,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_001_PublishedProvider() {
       String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
