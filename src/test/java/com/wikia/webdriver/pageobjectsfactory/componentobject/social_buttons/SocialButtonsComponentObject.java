@@ -13,8 +13,7 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong
+ * @author Michal 'justnpT' Nowierski
  */
 public class SocialButtonsComponentObject extends WikiBasePageObject {
 
@@ -28,6 +27,9 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
     @FindBys(@FindBy(css = "#PageShareToolbar a"))
     protected List<WebElement> shareButtonLinks;
 
+    /**
+     * Check if every share button is visible, then take a screenshot
+     */
     public void verifyShareButtonsPresent() {
         for (int i = 0; i < shareButtonImages.size(); i++) {
             WebElement image = shareButtonImages.get(i);
@@ -36,6 +38,10 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
         PageObjectLogging.log("verifyShareButtonsPresent", "social buttons present", true, driver);
     }
 
+    /**
+     * Get titles of every share button. The values are eg. "Facebook", "Twitter", (...)
+     * @return array of the titles
+     */
     public String[] getShareButtonTitles() {
         int numberOfShareButtons = shareButtonLinks.size();
         String[] titles = new String[numberOfShareButtons];

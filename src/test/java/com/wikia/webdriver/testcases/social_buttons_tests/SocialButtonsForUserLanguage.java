@@ -26,7 +26,10 @@ public class SocialButtonsForUserLanguage extends NewTestTemplate {
       groups = {"SocialButtons", "SocialButtons_001"},
       dataProvider = "SocialButtonsDataProvider"
   )
-
+    /**
+    * This tests executes for 11 users with different languages.
+    * Log in, open random article, compare present social buttons to expected social buttons
+    */
     public void ArticleCRUDUser_001_specialPage(String[] credentials, String[] expectedSocialNetworks) {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.logInCookie(credentials[0], credentials[1], wikiURL);
