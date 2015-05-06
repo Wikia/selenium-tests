@@ -51,6 +51,7 @@ public class SocialButtonsForUserLanguage extends NewTestTemplate {
      *     {expected buttons}
      * }
      */
+    @DataProvider(name = "SocialButtonsDataProvider")
     public final String[][][] SocialButtonsDataProvider() {
         return new String[][][]{
                 {
