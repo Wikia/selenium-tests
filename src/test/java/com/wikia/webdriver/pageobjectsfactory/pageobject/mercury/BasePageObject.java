@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
+import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -25,15 +26,10 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
-  }
-
-  public void openMercuryWiki(String wikiName) {
-    String mercuryWiki = urlBuilder.getUrlForWiki(wikiName);
-    getUrl(mercuryWiki);
   }
 
   public void tapOnElement(WebElement element) {

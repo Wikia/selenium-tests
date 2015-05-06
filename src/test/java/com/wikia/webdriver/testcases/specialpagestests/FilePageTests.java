@@ -87,6 +87,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
   public void filePage004_delete() {
     // Go to Special:Videos to add a video
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
@@ -118,7 +119,7 @@ public class FilePageTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {
-
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
 
     // Go to Special:Videos to add a video

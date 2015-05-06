@@ -36,6 +36,7 @@ public class CommentsTests extends NewTestTemplate {
     Assertion.assertTrue(comments.isCommentsListCollapsed(), "Comments are expanded");
     PageObjectLogging.log("Comments list", "is collapsed", true);
     comments.clickCommentsHeader();
+    comments.waitForFirstCommentToBeVisible();
     Assertion.assertFalse(comments.isCommentsListCollapsed(), "Comments are collapsed");
     PageObjectLogging.log("Comments list", "is expanded", true);
     PageObjectLogging.log("Number of comments per page", "is correct", "is incorrect",
@@ -57,6 +58,7 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
+    comments.waitForFirstCommentToBeVisible();
     int numberOfComments = comments.getNumberOfCommentsFromHeader();
     Assertion.assertTrue((numberOfComments - comments.getNumberOfRepliesOnThatPage()) > 25,
                          "There is less than 25 on that page");
@@ -89,6 +91,7 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
+    comments.waitForFirstCommentToBeVisible();
     Assertion.assertFalse(comments.isRepliesListExpanded(), "Replies list is expanded");
     PageObjectLogging.log("Replies list", "is collapsed", true);
     comments.clickViewReplies(0);
@@ -106,6 +109,7 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
+    comments.waitForFirstCommentToBeVisible();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
     PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:",
@@ -119,6 +123,7 @@ public class CommentsTests extends NewTestTemplate {
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
+    comments.waitForFirstCommentToBeVisible();
     PageObjectLogging.log("Video thumbnail", "is displayed", "is not displayed",
                           comments.isMediaThumbnailInComment(
                               MEDIA_TYPE_VIDEO, 1));
