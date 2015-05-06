@@ -112,4 +112,14 @@ public class MobileAdsDataProvider {
         },
     };
   }
+
+  @DataProvider
+  public static Object[][] mercuryConsecutivePageViews() {
+      return new Object[][]{
+        {
+            "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
+            "wka.ent/_adtest//article",
+        }
+      };
+  }
 }
