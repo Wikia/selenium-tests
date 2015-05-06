@@ -93,10 +93,12 @@ public class TestSlotsMobile extends MobileTestTemplate {
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
 
         ads.mercuryNavigateToMainPage();
+        ads.mercuryWaitForPageToLoad();
         ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
 
         ads.mercuryNavigateToAnArticle();
+        ads.mercuryWaitForPageToLoad();
         ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
     }

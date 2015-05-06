@@ -12,8 +12,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Bogna 'bognix' Knychala
@@ -24,6 +26,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   private static final String FLITE_MASK_SELECTOR = ".flite-mask";
   private static final String MERCURY_WIKI_TITLE_SELECTOR = ".wiki-title a";
   private static final String WIKI_LINK_SELECTOR = "a[href^='/wiki/']";
+  private static final String MERCURY_LOADING_OVERLAY = "loading-overlay";
 
   private AdsComparison adsComparison;
 
@@ -169,6 +172,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       }
     } else {
       PageObjectLogging.logWarning("mercuryNavigateToAnArticle()", "No links on main page!");
+    }
+  }
+
+  public void mercuryWaitForPageToLoad() {
+    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+    try {
+      PageObjectLogging.log("mercuryWaitForPageToLoad", "Waiting till loaded...", true, driver);
+      wait.until(
+        ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY))
+      );
+    } finally {
+      restoreDeaultImplicitWait();
     }
   }
 
