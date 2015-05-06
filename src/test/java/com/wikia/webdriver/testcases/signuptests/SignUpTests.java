@@ -106,7 +106,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-  @RelatedIssue(issueID = "SOC-683")
+  
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
