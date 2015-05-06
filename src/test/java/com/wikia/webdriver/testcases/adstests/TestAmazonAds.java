@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.AdsTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
 
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEngineering
  */
-public class TestAmazonAds extends AdsTestTemplate {
+public class TestAmazonAds extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -38,7 +38,7 @@ public class TestAmazonAds extends AdsTestTemplate {
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
 
     amazonAds.verifyAmazonScriptIncluded();
-//    amazonAds.verifyCallToAmazonIssued();
+    // TODO Add verification that a call to Amazon is issued when bug with browsermob-proxy will be fixed
     if (debugMode) {
       amazonAds.verifyGPTParams();
       amazonAds.verifyAdFromAmazonPresent();
