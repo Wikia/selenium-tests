@@ -113,14 +113,13 @@ public class AdsKruxObject extends AdsBaseObject {
     String specialSegment = "ph3uhzc41";
     String[] segs = segments.split(",");
     if (segs.length > MAX_SEGS_NUMBER_GPT) {
-      if (segments.contains(specialSegment) &&
-          !Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT).contains(specialSegment)) {
-        List<String> slicedSegs = new LinkedList<>(Arrays.asList(Arrays.copyOfRange(
-            segs, 0, MAX_SEGS_NUMBER_GPT - 1)));
+      List<String> slicedSegs = Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT);
+      if (segments.contains(specialSegment) && !slicedSegs.contains(specialSegment)) {
+        slicedSegs = new LinkedList<>(Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT - 1));
         slicedSegs.add(0, specialSegment);
         return slicedSegs;
       } else {
-        return Arrays.asList(Arrays.copyOfRange(segs, 0, MAX_SEGS_NUMBER_GPT));
+        return slicedSegs;
       }
     }
     return Arrays.asList(segs);
