@@ -117,10 +117,8 @@ public class AdsKruxObject extends AdsBaseObject {
       if (segments.contains(specialSegment) && !slicedSegs.contains(specialSegment)) {
         slicedSegs = new LinkedList<>(Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT - 1));
         slicedSegs.add(0, specialSegment);
-        return slicedSegs;
-      } else {
-        return slicedSegs;
       }
+      return slicedSegs;
     }
     return Arrays.asList(segs);
   }
