@@ -35,7 +35,7 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @RelatedIssue(issueID = "SOC-662")
+  @RelatedIssue(issueID = "SOC-774")
   @Test(groups = {"Facebook_001", "Facebook", "Facebook_002"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_noEmailPerms() {
