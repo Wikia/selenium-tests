@@ -23,7 +23,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
   @Test(
-      groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "allSlots"
   )
@@ -42,7 +42,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndPrefooterSlots"
   )
@@ -60,7 +60,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndInContentSlots"
   )
