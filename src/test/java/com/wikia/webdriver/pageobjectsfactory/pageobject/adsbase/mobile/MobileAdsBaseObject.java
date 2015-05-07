@@ -138,10 +138,19 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     }
   }
 
-  public void mercuryWaitForPageToLoad() {
+  /**
+   * Mercury is a single page application (SPA) and if you want to test navigating between different
+   * pages in the application you might want to use this method before clicking anything
+   * which is not on the first page.
+   *
+   * First page in Mercury loads just as a regular web page but next articles in Mercury just change
+   * part of loaded DOM and between them the preloader layer is displayed. This layer is on the very
+   * top and may block driver from clicking elements.
+   */
+  public void mercuryWaitForPreloaderToHide() {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      PageObjectLogging.log("mercuryWaitForPageToLoad", "Waiting till loaded...", true, driver);
+      PageObjectLogging.log("mercuryWaitForPreloaderToHide", "Waiting till loaded...", true, driver);
       wait.until(
         ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR))
       );
