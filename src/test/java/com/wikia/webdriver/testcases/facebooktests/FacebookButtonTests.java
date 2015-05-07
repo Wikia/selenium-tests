@@ -41,7 +41,6 @@ public class FacebookButtonTests extends NewTestTemplate {
     login.verifyFBButtonVisible();
   }
 
-  @RelatedIssue(issueID = "QAART-584")
   @Test(groups = {"FBButton_004", "FacebookButton"})
   public void FBButton_004_ForcedLoginButton_Visible() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

@@ -28,7 +28,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   // Test: Ooyala video in lightbox
-  @RelatedIssue(issueID = "MAIN-4457")
+  @RelatedIssue(issueID = "CONCF-522")
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
@@ -52,7 +52,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   // Test: Ooyala video in inline
-  @RelatedIssue(issueID = "MAIN-4457")
+  @RelatedIssue(issueID = "CONCF-522")
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
