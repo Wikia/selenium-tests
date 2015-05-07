@@ -23,7 +23,6 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "QAART-584")
   @Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
   public void ForcedLogin_001_newFile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
