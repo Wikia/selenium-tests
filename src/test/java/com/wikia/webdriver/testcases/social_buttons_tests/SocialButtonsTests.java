@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * @author: Michal 'justnpT' Nowierski
  */
-public class SocialButtonsForUserLanguage extends NewTestTemplate {
+public class SocialButtonsTests extends NewTestTemplate {
 
     private Credentials credentials = config.getCredentials();
 
@@ -68,15 +68,15 @@ public class SocialButtonsForUserLanguage extends NewTestTemplate {
                 },
                 {
                         {credentials.userNameBrazilianPortuguese, credentials.passwordBrazilianPortuguese},
-                        {"Facebook", "Twitter", "Reddit", "Pinterest", "Tumblr"}
+                        {"Facebook", "Twitter", "Reddit", "Tumblr"}
                 },
                 {
                         {credentials.userNameChinese, credentials.passwordChinese},
-                        {"Facebook", "Weibo", "WeChat"}
+                        {"Facebook", "Weibo"}
                 },
                 {
                         {credentials.userNameGerman, credentials.passwordGerman},
-                        {"Facebook", "Twitter", "Pinterest", "Tumblr"}
+                        {"Facebook", "Twitter", "Tumblr"}
                 },
                 {
                         {credentials.userNameFrench, credentials.passwordFrench},
