@@ -26,7 +26,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   private static final String FLITE_MASK_SELECTOR = ".flite-mask";
   private static final String MERCURY_WIKI_TITLE_SELECTOR = ".wiki-title a";
   private static final String WIKI_LINK_SELECTOR = "a[href^='/wiki/']";
-  private static final String MERCURY_LOADING_OVERLAY = "loading-overlay";
+  private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
 
   private AdsComparison adsComparison;
 
@@ -180,7 +180,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       PageObjectLogging.log("mercuryWaitForPageToLoad", "Waiting till loaded...", true, driver);
       wait.until(
-        ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY))
+        ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR))
       );
     } finally {
       restoreDeaultImplicitWait();
