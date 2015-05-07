@@ -117,7 +117,9 @@ public class MobileAdsDataProvider {
   public static Object[][] mercuryConsecutivePageViews() {
       return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
+            "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
             "wka.ent/_adtest//article",
         }
       };

@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,8 +23,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
   private static final String FLITE_MASK_SELECTOR = ".flite-mask";
-  private static final String MERCURY_WIKI_TITLE_SELECTOR = ".wiki-title a";
-  private static final String WIKI_LINK_SELECTOR = "a[href^='/wiki/']";
   private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
 
   private AdsComparison adsComparison;
@@ -111,67 +108,33 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   /**
-   * Scrolls to the main page link (to hide top bars) and clicks the link
+   * Checks if link to /wiki/articleName exists on the page and clicks it
+   *
+   * @param articleLinkName part of link to another wiki article
    */
-  public void mercuryNavigateToMainPage() {
-    if (checkIfElementOnPage(MERCURY_WIKI_TITLE_SELECTOR)) {
-      WebElement mainPageLink = driver.findElement(By.cssSelector(MERCURY_WIKI_TITLE_SELECTOR));
-      scrollToElement(mainPageLink);
+  public void mercuryNavigateToAnArticle(String articleLinkName) {
+    String articleLinkSelector = String.format("a[href^='/wiki/%s']", articleLinkName);
+    if (checkIfElementOnPage(articleLinkSelector)) {
+      WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
       PageObjectLogging.log(
-        "mercuryNavigateToMainPage()",
+        "mercuryNavigateToAnArticle()",
         String.format(
-          "Clicking main page link: %s (%s)",
-          mainPageLink.getText(),
-          mainPageLink.getAttribute("href")
+          "Clicking: %s (%s)",
+          link.getText(),
+          link.getAttribute("href")
         ),
         true,
         driver
       );
 
-      mainPageLink.click();
-    }
-  }
-
-  /**
-   * Gets list of /wiki/* links on page and clicks the first valid
-   */
-  public void mercuryNavigateToAnArticle() {
-    if (checkIfElementOnPage(WIKI_LINK_SELECTOR)) {
-      String notArticlePattern = ".*\\/wiki\\/.*\\:.*";
-      List<WebElement> links = driver.findElements(By.cssSelector(WIKI_LINK_SELECTOR));
-
-      PageObjectLogging.log(
-        "mercuryNavigateToAnArticle()",
-        "Found " + links.size() + " internal links",
-        true,
-        driver
-      );
-
-      for(WebElement link : links) {
-        String href = link.getAttribute("href");
-        Boolean isArticle = !href.matches(notArticlePattern);
-        Boolean isMainPage = href.equals(getMercuryMainPageHref());
-
-        if (isArticle && !isMainPage) {
-          PageObjectLogging.log(
-            "mercuryNavigateToAnArticle()",
-            String.format(
-              "Link found, clicking: %s (%s)",
-              link.getText(),
-              link.getAttribute("href")
-            ),
-            true,
-            driver
-          );
-
-          scrollToElement(link);
-          link.click();
-          return;
-        }
-      }
+      scrollToElement(link);
+      link.click();
     } else {
-      PageObjectLogging.logWarning("mercuryNavigateToAnArticle()", "No links on main page!");
+      PageObjectLogging.logWarning(
+        "mercuryNavigateToAnArticle()",
+        "Could not find the link to: /wiki/" + articleLinkName
+      );
     }
   }
 
@@ -185,15 +148,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  private String getMercuryMainPageHref() {
-    if (checkIfElementOnPage(MERCURY_WIKI_TITLE_SELECTOR)) {
-      WebElement mainPageLink = driver.findElement(By.cssSelector(MERCURY_WIKI_TITLE_SELECTOR));
-      return mainPageLink.getAttribute("href");
-    }
-
-    return "";
   }
 
   private void removeSmartBanner() {

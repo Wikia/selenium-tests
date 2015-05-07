@@ -84,21 +84,23 @@ public class TestSlotsMobile extends MobileTestTemplate {
     )
     public void TestLeaderboardAndPrefooterOnConsecutivePageViews(
         String wikiName,
-        String article,
+        String firstArticle,
+        String secondArticle,
+        String thirdArticle,
         String adUnit
     ) {
-        String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+        String testedPage = urlBuilder.getUrlForPath(wikiName, firstArticle);
         MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
         ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
 
-        ads.mercuryNavigateToMainPage();
         ads.mercuryWaitForPageToLoad();
+        ads.mercuryNavigateToAnArticle(secondArticle);
         ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
 
-        ads.mercuryNavigateToAnArticle();
         ads.mercuryWaitForPageToLoad();
+        ads.mercuryNavigateToAnArticle(thirdArticle);
         ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
         ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
     }
