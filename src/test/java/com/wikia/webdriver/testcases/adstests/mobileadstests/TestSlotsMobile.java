@@ -18,64 +18,64 @@ import org.testng.annotations.Test;
  */
 public class TestSlotsMobile extends MobileTestTemplate {
 
-  private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
-  private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
-  private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+    private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
+    private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
+    private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
-  @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "allSlots"
-  )
-  public void TestAllSlotsOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+    @Test(
+            groups = {"MobileAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
+            dataProviderClass = MobileAdsDataProvider.class,
+            dataProvider = "allSlots"
+    )
+    public void TestAllSlotsOnPage(
+            String wikiName, String article,
+            String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
-    ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
-  }
+        String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+        MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+        ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+        ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
+        ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+        ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+        ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
+        ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
+    }
 
-  @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardAndPrefooterSlots"
-  )
-  public void TestLeaderboardAndPrefooterOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+    @Test(
+            groups = {"MobileAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
+            dataProviderClass = MobileAdsDataProvider.class,
+            dataProvider = "leaderboardAndPrefooterSlots"
+    )
+    public void TestLeaderboardAndPrefooterOnPage(
+            String wikiName, String article,
+            String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
-    ads.verifyNoSlotPresent(MOBILE_IN_CONTENT);
-  }
+        String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+        MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+        ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+        ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+        ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+        ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
+        ads.verifyNoSlotPresent(MOBILE_IN_CONTENT);
+    }
 
-  @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardAndInContentSlots"
-  )
-  public void TestLeaderboardAndInContentOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+    @Test(
+            groups = {"MobileAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
+            dataProviderClass = MobileAdsDataProvider.class,
+            dataProvider = "leaderboardAndInContentSlots"
+    )
+    public void TestLeaderboardAndInContentOnPage(
+            String wikiName, String article,
+            String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
-    ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
-    ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
-  }
+        String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+        MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+        ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+        ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
+        ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+        ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
+        ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
+    }
 
     @Test(
             groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_004", "TestAdSlotsMobile"},
@@ -83,11 +83,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
             dataProvider = "mercuryConsecutivePageViews"
     )
     public void TestLeaderboardAndPrefooterOnConsecutivePageViews(
-        String wikiName,
-        String firstArticle,
-        String secondArticle,
-        String thirdArticle,
-        String adUnit
+            String wikiName,
+            String firstArticle,
+            String secondArticle,
+            String thirdArticle,
+            String adUnit
     ) {
         String testedPage = urlBuilder.getUrlForPath(wikiName, firstArticle);
         MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
