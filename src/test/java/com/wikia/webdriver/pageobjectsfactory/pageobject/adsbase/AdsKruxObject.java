@@ -105,7 +105,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   /**
    * Slice the krux segments to MAX_SEGS_NUMBER_GPT number for gpt call and set highest priority to
-   * "ph3uhzc41" segment
+   * special segment
    *
    * @param segments Krux segments
    */
