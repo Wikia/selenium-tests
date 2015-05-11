@@ -46,7 +46,6 @@ public class TestKruxIntegration extends NewTestTemplate {
     ads.refreshPage();
     ads.verifyKruxControlTag(kruxSiteId);
 
-    // Krux.user should be available now
     ads.verifyKruxUserParam();
   }
 }
