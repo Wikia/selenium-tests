@@ -55,7 +55,6 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
     wam.verifyWamIndexPageFirstColumn(41, 60);
   }
 
-  @RelatedIssue(issueID = "QAART-586")
   @Test(groups = {"WamPage004", "WamPageTests"})
   public void wam_004_compareTabAndHeaderName() {
     for (WamTab tab : WamTab.values()) {

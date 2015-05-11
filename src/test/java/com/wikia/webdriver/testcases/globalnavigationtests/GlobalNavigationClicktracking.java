@@ -33,7 +33,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      */
     @RelatedIssue(issueID = "QAART-555")
     @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
-            "GlobalNav" }, enabled = false)
+            "GlobalNav" })
     public void search() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openMainPage(wikiURL);

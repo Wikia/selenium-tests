@@ -24,7 +24,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_001_PublishedProvider() {
       String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
@@ -47,7 +46,8 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_002_PublishedLibrary() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+      WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -66,7 +66,8 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_003_EditModeProvider() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+      WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     base.openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -87,9 +88,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @RelatedIssue(issueID = "MAIN-4325")
   @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_004_EditModeLibrary() {
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     base.openRandomArticle(wikiURL);

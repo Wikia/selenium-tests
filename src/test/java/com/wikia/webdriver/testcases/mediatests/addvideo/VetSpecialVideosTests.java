@@ -23,11 +23,10 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   public void SpecialVideos_001_Provider() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("review");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);

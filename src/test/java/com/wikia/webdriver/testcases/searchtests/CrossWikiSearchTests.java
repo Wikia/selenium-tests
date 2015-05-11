@@ -98,7 +98,6 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoPagination();
   }
 
-  @RelatedIssue(issueID = "DAT-2753")
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
       groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {

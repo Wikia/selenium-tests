@@ -40,7 +40,7 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
-  @RelatedIssue(issueID = "QAART-562")
+  @RelatedIssue(issueID = "CONCF-438")
   @Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
