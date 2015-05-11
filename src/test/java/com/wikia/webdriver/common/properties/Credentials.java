@@ -100,6 +100,7 @@ public class Credentials {
 
   public String userNameForgottenPassword;
   public String userNameForgottenPassword2;
+  public String userNameForgottenPassword3;
 
   public String geoEdgeUserName;
   public String geoEdgeUserPass;
@@ -220,7 +221,6 @@ public class Credentials {
     emailQaart4 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.email.qawikia4.username");
     emailPasswordQaart4 =
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.email.qawikia4.password");
-
     userNameBlocked =
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.tooManyLoginAttempts.username");
     passwordBlocked =
@@ -230,6 +230,8 @@ public class Credentials {
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.forgottenPassword.username1");
     userNameForgottenPassword2 =
         XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.forgottenPassword.username2");
+    userNameForgottenPassword3 =
+        XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.forgottenPassword.username3");
 
     geoEdgeUserName = XMLFunctions.getXMLConfiguration(credentialsFile,
                                                        "ci.AdsConfig.GeoEdgeCredentials.userName");
