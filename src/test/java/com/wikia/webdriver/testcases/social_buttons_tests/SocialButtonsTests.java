@@ -92,7 +92,7 @@ public class SocialButtonsTests extends NewTestTemplate {
                 },
                 {
                         {credentials.userNamePolish, credentials.passwordPolish},
-                        {"Facebook", "Twitter", "NK"}
+                        {"Facebook", "Twitter", "NK", "Wykop"}
                 },
                 {
                         {credentials.userNameItalian, credentials.passwordItalian},
