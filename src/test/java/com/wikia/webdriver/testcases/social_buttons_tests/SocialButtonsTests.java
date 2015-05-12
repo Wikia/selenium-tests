@@ -64,7 +64,7 @@ public class SocialButtonsTests extends NewTestTemplate {
                 },
                 {
                         {credentials.userNameJapanese, credentials.passwordJapanese},
-                        {"Facebook", "Twitter", "GooglePlus"}
+                        {"Facebook", "Twitter", "Google+"}
                 },
                 {
                         {credentials.userNameBrazilianPortuguese, credentials.passwordBrazilianPortuguese},
@@ -72,7 +72,7 @@ public class SocialButtonsTests extends NewTestTemplate {
                 },
                 {
                         {credentials.userNameChinese, credentials.passwordChinese},
-                        {"Facebook", "Weibo"}
+                        {"Facebook", "Sina Weibo"}
                 },
                 {
                         {credentials.userNameGerman, credentials.passwordGerman},
@@ -84,11 +84,11 @@ public class SocialButtonsTests extends NewTestTemplate {
                 },
                 {
                         {credentials.userNameSpanish, credentials.passwordSpanish},
-                        {"Facebook", "Twitter", "Meneame", "Tumblr"}
+                        {"Facebook", "Twitter", "Menéame", "Tumblr"}
                 },
                 {
                         {credentials.userNameRussian, credentials.passwordRussian},
-                        {"VK", "Facebook", "OK", "Twitter"}
+                        {"VK", "Facebook", "Odnoklassniki", "Twitter"}
                 },
                 {
                         {credentials.userNamePolish, credentials.passwordPolish},
