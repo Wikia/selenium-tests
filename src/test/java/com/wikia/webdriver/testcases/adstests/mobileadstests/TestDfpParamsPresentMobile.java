@@ -18,7 +18,7 @@ public class TestDfpParamsPresentMobile extends TemplateDontLogout {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParams",
-      groups = {"TestDfpParamsPresentMobile_GeoEdgeFree", "MobileAds"}
+      groups = {"MobileAds", "TestDfpParamsPresentMobile_GeoEdgeFree"}
   )
   public void TestDfpParamsPresentMobile_GeoEdgeFree(
       String wikiName, String article, String adUnit, String slot, String lineItemId,

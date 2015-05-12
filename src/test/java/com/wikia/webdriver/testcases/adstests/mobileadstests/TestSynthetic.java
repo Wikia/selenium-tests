@@ -15,7 +15,7 @@ public class TestSynthetic extends TemplateDontLogout {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "testSynthetic",
-      groups = {"TestSynthetic"}
+      groups = {"MobileAds", "TestSynthetic"}
   )
   public void testSynthetic(String wikiPage, String article,
                             String slotName, int slotWidth, int slotHeight,
