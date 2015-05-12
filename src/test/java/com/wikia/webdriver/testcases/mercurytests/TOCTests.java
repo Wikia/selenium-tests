@@ -27,14 +27,10 @@ public class TOCTests extends NewTestTemplate {
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
-  @RelatedIssue(issueID = "HG-612")
   @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_TOC_TEST_ARTICLE);
-    // Temporary solution
-    driver.get(urlBuilder.getUrlForWiki("mediawiki119") + "wiki/MercuryToc");
-    //
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
     PageObjectLogging.log("TOC", "is displayed", true);
