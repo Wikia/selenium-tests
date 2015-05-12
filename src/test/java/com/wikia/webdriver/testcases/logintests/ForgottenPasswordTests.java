@@ -78,6 +78,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
+  @RelatedIssue(issueID = "SOC-593")
   public void ForgottenPassword_003_createWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
