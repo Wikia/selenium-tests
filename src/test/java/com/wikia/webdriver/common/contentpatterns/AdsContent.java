@@ -10,18 +10,12 @@ public class AdsContent {
 
   //HashMap with slots selector
   public static Map<String, String> SLOTS_SELECTORS;
-  public static Map<String, String> ADS_PROVIDERS;
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
       "window.adslots2.push([\"%slot%\"]);";
   public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
       "top.window.adDriver2ForcedStatus['%s']='success';";
-
-  public static final String SLOT_TWEAKER_HIDESLOT_SCRIPT =
-      "top.window.adDriver2ForcedStatus['%slot%']='success';"
-      + "varst=top.window.SlotTweaker(top.window.Wikia.log,top.document,top.window);"
-      + "st.hide('%slot%');";
 
   //SLOTS NAMES
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
@@ -54,9 +48,6 @@ public class AdsContent {
   public static final String PREFOOTERS_CONTAINER = "Prefooters";
   public static final String ADS_IN_CONTENT_CONTAINER = "AdsInContent";
 
-  //SLOTS SELECTORS
-  public static final String WIKIA_BAR_SELECTOR = "#" + WIKIA_BAR;
-
   private AdsContent() {
 
   }
@@ -65,20 +56,7 @@ public class AdsContent {
     return SLOTS_SELECTORS.get(slotName);
   }
 
-  public static String getElementForProvider(String providerName) {
-    setAdsProviders();
-    return ADS_PROVIDERS.get(providerName);
-  }
-
-  private static void setAdsProviders() {
-    ADS_PROVIDERS = new HashMap<>();
-    ADS_PROVIDERS.put(
-        "IDG",
-        "script[src*='http://ad-emea.doubleclick.net/N7503/adj/DE-OW-netzwerk']"
-    );
-  }
-
-  public static void setSlotsSelectors() {
+  static {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
