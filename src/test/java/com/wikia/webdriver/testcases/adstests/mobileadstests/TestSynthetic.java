@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestSynthetic extends NewTestTemplate {
+public class TestSynthetic extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,

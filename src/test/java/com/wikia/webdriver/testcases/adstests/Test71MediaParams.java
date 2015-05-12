@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class Test71MediaParams extends NewTestTemplate {
+public class Test71MediaParams extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
