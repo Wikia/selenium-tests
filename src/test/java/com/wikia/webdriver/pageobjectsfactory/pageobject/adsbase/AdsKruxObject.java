@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -93,15 +95,32 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public String getKsgmntPattern(String segmentsLocalStorage) {
     String ksgmnt = "\"ksgmnt\":[";
-    String[] segments = segmentsLocalStorage.split(",");
-    if (segments.length > MAX_SEGS_NUMBER_GPT) {
-      segments = Arrays.copyOfRange(segmentsLocalStorage.split(","), 0, MAX_SEGS_NUMBER_GPT);
-    }
+    List<String> segments = sliceSegsForGpt(segmentsLocalStorage);
     for (String segment : segments) {
       ksgmnt += String.format("\"%s\",", segment);
     }
     ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
     return ksgmnt;
+  }
+
+  /**
+   * Slice the krux segments to MAX_SEGS_NUMBER_GPT number for gpt call and set highest priority to
+   * special segment
+   *
+   * @param segments Krux segments
+   */
+  private List<String> sliceSegsForGpt(String segments) {
+    String specialSegment = "ph3uhzc41";
+    String[] segs = segments.split(",");
+    if (segs.length > MAX_SEGS_NUMBER_GPT) {
+      List<String> slicedSegs = Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT);
+      if (segments.contains(specialSegment) && !slicedSegs.contains(specialSegment)) {
+        slicedSegs = new LinkedList<>(Arrays.asList(segs).subList(0, MAX_SEGS_NUMBER_GPT - 1));
+        slicedSegs.add(0, specialSegment);
+      }
+      return slicedSegs;
+    }
+    return Arrays.asList(segs);
   }
 
 }

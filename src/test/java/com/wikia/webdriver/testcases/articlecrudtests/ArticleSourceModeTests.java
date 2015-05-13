@@ -257,7 +257,6 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @RelatedIssue(issueID = "QAART-574")
   @Test(groups = {"RTE_extended", "RTE_extended_017"})
   public void RTE_017_MoreMainTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

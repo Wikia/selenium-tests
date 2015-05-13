@@ -49,9 +49,6 @@ public class VideoUrlProvider {
             "http://www.metacafe.com/watch/10859228/epic_tetris_algorithm_savor_meets_alien_love_on_tagged_node/",
             "Epic Tetris Algorithm Savor Meets Alien Love on Tagged - NODE"
         }, {
-            "http://www.myvideo.de/watch/9112478/Snowblind",
-            "Snowblind"
-        }, {
             "http://vimeo.com/channels/staffpicks/58024671",
             "Melt Yourself Down - Fix My Life"
         }, {

@@ -75,7 +75,6 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
-
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -137,7 +136,6 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
-
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -167,7 +165,6 @@ public class SignUpTests extends NewTestTemplate {
    * Facebook 2. Open finish signup with facebook modal 3. create and verify account 4. disconnect
    * created account from facebook
    */
-
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
