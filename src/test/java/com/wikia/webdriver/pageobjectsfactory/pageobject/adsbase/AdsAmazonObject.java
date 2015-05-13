@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -8,8 +7,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 
 /**
@@ -26,9 +23,8 @@ public class AdsAmazonObject extends AdsBaseObject {
                 + "div[id*=_gpt][id*=LEFT_SKYSCRAPER_2][data-gpt-slot-params*=amznslots]")
   private WebElement slotWithAmazon;
 
-  public AdsAmazonObject(WebDriver driver, String testedPage,
-                         NetworkTrafficInterceptor networkTrafficInterceptor) {
-    super(driver, testedPage, networkTrafficInterceptor);
+  public AdsAmazonObject(WebDriver driver, String testedPage) {
+    super(driver, testedPage);
   }
 
   public void verifyAmazonScriptIncluded() {
