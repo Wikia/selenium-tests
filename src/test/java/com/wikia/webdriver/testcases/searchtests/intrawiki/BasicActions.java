@@ -103,6 +103,7 @@ public class BasicActions extends IntraWiki {
     search.verifyAllResultsVideos(SearchContent.RESULTS_PER_PAGE_HIGH);
   }
 
+  @RelatedIssue(issueID = "QAART-595")
   @Test(groups = {"IntraWikiSearch_006", "IntraWikiSearch", "Search"})
   public void sortingVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
@@ -146,7 +147,8 @@ public class BasicActions extends IntraWiki {
     search.verifyLanguageTranslation();
   }
 
- @Test(groups = {"IntraWikiSearch_010", "IntraWikiSearch", "Search"})
+  @RelatedIssue(issueID = "QAART-596")
+  @Test(groups = {"IntraWikiSearch_010", "IntraWikiSearch", "Search"})
   public void selectImagesOrVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
