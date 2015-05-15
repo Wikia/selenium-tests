@@ -152,9 +152,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   ) {
     setSlots();
     String
-        leaderboardAd =
-        urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentLeaderboard));
-    String medrecAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentMedrec));
+        leaderboardAd = removeProtocolAndServerName(getSlotImageAd(presentLeaderboard));
+    String medrecAd = removeProtocolAndServerName(getSlotImageAd(presentMedrec));
     verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 
     for (int i = 0; i <= numberOfPageViews; i++) {
@@ -163,6 +162,10 @@ public class AdsBaseObject extends WikiBasePageObject {
       Assertion.assertStringContains(leaderboardAd, getSlotImageAd(presentLeaderboard));
       Assertion.assertStringContains(medrecAd, getSlotImageAd(presentMedrec));
     }
+  }
+
+  private String removeProtocolAndServerName(String url) {
+    return url.substring(url.indexOf('.') + 1, url.length());
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
@@ -573,7 +576,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public String getGptParams(String slotName, String attr) {
-    WebElement adsDiv = driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper'][id*='" + slotName + "']"));
+    WebElement
+        adsDiv =
+        driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper'][id*='" + slotName + "']"));
     return adsDiv.getAttribute(attr);
   }
 
@@ -583,7 +588,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   /**
    * Test whether the correct GPT ad parameters are passed
-   * @param slotName Slotname
+   *
+   * @param slotName   Slotname
    * @param pageParams List of gpt page-level params to test
    * @param slotParams List of gpt slot-level params to test
    */
@@ -611,7 +617,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   /**
    * Test whether the correct GPT ad parameters are passed
-   * @param slotName Slotname
+   *
+   * @param slotName   Slotname
    * @param lineItemId expected line item id
    * @param creativeId expected creative id
    */
@@ -696,6 +703,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("GeoEdge", getCountry(), true);
+    PageObjectLogging.log("SlotName", slotName, true);
     Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
     return this;
   }

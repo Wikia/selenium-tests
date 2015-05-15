@@ -4,7 +4,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"Ads_In_Content", "Ads"}
 )
-public class TestAdsScreenshotComparison extends NewTestTemplate {
+public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   private String testedPage;
 

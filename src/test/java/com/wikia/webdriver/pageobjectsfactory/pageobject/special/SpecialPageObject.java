@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class SpecialPageObject extends WikiBasePageObject {
 
-  @FindBy(css = "#WikiaPageHeader > h2")
+  @FindBy(css = ".header-column.header-title>h2")
   protected WebElement specialPageHeader;
 
   private static final String HEADER_TEXT_SELECTOR = "//h1[contains(text(), '%s')]";

@@ -42,7 +42,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.submit();
     wall.verifyPostedMessageVideo(title);
   }
-    @RelatedIssue(issueID = "MAIN-4324")
+
   @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
   public void VetAddVideo_002_MessageWallLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

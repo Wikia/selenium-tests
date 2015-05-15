@@ -56,7 +56,7 @@ public class AdsDataProvider {
         {"wowwiki", "Portal:Main"},
         {"gameofthrones", "Season_4"},
         {"zh.pad", "Homepage/Mobile"},
-        {"zh.pad", "Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
+        {"zh.pad", "Special:Video"}
     };
   }
 
@@ -351,6 +351,10 @@ public class AdsDataProvider {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
         },
+        {
+            "GB", "adtest", "SyntheticTests/ProvidersChain",
+            "INVISIBLE_SKIN", "gpt; remnant", 0
+        }
     };
   }
 
