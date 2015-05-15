@@ -41,7 +41,7 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
-  @RelatedIssue(issueID = "QAART-592")
+  @RelatedIssue(issueID = "MAIN-4539")
   @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
   public void ImageServing_002_SpecialUploadTest(String fileName) {
