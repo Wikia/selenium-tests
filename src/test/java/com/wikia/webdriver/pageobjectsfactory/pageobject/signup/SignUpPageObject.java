@@ -59,6 +59,8 @@ public class SignUpPageObject extends WikiBasePageObject {
   private WebElement facebookSignUpButton;
 
   private By errorMsgBy = By.className("error-msg");
+  private By recaptchaResponseBy = By.cssSelector("#g-recaptcha-response");
+  private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
 
   private Select yearSelect;
   private Select daySelect;
@@ -95,10 +97,6 @@ public class SignUpPageObject extends WikiBasePageObject {
         .findElement(errorMsgBy)
         .getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_TOO_YOUNG_MESSAGE);
-  }
-
-  public void verifySubmitButtonDisabled() {
-    Assertion.assertEquals("true", signupButton.getAttribute("disabled"));
   }
 
   public void enterBirthDate(String month, String day, String year) {
@@ -161,17 +159,8 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyCaptchaInvalidMessage() {
-    String message = captchaField
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(parentBy)
-        .findElement(errorMsgBy)
-        .getText();
+    waitForElementPresenceByBy(recaptchaResponseBy);
+    String message = driver.findElement(recaptchaErrorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
   }
 

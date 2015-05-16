@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"Ads_Corporate_Page"}
 )
-public class TestAdsOnCorporatePages extends NewTestTemplate {
+public class TestAdsOnCorporatePages extends TemplateDontLogout {
 
   private String testedPage;
   private String adUnit;
@@ -45,7 +45,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
   )
   public void TestCorporatePage_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoLiftiumAdsOnPage();
+    wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
     // Not verifying GPT iframes in low value countries
   }
@@ -55,7 +55,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
   )
   public void TestCorporatePage_GEF() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoLiftiumAdsOnPage();
+    wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
     // Verifying GPT iframes in high value countries:
     wikiPage.verifyGptIframe(adUnit, slotName, "gpt");

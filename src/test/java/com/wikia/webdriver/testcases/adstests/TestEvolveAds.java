@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 
 import org.testng.annotations.Test;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestEvolveAds extends NewTestTemplate {
+public class TestEvolveAds extends TemplateDontLogout {
 
   @GeoEdgeProxy(country = "CA")
   @Test(
@@ -47,5 +47,18 @@ public class TestEvolveAds extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
     wikiPage.verifyEvolveCall();
+  }
+
+  @GeoEdgeProxy(country = "CA")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      groups = {"TestEvolveAds"},
+      dataProvider = "evolveHopTestPage"
+  )
+  public void testEvolveHop_CA(String wikiName, String article, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
+    wikiPage.verifyEvolveInSlot(slotName);
+    wikiPage.verifyEvolveHopInSlot(slotName);
   }
 }

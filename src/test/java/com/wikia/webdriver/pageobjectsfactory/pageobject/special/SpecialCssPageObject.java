@@ -41,7 +41,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   private WebElement changesModal;
   @FindBy(css = "#wikiDiff .diff-addedline > div")
   private WebElement changesModalAddedLine;
-  @FindBy(css = ".global-notification.confirm")
+  @FindBy(css = ".banner-notification.confirm")
   private WebElement notificationConfirm;
   @FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=history\"]")
   private WebElement historyButton;

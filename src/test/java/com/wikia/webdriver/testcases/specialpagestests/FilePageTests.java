@@ -1,7 +1,12 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -12,14 +17,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
-import org.testng.annotations.Test;
-
 public class FilePageTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
   /**
-   * Verify functionality of tabs on file pages in Oasis.  When a tab is clicked, the corresponding
+   * Verify functionality of tabs on file pages in Oasis. When a tab is clicked, the corresponding
    * content should be displayed.
    *
    * @author "Liz Lee"
@@ -81,28 +84,29 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
-  public void filePage004_delete_QAART_518() {
+  public void filePage004_delete() {
     // Go to Special:Videos to add a video
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
+
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL4);
+    vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there
-    specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL4_FILE_TITLE);
+    specialVideos.verifyVideoAdded(video.getTitle());
 
     // Now delete the video
-    FilePagePageObject
-        filePage =
-        specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 
@@ -112,7 +116,10 @@ public class FilePageTests extends NewTestTemplate {
    * @author garth
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-  public void filePage005_deleteFromHistory_QAART_518() {
+  public void filePage005_deleteFromHistory() {
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
+
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -120,20 +127,19 @@ public class FilePageTests extends NewTestTemplate {
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL4);
+    vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there
-    specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL4_FILE_TITLE);
+    specialVideos.verifyVideoAdded(video.getTitle());
 
     // Go to the history tab and add a second video to test deleting a version
-    FilePagePageObject
-        filePage =
-        specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.selectHistoryTab();
+
     filePage.replaceVideo(VideoContent.YOUTUBE_VIDEO_URL5);
 
     // Load the file page again, should have the same name
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmbeddedVideoIsPresent();
 
     // Go to the history tab and verify there are at least two videos
@@ -145,7 +151,7 @@ public class FilePageTests extends NewTestTemplate {
     deletePage.submitDeletion();
 
     // Load the file page again, should have the same name
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmbeddedVideoIsPresent();
 
     // Delete the first version and thus the whole page
@@ -153,7 +159,7 @@ public class FilePageTests extends NewTestTemplate {
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage = specialVideos.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL4_FILENAME);
+    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 }

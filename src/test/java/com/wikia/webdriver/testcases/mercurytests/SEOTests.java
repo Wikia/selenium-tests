@@ -1,103 +1,65 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.OpenGraphPageObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * @ownership: Mobile Web
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
+ * @ownership: Content - Mercury mobile
  */
 public class SEOTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void optInMercury() {
+  public void prepareTest() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki("muppet");
-    MercuryContent.turnOnMercurySkin(driver, wikiURL);
   }
 
   // SEOT01
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_001_CheckTypeMetaTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgTypeWebsite();
-    SearchNavSideMenuComponentObject leftNav = article.clickSearchButton();
-    leftNav.clickRandomPage();
-    openGraph.verifyOgTypeArticle();
-  }
-
-  // SEOT02
-  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_002_CheckTitleMetaTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgTitleMainPage();
-    SearchNavSideMenuComponentObject leftNav = article.clickSearchButton();
-    leftNav.clickRandomPage();
-    openGraph.verifyOgTitleArticlePage();
-  }
-
-  // SEOT03
-  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_003_CheckSiteNameTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgSiteNameNotExists();
-    SearchNavSideMenuComponentObject leftNav = article.clickSearchButton();
-    leftNav.clickRandomPage();
-    openGraph.verifyOgSiteNameExists();
-  }
-
-  // SEOT04
-  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_004_CheckDescriptionTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgDescription();
-    String descOne = openGraph.getDescription();
-    System.out.println(descOne);
-    SearchNavSideMenuComponentObject leftNav = article.clickSearchButton();
-    leftNav.clickRandomPage();
-    openGraph.verifyOgDescription();
-    String descTwo = openGraph.getDescription();
-    System.out.println(descTwo);
-    openGraph.verifyOgDescriptionTagWasChanged(descOne, descTwo);
-  }
-
-  // SEOT05
-  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_005_CheckUrlTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
+  @RelatedIssue(issueID = "CONCF-412")
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
+  public void MercurySEOTest_001_MetaTags_CanonicalLink() {
+    BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgUrlTag();
-  }
-
-  // SEOT06
-  @Test(groups = {"MercurySEOTest_006", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_006_CheckImageTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgImage();
-  }
-
-  // SEOT07
-  @Test(groups = {"MercurySEOTest_007", "MercurySEOTests", "Mercury"})
-  public void MercurySEOTest_007_CheckFbAppTag() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
-    OpenGraphPageObject openGraph = new OpenGraphPageObject(driver);
-    openGraph.verifyOgFbApp();
+    SEOPageObject seo = new SEOPageObject(driver);
+    NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
+    PageObjectLogging.log("link[rel='canonical']", "contains current url", "contains wrong url",
+                          seo.isLinkRelCanonical());
+    PageObjectLogging.log("meta[property='fb:app_id']", "is filled", "is empty", seo.isOgFbApp());
+    PageObjectLogging.log("meta[property='og:image']", "is filled", "is empty", seo.isOgImage());
+    PageObjectLogging.log("meta[property='og:url']", "contains current url", "contains wrong url",
+                          seo.isOgUrlTag());
+    PageObjectLogging
+        .log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
+    PageObjectLogging
+        .log("meta[property='og:site_name']", "is empty", "is filled", !seo.isOgSiteName());
+    PageObjectLogging
+        .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
+    PageObjectLogging
+        .log("meta[property='og:type']", "contains website", "is wrong", seo.isOgTypeWebsite());
+    String lastDesc = seo.getDescription();
+    leftNav.clickSearchButton();
+    leftNav.clickNavListElement(0);
+    base.waitForLoadingSpinnerToFinishReloadingPage();
+    PageObjectLogging.logWarning("Site status", "Page was reloaded asynchronously");
+    PageObjectLogging
+        .log("meta[property='og:description']", "is filled", "is empty", seo.isOgDescription());
+    PageObjectLogging.log("meta[property='og:description']", "is different", "does not changed",
+                          !lastDesc.equals(seo.getDescription()));
+    PageObjectLogging
+        .log("meta[property='og:site_name']", "is filled", "is empty", seo.isOgSiteName());
+    PageObjectLogging
+        .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
+    PageObjectLogging
+        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());
   }
 }

@@ -1,9 +1,16 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import org.testng.annotations.Test;
@@ -16,6 +23,7 @@ import org.testng.annotations.Test;
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
+
 
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
@@ -65,5 +73,32 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.openSpecialUserLogin(wikiURL);
     login.login(userName, newPassword);
     login.verifyUserLoggedIn(userName);
+  }
+
+  @Test(
+      groups = {"ForgottenPassword_003", "ForgottenPassword"}
+  )
+  @RelatedIssue(issueID = "SOC-593")
+  public void ForgottenPassword_003_createWiki() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
+    String wikiName = cnw1.getWikiName();
+    cnw1.typeInWikiName(wikiName);
+    cnw1.verifySuccessIcon();
+    CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
+    cnwLogin.typeInUserName(credentials.userNameForgottenPassword3);
+    cnwLogin.clickForgotPassword();
+    cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
+    String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
+    cnwLogin.typeInPassword(newPassword);
+    CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
+    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
+    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
+    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
+    ArticlePageObject article = cnw3.submit();
+    article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
+    article.closeNewWikiCongratulationsLightBox();
+    article.verifyWikiTitleHeader(wikiName);
+    article.verifyUserLoggedIn(credentials.userNameForgottenPassword3);
   }
 }

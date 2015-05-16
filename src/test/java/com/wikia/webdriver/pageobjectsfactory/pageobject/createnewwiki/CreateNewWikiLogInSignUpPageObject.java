@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -30,6 +31,8 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   WebElement usernameValidationText;
   @FindBy(css = "form#SignupRedirect input[type='submit']")
   WebElement signUpSubmitButton;
+  @FindBy(css = ".UserLoginModal .forgot-password")
+  WebElement forgotPasswordLink;
 
   private static final String
       ERROR_MESSAGE_CSS =
@@ -45,6 +48,11 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
     PageObjectLogging.log("typeInPassword", "password name was typed", true);
+  }
+
+  public void clickForgotPassword() {
+    waitForElementByElement(forgotPasswordLink);
+    forgotPasswordLink.click();
   }
 
   public CreateNewWikiPageObjectStep2 submitLogin() {
@@ -81,5 +89,16 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     waitForElementByCss(ERROR_MESSAGE_CSS);
     Assertion.assertEquals(CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE,
                            errorMessage.getText());
+  }
+
+  public void verifyMessageAboutNewPassword(String userName) {
+    waitForElementByElement(usernameValidationText);
+    String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
+    waitForTextToBePresentInElementByElement(usernameValidationText, newPasswordMsg);
+    PageObjectLogging.log(
+        "MessageAboutPasswordSent",
+        "Message about new password sent present",
+        true
+    );
   }
 }

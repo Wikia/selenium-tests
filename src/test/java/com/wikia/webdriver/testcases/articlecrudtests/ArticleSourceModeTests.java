@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -255,7 +256,6 @@ public class ArticleSourceModeTests extends NewTestTemplate {
         "[[" + VideoContent.YOUTUBE_VIDEO_WIKITEXT + PageContent.CAPTION + "]]");
     source.submitArticle();
   }
-
 
   @Test(groups = {"RTE_extended", "RTE_extended_017"})
   public void RTE_017_MoreMainTools() {

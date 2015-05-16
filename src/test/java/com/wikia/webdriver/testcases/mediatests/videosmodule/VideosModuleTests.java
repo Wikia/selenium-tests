@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -16,7 +17,7 @@ public class VideosModuleTests extends NewTestTemplate {
    * @author James Sutterfield
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-  public void VideosModuleTest_001_QAART_508() {
+  public void VideosModuleTest_001() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);

@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentat
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
@@ -51,7 +52,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement veEditorSurface;
   @FindBy(css = ".image.video.video-thumbnail.medium")
   private List<WebElement> videoNodes;
-  @FindBy(css = "figure.ve-ce-branchNode a")
+  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
   @FindBy(css = "figure.ve-ce-branchNode a")
   private List<WebElement> mediaNodes;
@@ -67,34 +68,37 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mediaCaption;
   @FindBy(css = ".ve-ce-resizableNode-swHandle")
   private WebElement swResizeHandle;
-  @FindBy(css = ".ve-ui-desktopContext .oo-ui-popupWidget")
+  @FindBy(css = ".ve-ui-desktopContext .oo-ui-popupWidget-popup")
   private WebElement contextMenu;
-  @FindBy(css = ".ve-ce-node-focused")
+  @FindBy(css = ".ve-ui-wikiaFocusWidget")
   private WebElement focusedNode;
   @FindBy(css = ".mw-body-content")
   private WebElement mainContent;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
   private WebElement galleryNode;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
+  @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
+  private WebElement focusedHighlight;
 
-  private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
-  private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
-  private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
-  private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
-
-  private String blockTransclusionString = ".ve-ce-mwTransclusionBlockNode";
+  private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
+  private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
+  private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
+  private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public void selectMediaAndDelete() {
-    waitForElementByElement(editArea);
+    waitForElementVisibleByElement(editArea);
     editArea.click();
-    waitForElementByElement(mediaNode);
+    waitForElementVisibleByElement(mediaNode);
     mediaNode.click();
-    Actions actions2 = new Actions(driver);
-    actions2.sendKeys(Keys.DELETE).build().perform();
+    deleteMediaNode();
     PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+  }
+
+  private void deleteMediaNode() {
+    executeScript("$(\"figure\").trigger($.Event(\"keydown\", {keyCode: 46}))");
   }
 
   public void typeTextArea(String text) {
@@ -111,11 +115,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void selectText(int from, int to) {
     String
         showSelectiontJS =
-        "ve.instances[0].model.change( null, new ve.Range( " + from + ", " + to + " ) );";
+        "ve.init.target.getSurface().getModel().change(" +
+        "null, new ve.dm.LinearSelection(" +
+        "ve.init.target.getSurface().getModel().getDocument(),new ve.Range(" +
+        from + "," + to + " )));";
     ((JavascriptExecutor) driver).executeScript(showSelectiontJS);
   }
 
   public void selectText(String text) {
+    waitForElementVisibleByElement(editArea);
     String textDump = editArea.getText();
     int
         from =
@@ -137,11 +145,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void removeText(String text) {
-    int[] indexes = getTextIndex(text);
-    String script = "ve.instances[0].model.change("
-                    + "ve.dm.Transaction.newFromRemoval(ve.instances[0].model.documentModel,"
-                    + "new ve.Range(arguments[0],arguments[1])));";
-    ((JavascriptExecutor) driver).executeScript(script, indexes[0], indexes[1]);
+    selectText(text);
+    editArea.sendKeys(Keys.DELETE);
   }
 
   public void verifyNumList(List<String> elements) {
@@ -177,14 +182,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return new ArticlePageObject(driver);
   }
 
-  public void verifyVideo() {
-    waitForElementByElement(mediaNode);
-    waitForElementVisibleByElement(mediaNode);
-    PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
-  }
-
   public void verifyMapPresent() {
-    waitForElementByElement(mapNode);
     waitForElementVisibleByElement(mapNode);
     PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
   }
@@ -198,7 +196,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideos(int expected) {
-    waitForElementByElement(mediaNode);
     waitForElementVisibleByElement(mediaNode);
     Assertion.assertNumber(expected, videoNodes.size(),
                            "Checking the correct number of video nodes added");
@@ -206,10 +203,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyGalleries(int expected) {
-    waitForElementVisibleByElement(galleryNode);
-    Assertion.assertNumber(expected, galleryNodes.size(),
-                           "Checking the correct number of gallery nodes added");
-    PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);
+    if (expected > 0) {
+      waitForElementVisibleByElement(galleryNode);
+    }
+    Assertion.assertNumber(
+        expected,
+        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")),
+        "Checking the correct number of gallery nodes");
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -302,7 +302,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     VisualEditorSourceEditorDialog veSrcDialog =
         (VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
     veSrcDialog.typeInEditArea(text);
-    return new VisualEditorPageObject(driver);
+    return veSrcDialog.clickApplyChangesButton();
   }
 
   public void verifyPreviewVideoPlay(String providerName) {
@@ -320,7 +320,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideoCaption(String caption) {
-    waitForElementByElement(mediaNode);
     waitForElementVisibleByElement(mediaNode);
     waitForElementByElement(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
@@ -335,7 +334,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void selectMediaByIndex(int index) {
     WebElement selectedMedia = mediaNodes.get(index);
     waitForElementVisibleByElement(selectedMedia);
-    selectedMedia.click();
+    scrollAndClick(selectedMedia, 80);
   }
 
   public void selectMediaByTitle(String title) {
@@ -400,22 +399,30 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement selectedGallery = galleryNodes.get(index);
     waitForElementClickableByElement(selectedGallery);
     selectedGallery.click();
+
   }
 
   public void deleteGallery(int index) {
     selectGallery(index);
+    //wait for highlight
+    waitForElementByElement(focusedHighlight);
+    //TODO check if any future webdriver upgrade would resolve having to use separate logic
+    if("Chrome".equalsIgnoreCase(getBrowser())) {
+      Actions actions2 = new Actions(driver);
+      actions2.sendKeys(Keys.DELETE).build().perform();
+    } else {
+      editArea.sendKeys(Keys.DELETE);
+    }
+  }
+
+  public void deleteTransclusion(int index, Transclusion transclusion) {
+    clickTransclusion(index, transclusion);
     Actions actions2 = new Actions(driver);
     actions2.sendKeys(Keys.DELETE).build().perform();
   }
 
-  public void deleteBlockTransclusion(int index) {
-    clickBlockTransclusion(index);
-    Actions actions2 = new Actions(driver);
-    actions2.sendKeys(Keys.DELETE).build().perform();
-  }
-
-  public void clickBlockTransclusion(int index) {
-    Point tempLocation = getBlockTransclusionLocation(index);
+  public void clickTransclusion(int index, Transclusion transclusion) {
+    Point tempLocation = getTransclusionLocation(index, transclusion);
     int xOffset = 10;
     int yOffset = 10;
     int tempLeft = tempLocation.x + xOffset;
@@ -427,15 +434,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     waitForElementVisibleByElement(contextEdit);
     PageObjectLogging
-        .log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
+        .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
              driver);
   }
 
-  private Point getBlockTransclusionLocation(int index) {
+  private Point getTransclusionLocation(int index, Transclusion transclusion) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     Object
         templateBounding =
-        js.executeScript(VEContent.BOUNDING_SCRIPT, blockTransclusionString, index);
+        js.executeScript(VEContent.BOUNDING_SCRIPT, transclusion.getCssSelector(), index);
     Map<String, String> mapBounding = (Map) templateBounding;
     int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));
     int tempTop = getMapValueAsInt(String.valueOf(mapBounding.get("top")));
@@ -447,8 +454,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorEditTemplateDialog openEditTemplateDialog() {
-    waitForElementByElement(editArea);
-    waitForElementByElement(focusedNode);
+    waitForElementVisibleByElement(editArea);
+    waitForElementVisibleByElement(focusedNode);
     clickContextMenu();
     return new VisualEditorEditTemplateDialog(driver);
   }

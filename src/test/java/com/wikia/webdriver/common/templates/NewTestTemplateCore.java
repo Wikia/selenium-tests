@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 
+
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +26,7 @@ import org.testng.annotations.Listeners;
 import java.io.File;
 import java.lang.reflect.Method;
 
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;
@@ -35,7 +36,7 @@ public class NewTestTemplateCore {
   protected String wikiCorporateURL;
   protected String wikiCorpSetupURL;
   private DesiredCapabilities capabilities;
-  protected NetworkTrafficInterceptor networkTrafficIntereceptor;
+  protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected boolean isProxyServerRunning = false;
 
   public NewTestTemplateCore() {
@@ -59,7 +60,7 @@ public class NewTestTemplateCore {
   }
 
   protected void prepareURLs() {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());
     wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
     wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
@@ -93,6 +94,10 @@ public class NewTestTemplateCore {
   }
 
   protected void stopBrowser() {
+    /*if (NewDriverProvider.getMobileDriver() != null
+        && NewDriverProvider.getMobileDriver().getSessionId() != null) {
+      NewDriverProvider.getMobileDriver().quit();
+    }*/
     if (driver != null) {
       driver.quit();
     }
@@ -148,12 +153,12 @@ public class NewTestTemplateCore {
     }
 
     isProxyServerRunning = true;
-    networkTrafficIntereceptor = new NetworkTrafficInterceptor();
-    networkTrafficIntereceptor.startSeleniumProxyServer();
+    networkTrafficInterceptor = new NetworkTrafficInterceptor();
+    networkTrafficInterceptor.startSeleniumProxyServer();
     if (isGeoEdgeSet && !countryCode.isEmpty()) {
       setGeoEdge(countryCode);
     }
-    capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
+    capabilities = getCapsWithProxyServerSet(networkTrafficInterceptor);
     setDriverCapabilities(capabilities);
   }
 
@@ -161,7 +166,7 @@ public class NewTestTemplateCore {
     GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
     String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
     String ip = geoEdgeUtils.getIPForCountry(countryCode);
-    networkTrafficIntereceptor.setProxyServer(ip);
-    networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
+    networkTrafficInterceptor.setProxyServer(ip);
+    networkTrafficInterceptor.changeHeader("Proxy-Authorization", credentialsBase64);
   }
 }

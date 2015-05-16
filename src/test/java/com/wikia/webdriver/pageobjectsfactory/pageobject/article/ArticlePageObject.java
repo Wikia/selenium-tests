@@ -54,6 +54,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement historyDropdown;
   @FindBy(css = ".WikiaMenuElement .createpage, ul .createpage")
   protected WebElement addArticleInDropdown;
+  @FindBy(css = ".wikia-menu-button.contribute a[data-id='edit']")
+  protected WebElement editArticleInDropDown;
   @FindBy(css = "#wpCreatePageDialogTitle")
   protected WebElement articleTitleInputModal;
   @FindBy(css = "#CreatePageModalDialog .primary")
@@ -908,5 +910,12 @@ public class ArticlePageObject extends WikiBasePageObject {
         throw new NoSuchElementException(
             "Invalid expected editor chosen: " + expectedEditor.name());
     }
+  }
+
+  public VisualEditModePageObject editArticleInCKUsingDropdown() {
+    actionsClick(contributeDropdown);
+    waitForElementVisibleByElement(editArticleInDropDown);
+    editArticleInDropDown.click();
+    return new VisualEditModePageObject(driver);
   }
 }

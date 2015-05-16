@@ -26,7 +26,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   @FindBy(xpath = "//p[contains(text(), 'The requested IP address or username is not blocked.')]")
   private WebElement userUnblockedMessage;
   @FindBy(css = ".mw-blocklist td:nth-child(3)")
-  private WebElement expirationDate;
+  private WebElement expirationDateElement;
 
   private void typeInUserName(String userName) {
     waitForElementByElement(userNameField);
@@ -68,11 +68,11 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   public boolean isUserBlocked(String username) {
     boolean isBlocked = false;
     searchForUser(username);
-    if (!checkIfElementOnPage(expirationDate)) {
+    if (!checkIfElementOnPage(expirationDateElement)) {
       return isBlocked;
     }
     SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
-    String expirationDateText = expirationDate.getText();
+    String expirationDateText = expirationDateElement.getText();
     try {
       Date expirationDate = blockListDateFormat.parse(expirationDateText);
       Date currentDate = new Date();

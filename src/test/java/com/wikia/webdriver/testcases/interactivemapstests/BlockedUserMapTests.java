@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -44,7 +45,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
-  public void BlockedUserMapTests_002_VerifyUserCannotAddPin_QAART_476() {
+  public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
                      wikiURL);
@@ -93,6 +94,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
     template.verifyErrorExists();
   }
 
+  @RelatedIssue(issueID = "QAART-594")
   @Test(groups = {"BlockedUserMapTests_005", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_005_VerifyUserCannotEditPinTypesOnEmbeddedMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

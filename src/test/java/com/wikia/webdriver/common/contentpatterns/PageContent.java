@@ -66,7 +66,7 @@ public class PageContent {
   public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
   //image storage
   public static final String FILE_DELETE_AND_RESTORE = "Constantine_test.png";
-  public static final String FILERENAME = "HongKongHarbour.jpg";
+  public static final String FILERENAME = "Image003.jpg";
   public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
   public static final String[] LIST_OF_FILES = {
@@ -147,6 +147,9 @@ public class PageContent {
   public static final String WIKI_SIGN_UP_BIRTHMONTH = "11";
   public static final String WIKI_SIGN_UP_BIRTHYEAR = "1954";
   public static final int MIN_AGE = 12;
+
+  //Hero Module edit field default message
+  public static final String WIKIA_HERO_PROMOTE_MESSAGE = "Add a summary that will promote your wikia in searches and on hubs.";
 
   private PageContent() {
 

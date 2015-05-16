@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.awt.*;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestOoyalaAds extends NewTestTemplate {
+public class TestOoyalaAds extends TemplateDontLogout {
 
   private final static Color GREEN = new Color(0, 214, 0);
   private final static Color BLUE = new Color(0, 13, 255);

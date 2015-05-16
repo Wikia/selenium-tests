@@ -1,12 +1,9 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,24 +29,6 @@ public class ImageEditor {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public BufferedImage scaleImage(
-      File inputFile, double scaleX, double scaleY
-  ) {
-    BufferedImage inputImage = null;
-    try {
-      inputImage = ImageIO.read(inputFile);
-    } catch (IOException e) {
-      PageObjectLogging.log("scaleImage", e.getMessage(), false);
-    }
-    BufferedImage outputImage = new BufferedImage(
-        inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_INT_RGB
-    );
-    Graphics2D graphics = outputImage.createGraphics();
-    AffineTransform affineTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
-    graphics.drawRenderedImage(inputImage, affineTransform);
-    return outputImage;
   }
 
   public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size,

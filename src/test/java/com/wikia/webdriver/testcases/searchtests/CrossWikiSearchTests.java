@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.searchtests;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -27,8 +28,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @Test(dataProviderClass = CrossWikiSearchProvider.class,
-      dataProvider = "getExactMatchQueries",
+  @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
       groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_001_exactMatch(String query, String wikiName, String vertical) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
@@ -98,8 +98,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoPagination();
   }
 
-  @Test(dataProviderClass = CrossWikiSearchProvider.class,
-      dataProvider = "getPushToTopQueries",
+  @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
       groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
@@ -124,10 +123,10 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     promote.verifyCrossWikiSearchImage(searchImage);
   }
 
-  //TODO when Jakub K. agrees final functionality
-//	@Test(dataProviderClass=SearchDataProvider.class,
-//			dataProvider="getExpectedWikiResults",
-//			groups = {"CrossWikiSearchTests_008", "Search, "CrossWikiSearch""})
+  // TODO when Jakub K. agrees final functionality
+  // @Test(dataProviderClass=SearchDataProvider.class,
+  // dataProvider="getExpectedWikiResults",
+  // groups = {"CrossWikiSearchTests_008", "Search, "CrossWikiSearch""})
   public void crossWikiSearch_008_wikimatch(String expectedWikiTitle) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -139,8 +138,9 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
-  @Test(enabled = false, groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
-  public void crossWikiSearch_009_romanNumbersMatch_PLA_1245() {
+  @RelatedIssue(issueID = "MAIN-4498")
+  @Test( groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
+  public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE_ROMAN_NUMBER);

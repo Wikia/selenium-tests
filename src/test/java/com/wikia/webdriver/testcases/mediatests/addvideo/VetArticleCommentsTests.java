@@ -5,6 +5,8 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -23,19 +25,22 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
-  public void VetArticleComments_001_Provider_QAART_509() {
+  public void VetArticleComments_001_Provider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     ArticlePageObject article = base.openRandomArticle(wikiURL);
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
+
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("microsoft");
+
     VetOptionsComponentObject
         vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
+        vetAddingVideo.addVideoByUrl(video.getUrl());
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     article.submitComment();
-    article.verifyCommentVideo(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
+    article.verifyCommentVideo(video.getTitle());
   }
 
   @Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})

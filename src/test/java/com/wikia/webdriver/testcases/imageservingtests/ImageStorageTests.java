@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,11 +15,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Delete image, verify 404 status, restore image, verify
- *         200 status 2. Move image, verify status
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. Delete image, verify 404 status, restore image, verify 200 status 2. Move image,
+ *         verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -31,15 +35,26 @@ public class ImageStorageTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   public void ImageStorage_001_deleteImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-    FilePagePageObject file = newFiles.openImage(PageContent.FILE_DELETE_AND_RESTORE, true);
+    base.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
+
+    SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
+    filesPage.addPhoto();
+    filesPage.selectFileToUpload(PageContent.FILE);
+    String fileName = DateTime.now().getMillis() + PageContent.FILE;
+    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.setFileName(fileName);
+    filesPage.checkIgnoreAnyWarnings();
+    filesPage.clickUploadButton();
+    filesPage.verifyFileUploaded(fileName);
+
+    FilePagePageObject file =
+        new SpecialNewFilesPageObject(driver).openFilePage(wikiURL, fileName, true);
     imageURL = file.getImageUrl();
     imageThumbnailURL = file.getImageThumbnailUrl();
-    newFiles.verifyURLStatus(200, imageURL);
-    newFiles.verifyURLStatus(200, imageThumbnailURL);
+    file.verifyURLStatus(200, imageURL);
+    file.verifyURLStatus(200, imageThumbnailURL);
 
-    DeletePageObject delete = newFiles.deletePage();
+    DeletePageObject delete = file.deletePage();
     base = delete.submitDeletion();
     base.verifyNotificationMessage();
 
@@ -51,26 +66,42 @@ public class ImageStorageTests extends NewTestTemplate {
     restore.restorePage();
     restore.verifyNotificationMessage();
 
-    newFiles.verifyURLStatus(200, imageURL);
-    newFiles.verifyURLStatus(200, imageThumbnailURL);
+    file.verifyURLStatus(200, imageURL);
+    file.verifyURLStatus(200, imageThumbnailURL);
+
+    file.deletePage();
+    delete.submitDeletion();
   }
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
+ @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
   public void ImageStorage_002_moveImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-    FilePagePageObject file = newFiles.openImage(PageContent.FILERENAME, true);
+
+    SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
+    filesPage.addPhoto();
+    filesPage.selectFileToUpload(PageContent.FILE);
+    String fileName = DateTime.now().getMillis() + PageContent.FILE;
+    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.setFileName(fileName);
+    filesPage.checkIgnoreAnyWarnings();
+    filesPage.clickUploadButton();
+    filesPage.verifyFileUploaded(fileName);
+
+    FilePagePageObject file = base.openFilePage(wikiURL, fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
-    String imageNewName = renamePage.getTimeStamp() + PageContent.FILERENAME;
+    String imageNewName = renamePage.getTimeStamp() + fileName;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = newFiles.openFilePage(wikiURL, imageNewName);
+    file = base.openFilePage(wikiURL, imageNewName, true);
     renamePage = file.renameUsingDropdown();
-    renamePage.rename(PageContent.FILERENAME, true);
+    renamePage.rename(fileName, true);
     file.verifyNotificationMessage();
-    file.verifyHeader(PageContent.FILERENAME);
+    file.verifyHeader(fileName);
+
+    DeletePageObject delete = file.deletePage();
+    delete.submitDeletion();
   }
 }

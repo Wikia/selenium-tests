@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -25,6 +26,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_001_PublishedProvider() {
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);
@@ -44,7 +46,8 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_002_PublishedLibrary() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+      WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     base.openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -63,7 +66,8 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "Media"})
   public void Placeholders_003_EditModeProvider() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+      WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     base.openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -85,7 +89,8 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
-  public void Placeholders_004_EditModeLibrary_QAART_496() {
+  public void Placeholders_004_EditModeLibrary() {
+      String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     base.openRandomArticle(wikiURL);

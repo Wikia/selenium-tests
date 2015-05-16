@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>Test</name>
 	<groupId>com.wiki.qa</groupId>
@@ -7,17 +7,17 @@
 	<version>1.0-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 		<mvn.run>true</mvn.run>
 		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
-		<webdriver.version>2.43.1</webdriver.version>
+		<webdriver.version>2.45.0</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>4.3.2</version>
+			<version>4.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>net.kennychua</groupId>
@@ -37,12 +37,21 @@
 			<version>8.1.15.v20140411</version>
 		</dependency>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.10</version>
+		</dependency>
+		<dependency>
 			<groupId>biz.neustar</groupId>
 			<artifactId>browsermob-proxy</artifactId>
 			<version>2.0-beta-7</version>
 			<!-- QAART-397 Added exclusions as browsermob-proxy uses version 7.3.0.v20110203 -->
 			<!-- which no longer return http 200 -->
 			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-server</artifactId>
@@ -105,7 +114,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.5</version>
+			<version>4.3.6</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -130,7 +139,7 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.2.3</version>
+			<version>2.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.json</groupId>
@@ -157,6 +166,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -189,6 +203,7 @@
 						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
+						<disable-flash>${disable-flash}</disable-flash>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>${testSuite}</suiteXmlFile>

@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
 import org.testng.annotations.Factory;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  * @description 1. Test no ads on corporate pages
  */
-public class TestAdsOnGermanCorpPages extends NewTestTemplate {
+public class TestAdsOnGermanCorpPages extends TemplateDontLogout {
 
   private String testedPage;
 

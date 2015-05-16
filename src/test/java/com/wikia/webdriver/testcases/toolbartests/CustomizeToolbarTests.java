@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -138,10 +139,10 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
   }
 
   @Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"})
-  public void CustomizeToolbar007_MoreButton_QAART_510() {
+  public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
-    toolbar.addManyItems(toolPreferences, 5);
+    toolbar.addManyItems(toolPreferences, 8);
     toolbar.clickSave();
     setWindowSize(800, 600, driver);
     toolbar.refreshPage();

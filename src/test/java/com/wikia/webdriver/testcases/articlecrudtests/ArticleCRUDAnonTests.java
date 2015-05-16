@@ -100,12 +100,10 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void ArticleCRUDAnon_006_editDropdown() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article =
-        base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
-    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    article = ve.clickVEEditAndPublish(articleContent);
+    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
+    visualEditMode.addContent(articleContent);
+    visualEditMode.clickPublishButton();
     article.verifyContent(articleContent);
   }
 }

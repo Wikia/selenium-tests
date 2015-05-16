@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"Ads_Hubs_Pages", "Ads"}
 )
-public class TestAdsOnHubs extends NewTestTemplate {
+public class TestAdsOnHubs extends TemplateDontLogout {
 
   private String testedPage;
 

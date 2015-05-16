@@ -319,9 +319,9 @@ public class VisualEditModePageObject extends EditMode {
       if (nextStarIndex < 0) {
         break;
       }
-      String video = sourceText.substring(previousStarIndex, nextStarIndex);
-      if (!video.contains(unwantedVideoName)) {
-        videos.add(video);
+      String videoText = sourceText.substring(previousStarIndex, nextStarIndex);
+      if (!videoText.contains(unwantedVideoName)) {
+        videos.add(videoText);
       }
       index = previousStarIndex + 1;
     }

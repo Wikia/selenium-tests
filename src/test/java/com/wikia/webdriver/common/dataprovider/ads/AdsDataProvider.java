@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -50,12 +51,12 @@ public class AdsDataProvider {
         {"zh.tos", "Category:%E5%9C%96%E9%91%92"},
         {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Slenderman"},
+        {"it.creepypasta", "Slenderman"},
         {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
         {"wowwiki", "Portal:Main"},
         {"gameofthrones", "Season_4"},
         {"zh.pad", "Homepage/Mobile"},
-        {"zh.pad", "Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
+        {"zh.pad", "Special:Video"}
     };
   }
 
@@ -82,7 +83,7 @@ public class AdsDataProvider {
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Categoria:Creepypasta"},
+        {"it.creepypasta", "Categoria:Creepypasta"},
         {"wikia", "Wikia"},
         {"wikia", "Video_Games/Lizzunchbox"},
         {"monsterhunter", "MH3U:_Monsters"},
@@ -97,7 +98,7 @@ public class AdsDataProvider {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypastaitalia", "Categoria:Creepypasta"},
+        {"it.creepypasta", "Categoria:Creepypasta"},
         {"monsterhunter", "MH3U:_Monsters"},
         {"monsterhunter", "Portal:MH3U"},
 
@@ -149,9 +150,9 @@ public class AdsDataProvider {
   public static Object[][] specialPages() {
     return new Object[][]{
         {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD"},
+         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD"},
+         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
   }
 
@@ -159,9 +160,9 @@ public class AdsDataProvider {
   public static Object[][] filePages() {
     return new Object[][]{
         {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
-         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
+         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
-         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD"},
+         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
     };
   }
 
@@ -299,9 +300,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"memory-alpha", "Portal:Main"},
-        {"gameofthrones", "Season_4"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
+        {"adtest", "SyntheticTests/Amazon"},
     };
   }
 
@@ -329,6 +328,11 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] evolveHopTestPage() {
+    return new Object[][]{{"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD"}};
+  }
+
+  @DataProvider
   public static Object[][] testProvidersChain() {
     return new Object[][]{
         {
@@ -341,20 +345,16 @@ public class AdsDataProvider {
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 0
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
         },
         {
             "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; Liftium", 2
+            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
         },
         {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 0
-        },
-        {
-            "VE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "Liftium", 3
-        },
+            "GB", "adtest", "SyntheticTests/ProvidersChain",
+            "INVISIBLE_SKIN", "gpt; remnant", 0
+        }
     };
   }
 
@@ -365,6 +365,84 @@ public class AdsDataProvider {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
             "TOP_LEADERBOARD", "gpt; remnant; Liftium", "Liftium"
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxRealTimeSegment() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("adtest", "SyntheticTests/Krux/Page_2"),
+                          Pair.of("adtest", "SyntheticTests/Krux/Page_3")),
+            "o8l9bis26"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegmentOasis() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
+            "mf20tfg50",
+            true,
+            "JtL6ozVw"
+        },
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
+            "mf20tfg50",
+            false,
+            "JpYqU4Qn"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegmentWikiaMobile() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
+            "mf20tfg50",
+            true,
+            "JtL70cvM"
+        },
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
+            "mf20tfg50",
+            false,
+            "JsJ9_bf5"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxStandardSegmentMercury() {
+    return new Object[][]{
+        {
+            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Rachel_Berry")),
+            "mf20tfg50",
+            true,
+            "JtL7NnTV"
+        },
+        {
+            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
+                          Pair.of("glee", "Glee_TV_Show_Wiki"),
+                          Pair.of("glee", "Kurt_Hummel")),
+            "mf20tfg50",
+            false,
+            "JsJ_0XFq"
+        }
     };
   }
 
