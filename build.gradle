@@ -43,7 +43,7 @@ test {
 dependencies {
     def webdriverVersion = '2.43.1'
     testCompile "junit:junit:4.11"
-    testCompile 'org.apache.httpcomponents:httpcore:4.3.2'
+    testCompile 'org.apache.httpcomponents:httpcore:4.3.3'
     testCompile 'net.kennychua:phantomjs-qunit-runner:1.0.14'
     testCompile 'org.eclipse.jetty:jetty-server:8.1.15.v20140411'
     testCompile 'org.eclipse.jetty:jetty-servlet:8.1.15.v20140411'
@@ -69,6 +69,7 @@ dependencies {
     testCompile 'org.json:json:20080701'
     testCompile 'io.appium:java-client:2.1.0'
     testCompile 'joda-time:joda-time:2.7'
+    testCompile 'com.jayway.jsonpath:json-path:1.2.0'
     testCompile('biz.neustar:browsermob-proxy:2.0-beta-7') {
         exclude group: 'org.eclipse.jetty'
     }
