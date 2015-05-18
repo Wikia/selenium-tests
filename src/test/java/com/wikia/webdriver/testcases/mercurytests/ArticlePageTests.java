@@ -65,7 +65,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.LINKED_IMAGES);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);

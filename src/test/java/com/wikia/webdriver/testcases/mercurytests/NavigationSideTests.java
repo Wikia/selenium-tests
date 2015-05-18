@@ -22,7 +22,7 @@ public class NavigationSideTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private final static String SEARCH_PASS = "test";
+  private final static String SEARCH_PASS = "Gallery";
   private final static String SEARCH_FAIL = "te";
 
   // NST01

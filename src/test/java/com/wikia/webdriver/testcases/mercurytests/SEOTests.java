@@ -25,15 +25,16 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT01
-  @RelatedIssue(issueID = "CONCF-412")
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
+  @RelatedIssue(issueID = "HG-671")
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
     SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    PageObjectLogging.log("link[rel='canonical']", "contains current url", "contains wrong url",
-                          seo.isLinkRelCanonical());
+    // Uncomment after issue is fixed - related to HG-668
+    /*PageObjectLogging.log("link[rel='canonical']", "contains current url", "contains wrong url",
+                          seo.isLinkRelCanonical());*/
     PageObjectLogging.log("meta[property='fb:app_id']", "is filled", "is empty", seo.isOgFbApp());
     PageObjectLogging.log("meta[property='og:image']", "is filled", "is empty", seo.isOgImage());
     PageObjectLogging.log("meta[property='og:url']", "contains current url", "contains wrong url",
@@ -46,7 +47,8 @@ public class SEOTests extends NewTestTemplate {
         .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
     PageObjectLogging
         .log("meta[property='og:type']", "contains website", "is wrong", seo.isOgTypeWebsite());
-    String lastDesc = seo.getDescription();
+    // Uncomment after issue is fixed - related to HG-605
+    /*String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
@@ -60,6 +62,6 @@ public class SEOTests extends NewTestTemplate {
     PageObjectLogging
         .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
     PageObjectLogging
-        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());
+        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());*/
   }
 }
