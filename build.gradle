@@ -8,6 +8,40 @@ repositories {
     jcenter()
 }
 
+buildscript {
+  repositories { mavenCentral() }
+  dependencies { 
+	classpath 'org.ajoberstar:gradle-git:0.2.3'
+    	classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
+   		classpath 'org.ajoberstar:gradle-git:1.1.0'
+
+ }
+}
+
+import org.ajoberstar.grgit.*
+
+task initConfig{
+  def grgit = Grgit.clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git')
+}
+
+task cloneConfig(type: com.palominolabs.gradle.task.git.clone.GitCloneTask) {
+  dir = file("./../config")
+  trySshAgent = false
+  uri = 'https://github.com/Wikia/selenium-tests.git'
+  treeish = 'master' // a git hash, or tag name, or branch name
+}
+
+import org.ajoberstar.gradle.git.tasks.*
+
+task cloneGitRepo(type: GitClone) {
+        def destination = file("./../config")
+        uri = "https://github.com/Wikia/selenium-config.git"
+        destinationPath = destination
+        bare = false
+        //enabled = !destination.exists() //to clone only once
+}
+
+
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
