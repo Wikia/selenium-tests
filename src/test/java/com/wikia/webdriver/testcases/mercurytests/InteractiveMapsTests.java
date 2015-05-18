@@ -31,7 +31,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
@@ -52,7 +52,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_002", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.clickViewMapButton();
@@ -99,7 +99,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_003", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_MAPS);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.clickViewMapButton();
