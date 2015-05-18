@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -28,6 +29,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   // IMAPT01
+  @RelatedIssue(issueID = "HG-669")
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     BasePageObject base = new BasePageObject(driver);
@@ -36,8 +38,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
     PageObjectLogging.log("Map modal", "is visible", true);
-    PageObjectLogging
-        .log("Url", "match pattern ?map=", "does not match pattern ?map=", maps.isMapIdInUrl());
+    // Uncomment after issue is fixed
+    /*PageObjectLogging
+        .log("Url", "match pattern ?map=", "does not match pattern ?map=", maps.isMapIdInUrl());*/
     PageObjectLogging.log("Map title in header", "is displayed", "is not displayed",
                           maps.isTextInMapTitleHeader());
     maps.switchToMapFrame();

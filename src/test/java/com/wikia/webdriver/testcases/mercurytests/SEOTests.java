@@ -25,8 +25,8 @@ public class SEOTests extends NewTestTemplate {
   }
 
   // SEOT01
-  @RelatedIssue(issueID = "CONCF-412")
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"}, enabled = false)
+  @RelatedIssue(issueID = "HG-605")
+  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, "");
@@ -46,7 +46,8 @@ public class SEOTests extends NewTestTemplate {
         .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
     PageObjectLogging
         .log("meta[property='og:type']", "contains website", "is wrong", seo.isOgTypeWebsite());
-    String lastDesc = seo.getDescription();
+    // Uncomment after issue is fixed
+    /*String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
     base.waitForLoadingSpinnerToFinishReloadingPage();
@@ -60,6 +61,6 @@ public class SEOTests extends NewTestTemplate {
     PageObjectLogging
         .log("meta[property='og:title']", "contains Wiki", "is wrong", seo.isOgTitleWithWiki());
     PageObjectLogging
-        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());
+        .log("meta[property='og:type']", "contains article", "is wrong", seo.isOgTypeArticle());*/
   }
 }
