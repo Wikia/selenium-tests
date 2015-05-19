@@ -25,12 +25,9 @@ public class HeroModuleTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  private final static String WIKI_NAME = "momrod2";
-
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_001"})
   public void HeroModuleTests_001_VerifyImageVisibilityAfterRefresh() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String prevMoMSrc = mom.getMoMSrc();
     mom.selectFileToUpload(PageContent.FILE);
@@ -45,7 +42,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_002"})
   public void HeroModuleTests_002_VerifyImmediateImageVisibility() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
@@ -56,7 +52,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_003"})
   public void HeroModuleTests_003_VerifyImmediateChangesForDescription() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     String momDescription = mom.getTimeStamp();
@@ -68,7 +63,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_004"})
   public void HeroModuleTests_004_OnlyAdminsAndStaffCanModify() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.verifyAdminStaffButtons();
     mom.logOut();
@@ -81,7 +75,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_005"})
   public void HeroModuleTests_005_VerifyImageDiscardDisplaysPreviousState() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String imgSrc = mom.getMoMSrc();
     mom.selectFileToUpload(PageContent.FILE);
@@ -94,7 +87,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_006"})
   public void HeroModuleTests_006_VerifyDraggingToRepositionFunctionality() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
@@ -107,7 +99,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_007"})
   public void HeroModuleTests_007_DeleteDescriptionAndCheckPublishButtonAvailability() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     mom.deleteDescriptionEditorContent();
@@ -118,7 +109,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_008"})
   public void HeroModuleTests_008_DescriptionFieldDiscardChanges() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String publishedText = mom.getDescriptionText();
     mom.clickEditDescriptionLink();
@@ -131,7 +121,6 @@ public class HeroModuleTests extends NewTestTemplate {
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_009"})
   public void HeroModuleTests_009_AddDescriptionAndCheckPublishButtonAvailability() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
-    mom.openWikiPage(urlBuilder.getUrlForWiki(WIKI_NAME));
     mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     mom.deleteDescriptionEditorContent();
