@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -10,6 +8,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
+import com.google.common.base.Joiner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -542,17 +541,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForIframeLoaded(WebElement iframe) {
-    driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeAsyncScript(
-        "var callback = arguments[arguments.length - 1]; " +
-        "var iframe = arguments[0];" +
-        "if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {"
-        +
-        "iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
-        "}",
-        iframe
-    );
+    PageObjectLogging.log("waitForIframeLoaded", "Switching to adslot iframe", true);
+    driver.switchTo().frame(iframe);
+    waitPageLoaded();
+    PageObjectLogging.log("waitForIframeLoaded", "Switching back to the page", true);
+    driver.switchTo().defaultContent();
   }
 
   /**
