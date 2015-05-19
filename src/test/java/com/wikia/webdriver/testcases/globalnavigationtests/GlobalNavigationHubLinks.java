@@ -1,12 +1,13 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
-
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychała
@@ -14,10 +15,8 @@ import org.testng.annotations.Test;
  */
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 
-  @Test(
-      groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"}
-
-  )
+  @RelatedIssue(issueID = "MAIN-4507")
+  @Test(groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"})
   public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki("muppet"));
