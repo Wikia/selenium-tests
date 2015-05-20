@@ -43,7 +43,6 @@ public class ImageComparison {
    */
   public boolean areFilesTheSame(File file1, File file2, double accuracy) {
     double difference = (double) file1.length() / file2.length();
-    System.out.println("Accuracy: " + difference);
     return (difference >= accuracy && difference <= 1.0) || (difference >= 1.0
                                                              && difference <= 2.0 - accuracy);
   }
