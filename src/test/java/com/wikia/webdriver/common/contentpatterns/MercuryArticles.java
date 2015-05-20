@@ -5,10 +5,14 @@ package com.wikia.webdriver.common.contentpatterns;
  */
 public class MercuryArticles {
 
-  public static final String MERCURY_MAPS = "MercuryMapTest";
-  public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
-  public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
-  public static final String MERCURY_GALLERY_TEST_TWO = "Mercury_Gallery_2";
-  public static final String MERCURY_SINGLE_LINKED_IMAGE = "MercuryLinkedImages";
-  public static final String MERCURY_ARTICLE_WITHOUT_TOC = "MercuryTOCWithoutH2";
+  //Articles prepared for mercuryautomationtesting.wikia.com wiki
+  public static final String GALLERY = "Gallery";
+  public static final String GALLERY_2 = "Gallery2";
+  public static final String GALLERY_3 = "Gallery3";
+  public static final String LINKED_IMAGES = "LinkedImages";
+  public static final String TOC = "TOC";
+  public static final String TOC_WITHOUT_H2 = "TOCWithoutH2";
+  public static final String COMMENTS = "Comments";
+  public static final String MAP = "Map";
+  public static final String VIDEO = "Video";
 }
