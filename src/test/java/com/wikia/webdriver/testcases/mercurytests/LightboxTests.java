@@ -101,8 +101,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT03
-  @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests",
-                  "Mercury"}, invocationCount = 1)
+  @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
