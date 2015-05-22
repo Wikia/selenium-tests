@@ -75,7 +75,8 @@ public class ImageComparison {
   }
 
   /**
-   * @param threshold in percentage between 0 and 100.
+   * @param threshold in percentage between 0 and 100. If images have less than threshold percent of
+   *                  different pixels return false
    */
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
