@@ -33,7 +33,7 @@ public class Test71MediaNoAdsForUsers extends TemplateDontLogout {
     }
   }
 
-  private void loginSteps() {
+  private void login() {
     Credentials credentials = config.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, testedWiki);
@@ -42,7 +42,7 @@ public class Test71MediaNoAdsForUsers extends TemplateDontLogout {
   @Test(groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
   public void NoAds71Media_GeoEdgeFree() throws Exception {
     AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-    loginSteps();
+    login();
     ads71Media.verifyNo71MediaAds();
   }
 }

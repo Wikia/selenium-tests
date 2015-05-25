@@ -34,7 +34,7 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
     }
   }
 
-  private void loginSteps() {
+  private void login() {
     Credentials credentials = config.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, testedWiki);
@@ -46,7 +46,7 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
   )
   public void TestNoAdsForUsers_AU() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    loginSteps();
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 
@@ -56,7 +56,7 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
   )
   public void TestNoAdsForUsers_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    loginSteps();
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 
@@ -65,7 +65,7 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
   )
   public void TestNoAdsForUsers_GeoEdgeFree() throws Exception {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    loginSteps();
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 }
