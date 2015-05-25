@@ -80,7 +80,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
-  @RelatedIssue(issueID = "QAART-593", comment = "Automation test is broken. Please test manually")
+  @RelatedIssue(issueID = "SOC-843", comment = "Automation test is broken. Please test manually")
   public void ForgottenPassword_003_createWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
