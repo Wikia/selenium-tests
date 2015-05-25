@@ -185,23 +185,35 @@ public class AdsDataProvider {
   public static Object[][] skin() {
     return new Object[][]{
         {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-            new Dimension(1366, 768),
-            "src/test/resources/adsResources/skin1366_left",
-            "src/test/resources/adsResources/skin1366_right",
+            "adtest-pluto", "Skin",
+            new Dimension(1600, 900),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }, {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/skin1920_left",
-            "src/test/resources/adsResources/skin1920_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }, {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
             new Dimension(2400, 1080),
-            "src/test/resources/adsResources/skin2400_left",
-            "src/test/resources/adsResources/skin2400_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(1600, 900),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(2400, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }
     };
   }
@@ -210,11 +222,16 @@ public class AdsDataProvider {
   public static Object[][] skinLimited() {
     return new Object[][]{
         {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/skin1920_left",
-            "src/test/resources/adsResources/skin1920_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        },
+        {
+            "adtest", "Skin",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }
     };
   }

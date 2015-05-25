@@ -35,6 +35,8 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_UP = "up";
   private static final String DIRECTION_DOWN = "down";
 
+  private static final double ACCURACY = 0.98;
+
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_001_Open_Close() {
@@ -112,11 +114,13 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 3000);
     File afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming in by gesture", "works", "does not work",
-                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          !new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming out by gesture", "works", "does not work",
-                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
@@ -126,12 +130,14 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming in by double tap", "works", "does not work",
-                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          !new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming out by double tap", "works", "does not work",
-                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
   }
 
   // MT04

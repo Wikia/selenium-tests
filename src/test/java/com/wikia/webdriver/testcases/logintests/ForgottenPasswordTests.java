@@ -25,6 +25,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
 
+  @RelatedIssue(issueID = "QAART-597")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -51,6 +52,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
+  @RelatedIssue(issueID = "QAART-597")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )

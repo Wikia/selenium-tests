@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
 import com.google.common.collect.ImmutableMap;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 
@@ -38,12 +39,13 @@ public class UrlBuilder {
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    url = url + separator + wikiPath;
 
     if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
       return appendQueryStringToURL(url, "useskin=wikiamobile");
     }
 
-    return url + separator + wikiPath;
+    return url;
   }
 
   public String getUrlForWiki(String wikiName) {
