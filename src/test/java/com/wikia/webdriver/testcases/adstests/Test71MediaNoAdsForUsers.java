@@ -41,8 +41,8 @@ public class Test71MediaNoAdsForUsers extends TemplateDontLogout {
 
   @Test(groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
   public void NoAds71Media_GeoEdgeFree() throws Exception {
-    loginSteps();
     AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
+    loginSteps();
     ads71Media.verifyNo71MediaAds();
   }
 }
