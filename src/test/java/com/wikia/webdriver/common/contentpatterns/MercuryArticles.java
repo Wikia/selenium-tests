@@ -6,6 +6,7 @@ package com.wikia.webdriver.common.contentpatterns;
 public class MercuryArticles {
 
   //Articles prepared for mercuryautomationtesting.wikia.com wiki
+  public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
   public static final String GALLERY = "Gallery";
   public static final String GALLERY_2 = "Gallery2";
   public static final String GALLERY_3 = "Gallery3";
