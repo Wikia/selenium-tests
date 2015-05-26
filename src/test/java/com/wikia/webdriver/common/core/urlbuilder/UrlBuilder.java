@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
 import com.google.common.collect.ImmutableMap;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 
@@ -53,7 +52,7 @@ public class UrlBuilder {
     String suffix = getUrlSuffix(wikiName);
 
     if (customWikiNames.containsKey(wikiName)) {
-      if (env.contains("dev")) {
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
         prefix = "";
         wikiName = (String) customWikiNames.get(wikiName).getRight();
       } else {
@@ -75,11 +74,11 @@ public class UrlBuilder {
   }
 
   private String getUrlSuffix(String wikiName) {
-    if (env.contains("dev") && isMercuryBrowser()) {
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev") && isMercuryBrowser()) {
       return String.format(XIPIO_ADDRESS_FORMAT, XIPIO_DEFAULT_DOMAIN, XIPIO_DEFAULT_PORT);
     }
 
-    if (env.contains("dev")) {
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
       String devBoxOwner = env.split("-")[1];
       return "." + devBoxOwner + "." + "wikia-dev.com";
     }
@@ -93,11 +92,12 @@ public class UrlBuilder {
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
     if (env != null) {
-      if (!env.contains("dev") && !env.equals("prod")) {
+      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !env.equals("prod")) {
         prefix = env + "." + prefix;
       }
 
-      if (env.contains("dev") && !isMercuryBrowser() && wikiName.endsWith("wikia")) {
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev") && !isMercuryBrowser()
+          && wikiName.endsWith("wikia")) {
         wikiName = "wikiaglobal";
       }
     }
