@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class TestTopWamWikis extends TemplateDontLogout {
 
   Credentials credentials = config.getCredentials();
-  Integer numberOfTop1kWikis = 999;
+  Integer numberOfTop1kWikis = 998;
   String extensionURL = "var=1429&searchType=bool&val=2&likeValue=true";
 
   public TestTopWamWikis() {
