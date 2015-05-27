@@ -24,12 +24,14 @@ public class SEOTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
   }
 
+  private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
+
   // SEOT01
   @RelatedIssue(issueID = "HG-671")
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
     SEOPageObject seo = new SEOPageObject(driver);
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
     // Uncomment after issue is fixed - related to HG-668
