@@ -21,7 +21,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4538")
+  @RelatedIssue(issueID = "MAIN-4538", comment = " Feature to be deprecated. No need to test manually")
   @Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
   public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

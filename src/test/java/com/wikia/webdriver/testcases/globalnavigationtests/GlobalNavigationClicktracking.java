@@ -31,7 +31,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      * trigger suggestion mouse click on suggestion - search-suggest click
      * search after suggestion - search-after-suggest-button clear suggestion
      */
-    @RelatedIssue(issueID = "QAART-555")
+    @RelatedIssue(issueID = "QAART-555", comment = "Automation test is broken. NB Not possible to test manually")
     @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
             "GlobalNav" })
     public void search() {

@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class TestTopWamWikis extends TemplateDontLogout {
 
   Credentials credentials = config.getCredentials();
-  Integer numberOfTop1kWikis = 1000;
+  Integer numberOfTop1kWikis = 999;
   String extensionURL = "var=1429&searchType=bool&val=2&likeValue=true";
 
   public TestTopWamWikis() {
@@ -27,8 +27,8 @@ public class TestTopWamWikis extends TemplateDontLogout {
                                                           URLsContent.SPECIAL_WHERE_IS_EXTENSION);
     whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);
     WikiBasePageObject wikiPage = new WikiBasePageObject(driver);
-    wikiPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     wikiPage.getUrl(whereIsExtensionUrl);
+    wikiPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     wikiPage.verifyNumberOfTop1kWikis(numberOfTop1kWikis);
   }
 }

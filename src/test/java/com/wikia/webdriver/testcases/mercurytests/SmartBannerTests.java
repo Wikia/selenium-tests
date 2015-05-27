@@ -22,12 +22,14 @@ public class SmartBannerTests extends NewTestTemplate {
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
-
-  private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
-                                                        "marvel", "tardis", "starwars", "lego"};
-  private static final String[] DIFFERENT_HUBS_COLORS = {"#94d11f", "#8ca038", "#ff7f26",
-                                                         "#ff5400", "#00b7e0", "#09d3bf",
-                                                         "#ffd000"};
+  
+  private static final String[]
+      DIFFERENT_HUBS_WIKIS =
+      {"destiny", "cocktails", "thehungergames", "dc", "tardis", "starwars", "lego"};
+  private static final String[]
+      DIFFERENT_HUBS_COLORS =
+      {"#94d11f", "#8ca038", "#ff7f26", "#ff5400", "#00b7e0", "#09d3bf",
+       "#ffd000"};
 
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
