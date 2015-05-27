@@ -24,16 +24,34 @@ public class SmartBannerTests extends NewTestTemplate {
   }
 
   /**
+   * HUB color definition
+   */
+  private enum Colors {
+    LIGHT_GREEN("#94d11f"),
+    DARK_GREEN("#8ca038"),
+    LIGHT_ORANGE("#ff7f26"),
+    DARK_ORANGE("#ff5400"),
+    LIGHT_BLUE("#00b7e0"),
+    CYAN("#09d3bf"),
+    YELLOW("#ffd000");
+    private String hex;
+
+    private Colors(String hex) {
+      this.hex = hex;
+    }
+  }
+
+  /**
    * Wiki name, Main page, HUB color
    */
   private static final String[][] WIKIS = {
-      {"destiny", "Destiny_Wiki", "#94d11f"},
-      {"cocktails", "Cocktails_Wiki", "#8ca038"},
-      {"thehungergames", "The_Hunger_Games_Wiki", "#ff7f26"},
-      {"dc", "Main_Page", "#ff5400"},
-      {"tardis", "Doctor_Who_Wiki", "#00b7e0"},
-      {"starwars", "Main_Page", "#09d3bf"},
-      {"lego", "LEGO_Wiki", "#ffd000"}
+      {"destiny", "Destiny_Wiki", Colors.LIGHT_GREEN.hex},
+      {"cocktails", "Cocktails_Wiki", Colors.DARK_GREEN.hex},
+      {"thehungergames", "The_Hunger_Games_Wiki", Colors.LIGHT_ORANGE.hex},
+      {"dc", "Main_Page", Colors.DARK_ORANGE.hex},
+      {"tardis", "Doctor_Who_Wiki", Colors.LIGHT_BLUE.hex},
+      {"starwars", "Main_Page", Colors.CYAN.hex},
+      {"lego", "LEGO_Wiki", Colors.YELLOW.hex}
   };
 
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
