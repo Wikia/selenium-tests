@@ -33,8 +33,8 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
      */
     @RelatedIssue(issueID = "QAART-555", comment = "Automation test is broken. NB Not possible to test manually")
     @Test(groups = { "ClicktrackingGlobalSearch", "ClickTracking",
-            "GlobalNav" })
-    public void search() {
+            "GlobalNav", "TestGlobalNavClickTracking_001" })
+    public void TestGlobalNavClickTracking_001() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openMainPage(wikiURL);
         NavigationBar navbar = new NavigationBar(driver);
