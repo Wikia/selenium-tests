@@ -32,13 +32,7 @@ public class TestFloorAdhesion extends TemplateDontLogout {
         String testPage = urlBuilder.getUrlForPath(wikiName, article);
         AdsBaseObject wikiPage = new AdsBaseObject(driver, testPage);
 
-        // verify the unit is visible
-        wikiPage.waitForElementByCss(FLOOR_ADHESION_SELECTOR);
-        PageObjectLogging.log(
-                "testFloorAdhesionOnOasis",
-                "Floor Adhesion unit visible",
-                true
-        );
+        verifyFloorAdhesionIsVisible(wikiPage);
 
         // verify there is no Wikia Bar
         WebElement wikiaBar = driver.findElement(By.cssSelector(WIKIA_BAR_SELECTOR));
@@ -49,13 +43,8 @@ public class TestFloorAdhesion extends TemplateDontLogout {
                 true
         );
 
-        // verify clicking it opens lightbox
-        driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_SELECTOR)).click();
-        wikiPage.waitForElementByCss(floorAdhesionModalSelector);
-
-        // verify closing modal and closing Floor Adhesion unit works
-        driver.findElement(By.cssSelector(floorAdhesionModalCloseSelector)).click();
-        driver.findElement(By.cssSelector(FLOOR_ADHESION_CLOSE_SELECTOR)).click();
+        verifyClickingUnitOpensLightbox(wikiPage, floorAdhesionModalSelector);
+        verifyClosingWorks(floorAdhesionModalCloseSelector);
     }
 
     @Test(
@@ -72,19 +61,29 @@ public class TestFloorAdhesion extends TemplateDontLogout {
         String testPage = urlBuilder.getUrlForPath(wikiName, article);
         MobileAdsBaseObject wikiPage = new MobileAdsBaseObject(driver, testPage);
 
-        // verify the unit is visible
+        verifyFloorAdhesionIsVisible(wikiPage);
+        verifyClickingUnitOpensLightbox(wikiPage, floorAdhesionModalSelector);
+        verifyClosingWorks(floorAdhesionModalCloseSelector);
+    }
+
+    private void verifyFloorAdhesionIsVisible(AdsBaseObject wikiPage) {
         wikiPage.waitForElementByCss(FLOOR_ADHESION_SELECTOR);
         PageObjectLogging.log(
                 "testFloorAdhesionOnOasis",
                 "Floor Adhesion unit visible",
                 true
         );
+    }
 
-        // verify clicking it opens lightbox
+    private void verifyClickingUnitOpensLightbox(
+            AdsBaseObject wikiPage,
+            String floorAdhesionModalSelector
+    ) {
         driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_SELECTOR)).click();
         wikiPage.waitForElementByCss(floorAdhesionModalSelector);
+    }
 
-        // verify closing modal and closing Floor Adhesion unit works
+    private void verifyClosingWorks(String floorAdhesionModalCloseSelector) {
         driver.findElement(By.cssSelector(floorAdhesionModalCloseSelector)).click();
         driver.findElement(By.cssSelector(FLOOR_ADHESION_CLOSE_SELECTOR)).click();
     }
