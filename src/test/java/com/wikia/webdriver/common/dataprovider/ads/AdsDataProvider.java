@@ -463,4 +463,11 @@ public class AdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] flooradhesion() {
+        return new Object[][]{
+                {"adtest", "FLOOR_ADHESION"}
+        };
+    }
+
 }
