@@ -124,16 +124,4 @@ public class MobileAdsDataProvider {
                 }
         };
     }
-
-    @DataProvider
-    public static Object[][] floorAdhesionOnMercury() {
-        return new Object[][]{
-                {
-                        "adtest",
-                        "FLOOR_ADHESION",
-                        ".ads-lightbox",
-                        ".lightbox-close-wrapper"
-                }
-        };
-    }
 }

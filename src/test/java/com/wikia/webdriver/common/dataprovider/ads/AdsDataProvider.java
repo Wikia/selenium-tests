@@ -463,16 +463,4 @@ public class AdsDataProvider {
     };
   }
 
-    @DataProvider
-    public static Object[][] floorAdhesionOnOasis() {
-        return new Object[][]{
-                {
-                        "adtest",
-                        "FLOOR_ADHESION",
-                        "#blackout_ext-wikia-adEngine-template-modal",
-                        "#ext-wikia-adEngine-template-modal .close"
-                }
-        };
-    }
-
 }
