@@ -9,39 +9,58 @@ repositories {
 }
 
 buildscript {
-  repositories { mavenCentral() }
-  dependencies { 
-	classpath 'org.ajoberstar:gradle-git:0.2.3'
-    	classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
-   		classpath 'org.ajoberstar:gradle-git:1.1.0'
-
- }
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'org.ajoberstar:gradle-git:1.0.0'
+        classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
+    }
 }
 
-import org.ajoberstar.grgit.*
+import org.ajoberstar.grgit.Credentials
+import org.ajoberstar.grgit.Grgit
 
-task initConfig{
-  def grgit = Grgit.clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git')
+task initConfig << {
+    def configPath = "./../config";
+
+
+    def dest = new File(configPath);
+
+    if (project.hasProperty("user") && project.hasProperty("pass")) {
+        println "User and pass set"
+        def cred = new Credentials(username: user, password: pass);
+
+        if (dest.isDirectory()) {
+            println "directory exists"
+            def repo = Grgit.open(dir: configPath, creds: new Credentials(username: user, password: pass))
+
+            println "Current Config branch: ${repo.getBranch().getCurrent().getName()}"
+            println "Pulling branch with rebase ..."
+            repo.pull(rebase: true)
+        } else {
+            println "No config directory in location: ${dest.getAbsolutePath()}"
+            println "Cloning configuration ..."
+            def grgit = Grgit.
+                    clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git',
+                          credentials: new Credentials(username: user, password: pass))
+        }
+    } else {
+        println "User and pass missing. "
+        println "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config"
+
+        if (dest.isDirectory()) {
+            println "directory exists"
+            def repo = Grgit.open(configPath)
+
+            println "Current Config branch: ${repo.getBranch().getCurrent().getName()}"
+            println "Can't pull cause of missing user and password ..."
+        } else {
+            println "No config directory in location: ${dest.getAbsolutePath()}"
+            throw new GradleException(
+                    "Can't download configuration without user and password \n (config is a private repository). \n " +
+                    "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
+        }
+    }
 }
-
-task cloneConfig(type: com.palominolabs.gradle.task.git.clone.GitCloneTask) {
-  dir = file("./../config")
-  trySshAgent = false
-  uri = 'https://github.com/Wikia/selenium-tests.git'
-  treeish = 'master' // a git hash, or tag name, or branch name
-}
-
-import org.ajoberstar.gradle.git.tasks.*
-
-task cloneGitRepo(type: GitClone) {
-        def destination = file("./../config")
-        uri = "https://github.com/Wikia/selenium-config.git"
-        destinationPath = destination
-        bare = false
-        //enabled = !destination.exists() //to clone only once
-}
-
-
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
