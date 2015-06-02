@@ -630,7 +630,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Check if AdEngine loaded the ad web elements inside slot.
    */
-  public boolean checkIfSlotOnPageLoaded(String slotName) {
+  public boolean isSlotOnPageLoaded(String slotName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -651,6 +651,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     try {
       new WebDriverWait(driver, 3).until(CommonExpectedConditions.elementVisible(slot));
     } catch (org.openqa.selenium.TimeoutException ignore) {
+      PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
     }
   }
 
