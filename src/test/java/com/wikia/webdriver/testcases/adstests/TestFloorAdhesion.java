@@ -10,32 +10,46 @@ public class TestFloorAdhesion extends TemplateDontLogout {
     private final String WIKI_NAME = "adtest";
     private final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
-    private enum Selectors {
-        OASIS_MODAL_CSS("#blackout_ext-wikia-adEngine-template-modal"),
-        OASIS_MODAL_CLOSE_CSS("#ext-wikia-adEngine-template-modal .close"),
-        MERCURY_MODAL_CSS(".ads-lightbox"),
-        MERCURY_MODAL_CLOSE_CSS(".lightbox-close-wrapper");
-        private String selector;
+    private class ModalSelectors {
+        private final String OASIS_MODAL_CSS = "#blackout_ext-wikia-adEngine-template-modal";
+        private final String OASIS_MODAL_CLOSE_CSS = "#ext-wikia-adEngine-template-modal .close";
 
-        private Selectors(String selector) {
-            this.selector = selector;
+        private final String MERCURY_MODAL_CSS = ".ads-lightbox";
+        private final String MERCURY_MODAL_CLOSE_CSS = ".lightbox-close-wrapper";
+
+        private String modalSelector;
+        private String modalCloseSelector;
+
+        public ModalSelectors(String skin) {
+            modalSelector = OASIS_MODAL_CSS;
+            modalCloseSelector = OASIS_MODAL_CLOSE_CSS;
+
+            if("mercury".equalsIgnoreCase(skin)) {
+                modalSelector = MERCURY_MODAL_CSS;
+                modalCloseSelector = MERCURY_MODAL_CLOSE_CSS;
+            }
+        }
+
+        public String getModalSelector() {
+            return modalSelector;
+        }
+
+        public String getModalCloseSelector() {
+            return modalCloseSelector;
         }
     }
 
     @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
     public void testFloorAdhesion() {
+        String browser = config.getBrowser();
+        String skin = "CHROMEMOBILEMERCURY".equalsIgnoreCase(browser) ? "mercury" : "oasis";
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+
         AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+        ModalSelectors modalSelectors = new ModalSelectors(skin);
 
-        String floorAdhesionModalSelector =
-                "CHROMEMOBILEMERCURY".equalsIgnoreCase(config.getBrowser()) ?
-                        Selectors.MERCURY_MODAL_CSS.selector :
-                        Selectors.OASIS_MODAL_CSS.selector;
-
-        String floorAdhesionModalCloseSelector =
-                "CHROMEMOBILEMERCURY".equalsIgnoreCase(config.getBrowser()) ?
-                        Selectors.MERCURY_MODAL_CLOSE_CSS.selector :
-                        Selectors.OASIS_MODAL_CLOSE_CSS.selector;
+        String floorAdhesionModalSelector = modalSelectors.getModalSelector();
+        String floorAdhesionModalCloseSelector = modalSelectors.getModalCloseSelector();
 
         PageObjectLogging.log(
                 "Check visibility",
@@ -43,11 +57,13 @@ public class TestFloorAdhesion extends TemplateDontLogout {
                 wikiPage.isFloorAdhesionPresent()
         );
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "There should be no Wikia Bar when Floor Adhesion is visible",
-                wikiPage.thereIsNoWikiaBar()
-        );
+        if(!"mercury".equalsIgnoreCase(skin)) {
+            PageObjectLogging.log(
+                    "Check visibility",
+                    "There should be no Wikia Bar when Floor Adhesion is visible",
+                    wikiPage.thereIsNoWikiaBar()
+            );
+        }
 
         PageObjectLogging.log(
                 "Check visibility",
