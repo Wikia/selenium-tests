@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -636,7 +635,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       String slotSelector = AdsContent.getSlotSelector(slotName);
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerFloatingMedrec(slot);
+        tryTriggerFloatingMedrec(slot);
       }
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 0;
@@ -645,7 +644,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void triggerFloatingMedrec(WebElement slot) {
+  private void tryTriggerFloatingMedrec(WebElement slot) {
     executeScript("window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
     // try to wait a floating medrec 3 seconds
     try {
