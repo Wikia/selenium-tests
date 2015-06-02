@@ -29,11 +29,10 @@ public class TestFloorAdhesion extends TemplateDontLogout {
                 wikiPage.isFloorAdhesionPresent()
         );
 
-
         PageObjectLogging.log(
                 "Check visibility",
                 "There should be no Wikia Bar when Floor Adhesion is visible",
-                wikiPage.thereIsNoWikiaBar()
+                wikiPage.thereIsNoWikiaBar(browser)
         );
 
         PageObjectLogging.log(

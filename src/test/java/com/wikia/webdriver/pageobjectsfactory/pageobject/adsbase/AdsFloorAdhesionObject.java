@@ -82,7 +82,13 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
         return isCssElementNotPresent(floorAdhesionModalSelector);
     }
 
-    public Boolean thereIsNoWikiaBar() {
+    public Boolean thereIsNoWikiaBar(String browser) {
+        if("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
+        // Mercury does not have WikiaBar
+        // There should be better way to verify skin - remove it after QAART-608 is done
+            return true;
+        }
+
         return isCssElementNotVisible(WIKIA_BAR_CSS);
     }
 }
