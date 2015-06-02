@@ -4,20 +4,11 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestFloorAdhesion extends TemplateDontLogout {
-    private final String FLOOR_ADHESION_SELECTOR = "#ext-wikia-adEngine-template-footer";
-    private final String FLOOR_ADHESION_AD_SELECTOR = "#ext-wikia-adEngine-template-footer .ad";
-    private final String
-            FLOOR_ADHESION_CLOSE_SELECTOR = "#ext-wikia-adEngine-template-footer .close";
-    private final String WIKIA_BAR_SELECTOR = "#WikiaBar";
-
     @Test(
             dataProvider = "floorAdhesionOnOasis",
             dataProviderClass = AdsDataProvider.class,
@@ -30,21 +21,45 @@ public class TestFloorAdhesion extends TemplateDontLogout {
             String floorAdhesionModalCloseSelector
     ) {
         String testPage = urlBuilder.getUrlForPath(wikiName, article);
-        AdsBaseObject wikiPage = new AdsBaseObject(driver, testPage);
+        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
 
-        verifyFloorAdhesionIsVisible(wikiPage);
-
-        // verify there is no Wikia Bar
-        WebElement wikiaBar = driver.findElement(By.cssSelector(WIKIA_BAR_SELECTOR));
-        wikiPage.waitForElementNotVisibleByElement(wikiaBar);
         PageObjectLogging.log(
-                "testFloorAdhesionOnOasis",
-                "WikiaBar not visible",
-                true
+                "Check visibility",
+                "Floor Adhesion should be displayed after opening the page",
+                wikiPage.isFloorAdhesionPresent()
         );
 
-        verifyClickingUnitOpensLightbox(wikiPage, floorAdhesionModalSelector);
-        verifyClosingWorks(floorAdhesionModalCloseSelector);
+        PageObjectLogging.log(
+                "Check visibility",
+                "There should be no Wikia Bar when Floor Adhesion is visible",
+                wikiPage.thereIsNoWikiaBar()
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking Floor Adhesion opens light-box",
+                wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector)
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking light-box close button hides light-box",
+                wikiPage
+                        .clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
+                        .verifyThereIsNoModal(floorAdhesionModalSelector)
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Floor Adhesion should be displayed after closing light-box",
+                wikiPage.isFloorAdhesionPresent()
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking Floor Adhesion close button hides ad unit",
+                wikiPage.clickFloorAdhesionClose().thereIsNoFloorAdhesion()
+        );
     }
 
     @Test(
@@ -59,32 +74,38 @@ public class TestFloorAdhesion extends TemplateDontLogout {
             String floorAdhesionModalCloseSelector
     ) {
         String testPage = urlBuilder.getUrlForPath(wikiName, article);
-        MobileAdsBaseObject wikiPage = new MobileAdsBaseObject(driver, testPage);
+        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
 
-        verifyFloorAdhesionIsVisible(wikiPage);
-        verifyClickingUnitOpensLightbox(wikiPage, floorAdhesionModalSelector);
-        verifyClosingWorks(floorAdhesionModalCloseSelector);
-    }
-
-    private void verifyFloorAdhesionIsVisible(AdsBaseObject wikiPage) {
-        wikiPage.waitForElementByCss(FLOOR_ADHESION_SELECTOR);
         PageObjectLogging.log(
-                "testFloorAdhesionOnOasis",
-                "Floor Adhesion unit visible",
-                true
+                "Check visibility",
+                "Floor Adhesion should be displayed after opening the page",
+                wikiPage.isFloorAdhesionPresent()
         );
-    }
 
-    private void verifyClickingUnitOpensLightbox(
-            AdsBaseObject wikiPage,
-            String floorAdhesionModalSelector
-    ) {
-        driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_SELECTOR)).click();
-        wikiPage.waitForElementByCss(floorAdhesionModalSelector);
-    }
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking Floor Adhesion opens light-box",
+                wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector)
+        );
 
-    private void verifyClosingWorks(String floorAdhesionModalCloseSelector) {
-        driver.findElement(By.cssSelector(floorAdhesionModalCloseSelector)).click();
-        driver.findElement(By.cssSelector(FLOOR_ADHESION_CLOSE_SELECTOR)).click();
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking light-box close button hides light-box",
+                wikiPage
+                        .clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
+                        .verifyThereIsNoModal(floorAdhesionModalSelector)
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Floor Adhesion should be displayed after closing light-box",
+                wikiPage.isFloorAdhesionPresent()
+        );
+
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking Floor Adhesion close button hides ad unit",
+                wikiPage.clickFloorAdhesionClose().thereIsNoFloorAdhesion()
+        );
     }
 }
