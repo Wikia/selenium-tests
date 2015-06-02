@@ -1,8 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.ModalSelectorsHelper;
 
@@ -23,43 +21,18 @@ public class TestFloorAdhesion extends TemplateDontLogout {
         String floorAdhesionModalSelector = modalSelectors.getModalSelector();
         String floorAdhesionModalCloseSelector = modalSelectors.getModalCloseSelector();
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "Floor Adhesion should be displayed after opening the page",
-                wikiPage.isFloorAdhesionPresent()
-        );
+        wikiPage.verifyFloorAdhesionPresent();
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "There should be no Wikia Bar when Floor Adhesion is visible",
-                wikiPage.thereIsNoWikiaBar(browser)
-        );
+        wikiPage.verifyThereIsNoWikiaBar(browser);
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "Clicking Floor Adhesion opens light-box",
-                wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector)
-        );
+        wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "Clicking light-box close button hides light-box",
-                wikiPage
-                        .clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
-                        .verifyThereIsNoModal(floorAdhesionModalSelector)
-        );
+        wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
+                .verifyThereIsNoModal(floorAdhesionModalSelector);
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "Floor Adhesion should be displayed after closing light-box",
-                wikiPage.isFloorAdhesionPresent()
-        );
+        wikiPage.verifyFloorAdhesionPresent();
 
-        PageObjectLogging.log(
-                "Check visibility",
-                "Clicking Floor Adhesion close button hides ad unit",
-                wikiPage.clickFloorAdhesionClose().thereIsNoFloorAdhesion()
-        );
+        wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
     }
 
 }

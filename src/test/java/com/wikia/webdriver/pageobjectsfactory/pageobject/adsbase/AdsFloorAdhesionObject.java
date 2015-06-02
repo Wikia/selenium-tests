@@ -1,59 +1,38 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.NoSuchElementException;
 
-public class AdsFloorAdhesionObject extends AdsBaseObject {
+public class AdsFloorAdhesionObject extends BasePageObject {
     private final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
     private final String FLOOR_ADHESION_AD_CSS = "#ext-wikia-adEngine-template-footer .ad";
     private final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-footer .close";
     private final String WIKIA_BAR_CSS = "#WikiaBar";
 
     public AdsFloorAdhesionObject(WebDriver driver, String testedPage) {
-        super(driver, testedPage);
+        super(driver);
+        getUrl(testedPage, true);
     }
 
-    private Boolean isCssElementPresent(String cssSelector) {
-        try {
-            WebElement element = driver.findElement(By.cssSelector(cssSelector));
-            if( element.isDisplayed() ) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch( Exception e ) {
-            return false;
-        }
-    }
-
-    private Boolean isCssElementNotVisible(String cssSelector) {
-        try {
-            WebElement element = driver.findElement(By.cssSelector(cssSelector));
-            waitForElementNotVisibleByElement(element);
-            return true;
-        } catch(Exception e) {
-            return false;
-        }
-    }
-
-    private Boolean isCssElementNotPresent(String cssSelector) {
-        try {
-            driver.findElement(By.cssSelector(cssSelector));
-            return false;
-        } catch (NoSuchElementException e) {
-            return true;
-        }
-    }
-
-    public Boolean isFloorAdhesionPresent() {
+    public void verifyFloorAdhesionPresent() {
         waitForElementByCss(FLOOR_ADHESION_CSS);
-        return isCssElementPresent(FLOOR_ADHESION_CSS);
+        PageObjectLogging.log(
+                "Check visibility of Floor Adhesion",
+                "Floor Adhesion should be displayed",
+                true
+        );
     }
 
-    public Boolean thereIsNoFloorAdhesion() {
-        return isCssElementNotVisible(FLOOR_ADHESION_CSS);
+    public void verifyThereIsNoFloorAdhesion() {
+        waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(FLOOR_ADHESION_CSS)));
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking Floor Adhesion close button hides ad unit",
+                true
+        );
     }
 
     public AdsFloorAdhesionObject clickFloorAdhesion() {
@@ -73,22 +52,41 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
         return this;
     }
 
-    public Boolean verifyModalOpened(String floorAdhesionModalSelector) {
+    public void verifyModalOpened(String floorAdhesionModalSelector) {
         waitForElementByCss(floorAdhesionModalSelector);
-        return isCssElementPresent(floorAdhesionModalSelector);
+        PageObjectLogging.log(
+            "Check visibility",
+            "Clicking Floor Adhesion opens light-box",
+            true
+        );
     }
 
-    public Boolean verifyThereIsNoModal(String floorAdhesionModalSelector) {
-        return isCssElementNotPresent(floorAdhesionModalSelector);
+    public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
+        waitForElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
+        PageObjectLogging.log(
+                "Check visibility",
+                "Clicking light-box close button hides light-box",
+                true
+        );
     }
 
-    public Boolean thereIsNoWikiaBar(String browser) {
+    public void verifyThereIsNoWikiaBar(String browser) {
         if("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
         // Mercury does not have WikiaBar
         // There should be better way to verify skin - remove it after QAART-608 is done
-            return true;
+            PageObjectLogging.log(
+                    "Check visibility of Wikia Bar",
+                    "It is Mercury skin with no Wikia Bar",
+                    true
+            );
+            return;
         }
 
-        return isCssElementNotVisible(WIKIA_BAR_CSS);
+        waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(WIKIA_BAR_CSS)));
+        PageObjectLogging.log(
+                "Check visibility of Wikia Bar",
+                "There should be no Wikia Bar when Floor Adhesion is visible",
+                true
+        );
     }
 }
