@@ -11,7 +11,19 @@ public class TestFloorAdhesion extends TemplateDontLogout {
     private final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
     @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
-    public void testFloorAdhesion() {
+    public void testFloorAdhesionPresence() {
+        String browser = config.getBrowser();
+        String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+
+        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+
+        wikiPage.verifyFloorAdhesionPresent();
+
+        wikiPage.verifyThereIsNoWikiaBar(browser);
+    }
+
+    @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+    public void testFloorAdhesionModal() {
         String browser = config.getBrowser();
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
 
@@ -21,17 +33,16 @@ public class TestFloorAdhesion extends TemplateDontLogout {
         String floorAdhesionModalSelector = modalSelectors.getModalSelector();
         String floorAdhesionModalCloseSelector = modalSelectors.getModalCloseSelector();
 
-        wikiPage.verifyFloorAdhesionPresent();
-
-        wikiPage.verifyThereIsNoWikiaBar(browser);
-
         wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
 
         wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
                 .verifyThereIsNoModal(floorAdhesionModalSelector);
+    }
 
-        wikiPage.verifyFloorAdhesionPresent();
-
+    @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+    public void testFloorAdhesionCloseButton() {
+        String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
         wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
     }
 
