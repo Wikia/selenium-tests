@@ -73,7 +73,6 @@
             <class name="com.wikia.webdriver.testcases.forumtests.ForumBoardTests"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumThreadTests"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationtests.CompareScreenshotsForHubsMenu"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GameStarLogo"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationClicktracking"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationHubLinks"/>
