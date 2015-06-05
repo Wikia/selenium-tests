@@ -21,10 +21,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
     private final static String AMAZON_ARTICLE_LINK_CSS = "a[href=\'/wiki/Amazon\']";
 
-    @FindBy(css = "div[id*=_gpt][id*=TOP][data-gpt-slot-params*=amznslots], "
-            + "div[id*=_gpt][id*=LEFT_SKYSCRAPER_2][data-gpt-slot-params*=amznslots], "
-            + "div[id*=_gpt][id*=MOBILE_IN_CONTENT][data-gpt-slot-params*=amznslots], "
-            + "div[id*=_gpt][id*=MOBILE_PREFOOTER][data-gpt-slot-params*=amznslots]")
+    @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
     private WebElement slotWithAmazon;
 
     public AdsAmazonObject(WebDriver driver, String testedPage) {
@@ -48,8 +45,10 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
 
     public void verifyAdFromAmazonPresent() {
-        WebElement amazonIframe = slotWithAmazon.findElement(
-                By.cssSelector("div[id*=__container__] > iframe"));
+        waitForElementByElement(slotWithAmazon);
+        WebElement amazonIframe = slotWithAmazon.findElement(By.cssSelector(
+                "div[id*=__container__] > iframe"
+        ));
         driver.switchTo().frame(amazonIframe);
         if (checkIfElementOnPage(AMAZON_IFRAME)) {
             PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
