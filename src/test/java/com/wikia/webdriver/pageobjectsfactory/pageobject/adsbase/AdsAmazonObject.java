@@ -19,8 +19,12 @@ public class AdsAmazonObject extends AdsBaseObject {
   private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
   private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
+    private final static String AMAZON_ARTICLE_LINK_CSS = "a[href=\'/wiki/Amazon\']";
+
   @FindBy(css = "div[id*=_gpt][id*=TOP][data-gpt-slot-params*=amznslots], "
-                + "div[id*=_gpt][id*=LEFT_SKYSCRAPER_2][data-gpt-slot-params*=amznslots]")
+                + "div[id*=_gpt][id*=LEFT_SKYSCRAPER_2][data-gpt-slot-params*=amznslots], "
+                + "div[id*=_gpt][id*=MOBILE_IN_CONTENT][data-gpt-slot-params*=amznslots], "
+                + "div[id*=_gpt][id*=MOBILE_PREFOOTER][data-gpt-slot-params*=amznslots]")
   private WebElement slotWithAmazon;
 
   public AdsAmazonObject(WebDriver driver, String testedPage) {
@@ -62,4 +66,11 @@ public class AdsAmazonObject extends AdsBaseObject {
       throw new NoSuchElementException("Amazon params not found on page");
     }
   }
+
+    public AdsAmazonObject clickAmazonArticleLink() {
+        WebElement amazonArticleLink = driver.findElement(By.cssSelector(AMAZON_ARTICLE_LINK_CSS));
+        waitForElementByElement(amazonArticleLink);
+        amazonArticleLink.click();
+        return this;
+    }
 }
