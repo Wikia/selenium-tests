@@ -7,7 +7,12 @@ import org.testng.annotations.Test;
 
 public class TestAmazonMobileAds extends TemplateDontLogout {
 
-    @Test(groups = {"AmazonAds", "AmazonAds_debugMode", "MercuryAds", "MercuryAmazonAds"})
+    @Test(groups = {
+            "AmazonAds",
+            "AmazonAds_debugMode",
+            "MercuryAds",
+            "MercuryAmazonAds"
+    })
     public void AmazonAds_debugMode() {
         String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
         testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
