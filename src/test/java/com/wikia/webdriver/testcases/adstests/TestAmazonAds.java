@@ -44,4 +44,15 @@ public class TestAmazonAds extends TemplateDontLogout {
             amazonAds.verifyAdFromAmazonPresent();
         }
     }
+
+    @Test(groups = {
+            "MercuryAds",
+            "MercuryAmazonAds"
+    })
+    public void AmazonAds_debugMode() {
+        String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+        testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+        AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
+        amazonAds.clickAmazonArticleLink().verifyAdFromAmazonPresent();
+    }
 }
