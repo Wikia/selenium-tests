@@ -128,8 +128,8 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"adtest", "DFP/hop", 1, "mobile"},
-        {"adtest", "DFP/hophop", 2, "mobile_remnant"}
+        {"adtest", "DFP/hop", "mobile"},
+        {"adtest", "DFP/hophop", "mobile_remnant"}
     };
   }
 }

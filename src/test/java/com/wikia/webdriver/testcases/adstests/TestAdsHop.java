@@ -18,11 +18,10 @@ public class TestAdsHop extends TemplateDontLogout {
       dataProvider = "testAdsHopPostMessage",
       groups = "TestAdsHop"
   )
-  public void testAdsHopPostMessage(String wikiName, String article, int testedDivNumber,
-                                    String src) {
+  public void testAdsHopPostMessage(String wikiName, String article, String src) {
     new AdsHopObject(driver, urlBuilder.getUrlForPath(wikiName, article))
-        .verifyClassHidden(AdsContent.MOBILETOP_LB, testedDivNumber)
-        .verifyPostMessage(AdsContent.MOBILETOP_LB, testedDivNumber, src)
+        .verifyClassHidden(AdsContent.MOBILETOP_LB, src)
+        .verifyPostMessage(AdsContent.MOBILETOP_LB, src)
         .verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
   }
 
