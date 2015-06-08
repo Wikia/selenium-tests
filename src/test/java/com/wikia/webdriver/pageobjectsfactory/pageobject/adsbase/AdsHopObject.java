@@ -28,7 +28,7 @@ public class AdsHopObject extends AdsBaseObject {
 
   public AdsHopObject verifyClassHidden(String slotName, String src) {
     WebElement testedDiv = getTestedDiv(slotName, src);
-    Assertion.assertEquals(" hidden", testedDiv.getAttribute("class"));
+    Assertion.assertEquals("hidden", testedDiv.getAttribute("class").trim());
     return this;
   }
 
