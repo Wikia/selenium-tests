@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.security.InvalidParameterException;
+
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -20,9 +22,17 @@ public class AdsAmazonObject extends AdsBaseObject {
     private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
     private final static String AMAZON_ARTICLE_LINK_CSS = "a[href=\'/wiki/Amazon\']";
+    private final static String AMAZON_SECOND_ARTICLE_LINK_CSS = "a[href=\'wiki/SyntheticTests/AmazonStep2\']";
 
     @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
     private WebElement slotWithAmazon;
+
+    private WebElement getAmazonIframe(WebElement slotWithAmazon) {
+        waitForElementByElement(slotWithAmazon);
+        return slotWithAmazon.findElement(By.cssSelector(
+                "div[id*=__container__] > iframe"
+        ));
+    }
 
     public AdsAmazonObject(WebDriver driver, String testedPage) {
         super(driver, testedPage);
@@ -44,17 +54,28 @@ public class AdsAmazonObject extends AdsBaseObject {
         }
     }
 
-    public void verifyAdFromAmazonPresent() {
-        waitForElementByElement(slotWithAmazon);
-        WebElement amazonIframe = slotWithAmazon.findElement(By.cssSelector(
-                "div[id*=__container__] > iframe"
-        ));
-        driver.switchTo().frame(amazonIframe);
+    public AdsAmazonObject verifyAdFromAmazonPresent() {
+        driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
+
         if (checkIfElementOnPage(AMAZON_IFRAME)) {
             PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
         } else {
             throw new NoSuchElementException("Amazon Ad not found on page");
         }
+
+        driver.switchTo().defaultContent();
+        return this;
+    }
+
+    public void verifyNoAdsFromAmazonPresent() {
+        driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
+
+        if (checkIfElementOnPage(AMAZON_IFRAME)) {
+            PageObjectLogging.log("AmazonAd", "Amazon ad present", false);
+        } else {
+            PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
+        }
+
         driver.switchTo().defaultContent();
     }
 
@@ -66,10 +87,20 @@ public class AdsAmazonObject extends AdsBaseObject {
         }
     }
 
-    public AdsAmazonObject clickAmazonArticleLink() {
+    public AdsAmazonObject clickAmazonArticleLink(String linkSelectoryInCss) {
         WebElement amazonArticleLink = driver.findElement(By.cssSelector(AMAZON_ARTICLE_LINK_CSS));
         waitForElementByElement(amazonArticleLink);
         amazonArticleLink.click();
         return this;
+    }
+
+    public String getAmazonLinkCssSelector(String linkName) {
+        if (linkName.equals("AmazonArticle")) {
+            return AMAZON_ARTICLE_LINK_CSS;
+        } else if (linkName.equals("AmazonSecondArticle")) {
+            return AMAZON_SECOND_ARTICLE_LINK_CSS;
+        }
+
+        throw new InvalidParameterException("Invalid linkName parameter");
     }
 }
