@@ -59,6 +59,8 @@ public class YoutubeVideoProvider {
 
     String videoTitle = null;
     String videoUrl = null;
+    String videoId = null;
+
 
     try {
       HttpResponse response = httpclient.execute(httpPost);
@@ -68,7 +70,7 @@ public class YoutubeVideoProvider {
       ReadContext responseValue = JsonPath.parse(EntityUtils.toString(entity));
 
       videoTitle = responseValue.read("$.items[0].snippet.title");
-      String videoId = responseValue.read("$.items[0].id.videoId");
+      videoId = responseValue.read("$.items[0].id.videoId");
 
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
@@ -77,6 +79,6 @@ public class YoutubeVideoProvider {
           false);
     }
 
-    return new YoutubeVideo(videoTitle, videoUrl);
+    return new YoutubeVideo(videoTitle, videoUrl, videoId);
   }
 }

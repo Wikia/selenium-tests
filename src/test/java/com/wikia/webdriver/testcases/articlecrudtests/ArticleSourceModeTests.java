@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -21,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -286,22 +289,28 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     }
 
     @CreationTicket(ticketID ="CONCF-626")
-    @Test(groups = {"RTE_extended", "RTE_extended_019"})
+    @Test(groups = {"RTE_extended", "RTE_extended_020"})
     public void RTE_020_YoutubeTag_Preview() {
-//        String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-//        ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-//        SourceEditModePageObject source = article.openCurrectArticleSourceMode();
-//        source.checkSymbolsTools();
-//        source.submitArticle();
+        String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+        ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+        SourceEditModePageObject source = article.openCurrectArticleSourceMode();
+        YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
+        String videoID = video.getID();
+        source.addContent("<youtube>\n"+videoID+"\n</youtube>");
+        PreviewEditModePageObject preview = source.previewArticle();
+        preview.verifyVideoOnPreview(videoID);
     }
 
     @CreationTicket(ticketID ="CONCF-626")
-    @Test(groups = {"RTE_extended", "RTE_extended_019"})
-    public void RTE_020_YoutubeTag_Publish() {
-//        String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-//        ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-//        SourceEditModePageObject source = article.openCurrectArticleSourceMode();
-//        source.checkSymbolsTools();
-//        source.submitArticle();
+    @Test(groups = {"RTE_extended", "RTE_extended_021"})
+    public void RTE_021_YoutubeTag_Publish() {
+        String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+        ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+        SourceEditModePageObject source = article.openCurrectArticleSourceMode();
+        YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
+        String videoID = video.getID();
+        source.addContent("<youtube>\n"+videoID+"\n</youtube>");
+        article = source.clickPublishButton();
+        article.verifyVideo(videoID);
     }
 }

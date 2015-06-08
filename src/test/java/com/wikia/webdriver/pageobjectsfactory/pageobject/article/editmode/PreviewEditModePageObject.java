@@ -15,6 +15,8 @@ public class PreviewEditModePageObject extends EditMode {
 
   @FindBy(css = ".modalWrapper.preview")
   private WebElement previewModal;
+  @FindBy(css = "#mw-content-text object")
+  protected WebElement video;
   @FindBy(css = ".preview .video-thumbnail")
   protected WebElement videoArticle;
 
@@ -83,6 +85,11 @@ public class PreviewEditModePageObject extends EditMode {
 
   public void verifyTextContent(String desiredText) {
     Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+  }
+
+  public void verifyVideoOnPreview(String videoID) {
+      waitForElementByElement(video);
+      waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
   }
 
   public void publish() {
