@@ -56,7 +56,9 @@ public class YoutubeVideo implements Video {
   }
 
   @Override
-  public String getID() { return this.videoID; }
+  public String getID() {
+    return this.videoID;
+  }
 
   @Override
   public String getWikiFileName() {

@@ -88,8 +88,8 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyVideoOnPreview(String videoID) {
-      waitForElementByElement(video);
-      waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
+    waitForElementByElement(video);
+    waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
   }
 
   public void publish() {
