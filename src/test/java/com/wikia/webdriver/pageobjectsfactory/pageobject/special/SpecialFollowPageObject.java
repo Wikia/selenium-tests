@@ -41,7 +41,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
     Assertion.assertTrue(isPresent, "image " + imageVideo
                                     + " is not present on the following list");
     PageObjectLogging.log("verifyFollowedImageVideo",
-                          imageVideo + "is visible on followed list", true, driver);
+                          imageVideo + "is visible on followed list", true);
   }
 
   public void verifyFollowedBlog(String userName, String blogTitle) {
