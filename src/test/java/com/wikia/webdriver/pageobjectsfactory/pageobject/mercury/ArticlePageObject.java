@@ -31,6 +31,11 @@ public class ArticlePageObject extends BasePageObject {
   private List<WebElement> topContributorsLinks;
   @FindBy(css = "nav.article-categories-list div")
   private WebElement categoryButton;
+  @FindBy(css = ".article-title")
+  private WebElement articleTitle;
+  @FindBy(css = ".article-content a")
+  private List<WebElement> anchorsInContent;
+
 
   public ArticlePageObject(WebDriver driver) {
     super(driver);
@@ -49,6 +54,11 @@ public class ArticlePageObject extends BasePageObject {
 
   public void clickOnImage(int index) {
     singleImgLink.get(index).click();
+  }
+
+  public void clickOnAnchorInContent(int index) {
+    waitForElementByElement(anchorsInContent.get(index));
+    anchorsInContent.get(index).click();
   }
 
   public boolean isWikiaLogoVisible() {
@@ -87,5 +97,9 @@ public class ArticlePageObject extends BasePageObject {
       throw new WebDriverException("Expected String but got null");
     }
     return categoryButton.getAttribute("class").contains("collapsed");
+  }
+
+  public String getArticleTitle() {
+    return articleTitle.getText();
   }
 }

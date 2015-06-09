@@ -23,7 +23,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   private WebElement cancelSearchCaption;
   @FindBy(css = ".local-wikia-search a")
   private WebElement searchSuggestion;
-  @FindBy(css = ".local-nav-menu > li > div")
+  @FindBy(css = ".local-nav-menu > li")
   private List<WebElement> navList;
   @FindBy(css = ".back")
   private WebElement backChevron;
