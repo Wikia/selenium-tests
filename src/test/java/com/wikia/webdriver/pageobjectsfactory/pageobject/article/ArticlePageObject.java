@@ -423,6 +423,13 @@ public class ArticlePageObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyVideo", "video is visible", true);
   }
 
+  public void verifyVideo(String videoId) {
+    WebElement video = driver.findElement(By.cssSelector("#mw-content-text object"));
+    waitForElementByElement(video);
+    waitForValueToBePresentInElementsAttributeByElement(video, "id", videoId);
+    PageObjectLogging.log("verifyVideo", "video is visible", true);
+  }
+
   public void verifyVideoInline() {
     waitForElementByElement(videoInline);
     PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
