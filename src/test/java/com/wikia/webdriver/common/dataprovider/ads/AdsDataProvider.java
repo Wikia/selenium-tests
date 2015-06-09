@@ -47,12 +47,13 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
-        {"zh.tos", "神魔之塔_Tower_of_Saviors_维基"},
+        {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
         {"gameofthrones", "Game_of_Thrones_Wiki"},
         {"2007.runescape", "2007scape_Wiki"},
-        {"ru.warframe", "Заглавная_страница"},
+        {"ru.warframe", "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
         {"gameofthrones", "Daenerys_Targaryen"},
         {"elderscrolls", "Console_Commands_(Skyrim"},
+        //intentionally without ) sign - there is redirect on page
         {"naruto", "Naruto_Uzumaki"},
         {"clashofclans", "Air_Sweeper"},
         {"leagueoflegends", "Ekko"},
