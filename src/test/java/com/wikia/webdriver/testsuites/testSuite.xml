@@ -157,8 +157,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
-            <class name="com.wikia.webdriver.testcases.toolbartests.ShareToolbarTests"/>
-            <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar"/>
+            <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
             <class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEAndRTEDisabledEditorEntryAnonTests"/>
