@@ -89,6 +89,10 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.clickCategoryButton();
     PageObjectLogging.log("Category list", "is expanded", "is collapsed",
                           !articlePage.isChevronCollapsed());
+    articlePage.clickOnCategoryListElement(0);
+    PageObjectLogging
+        .log("Url", "match pattern /wiki/Category:", "does not match pattern /wiki/Category:",
+             articlePage.isUrlContainingCategoryPage());
   }
 
   // APT05
@@ -101,7 +105,7 @@ public class ArticlePageTests extends NewTestTemplate {
     try {
       encodedColonUrl = URLEncoder.encode(MercuryArticles.COLON, "UTF-8");
       encodedQuestionMarkUrl = URLEncoder.encode(MercuryArticles.QUESTION_MARK, "UTF-8");
-    } catch(UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e) {
       throw new WebDriverException("Wrong URL encoding");
     }
     PageObjectLogging.logWarning("Info", "Accessing article directly through URL");
