@@ -39,6 +39,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   private WebElement searchButton;
   @FindBy(css = "nav.side-nav")
   private WebElement menuView;
+  @FindBy(xpath = "//span[contains(.,'Sorry, we could')]")
+  private WebElement sorrySpan;
 
   public NavigationSideComponentObject(WebDriver driver) {
     super(driver);
@@ -87,6 +89,15 @@ public class NavigationSideComponentObject extends BasePageObject {
   public boolean isSuggestionListDisplayed() {
     try {
       waitForElementVisibleByElement(searchSuggestion, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
+    }
+    return true;
+  }
+
+  public boolean isSorryInfoDisplayed() {
+    try {
+      waitForElementVisibleByElement(sorrySpan, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }

@@ -72,6 +72,12 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
     PageObjectLogging.log("Search suggestions", "are hidden", "are displayed",
                           !searchObject.isSuggestionListDisplayed());
+    searchObject.typeInSearchField(SEARCH_FAIL);
+    PageObjectLogging.log("Sorry message", "is displayed", "is hidden",
+                          searchObject.isSorryInfoDisplayed());
+    base.waitMilliseconds(5000, "Wait for message to disappear");
+    PageObjectLogging.log("Sorry message", "is displayed", "is hidden",
+                          searchObject.isSorryInfoDisplayed());
     searchObject.clickCancelButton();
     PageObjectLogging
         .log("Menu field", "is visible", "is hidden", searchObject.isMenuFieldVisible());
@@ -92,7 +98,7 @@ public class NavigationSideTests extends NewTestTemplate {
     PageObjectLogging.log("Search suggestions", "are displayed", true);
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
-    base.waitMilliseconds(5000, "waitMilliseconds");
+    base.waitForLoadingSpinnerToFinishReloadingPage();
     PageObjectLogging.log("Redirection", "works", "does not work",
                           !oldUrl.equals(driver.getCurrentUrl()));
   }
