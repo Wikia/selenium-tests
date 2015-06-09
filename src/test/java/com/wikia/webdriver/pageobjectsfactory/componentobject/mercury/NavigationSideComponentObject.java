@@ -27,6 +27,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   private List<WebElement> navList;
   @FindBy(css = ".back")
   private WebElement backChevron;
+  @FindBy(css = ".random-article-link")
+  private WebElement randomPageButton;
   @FindBy(css = ".overlay")
   private WebElement overlay;
   @FindBy(css = ".local-wikia-search")
@@ -77,6 +79,11 @@ public class NavigationSideComponentObject extends BasePageObject {
     tapOnElement(overlay);
   }
 
+  public void clickRandomPageButton() {
+    waitForElementByElement(randomPageButton);
+    randomPageButton.click();
+  }
+
   public boolean isSuggestionListDisplayed() {
     try {
       waitForElementVisibleByElement(searchSuggestion, 5, 1000);
@@ -96,6 +103,15 @@ public class NavigationSideComponentObject extends BasePageObject {
   public boolean isBackLinkDisplayed() {
     try {
       waitForElementVisibleByElement(backChevron, 5, 1000);
+    } catch (TimeoutException | NoSuchElementException e) {
+      return false;
+    }
+    return true;
+  }
+
+  public boolean isRandomPageButtonDisplayed() {
+    try {
+      waitForElementVisibleByElement(randomPageButton, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }

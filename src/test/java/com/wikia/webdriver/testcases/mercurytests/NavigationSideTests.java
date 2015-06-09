@@ -43,9 +43,13 @@ public class NavigationSideTests extends NewTestTemplate {
                           nav.isNavListElementEllipsized(1));
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
     PageObjectLogging.log("Back link", "is hidden", true);
+    PageObjectLogging.log("Random page button", "is displayed", "is hidden",
+                          nav.isRandomPageButtonDisplayed());
     nav.clickNavListElement(2);
     Assertion.assertTrue(nav.isBackLinkDisplayed(), "Back link isn't displayed");
     PageObjectLogging.log("Back link", "is displayed", true);
+    PageObjectLogging
+        .log("Random page button", "is hidden", "is displayed", !nav.isRandomPageButtonDisplayed());
     nav.clickBackChevron();
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
     PageObjectLogging.log("Back link", "works", true);
@@ -101,7 +105,7 @@ public class NavigationSideTests extends NewTestTemplate {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();
-    nav.clickNavListElement(1);
+    nav.clickRandomPageButton();
     base.waitForLoadingSpinnerToFinishReloadingPage();
     PageObjectLogging.log("Redirection", "works", "does not work",
                           !oldUrl.equals(driver.getCurrentUrl()));
