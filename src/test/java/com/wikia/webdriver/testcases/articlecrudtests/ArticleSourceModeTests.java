@@ -289,7 +289,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended", "RTE_extended_020"})
+  @Test(groups = {"RTE_extended", "RTE_extended_020"}, invocationCount = 10)
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -302,7 +302,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended", "RTE_extended_021"})
+  @Test(groups = {"RTE_extended", "RTE_extended_021"}, invocationCount = 30)
   public void RTE_021_YoutubeTag_Publish() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -311,6 +311,6 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     String videoID = video.getID();
     source.addContent("<youtube>\n" + videoID + "\n</youtube>");
     article = source.clickPublishButton();
-    article.verifyVideo(videoID);
+    article.verifyArticleTitle(articleName);
   }
 }

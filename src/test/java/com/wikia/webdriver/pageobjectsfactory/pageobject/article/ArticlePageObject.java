@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-  @FindBy(css = "article header h1")
+  @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
   protected WebElement articleContentContainer;
