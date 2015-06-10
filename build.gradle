@@ -8,6 +8,10 @@ repositories {
     jcenter()
 }
 
+ext {
+    testSuite = 'src/test/java/com/wikia/webdriver/testsuites/testSuite.xml'
+}
+
 buildscript {
     repositories { mavenCentral() }
     dependencies {
@@ -16,12 +20,57 @@ buildscript {
     }
 }
 
+
+import groovy.xml.StreamingMarkupBuilder
 import org.ajoberstar.grgit.Credentials
 import org.ajoberstar.grgit.Grgit
 
+task runFailed {
+    if (project.hasProperty('failedOnly')) {
+        println "Gathering failed config"
+
+        def f = new File('testng_failed.xml')
+
+        new URL('http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix/groups=ClickTracking,label=webdriver/ws/target/surefire-reports/testng-failed.xml').withInputStream { i ->
+            f.withOutputStream {
+                it << i
+            }
+        }
+        project.testSuite = f.getAbsolutePath().replace('\\', '/')
+    }
+
+}
+
+task getSuite << {
+    def parser = new XmlSlurper()
+    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+    def suite = parser.parse(new File('testng-failed.xml'))
+    def yasuite = parser.parse(new File('testng-failed2.xml'))
+
+    def nodes = suite.'**'.findAll {
+        node -> node.name() == 'class'
+    }*.@name
+
+    def nodesToAdd = yasuite.'**'.findAll {
+        node -> node.name() == 'class' && !nodes.contains(node.@name)
+    }
+
+    println "nodes to add: ${nodesToAdd.size()}"
+
+    suite.test.groups.replaceNode{}
+
+    suite.test.classes.appendNode(nodesToAdd)
+
+    def writer = new FileWriter('mod.xml')
+
+    def builder = new StreamingMarkupBuilder()
+    writer << builder.bind {
+        mkp.yield suite
+    }
+}
+
 task initConfig << {
     def configPath = "./../config";
-
 
     def dest = new File(configPath);
 
@@ -41,7 +90,7 @@ task initConfig << {
             println "Cloning configuration ..."
             def grgit = Grgit.
                     clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git',
-                          credentials: new Credentials(username: user, password: pass))
+                            credentials: new Credentials(username: user, password: pass))
         }
     } else {
         println "User and pass missing. "
@@ -57,19 +106,22 @@ task initConfig << {
             println "No config directory in location: ${dest.getAbsolutePath()}"
             throw new GradleException(
                     "Can't download configuration without user and password \n (config is a private repository). \n " +
-                    "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
+                            "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
         }
     }
 }
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
+    println "Test suite used: ${testSuite}"
     useTestNG {
-        suiteXmlFiles = (project.hasProperty('testSuite') ? testSuite :
-                         'src/test/java/com/wikia/webdriver/testsuites/testSuite.xml').split(',').
+        suiteXmlFiles = testSuite.split(',').
                 collect({ path -> new File(path) })
-        includeGroups = (project.hasProperty('groups') ? groups : 'Login').split(',')
+        includeGroups = (project.hasProperty('groups') ? groups : '').split(',')
+        useDefaultListeners = true
     }
+    testLogging.showStandardStreams = true
+    scanForTestClasses = true
 
     minHeapSize = '800m'
     maxHeapSize = '800m'
@@ -86,11 +138,13 @@ test {
 
     systemProperty 'platform', project.hasProperty('platform') ? platform : ''
     systemProperty 'platform-version',
-                   project.hasProperty('platform_version') ? platform_version : ''
+            project.hasProperty('platform_version') ? platform_version : ''
     systemProperty 'device-id', project.hasProperty('device_id') ? device_id : ''
     systemProperty 'mobile-config', '/selenium-config/mobile-config.xml'
     systemProperty 'config', '/selenium-config/config.xml'
     systemProperty 'captcha', '/selenium-config/captcha.txt'
+
+    outputs.upToDateWhen { false }
 }
 
 dependencies {
@@ -108,7 +162,7 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-server:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-java:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
-    testCompile 'org.testng:testng:6.8.8'
+    testCompile 'org.testng:testng:6.9.4'
     testCompile 'junit:junit:4.8.1'
     testCompile 'org.yaml:snakeyaml:1.8'
     testCompile 'org.apache.httpcomponents:httpclient:4.3.5'
