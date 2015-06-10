@@ -19,7 +19,6 @@ import org.joda.time.DateTimeZone;
 
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
-
 import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -33,7 +32,11 @@ public class YoutubeVideoProvider {
 
   /**
    * This method returns latest youtube video(added no longer then hour ago) for a specified query.
-   * This one is using a YouTube Data API (v3) - see for reference - https://developers.google.com/youtube/v3/
+   * This one is using a YouTube Data API (v3) - see for reference -
+   * https://developers.google.com/youtube/v3/
+   *
+   * @param searchQuery
+   * @return
    */
   public static YoutubeVideo getLatestVideoForQuery(String searchQuery) {
     HttpClient httpclient =
@@ -52,11 +55,10 @@ public class YoutubeVideoProvider {
 
     HttpGet httpPost =
         new HttpGet("https://www.googleapis.com/youtube/v3/search?"
-                    + URLEncodedUtils.format(nvps, "utf-8"));
+            + URLEncodedUtils.format(nvps, "utf-8"));
 
     String videoTitle = null;
     String videoUrl = null;
-    String videoId = null;
 
     try {
       HttpResponse response = httpclient.execute(httpPost);
@@ -66,15 +68,15 @@ public class YoutubeVideoProvider {
       ReadContext responseValue = JsonPath.parse(EntityUtils.toString(entity));
 
       videoTitle = responseValue.read("$.items[0].snippet.title");
-      videoId = responseValue.read("$.items[0].id.videoId");
+      String videoId = responseValue.read("$.items[0].id.videoId");
 
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
     } catch (IOException e) {
       PageObjectLogging.log("A problem occurred while receiving a YouTube video", e.getMessage(),
-                            false);
+          false);
     }
 
-    return new YoutubeVideo(videoTitle, videoUrl, videoId);
+    return new YoutubeVideo(videoTitle, videoUrl);
   }
 }

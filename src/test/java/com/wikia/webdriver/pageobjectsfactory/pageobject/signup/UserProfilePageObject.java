@@ -21,7 +21,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement blogTab;
   @FindBy(css = "a[data-id='createblogpost']")
   private WebElement createBlogPostButton;
-  @FindBy(css = ".WikiaBlogListingPost h1>a")
+  @FindBy(css = ".WikiaBlogListingPost h2>a")
   private List<WebElement> blogPostList;
   @FindBy(css = ".masthead-avatar")
   private WebElement avatarWrapper;
