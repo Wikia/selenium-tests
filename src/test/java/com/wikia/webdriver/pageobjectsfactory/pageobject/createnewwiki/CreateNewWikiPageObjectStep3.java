@@ -1,15 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author Karol
@@ -35,19 +38,16 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
   }
 
-  public void selectTheme(int skinNumber) {
-    waitForElementByCss(DATA_THEME_LIST);
-    jQueryClick("li[data-theme]:nth-child(" + skinNumber + ")");
-    try {
-      Thread.sleep(1500);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("selectTheme", e.getMessage(), false);
-    }
-    PageObjectLogging.log("selectTheme", "skin number: " + skinNumber + " selected", true, driver);
-  }
-
   public ArticlePageObject submit() {
-    waitForElementNotPresent(loadingIndicatorBy);
+
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, 90).until(CommonExpectedConditions
+          .elementNotPresent(loadingIndicatorBy));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+
     scrollAndClick(submitButton);
     PageObjectLogging.log("submit", "Submit button clicked", true, driver);
     return new ArticlePageObject(driver);

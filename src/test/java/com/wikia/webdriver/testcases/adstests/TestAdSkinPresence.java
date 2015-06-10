@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -11,7 +12,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 /**
- * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
 public class TestAdSkinPresence extends TemplateDontLogout {
@@ -21,28 +21,19 @@ public class TestAdSkinPresence extends TemplateDontLogout {
     urlBuilder = new UrlBuilder(config.getEnv());
   }
 
-  /**
-   * Test ad skin presence on given resolution.
-   *
-   * @param wikiName         - name of the wiki
-   * @param article          - name of the article
-   * @param screenImageUrl   - DFP link with ad skin image
-   * @param windowResolution - window resolution
-   * @param skinLeftSide     - path to file with decoded using Base64 ad skin
-   * @param skinRightSide    - path to file with decoded using Base64 ad skin
-   */
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skin",
-      groups = {"TestSkinPresence_GeoEdgeFree"},
-      invocationCount = 3
+      groups = {"TestSkinPresence_GeoEdgeFree"}
   )
-  public void TestSkinPresence_GeoEdgeFree(
-      String wikiName, String article, String screenImageUrl,
-      Dimension windowResolution, String skinLeftSide, String skinRightSide
-  ) throws IOException {
+  public void TestSkinPresence_GeoEdgeFree(String wikiName, String article,
+                                           Dimension windowResolution,
+                                           String expectedAdSkinLeftPath,
+                                           String expectedAdSkinRightPath) throws IOException {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-    wikiPage.verifyAdSkinPresence(screenImageUrl, skinLeftSide, skinRightSide);
+    PageObjectLogging.log("Window resolution: ", String.valueOf(windowResolution.width), true);
+    new AdsBaseObject(driver, testedPage, windowResolution).checkSkin(expectedAdSkinLeftPath,
+                                                                      expectedAdSkinRightPath);
   }
+
 }

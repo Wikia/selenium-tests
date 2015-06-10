@@ -32,7 +32,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     PageObjectLogging
         .log("Wikia logo", "is visible", "is not visible", articlePage.isWikiaLogoVisible());
@@ -54,7 +54,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.clickTopContributor(0);
     PageObjectLogging.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:",
@@ -65,7 +65,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_SINGLE_LINKED_IMAGE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.LINKED_IMAGES);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
@@ -78,7 +78,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     Assertion.assertTrue(articlePage.isChevronCollapsed(), "Chevron isn't collapsed");
     PageObjectLogging.log("Category list", "is collapsed", true);

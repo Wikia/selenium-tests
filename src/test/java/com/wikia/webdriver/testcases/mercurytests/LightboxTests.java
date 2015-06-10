@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -35,11 +36,13 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_UP = "up";
   private static final String DIRECTION_DOWN = "down";
 
+  private static final double ACCURACY = 0.90;
+
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_001_Open_Close() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
@@ -54,7 +57,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);
@@ -102,7 +105,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);
@@ -112,11 +115,13 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 3000);
     File afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming in by gesture", "works", "does not work",
-                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          !new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming out by gesture", "works", "does not work",
-                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
@@ -126,19 +131,21 @@ public class LightboxTests extends NewTestTemplate {
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming in by double tap", "works", "does not work",
-                          !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          !new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
     PageObjectLogging.log("Zooming out by double tap", "works", "does not work",
-                          new ImageComparison().areFilesTheSame(beforeZooming, afterZooming));
+                          new ImageComparison()
+                              .areFilesTheSame(beforeZooming, afterZooming, ACCURACY));
   }
 
   // MT04
   @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_004_UIShow_UIHide() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);
@@ -153,23 +160,26 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   // MT05
-  @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"})
+  @RelatedIssue(issueID = "HG-730")
+  @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"}, enabled = false)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
+    String oldUrl = driver.getCurrentUrl();
     lightbox.clickGalleryImage(0);
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
     mobileDriver.execute(DriverCommand.GO_BACK, null);
-    Assertion.assertFalse(lightbox.isLightboxOpened(), "Lightbox is opened");
+    PageObjectLogging.log("Lightbox", "is closed", "is opened", !lightbox.isLightboxOpened());
+    PageObjectLogging.log("URL", "is the same", "is different", oldUrl.equals(driver.getCurrentUrl()));
   }
 
   // MT06
   @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_GALLERY_TEST_TWO);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     LightboxComponentObject lightbox = new LightboxComponentObject(driver);
     lightbox.clickGalleryImage(0);

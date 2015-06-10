@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.TimeoutException;
 
 /**
  * Bogna 'bognix' Knychala
@@ -24,12 +25,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
     private static final String FLITE_MASK_SELECTOR = ".flite-mask";
     private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
+    private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
     private AdsComparison adsComparison;
 
     public MobileAdsBaseObject(WebDriver driver, String page) {
         super(driver, page);
         adsComparison = new AdsComparison();
+
+        if (getBrowser().equals("CHROMEMOBILEMERCURY")) {
+            verifyMercury();
+        }
+
         PageObjectLogging.log("", "Page screenshot", true, driver);
     }
 
@@ -177,4 +184,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         );
     }
 
+    private void verifyMercury() {
+        try {
+            waitForElementByCss(MERCURY_ARTICLE_CONTAINER_SELECTOR);
+        } catch (TimeoutException e) {
+            PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
+            throw e;
+        }
+    }
 }

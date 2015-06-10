@@ -35,7 +35,7 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @RelatedIssue(issueID = "SOC-774")
+  @RelatedIssue(issueID = "SOC-774", comment = "Automation test is broken. Please Test Manually. ")
   @Test(groups = {"Facebook_001", "Facebook", "Facebook_002"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_noEmailPerms() {

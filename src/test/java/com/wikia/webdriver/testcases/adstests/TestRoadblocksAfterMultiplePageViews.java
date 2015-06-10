@@ -9,9 +9,7 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
- * @description 1. Check if roadblock is present after 3 PV
  */
 public class TestRoadblocksAfterMultiplePageViews extends TemplateDontLogout {
 
@@ -25,17 +23,18 @@ public class TestRoadblocksAfterMultiplePageViews extends TemplateDontLogout {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skinLimited",
-      groups = {"TestRoadblock_GeoEdgeFree"},
-      invocationCount = 3
+      groups = {"TestRoadblock_GeoEdgeFree"}
   )
-  public void TestRoadblock_GeoEdgeFree(
-      String wikiName, String article, String screenImageUrl,
-      Dimension windowResolution, String skinLeftSide, String skinRightSide
-  ) {
+  public void TestRoadblock_GeoEdgeFree(String wikiName, String article, Dimension windowResolution,
+                                        String expectedAdSkinLeftPartPath,
+                                        String expectedAdSkinRightPartPath) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-    wikiPage
-        .verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide,
-                                                     PAGE_VIEWS_COUNT);
+    for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {
+      wikiPage.checkTopLeaderboard();
+      wikiPage.checkMedrec();
+      wikiPage.checkSkin(expectedAdSkinLeftPartPath, expectedAdSkinRightPartPath);
+    }
   }
+
 }

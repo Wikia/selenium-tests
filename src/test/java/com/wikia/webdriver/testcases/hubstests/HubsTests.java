@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.hubstests;
 
+import java.util.Map;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
@@ -9,11 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.Map;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Michal 'justptT' Nowierski
@@ -22,22 +23,16 @@ import java.util.Map;
  */
 public class HubsTests extends NewTestTemplateBeforeClass {
 
+  private static final String CORP_WIKI_NAME = "corp";
+  Credentials credentials = config.getCredentials();
+
   @DataProvider
   private final Object[][] provideHubName() {
-    return new Object[][]{
-        {HubName.VIDEO_GAMES},
-        {HubName.ENTERTAINMENT},
-        {HubName.LIFESTYLE}
-    };
+    return new Object[][] { {HubName.VIDEO_GAMES}, {HubName.ENTERTAINMENT}, {HubName.LIFESTYLE}};
   }
 
-  Credentials credentials = config.getCredentials();
-  private static final String CORP_WIKI_NAME = "corp";
-
-  @Test(enabled = false,
-      groups = {"HubsTest_001", "Hubs", "Smoke4"},
-      dataProviderClass = HubsDataProvider.class,
-      dataProvider = "provideHubDBName")
+  @Test(enabled = false, groups = {"HubsTest_001", "Hubs", "Smoke4"},
+      dataProviderClass = HubsDataProvider.class, dataProvider = "provideHubDBName")
   public void HubsTest_001_verifyMosaicSliderShowsImagesOnHover(String hubDBName) {
     HomePageObject home = new HomePageObject(driver);
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
@@ -63,8 +58,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
   }
 
 
-  @Test(groups = {"HubsTest_002", "Hubs"},
-      dataProviderClass = HubsDataProvider.class,
+  @Test(groups = {"HubsTest_002", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   /**
    *  verify that from community module has its elements
@@ -78,8 +72,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
     hub.verifyFromModuleHasQuatation();
   }
 
-  @Test(groups = {"HubsTest_003", "Hubs"},
-      dataProviderClass = HubsDataProvider.class,
+  @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   /**
    * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
@@ -121,6 +114,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
+  @RelatedIssue(issueID = "MAIN-4507", comment = "Wikia code defect. Please test manually")
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
   /**
    * Verify that each language drop down  goes to the correct page
