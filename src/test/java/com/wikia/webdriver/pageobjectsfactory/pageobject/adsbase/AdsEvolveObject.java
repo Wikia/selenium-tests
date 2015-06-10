@@ -45,8 +45,8 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
-    String nextProviderSlotCSS = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
-    Assertion.assertTrue(checkIfElementOnPage(nextProviderSlotCSS));
+    String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
+    Assertion.assertTrue(checkIfElementOnPage(nextProviderSlotCss));
     PageObjectLogging.log("Evolve", "Evolve hopped to " + nextProviderSrc, true);
   }
 }
