@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -104,7 +105,10 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST04
-  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"})
+  // TODO: check article titles instead of url, check that receive at least 3 different articles in 10 attempts
+  @RelatedIssue(issueID = "HG-686")
+  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests",
+                  "Mercury"}, enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
