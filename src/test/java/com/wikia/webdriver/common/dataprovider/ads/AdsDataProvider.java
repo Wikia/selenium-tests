@@ -346,7 +346,7 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] evolveHopTestPage() {
-    return new Object[][]{{"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD"}};
+    return new Object[][]{{"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "remnant"}};
   }
 
   @DataProvider
