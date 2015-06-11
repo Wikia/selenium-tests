@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -55,29 +56,20 @@ public class AdsAmazonObject extends AdsBaseObject {
         }
     }
 
-    public AdsAmazonObject verifyAdFromAmazonPresent() {
+    public AdsAmazonObject verifyAdsFromAmazonPresent() {
         driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-
-        if (checkIfElementOnPage(AMAZON_IFRAME)) {
-            PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
-        } else {
-            throw new NoSuchElementException("Amazon Ad not found on page");
-        }
-
+        Assertion.assertTrue(checkIfElementOnPage(AMAZON_IFRAME));
+        PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
         driver.switchTo().defaultContent();
         return this;
     }
 
-    public void verifyNoAdsFromAmazonPresent() {
+    public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
         driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-
-        if (checkIfElementOnPage(AMAZON_IFRAME)) {
-            PageObjectLogging.log("AmazonAd", "Amazon ad present", false);
-        } else {
-            PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
-        }
-
+        Assertion.assertFalse(checkIfElementOnPage(AMAZON_IFRAME));
+        PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
         driver.switchTo().defaultContent();
+        return this;
     }
 
     public void verifyGPTParams() {

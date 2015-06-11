@@ -41,7 +41,7 @@ public class TestAmazonAds extends TemplateDontLogout {
         // TODO Add verification that a call to Amazon is issued when bug with browsermob-proxy will be fixed
         if (debugMode) {
             amazonAds.verifyGPTParams();
-            amazonAds.verifyAdFromAmazonPresent();
+            amazonAds.verifyAdsFromAmazonPresent();
         }
     }
 
@@ -57,7 +57,7 @@ public class TestAmazonAds extends TemplateDontLogout {
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
                 .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonArticle"))
-                .verifyAdFromAmazonPresent();
+                .verifyAdsFromAmazonPresent();
     }
 
     @Test(groups = {
@@ -70,7 +70,7 @@ public class TestAmazonAds extends TemplateDontLogout {
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
                 .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonArticle"))
-                .verifyAdFromAmazonPresent()
+                .verifyAdsFromAmazonPresent()
                 .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
                 .verifyNoAdsFromAmazonPresent();
     }
