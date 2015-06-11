@@ -391,6 +391,22 @@ public class AdsDataProvider {
     }
 
     @DataProvider
+    public static Object[][] kruxIntegration() {
+        return new Object[][]{
+                {"zh.tos", "神魔之塔_Tower_of_Saviors_维基"},
+                {"gameofthrones", "Game_of_Thrones_Wiki"},
+                {"2007.runescape", "2007scape_Wiki"},
+                {"ru.warframe", "Заглавная_страница"},
+                {"gameofthrones", "Daenerys_Targaryen"},
+                {"elderscrolls", "Console_Commands_(Skyrim"},
+                {"naruto", "Naruto_Uzumaki"},
+                {"clashofclans", "Air_Sweeper"},
+                {"leagueoflegends", "Ekko"},
+                {"lego", "LEGO"}
+        };
+    }
+
+    @DataProvider
     public static Object[][] kruxStandardSegmentOasis() {
         return new Object[][]{
                 {
