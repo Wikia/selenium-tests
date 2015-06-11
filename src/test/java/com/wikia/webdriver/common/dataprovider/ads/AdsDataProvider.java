@@ -353,23 +353,15 @@ public class AdsDataProvider {
   public static Object[][] testProvidersChain() {
     return new Object[][]{
         {
-            "DE", "adtest", "SyntheticTests/ProvidersChain",
+            "adtest", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
         },
         {
-            "DE", "adtest", "SyntheticTests/ProvidersChain",
+            "adtest", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "gpt; remnant; Liftium", 3
         },
         {
-            "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
-        },
-        {
-            "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
-        },
-        {
-            "GB", "adtest", "SyntheticTests/ProvidersChain",
+            "adtest", "SyntheticTests/ProvidersChain",
             "INVISIBLE_SKIN", "gpt; remnant", 0
         }
     };
