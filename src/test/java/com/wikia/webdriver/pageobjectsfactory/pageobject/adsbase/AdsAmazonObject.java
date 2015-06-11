@@ -88,7 +88,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
 
     public AdsAmazonObject clickAmazonArticleLink(String linkSelectoryInCss) {
-        WebElement amazonArticleLink = driver.findElement(By.cssSelector(AMAZON_ARTICLE_LINK_CSS));
+        WebElement amazonArticleLink = driver.findElement(By.cssSelector(linkSelectoryInCss));
         waitForElementByElement(amazonArticleLink);
         amazonArticleLink.click();
         return this;
