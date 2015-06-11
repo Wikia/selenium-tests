@@ -23,7 +23,8 @@ public class TestProvidersChain extends TemplateDontLogout {
       String article,
       String slotName,
       String providers,
-      int times) {
+      int times)
+  {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
         .refresh(times)
         .waitPageLoaded()
