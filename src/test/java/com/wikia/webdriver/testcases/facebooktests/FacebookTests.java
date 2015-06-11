@@ -35,7 +35,6 @@ public class FacebookTests extends NewTestTemplate {
    * email address and create account 5. confirm account and login, 6. Verify user can login via
    * facebook
    */
-  @RelatedIssue(issueID = "SOC-774", comment = "Automation test is broken. Please Test Manually. ")
   @Test(groups = {"Facebook_001", "Facebook", "Facebook_002"})
   @UseUnstablePageLoadStrategy
   public void Facebook_001_noEmailPerms() {
@@ -86,6 +85,11 @@ public class FacebookTests extends NewTestTemplate {
         new FacebookSignupModalComponentObject(driver, windows[0].toString());
     fbModal.acceptWikiaAppPolicy();
     fbModal.loginExistingAccount(credentials.userName, credentials.password);
+    fbModal.verifyUserLoggedIn(credentials.userName);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    PreferencesPageObject disconnectFBPrefs = base.openSpecialPreferencesPage(wikiURL);
+    disconnectFBPrefs.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    disconnectFBPrefs.disconnectFromFacebook();
   }
 
   @Test(groups = {"Facebook_003", "Facebook"}, dependsOnMethods = {"Facebook_002_linkFBwithWikia"})
@@ -101,37 +105,9 @@ public class FacebookTests extends NewTestTemplate {
     SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
     signUp.clickFacebookSignUp();
     base.verifyUserLoggedIn(credentials.userName);
+    PreferencesPageObject disconnectFBPrefs = base.openSpecialPreferencesPage(wikiURL);
+    disconnectFBPrefs.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    disconnectFBPrefs.disconnectFromFacebook();
   }
 
-  @AfterGroups(groups = {"Facebook_001"}, alwaysRun = true)
-  public void disconnectFromFacebook() {
-    startBrowser();
-    try {
-      SignUpPageObject verifyAccountSignup =
-          new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
-      verifyAccountSignup.appendToUrl("noads=1");
-      verifyAccountSignup.logInCookie(userName, password, wikiURL);
-      PreferencesPageObject prefsPage = verifyAccountSignup.openSpecialPreferencesPage(wikiURL);
-      prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-      prefsPage.disconnectFromFacebook();
-    } finally {
-      stopBrowser();
-    }
-  }
-
-  @AfterGroups(groups = {"Facebook_003", "Facebook_002"},alwaysRun = true)
-  public void disconnectFromFacebookAccount() {
-    startBrowser();
-    try{
-      SignUpPageObject verifyAccountSignup =
-          new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
-      verifyAccountSignup.appendToUrl("noads=1");
-      verifyAccountSignup.logInCookie(credentials.userName, credentials.password, wikiURL);
-      PreferencesPageObject prefsPage = verifyAccountSignup.openSpecialPreferencesPage(wikiURL);
-      prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-      prefsPage.disconnectFromFacebook();
-    }finally {
-      stopBrowser();
-    }
-  }
 }
