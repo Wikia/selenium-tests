@@ -39,7 +39,8 @@ public class AdsFloorAdhesionObject extends BasePageObject {
 
     public AdsFloorAdhesionObject clickFloorAdhesion() {
         WebElement iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS));
-        driver.switchTo().frame(iframeAd).findElement(By.cssSelector(FLOOR_ADHESION_IMAGE_IN_FRAME_CSS)).click();
+        driver.switchTo().frame(iframeAd);
+        driver.findElement(By.cssSelector(FLOOR_ADHESION_IMAGE_IN_FRAME_CSS)).click();
         driver.switchTo().defaultContent();
         return this;
     }
