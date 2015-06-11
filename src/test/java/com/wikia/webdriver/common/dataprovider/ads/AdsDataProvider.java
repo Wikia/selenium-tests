@@ -47,16 +47,17 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"zh.tos", "Category:%E5%9C%96%E9%91%92"},
-        {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Slenderman"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
-        {"wowwiki", "Portal:Main"},
-        {"gameofthrones", "Season_4"},
-        {"zh.pad", "Homepage/Mobile"},
-        {"zh.pad", "Special:Video"}
+        {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
+        {"gameofthrones", "Game_of_Thrones_Wiki"},
+        {"2007.runescape", "2007scape_Wiki"},
+        {"ru.warframe", "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
+        {"gameofthrones", "Daenerys_Targaryen"},
+        {"elderscrolls", "Console_Commands_(Skyrim"},
+        //intentionally without ) sign - there is redirect on page
+        {"naruto", "Naruto_Uzumaki"},
+        {"clashofclans", "Air_Sweeper"},
+        {"leagueoflegends", "Ekko"},
+        {"lego", "LEGO"}
     };
   }
 
