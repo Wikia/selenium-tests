@@ -21,8 +21,9 @@ public class AdsAmazonObject extends AdsBaseObject {
     private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
     private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
-    private final static String AMAZON_ARTICLE_LINK_CSS = "a[href=\'/wiki/Amazon\']";
-    private final static String AMAZON_SECOND_ARTICLE_LINK_CSS = "a[href=\'wiki/SyntheticTests/AmazonStep2\']";
+    private final static String AMAZON_ARTICLE_LINK_CSS = "a[href='/wiki/Amazon']";
+    private final static String AMAZON_SECOND_ARTICLE_LINK_CSS =
+            "a[href='wiki/SyntheticTests/AmazonStep2']";
 
     @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
     private WebElement slotWithAmazon;
