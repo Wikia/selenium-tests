@@ -5,10 +5,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AdsFloorAdhesionObject extends BasePageObject {
     private final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
-    private final String FLOOR_ADHESION_AD_CSS = "#ext-wikia-adEngine-template-footer .ad";
+    private final String FLOOR_ADHESION_AD_FRAME_CSS = "#ext-wikia-adEngine-template-footer .ad iframe";
+    private final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
     private final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-footer .close";
     private final String WIKIA_BAR_CSS = "#WikiaBar";
 
@@ -36,7 +38,10 @@ public class AdsFloorAdhesionObject extends BasePageObject {
     }
 
     public AdsFloorAdhesionObject clickFloorAdhesion() {
-        driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_CSS)).click();
+        WebElement iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS));
+        driver.switchTo().frame(iframeAd);
+        driver.findElement(By.cssSelector(FLOOR_ADHESION_IMAGE_IN_FRAME_CSS)).click();
+        driver.switchTo().defaultContent();
         return this;
     }
 
