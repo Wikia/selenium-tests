@@ -3,14 +3,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.security.InvalidParameterException;
-
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -22,9 +20,11 @@ public class AdsAmazonObject extends AdsBaseObject {
     private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
     private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
 
-    private final static String AMAZON_ARTICLE_LINK_CSS = "a[href='/wiki/Amazon']";
-    private final static String AMAZON_SECOND_ARTICLE_LINK_CSS =
-            "a[href='wiki/SyntheticTests/AmazonStep2']";
+    private final static ImmutableMap<String, String> amazonLinkCssSelectors =
+            new ImmutableMap.Builder<String, String>()
+                .put("AmazonFirstArticle", "a[href='/wiki/Amazon']")
+                .put("AmazonSecondArticle", "a[href='wiki/SyntheticTests/AmazonStep2']")
+                .build();
 
     @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
     private WebElement slotWithAmazon;
@@ -88,12 +88,6 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
 
     public String getAmazonLinkCssSelector(String linkName) {
-        if (linkName.equals("AmazonArticle")) {
-            return AMAZON_ARTICLE_LINK_CSS;
-        } else if (linkName.equals("AmazonSecondArticle")) {
-            return AMAZON_SECOND_ARTICLE_LINK_CSS;
-        }
-
-        throw new InvalidParameterException("Invalid linkName parameter");
+        return amazonLinkCssSelectors.get(linkName);
     }
 }
