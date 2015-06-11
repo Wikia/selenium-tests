@@ -20,8 +20,9 @@ buildscript {
     }
 }
 
-
+import groovy.json.JsonSlurper
 import groovy.xml.StreamingMarkupBuilder
+import groovy.xml.XmlUtil
 import org.ajoberstar.grgit.Credentials
 import org.ajoberstar.grgit.Grgit
 
@@ -31,42 +32,181 @@ task runFailed {
 
         def f = new File('testng_failed.xml')
 
-        new URL('http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix/groups=ClickTracking,label=webdriver/ws/target/surefire-reports/testng-failed.xml').withInputStream { i ->
-            f.withOutputStream {
-                it << i
-            }
-        }
+        new URL(
+                'http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix/groups=ClickTracking,label=webdriver/ws/target/surefire-reports/testng-failed.xml').
+                withInputStream { i ->
+                    f.withOutputStream {
+                        it << i
+                    }
+                }
         project.testSuite = f.getAbsolutePath().replace('\\', '/')
     }
-
 }
 
 task getSuite << {
+
+    def jobName = "wikia-test-matrix"
+    def apiSuffix = "api/json?pretty=true"
+
+    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def reportPath = "/ws/target/surefire-reports/testng-failed.xml"
+
+    def jsonSlurper = new JsonSlurper()
+    def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
+
+    def job = jobsList.jobs
+
+    def selectedJob
+
+    job.each {
+        if (jobName.equals(it.name)) {
+            selectedJob = it
+        }
+    }
+
+    def activeConfigs = jsonSlurper.parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
+
+    def failedCOnfigurations = []
+
+    activeConfigs.each {
+        if (it.color == 'red') {
+            failedCOnfigurations.add(it.url)
+        }
+    }
+    def failedSuites = []
+
     def parser = new XmlSlurper()
     parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-    def suite = parser.parse(new File('testng-failed.xml'))
-    def yasuite = parser.parse(new File('testng-failed2.xml'))
+    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+    failedCOnfigurations.each {
+        failedSuites.add(parser.parse("${it}/ws/target/surefire-reports/testng-failed.xml"))
+    }
+    println "Number of failed onfigurations: ${failedSuites.size()}"
 
-    def nodes = suite.'**'.findAll {
-        node -> node.name() == 'class'
-    }*.@name
-
-    def nodesToAdd = yasuite.'**'.findAll {
-        node -> node.name() == 'class' && !nodes.contains(node.@name)
+    failedSuites.each {
+        it.test.classes.class.each {
+            it.methods.include.each {
+            }
+        }
     }
 
-    println "nodes to add: ${nodesToAdd.size()}"
+    if (failedSuites.size() > 0) {
+        def first = failedSuites[0]
+        def firstClasses = []
 
-    suite.test.groups.replaceNode{}
+        failedSuites.each {
+            firstClasses = []
+            first.test.classes.class.each {
+                firstClasses.add(it.@name)
+            }
 
-    suite.test.classes.appendNode(nodesToAdd)
+            def nodesToAdd = it.'**'.findAll {
+                node -> node.name() == 'class' && !firstClasses.contains(node.@name)
+            }
 
-    def writer = new FileWriter('mod.xml')
+            if (nodesToAdd.size() > 0) {
+                first.'test'.classes.appendNode(nodesToAdd)
+                first = parser.parseText(XmlUtil.serialize(first))
 
-    def builder = new StreamingMarkupBuilder()
-    writer << builder.bind {
-        mkp.yield suite
+            }
+
+            def present = it.'**'.findAll {
+                node -> node.name() == 'class' && firstClasses.contains(node.@name)
+            }
+            def methodsPresent = []
+
+            present.each {
+                println "CLASS: ${it.@name}"
+                methodsPresent = first.'**'.findAll {
+                    node ->
+                        node.name() == 'include' &&
+                        node.parent().parent().@name == it.@name
+                }
+                it.methods.include.each {
+                    if (!methodsPresent.contains(it.@iname)) {
+                        println "Method missing  ->  ${it.@name}"
+                    }
+                }
+            }
+
+            def writer = new FileWriter('mod.xml')
+
+            def builder = new StreamingMarkupBuilder()
+            writer << builder.bind {
+                mkp.yield first
+            }
+
+//            def methodsToAdd = present.'**'.findAll {
+//                node -> node.name() == 'include'
+//            }
+//
+//            methodsToAdd.each{
+//                println "METHOD MISSING: ${it.name}"
+//            }
+
+//            println XmlUtil.serialize( first )
+
+//            it.test.classes.class.each {
+//                if (firstClasses.contains(it.@name)) {
+//                    println "class: ${it.@name} is present"
+//                } else {
+//                    println "class: ${it.@name} is NOT present"
+//
+//                    println "BEFORE APPEND: "
+//                    first.test.classes.class.each {
+//                        println it.@name
+//                    }
+//
+//                    first.test.classes.appendNode(it)
+//                    println "AFTER APPEND: "
+//                    first.test.classes.class.each {
+//                        println it.@name
+//                    }
+//                    println ".............................. "
+//
+//                }
+//            }
+
+//            it.test.classes.class.each{
+//                it.methods.include.each{
+//                    println "... ${it.@name}"
+//                }
+//            }
+        }
     }
+
+//
+//    new URL('http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix/groups=ClickTracking,label=webdriver/ws/target/surefire-reports/testng-failed.xml').withInputStream { i ->
+//        f.withOutputStream {
+//            it << i
+//        }
+//    }
+//
+//    def parser = new XmlSlurper()
+//    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+//    def suite = parser.parse(new File('testng-failed.xml'))
+//    def yasuite = parser.parse(new File('testng-failed2.xml'))
+//
+//    def nodes = suite.'**'.findAll {
+//        node -> node.name() == 'class'
+//    }*.@name
+//
+//    def nodesToAdd = yasuite.'**'.findAll {
+//        node -> node.name() == 'class' && !nodes.contains(node.@name)
+//    }
+//
+//    println "nodes to add: ${nodesToAdd.size()}"
+//
+//    suite.test.groups.replaceNode{}
+//
+//    suite.test.classes.appendNode(nodesToAdd)
+//
+//    def writer = new FileWriter('mod.xml')
+//
+//    def builder = new StreamingMarkupBuilder()
+//    writer << builder.bind {
+//        mkp.yield suite
+//    }
 }
 
 task initConfig << {
@@ -80,7 +220,8 @@ task initConfig << {
 
         if (dest.isDirectory()) {
             println "directory exists"
-            def repo = Grgit.open(dir: configPath, creds: new Credentials(username: user, password: pass))
+            def repo = Grgit.
+                    open(dir: configPath, creds: new Credentials(username: user, password: pass))
 
             println "Current Config branch: ${repo.getBranch().getCurrent().getName()}"
             println "Pulling branch with rebase ..."
@@ -90,7 +231,7 @@ task initConfig << {
             println "Cloning configuration ..."
             def grgit = Grgit.
                     clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git',
-                            credentials: new Credentials(username: user, password: pass))
+                          credentials: new Credentials(username: user, password: pass))
         }
     } else {
         println "User and pass missing. "
@@ -106,7 +247,7 @@ task initConfig << {
             println "No config directory in location: ${dest.getAbsolutePath()}"
             throw new GradleException(
                     "Can't download configuration without user and password \n (config is a private repository). \n " +
-                            "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
+                    "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
         }
     }
 }
@@ -138,7 +279,7 @@ test {
 
     systemProperty 'platform', project.hasProperty('platform') ? platform : ''
     systemProperty 'platform-version',
-            project.hasProperty('platform_version') ? platform_version : ''
+                   project.hasProperty('platform_version') ? platform_version : ''
     systemProperty 'device-id', project.hasProperty('device_id') ? device_id : ''
     systemProperty 'mobile-config', '/selenium-config/mobile-config.xml'
     systemProperty 'config', '/selenium-config/config.xml'
