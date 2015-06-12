@@ -399,10 +399,7 @@ public class AdsDataProvider {
                 {"ru.warframe", "Заглавная_страница"},
                 {"gameofthrones", "Daenerys_Targaryen"},
                 {"elderscrolls", "Console_Commands_(Skyrim"},
-                {"naruto", "Naruto_Uzumaki"},
-                {"clashofclans", "Air_Sweeper"},
                 {"leagueoflegends", "Ekko"},
-                {"lego", "LEGO"}
         };
     }
 
