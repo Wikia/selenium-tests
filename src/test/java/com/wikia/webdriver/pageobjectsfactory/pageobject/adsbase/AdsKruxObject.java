@@ -41,7 +41,6 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
-    waitPageLoaded();
     String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
     Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
   }
