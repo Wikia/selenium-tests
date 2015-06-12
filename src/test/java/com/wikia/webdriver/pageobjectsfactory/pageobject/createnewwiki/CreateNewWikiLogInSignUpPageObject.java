@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -50,7 +51,10 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     PageObjectLogging.log("typeInPassword", "password name was typed", true);
   }
 
-  public void clickForgotPassword() {
+  public void clickForgotPassword(String userName, String apiToken) {
+    Assertion.assertEquals(
+            ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
+            resetForgotPasswordTime(userName, apiToken));
     waitForElementByElement(forgotPasswordLink);
     forgotPasswordLink.click();
   }
