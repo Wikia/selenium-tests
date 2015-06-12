@@ -9,6 +9,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.XMLFunctions;
+import com.wikia.webdriver.common.properties.PropertiesSetter;
 
 public class Properties {
 
