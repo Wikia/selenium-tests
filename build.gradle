@@ -132,7 +132,6 @@ task getSuite << {
             def methodsPresent = []
 
             present.each {
-                println "CLASS: ${it.@name}"
                 methodsPresent = first.'**'.findAll {
                     node ->
                         node.name() == 'include' &&
@@ -170,8 +169,6 @@ test {
         includeGroups = (project.hasProperty('groups') ? groups : '').split(',')
         useDefaultListeners = true
     }
-    testLogging.showStandardStreams = true
-    scanForTestClasses = true
 
     minHeapSize = '800m'
     maxHeapSize = '800m'
