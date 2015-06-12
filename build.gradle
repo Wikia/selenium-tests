@@ -77,83 +77,104 @@ task getSuite << {
     def reportPath = "/ws/target/surefire-reports/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
-    def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
-
-    def selectedJob
-
-    jobsList.jobs.each {
-        if (jobName.equals(it.name)) {
-            selectedJob = it
-        }
-    }
-
-    def activeConfigs = jsonSlurper.parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
-
-    def failedCOnfigurations = []
-
-    activeConfigs.each {
-        if (it.color == 'red') {
-            failedCOnfigurations.add(it.url)
-        }
-    }
-    def failedSuites = []
-
     def parser = new XmlSlurper()
     parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
     parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-    failedCOnfigurations.each {
-        failedSuites.add(parser.parse("${it}/ws/target/surefire-reports/testng-failed.xml"))
-    }
-    println "Number of failed onfigurations: ${failedSuites.size()}"
 
-    if (failedSuites.size() > 0) {
-        def first = failedSuites[0]
-        def firstClasses = []
+    def xml
 
-        failedSuites.each {
-            firstClasses = []
-            first.test.classes.class.each {
-                firstClasses.add(it.@name)
+    println "Jenkins Duty Failed Execution: ${project.failedOnly}"
+
+    if (project.failedOnly.equals('jenkinsDuty')) {
+        println "Jenkins Duty Failed Execution"
+
+        xml = parser.parse(
+                "http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix-failed-execution/ws/target/surefire-reports/testng-failed.xml")
+
+    } else {
+        def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
+
+        def selectedJob
+
+        jobsList.jobs.each {
+            if (jobName.equals(it.name)) {
+                selectedJob = it
             }
+        }
 
-            def nodesToAdd = it.'**'.findAll {
-                node -> node.name() == 'class' && !firstClasses.contains(node.@name)
+        def activeConfigs = jsonSlurper.
+                parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
+
+        def failedCOnfigurations = []
+
+        activeConfigs.each {
+            if (it.color == 'red') {
+                failedCOnfigurations.add(it.url)
             }
+        }
+        def failedSuites = []
 
-            if (nodesToAdd.size() > 0) {
-                first.'test'.classes.appendNode(nodesToAdd)
-                first = parser.parseText(XmlUtil.serialize(first))
 
-            }
+        failedCOnfigurations.each {
+            failedSuites.add(parser.parse("${it}/ws/target/surefire-reports/testng-failed.xml"))
+        }
+        println "Number of failed onfigurations: ${failedSuites.size()}"
 
-            def present = it.'**'.findAll {
-                node -> node.name() == 'class' && firstClasses.contains(node.@name)
-            }
-            def methodsPresent = []
+        if (failedSuites.size() > 0) {
+            def first = failedSuites[0]
+            def firstClasses = []
 
-            present.each {
-                methodsPresent = first.'**'.findAll {
-                    node ->
-                        node.name() == 'include' &&
-                        node.parent().parent().@name == it.@name
+            failedSuites.each {
+                firstClasses = []
+                first.test.classes.class.each {
+                    firstClasses.add(it.@name)
                 }
-                it.methods.include.each {
-                    if (!methodsPresent.contains(it.@iname)) {
-                        println "Method missing  ->  ${it.@name}"
+
+                def nodesToAdd = it.'**'.findAll {
+                    node -> node.name() == 'class' && !firstClasses.contains(node.@name)
+                }
+
+                if (nodesToAdd.size() > 0) {
+                    first.'test'.classes.appendNode(nodesToAdd)
+                    first = parser.parseText(XmlUtil.serialize(first))
+
+                }
+
+                def present = it.'**'.findAll {
+                    node -> node.name() == 'class' && firstClasses.contains(node.@name)
+                }
+                def methodsPresent = []
+
+                present.each {
+                    methodsPresent = first.'**'.findAll {
+                        node ->
+                            node.name() == 'include' &&
+                            node.parent().parent().@name == it.@name
+                    }
+                    it.methods.include.each {
+                        if (!methodsPresent.contains(it.@iname)) {
+                            println "Method missing  ->  ${it.@name}"
+                        }
                     }
                 }
             }
+            first.test.groups.replaceNode {}
+            xml = first
         }
-        first.test.groups.replaceNode {}
-        new File("test.xml").withWriter { it << XmlUtil.serialize(first) }
+
+
     }
+    new File("test.xml").withWriter { it << XmlUtil.serialize(xml) }
+
+
 }
 
 task runFailed {
     if (project.hasProperty('failedOnly')) {
         println "Gathering failed config"
 
-        getSuite.execute();
+            getSuite.execute();
+
         def f = new File('test.xml')
 
         project.testSuite = f.getAbsolutePath().replace('\\', '/')
