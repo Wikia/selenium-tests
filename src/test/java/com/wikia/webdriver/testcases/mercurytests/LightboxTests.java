@@ -36,7 +36,7 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_UP = "up";
   private static final String DIRECTION_DOWN = "down";
 
-  private static final double ACCURACY = 0.90;
+  private static final double ACCURACY = 0.83;
 
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
