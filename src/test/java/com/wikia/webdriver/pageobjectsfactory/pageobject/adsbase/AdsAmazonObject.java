@@ -30,7 +30,7 @@ public class AdsAmazonObject extends AdsBaseObject {
                 .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
                 .build();
 
-    @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]")
+    @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]:not(.hidden)")
     private WebElement slotWithAmazon;
 
     private WebElement getAmazonIframe(WebElement slotWithAmazon) {
@@ -92,10 +92,8 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
 
     public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
-        driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-        Assertion.assertFalse(checkIfElementOnPage(AMAZON_IFRAME));
+        Assertion.assertFalse(checkIfElementOnPage(slotWithAmazon));
         PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
-        driver.switchTo().defaultContent();
         return this;
     }
 
@@ -112,6 +110,7 @@ public class AdsAmazonObject extends AdsBaseObject {
         WebElement amazonArticleLink = driver.findElement(By.cssSelector(linkSelectoryInCss));
         waitForElementByElement(amazonArticleLink);
         amazonArticleLink.click();
+        mercuryWaitForPreloaderToHide();
         return this;
     }
 

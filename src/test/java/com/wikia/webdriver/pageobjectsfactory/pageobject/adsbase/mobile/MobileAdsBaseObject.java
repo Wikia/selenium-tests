@@ -9,13 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.TimeoutException;
 
 /**
  * Bogna 'bognix' Knychala
@@ -24,7 +21,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
     private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
     private static final String FLITE_MASK_SELECTOR = ".flite-mask";
-    private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
     private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
     private AdsComparison adsComparison;
@@ -142,27 +138,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
                     "mercuryNavigateToAnArticle()",
                     "Could not find the link to: /wiki/" + articleLinkName
             );
-        }
-    }
-
-    /**
-     * Mercury is a single page application (SPA) and if you want to test navigating between
-     * different pages in the application you might want to use this method before clicking anything
-     * which is not on the first page.
-     *
-     * First page in Mercury loads just as a regular web page but next articles in Mercury just
-     * change part of loaded DOM and between them the preloader layer is displayed. This layer is on
-     * the very top and may block driver from clicking elements.
-     */
-    public void mercuryWaitForPreloaderToHide() {
-        driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-        try {
-            PageObjectLogging.log("mercuryWaitForPreloaderToHide", "Waiting till loaded...", true, driver);
-            wait.until(
-                    ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR))
-            );
-        } finally {
-            restoreDeaultImplicitWait();
         }
     }
 
