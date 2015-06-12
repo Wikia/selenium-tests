@@ -1,14 +1,14 @@
 package com.wikia.webdriver.common.properties;
 
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.XMLFunctions;
+import java.io.File;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import java.io.File;
+import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.XMLFunctions;
 
 public class Properties {
 
@@ -195,11 +195,11 @@ public class Properties {
         XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.password");
 
     userNameBlocked =
-        XMLFunctions
-            .getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
+        XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE,
+            "ci.user.tooManyLoginAttempts.username");
     passwordBlocked =
-        XMLFunctions
-            .getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
+        XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE,
+            "ci.user.tooManyLoginAttempts.password");
 
     userNameForgottenPassword =
         XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username1");
@@ -207,11 +207,11 @@ public class Properties {
         XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username2");
 
     geoEdgeUserName =
-        XMLFunctions
-            .getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
+        XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE,
+            "ci.AdsConfig.GeoEdgeCredentials.userName");
     geoEdgeUserPass =
-        XMLFunctions
-            .getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
+        XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE,
+            "ci.AdsConfig.GeoEdgeCredentials.password");
 
     apiToken = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.api.token");
   }
@@ -234,7 +234,7 @@ public class Properties {
     Global.LIVE_DOMAIN = System.getProperty("live-domain");
     Global.ENV = System.getProperty("env");
     Global.QS = System.getProperty("qs");
-//  Global.LOG_VERBOSE = (Global.BROWSER.equals("IE")) ? 1 : 2;
+    // Global.LOG_VERBOSE = (Global.BROWSER.equals("IE")) ? 1 : 2;
 
     try {
       if (Global.DOMAIN.contains("dev")) {
