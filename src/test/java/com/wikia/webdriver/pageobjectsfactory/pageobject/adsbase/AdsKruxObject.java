@@ -61,7 +61,6 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   public void waitForKrux() {
-    waitPageLoaded();
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
