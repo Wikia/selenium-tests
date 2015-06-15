@@ -4,6 +4,7 @@ group = 'com.wikia.qa'
 version = '1.0.0'
 sourceCompatibility = 1.7
 apply from: rootProject.file('gradle/static_checks.gradle')
+compileJava.options.encoding = 'UTF-8'
 
 repositories {
     jcenter()
@@ -161,8 +162,6 @@ task getSuite << {
             first.test.groups.replaceNode {}
             xml = first
         }
-
-
     }
     new File("test.xml").withWriter { it << XmlUtil.serialize(xml) }
 
@@ -173,7 +172,7 @@ task runFailed {
     if (project.hasProperty('failedOnly')) {
         println "Gathering failed config"
 
-            getSuite.execute();
+        getSuite.execute();
 
         def f = new File('test.xml')
 
@@ -183,7 +182,7 @@ task runFailed {
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
-    ext.groups = project.hasProperty('groups')? groups : System.getProperty('groups', '')
+    ext.groups = project.hasProperty('groups') ? groups : System.getProperty('groups', '')
 
     useTestNG {
         suiteXmlFiles = testSuite.split(',').
@@ -197,7 +196,7 @@ test {
 
     jvmArgs = ['-XX:MaxPermSize=1024m']
 
-    systemProperty 'env', project.hasProperty('env') ? env : 'preview'
+    systemProperty 'env', project.hasProperty('env') ? env : 'prod'
     systemProperty 'run_mvn', project.hasProperty('mvn_run') ? mvn_run : ''
     systemProperty 'base-address', project.hasProperty('base_address') ? base_address : ''
     systemProperty 'live-domain', project.hasProperty('live_domain') ? live_domain : ''
