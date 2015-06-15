@@ -183,11 +183,12 @@ task runFailed {
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
-    println "Test suite used: ${testSuite}"
+    ext.groups = project.hasProperty('groups')? groups : System.getProperty('groups', '')
+
     useTestNG {
         suiteXmlFiles = testSuite.split(',').
                 collect({ path -> new File(path) })
-        includeGroups = (project.hasProperty('groups') ? groups : '').split(',')
+        includeGroups = groups.split(',')
         useDefaultListeners = true
     }
 
