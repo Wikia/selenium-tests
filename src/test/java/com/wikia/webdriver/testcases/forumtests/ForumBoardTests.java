@@ -97,8 +97,9 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.verifyTextOnFollowButton(1, "Follow");
   }
 
-  @RelatedIssue(issueID = "CONN-476", comment = "Wikia code defect. Will not be fixed. No need to test manually")
-  @Test(groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
+    @Test(
+        enabled = false, //CONCF-476
+        groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
