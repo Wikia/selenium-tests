@@ -5,6 +5,7 @@ version = '1.0.0'
 sourceCompatibility = 1.7
 apply from: rootProject.file('gradle/static_checks.gradle')
 compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 repositories {
     jcenter()
@@ -22,6 +23,11 @@ buildscript {
     }
 }
 
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
 import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
 import org.ajoberstar.grgit.Credentials
