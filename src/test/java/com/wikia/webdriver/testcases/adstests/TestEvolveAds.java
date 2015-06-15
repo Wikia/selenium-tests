@@ -55,10 +55,15 @@ public class TestEvolveAds extends TemplateDontLogout {
       groups = {"TestEvolveAds"},
       dataProvider = "evolveHopTestPage"
   )
-  public void testEvolveHop_CA(String wikiName, String article, String slotName) {
+  public void testEvolveHop_CA(
+      String wikiName,
+      String article,
+      String slotName,
+      String nextProviderSrc
+  ) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
     wikiPage.verifyEvolveInSlot(slotName);
-    wikiPage.verifyEvolveHopInSlot(slotName);
+    wikiPage.verifyEvolveHoppedInSlot(slotName, nextProviderSrc);
   }
 }

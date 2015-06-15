@@ -45,7 +45,9 @@ public class TestAmazonAds extends TemplateDontLogout {
         }
     }
 
-    @Test(groups = {
+    @Test(
+        enabled = false, // wf ADEN-2044
+        groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
