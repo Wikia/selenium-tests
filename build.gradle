@@ -90,13 +90,15 @@ task getSuite << {
 
     def xml
 
-    println "Jenkins Duty Failed Execution: ${project.failedOnly}"
-
     if (project.failedOnly.equals('jenkinsDuty')) {
-        println "Jenkins Duty Failed Execution"
+        println "Switching to Jenkins Duty Mode"
 
-        xml = parser.parse(
-                "http://qa-s2.wikia-prod:8080/view/Wikia-selenium-triggers/job/wikia-test-matrix-failed-execution/ws/target/surefire-reports/testng-failed.xml")
+        try {
+            xml = parser.parse(
+                    "${JenkinsURL}view/Wikia-selenium-triggers/job/wikia-test-matrix-failed-execution${reportPath}")
+        } catch (all) {
+            throw new GradleException("Problem getting a failed suite")
+        }
 
     } else {
         def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
