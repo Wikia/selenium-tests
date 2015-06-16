@@ -17,6 +17,8 @@ public class PreviewEditModePageObject extends EditMode {
   private WebElement previewModal;
   @FindBy(css = ".preview .video-thumbnail")
   protected WebElement videoArticle;
+  @FindBy(css = "#mw-content-text object")
+  protected WebElement video;
 
   By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
   By videoWidthSelector = By.cssSelector(".image > img");
@@ -104,4 +106,8 @@ public class PreviewEditModePageObject extends EditMode {
     PageObjectLogging.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", true);
   }
 
+  public void verifyVideoOnPreview(String videoID) {
+    waitForElementByElement(video);
+    waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
+  }
 }

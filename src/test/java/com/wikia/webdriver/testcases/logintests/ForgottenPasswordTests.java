@@ -82,14 +82,15 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   )
   @RelatedIssue(issueID = "SOC-843", comment = "Automation test is broken. Please test manually")
   public void ForgottenPassword_003_createWiki() {
+    String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
     CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
-    cnwLogin.typeInUserName(credentials.userNameForgottenPassword3);
-    cnwLogin.clickForgotPassword();
+    cnwLogin.typeInUserName(userName);
+    cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
     String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
     cnwLogin.typeInPassword(newPassword);
@@ -101,6 +102,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userNameForgottenPassword3);
+    article.verifyUserLoggedIn(userName);
   }
 }

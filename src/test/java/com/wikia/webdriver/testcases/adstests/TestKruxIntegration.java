@@ -17,7 +17,7 @@ public class TestKruxIntegration extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "popularSites",
+      dataProvider = "kruxIntegration",
       groups = {"KruxIntegrationMobile_GeoEdgeFree", "Ads"}
   )
   public void TestKruxIntegrationMobile_GeoEdgeFree(String wikiName, String article) {
@@ -26,7 +26,7 @@ public class TestKruxIntegration extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "popularSites",
+      dataProvider = "kruxIntegration",
       groups = {"KruxIntegrationDesktop_GeoEdgeFree", "Ads"}
   )
   public void TestKruxIntegrationDesktop_GeoEdgeFree(String wikiName, String article) {
