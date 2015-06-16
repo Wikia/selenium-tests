@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -40,6 +41,7 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
+  @RelatedIssue(issueID = "QAART-623", comment = "Automation test is broken. Please test manually")
   @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
   public void ImageServing_002_SpecialUploadTest(String fileName) {
