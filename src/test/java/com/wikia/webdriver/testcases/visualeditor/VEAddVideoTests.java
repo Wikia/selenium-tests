@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -22,7 +22,8 @@ import org.testng.annotations.Test;
  * the article
  */
 
-public class VEAddVideoTests extends NewTestTemplateBeforeClass {
+@Test(groups = {"VEAddVideo"})
+public class VEAddVideoTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
   WikiBasePageObject base;
@@ -35,12 +36,8 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
   }
 
   //AM01
-  @Test(
-      groups = {
-          "VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
-          "VEAddExternalVideoTests_004"
-      }
-  )
+  @Test(groups = {"VEAddExternalVideoTests_001", "VEAddExternalVideo",
+                  "VEAddExternalVideoTests_004"})
   @RelatedIssue(issueID = "OPS-6181", comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
   public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -55,13 +52,10 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   //AM02
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
-  )
+  @Test(groups = {"VEAddExternalVideoTests_002", "VEAddExternalVideo"})
   @RelatedIssue(issueID = "OPS-6181", comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -76,13 +70,10 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   //AM03
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
-  )
+  @Test(groups = {"VEAddExternalVideoTests_003", "VEAddExistingVideo"})
   public void VEAddExternalVideoTests_003_AddExistingVid() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
@@ -97,14 +88,10 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
-
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_004", "VEAddExistingVideo"},
-      dependsOnGroups = "VEAddExternalVideoTests_001"
-  )
+  @Test(groups = {"VEAddExternalVideoTests_004",
+                  "VEAddExistingVideo"}, dependsOnGroups = "VEAddExternalVideoTests_001")
   public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
@@ -114,6 +101,5 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = ve.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 }
