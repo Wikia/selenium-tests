@@ -47,15 +47,13 @@ public class AdsAmazonObject extends AdsBaseObject {
         try {
             wait.until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver driver) {
-                    Object result = ((JavascriptExecutor) driver)
+                    return (Boolean) ((JavascriptExecutor) driver)
                             .executeAsyncScript(
                                     "var callback = arguments[0];" +
                                     "require(['ext.wikia.adEngine.lookup.amazonMatch'], function (amazon) {\n" +
                                     "   callback(amazon.hasResponse());\n" +
                                     "});"
                             );
-
-                    return result.equals(true);
                 }
             });
         } finally {
