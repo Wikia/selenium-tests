@@ -39,14 +39,14 @@ public class TestATF extends TemplateDontLogout {
     if (isWgVarOn) {
       Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
       Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
-      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_3));
+      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
       Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
       Thread.sleep(1000 * delaySec);
     }
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_3));
+    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
   }
 
@@ -71,7 +71,7 @@ public class TestATF extends TemplateDontLogout {
     Assertion.assertNotEquals(
         adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn);
     Assertion.assertNotEquals(
-        adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_3), isWgVarOn);
+        adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn);
     Assertion.assertNotEquals(
         adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
   }
