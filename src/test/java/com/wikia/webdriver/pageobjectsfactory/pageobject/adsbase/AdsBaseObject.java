@@ -1,25 +1,26 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdSkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+
+import com.google.common.base.Joiner;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,25 +36,16 @@ import java.util.regex.Pattern;
 public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
-  private static final String
-      KRUX_CONTROL_TAG_URL_PREFIX =
-      "http://cdn.krxd.net/controltag?confid=";
-  private static final String LOGGING_PARAMS = "log_level=9&log_group=Wikia.Tracker";
-  private static final int SKIN_WIDTH = 90;
-  private static final int SKIN_MARGIN_TOP = 100;
-  private static final int SKIN_MARGIN_HORIZONTAL = 5;
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
       "data-gpt-creative-size",
   };
-
   private static final String[] SPOTLIGHT_SLOTS = {
       "#SPOTLIGHT_FOOTER_1",
       "#SPOTLIGHT_FOOTER_2",
       "#SPOTLIGHT_FOOTER_3",
   };
-
   private static final String[] PROVIDERS = {
       "mobile_remnant",
       "mobile",
@@ -61,42 +53,28 @@ public class AdsBaseObject extends WikiBasePageObject {
       "remnant",
       "Liftium",
   };
-
-  // Selectors
-  private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String LEADERBOARD_GPT_SELECTOR = "div[id*='gpt/TOP_LEADERBOARD']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
-
-  // Elements
-  @FindBy(css = AdsContent.WIKIA_BAR_SELECTOR)
-  private WebElement toolbar;
-  @FindBy(css = "#WikiaPage")
-  private WebElement wikiaArticle;
-  @FindBy(css = ".WikiaSpotlight")
-  private List<WebElement> spotlights;
-  @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
-  private List<WebElement> liftiumIframes;
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
-
-  @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
-  private WebElement kruxControlTag;
-
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected String presentLeaderboardName;
   protected String presentLeaderboardSelector;
   protected String presentMedrecName;
   protected String presentMedrecSelector;
+  // Elements
+
+  @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
+  private List<WebElement> liftiumIframes;
 
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
-    AdsContent.setSlotsSelectors();
     getUrl(page, true);
     setSlots();
   }
@@ -106,7 +84,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     super(driver);
-    AdsContent.setSlotsSelectors();
     networkTrafficInterceptor.startIntercepting(page);
     getUrl(page, true);
     this.networkTrafficInterceptor = networkTrafficInterceptor;
@@ -115,7 +92,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject(WebDriver driver) {
     super(driver);
-    AdsContent.setSlotsSelectors();
     setSlots();
   }
 
@@ -123,7 +99,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     super(driver);
     driver.manage().window().setSize(resolution);
     getUrl(testedPage, true);
-    AdsContent.setSlotsSelectors();
     setSlots();
   }
 
@@ -143,25 +118,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       presentMedrec = null;
       presentMedrecName = null;
       presentMedrecSelector = null;
-    }
-  }
-
-  public void verifyRoadblockServedAfterMultiplePageViews(
-      String adSkinUrl, String expectedAdSkinLeftPart, String expectedAdSkinRightPart,
-      int numberOfPageViews
-  ) {
-    setSlots();
-    String
-        leaderboardAd =
-        urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentLeaderboard));
-    String medrecAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentMedrec));
-    verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
-
-    for (int i = 0; i <= numberOfPageViews; i++) {
-      refreshPage();
-      verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
-      Assertion.assertStringContains(leaderboardAd, getSlotImageAd(presentLeaderboard));
-      Assertion.assertStringContains(medrecAd, getSlotImageAd(presentMedrec));
     }
   }
 
@@ -222,100 +178,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifySlotExpanded(WebElement element) {
     if (!checkIfSlotExpanded(element)) {
       throw new NoSuchElementException(element.getAttribute("id") + " is collapsed");
-    }
-  }
-
-  /**
-   * Check Ad skin on page with provided resolution. Compare left and right sides of skin with
-   * provided Base64.
-   *
-   * @param adSkinUrl               - DFP link with ad skin image
-   * @param expectedAdSkinLeftPart  - path to file with expected skin encoded in Base64
-   * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
-   */
-  public void verifyAdSkinPresence(
-      String adSkinUrl,
-      String expectedAdSkinLeftPart, String expectedAdSkinRightPart
-  ) {
-    AdsContent.setSlotsSelectors();
-
-    String backgroundImageUrlAfter = getPseudoElementValue(
-        body, ":after", "backgroundImage"
-    );
-    Assertion.assertStringContains(adSkinUrl, backgroundImageUrlAfter);
-
-    String backgroundImageUrlBefore = getPseudoElementValue(
-        body, ":before", "backgroundImage"
-    );
-    Assertion.assertStringContains(adSkinUrl, backgroundImageUrlBefore);
-
-    PageObjectLogging.log(
-        "ScreenshotPage",
-        "Screenshot of the page taken",
-        true, driver
-    );
-
-    AdsComparison adsComparison = new AdsComparison();
-    adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.WIKIA_BAR), driver);
-    hideMessage();
-
-    int articleLocationX = wikiaArticle.getLocation().x;
-    int articleWidth = wikiaArticle.getSize().width;
-    Point
-        articleLeftSideStartPoint =
-        new Point(articleLocationX - SKIN_MARGIN_HORIZONTAL - SKIN_WIDTH, SKIN_MARGIN_TOP);
-    Point
-        articleRightSideStartPoint =
-        new Point(articleLocationX + articleWidth + SKIN_MARGIN_HORIZONTAL, SKIN_MARGIN_TOP);
-    Dimension skinSize = new Dimension(SKIN_WIDTH, 500);
-
-    boolean successLeft = adsComparison.compareImageWithScreenshot(
-        expectedAdSkinLeftPart, skinSize, articleLeftSideStartPoint, driver
-    );
-    if (successLeft) {
-      PageObjectLogging.log(
-          "ExpectedSkinFound",
-          "Expected ad skin found on page - left side of skin",
-          true
-      );
-    } else {
-      PageObjectLogging.log(
-          "ExpectedSkinNotFound",
-          "Expected ad skin not found on page - left side of skin",
-          false, driver
-      );
-    }
-
-    boolean successRight = adsComparison.compareImageWithScreenshot(
-        expectedAdSkinRightPart, skinSize, articleRightSideStartPoint, driver
-    );
-    if (successRight) {
-      PageObjectLogging.log(
-          "ExpectedSkinFound",
-          "Expected ad skin found on page - right side of skin",
-          true
-      );
-    } else {
-      PageObjectLogging.log(
-          "ExpectedSkinNotFound",
-          "Expected ad skin not found on page - right side of skin",
-          false, driver
-      );
-    }
-
-    if (!successLeft || !successRight) {
-      throw new NoSuchElementException("Skin not found on page");
-    }
-  }
-
-  private void hideMessage() {
-    hideElement(WIKIA_MESSAGE_BUBLE);
-  }
-
-  protected void hideElement(String cssSelector) {
-    if (checkIfElementOnPage(cssSelector)) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript("$(arguments[0]).css('visibility', 'hidden')", cssSelector);
     }
   }
 
@@ -539,17 +401,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForIframeLoaded(WebElement iframe) {
-    driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeAsyncScript(
-        "var callback = arguments[arguments.length - 1]; " +
-        "var iframe = arguments[0];" +
-        "if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {"
-        +
-        "iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
-        "}",
-        iframe
-    );
+    PageObjectLogging.log("waitForIframeLoaded", "Switching to adslot iframe", true);
+    driver.switchTo().frame(iframe);
+    waitPageLoaded();
+    PageObjectLogging.log("waitForIframeLoaded", "Switching back to the page", true);
+    driver.switchTo().defaultContent();
   }
 
   /**
@@ -573,7 +429,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public String getGptParams(String slotName, String attr) {
-    WebElement adsDiv = driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper'][id*='" + slotName + "']"));
+    WebElement
+        adsDiv =
+        driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper'][id*='" + slotName + "']"));
     return adsDiv.getAttribute(attr);
   }
 
@@ -583,7 +441,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   /**
    * Test whether the correct GPT ad parameters are passed
-   * @param slotName Slotname
+   *
+   * @param slotName   Slotname
    * @param pageParams List of gpt page-level params to test
    * @param slotParams List of gpt slot-level params to test
    */
@@ -611,7 +470,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   /**
    * Test whether the correct GPT ad parameters are passed
-   * @param slotName Slotname
+   *
+   * @param slotName   Slotname
    * @param lineItemId expected line item id
    * @param creativeId expected creative id
    */
@@ -695,7 +555,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
-    PageObjectLogging.log("GeoEdge", getCountry(), true);
+    PageObjectLogging.log("SlotName", slotName, true);
     Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
     return this;
   }
@@ -757,6 +617,40 @@ public class AdsBaseObject extends WikiBasePageObject {
     appendToUrl(param);
     waitPageLoaded();
     return this;
+  }
+
+  public void checkSkin(String adSkinLeftPath, String adSkinRightPath) {
+    AdSkinHelper skinHelper = new AdSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
+    Assertion.assertTrue(skinHelper.skinPresent());
+    PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
+  }
+
+  /**
+   * Check if AdEngine loaded the ad web elements inside slot.
+   */
+  public boolean isSlotOnPageLoaded(String slotName) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+      WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+        tryTriggerFloatingMedrec(slot);
+      }
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+      return adWebElements.size() > 0;
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  private void tryTriggerFloatingMedrec(WebElement slot) {
+    executeScript("window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
+    // try to wait a floating medrec 3 seconds
+    try {
+      new WebDriverWait(driver, 3).until(CommonExpectedConditions.elementVisible(slot));
+    } catch (org.openqa.selenium.TimeoutException ignore) {
+      PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
+    }
   }
 
 }

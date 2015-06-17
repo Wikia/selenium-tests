@@ -261,6 +261,8 @@ public class SourceEditModePageObject extends EditMode {
       driver.findElement(
           By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
           .click();
+      waitForElementNotVisibleByElement(editorModal);
+      waitForElementNotVisibleByElement(focusedMode);
       checkSourceContent(content);
     }
   }
@@ -275,6 +277,8 @@ public class SourceEditModePageObject extends EditMode {
       driver.findElement(By.xpath(
           "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
           .click();
+      waitForElementNotVisibleByElement(editorModal);
+      waitForElementNotVisibleByElement(focusedMode);
       checkSourceContent(content);
     }
   }

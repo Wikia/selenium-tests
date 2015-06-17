@@ -25,7 +25,7 @@ public class POMConfiguration extends AbstractConfiguration {
       env = "prod"; //Set default value to production
     }
 
-    wikiName = System.getProperty("wiki-name");
+    wikiName = System.getProperty("wikiName");
     if (wikiName == null || wikiName.isEmpty()) {
       wikiName = "mediawiki119"; //Set default value to mediawiki119
     }
@@ -56,7 +56,7 @@ public class POMConfiguration extends AbstractConfiguration {
 
   @Override
   public String getPlatformVersion() {
-    return System.getProperty("platform-version");
+    return System.getProperty("platformVersion");
   }
 
   @Override
@@ -66,12 +66,12 @@ public class POMConfiguration extends AbstractConfiguration {
 
   @Override
   public String getDeviceId() {
-    return System.getProperty("device-id");
+    return System.getProperty("deviceId");
   }
 
   @Override
   public String geMobileConfig() {
-    return System.getProperty("mobile-config");
+    return System.getProperty("mobileConfig");
   }
 
   @Override
@@ -86,11 +86,16 @@ public class POMConfiguration extends AbstractConfiguration {
 
   @Override
   public String getAppiumIp() {
-    return System.getProperty("appium-ip");
+    return System.getProperty("appiumIp");
   }
 
   @Override
   public String getDeviceName() {
-    return System.getProperty("device-name");
+    return System.getProperty("deviceName");
+  }
+
+  @Override
+  public String getDisableFlash() {
+    return System.getProperty("disableFlash");
   }
 }

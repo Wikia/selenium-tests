@@ -13,8 +13,8 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 
-import net.lightbody.bmp.proxy.ProxyServer;
 
+import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;

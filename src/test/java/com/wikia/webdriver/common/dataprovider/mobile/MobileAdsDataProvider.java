@@ -112,4 +112,24 @@ public class MobileAdsDataProvider {
         },
     };
   }
+
+  @DataProvider
+  public static Object[][] mercuryConsecutivePageViews() {
+    return new Object[][]{
+        {
+            "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
+            "wka.ent/_adtest//article",
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] testAdsHopPostMessage() {
+    return new Object[][]{
+        {"adtest", "DFP/hop", "mobile"},
+        {"adtest", "DFP/hophop", "mobile_remnant"}
+    };
+  }
 }

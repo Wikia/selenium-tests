@@ -25,7 +25,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   String wikiDomain;
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "QAART-541")
+  @RelatedIssue(issueID = "MAIN-4660", comment = "Wikia code defect. Please test manually")
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

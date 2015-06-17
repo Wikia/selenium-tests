@@ -54,7 +54,7 @@ public class MailFunctions {
             forgottenPasswordMessageFound = true;
             magicMessage = message;
           }
-          if (counter > 300) {
+          if (counter > 100) {
             throw new WebDriverException("Mail timeout exceeded");
           }
           counter += 1;

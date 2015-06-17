@@ -29,7 +29,7 @@ public class ArticlePageObject extends BasePageObject {
   private List<WebElement> footerLinks;
   @FindBy(css = "div.contributors a")
   private List<WebElement> topContributorsLinks;
-  @FindBy(css = "nav.article-categories-list button")
+  @FindBy(css = "nav.article-categories-list div")
   private WebElement categoryButton;
 
   public ArticlePageObject(WebDriver driver) {
@@ -37,6 +37,8 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
+    waitForElementVisibleByElement(topContributorsLinks.get(0), 5, 500);
+    scrollToElement(topContributorsLinks.get(index));
     topContributorsLinks.get(index).click();
   }
 

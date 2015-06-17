@@ -1,105 +1,107 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
+import com.google.common.collect.ImmutableMap;
+import org.apache.commons.lang3.tuple.Pair;
+
+
 /**
- * @author Bogna 'bognix' Knychala
+ * @author drets
  */
 public class UrlBuilder {
 
-  private String env;
-  private String browser;
-  private Boolean isWikia;
+  private static final String XIPIO_ADDRESS_FORMAT = ".%s:%d";
 
-  public UrlBuilder(String environment, String browser) {
-    this.env = environment;
+  private static final String XIPIO_DEFAULT_DOMAIN = "127.0.0.1.xip.io";
+  private static final int XIPIO_DEFAULT_PORT = 8000;
+
+  private String browser;
+  private String env;
+
+  public UrlBuilder(String env) {
+    this.env = env;
+  }
+
+  public UrlBuilder(String env, String browser) {
+    this.env = env;
     this.browser = browser;
   }
 
-  public UrlBuilder(String environment) {
-    env = environment;
-  }
-
-  public UrlBuilder() {
-    env = null;
-  }
+  private ImmutableMap<String, Pair> customWikiNames = ImmutableMap.<String, Pair>builder()
+      .put("de.jedipedia", Pair.of("www.jedipedia.de", "dejedipedia"))
+      .put("memory-alpha.org", Pair.of("en.memory-alpha.org", "enmemoryalpha"))
+      .put("de.memory-alpha", Pair.of("de.memory-alpha.org", "dememoryalpha"))
+      .put("yoyo", Pair.of("www.yoyowiki.org", "yoyo"))
+      .put("wowwiki", Pair.of("www.wowwiki.com", "wowwiki"))
+      .build();
 
 
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
-    if (!(isWikia)) {
-      url += "wiki/";
-    }
-    url += wikiPath;
+    String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    url = url + separator + wikiPath;
+
     if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
       return appendQueryStringToURL(url, "useskin=wikiamobile");
-    } else if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
-      return appendQueryStringToURL(url, "useskin=mercury");
     }
+
     return url;
   }
 
-  public String getUrlForWiki(String inputWikiName) {
-    String prefix;
-    String suffix;
-    String wikiName = inputWikiName;
-    isWikia = wikiName.endsWith("wikia");
-    String url = "http://";
+  public String getUrlForWiki(String wikiName) {
+    String prefix = getUrlPrefix(wikiName);
+    String suffix = getUrlSuffix(wikiName);
 
-    if (isWikia) {
-      //If wikia.com than append www
-      if ("wikia".equals(wikiName)) {
-        prefix = "www.";
-      } else {
-        //for different languages, for example de.wikia, don't prepend www
+    if (customWikiNames.containsKey(wikiName)) {
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
         prefix = "";
+        wikiName = (String) customWikiNames.get(wikiName).getRight();
+      } else {
+        prefix = suffix = "";
+        wikiName = (String) customWikiNames.get(wikiName).getLeft();
       }
-      suffix = ".com/";
-    } else if (wikiName.endsWith(".de")) {
-      prefix = "";
-      suffix = "/";
-    } else {
-      prefix = "";
-      suffix = ".wikia.com/";
     }
 
-    try {
-      if ("prod".equals(env)) {
-        url += prefix + wikiName + suffix;
-      } else if ("preview".equals(env) || env.contains("sandbox")) {
-        url += env + "." + prefix + wikiName + suffix;
-      } else if (env.contains("dev")) {
-        String devBoxOwner = env.split("-")[1];
-        if (isWikia) {
-          wikiName = "wikiaglobal";
-        }
-        url += wikiName + "." + devBoxOwner + "." + "wikia-dev.com/";
-      } else if (env != null) {
-        url += env + "." + prefix + wikiName + suffix;
-      }
-    } catch (NullPointerException ex) {
-      throw new RuntimeException("ENV property is not set!");
-    }
-    return url;
+    return composeUrl(prefix, wikiName, suffix);
   }
 
   public String appendQueryStringToURL(String url, String qs) {
-    String temp;
-    if (url.contains("?")) {
-      temp = url + "&" + qs;
-      return temp;
-    } else {
-      temp = url + "?" + qs;
-      return temp;
-    }
+    String separator = url.contains("?") ? "&" : "?";
+    return url + separator + qs;
   }
 
-  public String removeQueryStringsFromURL(String url) {
-    if (url.contains("?")) {
-      return url.substring(0, url.indexOf("?"));
-    }
-    return url;
+  private String getUrlPrefix(String wikiName) {
+    return wikiName.equals("wikia") ? "www." : "";
   }
 
-  public String removeProtocolServerNameFromUrl(String url) {
-    return url.substring(url.indexOf('.') + 1, url.length());
+  private String getUrlSuffix(String wikiName) {
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev") && isMercuryBrowser()) {
+      return String.format(XIPIO_ADDRESS_FORMAT, XIPIO_DEFAULT_DOMAIN, XIPIO_DEFAULT_PORT);
+    }
+
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
+      String devBoxOwner = env.split("-")[1];
+      return "." + devBoxOwner + "." + "wikia-dev.com";
+    }
+
+    return wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
+  }
+
+  private Boolean isMercuryBrowser() {
+    return browser != null && browser.equalsIgnoreCase("CHROMEMOBILEMERCURY");
+  }
+
+  private String composeUrl(String prefix, String wikiName, String suffix) {
+    if (env != null) {
+      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !env.equals("prod")) {
+        prefix = env + "." + prefix;
+      }
+
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev") && !isMercuryBrowser()
+          && wikiName.endsWith("wikia")) {
+        wikiName = "wikiaglobal";
+      }
+    }
+
+    return "http://" + prefix + wikiName + suffix + "/";
   }
 }

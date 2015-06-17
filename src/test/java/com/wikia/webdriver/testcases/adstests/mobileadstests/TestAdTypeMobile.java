@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class TestAdTypeMobile extends MobileTestTemplate {
 
   @Test(
-      groups = {"TestAdTypeAsync_001", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_001", "TestAdType", "MobileAds"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncSuccessWithAd"
   )
@@ -30,7 +30,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeAsync_002", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_002", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopNoAd"
   )
@@ -47,7 +47,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeAsync_003", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_003", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncSuccessNoAd"
   )
@@ -61,7 +61,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeAsync_004", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_004", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopWithAd"
   )
@@ -75,7 +75,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeAsync_005", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_005", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopWithSpecialProvider"
   )
@@ -89,7 +89,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeAsync_006", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeAsync_006", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopAndAsyncSuccess"
   )
@@ -108,7 +108,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeForcedSuccess_001", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeForcedSuccess_001", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "forcedSuccessNoAd"
   )
@@ -122,7 +122,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdTypeInspectIframe_001", "TestAdType"},
+      groups = {"MobileAds", "TestAdTypeInspectIframe_001", "TestAdType"},
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "inspectIframeImg"
   )

@@ -12,4 +12,6 @@ import java.lang.annotation.Target;
 @Target(value = {ElementType.METHOD})
 public @interface RelatedIssue {
   String issueID();
+
+  String comment() default "";
 }

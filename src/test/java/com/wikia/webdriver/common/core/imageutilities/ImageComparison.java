@@ -32,20 +32,26 @@ public class ImageComparison {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    if (Arrays.equals(fileInBytes1, fileInBytes2)) {
-      return true;
-    }
-    return false;
+    return Arrays.equals(fileInBytes1, fileInBytes2);
+  }
+
+  /**
+   * Compare two files byte length in specific accuracy
+   *
+   * @param accuracy use value between 0.0 and 1.0 i.e 0.98 for 98% accuracy
+   * @return boolean
+   */
+  public boolean areFilesTheSame(File file1, File file2, double accuracy) {
+    double difference = (double) file1.length() / file2.length();
+    return (difference >= accuracy && difference <= 1.0) || (difference >= 1.0
+                                                             && difference <= 2.0 - accuracy);
   }
 
   public boolean areBase64StringsTheSame(String base1, String base2) {
     Base64 coder = new Base64();
     byte[] baseInBytes1 = coder.decode(base1);
     byte[] baseInBytes2 = coder.decode(base2);
-    if (Arrays.equals(baseInBytes1, baseInBytes2)) {
-      return true;
-    }
-    return false;
+    return Arrays.equals(baseInBytes1, baseInBytes2);
   }
 
   /**
@@ -69,7 +75,8 @@ public class ImageComparison {
   }
 
   /**
-   * @param threshold in percentage between 0 and 100.
+   * @param threshold in percentage between 0 and 100. If images have less than threshold percent of
+   *                  different pixels return false
    */
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
@@ -89,5 +96,4 @@ public class ImageComparison {
     }
     return true;
   }
-
 }

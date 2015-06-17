@@ -82,7 +82,6 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.clickPostButton();
   }
 
-  @RelatedIssue(issueID = "QAART_545")
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_006_followDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -98,8 +97,9 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.verifyTextOnFollowButton(1, "Follow");
   }
 
-  @RelatedIssue(issueID = "MAIN-2106")
-  @Test(groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"}, enabled = false)
+    @Test(
+        enabled = false, //CONCF-476
+        groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

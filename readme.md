@@ -55,7 +55,7 @@ All commands must be run from the `selenium-tests` directory cloned during setup
 
     mvn clean test -Dbrowser=CHROMEMOBILE -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
-##### Running tests on devbox for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
+##### Running tests on local instance of Mercury (which fetches data from devbox) for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
 
     mvn clean test -Dbrowser=CHROMEMOBILEMERCURY -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
@@ -73,10 +73,11 @@ The following are valid test parameters:
 
 * `-Dbrowser` - Which browser to use, for example "CHROME"
 * `-Dbase-address` - (Deprecated) The base URL to run in the browser, for example "http://yourname.wikia-dev.com/"
-* `-Denv` - The environment on which the test(s) should be run in, for example "prod", "preview", "dev-<name>", "sandbox-<number>"
+* `-Denv` - The environment on which the test(s) should be run in, for example `prod`, `preview`, `dev-<name>`, `sandbox-<number>`,
 * `-Dwiki-name` - The wiki where the test(s) should be run on, for example "mediawiki119", "muppet"
 * `-Dgroups` - (Optional) Which test groups to run, for example "Chat". Optional. Uses all tests if omitted
 * `-Dlive-domain` - (Optional) The base URL to run in the browser, for example "http://www.wikia.com/". Only required for Hubs tests
+* `-Ddisable-flash` - (Optional) Disable Flash plugin, any String value = true
 
 ### Browsers
 
@@ -84,6 +85,8 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 * FF
 * CHROME
+* CHROMEMOBILE
+* CHROMEMOBILEMERCURY
 * IE
 * GHOST (phantomjs)
 

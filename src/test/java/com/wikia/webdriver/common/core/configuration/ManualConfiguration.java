@@ -53,7 +53,7 @@ public class ManualConfiguration extends AbstractConfiguration {
 
   @Override
   public String getPlatformVersion() {
-    return config.get("platform-version");
+    return config.get("platformVersion");
   }
 
   @Override
@@ -63,12 +63,12 @@ public class ManualConfiguration extends AbstractConfiguration {
 
   @Override
   public String getDeviceId() {
-    return config.get("device-id");
+    return config.get("deviceId");
   }
 
   @Override
   public String geMobileConfig() {
-    return config.get("mobile-config");
+    return config.get("mobileConfig");
   }
 
   @Override
@@ -83,11 +83,16 @@ public class ManualConfiguration extends AbstractConfiguration {
 
   @Override
   public String getAppiumIp() {
-    return config.get("appium-ip");
+    return config.get("appiumIp");
   }
 
   @Override
   public String getDeviceName() {
-    return config.get("device-name");
+    return config.get("deviceName");
+  }
+
+  @Override
+  public String getDisableFlash() {
+    return String.valueOf(config.get("disableFlash"));
   }
 }

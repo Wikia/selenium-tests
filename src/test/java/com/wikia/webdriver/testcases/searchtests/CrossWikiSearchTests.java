@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.searchtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
@@ -10,6 +8,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
+
+import org.testng.annotations.Test;
 
 /**
  * Author: Artur Dwornik & Rodrigo Molinero Gomez Date: 29.03.13 Time: 11:22 STAPI01: Verify that
@@ -138,8 +138,9 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
-  @RelatedIssue(issueID = "PLA-1245")
-  @Test(enabled = false, groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
+  @Test(
+        enabled = false, //MAIN-4498
+        groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);

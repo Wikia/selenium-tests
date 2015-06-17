@@ -23,11 +23,36 @@ public class SmartBannerTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private static final String[] DIFFERENT_HUBS_WIKIS = {"destiny", "cocktails", "thehungergames",
-                                                        "marvel", "tardis", "starwars", "lego"};
-  private static final String[] DIFFERENT_HUBS_COLORS = {"#94d11f", "#8ca038", "#ff7f26",
-                                                         "#ff5400", "#00b7e0", "#09d3bf",
-                                                         "#ffd000"};
+  /**
+   * HUB color definition
+   */
+  private enum Colors {
+    LIGHT_GREEN("#94d11f"),
+    DARK_GREEN("#8ca038"),
+    LIGHT_ORANGE("#ff7f26"),
+    DARK_ORANGE("#ff5400"),
+    LIGHT_BLUE("#00b7e0"),
+    CYAN("#09d3bf"),
+    YELLOW("#ffd000");
+    private String hex;
+
+    private Colors(String hex) {
+      this.hex = hex;
+    }
+  }
+
+  /**
+   * Wiki name, Main page, HUB color
+   */
+  private static final String[][] WIKIS = {
+      {"destiny", "Destiny_Wiki", Colors.LIGHT_GREEN.hex},
+      {"cocktails", "Cocktails_Wiki", Colors.DARK_GREEN.hex},
+      {"thehungergames", "The_Hunger_Games_Wiki", Colors.LIGHT_ORANGE.hex},
+      {"dc", "Main_Page", Colors.DARK_ORANGE.hex},
+      {"tardis", "Doctor_Who_Wiki", Colors.LIGHT_BLUE.hex},
+      {"starwars", "Main_Page", Colors.CYAN.hex},
+      {"lego", "LEGO_Wiki", Colors.YELLOW.hex}
+  };
 
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
@@ -35,8 +60,9 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
+    wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryWiki(DIFFERENT_HUBS_WIKIS[0]);
+    base.openMercuryArticleByName(wikiURL, WIKIS[0][1]);
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
@@ -61,15 +87,17 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT02
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
+    BasePageObject base = new BasePageObject(driver);
     SmartBannerComponentObject banner;
-    for (int i = 0; i < DIFFERENT_HUBS_WIKIS.length; ++i) {
-      driver.get("http://" + DIFFERENT_HUBS_WIKIS[i] + ".wikia.com/wiki/");
+    for (String[] WIKI : WIKIS) {
+      wikiURL = urlBuilder.getUrlForWiki(WIKI[0]);
+      base.openMercuryArticleByName(wikiURL, WIKI[1]);
       banner = new SmartBannerComponentObject(driver);
       PageObjectLogging
           .log("Smart banner color", "is correct", "is wrong", banner.isSmartBannerColorCorrect(
-              DIFFERENT_HUBS_COLORS[i]));
+              WIKI[2]));
       PageObjectLogging.log("Smart banner button color", "is correct", "is wrong",
-                            banner.isSmartBannerButtonColorCorrect(DIFFERENT_HUBS_COLORS[i]));
+                            banner.isSmartBannerButtonColorCorrect(WIKI[2]));
     }
   }
 }
