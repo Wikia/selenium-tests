@@ -39,7 +39,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationLandscape = By.cssSelector("[id*='landscape']");
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
-  public WebElement getFinishElement() {
+  public WebElement getFinishButton() {
     return finishButton;
   }
 

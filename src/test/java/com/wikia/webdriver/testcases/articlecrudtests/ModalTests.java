@@ -12,9 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * Created by wikia on 2015-06-03.
- */
 public class ModalTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
@@ -29,16 +26,16 @@ public class ModalTests extends NewTestTemplate {
     ArticlePageObject article = base.openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
-    WebElement finishButton = galleryBuilder.getFinishElement();
-    //verify Finish button visible
+    WebElement finishButton = galleryBuilder.getFinishButton();
+    //verify Finish button is visible
     galleryBuilder.waitForElementByElement(finishButton);
-    //resize window
+    //resize window to the size that makes Finish button not visible
     driver.manage().window().setSize(dimension);
-    //verify Finish button not visible
+    //verify Finish button is not visible
     galleryBuilder.waitForElementNotVisibleByElement(finishButton);
-    //scroll to Finish
+    //scroll to Finish button
     galleryBuilder.scrollToElement(finishButton);
-    //verify Finish visible
+    //verify Finish button is visible
     galleryBuilder.waitForElementByElement(finishButton);
     galleryBuilder.clickFinish();
 }
