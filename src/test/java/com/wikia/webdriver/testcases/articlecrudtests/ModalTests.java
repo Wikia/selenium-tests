@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -16,6 +17,7 @@ public class ModalTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
+  @CreationTicket(ticketID = "CONCF-621")
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"},
       dataProvider = "DimensionDataProvider"
   )
