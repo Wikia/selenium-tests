@@ -19,7 +19,6 @@ public class ModalTests extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"},
       dataProvider = "DimensionDataProvider"
   )
-
   public void ArticleFeaturesCRUDUser_001_addModifyGallery(Dimension dimension) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -38,7 +37,7 @@ public class ModalTests extends NewTestTemplate {
     //verify Finish button is visible
     galleryBuilder.waitForElementByElement(finishButton);
     galleryBuilder.clickFinish();
-}
+  }
 
 
   @DataProvider(name = "DimensionDataProvider")
