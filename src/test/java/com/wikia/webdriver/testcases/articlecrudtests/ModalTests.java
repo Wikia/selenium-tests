@@ -2,29 +2,54 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 
-import java.awt.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /**
  * Created by wikia on 2015-06-03.
  */
 public class ModalTests extends NewTestTemplate {
 
-    Credentials credentials = config.getCredentials();
+  Credentials credentials = config.getCredentials();
 
-    @Test(groups = {"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
-    public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.logInCookie(credentials.userName, credentials.password, wikiURL);
-        ArticlePageObject article = base.openRandomArticle(wikiURL);
-        VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-        //under this window height scrollbar should be visible
-        //TODO: define proper number for this dimension.
-        //TODO: evaluate creating more tests for different resolutions
-        Dimension dimension = new Dimension(1000, 500);
-        driver.manage().window().setSize(dimension);
-        GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
+  @Test(groups = {"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"},
+      dataProvider = "DimensionDataProvider"
+  )
 
-    }
+  public void ArticleFeaturesCRUDUser_001_addModifyGallery(Dimension dimension) {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
+    WebElement finishButton = galleryBuilder.getFinishElement();
+    //verify Finish button visible
+    galleryBuilder.waitForElementByElement(finishButton);
+    //resize window
+    driver.manage().window().setSize(dimension);
+    //verify Finish button not visible
+    galleryBuilder.waitForElementNotVisibleByElement(finishButton);
+    //scroll to Finish
+    galleryBuilder.scrollToElement(finishButton);
+    //verify Finish visible
+    galleryBuilder.waitForElementByElement(finishButton);
+    galleryBuilder.clickFinish();
+}
+
+
+  @DataProvider(name = "DimensionDataProvider")
+  public final Dimension[][] DimensionProvider() {
+    return new Dimension[][]{
+        {new Dimension(1100, 570)},
+        {new Dimension(800, 570)}
+    };
+  }
 
 }

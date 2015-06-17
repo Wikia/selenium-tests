@@ -39,6 +39,10 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationLandscape = By.cssSelector("[id*='landscape']");
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
+  public WebElement getFinishElement() {
+    return finishButton;
+  }
+
   public enum PositionsGallery {
     LEFT, CENTER, RIGHT;
 
@@ -136,7 +140,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
 
   public void clickFinish() {
     waitForElementByElement(finishButton);
-    finishButton.click();
+    scrollAndClick(finishButton);
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }
 }

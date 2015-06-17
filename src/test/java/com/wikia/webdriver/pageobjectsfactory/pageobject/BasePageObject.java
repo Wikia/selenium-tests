@@ -229,7 +229,7 @@ public class BasePageObject {
     element.click();
   }
 
-  protected void scrollToElement(WebElement element) {
+  public void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
       js.executeScript(
