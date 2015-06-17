@@ -63,7 +63,7 @@ public class MobileDriversRegistry {
     List devicesForPlatform = platformNode.getChildren();
     for (int i = 0; i < devicesForPlatform.size(); i++) {
       ConfigurationNode node = (ConfigurationNode) devicesForPlatform.get(i);
-      String version = getAttributeValue("platform-version", node);
+      String version = getAttributeValue("platformVersion", node);
       String uuid = getAttributeValue("uuid", node);
       appendToDevicesList(version, uuid);
     }

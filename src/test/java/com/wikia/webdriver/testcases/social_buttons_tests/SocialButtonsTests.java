@@ -30,7 +30,7 @@ public class SocialButtonsTests extends NewTestTemplate {
     * This tests executes for 11 users with different languages.
     * Log in, open random article, compare present social buttons to expected social buttons
     */
-    public void ArticleCRUDUser_001_specialPage(String[] credentials, String[] expectedSocialNetworks) {
+    public void SocialButtons_001_differentLanguages(String[] credentials, String[] expectedSocialNetworks) {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.logInCookie(credentials[0], credentials[1], wikiURL);
         ArticlePageObject article = base.openRandomArticle(wikiURL);

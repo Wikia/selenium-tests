@@ -1,15 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
-import static org.testng.Assert.assertFalse;
 
 /**
  * @author Dmytro Rets
@@ -47,16 +44,9 @@ public class AdsEvolveObject extends AdsBaseObject {
     verifyNoEvolveInSlot(AdsContent.PREFOOTER_RIGHT);
   }
 
-  public void verifyEvolveHopInSlot(String slotName) {
-    WebElement adSlot = driver.findElement(By.id(slotName));
-    java.util.List<WebElement> providers = adSlot.findElements(By.tagName("div"));
-    WebElement evolveDiv = providers.get(0);
-    Boolean evolveIframePresent = adSlot.findElements(
-        By.cssSelector("iframe[src*=\'" + EVOLVE_DFP_URL + "\']")).size() > 0;
-    assertFalse(evolveIframePresent);
-    WebElement evolveHopScript = evolveDiv.findElement(
-        By.cssSelector("script[type='text/javascript']"));
-    String evolveHopMessage = String.format("window.evolve_hop('%s')", slotName);
-    assertStringContains(evolveHopMessage, evolveHopScript.getAttribute("src"));
+  public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
+    String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
+    Assertion.assertTrue(checkIfElementOnPage(nextProviderSlotCss));
+    PageObjectLogging.log("Evolve", "Evolve hopped to " + nextProviderSrc, true);
   }
 }

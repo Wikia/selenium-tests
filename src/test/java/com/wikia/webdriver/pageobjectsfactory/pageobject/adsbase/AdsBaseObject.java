@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdSkinH
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 import com.google.common.base.Joiner;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +20,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -553,7 +555,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
-    PageObjectLogging.log("GeoEdge", getCountry(), true);
     PageObjectLogging.log("SlotName", slotName, true);
     Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
     return this;
@@ -622,6 +623,34 @@ public class AdsBaseObject extends WikiBasePageObject {
     AdSkinHelper skinHelper = new AdSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
+  }
+
+  /**
+   * Check if AdEngine loaded the ad web elements inside slot.
+   */
+  public boolean isSlotOnPageLoaded(String slotName) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+      WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+        tryTriggerFloatingMedrec(slot);
+      }
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+      return adWebElements.size() > 0;
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  private void tryTriggerFloatingMedrec(WebElement slot) {
+    executeScript("window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
+    // try to wait a floating medrec 3 seconds
+    try {
+      new WebDriverWait(driver, 3).until(CommonExpectedConditions.elementVisible(slot));
+    } catch (org.openqa.selenium.TimeoutException ignore) {
+      PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
+    }
   }
 
 }
