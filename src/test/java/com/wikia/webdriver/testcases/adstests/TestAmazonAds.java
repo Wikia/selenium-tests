@@ -46,8 +46,8 @@ public class TestAmazonAds extends TemplateDontLogout {
     }
 
     @Test(
-        enabled = false, // wf ADEN-2044
-        groups = {
+            enabled = false, // wf ADEN-2126
+            groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
@@ -60,7 +60,9 @@ public class TestAmazonAds extends TemplateDontLogout {
                 .verifyAdsFromAmazonPresent();
     }
 
-    @Test(groups = {
+    @Test(
+            enabled = false, // wf ADEN-2126
+            groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
