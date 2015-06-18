@@ -34,18 +34,11 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private WebElement spacing;
   @FindBy(css = "ul#WikiaPhotoGalleryOrientation")
   private WebElement orientation;
-  @FindBy(css = "#WikiaPhotoGalleryEditorPagesWrapper")
-  private WebElement galleryModal;
 
   private By orintationNone = By.cssSelector("[id*='none']");
   private By orintationSquare = By.cssSelector("[id*='square']");
   private By orintationLandscape = By.cssSelector("[id*='landscape']");
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
-
-  public void verifyGalleryPresent() {
-    waitForElementByElement(galleryModal);
-    PageObjectLogging.log("verifyGalleryPresent", "Gallery modal peresent", true);
-  }
 
   public boolean isFinishButtonVisibleOnPage() {
     if (!finishButton.isDisplayed()) {
@@ -156,7 +149,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
 
   public void clickFinish() {
     waitForElementByElement(finishButton);
-    scrollAndClick(finishButton);
+    finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }
 }

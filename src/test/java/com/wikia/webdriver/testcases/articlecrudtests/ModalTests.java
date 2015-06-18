@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.WindowHandler;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -23,14 +22,17 @@ public class ModalTests extends NewTestTemplate {
       dataProvider = "DimensionDataProvider"
   )
   public void ModalTests_verifyScrollbarAppears(Dimension dimension) {
+    String errorMessage = "can not scroll window";
+    
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
+
     ArticlePageObject article = base.openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
-    //verify Finish button is visible
+    //resize window
     driver.manage().window().setSize(dimension);
-    String errorMessage = "can not scroll window";
+    //make sure you can scroll to finish button and the finish button is visible
     Assertion.assertTrue(galleryBuilder.isFinishButtonVisibleOnPage(), errorMessage);
   }
 
