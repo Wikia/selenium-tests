@@ -41,13 +41,13 @@ public class TestAmazonAds extends TemplateDontLogout {
         // TODO Add verification that a call to Amazon is issued when bug with browsermob-proxy will be fixed
         if (debugMode) {
             amazonAds.verifyGPTParams();
-            amazonAds.verifyAdFromAmazonPresent();
+            amazonAds.verifyAdsFromAmazonPresent();
         }
     }
 
     @Test(
-        enabled = false, // wf ADEN-2044
-        groups = {
+            enabled = false, // wf ADEN-2126
+            groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
@@ -55,6 +55,25 @@ public class TestAmazonAds extends TemplateDontLogout {
         String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
         testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
-        amazonAds.clickAmazonArticleLink().verifyAdFromAmazonPresent();
+        amazonAds
+                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
+                .verifyAdsFromAmazonPresent();
+    }
+
+    @Test(
+            enabled = false, // wf ADEN-2126
+            groups = {
+            "MercuryAds",
+            "MercuryAmazonAds"
+    })
+    public void AmazonAds_debugModeOnConsecutivePageViews() {
+        String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+        testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+        AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
+        amazonAds
+                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
+                .verifyAdsFromAmazonPresent()
+                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
+                .verifyNoAdsFromAmazonPresent();
     }
 }
