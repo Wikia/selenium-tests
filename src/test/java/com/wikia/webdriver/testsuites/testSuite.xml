@@ -55,6 +55,7 @@
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleSourceModeTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleTOCTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ClicktrackingArticleEditModeTests"/>
+            <class name="com.wikia.webdriver.testcases.articlecrudtests.ModalTests"/>
             <class name="com.wikia.webdriver.testcases.blogtests.BlogFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.blogtests.BlogTests"/>
             <class name="com.wikia.webdriver.testcases.categoriestests.CategoriesArticleTests"/>
