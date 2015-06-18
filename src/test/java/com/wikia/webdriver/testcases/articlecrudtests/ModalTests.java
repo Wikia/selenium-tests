@@ -28,20 +28,17 @@ public class ModalTests extends NewTestTemplate {
     ArticlePageObject article = base.openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
-    galleryBuilder.verifyGalleryPresent();
+    //verify Finish button is visible
     driver.manage().window().setSize(dimension);
-    WindowHandler handler = new WindowHandler(driver);
-    driver.manage().window().setSize(dimension);
-    //make sure scrollbar is present
-    String errorMessage = "Scrollbar not present when gallery modal is opened on the givern resolution";
-    Assertion.assertTrue(handler.isScrollBarPresent(), errorMessage );
-    }
+    String errorMessage = "can not scroll window";
+    Assertion.assertTrue(galleryBuilder.isFinishButtonVisibleOnPage(), errorMessage);
+  }
 
 
   @DataProvider(name = "DimensionDataProvider")
   public final Dimension[][] DimensionProvider() {
     return new Dimension[][]{
-//        {new Dimension(1100, 570)},
+        {new Dimension(1100, 570)},
         {new Dimension(800, 570)}
     };
   }
