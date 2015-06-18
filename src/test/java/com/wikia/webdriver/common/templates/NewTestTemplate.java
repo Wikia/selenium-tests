@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -19,18 +20,19 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
-    runProxyServerIfNeeded(method);
-    if (method.isAnnotationPresent(UserAgent.class)) {
-      setBrowserUserAgent(
+      PageObjectLogging.start();
+      runProxyServerIfNeeded(method);
+      if (method.isAnnotationPresent(UserAgent.class)) {
+        setBrowserUserAgent(
           method.getAnnotation(UserAgent.class).userAgent()
       );
     }
 
-    if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
-      NewDriverProvider.setUnstablePageLoadStrategy(true);
+      if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
+        NewDriverProvider.setUnstablePageLoadStrategy(true);
     }
 
-    startBrowser();
+      startBrowser();
     //Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
     logOut();
@@ -42,5 +44,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
       networkTrafficInterceptor.stop();
     }
     stopBrowser();
+    PageObjectLogging.clear();
   }
 }
