@@ -31,6 +31,13 @@ public class ArticlePageObject extends BasePageObject {
   private List<WebElement> topContributorsLinks;
   @FindBy(css = "nav.article-categories-list div")
   private WebElement categoryButton;
+  @FindBy(css = "nav.article-categories-list li")
+  private List<WebElement> categoryList;
+  @FindBy(css = ".article-title")
+  private WebElement articleTitle;
+  @FindBy(css = ".article-content a")
+  private List<WebElement> anchorsInContent;
+
 
   public ArticlePageObject(WebDriver driver) {
     super(driver);
@@ -49,6 +56,16 @@ public class ArticlePageObject extends BasePageObject {
 
   public void clickOnImage(int index) {
     singleImgLink.get(index).click();
+  }
+
+  public void clickOnAnchorInContent(int index) {
+    waitForElementByElement(anchorsInContent.get(index));
+    anchorsInContent.get(index).click();
+  }
+
+  public void clickOnCategoryListElement(int index) {
+    waitForElementByElement(categoryList.get(index));
+    categoryList.get(index).click();
   }
 
   public boolean isWikiaLogoVisible() {
@@ -82,10 +99,18 @@ public class ArticlePageObject extends BasePageObject {
     return driver.getCurrentUrl().contains("/wiki/User:");
   }
 
+  public boolean isUrlContainingCategoryPage() {
+    return driver.getCurrentUrl().contains("/wiki/Category:");
+  }
+
   public boolean isChevronCollapsed() throws WebDriverException {
     if (categoryButton.getAttribute("class") == null) {
       throw new WebDriverException("Expected String but got null");
     }
     return categoryButton.getAttribute("class").contains("collapsed");
+  }
+
+  public String getArticleTitle() {
+    return articleTitle.getText();
   }
 }

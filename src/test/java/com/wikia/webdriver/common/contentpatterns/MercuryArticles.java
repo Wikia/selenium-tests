@@ -16,4 +16,7 @@ public class MercuryArticles {
   public static final String COMMENTS = "Comments";
   public static final String MAP = "Map";
   public static final String VIDEO = "Video";
+  public static final String POLL_DADDY = "PollDaddy";
+  public static final String QUESTION_MARK = "Question?mark?question";
+  public static final String COLON = "Colon:colon:colon";
 }
