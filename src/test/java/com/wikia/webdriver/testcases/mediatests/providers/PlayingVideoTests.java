@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Saipetch Kongkatong, Liz Lee
+ * @ownership Content X-Wing
  */
 public class PlayingVideoTests extends NewTestTemplate {
 

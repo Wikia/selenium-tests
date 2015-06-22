@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
+ * @ownership Content X-Wing
  */
 public class ArticleEditDropdownTests extends NewTestTemplate {
 

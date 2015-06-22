@@ -6,6 +6,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 
+/**
+ * @ownership Content X-Wing
+ */
 public class GlobalNavigationScrollAction extends NewTestTemplate{
 	
 	/**

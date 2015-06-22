@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
  *         hide/show top bar in modal 4. Verify that user is able to go back to page from modal
  *         using back button 5. Verify that user is back on the same place of page when he go in and
  *         back from modal
+ * @ownership Content X-Wing
  */
 
 public class MobileModalTests extends NewTestTemplate {

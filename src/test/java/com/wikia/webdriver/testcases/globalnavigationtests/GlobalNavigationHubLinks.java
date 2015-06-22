@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
 
 /**
  * @author Bogna 'bognix' Knychała
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 

@@ -14,6 +14,8 @@ import org.testng.annotations.Test;
  *         that when user click on wikia wordmark he goes to wikia main page 3. Verify that when
  *         user open search and click outside of search then he is back to page (courtain disappear)
  *         4. Verify that back buttons on topbar menu work correctly
+ *
+ * @ownership Content X-Wing
  */
 
 public class MobileTopbarTests extends NewTestTemplate {

@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Michal 'justnpT' Nowierski
+ * @ownership Content X-Wing
  */
 public class ArticleTOCTests extends NewTestTemplate {
 

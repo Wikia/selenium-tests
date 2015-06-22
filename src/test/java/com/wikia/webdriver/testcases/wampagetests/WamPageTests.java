@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 
 /**
  * @author Qaga
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 
 public class WamPageTests extends NewTestTemplateBeforeClass {

@@ -46,6 +46,8 @@ import org.testng.annotations.Test;
  *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
  *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
  *         user)
+ *
+ * @ownership Content X-Wing
  */
 public class LightboxTests extends NewTestTemplate {
 

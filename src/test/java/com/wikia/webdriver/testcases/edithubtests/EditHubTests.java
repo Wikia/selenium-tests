@@ -10,7 +10,8 @@ import org.testng.annotations.Test;
 
 /**
  * @author Damian 'kvas' Jóźwiak
- * @ownership Consumer 1. Open edit hub dashboard and check if calendar exists
+ * @ownership Content X-Wing
+ * 1. Open edit hub dashboard and check if calendar exists
  */
 public class EditHubTests extends NewTestTemplate {
 

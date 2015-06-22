@@ -18,6 +18,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSpecialUse
  *         Verify that user is not logged in when he is using incorrect login and incorrect password
  *         3. Verify that user is not logged in when he is using correct login and empty password 4.
  *         Verify that user is able to login successfully using FB login
+ *
+ * @ownership Content X-Wing
  */
 public class MobileLoginTests extends NewTestTemplate {
 

@@ -18,6 +18,7 @@ import java.util.List;
  *         correctly with pagination (1->2->1) 5. Verify that search results on second page are
  *         different than on first page 6. Verify that user is able to go to suggested from search
  *         suggestions
+ * @ownership Content X-Wing
  */
 
 public class MobileSearchTests extends NewTestTemplate {

@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class VetArticlePlaceholderTests extends NewTestTemplate {
 
