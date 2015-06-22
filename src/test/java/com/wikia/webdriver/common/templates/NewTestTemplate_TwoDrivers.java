@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebDriver;
@@ -30,9 +31,9 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
       }
     }
 
-    driverOne = startCustomBrowser("FF");
+    driverOne = startCustomBrowser(ConfigurationFactory.getConfig().getBrowser());
     logOutCustomDriver(driverOne);
-    driverTwo = startCustomBrowser("FF");
+    driverTwo = startCustomBrowser(ConfigurationFactory.getConfig().getBrowser());
     logOutCustomDriver(driverTwo);
     this.driver = driverOne;
   }
