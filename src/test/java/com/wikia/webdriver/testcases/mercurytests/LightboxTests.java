@@ -172,7 +172,8 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
     mobileDriver.execute(DriverCommand.GO_BACK, null);
     PageObjectLogging.log("Lightbox", "is closed", "is opened", !lightbox.isLightboxOpened());
-    PageObjectLogging.log("URL", "is the same", "is different", oldUrl.equals(driver.getCurrentUrl()));
+    PageObjectLogging
+        .log("URL", "is the same", "is different", oldUrl.equals(driver.getCurrentUrl()));
   }
 
   // MT06

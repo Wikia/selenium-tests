@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -72,6 +73,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
+
+
+    private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
 
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
@@ -224,10 +228,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
     verifyNoAds();
     PageObjectLogging.log(
-        "verifyNoAdsOnPage",
-        "No ads detected",
-        true,
-        driver
+            "verifyNoAdsOnPage",
+            "No ads detected",
+            true,
+            driver
     );
   }
 
@@ -259,7 +263,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement)
       throws Exception {
     String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
-        "%slot%", slotName
+            "%slot%", slotName
     );
     boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
     if (scriptFound) {
@@ -515,7 +519,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     // Removing comments section as it expands content downwards
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                     waitForElementByCss("#WikiaArticleFooter"));
+            waitForElementByCss("#WikiaArticleFooter"));
 
     AdsComparison adsComparison = new AdsComparison();
 
@@ -606,6 +610,34 @@ public class AdsBaseObject extends WikiBasePageObject {
       restoreDeaultImplicitWait();
     }
   }
+
+    /**
+     * Mercury is a single page application (SPA) and if you want to test navigating between
+     * different pages in the application you might want to use this method before clicking anything
+     * which is not on the first page.
+     *
+     * First page in Mercury loads just as a regular web page but next articles in Mercury just
+     * change part of loaded DOM and between them the preloader layer is displayed. This layer is on
+     * the very top and may block driver from clicking elements.
+     */
+    public void mercuryWaitForPreloaderToHide() {
+        driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+        try {
+            PageObjectLogging.log(
+                    "mercuryWaitForPreloaderToHide",
+                    "Waiting till loaded...",
+                    true,
+                    driver
+            );
+            wait.until(
+                    ExpectedConditions.invisibilityOfElementLocated(
+                            By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR)
+                    )
+            );
+        } finally {
+            restoreDeaultImplicitWait();
+        }
+    }
 
   public String getCountry() {
     return ((String) ((JavascriptExecutor) driver).executeScript(

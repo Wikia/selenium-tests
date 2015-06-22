@@ -113,7 +113,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickFilterBox();
     Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
     PageObjectLogging.log("Filter box", "is expanded", true);
-    base.waitMilliseconds(5000, "Wait fo filterbox to be scrollable");
+    base.waitMilliseconds(5000, "Wait for filterbox to be scrollable");
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
     PageObjectLogging.log("Scrolling in filter box", "works", "does not work",

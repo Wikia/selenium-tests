@@ -105,7 +105,7 @@ public class CommentsPageObject extends BasePageObject {
   public int getNumberOfCommentsFromHeader() {
     return Integer.parseInt(commentsHeader.getText().substring(0,
                                                                commentsHeader.getText()
-                                                                       .indexOf(" ")));
+                                                                   .indexOf(" ")));
   }
 
   public int getNumberOfRepliesOnThatPage() {
