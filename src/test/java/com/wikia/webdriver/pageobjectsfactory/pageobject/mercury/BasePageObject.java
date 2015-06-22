@@ -37,11 +37,17 @@ public class BasePageObject extends MobileBasePageObject {
     jsexec.executeScript("arguments[0].click();", element);
   }
 
-  public void waitMilliseconds(int time, String message) {
+  /**
+   * It will wait and log reason
+   * @param time - in milliseconds
+   * @param reason - i.e. Wait for message to disappear
+   */
+  public void waitMilliseconds(int time, String reason) {
+    PageObjectLogging.logWarning("Wait for " + time + " ms", reason);
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(message, e.getMessage(), false);
+      PageObjectLogging.log(reason, e.getMessage(), false);
     }
   }
 

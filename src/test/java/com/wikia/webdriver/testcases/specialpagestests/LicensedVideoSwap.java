@@ -40,8 +40,10 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
-  @RelatedIssue(issueID = "CONCF-438")
-  @Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
+  @RelatedIssue(issueID = "CONCF-438", comment = "Feature will be deprecated. No need to test manually")
+  @Test(
+      enabled = false, //CONCF-438
+      groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();

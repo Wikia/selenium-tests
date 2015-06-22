@@ -9,12 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Bogna 'bognix' Knychala
@@ -23,13 +21,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
     private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
     private static final String FLITE_MASK_SELECTOR = ".flite-mask";
-    private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
+    private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
     private AdsComparison adsComparison;
 
     public MobileAdsBaseObject(WebDriver driver, String page) {
         super(driver, page);
         adsComparison = new AdsComparison();
+
+        if (getBrowser().equals("CHROMEMOBILEMERCURY")) {
+            verifyMercury();
+        }
+
         PageObjectLogging.log("", "Page screenshot", true, driver);
     }
 
@@ -138,27 +141,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         }
     }
 
-    /**
-     * Mercury is a single page application (SPA) and if you want to test navigating between
-     * different pages in the application you might want to use this method before clicking anything
-     * which is not on the first page.
-     *
-     * First page in Mercury loads just as a regular web page but next articles in Mercury just
-     * change part of loaded DOM and between them the preloader layer is displayed. This layer is on
-     * the very top and may block driver from clicking elements.
-     */
-    public void mercuryWaitForPreloaderToHide() {
-        driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-        try {
-            PageObjectLogging.log("mercuryWaitForPreloaderToHide", "Waiting till loaded...", true, driver);
-            wait.until(
-                    ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR))
-            );
-        } finally {
-            restoreDeaultImplicitWait();
-        }
-    }
-
     private void removeSmartBanner() {
         if (checkIfElementOnPage(SMART_BANNER_SELECTOR)) {
             WebElement smartBanner = driver.findElement(By.cssSelector(SMART_BANNER_SELECTOR));
@@ -177,4 +159,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         );
     }
 
+    private void verifyMercury() {
+        try {
+            waitForElementByCss(MERCURY_ARTICLE_CONTAINER_SELECTOR);
+        } catch (TimeoutException e) {
+            PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
+            throw e;
+        }
+    }
 }

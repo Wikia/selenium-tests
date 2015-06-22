@@ -26,12 +26,14 @@ public class CommentsTests extends NewTestTemplate {
   private static final String MEDIA_TYPE_VIDEO = "Video";
   private static final String MEDIA_TYPE_IMAGE = "Image";
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
+  private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
+  private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
 
   // CT01
   @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.COMMENTS);
     CommentsPageObject comments = new CommentsPageObject(driver);
     Assertion.assertTrue(comments.isCommentsListCollapsed(), "Comments are expanded");
     PageObjectLogging.log("Comments list", "is collapsed", true);
@@ -55,7 +57,7 @@ public class CommentsTests extends NewTestTemplate {
   @Test(groups = {"MercuryCommentsTest_002", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.COMMENTS);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -88,7 +90,7 @@ public class CommentsTests extends NewTestTemplate {
   @Test(groups = {"MercuryCommentsTest_003", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_003_RepliesListCounter() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.COMMENTS);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -106,7 +108,7 @@ public class CommentsTests extends NewTestTemplate {
   @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.COMMENTS);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -120,18 +122,21 @@ public class CommentsTests extends NewTestTemplate {
   @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_005_Images_Videos() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, MercuryArticles.MERCURY_COMMENTS_TEST_ARTICLE);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.COMMENTS);
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
     PageObjectLogging.log("Video thumbnail", "is displayed", "is not displayed",
                           comments.isMediaThumbnailInComment(
-                              MEDIA_TYPE_VIDEO, 1));
+                              MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO));
     PageObjectLogging.log("Video link", "is present", "is not present",
-                          comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, 1));
+                          comments
+                              .isMediaLinkInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO));
     PageObjectLogging.log("Image thumbnail", "is displayed", "is not displayed",
-                          comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, 3));
+                          comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE,
+                                                             COMMENT_NUMBER_WITH_IMAGE));
     PageObjectLogging.log("Image link", "is present", "is not present",
-                          comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, 3));
+                          comments
+                              .isMediaLinkInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE));
   }
 }

@@ -22,7 +22,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
+  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
@@ -41,7 +41,6 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
-    waitPageLoaded();
     String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
     Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
   }
@@ -62,7 +61,6 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   public void waitForKrux() {
-    waitPageLoaded();
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =

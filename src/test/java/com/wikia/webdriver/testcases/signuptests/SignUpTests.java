@@ -1,13 +1,7 @@
 package com.wikia.webdriver.testcases.signuptests;
 
-import java.io.File;
-import java.util.Calendar;
-
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -26,6 +20,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
+
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.Calendar;
 
 /*
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
@@ -165,6 +165,8 @@ public class SignUpTests extends NewTestTemplate {
    * Facebook 2. Open finish signup with facebook modal 3. create and verify account 4. disconnect
    * created account from facebook
    */
+
+  @RelatedIssue(issueID = "SOC-823", comment = "Automation test is broken. Please test manually")
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,

@@ -25,6 +25,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
 
+  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -51,6 +52,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
@@ -78,16 +80,17 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
-  @RelatedIssue(issueID = "SOC-593")
+  @RelatedIssue(issueID = "SOC-843", comment = "Automation test is broken. Please test manually")
   public void ForgottenPassword_003_createWiki() {
+    String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
     CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
-    cnwLogin.typeInUserName(credentials.userNameForgottenPassword3);
-    cnwLogin.clickForgotPassword();
+    cnwLogin.typeInUserName(userName);
+    cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
     String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
     cnwLogin.typeInPassword(newPassword);
@@ -99,6 +102,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userNameForgottenPassword3);
+    article.verifyUserLoggedIn(userName);
   }
 }

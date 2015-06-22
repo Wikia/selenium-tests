@@ -21,8 +21,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
-  @RelatedIssue(issueID = "QAART-557")
-  @Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
+ @Test(
+      enabled = false, //MAIN-4538
+      groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
   public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);

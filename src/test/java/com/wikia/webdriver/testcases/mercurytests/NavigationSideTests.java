@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -22,14 +24,14 @@ public class NavigationSideTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private final static String SEARCH_PASS = "test";
+  private final static String SEARCH_PASS = "Gallery";
   private final static String SEARCH_FAIL = "te";
 
   // NST01
   @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     Assertion.assertFalse(nav.isNavMenuVisible(), "Navigation menu is visible");
     PageObjectLogging.log("Navigation menu", "is hidden", true);
@@ -42,9 +44,13 @@ public class NavigationSideTests extends NewTestTemplate {
                           nav.isNavListElementEllipsized(1));
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
     PageObjectLogging.log("Back link", "is hidden", true);
-    nav.clickNavListElement(1);
+    PageObjectLogging.log("Random page button", "is displayed", "is hidden",
+                          nav.isRandomPageButtonDisplayed());
+    nav.clickNavListElement(2);
     Assertion.assertTrue(nav.isBackLinkDisplayed(), "Back link isn't displayed");
     PageObjectLogging.log("Back link", "is displayed", true);
+    PageObjectLogging
+        .log("Random page button", "is hidden", "is displayed", !nav.isRandomPageButtonDisplayed());
     nav.clickBackChevron();
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
     PageObjectLogging.log("Back link", "works", true);
@@ -56,7 +62,7 @@ public class NavigationSideTests extends NewTestTemplate {
   @Test(groups = {"MercuryNavigationSideTest_002", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_002_SearchInvalidSuggestion_Cancel() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -67,6 +73,12 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
     PageObjectLogging.log("Search suggestions", "are hidden", "are displayed",
                           !searchObject.isSuggestionListDisplayed());
+    searchObject.typeInSearchField(SEARCH_FAIL);
+    PageObjectLogging.log("Sorry message", "is displayed", "is hidden",
+                          searchObject.isSorryInfoDisplayed());
+    base.waitMilliseconds(5000, "Wait for message to disappear");
+    PageObjectLogging.log("Sorry message", "is displayed", "is hidden",
+                          searchObject.isSorryInfoDisplayed());
     searchObject.clickCancelButton();
     PageObjectLogging
         .log("Menu field", "is visible", "is hidden", searchObject.isMenuFieldVisible());
@@ -78,7 +90,7 @@ public class NavigationSideTests extends NewTestTemplate {
   @Test(groups = {"MercuryNavigationSideTest_003", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_003_ValidSuggestionRedirect() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -87,20 +99,23 @@ public class NavigationSideTests extends NewTestTemplate {
     PageObjectLogging.log("Search suggestions", "are displayed", true);
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
-    base.waitMilliseconds(5000, "waitMilliseconds");
+    base.waitForLoadingSpinnerToFinishReloadingPage();
     PageObjectLogging.log("Redirection", "works", "does not work",
                           !oldUrl.equals(driver.getCurrentUrl()));
   }
 
   // NST04
-  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"})
+  // TODO: check article titles instead of url, check that receive at least 3 different articles in 10 attempts
+  @RelatedIssue(issueID = "HG-686")
+  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests",
+                  "Mercury"}, enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByName(wikiURL, "");
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();
-    nav.clickNavListElement(0);
+    nav.clickRandomPageButton();
     base.waitForLoadingSpinnerToFinishReloadingPage();
     PageObjectLogging.log("Redirection", "works", "does not work",
                           !oldUrl.equals(driver.getCurrentUrl()));

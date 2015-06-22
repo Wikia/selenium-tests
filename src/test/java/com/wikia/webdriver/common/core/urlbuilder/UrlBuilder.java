@@ -38,12 +38,13 @@ public class UrlBuilder {
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    url = url + separator + wikiPath;
 
     if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
       return appendQueryStringToURL(url, "useskin=wikiamobile");
     }
 
-    return url + separator + wikiPath;
+    return url;
   }
 
   public String getUrlForWiki(String wikiName) {
@@ -51,7 +52,7 @@ public class UrlBuilder {
     String suffix = getUrlSuffix(wikiName);
 
     if (customWikiNames.containsKey(wikiName)) {
-      if (env.contains("dev")) {
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
         prefix = "";
         wikiName = (String) customWikiNames.get(wikiName).getRight();
       } else {
@@ -73,11 +74,11 @@ public class UrlBuilder {
   }
 
   private String getUrlSuffix(String wikiName) {
-    if (env.contains("dev") && isMercuryBrowser()) {
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev") && isMercuryBrowser()) {
       return String.format(XIPIO_ADDRESS_FORMAT, XIPIO_DEFAULT_DOMAIN, XIPIO_DEFAULT_PORT);
     }
 
-    if (env.contains("dev")) {
+    if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
       String devBoxOwner = env.split("-")[1];
       return "." + devBoxOwner + "." + "wikia-dev.com";
     }
@@ -91,11 +92,12 @@ public class UrlBuilder {
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
     if (env != null) {
-      if (!env.contains("dev") && !env.equals("prod")) {
+      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !env.equals("prod")) {
         prefix = env + "." + prefix;
       }
 
-      if (env.contains("dev") && !isMercuryBrowser() && wikiName.endsWith("wikia")) {
+      if (env.contains("dev") && !env.contains("sandbox-mercurydev") && !isMercuryBrowser()
+          && wikiName.endsWith("wikia")) {
         wikiName = "wikiaglobal";
       }
     }

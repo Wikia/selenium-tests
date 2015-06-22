@@ -41,10 +41,9 @@ public class MailFunctions {
       inbox.open(Folder.READ_ONLY);
       Message messages[] = null;
 
-      int counter = 0;
       boolean forgottenPasswordMessageFound = false;
       Message magicMessage = null;
-      while (!forgottenPasswordMessageFound) {
+      for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages= inbox.getMessages();
 
         System.out.println("Waiting for message ... \r");
@@ -54,10 +53,9 @@ public class MailFunctions {
             forgottenPasswordMessageFound = true;
             magicMessage = message;
           }
-          if (counter > 300) {
-            throw new WebDriverException("Mail timeout exceeded");
-          }
-          counter += 1;
+        }
+        if (i > 100) {
+          throw new WebDriverException("Mail timeout exceeded");
         }
       }
 
