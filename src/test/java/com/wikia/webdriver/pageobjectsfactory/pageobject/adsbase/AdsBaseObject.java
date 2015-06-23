@@ -49,9 +49,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   };
   private static final String[] PROVIDERS = {
       "DirectGpt",
-      "RemnantGpt",
-      "MobileGptMobile",
       "DirectGptMobile",
+      "RemnantGpt",
+      "RemnantGptMobile",
       "Liftium",
   };
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
