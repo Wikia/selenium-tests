@@ -9,9 +9,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubP
 import org.testng.annotations.Test;
 
 /**
+ * 1. Open edit hub dashboard and check if calendar exists
+ *
  * @author Damian 'kvas' Jóźwiak
  * @ownership Content X-Wing
- * 1. Open edit hub dashboard and check if calendar exists
  */
 public class EditHubTests extends NewTestTemplate {
 
