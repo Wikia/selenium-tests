@@ -48,10 +48,10 @@ public class AdsBaseObject extends WikiBasePageObject {
       "#SPOTLIGHT_FOOTER_3",
   };
   private static final String[] PROVIDERS = {
-      "mobile_remnant",
-      "mobile",
-      "gpt",
-      "remnant",
+      "DirectGpt",
+      "RemnantGpt",
+      "MobileGptMobile",
+      "DirectGptMobile",
       "Liftium",
   };
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
@@ -568,7 +568,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     List<String> providersChain = new ArrayList<>();
     String slotSelector = AdsContent.getSlotSelector(slotName);
     for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
-      String providerSlotName = providerSlot.getAttribute("id");
+      String providerSlotName = providerSlot.getAttribute("id").split("_")[0];
       String provider = "";
       for (String providerName : PROVIDERS) {
         String
