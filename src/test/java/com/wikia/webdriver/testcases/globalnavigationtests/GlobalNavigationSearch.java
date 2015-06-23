@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 public class GlobalNavigationSearch extends NewTestTemplate {
 
