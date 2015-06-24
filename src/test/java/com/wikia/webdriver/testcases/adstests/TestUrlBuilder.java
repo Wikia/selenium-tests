@@ -157,46 +157,46 @@ public class TestUrlBuilder extends TemplateDontLogout {
        "http://de.videospielehub.127.0.0.1.xip.io:8000/wiki/Videospiele_Hub",
        "http://de.videospielehub.wikia.com/wiki/Videospiele_Hub?useskin=wikiamobile"
       },
-      {"de.jedipedia", "Jedipedia:Hauptseite",
-       "http://www.jedipedia.de/wiki/Jedipedia:Hauptseite",
-       "http://preview.www.jedipedia.de/wiki/Jedipedia:Hauptseite",
-       "http://sandbox.www.jedipedia.de/wiki/Jedipedia:Hauptseite",
-       "http://sandbox-mercurydev.www.jedipedia.de/wiki/Jedipedia:Hauptseite",
-       "http://dejedipedia.dmytror.wikia-dev.com/wiki/Jedipedia:Hauptseite",
-       "http://dejedipedia.127.0.0.1.xip.io:8000/wiki/Jedipedia:Hauptseite",
-       "http://www.jedipedia.de/wiki/Jedipedia:Hauptseite?useskin=wikiamobile"
+      {"jedipedia", "Jedipedia:Hauptseite",
+       "http://jedipedia.wikia.com/wiki/Jedipedia:Hauptseite",
+       "http://preview.jedipedia.wikia.com/wiki/Jedipedia:Hauptseite",
+       "http://sandbox.jedipedia.wikia.com/wiki/Jedipedia:Hauptseite",
+       "http://sandbox-mercurydev.jedipedia.wikia.com/wiki/Jedipedia:Hauptseite",
+       "http://jedipedia.dmytror.wikia-dev.com/wiki/Jedipedia:Hauptseite",
+       "http://jedipedia.127.0.0.1.xip.io:8000/wiki/Jedipedia:Hauptseite",
+       "http://jedipedia.wikia.com/wiki/Jedipedia:Hauptseite?useskin=wikiamobile"
       },
-      {"memory-alpha.org", "Portal:Main", "http://en.memory-alpha.org/wiki/Portal:Main",
-       "http://preview.en.memory-alpha.org/wiki/Portal:Main",
-       "http://sandbox.en.memory-alpha.org/wiki/Portal:Main",
-       "http://sandbox-mercurydev.en.memory-alpha.org/wiki/Portal:Main",
-       "http://enmemoryalpha.dmytror.wikia-dev.com/wiki/Portal:Main",
-       "http://enmemoryalpha.127.0.0.1.xip.io:8000/wiki/Portal:Main",
-       "http://en.memory-alpha.org/wiki/Portal:Main?useskin=wikiamobile"
+      {"en.memory-alpha", "Portal:Main", "http://en.memory-alpha.wikia.com/wiki/Portal:Main",
+       "http://preview.en.memory-alpha.wikia.com/wiki/Portal:Main",
+       "http://sandbox.en.memory-alpha.wikia.com/wiki/Portal:Main",
+       "http://sandbox-mercurydev.en.memory-alpha.wikia.com/wiki/Portal:Main",
+       "http://en.memory-alpha.dmytror.wikia-dev.com/wiki/Portal:Main",
+       "http://en.memory-alpha.127.0.0.1.xip.io:8000/wiki/Portal:Main",
+       "http://en.memory-alpha.wikia.com/wiki/Portal:Main?useskin=wikiamobile"
       },
-      {"de.memory-alpha", "Hauptseite", "http://de.memory-alpha.org/wiki/Hauptseite",
-       "http://preview.de.memory-alpha.org/wiki/Hauptseite",
-       "http://sandbox.de.memory-alpha.org/wiki/Hauptseite",
-       "http://sandbox-mercurydev.de.memory-alpha.org/wiki/Hauptseite",
-       "http://dememoryalpha.dmytror.wikia-dev.com/wiki/Hauptseite",
-       "http://dememoryalpha.127.0.0.1.xip.io:8000/wiki/Hauptseite",
-       "http://de.memory-alpha.org/wiki/Hauptseite?useskin=wikiamobile"
+      {"de.memory-alpha", "Hauptseite", "http://de.memory-alpha.wikia.com/wiki/Hauptseite",
+       "http://preview.de.memory-alpha.wikia.com/wiki/Hauptseite",
+       "http://sandbox.de.memory-alpha.wikia.com/wiki/Hauptseite",
+       "http://sandbox-mercurydev.de.memory-alpha.wikia.com/wiki/Hauptseite",
+       "http://de.memory-alpha.dmytror.wikia-dev.com/wiki/Hauptseite",
+       "http://de.memory-alpha.127.0.0.1.xip.io:8000/wiki/Hauptseite",
+       "http://de.memory-alpha.wikia.com/wiki/Hauptseite?useskin=wikiamobile"
       },
-      {"yoyo", "Main_Page", "http://www.yoyowiki.org/wiki/Main_Page",
-       "http://preview.www.yoyowiki.org/wiki/Main_Page",
-       "http://sandbox.www.yoyowiki.org/wiki/Main_Page",
-       "http://sandbox-mercurydev.www.yoyowiki.org/wiki/Main_Page",
+      {"yoyo", "Main_Page", "http://yoyo.wikia.com/wiki/Main_Page",
+       "http://preview.yoyo.wikia.com/wiki/Main_Page",
+       "http://sandbox.yoyo.wikia.com/wiki/Main_Page",
+       "http://sandbox-mercurydev.yoyo.wikia.com/wiki/Main_Page",
        "http://yoyo.dmytror.wikia-dev.com/wiki/Main_Page",
        "http://yoyo.127.0.0.1.xip.io:8000/wiki/Main_Page",
-       "http://www.yoyowiki.org/wiki/Main_Page?useskin=wikiamobile"
+       "http://yoyo.wikia.com/wiki/Main_Page?useskin=wikiamobile"
       },
-      {"wowwiki", "Portal:Main", "http://www.wowwiki.com/Portal:Main",
-       "http://preview.www.wowwiki.com/Portal:Main",
-       "http://sandbox.www.wowwiki.com/Portal:Main",
-       "http://sandbox-mercurydev.www.wowwiki.com/Portal:Main",
+      {"wowwiki", "Portal:Main", "http://wowwiki.wikia.com/Portal:Main",
+       "http://preview.wowwiki.wikia.com/Portal:Main",
+       "http://sandbox.wowwiki.wikia.com/Portal:Main",
+       "http://sandbox-mercurydev.wowwiki.wikia.com/Portal:Main",
        "http://wowwiki.dmytror.wikia-dev.com/Portal:Main",
        "http://wowwiki.127.0.0.1.xip.io:8000/Portal:Main",
-       "http://www.wowwiki.com/Portal:Main?useskin=wikiamobile"
+       "http://wowwiki.wikia.com/Portal:Main?useskin=wikiamobile"
       }
   };
 
