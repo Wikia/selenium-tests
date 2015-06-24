@@ -48,10 +48,10 @@ public class AdsBaseObject extends WikiBasePageObject {
       "#SPOTLIGHT_FOOTER_3",
   };
   private static final String[] PROVIDERS = {
-      "mobile_remnant",
-      "mobile",
-      "gpt",
-      "remnant",
+      "DirectGpt",
+      "DirectGptMobile",
+      "RemnantGpt",
+      "RemnantGptMobile",
       "Liftium",
   };
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
@@ -435,7 +435,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String getGptParams(String slotName, String attr) {
     WebElement
         adsDiv =
-        driver.findElement(By.cssSelector("div[id*='wikia_gpt_helper'][id*='" + slotName + "']"));
+        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "']"));
     return adsDiv.getAttribute(attr);
   }
 
@@ -568,7 +568,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     List<String> providersChain = new ArrayList<>();
     String slotSelector = AdsContent.getSlotSelector(slotName);
     for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
-      String providerSlotName = providerSlot.getAttribute("id");
+      String providerSlotName = providerSlot.getAttribute("id").split("_")[0];
       String provider = "";
       for (String providerName : PROVIDERS) {
         String

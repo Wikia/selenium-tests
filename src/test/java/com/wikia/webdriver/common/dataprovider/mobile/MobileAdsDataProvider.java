@@ -108,7 +108,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "mobile; mobile_remnant", ""
+            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
         },
     };
   }
@@ -128,8 +128,8 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"adtest", "DFP/hop", "mobile"},
-        {"adtest", "DFP/hophop", "mobile_remnant"}
+        {"adtest", "DFP/hop", "DirectGptMobile"},
+        {"adtest", "DFP/hophop", "RemnantGptMobile"}
     };
   }
 }

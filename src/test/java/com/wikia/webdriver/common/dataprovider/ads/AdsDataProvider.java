@@ -352,7 +352,7 @@ public class AdsDataProvider {
     @DataProvider
     public static Object[][] evolveHopTestPage() {
         return new Object[][]{
-            {"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "remnant"}};
+            {"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "RemnantGpt"}};
     }
 
     @DataProvider
@@ -360,15 +360,15 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 "adtest", "SyntheticTests/ProvidersChain",
-                "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
+                "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
             },
             {
                 "adtest", "SyntheticTests/ProvidersChain",
-                "TOP_LEADERBOARD", "gpt; remnant; Liftium", 3
+                "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
             },
             {
                 "adtest", "SyntheticTests/ProvidersChain",
-                "INVISIBLE_SKIN", "gpt; remnant", 0
+                "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
             }
         };
     }
@@ -378,7 +378,7 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-                "TOP_LEADERBOARD", "gpt; remnant; Liftium", "Liftium"
+                "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
             },
         };
     }

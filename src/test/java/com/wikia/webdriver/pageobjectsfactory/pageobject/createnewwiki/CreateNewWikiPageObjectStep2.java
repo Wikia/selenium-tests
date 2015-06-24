@@ -55,7 +55,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void selectAllAgesCheckbox() {
-    allAgesCheckBox.click();
+    scrollAndClick(allAgesCheckBox);
     PageObjectLogging.log("selectAllAgesCheckbox", "all ages checkbox selected", true);
   }
 
