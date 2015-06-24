@@ -669,7 +669,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         tryTriggerFloatingMedrec(slot);
       }
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
-      return adWebElements.size() > 0;
+      return adWebElements.size() > 1;
     } finally {
       restoreDeaultImplicitWait();
     }
