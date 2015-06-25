@@ -53,7 +53,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private WebDriver driver;
 
   private static String getPageSource(WebDriver driver) {
-    return getPageSource(driver)
+    return driver.getPageSource()
             .replaceAll("<script", "<textarea style=\"display: none\"><script")
             .replaceAll("</script", "</script></textarea");
   }
