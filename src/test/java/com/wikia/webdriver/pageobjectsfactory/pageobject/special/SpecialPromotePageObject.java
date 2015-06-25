@@ -115,7 +115,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   public void verifyCrossWikiSearchImage(String firstImage) {
     waitForElementByElement(thumbnailImage);
     String secondImage = getUniqueThumbnailTextSpecialPromotePage();
-    Assertion.assertEquals(firstImage, secondImage);
+    Assertion.assertEquals(secondImage, firstImage);
   }
 
   public void verifyUploadedImage(String fileName) {

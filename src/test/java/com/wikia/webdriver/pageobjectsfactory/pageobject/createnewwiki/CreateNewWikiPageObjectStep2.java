@@ -61,6 +61,6 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
 
   public void verifyCategoryError() {
     waitForElementByElement(categoryErrorMsg);
-    Assertion.assertEquals(CreateWikiMessages.CATEGORY_ERROR_MESSAGE, categoryErrorMsg.getText());
+    Assertion.assertEquals(categoryErrorMsg.getText(), CreateWikiMessages.CATEGORY_ERROR_MESSAGE);
   }
 }

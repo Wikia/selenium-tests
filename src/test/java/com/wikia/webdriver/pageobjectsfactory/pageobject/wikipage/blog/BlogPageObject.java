@@ -31,7 +31,7 @@ public class BlogPageObject extends ArticlePageObject {
 
   public void verifyBlogTitle(String title) {
     waitForElementByElement(blogHeader);
-    Assertion.assertEquals(title, blogHeader.getText());
+    Assertion.assertEquals(blogHeader.getText(), title);
   }
 
   public String getBlogName() {

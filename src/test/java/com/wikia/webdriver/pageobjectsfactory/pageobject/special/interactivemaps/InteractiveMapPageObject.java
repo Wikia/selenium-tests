@@ -288,7 +288,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyCreatedMapTitle(String mapTitle) {
     waitForElementByElement(createdMapTitle);
-    Assertion.assertEquals(mapTitle, createdMapTitle.getText());
+    Assertion.assertEquals(createdMapTitle.getText(), mapTitle);
   }
 
   public void verifyCreatedPinTypesForNewMap() {
@@ -436,8 +436,8 @@ public class InteractiveMapPageObject extends BasePageObject {
           .contains(pinTypeName)
           ) {
         Assertion.assertEquals(
-            pinTypeName,
-            createdPinNames.get(createdPinNames.size() - 1).getText());
+                createdPinNames.get(createdPinNames.size() - 1).getText(), pinTypeName
+        );
       } else {
         PageObjectLogging.log(
             "verifyPinTypeExist",
@@ -483,7 +483,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
-    Assertion.assertEquals(mapIdExpected, mapIdActual);
+    Assertion.assertEquals(mapIdActual, mapIdExpected);
   }
 
   public void verifyEscapedFragmentMetaTag() {

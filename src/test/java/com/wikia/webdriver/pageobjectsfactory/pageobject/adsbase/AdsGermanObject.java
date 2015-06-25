@@ -207,7 +207,7 @@ public class AdsGermanObject extends AdsBaseObject {
 
   public void verify71MediaParams(String expectedParams) {
     String actualParams = Joiner.on("; ").join(get71MediaParams());
-    Assertion.assertEquals(expectedParams, actualParams);
+    Assertion.assertEquals(actualParams, expectedParams);
   }
 
   private ArrayList<String> get71MediaParams() {

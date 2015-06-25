@@ -202,7 +202,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyVideoCaption(String captionDesired) {
     mouseOverComponent(Components.VIDEO);
-    Assertion.assertEquals(captionDesired, caption.getText());
+    Assertion.assertEquals(caption.getText(), captionDesired);
   }
 
   private void mouseOverComponent(Components component) {

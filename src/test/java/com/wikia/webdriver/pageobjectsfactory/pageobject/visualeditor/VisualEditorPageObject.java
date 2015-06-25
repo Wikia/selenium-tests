@@ -151,22 +151,22 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyNumList(List<String> elements) {
     for (int i = 0; i < elements.size(); i++) {
-      Assertion.assertEquals(elements.get(i), numList.get(i).getText());
+      Assertion.assertEquals(numList.get(i).getText(), elements.get(i));
     }
   }
 
   public void verifyBullList(List<String> elements) {
     for (int i = 0; i < elements.size(); i++) {
-      Assertion.assertEquals(elements.get(i), bullList.get(i).getText());
+      Assertion.assertEquals(bullList.get(i).getText(), elements.get(i));
     }
   }
 
   public void verifyFormatting(Formatting format, String text) {
-    Assertion.assertEquals(text, editArea.findElement(format.getTag()).getText());
+    Assertion.assertEquals(editArea.findElement(format.getTag()).getText(), text);
   }
 
   public void verifyStyle(Style style, String text) {
-    Assertion.assertEquals(text, editArea.findElement(style.getTag()).getText());
+    Assertion.assertEquals(editArea.findElement(style.getTag()).getText(), text);
   }
 
   public void verifyEditorSurfacePresent() {

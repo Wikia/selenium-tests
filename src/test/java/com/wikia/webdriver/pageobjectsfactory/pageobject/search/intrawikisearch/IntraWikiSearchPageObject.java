@@ -164,8 +164,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
     public void verifyFirstArticleNameTheSame(String firstResult) {
         Assertion.assertEquals(
-    	    firstResult.toLowerCase(),
-    	    titles.get(0).getText().toLowerCase()
+                titles.get(0).getText().toLowerCase(), firstResult.toLowerCase()
         );
     }
 

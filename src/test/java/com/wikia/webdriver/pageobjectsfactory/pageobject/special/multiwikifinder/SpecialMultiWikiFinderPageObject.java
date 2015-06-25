@@ -79,8 +79,8 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
     previousResultsButton.click();
     String firstLinkAfterBack = listOfLinks.get(0).getAttribute("href");
     String lastLinkAfterBack = listOfLinks.get(listOfLinks.size() - 1).getAttribute("href");
-    Assertion.assertEquals(firstLinkOnFirstPage, firstLinkAfterBack);
-    Assertion.assertEquals(lastLinkOnFirstPage, lastLinkAfterBack);
+    Assertion.assertEquals(firstLinkAfterBack, firstLinkOnFirstPage);
+    Assertion.assertEquals(lastLinkAfterBack, lastLinkOnFirstPage);
   }
 
   public void verifyAllLinksHavePagenameInPath(String pageName) {

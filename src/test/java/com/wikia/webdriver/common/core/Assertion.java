@@ -34,12 +34,12 @@ public class Assertion extends Assert {
     return assertion;
   }
 
-  public static void assertEquals(String pattern, String current) {
+  public static void assertEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
     boolean assertion = true;
     try {
-      Assert.assertEquals(pattern, current);
+      Assert.assertEquals(current, pattern);
     } catch (AssertionError err) {
       addVerificationFailure(err);
       assertion = false;

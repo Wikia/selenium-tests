@@ -336,7 +336,7 @@ public class BasePageObject {
   }
 
   public void verifyURL(String givenURL) {
-    Assertion.assertEquals(givenURL, driver.getCurrentUrl());
+    Assertion.assertEquals(driver.getCurrentUrl(), givenURL);
   }
 
   public String getCurrentUrl() {

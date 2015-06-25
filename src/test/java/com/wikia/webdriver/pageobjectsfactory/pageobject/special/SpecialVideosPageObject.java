@@ -134,7 +134,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     String deletedVideo =
         "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    Assertion.assertEquals(deletedVideo, getFlashMessageText());
+    Assertion.assertEquals(getFlashMessageText(), deletedVideo);
     PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
         + " was deleted", true);
   }

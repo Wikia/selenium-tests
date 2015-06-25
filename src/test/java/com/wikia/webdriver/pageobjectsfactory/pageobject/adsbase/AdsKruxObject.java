@@ -42,7 +42,7 @@ public class AdsKruxObject extends AdsBaseObject {
    */
   public void verifyKruxControlTag(String kruxSiteId) {
     String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
-    Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
+    Assertion.assertEquals(kruxControlTag.getAttribute("src"), expectedUrl);
   }
 
   /**

@@ -57,7 +57,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
       String langDropElement = langList.get(i).getText();
       if (langDropElement.contains(lang + ":")) {
         language.selectByIndex(i);
-        Assertion.assertEquals(lang + ".", languageSelectedIndicator.getText());
+        Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
         break;
       }
     }
@@ -108,7 +108,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   }
 
   public void verifyWikiName(String expectedWikiName) {
-    Assertion.assertEquals(expectedWikiName, wikiName.getAttribute("value"));
+    Assertion.assertEquals(wikiName.getAttribute("value"), expectedWikiName);
     PageObjectLogging.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, true);
   }
 

@@ -84,7 +84,7 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
   }
 
   public void publish() {

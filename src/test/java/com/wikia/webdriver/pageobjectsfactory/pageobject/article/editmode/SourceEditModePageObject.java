@@ -91,12 +91,12 @@ public class SourceEditModePageObject extends EditMode {
 
   public void checkSourceContent(String desiredContent) {
     waitForElementClickableByElement(sourceModeTextArea);
-    Assertion.assertEquals(desiredContent, getSourceContent());
+    Assertion.assertEquals(getSourceContent(), desiredContent);
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(desiredContent.substring(1, 38) + desiredContent.substring(48),
-                           getSourceContent().substring(1, 38) + getSourceContent().substring(48));
+    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    );
   }
 
 

@@ -190,7 +190,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void verifyNoResultsCaption() {
     waitForElementByElement(noResultsCaption);
-    Assertion.assertEquals("No results found.", noResultsCaption.getText());
+    Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
     PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
                           true);
   }

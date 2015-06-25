@@ -45,7 +45,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[1]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     deleteMapModal.clickDeleteMap();
-    Assertion.assertEquals(InteractiveMapsContent.MAP_DELETE_ERROR, deleteMapModal.getDeleteMapError());
+    Assertion.assertEquals(deleteMapModal.getDeleteMapError(), InteractiveMapsContent.MAP_DELETE_ERROR);
   }
 
   @RelatedIssue(issueID = "QAART-557")

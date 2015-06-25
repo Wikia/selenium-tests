@@ -383,6 +383,6 @@ public class WikiArticleEditMode extends WikiEditMode {
     driver.switchTo().defaultContent();
     waitForElementByElement(embededMap);
     String embededMapID = embededMap.getAttribute("data-map-id");
-    Assertion.assertEquals(mapID, embededMapID);
+    Assertion.assertEquals(embededMapID, mapID);
   }
 }
