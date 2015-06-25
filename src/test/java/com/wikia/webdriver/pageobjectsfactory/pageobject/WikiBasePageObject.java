@@ -1046,7 +1046,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyHeader(String fileName) {
     waitForElementByElement(wikiFirstHeader);
-    Assertion.assertStringContains(fileName, wikiFirstHeader.getText());
+    Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
   }
 
   public void disableCaptcha() {
@@ -1215,7 +1215,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyArticleName(String targetText) {
-    Assertion.assertStringContains(getArticleName(), targetText);
+    Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log(
         "verifyArticleName",
         "The article shows " + targetText,
@@ -1232,7 +1232,7 @@ public class WikiBasePageObject extends BasePageObject {
         true,
         driver
     );
-    Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
+    Assertion.assertStringContains(headerWhereIsMyExtensionPage.getText(), pattern);
   }
 
   protected Boolean isNewGlobalNavPresent() {

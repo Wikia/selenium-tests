@@ -203,20 +203,20 @@ public class TestUrlBuilder extends TemplateDontLogout {
   @Test(groups = "TestUrlBuilder")
   public void testUrlBuilder() {
     for (Object[] data : TEST_DATA) {
-      Assertion.assertEquals((String) data[2], new UrlBuilder("prod")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[3], new UrlBuilder("preview")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[4], new UrlBuilder("sandbox")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[5], new UrlBuilder("sandbox-mercurydev")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[6], new UrlBuilder("dev-dmytror")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[7], new UrlBuilder("dev-nandy", "CHROMEMOBILEMERCURY")
-          .getUrlForPath((String) data[0], (String) data[1]));
-      Assertion.assertEquals((String) data[8], new UrlBuilder("prod", "CHROMEMOBILE")
-          .getUrlForPath((String) data[0], (String) data[1]));
+      Assertion.assertEquals(new UrlBuilder("prod")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[2]);
+      Assertion.assertEquals(new UrlBuilder("preview")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[3]);
+      Assertion.assertEquals(new UrlBuilder("sandbox")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[4]);
+      Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[5]);
+      Assertion.assertEquals(new UrlBuilder("dev-dmytror")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[6]);
+      Assertion.assertEquals(new UrlBuilder("dev-nandy", "CHROMEMOBILEMERCURY")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[7]);
+      Assertion.assertEquals(new UrlBuilder("prod", "CHROMEMOBILE")
+          .getUrlForPath((String) data[0], (String) data[1]), (String) data[8]);
     }
   }
 }

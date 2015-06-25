@@ -122,7 +122,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   public void verifyFBLogin() {
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    Assertion.assertStringContains(URLsContent.FACEBOOK_DOMAIN, getCurrentUrl());
+    Assertion.assertStringContains(getCurrentUrl(), URLsContent.FACEBOOK_DOMAIN);
     PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
   }
 

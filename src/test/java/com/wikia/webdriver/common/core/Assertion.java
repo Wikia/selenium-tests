@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Assertion extends Assert {
 
-  public static boolean assertStringContains(String pattern, String current) {
+  public static boolean assertStringContains(String current, String pattern) {
     String currentEncoded = encodeSpecialChars(current);
     String patternEncoded = encodeSpecialChars(pattern);
     boolean assertion = true;
@@ -34,12 +34,12 @@ public class Assertion extends Assert {
     return assertion;
   }
 
-  public static void assertEquals(String pattern, String current) {
+  public static void assertEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
     boolean assertion = true;
     try {
-      Assert.assertEquals(pattern, current);
+      Assert.assertEquals(current, pattern);
     } catch (AssertionError err) {
       addVerificationFailure(err);
       assertion = false;
@@ -52,7 +52,7 @@ public class Assertion extends Assert {
     );
   }
 
-  public static void assertNotEquals(String pattern, String current) {
+  public static void assertNotEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
     boolean assertion = true;
@@ -70,7 +70,7 @@ public class Assertion extends Assert {
     );
   }
 
-  public static void assertNumber(Number expected, Number actual, String message) {
+  public static void assertNumber(Number actual, Number expected, String message) {
     boolean assertion = true;
     try {
       Assert.assertEquals(expected, actual);

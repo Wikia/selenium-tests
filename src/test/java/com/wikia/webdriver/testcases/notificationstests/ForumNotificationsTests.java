@@ -77,6 +77,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
         forumBoardTitle.replace("_", " ")
     );
     String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
-    Assertion.assertEquals("#2", anchor);
+    Assertion.assertEquals(anchor, "#2");
   }
 }

@@ -43,7 +43,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
   }
 
   public void verifyModeName() {
-    Assertion.assertEquals(MobilePageContent.EDITMODE_HEADER, getModeName());
+    Assertion.assertEquals(getModeName(), MobilePageContent.EDITMODE_HEADER);
     PageObjectLogging.log(
         "verifyModeName",
         "The header shows '" + MobilePageContent.EDITMODE_HEADER + "'",
@@ -62,7 +62,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
   public void verifyEditText(String targetText) {
     waitForValueToBePresentInElementsAttributeByElement(
         editArea, "value", targetText);
-    Assertion.assertEquals(targetText, getEditText());
+    Assertion.assertEquals(getEditText(), targetText);
     PageObjectLogging.log(
         "verifyEditText",
         "The summary shows " + targetText,

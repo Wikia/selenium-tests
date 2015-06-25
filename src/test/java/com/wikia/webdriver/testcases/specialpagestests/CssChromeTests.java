@@ -49,7 +49,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.saveCssContent(currentTimestamp);
     specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
     String cssContent = specialCss.getWikiaCssContent();
-    Assertion.assertEquals(currentTimestamp, cssContent);
+    Assertion.assertEquals(cssContent, currentTimestamp);
   }
 
   /**
@@ -64,7 +64,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
     specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
     String editSummary = specialCss.getFirstCssRevision();
-    Assertion.assertStringContains(currentTimestamp, editSummary);
+    Assertion.assertStringContains(editSummary, currentTimestamp);
   }
 
   /**
@@ -78,7 +78,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.clickShowChanges();
     specialCss.showChangesModal();
     String addedLine = specialCss.getAddedLineText();
-    Assertion.assertEquals(currentTimestamp, addedLine);
+    Assertion.assertEquals(addedLine, currentTimestamp);
   }
 
   /**

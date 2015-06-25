@@ -52,11 +52,17 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private By lastFindBy;
   private WebDriver driver;
 
+  private static String getPageSource(WebDriver driver) {
+    return getPageSource(driver)
+            .replaceAll("<script", "<textarea style=\"display: none\"><script")
+            .replaceAll("</script", "</script></textarea");
+  }
+
   public static void log(String command, String description, boolean success, WebDriver driver) {
     logsResults.add(success);
     imageCounter += 1;
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-    CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", driver.getPageSource());
+    CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
@@ -241,7 +247,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (Global.LOG_ENABLED) {
       try {
         new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", driver.getPageSource());
+        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
       } catch (Exception e) {
         log("onException",
             "driver has no ability to catch screenshot or html source - driver may died", false);

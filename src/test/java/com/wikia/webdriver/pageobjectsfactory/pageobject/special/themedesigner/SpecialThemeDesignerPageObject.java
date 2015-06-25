@@ -100,7 +100,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
   public void verifyThemeSelected(String themeName) {
     waitForElementByCss("li.selected[data-theme='" + themeName + "']");
-    Assertion.assertEquals(themeName, executeScriptRet("ThemeDesigner.settings.theme"));
+    Assertion.assertEquals(executeScriptRet("ThemeDesigner.settings.theme"), themeName);
     PageObjectLogging.log("verifyThemeSelected",
                           "theme " + themeName + " selection verified", true);
   }

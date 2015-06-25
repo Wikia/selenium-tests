@@ -231,7 +231,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public void verifyWikiTextInSourceMode(String text) {
     String wikiText = sourceModeTextArea.getAttribute("value");
-    Assertion.assertStringContains(text, wikiText);
+    Assertion.assertStringContains(wikiText, text);
   }
 
   public void clickOnModifyImageLink() {
@@ -383,6 +383,6 @@ public class WikiArticleEditMode extends WikiEditMode {
     driver.switchTo().defaultContent();
     waitForElementByElement(embededMap);
     String embededMapID = embededMap.getAttribute("data-map-id");
-    Assertion.assertEquals(mapID, embededMapID);
+    Assertion.assertEquals(embededMapID, mapID);
   }
 }

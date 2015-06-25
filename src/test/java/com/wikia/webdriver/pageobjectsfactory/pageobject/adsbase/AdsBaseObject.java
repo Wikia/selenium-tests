@@ -467,11 +467,11 @@ public class AdsBaseObject extends WikiBasePageObject {
         String dataGptSlotParams = getGptParams(slotName, "data-gpt-slot-params");
 
         for (String param : pageParams) {
-            Assertion.assertStringContains(param, dataGptPageParams);
+            Assertion.assertStringContains(dataGptPageParams, param);
         }
 
         for (String param : slotParams) {
-            Assertion.assertStringContains(param, dataGptSlotParams);
+            Assertion.assertStringContains(dataGptSlotParams, param);
         }
 
         PageObjectLogging.log(
@@ -559,7 +559,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     public AdsBaseObject verifyLineItemId(String slotName, int lineItemId) {
         String lineItemParam = getGptParams(slotName, GPT_DATA_ATTRIBUTES[0]);
-        Assertion.assertStringContains(String.valueOf(lineItemId), lineItemParam);
+        Assertion.assertStringContains(lineItemParam, String.valueOf(lineItemId));
         PageObjectLogging
             .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
         return this;

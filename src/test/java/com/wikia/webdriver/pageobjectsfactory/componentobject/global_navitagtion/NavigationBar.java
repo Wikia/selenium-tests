@@ -55,7 +55,7 @@ public class NavigationBar extends WikiBasePageObject {
                         "title");
             }
         }
-        Assertion.assertStringContains(suggestionText, allSuggestionTexts);
+        Assertion.assertStringContains(allSuggestionTexts, suggestionText);
     }
 
     /**

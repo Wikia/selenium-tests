@@ -106,7 +106,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
   public void verifyNumOfCartItems(int expected) {
     waitForDialogVisible();
-    Assertion.assertNumber(expected, cartItems.size(), "Verify number of items in cart");
+    Assertion.assertNumber(cartItems.size(), expected, "Verify number of items in cart");
   }
 
   public void addMediaToCart(int number) {

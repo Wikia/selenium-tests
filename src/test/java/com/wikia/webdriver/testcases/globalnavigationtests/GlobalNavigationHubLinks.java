@@ -28,7 +28,7 @@ public class GlobalNavigationHubLinks extends NewTestTemplate {
             WebElement hub = globalNav.openHub(hubName);
             String link = globalNav.getHubLink(hub);
             hub.click();
-            Assertion.assertEquals(link, driver.getCurrentUrl());
+            Assertion.assertEquals(driver.getCurrentUrl(), link);
         }
     }
 }

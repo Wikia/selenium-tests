@@ -187,12 +187,12 @@ public class ChatPageObject extends WikiBasePageObject {
     if (checkIfPrivateMessagesNotAllowed(userName)) {
       allowPrivateMessageFromUser(userName);
     }
-    Assertion.assertNumber(3, userDropDownActionsElements.size(),
-                           "Checking number of elements in the dropDown");
+    Assertion.assertNumber(userDropDownActionsElements.size(), 3,
+            "Checking number of elements in the dropDown");
     Assertion
-        .assertEquals("message-wall", userDropDownActionsElements.get(0).getAttribute("class"));
-    Assertion.assertEquals("contribs", userDropDownActionsElements.get(1).getAttribute("class"));
-    Assertion.assertEquals("private", userDropDownActionsElements.get(2).getAttribute("class"));
+        .assertEquals(userDropDownActionsElements.get(0).getAttribute("class"), "message-wall");
+    Assertion.assertEquals(userDropDownActionsElements.get(1).getAttribute("class"), "contribs");
+    Assertion.assertEquals(userDropDownActionsElements.get(2).getAttribute("class"), "private");
   }
 
   public void verifyBlockingUserDropdown(String userName) {
@@ -201,21 +201,21 @@ public class ChatPageObject extends WikiBasePageObject {
     //We need to click it more then once sometimes to actually load everything
     waitForProperNumberOfElementsInUserDropdown(userName);
     List<WebElement> list = userDropDownActionsElements;
-    Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
-    Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
-    Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
-    Assertion.assertEquals("private-allow", list.get(2).getAttribute("class"));
+    Assertion.assertNumber(list.size(), 3, "Checking number of elements in the drop-down");
+    Assertion.assertEquals(list.get(0).getAttribute("class"), "message-wall");
+    Assertion.assertEquals(list.get(1).getAttribute("class"), "contribs");
+    Assertion.assertEquals(list.get(2).getAttribute("class"), "private-allow");
   }
 
   public void verifyPrivateUserDropdown(String userName) {
     openUserDropDownInPrivateMessageSection(userName);
-    Assertion.assertNumber(3, userDropDownActionsElements.size(),
-                           "Checking number of elements in the drop-down");
+    Assertion.assertNumber(userDropDownActionsElements.size(), 3,
+            "Checking number of elements in the drop-down");
     Assertion
-        .assertEquals("message-wall", userDropDownActionsElements.get(0).getAttribute("class"));
-    Assertion.assertEquals("contribs", userDropDownActionsElements.get(1).getAttribute("class"));
+        .assertEquals(userDropDownActionsElements.get(0).getAttribute("class"), "message-wall");
+    Assertion.assertEquals(userDropDownActionsElements.get(1).getAttribute("class"), "contribs");
     Assertion
-        .assertEquals("private-block", userDropDownActionsElements.get(2).getAttribute("class"));
+        .assertEquals(userDropDownActionsElements.get(2).getAttribute("class"), "private-block");
   }
 
   public void verifyAdminUserDropdown(String userName) {
@@ -223,12 +223,12 @@ public class ChatPageObject extends WikiBasePageObject {
     verifyNormalUserDropdown(userName);
 
     //and admin dropDown
-    Assertion.assertNumber(3, adminDropDownActionsElements.size(),
-                           "Checking number of elements in the drop-down");
+    Assertion.assertNumber(adminDropDownActionsElements.size(), 3,
+            "Checking number of elements in the drop-down");
     Assertion
-        .assertEquals("give-chat-mod", adminDropDownActionsElements.get(0).getAttribute("class"));
-    Assertion.assertEquals("kick", adminDropDownActionsElements.get(1).getAttribute("class"));
-    Assertion.assertEquals("ban", adminDropDownActionsElements.get(2).getAttribute("class"));
+        .assertEquals(adminDropDownActionsElements.get(0).getAttribute("class"), "give-chat-mod");
+    Assertion.assertEquals(adminDropDownActionsElements.get(1).getAttribute("class"), "kick");
+    Assertion.assertEquals(adminDropDownActionsElements.get(2).getAttribute("class"), "ban");
   }
 
   public void writeOnChat(String message) {

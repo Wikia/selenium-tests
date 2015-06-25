@@ -114,7 +114,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     public void verifySuggestions(String suggestion) {
         waitForElementByElement(suggestionsList.get(0));
         for (int i = 0; i < suggestionsList.size(); i++) {
-            Assertion.assertStringContains(suggestion, suggestionsList.get(i).getText());
+            Assertion.assertStringContains(suggestionsList.get(i).getText(), suggestion);
         }
     }
 
@@ -140,7 +140,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyFirstResult(String query) {
-        Assertion.assertStringContains(query.replaceAll("_", " "), firstResult.getText());
+        Assertion.assertStringContains(firstResult.getText(), query.replaceAll("_", " "));
         for (WebElement elem : descriptions) {
             Assertion.assertTrue(!elem.getText().isEmpty());
         }
@@ -164,8 +164,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
     public void verifyFirstArticleNameTheSame(String firstResult) {
         Assertion.assertEquals(
-    	    firstResult.toLowerCase(),
-    	    titles.get(0).getText().toLowerCase()
+                titles.get(0).getText().toLowerCase(), firstResult.toLowerCase()
         );
     }
 
@@ -174,11 +173,11 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyFirstArticleNameNotTheSame(String firstResult) {
-        Assertion.assertNotEquals(firstResult, titles.get(0).getText());
+        Assertion.assertNotEquals(titles.get(0).getText(), firstResult);
     }
 
     public void verifyResultsCount(int i) {
-        Assertion.assertNumber(i, titles.size(), "checking results count");
+        Assertion.assertNumber(titles.size(), i, "checking results count");
     }
 
     public void clickAdvancedButton() {
@@ -268,7 +267,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
     public void verifyTopModule() {
         waitForElementByElement(topModule);
-        Assertion.assertNumber(7, topModuleResults.size(), "Top module has correct amount of results");
+        Assertion.assertNumber(topModuleResults.size(), 7, "Top module has correct amount of results");
         for (int i = 0; i < topModuleResults.size(); i++) {
             Assertion.assertTrue(topModuleArticleThumbnail.get(i).isDisplayed());
             Assertion.assertTrue(topModuleArticleText.get(i).isDisplayed());
@@ -333,7 +332,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyPushToTopWikiTitle(String searchWiki) {
-        Assertion.assertStringContains(searchWiki, pushToTopWikiResult.getText());
+        Assertion.assertStringContains(pushToTopWikiResult.getText(), searchWiki);
     }
 
     public void verifyPushToTopWikiThumbnail() {
@@ -349,7 +348,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
         waitForElementByElement(newSuggestionsList.get(0));
         System.out.println(newSuggestionsList.size());
         for (int i = 0; i < newSuggestionsList.size(); i++) {
-            Assertion.assertStringContains(query, suggestionTextsList.get(i).getText());
+            Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
             Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
         }
         PageObjectLogging.log("verifyNewSuggestionsTextAndImages",

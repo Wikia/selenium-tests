@@ -35,7 +35,7 @@ public class AdsHopObject extends AdsBaseObject {
 
     public AdsHopObject verifyClassHidden(String slotName, String src) {
         WebElement testedDiv = getTestedDiv(slotName, src);
-        Assertion.assertEquals("hidden", testedDiv.getAttribute("class").trim());
+        Assertion.assertEquals(testedDiv.getAttribute("class").trim(), "hidden");
         return this;
     }
 
@@ -46,7 +46,7 @@ public class AdsHopObject extends AdsBaseObject {
         driver.switchTo().frame(iframe);
         WebElement postMessageScript = driver.findElement(By.xpath(POST_MESSAGE_SCRIPT_XPATH));
         Assertion
-            .assertEquals(getPostMessagePattern(src), postMessageScript.getAttribute("innerHTML"));
+            .assertEquals(postMessageScript.getAttribute("innerHTML"), getPostMessagePattern(src));
         driver.switchTo().defaultContent();
         return this;
     }
