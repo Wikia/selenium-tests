@@ -356,10 +356,11 @@ public class AdsBaseObject extends WikiBasePageObject {
         WebElement slot = driver.findElement(By.cssSelector(slotSelector));
         String log = "GPT ad not found in slot: " + slotSelector;
         if (checkIfElementInElement(GPT_DIV_SELECTOR, slot)) {
-            log = "GPT ad found in slot: " + slotSelector;
-            WebElement gptDiv = slot.findElement(By.cssSelector(GPT_DIV_SELECTOR));
+            List<WebElement> gptDivs = slot.findElements(By.cssSelector(GPT_DIV_SELECTOR));
+            WebElement lastGptDiv = gptDivs.get(gptDivs.size() - 1);
+            log = "GPT ad found in slot: " + lastGptDiv.getAttribute("id");
             for (String attribute : GPT_DATA_ATTRIBUTES) {
-                log += "; " + attribute + " = " + gptDiv.getAttribute(attribute);
+                log += "; " + attribute + " = " + lastGptDiv.getAttribute(attribute);
             }
         }
         PageObjectLogging.log("extractGptInfo", log, true, driver);
