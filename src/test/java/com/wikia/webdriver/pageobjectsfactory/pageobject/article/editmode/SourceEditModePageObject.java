@@ -307,7 +307,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void verifyVideoAlignment(PositionsVideo position) {
-    Assertion.assertStringContains(position.toString().toLowerCase(), getContent()
+    Assertion.assertStringContains(getContent(), position.toString().toLowerCase()
     );
   }
 
@@ -317,14 +317,13 @@ public class SourceEditModePageObject extends EditMode {
         content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
     );
     Assertion.assertNumber(
-        width,
-        widthDesired,
-        "width is " + width + " should be " + widthDesired
+            widthDesired, width,
+            "width is " + width + " should be " + widthDesired
     );
   }
 
   public void verifyVideoCaption(String desiredCaption) {
-    Assertion.assertStringContains(desiredCaption, getContent());
+    Assertion.assertStringContains(getContent(), desiredCaption);
   }
 
   /**

@@ -175,13 +175,13 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().defaultContent();
     switch (position) {
       case LEFT:
-        Assertion.assertStringContains("alignLeft", positionClass);
+        Assertion.assertStringContains(positionClass, "alignLeft");
         break;
       case CENTER:
-        Assertion.assertStringContains("alignCenter", positionClass);
+        Assertion.assertStringContains(positionClass, "alignCenter");
         break;
       case RIGHT:
-        Assertion.assertStringContains("alignRight", positionClass);
+        Assertion.assertStringContains(positionClass, "alignRight");
         break;
       default:
         throw new NoSuchElementException("Non-existing position selected");
@@ -194,9 +194,8 @@ public class VisualEditModePageObject extends EditMode {
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
     Assertion.assertNumber(
-        widthDesired,
-        widthCurrent,
-        "width should be " + widthDesired + " but is " + widthCurrent
+            widthCurrent, widthDesired,
+            "width should be " + widthDesired + " but is " + widthCurrent
     );
   }
 

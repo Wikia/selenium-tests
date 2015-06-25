@@ -35,7 +35,7 @@ public class MobileModalTests extends NewTestTemplate {
     MobileModalComponentObject modal = mobile.clickModal();
     String current = modal.getCurrentImageUrl();
     modal.goToNextImage();
-    Assertion.assertNotEquals(current, modal.getCurrentImageUrl());
+    Assertion.assertNotEquals(modal.getCurrentImageUrl(), current);
     modal.closeModal();
     modal.verifyModalClosed();
   }
@@ -47,7 +47,7 @@ public class MobileModalTests extends NewTestTemplate {
     MobileModalComponentObject modal = mobile.clickModal();
     String current = modal.getCurrentImageUrl();
     modal.goToPreviousImage();
-    Assertion.assertNotEquals(current, modal.getCurrentImageUrl());
+    Assertion.assertNotEquals(modal.getCurrentImageUrl(), current);
     modal.closeModal();
     modal.verifyModalClosed();
   }

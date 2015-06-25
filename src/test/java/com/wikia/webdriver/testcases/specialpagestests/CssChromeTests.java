@@ -64,7 +64,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
     specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
     String editSummary = specialCss.getFirstCssRevision();
-    Assertion.assertStringContains(currentTimestamp, editSummary);
+    Assertion.assertStringContains(editSummary, currentTimestamp);
   }
 
   /**

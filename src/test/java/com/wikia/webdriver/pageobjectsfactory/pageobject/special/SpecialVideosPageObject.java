@@ -145,7 +145,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     addVideoViaAjax(video.getUrl());
     deleteVideo();
     verifyNotificationMessage();
-    Assertion.assertNotEquals(video.getTitle(), getNewestVideoTitle());
+    Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
     PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video "
         + video.getTitle() + " was deleted", true);
   }

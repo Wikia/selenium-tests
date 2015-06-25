@@ -120,7 +120,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
     waitForElementByElement(heroImageModule);
-    Assertion.assertNotEquals(imgSrc, newImgSrc);
+    Assertion.assertNotEquals(newImgSrc, imgSrc);
   }
 
   public void deleteDescriptionEditorContent() {
@@ -175,6 +175,6 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void compareTopValues(String firstTopValue, String secondTopValue) {
-    Assertion.assertNotEquals(firstTopValue, secondTopValue);
+    Assertion.assertNotEquals(secondTopValue, firstTopValue);
   }
 }

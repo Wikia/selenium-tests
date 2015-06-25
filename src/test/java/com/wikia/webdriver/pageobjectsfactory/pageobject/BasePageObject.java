@@ -317,7 +317,7 @@ public class BasePageObject {
 
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
-    Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
+    Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
     PageObjectLogging.log("verifyURLcontains",
                           "current url is the same as expetced url", true);
   }

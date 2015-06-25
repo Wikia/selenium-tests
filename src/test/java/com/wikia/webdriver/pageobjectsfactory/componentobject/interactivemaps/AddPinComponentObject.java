@@ -170,7 +170,7 @@ public class AddPinComponentObject extends BasePageObject {
 
   public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
     waitForElementByElement(articleImageUrl);
-    Assertion.assertNotEquals(placeholderImageSrc, getAssociatedArticleImageSrc());
+    Assertion.assertNotEquals(getAssociatedArticleImageSrc(), placeholderImageSrc);
   }
 
   public void verifyAssociatedArticlePlaceholder() {

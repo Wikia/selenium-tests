@@ -212,8 +212,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifyImageLicense(ImageLicense imageLicense) {
     Assertion.assertStringContains(
-        imageLicense.getText(),
-        imgLicensePlate.getText()
+            imgLicensePlate.getText(), imageLicense.getText()
     );
   }
 }

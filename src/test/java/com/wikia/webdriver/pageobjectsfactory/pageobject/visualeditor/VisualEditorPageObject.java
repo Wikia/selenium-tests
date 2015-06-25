@@ -197,8 +197,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyVideos(int expected) {
     waitForElementVisibleByElement(mediaNode);
-    Assertion.assertNumber(expected, videoNodes.size(),
-                           "Checking the correct number of video nodes added");
+    Assertion.assertNumber(videoNodes.size(), expected,
+            "Checking the correct number of video nodes added");
     PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
   }
 
@@ -207,9 +207,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
       waitForElementVisibleByElement(galleryNode);
     }
     Assertion.assertNumber(
-        expected,
-        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")),
-        "Checking the correct number of gallery nodes");
+            getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")), expected,
+            "Checking the correct number of gallery nodes");
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -217,8 +216,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     String className = galleryNode.getAttribute("class");
     String count = className.substring(className.indexOf("count-"));
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
-    Assertion.assertNumber(expected, numOfMediasInGallery,
-                           "Checking the correct number of media in gallery");
+    Assertion.assertNumber(numOfMediasInGallery, expected,
+            "Checking the correct number of media in gallery");
     PageObjectLogging
         .log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
@@ -226,8 +225,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void verifyMedias(int expected) {
     waitForElementByElement(mediaNode);
     waitForElementVisibleByElement(mediaNode);
-    Assertion.assertNumber(expected, mediaNodes.size(),
-                           "Checking the correct number of media nodes added");
+    Assertion.assertNumber(mediaNodes.size(), expected,
+            "Checking the correct number of media nodes added");
     PageObjectLogging.log("verifyMedias", mediaNodes.size() + " media displayed", true);
   }
 
@@ -385,13 +384,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyNumberOfBlockTransclusion(int expected) {
-    Assertion.assertNumber(expected, getNumOfElementOnPage(blockTransclusionBy),
-                           "The number of blocked transclusion node is not equal");
+    Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy), expected,
+            "The number of blocked transclusion node is not equal");
   }
 
   public void verifyNumberOfInlineTransclusion(int expected) {
-    Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy),
-                           "The number of inline transclusion node is not equal");
+    Assertion.assertNumber(getNumOfElementOnPage(inlineTransclusionBy), expected,
+            "The number of inline transclusion node is not equal");
   }
 
 

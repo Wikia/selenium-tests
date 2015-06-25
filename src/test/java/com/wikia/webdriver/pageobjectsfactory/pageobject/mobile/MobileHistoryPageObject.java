@@ -30,7 +30,7 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
   }
 
   public void verifyHistoryPageHeader(String targetText) {
-    Assertion.assertStringContains(getModeName(), targetText);
+    Assertion.assertStringContains(targetText, getModeName());
     PageObjectLogging.log(
         "verifyHistoryPageHeader",
         "The summary shows " + targetText,
@@ -43,7 +43,7 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
   }
 
   public void verifyLastEditHistoryDevice(String targetText) {
-    Assertion.assertStringContains(getLastEditHistoryDevice(), targetText);
+    Assertion.assertStringContains(targetText, getLastEditHistoryDevice());
     PageObjectLogging.log(
         "verifyLastEditHistoryDevice",
         "The last edit shows " + targetText,
@@ -52,7 +52,7 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
   }
 
   public void verifyLastEditHistorySummary(String targetText) {
-    Assertion.assertStringContains(getLastHistorySummary(), targetText);
+    Assertion.assertStringContains(targetText, getLastHistorySummary());
     PageObjectLogging.log(
         "verifyLastEditHistorySummary",
         "The last edit summary shows " + targetText,

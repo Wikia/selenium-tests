@@ -24,6 +24,6 @@ public class TestExtraMarker extends TemplateDontLogout {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     String logs = wikiPage.getBrowserLogs(slot).toString();
     Assertion.assertStringNotEmpty(logs);
-    Assertion.assertStringContains(extraMarkerMessage, logs);
+    Assertion.assertStringContains(logs, extraMarkerMessage);
   }
 }

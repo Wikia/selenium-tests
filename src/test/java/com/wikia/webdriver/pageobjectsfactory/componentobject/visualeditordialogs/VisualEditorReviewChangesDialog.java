@@ -87,16 +87,16 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
         }
       }
     }
-    Assertion.assertNumber(expectedCount, count, "Number of diffs.");
+    Assertion.assertNumber(count, expectedCount, "Number of diffs.");
     if (mode == INSERT) {
-      Assertion.assertNumber(0, targets.size(), "Number of diffs.");
+      Assertion.assertNumber(targets.size(), 0, "Number of diffs.");
     }
   }
 
   private void verifyNewArticleDiffs(List<String> targets) {
     String wikiText = wikiaAritlceFirstPreview.getText();
     for (String target : targets) {
-      Assertion.assertStringContains(target, wikiText);
+      Assertion.assertStringContains(wikiText, target);
     }
   }
 

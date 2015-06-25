@@ -98,7 +98,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         WebElement slot = driver.findElement(By.id(slotName));
         if (checkIfSlotExpanded(slot)) {
             String foundImg = getSlotImageAd(slot);
-            Assertion.assertStringContains(expectedImg, foundImg);
+            Assertion.assertStringContains(foundImg, expectedImg);
         } else {
             throw new NoSuchElementException("Slot is collapsed - should be expanded");
         }

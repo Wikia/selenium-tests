@@ -53,7 +53,7 @@ public class VideoComponentObject extends WikiBasePageObject {
   public void verifyVideoOoyalaEmbed() {
     WebElement container = videoEmbed.findElement(By.tagName("div"));
     String containerId = "ooyalaplayer-";
-    Assertion.assertStringContains(containerId, container.getAttribute("id"));
+    Assertion.assertStringContains(container.getAttribute("id"), containerId);
     waitForElementVisibleByElement(container.findElement(By.tagName("object")));
     PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
   }
@@ -70,19 +70,19 @@ public class VideoComponentObject extends WikiBasePageObject {
 
   public void verifyVideoIgnEmbed() {
     String iframeSrc = "http://widgets.ign.com/video/embed/content.html?url=";
-    Assertion.assertStringContains(iframeSrc, getVideoPlayerIframe().getAttribute("src"));
+    Assertion.assertStringContains(getVideoPlayerIframe().getAttribute("src"), iframeSrc);
     PageObjectLogging.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
   }
 
   public void verifyVideoAnyclipEmbed() {
     WebElement container = videoEmbed.findElement(By.tagName("div"));
     String containerId = "ACPContainer0";
-    Assertion.assertStringContains(containerId, container.getAttribute("id"));
+    Assertion.assertStringContains(container.getAttribute("id"), containerId);
 
     WebElement object = container.findElement(By.tagName("object"));
     waitForElementVisibleByElement(object);
-    Assertion.assertStringContains(object.getAttribute("id"),
-                                   getVideoPlayerObject().getAttribute("value"));
+    Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id")
+    );
     PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
   }
 
@@ -135,7 +135,7 @@ public class VideoComponentObject extends WikiBasePageObject {
         break;
     }
 
-    Assertion.assertStringContains(autoplayStr, embedCode);
+    Assertion.assertStringContains(embedCode, autoplayStr);
   }
 
 }

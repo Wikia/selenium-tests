@@ -389,8 +389,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     scrollToElement(popUpContent);
     waitForElementVisibleByElement(pinTitle);
     waitForElementVisibleByElement(pinDescription);
-    Assertion.assertNotEquals(pinName, pinTitle.getText());
-    Assertion.assertNotEquals(pinDesc, pinDescription.getText());
+    Assertion.assertNotEquals(pinTitle.getText(), pinName);
+    Assertion.assertNotEquals(pinDescription.getText(), pinDesc);
   }
 
   public void verifyControlButtonsAreVisible() {
