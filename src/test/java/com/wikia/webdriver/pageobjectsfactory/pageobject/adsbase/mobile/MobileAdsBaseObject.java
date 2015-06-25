@@ -59,12 +59,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
             );
             return;
         }
-        if (!checkIfSlotExpanded(presentLeaderboard)) {
-            throw new NoSuchElementException(
-                    String.format("Slot is not expanded - ad is not there; CSS selector: %s",
-                            presentLeaderboardSelector)
-            );
-        }
+        waitForSlotExpanded(presentLeaderboard);
         if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
             throw new NoSuchElementException(
                     "Screenshots of element on/off look the same."
