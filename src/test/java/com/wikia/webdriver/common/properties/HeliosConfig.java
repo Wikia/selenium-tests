@@ -18,7 +18,7 @@ public class HeliosConfig {
 
   private static void init() {
     File configFile = new File(ConfigurationFactory.getConfig().getCredentialsFilePath());
-    String env = ConfigurationFactory.getConfig().getEnv();
+    String env = ConfigurationFactory.getConfig().getEnvType();
     clientId = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".client_id");
     clientSecret = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".client_secret");
     baseURL = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".base_url");
