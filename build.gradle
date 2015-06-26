@@ -27,6 +27,10 @@ tasks.withType(Compile) {
     options.encoding = 'UTF-8'
 }
 
+tasks.withType(Test) {
+    systemProperties = System.getProperties()
+}
+
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
 import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
@@ -199,6 +203,7 @@ task getSuite << {
 }
 
 task runFailed {
+
     if (project.hasProperty('failedOnly')) {
         println "Gathering failed config"
 
