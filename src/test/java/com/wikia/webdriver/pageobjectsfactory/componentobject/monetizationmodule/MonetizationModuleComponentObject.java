@@ -248,7 +248,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   public void verifyAdsenseHeaderShown() {
     waitForElementByElement(adHeader);
     Assertion.assertTrue(checkIfElementOnPage(adHeader));
-    Assertion.assertEquals(ADSENSE_HEADER_VALUE.toUpperCase(), adHeader.getText());
+    Assertion.assertEquals(adHeader.getText(), ADSENSE_HEADER_VALUE.toUpperCase());
     PageObjectLogging
         .log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
   }

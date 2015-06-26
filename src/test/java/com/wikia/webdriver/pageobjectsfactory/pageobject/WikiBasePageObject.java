@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.exceptions.TestFailedException;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -69,10 +70,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultBackoffStrategy;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
@@ -924,68 +928,64 @@ public class WikiBasePageObject extends BasePageObject {
     String client_secret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    HttpPost httpPost = new HttpPost(heliosBaseUrl);
+    List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+    nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
+    nvps.add(new BasicNameValuePair("client_id", client_id));
+    nvps.add(new BasicNameValuePair("client_secret", client_secret));
+    nvps.add(new BasicNameValuePair("username", userName));
+    nvps.add(new BasicNameValuePair("password", password));
+
+    CloseableHttpResponse response = null;
+    httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
     try {
-      CookieStore cookieStore = new BasicCookieStore();
+      response = httpClient.execute(httpPost);
 
-      HttpClient httpclient = HttpClientBuilder.create()
-          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-          .setDefaultCookieStore(cookieStore)
-          .disableAutomaticRetries()
-          .build();
-      HttpPost httpPost = new HttpPost(heliosBaseUrl);
-      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-      nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
-      nvps.add(new BasicNameValuePair("client_id", client_id));
-      nvps.add(new BasicNameValuePair("client_secret", client_secret));
-      nvps.add(new BasicNameValuePair("username", userName));
-      nvps.add(new BasicNameValuePair("password", password));
-
-      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
-
-      HttpResponse response = httpclient.execute(httpPost);
       HttpEntity entity = response.getEntity();
-
       JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+
+      EntityUtils.consume(entity);
 
       PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
       PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
 
       String token = responseValue.getString("access_token");
-      String refreshToken = responseValue.getString("refresh_token");
-      System.out.println("access_token: " + token);
-      System.out.println("refresh_token: " + refreshToken);
 
       driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
 
-      try {
-        driver.get(wikiURL);
-        System.out.println("cookie: " + driver.manage().getCookieNamed("access_token"));
-
-      } catch (TimeoutException e) {
-        PageObjectLogging.log("loginCookie",
-                              "page timeout after login by cookie", true);
-      }
-
+      driver.get(wikiURL);
       verifyUserLoggedIn(userName);
       PageObjectLogging.log("loginCookie",
-                            "user was logged in by cookie", true, driver);
+          "user was logged in by by helios using acces token: " + token, true);
       return token;
-    } catch (UnsupportedEncodingException e) {
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("loginCookie",
+                              "page timeout after login by cookie", false);
+    } catch (UnsupportedEncodingException | ClientProtocolException e) {
       PageObjectLogging.log("logInCookie",
                             "UnsupportedEncodingException", false);
-      return null;
-    } catch (ClientProtocolException e) {
-      PageObjectLogging.log("logInCookie", "ClientProtocolException",
-                            false);
-      return null;
-    } catch (IOException e) {
-      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-      return null;
+      throw new WebDriverException();
     } catch (JSONException e) {
+      PageObjectLogging.log("logInCookie",
+          "Problem with parsing JSON response", false);
+      throw new WebDriverException();
+    } catch (IOException e) {
+      PageObjectLogging.log("logInCookie",
+          "IO Exception", false);
       e.printStackTrace();
-      return null;
+    } finally {
+      try {
+        response.close();
+      } catch (IOException | NullPointerException e) {
+        PageObjectLogging.log("logInCookie",
+            "IO Exception", false);
+        e.printStackTrace();
+      }
     }
+    return "";
   }
 
   public void openWikiPage(String wikiURL) {
@@ -1032,7 +1032,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyHeader(String fileName) {
     waitForElementByElement(wikiFirstHeader);
-    Assertion.assertStringContains(fileName, wikiFirstHeader.getText());
+    Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
   }
 
   public void disableCaptcha() {
@@ -1201,7 +1201,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyArticleName(String targetText) {
-    Assertion.assertStringContains(getArticleName(), targetText);
+    Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log(
         "verifyArticleName",
         "The article shows " + targetText,
@@ -1218,7 +1218,7 @@ public class WikiBasePageObject extends BasePageObject {
         true,
         driver
     );
-    Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
+    Assertion.assertStringContains(headerWhereIsMyExtensionPage.getText(), pattern);
   }
 
   protected Boolean isNewGlobalNavPresent() {

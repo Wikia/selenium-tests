@@ -92,8 +92,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
   public void remindPassword(String name, String apiToken) {
     Assertion.assertEquals(
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
-        resetForgotPasswordTime(name, apiToken));
+            resetForgotPasswordTime(name, apiToken), ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE
+    );
     typeInUserName(name);
     clickForgotPasswordLink();
   }
@@ -125,8 +125,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   public void verifyClosedAccountMessage() {
     waitForElementByElement(messagePlaceholder);
     Assertion.assertEquals(
-        DISABLED_ACCOUNT_MESSAGE,
-        messagePlaceholder.getText()
+            messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE
     );
   }
 }

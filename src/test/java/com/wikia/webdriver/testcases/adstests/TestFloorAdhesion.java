@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.ModalSelectorsHelper;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
 
@@ -14,11 +14,15 @@ public class TestFloorAdhesion extends TemplateDontLogout {
     public void testFloorAdhesionPresence() {
         String browser = config.getBrowser();
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+        AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
         AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
 
-        wikiPage.verifyFloorAdhesionPresent();
-
+        wikiPage.verifyFloorAdhesionPresent(
+                skinContext.getSlotName(),
+                skinContext.getLineItemId(),
+                skinContext.getCreativeId()
+        );
         wikiPage.verifyThereIsNoWikiaBar(browser);
     }
 
@@ -28,10 +32,10 @@ public class TestFloorAdhesion extends TemplateDontLogout {
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
 
         AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
-        ModalSelectorsHelper modalSelectors = new ModalSelectorsHelper(browser);
+        AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
-        String floorAdhesionModalSelector = modalSelectors.getModalSelector();
-        String floorAdhesionModalCloseSelector = modalSelectors.getModalCloseSelector();
+        String floorAdhesionModalSelector = skinContext.getModalSelector();
+        String floorAdhesionModalCloseSelector = skinContext.getModalCloseSelector();
 
         wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
 

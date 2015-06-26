@@ -8,8 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -31,7 +29,7 @@ public class TestKruxSegment extends TemplateDontLogout {
       adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
     }
-    Assertion.assertStringContains(segmentId, adsKruxObject.getKxsegs());
+    Assertion.assertStringContains(adsKruxObject.getKxsegs(), segmentId);
   }
 
   @Test(
@@ -77,8 +75,8 @@ public class TestKruxSegment extends TemplateDontLogout {
     }
     String segmentsLocalStorage = adsKruxObject.getKxsegs();
     String dataGptPageParams = adsKruxObject.getGptParams("LEADERBOARD", "data-gpt-page-params");
-    Assertion.assertStringContains(adsKruxObject.getKsgmntPattern(segmentsLocalStorage),
-                                   dataGptPageParams);
+    Assertion.assertStringContains(dataGptPageParams, adsKruxObject.getKsgmntPattern(segmentsLocalStorage)
+    );
     Assertion.assertEquals(segmentsLocalStorage.contains(segment), isPresent);
   }
 

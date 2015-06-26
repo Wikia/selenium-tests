@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AdsFloorAdhesionObject extends BasePageObject {
+public class AdsFloorAdhesionObject extends AdsBaseObject {
     private final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
     private final String FLOOR_ADHESION_AD_FRAME_CSS = "#ext-wikia-adEngine-template-footer .ad iframe";
     private final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
@@ -19,7 +19,8 @@ public class AdsFloorAdhesionObject extends BasePageObject {
         getUrl(testedPage, true);
     }
 
-    public void verifyFloorAdhesionPresent() {
+    public void verifyFloorAdhesionPresent(String expectedSlotName, String expectedLineItemId, String expectedCreativeId) {
+        verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
         waitForElementByCss(FLOOR_ADHESION_CSS);
         PageObjectLogging.log(
                 "Check visibility of Floor Adhesion",

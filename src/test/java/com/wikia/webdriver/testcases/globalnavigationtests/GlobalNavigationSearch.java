@@ -40,8 +40,8 @@ public class GlobalNavigationSearch extends NewTestTemplate {
         .searchGlobally(query);
 
     String currentUrl = driver.getCurrentUrl();
-    Assertion.assertStringContains(expectedSpecialPage, currentUrl);
-    Assertion.assertStringContains(resultLang, currentUrl);
+    Assertion.assertStringContains(currentUrl, expectedSpecialPage);
+    Assertion.assertStringContains(currentUrl, resultLang);
     Assertion.assertTrue(search.isResultPresent());
   }
 
@@ -69,8 +69,8 @@ public class GlobalNavigationSearch extends NewTestTemplate {
         .searchGlobally(query);
 
     String currentUrl = driver.getCurrentUrl();
-    Assertion.assertStringContains(expectedSpecialPage, currentUrl);
-    Assertion.assertStringContains(resultLang, currentUrl);
+    Assertion.assertStringContains(currentUrl, expectedSpecialPage);
+    Assertion.assertStringContains(currentUrl, resultLang);
     Assertion.assertTrue(search.isResultPresent());
   }
 

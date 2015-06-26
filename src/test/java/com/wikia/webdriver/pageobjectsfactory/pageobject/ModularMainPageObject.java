@@ -100,7 +100,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void verifyEditedAndPublishedDescriptions(String editedDescription) {
     waitForElementByElement(heroPublishedDescription);
-    Assertion.assertEquals(editedDescription, heroPublishedDescription.getText());
+    Assertion.assertEquals(heroPublishedDescription.getText(), editedDescription);
   }
 
   public void verifyAdminStaffButtons() {
@@ -120,7 +120,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
     waitForElementByElement(heroImageModule);
-    Assertion.assertNotEquals(imgSrc, newImgSrc);
+    Assertion.assertNotEquals(newImgSrc, imgSrc);
   }
 
   public void deleteDescriptionEditorContent() {
@@ -152,7 +152,7 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void verifyPublishedTextAndEditor(String publishedText) {
     waitForElementByElement(heroPublishedDescription);
-    Assertion.assertEquals(publishedText, heroPublishedDescription.getText());
+    Assertion.assertEquals(heroPublishedDescription.getText(), publishedText);
   }
 
   public void clickDiscardButton() {
@@ -175,6 +175,6 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void compareTopValues(String firstTopValue, String secondTopValue) {
-    Assertion.assertNotEquals(firstTopValue, secondTopValue);
+    Assertion.assertNotEquals(secondTopValue, firstTopValue);
   }
 }

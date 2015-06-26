@@ -44,7 +44,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     waitForElementByElement(featuredVideoForm);
     WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
     String title = videoTitle.getText();
-    Assertion.assertEquals(title, name);
+    Assertion.assertEquals(name, title);
     PageObjectLogging.log("verifyVideoTitleUpdated", "Video title was updated", true);
   }
 
@@ -52,7 +52,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     waitForElementByElement(featuredVideoForm);
     WebElement displayTitle = featuredVideoForm.findElement(By.cssSelector(".display-title"));
     String title = displayTitle.getAttribute("value");
-    Assertion.assertEquals(title, name);
+    Assertion.assertEquals(name, title);
     PageObjectLogging
         .log("verifyVideoDisplayTitleUpdated", "Video display title input was populated", true);
   }
