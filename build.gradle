@@ -229,8 +229,6 @@ test {
     minHeapSize = '800m'
     maxHeapSize = '800m'
 
-    jvmArgs = ['-XX:MaxPermSize=1024m']
-
     outputs.upToDateWhen { false }
 }
 
