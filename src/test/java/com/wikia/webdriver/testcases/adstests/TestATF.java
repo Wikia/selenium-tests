@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 public class TestATF extends TemplateDontLogout {
 
   private final static Dimension PAGE_SIZE = new Dimension(1366, 768);
+  private final static Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -74,6 +75,27 @@ public class TestATF extends TemplateDontLogout {
         adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn);
     Assertion.assertNotEquals(
         adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "disableBtf",
+      groups = {"TestATF", "Ads"}
+  )
+  public void TestATFonTablet(String wikiName, String article, boolean isWgVarOn) {
+    PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
+    adsBaseObject.waitPageLoaded();
+
+    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
+    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
+    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
+
+    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
+    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
+    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
   }
 
 }
