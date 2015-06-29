@@ -691,12 +691,16 @@ public class AdsBaseObject extends WikiBasePageObject {
         }
     }
 
-    private void tryTriggerFloatingMedrec(WebElement slot) {
-        executeScript(
-            "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
-        // try to wait a floating medrec 3 seconds
+    private void tryTriggerFloatingMedrec(final WebElement slot) {
         try {
-            new WebDriverWait(driver, 3).until(CommonExpectedConditions.elementVisible(slot));
+            new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
+                @Override
+                public Object apply(WebDriver webDriver) {
+                    executeScript(
+                        "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
+                    return slot.getAttribute("style").contains("visibility: visible;");
+                }
+            });
         } catch (org.openqa.selenium.TimeoutException ignore) {
             PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
         }
