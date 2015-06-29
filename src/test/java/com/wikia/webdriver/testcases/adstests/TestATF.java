@@ -77,10 +77,10 @@ public class TestATF extends TemplateDontLogout {
         adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
   }
 
-    /**
-     * https://wikia-inc.atlassian.net/browse/ADEN-2156
-     * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
-     */
+  /**
+   * https://wikia-inc.atlassian.net/browse/ADEN-2156
+   * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
+   */
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
