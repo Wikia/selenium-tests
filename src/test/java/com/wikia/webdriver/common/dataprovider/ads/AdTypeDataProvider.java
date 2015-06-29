@@ -111,4 +111,17 @@ public class AdTypeDataProvider {
         },
     };
   }
+
+  @DataProvider
+  public static final Object[][] collapse() {
+    return new Object[][]{
+        {
+            "adtest", "SyntheticTests/AdType/Collapse",
+            "wka.ent/_adtest//article",
+            "TOP_RIGHT_BOXAD"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=386164332&lineItemId=165191172
+        },
+    };
+  }
+
 }
