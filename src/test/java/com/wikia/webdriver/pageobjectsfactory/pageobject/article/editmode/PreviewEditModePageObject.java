@@ -69,12 +69,12 @@ public class PreviewEditModePageObject extends EditMode {
         videoWidthSelector
     ).getAttribute("width"));
     Assertion
-        .assertNumber(desiredWidth, width, "width should be " + desiredWidth + " but is " + width);
+        .assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is " + width);
   }
 
   public void verifyVideoCaption(String desiredCaption) {
     String caption = previewModal.findElement(videoCaptionSelector).getText();
-    Assertion.assertStringContains(desiredCaption, caption);
+    Assertion.assertStringContains(caption, desiredCaption);
   }
 
   public void closePreviewModal() {
@@ -84,7 +84,7 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
   }
 
   public void publish() {

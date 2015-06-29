@@ -19,24 +19,21 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
   public void verifyWrongPasswordErrorMessage() {
     waitForElementByElement(errorMessage);
     Assertion.assertEquals(
-        MobilePageContent.LOGIN_WRONG_PASSWORD_ERROR_MESSAGE,
-        errorMessage.getText()
+            errorMessage.getText(), MobilePageContent.LOGIN_WRONG_PASSWORD_ERROR_MESSAGE
     );
   }
 
   public void verifyWrongLoginErrorMessage() {
     waitForElementByElement(errorMessage);
     Assertion.assertEquals(
-        MobilePageContent.LOGIN_WRONG_LOGIN_ERROR_MESSAGE,
-        errorMessage.getText()
+            errorMessage.getText(), MobilePageContent.LOGIN_WRONG_LOGIN_ERROR_MESSAGE
     );
   }
 
   public void verifyEmptyPasswordErrorMessage() {
     waitForElementByElement(errorMessage);
     Assertion.assertEquals(
-        MobilePageContent.LOGIN_EMPTY_PASSWORD_ERROR_MESSAGE,
-        errorMessage.getText()
+            errorMessage.getText(), MobilePageContent.LOGIN_EMPTY_PASSWORD_ERROR_MESSAGE
     );
   }
 }

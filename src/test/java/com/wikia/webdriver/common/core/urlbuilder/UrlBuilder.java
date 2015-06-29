@@ -26,15 +26,6 @@ public class UrlBuilder {
     this.browser = browser;
   }
 
-  private ImmutableMap<String, Pair> customWikiNames = ImmutableMap.<String, Pair>builder()
-      .put("de.jedipedia", Pair.of("www.jedipedia.de", "dejedipedia"))
-      .put("memory-alpha.org", Pair.of("en.memory-alpha.org", "enmemoryalpha"))
-      .put("de.memory-alpha", Pair.of("de.memory-alpha.org", "dememoryalpha"))
-      .put("yoyo", Pair.of("www.yoyowiki.org", "yoyo"))
-      .put("wowwiki", Pair.of("www.wowwiki.com", "wowwiki"))
-      .build();
-
-
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
@@ -50,16 +41,6 @@ public class UrlBuilder {
   public String getUrlForWiki(String wikiName) {
     String prefix = getUrlPrefix(wikiName);
     String suffix = getUrlSuffix(wikiName);
-
-    if (customWikiNames.containsKey(wikiName)) {
-      if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
-        prefix = "";
-        wikiName = (String) customWikiNames.get(wikiName).getRight();
-      } else {
-        prefix = suffix = "";
-        wikiName = (String) customWikiNames.get(wikiName).getLeft();
-      }
-    }
 
     return composeUrl(prefix, wikiName, suffix);
   }

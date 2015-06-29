@@ -51,13 +51,13 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
   public void verifyChevronOpened() {
     for (WebElement elem : chevronList) {
-      Assertion.assertEquals("collSec open", elem.getAttribute("class"));
+      Assertion.assertEquals(elem.getAttribute("class"), "collSec open");
     }
   }
 
   public void verifyChevronClosed() {
     for (WebElement elem : chevronList) {
-      Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));
+      Assertion.assertNotEquals(elem.getAttribute("class"), "collSec open");
     }
   }
 
@@ -129,11 +129,11 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
   }
 
   public void verifyArticlesEquals(String article, String article2) {
-    Assertion.assertEquals(article, article2);
+    Assertion.assertEquals(article2, article);
   }
 
   public void verifyArticlesNotEquals(String article, String article2) {
-    Assertion.assertNotEquals(article, article2);
+    Assertion.assertNotEquals(article2, article);
   }
 
   public void showNextArticles(String articlesFirstLetter) {

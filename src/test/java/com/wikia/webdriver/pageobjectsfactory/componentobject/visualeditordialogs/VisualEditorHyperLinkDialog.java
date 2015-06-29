@@ -123,26 +123,26 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   public void verifyNewPageIsTop() {
     indexLinkCategories();
-    Assertion.assertNumber(0, pageCategoryIndex[NEW_PAGE_INDEX],
-                           "Checking New Page is on the top of the results.");
+    Assertion.assertNumber(pageCategoryIndex[NEW_PAGE_INDEX], 0,
+            "Checking New Page is on the top of the results.");
   }
 
   public void verifyMatchingPageIsTop() {
     indexLinkCategories();
-    Assertion.assertNumber(0, pageCategoryIndex[MATCHING_PAGE_INDEX],
-                           "Checking Matching Page is on the top of the results.");
+    Assertion.assertNumber(pageCategoryIndex[MATCHING_PAGE_INDEX], 0,
+            "Checking Matching Page is on the top of the results.");
   }
 
   public void verifyExternalLinkIsTop() {
     indexLinkCategories();
-    Assertion.assertNumber(0, pageCategoryIndex[EXTERNAL_LINK_INDEX],
-                           "Checking External Link is on the top of the results.");
+    Assertion.assertNumber(pageCategoryIndex[EXTERNAL_LINK_INDEX], 0,
+            "Checking External Link is on the top of the results.");
   }
 
   public void verifyRedirectPageIsTop() {
     indexLinkCategories();
-    Assertion.assertNumber(0, pageCategoryIndex[REDIRECT_PAGE_INDEX],
-                           "Checking Redirect Page is on the top of the results.");
+    Assertion.assertNumber(pageCategoryIndex[REDIRECT_PAGE_INDEX], 0,
+            "Checking Redirect Page is on the top of the results.");
   }
 
   public void clickLinkResult() {

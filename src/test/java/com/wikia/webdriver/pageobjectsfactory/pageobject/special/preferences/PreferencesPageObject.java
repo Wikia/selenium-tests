@@ -73,8 +73,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public void verifyEmailMeSection() {
     for (WebElement elem : emailMeSectionRows) {
       PageObjectLogging.log("verifyEmailSection", "verifying " + elem.getText(), true);
-      Assertion.assertEquals("true",
-          elem.findElement(By.cssSelector("input")).getAttribute("checked"));
+      Assertion.assertEquals(elem.findElement(By.cssSelector("input")).getAttribute("checked"), "true"
+      );
     }
   }
 

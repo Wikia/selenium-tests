@@ -20,7 +20,7 @@ public class GermanAdsDataProvider {
         {"de.fahrrad", "Reifenumfang_%28Tabelle%29"},
         {"de.bindingofisaac", "Items"},
         {"de.videospielehub", "Videospiele_Hub"},
-        {"de.jedipedia", "Obi-Wan_Kenobi"},
+        {"jedipedia", "Obi-Wan_Kenobi"},
         {"de.memory-alpha", "Hauptseite"}
     };
   }
@@ -114,7 +114,7 @@ public class GermanAdsDataProvider {
         {"dietributevonpanem", "Lied_vom_Henkersbaum_(The_Hanging_Tree)",
          "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dedietributevonpanem; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: dedietribu"},
-        {"jedipedia.de", "Jedipedia:Hauptseite",
+        {"jedipedia", "Jedipedia:Hauptseite",
          "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dejedipedia; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,ps3,xbox360,nintendo,movie,scifi,dejedipedi"},
         {"de.clashofclans", "Kategorie:Truppen",

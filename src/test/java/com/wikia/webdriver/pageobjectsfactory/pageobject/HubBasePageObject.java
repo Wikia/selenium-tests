@@ -103,8 +103,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void mosaicSliderVerifyLargeImageDescriptionDifferent(
       String previousLargeImageDescription) {
-    Assertion.assertNotEquals(previousLargeImageDescription,
-                              mosaicSliderGetCurrentLargeImageDescription());
+    Assertion.assertNotEquals(mosaicSliderGetCurrentLargeImageDescription(), previousLargeImageDescription
+    );
   }
 
   /**

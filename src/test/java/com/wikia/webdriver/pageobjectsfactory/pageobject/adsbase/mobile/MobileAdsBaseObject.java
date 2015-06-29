@@ -59,12 +59,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
             );
             return;
         }
-        if (!checkIfSlotExpanded(presentLeaderboard)) {
-            throw new NoSuchElementException(
-                    String.format("Slot is not expanded - ad is not there; CSS selector: %s",
-                            presentLeaderboardSelector)
-            );
-        }
+        waitForSlotExpanded(presentLeaderboard);
         if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
             throw new NoSuchElementException(
                     "Screenshots of element on/off look the same."
@@ -103,7 +98,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         WebElement slot = driver.findElement(By.id(slotName));
         if (checkIfSlotExpanded(slot)) {
             String foundImg = getSlotImageAd(slot);
-            Assertion.assertStringContains(expectedImg, foundImg);
+            Assertion.assertStringContains(foundImg, expectedImg);
         } else {
             throw new NoSuchElementException("Slot is collapsed - should be expanded");
         }

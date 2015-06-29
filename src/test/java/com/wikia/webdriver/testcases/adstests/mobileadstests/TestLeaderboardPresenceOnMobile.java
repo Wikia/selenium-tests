@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
 
@@ -19,8 +19,8 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
   private String testedPage;
 
   @Factory(
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "articlesWithTopLeaderboard"
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "popularSites"
   )
   public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
     urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());

@@ -107,15 +107,15 @@ public class SpecialPromotePageObject extends BasePageObject {
   public void verifyCrossWikiSearchDescription(String firstDescription) {
     waitForElementByElement(wikiaDescription);
     Assertion.assertStringContains(
-        firstDescription.substring(0,
-                                   firstDescription.length() - 3), wikiaDescription.getText()
+            wikiaDescription.getText(), firstDescription.substring(0,
+                                   firstDescription.length() - 3)
     );
   }
 
   public void verifyCrossWikiSearchImage(String firstImage) {
     waitForElementByElement(thumbnailImage);
     String secondImage = getUniqueThumbnailTextSpecialPromotePage();
-    Assertion.assertEquals(firstImage, secondImage);
+    Assertion.assertEquals(secondImage, firstImage);
   }
 
   public void verifyUploadedImage(String fileName) {

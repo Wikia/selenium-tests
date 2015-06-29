@@ -49,7 +49,7 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
       for (int j = i + 1; j < videos.size(); j++) {
         videoTitle1 = videos.get(i).getAttribute("data-video-key");
         videoTitle2 = videos.get(j).getAttribute("data-video-key");
-        Assertion.assertNotEquals(videoTitle1, videoTitle2);
+        Assertion.assertNotEquals(videoTitle2, videoTitle1);
       }
     }
     PageObjectLogging.log("verifyNoDuplicates", "Videos Module not showing duplicates", true);

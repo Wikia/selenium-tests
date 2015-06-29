@@ -62,14 +62,14 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void verifyNoResults() {
-    Assertion.assertEquals("No results found.", noResultsCaption.getText());
+    Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
   }
 
   public void verifyPagination() {
     waitForElementByBy(paginationContainerBy);
     int i = 1;
     for (WebElement elem : paginationPages) {
-      Assertion.assertEquals(Integer.toString(i), elem.getText());
+      Assertion.assertEquals(elem.getText(), Integer.toString(i));
       i++;
     }
   }

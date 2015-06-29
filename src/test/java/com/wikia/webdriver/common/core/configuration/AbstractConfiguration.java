@@ -38,4 +38,17 @@ public abstract class AbstractConfiguration {
   public Credentials getCredentials() {
     return new Credentials(new File(this.getCredentialsFilePath()));
   }
+
+  public String getEnvType(){
+    if(getEnv().contains("prod")){
+      return "prod";
+    }else if(getEnv().contains("preview")){
+      return "preview";
+    }else if(getEnv().contains("sandbox")){
+      return "sandbox";
+    }else if(getEnv().contains("dev")){
+      return "dev";
+    }
+    return "";
+  }
 }

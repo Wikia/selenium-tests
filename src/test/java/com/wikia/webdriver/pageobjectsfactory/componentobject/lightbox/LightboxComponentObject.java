@@ -165,7 +165,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void verifyTitleUrl(String expectedUrl) {
     String titleUrl = titleLink.getAttribute("href");
-    Assertion.assertEquals(expectedUrl, titleUrl);
+    Assertion.assertEquals(titleUrl, expectedUrl);
     PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
   }
 
@@ -178,7 +178,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void verifyMoreInfoUrl(String expectedUrl) {
     String moreInfoUrl = moreInfoLink.getAttribute("href");
-    Assertion.assertEquals(expectedUrl, moreInfoUrl);
+    Assertion.assertEquals(moreInfoUrl, expectedUrl);
     PageObjectLogging.log("verifyMoreInfoUrl", "More Info URL is correct", true);
   }
 
