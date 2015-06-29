@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  */
 public class TestATF extends TemplateDontLogout {
 
-  private final static Dimension PAGE_SIZE = new Dimension(1366, 768);
+  private final static Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private final static Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
 
   @Test(
@@ -30,7 +30,7 @@ public class TestATF extends TemplateDontLogout {
     PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitPageLoaded();
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
@@ -60,7 +60,7 @@ public class TestATF extends TemplateDontLogout {
     PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitPageLoaded();
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
@@ -77,6 +77,10 @@ public class TestATF extends TemplateDontLogout {
         adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
   }
 
+    /**
+     * https://wikia-inc.atlassian.net/browse/ADEN-2156
+     * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
+     */
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -92,10 +96,6 @@ public class TestATF extends TemplateDontLogout {
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
-
-    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
-    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
-    Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
   }
 
 }
