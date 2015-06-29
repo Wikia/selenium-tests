@@ -956,7 +956,12 @@ public class WikiBasePageObject extends BasePageObject {
 
       driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
 
-      driver.get(wikiURL);
+      if(driver.getCurrentUrl().contains("Logout")){
+        driver.get(wikiURL);
+      }else {
+        driver.navigate().refresh();
+      }
+
       verifyUserLoggedIn(userName);
       PageObjectLogging.log("loginCookie",
           "user was logged in by by helios using acces token: " + token, true);
