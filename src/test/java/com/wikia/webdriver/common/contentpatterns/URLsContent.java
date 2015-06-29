@@ -129,6 +129,7 @@ public class URLsContent {
   public static final String ARTICLENAME_002 = "TestVid002";
   public static final String ARTICLENAME_003 = "TestVid003";
   public static final String ARTICLENAME_004 = "TestVid004";
+  public static final String FlagTest = "FlagTest";
 
   public static final String SPECIAL_SEARCH = "wiki/Special:Search";
 
@@ -172,6 +173,7 @@ public class URLsContent {
 
   //External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
+  public static final String EXTERNAL_RUNESCAPE = "http://runescape-test.wikia.com/";
 
   //Embed map URL for Interactive Maps
   public static final String EMBEDED_MAP_EDITPAGE = "wiki/EmbedMap?action=edit";
