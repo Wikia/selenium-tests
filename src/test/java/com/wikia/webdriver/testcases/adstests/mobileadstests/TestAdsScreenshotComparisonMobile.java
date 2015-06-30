@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -10,11 +11,9 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * Bogna 'bognix' Knychala
- *
  * @ownership AdEngineering
  */
-public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
+public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
 
   private String testedPage;
 
@@ -22,95 +21,122 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "popularSites"
   )
-  public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
+  public TestAdsScreenshotComparisonMobile(String wikiName, String article) {
     urlBuilder = new UrlBuilder(config.getEnv(), config.getBrowser());
     testedPage = urlBuilder.getUrlForPath(wikiName, article);
+  }
+
+  private void checkAds(String country) {
+    MobileAdsBaseObject mobileAdsBaseObject = new MobileAdsBaseObject(driver, testedPage);
+    Assertion.assertEquals(mobileAdsBaseObject.getCountry(), country);
+    mobileAdsBaseObject.verifyMobileTopLeaderboard();
+  }
+
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF"}
+  )
+  public void Ads_Screenshot_Mobile_GEF() {
+    checkAds("US");
+  }
+
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_GB"}
+  )
+  public void Ads_Screenshot_Mobile_Rapid_GB() {
+    checkAds("GB");
+  }
+
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_CA"}
+  )
+  public void Ads_Screenshot_Mobile_Rapid_CA() {
+    checkAds("CA");
+  }
+
+  @Test(
+      groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_DE"}
+  )
+  public void Ads_Screenshot_Mobile_Rapid_DE() {
+    checkAds("DE");
   }
 
   @GeoEdgeProxy(country = "JP")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"}
   )
-  public void TopLeaderboardPresenceTest_JP() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_JP() {
+    checkAds("JP");
   }
 
   @GeoEdgeProxy(country = "VE")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_VE"}
   )
-  public void TopLeaderboardPresenceTest_VE() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_VE() {
+    checkAds("VE");
   }
 
   @GeoEdgeProxy(country = "AU")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_AU"}
   )
-  public void TopLeaderboardPresenceTest_AU() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_AU() {
+    checkAds("AU");
   }
 
   @GeoEdgeProxy(country = "NZ")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_NZ"}
   )
-  public void TopLeaderboardPresenceTest_NZ() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_NZ() {
+    checkAds("NZ");
   }
 
   @GeoEdgeProxy(country = "DE")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_DE"}
   )
-  public void TopLeaderboardPresenceTest_DE() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_DE() {
+    checkAds("DE");
   }
 
   @GeoEdgeProxy(country = "GB")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_GB"}
   )
-  public void TopLeaderboardPresenceTest_GB() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_GB() {
+    checkAds("GB");
   }
 
   @GeoEdgeProxy(country = "LT")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_LT"}
   )
-  public void TopLeaderboardPresenceTest_LT() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_LT() {
+    checkAds("LT");
   }
 
   @GeoEdgeProxy(country = "TW")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_TW"}
   )
-  public void TopLeaderboardPresenceTest_TW() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_TW() {
+    checkAds("TW");
   }
 
   @GeoEdgeProxy(country = "CA")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_CA"}
   )
-  public void TopLeaderboardPresenceTest_CA() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
-  }
-
-  @Test(
-      groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF"}
-  )
-  public void TopLeaderboardPresenceTest_GEF() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_CA() {
+    checkAds("CA");
   }
 
   @GeoEdgeProxy(country = "NO")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"}
   )
-  public void TopLeaderboardPresenceTest_NO() {
-    new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
+  public void Ads_Screenshot_Mobile_NO() {
+    checkAds("NO");
   }
 }
