@@ -21,5 +21,12 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   }
 
 
+  public void clickPageInputField() {
+    waitForElementByElement(pageInputField);
+    pageInputField.click();
+  }
 
+  public void typeInfoboxImageName(String imageFileName) {
+    pageInputField.sendKeys(imageFileName);
+  }
 }
