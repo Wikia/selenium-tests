@@ -13,7 +13,8 @@ public class TestAdType extends TemplateDontLogout {
   @Test(
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "collapse",
-      groups = {"Ads", "TestAdTypeCollapse_001", "TestAdType"}
+      groups = {"Ads", "TestAdTypeCollapse_001", "TestAdType"},
+      enabled = false // wf ADEN-2052
   )
   public void TestAdTypeCollapse_001(String wikiName, String article, String adUnit, String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
