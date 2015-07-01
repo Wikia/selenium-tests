@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 *  dropDownSuggestions: Type at least 3 chars and verify suggestions are displaying and contain given phrase
 *  searchSuggestionsVisibility: Verify Image and text is shown next to every suggestion
 */
-
+@Test(groups = {"IntraWikiSearchSuggestions"})
 public class Suggestions extends IntraWiki {
 
 	  @Test(groups = {"dropDownSuggestions", "IntraWikiSearch", "Search"})

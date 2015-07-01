@@ -32,7 +32,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
  * namespaces in result titles 14. Verify top module 15. Verify push to top is working in
  * community.wikia.com
  */
-
+@Test(groups = {"IntraWikiSearchBasicActions"})
 public class BasicActions extends IntraWiki {
 
   @Test(groups = {"anonSearch", "IntraWikiSearch", "Search"})
