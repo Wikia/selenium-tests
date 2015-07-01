@@ -17,8 +17,8 @@ import org.testng.annotations.Test;
  */
 public class CuratedContentTests extends NewTestTemplate {
 
-  private static final String category = URLsContent.CATEGORY_HELP;
-  private static final String label = PageContent.LOREM_IPSUM_SHORT;
+  private static final String CATEGORY = URLsContent.CATEGORY_HELP;
+  private static final String LABEL = PageContent.LOREM_IPSUM_SHORT;
 
   Credentials credentials = config.getCredentials();
 
@@ -29,7 +29,7 @@ public class CuratedContentTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element without image
-    cc.addNewElement(category, label);
+    cc.addNewElement(CATEGORY, label);
     // verify error message and save button not clickable
     cc.verifyImageErrorInLastElement();
     cc.verifySaveNotClickable();
@@ -42,7 +42,7 @@ public class CuratedContentTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element and add image to that element
-    cc.addNewElement(category, label);
+    cc.addNewElement(CATEGORY, label);
     PhotoAddComponentObject addPhotoModal = cc.clickImageOnLastElement();
     addPhotoModal.clickAddThisPhoto(1);
     cc.verifyImageInLastElement();
