@@ -54,7 +54,7 @@ public class MailFunctions {
             magicMessage = message;
           }
         }
-        if (i > 100) {
+        if (i > 30) {
           throw new WebDriverException("Mail timeout exceeded");
         }
       }
