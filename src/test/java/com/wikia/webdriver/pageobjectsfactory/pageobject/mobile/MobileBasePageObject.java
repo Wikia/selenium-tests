@@ -301,4 +301,9 @@ public class MobileBasePageObject extends WikiBasePageObject {
     );
     return new MobileEditModePageObject(driver);
   }
+
+  public MobileSignupPageObject openMobileSignupPage(String wikiURL) {
+    openWikiPage(wikiURL + "signup");
+    return new MobileSignupPageObject(driver);
+  }
 }
