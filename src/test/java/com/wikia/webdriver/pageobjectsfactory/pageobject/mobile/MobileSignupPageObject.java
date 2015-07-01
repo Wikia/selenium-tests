@@ -37,23 +37,25 @@ public class MobileSignupPageObject extends MobileBasePageObject {
     private WebElement avatar;
 
 
-
-    public void typeEmailAddress(String email) {
+    public MobileSignupPageObject typeEmailAddress(String email) {
         waitForElementByElement(signupEmail);
         signupEmail.sendKeys(email);
+        return this;
     }
 
-    public void typeUsername(String username) {
+    public MobileSignupPageObject typeUsername(String username) {
         waitForElementByElement(signupUsername);
         signupUsername.sendKeys(username);
+        return this;
     }
 
-    public void typePassword(String password) {
+    public MobileSignupPageObject typePassword(String password) {
         waitForElementByElement(signupPassword);
         signupPassword.sendKeys(password);
+        return this;
     }
 
-    public void typeBirthdate(String month, String day, String year) {
+    public MobileSignupPageObject typeBirthdate(String month, String day, String year) {
         waitForElementByElement(signupBirthdate);
         scrollAndClick((signupBirthdate));
 
@@ -68,9 +70,11 @@ public class MobileSignupPageObject extends MobileBasePageObject {
         waitForElementByElement(signupBirthYear);
         signupBirthYear.click();
         signupBirthYear.sendKeys(year);
+
+        return this;
     }
 
-    public void clickSignupButton() {
+    public void register() {
         waitForElementByElement(signupButton);
         scrollAndClick(signupButton);
     }

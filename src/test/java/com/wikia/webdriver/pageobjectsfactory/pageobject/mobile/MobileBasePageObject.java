@@ -303,7 +303,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public MobileSignupPageObject openMobileSignupPage(String wikiURL) {
-    openWikiPage(wikiURL + "signup");
+    openWikiPage(wikiURL + "register");
     return new MobileSignupPageObject(driver);
   }
 }
