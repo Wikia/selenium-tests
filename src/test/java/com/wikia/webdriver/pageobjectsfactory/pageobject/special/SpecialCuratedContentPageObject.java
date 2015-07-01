@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,12 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   private WebElement lastElementLabelInput;
   @FindBy(css = "li.item:last-of-type span.remove")
   private WebElement lastElementRemoveIcon;
+  @FindBy(css = "li.item:last-of-type .image")
+  private WebElement lastElementImage;
+  @FindBy(css = "li.item:last-of-type .image[style]")
+  private WebElement lastElementImageFilled;
+  @FindBy(css = "li.item:last-of-type .image.error")
+  private WebElement lastElementImageWithError;
 
   public SpecialCuratedContentPageObject(WebDriver driver) {
     super(driver);
@@ -48,6 +55,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public void verifySuccesfulSave() {
     waitForElementByElement(successMark);
+    PageObjectLogging.log("verifySuccesfulSave", "Curated Content saved with success", true);
   }
 
   public void removeLastElement(String label) {
@@ -55,10 +63,24 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
     scrollAndClick(lastElementRemoveIcon);
   }
 
-  public PhotoAddComponentObject addImage() {
-    return null;
+  public PhotoAddComponentObject clickImageOnLastElement() {
+    waitForElementByElement(lastElementImage);
+    scrollAndClick(lastElementImage);
+    return new PhotoAddComponentObject(driver);
   }
 
-  public void verifyImageInElement(String label) {
+  public void verifyImageInLastElement() {
+    waitForElementByElement(lastElementImageFilled);
+    PageObjectLogging.log("verifyImageInLastElement", "Image is present in the last element", true);
+  }
+
+  public void verifyImageErrorInLastElement() {
+    waitForElementByElement(lastElementImageWithError);
+    PageObjectLogging.log("verifyImageErrorInLastElement", "Image shows error", true);
+  }
+
+  public void verifySaveNotClickable() {
+    waitForElementNotClickableByElement(saveButton);
+    PageObjectLogging.log("verifySaveNotClickable", "Save button is not clickable", true);
   }
 }

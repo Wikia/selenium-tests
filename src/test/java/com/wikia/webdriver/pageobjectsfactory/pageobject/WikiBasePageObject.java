@@ -394,7 +394,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SpecialCuratedContentPageObject openSpecialCuratedContent(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CSS);
+    getUrl(wikiURL + URLsContent.SPECIAL_CURATED_CONTENT);
     return new SpecialCuratedContentPageObject(driver);
   }
 

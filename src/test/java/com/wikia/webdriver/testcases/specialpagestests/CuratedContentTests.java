@@ -28,6 +28,9 @@ public class CuratedContentTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
+    cc.addNewElement(category, label);
+    cc.verifyImageErrorInLastElement();
+    cc.verifySaveNotClickable();
   }
 
   @CreationTicket(ticketID = "CONCF-767")
@@ -38,10 +41,9 @@ public class CuratedContentTests extends NewTestTemplate {
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element and add image to that element
     cc.addNewElement(category, label);
-    PhotoAddComponentObject addPhotoModal = cc.addImage();
-    PhotoOptionsComponentObject photoOptionsModal = addPhotoModal.addPhotoFromWiki("image", 1);
-    photoOptionsModal.clickAddPhoto();
-    cc.verifyImageInElement(label);
+    PhotoAddComponentObject addPhotoModal = cc.clickImageOnLastElement();
+    PhotoOptionsComponentObject photoOptionsModal = addPhotoModal.clickAddThisPhoto(1);
+    cc.verifyImageInLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();
     //clean the added element
