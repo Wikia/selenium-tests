@@ -9,8 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * @author Garth Webb
- * @author Saipetch Kongkatong
+ * @ownership Content
  */
 public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
@@ -19,7 +18,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   @FindBy(css = "#save")
   private WebElement saveButton;
   @FindBy(css = "#save.ok")
-  private WebElement successMark;
+  private WebElement successfulSaveMark;
   @FindBy(css = "li.item:last-of-type .item-input")
   private WebElement lastElementNameInput;
   @FindBy(css = "li.item:last-of-type .name")
@@ -54,7 +53,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   }
 
   public void verifySuccesfulSave() {
-    waitForElementByElement(successMark);
+    waitForElementByElement(successfulSaveMark);
     PageObjectLogging.log("verifySuccesfulSave", "Curated Content saved with success", true);
   }
 

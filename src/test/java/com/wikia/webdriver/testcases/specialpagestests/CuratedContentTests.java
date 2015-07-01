@@ -28,7 +28,9 @@ public class CuratedContentTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
+    // add new element without image
     cc.addNewElement(category, label);
+    // verify error message and save button not clickable
     cc.verifyImageErrorInLastElement();
     cc.verifySaveNotClickable();
   }
