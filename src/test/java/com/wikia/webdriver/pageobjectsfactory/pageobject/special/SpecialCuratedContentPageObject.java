@@ -1,23 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.video.YoutubeVideo;
-import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author Garth Webb
@@ -25,8 +13,18 @@ import java.util.Random;
  */
 public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
-  @FindBy(css = ".WikiaPageHeader h1")
-  private WebElement h1Header;
+  @FindBy(css = "#addItem")
+  private WebElement addItemButton;
+  @FindBy(css = "#save")
+  private WebElement saveButton;
+  @FindBy(css = "#save.ok")
+  private WebElement successMark;
+  @FindBy(css = "li.item:last-of-type .item-input")
+  private WebElement lastElementNameInput;
+  @FindBy(css = "li.item:last-of-type .name")
+  private WebElement lastElementLabelInput;
+  @FindBy(css = "li.item:last-of-type span.remove")
+  private WebElement lastElementRemoveIcon;
 
   public SpecialCuratedContentPageObject(WebDriver driver) {
     super(driver);
@@ -34,4 +32,33 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   }
 
 
+  public void addNewElement(String name, String label) {
+    waitForElementByElement(addItemButton);
+    scrollAndClick(addItemButton);
+    waitForElementByElement(lastElementNameInput);
+    lastElementNameInput.sendKeys(name);
+    waitForElementByElement(lastElementLabelInput);
+    lastElementLabelInput.sendKeys(label);
+  }
+
+  public void clickSave() {
+    waitForElementByElement(saveButton);
+    scrollAndClick(saveButton);
+  }
+
+  public void verifySuccesfulSave() {
+    waitForElementByElement(successMark);
+  }
+
+  public void removeLastElement(String label) {
+    waitForElementByElement(lastElementRemoveIcon);
+    scrollAndClick(lastElementRemoveIcon);
+  }
+
+  public PhotoAddComponentObject addImage() {
+    return null;
+  }
+
+  public void verifyImageInElement(String label) {
+  }
 }

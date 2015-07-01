@@ -163,6 +163,7 @@ public class URLsContent {
   //Urls for different namespace pages
   public static final String WIKI_MAINPAGE = "Main_Page";
   public static final String CATEGORY_PAGE = "Category:General_wiki_templates";
+  public static final String CATEGORY_HELP = "Category:Help";
   public static final String TEMPLATE_PAGE = "Template:Infobox";
   public static final String LIST_PAGE = "List:Listing";
   public static final String MEDIAWIKI = "mediawiki119";
