@@ -191,6 +191,11 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 "adtest-pluto", "Skin",
+                new Dimension(1200, 1000),
+                "src/test/resources/adsResources/no_wikia_skin_left.png",
+                "src/test/resources/adsResources/no_wikia_skin_right.png",
+            }, {
+                "adtest-pluto", "Skin",
                 new Dimension(1600, 900),
                 "src/test/resources/adsResources/wikia_skin_left.png",
                 "src/test/resources/adsResources/wikia_skin_right.png",

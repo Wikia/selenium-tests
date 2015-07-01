@@ -75,6 +75,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
+
+  @RelatedIssue(issueID = "SOC-987", comment = "test needs update for the new version of email")
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

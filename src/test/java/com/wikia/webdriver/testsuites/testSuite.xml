@@ -10,7 +10,7 @@
             <class name="com.wikia.webdriver.testcases.admindashboardtests.EditingLocalCssTests"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestDfpParamsPresentMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestLeaderboardPresenceOnMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdsScreenshotComparisonMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSlotsMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSynthetic"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
@@ -24,6 +24,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparison"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestATF"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>

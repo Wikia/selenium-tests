@@ -50,7 +50,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     }
 
     public void verifyMobileTopLeaderboard() {
-        PageObjectLogging.log("GeoEdge", getCountry(), true);
         extractGptInfo(presentLeaderboardSelector);
         removeSmartBanner();
         if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
