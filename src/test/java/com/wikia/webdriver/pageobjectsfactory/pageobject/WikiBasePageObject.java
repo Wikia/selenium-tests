@@ -188,8 +188,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-
-
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
