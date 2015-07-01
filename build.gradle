@@ -227,9 +227,6 @@ test {
         useDefaultListeners = true
     }
 
-    minHeapSize = '800m'
-    maxHeapSize = '800m'
-
     outputs.upToDateWhen { false }
 }
 
