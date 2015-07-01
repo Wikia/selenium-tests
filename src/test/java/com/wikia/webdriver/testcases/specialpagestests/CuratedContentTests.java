@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 
@@ -29,7 +28,7 @@ public class CuratedContentTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element without image
-    cc.addNewElement(CATEGORY, label);
+    cc.addNewElement(CATEGORY, LABEL);
     // verify error message and save button not clickable
     cc.verifyImageErrorInLastElement();
     cc.verifySaveNotClickable();
@@ -42,14 +41,14 @@ public class CuratedContentTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element and add image to that element
-    cc.addNewElement(CATEGORY, label);
+    cc.addNewElement(CATEGORY, LABEL);
     PhotoAddComponentObject addPhotoModal = cc.clickImageOnLastElement();
     addPhotoModal.clickAddThisPhoto(1);
     cc.verifyImageInLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();
     //clean the added element
-    cc.removeLastElement(label);
+    cc.removeLastElement(LABEL);
     cc.clickSave();
     cc.verifySuccesfulSave();
   }
