@@ -17,8 +17,8 @@ import org.testng.annotations.Test;
  */
 public class CuratedContentTests extends NewTestTemplate {
 
-  String category = URLsContent.CATEGORY_HELP;
-  String label = PageContent.LOREM_IPSUM_SHORT;
+  private static final String category = URLsContent.CATEGORY_HELP;
+  private static final String label = PageContent.LOREM_IPSUM_SHORT;
 
   Credentials credentials = config.getCredentials();
 
@@ -44,7 +44,7 @@ public class CuratedContentTests extends NewTestTemplate {
     // add new element and add image to that element
     cc.addNewElement(category, label);
     PhotoAddComponentObject addPhotoModal = cc.clickImageOnLastElement();
-    PhotoOptionsComponentObject photoOptionsModal = addPhotoModal.clickAddThisPhoto(1);
+    addPhotoModal.clickAddThisPhoto(1);
     cc.verifyImageInLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();

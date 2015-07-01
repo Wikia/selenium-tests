@@ -34,7 +34,6 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public SpecialCuratedContentPageObject(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
   }
 
 
