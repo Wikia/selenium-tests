@@ -188,14 +188,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-  @FindBy(css = "#WikiaPageHeader > nav.wikia-menu-button > span.drop")
-  private WebElement getEditButton;
-  @FindBy(css = "#ca-flags")
-  private WebElement flagButton;
-  @FindBy(css = "#flagsEditForm ul input[type=checkbox]")
-  private List<WebElement> allFlags;
-  @FindBy(xpath = "//footer/div/button")
-  private WebElement doneButton;
 
 
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
@@ -1301,22 +1293,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyGlobalNavigation() {
 	  waitForElementByElement(globalNavigationBar);
 	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
-  }
-
-  public void openFlagModal() {
-    waitForElementClickableByElement(getEditButton);
-    getEditButton.click();
-    waitForElementByElement(flagButton);
-    flagButton.click();
-    PageObjectLogging.log("openFlagModal", "Verified flag modal", true);
-  }
-
-  public List getListFlags() {
-    return allFlags;
-  }
-
-  public void doneButton() {
-    doneButton.click();
   }
 
   public VenusGlobalNavPageObject getVenusGlobalNav() {

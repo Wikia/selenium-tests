@@ -176,7 +176,7 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
-            <class name="com.wikia.webdriver.testcases.flagtests.FlagTest"/>
+            <class name="com.wikia.webdriver.testcases.flagtests.FlagTests"/>
         </classes>
     </test>
 </suite>
