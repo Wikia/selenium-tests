@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Liz Lee on 6/18/14.
+ * @ownership Content X-Wing
  */
 public class VideoPageAdminTests extends NewTestTemplate {
 

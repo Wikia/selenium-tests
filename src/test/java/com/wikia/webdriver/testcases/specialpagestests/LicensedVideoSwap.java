@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by kenkouot on 3/20/14.
+ * @ownership Content X-Wing
  */
 public class LicensedVideoSwap extends NewTestTemplate {
 

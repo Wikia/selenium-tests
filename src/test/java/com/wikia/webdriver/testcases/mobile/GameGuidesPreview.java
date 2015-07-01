@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
  *         5. Verify that you are able to hide top bar in modal 6. Verify that back button close
  *         modal 7. Verify that when you go to modal and go back you are in the same place as
  *         previously.
+ * @ownership Content X-Wing
  */
 public class GameGuidesPreview extends NewTestTemplate {
 
