@@ -12,6 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPage
 @Test(groups = {"MobileSignup", "Mobile"})
 public class MobileSignupTests extends NewTestTemplate {
 
+
+
   @Test(groups = {"MobileSignup_001"})
   public void successfulSignup() {
 
@@ -23,5 +25,57 @@ public class MobileSignupTests extends NewTestTemplate {
     mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
         .typeBirthdate("12", "12", "1952").register();
     mobileSignup.verifyAvatarAfterSignup();
+  }
+
+  @Test(groups = {"MobileSignup_002"})
+  public void signupErrorEmailInUse() {
+
+    MobileSignupPageObject mobileSignup =
+          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+    String userName = "User" + mobileSignup.getTimeStamp();
+    String password = "Pass" + mobileSignup.getTimeStamp();
+    String email = "qaart001@gmail.com";
+    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
+          .typeBirthdate("12", "12", "1952").register();
+    mobileSignup.verifyEmailInUseError();
+  }
+
+  @Test(groups = {"MobileSignup_003"})
+  public void signupErrorUsernameTaken() {
+
+    MobileSignupPageObject mobileSignup =
+          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+    String userName = "bekcunning";
+    String password = "Pass" + mobileSignup.getTimeStamp();
+    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
+    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
+          .typeBirthdate("12", "12", "1952").register();
+    mobileSignup.verifyUsernameTakenError();
+  }
+
+  @Test(groups = {"MobileSignup_004"})
+  public void signupErrorBadPassword() {
+
+    MobileSignupPageObject mobileSignup =
+          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+    String userName = "User" + mobileSignup.getTimeStamp();
+    String password = userName;
+    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
+    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
+          .typeBirthdate("12", "12", "1952").register();
+    mobileSignup.verifyPasswordError();
+  }
+
+  @Test(groups = {"MobileSignup_005"})
+  public void signupErrorTooYoungUser() {
+
+    MobileSignupPageObject mobileSignup =
+          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+    String userName = "User" + mobileSignup.getTimeStamp();
+    String password = "Pass" + mobileSignup.getTimeStamp();
+    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
+    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
+          .typeBirthdate("12", "12", "2009").register();
+    mobileSignup.verifyBirthdateError();
   }
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +35,14 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   private WebElement signupButton;
   @FindBy(css = ".avatar")
   private WebElement avatar;
-
+  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
+  private WebElement emailError;
+  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[2]/small[2]")
+  private WebElement usernameError;
+  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
+  private WebElement passwordError;
+  @FindBy(css = "#signupForm > small.error")
+  private WebElement genericError;
 
   public MobileSignupPageObject typeEmailAddress(String email) {
     waitForElementByElement(signupEmail);
@@ -83,4 +91,23 @@ public class MobileSignupPageObject extends MobileBasePageObject {
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
+  public void verifyEmailInUseError() {
+    waitForElementByElement(emailError);
+    Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
+  }
+
+  public void verifyUsernameTakenError() {
+    waitForElementByElement(usernameError);
+    Assertion.assertEquals(usernameError.getText(), "Someone already has this username. Try a different one!");
+  }
+
+  public void verifyPasswordError() {
+    waitForElementByElement(passwordError);
+    Assertion.assertEquals(passwordError.getText(), "Your password must be different from your username.");
+  }
+
+  public void verifyBirthdateError() {
+    waitForElementByElement(genericError);
+    Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
+  }
 }
