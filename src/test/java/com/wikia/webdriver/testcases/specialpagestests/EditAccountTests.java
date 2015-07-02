@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -18,8 +19,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
  */
 public class EditAccountTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
-  UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+  Credentials credentials = Configuration.getCredentials();
+  UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
   private String testedWiki = urlBuilder.getUrlForWiki("community");
 
   @Test(groups = "EditAccountTest")

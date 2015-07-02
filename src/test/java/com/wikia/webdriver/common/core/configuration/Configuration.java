@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.properties.Credentials;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,94 +13,101 @@ import org.yaml.snakeyaml.Yaml;
 /**
  * Created by Ludwik on 2015-06-26.
  */
-public class Configuration extends AbstractConfiguration {
+public class Configuration {
 
-  private Map<String, String> config;
+  private static Map<String, String> config;
 
-  public Configuration() {
-    Yaml yaml = new Yaml();
-    InputStream input = null;
-    try {
-      input = new FileInputStream(new File("config.yml"));
-    } catch (FileNotFoundException ex) {
+  private static Map<String, String> readConfiguration() {
+    if (config == null) {
+      Yaml yaml = new Yaml();
+      InputStream input = null;
       try {
-        input = new FileInputStream(new File("config_sample.yml"));
-      } catch (FileNotFoundException ex2) {
-        System.out.println("CAN'T LOCATE CONFIG FILE");
+        input = new FileInputStream(new File("config.yml"));
+      } catch (FileNotFoundException ex) {
+        try {
+          input = new FileInputStream(new File("config_sample.yml"));
+        } catch (FileNotFoundException ex2) {
+          System.out.println("CAN'T LOCATE CONFIG FILE");
+        }
       }
+      config = (Map<String, String>) yaml.load(input);
     }
-    config = (Map<String, String>) yaml.load(input);
+    return config;
   }
 
-  private String getProp(String propertyName) {
+  private static String getProp(String propertyName) {
     String value =
-        System.getProperty(propertyName) != null ? System.getProperty(propertyName) : config
-            .get(propertyName);
+        System.getProperty(propertyName) != null ? System.getProperty(propertyName)
+            : readConfiguration().get(propertyName);
     return value;
   }
 
-  @Override
-  public String getBrowser() {
+  public static String getBrowser() {
     return getProp("browser");
   }
 
-  @Override
-  public String getEnv() {
+  public static String getEnv() {
     return getProp("env");
   }
 
-  @Override
-  public String getWikiName() {
+  public static String getWikiName() {
     return getProp("wikiName");
   }
 
-  @Override
-  public File getCaptchaFile() {
+  public static File getCaptchaFile() {
     return new File(getProp("captchaPath"));
   }
 
-  @Override
-  public String getPlatformVersion() {
+  public static String getPlatformVersion() {
     return getProp("platformVersion");
   }
 
-  @Override
-  public String getPlatform() {
+  public static String getPlatform() {
     return getProp("platform");
   }
 
-  @Override
-  public String getDeviceId() {
+  public static String getDeviceId() {
     return getProp("deviceId");
   }
 
-  @Override
-  public String geMobileConfig() {
+  public static String geMobileConfig() {
     return getProp("mobileConfig");
   }
 
-  @Override
-  public String getCredentialsFilePath() {
+  public static String getCredentialsFilePath() {
     return getProp("credentialsPath");
   }
 
-  @Override
-  public String getQS() {
+  public static String getQS() {
     return getProp("qs");
   }
 
-  @Override
-  public String getAppiumIp() {
+  public static String getAppiumIp() {
     return getProp("appiumIp");
   }
 
-  @Override
-  public String getDeviceName() {
+  public static String getDeviceName() {
     return getProp("deviceName");
   }
 
-  @Override
-  public String getDisableFlash() {
+  public static String getDisableFlash() {
     return String.valueOf(getProp("disableFlash"));
+  }
+
+  public static Credentials getCredentials() {
+    return new Credentials(new File(getCredentialsFilePath()));
+  }
+
+  public static String getEnvType(){
+    if(getEnv().contains("prod")){
+      return "prod";
+    }else if(getEnv().contains("preview")){
+      return "preview";
+    }else if(getEnv().contains("sandbox")){
+      return "sandbox";
+    }else if(getEnv().contains("dev")){
+      return "dev";
+    }
+    return "";
   }
 }

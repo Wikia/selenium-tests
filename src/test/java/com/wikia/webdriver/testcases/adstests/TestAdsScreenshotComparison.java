@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -28,10 +29,10 @@ public class TestAdsScreenshotComparison extends TemplateDontLogout {
     )
     public TestAdsScreenshotComparison(String wikiName, String path) {
         super();
-        urlBuilder = new UrlBuilder(config.getEnv());
+        urlBuilder = new UrlBuilder(Configuration.getEnv());
         testedPage = urlBuilder.getUrlForPath(wikiName, path);
-        if (config.getQS() != null) {
-            testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+        if (Configuration.getQS() != null) {
+            testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
         }
     }
 

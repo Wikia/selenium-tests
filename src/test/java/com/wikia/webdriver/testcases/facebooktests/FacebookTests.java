@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
 
 public class FacebookTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   private String userName;
   private String password;
 

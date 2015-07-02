@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -16,7 +17,7 @@ public class ForumThreadTests extends NewTestTemplate {
 
   private String title;
   private String message;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
   public void ForumThreadTests_001_replyToThread() {

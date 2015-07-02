@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mediatests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -21,7 +22,7 @@ import org.testng.annotations.Test;
 
 public class VetAddingVideoTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
   public void VetAddVideo_001_MessageWallProvider() {

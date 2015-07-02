@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
   public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
