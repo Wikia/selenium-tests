@@ -3,7 +3,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ public class AddFlagsComponentObject extends WikiBasePageObject {
     public AddFlagsComponentObject(WebDriver driver) {
         super(driver);
     }
+    private List list = new ArrayList();
+    private List<WebElement> inputs = getListFlags();
     @FindBy(css = "#WikiaPageHeader > nav.wikia-menu-button > span.drop")
     private WebElement editButtonFlag;
     @FindBy(css = "#ca-flags")
@@ -22,8 +25,8 @@ public class AddFlagsComponentObject extends WikiBasePageObject {
     @FindBy(xpath = "//footer/div/button")
     private WebElement doneButton;
 
-    public void openFlagModal() {
-        waitForElementClickableByElement(editButtonFlag);
+    public void clickFlagButton() {
+        waitForElementByElement(editButtonFlag);
         editButtonFlag.click();
         waitForElementByElement(flagButton);
         flagButton.click();
@@ -33,7 +36,26 @@ public class AddFlagsComponentObject extends WikiBasePageObject {
         return allFlags;
     }
 
-    public void doneButton() {
+    public void clickDoneButton() {
+        waitForElementByElement(doneButton);
         doneButton.click();
+    }
+
+    public void selectFlagsInModal() {
+        for (WebElement input : inputs) {
+          if (!input.isSelected())
+            input.click();
+            list.add(input.getAttribute("id"));
+         }
+    }
+
+    public void checkFlagsEnabling() {
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String rep;
+            rep = (String) iterator.next();
+            rep = rep.replaceFirst("\\D+", "");
+            waitForElementByCss("[data-type-id=\"" + rep + "\"]").isEnabled();
+        }
     }
 }
