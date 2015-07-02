@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
 
+
 /**
  * Created by rcunningham on 6/30/15.
  */
