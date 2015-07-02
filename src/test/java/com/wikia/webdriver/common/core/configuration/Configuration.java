@@ -1,7 +1,5 @@
 package com.wikia.webdriver.common.core.configuration;
 
-import com.wikia.webdriver.common.properties.Credentials;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +7,8 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
+
+import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Created by Ludwik on 2015-06-26.
@@ -50,13 +50,7 @@ public class Configuration {
     return getProp("env");
   }
 
-  public static String getWikiName() {
-    return getProp("wikiName");
-  }
-
-  public static File getCaptchaFile() {
-    return new File(getProp("captchaPath"));
-  }
+  public static String getWikiName(){ return getProp("wikiName"); }
 
   public static String getPlatformVersion() {
     return getProp("platformVersion");
@@ -98,14 +92,14 @@ public class Configuration {
     return new Credentials(new File(getCredentialsFilePath()));
   }
 
-  public static String getEnvType(){
-    if(getEnv().contains("prod")){
+  public static String getEnvType() {
+    if (getEnv().contains("prod")) {
       return "prod";
-    }else if(getEnv().contains("preview")){
+    } else if (getEnv().contains("preview")) {
       return "preview";
-    }else if(getEnv().contains("sandbox")){
+    } else if (getEnv().contains("sandbox")) {
       return "sandbox";
-    }else if(getEnv().contains("dev")){
+    } else if (getEnv().contains("dev")) {
       return "dev";
     }
     return "";
