@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
  *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user 
  *  goSearchPreference: Make sure clicking search button after typing article name to the search field takes you to destination page when user has the preference enabled
  */
-
+@Test(groups = {"IntraWikiSearchGoSearch"})
 public class GoSearchFeature extends IntraWiki {
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "AnonFromSuggestion"})
