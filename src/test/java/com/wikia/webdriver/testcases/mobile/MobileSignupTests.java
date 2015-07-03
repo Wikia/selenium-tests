@@ -12,8 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPage
 @Test(groups = {"MobileSignup", "Mobile"})
 public class MobileSignupTests extends NewTestTemplate {
 
-
-
   @Test(groups = {"MobileSignup_001"})
   public void successfulSignup() {
 
