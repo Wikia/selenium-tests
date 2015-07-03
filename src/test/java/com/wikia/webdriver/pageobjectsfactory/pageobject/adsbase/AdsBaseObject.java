@@ -229,10 +229,10 @@ public class AdsBaseObject extends WikiBasePageObject {
         scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
         verifyNoAds();
         PageObjectLogging.log(
-            "verifyNoAdsOnPage",
-            "No ads detected",
-            true,
-            driver
+                "verifyNoAdsOnPage",
+                "No ads detected",
+                true,
+                driver
         );
     }
 
@@ -264,7 +264,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement)
         throws Exception {
         String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
-            "%slot%", slotName
+                "%slot%", slotName
         );
         boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
         if (scriptFound) {
@@ -533,7 +533,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         // Removing comments section as it expands content downwards
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                         waitForElementByCss("#WikiaArticleFooter"));
+                waitForElementByCss("#WikiaArticleFooter"));
 
         AdsComparison adsComparison = new AdsComparison();
 
@@ -649,6 +649,17 @@ public class AdsBaseObject extends WikiBasePageObject {
                 ExpectedConditions.invisibilityOfElementLocated(
                     By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR)
                 )
+            );
+        } finally {
+            restoreDeaultImplicitWait();
+        }
+    }
+
+    public void waitTitleChangesTo(String desiredArticleTitle) {
+        driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+        try {
+            wait.until(
+                    ExpectedConditions.titleContains(desiredArticleTitle)
             );
         } finally {
             restoreDeaultImplicitWait();

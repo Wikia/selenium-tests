@@ -57,7 +57,7 @@ public class TestAmazonAds extends TemplateDontLogout {
         //testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
+                .clickAmazonArticleLink("AmazonFirstArticle")
                 .verifyAdsFromAmazonPresent()
                 .verifyGPTParams();
     }
@@ -74,12 +74,12 @@ public class TestAmazonAds extends TemplateDontLogout {
         // testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
+                .clickAmazonArticleLink("AmazonFirstArticle")
                 .verifyAdsFromAmazonPresent();
 
         amazonAds.verifyGPTParams();
 
-        amazonAds.clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
+        amazonAds.clickAmazonArticleLink("AmazonSecondArticle")
                 .verifyNoAdsFromAmazonPresent();
     }
 }
