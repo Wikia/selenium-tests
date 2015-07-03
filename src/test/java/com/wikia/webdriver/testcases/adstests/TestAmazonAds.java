@@ -58,7 +58,8 @@ public class TestAmazonAds extends TemplateDontLogout {
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
                 .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
-                .verifyAdsFromAmazonPresent();
+                .verifyAdsFromAmazonPresent()
+                .verifyGPTParams();
     }
 
     @Test(
@@ -74,8 +75,11 @@ public class TestAmazonAds extends TemplateDontLogout {
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
                 .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
-                .verifyAdsFromAmazonPresent()
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
+                .verifyAdsFromAmazonPresent();
+
+        amazonAds.verifyGPTParams();
+
+        amazonAds.clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
                 .verifyNoAdsFromAmazonPresent();
     }
 }
