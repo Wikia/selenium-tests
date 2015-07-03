@@ -120,7 +120,7 @@ public class MailFunctions {
     String content = mailContent.replace("=", "");
     // mail content contain 'upn3D' chars, which has to be changed to 'upn='
     content = content.replace("upn3D", "upn=");
-    Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*(?=\")"); // getting activation URL
+    Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*?(?=\")"); // getting activation URL
                                                                         // from mail content
     Matcher m = p.matcher(content);
     if (m.find()) {
