@@ -11,7 +11,11 @@ import org.yaml.snakeyaml.Yaml;
 import com.wikia.webdriver.common.properties.Credentials;
 
 /**
- * Created by Ludwik on 2015-06-26.
+ * Configuration handler. This Class should handle run configuration and global properties.
+ * Configuration handling:
+ * 1. If there is a System Property specified - return value of this property
+ * 2. If no System Property is found - value is provided from configuration files (config_sample.yml if no config.yml provided)
+ * NOTE: system property should override ANY property specified in config files
  */
 public class Configuration {
 
@@ -37,8 +41,8 @@ public class Configuration {
 
   private static String getProp(String propertyName) {
     String value =
-        System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-            : readConfiguration().get(propertyName);
+        System.getProperty(propertyName) != null ? System.getProperty(propertyName) : String
+            .valueOf(readConfiguration().get(propertyName));
     return value;
   }
 
@@ -50,7 +54,9 @@ public class Configuration {
     return getProp("env");
   }
 
-  public static String getWikiName(){ return getProp("wikiName"); }
+  public static String getWikiName() {
+    return getProp("wikiName");
+  }
 
   public static String getPlatformVersion() {
     return getProp("platformVersion");
@@ -85,7 +91,7 @@ public class Configuration {
   }
 
   public static String getDisableFlash() {
-    return String.valueOf(getProp("disableFlash"));
+    return getProp("disableFlash");
   }
 
   public static Credentials getCredentials() {
