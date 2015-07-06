@@ -1,51 +1,83 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
+import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 /**
- * @author Piotr 'PMG' Gackowski
  * @ownership AdEngineering
  */
-
 public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
 
-    private void testIVW2(String wikiName, String article, String ivw2Param) {
-        String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-        AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage);
-        wikiPage.verifyParamFromIVW2Present(ivw2Param);
+    private static Object[][] IVW2_CORPORATE_TEST_DATA = new Object[][]{
+        {"de.wikia", "Wikia", "RC_WIKIA_HOME"},
+        {"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
+        {"de.wikia", "%C3%9Cber_Wikia", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Presse", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Stellen", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Projekt:Datenschutz", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Spezial:UserSignup", "RC_WIKIA_SVCE"},
+        {"de.wikia", "Mobil", "RC_WIKIA_MOBIL"},
+        {"de.wikia", "Mobil/LyricWiki", "RC_WIKIA_MOBIL"},
+        {"de.wikia", "Mobil/GameGuides", "RC_WIKIA_MOBIL"},
+        {"de.wikia", "Spezial:Suche?search=elder&fulltext=Search", "RC_WIKIA_SEARCH"},
+        {"de.wikia", "Entertainment/Anime", "RC_WIKIA_START"}
+    };
+
+    private static Object[][] IVW2_HUBS_TEST_DATA = new Object[][]{
+        {"de.videospielehub", "Videospiele_Hub", "RC_WIKIA_START"},
+        {"de.lifestylehub", "Lifestyle_Hub", "RC_WIKIA_START"},
+        {"de.filmhub", "Film_Hub", "RC_WIKIA_START"},
+        {"de.tvhub", "TV_Hub", "RC_WIKIA_START"},
+        {"de.literaturhub", "Literatur_Hub", "RC_WIKIA_START"},
+        {"de.comicshub", "Comics_Hub", "RC_WIKIA_START"},
+        {"de.musikhub", "Musik_Hub", "RC_WIKIA_START"}
+    };
+
+    private static Object[][] IVW2_OTHER_TEST_DATA = new Object[][]{
+        {"de.community", "Admin-Bereich:Hauptseite", "RC_WIKIA_COMMUNITY"},
+        {"de.community", "Community_Deutschland", "RC_WIKIA_COMMUNITY"},
+        {"de.community", "Blog%3AWikia_Deutschland_News", "RC_WIKIA_COMMUNITY"},
+        {"de.community", "Forum:%C3%9Cbersicht", "RC_WIKIA_PIN"},
+        {"de.elderscrolls", "Elder_Scrolls_Wiki", "RC_WIKIA_UGCGAMES"},
+        {"de.swtor", "Star_Wars_-_The_Old_Republic_Wiki", "RC_WIKIA_UGCGAMES"},
+        {"shaun", "Shaun", "RC_WIKIA_UGCENT"},
+        {"de.marvel-filme", "Marvel-Filme", "RC_WIKIA_UGCENT"},
+        {"de.gta", "Hauptseite", "RC_WIKIA_UGCGAMES"},
+        {"de.green", "Hauptseite", "RC_WIKIA_UGCLIFESTYLE"},
+        {"de.naruto", "Narutopedia", "RC_WIKIA_UGCANIME"},
+    };
+
+    private void testIVW2(Object[][] testData) throws IOException {
+        for (Object[] data : testData) {
+            String wikiName = (String) data[0];
+            String article = (String) data[1];
+            String ivw2Param = (String) data[2];
+            String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+            String htmlSource = Jsoup.connect(testedPage).get().html();
+            Assertion.assertTrue(htmlSource.contains(ivw2Param));
+            PageObjectLogging.log("IVW2", ivw2Param + " param is on the " + testedPage, true);
+        }
     }
 
-    @Test(
-        groups = {"TestIVW2AnalyticsProviderCorporate_GEF"},
-        dataProviderClass = GermanAdsDataProvider.class,
-        dataProvider = "pagesForIVW2Corporate"
-    )
-    public void TestIVW2AnalyticsProviderCorporate_GEF(String wikiName, String article,
-                                                       String ivw2Param) {
-        testIVW2(wikiName, article, ivw2Param);
+    @Test(groups = "TestIVW2AnalyticsProviderCorporate_GEF")
+    public void TestIVW2AnalyticsProviderCorporate_GEF() throws IOException {
+        testIVW2(IVW2_CORPORATE_TEST_DATA);
     }
 
-    @Test(
-        groups = {"TestIVW2AnalyticsProviderHubs_GEF"},
-        dataProviderClass = GermanAdsDataProvider.class,
-        dataProvider = "pagesForIVW2Hubs"
-    )
-    public void TestIVW2AnalyticsProviderHubs_GEF(String wikiName, String article,
-                                                  String ivw2Param) {
-        testIVW2(wikiName, article, ivw2Param);
+    @Test(groups = "TestIVW2AnalyticsProviderHubs_GEF")
+    public void TestIVW2AnalyticsProviderHubs_GEF() throws IOException {
+        testIVW2(IVW2_HUBS_TEST_DATA);
     }
 
-    @Test(
-        groups = {"TestIVW2AnalyticsProviderOther_GEF"},
-        dataProviderClass = GermanAdsDataProvider.class,
-        dataProvider = "pagesForIVW2Other"
-    )
-    public void TestIVW2AnalyticsProviderOther_GEF(String wikiName, String article,
-                                                   String ivw2Param) {
-        testIVW2(wikiName, article, ivw2Param);
+    @Test(groups = "TestIVW2AnalyticsProviderOther_GEF")
+    public void TestIVW2AnalyticsProviderOther_GEF() throws IOException {
+        testIVW2(IVW2_OTHER_TEST_DATA);
     }
 }

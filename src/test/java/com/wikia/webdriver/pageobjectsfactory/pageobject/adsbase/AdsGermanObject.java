@@ -1,12 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
+import com.google.common.base.Joiner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -168,16 +166,6 @@ public class AdsGermanObject extends AdsBaseObject {
       }
     }
     return true;
-  }
-
-  public void verifyParamFromIVW2Present(String ivw2Param) {
-    if (driver.getPageSource().contains(ivw2Param)) {
-      PageObjectLogging.log("ParameterFromIVW2IsPresent",
-                            "Parameter " + ivw2Param + " from IVW2 is present",
-                            true);
-    } else {
-      throw new NoSuchElementException("Parameter from IVW2 is not present");
-    }
   }
 
   private boolean hasSkin(WebElement element, String elementSelector) {
