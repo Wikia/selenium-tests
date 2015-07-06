@@ -221,6 +221,7 @@ public class BasePageObject {
 
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
+    waitForElementClickableByElement(element);
     element.click();
   }
 
