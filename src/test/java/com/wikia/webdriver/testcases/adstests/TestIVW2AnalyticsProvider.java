@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
@@ -16,12 +15,10 @@ public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
 
   private void testIVW2(String wikiName, String article, String ivw2Param) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage, networkTrafficInterceptor);
-    wikiPage.verifyCallToIVW2Issued();
+    AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage);
     wikiPage.verifyParamFromIVW2Present(ivw2Param);
   }
 
-  @NetworkTrafficDump
   @Test(
       groups = {"TestIVW2AnalyticsProviderCorporate_GEF"},
       dataProviderClass = GermanAdsDataProvider.class,
@@ -32,7 +29,6 @@ public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
     testIVW2(wikiName, article, ivw2Param);
   }
 
-  @NetworkTrafficDump
   @Test(
       groups = {"TestIVW2AnalyticsProviderHubs_GEF"},
       dataProviderClass = GermanAdsDataProvider.class,
@@ -42,7 +38,6 @@ public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
     testIVW2(wikiName, article, ivw2Param);
   }
 
-  @NetworkTrafficDump
   @Test(
       groups = {"TestIVW2AnalyticsProviderOther_GEF"},
       dataProviderClass = GermanAdsDataProvider.class,

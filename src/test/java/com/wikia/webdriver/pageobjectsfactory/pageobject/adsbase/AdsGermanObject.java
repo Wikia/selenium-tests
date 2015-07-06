@@ -35,15 +35,6 @@ public class AdsGermanObject extends AdsBaseObject {
     driver.manage().window().setSize(new Dimension(1920, 1080));
   }
 
-
-  public AdsGermanObject(
-      WebDriver driver,
-      String page,
-      NetworkTrafficInterceptor networkTrafficInterceptor
-  ) {
-    super(driver, page, networkTrafficInterceptor);
-  }
-
   /*
    * List of all possible combinations for 71M ads with their characteristic slots
    */
@@ -177,14 +168,6 @@ public class AdsGermanObject extends AdsBaseObject {
       }
     }
     return true;
-  }
-
-  public void verifyCallToIVW2Issued() {
-    if (networkTrafficInterceptor.searchRequestUrlInHar(IVW2_SCRIPT)) {
-      PageObjectLogging.log("RequestToIVW2Issued", "Request to IVW2 issued", true);
-    } else {
-      throw new NoSuchElementException("Request to IVW2 not issued");
-    }
   }
 
   public void verifyParamFromIVW2Present(String ivw2Param) {
