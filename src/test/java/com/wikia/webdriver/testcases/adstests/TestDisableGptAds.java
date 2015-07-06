@@ -36,7 +36,7 @@ public class TestDisableGptAds extends TemplateDontLogout {
   private void testDisableGpt(String wikiName, String article, String instantGlobals,
                               String slotName, String providers, String disasterProviders) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
-        .waitPageLoaded()
+        .waitForPageLoaded()
         .verifyProvidersChain(slotName, providers)
         .addToUrl(instantGlobals)
         .verifyProvidersChain(slotName, disasterProviders);

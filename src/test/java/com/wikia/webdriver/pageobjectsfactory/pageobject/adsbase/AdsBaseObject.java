@@ -418,7 +418,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     public void waitForIframeLoaded(WebElement iframe) {
         PageObjectLogging.log("waitForIframeLoaded", "Switching to adslot iframe", true);
         driver.switchTo().frame(iframe);
-        waitPageLoaded();
+        waitForPageLoaded();
         PageObjectLogging.log("waitForIframeLoaded", "Switching back to the page", true);
         driver.switchTo().defaultContent();
     }
@@ -607,19 +607,21 @@ public class AdsBaseObject extends WikiBasePageObject {
         return this;
     }
 
-    public AdsBaseObject waitPageLoaded() {
-        waitOnReadyEvent();
+    public AdsBaseObject waitForPageLoaded() {
+        waitForJavaScriptTruthy("document.readyState === 'complete'");
         return this;
     }
 
-    private void waitOnReadyEvent() {
+    private void waitForJavaScriptTruthy(final String script) {
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
         try {
             wait.until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver driver) {
-                    return ((JavascriptExecutor) driver)
-                            .executeScript("return document.readyState")
-                            .equals("complete");
+                    try {
+                        return (boolean) ((JavascriptExecutor) driver).executeScript("return !!(" + script + ");");
+                    } catch (WebDriverException e) {
+                        return false;
+                    }
                 }
             });
         } finally {
@@ -648,6 +650,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     public String getCountry() {
+        waitForJavaScriptTruthy("Wikia.geo");
         return ((String) ((JavascriptExecutor) driver).executeScript(
                 "return Wikia.geo.getCountryCode();"
         ));
@@ -655,7 +658,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     public AdsBaseObject addToUrl(String param) {
         appendToUrl(param);
-        waitPageLoaded();
+        waitForPageLoaded();
         return this;
     }
 
