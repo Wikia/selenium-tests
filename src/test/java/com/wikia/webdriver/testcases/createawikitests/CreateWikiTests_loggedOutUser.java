@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
  *         with blank user name 5. Try to create wiki with blank user name 6. Try to create wiki
  *         with invalid user name
  */
+@Test(groups = {"CNW_Anon"})
 public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

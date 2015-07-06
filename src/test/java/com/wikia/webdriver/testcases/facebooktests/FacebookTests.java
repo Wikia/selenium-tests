@@ -46,7 +46,7 @@ public class FacebookTests extends NewTestTemplate {
     FacebookUserPageObject userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
 
-    SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     userName = "QA" + signUp.getTimeStamp();

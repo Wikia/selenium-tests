@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  *         Create a wiki with changed domain 4. Try to create a wiki which name exists 5. Try to
  *         create a wiki which name violates naming policy 6. Try to create a wiki without category
  */
+@Test(groups = {"CNW_User"})
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   String wikiDomain;
