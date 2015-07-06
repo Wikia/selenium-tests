@@ -43,7 +43,7 @@ public class EditAccountTests extends NewTestTemplate {
     login.verifyClosedAccountMessage();
   }
 
-  @RelatedIssue(issueID = "MAIN-4879-555", comment = "Product functionality is regressed. Manual testing is not possible")
+  @RelatedIssue(issueID = "MAIN-4879", comment = "Product functionality is regressed. Manual testing is not possible")
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_002_verifyAccountClosed")
   public void EditAccount_003_reopenAccount() {
     EditAccount editAccount =
