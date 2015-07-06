@@ -56,7 +56,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
     PageObjectLogging.log("verifySuccesfulSave", "Curated Content saved with success", true);
   }
 
-  public void removeLastElement(String label) {
+  public void removeLastElement() {
     waitForElementByElement(lastElementRemoveIcon);
     scrollAndClick(lastElementRemoveIcon);
   }

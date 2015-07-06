@@ -48,7 +48,7 @@ public class CuratedContentTests extends NewTestTemplate {
     cc.clickSave();
     cc.verifySuccesfulSave();
     //clean the added element
-    cc.removeLastElement(LABEL);
+    cc.removeLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();
   }
