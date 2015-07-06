@@ -86,10 +86,13 @@ public class AdsComparison {
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
-          Triple rgb = ImageHelper.getRgbVariance(adImg);
-          PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
-          PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
-          PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);
+//          Triple rgb = ImageHelper.getRgbVariance(adImg);
+//          PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
+//          PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
+//          PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);
+          if (adImg.getHeight() == 1) {
+            return false;
+          }
           return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);
         }
       });
