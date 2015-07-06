@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.exceptions.TestFailedException;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -31,6 +30,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDas
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
@@ -64,18 +64,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultBackoffStrategy;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -98,7 +92,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -398,6 +391,11 @@ public class WikiBasePageObject extends BasePageObject {
   public SpecialCssPageObject openSpecialCss(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CSS);
     return new SpecialCssPageObject(driver);
+  }
+
+  public SpecialCuratedContentPageObject openSpecialCuratedContent(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_CURATED_CONTENT);
+    return new SpecialCuratedContentPageObject(driver);
   }
 
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
