@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mediatests.providers;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -19,7 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
  */
 public class VetProvidersTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
     
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
       "VetProvidersArticle", "VetProvidersTests_001", "Media"})

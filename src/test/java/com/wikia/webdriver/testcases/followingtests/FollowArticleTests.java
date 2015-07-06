@@ -3,6 +3,7 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
  */
 public class FollowArticleTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   String articleName;
 
   @Test(groups = "FollowArticle")

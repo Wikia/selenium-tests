@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
@@ -22,7 +23,7 @@ import org.testng.annotations.Test;
  */
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
 
   @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
