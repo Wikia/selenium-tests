@@ -12,7 +12,7 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] popularGermanArticles() {
+  public static Object[][] popularGermanArticles() {
     return new Object[][]{
         {"de.naruto", "Narutopedia"},
         {"de.gameofthrones", "Staffel_4"},
@@ -26,14 +26,14 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] germanCorpPages() {
+  public static Object[][] germanCorpPages() {
     return new Object[][]{
         {"de.wikia", "Wikia"}
     };
   }
 
   @DataProvider
-  public static final Object[][] germanArticles() {
+  public static Object[][] germanArticles() {
     return new Object[][]{
         {"de.gta", "Fahrzeuge_(V)"},
         {"de.gameofthrones", "Staffel_4"}
@@ -41,7 +41,7 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] pagesForIVW2Corporate() {
+  public static Object[][] pagesForIVW2Corporate() {
     return new Object[][]{
         {"de.wikia", "Wikia", "RC_WIKIA_HOME"},
         {"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
@@ -60,7 +60,7 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] pagesForIVW2Hubs() {
+  public static Object[][] pagesForIVW2Hubs() {
     return new Object[][]{
         {"de.videospielehub", "Videospiele_Hub", "RC_WIKIA_START"},
         {"de.lifestylehub", "Lifestyle_Hub", "RC_WIKIA_START"},
@@ -73,7 +73,7 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] pagesForIVW2Other() {
+  public static Object[][] pagesForIVW2Other() {
     return new Object[][]{
         {"de.community", "Admin-Bereich:Hauptseite", "RC_WIKIA_COMMUNITY"},
         {"de.community", "Community_Deutschland", "RC_WIKIA_COMMUNITY"},
@@ -93,7 +93,7 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static final Object[][] popularDEArticlesWithParams() {
+  public static Object[][] popularDEArticlesWithParams() {
     return new Object[][]{
         {"de.clashofclans", "Clash_of_Clans_Wiki",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
