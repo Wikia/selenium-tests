@@ -22,7 +22,7 @@ public class CuratedContentTests extends NewTestTemplate {
   Credentials credentials = config.getCredentials();
 
   @CreationTicket(ticketID = "CONCF-767")
-  @Test(groups = {"CuratedContent001", "CuratedContent"})
+  @Test(groups = {"CuratedContent001", "CuratedContent"}, invocationCount = 20)
   public void curatedContent001_saveWithoutImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -35,7 +35,7 @@ public class CuratedContentTests extends NewTestTemplate {
   }
 
   @CreationTicket(ticketID = "CONCF-767")
-  @Test(groups = {"CuratedContent002", "CuratedContent"})
+  @Test(groups = {"CuratedContent002", "CuratedContent"}, invocationCount = 20)
   public void curatedContent002_saveWithImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
