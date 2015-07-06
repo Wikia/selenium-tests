@@ -54,7 +54,7 @@ public class MailFunctions {
             magicMessage = message;
           }
         }
-        if (i > 100) {
+        if (i > 15) {
           throw new WebDriverException("Mail timeout exceeded");
         }
       }
@@ -118,14 +118,15 @@ public class MailFunctions {
   public static String getActivationLinkFromEmailContent(String mailContent) {
     // mail content contain '=' chars, which has to be removed
     String content = mailContent.replace("=", "");
-    Pattern p = Pattern.compile("Special:WikiaConfirmEmail/*\\w{3,}<"); // getting activation URL
+    // mail content contain 'upn3D' chars, which has to be changed to 'upn='
+    content = content.replace("upn3D", "upn=");
+    Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*?(?=\")"); // getting activation URL
                                                                         // from mail content
     Matcher m = p.matcher(content);
     if (m.find()) {
-      return m.group(0).substring(0, m.group(0).length() - 1);
+      return m.group(0).replace("button\" href3D\"", "");
       // m.group(0) returns first match for the regexp
-      // last character is '<' so has to be removed
-    } else {
+          } else {
       throw new RuntimeException("There was no match in the following content: \n" + content);
     }
   }

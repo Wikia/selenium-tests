@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
  *         CHROMEMOBILE browser 1. Verify that user is able to see category exhibition buttons grid
  *         2. Verify that category with more than 25 entries for one letter have pagination of
  *         entries
+ *
+ * @ownership Content X-Wing
  */
 public class MobileCategoriesTests extends NewTestTemplate {
 

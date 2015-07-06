@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Ludwik on 2015-01-23.
  */
+@Test(groups = {"IntraWikiSearchExtraMatch"})
 public class ExactMatch extends NewTestTemplate {
 
   @Test(dataProviderClass = IntraWikiSearchProvider.class,

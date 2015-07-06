@@ -7,6 +7,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Content X-Wing
+ */
 public class VideosPageTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();

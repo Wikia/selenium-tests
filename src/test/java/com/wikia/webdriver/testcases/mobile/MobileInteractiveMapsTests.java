@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * @author: Tomasz Napieralski
+ * @ownership Content X-Wing
  */
 public class MobileInteractiveMapsTests extends NewTestTemplate {
 

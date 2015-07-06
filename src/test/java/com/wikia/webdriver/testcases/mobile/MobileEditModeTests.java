@@ -22,6 +22,8 @@ import org.testng.annotations.Test;
  *         on a section only shows the correct section in edit mode 6. Anon user does not have edit
  *         option on article 7. Verify that preview is non-interactive, only scrolling 8. Opening
  *         license to see if opens in new tab 9. check for the new article banner can be dismissed
+ *
+ * @ownership Content X-Wing
  */
 public class MobileEditModeTests extends NewTestTemplate {
 

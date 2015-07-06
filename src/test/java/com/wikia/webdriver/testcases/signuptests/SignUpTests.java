@@ -108,6 +108,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
+  @RelatedIssue(issueID = "SOC-987", comment = "Automation test is broken and once SOC-987 is fixed, this issue should be as well. Please test manually.")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);

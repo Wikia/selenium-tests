@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- * @ownership Contribution
+ * @ownership Content X-Wing
  */
 public class ArticleSourceModeTests extends NewTestTemplate {
 

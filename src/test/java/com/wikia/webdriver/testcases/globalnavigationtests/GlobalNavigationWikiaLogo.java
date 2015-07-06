@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
 /**
  * @author Bogna 'bognix' Knychała
- * @ownership Content
+ * @ownership Content X-Wing
  */
 public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 

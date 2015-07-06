@@ -160,7 +160,6 @@
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
-            <class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEAndRTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEDisabledEditorEntryAnonTests"/>
@@ -177,6 +176,7 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mobile.MobileSignupTests"/>
         </classes>
     </test>
 </suite>

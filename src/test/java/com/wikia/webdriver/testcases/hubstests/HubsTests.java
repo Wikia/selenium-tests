@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWi
  * @author Karol 'kkarolk' Kujawiak
  * @author Michal 'justptT' Nowierski
  * @author Robert 'rochan' Chan
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 public class HubsTests extends NewTestTemplateBeforeClass {
 

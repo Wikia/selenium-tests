@@ -8,6 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.S
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Content X-Wing
+ */
 public class ThemeDesigner extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
