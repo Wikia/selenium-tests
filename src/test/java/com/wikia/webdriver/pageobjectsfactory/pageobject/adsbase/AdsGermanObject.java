@@ -171,7 +171,7 @@ public class AdsGermanObject extends AdsBaseObject {
   }
 
   public void verifyParamFromIVW2Present(String ivw2Param) {
-    if (driver.getPageSource().indexOf(ivw2Param) >= 0) {
+    if (driver.getPageSource().contains(ivw2Param)) {
       PageObjectLogging.log("ParameterFromIVW2IsPresent",
                             "Parameter " + ivw2Param + " from IVW2 is present",
                             true);
