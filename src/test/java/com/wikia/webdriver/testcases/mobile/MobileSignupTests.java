@@ -1,10 +1,11 @@
 package com.wikia.webdriver.testcases.mobile;
 
-import org.testng.annotations.Test;
-
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * Created by rcunningham on 6/30/15.
@@ -12,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPage
 @Test(groups = {"MobileSignup", "Mobile"})
 public class MobileSignupTests extends NewTestTemplate {
 
+  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_001"})
   public void successfulSignup() {
 
@@ -25,6 +27,7 @@ public class MobileSignupTests extends NewTestTemplate {
     mobileSignup.verifyAvatarAfterSignup();
   }
 
+  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_002"})
   public void signupErrorEmailInUse() {
 
@@ -38,6 +41,7 @@ public class MobileSignupTests extends NewTestTemplate {
     mobileSignup.verifyEmailInUseError();
   }
 
+  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_003"})
   public void signupErrorUsernameTaken() {
 
@@ -51,6 +55,7 @@ public class MobileSignupTests extends NewTestTemplate {
     mobileSignup.verifyUsernameTakenError();
   }
 
+  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_004"})
   public void signupErrorBadPassword() {
 
@@ -64,6 +69,7 @@ public class MobileSignupTests extends NewTestTemplate {
     mobileSignup.verifyPasswordError();
   }
 
+  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_005"})
   public void signupErrorTooYoungUser() {
 
