@@ -71,8 +71,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @RelatedIssue(issueID = "MAIN-4880", comment = "Wikia product code defect Manual testing not possible.")
-  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
+   @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
   public void CssChrome_004_verifyChangesAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.insertCssText("\n" + currentTimestamp);
