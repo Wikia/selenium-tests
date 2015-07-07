@@ -32,32 +32,6 @@ public class ImageHelper {
     return imageUrl.substring(indexComparisonStart, indexComparisonStart + indexComparisonFinish);
   }
 
-  /**
-   * Method calculates RGB variance of an image
-   * @return R variance, G variance, B variance
-   */
-  public static Triple getRgbVariance(BufferedImage image) {
-    ArrayList<Color> pixels = new ArrayList<>();
-    for (int x = 0; x < image.getWidth(); x++) {
-      for (int y = 0; y < image.getHeight(); y++) {
-        pixels.add(new Color(image.getRGB(x, y)));
-      }
-    }
-    ArrayList<Integer> red = new ArrayList<>();
-    for (Color pixel : pixels) {
-      red.add(pixel.getRed());
-    }
-    ArrayList<Integer> green = new ArrayList<>();
-    for (Color pixel : pixels) {
-      green.add(pixel.getGreen());
-    }
-    ArrayList<Integer> blue = new ArrayList<>();
-    for (Color pixel : pixels) {
-      blue.add(pixel.getBlue());
-    }
-    return Triple.of(getVariance(red), getVariance(green), getVariance(blue));
-  }
-
   private static double getVariance(java.util.List<Integer> numbers) {
     double sum = 0;
     int size = numbers.size();
