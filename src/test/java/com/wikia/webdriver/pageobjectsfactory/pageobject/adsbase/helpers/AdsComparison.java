@@ -2,14 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
-import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -86,10 +84,9 @@ public class AdsComparison {
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
-          Triple rgb = ImageHelper.getRgbVariance(adImg);
-          PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
-          PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
-          PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);
+          if (adImg.getHeight() == 1) {
+            return false;
+          }
           return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);
         }
       });
