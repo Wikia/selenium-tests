@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.createawikitests;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -20,10 +21,11 @@ import org.testng.annotations.Test;
  *         Create a wiki with changed domain 4. Try to create a wiki which name exists 5. Try to
  *         create a wiki which name violates naming policy 6. Try to create a wiki without category
  */
+@Test(groups = {"CNW_User"})
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   String wikiDomain;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   public void CreateNewWiki_001_createDeleteWiki() {

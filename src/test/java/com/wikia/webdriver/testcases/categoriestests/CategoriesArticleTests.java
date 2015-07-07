@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
@@ -26,7 +27,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	 * Add category to article as anon edit, delete
 	 */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
   public void CategoriesTestsArticle_001_anon() {

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.driverprovider.mobileprovider;
 
-import com.wikia.webdriver.common.core.configuration.AbstractConfiguration;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 import org.openqa.selenium.WebDriver;
@@ -20,12 +20,12 @@ public class MobileDriverProvider {
   private String mobileConfig;
   private String browser;
 
-  public MobileDriverProvider(AbstractConfiguration config) {
-    platform = config.getPlatform();
-    platformVersion = config.getPlatformVersion();
-    deviceId = config.getDeviceId();
-    mobileConfig = config.geMobileConfig();
-    browser = config.getBrowser();
+  public MobileDriverProvider() {
+    platform = Configuration.getPlatform();
+    platformVersion = Configuration.getPlatformVersion();
+    deviceId = Configuration.getDeviceId();
+    mobileConfig = Configuration.geMobileConfig();
+    browser = Configuration.getBrowser();
   }
 
   public WebDriver getDriverInstance() {

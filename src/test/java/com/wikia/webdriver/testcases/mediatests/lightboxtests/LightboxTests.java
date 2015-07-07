@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -46,10 +48,12 @@ import org.testng.annotations.Test;
  *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
  *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
  *         user)
+ *
+ * @ownership Content X-Wing
  */
 public class LightboxTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
   public void LightboxTest_001_unusedFiles() {
@@ -139,6 +143,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxVideo();
   }
 
+  @RelatedIssue(issueID = "CONCF-763", comment = "filepage link redirects to unexpected page")
   @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
   /**
    * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
@@ -160,6 +165,7 @@ public class LightboxTests extends NewTestTemplate {
     filePage.verifyVideoAutoplay(true);
   }
 
+  @RelatedIssue(issueID = "CONCF-763", comment = "filepage link redirects to unexpected page")
   @Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)

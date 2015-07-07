@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Bartosz 'V.' Bentkowski
  *
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 public class GameStarLogo extends NewTestTemplate {
 

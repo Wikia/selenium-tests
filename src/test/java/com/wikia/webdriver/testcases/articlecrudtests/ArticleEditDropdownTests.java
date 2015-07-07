@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -9,10 +10,11 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
+ * @ownership Content X-Wing
  */
 public class ArticleEditDropdownTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(
       groups = {"ArticleEditDropdown_001", "ArticleEditDropdown"}

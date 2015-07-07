@@ -9,7 +9,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
-		<mvn.run>true</mvn.run>
 		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
 		<webdriver.version>2.45.0</webdriver.version>
 	</properties>
@@ -190,21 +189,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.18</version>
 				<configuration>
-					<systemPropertyVariables>
-						<run_mvn>${mvn.run}</run_mvn>
-						<base-address>${base-address}</base-address>
-						<live-domain>${live-domain}</live-domain>
-						<wiki-name>${wiki-name}</wiki-name>
-						<browser>${browser}</browser>
-						<env>${env}</env>
-						<platform>${platform}</platform>
-						<platform-version>${platform-version}</platform-version>
-						<device-id>${device-id}</device-id>
-						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
-						<config>/selenium-config/config.xml</config>
-						<captcha>/selenium-config/captcha.txt</captcha>
-						<disable-flash>${disable-flash}</disable-flash>
-					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>${testSuite}</suiteXmlFile>
 					</suiteXmlFiles>
@@ -225,12 +209,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>manualConfig</id>
-			<properties>
-				<mvn.run>false</mvn.run>
-			</properties>
-		</profile>
-	</profiles>
 </project>

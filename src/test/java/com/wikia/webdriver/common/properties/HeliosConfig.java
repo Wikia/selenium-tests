@@ -5,7 +5,7 @@ import java.io.File;
 import org.apache.commons.lang3.StringUtils;
 
 import com.wikia.webdriver.common.core.XMLFunctions;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 /**
  * Created by Ludwik on 2015-04-24.
@@ -17,8 +17,8 @@ public class HeliosConfig {
   private static String baseURL;
 
   private static void init() {
-    File configFile = new File(ConfigurationFactory.getConfig().getCredentialsFilePath());
-    String env = ConfigurationFactory.getConfig().getEnvType();
+    File configFile = new File(Configuration.getCredentialsFilePath());
+    String env = Configuration.getEnvType();
     clientId = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".client_id");
     clientSecret = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".client_secret");
     baseURL = XMLFunctions.getXMLConfiguration(configFile, "helios." + env + ".base_url");

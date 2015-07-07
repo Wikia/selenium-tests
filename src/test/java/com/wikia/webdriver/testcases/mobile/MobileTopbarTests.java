@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mobile;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
@@ -14,11 +15,13 @@ import org.testng.annotations.Test;
  *         that when user click on wikia wordmark he goes to wikia main page 3. Verify that when
  *         user open search and click outside of search then he is back to page (courtain disappear)
  *         4. Verify that back buttons on topbar menu work correctly
+ *
+ * @ownership Content X-Wing
  */
 
 public class MobileTopbarTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {
