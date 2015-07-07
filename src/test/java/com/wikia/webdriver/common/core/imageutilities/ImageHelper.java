@@ -1,11 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.WebElement;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 /**
  * Created by Ludwik Kazmierczak
@@ -30,19 +25,5 @@ public class ImageHelper {
     int indexComparisonFinish = imageUrl.substring(indexComparisonStart).indexOf(STOP_TOKEN);
 
     return imageUrl.substring(indexComparisonStart, indexComparisonStart + indexComparisonFinish);
-  }
-
-  private static double getVariance(java.util.List<Integer> numbers) {
-    double sum = 0;
-    int size = numbers.size();
-    for (Integer number : numbers) {
-      sum += number;
-    }
-    double average = sum / size;
-    sum = 0;
-    for (int number : numbers) {
-      sum += Math.pow(number - average, 2);
-    }
-    return sum / size;
   }
 }
