@@ -2,12 +2,13 @@
 #Copy its content to config.yml file
 #It is used only when you run tests using IDE
 
-browser: CHROME #acceptable values: FF, CHROME, GHOST, ANDROID
+browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILE, CHROMEMOBILEMERCURY
 wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: /selenium-config/config.xml #Path to your config.xml file
 captchaPath: /selenium-config/captcha.txt #Path to your captcha.txt file
 qs: null
+disableFlash: true
 
 #Config related with mobile devices
 platform: ANDROID #acceptable values: IOS and ANDROID

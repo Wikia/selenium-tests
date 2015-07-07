@@ -191,6 +191,11 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 "adtest-pluto", "Skin",
+                new Dimension(1200, 1000),
+                "src/test/resources/adsResources/no_wikia_skin_left.png",
+                "src/test/resources/adsResources/no_wikia_skin_right.png",
+            }, {
+                "adtest-pluto", "Skin",
                 new Dimension(1600, 900),
                 "src/test/resources/adsResources/wikia_skin_left.png",
                 "src/test/resources/adsResources/wikia_skin_right.png",
@@ -483,6 +488,15 @@ public class AdsDataProvider {
         return new Object[][]{
             {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
             {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
+        };
+    }
+
+    @DataProvider
+    public static Object[][] testPad() {
+        return new Object[][]{
+            {"adtest-pad", "Adtest-pad_Wikia", 250},
+            {"adtest-pad", "Article_1", 480},
+            {"adtest-pad", "Article_2", 480}
         };
     }
 

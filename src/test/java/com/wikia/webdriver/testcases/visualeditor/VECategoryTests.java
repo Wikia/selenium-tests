@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -27,7 +28,6 @@ import java.util.List;
 
 public class VECategoryTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
   WikiBasePageObject base;
   String articleName, testCategory, categorySearchStr;
   List<String> categoryWikiTexts;

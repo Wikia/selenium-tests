@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.contentpatterns.MobilePageContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
@@ -22,10 +23,12 @@ import org.testng.annotations.Test;
  *         on a section only shows the correct section in edit mode 6. Anon user does not have edit
  *         option on article 7. Verify that preview is non-interactive, only scrolling 8. Opening
  *         license to see if opens in new tab 9. check for the new article banner can be dismissed
+ *
+ * @ownership Content X-Wing
  */
 public class MobileEditModeTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {

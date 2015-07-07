@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,9 +19,10 @@ import org.testng.annotations.Test;
  *         with blank user name 5. Try to create wiki with blank user name 6. Try to create wiki
  *         with invalid user name
  */
+@Test(groups = {"CNW_Anon"})
 public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
   public void CreateNewWiki_001_loggedOutUser() {

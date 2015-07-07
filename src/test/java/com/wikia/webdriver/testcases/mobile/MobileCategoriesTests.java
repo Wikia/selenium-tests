@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mobile;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
@@ -13,10 +14,12 @@ import org.testng.annotations.Test;
  *         CHROMEMOBILE browser 1. Verify that user is able to see category exhibition buttons grid
  *         2. Verify that category with more than 25 entries for one letter have pagination of
  *         entries
+ *
+ * @ownership Content X-Wing
  */
 public class MobileCategoriesTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {

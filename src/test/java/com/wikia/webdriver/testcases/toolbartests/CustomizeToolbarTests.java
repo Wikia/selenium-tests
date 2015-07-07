@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
@@ -12,10 +13,11 @@ import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   CustomizedToolbarComponentObject toolbar;
 

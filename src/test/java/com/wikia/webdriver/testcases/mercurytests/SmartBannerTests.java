@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership Content X-Wing
  */
 public class SmartBannerTests extends NewTestTemplate {
 
@@ -67,7 +68,7 @@ public class SmartBannerTests extends NewTestTemplate {
     PerformTouchAction touchAction = new PerformTouchAction(driver);
     String buttonName;
     Assertion.assertTrue(banner.isSmartBannerVisible(), "Smart banner is closed");
-    if (config.getPlatform().equals("ANDROID")) {
+    if (Configuration.getPlatform().equals("ANDROID")) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;

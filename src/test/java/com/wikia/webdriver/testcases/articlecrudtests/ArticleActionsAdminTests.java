@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,10 +15,11 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
+ * @ownership: Content X-Wing
  */
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ArticleActionsAdmin_001", "ArticleActionsAdmin"})
   @UseUnstablePageLoadStrategy

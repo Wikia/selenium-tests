@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.blogtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -26,7 +27,7 @@ import org.testng.annotations.Test;
 
 public class BlogFeaturesTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlogFeatures_001", "BlogFeaturesTests"})
   public void BlogFeatures_001_AddingGallery() {

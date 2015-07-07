@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -18,10 +19,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class VetSpecialVideosTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   public void SpecialVideos_001_Provider() {

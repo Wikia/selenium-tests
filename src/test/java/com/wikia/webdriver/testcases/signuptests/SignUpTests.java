@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -36,8 +37,7 @@ public class SignUpTests extends NewTestTemplate {
 
   private static String userName;
   private static String password;
-  Credentials credentials = config.getCredentials();
-  File captchaFile = config.getCaptchaFile();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
@@ -75,6 +75,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
+
+  @RelatedIssue(issueID = "SOC-987", comment = "test needs update for the new version of email")
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -106,6 +108,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
+  @RelatedIssue(issueID = "SOC-987", comment = "Automation test is broken and once SOC-987 is fixed, this issue should be as well. Please test manually.")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);

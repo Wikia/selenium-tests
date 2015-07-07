@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
@@ -19,12 +20,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWi
  * @author Karol 'kkarolk' Kujawiak
  * @author Michal 'justptT' Nowierski
  * @author Robert 'rochan' Chan
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 public class HubsTests extends NewTestTemplateBeforeClass {
 
   private static final String CORP_WIKI_NAME = "corp";
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @DataProvider
   private final Object[][] provideHubName() {

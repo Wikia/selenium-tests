@@ -229,10 +229,10 @@ public class AdsBaseObject extends WikiBasePageObject {
         scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
         verifyNoAds();
         PageObjectLogging.log(
-            "verifyNoAdsOnPage",
-            "No ads detected",
-            true,
-            driver
+                "verifyNoAdsOnPage",
+                "No ads detected",
+                true,
+                driver
         );
     }
 
@@ -264,7 +264,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement)
         throws Exception {
         String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
-            "%slot%", slotName
+                "%slot%", slotName
         );
         boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
         if (scriptFound) {
@@ -523,17 +523,17 @@ public class AdsBaseObject extends WikiBasePageObject {
     public void verifyParamValue(String paramName, String paramValue, boolean expected) {
         Assertion
             .assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue),
-                          expected,
-                          "parameter \"" + paramName + "\" not found");
+                    expected,
+                    "parameter \"" + paramName + "\" not found");
         PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
-                                                  + expected, true, driver);
+                + expected, true, driver);
     }
 
     public void checkSpotlights() {
         // Removing comments section as it expands content downwards
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                         waitForElementByCss("#WikiaArticleFooter"));
+                waitForElementByCss("#WikiaArticleFooter"));
 
         AdsComparison adsComparison = new AdsComparison();
 
@@ -629,26 +629,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     /**
      * Mercury is a single page application (SPA) and if you want to test navigating between
-     * different pages in the application you might want to use this method before clicking anything
+     * different pages in the application you might want to use this method after clicking anything
      * which is not on the first page.
      *
      * First page in Mercury loads just as a regular web page but next articles in Mercury just
-     * change part of loaded DOM and between them the preloader layer is displayed. This layer is on
-     * the very top and may block driver from clicking elements.
+     * change part of loaded DOM. We tried few things but waiting for the page title to change
+     * was so far the best way to make sure we can move on with our tests.
      */
-    public void mercuryWaitForPreloaderToHide() {
+    public void waitTitleChangesTo(String desiredArticleTitle) {
         driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
         try {
-            PageObjectLogging.log(
-                "mercuryWaitForPreloaderToHide",
-                "Waiting till loaded...",
-                true,
-                driver
-            );
             wait.until(
-                ExpectedConditions.invisibilityOfElementLocated(
-                    By.cssSelector(MERCURY_LOADING_OVERLAY_SELECTOR)
-                )
+                    ExpectedConditions.titleContains(desiredArticleTitle)
             );
         } finally {
             restoreDeaultImplicitWait();
@@ -691,12 +683,16 @@ public class AdsBaseObject extends WikiBasePageObject {
         }
     }
 
-    private void tryTriggerFloatingMedrec(WebElement slot) {
-        executeScript(
-            "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
-        // try to wait a floating medrec 3 seconds
+    private void tryTriggerFloatingMedrec(final WebElement slot) {
         try {
-            new WebDriverWait(driver, 3).until(CommonExpectedConditions.elementVisible(slot));
+            new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
+                @Override
+                public Object apply(WebDriver webDriver) {
+                    executeScript(
+                        "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
+                    return slot.getAttribute("style").contains("visibility: visible;");
+                }
+            });
         } catch (org.openqa.selenium.TimeoutException ignore) {
             PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
         }

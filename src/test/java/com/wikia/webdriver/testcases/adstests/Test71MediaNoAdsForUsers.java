@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -25,16 +26,16 @@ public class Test71MediaNoAdsForUsers extends TemplateDontLogout {
   )
   public Test71MediaNoAdsForUsers(String wikiName, String path) {
     super();
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedWiki = urlBuilder.getUrlForWiki(wikiName);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 
   private void login() {
-    Credentials credentials = config.getCredentials();
+    Credentials credentials = Configuration.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, testedWiki);
   }

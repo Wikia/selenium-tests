@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
 
 public class FacebookTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   private String userName;
   private String password;
 
@@ -45,7 +46,7 @@ public class FacebookTests extends NewTestTemplate {
     FacebookUserPageObject userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
 
-    SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     userName = "QA" + signUp.getTimeStamp();

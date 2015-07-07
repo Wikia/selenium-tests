@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
@@ -12,7 +13,7 @@ public class TestFloorAdhesion extends TemplateDontLogout {
 
     @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
     public void testFloorAdhesionPresence() {
-        String browser = config.getBrowser();
+        String browser = Configuration.getBrowser();
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
         AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
@@ -28,7 +29,7 @@ public class TestFloorAdhesion extends TemplateDontLogout {
 
     @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
     public void testFloorAdhesionModal() {
-        String browser = config.getBrowser();
+        String browser = Configuration.getBrowser();
         String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
 
         AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);

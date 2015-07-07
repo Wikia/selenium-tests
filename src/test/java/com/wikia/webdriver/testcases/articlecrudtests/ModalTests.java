@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 
 public class ModalTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @CreationTicket(ticketID = "CONCF-621")
   @Test(groups = {"ModalTests_verifyScrollbarAppears_001", "ModalTests"},

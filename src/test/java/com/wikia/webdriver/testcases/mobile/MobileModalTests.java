@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
@@ -17,11 +18,12 @@ import org.testng.annotations.Test;
  *         hide/show top bar in modal 4. Verify that user is able to go back to page from modal
  *         using back button 5. Verify that user is back on the same place of page when he go in and
  *         back from modal
+ * @ownership Content X-Wing
  */
 
 public class MobileModalTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {

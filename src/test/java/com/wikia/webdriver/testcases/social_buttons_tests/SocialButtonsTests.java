@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.social_buttons_tests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.social_buttons.SocialButtonsComponentObject;
@@ -11,10 +12,11 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Michal 'justnpT' Nowierski
+ * @ownership Content X-Wing
  */
 public class SocialButtonsTests extends NewTestTemplate {
 
-    private Credentials credentials = config.getCredentials();
+    private Credentials credentials = Configuration.getCredentials();
 
 
   @Test(

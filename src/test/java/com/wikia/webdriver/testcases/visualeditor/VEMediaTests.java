@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -38,7 +39,7 @@ import java.util.List;
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
   String articleName, testFullFileName;
   int numOfVideo = 1;

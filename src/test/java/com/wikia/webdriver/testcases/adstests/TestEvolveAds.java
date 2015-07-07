@@ -53,7 +53,8 @@ public class TestEvolveAds extends TemplateDontLogout {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
-      dataProvider = "evolveHopTestPage"
+      dataProvider = "evolveHopTestPage",
+      enabled = false // wf ADR-254
   )
   public void testEvolveHop_CA(
       String wikiName,

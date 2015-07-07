@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership Content X-Wing
  */
 public class NavigationSideTests extends NewTestTemplate {
 

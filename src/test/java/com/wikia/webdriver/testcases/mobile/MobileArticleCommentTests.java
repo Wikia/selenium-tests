@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
@@ -9,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/*
+/**
  * @author PMG
  *
  * Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
@@ -18,10 +19,12 @@ import org.testng.annotations.Test;
  * 3. Verify that pagination of comments is correct
  * 4. Verify that comments counter is updated correctly
  * 5. Verify that when user go to input comment field - this field will expand
+ *
+ * @ownership Content X-Wing
  */
 public class MobileArticleCommentTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   String timeStamp;
 
   @BeforeMethod(alwaysRun = true)
