@@ -1,8 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.server.handler.ConfigureTimeout;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
