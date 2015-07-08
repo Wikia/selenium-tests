@@ -833,7 +833,7 @@ public class WikiBasePageObject extends BasePageObject {
                                                                        MailFunctions
                                                                            .getFirstEmailContent(
                                                                                email, password,
-                                                                               "Forgotten password request"
+                                                                               "Reset your Wikia password"
                                                                            )
                                                                    )
     );
