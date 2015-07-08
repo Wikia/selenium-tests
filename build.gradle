@@ -152,6 +152,8 @@ task getSuite << {
                 def firstClasses = []
 
                 failedSuites.each {
+                    def myAwesomeSuite = it
+
                     firstClasses = []
                     first.test.classes.class.each {
                         firstClasses.add(it.@name)
@@ -164,24 +166,38 @@ task getSuite << {
                     if (nodesToAdd.size() > 0) {
                         first.'test'.classes.appendNode(nodesToAdd)
                         first = parser.parseText(XmlUtil.serialize(first))
-
                     }
 
                     def present = it.'**'.findAll {
                         node -> node.name() == 'class' && firstClasses.contains(node.@name)
                     }
-                    def methodsPresent = []
+                    println present.size()
 
                     present.each {
-                        methodsPresent = first.'**'.findAll {
+                        def methodsPresent = first.'**'.findAll {
                             node ->
                                 node.name() == 'include' &&
                                 node.parent().parent().@name == it.@name
                         }
-                        it.methods.include.each {
-                            if (!methodsPresent.contains(it.@iname)) {
-                                println "Method missing  ->  ${it.@name}"
-                            }
+
+                        def methodsPresentNames = []
+                        methodsPresent.each {
+                            methodsPresentNames.add(it.@name)
+                        }
+
+                        def methodsToAdd = myAwesomeSuite.'**'.findAll {
+                            node ->
+                                node.name() == 'include' &&
+                                !methodsPresentNames.contains(node.@name) &&
+                                node.parent().parent().@name == it.@name
+                        }
+
+                        def magicName = it.@name
+
+                        if (methodsToAdd.size() > 0) {
+                            first.'test'.classes.class.find { it.@name == magicName }.methods.
+                                    appendNode(methodsToAdd)
+                            first = parser.parseText(XmlUtil.serialize(first))
                         }
                     }
                 }
