@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -19,7 +20,7 @@ public class CuratedContentTests extends NewTestTemplate {
   private static final String CATEGORY = URLsContent.CATEGORY_HELP;
   private static final String LABEL = PageContent.LOREM_IPSUM_SHORT;
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @CreationTicket(ticketID = "CONCF-767")
   @Test(groups = {"CuratedContent001", "CuratedContent"})
