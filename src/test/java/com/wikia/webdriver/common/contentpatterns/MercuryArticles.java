@@ -19,4 +19,10 @@ public class MercuryArticles {
   public static final String POLL_DADDY = "PollDaddy";
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
+
+  //Articles prepared for mercurycc.wikia.com wiki
+  public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
+
+  //Articles prepared for mercuryemptycc.wikia.com wiki
+  public static final String ECC_MAIN_PAGE = "Mercury_CC_Wikia";
 }

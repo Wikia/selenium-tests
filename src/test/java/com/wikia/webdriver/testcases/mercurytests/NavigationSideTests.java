@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership Content X-Wing
  */
 public class NavigationSideTests extends NewTestTemplate {

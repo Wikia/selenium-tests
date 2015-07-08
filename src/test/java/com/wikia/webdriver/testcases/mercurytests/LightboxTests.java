@@ -21,7 +21,6 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
  * @ownership Content X-Wing
  */
 public class LightboxTests extends NewTestTemplate {
