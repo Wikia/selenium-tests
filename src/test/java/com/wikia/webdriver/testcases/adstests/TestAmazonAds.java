@@ -46,34 +46,40 @@ public class TestAmazonAds extends TemplateDontLogout {
     }
 
     @Test(
-            enabled = false, // wf ADEN-2126
             groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
     public void AmazonAds_debugMode() {
-        String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
-        testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+        String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon_amzn_debug_mode=1");
+        // TODO: go back to Amazon article instead of SyntheticTests/Amazon_amzn_debug_mode=1
+        // and uncomment line below once Mercury Team fixed HG-793
+        //testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
-                .verifyAdsFromAmazonPresent();
+                .clickAmazonArticleLink("AmazonFirstArticle")
+                .verifyAdsFromAmazonPresent()
+                .verifyGPTParams();
     }
 
     @Test(
-            enabled = false, // wf ADEN-2126
             groups = {
             "MercuryAds",
             "MercuryAmazonAds"
     })
     public void AmazonAds_debugModeOnConsecutivePageViews() {
-        String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
-        testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+        String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon_amzn_debug_mode=1");
+        // TODO: go back to Amazon article instead of SyntheticTests/Amazon_amzn_debug_mode=1
+        // and uncomment line below once Mercury Team fixed HG-793
+        // testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
         AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
         amazonAds
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonFirstArticle"))
-                .verifyAdsFromAmazonPresent()
-                .clickAmazonArticleLink(amazonAds.getAmazonLinkCssSelector("AmazonSecondArticle"))
+                .clickAmazonArticleLink("AmazonFirstArticle")
+                .verifyAdsFromAmazonPresent();
+
+        amazonAds.verifyGPTParams();
+
+        amazonAds.clickAmazonArticleLink("AmazonSecondArticle")
                 .verifyNoAdsFromAmazonPresent();
     }
 }

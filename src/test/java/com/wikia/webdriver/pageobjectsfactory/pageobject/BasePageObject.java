@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -67,17 +67,17 @@ public class BasePageObject {
     builder = new Actions(driver);
     PageFactory.initElements(driver, this);
     this.setWindowSizeAndroid();
-    urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
   }
 
   protected void setWindowSizeAndroid() {
-    if (!ConfigurationFactory.getConfig().getBrowser().toString().contains("ANDROID")) {
+    if (!Configuration.getBrowser().toString().contains("ANDROID")) {
       driver.manage().window().maximize();
     }
   }
 
   public String getBrowser() {
-    return ConfigurationFactory.getConfig().getBrowser().toString();
+    return Configuration.getBrowser().toString();
   }
 
   public static String getAttributeValue(WebElement element, String attributeName) {

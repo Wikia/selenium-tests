@@ -23,6 +23,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     private final static String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
     private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
     private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
+    private final static String AMAZON_SLOTS_CSS_SELECTOR = "div[id*=_gpt][data-gpt-slot-params*=amznslots]:not(.hidden)";
 
     private final static ImmutableMap<String, String> amazonLinkCssSelectors =
             new ImmutableMap.Builder<String, String>()
@@ -30,7 +31,13 @@ public class AdsAmazonObject extends AdsBaseObject {
                 .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
                 .build();
 
-    @FindBy(css = "div[id*=_gpt][data-gpt-slot-params*=amznslots]:not(.hidden)")
+    private final static ImmutableMap<String, String> amazonLinkTitles =
+            new ImmutableMap.Builder<String, String>()
+                    .put("AmazonFirstArticle", "Amazon")
+                    .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2")
+                    .build();
+
+    @FindBy(css = AMAZON_SLOTS_CSS_SELECTOR)
     private WebElement slotWithAmazon;
 
     private WebElement getAmazonIframe(WebElement slotWithAmazon) {
@@ -90,7 +97,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
 
     public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
-        Assertion.assertFalse(checkIfElementOnPage(slotWithAmazon));
+        Assertion.assertFalse(checkIfElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
         PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
         return this;
     }
@@ -103,16 +110,14 @@ public class AdsAmazonObject extends AdsBaseObject {
         }
     }
 
-    public AdsAmazonObject clickAmazonArticleLink(String linkSelectoryInCss) {
+    public AdsAmazonObject clickAmazonArticleLink(String linkName) {
         waitForAmazonResponse();
-        WebElement amazonArticleLink = driver.findElement(By.cssSelector(linkSelectoryInCss));
+        WebElement amazonArticleLink = driver.findElement(
+                By.cssSelector(amazonLinkCssSelectors.get(linkName))
+        );
         waitForElementByElement(amazonArticleLink);
         amazonArticleLink.click();
-        mercuryWaitForPreloaderToHide();
+        waitTitleChangesTo(amazonLinkTitles.get(linkName));
         return this;
-    }
-
-    public String getAmazonLinkCssSelector(String linkName) {
-        return amazonLinkCssSelectors.get(linkName);
     }
 }

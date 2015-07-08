@@ -27,7 +27,7 @@ public class TestProvidersChain extends TemplateDontLogout {
   {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
         .refresh(times)
-        .waitPageLoaded()
+        .waitForPageLoaded()
         .verifyProvidersChain(slotName, providers);
   }
 }

@@ -3,6 +3,7 @@
  */
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -19,7 +20,7 @@ import org.testng.annotations.Test;
  */
 public class VideoSuggestionsTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   /**
    * TC001 - Verifies video name field is editable for Non-Premium Wikia videos

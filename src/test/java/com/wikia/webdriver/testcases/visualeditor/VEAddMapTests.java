@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -29,7 +30,7 @@ import org.testng.annotations.Test;
 
 public class VEAddMapTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
   String articleName, mapID;
   InteractiveMapPageObject createdMap;

@@ -39,6 +39,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnSonyReferrer"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestParamValue"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -36,8 +37,7 @@ public class SignUpTests extends NewTestTemplate {
 
   private static String userName;
   private static String password;
-  Credentials credentials = config.getCredentials();
-  File captchaFile = config.getCaptchaFile();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {

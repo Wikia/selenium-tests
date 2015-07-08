@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
@@ -25,7 +26,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	 * Add category to article edit mode as anon edit, delete
 	 */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CategoriesTestsArticleEdit_001", "CategoriesTestsArticleEditMode"})
   public void CategoriesTestsArticleEdit_001_anonEdit() {

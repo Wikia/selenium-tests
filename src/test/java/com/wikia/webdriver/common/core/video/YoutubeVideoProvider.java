@@ -20,7 +20,7 @@ import org.joda.time.DateTimeZone;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
@@ -29,7 +29,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 public class YoutubeVideoProvider {
 
   private static final String API_KEY =
-      ConfigurationFactory.getConfig().getCredentials().youTubeApiKey;
+      Configuration.getCredentials().youTubeApiKey;
 
   /**
    * This method returns latest youtube video(added no longer then hour ago) for a specified query.

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -26,7 +27,7 @@ public class VetModalWidthTests extends NewTestTemplate {
    * vet modal when page edited,
    */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   String articleTitle;
 

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -24,7 +25,7 @@ import org.testng.annotations.Test;
 
 public class EmbedMapTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
   public void EmbedMapTests_001_EmbedMapInWikiaPage() {

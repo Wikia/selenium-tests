@@ -19,8 +19,10 @@ import org.openqa.selenium.WebElement;
  */
 public class MobileAdsBaseObject extends AdsBaseObject {
 
-    private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
+    private static final String SMART_BANNER_SELECTOR = ".android.smartbanner";
     private static final String FLITE_MASK_SELECTOR = ".flite-mask";
+    private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]" +
+            "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
     private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
     private AdsComparison adsComparison;
@@ -51,19 +53,25 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
     public void verifyMobileTopLeaderboard() {
         extractGptInfo(presentLeaderboardSelector);
-        removeSmartBanner();
-        if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
-            PageObjectLogging.log(
-                    "FliteAd", "Page contains the flite ad", true, driver
-            );
-            return;
-        }
-        waitForSlotExpanded(presentLeaderboard);
+
+        removeElementIfPresent(SMART_BANNER_SELECTOR);
+
         if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
+
+            if (checkIfElementOnPage(CELTRA_MASK_SELECTOR)) {
+                PageObjectLogging.logWarning("Special ad", "Celtra");
+                return;
+            }
+
+            if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
+                PageObjectLogging.logWarning("Special ad", "Flite");
+                return;
+            }
+
             throw new NoSuchElementException(
-                    "Screenshots of element on/off look the same."
-                            + "Most probable ad is not present; CSS "
-                            + presentLeaderboardSelector
+                "Screenshots of element on/off look the same."
+                        + "Most probable ad is not present; CSS "
+                        + presentLeaderboardSelector
             );
         }
     }
@@ -135,12 +143,13 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         }
     }
 
-    private void removeSmartBanner() {
-        if (checkIfElementOnPage(SMART_BANNER_SELECTOR)) {
-            WebElement smartBanner = driver.findElement(By.cssSelector(SMART_BANNER_SELECTOR));
+    private void removeElementIfPresent(String cssSelector) {
+        if (checkIfElementOnPage(cssSelector)) {
+            PageObjectLogging.log("Removing element", cssSelector, true);
+            WebElement element = driver.findElement(By.cssSelector(cssSelector));
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("$(arguments[0]).css('display', 'none')", smartBanner);
-            waitForElementNotVisibleByElement(smartBanner);
+            js.executeScript("$(arguments[0]).css('display', 'none')", element);
+            waitForElementNotVisibleByElement(element);
         }
     }
 

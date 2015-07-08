@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateDontLogout;
@@ -24,10 +25,10 @@ public class TestAdsOnGermanCorpPages extends TemplateDontLogout {
       dataProvider = "germanCorpPages"
   )
   public TestAdsOnGermanCorpPages(String wikiName, String path) {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class MobileInteractiveMapsTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"MobileInteractiveMapsTests_001", "MobileInteractiveMapsTests", "Mobile"})
   public void MobileInteractiveMapsTests_001_MapVisibilityWhenUserLoggedOut() {

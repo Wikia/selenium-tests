@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.edithubtests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
  */
 public class EditHubTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"EditHub_001", "EditHub"},
       dataProviderClass = HubsDataProvider.class,

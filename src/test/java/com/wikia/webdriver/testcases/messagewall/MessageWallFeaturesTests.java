@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.messagewall;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -22,7 +23,7 @@ import org.testng.annotations.Test;
  */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
   public void MessageWallFeatures_001_sourceMode() {

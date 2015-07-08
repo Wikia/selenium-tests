@@ -4,13 +4,13 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class AlertHandler {
 
   public static boolean isAlertPresent(WebDriver driver) {
     try {
-      if ("GHOST".equals(ConfigurationFactory.getConfig().getBrowser())){
+      if ("GHOST".equals(Configuration.getBrowser())){
         return false;
       }
       driver.switchTo().alert();

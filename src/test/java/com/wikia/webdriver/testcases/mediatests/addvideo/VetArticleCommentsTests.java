@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -23,7 +24,7 @@ import org.testng.annotations.Test;
  */
 public class VetArticleCommentsTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
   public void VetArticleComments_001_Provider() {
