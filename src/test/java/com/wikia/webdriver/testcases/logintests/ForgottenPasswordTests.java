@@ -26,7 +26,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
+  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -53,7 +53,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
+  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
@@ -81,7 +81,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
-  @RelatedIssue(issueID = "SOC-843", comment = "Automation test is broken. Please test manually")
   public void ForgottenPassword_003_createWiki() {
     String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);

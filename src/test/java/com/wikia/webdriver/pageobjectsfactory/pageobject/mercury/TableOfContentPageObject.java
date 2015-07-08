@@ -10,8 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class TableOfContentPageObject extends BasePageObject {
 

@@ -1,12 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
+import com.google.common.base.Joiner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,15 +31,6 @@ public class AdsGermanObject extends AdsBaseObject {
     getUrl(page);
     setSlots();
     driver.manage().window().setSize(new Dimension(1920, 1080));
-  }
-
-
-  public AdsGermanObject(
-      WebDriver driver,
-      String page,
-      NetworkTrafficInterceptor networkTrafficInterceptor
-  ) {
-    super(driver, page, networkTrafficInterceptor);
   }
 
   /*
@@ -177,24 +166,6 @@ public class AdsGermanObject extends AdsBaseObject {
       }
     }
     return true;
-  }
-
-  public void verifyCallToIVW2Issued() {
-    if (networkTrafficInterceptor.searchRequestUrlInHar(IVW2_SCRIPT)) {
-      PageObjectLogging.log("RequestToIVW2Issued", "Request to IVW2 issued", true);
-    } else {
-      throw new NoSuchElementException("Request to IVW2 not issued");
-    }
-  }
-
-  public void verifyParamFromIVW2Present(String ivw2Param) {
-    if (driver.getPageSource().indexOf(ivw2Param) >= 0) {
-      PageObjectLogging.log("ParameterFromIVW2IsPresent",
-                            "Parameter " + ivw2Param + " from IVW2 is present",
-                            true);
-    } else {
-      throw new NoSuchElementException("Parameter from IVW2 is not present");
-    }
   }
 
   private boolean hasSkin(WebElement element, String elementSelector) {

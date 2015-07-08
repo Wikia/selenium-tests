@@ -71,7 +71,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public void setKruxUserCookie(String userId) {
     getUrl(KRUX_CDN);
-    waitPageLoaded();
+    waitForPageLoaded();
     setCookie("_kuid_", userId);
   }
 

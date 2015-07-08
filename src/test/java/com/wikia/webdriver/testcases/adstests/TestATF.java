@@ -31,7 +31,7 @@ public class TestATF extends TemplateDontLogout {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitPageLoaded();
+    adsBaseObject.waitForPageLoaded();
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
@@ -61,7 +61,7 @@ public class TestATF extends TemplateDontLogout {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitPageLoaded();
+    adsBaseObject.waitForPageLoaded();
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
@@ -91,7 +91,7 @@ public class TestATF extends TemplateDontLogout {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
-    adsBaseObject.waitPageLoaded();
+    adsBaseObject.waitForPageLoaded();
 
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));

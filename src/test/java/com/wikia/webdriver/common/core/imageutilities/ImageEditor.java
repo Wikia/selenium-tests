@@ -35,15 +35,20 @@ public class ImageEditor {
                         BufferedImage image) {
     int width = size.width;
     int height = size.height;
-    Rectangle rect = new Rectangle(width, height);
     File subImg;
     try {
       subImg = File.createTempFile("screenshot", ".png");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    if (width < 1) {
+      width = 1;
+    }
+    if (height < 1) {
+      height = 1;
+    }
     BufferedImage dest = image.getSubimage(
-        start.getX(), start.getY(), rect.width, rect.height
+        start.getX(), start.getY(), width, height
     );
     try {
       ImageIO.write(dest, "png", subImg);
