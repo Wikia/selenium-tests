@@ -1,5 +1,9 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import org.openqa.selenium.WebDriverException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,10 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
-
-import org.openqa.selenium.WebDriverException;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -44,7 +44,7 @@ public class MailFunctions {
       boolean forgottenPasswordMessageFound = false;
       Message magicMessage = null;
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
-        messages= inbox.getMessages();
+        messages = inbox.getMessages();
 
         System.out.println("Waiting for message ... \r");
         Thread.sleep(2000);
@@ -121,19 +121,29 @@ public class MailFunctions {
     // mail content contain 'upn3D' chars, which has to be changed to 'upn='
     content = content.replace("upn3D", "upn=");
     Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*?(?=\")"); // getting activation URL
-                                                                        // from mail content
+    // from mail content
     Matcher m = p.matcher(content);
     if (m.find()) {
       return m.group(0).replace("button\" href3D\"", "");
       // m.group(0) returns first match for the regexp
-          } else {
+    } else {
       throw new RuntimeException("There was no match in the following content: \n" + content);
     }
   }
 
   public static String getPasswordFromEmailContent(String mailContent) {
-    String content = mailContent.replace("\"", "\n");
-    String[] lines = content.split("\n");
-    return lines[1];
+    // mail content contain '=' chars, which has to be removed
+    String content = mailContent.replace("=", "");
+    Pattern p = Pattern.compile("below:[\\s\\S]*?(?=If)"); // getting new password
+    // from mail content
+    Matcher m = p.matcher(content);
+    if (m.find()) {
+      return m.group(0).replace("below:", "");
+      // m.group(0) returns first match for the regexp
+    } else {
+      throw new RuntimeException("There was no match in the following content: \n" + content);
+    }
+
   }
+
 }
