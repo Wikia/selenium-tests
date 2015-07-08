@@ -1,10 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.remote.server.handler.ConfigureTimeout;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -145,7 +148,8 @@ public class NavigationSideComponentObject extends BasePageObject {
     searchInput.sendKeys(content);
   }
 
-    public boolean isUserLoggedIn (String username){
-        return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()>0;
-    }
+  public boolean isUserLoggedIn(String username) {
+    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
+           > 0;
+  }
 }
