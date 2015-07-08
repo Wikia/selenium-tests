@@ -78,8 +78,8 @@ public class TestATF extends TemplateDontLogout {
   }
 
   /**
-   * https://wikia-inc.atlassian.net/browse/ADEN-2156
-   * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
+   * https://wikia-inc.atlassian.net/browse/ADEN-2156 Test whether ads on small screens are
+   * displayed when wgAdDriverDelayBelowTheFold is enabled
    */
   @Test(
       dataProviderClass = AdsDataProvider.class,

@@ -16,8 +16,8 @@ import org.testng.annotations.Test;
  */
 public class Test71MediaAds extends TemplateDontLogout {
 
-  private String testedPage;
   private static final String MEDIA_71_FORCE_RESPONSE = "showroom=billboard&subsite=ingrid";
+  private String testedPage;
 
   @Factory(
       dataProviderClass = GermanAdsDataProvider.class,

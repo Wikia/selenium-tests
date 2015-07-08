@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @ownership AdEng
  */
 public class TestProvidersChain extends TemplateDontLogout {
-  
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "testProvidersChain",
@@ -23,8 +23,7 @@ public class TestProvidersChain extends TemplateDontLogout {
       String article,
       String slotName,
       String providers,
-      int times)
-  {
+      int times) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
         .refresh(times)
         .waitForPageLoaded()
