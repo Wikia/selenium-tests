@@ -171,7 +171,6 @@ task getSuite << {
                     def present = it.'**'.findAll {
                         node -> node.name() == 'class' && firstClasses.contains(node.@name)
                     }
-                    println present.size()
 
                     present.each {
                         def methodsPresent = first.'**'.findAll {
