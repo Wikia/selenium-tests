@@ -104,4 +104,35 @@ public class CuratedMainPageTests extends NewTestTemplate {
       lastElement = element.name;
     }
   }
+
+  // CCT02
+  @Test(groups = {"MercuryCuratedMainPageTests_002", "MercuryCuratedMainPageTests", "Mercury"})
+  public void MercuryCuratedMainPageTests_002_CheckElementsInvisibility() {
+    BasePageObject base = new BasePageObject(driver);
+    base.openMercuryArticleByName(wikiURL, MercuryArticles.ECC_MAIN_PAGE);
+    CuratedPageObject cc = new CuratedPageObject(driver);
+    PageObjectLogging.logWarning("Check", "Elements invisibility");
+    PageObjectLogging
+        .log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+             MercuryMessages.INVISIBLE_MSG, cc.isArticleTitleVisible());
+    PageObjectLogging
+        .log(PageElements.WIKIA_STATS.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG,
+             !cc.isWikiaStatsContainerVisible());
+    PageObjectLogging
+        .log(PageElements.FEATURED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG, !cc.isFeaturedContentVisible());
+    PageObjectLogging
+        .log(PageElements.CURATED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG, !cc.isCuratedContentVisible());
+    PageObjectLogging
+        .log(PageElements.IN_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG, !cc.isMobileInContentVisible());
+    PageObjectLogging
+        .log(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG, !cc.isTrendingArticlesVisible());
+    PageObjectLogging
+        .log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
+             MercuryMessages.VISIBLE_MSG, !cc.isTrendingVideosVisible());
+  }
 }
