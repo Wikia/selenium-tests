@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -110,6 +111,7 @@ public class CuratedMainPageTests extends NewTestTemplate {
   }
 
   // CCT02
+  @RelatedIssue(issueID = "CONCF-762")
   @Test(groups = {"MercuryCuratedMainPageTests_002", "MercuryCuratedMainPageTests", "Mercury"})
   public void MercuryCuratedMainPageTests_002_CheckElementsInvisibility() {
     BasePageObject base = new BasePageObject(driver);
