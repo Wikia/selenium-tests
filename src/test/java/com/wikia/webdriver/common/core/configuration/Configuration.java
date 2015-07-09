@@ -12,10 +12,10 @@ import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
- * Configuration handling:
- * 1. If there is a System Property specified - return value of this property
- * 2. If no System Property is found - value is provided from configuration files (config_sample.yml if no config.yml provided)
- * NOTE: system property should override ANY property specified in config files
+ * Configuration handling: 1. If there is a System Property specified - return value of this
+ * property 2. If no System Property is found - value is provided from configuration files
+ * (config_sample.yml if no config.yml provided) NOTE: system property should override ANY property
+ * specified in config files
  */
 public class Configuration {
 
@@ -39,10 +39,15 @@ public class Configuration {
     return config;
   }
 
+  private static String getPropertyFromFile(String propertyName) {
+    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null : String
+        .valueOf(readConfiguration().get(propertyName));
+  }
+
   private static String getProp(String propertyName) {
     String value =
-        System.getProperty(propertyName) != null ? System.getProperty(propertyName) : String
-            .valueOf(readConfiguration().get(propertyName));
+        System.getProperty(propertyName) != null ? System.getProperty(propertyName)
+            : getPropertyFromFile(propertyName);
     return value;
   }
 
