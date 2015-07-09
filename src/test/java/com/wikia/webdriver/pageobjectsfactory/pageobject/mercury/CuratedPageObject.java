@@ -32,13 +32,25 @@ public class CuratedPageObject extends BasePageObject {
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
 
+  private enum Settings {
+    TIME_OUT_IN_SEC(5),
+    CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    private Settings(int value) {
+      this.value = value;
+    }
+  }
+
   public CuratedPageObject(WebDriver driver) {
     super(driver);
   }
 
   public boolean isMobileTopLeaderboardVisible() {
     try {
-      waitForElementVisibleByElement(mobileTopLeaderboard, 5, 1000);
+      waitForElementVisibleByElement(mobileTopLeaderboard, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -47,7 +59,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isArticleTitleVisible() {
     try {
-      waitForElementVisibleByElement(articleTitle, 5, 1000);
+      waitForElementVisibleByElement(articleTitle, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -56,7 +69,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isWikiaStatsContainerVisible() {
     try {
-      waitForElementVisibleByElement(wikiaStatsContainer, 5, 1000);
+      waitForElementVisibleByElement(wikiaStatsContainer, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -65,7 +79,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isFeaturedContentVisible() {
     try {
-      waitForElementVisibleByElement(featuredContent, 5, 1000);
+      waitForElementVisibleByElement(featuredContent, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -74,7 +89,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isCuratedContentVisible() {
     try {
-      waitForElementVisibleByElement(curatedContent, 5, 1000);
+      waitForElementVisibleByElement(curatedContent, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -83,7 +99,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isMobileInContentVisible() {
     try {
-      waitForElementVisibleByElement(mobileInContent, 5, 1000);
+      waitForElementVisibleByElement(mobileInContent, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -92,7 +109,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isTrendingArticlesVisible() {
     try {
-      waitForElementVisibleByElement(trendingArticles, 5, 1000);
+      waitForElementVisibleByElement(trendingArticles, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -101,7 +119,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isTrendingVideosVisible() {
     try {
-      waitForElementVisibleByElement(trendingVideos, 5, 1000);
+      waitForElementVisibleByElement(trendingVideos, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -110,7 +129,8 @@ public class CuratedPageObject extends BasePageObject {
 
   public boolean isMobilePrefooterVisible() {
     try {
-      waitForElementVisibleByElement(mobilePrefooter, 5, 1000);
+      waitForElementVisibleByElement(mobilePrefooter, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -124,6 +144,7 @@ public class CuratedPageObject extends BasePageObject {
 
   public int getElementHeight(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer.parseInt(js.executeScript("return $('" + element + "').offset().top").toString());
+    return Integer
+        .parseInt(js.executeScript("return $('" + element + "').offset().top").toString());
   }
 }

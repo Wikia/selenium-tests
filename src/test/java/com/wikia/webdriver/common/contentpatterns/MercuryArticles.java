@@ -17,6 +17,13 @@ public class MercuryArticles {
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
 
+  /** Legend:
+   * FC - Featured Content
+   * CC - Curated Content
+   * TA - Trending Articles
+   * TV - Trending Videos
+   */
+
   //Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
 
