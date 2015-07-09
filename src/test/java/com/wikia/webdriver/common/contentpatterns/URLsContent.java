@@ -174,7 +174,6 @@ public class URLsContent {
 
   //External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
-  public static final String EXTERNAL_RUNESCAPE = "http://runescape-test.wikia.com/";
 
   //Embed map URL for Interactive Maps
   public static final String EMBEDED_MAP_EDITPAGE = "wiki/EmbedMap?action=edit";

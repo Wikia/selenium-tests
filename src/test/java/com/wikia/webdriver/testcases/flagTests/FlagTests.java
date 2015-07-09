@@ -1,9 +1,11 @@
 package com.wikia.webdriver.testcases.flagtests;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.flag.AddFlagsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+
 import org.testng.annotations.Test;
 
 /**
@@ -20,14 +22,18 @@ public class FlagTests extends NewTestTemplate {
             groups = {"FlagTests","Flag_Tests_001"})
     public void FlagTests_001_addFlag() {
         AddFlagsComponentObject flag = new AddFlagsComponentObject(driver);
-        flag.logInCookie(credentials.userNameStaff, credentials.passwordStaff,
-                URLsContent.EXTERNAL_RUNESCAPE);
-        flag.openArticleByName(URLsContent.EXTERNAL_RUNESCAPE, URLsContent.FLAGTEST);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
+        base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+        String articleContent = PageContent.ARTICLE_TEXT;
+        String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+        VisualEditModePageObject
+                visualEditMode =
+                base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        visualEditMode.addContent(articleContent);
+        visualEditMode.submitArticle();
         flag.clickFlagButton();
         flag.selectFlagsInModal();
         flag.clickDoneButton();
         flag.checkFlagsEnabling();
-        //If some flags aren't visible test is failing
-        PageObjectLogging.log("Verify flags", "All flags are visible", true);
     }
 }

@@ -1,4 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.flag;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class AddFlagsComponentObject extends WikiBasePageObject {
     }
     private List list = new ArrayList();
     private List<WebElement> inputs = getListFlags();
+    protected int numFLags = 0;
     @FindBy(css = "#WikiaPageHeader > nav.wikia-menu-button > span.drop")
     private WebElement editButtonFlag;
     @FindBy(css = "#ca-flags")
@@ -43,19 +45,24 @@ public class AddFlagsComponentObject extends WikiBasePageObject {
 
     public void selectFlagsInModal() {
         for (WebElement input : inputs) {
-          if (!input.isSelected())
-            input.click();
-            list.add(input.getAttribute("id"));
+          if (!input.isSelected()) {
+              input.click();
+              numFLags++;
+          }
+              list.add(input.getAttribute("id"));
          }
     }
 
     public void checkFlagsEnabling() {
+        int size = 0;
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
             String rep;
             rep = (String) iterator.next();
             rep = rep.replaceFirst("\\D+", "");
-            waitForElementByCss("[data-type-id=\"" + rep + "\"]").isEnabled();
+           if(checkIfElementOnPage("[data-type-id=\"" + rep + "\"]"))
+            size++;
         }
+        Assertion.assertNumber(numFLags,size,"Check numbers of flags");
     }
 }
