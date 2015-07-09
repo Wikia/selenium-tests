@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -25,6 +26,19 @@ public class CuratedMainPageTests extends NewTestTemplate {
   private static final String SECTION_PATH = "/main/section/";
   private static final String CATEGORY_PATH = "/main/category/";
 
+  private static final String VISIBLE = "AD Mobile Top Leaderboard";
+  private static final String INVISIBLE = "Article Title";
+
+  private static final String LEADERBOARD = "AD Mobile Top Leaderboard";
+  private static final String TITLE = "Article Title";
+  private static final String STATS = "Wikia Stats Container";
+  private static final String FEATURED_CONTENT = "Featured Content";
+  private static final String CURATED_CONTENT = "Curated Content";
+  private static final String MIDDLE_AD = "AD Mobile In Content";
+  private static final String TRENDING_ARTICLES = "Trending Articles";
+  private static final String TRENDING_VIDEOS = "Trending Videos";
+  private static final String PREFOOTER_AD = "AD Mobile Prefooter";
+
   private static final String[]
       ELEMENTS_ORDER =
       {".mobile-top-leaderboard", ".article-title", ".wikia-stats-container", ".featured-content",
@@ -42,25 +56,25 @@ public class CuratedMainPageTests extends NewTestTemplate {
         .log("Current URL", "is set on " + ROOT_PATH, "is not set on " + ROOT_PATH,
              cc.isUrlPathEqualTo(ROOT_PATH));
     PageObjectLogging
-        .log("AD Mobile Top Leaderboard", "is visible", "is not visible",
+        .log(LEADERBOARD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
              cc.isMobileTopLeaderboardVisible());
     PageObjectLogging
-        .log("Article Title", "is visible", "is not visible", cc.isArticleTitleVisible());
+        .log(TITLE, MercuryMessages.INVISIBLE_MSG, cc.isArticleTitleVisible());
     PageObjectLogging
-        .log("Wikia Stats Container", "is visible", "is not visible",
+        .log(STATS, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
              cc.isWikiaStatsContainerVisible());
     PageObjectLogging
-        .log("Featured Content", "is visible", "is not visible", cc.isFeaturedContentVisible());
+        .log(FEATURED_CONTENT, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isFeaturedContentVisible());
     PageObjectLogging
-        .log("Curated Content", "is visible", "is not visible", cc.isCuratedContentVisible());
+        .log(CURATED_CONTENT, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isCuratedContentVisible());
     PageObjectLogging
-        .log("AD Mobile In Content", "is visible", "is not visible", cc.isMobileInContentVisible());
+        .log(MIDDLE_AD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobileInContentVisible());
     PageObjectLogging
-        .log("Trending Articles", "is visible", "is not visible", cc.isTrendingArticlesVisible());
+        .log(TRENDING_ARTICLES, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingArticlesVisible());
     PageObjectLogging
-        .log("Trending Videos", "is visible", "is not visible", cc.isTrendingVideosVisible());
+        .log(TRENDING_VIDEOS, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingVideosVisible());
     PageObjectLogging
-        .log("AD Mobile Prefooter", "is visible", "is not visible", cc.isMobilePrefooterVisible());
+        .log(PREFOOTER_AD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobilePrefooterVisible());
 
     int lastPosition = 0;
     String lastElement = "top";
