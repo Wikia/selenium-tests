@@ -5,13 +5,9 @@ import java.io.File;
 public class PageContent {
 
   //wiki
-  public static final String WIKI_HEADLINE = "Lorem ipsum dolor";
+  public static final String LOREM_IPSUM_SHORT = "Lorem ipsum dolor";
   public static final String
-      WIKI_DESCRIPTION =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-  public static final String WIKI_PROMOTE_HEADLINE = "Lorem ipsum dolor Lorem";
-  public static final String
-      WIKI_PROMOTE_DESCRIPTION =
+      LOREM_IPSUM_LONG =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit "
       + "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur "
       + "adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet,"

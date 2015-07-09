@@ -38,6 +38,7 @@ public class URLsContent {
   public static final String SPECIAL_CREATE_BLOGPAGE = "wiki/Special:CreateBlogPage";
   public static final String SPECIAL_ADMIN_DASHBOARD = "wiki/Special:AdminDashboard";
   public static final String SPECIAL_CSS = "wiki/Special:CSS";
+  public static final String SPECIAL_CURATED_CONTENT = "wiki/Special:CuratedContent";
   public static final String SPECIAL_RANDOM = "wiki/Special:Random";
   public static final String SPECIAL_FOLLOW = "wiki/Special:Following";
   public static final String SPECIAL_FORUM = "wiki/Special:Forum";
@@ -162,6 +163,7 @@ public class URLsContent {
   //Urls for different namespace pages
   public static final String WIKI_MAINPAGE = "Main_Page";
   public static final String CATEGORY_PAGE = "Category:General_wiki_templates";
+  public static final String CATEGORY_HELP = "Category:Help";
   public static final String TEMPLATE_PAGE = "Template:Infobox";
   public static final String LIST_PAGE = "List:Listing";
   public static final String MEDIAWIKI = "mediawiki119";

@@ -21,8 +21,8 @@ public class PromoteTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialPromotePageObject promote = base.openSpecialPromotePage(wikiURL);
-    promote.typeIntoHeadline(PageContent.WIKI_PROMOTE_HEADLINE);
-    promote.typeIntoDescription(PageContent.WIKI_PROMOTE_DESCRIPTION);
+    promote.typeIntoHeadline(PageContent.LOREM_IPSUM_SHORT);
+    promote.typeIntoDescription(PageContent.LOREM_IPSUM_LONG);
     promote.uploadThumbnailImage(PageContent.FILEPNG);
     promote.verifyUploadedImage(PageContent.FILEPNG);
     promote.modifyThumnailImage(PageContent.FILE2PNG);
