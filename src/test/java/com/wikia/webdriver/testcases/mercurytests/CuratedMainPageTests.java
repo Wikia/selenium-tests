@@ -34,7 +34,7 @@ public class CuratedMainPageTests extends NewTestTemplate {
 
   // CCT01
   @Test(groups = {"MercuryCuratedMainPageTests_001", "MercuryCuratedMainPageTests", "Mercury"})
-  public void MercuryCuratedMainPageTests_001_Description() {
+  public void MercuryCuratedMainPageTests_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.CC_MAIN_PAGE);
     CuratedPageObject cc = new CuratedPageObject(driver);

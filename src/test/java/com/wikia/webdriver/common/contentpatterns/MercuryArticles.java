@@ -20,9 +20,18 @@ public class MercuryArticles {
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
 
-  //Articles prepared for mercurycc.wikia.com wiki
+  //Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
 
-  //Articles prepared for mercuryemptycc.wikia.com wiki
+  //Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
+  public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
+
+  //Articles prepared for mercuryntvcc.wikia.com wiki (with FC, CC and TA)
+  public static final String NTVCC_MAIN_PAGE = "Mercuryntacc_Wikia";
+
+  //Articles prepared for mercuryntavcc.wikia.com wiki (with FC and CC)
+  public static final String NTAVCC_MAIN_PAGE = "Mercuryntacc_Wikia";
+
+  //Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "Mercury_CC_Wikia";
 }
