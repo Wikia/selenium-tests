@@ -31,11 +31,11 @@ public class MercuryArticles {
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
 
   //Articles prepared for mercuryntvcc.wikia.com wiki (with FC, CC and TA)
-  public static final String NTVCC_MAIN_PAGE = "Mercuryntacc_Wikia";
+  public static final String NTVCC_MAIN_PAGE = "Mercuryntvcc_Wikia";
 
   //Articles prepared for mercuryntavcc.wikia.com wiki (with FC and CC)
-  public static final String NTAVCC_MAIN_PAGE = "Mercuryntacc_Wikia";
+  public static final String NTAVCC_MAIN_PAGE = "Mercuryntavcc_Wikia";
 
   //Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
-  public static final String ECC_MAIN_PAGE = "Mercury_CC_Wikia";
+  public static final String ECC_MAIN_PAGE = "Mercury_empty_CC_Wikia";
 }
