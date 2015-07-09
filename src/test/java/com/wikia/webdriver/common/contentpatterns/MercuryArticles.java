@@ -1,8 +1,5 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-/**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- */
 public class MercuryArticles {
 
   //Articles prepared for mercuryautomationtesting.wikia.com wiki

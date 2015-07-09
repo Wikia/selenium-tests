@@ -26,25 +26,25 @@ public class CuratedMainPageTests extends NewTestTemplate {
   private static final String SECTION_PATH = "/main/section/";
   private static final String CATEGORY_PATH = "/main/category/";
 
-  private static final String VISIBLE = "AD Mobile Top Leaderboard";
-  private static final String INVISIBLE = "Article Title";
+  private enum PageElements {
+    TOP_LEADERBOARD("Top Leaderboard AD", ".mobile-top-leaderboard"),
+    ARTICLE_TITLE("Article Title", ".article-title"),
+    WIKIA_STATS("Wikia Stats Container", ".wikia-stats-container"),
+    FEATURED_CONTENT("Featured Content", ".featured-content"),
+    CURATED_CONTENT("Curated Content", ".curated-content"),
+    IN_CONTENT("In Content AD", ".mobile-in-content"),
+    TRENDING_ARTICLES("Trending Articles", ".trending-articles"),
+    TRENDING_VIDEOS("Trending Videos", ".trending-videos"),
+    PREFOOTER("Prefooter AD", ".mobile-prefooter");
 
-  private static final String LEADERBOARD = "AD Mobile Top Leaderboard";
-  private static final String TITLE = "Article Title";
-  private static final String STATS = "Wikia Stats Container";
-  private static final String FEATURED_CONTENT = "Featured Content";
-  private static final String CURATED_CONTENT = "Curated Content";
-  private static final String MIDDLE_AD = "AD Mobile In Content";
-  private static final String TRENDING_ARTICLES = "Trending Articles";
-  private static final String TRENDING_VIDEOS = "Trending Videos";
-  private static final String PREFOOTER_AD = "AD Mobile Prefooter";
+    private String name;
+    private String className;
 
-  private static final String[]
-      ELEMENTS_ORDER =
-      {".mobile-top-leaderboard", ".article-title", ".wikia-stats-container", ".featured-content",
-       ".curated-content", ".mobile-in-content", ".trending-articles", ".trending-videos",
-       ".mobile-prefooter"};
-
+    private PageElements(String name, String className) {
+      this.name = name;
+      this.className = className;
+    }
+  }
 
   // CCT01
   @Test(groups = {"MercuryCuratedMainPageTests_001", "MercuryCuratedMainPageTests", "Mercury"})
@@ -52,40 +52,44 @@ public class CuratedMainPageTests extends NewTestTemplate {
     BasePageObject base = new BasePageObject(driver);
     base.openMercuryArticleByName(wikiURL, MercuryArticles.CC_MAIN_PAGE);
     CuratedPageObject cc = new CuratedPageObject(driver);
+    PageObjectLogging.logWarning("Check", "Page URL");
     PageObjectLogging
         .log("Current URL", "is set on " + ROOT_PATH, "is not set on " + ROOT_PATH,
              cc.isUrlPathEqualTo(ROOT_PATH));
+    PageObjectLogging.logWarning("Check", "Elements visibility");
     PageObjectLogging
-        .log(LEADERBOARD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
+        .log(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
              cc.isMobileTopLeaderboardVisible());
     PageObjectLogging
-        .log(TITLE, MercuryMessages.INVISIBLE_MSG, cc.isArticleTitleVisible());
+        .log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isArticleTitleVisible());
     PageObjectLogging
-        .log(STATS, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
+        .log(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
              cc.isWikiaStatsContainerVisible());
     PageObjectLogging
-        .log(FEATURED_CONTENT, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isFeaturedContentVisible());
+        .log(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isFeaturedContentVisible());
     PageObjectLogging
-        .log(CURATED_CONTENT, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isCuratedContentVisible());
+        .log(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isCuratedContentVisible());
     PageObjectLogging
-        .log(MIDDLE_AD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobileInContentVisible());
+        .log(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobileInContentVisible());
     PageObjectLogging
-        .log(TRENDING_ARTICLES, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingArticlesVisible());
+        .log(PageElements.TRENDING_ARTICLES.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingArticlesVisible());
     PageObjectLogging
-        .log(TRENDING_VIDEOS, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingVideosVisible());
+        .log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isTrendingVideosVisible());
     PageObjectLogging
-        .log(PREFOOTER_AD, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobilePrefooterVisible());
+        .log(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, cc.isMobilePrefooterVisible());
 
     int lastPosition = 0;
     String lastElement = "top";
 
-    for (String element : ELEMENTS_ORDER) {
-      int newPosition = cc.getElementHeight(element);
+    PageObjectLogging.logWarning("Check", "Elements order");
+
+    for (PageElements element : PageElements.values()) {
+      int newPosition = cc.getElementHeight(element.className);
       PageObjectLogging
-          .log("Element " + element, "is after " + lastElement, "is not after " + lastElement,
+          .log(element.name, "is after " + lastElement, "is not after " + lastElement,
                lastPosition <= newPosition);
       lastPosition = newPosition;
-      lastElement = element;
+      lastElement = element.name;
     }
   }
 }
