@@ -15,18 +15,18 @@ import java.io.IOException;
  */
 public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
 
-    private final static int TIMEOUT_SEC = 30;
+  private final static int TIMEOUT_SEC = 30;
 
-    @Test(groups = "TestIVW2AnalyticsProvider")
-    public void TestIVW2AnalyticsProvider() throws IOException {
-        for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
-            String wikiName = (String) data[0];
-            String article = (String) data[1];
-            String ivw2Param = (String) data[2];
-            String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-            String htmlSource = Jsoup.connect(testedPage).timeout(TIMEOUT_SEC * 1000).get().html();
-            Assertion.assertTrue(htmlSource.contains(ivw2Param));
-            PageObjectLogging.log("IVW2", ivw2Param + " param is on the " + testedPage, true);
-        }
+  @Test(groups = "TestIVW2AnalyticsProvider")
+  public void TestIVW2AnalyticsProvider() throws IOException {
+    for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
+      String wikiName = (String) data[0];
+      String article = (String) data[1];
+      String ivw2Param = (String) data[2];
+      String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+      String htmlSource = Jsoup.connect(testedPage).timeout(TIMEOUT_SEC * 1000).get().html();
+      Assertion.assertTrue(htmlSource.contains(ivw2Param));
+      PageObjectLogging.log("IVW2", ivw2Param + " param is on the " + testedPage, true);
     }
+  }
 }

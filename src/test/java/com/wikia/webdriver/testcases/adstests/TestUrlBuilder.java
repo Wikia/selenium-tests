@@ -204,19 +204,26 @@ public class TestUrlBuilder extends TemplateDontLogout {
   public void testUrlBuilder() {
     for (Object[] data : TEST_DATA) {
       Assertion.assertEquals(new UrlBuilder("prod")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[2]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[2]);
       Assertion.assertEquals(new UrlBuilder("preview")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[3]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[3]);
       Assertion.assertEquals(new UrlBuilder("sandbox")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[4]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[4]);
       Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[5]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[5]);
       Assertion.assertEquals(new UrlBuilder("dev-dmytror")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[6]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[6]);
       Assertion.assertEquals(new UrlBuilder("dev-nandy", "CHROMEMOBILEMERCURY")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[7]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[7]);
       Assertion.assertEquals(new UrlBuilder("prod", "CHROMEMOBILE")
-          .getUrlForPath((String) data[0], (String) data[1]), (String) data[8]);
+                                 .getUrlForPath((String) data[0], (String) data[1]),
+                             (String) data[8]);
     }
   }
 }
