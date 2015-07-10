@@ -42,11 +42,12 @@ public class TOCTests extends NewTestTemplate {
         true
     );
 
+    boolean result = toc.isTOCUnderArticleName();
     PageObjectLogging.log(
         "TOC position",
         "is under article name",
         "is not under article name",
-        toc.isTOCUnderArticleName()
+        result
     );
 
     Assertion.assertFalse(
@@ -75,18 +76,20 @@ public class TOCTests extends NewTestTemplate {
 
     toc.clickOnTOCListElement(1);
 
+    result = toc.isUserMovedToRightSection(1);
     PageObjectLogging.log(
         "TOC redirection",
         "works",
         "does not work",
-        toc.isUserMovedToRightSection(1)
+        result
     );
 
+    result = toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP);
     PageObjectLogging.log(
         "Header padding",
         "is correct",
         "is wrong",
-        toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP)
+        result
     );
   }
 
@@ -96,11 +99,12 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercuryArticles.TOC_WITHOUT_H2);
 
+    boolean result = !toc.isTOCDisplayed();
     PageObjectLogging.log(
         "TOC",
         "is hidden",
         "is displayed",
-        !toc.isTOCDisplayed()
+        result
     );
   }
 }

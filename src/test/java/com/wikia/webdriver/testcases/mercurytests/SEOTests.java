@@ -40,53 +40,60 @@ public class SEOTests extends NewTestTemplate {
         seo.isLinkRelCanonical()
     );*/
 
+    boolean result = seo.isOgFbApp();
     PageObjectLogging.log(
         "meta[property='fb:app_id']",
         "is filled",
         "is empty",
-        seo.isOgFbApp()
+        result
     );
 
+    result = seo.isOgImage();
     PageObjectLogging.log(
         "meta[property='og:image']",
         "is filled",
         "is empty",
-        seo.isOgImage()
+        result
     );
 
+    result = seo.isOgUrlTag();
     PageObjectLogging.log(
         "meta[property='og:url']",
         "contains current url",
         "contains wrong url",
-        seo.isOgUrlTag()
+        result
     );
 
+    result = seo.isOgDescription();
     PageObjectLogging.log(
         "meta[property='og:description']",
         "is filled",
         "is empty",
-        seo.isOgDescription()
+        result
     );
 
+    result = !seo.isOgSiteName();
     PageObjectLogging.log(
         "meta[property='og:site_name']",
         "is empty",
         "is filled",
-        !seo.isOgSiteName()
+        result
     );
 
+    result = seo.isOgTitleWithWiki();
     PageObjectLogging.log(
         "meta[property='og:title']",
         "contains Wiki",
         "is wrong",
-        seo.isOgTitleWithWiki()
+        result
     );
 
+    result = seo.isOgTypeWebsite();
     PageObjectLogging.log(
         "meta[property='og:type']",
         "contains website",
         "is wrong",
-        seo.isOgTypeWebsite()
+        result
     );
 
     // Uncomment after issue is fixed - related to HG-605

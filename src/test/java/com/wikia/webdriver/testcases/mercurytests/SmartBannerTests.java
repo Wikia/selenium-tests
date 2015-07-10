@@ -77,31 +77,34 @@ public class SmartBannerTests extends NewTestTemplate {
       buttonName = BUTTON_NAME_FOR_IOS;
     }
 
+    boolean result = banner.getButtonName().equals(buttonName);
     PageObjectLogging.log(
         "Button name",
         "is correct",
         "is incorrect",
-        banner.getButtonName().equals(buttonName)
+        result
     );
 
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
 
+    result = lastSmartBannerPosition == banner.getSmartBannerPosition();
     PageObjectLogging.log(
         "Position",
         "is fixed",
         "is floated",
-        lastSmartBannerPosition == banner.getSmartBannerPosition()
+        result
     );
 
     banner.scrollToTopAndWaitForShareBarToBeHidden();
     banner.clickCloseButton();
 
+    result = !banner.isSmartBannerVisible();
     PageObjectLogging.log(
         "Smart banner",
         "is closed",
         "is visible",
-        !banner.isSmartBannerVisible()
+        result
     );
   }
 
@@ -109,23 +112,26 @@ public class SmartBannerTests extends NewTestTemplate {
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);;
+    boolean result;
 
     for (String[] WIKI : WIKIS) {
       wikiURL = urlBuilder.getUrlForWiki(WIKI[0]);
       banner.openMercuryArticleByName(wikiURL, WIKI[1]);
 
+      result = banner.isSmartBannerColorCorrect(WIKI[2]);
       PageObjectLogging.log(
           "Smart banner color",
           "is correct",
           "is wrong",
-          banner.isSmartBannerColorCorrect(WIKI[2])
+          result
       );
 
+      result = banner.isSmartBannerButtonColorCorrect(WIKI[2]);
       PageObjectLogging.log(
           "Smart banner button color",
           "is correct",
           "is wrong",
-          banner.isSmartBannerButtonColorCorrect(WIKI[2])
+          result
       );
     }
   }

@@ -46,38 +46,42 @@ public class InteractiveMapsTests extends NewTestTemplate {
         true
     );
 
+    boolean result = maps.isMapIdInUrl();
     PageObjectLogging.log(
         "Url",
         "match pattern ?map=",
         "does not match pattern ?map=",
-        maps.isMapIdInUrl()
+        result
     );
 
+    result = maps.isTextInMapTitleHeader();
     PageObjectLogging.log(
         "Map title in header",
         "is displayed",
         "is not displayed",
-        maps.isTextInMapTitleHeader()
+        result
     );
 
     maps.switchToMapFrame();
     maps.clickPin();
 
+    result = maps.isPinPopUp();
     PageObjectLogging.log(
         "Pin popup",
         "appears",
         "does not appear",
-        maps.isPinPopUp()
+        result
     );
 
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
 
+    result = !maps.isMapModalVisible();
     PageObjectLogging.log(
         "Map modal",
         "is closed",
         "is opened",
-        !maps.isMapModalVisible()
+        result
     );
   }
 
@@ -248,11 +252,12 @@ public class InteractiveMapsTests extends NewTestTemplate {
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
 
+    boolean result = !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling);
     PageObjectLogging.log(
         "Scrolling in filter box",
         "works",
         "does not work",
-        !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling)
+        result
     );
   }
 }
