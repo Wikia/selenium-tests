@@ -168,9 +168,12 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public void verifyTabsExistImage() {
-    String[] expectedTabs = {"about", "history", "metadata"};
+    String[] expectedTabs = {"about", "history"};
     Assertion.assertTrue(expectedTabs.length <= tabs.size());
-    verifyTabsExist(expectedTabs);
+    for (int i = 0; i < 2; i++) {
+      String tab = tabs.get(i).getAttribute("data-tab");
+      Assertion.assertEquals(tab, expectedTabs[i]);
+    }
   }
 
   public void verifyTabsExist(String[] expectedTabs) {
