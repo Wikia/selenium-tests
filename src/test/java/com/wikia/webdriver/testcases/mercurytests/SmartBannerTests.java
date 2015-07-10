@@ -28,12 +28,12 @@ public class SmartBannerTests extends NewTestTemplate {
    */
   private enum Colors {
     LIGHT_GREEN("#94d11f"),
-    DARK_GREEN("#8ca038"),
     LIGHT_ORANGE("#ff7f26"),
     DARK_ORANGE("#ff5400"),
     LIGHT_BLUE("#00b7e0"),
     CYAN("#09d3bf"),
-    YELLOW("#ffd000");
+    YELLOW("#ffd000"),
+    MAGENTA("#c819ad");
     private String hex;
 
     private Colors(String hex) {
@@ -46,12 +46,12 @@ public class SmartBannerTests extends NewTestTemplate {
    */
   private static final String[][] WIKIS = {
       {"destiny", "Destiny_Wiki", Colors.LIGHT_GREEN.hex},
-      {"cocktails", "Cocktails_Wiki", Colors.DARK_GREEN.hex},
       {"thehungergames", "The_Hunger_Games_Wiki", Colors.LIGHT_ORANGE.hex},
       {"dc", "Main_Page", Colors.DARK_ORANGE.hex},
       {"tardis", "Doctor_Who_Wiki", Colors.LIGHT_BLUE.hex},
       {"starwars", "Main_Page", Colors.CYAN.hex},
-      {"lego", "LEGO_Wiki", Colors.YELLOW.hex}
+      {"lego", "LEGO_Wiki", Colors.YELLOW.hex},
+      {"ladygaga", "Gagapedia", Colors.MAGENTA.hex}
   };
 
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
