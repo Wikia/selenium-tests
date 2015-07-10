@@ -1,11 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Qaga on 2015-06-30.
@@ -37,8 +43,7 @@ public class LoginPage extends WikiBasePageObject {
   }
 
   public LoginPage get() {
-    driver.get(urlBuilder.getUrlForWiki("glee") + "login" + "?redirect=" + urlBuilder
-        .getUrlForWiki("glee"));
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login");
 
     return this;
   }
@@ -58,5 +63,29 @@ public class LoginPage extends WikiBasePageObject {
 
   public boolean isSubmitButtonDisabled() {
     return "true".equals(submitButton.getAttribute("disabled"));
+  }
+
+  /**
+   * Check if button is disabled for the @duration
+   * 
+   * @param duration in seconds
+   * @return
+   */
+  public boolean isSubmitButtonDisabled(int duration) {
+    changeImplicitWait((duration*1000)/4, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, duration, (duration * 1000) / 2)
+          .until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver input) {
+              return !isSubmitButtonDisabled();
+            }
+          });
+      return false;
+    } catch (TimeoutException e) {
+      return true;
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 }
