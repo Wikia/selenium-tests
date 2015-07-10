@@ -159,7 +159,7 @@ public class CuratedMainPageTests extends NewTestTemplate {
 
   // CCT02
   @RelatedIssue(issueID = "CONCF-762")
-  @Test(groups = {"MercuryCuratedMainPageTests_002", "MercuryCuratedMainPageTests", "Mercury"})
+  @Test(groups = {"MercuryCuratedMainPageTests_002", "MercuryCuratedMainPageTests", "Mercury"}, enabled = false)
   public void MercuryCuratedMainPageTests_002_CheckElementsInvisibility() {
     CuratedPageObject cc = new CuratedPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC);
