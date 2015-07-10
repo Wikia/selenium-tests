@@ -59,8 +59,8 @@ public class ImageServingTests extends NewTestTemplate {
     String imageURL = filePage.getImageUrl();
     String imageThumbnailURL = filePage.getImageThumbnailUrl();
 
-    filePage.verifyURLStatus(200, imageURL);
-    filePage.verifyURLStatus(200, imageThumbnailURL);
+   filePage.verifyURLStatus(200, imageURL);
+   filePage.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageServing_003", "ImageServing"})
