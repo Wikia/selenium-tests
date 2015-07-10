@@ -143,7 +143,6 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxVideo();
   }
 
-  @RelatedIssue(issueID = "CONCF-763", comment = "filepage link redirects to unexpected page")
   @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
   /**
    * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
@@ -153,7 +152,7 @@ public class LightboxTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 
-    int itemNumber = 0;
+    int itemNumber = 2;
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -165,7 +164,6 @@ public class LightboxTests extends NewTestTemplate {
     filePage.verifyVideoAutoplay(true);
   }
 
-  @RelatedIssue(issueID = "CONCF-763", comment = "filepage link redirects to unexpected page")
   @Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
@@ -175,7 +173,7 @@ public class LightboxTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
-    int itemNumber = 0;
+    int itemNumber = 2;
 
     LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
     lightbox.verifyLightboxPopup();
