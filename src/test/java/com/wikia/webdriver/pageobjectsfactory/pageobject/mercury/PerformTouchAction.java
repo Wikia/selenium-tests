@@ -18,7 +18,7 @@ import java.util.List;
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
  * @updated: 9 Feb 2015
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class PerformTouchAction {
 

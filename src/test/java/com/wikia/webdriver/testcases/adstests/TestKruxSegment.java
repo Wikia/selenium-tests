@@ -75,7 +75,8 @@ public class TestKruxSegment extends TemplateDontLogout {
     }
     String segmentsLocalStorage = adsKruxObject.getKxsegs();
     String dataGptPageParams = adsKruxObject.getGptParams("LEADERBOARD", "data-gpt-page-params");
-    Assertion.assertStringContains(dataGptPageParams, adsKruxObject.getKsgmntPattern(segmentsLocalStorage)
+    Assertion.assertStringContains(dataGptPageParams,
+                                   adsKruxObject.getKsgmntPattern(segmentsLocalStorage)
     );
     Assertion.assertEquals(segmentsLocalStorage.contains(segment), isPresent);
   }

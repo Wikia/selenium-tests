@@ -2,6 +2,8 @@ package com.wikia.webdriver.common.core.urlbuilder;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.tuple.Pair;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 
 /**
@@ -16,6 +18,9 @@ public class UrlBuilder {
 
   private String browser;
   private String env;
+
+  public UrlBuilder() {
+  }
 
   public UrlBuilder(String env) {
     this.env = env;
@@ -65,6 +70,26 @@ public class UrlBuilder {
     }
 
     return wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
+  }
+
+  /**
+   * Return url path i.e. from mlp.wikia.com/wiki/Main_Page returns /wiki/Main_Page
+   * @param driver WebDriver
+   * @return String
+   */
+  public String getUrlPath(WebDriver driver) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return js.executeScript("return location.pathname").toString();
+  }
+
+  /**
+   * Return url parameters i.e. from mlp.wikia.com/wiki/Main_Page?noads=1 returns ?noads=1
+   * @param driver WebDriver
+   * @return String
+   */
+  public String getUrlParams(WebDriver driver) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return js.executeScript("return location.search").toString();
   }
 
   private Boolean isMercuryBrowser() {
