@@ -10,8 +10,6 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
-
 
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
@@ -43,7 +41,6 @@ public class NewTestTemplateCore {
   }
 
   protected void prepareDirectories() {
-    Properties.setProperties();
     CommonUtils.deleteDirectory("." + File.separator + "logs");
     CommonUtils.createDirectory("." + File.separator + "logs");
   }

@@ -101,7 +101,7 @@ public class Configuration {
   }
 
   public static Credentials getCredentials() {
-    return new Credentials(new File(getCredentialsFilePath()));
+    return new Credentials();
   }
 
   public static String getEnvType() {
