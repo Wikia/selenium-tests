@@ -6,9 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class AlertHandler {
-  private AlertHandler() {
-
-  }
+  private AlertHandler() {}
 
   public static boolean isAlertPresent(WebDriver driver) {
     try {

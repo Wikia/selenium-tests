@@ -18,6 +18,7 @@ import com.wikia.webdriver.common.properties.Credentials;
  * specified in config files
  */
 public class Configuration {
+  private Configuration() {}
 
   private static Map<String, String> config;
 
