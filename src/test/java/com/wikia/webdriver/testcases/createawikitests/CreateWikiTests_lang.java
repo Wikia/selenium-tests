@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.createawikitests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
@@ -26,6 +27,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
       "CreateNewWiki_lang_001", "CNW_lang_first"})
   @RelatedIssue(issueID = "MAIN-4491",
       comment = "Last throbber takes too long and makes test fail. Please test manually")
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -49,6 +51,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
   @RelatedIssue(issueID = "MAIN-4491",
       comment = "Last throbber takes too long and makes test fail. Please test manually")
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }

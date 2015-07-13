@@ -108,6 +108,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyFirstResultTitle(wikiName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4901", comment = "Wikia code defect. Cannot be tested manually.")
   @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);

@@ -25,6 +25,10 @@ public class AdsGermanObject extends AdsBaseObject {
 
   private static final String IVW2_SCRIPT = "script.ioam.de";
   private static final String JS_SKIN_CALL = "top.loadCustomAd({type:\"skin\",destUrl:\"";
+  /*
+   * List of all possible combinations for 71M ads with their characteristic slots
+   */
+  private List<Map<String, Object>> combinations = new ArrayList<>();
 
   public AdsGermanObject(WebDriver driver, String page) {
     super(driver);
@@ -32,11 +36,6 @@ public class AdsGermanObject extends AdsBaseObject {
     setSlots();
     driver.manage().window().setSize(new Dimension(1920, 1080));
   }
-
-  /*
-   * List of all possible combinations for 71M ads with their characteristic slots
-   */
-  private List<Map<String, Object>> combinations = new ArrayList<>();
 
   private void setSlots() {
     Map<String, Object> billboardMap = new HashMap<String, Object>();

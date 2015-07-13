@@ -13,8 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class LightboxComponentObject extends BasePageObject {
 
