@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -144,5 +145,10 @@ public class NavigationSideComponentObject extends BasePageObject {
   public void typeInSearchField(String content) {
     waitForElementVisibleByElement(searchInput);
     searchInput.sendKeys(content);
+  }
+
+  public boolean isUserLoggedIn(String username) {
+    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
+           > 0;
   }
 }
