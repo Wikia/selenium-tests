@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -887,7 +887,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void logOut(WebDriver driver) {
     try {
       driver.manage().deleteAllCookies();
-      driver.get(Global.DOMAIN + URLsContent.LOGOUT);
+      driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);

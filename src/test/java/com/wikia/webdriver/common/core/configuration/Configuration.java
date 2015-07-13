@@ -100,6 +100,10 @@ public class Configuration {
     return getProp("disableFlash");
   }
 
+  public static String getJSErrorsEnabled() {return getProp("jsErrorsEnabled");}
+
+  public static String getLogEnabled() {return getProp("logEnabled");}
+
   public static Credentials getCredentials() {
     return new Credentials();
   }

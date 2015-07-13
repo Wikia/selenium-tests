@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -264,7 +264,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
    * go to mediawiki:wikia.css and return the number of comments from talk button bubble
    */
   public int getNumberFromWikaiCssTalkBubble() {
-    getUrl(Global.DOMAIN + "wiki/MediaWiki:Wikia.css");
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "wiki/MediaWiki:Wikia.css");
     waitForElementByElement(mwTalkBubble);
     return Integer.parseInt(mwTalkBubble.getText());
   }

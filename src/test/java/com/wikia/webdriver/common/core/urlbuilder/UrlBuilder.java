@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
-import com.google.common.collect.ImmutableMap;
-import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 /**
  * @author drets
@@ -20,6 +19,8 @@ public class UrlBuilder {
   private String env;
 
   public UrlBuilder() {
+    env = Configuration.getEnv();
+    browser = Configuration.getBrowser();
   }
 
   public UrlBuilder(String env) {
@@ -74,6 +75,7 @@ public class UrlBuilder {
 
   /**
    * Return url path i.e. from mlp.wikia.com/wiki/Main_Page returns /wiki/Main_Page
+   * 
    * @param driver WebDriver
    * @return String
    */
@@ -84,6 +86,7 @@ public class UrlBuilder {
 
   /**
    * Return url parameters i.e. from mlp.wikia.com/wiki/Main_Page?noads=1 returns ?noads=1
+   * 
    * @param driver WebDriver
    * @return String
    */
