@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -10,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Saipetch Kongkatong
@@ -20,13 +20,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";
   private static final String COOKIE_FROMSEARCH_VALUE = "1";
   private static final String ATTRIBUTE_NAME_SLOT = "data-mon-slot";
-  private static final String ATTRIBUTE_NAME_MODULE_TYPE = "data-mon-type";
   private static final String ADSENSE_HEADER_VALUE = "advertisement";
   private static final String SLOT_IN_CONTENT = "in_content";
-  private static final String SLOT_BELOW_CATEGORY = "below_category";
-  private static final String SLOT_ABOVE_FOOTER = "above_footer";
   private static final int NUM_OF_REDIRECT = 5;
-  private static final int SINGLE = 0;
   private static final int MULTI = 1;
 
   @FindBy(css = ".adsbygoogle.ad-responsive-ic")
@@ -39,12 +35,6 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private WebElement monetizationModuleContainerElem;
 
   private By monetizationModuleContainer = By.cssSelector(".monetization-module");
-  private By slotAboveTitle = By.cssSelector(".monetization-module[data-mon-slot='above_title']");
-  private By slotBelowTitle = By.cssSelector(".monetization-module[data-mon-slot='below_title']");
-  private By slotInContent = By.cssSelector(".monetization-module[data-mon-slot='in_content']");
-  private By
-      slotBelowCategory =
-      By.cssSelector(".monetization-module[data-mon-slot='below_category']");
   private By slotAboveFooter = By.cssSelector(".monetization-module[data-mon-slot='above_footer']");
   private By adsenseContainer = By.cssSelector(".monetization-module[data-mon-type='adunit']");
   private By adsenseIns = By.cssSelector(".adsbygoogle");
@@ -53,14 +43,12 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By slotInContentAdsense = By.cssSelector("#monetization-adunit-in_content");
   private By slotBelowCategoryAdsense = By.cssSelector("#monetization-adunit-below_category");
   private By slotAboveFooterAdsense = By.cssSelector("#monetization-adunit-above_footer");
-  private By MonetizationModuleListBy = By.cssSelector(".monetization-module");
-  private By
-      MonetizationModuleAdsenseListBy =
-      By.cssSelector(".monetization-module[data-mon-type='adunit']");
+  private By MonetizationModuleAdsenseListBy = By
+      .cssSelector(".monetization-module[data-mon-type='adunit']");
 
-  //Amazon
-  private By
-      amazonContainerBy = By.cssSelector(".monetization-module[data-mon-type='amazon_video']");
+  // Amazon
+  private By amazonContainerBy = By
+      .cssSelector(".monetization-module[data-mon-type='amazon_video']");
   private By slotInContentAmazon = By.cssSelector("#monetization-amazon_video-in_content");
   private By slotAboveFooterAmazon = By.cssSelector("#monetization-amazon_video-above_footer");
   private By slotBelowCategoryAmazon = By.cssSelector("#monetization-amazon_video-below_category");
@@ -69,15 +57,14 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By primeProductPriceBy = By.cssSelector(".product-price");
   private By productThumbBy = By.cssSelector(".product-thumb");
   private By productThumbImgBy = By.cssSelector(".product-thumb img");
-  private By moduleTitleBy = By.cssSelector(".module-title");
 
-  //Ecommerce
-  private By
-      ecommerceContainerBy = By.cssSelector(".monetization-module[data-mon-type='ecommerce']");
+  // Ecommerce
+  private By ecommerceContainerBy = By
+      .cssSelector(".monetization-module[data-mon-type='ecommerce']");
   private By slotInContentEcommerceBy = By.cssSelector("#monetization-ecommerce-in_content");
   private By slotAboveFooterEcommerceBy = By.cssSelector("#monetization-ecommerce-above_footer");
-  private By
-      slotBelowCategoryEcommerceBy = By.cssSelector("#monetization-ecommerce-below_category");
+  private By slotBelowCategoryEcommerceBy = By
+      .cssSelector("#monetization-ecommerce-below_category");
   private By slotAboveTitleEcommerceBy = By.cssSelector("#monetization-ecommerce-above_title");
   private By slotBelowTitleEcommerceBy = By.cssSelector("#monetization-ecommerce-below_title");
   private By eCommerceMultipleProductBy = By.cssSelector(".ecommerce-multiple-product");
@@ -103,8 +90,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyMonetizationModuleNotShown() {
     waitForElementNotVisibleByElement(monetizationModuleContainerElem);
-    PageObjectLogging
-        .log("verifyMonetizationModuleNotShown", "Monetization module is not shown", true);
+    PageObjectLogging.log("verifyMonetizationModuleNotShown", "Monetization module is not shown",
+        true);
   }
 
   public void verifyAdsenseUnitShown() {
@@ -141,8 +128,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
           verifyAdsenseUnitShownAboveFooter();
           break;
         default:
-          PageObjectLogging
-              .log("verifyAdsenseUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+          PageObjectLogging.log("verifyAdsenseUnitSlot", "Invalid slot name (Name: " + slotName
+              + ")", true);
           break;
       }
     }
@@ -152,74 +139,70 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     waitForElementByElementLocatedBy(slotAboveTitleAdsense);
     Assertion.assertTrue(checkIfElementOnPage(slotAboveTitleAdsense));
     Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
-    PageObjectLogging
-        .log("verifyAdsenseUnitShownAboveTitle", "Adsense unit is visible above the title", true);
+    PageObjectLogging.log("verifyAdsenseUnitShownAboveTitle",
+        "Adsense unit is visible above the title", true);
   }
 
   public void verifyAdsenseUnitNotShownAboveTitle() {
     waitForElementNotPresent(slotAboveTitleAdsense);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownAboveTitle", "Adsense unit is not shown above the title",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownAboveTitle",
+        "Adsense unit is not shown above the title", true);
   }
 
   public void verifyAdsenseUnitShownBelowTitle() {
     waitForElementByElementLocatedBy(slotBelowTitleAdsense);
     Assertion.assertTrue(checkIfElementOnPage(slotBelowTitleAdsense));
     Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
-    PageObjectLogging
-        .log("verifyAdsenseUnitShownBelowTitle", "Adsense unit is visible below the title", true);
+    PageObjectLogging.log("verifyAdsenseUnitShownBelowTitle",
+        "Adsense unit is visible below the title", true);
   }
 
   public void verifyAdsenseUnitNotShownBelowTitle() {
     waitForElementNotPresent(slotBelowTitleAdsense);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownBelowTitle", "Adsense unit is not shown below the title",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownBelowTitle",
+        "Adsense unit is not shown below the title", true);
   }
 
   public void verifyAdsenseUnitShownInContent() {
     waitForElementByElementLocatedBy(slotInContentAdsense);
     Assertion.assertTrue(checkIfElementOnPage(slotInContentAdsense));
     Assertion.assertTrue(checkIfElementOnPage(adsenseInsInContent));
-    PageObjectLogging
-        .log("verifyAdsenseUnitShownInContent", "Adsense unit is visible in content", true);
+    PageObjectLogging.log("verifyAdsenseUnitShownInContent", "Adsense unit is visible in content",
+        true);
   }
 
   public void verifyAdsenseUnitNotShownInContent() {
     waitForElementNotPresent(slotInContentAdsense);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownInContent", "Adsense unit is not shown in content", true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownInContent",
+        "Adsense unit is not shown in content", true);
   }
 
   public void verifyAdsenseUnitShownBelowCategory() {
     waitForElementByElementLocatedBy(slotBelowCategoryAdsense);
     Assertion.assertTrue(checkIfElementOnPage(slotBelowCategoryAdsense));
     Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
-    PageObjectLogging
-        .log("verifyAdsenseUnitShownBelowCategory", "Adsense unit is visible below category", true);
+    PageObjectLogging.log("verifyAdsenseUnitShownBelowCategory",
+        "Adsense unit is visible below category", true);
   }
 
   public void verifyAdsenseUnitNotShownBelowCategory() {
     waitForElementNotPresent(slotBelowCategoryAdsense);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownBelowCategory", "Adsense unit is not shown below category",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownBelowCategory",
+        "Adsense unit is not shown below category", true);
   }
 
   public void verifyAdsenseUnitShownAboveFooter() {
     waitForElementByElementLocatedBy(slotAboveFooterAdsense);
     Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAdsense));
     Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
-    PageObjectLogging
-        .log("verifyAdsenseUnitShownAboveFooter", "Adsense unit is visible above footer", true);
+    PageObjectLogging.log("verifyAdsenseUnitShownAboveFooter",
+        "Adsense unit is visible above footer", true);
   }
 
   public void verifyAdsenseUnitNotShownAboveFooter() {
     waitForElementNotPresent(slotAboveFooterAdsense);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownAboveFooter", "Adsense unit is not shown above footer",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownAboveFooter",
+        "Adsense unit is not shown above footer", true);
   }
 
   public boolean verifyWindowWidth(int expectedWidth) {
@@ -239,9 +222,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       } else {
         Assertion.assertEquals(width, expectedOthers);
       }
-      PageObjectLogging.log("verifyAdsenseUnitWidth",
-                            "Verify the width of the adsense unit for " + slotName + " (width="
-                            + width + ")", true);
+      PageObjectLogging.log("verifyAdsenseUnitWidth", "Verify the width of the adsense unit for "
+          + slotName + " (width=" + width + ")", true);
     }
   }
 
@@ -265,29 +247,29 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
       switch (slotName) {
         case "in_content":
-          PageObjectLogging
-              .log("verifyAmazonUnitSlot", "Verifying Amazon for In Content slot", true);
+          PageObjectLogging.log("verifyAmazonUnitSlot", "Verifying Amazon for In Content slot",
+              true);
           verifyAmazonUnitShown(slotInContentAmazon);
           verifyProductThumbInvisible(slotInContentAmazon);
           verifyProductThumbImageSize(slotInContentAmazon);
           break;
         case "below_category":
-          PageObjectLogging.log(
-              "verifyAmazonUnitSlot", "Verifying Amazon for Below Category slot", true);
+          PageObjectLogging.log("verifyAmazonUnitSlot", "Verifying Amazon for Below Category slot",
+              true);
           verifyAmazonUnitShown(slotBelowCategoryAmazon);
           verifyProductThumbVisible(slotBelowCategoryAmazon);
           verifyProductThumbImageSize(slotBelowCategoryAmazon);
           break;
         case "above_footer":
-          PageObjectLogging.log(
-              "verifyAmazonUnitSlot", "Verifying Amazon for Above Footer slot", true);
+          PageObjectLogging.log("verifyAmazonUnitSlot", "Verifying Amazon for Above Footer slot",
+              true);
           verifyAmazonUnitShown(slotAboveFooterAmazon);
           verifyProductThumbVisible(slotAboveFooterAmazon);
           verifyProductThumbImageSize(slotAboveFooterAmazon);
           break;
         default:
-          PageObjectLogging
-              .log("verifyAmazonUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+          PageObjectLogging.log("verifyAmazonUnitSlot", "Invalid slot name (Name: " + slotName
+              + ")", true);
           break;
       }
     }
@@ -299,29 +281,29 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       String slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
       switch (slotName) {
         case "in_content":
-          PageObjectLogging.log(
-              "verifyAmazonPrimeUnitSlot", "Verifying Amazon Prime for In Content slot", true);
+          PageObjectLogging.log("verifyAmazonPrimeUnitSlot",
+              "Verifying Amazon Prime for In Content slot", true);
           verifyAmazonUnitShown(slotInContentAmazon);
           verifyAmazonPrimeShown(slotInContentAmazon);
           verifyProductThumbInvisible(slotInContentAmazon);
           break;
         case "below_category":
-          PageObjectLogging.log(
-              "verifyAmazonPrimeUnitSlot", "Verifying Amazon Prime for Below Category slot", true);
+          PageObjectLogging.log("verifyAmazonPrimeUnitSlot",
+              "Verifying Amazon Prime for Below Category slot", true);
           verifyAmazonUnitShown(slotBelowCategoryAmazon);
           verifyAmazonPrimeShown(slotBelowCategoryAmazon);
           verifyProductThumbVisible(slotBelowCategoryAmazon);
           break;
         case "above_footer":
-          PageObjectLogging.log(
-              "verifyAmazonPrimeUnitSlot", "Verifying Amazon Prime for Above Footer slot", true);
+          PageObjectLogging.log("verifyAmazonPrimeUnitSlot",
+              "Verifying Amazon Prime for Above Footer slot", true);
           verifyAmazonUnitShown(slotAboveFooterAmazon);
           verifyAmazonPrimeShown(slotAboveFooterAmazon);
           verifyProductThumbVisible(slotAboveFooterAmazon);
           break;
         default:
-          PageObjectLogging
-              .log("verifyAmazonPrimeUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+          PageObjectLogging.log("verifyAmazonPrimeUnitSlot", "Invalid slot name (Name: " + slotName
+              + ")", true);
           break;
       }
     }
@@ -331,8 +313,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     WebElement priceElem = findPriceElementFromSlot(slotBy);
     waitForElementVisibleByElement(priceElem);
     scrollToElement(priceElem);
-    PageObjectLogging
-        .log("verifyAmazonPrimeShown", "Amazon prime unit is visible", true);
+    PageObjectLogging.log("verifyAmazonPrimeShown", "Amazon prime unit is visible", true);
   }
 
   private void verifyAmazonUnitShown(By slotBy) {
@@ -344,34 +325,29 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAmazonUnitNotShownAboveTitle() {
     waitForElementNotPresent(slotAboveTitleAmazon);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownAboveTitle", "Adsense unit is not shown above the title",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownAboveTitle",
+        "Adsense unit is not shown above the title", true);
   }
 
   public void verifyAmazonUnitNotShownBelowTitle() {
     waitForElementNotPresent(slotBelowTitleAmazon);
-    PageObjectLogging
-        .log("verifyAdsenseUnitNotShownBelowTitle", "Adsense unit is not shown below the title",
-             true);
+    PageObjectLogging.log("verifyAdsenseUnitNotShownBelowTitle",
+        "Adsense unit is not shown below the title", true);
   }
 
   public void verifyAmazonUnitWidth(int expectedInContent, int expectedOthers) {
-    WebElement elem =
-        redirectUntilDesiredSlotShown(amazonContainerBy, SLOT_IN_CONTENT);
+    WebElement elem = redirectUntilDesiredSlotShown(amazonContainerBy, SLOT_IN_CONTENT);
     String slotName = null;
     int width = -1;
     try {
       slotName = elem.getAttribute(ATTRIBUTE_NAME_SLOT);
       width = elem.getSize().width;
-      PageObjectLogging.log("verifyAmazonUnitWidth",
-                            "Verify the width of the AMAZON unit for " + slotName + " (width="
-                            + width + ")", true, driver);
+      PageObjectLogging.log("verifyAmazonUnitWidth", "Verify the width of the AMAZON unit for "
+          + slotName + " (width=" + width + ")", true, driver);
       Assertion.assertEquals(width, expectedInContent);
     } catch (NullPointerException e) {
-      PageObjectLogging.log("verifyAmazonUnitWidth",
-                            "Unable to find " + SLOT_IN_CONTENT + "after " + NUM_OF_REDIRECT
-                            + " redirects", false, driver);
+      PageObjectLogging.log("verifyAmazonUnitWidth", "Unable to find " + SLOT_IN_CONTENT + "after "
+          + NUM_OF_REDIRECT + " redirects", false, driver);
     }
   }
 
@@ -398,49 +374,46 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
       if (isMulti == MULTI) {
         switch (slotName) {
           case "in_content":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Multi for In Content slot", true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Multi for In Content slot", true);
             verifyEcommerceUnitShown(slotInContentEcommerceBy, eCommerceMultipleProductBy);
             break;
           case "below_category":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Multi for Below Category slot",
-                true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Multi for Below Category slot", true);
             verifyEcommerceUnitShown(slotBelowCategoryEcommerceBy, eCommerceMultipleProductBy);
             break;
           case "above_footer":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Multi for Above Footer slot", true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Multi for Above Footer slot", true);
             verifyEcommerceUnitShown(slotAboveFooterEcommerceBy, eCommerceMultipleProductBy);
             break;
           default:
-            PageObjectLogging
-                .log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName
+                + ")", true);
             break;
         }
         verifyNumOfProductThumbVisible(eCommerceMultipleProductBy);
       } else {
         switch (slotName) {
           case "in_content":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Single for In Content slot", true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Single for In Content slot", true);
             verifyEcommerceUnitShown(slotInContentEcommerceBy, eCommerceSingleProductBy);
             break;
           case "below_category":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Single for Below Category slot",
-                true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Single for Below Category slot", true);
             verifyEcommerceUnitShown(slotBelowCategoryEcommerceBy, eCommerceSingleProductBy);
             break;
           case "above_footer":
-            PageObjectLogging.log(
-                "verifyEcommerceUnitSlot", "Verifying Ecommerce Single for Above Footer slot",
-                true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot",
+                "Verifying Ecommerce Single for Above Footer slot", true);
             verifyEcommerceUnitShown(slotAboveFooterEcommerceBy, eCommerceSingleProductBy);
             break;
           default:
-            PageObjectLogging
-                .log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName + ")", true);
+            PageObjectLogging.log("verifyEcommerceUnitSlot", "Invalid slot name (Name: " + slotName
+                + ")", true);
             break;
         }
         verifyNumOfProductThumbVisible(eCommerceSingleProductBy);
@@ -449,17 +422,14 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyNumOfProductThumbVisible(By numOfProductBy) {
-    List<WebElement>
-        thumbElemsList =
+    List<WebElement> thumbElemsList =
         driver.findElement(numOfProductBy).findElements(productThumbBy);
     if (numOfProductBy.equals(eCommerceMultipleProductBy)) {
       Assertion.assertTrue(thumbElemsList.size() > 1,
-                           "Expecting more than 1 product thumb image. Found: "
-                           + thumbElemsList.size());
+          "Expecting more than 1 product thumb image. Found: " + thumbElemsList.size());
     } else {
       Assertion.assertTrue(thumbElemsList.size() == 1,
-                           "Expecting only 1 product thumb image. Found: "
-                           + thumbElemsList.size());
+          "Expecting only 1 product thumb image. Found: " + thumbElemsList.size());
     }
   }
 
@@ -473,16 +443,14 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyEcommerceUnitNotShownAboveTitle() {
     waitForElementNotPresent(slotAboveTitleEcommerceBy);
-    PageObjectLogging
-        .log("verifyEcommerceUnitNotShownAboveTitle", "Ecommerce unit is not shown above the title",
-             true);
+    PageObjectLogging.log("verifyEcommerceUnitNotShownAboveTitle",
+        "Ecommerce unit is not shown above the title", true);
   }
 
   public void verifyEcommerceUnitNotShownBelowTitle() {
     waitForElementNotPresent(slotBelowTitleEcommerceBy);
-    PageObjectLogging
-        .log("verifyEcommerceUnitNotShownBelowTitle", "Ecommerce unit is not shown below the title",
-             true);
+    PageObjectLogging.log("verifyEcommerceUnitNotShownBelowTitle",
+        "Ecommerce unit is not shown below the title", true);
   }
 
   private WebElement redirectUntilDesiredSlotShown(By adSlotBy, String adSlotName) {
@@ -507,17 +475,15 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyProductThumbInvisible(By slotBy) {
-    waitForElementNotVisibleByElement(
-        driver.findElement(slotBy).findElement(productThumbBy));
-    PageObjectLogging
-        .log("verifyProductThumbInvisible", "Product thumbnail is NOT visible in content", true);
+    waitForElementNotVisibleByElement(driver.findElement(slotBy).findElement(productThumbBy));
+    PageObjectLogging.log("verifyProductThumbInvisible",
+        "Product thumbnail is NOT visible in content", true);
   }
 
   private void verifyProductThumbVisible(By slotBy) {
-    waitForElementVisibleByElement(
-        driver.findElement(slotBy).findElement(productThumbBy));
-    PageObjectLogging
-        .log("verifyProductThumbInvisible", "Product thumbnail is visible in content", true);
+    waitForElementVisibleByElement(driver.findElement(slotBy).findElement(productThumbBy));
+    PageObjectLogging.log("verifyProductThumbInvisible", "Product thumbnail is visible in content",
+        true);
   }
 
   private void verifyProductThumbImageSize(By slotBy) {
@@ -529,9 +495,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     String maxWidthStr = thumbImg.getCssValue("max-width");
     int maxHeight = Integer.parseInt(maxHeightStr.substring(0, maxHeightStr.indexOf("px")));
     int maxWidth = Integer.parseInt(maxWidthStr.substring(0, maxWidthStr.indexOf("px")));
-    Assertion.assertTrue(imgHeight <= maxHeight,
-                         "img height: " + imgHeight + "is bigger than max height: " + maxHeight);
-    Assertion.assertTrue(imgWidth <= maxWidth,
-                         "img width: " + imgWidth + " is bigger than max width: " + maxHeight);
+    Assertion.assertTrue(imgHeight <= maxHeight, "img height: " + imgHeight
+        + "is bigger than max height: " + maxHeight);
+    Assertion.assertTrue(imgWidth <= maxWidth, "img width: " + imgWidth
+        + " is bigger than max width: " + maxHeight);
   }
 }

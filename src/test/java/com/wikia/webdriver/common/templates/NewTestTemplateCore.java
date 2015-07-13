@@ -157,7 +157,7 @@ public class NewTestTemplateCore {
   }
 
   public void setGeoEdge(String countryCode) {
-    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(Configuration.getCredentialsFilePath());
+    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils();
     String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
     String ip = geoEdgeUtils.getIPForCountry(countryCode);
     networkTrafficInterceptor.setProxyServer(ip);

@@ -1,18 +1,5 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
@@ -25,12 +12,23 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 
 public class CommonUtils {
 
-	private CommonUtils() {
-
-	}
+  private CommonUtils() {}
 
   /**
    * appends given text to specified file
@@ -42,12 +40,10 @@ public class CommonUtils {
     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
   }
 
-
   public static List<String> getLinesInFile(String pathToFile) {
     List<String> list = new ArrayList<String>();
     try {
-      BufferedReader br = new BufferedReader(
-          new FileReader(pathToFile));
+      BufferedReader br = new BufferedReader(new FileReader(pathToFile));
       String line;
       while ((line = br.readLine()) != null) {
         list.add(line);

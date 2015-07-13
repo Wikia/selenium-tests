@@ -41,9 +41,6 @@ public class VenusGlobalNavPageObject {
   @FindBy(css = "#searchSelect")
   private WebElement searchSelect;
 
-  @FindBy(css = "#searchLabelSingle")
-  private WebElement inlineSearch;
-
   @FindBy(css = "#searchInput")
   private WebElement searchInput;
 

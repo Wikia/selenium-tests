@@ -179,8 +179,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
   protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-  @FindBy(css = "a.ajaxRegister")
-  private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".banner-notification div.msg a")
@@ -204,7 +202,6 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
-  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
