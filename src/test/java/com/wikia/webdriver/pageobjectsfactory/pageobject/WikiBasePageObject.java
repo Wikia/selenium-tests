@@ -978,14 +978,12 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (IOException e) {
       PageObjectLogging.log("logInCookie",
           "IO Exception", false);
-      e.printStackTrace();
     } finally {
       try {
         response.close();
       } catch (IOException | NullPointerException e) {
         PageObjectLogging.log("logInCookie",
             "IO Exception", false);
-        e.printStackTrace();
       }
     }
     return "";
