@@ -49,4 +49,10 @@ public class LoginTests extends NewTestTemplate {
     dropDown.logIn(credentials.userNameStaff, credentials.passwordStaff);
     base.verifyUserLoggedIn(credentials.userNameStaff);
   }
+
+  @Test(groups = {"Login_005", "Login"})
+  public void Login_005_japaneseUserLogin() {
+    SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
+    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, "http://ja.ja-test.wikia.com/");
+  }
 }

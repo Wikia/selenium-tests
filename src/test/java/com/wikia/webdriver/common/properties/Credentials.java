@@ -129,6 +129,9 @@ public class Credentials {
     public String userNameJapanese;
     public String passwordJapanese;
 
+    public String userNameJapanese2;
+    public String passwordJapanese2;
+
     public String userNameBrazilianPortuguese;
     public String passwordBrazilianPortuguese;
 
@@ -203,6 +206,8 @@ public class Credentials {
         passwordPolish = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language9.password");
         userNameItalian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language10.username");
         passwordItalian = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language10.password");
+        userNameJapanese2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language11.username");
+        passwordJapanese2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.language11.password");
 
         userNameNonLatin =
                 XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.username");
