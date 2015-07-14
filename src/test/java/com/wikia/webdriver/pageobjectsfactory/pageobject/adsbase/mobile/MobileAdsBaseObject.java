@@ -52,11 +52,13 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   public void verifyMobileTopLeaderboard() {
-    extractGptInfo(presentLeaderboardSelector);
+    removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
 
-    removeElementIfPresent(SMART_BANNER_SELECTOR);
+    waitForElementByElement(presentLeaderboard);
+    waitForSlotExpanded(presentLeaderboard);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
+      extractGptInfo(presentLeaderboardSelector);
 
       if (checkIfElementOnPage(CELTRA_MASK_SELECTOR)) {
         PageObjectLogging.logWarning("Special ad", "Celtra");
@@ -69,11 +71,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       }
 
       throw new NoSuchElementException(
-          "Screenshots of element on/off look the same."
-          + "Most probable ad is not present; CSS "
+          "No ad detected in selector: "
           + presentLeaderboardSelector
       );
     }
+
+    extractGptInfo(presentLeaderboardSelector);
   }
 
   public void verifyNoAdInSlot(String slotName) {

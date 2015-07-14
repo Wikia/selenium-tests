@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
@@ -750,7 +749,7 @@ public class BasePageObject {
   }
 
   public void openWikiPage() {
-    getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 

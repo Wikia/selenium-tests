@@ -1,9 +1,5 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.openqa.selenium.WebDriverException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +14,10 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
+
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -39,14 +39,14 @@ public class MailFunctions {
       // getInbox
       Folder inbox = store.getFolder("Inbox");
       inbox.open(Folder.READ_ONLY);
-      Message messages[] = null;
+      Message[] messages = null;
 
       boolean forgottenPasswordMessageFound = false;
       Message magicMessage = null;
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
 
-        System.out.println("Waiting for message ... \r");
+        PageObjectLogging.log("Mail", "Waiting for the message", true);
         Thread.sleep(2000);
         for (Message message : messages) {
           if (message.getSubject().contains(subject)) {
@@ -59,7 +59,7 @@ public class MailFunctions {
         }
       }
 
-      System.out.println("Mail arrived... \r");
+      PageObjectLogging.log("Mail", "Mail arrived", true);
 
       Message m = magicMessage;
       String line;
@@ -74,16 +74,10 @@ public class MailFunctions {
       return builder.toString();
     } catch (NoSuchProviderException e) {
       PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (MessagingException e) {
+      throw new WebDriverException();
+    } catch (MessagingException | IOException | InterruptedException e) {
       PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (IOException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
+      throw new WebDriverException();
     }
   }
 
@@ -105,13 +99,13 @@ public class MailFunctions {
           messages[i].setFlag(Flags.Flag.DELETED, true);
         }
       } else {
-        System.out.println("There is no messages in inbox");
+        PageObjectLogging.log("Mail", "There are no messages in inbox", true);
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      System.out.println("problems : " + e.getMessage());
+      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
     } catch (MessagingException e) {
-      System.out.println("problems : " + e.getMessage());
+      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
     }
   }
 
@@ -127,7 +121,7 @@ public class MailFunctions {
       return m.group(0).replace("button\" href3D\"", "");
       // m.group(0) returns first match for the regexp
     } else {
-      throw new RuntimeException("There was no match in the following content: \n" + content);
+      throw new WebDriverException("There was no match in the following content: \n" + content);
     }
   }
 
@@ -141,7 +135,7 @@ public class MailFunctions {
       return m.group(0).replace("below:", "");
       // m.group(0) returns first match for the regexp
     } else {
-      throw new RuntimeException("There was no match in the following content: \n" + content);
+      throw new WebDriverException("There was no match in the following content: \n" + content);
     }
 
   }

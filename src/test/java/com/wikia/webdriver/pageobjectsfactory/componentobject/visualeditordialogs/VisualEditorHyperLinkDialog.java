@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -18,29 +18,18 @@ import java.util.List;
  */
 public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
-  @FindBy(css = ".oo-ui-icon-previous")
-  private WebElement previousButton;
   @FindBy(css = ".ve-ui-mwLinkTargetInputWidget input")
   private WebElement linkInput;
   @FindBy(css = ".oo-ui-pendingElement-pending")
   private WebElement inputPending;
   @FindBy(css = ".oo-ui-optionWidget-selected")
   private WebElement selectedResult;
-  @FindBy(css = ".ve-ui-desktopContext")
-  private WebElement desktopContext;
-  @FindBy(css = ".oo-ui-processDialog-title.oo-ui-labelElement")
-  private WebElement title;
-  @FindBy(css = ".oo-ui-window.ve-ui-inspector")
-  private WebElement inspector;
 
   private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
   private By selectedResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
-  private By linkCategoryBy =
-      By.cssSelector(".oo-ui-menuSectionOptionWidget .oo-ui-labelElement-label");
-  private By highlightedResultsBy = By.cssSelector(".oo-ui-optionWidget-highlighted");
+  private By linkCategoryBy = By
+      .cssSelector(".oo-ui-menuSectionOptionWidget .oo-ui-labelElement-label");
   private By doneButtonBy = By.cssSelector(".oo-ui-window-foot .oo-ui-buttonElement-button");
-
-  private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
   private int[] pageCategoryIndex = new int[4];
   private static final int NEW_PAGE_INDEX = 0;
@@ -74,7 +63,8 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   private void indexLinkCategories() {
     waitForElementNotVisibleByElement(inputPending);
-    List<WebElement> linkCategories = driver.findElement(linkResultMenuBy).findElements(linkCategoryBy);
+    List<WebElement> linkCategories =
+        driver.findElement(linkResultMenuBy).findElements(linkCategoryBy);
     for (int i = 0; i < linkCategories.size(); i++) {
       String categoryName = linkCategories.get(i).getAttribute("title");
       switch (categoryName) {
@@ -105,44 +95,22 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     return (pageCategoryIndex[category] == -1);
   }
 
-  public void isNewPage() {
-    Assertion.assertTrue(isCategoryResult(NEW_PAGE_INDEX), "New page index not found");
-  }
-
-  public void isMatchingPage() {
-    Assertion.assertTrue(isCategoryResult(MATCHING_PAGE_INDEX), "Matching page index not found");
-  }
-
-  public void isExternalLink() {
-    Assertion.assertTrue(isCategoryResult(EXTERNAL_LINK_INDEX), "External link index not found");
-  }
-
-  public void isRedirectPage() {
-    Assertion.assertTrue(isCategoryResult(REDIRECT_PAGE_INDEX), "Redirect page index not found");
-  }
-
   public void verifyNewPageIsTop() {
     indexLinkCategories();
     Assertion.assertNumber(pageCategoryIndex[NEW_PAGE_INDEX], 0,
-            "Checking New Page is on the top of the results.");
+        "Checking New Page is on the top of the results.");
   }
 
   public void verifyMatchingPageIsTop() {
     indexLinkCategories();
     Assertion.assertNumber(pageCategoryIndex[MATCHING_PAGE_INDEX], 0,
-            "Checking Matching Page is on the top of the results.");
+        "Checking Matching Page is on the top of the results.");
   }
 
   public void verifyExternalLinkIsTop() {
     indexLinkCategories();
     Assertion.assertNumber(pageCategoryIndex[EXTERNAL_LINK_INDEX], 0,
-            "Checking External Link is on the top of the results.");
-  }
-
-  public void verifyRedirectPageIsTop() {
-    indexLinkCategories();
-    Assertion.assertNumber(pageCategoryIndex[REDIRECT_PAGE_INDEX], 0,
-            "Checking Redirect Page is on the top of the results.");
+        "Checking External Link is on the top of the results.");
   }
 
   public void clickLinkResult() {

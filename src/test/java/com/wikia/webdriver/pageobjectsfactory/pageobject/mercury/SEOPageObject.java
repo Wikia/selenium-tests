@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class SEOPageObject extends MobileBasePageObject {
+public class SEOPageObject extends BasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
