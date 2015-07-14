@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.templates;
 
 import java.lang.reflect.Method;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
@@ -50,7 +52,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
-    logOut();
+    driver.get((wikiURL + URLsContent.SPECIAL_VERSION));
 
     if (method.isAnnotationPresent(Execute.class)) {
       if(method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {

@@ -37,7 +37,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void moveArticle() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
