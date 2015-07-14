@@ -28,7 +28,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 
   @Test
-  public void remindPasswordFromLoginDrobdown() {
+  public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
