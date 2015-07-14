@@ -28,7 +28,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 
   @Test
-  public void forgottenPassword_001_dropdown() {
+  public void remindPasswordFromLoginDrobdown() {
     String userName = credentials.userNameForgottenPassword;
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -54,7 +54,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  public void forgottenPassword_002_specialPage() {
+  public void remindPasswordOnSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -76,7 +76,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  public void forgottenPassword_003_createWiki() {
+  public void remindPasswordWhileCreatingWIki() {
     String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
