@@ -76,7 +76,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  public void remindPasswordWhileCreatingWIki() {
+  public void remindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
