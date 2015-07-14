@@ -54,6 +54,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   public void verifyMobileTopLeaderboard() {
     removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
 
+    waitForElementByElement(presentLeaderboard);
     waitForSlotExpanded(presentLeaderboard);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
