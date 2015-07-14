@@ -48,9 +48,6 @@ public class VEMediaTests extends NewTestTemplate {
   int numOfVideo = 1;
   ImageLicense testImageLicense;
 
-  private static String ARTICLE_NAME = PageContent.ARTICLE_NAME_PREFIX
-      + DateTime.now().getMillis();
-
   // AM04
   @Test(groups = {"VEMediaTests", "VEMediaTests_001", "VEMediaPreview"})
   @Execute(asUser = User.USER_9)
@@ -59,7 +56,9 @@ public class VEMediaTests extends NewTestTemplate {
         "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
     String providerName = "youtube";
 
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, ARTICLE_NAME);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -75,8 +74,9 @@ public class VEMediaTests extends NewTestTemplate {
   public void VEMediaTests_002_previewImage() {
     String mediaTitle = "Thomas Wright 1792 - 1849";
 
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
-        ARTICLE_NAME);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -95,8 +95,8 @@ public class VEMediaTests extends NewTestTemplate {
     testFullFileName = testFileUploadName + ".png";
     testImageLicense = ImageLicense.CCBYSA;
 
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openNewArticleEditModeVisual(
-        wikiURL);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     // Excluding FF on running this VE-1370
@@ -116,8 +116,9 @@ public class VEMediaTests extends NewTestTemplate {
   public void VEMediaTests_004_editCaption() {
     String captionText = "test123";
 
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
-        ARTICLE_NAME);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -138,8 +139,9 @@ public class VEMediaTests extends NewTestTemplate {
   @Test(groups = {"VEMediaTests", "VEMediaTests_005", "VEMediaResize"})
   @Execute(asUser = User.USER_9)
   public void VEMediaTests_005_resizeVideoWithHandle() {
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
-        ARTICLE_NAME);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -161,8 +163,9 @@ public class VEMediaTests extends NewTestTemplate {
   public void VEMediaTests_006_resizeVideoWithSetting() {
     int resizeNumber = 250;
 
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
-        ARTICLE_NAME);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -199,9 +202,10 @@ public class VEMediaTests extends NewTestTemplate {
     wikiTexts.add("|centre");
     wikiTexts.add("|left");
 
-    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
-        randomArticleName);
+    String randomArticleName =
+        PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =

@@ -10,7 +10,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
  */
 public enum User {
   USER("ci.user.regular.username", "ci.user.regular.password"), USER_2("ci.user.regular2.username",
-      "ci.user.regular2.password"), USER_9("ci.user.regular2.username", "ci.user.regular2.password"), STAFF(
+      "ci.user.regular2.password"), USER_9("ci.user.regular9.username", "ci.user.regular9.password"), USER_12(
+      "ci.user.regular12.username", "ci.user.regular12.password"), STAFF(
       "ci.user.wikiastaff.username", "ci.user.wikiastaff.password"), ANONYMOUS("anonymous",
       "anonymous");
 
