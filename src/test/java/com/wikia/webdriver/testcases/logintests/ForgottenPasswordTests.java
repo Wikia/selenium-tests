@@ -21,14 +21,14 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @author Karol 'kkarolk' Kujawiak
  */
+@Test(groups = {"ForgottenPassword"})
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
-  @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
-  public void ForgottenPassword_001_dropdown() {
+  @Test
+  public void forgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -53,11 +53,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
-  @Test(
-      groups = {"ForgottenPassword_002", "ForgottenPassword"}
-  )
-  public void ForgottenPassword_002_specialPage() {
+  @Test
+  public void forgottenPassword_002_specialPage() {
     String userName = credentials.userNameForgottenPassword2;
 
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -78,10 +75,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @Test(
-      groups = {"ForgottenPassword_003", "ForgottenPassword"}
-  )
-  public void ForgottenPassword_003_createWiki() {
+  @Test
+  public void forgottenPassword_003_createWiki() {
     String userName = credentials.userNameForgottenPassword3;
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -92,7 +87,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     cnwLogin.typeInUserName(userName);
     cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
-    String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
+    String
+        newPassword =
+        cnwLogin
+            .receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
