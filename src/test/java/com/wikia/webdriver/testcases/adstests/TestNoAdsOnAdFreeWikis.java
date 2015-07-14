@@ -43,15 +43,6 @@ public class TestNoAdsOnAdFreeWikis extends TemplateDontLogout {
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @GeoEdgeProxy(country = "VE")
-  @Test(
-      groups = {"TestNoAdsOnAdsFreeWikis_VE"}
-  )
-  public void TestNoAdsOnAdsFreeWikis_VE() {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
-  }
-
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikis_GeoEdgeFree"}
   )
