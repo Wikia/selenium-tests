@@ -103,14 +103,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void setSlots() {
-    if (checkIfElementOnPage(presentLeaderboard)) {
-      presentLeaderboardName = presentLeaderboard.getAttribute("id");
-      presentLeaderboardSelector = "#" + presentLeaderboardName;
-    } else {
-      presentLeaderboardName = null;
-      presentLeaderboardSelector = null;
-      presentLeaderboard = null;
-    }
+    presentLeaderboardName = presentLeaderboard.getAttribute("id");
+    presentLeaderboardSelector = "#" + presentLeaderboardName;
+
     if (checkIfElementOnPage(presentMedrec)) {
       presentMedrecName = presentMedrec.getAttribute("id");
       presentMedrecSelector = "#" + presentMedrecName;
