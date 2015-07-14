@@ -221,7 +221,7 @@ public class BasePageObject {
 
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
-    waitForElementClickableByElement(element);
+    waitForElementClickableByElement(element, 5);
     element.click();
   }
 
@@ -633,6 +633,17 @@ public class BasePageObject {
     try {
       wait.until(CommonExpectedConditions.elementToBeClickable(element));
     } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    wait = new WebDriverWait(driver, newTimeOut);
+    try {
+      wait.until(CommonExpectedConditions.elementToBeClickable(element));
+    } finally {
+      wait = new WebDriverWait(driver, timeOut);
       restoreDeaultImplicitWait();
     }
   }
