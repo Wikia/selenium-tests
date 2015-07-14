@@ -258,8 +258,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
               + ExceptionUtils.getStackTrace(result.getThrowable()));
 
       StringBuilder builder = new StringBuilder();
-      builder.append("<tr class=\"error\"><td>error</td><td>" + exception
-          + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+      builder.append("<tr class=\"error\"><td>error</td><td><pre>" + exception
+          + "</pre></td><td> <br/><a href='screenshots/screenshot" + imageCounter
           + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
           + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
