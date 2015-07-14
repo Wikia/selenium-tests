@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReviewChangesDialog;
@@ -27,7 +26,6 @@ import java.util.List;
 
 public class VECategoryTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
   WikiBasePageObject base;
   String articleName, testCategory, categorySearchStr;
   List<String> categoryWikiTexts;

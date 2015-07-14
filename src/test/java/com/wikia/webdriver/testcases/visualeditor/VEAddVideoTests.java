@@ -1,48 +1,41 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
  * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1134 Adding non-premium (Youtube) video VE-1134 Adding Premium
- * Video with full URL VE-1264 Adding Existing videos to an article VE-1265 Deleting a video from
- * the article
+ * @ownership Contribution
+ *            <p/>
+ *            VE-1134 Adding non-premium (Youtube) video VE-1134 Adding Premium Video with full URL
+ *            VE-1264 Adding Existing videos to an article VE-1265 Deleting a video from the article
  */
 
-public class VEAddVideoTests extends NewTestTemplateBeforeClass {
+public class VEAddVideoTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
-  WikiBasePageObject base;
-  String articleName;
-
-  @BeforeMethod(alwaysRun = true)
-  public void setup_VEPreferred() {
-    base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName11, credentials.password11, wikiURL);
-  }
-
-  //AM01
-  @Test(
-      groups = {
-          "VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
-          "VEAddExternalVideoTests_004"
-      }
-  )
+  // AM01
+  @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
+      "VEAddExternalVideoTests_004"})
+  @RelatedIssue(
+      issueID = "OPS-6181",
+      comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
+  @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -53,16 +46,18 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
-  //AM02
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
-  )
+  // AM02
+  @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
+  @RelatedIssue(
+      issueID = "OPS-6181",
+      comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
+  @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
-    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -73,16 +68,15 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
-  //AM03
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
-  )
+  // AM03
+  @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"})
+  @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_003_AddExistingVid() {
-    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, randomArticleName);
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+            + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -94,23 +88,33 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
 
-  @Test(
-      groups = {"VEAddVideo", "VEAddExternalVideoTests_004", "VEAddExistingVideo"},
-      dependsOnGroups = "VEAddExternalVideoTests_001"
-  )
+  @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_004", "VEAddExistingVideo"})
+  @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    VisualEditorPageObject ve =
+        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+    ve.verifyVEToolBarPresent();
+    ve.verifyEditorSurfacePresent();
+    VisualEditorAddMediaDialog mediaDialog =
+        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+    VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
+    veNew.verifyVideos(1);
+    veNew.verifyVEToolBarPresent();
+    VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
+    ArticlePageObject article = save.savePage();
+    article.verifyVEPublishComplete();
+
+    ve.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.selectMediaAndDelete();
     ve.verifyNoVideo();
-    VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-    ArticlePageObject article = save.savePage();
+    save = ve.clickPublishButton();
+    article = save.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 }

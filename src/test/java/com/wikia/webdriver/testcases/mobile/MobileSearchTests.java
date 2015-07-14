@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mobile;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
@@ -18,12 +19,13 @@ import java.util.List;
  *         correctly with pagination (1->2->1) 5. Verify that search results on second page are
  *         different than on first page 6. Verify that user is able to go to suggested from search
  *         suggestions
+ * @ownership Content X-Wing
  */
 
 public class MobileSearchTests extends NewTestTemplate {
 
   private String query = "PMG";
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {

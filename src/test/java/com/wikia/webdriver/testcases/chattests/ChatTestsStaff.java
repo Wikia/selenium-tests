@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -19,7 +20,7 @@ import org.testng.annotations.Test;
  */
 public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
 
-  private Credentials credentials = config.getCredentials();
+  private Credentials credentials = Configuration.getCredentials();
 
   private ChatPageObject openChatForUser(
       WebDriver driver, String userName, String password
@@ -29,7 +30,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
     return base.openChat(wikiURL);
   }
 
-
+    @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_001", "ChatStaff"})
   public void ChatTestsStaff_001_twoUserEnterChat() {
     switchToWindow(driverOne);
@@ -48,6 +49,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyUserJoinToChatMessage(credentials.userNameStaff2);
   }
 
+    @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_002", "ChatStaff"})
   public void ChatTestsStaff_002_verifySwitchingBetweenMainAndPrivateSections() {
     switchToWindow(driverOne);
@@ -76,6 +78,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyMessageOnChat(userTwoMessage);
   }
 
+    @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_003", "ChatStaff"})
   public void ChatTestsStaff_003_sendPrivateMessage() {
     switchToWindow(driverOne);
@@ -106,7 +109,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
     chatUserOne.verifyMessageOnChat(userTwoPrivateMessage);
   }
 
-  @DontRun(env = {"prod"})
+  @DontRun(env = {"prod", "sandbox"})
   @Test(groups = {"ChatTestsStaff_004", "ChatStaff"})
   public void ChatTestsStaff_004_basicUserChatFails() {
 

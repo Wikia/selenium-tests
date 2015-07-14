@@ -1,8 +1,11 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,21 +15,20 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 
-import org.testng.annotations.Test;
-
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create a wiki and delete 2. Create a wiki for children 3.
  *         Create a wiki with changed domain 4. Try to create a wiki which name exists 5. Try to
  *         create a wiki which name violates naming policy 6. Try to create a wiki without category
  */
+@Test(groups = {"CNW_User"})
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   String wikiDomain;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = "QAART-541")
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -51,6 +53,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_002_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -71,13 +74,12 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.logOut(newWikiURL);
     article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
     SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
-    factory.verifyVariableValue(
-        WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-        "true"
-    );
+    factory.verifyVariableValue(WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
+        "true");
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_003_createWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -98,6 +100,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_004_createWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -108,6 +111,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_005_createWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -118,6 +122,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_006_createWikiNoCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mobile;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
@@ -17,10 +18,11 @@ import org.testng.annotations.Test;
  *         5. Verify that you are able to hide top bar in modal 6. Verify that back button close
  *         modal 7. Verify that when you go to modal and go back you are in the same place as
  *         previously.
+ * @ownership Content X-Wing
  */
 public class GameGuidesPreview extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"GameGuidesPreview_001", "MobileGG"})
   public void GameGuidesPreview_001_sections_chevronTest() {
@@ -60,7 +62,7 @@ public class GameGuidesPreview extends NewTestTemplate {
     MobileModalComponentObject modal = mobile.clickModal();
     String current = modal.getCurrentImageUrl();
     modal.goToNextImage();
-    Assertion.assertNotEquals(current, modal.getCurrentImageUrl());
+    Assertion.assertNotEquals(modal.getCurrentImageUrl(), current);
     modal.closeModal();
     modal.verifyModalClosed();
   }
@@ -75,7 +77,7 @@ public class GameGuidesPreview extends NewTestTemplate {
     MobileModalComponentObject modal = mobile.clickModal();
     String current = modal.getCurrentImageUrl();
     modal.goToPreviousImage();
-    Assertion.assertNotEquals(current, modal.getCurrentImageUrl());
+    Assertion.assertNotEquals(modal.getCurrentImageUrl(), current);
     modal.closeModal();
     modal.verifyModalClosed();
   }

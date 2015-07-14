@@ -8,9 +8,8 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -22,13 +21,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void Placeholders_001_PublishedProvider() {
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
@@ -44,8 +45,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "Media"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void Placeholders_002_PublishedLibrary() {
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
@@ -61,8 +63,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "Media"})
-  @ExecuteAs(user = User.STAFF)
+  @Execute(asUser = User.STAFF)
   public void Placeholders_003_EditModeProvider() {
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
@@ -80,10 +83,10 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @RelatedIssue(issueID = "MAIN-4325")
   @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
-  @ExecuteAs(user = User.STAFF)
+  @Execute(asUser = User.STAFF)
   public void Placeholders_004_EditModeLibrary() {
+    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     WikiBasePageObject base = new WikiBasePageObject(driver);
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();

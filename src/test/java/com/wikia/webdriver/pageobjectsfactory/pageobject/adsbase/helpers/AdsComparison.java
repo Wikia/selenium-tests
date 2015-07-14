@@ -1,18 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Triple;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,18 +27,20 @@ import java.io.IOException;
  */
 public class AdsComparison {
 
+  public static final int IMAGES_THRESHOLD_PERCENT = 12;
   private static final int MILLIS_IN_SEC = 1000;
   private static final int DURATION_ACCURACY_PERCENT = 70;
-  public static final int IMAGES_THRESHOLD_PERCENT = 12;
   private static final int TIME_STEP_MILLS = 1000;
   private static final int MAX_ATTEMPTS = 600;
   private static final int AD_TIMEOUT_SEC = 15;
-  private Shooter shooter;
   protected ImageComparison imageComparison;
+  private Shooter shooter;
+  private ImageEditor imageEditor;
 
   public AdsComparison() {
     imageComparison = new ImageComparison();
     shooter = new Shooter();
+    imageEditor = new ImageEditor();
   }
 
   public void hideSlot(String selector, WebDriver driver) {
@@ -57,36 +56,6 @@ public class AdsComparison {
         "$(arguments[0]).css('opacity', arguments[1]);",
         selector, Integer.toString(value)
     );
-  }
-
-  public boolean compareImageWithScreenshot(
-      String filePath, Dimension screenshotSize, Point startPoint, WebDriver driver
-  ) {
-    String encodedExpectedScreen;
-    try {
-      encodedExpectedScreen = readFileAsString(filePath);
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
-    }
-    File capturedScreen = shooter.capturePageAndCrop(
-        startPoint, screenshotSize, driver
-    );
-
-    String encodedCapturedScreen;
-    try {
-      encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
-    }
-    capturedScreen.delete();
-    boolean success = true;
-
-    if (!(
-        imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen))
-        ) {
-      success = false;
-    }
-    return success;
   }
 
   public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element,
@@ -115,10 +84,9 @@ public class AdsComparison {
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
-          Triple rgb = ImageHelper.getRgbVariance(adImg);
-          PageObjectLogging.log("R variance", String.valueOf(rgb.getLeft()), true);
-          PageObjectLogging.log("G variance", String.valueOf(rgb.getMiddle()), true);
-          PageObjectLogging.log("B variance", String.valueOf(rgb.getRight()), true);
+          if (adImg.getHeight() == 1) {
+            return false;
+          }
           return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);
         }
       });

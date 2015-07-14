@@ -50,22 +50,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] articlesWithTopLeaderboard() {
-    return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"it.creepypasta", "Slenderman"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
-        {"wowwiki", "Portal:Main"},
-        {"muppet", "Kermit"},
-        {"warframe", "WARFRAME_Wiki"},
-        {"gameofthrones", "Season_4"},
-        {"dragon-story", "Battle_Arena"},
-        {"zh.chain-chronicle", "Chain_Chronicle_维基"},
-        {"zh.pad", "Homepage/Mobile"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
         {
@@ -108,8 +92,28 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "mobile; mobile_remnant", ""
+            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] mercuryConsecutivePageViews() {
+    return new Object[][]{
+        {
+            "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
+            "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
+            "wka.ent/_adtest//article",
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] testAdsHopPostMessage() {
+    return new Object[][]{
+        {"adtest", "DFP/hop", "DirectGptMobile"},
+        {"adtest", "DFP/hophop", "RemnantGptMobile"}
     };
   }
 }

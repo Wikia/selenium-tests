@@ -1,6 +1,11 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,21 +15,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
-import org.testng.annotations.Test;
-
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create wiki in different languages
  */
-
+@Test(groups = {"CNW_lang"})
 public class CreateWikiTests_lang extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
-  @Test(
-      dataProviderClass = CreateNewWikiDataProvider.class,
-      dataProvider = "getLangs",
-      groups = {"CreateNewWiki_lang_001", "CNW_lang"}
-  )
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
+      "CreateNewWiki_lang_001", "CNW_lang_first"})
+  @RelatedIssue(issueID = "MAIN-4491",
+      comment = "Last throbber takes too long and makes test fail. Please test manually")
+  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -42,5 +45,14 @@ public class CreateWikiTests_lang extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
     article.verifyUserLoggedIn(credentials.userName);
+  }
+
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
+      groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
+  @RelatedIssue(issueID = "MAIN-4491",
+      comment = "Last throbber takes too long and makes test fail. Please test manually")
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  public void langSecondHalf(String lang) {
+    CreateNewWiki_lang_TC001(lang);
   }
 }

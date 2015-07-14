@@ -17,6 +17,8 @@ public class PreviewEditModePageObject extends EditMode {
   private WebElement previewModal;
   @FindBy(css = ".preview .video-thumbnail")
   protected WebElement videoArticle;
+  @FindBy(css = "#mw-content-text object")
+  protected WebElement video;
 
   By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
   By videoWidthSelector = By.cssSelector(".image > img");
@@ -67,12 +69,12 @@ public class PreviewEditModePageObject extends EditMode {
         videoWidthSelector
     ).getAttribute("width"));
     Assertion
-        .assertNumber(desiredWidth, width, "width should be " + desiredWidth + " but is " + width);
+        .assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is " + width);
   }
 
   public void verifyVideoCaption(String desiredCaption) {
     String caption = previewModal.findElement(videoCaptionSelector).getText();
-    Assertion.assertStringContains(desiredCaption, caption);
+    Assertion.assertStringContains(caption, desiredCaption);
   }
 
   public void closePreviewModal() {
@@ -82,7 +84,7 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
   }
 
   public void publish() {
@@ -104,4 +106,8 @@ public class PreviewEditModePageObject extends EditMode {
     PageObjectLogging.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", true);
   }
 
+  public void verifyVideoOnPreview(String videoID) {
+    waitForElementByElement(video);
+    waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
+  }
 }

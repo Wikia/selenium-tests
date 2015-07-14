@@ -2,14 +2,12 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,7 +15,7 @@ import java.util.List;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestKruxSegment extends NewTestTemplate {
+public class TestKruxSegment extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -31,7 +29,7 @@ public class TestKruxSegment extends NewTestTemplate {
       adsKruxObject.getUrl(url);
       adsKruxObject.waitForKrux();
     }
-    Assertion.assertStringContains(segmentId, adsKruxObject.getKxsegs());
+    Assertion.assertStringContains(adsKruxObject.getKxsegs(), segmentId);
   }
 
   @Test(
@@ -77,8 +75,9 @@ public class TestKruxSegment extends NewTestTemplate {
     }
     String segmentsLocalStorage = adsKruxObject.getKxsegs();
     String dataGptPageParams = adsKruxObject.getGptParams("LEADERBOARD", "data-gpt-page-params");
-    Assertion.assertStringContains(adsKruxObject.getKsgmntPattern(segmentsLocalStorage),
-                                   dataGptPageParams);
+    Assertion.assertStringContains(dataGptPageParams,
+                                   adsKruxObject.getKsgmntPattern(segmentsLocalStorage)
+    );
     Assertion.assertEquals(segmentsLocalStorage.contains(segment), isPresent);
   }
 

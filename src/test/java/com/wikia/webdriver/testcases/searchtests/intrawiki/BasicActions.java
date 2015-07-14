@@ -32,10 +32,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
  * namespaces in result titles 14. Verify top module 15. Verify push to top is working in
  * community.wikia.com
  */
-
+@Test(groups = {"IntraWikiSearchBasicActions", "IntraWikiSearch"})
 public class BasicActions extends IntraWiki {
 
-  @Test(groups = {"anonSearch", "IntraWikiSearch", "Search"})
+  @Test(groups = {"anonSearch", "Search", "Search1"})
   public void anonSearch() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(testedWiki);
@@ -44,7 +44,7 @@ public class BasicActions extends IntraWiki {
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }
 
-  @Test(groups = {"userSearch", "IntraWikiSearch", "Search"})
+  @Test(groups = {"userSearch", "Search", "Search1"})
   public void userSearch() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(testedWiki);
@@ -54,7 +54,7 @@ public class BasicActions extends IntraWiki {
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }
 
-  @Test(groups = {"IntraWikiSearch_002", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_002", "Search", "Search1"})
   public void pagination() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -70,7 +70,7 @@ public class BasicActions extends IntraWiki {
     search.verifyLastResultPage();
   }
 
-  @Test(groups = {"IntraWikiSearch_003", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_003", "Search", "Search1"})
   public void resultsCount() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -80,7 +80,7 @@ public class BasicActions extends IntraWiki {
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE_HIGH);
   }
 
-  @Test(groups = {"IntraWikiSearch_004", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_004", "Search", "Search1"})
   public void noResults() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -88,7 +88,7 @@ public class BasicActions extends IntraWiki {
     search.verifyNoResults();
   }
 
-  @Test(groups = {"IntraWikiSearch_005", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_005", "Search", "Search1"})
   public void filtering() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -103,7 +103,7 @@ public class BasicActions extends IntraWiki {
     search.verifyAllResultsVideos(SearchContent.RESULTS_PER_PAGE_HIGH);
   }
 
-  @Test(groups = {"IntraWikiSearch_006", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_006", "Search", "Search1"})
   public void sortingVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -122,7 +122,7 @@ public class BasicActions extends IntraWiki {
     search.compareTitleListsNotEquals(titles2, titles3);
   }
 
-  @Test(groups = {"IntraWikiSearch_007", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_007", "Search", "Search1"})
   public void sortingImages() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -137,7 +137,7 @@ public class BasicActions extends IntraWiki {
     search.compareTitleListsNotEquals(titles1, titles2);
   }
 
-  @Test(groups = {"IntraWikiSearch_009", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_009", "Search", "Search2"})
   public void languageTranslation() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -146,8 +146,7 @@ public class BasicActions extends IntraWiki {
     search.verifyLanguageTranslation();
   }
 
-  @RelatedIssue(issueID = "MAIN-4153")
-  @Test(groups = {"IntraWikiSearch_010", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_010", "Search", "Search2"})
   public void selectImagesOrVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -159,7 +158,7 @@ public class BasicActions extends IntraWiki {
     search.verifyVideosOnly();
   }
 
-  @Test(groups = {"IntraWikiSearch_011", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_011", "Search", "Search2"})
   public void defaultNamespaces() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -168,7 +167,7 @@ public class BasicActions extends IntraWiki {
     search.verifyDefaultNamespaces();
   }
 
-  @Test(groups = {"IntraWikiSearch_012", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_012", "Search", "Search2"})
   public void noFileExtensionNeed() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -178,7 +177,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getNamespaces",
-      groups = {"IntraWikiSearch_013", "IntraWikiSearch", "Search"})
+      groups = {"IntraWikiSearch_013", "Search", "Search2"})
   public void namespaces(String searchPhrase, String namespace) {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -190,7 +189,7 @@ public class BasicActions extends IntraWiki {
     search.verifyNamespace(namespace);
   }
 
-  @Test(groups = {"IntraWikiSearch_014", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_014", "Search", "Search2"})
   public void topModule() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -198,7 +197,7 @@ public class BasicActions extends IntraWiki {
     search.verifyTopModule();
   }
 
-  @Test(groups = {"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
+  @Test(groups = {"IntraWikiSearch_015", "Search", "Search2"})
   public void communityPushToTopWikiResult() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(communityWiki);

@@ -17,12 +17,14 @@ public class YoutubeVideo implements Video {
   private final String url;
   private final String title;
   private final String fileName;
+  private final String videoID;
 
-  public YoutubeVideo(String title, String url) {
+  public YoutubeVideo(String title, String url, String videoId) {
     this.url = url;
     this.title = capitaliseFirstWord(escapeSpecialCharactersAndReduceSpacesFromTitle(title));
 
     this.fileName = transformTitleToFileName(this.title);
+    this.videoID = videoId;
   }
 
   private static String escapeSpecialCharactersAndReduceSpacesFromTitle(String title) {
@@ -51,6 +53,11 @@ public class YoutubeVideo implements Video {
   @Override
   public String getUrl() {
     return this.url;
+  }
+
+  @Override
+  public String getID() {
+    return this.videoID;
   }
 
   @Override

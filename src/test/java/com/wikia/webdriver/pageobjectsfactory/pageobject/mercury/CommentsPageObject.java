@@ -12,12 +12,11 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class CommentsPageObject extends BasePageObject {
 
-  @FindBy(css = ".article-comments > button")
+  @FindBy(css = ".article-comments > div")
   private WebElement commentsHeader;
   @FindBy(css = ".avatar")
   private List<WebElement> commentsAvatars;
@@ -37,8 +36,6 @@ public class CommentsPageObject extends BasePageObject {
   private List<WebElement> commentsReplies;
   @FindBy(css = "ul.comments > li ul")
   private List<WebElement> commentsRepliesList;
-  @FindBy(css = "button.show-comments-btn.page-btn")
-  private WebElement showCommentsButton;
   @FindBy(xpath = "//button[text()='Next page']")
   private WebElement nextCommentPageButton;
   @FindBy(xpath = "//button[text()='Previous page']")
@@ -105,9 +102,9 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public int getNumberOfCommentsFromHeader() {
-    return Integer.parseInt(showCommentsButton.getText().substring(0,
-                                                                   showCommentsButton.getText()
-                                                                       .indexOf(" ")));
+    return Integer.parseInt(commentsHeader.getText().substring(0,
+                                                               commentsHeader.getText()
+                                                                   .indexOf(" ")));
   }
 
   public int getNumberOfRepliesOnThatPage() {
@@ -176,5 +173,9 @@ public class CommentsPageObject extends BasePageObject {
     }
     return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
         .contains("/wiki/File:");
+  }
+
+  public void waitForFirstCommentToBeVisible() {
+    waitForElementVisibleByElement(allComments.get(0), 5, 500);
   }
 }

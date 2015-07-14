@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.core;
 
-import org.apache.commons.configuration.XMLConfiguration;
-
 import java.io.File;
 
-public class XMLFunctions {
+import org.apache.commons.configuration.XMLConfiguration;
 
-  private XMLFunctions() {
+public class XMLReader {
+
+  private XMLReader() {
 
   }
 
@@ -15,7 +15,8 @@ public class XMLFunctions {
    *
    * @author Karol Kujawiak
    */
-  public static String getXMLConfiguration(File file, String key) {
+  public static String getValue(File file, String key) {
+
     try {
       XMLConfiguration xml = new XMLConfiguration(file);
       return xml.getString(key);

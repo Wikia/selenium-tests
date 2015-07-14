@@ -10,19 +10,11 @@ public class CreateNewWikiDataProvider {
 
   @DataProvider
   private static final Object[][] getLangs() {
-    return new Object[][]{
-        {"de"},
-        {"es"},
-        {"fr"},
-        {"it"},
-        {"ja"},
-        {"nl"},
-        {"no"},
-        {"pl"},
-        {"pt"},
-        {"pt-br"},
-        {"ru"},
-        {"zh"},
-    };
+    return new Object[][] { {"de"}, {"es"}, {"fr"}, {"it"}, {"ja"}, {"nl"}};
+  }
+
+  @DataProvider
+  private static final Object[][] getLangSecondHalf() {
+    return new Object[][] { {"no"}, {"pl"}, {"pt"}, {"pt-br"}, {"ru"}, {"zh"}};
   }
 }

@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -17,7 +19,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"Ads_In_Content", "Ads"}
 )
-public class TestAdsScreenshotComparison extends NewTestTemplate {
+public class TestAdsScreenshotComparison extends TemplateDontLogout {
 
   private String testedPage;
 
@@ -27,103 +29,97 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
   )
   public TestAdsScreenshotComparison(String wikiName, String path) {
     super();
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 
-  @GeoEdgeProxy(country = "JP")
-  @Test(
-      groups = {"Ads_Screenshot_JP"}
-  )
-  public void Ads_Screenshot_JP() throws Exception {
-    checkAds();
+  private void checkAds(String country) {
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    Assertion.assertEquals(wikiPage.getCountry(), country);
+    wikiPage.checkMedrec();
+    wikiPage.checkTopLeaderboard();
   }
 
-  @GeoEdgeProxy(country = "DE")
-  @Test(
-      groups = {"Ads_Screenshot_DE"}
-  )
-  public void Ads_Screenshot_DE() throws Exception {
-    checkAds();
+  @Test(groups = {"Ads_Screenshot_GEF"})
+  public void Ads_Screenshot_GEF() throws Exception {
+    checkAds("US");
+  }
+
+  @Test(groups = {"Ads_Screenshot_Rapid_CA"})
+  public void Ads_Screenshot_Rapid_CA() throws Exception {
+    checkAds("CA");
+  }
+
+  @Test(groups = {"Ads_Screenshot_Rapid_DE"})
+  public void Ads_Screenshot_Rapid_DE() throws Exception {
+    checkAds("DE");
+  }
+
+  @Test(groups = {"Ads_Screenshot_Rapid_GB"})
+  public void Ads_Screenshot_Rapid_GB() throws Exception {
+    checkAds("GB");
   }
 
   @GeoEdgeProxy(country = "AU")
-  @Test(
-      groups = {"Ads_Screenshot_AU"}
-  )
+  @Test(groups = {"Ads_Screenshot_AU"})
   public void Ads_Screenshot_AU() throws Exception {
-    checkAds();
-  }
-
-  @GeoEdgeProxy(country = "VE")
-  @Test(
-      groups = {"Ads_Screenshot_VE"}
-  )
-  public void Ads_Screenshot_VE() throws Exception {
-    checkAds();
-  }
-
-  @GeoEdgeProxy(country = "LT")
-  @Test(
-      groups = {"Ads_Screenshot_LT"}
-  )
-  public void Ads_Screenshot_LT() throws Exception {
-    checkAds();
-  }
-
-  @GeoEdgeProxy(country = "TW")
-  @Test(
-      groups = {"Ads_Screenshot_TW"}
-  )
-  public void Ads_Screenshot_TW() throws Exception {
-    checkAds();
-  }
-
-  @GeoEdgeProxy(country = "NZ")
-  @Test(
-      groups = {"Ads_Screenshot_NZ"}
-  )
-  public void Ads_Screenshot_NZ() throws Exception {
-    checkAds();
+    checkAds("AU");
   }
 
   @GeoEdgeProxy(country = "CA")
-  @Test(
-      groups = {"Ads_Screenshot_CA"}
-  )
+  @Test(groups = {"Ads_Screenshot_CA"})
   public void Ads_Screenshot_CA() throws Exception {
-    checkAds();
+    checkAds("CA");
+  }
+
+  @GeoEdgeProxy(country = "DE")
+  @Test(groups = {"Ads_Screenshot_DE"})
+  public void Ads_Screenshot_DE() throws Exception {
+    checkAds("DE");
   }
 
   @GeoEdgeProxy(country = "GB")
-  @Test(
-      groups = {"Ads_Screenshot_GB"}
-  )
+  @Test(groups = {"Ads_Screenshot_GB"})
   public void Ads_Screenshot_GB() throws Exception {
-    checkAds();
+    checkAds("GB");
   }
 
-  @Test(
-      groups = {"Ads_Screenshot_GEF"}
-  )
-  public void Ads_Screenshot_GEF() throws Exception {
-    checkAds();
+  @GeoEdgeProxy(country = "JP")
+  @Test(groups = {"Ads_Screenshot_JP"})
+  public void Ads_Screenshot_JP() throws Exception {
+    checkAds("JP");
+  }
+
+  @GeoEdgeProxy(country = "LT")
+  @Test(groups = {"Ads_Screenshot_LT"})
+  public void Ads_Screenshot_LT() throws Exception {
+    checkAds("LT");
   }
 
   @GeoEdgeProxy(country = "NO")
-  @Test(
-      groups = {"Ads_Screenshot_NO"}
-  )
+  @Test(groups = {"Ads_Screenshot_NO"})
   public void Ads_Screenshot_NO() throws Exception {
-    checkAds();
+    checkAds("NO");
   }
 
-  private void checkAds() {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.checkMedrec();
-    wikiPage.checkTopLeaderboard();
+  @GeoEdgeProxy(country = "NZ")
+  @Test(groups = {"Ads_Screenshot_NZ"})
+  public void Ads_Screenshot_NZ() throws Exception {
+    checkAds("NZ");
+  }
+
+  @GeoEdgeProxy(country = "TW")
+  @Test(groups = {"Ads_Screenshot_TW"})
+  public void Ads_Screenshot_TW() throws Exception {
+    checkAds("TW");
+  }
+
+  @GeoEdgeProxy(country = "VE")
+  @Test(groups = {"Ads_Screenshot_VE"})
+  public void Ads_Screenshot_VE() throws Exception {
+    checkAds("VE");
   }
 }

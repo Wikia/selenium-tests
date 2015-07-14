@@ -7,16 +7,16 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 
 /**
  * @author Qaga
- * @ownership Consumer
+ * @ownership Content X-Wing
  */
 
-public class WamPageTests extends NewTestTemplateBeforeClass {
+public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
 
@@ -26,6 +26,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
     wam.openWamPage(wikiCorporateURL);
   }
 
+  @RelatedIssue(issueID = "CONCF-533")
   @Test(groups = {"WamPage001", "WamPageTests"})
   public void wam_001_verifyDefaultPage() {
     wam.verifyTabIsSelected(WamTab.ALL);
@@ -33,6 +34,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
     wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
+  @RelatedIssue(issueID = "CONCF-533")
   @Test(groups = {"WamPage002", "WamPageTests"})
   public void wam_002_verifyFilteringByVertical() {
     wam.verifyWamIndexIsNotEmpty();
@@ -45,7 +47,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
     }
   }
 
-  @RelatedIssue(issueID = "MAIN-3566")
+  @RelatedIssue(issueID = "CONCF-533")
   @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumn(1, 20);
@@ -55,7 +57,6 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
     wam.verifyWamIndexPageFirstColumn(41, 60);
   }
 
-  @RelatedIssue(issueID = "QAART-586")
   @Test(groups = {"WamPage004", "WamPageTests"})
   public void wam_004_compareTabAndHeaderName() {
     for (WamTab tab : WamTab.values()) {

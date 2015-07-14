@@ -73,7 +73,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void verifyIsNewRecaptcha(String target) {
-    Assertion.assertNotEquals(target, getRecaptchaImageSrc());
+    Assertion.assertNotEquals(getRecaptchaImageSrc(), target);
     PageObjectLogging.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", true);
   }
 

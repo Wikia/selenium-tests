@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Ludwik on 2015-01-23.
  */
+@Test(groups = {"IntraWikiSearchExtraMatch"})
 public class ExactMatch extends NewTestTemplate {
 
   @Test(dataProviderClass = IntraWikiSearchProvider.class,
@@ -17,7 +18,7 @@ public class ExactMatch extends NewTestTemplate {
   )
   public void IntraWikiSearch_001_exactMatch(String query) {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-    search.openWikiPage(urlBuilder.getUrlForWiki("muppet"));
+    search.openWikiPage(wikiURL);
     search.searchFor(query);
     search.verifyFirstResult(query);
   }

@@ -11,8 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class InteractiveMapsComponentObject extends BasePageObject {
 

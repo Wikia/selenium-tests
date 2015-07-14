@@ -1,8 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
 import org.testng.annotations.Factory;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  * @description 1. Test no ads on corporate pages
  */
-public class TestAdsOnGermanCorpPages extends NewTestTemplate {
+public class TestAdsOnGermanCorpPages extends TemplateDontLogout {
 
   private String testedPage;
 
@@ -24,10 +25,10 @@ public class TestAdsOnGermanCorpPages extends NewTestTemplate {
       dataProvider = "germanCorpPages"
   )
   public TestAdsOnGermanCorpPages(String wikiName, String path) {
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 

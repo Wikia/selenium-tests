@@ -4,8 +4,9 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -21,13 +22,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
  */
 public class WikiActivityTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_001", "darwin"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void WikiActivityTests_001_newEditionIsRecordedOnAvtivityModule() {
     String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
@@ -44,7 +45,7 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void WikiActivityTests_002_newPageCretionIsRecordedOnAvtivityModule() {
     SpecialCreatePagePageObject specialCreatePage =
         new WikiBasePageObject(driver).openSpecialCreatePage(wikiURL);
@@ -64,7 +65,7 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_003", "darwin"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void WikiActivityTests_003_newBlogCreationIsRecordedOnAvtivityModule() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
@@ -85,7 +86,7 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnAvtivityModule() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleName = article.getArticleName();

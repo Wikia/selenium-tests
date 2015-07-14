@@ -4,9 +4,8 @@
 package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -53,7 +52,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_003_user() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
@@ -63,7 +62,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_004_userSuggestions() {
     VisualEditModePageObject visualEditMode = new WikiBasePageObject(driver).navigateToArticleEditPageCK(
         wikiURL,

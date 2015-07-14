@@ -2,8 +2,8 @@ package com.wikia.webdriver.testcases.mediatests.providers;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -15,12 +15,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class VetProvidersTests extends NewTestTemplate {
 
-
   @RelatedIssue(issueID = "QAART-585")
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
       "VetProvidersArticle", "VetProvidersTests_001", "Media"})
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {

@@ -23,7 +23,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
   @Test(
-      groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "allSlots"
   )
@@ -42,7 +42,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdSlotsMobile_002", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndPrefooterSlots"
   )
@@ -60,7 +60,7 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"TestAdSlotsMobile_003", "TestAdSlotsMobile"},
+      groups = {"MobileAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndInContentSlots"
   )
@@ -75,5 +75,33 @@ public class TestSlotsMobile extends MobileTestTemplate {
     ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
     ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
+  }
+
+  @Test(
+      groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_004", "TestAdSlotsMobile"},
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "mercuryConsecutivePageViews"
+  )
+  public void TestLeaderboardAndPrefooterOnConsecutivePageViews(
+      String wikiName,
+      String firstArticle,
+      String secondArticle,
+      String thirdArticle,
+      String adUnit
+  ) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, firstArticle);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+
+    ads.mercuryNavigateToAnArticle(secondArticle);
+    ads.waitTitleChangesTo(secondArticle);
+    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+
+    ads.mercuryNavigateToAnArticle(thirdArticle);
+    ads.waitTitleChangesTo(thirdArticle);
+    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
   }
 }

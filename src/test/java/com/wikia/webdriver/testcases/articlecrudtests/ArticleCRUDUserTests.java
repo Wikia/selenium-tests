@@ -4,8 +4,9 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -16,11 +17,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 
 /**
  * @author: Bogna 'bognix' Knychała
+ * @ownership Content X-Wing
  */
 @Test(groups = {"ArticleCRUDUser"})
 public class ArticleCRUDUserTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ArticleCRUDUser_001"})
   public void ArticleCRUDUser_001_specialPage() {
@@ -51,7 +53,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleCRUDUser_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -65,7 +67,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDUser_004"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleCRUDUser_004_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
@@ -78,7 +80,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDUser_005"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleCRUDUser_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
@@ -90,7 +92,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDUser_006"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleCRUDUser_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =

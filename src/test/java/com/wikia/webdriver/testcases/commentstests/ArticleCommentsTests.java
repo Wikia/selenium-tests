@@ -4,8 +4,9 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -18,10 +19,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 @Test(groups = {"ArticleComments"})
 public class ArticleCommentsTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ArticleComments_001", "Smoke2"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleComments_001_editComment() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
@@ -38,7 +39,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleComments_002"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void ArticleComments_002_replyComment() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT +  DateTime.now().getMillis();
@@ -73,7 +74,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleComments_004"})
-  @ExecuteAs(user = User.STAFF)
+  @Execute(asUser = User.STAFF)
   public void ArticleComments_004_deleteComment() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();

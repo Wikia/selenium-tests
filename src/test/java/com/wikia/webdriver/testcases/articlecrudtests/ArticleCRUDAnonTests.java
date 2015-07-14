@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 /**
  * @author: Bogna 'bognix' Knychała
+ * @ownership Content X-Wing
  */
 @Test(groups = "ArticleCRUDAnon")
 public class ArticleCRUDAnonTests extends NewTestTemplate {

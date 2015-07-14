@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -30,6 +32,8 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   WebElement usernameValidationText;
   @FindBy(css = "form#SignupRedirect input[type='submit']")
   WebElement signUpSubmitButton;
+  @FindBy(css = ".UserLoginModal .forgot-password")
+  WebElement forgotPasswordLink;
 
   private static final String
       ERROR_MESSAGE_CSS =
@@ -45,6 +49,14 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
     PageObjectLogging.log("typeInPassword", "password name was typed", true);
+  }
+
+  public void clickForgotPassword(String userName, String apiToken) {
+    Assertion.assertEquals(
+            resetForgotPasswordTime(userName, apiToken), ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE
+    );
+    waitForElementByElement(forgotPasswordLink);
+    forgotPasswordLink.click();
   }
 
   public CreateNewWikiPageObjectStep2 submitLogin() {
@@ -63,23 +75,34 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
   public void verifyEmptyUserNameValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE, errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE);
   }
 
   public void verifyInvalidUserNameValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE,
-                           errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE
+    );
   }
 
   public void verifyBlankPasswordValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE);
   }
 
   public void verifyInvalidPasswordValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE,
-                           errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE
+    );
+  }
+
+  public void verifyMessageAboutNewPassword(String userName) {
+    waitForElementByElement(usernameValidationText);
+    String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
+    waitForTextToBePresentInElementByElement(usernameValidationText, newPasswordMsg);
+    PageObjectLogging.log(
+        "MessageAboutPasswordSent",
+        "Message about new password sent present",
+        true
+    );
   }
 }

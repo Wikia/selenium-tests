@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
+import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -12,8 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class BasePageObject extends MobileBasePageObject {
 
@@ -25,15 +25,10 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
-  }
-
-  public void openMercuryWiki(String wikiName) {
-    String mercuryWiki = urlBuilder.getUrlForWiki(wikiName);
-    getUrl(mercuryWiki);
   }
 
   public void tapOnElement(WebElement element) {
@@ -41,11 +36,17 @@ public class BasePageObject extends MobileBasePageObject {
     jsexec.executeScript("arguments[0].click();", element);
   }
 
-  public void waitMilliseconds(int time, String message) {
+  /**
+   * It will wait and log reason
+   * @param time - in milliseconds
+   * @param reason - i.e. Wait for message to disappear
+   */
+  public void waitMilliseconds(int time, String reason) {
+    PageObjectLogging.logWarning("Wait for " + time + " ms", reason);
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(message, e.getMessage(), false);
+      PageObjectLogging.log(reason, e.getMessage(), false);
     }
   }
 

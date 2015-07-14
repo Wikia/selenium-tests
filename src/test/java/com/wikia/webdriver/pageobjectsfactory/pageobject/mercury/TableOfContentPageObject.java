@@ -10,8 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
 public class TableOfContentPageObject extends BasePageObject {
 
@@ -21,9 +20,9 @@ public class TableOfContentPageObject extends BasePageObject {
   private List<WebElement> listOfLinks;
   @FindBy(css = "nav.table-of-contents ol")
   private WebElement TOCMenu;
-  @FindBy(css = "nav.table-of-contents button")
+  @FindBy(css = "nav.table-of-contents div")
   private WebElement tocButton;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[1]")
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
   private WebElement tocUnderH1;
 
   public TableOfContentPageObject(WebDriver driver) {

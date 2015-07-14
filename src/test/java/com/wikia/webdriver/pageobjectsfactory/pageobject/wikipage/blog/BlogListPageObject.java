@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class BlogListPageObject extends BasePageObject {
 
@@ -26,8 +26,8 @@ public class BlogListPageObject extends BasePageObject {
   }
 
   public BlogListPageObject verifyBlogListPage(String listName) {
-    verifyURL(Global.DOMAIN +
-              URLsContent.BLOG_LIST.replace("%listName%", listName));
+    verifyURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+        + URLsContent.BLOG_LIST.replace("%listName%", listName));
     waitForElementByElement(blogListHeader);
     waitForElementByElement(createBlogPostButton);
     return this;
@@ -35,16 +35,17 @@ public class BlogListPageObject extends BasePageObject {
 
   public BlogListPageObject verifyBlogList() {
     for (WebElement elem : blogList) {
-      //header with link to blog post
+      // header with link to blog post
       elem.findElement(By.cssSelector("h1 a[href*='/wiki/User_blog:']"));
-      //comments bubble
+      // comments bubble
       elem.findElement(By.cssSelector(".comments"));
     }
     return this;
   }
 
   public BlogListPageObject followBlogListingPage(String name) {
-    getUrl(Global.DOMAIN + "wiki/Blog:" + name + "?action=watch");
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "wiki/Blog:" + name
+        + "?action=watch");
     scrollAndClick(followSubmit);
     waitForElementByElement(followedButton);
     return this;

@@ -59,7 +59,7 @@ public class MobileSearchPageObject extends MobileBasePageObject {
   }
 
   public void compareResultsEquals(List<String> beforePagination, List<String> afterPagination) {
-    Assertion.assertNumber(beforePagination.size(), afterPagination.size(), "checking length");
+    Assertion.assertNumber(afterPagination.size(), beforePagination.size(), "checking length");
     for (int i = 0; i < beforePagination.size(); i++) {
       Assertion.assertEquals(beforePagination.get(i), afterPagination.get(i),
                              "list's elements are not equals");

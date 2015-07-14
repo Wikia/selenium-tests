@@ -1,14 +1,16 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -18,8 +20,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
  */
 public class EditAccountTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
-  UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+  Credentials credentials = Configuration.getCredentials();
+  UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
   private String testedWiki = urlBuilder.getUrlForWiki("community");
 
   @Test(groups = "EditAccountTest")
@@ -42,6 +44,7 @@ public class EditAccountTests extends NewTestTemplate {
     login.verifyClosedAccountMessage();
   }
 
+  @RelatedIssue(issueID = "MAIN-4879", comment = "Product functionality is regressed. Manual testing is not possible")
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_002_verifyAccountClosed")
   public void EditAccount_003_reopenAccount() {
     EditAccount editAccount =

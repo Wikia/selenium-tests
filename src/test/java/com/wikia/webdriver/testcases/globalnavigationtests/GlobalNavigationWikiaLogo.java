@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
 /**
  * @author Bogna 'bognix' Knychała
- * @ownership Content
+ * @ownership Content X-Wing
  */
 public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
@@ -26,7 +26,7 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getVenusGlobalNav().clickWikiaLogo();
-    Assertion.assertStringContains(urlBuilder.getUrlForWiki(expectedCentralUrl),
-        driver.getCurrentUrl());
+    Assertion.assertStringContains(driver.getCurrentUrl(), urlBuilder.getUrlForWiki(expectedCentralUrl)
+    );
   }
 }

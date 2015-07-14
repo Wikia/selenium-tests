@@ -1,12 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-public class TestNoAdsLoggedInUsers extends NewTestTemplate {
+public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
 
   private String testedPage;
   private String testedWiki;
@@ -26,20 +27,18 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
   )
   public TestNoAdsLoggedInUsers(String wikiName, String path) {
     super();
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedWiki = urlBuilder.getUrlForWiki(wikiName);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 
-  private void loginSteps() {
-    SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
-    Credentials credentials = config.getCredentials();
-    userLogin.loginAndVerify(
-        credentials.userName, credentials.password, testedWiki
-    );
+  private void login() {
+    Credentials credentials = Configuration.getCredentials();
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, testedWiki);
   }
 
   @GeoEdgeProxy(country = "AU")
@@ -47,8 +46,8 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
       groups = {"TestNoAdsForUsers_AU"}
   )
   public void TestNoAdsForUsers_AU() {
-    loginSteps();
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 
@@ -57,8 +56,8 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
       groups = {"TestNoAdsForUsers_VE"}
   )
   public void TestNoAdsForUsers_VE() {
-    loginSteps();
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 
@@ -66,8 +65,8 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
       groups = {"TestNoAdsForUsers_GeoEdgeFree"}
   )
   public void TestNoAdsForUsers_GeoEdgeFree() throws Exception {
-    loginSteps();
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    login();
     wikiPage.verifyNoAdsOnPage();
   }
 }

@@ -1,12 +1,9 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -19,9 +16,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
+import org.testng.annotations.Test;
+
 public class FilePageTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   /**
    * Verify functionality of tabs on file pages in Oasis. When a tab is clicked, the corresponding
@@ -53,10 +52,11 @@ public class FilePageTests extends NewTestTemplate {
    * @author "Liz Lee"
    */
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
-//  @ExecuteAs(user = User.USER)
   public void filePage002_tabsLoggedIn() {
-    FilePagePageObject filePage =
-        new FilePagePageObject(driver).openFilePage(wikiURL, URLsContent.FILENAME_001);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+
+    FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
     filePage.refreshAndVerifyTabs(0);
     filePage.refreshAndVerifyTabs(1);
@@ -116,7 +116,6 @@ public class FilePageTests extends NewTestTemplate {
    *
    * @author garth
    */
-  @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {
 

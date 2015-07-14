@@ -76,39 +76,39 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public void verifyMapPositionUpdated(PalantirContent handle) {
-    Assertion.assertEquals("true", handle.getSuccess());
-    Assertion.assertEquals("200", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_MAPPOS_SUCCESS, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertEquals(handle.getResponseCode(), "200");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_MAPPOS_SUCCESS);
   }
 
   public void verifyCorrectPlayerPos(PalantirContent handle) {
-    Assertion.assertEquals("true", handle.getSuccess());
-    Assertion.assertEquals("200", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_SUCCESS, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertEquals(handle.getResponseCode(), "200");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_PLAYER_SUCCESS);
   }
 
   public void verifyWrongPlayerPos(PalantirContent handle) {
-    Assertion.assertEquals("false", handle.getSuccess());
-    Assertion.assertEquals("422", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_MAP_OUTOFBOUNDARIES, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertEquals(handle.getResponseCode(), "422");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_MAP_OUTOFBOUNDARIES);
   }
 
   public void verifyWrongZoomLevel(PalantirContent handle) {
-    Assertion.assertEquals("false", handle.getSuccess());
-    Assertion.assertEquals("422", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_ZOOM, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertEquals(handle.getResponseCode(), "422");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_WRONG_ZOOM);
   }
 
   public void verifyDecimalZoomLevel(PalantirContent handle) {
-    Assertion.assertEquals("false", handle.getSuccess());
-    Assertion.assertEquals("422", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_PARAMETER, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertEquals(handle.getResponseCode(), "422");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_WRONG_PARAMETER);
   }
 
   public void verifyPlayerPosDeleted(PalantirContent handle) {
-    Assertion.assertEquals("true", handle.getSuccess());
-    Assertion.assertEquals("200", handle.getResponseCode());
-    Assertion.assertEquals(PalantirContent.PONTOMSG_REMOVEPLAYER, handle.getMessage());
+    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertEquals(handle.getResponseCode(), "200");
+    Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_REMOVEPLAYER);
   }
 
   public void verifyPoiAppearOnMap() {

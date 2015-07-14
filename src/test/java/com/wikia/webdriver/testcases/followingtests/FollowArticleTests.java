@@ -5,7 +5,7 @@ package com.wikia.webdriver.testcases.followingtests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -14,12 +14,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class FollowArticleTests extends NewTestTemplate {
+
   String articleName;
 
   @Test(groups = "FollowArticle")
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void FollowArticle_001_setup() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     articleName = article.getArticleName();
@@ -29,7 +31,7 @@ public class FollowArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = "FollowArticle", dependsOnMethods = {"FollowArticle_001_setup"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void FollowArticle_002_follow() {
     ArticlePageObject article =
         new ArticlePageObject(driver).openArticleByName(wikiURL, articleName);
@@ -37,7 +39,7 @@ public class FollowArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods = {"FollowArticle_002_follow"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void FollowArticle_003_verify() {
     SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
     follow.verifyFollowedArticle(articleName);

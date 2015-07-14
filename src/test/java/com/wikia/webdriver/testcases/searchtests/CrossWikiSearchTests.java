@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.searchtests;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -26,7 +27,7 @@ import org.testng.annotations.Test;
  */
 public class CrossWikiSearchTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
       groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch"})
@@ -98,7 +99,6 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoPagination();
   }
 
-  @RelatedIssue(issueID = "DAT-2753")
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
       groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
@@ -108,6 +108,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyFirstResultTitle(wikiName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4901", comment = "Wikia code defect. Cannot be tested manually.")
   @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
@@ -139,8 +140,9 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
-  @RelatedIssue(issueID = "PLA-1245")
-  @Test(enabled = false, groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
+  @Test(
+        enabled = false, //MAIN-4498
+        groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
   public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);

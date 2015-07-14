@@ -12,7 +12,7 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 
 ## Adding Tests
-Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manor as it's valid to run them in Windows, Mac or Linux environments.
+Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manner as it's valid to run them in Windows, Mac or Linux environments.
 
 ## Running Tests
 
@@ -55,7 +55,7 @@ All commands must be run from the `selenium-tests` directory cloned during setup
 
     mvn clean test -Dbrowser=CHROMEMOBILE -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
-##### Running tests on devbox for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
+##### Running tests on local instance of Mercury (which fetches data from devbox) for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
 
     mvn clean test -Dbrowser=CHROMEMOBILEMERCURY -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 

@@ -6,11 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Ludwik on 2015-02-19.
+ * This annotation serves as a holder to test general parameters
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})
-public @interface ExecuteAs {
+public @interface Execute {
 
-    User user();
+  User asUser() default User.ANONYMOUS;
+
+  String onWikia() default "";
 }

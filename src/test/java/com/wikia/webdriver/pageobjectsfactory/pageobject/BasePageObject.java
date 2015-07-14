@@ -4,8 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -67,17 +66,17 @@ public class BasePageObject {
     builder = new Actions(driver);
     PageFactory.initElements(driver, this);
     this.setWindowSizeAndroid();
-    urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
   }
 
   protected void setWindowSizeAndroid() {
-    if (!ConfigurationFactory.getConfig().getBrowser().toString().contains("ANDROID")) {
+    if (!Configuration.getBrowser().toString().contains("ANDROID")) {
       driver.manage().window().maximize();
     }
   }
 
   public String getBrowser() {
-    return ConfigurationFactory.getConfig().getBrowser().toString();
+    return Configuration.getBrowser().toString();
   }
 
   public static String getAttributeValue(WebElement element, String attributeName) {
@@ -317,7 +316,7 @@ public class BasePageObject {
 
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
-    Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
+    Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
     PageObjectLogging.log("verifyURLcontains",
                           "current url is the same as expetced url", true);
   }
@@ -336,7 +335,7 @@ public class BasePageObject {
   }
 
   public void verifyURL(String givenURL) {
-    Assertion.assertEquals(givenURL, driver.getCurrentUrl());
+    Assertion.assertEquals(driver.getCurrentUrl(), givenURL);
   }
 
   public String getCurrentUrl() {
@@ -750,7 +749,7 @@ public class BasePageObject {
   }
 
   public void openWikiPage() {
-    getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 

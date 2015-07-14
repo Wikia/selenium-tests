@@ -47,16 +47,18 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"zh.tos", "Category:%E5%9C%96%E9%91%92"},
-        {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Slenderman"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
-        {"wowwiki", "Portal:Main"},
-        {"gameofthrones", "Season_4"},
-        {"zh.pad", "Homepage/Mobile"},
-        {"zh.pad", "Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
+        {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
+        {"gameofthrones", "Game_of_Thrones_Wiki"},
+        {"2007.runescape", "2007scape_Wiki"},
+        {"ru.warframe",
+         "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
+        {"gameofthrones", "Daenerys_Targaryen"},
+        {"elderscrolls", "Console_Commands_(Skyrim"},
+        //intentionally without ) sign - there is redirect on page
+        {"naruto", "Naruto_Uzumaki"},
+        {"clashofclans", "Air_Sweeper"},
+        {"leagueoflegends", "Ekko"},
+        {"lego", "LEGO"}
     };
   }
 
@@ -73,7 +75,8 @@ public class AdsDataProvider {
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub",
+         "HUB_TOP_LEADERBOARD"},
         {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };
@@ -151,7 +154,8 @@ public class AdsDataProvider {
     return new Object[][]{
         {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
+        {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special",
+         "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
   }
@@ -162,7 +166,8 @@ public class AdsDataProvider {
         {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
          "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
-         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
+         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
+         new Dimension(1292, 1000)},
     };
   }
 
@@ -185,23 +190,40 @@ public class AdsDataProvider {
   public static Object[][] skin() {
     return new Object[][]{
         {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-            new Dimension(1366, 768),
-            "src/test/resources/adsResources/skin1366_left",
-            "src/test/resources/adsResources/skin1366_right",
+            "adtest-pluto", "Skin",
+            new Dimension(1200, 1000),
+            "src/test/resources/adsResources/no_wikia_skin_left.png",
+            "src/test/resources/adsResources/no_wikia_skin_right.png",
         }, {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
+            new Dimension(1600, 900),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/skin1920_left",
-            "src/test/resources/adsResources/skin1920_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }, {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
             new Dimension(2400, 1080),
-            "src/test/resources/adsResources/skin2400_left",
-            "src/test/resources/adsResources/skin2400_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(1600, 900),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin",
+            new Dimension(2400, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }
     };
   }
@@ -210,11 +232,16 @@ public class AdsDataProvider {
   public static Object[][] skinLimited() {
     return new Object[][]{
         {
-            "adtest-fluid", "Skin",
-            "googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+            "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/skin1920_left",
-            "src/test/resources/adsResources/skin1920_right",
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        },
+        {
+            "adtest", "Skin",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }
     };
   }
@@ -234,7 +261,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"adtest"},
         {"de.icarly"},
-        {"memory-alpha"}
+        {"en.memory-alpha"}
     };
   }
 
@@ -329,31 +356,24 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] evolveHopTestPage() {
-    return new Object[][]{{"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD"}};
+    return new Object[][]{
+        {"adtest", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "RemnantGpt"}};
   }
 
   @DataProvider
   public static Object[][] testProvidersChain() {
     return new Object[][]{
         {
-            "DE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
+            "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
         },
         {
-            "DE", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 3
+            "adtest", "SyntheticTests/ProvidersChain",
+            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
         },
         {
-            "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 0
-        },
-        {
-            "UA", "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", 2
-        },
-        {
-            "GB", "adtest", "SyntheticTests/ProvidersChain",
-            "INVISIBLE_SKIN", "gpt; remnant", 0
+            "adtest", "SyntheticTests/ProvidersChain",
+            "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
         }
     };
   }
@@ -363,7 +383,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "TOP_LEADERBOARD", "gpt; remnant; Liftium", "Liftium"
+            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
         },
     };
   }
@@ -377,6 +397,15 @@ public class AdsDataProvider {
                           Pair.of("adtest", "SyntheticTests/Krux/Page_3")),
             "o8l9bis26"
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxIntegration() {
+    return new Object[][]{
+        {"elderscrolls", "Skyrim"},
+        {"wowwiki", "Portal:Main"},
+        {"zh.pad", "Special:Video"}
     };
   }
 
@@ -443,6 +472,31 @@ public class AdsDataProvider {
             false,
             "JsJ_0XFq"
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] delayBtf() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/ATF", 20, false},
+        {"adtest-pluto", "SyntheticTests/ATF", 20, true},
+    };
+  }
+
+  @DataProvider
+  public static Object[][] disableBtf() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
+    };
+  }
+
+  @DataProvider
+  public static Object[][] testPad() {
+    return new Object[][]{
+        {"adtest-pad", "Adtest-pad_Wikia", 250},
+        {"adtest-pad", "Article_1", 480},
+        {"adtest-pad", "Article_2", 480}
     };
   }
 

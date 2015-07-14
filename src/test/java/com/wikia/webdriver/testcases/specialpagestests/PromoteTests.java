@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -13,15 +14,15 @@ import org.testng.annotations.Test;
  */
 public class PromoteTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"PromoteTests_001", "PromoteTests"})
   public void PromoteTests_001_changePromoteElements() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialPromotePageObject promote = base.openSpecialPromotePage(wikiURL);
-    promote.typeIntoHeadline(PageContent.WIKI_PROMOTE_HEADLINE);
-    promote.typeIntoDescription(PageContent.WIKI_PROMOTE_DESCRIPTION);
+    promote.typeIntoHeadline(PageContent.LOREM_IPSUM_SHORT);
+    promote.typeIntoDescription(PageContent.LOREM_IPSUM_LONG);
     promote.uploadThumbnailImage(PageContent.FILEPNG);
     promote.verifyUploadedImage(PageContent.FILEPNG);
     promote.modifyThumnailImage(PageContent.FILE2PNG);

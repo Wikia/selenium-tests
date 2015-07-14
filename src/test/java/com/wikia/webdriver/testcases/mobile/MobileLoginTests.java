@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mobile;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
@@ -18,10 +18,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSpecialUse
  *         Verify that user is not logged in when he is using incorrect login and incorrect password
  *         3. Verify that user is not logged in when he is using correct login and empty password 4.
  *         Verify that user is able to login successfully using FB login
+ *
+ * @ownership Content X-Wing
  */
 public class MobileLoginTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void logIn() {
@@ -59,7 +61,6 @@ public class MobileLoginTests extends NewTestTemplate {
     login.verifyWrongLoginErrorMessage();
   }
 
-  @RelatedIssue(issueID = "MOB-760")
   @Test(groups = {"MobileLogin_004", "MobileLogin", "Mobile"}, enabled = false)
   public void MobileLogin_004_failedLoginEmptyPassword() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);

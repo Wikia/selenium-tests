@@ -1,10 +1,10 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -24,15 +24,15 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnv = method.getAnnotation(DontRun.class).env();
       for (int i = 0; i < excludedEnv.length; i++) {
-        if (config.getEnv().contains(excludedEnv[i])) {
-          throw new SkipException("Test can't be run on " + config.getEnv() + " environment");
+        if (Configuration.getEnv().contains(excludedEnv[i])) {
+          throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
         }
       }
     }
 
-    driverOne = startCustomBrowser("FF");
+    driverOne = startCustomBrowser(Configuration.getBrowser());
     logOutCustomDriver(driverOne);
-    driverTwo = startCustomBrowser("FF");
+    driverTwo = startCustomBrowser(Configuration.getBrowser());
     logOutCustomDriver(driverTwo);
     this.driver = driverOne;
   }

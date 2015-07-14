@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.annotations.ExecuteAs;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -19,12 +19,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 @Test(groups = {"VetArticleComments", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void VetArticleComments_001_Provider() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     MiniEditorComponentObject editor = article.triggerCommentArea();
@@ -40,7 +41,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetArticleComments_002"})
-  @ExecuteAs(user = User.USER)
+  @Execute(asUser = User.USER)
   public void VetArticleComments_002_Library() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     MiniEditorComponentObject editor = article.triggerCommentArea();

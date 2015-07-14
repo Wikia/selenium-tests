@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class CssChromeTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   SpecialCssPageObject specialCss;
   private String testedPage;
@@ -49,7 +50,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.saveCssContent(currentTimestamp);
     specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
     String cssContent = specialCss.getWikiaCssContent();
-    Assertion.assertEquals(currentTimestamp, cssContent);
+    Assertion.assertEquals(cssContent, currentTimestamp);
   }
 
   /**
@@ -64,13 +65,13 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
     specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
     String editSummary = specialCss.getFirstCssRevision();
-    Assertion.assertStringContains(currentTimestamp, editSummary);
+    Assertion.assertStringContains(editSummary, currentTimestamp);
   }
 
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
+   @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
   public void CssChrome_004_verifyChangesAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.insertCssText("\n" + currentTimestamp);
@@ -78,7 +79,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.clickShowChanges();
     specialCss.showChangesModal();
     String addedLine = specialCss.getAddedLineText();
-    Assertion.assertEquals(currentTimestamp, addedLine);
+    Assertion.assertEquals(addedLine, currentTimestamp);
   }
 
   /**

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,12 +13,13 @@ import org.testng.annotations.Test;
 
 /**
  * Created by kenkouot on 3/20/14.
+ * @ownership Content X-Wing
  */
 public class LicensedVideoSwap extends NewTestTemplate {
 
   LicensedVideoSwapPageObject licensedVideoSwap;
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod(alwaysRun = true)
   public void lvsSetup() {
@@ -40,8 +42,10 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
-  @RelatedIssue(issueID = "QAART-562")
-  @Test(groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
+  @RelatedIssue(issueID = "CONCF-438", comment = "Feature will be deprecated. No need to test manually")
+  @Test(
+      enabled = false, //CONCF-438
+      groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();
