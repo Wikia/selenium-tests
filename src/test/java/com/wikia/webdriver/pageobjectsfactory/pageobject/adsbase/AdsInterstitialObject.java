@@ -29,7 +29,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Pattern pattern = Pattern.compile("matrix\\((.*), 0, 0, (.*), 0, 0\\)");
     Matcher matcher = pattern.matcher(scaledAdRatio);
     if (!matcher.find()) {
-      return 0.0;
+      return 0d;
     }
     Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
     return Double.parseDouble(matcher.group(1));
