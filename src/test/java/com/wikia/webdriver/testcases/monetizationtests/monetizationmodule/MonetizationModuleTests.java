@@ -21,6 +21,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   private static final String TEST_TOP_700_ARTICLE = "Style-5H2-10H3";
   private static final String TEST_WIKI = "sktest123";
   private static final String TEST_ARTICLE = "Style-5H2-10H3";
+  private static final String TEST_DE_WIKI = "de.sktest123";
+  private static final String TEST_DE_ARTICLE = "Style-5H2-10H3";
   private static final String TEST_AMAZON_WIKI = "dragonball";
   private static final String TEST_AMAZON_ARTICLE = "Goku";
   private static final String TEST_AMAZON_BIGIMG_WIKI = "starwars";
@@ -115,8 +117,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   @DataProvider(name = "DataMonetizationModule_005")
   public static Object[][] DataMonetizationModule_005() {
-    return new Object[][] { {800, 600, 320, 728}, {850, 600, 418, 728}, {1024, 600, 320, 690},
-        {1440, 600, 418, 728}, {1665, 600, 630, 728}, {1700, 600, 678, 728},};
+    return new Object[][]{ {800, 600, 360, 700}, {850, 600, 360, 700}, {1024, 600, 360, 700},
+        {1575, 600, 360, 700}, {1576, 600, 510, 728}, {1700, 600, 510, 728},};
   }
 
   /**
@@ -189,7 +191,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
+    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyAdsenseUnitNotShown();
     // anon user
@@ -463,8 +465,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @Test(dataProvider = "DataMonetizationModuleTest_015", groups = {"MonetizationModule",
       "MonetizationModuleTest_015", "Monetization"})
   public void MonetizationModuleTest_015(String countryCode) {
-    wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
-    String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
+    wikiURL = urlBuilder.getUrlForWiki(TEST_DE_WIKI);
+    String articleURL = urlBuilder.getUrlForPath(TEST_DE_WIKI, TEST_DE_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
@@ -586,7 +588,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   /**
-   * Mon-344 Check the width of the Amazon ad in the monetization module
+   * MON-344 Check the width of the Amazon ad in the monetization module
    *
    * @author Rochan
    */
@@ -742,7 +744,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyEcommerceUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
+    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyEcommerceUnitNotShown();
   }
