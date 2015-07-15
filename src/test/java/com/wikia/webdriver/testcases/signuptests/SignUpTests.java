@@ -169,7 +169,6 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @RelatedIssue(issueID = "SOC-823", comment = "Automation test is broken. Please test manually")
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
