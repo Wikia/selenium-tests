@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * @author Karol 'kkarolk' Kujawiak <p/> 1. Login user using Special:UserLogin page, 2. Login user
  *         using drop-down 3. Login staff user using Special:UserLogin page, 4. Login staff user
- *         using drop-down
+ *         using drop-down 5. Login japanese user
  */
 public class LoginTests extends NewTestTemplate {
 
