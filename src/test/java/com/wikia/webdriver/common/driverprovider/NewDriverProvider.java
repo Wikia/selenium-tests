@@ -26,7 +26,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -164,8 +163,6 @@ public class NewDriverProvider {
                 + "resources" + File.separator + "Firebug" + File.separator
                 + "JSErrorCollector.xpi");
         firefoxProfile.addExtension(jsErr);
-        // TODO!
-        Global.JS_ERROR_ENABLED = true;
       } catch (FileNotFoundException e) {
         System.out.println("JS extension file doesn't exist in provided location");
       } catch (IOException e) {

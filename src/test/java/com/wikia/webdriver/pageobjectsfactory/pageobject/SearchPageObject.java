@@ -29,10 +29,6 @@ public class SearchPageObject extends WikiBasePageObject {
   protected WebElement paginatorPrev;
   @FindBy(css = ".paginator-page")
   protected List<WebElement> paginationPages;
-  @FindBy(css = ".Results > :nth-child(4)")
-  protected WebElement fourthResult;
-  @FindBy(css = ".Results > :nth-child(4) h1 > a")
-  protected WebElement fourthResultLink;
   @FindBy(css = "h1 > a.result-link")
   protected List<WebElement> resultLinks;
   @FindBys(@FindBy(css = "li.result"))

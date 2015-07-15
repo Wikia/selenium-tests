@@ -18,6 +18,7 @@ import com.wikia.webdriver.common.properties.Credentials;
  * specified in config files
  */
 public class Configuration {
+  private Configuration() {}
 
   private static Map<String, String> config;
 
@@ -99,8 +100,12 @@ public class Configuration {
     return getProp("disableFlash");
   }
 
+  public static String getJSErrorsEnabled() {return getProp("jsErrorsEnabled");}
+
+  public static String getLogEnabled() {return getProp("logEnabled");}
+
   public static Credentials getCredentials() {
-    return new Credentials(new File(getCredentialsFilePath()));
+    return new Credentials();
   }
 
   public static String getEnvType() {

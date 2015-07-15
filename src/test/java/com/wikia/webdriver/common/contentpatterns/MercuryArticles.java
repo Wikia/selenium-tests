@@ -2,7 +2,9 @@ package com.wikia.webdriver.common.contentpatterns;
 
 public class MercuryArticles {
 
-  //Articles prepared for mercuryautomationtesting.wikia.com wiki
+  private MercuryArticles() {}
+
+  // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
   public static final String GALLERY = "Gallery";
   public static final String GALLERY_2 = "Gallery2";
@@ -17,25 +19,22 @@ public class MercuryArticles {
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
 
-  /** Legend:
-   * FC - Featured Content
-   * CC - Curated Content
-   * TA - Trending Articles
-   * TV - Trending Videos
+  /**
+   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
    */
 
-  //Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
+  // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
 
-  //Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
+  // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
 
-  //Articles prepared for mercuryntvcc.wikia.com wiki (with FC, CC and TA)
+  // Articles prepared for mercuryntvcc.wikia.com wiki (with FC, CC and TA)
   public static final String NTVCC_MAIN_PAGE = "Mercuryntvcc_Wikia";
 
-  //Articles prepared for mercuryntavcc.wikia.com wiki (with FC and CC)
+  // Articles prepared for mercuryntavcc.wikia.com wiki (with FC and CC)
   public static final String NTAVCC_MAIN_PAGE = "Mercuryntavcc_Wikia";
 
-  //Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
+  // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "Mercury_empty_CC_Wikia";
 }

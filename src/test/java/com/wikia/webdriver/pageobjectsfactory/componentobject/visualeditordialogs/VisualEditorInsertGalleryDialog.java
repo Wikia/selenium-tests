@@ -16,8 +16,6 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
   @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget input")
   private WebElement searchInput;
-  @FindBy(css = ".secondary .oo-ui-labelElement-label")
-  private WebElement cancelButton;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement doneButton;
   @FindBy(css = ".oo-ui-clearableTextInputWidget-clearButton")
@@ -28,12 +26,6 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement queryPending;
 
   //Cart
-  @FindBy(css = ".oo-ui-icon-cart-grid")
-  private WebElement gridViewButton;
-  @FindBy(css = ".oo-ui-icon-cart-list")
-  private WebElement listViewButton;
-  @FindBy(css = ".oo-ui-widget-enabled.ve-ui-wikiaSingleMediaCartWidget")
-  private WebElement cart;
   @FindBy(css = ".ve-ui-wikiaSingleMediaCartOptionWidget")
   private List<WebElement> cartItems;
 

@@ -1,8 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +11,9 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class NotificationsComponentObject extends WikiBasePageObject {
 
@@ -39,15 +39,12 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private WebElement emptyNumberOfUnreadNotifications;
   @FindBy(css = "#notificationsEntryPoint")
   private WebElement accountNavigationEntryPoint;
-  @FindBy(css = "#notifications .notification-message")
-  private WebElement notificationsMessage;
   private By notificationDropdownForCurrentWiki = By
       .cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
-  private By emptyNotificationDropdownForCurrentWiki = By
-      .cssSelector(
+  private By emptyNotificationDropdownForCurrentWiki =
+      By.cssSelector(
           "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
-  private By unreadNotificationReddot = By
-      .cssSelector("#WallNotifications > li > div.reddot");
+  private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
 
   /**
    * hover the mouse over the notification bubble and wait for it to expand
@@ -82,21 +79,19 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   public void showNotifications() {
     waitForNotificationsLoaded();
     openNotifications();
-    PageObjectLogging.log("#WallNotifications li ul.subnav",
-                          "show notifications", true);
+    PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true);
   }
 
   /**
    * click notifications bubble
    *
    * @todo: is this needed? the notifications expand on mouse hover so we should use the
-   * showNotifications method
+   *        showNotifications method
    */
   public void clickNotifications() {
     waitForElementByElement(notificationsBubbles);
     scrollAndClick(notificationsBubbles);
-    PageObjectLogging.log("clickshowNotifications",
-                          "click on notifications bubbles", true);
+    PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true);
   }
 
   /**
@@ -112,18 +107,15 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    */
   public String getNotificationLink(String text) {
     for (int i = 0; i < notificationsList.size(); i++) {
-      if (notificationsList.get(i)
-          .findElement(By.cssSelector(".notification-message")).getText()
+      if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
           .contains(text)) {
-        PageObjectLogging.log("getNotificationLink",
-                              "get addres that of " + i + 1
-                              + " notification points to", true);
+        PageObjectLogging.log("getNotificationLink", "get addres that of " + i + 1
+            + " notification points to", true);
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
     PageObjectLogging.log("getNotificationLink",
-                          "No notification that contains the following text: " + text,
-                          false);
+        "No notification that contains the following text: " + text, false);
     return null;
   }
 
@@ -180,8 +172,8 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
     List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
     Assertion.assertEquals(1, notificationsListForTitle.size());
-    String notificationMessageBody = notificationsListForTitle.get(0)
-        .findElement(By.cssSelector("p")).getText();
+    String notificationMessageBody =
+        notificationsListForTitle.get(0).findElement(By.cssSelector("p")).getText();
     Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
   }
 
@@ -192,8 +184,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
     List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
     Assertion.assertEquals(1, notificationsListForTitle.size());
-    String notificationMessageBody = notificationsListForTitle.get(0)
-        .findElement(By.cssSelector("div.notification-message")).getText();
+    String notificationMessageBody =
+        notificationsListForTitle.get(0).findElement(By.cssSelector("div.notification-message"))
+            .getText();
     Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
     Assertion.assertTrue(notificationMessageBody.contains(messageContent));
   }

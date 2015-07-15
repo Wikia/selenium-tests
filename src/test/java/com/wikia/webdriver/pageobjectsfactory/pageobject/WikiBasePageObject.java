@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -179,8 +179,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
   protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-  @FindBy(css = "a.ajaxRegister")
-  private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".banner-notification div.msg a")
@@ -204,7 +202,6 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
-  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
@@ -890,7 +887,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void logOut(WebDriver driver) {
     try {
       driver.manage().deleteAllCookies();
-      driver.get(Global.DOMAIN + URLsContent.LOGOUT);
+      driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
@@ -978,14 +975,12 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (IOException e) {
       PageObjectLogging.log("logInCookie",
           "IO Exception", false);
-      e.printStackTrace();
     } finally {
       try {
         response.close();
       } catch (IOException | NullPointerException e) {
         PageObjectLogging.log("logInCookie",
             "IO Exception", false);
-        e.printStackTrace();
       }
     }
     return "";
