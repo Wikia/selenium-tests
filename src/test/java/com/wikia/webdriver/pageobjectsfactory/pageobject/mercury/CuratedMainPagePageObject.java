@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryCuratedMainPages;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class CuratedPageObject extends BasePageObject {
+public class CuratedMainPagePageObject extends MercuryBasePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
@@ -32,6 +33,10 @@ public class CuratedPageObject extends BasePageObject {
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
 
+  public CuratedCategoryPageObject tapOnCuratedElement(int i) {
+    return null;
+  }
+
   private enum Settings {
     TIME_OUT_IN_SEC(5),
     CHECK_OUT_IN_MILLI_SEC(1000);
@@ -43,7 +48,7 @@ public class CuratedPageObject extends BasePageObject {
     }
   }
 
-  public CuratedPageObject(WebDriver driver) {
+  public CuratedMainPagePageObject(WebDriver driver) {
     super(driver);
   }
 
