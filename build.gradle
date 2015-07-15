@@ -277,5 +277,6 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
     testCompile('biz.neustar:browsermob-proxy:2.0-beta-7') {
         exclude group: 'org.eclipse.jetty'
+        exclude group: 'org.slf4j'
     }
 }
