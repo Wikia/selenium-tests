@@ -500,4 +500,14 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] interstitial() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/Interstitial", new Dimension(600, 800), 2},
+        {"adtest", "SyntheticTests/Interstitial", new Dimension(1000, 800), 2.66},
+        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(600, 800), 0},
+        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(1200, 600), 0},
+    };
+  }
+
 }
