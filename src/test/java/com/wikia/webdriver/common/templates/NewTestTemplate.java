@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.templates;
 
 import java.lang.reflect.Method;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
@@ -12,7 +11,6 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
