@@ -8,6 +8,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -32,9 +35,32 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
   private WebElement trendingVideos;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
+  @FindBys(@FindBy(css = "div.curated-content a"))
+  private List<WebElement> curatedContentItems;
 
-  public CuratedCategoryPageObject tapOnCuratedElement(int i) {
-    return null;
+
+  private void tapOnCuratedContentElement(int elementNumber){
+    WebElement curatedContentItem = curatedContentItems.get(elementNumber);
+
+    waitForElementByElement(curatedContentItem);
+    scrollToElement(curatedContentItem);
+    curatedContentItem.click();
+  }
+
+  /*
+  Engineer is sure that the categoryNumber he uses leads to a Category
+   */
+  public CuratedCategoryPageObject tapOnCuratedCategoryElement(int categoryNumber) {
+    tapOnCuratedContentElement(categoryNumber);
+    return new CuratedCategoryPageObject(driver);
+  }
+
+  /*
+ Engineer is sure that the sectionNumber he uses leads to a Category
+ */
+  public CuratedSectionPageObject tapOnCuratedSectionElement(int sectionNumber) {
+    tapOnCuratedContentElement(sectionNumber);
+    return new CuratedSectionPageObject(driver);
   }
 
   private enum Settings {
@@ -142,10 +168,7 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
     return true;
   }
 
-  public boolean isUrlPathEqualTo(String path) {
-    String currentPath = new UrlBuilder().getUrlPath(driver);
-    return currentPath.equals(path);
-  }
+
 
   public int getElementHeight(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;

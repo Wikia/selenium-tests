@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -65,5 +66,10 @@ public class BasePageObject extends MobileBasePageObject {
     if (spinnerPresent) {
       waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
     }
+  }
+
+  public boolean isUrlPathEqualTo(String path) {
+    String currentPath = new UrlBuilder().getUrlPath(driver);
+    return currentPath.equals(path);
   }
 }
