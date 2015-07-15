@@ -244,7 +244,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
     waitForElementByElement(contributeDropdown);
-    actionsClick(contributeDropdown);
+    scrollAndClick(contributeDropdown);
     waitForElementVisibleByElement(addArticleInDropdown);
     addArticleInDropdown.click();
     articleTitleInputModal.sendKeys(articleTitle);
