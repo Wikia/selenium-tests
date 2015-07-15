@@ -70,8 +70,8 @@ public class NewTestTemplateCore {
     return driver;
   }
 
-  protected void logOut() {
-    driver.get(wikiURL + URLsContent.LOGOUT);
+  protected void loadFirstPage() {
+    driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
 
   protected void logOutCustomDriver(WebDriver customDriver) {

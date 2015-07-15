@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.SonySideViewObject;
 
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  * @author Piotr 'Rychu' Gabryjeluk
  * @ownership AdEngineering
  */
-public class TestNoAdsOnSonyReferrer extends TemplateDontLogout {
+public class TestNoAdsOnSonyReferrer extends TemplateNoFirstLoad {
 
   private String testedPage;
 

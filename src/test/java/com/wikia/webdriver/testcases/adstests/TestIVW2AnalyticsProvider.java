@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @ownership AdEngineering
  */
-public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
+public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
   private final static int TIMEOUT_SEC = 30;
 

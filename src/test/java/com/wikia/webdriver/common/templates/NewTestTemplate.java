@@ -52,7 +52,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
-    driver.get((wikiURL + URLsContent.SPECIAL_VERSION));
+    loadFirstPage();
 
     if (method.isAnnotationPresent(Execute.class)) {
       if(method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
