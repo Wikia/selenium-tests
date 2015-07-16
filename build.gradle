@@ -89,7 +89,7 @@ task getSuite << {
     def apiSuffix = "api/json?pretty=true"
 
     def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
-    def reportPath = "/ws/target/surefire-reports/testng-failed.xml"
+    def reportPath = "/lastBuild/artifact/target/surefire-reports/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
     def parser = new XmlSlurper()
