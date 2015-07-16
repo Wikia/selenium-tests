@@ -87,14 +87,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, false);
   }
 
-  /**
-   * This method will log warning to log file (line in yellow color)
-   */
-  public static void logWarning(String command, String description) {
-    StringBuilder builder =
-        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
-            + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
+                         boolean success, boolean ifLowLevel) {
+    String description = descriptionOnFail;
+    if (success) {
+      description = descriptionOnSuccess;
+    }
+    log(command, description, success, ifLowLevel);
   }
 
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
@@ -114,6 +113,30 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     logJSError(NewDriverProvider.getWebDriver());
   }
 
+  /**
+   * This method will log warning to log file (line in yellow color)
+   */
+  public static void logWarning(String command, String description) {
+    StringBuilder builder =
+        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
+                                   + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
+
+  /**
+   * This method check that current Url contains path and log result
+   * Case sensitive is not important
+   */
+  public static void logUrl(WebDriver driver, String path) {
+    String currentUrl = driver.getCurrentUrl().toLowerCase();
+    path = path.toLowerCase();
+    PageObjectLogging.log(
+        "Log Url",
+        "Current Url " + currentUrl + " contains path " + path,
+        "Current Url " + currentUrl + " doesn't contain path " + path,
+        currentUrl.contains(path)
+    );
+  }
 
   public static void logImage(String command, File image, boolean success) {
     byte[] bytes = new byte[0];

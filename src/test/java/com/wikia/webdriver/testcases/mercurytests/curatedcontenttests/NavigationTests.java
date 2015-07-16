@@ -1,14 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -52,64 +48,33 @@ public class NavigationTests extends NewTestTemplate {
     category.clickOnCuratedContentElement(1);
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
-    boolean result = category.isTitleVisible();
-    PageObjectLogging.log(
-        PageElements.SECTION_TITLE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = category.isLinkToMainPageVisible();
-    PageObjectLogging.log(
-        PageElements.LINK_TO_MAIN_PAGE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = category.isSectionVisible();
-    PageObjectLogging.log(
-        PageElements.SECTION.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = category.isItemVisible(1);
-    PageObjectLogging.log(
-        PageElements.SECTION_ITEM.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    category
+        .isTitleVisible()
+        .isLinkToMainPageVisible()
+        .isSectionVisible()
+        .isItemVisible(1);
 
     String sectionTitle = category.getTitle();
+    String expectedUrlPath = ROOT_PATH_CATEGORY + sectionTitle;
 
-    String currentPath = category.getCurrentUrlPath();
-    category.isUrlPathEqualTo(currentPath, ROOT_PATH_CATEGORY + sectionTitle);
+    PageObjectLogging.logUrl(driver, expectedUrlPath);
 
-    String urlBeforeTappingOnLink = category.getCurrentUrl();
-    category.tapOnMainPageLink();
+    String previousUrl = driver.getCurrentUrl();
+    category.clickOnMainPageLink();
     category.waitForLoadingSpinnerToFinishReloadingPage();
+    String nextUrl = driver.getCurrentUrl();
 
-    currentPath = category.getCurrentUrlPath();
-    category.isUrlPathEqualTo(currentPath, ROOT_PATH);
+    PageObjectLogging.logUrl(driver, ROOT_PATH);
 
-    String currentUrl = driver.getCurrentUrl();
-    String urlAfterTappingOnLink = category.getCurrentUrl();
     category.navigateBack();
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
-    currentUrl = category.getCurrentUrl();
-    category.isUrlPathEqualTo(currentUrl, urlBeforeTappingOnLink);
+    PageObjectLogging.logUrl(driver, previousUrl);
 
     category.navigateForward();
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
-    currentUrl = category.getCurrentUrl();
-    category.isUrlPathEqualTo(currentUrl, urlAfterTappingOnLink);
-
+    PageObjectLogging.logUrl(driver, nextUrl);
   }
 
   // CCT07
@@ -121,37 +86,26 @@ public class NavigationTests extends NewTestTemplate {
     section.clickOnCuratedContentElement(0);
     section.waitForLoadingSpinnerToFinishReloadingPage();
 
-    boolean result = section.isTitleVisible();
-    PageObjectLogging.log(
-        PageElements.SECTION_TITLE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+//    boolean result = section.isTitleVisible();
+//    PageObjectLogging.log(
+//        PageElements.SECTION_TITLE.name,
+//        MercuryMessages.VISIBLE_MSG,
+//        MercuryMessages.INVISIBLE_MSG,
+//        result
+//    );
+//
+//    result = section.isLinkToMainPageVisible();
+//    PageObjectLogging.log(
+//        PageElements.LINK_TO_MAIN_PAGE.name,
+//        MercuryMessages.VISIBLE_MSG,
+//        MercuryMessages.INVISIBLE_MSG,
+//        result
+//    );
 
-    result = section.isLinkToMainPageVisible();
-    PageObjectLogging.log(
-        PageElements.LINK_TO_MAIN_PAGE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    section
+        .isSectionVisible()
+        .isItemVisible(1);
 
-    result = section.isSectionVisible();
-    PageObjectLogging.log(
-        PageElements.SECTION.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = section.isItemVisible(1);
-    PageObjectLogging.log(
-        PageElements.SECTION_ITEM.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
 
     String sectionTitle = section.getTitle();
     String currentPath = section.getCurrentUrlPath();
