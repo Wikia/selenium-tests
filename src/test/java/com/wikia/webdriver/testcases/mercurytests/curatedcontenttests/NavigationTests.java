@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
@@ -43,18 +44,18 @@ public class NavigationTests extends NewTestTemplate {
 
     String sectionTitle = category.getTitle();
     String expectedUrlPath = ROOT_PATH_CATEGORY + sectionTitle;
-    PageObjectLogging.logUrl(driver, expectedUrlPath);
+    UrlChecker.isPathContainedInCurrentUrl(driver, expectedUrlPath);
 
     String previousUrl = driver.getCurrentUrl();
     category.navigateToMainPage();
     String nextUrl = driver.getCurrentUrl();
-    PageObjectLogging.logUrl(driver, ROOT_PATH);
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH);
 
     category.navigateBack();
-    PageObjectLogging.logUrl(driver, previousUrl);
+    UrlChecker.isUrlEqualCurrentUrl(driver, previousUrl);
 
     category.navigateForward();
-    PageObjectLogging.logUrl(driver, nextUrl);
+    UrlChecker.isUrlEqualCurrentUrl(driver, nextUrl);
   }
 
   // CCT07
@@ -72,6 +73,6 @@ public class NavigationTests extends NewTestTemplate {
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    PageObjectLogging.logUrl(driver, ROOT_PATH_SECTION + section.getTitle());
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH_SECTION + section.getTitle());
   }
 }

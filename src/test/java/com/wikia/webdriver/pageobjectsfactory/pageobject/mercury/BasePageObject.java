@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -69,6 +69,7 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   //TODO: Remove this and use combination od logUrl
+  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
   public boolean isUrlPathEqualTo(String path) {
     String currentPath = new UrlBuilder().getUrlPath(driver);
     return currentPath.equals(path);
@@ -87,7 +88,7 @@ public class BasePageObject extends MobileBasePageObject {
 
     private int value;
 
-    private Settings(int value) {
+    Settings(int value) {
       this.value = value;
     }
   }

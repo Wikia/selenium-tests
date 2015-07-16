@@ -37,7 +37,7 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
@@ -121,21 +121,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
                                    + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-  }
-
-  /**
-   * This method check that current Url contains path and log result
-   * Case sensitive is not important
-   */
-  public static void logUrl(WebDriver driver, String path) {
-    String currentUrl = driver.getCurrentUrl().toLowerCase();
-    path = path.toLowerCase();
-    PageObjectLogging.log(
-        "Log Url",
-        "Current Url " + currentUrl + " contains path " + path,
-        "Current Url " + currentUrl + " doesn't contain path " + path,
-        currentUrl.contains(path)
-    );
   }
 
   public static void logImage(String command, File image, boolean success) {
