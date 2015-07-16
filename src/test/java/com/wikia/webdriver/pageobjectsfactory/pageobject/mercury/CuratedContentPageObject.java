@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @ownership: Content X-Wing
  */
-public class CuratedContentPageObject extends MercuryBasePageObject {
+public class CuratedContentPageObject extends BasePageObject {
 
   @FindBy(css = ".article-title")
   private WebElement sectionTitle;

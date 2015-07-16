@@ -68,19 +68,37 @@ public class BasePageObject extends MobileBasePageObject {
     }
   }
 
+  //TODO: Remove this and use combination od logUrl
   public boolean isUrlPathEqualTo(String path) {
     String currentPath = new UrlBuilder().getUrlPath(driver);
     return currentPath.equals(path);
   }
 
-  public void isUrlPathEqualTo(String current, String expected) {
-    boolean result = current.equalsIgnoreCase(expected);
-    PageObjectLogging.log("Current URL", "is set on " + expected,
-                          "is set on " + current + " instead of "+expected,
-                          result);
+  public CuratedMainPagePageObject openCuratedMainPage(String wikiURL, String mainPage) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + mainPage + "?cb=" + DateTime.now().getMillis());
+    PageObjectLogging
+        .log("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
+    return new CuratedMainPagePageObject(driver);
   }
 
-  public String getCurrentUrlPath() {
-    return new UrlBuilder().getUrlPath(driver);
+  private enum Settings {
+    TIME_OUT_IN_SEC(5),
+    CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    private Settings(int value) {
+      this.value = value;
+    }
+  }
+
+  public boolean isElementVisible(WebElement element) {
+    try {
+      waitForElementVisibleByElement(element, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+    } catch (TimeoutException e) {
+      return false;
+    }
+    return true;
   }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @ownership: Content X-Wing
  */
-public class CuratedMainPagePageObject extends MercuryBasePageObject {
+public class CuratedMainPagePageObject extends BasePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
