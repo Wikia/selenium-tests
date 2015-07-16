@@ -81,7 +81,6 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public String getCurrentUrlPath() {
-    String currentPath = new UrlBuilder().getUrlPath(driver);
-    return currentPath;
+    return new UrlBuilder().getUrlPath(driver);
   }
 }
