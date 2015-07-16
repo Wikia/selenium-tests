@@ -69,14 +69,14 @@ public class NavigationTests extends NewTestTemplate {
 
     String sectionTitle = category.getTitle();
 
-    String currentPath = category.getCurrentPath();
+    String currentPath = category.getCurrentUrlPath();
     category.isUrlPathEqualTo(currentPath, ROOT_PATH_CATEGORY + sectionTitle);
 
     String urlBeforeTappingOnLink = category.getCurrentUrl();
     category.tapOnMainPageLink();
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
-    currentPath = category.getCurrentPath();
+    currentPath = category.getCurrentUrlPath();
     category.isUrlPathEqualTo(currentPath, ROOT_PATH);
 
     String currentUrl = category.getCurrentUrl();
@@ -125,7 +125,7 @@ public class NavigationTests extends NewTestTemplate {
                           MercuryMessages.INVISIBLE_MSG, result);
 
     String sectionTitle = section.getTitle();
-    String currentPath = section.getCurrentPath();
+    String currentPath = section.getCurrentUrlPath();
     section.isUrlPathEqualTo(currentPath, ROOT_PATH_SECTION + sectionTitle);
   }
 

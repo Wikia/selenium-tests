@@ -8,9 +8,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by wikia on 2015-07-15.
- */
 public class MercuryBasePageObject extends BasePageObject {
 
   public MercuryBasePageObject(WebDriver driver) {

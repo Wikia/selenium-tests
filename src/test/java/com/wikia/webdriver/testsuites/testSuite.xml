@@ -118,6 +118,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.ArticlePageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.MainPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationSideTests"/>

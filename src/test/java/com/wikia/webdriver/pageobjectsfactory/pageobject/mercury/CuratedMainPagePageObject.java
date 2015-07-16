@@ -45,18 +45,10 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
   }
 
   /*
-  Engineer is sure that the categoryNumber he uses leads to a Category
-   */
-  public CuratedContentPageObject tapOnCuratedCategoryElement(int categoryNumber) {
-    tapOnCuratedContentElement(categoryNumber);
-    return new CuratedContentPageObject(driver);
-  }
-
-  /*
- Engineer is sure that the sectionNumber he uses leads to a Category
+ Returns Curated Content view with category items or section items
  */
-  public CuratedContentPageObject tapOnCuratedElement(int sectionNumber) {
-    tapOnCuratedContentElement(sectionNumber-1);
+  public CuratedContentPageObject tapOnCuratedElement(int elementNumber) {
+    tapOnCuratedContentElement(elementNumber-1);
     return new CuratedContentPageObject(driver);
   }
 
