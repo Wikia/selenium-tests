@@ -10,8 +10,6 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
-
 
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Dimension;
@@ -43,7 +41,6 @@ public class NewTestTemplateCore {
   }
 
   protected void prepareDirectories() {
-    Properties.setProperties();
     CommonUtils.deleteDirectory("." + File.separator + "logs");
     CommonUtils.createDirectory("." + File.separator + "logs");
   }
@@ -157,7 +154,7 @@ public class NewTestTemplateCore {
   }
 
   public void setGeoEdge(String countryCode) {
-    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(Configuration.getCredentialsFilePath());
+    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils();
     String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
     String ip = geoEdgeUtils.getIPForCountry(countryCode);
     networkTrafficInterceptor.setProxyServer(ip);

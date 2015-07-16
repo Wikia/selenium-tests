@@ -1,9 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,10 +8,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 /**
  * Created by RodriGomez on 02/04/15.
  */
-public class ModularMainPageObject extends WikiBasePageObject{
+public class ModularMainPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".hero-image")
   private WebElement heroImageModule;
@@ -27,8 +27,6 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement updateCoverImageInput;
   @FindBy(css = ".image-save-bar .new-btn.save-btn")
   private WebElement imagePublishButton;
-  @FindBy(css = ".image-save-bar .new-btn.discard-btn")
-  private WebElement imageDiscardButton;
   @FindBy(css = ".hero-description .new-btn.save-btn")
   private WebElement descriptionPublishButton;
   @FindBy(css = ".hero-description .new-btn.discard-btn")
@@ -37,15 +35,13 @@ public class ModularMainPageObject extends WikiBasePageObject{
   private WebElement descriptionEditField;
   @FindBy(css = ".edit-box")
   private WebElement editBox;
-  @FindBy (css = ".save-text")
-  private WebElement coverImageInformativeText;
-  @FindBy (css = ".position-text")
+  @FindBy(css = ".position-text")
   private WebElement dragToRepositionText;
-  @FindBy (css = ".update-btn")
+  @FindBy(css = ".update-btn")
   private WebElement updateCoverImageLink;
-  @FindBy (css = "button.sg-sub[disabled=disabled]")
+  @FindBy(css = "button.sg-sub[disabled=disabled]")
   private WebElement publishButtonDisabled;
-  @FindBy (css = ".image-window")
+  @FindBy(css = ".image-window")
   private WebElement imageWindowDragging;
 
 
@@ -65,14 +61,15 @@ public class ModularMainPageObject extends WikiBasePageObject{
   }
 
   public void selectFileToUpload(String file) {
-      updateCoverImageInput.sendKeys(getAbsolutePathForFile(
-          ClassLoader.getSystemResource("ImagesForUploadTests/" + file).getPath()));
+    updateCoverImageInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+        "ImagesForUploadTests/" + file).getPath()));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 
   public void verifyDragToRepositionText() {
     waitForElementByElement(dragToRepositionText);
-    PageObjectLogging.log("verifyDragToRepositionText", "Drag to reposition text message is visible", true);
+    PageObjectLogging.log("verifyDragToRepositionText",
+        "Drag to reposition text message is visible", true);
   }
 
   public void clickPublishButton() {
@@ -89,8 +86,8 @@ public class ModularMainPageObject extends WikiBasePageObject{
     waitForElementByElement(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
-    PageObjectLogging.log("typeMoMDescription",
-                          momDescription + "MoM description was typed in", true);
+    PageObjectLogging.log("typeMoMDescription", momDescription + "MoM description was typed in",
+        true);
   }
 
   public void clickDescriptionPublishButton() {
@@ -163,13 +160,14 @@ public class ModularMainPageObject extends WikiBasePageObject{
 
   public void moveCoverImage() {
     Actions actions = new Actions(driver);
-    actions.clickAndHold(imageWindowDragging).clickAndHold().moveByOffset(-200, -200).release().perform();
+    actions.clickAndHold(imageWindowDragging).clickAndHold().moveByOffset(-200, -200).release()
+        .perform();
   }
 
   public String getTopAttribute() {
-    if(StringUtils.isNotBlank(heroImageModule.getAttribute("style"))){
+    if (StringUtils.isNotBlank(heroImageModule.getAttribute("style"))) {
       return heroImageModule.getAttribute("style");
-    }else {
+    } else {
       return "";
     }
   }
