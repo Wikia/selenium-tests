@@ -127,7 +127,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_1", "RTE_extended_009"})
+  @Test(groups = {"RTE_extended_2", "RTE_extended_009"})
   public void RTE_009_Nowiki() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -137,7 +137,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_1", "RTE_extended_010"})
+  @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
   public void RTE_010_Signature() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -222,7 +222,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_2", "RTE_extended_015"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
   public void RTE_015_Slider() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -245,7 +245,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_2", "RTE_extended_016", "Media"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_016", "Media"})
   public void RTE_016_Video() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -261,7 +261,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_2", "RTE_extended_017"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_017"})
   public void RTE_017_MoreMainTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -270,7 +270,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_2", "RTE_extended_018"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_018"})
   public void RTE_018_MoreWikiMarkupTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -279,7 +279,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @Test(groups = {"RTE_extended_2", "RTE_extended_019"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_019"})
   public void RTE_019_MoreSympolsTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -289,7 +289,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended_2", "RTE_extended_020"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_020"})
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -302,7 +302,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended_2", "RTE_extended_021"})
+  @Test(groups = {"RTE_extended_3", "RTE_extended_021"})
   public void RTE_021_YoutubeTag_Publish() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
