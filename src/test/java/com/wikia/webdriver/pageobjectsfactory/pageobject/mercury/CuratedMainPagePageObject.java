@@ -1,8 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryCuratedMainPages;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -50,17 +47,17 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
   /*
   Engineer is sure that the categoryNumber he uses leads to a Category
    */
-  public CuratedCategoryPageObject tapOnCuratedCategoryElement(int categoryNumber) {
+  public CuratedContentPageObject tapOnCuratedCategoryElement(int categoryNumber) {
     tapOnCuratedContentElement(categoryNumber);
-    return new CuratedCategoryPageObject(driver);
+    return new CuratedContentPageObject(driver);
   }
 
   /*
  Engineer is sure that the sectionNumber he uses leads to a Category
  */
-  public CuratedSectionPageObject tapOnCuratedSectionElement(int sectionNumber) {
-    tapOnCuratedContentElement(sectionNumber);
-    return new CuratedSectionPageObject(driver);
+  public CuratedContentPageObject tapOnCuratedElement(int sectionNumber) {
+    tapOnCuratedContentElement(sectionNumber-1);
+    return new CuratedContentPageObject(driver);
   }
 
   private enum Settings {

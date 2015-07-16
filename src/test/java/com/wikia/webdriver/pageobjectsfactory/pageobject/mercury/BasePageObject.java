@@ -70,6 +70,23 @@ public class BasePageObject extends MobileBasePageObject {
 
   public boolean isUrlPathEqualTo(String path) {
     String currentPath = new UrlBuilder().getUrlPath(driver);
-    return currentPath.equals(path);
+    return currentPath.equalsIgnoreCase(path);
+  }
+
+  public void isUrlPathEqualTo(String current, String expected) {
+    boolean result = current.equalsIgnoreCase(expected);
+    PageObjectLogging.log("Current URL", "is set on " + expected,
+                          "is set on " + current + " instead of "+expected,
+                          result);
+  }
+
+  public String getCurrentPath() {
+    String currentPath = new UrlBuilder().getUrlPath(driver);
+    return currentPath;
+  }
+
+  public String getCurrentUrlPath() {
+    String currentPath = new UrlBuilder().getUrlPath(driver);
+    return currentPath;
   }
 }

@@ -453,6 +453,16 @@ public class BasePageObject {
     }
   }
 
+  public void navigateForward() {
+    try {
+      driver.navigate().forward();
+      PageObjectLogging.log("navigateForward", "next page loaded", true);
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("navigateForward",
+                            "page loaded for more then 30 seconds after navigating back", true);
+    }
+  }
+
   public void executeScript(String script) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript(script);

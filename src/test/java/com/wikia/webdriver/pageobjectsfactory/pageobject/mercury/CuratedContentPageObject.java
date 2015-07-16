@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,10 +10,10 @@ import java.util.List;
 /**
  * Created by wikia on 2015-07-15.
  */
-public class CuratedSectionPageObject extends MercuryBasePageObject {
+public class CuratedContentPageObject extends MercuryBasePageObject {
 
   @FindBy(css = ".article-title")
-  private WebElement articleTitle;
+  private WebElement sectionTitle;
   @FindBy(css = ".wiki-title a")
   private WebElement linkToMainPage;
   @FindBy(css = ".curated-content-items")
@@ -23,12 +22,12 @@ public class CuratedSectionPageObject extends MercuryBasePageObject {
   private List<WebElement> curatedContentItems;
 
 
- public CuratedSectionPageObject(WebDriver driver) {
+ public CuratedContentPageObject(WebDriver driver) {
     super(driver);
   }
 
   public boolean isTitleVisible() {
-    return isElementVisible(articleTitle);
+    return isElementVisible(sectionTitle);
   }
 
   public boolean isLinkToMainPageVisible() {
@@ -47,16 +46,19 @@ public class CuratedSectionPageObject extends MercuryBasePageObject {
     curatedContentItem.click();
   }
 
-  public boolean isItemVisible(int i) {
-    WebElement curatedContentItem = curatedContentItems.get(elementNumber);
-
-    waitForElementByElement(curatedContentItem);
-    scrollToElement(curatedContentItem);
-    curatedContentItem.click();
-    return isElementVisible();
+  public boolean isItemVisible(int elementNumber) {
+    WebElement sectionItem = curatedContentItems.get(elementNumber);
+    return isElementVisible(sectionItem);
   }
 
   public String getTitle() {
-    return null;
+    waitForElementByElement(sectionTitle);
+    return sectionTitle.getText();
+  }
+
+  public void tapOnMainPageLink() {
+    waitForElementByElement(linkToMainPage);
+    scrollToElement(linkToMainPage);
+    linkToMainPage.click();
   }
 }
