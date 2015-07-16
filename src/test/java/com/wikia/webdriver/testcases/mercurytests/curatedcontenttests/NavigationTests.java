@@ -26,19 +26,6 @@ public class NavigationTests extends NewTestTemplate {
   private static final String ROOT_PATH_SECTION = "/main/section/";
   private static final String ROOT_PATH_CATEGORY = "/main/category/";
 
-  private enum PageElements {
-    SECTION_TITLE("Section title"),
-    LINK_TO_MAIN_PAGE("Link to main page"),
-    SECTION("Section as the container of many elements"),
-    SECTION_ITEM("Item in a section");
-
-    private String name;
-
-    private PageElements(String name) {
-      this.name = name;
-    }
-  }
-
   // CCT06
   @Test(groups = {"MercuryNavigationTests_001", "MercuryNavigationTests", "Mercury"})
   public void MercuryNavigationTests_001_navigateThroughCategory() {
@@ -86,29 +73,12 @@ public class NavigationTests extends NewTestTemplate {
     section.clickOnCuratedContentElement(0);
     section.waitForLoadingSpinnerToFinishReloadingPage();
 
-//    boolean result = section.isTitleVisible();
-//    PageObjectLogging.log(
-//        PageElements.SECTION_TITLE.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-//
-//    result = section.isLinkToMainPageVisible();
-//    PageObjectLogging.log(
-//        PageElements.LINK_TO_MAIN_PAGE.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-
     section
+        .isTitleVisible()
+        .isLinkToMainPageVisible()
         .isSectionVisible()
         .isItemVisible(1);
 
-
-    String sectionTitle = section.getTitle();
-    String currentPath = section.getCurrentUrlPath();
-    section.isUrlPathEqualTo(currentPath, ROOT_PATH_SECTION + sectionTitle);
+    PageObjectLogging.logUrl(driver, ROOT_PATH_SECTION + section.getTitle());
   }
 }
