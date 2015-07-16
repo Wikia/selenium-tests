@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
- * Created by wikia on 2015-07-15.
+ * @ownership: Content X-Wing
  */
 public class CuratedContentPageObject extends MercuryBasePageObject {
 
@@ -24,6 +24,12 @@ public class CuratedContentPageObject extends MercuryBasePageObject {
 
  public CuratedContentPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public void clickOnCuratedContentElement(int elementNumber) {
+    waitForElementByElement(curatedContentItems.get(elementNumber));
+    scrollToElement(curatedContentItems.get(elementNumber));
+    curatedContentItems.get(elementNumber).click();
   }
 
   public boolean isTitleVisible() {

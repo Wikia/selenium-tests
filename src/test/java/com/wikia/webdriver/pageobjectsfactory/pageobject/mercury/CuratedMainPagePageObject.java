@@ -35,23 +35,6 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
   @FindBys(@FindBy(css = "div.curated-content a"))
   private List<WebElement> curatedContentItems;
 
-
-  private void tapOnCuratedContentElement(int elementNumber){
-    WebElement curatedContentItem = curatedContentItems.get(elementNumber);
-
-    waitForElementByElement(curatedContentItem);
-    scrollToElement(curatedContentItem);
-    curatedContentItem.click();
-  }
-
-  /*
- Returns Curated Content view with category items or section items
- */
-  public CuratedContentPageObject tapOnCuratedElement(int elementNumber) {
-    tapOnCuratedContentElement(elementNumber-1);
-    return new CuratedContentPageObject(driver);
-  }
-
   private enum Settings {
     TIME_OUT_IN_SEC(5),
     CHECK_OUT_IN_MILLI_SEC(1000);
@@ -65,6 +48,12 @@ public class CuratedMainPagePageObject extends MercuryBasePageObject {
 
   public CuratedMainPagePageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public void clickOnCuratedContentElement(int elementNumber) {
+    waitForElementByElement(curatedContentItems.get(elementNumber));
+    scrollToElement(curatedContentItems.get(elementNumber));
+    curatedContentItems.get(elementNumber).click();
   }
 
   public boolean isMobileTopLeaderboardVisible() {

@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @ownership: Content X-Wing
+ */
 public class NavigationTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -43,15 +46,13 @@ public class NavigationTests extends NewTestTemplate {
   // CCT06
   @Test(groups = {"MercuryNavigationTests_001", "MercuryNavigationTests", "Mercury"})
   public void MercuryNavigationTests_001_navigateThroughCategory() {
-    boolean result;
+    CuratedContentPageObject category = new CuratedContentPageObject(driver);
+    category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    CuratedMainPagePageObject mainPage;
-    mainPage = base.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
-    CuratedContentPageObject category = mainPage.tapOnCuratedElement(2);
+    category.clickOnCuratedContentElement(1);
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
-    result = category.isTitleVisible();
+    boolean result = category.isTitleVisible();
     PageObjectLogging.log(
         PageElements.SECTION_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -95,7 +96,7 @@ public class NavigationTests extends NewTestTemplate {
     currentPath = category.getCurrentUrlPath();
     category.isUrlPathEqualTo(currentPath, ROOT_PATH);
 
-    String currentUrl = category.getCurrentUrl();
+    String currentUrl = driver.getCurrentUrl();
     String urlAfterTappingOnLink = category.getCurrentUrl();
     category.navigateBack();
     category.waitForLoadingSpinnerToFinishReloadingPage();
@@ -114,10 +115,10 @@ public class NavigationTests extends NewTestTemplate {
   // CCT07
   @Test(groups = {"MercuryNavigationTests_002", "MercuryNavigationTests", "Mercury"})
   public void MercuryNavigationTests_002_navigateThroughSection() {
-    MercuryBasePageObject base = new MercuryBasePageObject(driver);
-    CuratedMainPagePageObject mainPage;
-    mainPage = base.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
-    CuratedContentPageObject section = mainPage.tapOnCuratedElement(1);
+    CuratedContentPageObject section = new CuratedContentPageObject(driver);
+    section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    section.clickOnCuratedContentElement(0);
     section.waitForLoadingSpinnerToFinishReloadingPage();
 
     boolean result = section.isTitleVisible();
