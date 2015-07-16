@@ -503,6 +503,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] interstitial() {
     return new Object[][]{
+        // Fixme: ADEN-2231 Page size contains scrollbar width.
         {"adtest", "SyntheticTests/Interstitial", new Dimension(604, 917), 1.96},
         {"adtest", "SyntheticTests/Interstitial", new Dimension(1017, 817), 2.752},
         {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(600, 800), 0},
