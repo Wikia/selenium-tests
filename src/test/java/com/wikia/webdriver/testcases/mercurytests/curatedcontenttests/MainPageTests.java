@@ -6,10 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedMainPagePageObject;
@@ -43,7 +41,7 @@ public class MainPageTests extends NewTestTemplate {
     private String name;
     private String className;
 
-    private PageElements(String name, String className) {
+    PageElements(String name, String className) {
       this.name = name;
       this.className = className;
     }
