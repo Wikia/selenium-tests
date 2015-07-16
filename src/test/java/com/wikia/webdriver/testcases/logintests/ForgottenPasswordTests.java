@@ -26,7 +26,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
+  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -35,14 +35,14 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropdown = new DropDownComponentObject(driver);
     dropdown.openDropDown();
-    dropdown.remindPassword(userName, credentials.apiToken);
+     dropdown.remindPassword(userName, credentials.apiToken);
 
     dropdown.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
         dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
     dropdown.openDropDown();
-    dropdown.logIn(userName, newPassword);
+     dropdown.logIn(userName, newPassword);
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     newPassword = login.setNewPassword();
     login.verifyUserLoggedIn(userName);
@@ -53,7 +53,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "SERVICES-439", comment = "Set new password dialog is missing. Please test manually.")
+  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
@@ -78,6 +78,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
