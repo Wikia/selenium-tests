@@ -446,20 +446,20 @@ public class BasePageObject {
   public void navigateBack() {
     try {
       driver.navigate().back();
-      PageObjectLogging.log("navigateBack", "previous page loaded", true);
+      PageObjectLogging.log("Navigate Back", "previous page loaded", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("navigateBack",
-                            "page loaded for more then 30 seconds after navigating back", true);
+      PageObjectLogging.log("Navigate Back",
+                            "page loaded for more then 30 seconds after navigating back", false);
     }
   }
 
   public void navigateForward() {
     try {
       driver.navigate().forward();
-      PageObjectLogging.log("navigateForward", "next page loaded", true);
+      PageObjectLogging.log("Navigate Forward", "next page loaded", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("navigateForward",
-                            "page loaded for more then 30 seconds after navigating back", true);
+      PageObjectLogging.log("Navigate Forward",
+                            "page loaded for more then 30 seconds after navigating forward", false);
     }
   }
 
