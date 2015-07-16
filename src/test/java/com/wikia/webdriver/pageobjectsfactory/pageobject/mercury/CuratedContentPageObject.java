@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement linkToMainPage;
   @FindBy(css = ".curated-content-items")
   private WebElement sectionContainer;
-  @FindBys(@FindBy(css = "div.curated-content a"))
+  @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
 
   private enum PageElements {
@@ -46,7 +45,7 @@ public class CuratedContentPageObject extends BasePageObject {
     return sectionTitle.getText();
   }
 
-  public CuratedContentPageObject clickOnCuratedContentElement(int elementNumber) {
+  public CuratedContentPageObject clickOnCuratedContentElementByIndex(int elementNumber) {
     waitForElementByElement(curatedContentItems.get(elementNumber));
     scrollToElement(curatedContentItems.get(elementNumber));
     curatedContentItems.get(elementNumber).click();
@@ -57,6 +56,12 @@ public class CuratedContentPageObject extends BasePageObject {
     waitForElementByElement(linkToMainPage);
     scrollToElement(linkToMainPage);
     linkToMainPage.click();
+    return this;
+  }
+
+  public CuratedContentPageObject navigateToMainPage() {
+    clickOnMainPageLink();
+    waitForLoadingSpinnerToFinishReloadingPage();
     return this;
   }
 
@@ -90,7 +95,7 @@ public class CuratedContentPageObject extends BasePageObject {
     return this;
   }
 
-  public CuratedContentPageObject isItemVisible(int elementNumber) {
+  public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
     PageObjectLogging.log(
         PageElements.SECTION_ITEM.name,
         MercuryMessages.VISIBLE_MSG,

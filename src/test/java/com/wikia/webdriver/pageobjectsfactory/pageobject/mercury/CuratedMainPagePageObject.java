@@ -5,9 +5,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -32,8 +29,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
   private WebElement trendingVideos;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
-  @FindBys(@FindBy(css = "div.curated-content a"))
-  private List<WebElement> curatedContentItems;
 
   private enum Settings {
     TIME_OUT_IN_SEC(5),
@@ -41,7 +36,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
     private int value;
 
-    private Settings(int value) {
+    Settings(int value) {
       this.value = value;
     }
   }
@@ -50,10 +45,10 @@ public class CuratedMainPagePageObject extends BasePageObject {
     super(driver);
   }
 
-  public void clickOnCuratedContentElement(int elementNumber) {
-    waitForElementByElement(curatedContentItems.get(elementNumber));
-    scrollToElement(curatedContentItems.get(elementNumber));
-    curatedContentItems.get(elementNumber).click();
+  public int getElementHeight(String element) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return Integer
+        .parseInt(js.executeScript("return $('" + element + "').offset().top").toString());
   }
 
   public boolean isMobileTopLeaderboardVisible() {
@@ -144,13 +139,5 @@ public class CuratedMainPagePageObject extends BasePageObject {
       return false;
     }
     return true;
-  }
-
-
-
-  public int getElementHeight(String element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer
-        .parseInt(js.executeScript("return $('" + element + "').offset().top").toString());
   }
 }

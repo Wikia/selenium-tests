@@ -32,35 +32,28 @@ public class NavigationTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    category.clickOnCuratedContentElement(1);
+    category.clickOnCuratedContentElementByIndex(1);
     category.waitForLoadingSpinnerToFinishReloadingPage();
 
     category
         .isTitleVisible()
         .isLinkToMainPageVisible()
         .isSectionVisible()
-        .isItemVisible(1);
+        .isCuratedContentItemVisibleByIndex(1);
 
     String sectionTitle = category.getTitle();
     String expectedUrlPath = ROOT_PATH_CATEGORY + sectionTitle;
-
     PageObjectLogging.logUrl(driver, expectedUrlPath);
 
     String previousUrl = driver.getCurrentUrl();
-    category.clickOnMainPageLink();
-    category.waitForLoadingSpinnerToFinishReloadingPage();
+    category.navigateToMainPage();
     String nextUrl = driver.getCurrentUrl();
-
     PageObjectLogging.logUrl(driver, ROOT_PATH);
 
     category.navigateBack();
-    category.waitForLoadingSpinnerToFinishReloadingPage();
-
     PageObjectLogging.logUrl(driver, previousUrl);
 
     category.navigateForward();
-    category.waitForLoadingSpinnerToFinishReloadingPage();
-
     PageObjectLogging.logUrl(driver, nextUrl);
   }
 
@@ -70,14 +63,14 @@ public class NavigationTests extends NewTestTemplate {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    section.clickOnCuratedContentElement(0);
+    section.clickOnCuratedContentElementByIndex(0);
     section.waitForLoadingSpinnerToFinishReloadingPage();
 
     section
         .isTitleVisible()
         .isLinkToMainPageVisible()
         .isSectionVisible()
-        .isItemVisible(1);
+        .isCuratedContentItemVisibleByIndex(1);
 
     PageObjectLogging.logUrl(driver, ROOT_PATH_SECTION + section.getTitle());
   }
