@@ -82,6 +82,11 @@ public class BasePageObject extends MobileBasePageObject {
     return new CuratedMainPagePageObject(driver);
   }
 
+  public void navigateToUrlWithPath(String wikiURL, String path) {
+    String url = wikiURL + path;
+    getUrl(url);
+  }
+
   private enum Settings {
     TIME_OUT_IN_SEC(5),
     CHECK_OUT_IN_MILLI_SEC(1000);

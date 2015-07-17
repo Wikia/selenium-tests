@@ -76,4 +76,26 @@ public class NavigationTests extends NewTestTemplate {
 
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH_SECTION + section.getTitle());
   }
+
+  // CCT09
+  @Test(groups = {"MercuryCuratedNavigationTests_003", "MercuryCuratedNavigationTests",
+                  "MercuryCuratedContentTests", "Mercury"})
+  public void MercuryCuratedNavigationTests_003_navigateThroughDifferentUrl() {
+    CuratedContentPageObject section = new CuratedContentPageObject(driver);
+
+    String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+
+    expectedUrl = wikiURL + MercurySubpages.CC_SECTION_CATEGORIES;
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+
+    expectedUrl = wikiURL;
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_QWERTY);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_QWERTY);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+  }
 }
