@@ -19,6 +19,15 @@ public class NavigationTests extends NewTestTemplate {
   private static final String ROOT_PATH = "/";
   private static final String ROOT_PATH_SECTION = "/main/section/";
   private static final String ROOT_PATH_CATEGORY = "/main/category/";
+  private static final String ROOT_ARTICLE_PATH = "/wiki/";
+  private static final String ROOT_BLOG_PATH = "/wiki/User_blog:";
+  private static final String ROOT_FILE_PATH = "/wiki/File:";
+
+  @BeforeMethod(alwaysRun = true)
+  public void prepareTest() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+  }
 
   // CCT06
   @Test(groups = {"MercuryCuratedNavigationTests_001", "MercuryCuratedNavigationTests",
@@ -52,12 +61,6 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isUrlEqualToCurrentUrl(driver, nextUrl);
   }
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
-  }
-
   // CCT07
   @Test(groups = {"MercuryCuratedNavigationTests_002", "MercuryCuratedNavigationTests",
                   "MercuryCuratedContentTests", "Mercury"})
@@ -75,5 +78,39 @@ public class NavigationTests extends NewTestTemplate {
         .isCuratedContentItemVisibleByIndex(1);
 
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH_SECTION + section.getTitle());
+  }
+
+  // CCT11
+  @Test(groups = {"MercuryCuratedNavigationTests_003", "MercuryCuratedNavigationTests",
+                  "MercuryCuratedContentTests", "Mercury"})
+  public void MercuryCuratedNavigationTests_003_navigateThroughNamespaces() {
+    CuratedContentPageObject category = new CuratedContentPageObject(driver);
+    category
+        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
+        .isArticleIconVisible()
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+
+    category
+        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+        .isBlogIconVisible()
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+
+    category
+        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+        .isImageIconVisible()
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+
+    category
+        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+        .isVideoIconVisible()
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
+    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
   }
 }
