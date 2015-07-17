@@ -48,11 +48,8 @@ public class VEAddVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  // AM02
+  //AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
-  @RelatedIssue(
-      issueID = "OPS-6181",
-      comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     VisualEditorPageObject ve =
