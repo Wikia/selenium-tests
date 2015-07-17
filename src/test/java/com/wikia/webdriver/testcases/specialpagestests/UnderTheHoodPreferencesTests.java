@@ -22,9 +22,6 @@ public class UnderTheHoodPreferencesTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
-  private static final String SOURCE = "1";
-  private static final String VE = "2";
-  private static final String CK = "3";
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
@@ -33,21 +30,14 @@ public class UnderTheHoodPreferencesTests extends NewTestTemplate {
     base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
   }
 
- // @Test(groups = {"EditingPreferencesTest", "EditPreferences_001"})
+  @Test(groups = {"UnderTheHoodPreferencesTest", "UnderTheHoodPreference_001"})
   public void UnderTheHoodPreference_001_Use_advanced_recent_changes() {
-    //EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
 
     PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
-    preferences.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-    /*editPrefPage.selectPreferredEditor(VE);
-    PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
-    VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-  */
+        preferences.Set_advanced_recent_changes_checkbox_value_to_default_unchecked();
+        preferences.Use_advanced_recent_changes_checkbox();
+    preferences.clickSaveButton();
+    preferences.Get_advanced_recent_changes_checkbox_value();
   }
 
 }

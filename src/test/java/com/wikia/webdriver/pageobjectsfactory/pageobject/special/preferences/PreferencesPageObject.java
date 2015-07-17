@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -34,6 +35,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement facebookPasswordInput;
   @FindBy(css = "#facebook input[name='login']")
   private WebElement facebookSubmitButton;
+  @FindBy(css = "#mw-input-wpusenewrc")
+  private WebElement Use_advanced_recent_changes_checkbox;
 
   public PreferencesPageObject(WebDriver driver) {
     super(driver);
@@ -126,6 +129,28 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
     driver.switchTo().window(windows[0].toString());
     waitForElementByElement(facebookDisconnect);
+  }
+
+  public void Use_advanced_recent_changes_checkbox() {
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    waitForElementClickableByElement(Use_advanced_recent_changes_checkbox);
+  Use_advanced_recent_changes_checkbox.click();
+    PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+  }
+
+  public void Get_advanced_recent_changes_checkbox_value() {
+// Verify that the Get_advanced_recent_changes_checkbox_value is checked
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    Assertion.assertFalse(Use_advanced_recent_changes_checkbox.getAttribute("checked") == null);
+     }
+
+  public void Set_advanced_recent_changes_checkbox_value_to_default_unchecked() {
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    if(Use_advanced_recent_changes_checkbox.getAttribute("checked") != null) // if Checked
+      Use_advanced_recent_changes_checkbox.click();
+    clickSaveButton();
+    PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
+
   }
 
   public enum tabNames {
