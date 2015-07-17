@@ -30,7 +30,7 @@ public class UnderTheHoodPreferencesTests extends NewTestTemplate {
 
     PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
     preferences.setAdvancedRecentChangesCheckboxValueToDefaultUnchecked();
-    preferences.useAdvancedRecentChangesCheckbox();
+    preferences.setAdvancedRecentChangesCheckbox();
     preferences.clickSaveButton();
     preferences.getAdvancedRecentChangesCheckboxValue();
   }

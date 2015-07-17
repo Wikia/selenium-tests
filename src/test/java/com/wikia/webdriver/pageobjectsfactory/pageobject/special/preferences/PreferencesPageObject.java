@@ -131,7 +131,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
     waitForElementByElement(facebookDisconnect);
   }
 
-  public void useAdvancedRecentChangesCheckbox() {
+  public void setAdvancedRecentChangesCheckbox() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     waitForElementClickableByElement(Use_advanced_recent_changes_checkbox);
   Use_advanced_recent_changes_checkbox.click();
