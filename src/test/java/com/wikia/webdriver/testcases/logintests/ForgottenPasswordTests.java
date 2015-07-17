@@ -27,7 +27,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -54,7 +53,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
