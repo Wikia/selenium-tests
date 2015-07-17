@@ -22,16 +22,20 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement sectionContainer;
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
+  @FindBy(css = ".load-more-items")
+  private WebElement loadMoreButton;
 
-  private enum PageElements {
+  private enum Labels {
     SECTION_TITLE("Section title"),
     LINK_TO_MAIN_PAGE("Link to main page"),
     SECTION("Section as the container of many elements"),
-    SECTION_ITEM("Item in a section");
+    SECTION_ITEM("Item in a section"),
+    LOAD_MORE_BUTTON("Load more button"),
+    NUMBER_OF_ITEMS("Number of items in curated content section");
 
     private String name;
 
-    PageElements(String name) {
+    Labels(String name) {
       this.name = name;
     }
   }
@@ -43,6 +47,11 @@ public class CuratedContentPageObject extends BasePageObject {
   public String getTitle() {
     waitForElementByElement(sectionTitle);
     return sectionTitle.getText();
+  }
+
+  public int getCuratedContentItemsNumber() {
+    waitForElementByElement(curatedContentItems.get(0));
+    return curatedContentItems.size();
   }
 
   public CuratedContentPageObject clickOnCuratedContentElementByIndex(int elementNumber) {
@@ -59,6 +68,13 @@ public class CuratedContentPageObject extends BasePageObject {
     return this;
   }
 
+  public CuratedContentPageObject clickOnLoadMoreButton() {
+    waitForElementByElement(loadMoreButton);
+    scrollToElement(loadMoreButton);
+    loadMoreButton.click();
+    return this;
+  }
+
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
     waitForLoadingSpinnerToFinishReloadingPage();
@@ -67,7 +83,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isTitleVisible() {
     PageObjectLogging.log(
-        PageElements.SECTION_TITLE.name,
+        Labels.SECTION_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(sectionTitle)
@@ -77,7 +93,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isLinkToMainPageVisible() {
     PageObjectLogging.log(
-        PageElements.LINK_TO_MAIN_PAGE.name,
+        Labels.LINK_TO_MAIN_PAGE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(linkToMainPage)
@@ -87,7 +103,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isSectionVisible() {
     PageObjectLogging.log(
-        PageElements.SECTION.name,
+        Labels.SECTION.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(sectionContainer)
@@ -97,10 +113,42 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
     PageObjectLogging.log(
-        PageElements.SECTION_ITEM.name,
+        Labels.SECTION_ITEM.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(curatedContentItems.get(elementNumber))
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isLoadMoreButtonVisible() {
+    PageObjectLogging.log(
+        Labels.LOAD_MORE_BUTTON.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(loadMoreButton)
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isLoadMoreButtonHidden() {
+    PageObjectLogging.log(
+        Labels.LOAD_MORE_BUTTON.name,
+        MercuryMessages.INVISIBLE_MSG,
+        MercuryMessages.VISIBLE_MSG,
+        !isElementVisible(loadMoreButton)
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isCurrentNumberOfItemsExpected(int expectedNumber) {
+    int currentNumber = getCuratedContentItemsNumber();
+    String message = "Expected: " + expectedNumber + ", get: " + currentNumber;
+
+    PageObjectLogging.log(
+        Labels.NUMBER_OF_ITEMS.name,
+        message,
+        expectedNumber == currentNumber
     );
     return this;
   }
