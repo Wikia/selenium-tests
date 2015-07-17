@@ -83,8 +83,7 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public void navigateToUrlWithPath(String wikiURL, String path) {
-    String url = wikiURL + path;
-    getUrl(url);
+    getUrl(wikiURL + path);
   }
 
   private enum Settings {
