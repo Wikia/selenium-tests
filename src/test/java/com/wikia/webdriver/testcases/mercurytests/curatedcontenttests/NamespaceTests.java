@@ -41,7 +41,7 @@ public class NamespaceTests extends NewTestTemplate {
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
-        .isVidoeIconVisible()
+        .isVideoIconVisible()
         .clickOnCuratedContentElementByIndex(1);
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
   }

@@ -22,20 +22,32 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement sectionContainer;
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
+  @FindBy(css = "#namespace-article")
+  private WebElement articleItemIcon;
+  @FindBy(css = "#namespace-blog")
+  private WebElement blogItemIcon;
+  @FindBy(css = "#namespace-image")
+  private WebElement imageItemIcon;
+  @FindBy(css = "#namespace-video")
+  private WebElement videoItemIcon;
 
   public CuratedContentPageObject isArticleIconVisible() {
+    isElementVisible(articleItemIcon);
     return this;
   }
 
   public CuratedContentPageObject isBlogIconVisible() {
+    isElementVisible(blogItemIcon);
     return this;
   }
 
   public CuratedContentPageObject isImageIconVisible() {
+    isElementVisible(imageItemIcon);
     return this;
   }
 
-  public CuratedContentPageObject isVidoeIconVisible() {
+  public CuratedContentPageObject isVideoIconVisible() {
+    isElementVisible(videoItemIcon);
     return this;
   }
 
