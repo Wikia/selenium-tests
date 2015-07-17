@@ -146,8 +146,9 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public void setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) // if Checked
+    if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) {// if Checked
       useAdvancedRecentChangesCheckbox.click();
+    }
     clickSaveButton();
     PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
 
