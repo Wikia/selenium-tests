@@ -27,8 +27,9 @@ public class NavigationTests extends NewTestTemplate {
   private static final String ROOT_PATH_CATEGORY = "/main/category/";
 
   // CCT06
-  @Test(groups = {"MercuryNavigationTests_001", "MercuryNavigationTests", "Mercury"})
-  public void MercuryNavigationTests_001_navigateThroughCategory() {
+  @Test(groups = {"MercuryCuratedNavigationTests_001", "MercuryCuratedNavigationTests",
+                  "MercuryCuratedContentTests", "Mercury"})
+  public void MercuryCuratedNavigationTests_001_navigateThroughCategory() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
@@ -58,8 +59,9 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT07
-  @Test(groups = {"MercuryNavigationTests_002", "MercuryNavigationTests", "Mercury"})
-  public void MercuryNavigationTests_002_navigateThroughSection() {
+  @Test(groups = {"MercuryCuratedNavigationTests_002", "MercuryCuratedNavigationTests",
+                  "MercuryCuratedContentTests", "Mercury"})
+  public void MercuryCuratedNavigationTests_002_navigateThroughSection() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
