@@ -131,20 +131,20 @@ public class PreferencesPageObject extends WikiBasePageObject {
     waitForElementByElement(facebookDisconnect);
   }
 
-  public void Use_advanced_recent_changes_checkbox() {
+  public void useAdvancedRecentChangesCheckbox() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     waitForElementClickableByElement(Use_advanced_recent_changes_checkbox);
   Use_advanced_recent_changes_checkbox.click();
     PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
   }
 
-  public void Get_advanced_recent_changes_checkbox_value() {
+  public void getAdvancedRecentChangesCheckboxValue() {
 // Verify that the Get_advanced_recent_changes_checkbox_value is checked
     selectTab(PreferencesPageObject.tabNames.UNDER);
     Assertion.assertFalse(Use_advanced_recent_changes_checkbox.getAttribute("checked") == null);
      }
 
-  public void Set_advanced_recent_changes_checkbox_value_to_default_unchecked() {
+  public void setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     if(Use_advanced_recent_changes_checkbox.getAttribute("checked") != null) // if Checked
       Use_advanced_recent_changes_checkbox.click();
