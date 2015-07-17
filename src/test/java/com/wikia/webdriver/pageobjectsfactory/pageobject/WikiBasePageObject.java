@@ -944,7 +944,9 @@ public class WikiBasePageObject extends BasePageObject {
 
       String token = responseValue.getString("access_token");
 
-      driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
+      String domian = Configuration.getEnvType().equals("dev")?".wikia-dev.com" : ".wikia.com";
+
+      driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
       if(driver.getCurrentUrl().contains("Logout")){
         driver.get(wikiURL);
