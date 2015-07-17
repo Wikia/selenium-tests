@@ -82,6 +82,13 @@ public class BasePageObject extends MobileBasePageObject {
     return new CuratedMainPagePageObject(driver);
   }
 
+  public CuratedContentPageObject openCuratedContentPage(String wikiURL, String path) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + path + "?cb=" + DateTime.now().getMillis());
+    PageObjectLogging
+        .log("openCuratedContentPage", "Curated content page" + path + " was opened", true);
+    return new CuratedContentPageObject(driver);
+  }
+
   private enum Settings {
     TIME_OUT_IN_SEC(5),
     CHECK_OUT_IN_MILLI_SEC(1000);

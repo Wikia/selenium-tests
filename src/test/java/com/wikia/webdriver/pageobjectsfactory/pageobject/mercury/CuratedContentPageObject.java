@@ -23,6 +23,22 @@ public class CuratedContentPageObject extends BasePageObject {
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
 
+  public CuratedContentPageObject isArticleIconVisible() {
+    return this;
+  }
+
+  public CuratedContentPageObject isBlogIconVisible() {
+    return this;
+  }
+
+  public CuratedContentPageObject isImageIconVisible() {
+    return this;
+  }
+
+  public CuratedContentPageObject isVidoeIconVisible() {
+    return this;
+  }
+
   private enum PageElements {
     SECTION_TITLE("Section title"),
     LINK_TO_MAIN_PAGE("Link to main page"),

@@ -16,12 +16,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class NavigationTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
-  }
-
   private static final String ROOT_PATH = "/";
   private static final String ROOT_PATH_SECTION = "/main/section/";
   private static final String ROOT_PATH_CATEGORY = "/main/category/";
@@ -56,6 +50,12 @@ public class NavigationTests extends NewTestTemplate {
 
     category.navigateForward();
     UrlChecker.isUrlEqualToCurrentUrl(driver, nextUrl);
+  }
+
+  @BeforeMethod(alwaysRun = true)
+  public void prepareTest() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
   }
 
   // CCT07
