@@ -5,10 +5,12 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import org.testng.annotations.Test;
@@ -25,7 +27,7 @@ import org.testng.annotations.Test;
  * page will display category in categories section at the bottom of the page automatically
  *
  */
-public class PortableInfoboxTests extends NewTestTemplate{
+public class PortableInfoboxTests extends NewTestTemplate {
 
   Credentials credentials = config.getCredentials();
 
@@ -62,30 +64,67 @@ public class PortableInfoboxTests extends NewTestTemplate{
   }
 
 
-    @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
-    public void verifyImagesInWhatLinksHerePage() {
-      ArticlePageObject article = new ArticlePageObject(driver);
-      article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-      PortableInfoboxPageObject info = article.getInfoboxPage();
-      String articleName = info.getNameForArticle();
-      SpecialWhatLinksHerePageObject links = info.openArticleByName(wikiURL, URLsContent.SPECIAL_WHAT_LINKS_HERE);
-      links.clickPageInputField();
-      links.typeInfoboxImageName(PageContent.FILE_IMAGE_NAME);
-      links.clickShowbutton();
-      links.verifyInfoboxArticleInList(articleName);
-    }
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
+  public void verifyImagesInWhatLinksHerePage() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    String articleName = info.getNameForArticle();
+    SpecialWhatLinksHerePageObject links = info.openArticleByName(wikiURL, URLsContent.SPECIAL_WHAT_LINKS_HERE);
+    links.clickPageInputField();
+    links.typeInfoboxImageName(PageContent.FILE_IMAGE_NAME);
+    links.clickShowbutton();
+    links.verifyInfoboxArticleInList(articleName);
+  }
 
-    @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})
-    public void verifyCategoriesInTemplateInvocation() {
-      ArticlePageObject article = new ArticlePageObject(driver);
-      article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-      PortableInfoboxPageObject info = article.getInfoboxPage();
-      SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
-      String catName = src.getRandomDigits(9);
-      src.addCategoryToSourceCode(catName);
-      TemplatePageObject temp = src.clickPublishButton();
-      temp.verifyCategoryInTemplatePage(catName);
-      info = temp.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-      info.verifyCategoryInArticlePage(catName);
-    }
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})
+  public void verifyCategoriesInTemplateInvocation() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    String catName = src.getRandomDigits(9);
+    src.addCategoryToSourceCode(catName);
+    TemplatePageObject temp = src.clickPublishButton();
+    temp.verifyCategoryInTemplatePage(catName);
+    info = temp.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    info.verifyCategoryInArticlePage(catName);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_006"})
+  public void verifyLightboxVisibilityAfterClickingImage() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info.clickImage();
+    info.verifyLightboxPresence();
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
+  public void verifyInfoboxLayoutChange() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+
+    String textThemeDesigner = toolbar.getThemeDesignerText();
+
+    toolbar.clickOnTool(textThemeDesigner);
+    SpecialThemeDesignerPageObject special = new SpecialThemeDesignerPageObject(driver);
+    special.openSpecialDesignerPage(wikiURL);
+    special.selectTheme(1);
+    special.submitThemeSelection();
+    String oldBackground = info.getBackgroundColor();
+
+    toolbar.clickOnTool(textThemeDesigner);
+    special.openSpecialDesignerPage(wikiURL);
+    special.selectTheme(4);
+    special.submitThemeSelection();
+    String newBackground = info.getBackgroundColor();
+
+    info.verifyChangedBackground(oldBackground, newBackground);
+
+  }
 }
+
+

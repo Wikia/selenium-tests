@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by Rodriuki on 11/06/15.
  */
-public class PortableInfoboxPageObject extends WikiBasePageObject{
+public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".portable-infobox-image-wrapper")
   private WebElement pInfoImage;
@@ -26,9 +27,17 @@ public class PortableInfoboxPageObject extends WikiBasePageObject{
   private List<WebElement> boldElements;
   @FindBy(css = "i")
   private List<WebElement> italicElements;
-  @FindBy (css = ".portable-infobox-item-value a[href*='cleanup4']")
+  @FindBy(css = ".portable-infobox-item-value a[href*='cleanup4']")
   private WebElement pInfoInternalLink;
+  @FindBy(css = ".WikiaLightbox")
+  private WebElement lightbox;
+  @FindBy(css = ".portable-infobox-layout-default")
+  private WebElement infoboxLayout;
 
+
+  public String getBackgroundColor() {
+    return infoboxLayout.getAttribute("background-color");
+  }
 
   public List<WebElement> getBoldElements(){
     return boldElements;
@@ -52,6 +61,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject{
     Assertion.assertEquals(checkIfElementOnPage(pInfoTitle), true);
   }
 
+  public void verifyLightboxPresence() {
+    waitForElementByElement(lightbox);
+    Assertion.assertEquals(checkIfElementOnPage(lightbox), true);
+  }
+
   public String getExternalLinkRedirectTitle() {
     waitForElementByElement(pInfoExternalLink);
     return pInfoExternalLink.getAttribute("href");
@@ -72,6 +86,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject{
     pInfoInternalLink.click();
   }
 
+  public void clickImage() {
+    waitForElementByElement(pInfoImage);
+    pInfoImage.click();
+  }
+
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
     waitForElementByElement(pInfoImage);
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
@@ -87,5 +106,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject{
     return pInfoImage.getAttribute("src");
   }
 
+
+  public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue)
+  {
+    Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
+  }
 
 }

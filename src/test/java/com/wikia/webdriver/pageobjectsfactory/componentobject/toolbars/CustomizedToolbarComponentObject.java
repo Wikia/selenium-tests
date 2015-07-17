@@ -38,6 +38,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private WebElement resetDefaultsButton;
   @FindBy(css = ".overflow-menu > .tools-menu li > a[href*=Special]")
   private List<WebElement> myToolsList;
+  @FindBy(css = ".tools-menu li > a[data-name='themedesigner'")
+  private WebElement themeDesignerButton;
 
   private By toolsList = By.cssSelector("ul.tools li");
 
@@ -144,7 +146,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickOnTool(String toolName) {
     jQueryClick(
-        waitForElementByCss(String.format(toolbarToolCss, toolName))
+            waitForElementByCss(String.format(toolbarToolCss, toolName))
     );
     PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
@@ -170,7 +172,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void verifyFollowedToolbar() {
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
-                                                    "title", "Unfollow");
+            "title", "Unfollow");
     PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
 
   }
@@ -301,4 +303,15 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     }
     PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
   }
+
+  /**
+   * Get text string from Theme Designer button in My Tools menu
+   *
+   */
+
+  public String getThemeDesignerText()
+  {
+    return themeDesignerButton.getText();
+  }
+
 }
