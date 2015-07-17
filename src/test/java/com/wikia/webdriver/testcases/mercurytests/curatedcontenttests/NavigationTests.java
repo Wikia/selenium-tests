@@ -51,10 +51,10 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH);
 
     category.navigateBack();
-    UrlChecker.isUrlEqualCurrentUrl(driver, previousUrl);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, previousUrl);
 
     category.navigateForward();
-    UrlChecker.isUrlEqualCurrentUrl(driver, nextUrl);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, nextUrl);
   }
 
   // CCT07

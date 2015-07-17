@@ -19,6 +19,11 @@ public class MainPageTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
+    //This is fix for problem which was occurring long time ago
+    //It was like accessing selector before page finished loading
+    //crashed driver
+    //TODO: Investigate is that problem still valid
+    //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
@@ -46,6 +51,9 @@ public class MainPageTests extends NewTestTemplate {
       this.className = className;
     }
   }
+
+  //TODO: Move logging methods to page object
+  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
 
   // CCT01
   @Test(groups = {"MercuryCuratedMainPageTests_001", "MercuryCuratedMainPageTests", "Mercury"})
@@ -137,8 +145,10 @@ public class MainPageTests extends NewTestTemplate {
     int lastPosition = 0;
     String lastElement = "top";
 
+    //TODO: make function from this
+    //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     for (PageElements element : PageElements.values()) {
-      int newPosition = cc.getElementHeight(element.className);
+      int newPosition = cc.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
       PageObjectLogging.log(
