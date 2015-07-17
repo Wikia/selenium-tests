@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  * Created by Rodriuki on 12/06/15.
  * Set of Test Cases found on https://one.wikia-inc.com/wiki/Portable_Infoboxes_Test_Plan
  *
- * TC01: Verify elements visibility: infobox title, image, headers, italic, bold, 0 values, quotation marks, references
+ * TC01: Verify elements visibility: infobox title, image, headers, italic, bold, quotation marks, references
  * TC02: Verify correct redirects in mediawiki119.wikia.com/wiki/RodriInfobox01 for:
  * external links, internal links, red links
  * TC03: Verify images used in infoboxes appear in Special:WhatLinksHere page
@@ -49,17 +49,17 @@ public class PortableInfoboxTests extends NewTestTemplate{
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
-    String externalNavigatedURL = .getURL();
+    String externalNavigatedURL =.getURL();
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
     String internalLinkName = info.getInternalLinkRedirectTitle();
     info.clickInternalLink();
-    String internalNavigatedURL = .getURL();
+    String internalNavigatedURL =.getURL();
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
-
+  }
 
 
     @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})

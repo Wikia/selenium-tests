@@ -31,17 +31,14 @@ public class PortableInfoboxPageObject extends WikiBasePageObject{
 
 
   public List<WebElement> getBoldElements(){
-
     return boldElements;
   }
 
   public List<WebElement> getItalicElements() {
-
     return italicElements;
   }
 
   public List<WebElement> getHeaderElements() {
-
     return pInfoTitleH3;
   }
 
