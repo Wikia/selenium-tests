@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.contentpatterns;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 public class URLsContent {
 

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -31,7 +31,7 @@ public class NavigationSideTests extends NewTestTemplate {
   @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
-    nav.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     Assertion.assertFalse(
         nav.isNavMenuVisible(),
@@ -141,7 +141,7 @@ public class NavigationSideTests extends NewTestTemplate {
   @Test(groups = {"MercuryNavigationSideTest_002", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_002_SearchInvalidSuggestion_Cancel() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
-    searchObject.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    searchObject.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -221,7 +221,7 @@ public class NavigationSideTests extends NewTestTemplate {
   @Test(groups = {"MercuryNavigationSideTest_003", "MercuryNavigationSideTests", "Mercury"})
   public void MercuryNavigationSideTest_003_ValidSuggestionRedirect() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
-    searchObject.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    searchObject.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -258,7 +258,7 @@ public class NavigationSideTests extends NewTestTemplate {
                   "Mercury"}, enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
-    nav.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.urlbuilder;
+package com.wikia.webdriver.common.core.url;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
