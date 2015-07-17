@@ -36,7 +36,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   @FindBy(css = "#facebook input[name='login']")
   private WebElement facebookSubmitButton;
   @FindBy(css = "#mw-input-wpusenewrc")
-  private WebElement Use_advanced_recent_changes_checkbox;
+  private WebElement useAdvancedRecentChangesCheckbox;
 
   public PreferencesPageObject(WebDriver driver) {
     super(driver);
@@ -133,21 +133,21 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public void setAdvancedRecentChangesCheckbox() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    waitForElementClickableByElement(Use_advanced_recent_changes_checkbox);
-  Use_advanced_recent_changes_checkbox.click();
+    waitForElementClickableByElement(useAdvancedRecentChangesCheckbox);
+  useAdvancedRecentChangesCheckbox.click();
     PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
   }
 
   public void getAdvancedRecentChangesCheckboxValue() {
 // Verify that the Get_advanced_recent_changes_checkbox_value is checked
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    Assertion.assertFalse(Use_advanced_recent_changes_checkbox.getAttribute("checked") == null);
+    Assertion.assertFalse(useAdvancedRecentChangesCheckbox.getAttribute("checked") == null);
      }
 
   public void setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    if(Use_advanced_recent_changes_checkbox.getAttribute("checked") != null) // if Checked
-      Use_advanced_recent_changes_checkbox.click();
+    if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) // if Checked
+      useAdvancedRecentChangesCheckbox.click();
     clickSaveButton();
     PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
 
