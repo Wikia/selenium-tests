@@ -17,32 +17,36 @@ public class NamespaceTests extends NewTestTemplate {
   private static final String ROOT_FILE_PATH = "/wiki/File:";
 
   // CCT06
-  @Test(groups = {"MercuryCuratedNavigationTests_001", "MercuryCuratedNavigationTests",
+  @Test(groups = {"MercuryCuratedNamespaceTests_001", "MercuryCuratedNamespaceTests",
                   "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_001_navigateThroughCategory() {
+  public void MercuryCuratedNavigationTests_001_navigateThroughNamespaces() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
         .isArticleIconVisible()
-        .clickOnCuratedContentElementByIndex(1);
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isBlogIconVisible()
-        .clickOnCuratedContentElementByIndex(1);
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isImageIconVisible()
-        .clickOnCuratedContentElementByIndex(1);
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isVideoIconVisible()
-        .clickOnCuratedContentElementByIndex(1);
+        .clickOnCuratedContentElementByIndex(0)
+        .waitForLoadingSpinnerToFinishReloadingPage();
     UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
   }
 

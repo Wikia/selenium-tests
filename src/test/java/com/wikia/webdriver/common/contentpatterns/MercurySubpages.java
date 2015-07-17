@@ -30,10 +30,10 @@ public class MercurySubpages {
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
   // Categories in mercurycc.wikia.com
-  public static final String CC_CATEGORY_ARTICLES = "main/Category/Articles";
-  public static final String CC_CATEGORY_BLOGS = "main/Category/Blog_posts";
-  public static final String CC_CATEGORY_IMAGES = "main/Category/Images";
-  public static final String CC_CATEGORY_VIDEOS = "main/Category/Videos";
+  public static final String CC_CATEGORY_ARTICLES = "main/category/Articles";
+  public static final String CC_CATEGORY_BLOGS = "main/category/Blog_posts";
+  public static final String CC_CATEGORY_IMAGES = "main/category/Images";
+  public static final String CC_CATEGORY_VIDEOS = "main/category/Videos";
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";

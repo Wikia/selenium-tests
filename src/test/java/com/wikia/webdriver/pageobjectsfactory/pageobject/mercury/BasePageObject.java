@@ -83,7 +83,7 @@ public class BasePageObject extends MobileBasePageObject {
   }
 
   public CuratedContentPageObject openCuratedContentPage(String wikiURL, String path) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + path + "?cb=" + DateTime.now().getMillis());
+    getUrl(wikiURL + path + "?cb=" + DateTime.now().getMillis());
     PageObjectLogging
         .log("openCuratedContentPage", "Curated content page" + path + " was opened", true);
     return new CuratedContentPageObject(driver);
