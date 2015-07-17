@@ -33,6 +33,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement lightbox;
   @FindBy(css = ".portable-infobox-layout-default")
   private WebElement infoboxLayout;
+  @FindBy(css = ".tabberlive")
+  private WebElement tabber;
+  @FindBy(css = ".tabbertab > .image")
+  private WebElement tabberImage;
 
 
   public String getBackgroundColor() {
@@ -54,6 +58,16 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyImagePresence() {
     waitForElementByElement(pInfoImage);
     Assertion.assertEquals(checkIfElementOnPage(pInfoImage), true);
+  }
+
+  public void verifyTabberPresence() {
+    waitForElementByElement(tabber);
+    Assertion.assertEquals(checkIfElementOnPage(tabber), true);
+  }
+
+  public void verifyTabberImagePresece() {
+    waitForElementByElement(tabberImage);
+    Assertion.assertEquals(checkIfElementOnPage(tabberImage), true);
   }
 
   public void verifyInfoboxTitlePresence() {

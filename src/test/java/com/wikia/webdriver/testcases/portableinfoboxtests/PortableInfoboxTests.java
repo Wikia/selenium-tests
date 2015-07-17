@@ -100,6 +100,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyLightboxPresence();
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
+  public void verifyVisibilityOfTabberAndItsImages() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info.verifyTabberPresence();
+    info.verifyTabberImagePresece();
+  }
+
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
   public void verifyInfoboxLayoutChange() {
     ArticlePageObject article = new ArticlePageObject(driver);
