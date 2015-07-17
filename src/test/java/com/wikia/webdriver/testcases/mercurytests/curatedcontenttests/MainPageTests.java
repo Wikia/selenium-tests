@@ -172,15 +172,7 @@ public class MainPageTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC);
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    boolean result = cc.isMobileTopLeaderboardVisible();
-    PageObjectLogging.log(
-        PageElements.TOP_LEADERBOARD.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = cc.isArticleTitleVisible();
+    boolean result = cc.isArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -212,14 +204,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isMobileInContentVisible();
-    PageObjectLogging.log(
-        PageElements.IN_CONTENT.name,
-        MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG,
-        result
-    );
-
     result = !cc.isTrendingArticlesVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_ARTICLES.name,
@@ -233,14 +217,6 @@ public class MainPageTests extends NewTestTemplate {
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
-        result
-    );
-
-    result = !cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
         result
     );
   }
