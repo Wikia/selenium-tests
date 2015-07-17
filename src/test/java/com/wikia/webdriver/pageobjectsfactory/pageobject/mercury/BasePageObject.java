@@ -68,7 +68,7 @@ public class BasePageObject extends MobileBasePageObject {
     }
   }
 
-  //TODO: Remove this and use combination od logUrl
+  //TODO: Remove this and use combination from logUrl
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
   public boolean isUrlPathEqualTo(String path) {
     String currentPath = new UrlBuilder().getUrlPath(driver);
