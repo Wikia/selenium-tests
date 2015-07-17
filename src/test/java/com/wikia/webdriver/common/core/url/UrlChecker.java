@@ -25,7 +25,7 @@ public class UrlChecker {
    * This method check that Url equals current Url and log result
    * Case sensitive is not important
    */
-  public static void isUrlEqualCurrentUrl(WebDriver driver, String url) {
+  public static void isUrlEqualToCurrentUrl(WebDriver driver, String url) {
     String currentUrl = driver.getCurrentUrl().toLowerCase();
     url = url.toLowerCase();
     PageObjectLogging.log(
