@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 public class UrlChecker {
 
   /**
-   * This method check that path is contained in current Url and log result
-   * Case sensitive is not important
+   * This method checks that current URL contains the path and logs result
+   * The method is case-insensitive 
    */
   public static void isPathContainedInCurrentUrl(WebDriver driver, String path) {
     String currentUrl = driver.getCurrentUrl().toLowerCase();
@@ -22,8 +22,8 @@ public class UrlChecker {
   }
 
   /**
-   * This method check that Url equals current Url and log result
-   * Case sensitive is not important
+   * This method checks that URL equals current URL and logs result
+   * The method is case-insensitive 
    */
   public static void isUrlEqualToCurrentUrl(WebDriver driver, String url) {
     String currentUrl = driver.getCurrentUrl().toLowerCase();
