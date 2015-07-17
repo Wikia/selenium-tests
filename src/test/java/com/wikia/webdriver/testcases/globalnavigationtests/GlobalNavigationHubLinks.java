@@ -15,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
  */
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 
-    @RelatedIssue(issueID = "MAIN-4507", comment = "Wikia code defect. Please check failed assertions in log file, ?ga_ param should be the only difference between urls")
     @Test(groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"})
     public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
         HomePageObject homePage = new HomePageObject(driver);
