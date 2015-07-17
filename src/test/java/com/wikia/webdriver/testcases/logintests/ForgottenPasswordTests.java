@@ -79,7 +79,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
+  @RelatedIssue(issueID = "MAIN-4977", comment = "New P2 Change your password screen appears twice in CNW process. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
@@ -95,9 +95,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     cnwLogin.typeInUserName(userName);
     cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
-    String newPassword = cnwLogin.receiveMailWithNewPassword(credentials.emailQaart1, credentials.emailPasswordQaart1);
+    String newPassword = cnwLogin.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
+    new SpecialUserLoginPageObject(driver).setNewPassword();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
