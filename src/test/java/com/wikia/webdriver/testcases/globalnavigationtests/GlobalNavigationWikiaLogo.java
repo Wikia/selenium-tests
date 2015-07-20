@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
  * @author Bogna 'bognix' Knychała
  * @ownership Content X-Wing
  */
+@Test(groups = {"WikiaLogo"})
 public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   @DataProvider
