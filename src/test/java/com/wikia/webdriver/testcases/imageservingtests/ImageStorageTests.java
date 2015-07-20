@@ -4,7 +4,6 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -92,7 +91,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
     FilePagePageObject file = base.openFilePage(wikiURL, fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
-    String imageNewName = renamePage.getTimeStamp() + fileName;
+    String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);

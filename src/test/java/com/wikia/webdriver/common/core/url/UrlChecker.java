@@ -30,8 +30,8 @@ public class UrlChecker {
     url = url.toLowerCase();
     PageObjectLogging.log(
         "Log Url",
-        "Url " + url + " is equal to current Url" + currentUrl,
-        "Url " + url + " isn't equal to current Url" + currentUrl,
+        "Url " + url + " is equal to current Url " + currentUrl,
+        "Url " + url + " isn't equal to current Url " + currentUrl,
         currentUrl.equals(url)
     );
   }

@@ -32,7 +32,6 @@ public class VetModalCaptionTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   String articleTitleCaption;
-  String articleTitleNoCaption;
   String articleTitleNotEditable;
   String caption;
 

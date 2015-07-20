@@ -82,18 +82,23 @@ public class BasePageObject extends MobileBasePageObject {
     return new CuratedMainPagePageObject(driver);
   }
 
+
   public CuratedContentPageObject openCuratedContentPage(String wikiURL, String path) {
     String url;
     Long currentTime = DateTime.now().getMillis();
     UrlBuilder builder = new UrlBuilder();
 
     url = wikiURL + path;
-    url = builder.appendQueryStringToURL(url, "cb="+currentTime);
+    url = builder.appendQueryStringToURL(url, "cb=" + currentTime);
     getUrl(url);
 
     PageObjectLogging
         .log("openCuratedContentPage", "Curated content page" + path + " was opened", true);
     return new CuratedContentPageObject(driver);
+  }
+
+  public void navigateToUrlWithPath(String wikiURL, String path) {
+    getUrl(wikiURL + path);
   }
 
   private enum Settings {
