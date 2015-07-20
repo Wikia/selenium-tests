@@ -86,7 +86,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
     scrollAndClick(facebookDisconnect);
     waitForElementByElement(fbConnect);
     PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook",
-        true);
+                          true);
   }
 
   public PreferencesPageObject clickSaveButton() {
@@ -131,20 +131,22 @@ public class PreferencesPageObject extends WikiBasePageObject {
     waitForElementByElement(facebookDisconnect);
   }
 
-  public void setAdvancedRecentChangesCheckbox() {
+  public PreferencesPageObject setAdvancedRecentChangesCheckbox() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     waitForElementClickableByElement(useAdvancedRecentChangesCheckbox);
   useAdvancedRecentChangesCheckbox.click();
     PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+
+  return this;
   }
 
-  public void getAdvancedRecentChangesCheckboxValue() {
+  public boolean getAdvancedRecentChangesCheckboxValue() {
 // Verify that the Get_advanced_recent_changes_checkbox_value is checked
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    Assertion.assertFalse(useAdvancedRecentChangesCheckbox.getAttribute("checked") == null);
+    return  useAdvancedRecentChangesCheckbox.getAttribute("checked") != null;
      }
 
-  public void setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
+  public PreferencesPageObject setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) {// if Checked
       useAdvancedRecentChangesCheckbox.click();
@@ -152,6 +154,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
     clickSaveButton();
     PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
 
+    return this;
   }
 
   public enum tabNames {
