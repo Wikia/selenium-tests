@@ -95,7 +95,6 @@ public class BlockedUserMapTests extends NewTestTemplate {
     template.verifyErrorExists();
   }
 
-  @RelatedIssue(issueID = "QAART-594")
   @Test(groups = {"BlockedUserMapTests_005", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_005_VerifyUserCannotEditPinTypesOnEmbeddedMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

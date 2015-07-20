@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -36,7 +36,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     boolean result = articlePage.isWikiaLogoVisible();
     PageObjectLogging.log(
@@ -93,7 +93,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     articlePage.clickTopContributor(0);
 
@@ -110,7 +110,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercuryArticles.LINKED_IMAGES);
+    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.LINKED_IMAGES);
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
@@ -129,7 +129,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercuryArticles.MAIN_PAGE);
+    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     Assertion.assertTrue(
         articlePage.isChevronCollapsed(),
@@ -172,8 +172,8 @@ public class ArticlePageTests extends NewTestTemplate {
     String encodedQuestionMarkUrl, encodedColonUrl;
 
     try {
-      encodedColonUrl = URLEncoder.encode(MercuryArticles.COLON, "UTF-8");
-      encodedQuestionMarkUrl = URLEncoder.encode(MercuryArticles.QUESTION_MARK, "UTF-8");
+      encodedColonUrl = URLEncoder.encode(MercurySubpages.COLON, "UTF-8");
+      encodedQuestionMarkUrl = URLEncoder.encode(MercurySubpages.QUESTION_MARK, "UTF-8");
     } catch (UnsupportedEncodingException e) {
       throw new WebDriverException("Wrong URL encoding");
     }
@@ -193,7 +193,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercuryArticles.COLON.toLowerCase());
+    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -212,7 +212,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercuryArticles.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -236,7 +236,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercuryArticles.COLON.toLowerCase());
+    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -256,7 +256,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercuryArticles.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -279,7 +279,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercuryArticles.COLON.toLowerCase());
+    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -301,7 +301,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercuryArticles.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -313,7 +313,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     nav.clickSearchButton();
     nav.clickSearchField();
-    nav.typeInSearchField(MercuryArticles.COLON.substring(0, 4));
+    nav.typeInSearchField(MercurySubpages.COLON.substring(0, 4));
     nav.clickSuggestion(0);
     article.waitForLoadingSpinnerToFinishReloadingPage();
 
@@ -325,7 +325,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercuryArticles.COLON.toLowerCase());
+    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -335,7 +335,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     nav.clickSearchButton();
     nav.clickSearchField();
-    nav.typeInSearchField(MercuryArticles.QUESTION_MARK.substring(0, 4));
+    nav.typeInSearchField(MercurySubpages.QUESTION_MARK.substring(0, 4));
     nav.clickSuggestion(0);
     article.waitForLoadingSpinnerToFinishReloadingPage();
 
@@ -348,7 +348,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercuryArticles.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",

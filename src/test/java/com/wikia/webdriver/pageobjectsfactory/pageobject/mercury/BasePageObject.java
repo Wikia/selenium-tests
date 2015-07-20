@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
 
@@ -65,5 +66,40 @@ public class BasePageObject extends MobileBasePageObject {
     if (spinnerPresent) {
       waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
     }
+  }
+
+  //TODO: Remove this and use combination from logUrl
+  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
+  public boolean isUrlPathEqualTo(String path) {
+    String currentPath = new UrlBuilder().getUrlPath(driver);
+    return currentPath.equals(path);
+  }
+
+  public CuratedMainPagePageObject openCuratedMainPage(String wikiURL, String mainPage) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + mainPage + "?cb=" + DateTime.now().getMillis());
+    PageObjectLogging
+        .log("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
+    return new CuratedMainPagePageObject(driver);
+  }
+
+  private enum Settings {
+    TIME_OUT_IN_SEC(5),
+    CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    Settings(int value) {
+      this.value = value;
+    }
+  }
+
+  public boolean isElementVisible(WebElement element) {
+    try {
+      waitForElementVisibleByElement(element, Settings.TIME_OUT_IN_SEC.value,
+                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+    } catch (TimeoutException e) {
+      return false;
+    }
+    return true;
   }
 }

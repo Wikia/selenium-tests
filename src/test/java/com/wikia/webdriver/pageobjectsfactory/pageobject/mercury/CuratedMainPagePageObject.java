@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class CuratedPageObject extends BasePageObject {
+public class CuratedMainPagePageObject extends BasePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
@@ -38,13 +36,19 @@ public class CuratedPageObject extends BasePageObject {
 
     private int value;
 
-    private Settings(int value) {
+    Settings(int value) {
       this.value = value;
     }
   }
 
-  public CuratedPageObject(WebDriver driver) {
+  public CuratedMainPagePageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public int getElementOffsetTop(String element) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    return Integer
+        .parseInt(js.executeScript("return $(arguments[0]).offset().top", element).toString());
   }
 
   public boolean isMobileTopLeaderboardVisible() {
@@ -135,16 +139,5 @@ public class CuratedPageObject extends BasePageObject {
       return false;
     }
     return true;
-  }
-
-  public boolean isUrlPathEqualTo(String path) {
-    String currentPath = new UrlBuilder().getUrlPath(driver);
-    return currentPath.equals(path);
-  }
-
-  public int getElementHeight(String element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer
-        .parseInt(js.executeScript("return $('" + element + "').offset().top").toString());
   }
 }

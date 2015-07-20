@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.urlbuilder;
+package com.wikia.webdriver.common.core.url;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +9,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
  * @author drets
  */
 public class UrlBuilder {
-
-  private static final String XIPIO_ADDRESS_FORMAT = ".%s:%d";
-
-  private static final String XIPIO_DEFAULT_DOMAIN = "127.0.0.1.xip.io";
-  private static final int XIPIO_DEFAULT_PORT = 8000;
 
   private String browser;
   private String env;
@@ -61,10 +56,6 @@ public class UrlBuilder {
   }
 
   private String getUrlSuffix(String wikiName) {
-    if (env.contains("dev") && !env.contains("sandbox-mercurydev") && isMercuryBrowser()) {
-      return String.format(XIPIO_ADDRESS_FORMAT, XIPIO_DEFAULT_DOMAIN, XIPIO_DEFAULT_PORT);
-    }
-
     if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
       String devBoxOwner = env.split("-")[1];
       return "." + devBoxOwner + "." + "wikia-dev.com";
