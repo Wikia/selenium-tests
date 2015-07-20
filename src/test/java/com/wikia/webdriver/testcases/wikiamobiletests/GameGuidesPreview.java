@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mobile;
+package com.wikia.webdriver.testcases.wikiamobiletests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
