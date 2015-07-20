@@ -4,9 +4,9 @@ package com.wikia.webdriver.common.templates;
  * @author drets
  * @ownership AdEng
  */
-public class TemplateDontLogout extends NewTestTemplate {
+public class TemplateNoFirstLoad extends NewTestTemplate {
 
   @Override
-  protected void logOut() {
+  protected void loadFirstPage() {
   }
 }

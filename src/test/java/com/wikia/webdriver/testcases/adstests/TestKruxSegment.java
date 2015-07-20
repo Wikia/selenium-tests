@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestKruxSegment extends TemplateDontLogout {
+public class TestKruxSegment extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.driverprovider.mobileprovider;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.ConfigurationNode;
