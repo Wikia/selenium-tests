@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.UrlChecker;
@@ -16,13 +17,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class NavigationTests extends NewTestTemplate {
 
-  private static final String ROOT_PATH = "/";
-  private static final String ROOT_PATH_SECTION = "/main/section/";
-  private static final String ROOT_PATH_CATEGORY = "/main/category/";
-  private static final String ROOT_ARTICLE_PATH = "/wiki/";
-  private static final String ROOT_BLOG_PATH = "/wiki/User_blog:";
-  private static final String ROOT_FILE_PATH = "/wiki/File:";
-
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
@@ -37,7 +31,7 @@ public class NavigationTests extends NewTestTemplate {
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     category.clickOnCuratedContentElementByIndex(1);
-    category.waitForLoadingSpinnerToFinishReloadingPage();
+    category.waitForLoadingSpinnerToFinish();
 
     category
         .isTitleVisible()
@@ -46,13 +40,13 @@ public class NavigationTests extends NewTestTemplate {
         .isCuratedContentItemVisibleByIndex(1);
 
     String sectionTitle = category.getTitle();
-    String expectedUrlPath = ROOT_PATH_CATEGORY + sectionTitle;
+    String expectedUrlPath = MercuryPaths.ROOT_PATH_CATEGORY + sectionTitle;
     UrlChecker.isPathContainedInCurrentUrl(driver, expectedUrlPath);
 
     String previousUrl = driver.getCurrentUrl();
     category.navigateToMainPage();
     String nextUrl = driver.getCurrentUrl();
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH);
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH);
 
     category.navigateBack();
     UrlChecker.isUrlEqualToCurrentUrl(driver, previousUrl);
@@ -69,7 +63,7 @@ public class NavigationTests extends NewTestTemplate {
     section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     section.clickOnCuratedContentElementByIndex(0);
-    section.waitForLoadingSpinnerToFinishReloadingPage();
+    section.waitForLoadingSpinnerToFinish();
 
     section
         .isTitleVisible()
@@ -77,7 +71,7 @@ public class NavigationTests extends NewTestTemplate {
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_PATH_SECTION + section.getTitle());
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
   }
 
   // CCT11
@@ -89,28 +83,32 @@ public class NavigationTests extends NewTestTemplate {
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
         .isArticleIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinishReloadingPage();
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+        .waitForLoadingSpinnerToFinish();
+    category.isArticle();
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isBlogIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinishReloadingPage();
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+        .waitForLoadingSpinnerToFinish();
+    category.isArticle();
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isImageIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinishReloadingPage();
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+        .waitForLoadingSpinnerToFinish();
+    category.isArticle();
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isVideoIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinishReloadingPage();
-    UrlChecker.isPathContainedInCurrentUrl(driver, ROOT_ARTICLE_PATH);
+        .waitForLoadingSpinnerToFinish();
+    category.isArticle();
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 }

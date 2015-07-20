@@ -114,7 +114,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
-    articlePage.waitForLoadingSpinnerToFinishReloadingPage();
+    articlePage.waitForLoadingSpinnerToFinish();
 
     boolean result = !driver.getCurrentUrl().equals(oldUrl);
     PageObjectLogging.log(
@@ -226,7 +226,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     article.clickOnAnchorInContent(0);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -245,7 +245,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     article.clickOnAnchorInContent(0);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(
@@ -269,7 +269,7 @@ public class ArticlePageTests extends NewTestTemplate {
     nav.clickSearchButton();
     nav.clickNavListElement(4);
     nav.clickNavListElement(7);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -290,7 +290,7 @@ public class ArticlePageTests extends NewTestTemplate {
     nav.clickSearchButton();
     nav.clickNavListElement(4);
     nav.clickNavListElement(6);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(
@@ -315,7 +315,7 @@ public class ArticlePageTests extends NewTestTemplate {
     nav.clickSearchField();
     nav.typeInSearchField(MercurySubpages.COLON.substring(0, 4));
     nav.clickSuggestion(0);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -337,7 +337,7 @@ public class ArticlePageTests extends NewTestTemplate {
     nav.clickSearchField();
     nav.typeInSearchField(MercurySubpages.QUESTION_MARK.substring(0, 4));
     nav.clickSuggestion(0);
-    article.waitForLoadingSpinnerToFinishReloadingPage();
+    article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(
