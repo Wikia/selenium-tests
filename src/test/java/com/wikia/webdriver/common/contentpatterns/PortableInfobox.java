@@ -13,8 +13,8 @@ public class PortableInfobox {
 
     public static final String
         INFOBOX_INVOCATION = "{{Infobox_Template " +
-            "|List = <ul> <li>One</li> <li>Two</li> </ul> " +
-            "|List2 = <ol> <li>One</li> <li>Two</li> </ol>" +
+            "|orderedList = <ul> <li>One</li> <li>Two</li> </ul> " +
+            "|unorderedList = <ol> <li>One</li> <li>Two</li> </ol>" +
             "}}";
 
 }
