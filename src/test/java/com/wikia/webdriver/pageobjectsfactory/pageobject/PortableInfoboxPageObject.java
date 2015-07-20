@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Rodriuki on 11/06/15.
+ * Created by nikodamn on 20/07/15
  */
 public class PortableInfoboxPageObject extends WikiBasePageObject {
 
@@ -37,6 +39,14 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement tabber;
   @FindBy(css = ".tabbertab > .image")
   private WebElement tabberImage;
+  @FindBy(css = ".portable-infobox-item-value ul li")
+  private WebElement unorderedListElement;
+  @FindBy(css = ".portable-infobox-item-value ol li")
+  private WebElement orderedListElement;
+
+  public PortableInfoboxPageObject(WebDriver driver) {
+    super(driver);
+  }
 
 
   public String getBackgroundColor() {
@@ -65,7 +75,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(checkIfElementOnPage(tabber), true);
   }
 
-  public void verifyTabberImagePresece() {
+  public void verifyTabberImagePresence() {
     waitForElementByElement(tabberImage);
     Assertion.assertEquals(checkIfElementOnPage(tabberImage), true);
   }
@@ -79,6 +89,17 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     waitForElementByElement(lightbox);
     Assertion.assertEquals(checkIfElementOnPage(lightbox), true);
   }
+
+  public void verifyOrderedListPresence(){
+    waitForElementByElement(orderedListElement);
+    Assertion.assertEquals(checkIfElementOnPage(orderedListElement), true);
+  }
+
+  public void verifyUnorderedListPresence(){
+    waitForElementByElement(unorderedListElement);
+    Assertion.assertEquals(checkIfElementOnPage(unorderedListElement), true);
+  }
+
 
   public String getExternalLinkRedirectTitle() {
     waitForElementByElement(pInfoExternalLink);
@@ -121,8 +142,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
 
-  public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue)
-  {
+  public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
 

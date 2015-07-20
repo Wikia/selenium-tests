@@ -55,12 +55,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import freemarker.template.Template;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -297,8 +299,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(
-        wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
-        URLsContent.ACTION_HISTORY));
+            wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
+            URLsContent.ACTION_HISTORY));
     PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
     return new HistoryPagePageObject(driver);
   }
@@ -474,7 +476,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementByElement(editButton);
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton",
-                          "Src main edit button clicked", true, driver);
+            "Src main edit button clicked", true, driver);
     return new SourceEditModePageObject(driver);
   }
 
@@ -535,10 +537,10 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditModePageObject goToCurrentArticleEditPage() {
     getUrl(
-        urlBuilder.appendQueryStringToURL(
-            driver.getCurrentUrl(),
-            URLsContent.ACTION_EDIT
-        )
+            urlBuilder.appendQueryStringToURL(
+                    driver.getCurrentUrl(),
+                    URLsContent.ACTION_EDIT
+            )
     );
     return new VisualEditModePageObject(driver);
   }
@@ -589,9 +591,9 @@ public class WikiBasePageObject extends BasePageObject {
   public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
     PageObjectLogging.log(
-        "SpecialUserLoginOnWiki",
-        "Special:UserLogin opened on: " + wikiURL,
-        true
+            "SpecialUserLoginOnWiki",
+            "Special:UserLogin opened on: " + wikiURL,
+            true
     );
     return new SpecialUserLoginPageObject(driver);
   }
@@ -604,6 +606,11 @@ public class WikiBasePageObject extends BasePageObject {
         true
     );
     return new LicensedVideoSwapPageObject(driver);
+  }
+
+  public TemplatePageObject openTemplatePage(String wikiURL, String template) {
+    getUrl(wikiURL + URLsContent.TEMPLATE_PAGE + template);
+    return new TemplatePageObject(driver);
   }
 
   @Deprecated

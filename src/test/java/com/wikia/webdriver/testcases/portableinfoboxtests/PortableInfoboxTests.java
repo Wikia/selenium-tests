@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -13,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLink
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.testng.annotations.Test;
 
 /**
@@ -26,6 +28,11 @@ import org.testng.annotations.Test;
  * TC04: Verify adding a category to infobox markup and then invoking that template in an article
  * page will display category in categories section at the bottom of the page automatically
  *
+ * Created by nikodamn 20/07/15
+ * TC06: Verify lightbox opens when clicking infobox image
+ * TC08: Verify visibility of tabber and it's images
+ * TC09: Verify infobox color has changed after changing colors in wiki Theme Designer
+ * TC12: Verify if ordered and unordered lists are parsed correctly after adding them
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -106,7 +113,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.verifyTabberPresence();
-    info.verifyTabberImagePresece();
+    info.verifyTabberImagePresence();
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
@@ -115,25 +122,38 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-
     String textThemeDesigner = toolbar.getThemeDesignerText();
-
     toolbar.clickOnTool(textThemeDesigner);
     SpecialThemeDesignerPageObject special = new SpecialThemeDesignerPageObject(driver);
     special.openSpecialDesignerPage(wikiURL);
     special.selectTheme(1);
     special.submitThemeSelection();
     String oldBackground = info.getBackgroundColor();
-
     toolbar.clickOnTool(textThemeDesigner);
     special.openSpecialDesignerPage(wikiURL);
     special.selectTheme(4);
     special.submitThemeSelection();
     String newBackground = info.getBackgroundColor();
-
     info.verifyChangedBackground(oldBackground, newBackground);
 
   }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
+  public void verifyOrderedAndUnorderedLists() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    TemplatePageObject template = article.openTemplatePage(wikiURL, "template");
+    SourceEditModePageObject editor = template.clickCreate();
+    editor.addContent(PortableInfobox.INFOBOX_TEMPLATE);
+    editor.clickPublishButton();
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    editor = article.editArticleInSrcUsingDropdown();
+    editor.addContent(PortableInfobox.INFOBOX_INVOCATION);
+    editor.clickPublishButton();
+    info.verifyOrderedListPresence();
+    info.verifyUnorderedListPresence();
+  }
+
 }
 
 
