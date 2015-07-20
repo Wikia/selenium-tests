@@ -110,9 +110,9 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT09
-  @Test(groups = {"MercuryCuratedNavigationTests_003", "MercuryCuratedNavigationTests",
+  @Test(groups = {"MercuryCuratedNavigationTests_004", "MercuryCuratedNavigationTests",
                   "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_003_navigateThroughDifferentUrl() {
+  public void MercuryCuratedNavigationTests_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
 
     String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
