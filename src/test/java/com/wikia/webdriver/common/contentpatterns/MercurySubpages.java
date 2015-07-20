@@ -33,6 +33,7 @@ public class MercurySubpages {
   public static final String CC_SECTION_QWERTY = "main/section/Qwerty";
   public static final String CC_CATEGORY_TEMPLATES = "main/category/Templates";
   public static final String CC_CATEGORY_QWERTY = "main/category/Qwerty";
+  public static final String CC_CATEGORY_ARTICLES = "main/category/Articles";
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
