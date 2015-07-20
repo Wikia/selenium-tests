@@ -3,10 +3,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +33,8 @@ public class CuratedContentPageObject extends BasePageObject {
     SECTION("Section as the container of many elements"),
     SECTION_ITEM("Item in a section"),
     LOAD_MORE_BUTTON("Load more button"),
-    NUMBER_OF_ITEMS("Number of items in curated content section");
+    NUMBER_OF_ITEMS("Number of items in curated content section"),
+    ITEM_LABELS("Curated Content items labels");
 
     private String name;
 
@@ -150,6 +153,32 @@ public class CuratedContentPageObject extends BasePageObject {
         message,
         expectedNumber == currentNumber
     );
+    return this;
+  }
+
+  public CuratedContentPageObject areItemsInCuratedContentUnique() {
+    List<String> itemsLabels = new ArrayList<>();
+    boolean conflict = false;
+
+    for(WebElement element : curatedContentItems) {
+      element = element.findElement(By.cssSelector("div.item-caption"));
+      String label = element.getText();
+
+      if(itemsLabels.contains(label)) {
+        conflict = true;
+        break;
+      }
+
+      itemsLabels.add(label);
+    }
+
+    PageObjectLogging.log(
+        Labels.ITEM_LABELS.name,
+        MercuryMessages.LIST_ITEMS_ARE_UNIQUE_MSG,
+        MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG,
+        !conflict
+    );
+
     return this;
   }
 }

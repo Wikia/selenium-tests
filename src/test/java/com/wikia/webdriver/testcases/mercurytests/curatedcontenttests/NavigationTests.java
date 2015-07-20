@@ -114,6 +114,7 @@ public class NavigationTests extends NewTestTemplate {
 
     category
         .isCurrentNumberOfItemsExpected(28)
+        .areItemsInCuratedContentUnique()
         .isLoadMoreButtonHidden();
   }
 }
