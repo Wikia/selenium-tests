@@ -68,7 +68,6 @@ public class AdsDataProvider {
         {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
         {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
@@ -503,6 +502,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] interstitial() {
     return new Object[][]{
+        // Fixme: ADEN-2231 Page size contains scrollbar width.
         {"adtest", "SyntheticTests/Interstitial", new Dimension(604, 917), 1.96},
         {"adtest", "SyntheticTests/Interstitial", new Dimension(1017, 817), 2.752},
         {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(600, 800), 0},

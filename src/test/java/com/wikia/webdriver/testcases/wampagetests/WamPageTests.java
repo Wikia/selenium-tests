@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 
@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
  * @ownership Content X-Wing
  */
 
-public class WamPageTests extends NewTestTemplateBeforeClass {
+public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
 

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
@@ -31,7 +31,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
+    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
 
     maps.clickViewMapButton();
 
@@ -89,7 +89,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_002", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
+    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
     maps.clickViewMapButton();
@@ -217,7 +217,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = {"MercuryInteractiveMapsTest_003", "MercuryInteractiveMapsTests", "Mercury"})
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercuryArticles.MAP);
+    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
     maps.clickViewMapButton();

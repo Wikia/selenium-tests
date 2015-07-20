@@ -13,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
  * @author Bogna 'bognix' Knychała
  * @ownership Content X-Wing
  */
+@Test(groups = {"HubLinksInGlobalNav"})
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 
     @Test(groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"})

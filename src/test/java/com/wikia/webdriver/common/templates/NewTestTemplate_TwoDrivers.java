@@ -20,6 +20,7 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
   @Override
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
+    prepareURLs();
 
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnv = method.getAnnotation(DontRun.class).env();

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"Ads_Special_Pages", "Ads"}
 )
-public class TestAdsOnSpecial extends TemplateDontLogout {
+public class TestAdsOnSpecial extends TemplateNoFirstLoad {
 
   @Test(
       groups = {"TestAdsOnSpecialPages_GeoEdgeFree"},

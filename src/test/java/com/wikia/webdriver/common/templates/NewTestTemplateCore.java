@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeUtils;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -45,17 +45,11 @@ public class NewTestTemplateCore {
     CommonUtils.createDirectory("." + File.separator + "logs");
   }
 
-  private void printProperties() {
-    System.out.println("Wiki url: " + wikiURL);
-    System.out.println("Wiki corporate url: " + wikiCorporateURL);
-  }
-
   protected void prepareURLs() {
-    urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getBrowser());
+    urlBuilder = new UrlBuilder();
     wikiURL = urlBuilder.getUrlForWiki(Configuration.getWikiName());
     wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
-    printProperties();
   }
 
   protected void startBrowser() {
@@ -76,8 +70,8 @@ public class NewTestTemplateCore {
     return driver;
   }
 
-  protected void logOut() {
-    driver.get(wikiURL + URLsContent.LOGOUT);
+  protected void loadFirstPage() {
+    driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
 
   protected void logOutCustomDriver(WebDriver customDriver) {

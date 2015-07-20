@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,20 +19,12 @@ import org.testng.annotations.Test;
  */
 public class UnderTheHoodPreferencesTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-  WikiBasePageObject base;
-
-  @BeforeMethod(alwaysRun = true)
-  public void setup() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
-    base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
-  }
-
   @Test(groups = {"UnderTheHoodPreferencesTest", "UnderTheHoodPreference_001"})
+  @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void UnderTheHoodPreference_001_Use_advanced_recent_changes() {
 
-    PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
+    PreferencesPageObject preferences = new WikiBasePageObject(driver)
+        .openSpecialPreferencesPage(wikiURL);
     preferences
         .setAdvancedRecentChangesCheckboxValueToDefaultUnchecked()
         .setAdvancedRecentChangesCheckbox()

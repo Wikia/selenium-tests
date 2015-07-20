@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class MercuryArticles {
+public class MercurySubpages {
 
-  private MercuryArticles() {}
+  private MercurySubpages() {}
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
@@ -20,11 +20,19 @@ public class MercuryArticles {
   public static final String COLON = "Colon:colon:colon";
 
   /**
-   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
+   * Legend:
+   * FC - Featured Content
+   * CC - Curated Content
+   * TA - Trending Articles
+   * TV - Trending Videos
    */
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
+  public static final String CC_SECTION_CATEGORIES = "main/section/Categories";
+  public static final String CC_SECTION_QWERTY = "main/section/Qwerty";
+  public static final String CC_CATEGORY_TEMPLATES = "main/category/Templates";
+  public static final String CC_CATEGORY_QWERTY = "main/category/Qwerty";
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
