@@ -4,10 +4,12 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -20,10 +22,16 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String
-      SLOT_SELECTOR =
-      "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
+  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
+  private static final int MAX_PAGE_REFRESHES = 5;
+  private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
+  private static final String ADD_USER_URL =
+      String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
+  private final static ImmutableMap<String, String> kruxSegs =
+      new ImmutableMap.Builder<String, String>()
+          .put("pqdapsy7l", "J6IRfe2v")
+          .build();
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
 
@@ -33,6 +41,12 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public AdsKruxObject(WebDriver driver) {
     super(driver);
+  }
+
+  @Override
+  public void getUrl(String url) {
+    getUrl(url, false);
+    waitForKrux();
   }
 
   /**
@@ -71,27 +85,14 @@ public class AdsKruxObject extends AdsBaseObject {
     }
   }
 
-  public void setKruxUserCookie(String userId) {
-    getUrl(KRUX_CDN);
-    waitForPageLoaded();
-    setCookie("_kuid_", userId);
-  }
-
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String segments = (String) js.executeScript("return localStorage.kxsegs;");
     PageObjectLogging.log("krux segments: ", segments, true, driver);
-    return segments;
+    return wrapSegs(segments);
   }
 
-  public String getKxkuid() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String kxkuid = (String) js.executeScript("return localStorage.kxkuid;");
-    PageObjectLogging.log("krux kuid: ", kxkuid, true, driver);
-    return kxkuid;
-  }
-
-  public String getKsgmntPattern(String segmentsLocalStorage) {
+  private String wrapSegs(String segmentsLocalStorage) {
     String ksgmnt = "\"ksgmnt\":[";
     String[] segments = segmentsLocalStorage.split(",");
     if (segments.length > MAX_SEGS_NUMBER_GPT) {
@@ -102,5 +103,38 @@ public class AdsKruxObject extends AdsBaseObject {
     }
     ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
     return ksgmnt;
+  }
+
+  public void initKruxUser(String wikiName) {
+    int i = 0;
+    while (i < MAX_PAGE_REFRESHES) {
+      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
+      waitForPageLoaded();
+      try {
+        new WebDriverWait(driver, 5).until(
+            CommonExpectedConditions.scriptReturnsTrue("return !!localStorage.kxuser;"));
+        break;
+      } catch (org.openqa.selenium.TimeoutException ignore) {
+        i++;
+      }
+    }
+  }
+
+  public void addSegmentToCurrentUser(String segmentId, String wikiName) {
+    int i = 0;
+    while (i < MAX_PAGE_REFRESHES) {
+      getUrl(ADD_USER_URL + kruxSegs.get(segmentId), false);
+      waitForPageLoaded();
+      Assertion.assertTrue(driver.getPageSource().contains(segmentId));
+      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
+      waitForPageLoaded();
+      try {
+        new WebDriverWait(driver, 5).until(CommonExpectedConditions.scriptReturnsTrue(
+            "return localStorage.kxsegs.includes(arguments[0]);", segmentId));
+        break;
+      } catch (org.openqa.selenium.TimeoutException ignore) {
+        i++;
+      }
+    }
   }
 }
