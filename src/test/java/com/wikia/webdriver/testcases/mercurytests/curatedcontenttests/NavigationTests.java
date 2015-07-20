@@ -92,7 +92,6 @@ public class NavigationTests extends NewTestTemplate {
         .isBlogIconVisible()
         .clickOnCuratedContentElementByIndex(0)
         .waitForLoadingSpinnerToFinish();
-    category.isArticle();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
@@ -100,7 +99,6 @@ public class NavigationTests extends NewTestTemplate {
         .isImageIconVisible()
         .clickOnCuratedContentElementByIndex(0)
         .waitForLoadingSpinnerToFinish();
-    category.isArticle();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
@@ -108,7 +106,6 @@ public class NavigationTests extends NewTestTemplate {
         .isVideoIconVisible()
         .clickOnCuratedContentElementByIndex(0)
         .waitForLoadingSpinnerToFinish();
-    category.isArticle();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 }

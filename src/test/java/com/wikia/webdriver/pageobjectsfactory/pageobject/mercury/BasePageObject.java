@@ -87,7 +87,7 @@ public class BasePageObject extends MobileBasePageObject {
     Long currentTime = DateTime.now().getMillis();
     UrlBuilder builder = new UrlBuilder();
 
-    url = builder.getUrlForPath(wikiURL, path);
+    url = wikiURL + path;
     url = builder.appendQueryStringToURL(url, "cb="+currentTime);
     getUrl(url);
 
