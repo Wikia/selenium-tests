@@ -37,7 +37,7 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
@@ -87,14 +87,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, false);
   }
 
-  /**
-   * This method will log warning to log file (line in yellow color)
-   */
-  public static void logWarning(String command, String description) {
-    StringBuilder builder =
-        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
-            + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
+                         boolean success, boolean ifLowLevel) {
+    String description = descriptionOnFail;
+    if (success) {
+      description = descriptionOnSuccess;
+    }
+    log(command, description, success, ifLowLevel);
   }
 
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
@@ -114,6 +113,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     logJSError(NewDriverProvider.getWebDriver());
   }
 
+  /**
+   * This method will log warning to log file (line in yellow color)
+   */
+  public static void logWarning(String command, String description) {
+    StringBuilder builder =
+        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
+                                   + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
 
   public static void logImage(String command, File image, boolean success) {
     byte[] bytes = new byte[0];

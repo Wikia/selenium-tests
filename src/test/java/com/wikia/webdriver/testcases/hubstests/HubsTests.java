@@ -111,7 +111,6 @@ public class HubsTests extends NewTestTemplate {
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
-  @RelatedIssue(issueID = "MAIN-4507", comment = "Wikia code defect. Please test manually")
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
   /**
    * Verify that each language drop down  goes to the correct page

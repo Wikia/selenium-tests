@@ -42,8 +42,7 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
-  @RelatedIssue(issueID = "QAART-623", comment = "Automation test is broken. Please test manually")
-  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
+ @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
   public void ImageServing_002_SpecialUploadTest(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);

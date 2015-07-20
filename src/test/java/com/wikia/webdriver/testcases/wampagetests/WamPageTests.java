@@ -26,15 +26,13 @@ public class WamPageTests extends NewTestTemplate {
     wam.openWamPage(wikiCorporateURL);
   }
 
-  @RelatedIssue(issueID = "CONCF-533")
-  @Test(groups = {"WamPage001", "WamPageTests"})
+ @Test(groups = {"WamPage001", "WamPageTests"})
   public void wam_001_verifyDefaultPage() {
     wam.verifyTabIsSelected(WamTab.ALL);
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
-  @RelatedIssue(issueID = "CONCF-533")
   @Test(groups = {"WamPage002", "WamPageTests"})
   public void wam_002_verifyFilteringByVertical() {
     wam.verifyWamIndexIsNotEmpty();
@@ -47,7 +45,6 @@ public class WamPageTests extends NewTestTemplate {
     }
   }
 
-  @RelatedIssue(issueID = "CONCF-533")
   @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumn(1, 20);

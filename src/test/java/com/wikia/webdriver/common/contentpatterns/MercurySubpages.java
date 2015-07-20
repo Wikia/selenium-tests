@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class MercuryArticles {
+public class MercurySubpages {
 
-  private MercuryArticles() {}
+  private MercurySubpages() {}
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
@@ -20,7 +20,11 @@ public class MercuryArticles {
   public static final String COLON = "Colon:colon:colon";
 
   /**
-   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
+   * Legend:
+   * FC - Featured Content
+   * CC - Curated Content
+   * TA - Trending Articles
+   * TV - Trending Videos
    */
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)

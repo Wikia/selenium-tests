@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -446,10 +446,20 @@ public class BasePageObject {
   public void navigateBack() {
     try {
       driver.navigate().back();
-      PageObjectLogging.log("navigateBack", "previous page loaded", true);
+      PageObjectLogging.log("Navigate Back", "previous page loaded", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("navigateBack",
-                            "page loaded for more then 30 seconds after navigating back", true);
+      PageObjectLogging.log("Navigate Back",
+                            "page loaded for more then 30 seconds after navigating back", false);
+    }
+  }
+
+  public void navigateForward() {
+    try {
+      driver.navigate().forward();
+      PageObjectLogging.log("Navigate Forward", "next page loaded", true);
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("Navigate Forward",
+                            "page loaded for more then 30 seconds after navigating forward", false);
     }
   }
 

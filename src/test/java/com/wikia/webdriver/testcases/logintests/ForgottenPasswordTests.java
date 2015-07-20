@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -26,11 +27,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropdown = new DropDownComponentObject(driver);
@@ -40,7 +40,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        dropdown.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     dropdown.openDropDown();
      dropdown.logIn(userName, newPassword);
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -53,13 +53,12 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
   public void ForgottenPassword_002_specialPage() {
     String userName = credentials.userNameForgottenPassword2;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
@@ -67,7 +66,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     login.login(userName, newPassword);
     newPassword = login.setNewPassword();
     login.verifyUserLoggedIn(userName);
@@ -78,12 +77,13 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4951", comment = "Change your password functionality does not change the password. Not possible to test manually.")
+  @RelatedIssue(issueID = "MAIN-4977", comment = "New P2 Change your password screen appears twice in CNW process. Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
   public void ForgottenPassword_003_createWiki() {
     String userName = credentials.userNameForgottenPassword3;
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -93,9 +93,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     cnwLogin.typeInUserName(userName);
     cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
-    String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
+    String newPassword = cnwLogin.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
+    new SpecialUserLoginPageObject(driver).setNewPassword();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
