@@ -234,6 +234,7 @@ task runFailed {
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
+    ignoreFailures=true;
     ext.groups = project.hasProperty('groups') ? groups : System.getProperty('groups', '')
 
     useTestNG {
