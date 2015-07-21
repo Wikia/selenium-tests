@@ -423,7 +423,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String getGptParams(String slotName, String attr) {
     WebElement
         adsDiv =
-        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "']"));
+        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
     return adsDiv.getAttribute(attr);
   }
 
