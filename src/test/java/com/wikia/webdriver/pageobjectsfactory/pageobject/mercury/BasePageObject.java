@@ -55,7 +55,7 @@ public class BasePageObject extends MobileBasePageObject {
    * First waits for spinner to be visible and then waits for spinner to be hidden Spinner presence
    * is optional, when it occurs it must be hidden later
    */
-  public void waitForLoadingSpinnerToFinishReloadingPage() {
+  public void waitForLoadingSpinnerToFinish() {
     boolean spinnerPresent = false;
     try {
       waitForElementVisibleByElement(loadingSpinner, 4, 1000);
@@ -80,6 +80,21 @@ public class BasePageObject extends MobileBasePageObject {
     PageObjectLogging
         .log("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
     return new CuratedMainPagePageObject(driver);
+  }
+
+
+  public CuratedContentPageObject openCuratedContentPage(String wikiURL, String path) {
+    String url;
+    Long currentTime = DateTime.now().getMillis();
+    UrlBuilder builder = new UrlBuilder();
+
+    url = wikiURL + path;
+    url = builder.appendQueryStringToURL(url, "cb=" + currentTime);
+    getUrl(url);
+
+    PageObjectLogging
+        .log("openCuratedContentPage", "Curated content page" + path + " was opened", true);
+    return new CuratedContentPageObject(driver);
   }
 
   public void navigateToUrlWithPath(String wikiURL, String path) {
