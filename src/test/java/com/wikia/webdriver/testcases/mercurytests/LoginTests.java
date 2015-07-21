@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mobile.mercury;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import org.testng.annotations.Test;
 
@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
  * Created by Qaga on 2015-06-29.
  */
 @Test(groups = {"MercuryMobileLogin"})
-public class Login extends NewTestTemplate {
+public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
       "Hm, we don't recognize these credentials. Please try again or register a new account.";

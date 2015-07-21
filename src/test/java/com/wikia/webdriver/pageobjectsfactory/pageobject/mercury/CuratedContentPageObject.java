@@ -3,10 +3,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public class CuratedContentPageObject extends BasePageObject {
 
+  @FindBy(css = ".article-wrapper")
+  private WebElement articleWrapper;
   @FindBy(css = ".article-title")
   private WebElement sectionTitle;
   @FindBy(css = ".wiki-title a")
@@ -22,16 +26,35 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement sectionContainer;
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
+  @FindBy(css = ".load-more-items")
+  private WebElement loadMoreButton;
+  @FindBy(css = "#namespace-article")
+  private WebElement articleItemIcon;
+  @FindBy(css = "#namespace-blog")
+  private WebElement blogItemIcon;
+  @FindBy(css = "#namespace-image")
+  private WebElement imageItemIcon;
+  @FindBy(css = "#namespace-video")
+  private WebElement videoItemIcon;
+  @FindBy(css = ALERT_NOTIFICATION_CSS)
+  private WebElement alertNotification;
 
-  private enum PageElements {
+  private static final String ALERT_NOTIFICATION_CSS = ".alert-notification";
+
+  private enum Labels {
+    ARTICLE("Article wrapper"),
     SECTION_TITLE("Section title"),
     LINK_TO_MAIN_PAGE("Link to main page"),
     SECTION("Section as the container of many elements"),
-    SECTION_ITEM("Item in a section");
+    SECTION_ITEM("Item in a section"),
+    LOAD_MORE_BUTTON("Load more button"),
+    NUMBER_OF_ITEMS("Number of items in curated content section"),
+    ITEM_LABELS("Curated Content items labels"),
+    ALERT_NOTIFICATION("Alert notification");
 
     private String name;
 
-    PageElements(String name) {
+    Labels(String name) {
       this.name = name;
     }
   }
@@ -43,6 +66,11 @@ public class CuratedContentPageObject extends BasePageObject {
   public String getTitle() {
     waitForElementByElement(sectionTitle);
     return sectionTitle.getText();
+  }
+
+  public int getCuratedContentItemsNumber() {
+    waitForElementByElement(curatedContentItems.get(0));
+    return curatedContentItems.size();
   }
 
   public CuratedContentPageObject clickOnCuratedContentElementByIndex(int elementNumber) {
@@ -59,15 +87,63 @@ public class CuratedContentPageObject extends BasePageObject {
     return this;
   }
 
+  public CuratedContentPageObject clickOnLoadMoreButton() {
+    waitForElementByElement(loadMoreButton);
+    scrollToElement(loadMoreButton);
+    loadMoreButton.click();
+    return this;
+  }
+
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
-    waitForLoadingSpinnerToFinishReloadingPage();
+    waitForLoadingSpinnerToFinish();
+    return this;
+  }
+
+  public CuratedContentPageObject isAlertNotificationVisible() {
+    waitForElementByCss(ALERT_NOTIFICATION_CSS);
+    PageObjectLogging.log(
+        Labels.ALERT_NOTIFICATION.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(alertNotification)
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isArticleIconVisible() {
+    isElementVisible(articleItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isBlogIconVisible() {
+    isElementVisible(blogItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isImageIconVisible() {
+    isElementVisible(imageItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isVideoIconVisible() {
+    isElementVisible(videoItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isArticle() {
+    PageObjectLogging.log(
+        Labels.ARTICLE.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(articleWrapper)
+    );
     return this;
   }
 
   public CuratedContentPageObject isTitleVisible() {
     PageObjectLogging.log(
-        PageElements.SECTION_TITLE.name,
+        Labels.SECTION_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(sectionTitle)
@@ -77,7 +153,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isLinkToMainPageVisible() {
     PageObjectLogging.log(
-        PageElements.LINK_TO_MAIN_PAGE.name,
+        Labels.LINK_TO_MAIN_PAGE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(linkToMainPage)
@@ -87,7 +163,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isSectionVisible() {
     PageObjectLogging.log(
-        PageElements.SECTION.name,
+        Labels.SECTION.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(sectionContainer)
@@ -97,11 +173,69 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
     PageObjectLogging.log(
-        PageElements.SECTION_ITEM.name,
+        Labels.SECTION_ITEM.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         isElementVisible(curatedContentItems.get(elementNumber))
     );
+    return this;
+  }
+
+  public CuratedContentPageObject isLoadMoreButtonVisible() {
+    PageObjectLogging.log(
+        Labels.LOAD_MORE_BUTTON.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(loadMoreButton)
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isLoadMoreButtonHidden() {
+    PageObjectLogging.log(
+        Labels.LOAD_MORE_BUTTON.name,
+        MercuryMessages.INVISIBLE_MSG,
+        MercuryMessages.VISIBLE_MSG,
+        !isElementVisible(loadMoreButton)
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject isCurrentNumberOfItemsExpected(int expectedNumber) {
+    int currentNumber = getCuratedContentItemsNumber();
+    String message = "Expected: " + expectedNumber + ", get: " + currentNumber;
+
+    PageObjectLogging.log(
+        Labels.NUMBER_OF_ITEMS.name,
+        message,
+        expectedNumber == currentNumber
+    );
+    return this;
+  }
+
+  public CuratedContentPageObject areItemsInCuratedContentUnique() {
+    List<String> itemsLabels = new ArrayList<>();
+    boolean conflict = false;
+
+    for(WebElement element : curatedContentItems) {
+      element = element.findElement(By.cssSelector("div.item-caption"));
+      String label = element.getText();
+
+      if(itemsLabels.contains(label)) {
+        conflict = true;
+        break;
+      }
+
+      itemsLabels.add(label);
+    }
+
+    PageObjectLogging.log(
+        Labels.ITEM_LABELS.name,
+        MercuryMessages.LIST_ITEMS_ARE_UNIQUE_MSG,
+        MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG,
+        !conflict
+    );
+
     return this;
   }
 }

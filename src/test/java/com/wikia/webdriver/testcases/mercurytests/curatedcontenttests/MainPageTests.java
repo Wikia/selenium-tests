@@ -8,8 +8,10 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedMainPagePageObject;
 
 /**
@@ -462,5 +464,23 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.VISIBLE_MSG,
         result
     );
+  }
+
+  // TODO: add description to test
+  // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
+  // CCT12
+  @Test(groups = {"MercuryCuratedMainPageTests_006", "MercuryCuratedMainPageTests",
+                  "MercuryCuratedContentTests", "Mercury"})
+  public void MercuryCuratedMainPageTests_006_CheckWrongCategoryAlert() {
+    CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    ccp.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    String oldUrl = driver.getCurrentUrl();
+    ccp
+        .clickOnCuratedContentElementByIndex(2)
+        .isAlertNotificationVisible()
+        .waitForLoadingSpinnerToFinish();
+    UrlChecker.isUrlEqualToCurrentUrl(driver, oldUrl);
   }
 }

@@ -29,10 +29,20 @@ public class MercurySubpages {
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
-  public static final String CC_SECTION_CATEGORIES = "main/section/Categories";
-  public static final String CC_SECTION_QWERTY = "main/section/Qwerty";
+
+  // Categories in mercurycc.wikia.com
+  public static final String CC_CATEGORY_ARTICLES = "main/category/Articles";
+  public static final String CC_CATEGORY_BLOGS = "main/category/Blog_posts";
+  public static final String CC_CATEGORY_IMAGES = "main/category/Images";
+  public static final String CC_CATEGORY_VIDEOS = "main/category/Videos";
   public static final String CC_CATEGORY_TEMPLATES = "main/category/Templates";
   public static final String CC_CATEGORY_QWERTY = "main/category/Qwerty";
+  public static final String CC_CATEGORY_28_ITEMS = "main/category/28itemsCategory";
+  public static final String CC_CATEGORY_10_ITEMS = "main/category/10itemsCategory";
+
+  // Sections in mercurycc.wikia.com
+  public static final String CC_SECTION_CATEGORIES = "main/section/Categories";
+  public static final String CC_SECTION_QWERTY = "main/section/Qwerty";
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "Mercuryntacc_Wikia";
