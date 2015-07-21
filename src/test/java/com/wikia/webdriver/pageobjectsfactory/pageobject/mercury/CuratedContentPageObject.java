@@ -36,6 +36,10 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement imageItemIcon;
   @FindBy(css = "#namespace-video")
   private WebElement videoItemIcon;
+  @FindBy(css = ALERT_NOTIFICATION_CSS)
+  private WebElement alertNotification;
+
+  private static final String ALERT_NOTIFICATION_CSS = ".alert-notification";
 
   private enum Labels {
     ARTICLE("Article wrapper"),
@@ -45,7 +49,8 @@ public class CuratedContentPageObject extends BasePageObject {
     SECTION_ITEM("Item in a section"),
     LOAD_MORE_BUTTON("Load more button"),
     NUMBER_OF_ITEMS("Number of items in curated content section"),
-    ITEM_LABELS("Curated Content items labels");
+    ITEM_LABELS("Curated Content items labels"),
+    ALERT_NOTIFICATION("Alert notification");
 
     private String name;
 
@@ -92,6 +97,17 @@ public class CuratedContentPageObject extends BasePageObject {
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
     waitForLoadingSpinnerToFinish();
+    return this;
+  }
+
+  public CuratedContentPageObject isAlertNotificationVisible() {
+    waitForElementByCss(ALERT_NOTIFICATION_CSS);
+    PageObjectLogging.log(
+        Labels.ALERT_NOTIFICATION.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(alertNotification)
+    );
     return this;
   }
 
