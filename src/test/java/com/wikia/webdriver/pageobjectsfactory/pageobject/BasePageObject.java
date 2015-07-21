@@ -70,13 +70,9 @@ public class BasePageObject {
   }
 
   protected void setWindowSizeAndroid() {
-    if (!Configuration.getBrowser().toString().contains("ANDROID")) {
+    if (!Configuration.getBrowser().contains("ANDROID")) {
       driver.manage().window().maximize();
     }
-  }
-
-  public String getBrowser() {
-    return Configuration.getBrowser().toString();
   }
 
   public static String getAttributeValue(WebElement element, String attributeName) {

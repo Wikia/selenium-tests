@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -13,6 +14,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+
+import java.util.ConcurrentModificationException;
 
 /**
  * Bogna 'bognix' Knychala
@@ -31,7 +34,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     super(driver, page);
     adsComparison = new AdsComparison();
 
-    if (getBrowser().equals("CHROMEMOBILEMERCURY")) {
+    if (Configuration.getBrowser().equals("CHROMEMOBILEMERCURY")) {
       verifyMercury();
     }
 

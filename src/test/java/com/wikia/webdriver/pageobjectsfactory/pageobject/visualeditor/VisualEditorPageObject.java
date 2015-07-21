@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -406,7 +407,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     //wait for highlight
     waitForElementByElement(focusedHighlight);
     //TODO check if any future webdriver upgrade would resolve having to use separate logic
-    if("Chrome".equalsIgnoreCase(getBrowser())) {
+    if("Chrome".equalsIgnoreCase(Configuration.getBrowser())) {
       Actions actions2 = new Actions(driver);
       actions2.sendKeys(Keys.DELETE).build().perform();
     } else {
