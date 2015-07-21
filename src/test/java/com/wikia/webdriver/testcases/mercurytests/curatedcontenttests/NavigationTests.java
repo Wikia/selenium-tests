@@ -98,35 +98,4 @@ public class NavigationTests extends NewTestTemplate {
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_QWERTY);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
   }
-
-  // CCT08
-  @Test(groups = {"MercuryCuratedNavigationTests_004", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_004_curatedContentItemsAreVisibleAndExpandable() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
-
-    category
-        .isCurrentNumberOfItemsExpected(24)
-        .isLoadMoreButtonVisible()
-        .clickOnLoadMoreButton()
-        .waitForLoadingSpinnerToFinishReloadingPage();
-
-    category
-        .isCurrentNumberOfItemsExpected(28)
-        .areItemsInCuratedContentUnique()
-        .isLoadMoreButtonHidden();
-  }
-
-  // CCT10
-  @Test(groups = {"MercuryCuratedNavigationTests_005", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_005_curatedContentItemsAreVisibleAndNotExpandable() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES);
-
-    category
-        .isCurrentNumberOfItemsExpected(3)
-        .isLoadMoreButtonHidden();
-  }
 }
