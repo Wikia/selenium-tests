@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class CuratedContentPageObject extends BasePageObject {
 
+  @FindBy(css = ".article-wrapper")
+  private WebElement articleWrapper;
   @FindBy(css = ".article-title")
   private WebElement sectionTitle;
   @FindBy(css = ".wiki-title a")
@@ -22,8 +24,37 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement sectionContainer;
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
+  @FindBy(css = "#namespace-article")
+  private WebElement articleItemIcon;
+  @FindBy(css = "#namespace-blog")
+  private WebElement blogItemIcon;
+  @FindBy(css = "#namespace-image")
+  private WebElement imageItemIcon;
+  @FindBy(css = "#namespace-video")
+  private WebElement videoItemIcon;
+
+  public CuratedContentPageObject isArticleIconVisible() {
+    isElementVisible(articleItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isBlogIconVisible() {
+    isElementVisible(blogItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isImageIconVisible() {
+    isElementVisible(imageItemIcon);
+    return this;
+  }
+
+  public CuratedContentPageObject isVideoIconVisible() {
+    isElementVisible(videoItemIcon);
+    return this;
+  }
 
   private enum PageElements {
+    ARTICLE("Article wrapper"),
     SECTION_TITLE("Section title"),
     LINK_TO_MAIN_PAGE("Link to main page"),
     SECTION("Section as the container of many elements"),
@@ -61,7 +92,17 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
-    waitForLoadingSpinnerToFinishReloadingPage();
+    waitForLoadingSpinnerToFinish();
+    return this;
+  }
+
+  public CuratedContentPageObject isArticle() {
+    PageObjectLogging.log(
+        PageElements.ARTICLE.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        isElementVisible(articleWrapper)
+    );
     return this;
   }
 
