@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
@@ -116,6 +117,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar006"})
   @Execute(asUser = User.USER_2)
+  @RelatedIssue(issueID = "MAIN-4998")
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
   public void CustomizeToolbar006_ButtonsActions() {
     toolbar.refreshPage();
