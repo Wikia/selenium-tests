@@ -1,6 +1,9 @@
 package com.wikia.webdriver.common.templates;
 
+import java.lang.reflect.Method;
+
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -8,20 +11,23 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import java.lang.reflect.Method;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
-  @BeforeClass(alwaysRun = true)
-  public void beforeClass() {
-    prepareURLs();
-  }
-
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
+      Configuration.clearCustomTestProperties();
+      if (method.isAnnotationPresent(Execute.class)) {
+        if(!method.getAnnotation(Execute.class).onWikia().equals("")){
+          Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
+        }
+      }
+      prepareURLs();
+
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnv = method.getAnnotation(DontRun.class).env();
       for (int i = 0; i < excludedEnv.length; i++) {
@@ -33,9 +39,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     runProxyServerIfNeeded(method);
     if (method.isAnnotationPresent(UserAgent.class)) {
-      setBrowserUserAgent(
-          method.getAnnotation(UserAgent.class).userAgent()
-      );
+      setBrowserUserAgent(method.getAnnotation(UserAgent.class).userAgent());
     }
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
@@ -43,9 +47,18 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     startBrowser();
-    //Reset unstable page load strategy to default 'false' value
+
+    // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
-    logOut();
+    loadFirstPage();
+
+    if (method.isAnnotationPresent(Execute.class)) {
+      if(method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
+      }else {
+        new WikiBasePageObject(driver).logInCookie(method.getAnnotation(Execute.class).asUser()
+            .getUserName(), method.getAnnotation(Execute.class).asUser().getPassword(), wikiURL);
+      }
+    }
   }
 
   @AfterMethod(alwaysRun = true)

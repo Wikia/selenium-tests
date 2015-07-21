@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @ownership AdEngineering
  */
-public class TestAdSkinPresence extends TemplateDontLogout {
+public class TestAdSkinPresence extends TemplateNoFirstLoad {
 
   public TestAdSkinPresence() {
     super();

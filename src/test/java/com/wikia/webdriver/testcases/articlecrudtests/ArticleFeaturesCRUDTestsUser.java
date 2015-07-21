@@ -1,10 +1,13 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject;
@@ -28,22 +31,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.testng.annotations.Test;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @ownership Content X-Wing
  */
+@Test(groups = {"ArticleFeaturesCRUDUser"})
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
   private int additionalPropertyValue = 10;
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
@@ -76,11 +76,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyGallery();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_002", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_002"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
@@ -102,11 +101,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_003", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_003"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
@@ -133,11 +131,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifySlideshow();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_004", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_004"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_004_addDeleteSlideshow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
@@ -156,11 +153,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_005", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_005"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_005_addModifySlider() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
@@ -187,11 +183,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifySlider();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_006", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_006"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_006_addDeleteSlider() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
@@ -210,16 +205,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.SLIDER);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser", "Media"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_007", "Media"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject
-        vetOptions =
+    VetOptionsComponentObject vetOptions =
         vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
@@ -235,16 +228,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_008", "ArticleFeaturesCRUDUser", "Smoke5", "Media"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_008", "Smoke5", "Media"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject
-        vetOptions =
+    VetOptionsComponentObject vetOptions =
         vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
@@ -256,11 +247,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.VIDEO);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser", "Smoke4"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_009", "Smoke4"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_009_addingModifyImage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -278,11 +268,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyPhoto();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_010", "ArticleFeaturesCRUDUser", "Smoke1"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_010_addDeleteImage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -296,17 +285,12 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.PHOTO);
   }
 
-  @Test(
-      dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties",
-      groups = {"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser"}
-  )
-  public void ArticleFeaturesCRUDUser_011_addingTable(
-      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
-  ) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
+      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_011"})
+  @Execute(asUser = User.USER)
+  public void ArticleFeaturesCRUDUser_011_addingTable(int border, int width, int height,
+      int cellspacing, int cellpadding, Alignment alignment) {
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
@@ -329,23 +313,18 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableSize(width, height);
   }
 
-  @Test(
-      dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties",
-      groups = {"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"},
-      enabled = false
-  )
-  public void ArticleFeaturesCRUDUser_012_modifyTable(
-      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
-  ) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
+      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_012"},
+      enabled = false)
+  @Execute(asUser = User.USER)
+  public void ArticleFeaturesCRUDUser_012_modifyTable(int border, int width, int height,
+      int cellspacing, int cellpadding, Alignment alignment) {
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
     sourceEditMode.clearSource();
-    String table = sourceEditMode.buildTablePropertiesContent(
-        border, width, height, cellspacing, cellpadding, alignment
-    );
+    String table =
+        sourceEditMode.buildTablePropertiesContent(border, width, height, cellspacing, cellpadding,
+            alignment);
     sourceEditMode.addContent(table);
     sourceEditMode.submitArticle();
     article.verifyTableBorder(border);
@@ -364,21 +343,17 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableCellpadding(cellpadding + additionalPropertyValue);
   }
 
-  @Test(
-      dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties",
-      groups = {"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser"})
-  public void ArticleFeaturesCRUDUser_013_deleteTable(
-      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
-  ) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
+      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_013"})
+  @Execute(asUser = User.USER)
+  public void ArticleFeaturesCRUDUser_013_deleteTable(int border, int width, int height,
+      int cellspacing, int cellpadding, Alignment alignment) {
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
     sourceEditMode.clearSource();
-    String table = sourceEditMode.buildTablePropertiesContent(
-        border, width, height, cellspacing, cellpadding, alignment
-    );
+    String table =
+        sourceEditMode.buildTablePropertiesContent(border, width, height, cellspacing, cellpadding,
+            alignment);
     sourceEditMode.addContent(table);
     sourceEditMode.submitArticle();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
@@ -387,15 +362,13 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableRemoved();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_014", "ArticleFeaturesCRUDUser"})
+  @Test(groups = {"ArticleFeaturesCRUDUser_014"})
+  @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_014_addingImagePlaceholder() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    base.openRandomArticle(wikiURL);
-    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject
-        visualEditMode =
-        base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
+    new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    VisualEditModePageObject visualEditMode =
+        new WikiBasePageObject(driver).goToArticleDefaultContentEditPage(wikiURL, articleTitle);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyArticleTitle(articleTitle);
     PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();

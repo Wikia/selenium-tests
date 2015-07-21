@@ -25,12 +25,13 @@ import org.testng.annotations.Test;
  * order STAPI09: Verify that searching for a query with either roman or decimal numbers will
  * display expected result in first page
  */
+@Test(groups = "CrossWikiSearch")
 public class CrossWikiSearchTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
-      groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch"})
+      groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_001_exactMatch(String query, String wikiName, String vertical) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -43,7 +44,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyFirstResultPageVideos();
   }
 
-  @Test(groups = {"CrossWikiSearchTests_002", "Search", "CrossWikiSearch"})
+  @Test(groups = {"CrossWikiSearchTests_002", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_002_pagination() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -70,7 +71,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
   }
 
-  @Test(groups = {"CrossWikiSearchTests_003", "Search", "CrossWikiSearch"})
+  @Test(groups = {"CrossWikiSearchTests_003", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_003_resultClick() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -82,7 +83,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     wikiArticleHomePage.verifyThisIsWikiHomePage();
   }
 
-  @Test(groups = {"CrossWikiSearch_004", "Search", "CrossWikiSearch"})
+  @Test(groups = {"CrossWikiSearch_004", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_004_noResults() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -91,7 +92,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoResultsCaption();
   }
 
-  @Test(groups = {"CrossWikiSearch_005", "Search", "CrossWikiSearch"})
+  @Test(groups = {"CrossWikiSearch_005", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_005_onePageResult() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -100,7 +101,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   }
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
-      groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
+      groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -109,7 +110,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "MAIN-4901", comment = "Wikia code defect. Cannot be tested manually.")
-  @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
+  @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -142,7 +143,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    */
   @Test(
         enabled = false, //MAIN-4498
-        groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch"})
+        groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);

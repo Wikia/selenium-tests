@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"NoAdsOnAdFreeWikis", "Ads"}
 )
-public class TestNoAdsOnAdFreeWikis extends TemplateDontLogout {
+public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
 
   private String testedPage;
 
