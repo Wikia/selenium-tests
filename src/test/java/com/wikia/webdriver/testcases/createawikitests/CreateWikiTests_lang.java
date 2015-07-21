@@ -26,7 +26,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
       "CreateNewWiki_lang_001", "CNW_lang_first"})
   @RelatedIssue(issueID = "MAIN-4491",
-      comment = "Last throbber takes too long and makes test fail. Please test manually")
+      comment = "Last throbber takes too long sometimes and makes test fail. Please test manually")
  public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -49,7 +49,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
   @RelatedIssue(issueID = "MAIN-4491",
-      comment = "Last throbber takes too long and makes test fail. Please test manually")
+      comment = "Last throbber takes too long sometimes and makes test fail. Please test manually")
  public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }
