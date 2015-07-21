@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
 import org.testng.annotations.Test;
 
 /**
@@ -17,6 +16,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
+  String jaTestWiki = "ja.ja-test";
 
   @Test(groups = {"Login_001", "Login", "Smoke5"})
   public void Login_001_specialPageUser() {
@@ -52,7 +52,8 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_005", "Login"})
   public void Login_005_japaneseUserLogin() {
+    String wikiJapaneseURL = urlBuilder.getUrlForWiki(jaTestWiki);
     SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
-    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, "http://ja.ja-test.wikia.com/");
+    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiJapaneseURL);
   }
 }

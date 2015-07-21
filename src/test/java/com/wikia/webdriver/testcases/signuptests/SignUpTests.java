@@ -21,11 +21,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.Calendar;
 
 /*
@@ -37,6 +35,7 @@ public class SignUpTests extends NewTestTemplate {
 
   private static String userName;
   private static String password;
+  private static String jaTestWiki = "ja.ja-test";
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
@@ -196,9 +195,8 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_008", "SignUp"})
   public void SignUp_008_signupJapaneseUser() {
-    String wikiURLJapanese = "http://ja.ja-test.wikia.com/";
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURLJapanese);
+    String wikiJapaneseURL = urlBuilder.getUrlForWiki(jaTestWiki);
+    SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiJapaneseURL);
     signUp.disableCaptcha();
     String userName = "品質管理" + signUp.getTimeStamp();
     String password = "品質管理管理" + signUp.getTimeStamp();
@@ -211,9 +209,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
             PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
-    //almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
-            almostTherePage.enterActivationLink(email, emailPassword, wikiURLJapanese, "ja");
+            almostTherePage.enterActivationLink(email, emailPassword, wikiJapaneseURL, "ja");
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
     UserProfilePageObject userProfile =
