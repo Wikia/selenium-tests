@@ -35,7 +35,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void LoginAndCreateToolbar() {
     toolbar = new CustomizedToolbarComponentObject(driver);
-    toolbar.refreshPage();
+    toolbar.openMainPage(wikiURL);
   }
 
   @Test(groups = {"CustomizeToolbar001", "Smoke4"})
@@ -118,7 +118,6 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
   public void CustomizeToolbar006_ButtonsActions() {
-    toolbar.refreshPage();
     toolbar.unfollowIfFollowed();
     toolbar.verifyToolOnToolbar(toolFollow);
     toolbar.clickOnTool("follow");
