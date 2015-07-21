@@ -57,26 +57,25 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String LEADERBOARD_GPT_SELECTOR = "div[id*='gpt/TOP_LEADERBOARD']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
-  private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
+
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
+  protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
+  protected String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
+
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
-  protected String presentLeaderboardName;
-  protected String presentLeaderboardSelector;
-  protected String presentMedrecName;
-  // Elements
-  protected String presentMedrecSelector;
+
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
     getUrl(page, true);
-    setSlots();
   }
 
   public AdsBaseObject(
@@ -87,7 +86,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     networkTrafficInterceptor.startIntercepting(page);
     getUrl(page, true);
     this.networkTrafficInterceptor = networkTrafficInterceptor;
-    setSlots();
   }
 
   public AdsBaseObject(WebDriver driver) {
@@ -98,21 +96,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     super(driver);
     driver.manage().window().setSize(resolution);
     getUrl(testedPage, true);
-    setSlots();
-  }
-
-  private void setSlots() {
-    presentLeaderboardName = presentLeaderboard.getAttribute("id");
-    presentLeaderboardSelector = "#" + presentLeaderboardName;
-
-    if (checkIfElementOnPage(presentMedrec)) {
-      presentMedrecName = presentMedrec.getAttribute("id");
-      presentMedrecSelector = "#" + presentMedrecName;
-    } else {
-      presentMedrec = null;
-      presentMedrecName = null;
-      presentMedrecSelector = null;
-    }
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
