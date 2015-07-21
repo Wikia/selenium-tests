@@ -26,7 +26,7 @@ public class SectionItemsTests extends NewTestTemplate {
                   "MercuryCuratedContentTests", "Mercury"})
   public void MercurySectionItemsTests_001_curatedContentItemsAreVisibleAndExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
+    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
 
     category
         .isCurrentNumberOfItemsExpected(24)
@@ -45,10 +45,10 @@ public class SectionItemsTests extends NewTestTemplate {
                   "MercuryCuratedContentTests", "Mercury"})
   public void MercurySectionItemsTests_002_curatedContentItemsAreVisibleAndNotExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES);
+    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
     category
-        .isCurrentNumberOfItemsExpected(3)
+        .isCurrentNumberOfItemsExpected(10)
         .isLoadMoreButtonHidden();
   }
 }

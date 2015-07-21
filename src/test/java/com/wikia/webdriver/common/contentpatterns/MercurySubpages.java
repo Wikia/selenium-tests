@@ -37,6 +37,8 @@ public class MercurySubpages {
   public static final String CC_CATEGORY_VIDEOS = "main/category/Videos";
   public static final String CC_CATEGORY_TEMPLATES = "main/category/Templates";
   public static final String CC_CATEGORY_QWERTY = "main/category/Qwerty";
+  public static final String CC_CATEGORY_28_ITEMS = "main/category/28itemsCategory";
+  public static final String CC_CATEGORY_10_ITEMS = "main/category/10itemsCategory";
 
   // Sections in mercurycc.wikia.com
   public static final String CC_SECTION_CATEGORIES = "main/section/Categories";
