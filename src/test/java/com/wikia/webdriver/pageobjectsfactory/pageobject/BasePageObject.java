@@ -390,27 +390,6 @@ public class BasePageObject {
     }
   }
 
-  protected Boolean scrollToSelectorNoJQ(String selector) {
-    if (checkIfElementOnPage(selector)) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript(
-          "var x = document.querySelector(arguments[0]);"
-          + "var event = new Event('scroll');"
-          + "window.scroll(0,x.offsetTop + x.clientHeight);"
-          + "window.dispatchEvent(event)",
-          selector
-      );
-      return true;
-    } else {
-      PageObjectLogging.log(
-          "SelectorNotFound",
-          "Selector " + selector + " not found on page",
-          true
-      );
-      return false;
-    }
-  }
-
   public void navigateBack() {
     try {
       driver.navigate().back();
@@ -456,16 +435,6 @@ public class BasePageObject {
     return (Long) js.executeScript("return " + script);
   }
 
-  protected void executeScript(String script, WebDriver driver) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(script);
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("executeScript", e.getMessage(), false);
-    }
-  }
-
   public void sendKeys(WebElement pageElem, String keysToSend) {
     try {
       pageElem.sendKeys(keysToSend);
@@ -482,15 +451,6 @@ public class BasePageObject {
     jse.executeScript(
         "document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '"
         + classWithoutHidden + "');");
-  }
-
-  //You can get access to hidden elements by type
-  public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex) {
-    int numElem = OptionalIndex.length == 0 ? 0 : OptionalIndex[0];
-    JavascriptExecutor jse = (JavascriptExecutor) driver;
-    jse.executeScript(
-        "document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '"
-        + newType + "');");
   }
 
   /**
@@ -731,19 +691,6 @@ public class BasePageObject {
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 
-  /**
-   * Wait for tags that are visible and are bigger then 1px x 1px
-   *
-   * @param tagNameOne - first tag name
-   * @param tagNameTwo - second tag name
-   */
-  public void waitForOneOfTagsPresentInElement(WebElement slot,
-                                               String tagNameOne, String tagNameTwo) {
-    wait.until(CommonExpectedConditions.oneOfTagsPresentInElement(slot,
-                                                                  tagNameOne, tagNameTwo));
-  }
-
-
   /*
    * notifications methods - will be moved to other class
    */
@@ -810,15 +757,6 @@ public class BasePageObject {
   public void waitForNewWindow() {
     wait.until(
         CommonExpectedConditions.newWindowPresent()
-    );
-  }
-
-  public void enableWikiaTracker() {
-    driver.get(
-        urlBuilder.appendQueryStringToURL(
-            driver.getCurrentUrl(),
-            URLsContent.WIKIA_TRACKER
-        )
     );
   }
 
