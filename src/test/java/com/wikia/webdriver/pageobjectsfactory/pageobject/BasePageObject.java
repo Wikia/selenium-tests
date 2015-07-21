@@ -186,34 +186,6 @@ public class BasePageObject {
     js.executeScript("$(arguments[0]).mouseenter()", elem);
   }
 
-  public void mouseOver(String cssSelecotr) {
-    executeScript("$('" + cssSelecotr + "').mouseenter()");
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOver", e.getMessage(), false);
-    }
-  }
-
-  public void mouseRelease(String cssSelecotr) {
-    executeScript("$('" + cssSelecotr + "').mouseleave()");
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseRelease", e.getMessage(), false);
-    }
-  }
-
-  protected String getPseudoElementValue(WebElement element, String pseudoElement,
-                                         String cssValue) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String value = (String) js.executeScript(
-        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
-        element, pseudoElement, cssValue
-    );
-    return value;
-  }
-
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
     element.click();
@@ -528,7 +500,7 @@ public class BasePageObject {
     wait.until(ExpectedConditions.presenceOfElementLocated(by));
     return driver.findElement(by);
   }
-  
+
   /**
    * Checks if the element is visible on the browser
    */
@@ -1104,7 +1076,7 @@ public class BasePageObject {
     }
     return result;
   }
-  
+
   /**
   * Send keys at the speed of good typist human.
   * based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
@@ -1123,6 +1095,6 @@ public class BasePageObject {
         }
       }
   }
-  
-  
+
+
 }
