@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,6 +33,9 @@ public class LoginPage extends WikiBasePageObject {
   @FindBy(css = "small.error")
   private WebElement errorMessage;
 
+  @FindBy(css = "a.close")
+  private WebElement closeButton;
+
   private NavigationSideComponentObject nav;
 
   public LoginPage(WebDriver driver) {
@@ -43,9 +49,17 @@ public class LoginPage extends WikiBasePageObject {
   }
 
   public LoginPage get() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login");
+    //driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    String redirectParameter = "";
 
-    return this;
+    try{
+      redirectParameter = URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
+
+    } catch (UnsupportedEncodingException e){
+      PageObjectLogging.log("encoding","problem occured during URL encoding",false);
+    }
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + redirectParameter);
+        return this;
   }
 
   public NavigationSideComponentObject getNav() {
@@ -87,5 +101,14 @@ public class LoginPage extends WikiBasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public String getCloseButtonURL(){
+    return closeButton.getAttribute("href");
+
+  }
+
+  public void clickOnCloseButton(){
+    closeButton.click();
   }
 }
