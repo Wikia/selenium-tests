@@ -223,6 +223,11 @@ public class AdsDataProvider {
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
         }
     };
   }
