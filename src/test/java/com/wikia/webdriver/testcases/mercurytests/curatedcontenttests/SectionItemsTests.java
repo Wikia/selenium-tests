@@ -32,7 +32,7 @@ public class SectionItemsTests extends NewTestTemplate {
         .isCurrentNumberOfItemsExpected(24)
         .isLoadMoreButtonVisible()
         .clickOnLoadMoreButton()
-        .waitForLoadingSpinnerToFinishReloadingPage();
+        .waitForLoadingSpinnerToFinish();
 
     category
         .isCurrentNumberOfItemsExpected(28)
