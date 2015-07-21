@@ -466,6 +466,8 @@ public class MainPageTests extends NewTestTemplate {
     );
   }
 
+  // TODO: add description to test
+  // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT12
   @Test(groups = {"MercuryCuratedMainPageTests_006", "MercuryCuratedMainPageTests",
                   "MercuryCuratedContentTests", "Mercury"})
