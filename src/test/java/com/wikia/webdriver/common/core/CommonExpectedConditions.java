@@ -476,6 +476,16 @@ public class CommonExpectedConditions {
     };
   }
 
+  public static ExpectedCondition<Boolean> scriptReturnsTrue(final String jsScript,
+                                                             final String argument) {
+    return new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver driver) {
+        return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript, argument);
+      }
+    };
+  }
+
   /**
    * @param bySelector
    * @return
