@@ -463,11 +463,6 @@ public class InteractiveMapPageObject extends BasePageObject {
     return new WikiArticleEditMode(driver);
   }
 
-  public VisualEditorAddMapDialog switchBackToVETab() {
-    switchToBrowserTab(0);
-    return new VisualEditorAddMapDialog(driver);
-  }
-
   public DeleteAMapComponentObject deleteMap() {
     waitForElementByElement(actionDropDown);
     actionDropDown.click();
@@ -480,10 +475,6 @@ public class InteractiveMapPageObject extends BasePageObject {
     actionDropDown.click();
     restoreMapButton.click();
     return new DeleteAMapComponentObject(driver);
-  }
-
-  public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
-    Assertion.assertEquals(mapIdActual, mapIdExpected);
   }
 
   public void verifyEscapedFragmentMetaTag() {

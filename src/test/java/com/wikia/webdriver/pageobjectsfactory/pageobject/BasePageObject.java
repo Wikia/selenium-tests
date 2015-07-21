@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -31,14 +31,14 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Karol
@@ -47,9 +47,9 @@ public class BasePageObject {
 
   public WebDriver driver;
   protected int timeOut = 30;
-  public WebDriverWait wait;
-  public Actions builder;
-  protected UrlBuilder urlBuilder;
+  public WebDriverWait wait = new WebDriverWait(driver, timeOut);
+  public Actions builder = new Actions(driver);
+  protected UrlBuilder urlBuilder = new UrlBuilder();
 
   @FindBy(css = "#WallNotifications div.notification div.msg-title")
   protected WebElement notificationsLatestNotificationOnWiki;
@@ -61,12 +61,10 @@ public class BasePageObject {
   protected WebElement followedButton;
 
   public BasePageObject(WebDriver driver) {
-    wait = new WebDriverWait(driver, timeOut);
     this.driver = driver;
-    builder = new Actions(driver);
-    PageFactory.initElements(driver, this);
     this.setWindowSizeAndroid();
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
+
+    PageFactory.initElements(driver, this);
   }
 
   protected void setWindowSizeAndroid() {
@@ -75,23 +73,9 @@ public class BasePageObject {
     }
   }
 
-  public static String getAttributeValue(WebElement element, String attributeName) {
-    return element.getAttribute(attributeName);
-  }
-
-  public void clickActions(WebElement pageElem) {
-    try {
-      Actions actionBuilder = new Actions(driver);
-      Actions click = actionBuilder.click(pageElem);
-      click.perform();
-    } catch (Exception e) {
-      PageObjectLogging.log("clickActions", e.toString(), false);
-    }
-  }
-
   public void mouseOverInArticleIframe(String cssSelecotr) {
-    executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                  + cssSelecotr + "')).mouseenter()");
+    executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
+        + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -100,8 +84,8 @@ public class BasePageObject {
   }
 
   /*
-   * Simple method for checking if element is on page or not.
-   * Changing the implicitWait value allows us no need for waiting 30 seconds
+   * Simple method for checking if element is on page or not. Changing the implicitWait value allows
+   * us no need for waiting 30 seconds
    */
   protected boolean checkIfElementOnPage(String cssSelector) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
@@ -119,8 +103,8 @@ public class BasePageObject {
   }
 
   /*
-   * Simple method for checking if element is on page or not.
-   * Changing the implicitWait value allows us no need for waiting 30 seconds
+   * Simple method for checking if element is on page or not. Changing the implicitWait value allows
+   * us no need for waiting 30 seconds
    */
   protected boolean checkIfElementOnPage(By cssSelectorBy) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
@@ -132,14 +116,14 @@ public class BasePageObject {
   }
 
   /*
-   * Simple method for checking if element is on page or not.
-   * Changing the implicitWait value allows us no need for waiting 30 seconds
+   * Simple method for checking if element is on page or not. Changing the implicitWait value allows
+   * us no need for waiting 30 seconds
    */
   protected boolean checkIfElementOnPage(WebElement element) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     boolean isElementOnPage = true;
     try {
-      //Get location on WebElement is rising exception when element is not present
+      // Get location on WebElement is rising exception when element is not present
       element.getLocation();
     } catch (Exception ex) {
       isElementOnPage = false;
@@ -150,8 +134,8 @@ public class BasePageObject {
   }
 
   /*
-   * Simple method for getting number of element on page.
-   * Changing the implicitWait value allows us no need for waiting 30 seconds
+   * Simple method for getting number of element on page. Changing the implicitWait value allows us
+   * no need for waiting 30 seconds
    */
   protected int getNumOfElementOnPage(By cssSelectorBy) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
@@ -199,16 +183,11 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript(
-          "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));",
-          element
-      );
+      js.executeScript("var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 60));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log(
-            "JSError", "JQuery is not defined", false
-        );
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
     }
   }
@@ -216,16 +195,11 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element, int offset) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript(
-          "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
-          element, offset
-      );
+      js.executeScript("var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element, offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log(
-            "JSError", "JQuery is not defined", false
-        );
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
     }
   }
@@ -233,16 +207,11 @@ public class BasePageObject {
   protected void scrollToElement(By elementBy) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript(
-          "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));",
-          driver.findElement(elementBy)
-      );
+      js.executeScript("var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 60));", driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log(
-            "JSError", "JQuery is not defined", false
-        );
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
     }
   }
@@ -270,9 +239,10 @@ public class BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("$(arguments[0]).focus()", element);
   }
-        /*
-         * Url helpers
-	 */
+
+  /*
+   * Url helpers
+   */
 
   public boolean verifyTitle(String title) {
     String currentTitle = driver.getTitle();
@@ -285,19 +255,19 @@ public class BasePageObject {
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
     Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
-    PageObjectLogging.log("verifyURLcontains",
-                          "current url is the same as expetced url", true);
+    PageObjectLogging.log("verifyURLcontains", "current url is the same as expetced url", true);
   }
 
   public void verifyURLcontains(final String givenString, int timeOut) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
-        @Override public Boolean apply(WebDriver driver) {
+        @Override
+        public Boolean apply(WebDriver driver) {
           return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
         }
       });
-    }finally {
+    } finally {
       restoreDeaultImplicitWait();
     }
   }
@@ -319,17 +289,12 @@ public class BasePageObject {
       driver.get(url);
     } catch (TimeoutException e) {
       PageObjectLogging.log("getUrl",
-                            "page %page% loaded for more then 30 seconds".replace(
-                                "%page%", url), false);
+          "page %page% loaded for more then 30 seconds".replace("%page%", url), false);
       return;
     }
     if (makeScreenshot) {
-      PageObjectLogging.log(
-          "Take screenshot",
-          String.format("Screenshot After Navigation to: %s", url),
-          true,
-          driver
-      );
+      PageObjectLogging.log("Take screenshot",
+          String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
 
@@ -338,8 +303,8 @@ public class BasePageObject {
       driver.navigate().refresh();
       PageObjectLogging.log("refreshPage", "page refreshed", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("refreshPage",
-                            "page loaded for more then 30 seconds after click", true);
+      PageObjectLogging
+          .log("refreshPage", "page loaded for more then 30 seconds after click", true);
     }
   }
 
@@ -366,26 +331,18 @@ public class BasePageObject {
     if (checkIfElementOnPage(selector)) {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
-        js.executeScript(
-            "var x = $(arguments[0]);"
+        js.executeScript("var x = $(arguments[0]);"
             + "window.scroll(0,x.position()['top']+x.height()+100);"
-            + "$(window).trigger('scroll');",
-            selector
-        );
+            + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-          PageObjectLogging.log(
-              "JSError", "JQuery is not defined", false
-          );
+          PageObjectLogging.log("JSError", "JQuery is not defined", false);
         }
       }
       return true;
     } else {
-      PageObjectLogging.log(
-          "SelectorNotFound",
-          "Selector " + selector + " not found on page",
-          true
-      );
+      PageObjectLogging
+          .log("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
     }
   }
@@ -396,7 +353,7 @@ public class BasePageObject {
       PageObjectLogging.log("Navigate Back", "previous page loaded", true);
     } catch (TimeoutException e) {
       PageObjectLogging.log("Navigate Back",
-                            "page loaded for more then 30 seconds after navigating back", false);
+          "page loaded for more then 30 seconds after navigating back", false);
     }
   }
 
@@ -406,7 +363,7 @@ public class BasePageObject {
       PageObjectLogging.log("Navigate Forward", "next page loaded", true);
     } catch (TimeoutException e) {
       PageObjectLogging.log("Navigate Forward",
-                            "page loaded for more then 30 seconds after navigating forward", false);
+          "page loaded for more then 30 seconds after navigating forward", false);
     }
   }
 
@@ -443,14 +400,13 @@ public class BasePageObject {
     }
   }
 
-  //You can get access to hidden elements by changing class
+  // You can get access to hidden elements by changing class
   public void unhideElementByClassChange(String elementName, String classWithoutHidden,
-                                         int... optionalIndex) {
+      int... optionalIndex) {
     int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
     JavascriptExecutor jse = (JavascriptExecutor) driver;
-    jse.executeScript(
-        "document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '"
-        + classWithoutHidden + "');");
+    jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem
+        + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
   /**
@@ -470,7 +426,9 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param element The element to be checked
+   * Checks if the element is visible on browser
+   * <p/>
+   * * @param element The element to be checked
    */
   public void waitForElementByElement(WebElement element) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
@@ -482,7 +440,9 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param elementBy The element to be checked
+   * Checks if the element is visible on browser
+   * <p/>
+   * * @param elementBy The element to be checked
    */
   public void waitForElementByElementLocatedBy(By elementBy) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
@@ -527,7 +487,7 @@ public class BasePageObject {
    * @param checkOutInMilliSec
    */
   public void waitForElementVisibleByElement(WebElement element, int timeOutInSec,
-                                                          int checkOutInMilliSec) {
+      int checkOutInMilliSec) {
     WebDriverWait wait = new WebDriverWait(driver, timeOutInSec);
     driver.manage().timeouts().implicitlyWait(checkOutInMilliSec, TimeUnit.MILLISECONDS);
     try {
@@ -540,8 +500,7 @@ public class BasePageObject {
   public WebElement waitForElementByCss(String cssSelector) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                                                                   .cssSelector(cssSelector)));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
       return driver.findElement(By.cssSelector(cssSelector));
     } finally {
       restoreDeaultImplicitWait();
@@ -549,16 +508,14 @@ public class BasePageObject {
   }
 
   public WebElement waitForElementByXPath(String xPath) {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                                                                 .xpath(xPath)));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
     return driver.findElement(By.xpath(xPath));
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions
-                     .invisibilityOfElementLocated(element));
+      wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -581,34 +538,32 @@ public class BasePageObject {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
   }
 
-  public void waitForValueToBePresentInElementsAttributeByCss(
-      String selector, String attribute, String value) {
+  public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
+      String value) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions
-          .valueToBePresentInElementsAttribute(By.cssSelector(selector),
-              attribute, value));
-    }finally {
+      wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
+          By.cssSelector(selector), attribute, value));
+    } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  public void waitForValueToBePresentInElementsCssByCss(
-      String selector, String cssProperty, String expectedValue) {
+  public void waitForValueToBePresentInElementsCssByCss(String selector, String cssProperty,
+      String expectedValue) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions
-          .cssValuePresentForElement(By.cssSelector(selector),
-              cssProperty, expectedValue));
-    }finally {
+      wait.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
+          cssProperty, expectedValue));
+    } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  public void waitForValueToBePresentInElementsAttributeByElement(
-      WebElement element, String attribute, String value) {
-    wait.until(CommonExpectedConditions
-                   .valueToBePresentInElementsAttribute(element, attribute, value));
+  public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
+      String attribute, String value) {
+    wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
+        value));
   }
 
   public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
@@ -639,8 +594,7 @@ public class BasePageObject {
   }
 
   public void waitForTextToBePresentInElementByBy(By by, String text) {
-    wait.until(CommonExpectedConditions
-                   .textToBePresentInElement(by, text));
+    wait.until(CommonExpectedConditions.textToBePresentInElement(by, text));
   }
 
   public void waitForStringInURL(String givenString) {
@@ -653,8 +607,8 @@ public class BasePageObject {
     Alert alert = driver.switchTo().alert();
     String alertText = alert.getText();
     alert.accept();
-    PageObjectLogging.log("waitForAlertAndAccept",
-                          "detected and closed alert with text " + alertText, true);
+    PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
+        + alertText, true);
   }
 
   public static String getTimeStamp() {
@@ -671,13 +625,10 @@ public class BasePageObject {
   }
 
   public String getRandomString(int length) {
-    char[] alphabet = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-        'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-        'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r',
-        's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char[] alphabet =
+        {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+            'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     Random rnd = new Random();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
@@ -700,11 +651,9 @@ public class BasePageObject {
     // notification
     notifications_clickOnNotificationsLogo();
     waitForElementByElement(notificationsLatestNotificationOnWiki);
-    waitForTextToBePresentInElementByElement(
-        notificationsLatestNotificationOnWiki, title);
+    waitForTextToBePresentInElementByElement(notificationsLatestNotificationOnWiki, title);
     PageObjectLogging.log("notifications_verifyNotificationTitle",
-                          "Verify that the latest notification has the following title: "
-                          + title, true, driver);
+        "Verify that the latest notification has the following title: " + title, true, driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
@@ -712,16 +661,14 @@ public class BasePageObject {
     waitForElementClickableByElement(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
     PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-                          "click on notifications logo on the upper right corner", true,
-                          driver);
+        "click on notifications logo on the upper right corner", true, driver);
   }
 
   public void notifications_showNotifications() {
     waitForElementByElement(notificationsShowNotificationsLogo);
     executeScript("$('#WallNotifications ul.subnav').addClass('show')");
     PageObjectLogging.log("norifications_showNotifications",
-                          "show notifications by adding 'show' class to element", true,
-                          driver);
+        "show notifications by adding 'show' class to element", true, driver);
   }
 
   /**
@@ -736,9 +683,7 @@ public class BasePageObject {
    */
   public void waitForElementNotPresent(final By selector) {
     changeImplicitWait(0, TimeUnit.SECONDS);
-    wait.until(
-        CommonExpectedConditions.elementNotPresent(selector)
-    );
+    wait.until(CommonExpectedConditions.elementNotPresent(selector));
     restoreDeaultImplicitWait();
   }
 
@@ -746,18 +691,14 @@ public class BasePageObject {
    * Wait for element to be in viewport Either position top or left is bigger then -1
    */
   public void waitForElementInViewPort(final WebElement element) {
-    wait.until(
-        CommonExpectedConditions.elementInViewPort(element)
-    );
+    wait.until(CommonExpectedConditions.elementInViewPort(element));
   }
 
   /**
    * Wait for new window present
    */
   public void waitForNewWindow() {
-    wait.until(
-        CommonExpectedConditions.newWindowPresent()
-    );
+    wait.until(CommonExpectedConditions.newWindowPresent());
   }
 
   public void appendToUrl(String additionToUrl) {
@@ -782,17 +723,14 @@ public class BasePageObject {
 
   public void pressDownArrow(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(
-        "var e = jQuery.Event(\"keydown\"); " +
-        "e.which=40; $(arguments[0]).trigger(e);",
-        element
-    );
+    js.executeScript("var e = jQuery.Event(\"keydown\"); "
+        + "e.which=40; $(arguments[0]).trigger(e);", element);
   }
 
   public void setDisplayStyle(String selector, String style) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
-                     style);
+        style);
   }
 
   private void purge(String url) throws Exception {
@@ -820,11 +758,9 @@ public class BasePageObject {
       HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
       connection.disconnect();
       connection.setRequestMethod("GET");
-      connection.setRequestProperty(
-          "User-Agent",
-          "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) " +
-          "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)"
-      );
+      connection.setRequestProperty("User-Agent",
+          "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) "
+              + "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
       int status = connection.getResponseCode();
       connection.disconnect();
       return status;
@@ -889,17 +825,11 @@ public class BasePageObject {
   public void verifyElementMoved(Point source, WebElement element) {
     Point target = element.getLocation();
     if (source.x == target.x && source.y == target.y) {
-      Assertion.fail(
-          "Element did not move. Old coordinate (" + source.x + "," + source.y + ") " +
-          "New coordinate (" + target.x + "," + target.y + ")"
-      );
+      Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
+          + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    PageObjectLogging.log(
-        "verifyElementMoved", "Element did move. From (" + source.x + "," + source.y + ") to ("
-                              + target.x + "," + target.y + ")",
-        true,
-        driver
-    );
+    PageObjectLogging.log("verifyElementMoved", "Element did move. From (" + source.x + ","
+        + source.y + ") to (" + target.x + "," + target.y + ")", true, driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -910,18 +840,11 @@ public class BasePageObject {
     int targetHeight = target.height;
 
     if (sourceWidth == targetWidth && sourceHeight == targetHeight) {
-      Assertion.fail(
-          "Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight + ") " +
-          "New dimension (" + targetWidth + "," + targetHeight + ")"
-      );
+      Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
+          + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    PageObjectLogging.log(
-        "verifyElementMoved",
-        "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to ("
-        + targetWidth + "," + targetHeight + ")",
-        true,
-        driver
-    );
+    PageObjectLogging.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
+        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
   }
 
   public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
@@ -937,19 +860,14 @@ public class BasePageObject {
       }
       if (value.equals(retAttribute)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByValue",
-                              "Element with attribute: " + attribute + " with the value: " + value
-                              + " is found from the list",
-                              true
-        );
+        PageObjectLogging.log("getElementByValue", "Element with attribute: " + attribute
+            + " with the value: " + value + " is found from the list", true);
         break;
       }
     }
     if (foundElement == null) {
-      throw new NoSuchElementException(
-          "Element with attribute: " + attribute + " with the value: "
-          + value + " is not found from the list"
-      );
+      throw new NoSuchElementException("Element with attribute: " + attribute + " with the value: "
+          + value + " is not found from the list");
     }
     return foundElement;
   }
@@ -959,22 +877,16 @@ public class BasePageObject {
     for (WebElement element : elements) {
       if (element.getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByText",
-                              "Element with text: " + value
-                              + " is found from the list", true);
+        PageObjectLogging.log("getElementByText", "Element with text: " + value
+            + " is found from the list", true);
         break;
       }
     }
     if (foundElement == null) {
-      throw new NoSuchElementException(
-          "Element with text: " + value + " is not found from the list");
+      throw new NoSuchElementException("Element with text: " + value
+          + " is not found from the list");
     }
     return foundElement;
-  }
-
-  public void switchToBrowserTab(int index) {
-    List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-    driver.switchTo().window(tabs.get(index));
   }
 
   public void switchToNewBrowserTab() {
@@ -983,20 +895,19 @@ public class BasePageObject {
   }
 
   public WebElement getElementByChildText(List<WebElement> elements, By childBySelector,
-                                          String value) {
+      String value) {
     WebElement foundElement = null;
     for (WebElement element : elements) {
       if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByChildText",
-                              "Element's child with text: " + value + " is found from the list",
-                              true);
+        PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value
+            + " is found from the list", true);
         break;
       }
     }
     if (foundElement == null) {
-      throw new NoSuchElementException(
-          "Element's child with text: " + value + " is not found from the list");
+      throw new NoSuchElementException("Element's child with text: " + value
+          + " is not found from the list");
     }
     return foundElement;
   }
@@ -1016,22 +927,22 @@ public class BasePageObject {
   }
 
   /**
-  * Send keys at the speed of good typist human.
-  * based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
-  * "A professional or good typist hits around 325 to 335 CPM (chars per minute)"
-  * This means 60 000 / 330 = 182ms
-  */
+   * Send keys at the speed of good typist human. based on research:
+   * http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
+   * "A professional or good typist hits around 325 to 335 CPM (chars per minute)" This means 60 000
+   * / 330 = 182ms
+   */
   public void sendKeysHumanSpeed(WebElement input, String keys) {
-      int interval = 182;
-      for(char c : keys.toCharArray()) {
-          String character = String.valueOf(c);
-          input.sendKeys(character);
-          try {
-            Thread.sleep(interval);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    int interval = 182;
+    for (char c : keys.toCharArray()) {
+      String character = String.valueOf(c);
+      input.sendKeys(character);
+      try {
+        Thread.sleep(interval);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
+    }
   }
 
 

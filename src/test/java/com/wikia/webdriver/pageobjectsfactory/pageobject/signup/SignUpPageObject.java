@@ -149,7 +149,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   private String getWordFromCaptcha(File captchaFile) {
     try {
-      String captchaId = getAttributeValue(blurryWordHidden, "value");
+      String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
               + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;

@@ -256,11 +256,6 @@ public class MobileBasePageObject extends WikiBasePageObject {
     Assertion.assertTrue(firstPosition == getPosition(), "position is different");
   }
 
-  public void clickOnWikiaTopPageLogo() {
-    waitForElementByElement(wikiaTopPageLogo);
-    clickActions(wikiaTopPageLogo);
-  }
-
   public void verifyCurtainOpened() {
     Assertion.assertEquals("block", curtain.getCssValue("display"), "curtain is not opened");
   }
