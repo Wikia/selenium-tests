@@ -36,6 +36,9 @@ public class LoginPage extends WikiBasePageObject {
   @FindBy(css = "a.close")
   private WebElement closeButton;
 
+  @FindBy(css = "a.footer-callout-link")
+  private WebElement registerNowLink;
+
   private NavigationSideComponentObject nav;
 
   public LoginPage(WebDriver driver) {
@@ -110,5 +113,9 @@ public class LoginPage extends WikiBasePageObject {
 
   public void clickOnCloseButton(){
     closeButton.click();
+  }
+
+  public void clickOnRegisterLink(){
+    registerNowLink.click();
   }
 }

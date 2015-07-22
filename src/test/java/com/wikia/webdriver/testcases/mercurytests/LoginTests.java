@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -76,6 +77,19 @@ public class LoginTests extends NewTestTemplate {
     loginPage.clickOnCloseButton();
 
     Assertion.assertEquals(expectedHomePageTitle, homePage.getArticleTitle());
+  }
 
+  @Test
+  @Execute (onWikia = "mobileregressiontesting")
+  public void registerNowLinkWorksAndRedirectsProperly(){
+    MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
+    registrationPage.openRegisterPage();
+    String expectedHeader = registrationPage.isHeaderCopyCorrect();
+
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.clickOnRegisterLink();
+    String currentHeader = registrationPage.isHeaderCopyCorrect();
+
+    Assertion.assertEquals(expectedHeader, currentHeader);
   }
 }
