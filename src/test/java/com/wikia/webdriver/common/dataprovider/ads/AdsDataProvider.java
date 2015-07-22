@@ -472,7 +472,7 @@ public class AdsDataProvider {
             "adtest",
             "SyntheticTests/Interstitial",
             new Dimension(800, 800),
-            new Dimension(568, 564),
+            new Dimension(569, 564),
             true
         },
         {
