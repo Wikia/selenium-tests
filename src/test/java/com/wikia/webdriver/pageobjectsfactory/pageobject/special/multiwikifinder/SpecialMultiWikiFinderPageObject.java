@@ -39,9 +39,9 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
   }
 
   public void findPageName(String pagename) {
-    waitForElementByElement(enterPagenameField);
+    wait.forElementVisible(enterPagenameField);
     enterPagenameField.sendKeys(pagename);
-    waitForElementByElement(findButton);
+    wait.forElementVisible(findButton);
     findButton.click();
   }
 
@@ -63,7 +63,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
           true, driver
       );
     } else {
-      waitForElementByElement(listOfLinks.get(0));
+      wait.forElementVisible(listOfLinks.get(0));
       Assertion.assertTrue(listOfLinks.size() <= limit);
     }
   }

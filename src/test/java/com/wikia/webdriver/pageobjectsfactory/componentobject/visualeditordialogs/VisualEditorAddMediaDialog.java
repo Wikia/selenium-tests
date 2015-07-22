@@ -72,7 +72,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void typeInSearchTextField(String input) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.sendKeys(input);
   }
 
@@ -151,7 +151,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void typeNewFileName(String newFileName) {
-    waitForElementByElement(fileNameInput);
+    wait.forElementVisible(fileNameInput);
     if (Boolean.parseBoolean(fileNameInput.getAttribute("readonly"))) {
       throw new NoSuchElementException(
           "File name input is read only! This file already exist on this wiki");

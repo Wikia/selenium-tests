@@ -45,7 +45,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void clickPublishButton() {
-    waitForElementByElement(publishButton);
+    wait.forElementVisible(publishButton);
     scrollAndClick(publishButton);
     PageObjectLogging.log("clickPublishButton", "publish button click", true);
   }
@@ -55,11 +55,11 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void modifyThumnailImage(String file) {
-    waitForElementByElement(thumbnailImage);
+    wait.forElementVisible(thumbnailImage);
     scrollAndClick(thumbnailImage);
-    waitForElementByElement(modifyThumbnailButton);
+    wait.forElementVisible(modifyThumbnailButton);
     modifyThumbnailButton.click();
-    waitForElementByElement(uploadFileInput);
+    wait.forElementVisible(uploadFileInput);
     uploadFileInput.sendKeys(
         getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
     );
@@ -70,7 +70,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void typeIntoHeadline(String text) {
-    waitForElementByElement(wikiaHeadline);
+    wait.forElementVisible(wikiaHeadline);
     wikiaHeadline.clear();
     wikiaHeadline.sendKeys(text);
     PageObjectLogging.log(
@@ -80,7 +80,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void typeIntoDescription(String text) {
-    waitForElementByElement(wikiaDescription);
+    wait.forElementVisible(wikiaDescription);
     wikiaDescription.clear();
     wikiaDescription.sendKeys(text);
     PageObjectLogging.log(
@@ -90,9 +90,9 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void uploadThumbnailImage(String file) {
-    waitForElementByElement(addPhotoButton);
+    wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
-    waitForElementByElement(uploadFileInput);
+    wait.forElementVisible(uploadFileInput);
     uploadFileInput.sendKeys(
         getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
     );
@@ -100,12 +100,12 @@ public class SpecialPromotePageObject extends BasePageObject {
         "uploadThumbnailImage",
         "file " + file + " added to upload",
         true);
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     submitButton.click();
   }
 
   public void verifyCrossWikiSearchDescription(String firstDescription) {
-    waitForElementByElement(wikiaDescription);
+    wait.forElementVisible(wikiaDescription);
     Assertion.assertStringContains(
             wikiaDescription.getText(), firstDescription.substring(0,
                                    firstDescription.length() - 3)
@@ -113,7 +113,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void verifyCrossWikiSearchImage(String firstImage) {
-    waitForElementByElement(thumbnailImage);
+    wait.forElementVisible(thumbnailImage);
     String secondImage = getUniqueThumbnailTextSpecialPromotePage();
     Assertion.assertEquals(secondImage, firstImage);
   }
@@ -134,7 +134,7 @@ public class SpecialPromotePageObject extends BasePageObject {
    * @return file uploaded as main thumbnail on special:Promote
    */
   public File getUploadedImage() {
-    waitForElementByElement(thumbnailImage);
+    wait.forElementVisible(thumbnailImage);
     File uploadedImageFile = new File(PageContent.RESOURCES_PATH + "shouldBeDeleted.png");
     try {
       URL url = new URL(thumbnailImage.getAttribute("src"));

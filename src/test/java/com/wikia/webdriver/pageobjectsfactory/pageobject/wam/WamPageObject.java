@@ -82,7 +82,7 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if there is a table row different than head one in WAM index table
    */
   public void verifyWamIndexIsNotEmpty() {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
@@ -98,7 +98,7 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if there are as many rows in the WAM index table as we expect
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals "
         + expectedRowsNo);
   }
@@ -132,7 +132,7 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if "Vertical" column in WAM index has the same values for each row
    */
   public void verifyVerticalColumnValuesAreTheSame() {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     String selectedValue = tabSelected.getAttribute("data-vertical-id");
 
     for (int i = 1; i < wamIndexRows.size(); ++i) {
@@ -151,7 +151,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     List<String> current = getCurrentIndexNo();
     for (int i = 0; i <= endElement - startElement; i++) {
       Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
@@ -160,7 +160,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void clickNextPaginator() {
-    waitForElementByElement(paginationNext);
+    wait.forElementVisible(paginationNext);
     scrollAndClick(paginationNext);
     PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
   }
@@ -175,7 +175,7 @@ public class WamPageObject extends BasePageObject {
     Assertion.assertTrue(driver
         .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
         .getAttribute("class").contains("icon-vertical-selected"));
-    waitForElementByElement(tabSelected);
+    wait.forElementVisible(tabSelected);
   }
 
   public String getSelectedHeaderName() {

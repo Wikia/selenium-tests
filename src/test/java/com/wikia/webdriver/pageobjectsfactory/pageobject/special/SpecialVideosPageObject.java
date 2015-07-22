@@ -68,11 +68,11 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   protected void verifyH1() {
-    waitForElementByElement(h1Header);
+    wait.forElementVisible(h1Header);
   }
 
   protected void verifyNewestVideo() {
-    waitForElementByElement(newestVideo);
+    wait.forElementVisible(newestVideo);
   }
 
   protected void verifyAddVideoButton() {
@@ -80,7 +80,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   protected void verifySortDropdown() {
-    waitForElementByElement(sortDropdown);
+    wait.forElementVisible(sortDropdown);
   }
 
   public VetAddVideoComponentObject clickAddAVideo() {
@@ -114,16 +114,16 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public String getNewestVideoTitle() {
-    waitForElementByElement(newestVideo);
+    wait.forElementVisible(newestVideo);
     return newestVideoTitle.getText();
   }
 
   public void deleteVideo() {
     openSpecialVideoPageMostRecent(getWikiUrl());
     executeScript("$('.special-videos-grid .remove').first().show()");
-    waitForElementByElement(newestVideo);
+    wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
-    waitForElementByElement(deleteConfirmButton);
+    wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
   }
 

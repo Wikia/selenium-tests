@@ -83,7 +83,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMonetizationModuleShown() {
-    waitForElementByBy(monetizationModuleContainer);
+    wait.forElementPresent(monetizationModuleContainer);
     Assertion.assertTrue(checkIfElementOnPage(monetizationModuleContainer));
     PageObjectLogging.log("verifyMonetizationModuleShown", "Monetization module is visible", true);
   }
@@ -228,7 +228,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseHeaderShown() {
-    waitForElementByElement(adHeader);
+    wait.forElementVisible(adHeader);
     Assertion.assertTrue(checkIfElementOnPage(adHeader));
     Assertion.assertEquals(adHeader.getText(), ADSENSE_HEADER_VALUE.toUpperCase());
     PageObjectLogging

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,36 +44,36 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   private WebElement genericError;
 
   public MobileSignupPageObject typeEmailAddress(String email) {
-    waitForElementByElement(signupEmail);
+    wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
   public MobileSignupPageObject typeUsername(String username) {
-    waitForElementByElement(signupUsername);
+    wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
   public MobileSignupPageObject typePassword(String password) {
-    waitForElementByElement(signupPassword);
+    wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
   public MobileSignupPageObject typeBirthdate(String month, String day, String year) {
-    waitForElementByElement(signupBirthdate);
+    wait.forElementVisible(signupBirthdate);
     scrollAndClick((signupBirthdate));
 
-    waitForElementByElement(signupBirthMonth);
+    wait.forElementVisible(signupBirthMonth);
     scrollAndClick((signupBirthMonth));
     signupBirthMonth.sendKeys(month);
 
-    waitForElementByElement(signupBirthDay);
+    wait.forElementVisible(signupBirthDay);
     signupBirthDay.click();
     signupBirthDay.sendKeys(day);
 
-    waitForElementByElement(signupBirthYear);
+    wait.forElementVisible(signupBirthYear);
     signupBirthYear.click();
     signupBirthYear.sendKeys(year);
 
@@ -82,32 +81,32 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   }
 
   public void register() {
-    waitForElementByElement(signupButton);
+    wait.forElementVisible(signupButton);
     scrollAndClick(signupButton);
   }
 
   public void verifyAvatarAfterSignup() {
-    waitForElementByElement(avatar);
+    wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
   public void verifyEmailInUseError() {
-    waitForElementByElement(emailError);
+    wait.forElementVisible(emailError);
     Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
   }
 
   public void verifyUsernameTakenError() {
-    waitForElementByElement(usernameError);
+    wait.forElementVisible(usernameError);
     Assertion.assertEquals(usernameError.getText(), "Someone already has this username. Try a different one!");
   }
 
   public void verifyPasswordError() {
-    waitForElementByElement(passwordError);
+    wait.forElementVisible(passwordError);
     Assertion.assertEquals(passwordError.getText(), "Your password must be different from your username.");
   }
 
   public void verifyBirthdateError() {
-    waitForElementByElement(genericError);
+    wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
   }
 }

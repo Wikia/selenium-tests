@@ -32,7 +32,7 @@ public class PreviewEditModePageObject extends EditMode {
 
   public PreviewEditModePageObject(WebDriver driver) {
     super(driver);
-    waitForElementByElement(previewModal);
+    wait.forElementVisible(previewModal);
   }
 
   public void verifyVideoAlignment(PositionsVideo positions) {
@@ -92,12 +92,12 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyTOCpresentOnPreview() {
-    waitForElementByElement(previewModal.findElement(tableOfContents));
+    wait.forElementVisible(previewModal.findElement(tableOfContents));
     PageObjectLogging.log("verifyTOCpresentOnPreview", "TOC is present on preview", true);
   }
 
   public void verifyTOCexpandedOnPreview() {
-    waitForElementByElement(previewModal.findElement(tableOfContentsOrderedList));
+    wait.forElementVisible(previewModal.findElement(tableOfContentsOrderedList));
     PageObjectLogging.log("verifyTOCexpandedOnPreview", "TOC is expanded on preview", true);
   }
 
@@ -107,7 +107,7 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public void verifyVideoOnPreview(String videoID) {
-    waitForElementByElement(video);
+    wait.forElementVisible(video);
     waitForValueToBePresentInElementsAttributeByElement(video, "id", videoID);
   }
 }

@@ -136,7 +136,7 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void verifyDiscussionWithImage() {
-    waitForElementByElement(postedImageList.get(0));
+    wait.forElementVisible(postedImageList.get(0));
     PageObjectLogging.log("verifyPostedMessageWithImage",
                           "discussion with image started", true);
   }
@@ -185,7 +185,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForElementByElement(followButton);
+    wait.forElementVisible(followButton);
     if (followButton.getText().contains("Following")) {
       PageObjectLogging
           .log("unfollowIfDiscussionIsFollowed",
@@ -217,7 +217,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForElementByElement(followButton);
+    wait.forElementVisible(followButton);
     waitForElementClickableByElement(followButton);
     scrollAndClick(followButton);
     PageObjectLogging.log("clickOnFollowButton",

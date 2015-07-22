@@ -58,17 +58,17 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public void clickNextCommentPageButton() {
-    waitForElementByElement(nextCommentPageButton);
+    wait.forElementVisible(nextCommentPageButton);
     nextCommentPageButton.click();
   }
 
   public void clickPreviousCommentPageButton() {
-    waitForElementByElement(previousCommentPageButton);
+    wait.forElementVisible(previousCommentPageButton);
     previousCommentPageButton.click();
   }
 
   public void clickOnUsername(int index) {
-    waitForElementByElement(commentsUsernames.get(index));
+    wait.forElementVisible(commentsUsernames.get(index));
     commentsUsernames.get(index).click();
   }
 
@@ -84,7 +84,7 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public String getUserUsername(int index) {
-    waitForElementByElement(commentsUsernames.get(index));
+    wait.forElementVisible(commentsUsernames.get(index));
     return commentsUsernames.get(index).getText();
   }
 

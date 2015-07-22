@@ -77,11 +77,11 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyChatPage() {
-    waitForElementByElement(messageWritingArea);
-    waitForElementByElement(chatInlineAlert);
-    waitForElementByElement(sideBar);
-    waitForElementByElement(userName);
-    waitForElementByElement(userAvatar);
+    wait.forElementVisible(messageWritingArea);
+    wait.forElementVisible(chatInlineAlert);
+    wait.forElementVisible(sideBar);
+    wait.forElementVisible(userName);
+    wait.forElementVisible(userAvatar);
     PageObjectLogging.log("verifyChatPage", "Chat page verified", true, driver);
   }
 
@@ -96,7 +96,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserJoinToChatMessage(String userName) {
-    waitForElementByElement(chatInlineAlertContinued);
+    wait.forElementVisible(chatInlineAlertContinued);
     if (!checkIfElementOnPage(String.format(USER_SELECTOR, userName))) {
       PageObjectLogging.log(
           "VerifyUserJoinsChat",
@@ -124,7 +124,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageHeader() {
-    waitForElementByElement(privateMessagesHeader);
+    wait.forElementVisible(privateMessagesHeader);
     PageObjectLogging.log(
         "verifyPrivateMessageHeader",
         "private message header is visible",
@@ -134,7 +134,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageNotification() {
-    waitForElementByElement(privateMessageNotification);
+    wait.forElementVisible(privateMessageNotification);
     PageObjectLogging.log(
         "verifyPrivateMessageNotification",
         "private message notification is visible",
@@ -163,7 +163,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateChatTitle() {
-    waitForElementByElement(privateChatHeader);
+    wait.forElementVisible(privateChatHeader);
     PageObjectLogging.log(
         "verifyPrivateChatTitle",
         "private chat title is correct",
@@ -173,7 +173,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyMainChatIsHighlighted() {
-    waitForElementByElement(mainChatSelection);
+    wait.forElementVisible(mainChatSelection);
     PageObjectLogging.log(
         "verifyPrivateMessageIsHighlighted",
         "private message section is highlighted",
@@ -232,7 +232,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void writeOnChat(String message) {
-    waitForElementByElement(chatLoadedIndicator);
+    wait.forElementVisible(chatLoadedIndicator);
     messageWritingArea.sendKeys(message);
     pressEnter(messageWritingArea);
     PageObjectLogging.log("writeOnChat", "Message: " + message + " written", true, driver);
@@ -246,7 +246,7 @@ public class ChatPageObject extends WikiBasePageObject {
       allowPrivateMessageFromUser(userName);
     }
     clickOnDifferentUser(userName);
-    waitForElementByElement(privateMassageButton);
+    wait.forElementVisible(privateMassageButton);
     privateMassageButton.click();
     WebElement
         userInPrivateMessageSection =
@@ -275,7 +275,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   private void clickBanUser(String userName) {
     banUserButton.click();
-    waitForElementByElement(chatBanModal);
+    wait.forElementVisible(chatBanModal);
     PageObjectLogging.log("clickBanUser", "ban user " + userName + " is clicked", true);
   }
 
@@ -299,7 +299,7 @@ public class ChatPageObject extends WikiBasePageObject {
     WebElement unbanLink = driver.findElement(By.xpath(
         String.format(USER_UNBAN_LINK, userName)
     ));
-    waitForElementByElement(unbanLink);
+    wait.forElementVisible(unbanLink);
     unbanLink.click();
     verifyChatUnbanMessage(userName);
     PageObjectLogging.log(

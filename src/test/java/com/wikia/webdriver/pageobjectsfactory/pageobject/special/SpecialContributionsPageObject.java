@@ -20,19 +20,19 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
   private WebElement searchButton;
 
   private void selectContributorUserName() {
-    waitForElementByElement(userNameRadio);
+    wait.forElementVisible(userNameRadio);
     userNameRadio.click();
     PageObjectLogging.log("selectContributorUserName", "by username selected", true);
   }
 
   private void typeInUserName(String userName) {
-    waitForElementByElement(userNameField);
+    wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
     PageObjectLogging.log("typeInUserName", userName + " username typed in", true);
   }
 
   private void clickSearchButton() {
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
     PageObjectLogging.log("clickSearchButton", "search button clicked", true);
   }

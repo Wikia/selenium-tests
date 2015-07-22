@@ -21,7 +21,7 @@ public class LatestVideoAdminPageObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoAdminPageObject clickFeaturedTab(WebDriver driver) {
-    waitForElementByElement(featuredTab);
+    wait.forElementVisible(featuredTab);
     scrollAndClick(featuredTab);
     return new FeaturedVideoAdminPageObject(driver);
   }

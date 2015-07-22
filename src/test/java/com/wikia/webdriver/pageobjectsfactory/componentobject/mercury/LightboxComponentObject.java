@@ -40,13 +40,13 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public void clickGalleryImage(int index) {
-    waitForElementByElement(galleryImagesArray.get(index));
+    wait.forElementVisible(galleryImagesArray.get(index));
     scrollToElement(galleryImagesArray.get(index));
     galleryImagesArray.get(index).click();
   }
 
   public String getCurrentImagePath() throws WebDriverException {
-    waitForElementByElement(currentImage);
+    wait.forElementVisible(currentImage);
     if (currentImage.getAttribute("src") == null) {
       throw new WebDriverException("Expected String but got null");
     }

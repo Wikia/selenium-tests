@@ -55,19 +55,19 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     Assertion.assertEquals(
             resetForgotPasswordTime(userName, apiToken), ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE
     );
-    waitForElementByElement(forgotPasswordLink);
+    wait.forElementVisible(forgotPasswordLink);
     forgotPasswordLink.click();
   }
 
   public CreateNewWikiPageObjectStep2 submitLogin() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     submitButton.click();
     PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public SignUpPageObject submitSignup() {
-    waitForElementByElement(signUpSubmitButton);
+    wait.forElementVisible(signUpSubmitButton);
     signUpSubmitButton.click();
     PageObjectLogging.log("submitSignUp", "signup submit button was clicked", true, driver);
     return new SignUpPageObject(driver);
@@ -96,7 +96,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
-    waitForElementByElement(usernameValidationText);
+    wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     waitForTextToBePresentInElementByElement(usernameValidationText, newPasswordMsg);
     PageObjectLogging.log(

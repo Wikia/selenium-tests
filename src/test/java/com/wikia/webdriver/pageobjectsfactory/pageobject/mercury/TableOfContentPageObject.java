@@ -39,12 +39,12 @@ public class TableOfContentPageObject extends BasePageObject {
   }
 
   public boolean isTOCUnderArticleName() throws WebDriverException {
-    waitForElementByElement(tocUnderH1);
+    wait.forElementVisible(tocUnderH1);
     return tocUnderH1.isDisplayed() && tocUnderH1.getTagName().equals("nav");
   }
 
   public void clickOnTOC() {
-    waitForElementByElement(tocButton);
+    wait.forElementVisible(tocButton);
     tocButton.click();
   }
 

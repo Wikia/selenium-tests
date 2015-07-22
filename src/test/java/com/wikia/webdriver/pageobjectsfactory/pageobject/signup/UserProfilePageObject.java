@@ -39,7 +39,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public void clickOnBlogTab() {
-    waitForElementByElement(blogTab);
+    wait.forElementVisible(blogTab);
     waitForElementClickableByElement(blogTab);
     blogTab.click();
     PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
@@ -70,7 +70,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public SpecialCreatePagePageObject clickOnCreateBlogPost() {
-    waitForElementByElement(createBlogPostButton);
+    wait.forElementVisible(createBlogPostButton);
     waitForElementClickableByElement(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
@@ -103,7 +103,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     avatarRemoveButton.click();
     AlertHandler.acceptPopupWindow(driver);
     hideAvatarControls();
-    waitForElementByElement(avatarWrapper);
+    wait.forElementVisible(avatarWrapper);
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
   }
 

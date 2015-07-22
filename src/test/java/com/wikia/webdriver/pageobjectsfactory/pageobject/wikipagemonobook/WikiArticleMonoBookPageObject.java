@@ -30,12 +30,12 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
   }
 
   public void verifyEditionArea() {
-    waitForElementByElement(editionArea);
+    wait.forElementVisible(editionArea);
     PageObjectLogging.log("verifyEditArea", "verify that edition area is present", true);
   }
 
   public void verifyOasisOnly() {
-    waitForElementByElement(oasisOnly);
+    wait.forElementVisible(oasisOnly);
     PageObjectLogging.log("verifyOasisOnly", "Oasis only warning is present", true);
   }
 }

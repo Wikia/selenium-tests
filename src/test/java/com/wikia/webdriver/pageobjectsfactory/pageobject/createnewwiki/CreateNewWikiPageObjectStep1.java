@@ -50,7 +50,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public void selectLanguage(String lang) {
     scrollAndClick(languageSelectorTrigger);
-    waitForElementByElement(languageSelector);
+    wait.forElementVisible(languageSelector);
     Select language = new Select(languageSelector);
     List<WebElement> langList = language.getOptions();
     for (int i = 0; i < langList.size(); i++) {
@@ -78,8 +78,8 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
    * @author Karol Kujawiak
    */
   public void verifySuccessIcon() {
-    waitForElementByElement(successIcon);
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(successIcon);
+    wait.forElementVisible(submitButton);
     PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
   }
 

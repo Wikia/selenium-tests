@@ -68,7 +68,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void clickTab(int tab) {
     WebElement currentTab = tabList.get(tab);
-    waitForElementByElement(currentTab);
+    wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
     PageObjectLogging.log(
         "clickTab",
@@ -90,7 +90,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public void verifySelectedTab(String tabName) {
-    waitForElementByElement(tabBody);
+    wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
     PageObjectLogging.log(
         "verified selected tab",
@@ -137,19 +137,19 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public void verifyEmbeddedVideoIsPresent() {
-    waitForElementByElement(fileEmbedded);
+    wait.forElementVisible(fileEmbedded);
     PageObjectLogging
         .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyEmptyFilePage() {
-    waitForElementByElement(noFileText);
+    wait.forElementVisible(noFileText);
     PageObjectLogging
         .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyThumbnailIsPresent() {
-    waitForElementByElement(videoThumbnail);
+    wait.forElementVisible(videoThumbnail);
     PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
   }
 
@@ -187,13 +187,13 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public void replaceVideo(String url) {
-    waitForElementByElement(reuploadLink);
+    wait.forElementVisible(reuploadLink);
     scrollAndClick(reuploadLink);
 
     uploadFileURL.sendKeys(url);
     PageObjectLogging.log("replaceVideo", url + " typed into url field", true);
 
-    waitForElementByElement(addButton);
+    wait.forElementVisible(addButton);
     scrollAndClick(addButton);
     PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
   }

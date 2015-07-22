@@ -194,39 +194,39 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void clickSourceModeButton() {
-    waitForElementByElement(sourceModeButton);
+    wait.forElementVisible(sourceModeButton);
     scrollAndClick(sourceModeButton);
     PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
   }
 
   public void clickBoldButton() {
-    waitForElementByElement(boldButton);
+    wait.forElementVisible(boldButton);
     scrollAndClick(boldButton);
     PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
   }
 
   public void clickItalicButton() {
-    waitForElementByElement(italicButton);
+    wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
   public NewMessageWallAddLinkComponentObject clickLinkButton() {
-    waitForElementByElement(linkButton);
+    wait.forElementVisible(linkButton);
     scrollAndClick(linkButton);
     PageObjectLogging.log("clickLinkButton", "link button clicked", true);
     return new NewMessageWallAddLinkComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickImageButton() {
-    waitForElementByElement(imageButton);
+    wait.forElementVisible(imageButton);
     scrollAndClick(imageButton);
     PageObjectLogging.log("clickImageButton", "image button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public void verifyThreadRemoved() {
-    waitForElementByElement(removedThreadMessage);
+    wait.forElementVisible(removedThreadMessage);
     PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
@@ -242,7 +242,7 @@ public class NewMessageWall extends WikiBasePageObject {
     waitForElementPresenceByBy(closeButtonBy);
     setDisplayStyle(firstMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
-    waitForElementByBy(closeButtonBy);
+    wait.forElementPresent(closeButtonBy);
     setDisplayStyle(firstMessageMenu, "none");
     PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
   }
@@ -295,7 +295,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
-    waitForElementByElement(editMessageWrapper);
+    wait.forElementVisible(editMessageWrapper);
     Assertion.assertEquals(
             editMessageWrapper.findElement(messageTitleBy).getText(), title
     );

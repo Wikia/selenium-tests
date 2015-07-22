@@ -1,10 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.social_buttons;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +31,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
     public void verifyShareButtonsPresent() {
         for (int i = 0; i < shareButtonImages.size(); i++) {
             WebElement image = shareButtonImages.get(i);
-            waitForElementByElement(image);
+            wait.forElementVisible(image);
         }
         PageObjectLogging.log("verifyShareButtonsPresent", "social buttons present", true, driver);
     }
@@ -47,7 +45,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
         String[] titles = new String[numberOfShareButtons];
         for (int i = 0; i < numberOfShareButtons; i++) {
             WebElement link = shareButtonLinks.get(i);
-            waitForElementByElement(link);
+            wait.forElementVisible(link);
             titles[i] = link.getAttribute("title");
         }
         return titles;

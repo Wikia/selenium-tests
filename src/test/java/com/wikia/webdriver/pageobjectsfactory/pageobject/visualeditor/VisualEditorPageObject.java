@@ -213,7 +213,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyMediasInGallery(int expected) {
-    waitForElementByElement(galleryNode);
+    wait.forElementVisible(galleryNode);
     String className = galleryNode.getAttribute("class");
     String count = className.substring(className.indexOf("count-"));
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
@@ -224,7 +224,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyMedias(int expected) {
-    waitForElementByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     waitForElementVisibleByElement(mediaNode);
     Assertion.assertNumber(mediaNodes.size(), expected,
             "Checking the correct number of media nodes added");
@@ -232,9 +232,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorMediaSettingsDialog openMediaSettings() {
-    waitForElementByElement(editArea);
+    wait.forElementVisible(editArea);
     waitForElementVisibleByElement(mediaNode);
-    waitForElementByElement(focusedNode);
+    wait.forElementVisible(focusedNode);
     clickContextMenu();
     return new VisualEditorMediaSettingsDialog(driver);
   }
@@ -321,13 +321,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyVideoCaption(String caption) {
     waitForElementVisibleByElement(mediaNode);
-    waitForElementByElement(mediaCaption);
+    wait.forElementVisible(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
     PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
   }
 
   public void selectMedia() {
-    waitForElementByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     mediaNode.click();
   }
 
@@ -405,7 +405,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void deleteGallery(int index) {
     selectGallery(index);
     //wait for highlight
-    waitForElementByElement(focusedHighlight);
+    wait.forElementVisible(focusedHighlight);
     //TODO check if any future webdriver upgrade would resolve having to use separate logic
     if("Chrome".equalsIgnoreCase(Configuration.getBrowser())) {
       Actions actions2 = new Actions(driver);

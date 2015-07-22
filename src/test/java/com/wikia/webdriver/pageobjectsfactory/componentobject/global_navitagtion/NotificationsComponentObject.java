@@ -89,7 +89,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    *        showNotifications method
    */
   public void clickNotifications() {
-    waitForElementByElement(notificationsBubbles);
+    wait.forElementVisible(notificationsBubbles);
     scrollAndClick(notificationsBubbles);
     PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true);
   }

@@ -49,7 +49,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   public ArticlePageObject clickGetInfoLink() {
     waitForDialogVisible();
     try {
-      waitForElementByElement(getInfoLink);
+      wait.forElementVisible(getInfoLink);
       // Opens new tab to Template namespace
       getInfoLink.click();
       return new ArticlePageObject(driver);

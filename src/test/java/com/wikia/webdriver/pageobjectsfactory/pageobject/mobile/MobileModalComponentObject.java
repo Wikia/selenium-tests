@@ -32,7 +32,7 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   String modalTransition = "section[style*='transition']";
 
   public void closeModal() {
-    waitForElementByElement(openedModal);
+    wait.forElementVisible(openedModal);
     waitForElementClickableByElement(closeModalButton);
     scrollAndClick(closeModalButton);
   }
@@ -42,13 +42,13 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void goToPreviousImage() {
-    waitForElementByElement(previousImageButton);
+    wait.forElementVisible(previousImageButton);
     previousImageButton.click();
     waitForElementNotPresent(modalTransition);
   }
 
   public void goToNextImage() {
-    waitForElementByElement(nextImageButton);
+    wait.forElementVisible(nextImageButton);
     nextImageButton.click();
     waitForElementNotPresent(modalTransition);
   }
@@ -58,11 +58,11 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void verifyTopBarVisible() {
-    waitForElementByElement(topBarVisible);
+    wait.forElementVisible(topBarVisible);
   }
 
   public void verifyTopBarHidden() {
-    waitForElementByElement(topBarHidden);
+    wait.forElementVisible(topBarHidden);
   }
 
   public void verifyModalClosed() {
@@ -72,12 +72,12 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void hideTopBar() {
-    waitForElementByElement(topBarVisible);
+    wait.forElementVisible(topBarVisible);
     topBarVisible.click();
   }
 
   public void showTopBar() {
-    waitForElementByElement(topBarHidden);
+    wait.forElementVisible(topBarHidden);
     topBarHidden.click();
   }
 

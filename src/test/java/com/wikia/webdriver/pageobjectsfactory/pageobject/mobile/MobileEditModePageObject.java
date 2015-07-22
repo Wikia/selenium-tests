@@ -31,7 +31,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
   }
 
   public MobileEditPreviewPageObject clickPreview() {
-    waitForElementByElement(editPreviewButton);
+    wait.forElementVisible(editPreviewButton);
     waitForElementClickableByElement(editPreviewButton);
     jQueryClick(editPreviewButton);
     return new MobileEditPreviewPageObject(driver);

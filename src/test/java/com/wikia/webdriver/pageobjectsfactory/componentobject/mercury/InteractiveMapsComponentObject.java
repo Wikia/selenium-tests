@@ -111,7 +111,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public void switchToMapFrame() {
-    waitForElementByElement(lightbox);
+    wait.forElementVisible(lightbox);
     driver.switchTo().frame(mapFrame);
   }
 

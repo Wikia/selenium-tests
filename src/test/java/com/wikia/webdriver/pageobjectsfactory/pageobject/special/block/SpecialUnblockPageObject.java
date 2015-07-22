@@ -21,13 +21,13 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   }
 
   private void typeInUserName(String userName) {
-    waitForElementByElement(userNameField);
+    wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
     PageObjectLogging.log("typeInUserName", userName + "typed into username field", true);
   }
 
   private void clickSubmitButton() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
     PageObjectLogging.log("clickSubmitButton", "submit button clicked", true);
   }
@@ -38,7 +38,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   }
 
   public void verifyUnblockMessage(String userName) {
-    waitForElementByElement(unblockedUserHead);
+    wait.forElementVisible(unblockedUserHead);
     waitForElementByXPath(
         "//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName + "' and contains(text(), '"
         + userName + "')]");

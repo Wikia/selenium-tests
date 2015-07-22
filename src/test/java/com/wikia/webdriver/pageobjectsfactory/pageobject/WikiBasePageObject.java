@@ -226,7 +226,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyModalLoginAppeared() {
-    waitForElementByElement(logInModal);
+    wait.forElementVisible(logInModal);
     PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
   }
 
@@ -488,7 +488,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
-    waitForElementByElement(editButton);
+    wait.forElementVisible(editButton);
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton",
                           "Src main edit button clicked", true, driver);
@@ -496,7 +496,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
-    waitForElementByElement(editButton);
+    wait.forElementVisible(editButton);
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked",
                           true, driver);
@@ -504,7 +504,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
-    waitForElementByElement(veEditButton);
+    wait.forElementVisible(veEditButton);
     veEditButton.click();
     PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked",
                           true, driver);
@@ -526,7 +526,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
-    waitForElementByElement(sectionEditButton);
+    wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log(
         "openCKModeWithSectionEditButton",
@@ -539,7 +539,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
-    waitForElementByElement(sectionEditButton);
+    wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log(
         "openSrcModeWithSectionEditButton",
@@ -625,7 +625,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   @Deprecated
   public void verifyAvatarPresent() {
-    waitForElementByElement(userProfileAvatar);
+    wait.forElementVisible(userProfileAvatar);
     PageObjectLogging.log(
         "verifyAvatarPresent",
         "avatar is visible",
@@ -636,7 +636,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
           if (body.getAttribute("class").contains("skin-monobook")) {
             return driver.findElements(
@@ -661,8 +661,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   protected void clickArticleDeleteConfirmationButton() {
-    waitForElementByElement(deleteConfirmationButton);
-    waitForElementByElement(deleteCommentReasonField);
+    wait.forElementVisible(deleteConfirmationButton);
+    wait.forElementVisible(deleteCommentReasonField);
     deleteCommentReasonField.clear();
     deleteCommentReasonField.sendKeys("QAReason");
     deleteConfirmationButton.click();
@@ -686,9 +686,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   protected void clickRestoreArticleButton() {
-    waitForElementByElement(restoreButton);
+    wait.forElementVisible(restoreButton);
     scrollAndClick(restoreButton);
-    waitForElementByElement(userMessage);
+    wait.forElementVisible(userMessage);
     PageObjectLogging.log(
         "clickUndeleteArticle",
         "undelete article button clicked",
@@ -697,7 +697,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SpecialRestorePageObject undeleteByFlashMessage() {
-    waitForElementByElement(undeleteLink);
+    wait.forElementVisible(undeleteLink);
     undeleteLink.click();
     return new SpecialRestorePageObject(driver);
   }
@@ -740,7 +740,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyPermissionsErrorsPresent() {
-    waitForElementByElement(premissionErrorMessage);
+    wait.forElementVisible(premissionErrorMessage);
     PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
                           true, driver);
   }
@@ -766,7 +766,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
-    waitForElementByElement(specialUserLoginLink);
+    wait.forElementVisible(specialUserLoginLink);
     PageObjectLogging.log(
         "LoginLinkPresent",
         "Link to login special page present",
@@ -794,9 +794,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void logInViaModal(String userName, String password) {
-    waitForElementByElement(modalUserNameInput);
+    wait.forElementVisible(modalUserNameInput);
     modalUserNameInput.sendKeys(userName);
-    waitForElementByElement(modalPasswordInput);
+    wait.forElementVisible(modalPasswordInput);
     modalPasswordInput.sendKeys(password);
     PageObjectLogging.log(
         "FillLoginForm",
@@ -838,7 +838,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getWikiaCssContent() {
-    waitForElementByElement(cssSource);
+    wait.forElementVisible(cssSource);
     String source = cssSource.getText();
     PageObjectLogging.log("cssSource",
         "the following text was get from Wikia.css: " + source, true);
@@ -846,7 +846,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getFirstCssRevision() {
-    waitForElementByElement(cssEditSummary);
+    wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
     PageObjectLogging.log("cssEditSummary",
                           "the following edit summaty was get from Wikia.css: "
@@ -993,7 +993,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void follow() {
-    waitForElementByElement(followButton);
+    wait.forElementVisible(followButton);
     jQueryClick(followButton);
     waitForTextToBePresentInElementByElement(followButton, "Following");
     PageObjectLogging.log("followArticle", "page is followed", true, driver);
@@ -1020,12 +1020,12 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getHeaderText() {
-    waitForElementByElement(wikiFirstHeader);
+    wait.forElementVisible(wikiFirstHeader);
     return wikiFirstHeader.getText();
   }
 
   public void verifyHeader(String fileName) {
-    waitForElementByElement(wikiFirstHeader);
+    wait.forElementVisible(wikiFirstHeader);
     Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
   }
 
@@ -1205,7 +1205,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {
     String pattern = "List of wikis with matched criteria (" + numberOfWikis + ")";
-    waitForElementByElement(headerWhereIsMyExtensionPage);
+    wait.forElementVisible(headerWhereIsMyExtensionPage);
     PageObjectLogging.log(
         "verifyNumberOfTop1kWikis",
         "Verification of top 1k wikis",
@@ -1263,13 +1263,13 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void scrollToFooter() {
-	  waitForElementByElement(footer);
+	  wait.forElementVisible(footer);
 	  scrollToElement(footer);
 	  PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
   public void verifyGlobalNavigation() {
-	  waitForElementByElement(globalNavigationBar);
+	  wait.forElementVisible(globalNavigationBar);
 	  PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
@@ -1296,7 +1296,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyAvatarPlaceholder() {
 	  // prevent http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp
 	  WebElement placeholder = driver.findElement(By.cssSelector(globalNavigationAvatarPlaceholder));
-	  waitForElementByElement(placeholder);
+	  wait.forElementVisible(placeholder);
 	  PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
   }
 
@@ -1306,14 +1306,14 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyAvatarVisible() {
-	  waitForElementByElement(globalNavigationAvatar);
+	  wait.forElementVisible(globalNavigationAvatar);
 	  PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
   }
 
   public UserProfilePageObject clickOnAvatar() {
 	  waitForElementClickableByElement(globalNavigationUserChevron);
 	  globalNavigationUserChevron.click();
-	  waitForElementByElement(userMenuDropdown);
+	  wait.forElementVisible(userMenuDropdown);
 	  waitForElementClickableByElement(globalNavigationAvatar);
     globalNavigationAvatar.click();
 	  PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);

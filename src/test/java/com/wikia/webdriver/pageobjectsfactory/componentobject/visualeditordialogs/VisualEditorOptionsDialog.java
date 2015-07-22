@@ -85,7 +85,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     waitForDialogVisible();
     typeCategory(cat);
     clickLinkResult();
-    waitForElementByElement(categoryItem);
+    wait.forElementVisible(categoryItem);
     PageObjectLogging.log("addCategory", "Category: " + cat + " is added", true, driver);
   }
 
@@ -97,9 +97,9 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   }
 
   public void clickLinkResult() {
-    waitForElementByElement(selectedResult);
+    wait.forElementVisible(selectedResult);
     WebElement matchingResult = selectedResult.findElement(labelElementBy);
-    waitForElementByElement(matchingResult);
+    wait.forElementVisible(matchingResult);
     waitForElementClickableByElement(matchingResult);
     matchingResult.click();
   }
@@ -119,7 +119,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
   private void clickCategory(String searchCategory) {
     waitForDialogVisible();
-    waitForElementByElement(categoryItem);
+    wait.forElementVisible(categoryItem);
     WebElement elementFound = getElementByText(categoryItems, searchCategory);
     WebElement categoryDownIndicator = elementFound.findElement(downIndicatorBy);
     categoryDownIndicator.click();

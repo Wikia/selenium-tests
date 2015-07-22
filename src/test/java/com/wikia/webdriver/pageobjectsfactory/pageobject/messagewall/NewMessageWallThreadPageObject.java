@@ -36,7 +36,7 @@ public class NewMessageWallThreadPageObject extends NewMessageWall {
   }
 
   public void verifyLastReply(String userName, String message) {
-    waitForElementByElement(replyBody);
+    wait.forElementVisible(replyBody);
     Assertion.assertEquals(lastReplyEditor.get(lastReplyEditor.size() - 1).getText(), userName);
     Assertion.assertEquals(lastReplyText.get(lastReplyEditor.size() - 1).getText(), message);
   }

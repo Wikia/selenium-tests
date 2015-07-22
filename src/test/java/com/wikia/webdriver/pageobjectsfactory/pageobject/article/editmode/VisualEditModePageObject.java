@@ -131,7 +131,7 @@ public class VisualEditModePageObject extends EditMode {
 
   private void verifyComponent(WebElement component) {
     driver.switchTo().frame(iframe);
-    waitForElementByElement(component);
+    wait.forElementVisible(component);
     driver.switchTo().defaultContent();
   }
 
@@ -163,7 +163,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyContentLoaded() {
     driver.switchTo().frame(iframe);
-    waitForElementByElement(contentInput);
+    wait.forElementVisible(contentInput);
     PageObjectLogging.log("verifyContentLoaded", "RTE editor loaded", true, driver);
     driver.switchTo().defaultContent();
   }
@@ -242,7 +242,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public Object modifyComponent(Components component) {
     mouseOverComponent(component);
-    waitForElementByElement(modifyComponentButton);
+    wait.forElementVisible(modifyComponentButton);
     modifyComponentButton.click();
     PageObjectLogging.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
     switch (component) {
@@ -309,7 +309,7 @@ public class VisualEditModePageObject extends EditMode {
    */
   public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
     List<String> videos = new ArrayList<String>();
-    waitForElementByElement(messageSourceModeTextArea);
+    wait.forElementVisible(messageSourceModeTextArea);
     String sourceText = messageSourceModeTextArea.getText();
     int index = 0;
     while (true) {
@@ -324,7 +324,7 @@ public class VisualEditModePageObject extends EditMode {
       }
       index = previousStarIndex + 1;
     }
-    waitForElementByElement(messageSourceModeTextArea);
+    wait.forElementVisible(messageSourceModeTextArea);
     messageSourceModeTextArea.clear();
     messageSourceModeTextArea.sendKeys("WHITELIST");
     messageSourceModeTextArea.sendKeys(Keys.ENTER);
@@ -342,7 +342,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void typeCategoryName(String categoryName) {
-    waitForElementByElement(categoryInput);
+    wait.forElementVisible(categoryInput);
     CommonUtils.setClipboardContents(categoryName);
     categoryInput.sendKeys(Keys.chord(Keys.CONTROL, "v"));
     PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
@@ -393,7 +393,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public String selectCategorySuggestions(int categoryNumber) {
-    waitForElementByElement(categorySuggestionsContainer);
+    wait.forElementVisible(categorySuggestionsContainer);
     WebElement categoryItem = categorySuggestionsContainer
         .findElements(categorySuggestionsList)
         .get(categoryNumber);
@@ -430,14 +430,14 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyBlockedUserMessage() {
-    waitForElementByElement(blockedUserMessage1);
-    waitForElementByElement(blockedUserMessage2);
+    wait.forElementVisible(blockedUserMessage1);
+    wait.forElementVisible(blockedUserMessage2);
     PageObjectLogging.log("verifyBlockedUserMessage",
                           "blocked user message when attempting to create article verified", true);
   }
 
   private void selectFromContextMenu(WebElement option) {
-    waitForElementByElement(iframe);
+    wait.forElementVisible(iframe);
     driver.switchTo().frame(iframe);
     Actions actions = new Actions(driver);
     actions.contextClick(visualModeTable).build().perform();
@@ -454,11 +454,11 @@ public class VisualEditModePageObject extends EditMode {
 
   public void clickPropertiesTableButton() {
     selectFromContextMenu(propertiesItem);
-    waitForElementByElement(addTableLightbox);
+    wait.forElementVisible(addTableLightbox);
   }
 
   public ArticlePageObject clickPublishButton() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
   }

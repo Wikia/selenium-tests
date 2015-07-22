@@ -99,7 +99,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private void clickStyleItemFromDropDown(By styleBy) {
     WebElement styleListElement = toolListDropDowns.get(STYLE_LIST);
     WebElement styleItems = toolListItems.get(STYLE_LIST);
-    waitForElementByElement(styleListElement);
+    wait.forElementVisible(styleListElement);
     Actions actions = new Actions(driver);
     actions.click(styleListElement).click(styleItems.findElement(styleBy)).build().perform();
   }

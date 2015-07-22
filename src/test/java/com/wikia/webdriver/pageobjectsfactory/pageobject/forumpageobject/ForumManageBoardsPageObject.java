@@ -40,26 +40,26 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private WebElement secondForumLink;
 
   private void openCreateNewBoardForm() {
-    waitForElementByElement(createBoardButton);
+    wait.forElementVisible(createBoardButton);
     createBoardButton.click();
     PageObjectLogging.log("openCreateNewBoardForm", "create new board form opened", true);
   }
 
   private void typeBoardTitle(String title) {
-    waitForElementByElement(boardTitleField);
+    wait.forElementVisible(boardTitleField);
     boardTitleField.sendKeys(title);
     PageObjectLogging.log("typeBoardTitle", "board title: '" + title + "' typed in", true);
   }
 
   private void typeBoradDescription(String description) {
-    waitForElementByElement(boardDescriptionField);
+    wait.forElementVisible(boardDescriptionField);
     boardDescriptionField.sendKeys(description);
     PageObjectLogging
         .log("typeBoardDescription", "board description: '" + description + "' typed in", true);
   }
 
   private void submitNewBoard() {
-    waitForElementByElement(boardSubmitButton);
+    wait.forElementVisible(boardSubmitButton);
     scrollAndClick(boardSubmitButton);
     PageObjectLogging.log("submitNewBoard", "new board submitted", true);
   }
@@ -87,7 +87,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void confirmDeleteForum(String deletedName, String mergerdName) {
-    waitForElementByElement(deleteBoardConfirmationField);
+    wait.forElementVisible(deleteBoardConfirmationField);
     deleteBoardConfirmationField.sendKeys(deletedName);
     Select select = new Select(mergeToBoard);
     select.selectByVisibleText(mergerdName);
@@ -95,7 +95,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void clickDeleteAndMergeForum() {
-    waitForElementByElement(deleteAndMergeButton);
+    wait.forElementVisible(deleteAndMergeButton);
     scrollAndClick(deleteAndMergeButton);
     PageObjectLogging.log("clickDeleteAndMergeForum", "delete and merge button clicked", true);
   }
@@ -115,12 +115,12 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   public String getFirstForumName() {
-    waitForElementByElement(firstForumLink);
+    wait.forElementVisible(firstForumLink);
     return firstForumLink.getText();
   }
 
   public String getSecondForumName() {
-    waitForElementByElement(secondForumLink);
+    wait.forElementVisible(secondForumLink);
     return secondForumLink.getText();
   }
 
@@ -158,8 +158,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void clearEditBoardFields() {
-    waitForElementByElement(boardTitleField);
-    waitForElementByElement(boardDescriptionField);
+    wait.forElementVisible(boardTitleField);
+    wait.forElementVisible(boardDescriptionField);
     boardTitleField.clear();
     boardDescriptionField.clear();
     PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true);

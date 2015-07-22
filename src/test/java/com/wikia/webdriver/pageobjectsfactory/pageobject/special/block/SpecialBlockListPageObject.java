@@ -29,14 +29,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private WebElement expirationDateElement;
 
   private void typeInUserName(String userName) {
-    waitForElementByElement(userNameField);
+    wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
     PageObjectLogging
         .log("Special:BlockList typeInUserName", userName + " typed in username field", true);
   }
 
   private void clickSearchButton() {
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
     PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
   }
@@ -47,7 +47,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserUnblocked() {
-    waitForElementByElement(userUnblockedMessage);
+    wait.forElementVisible(userUnblockedMessage);
     PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
                           "verified that user is not on blocked users list", true, driver);
   }

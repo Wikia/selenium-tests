@@ -51,12 +51,12 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void verifyMoMImage() {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     PageObjectLogging.log("verifyMoMImage", "Hero module image is visible", true);
   }
 
   public void clickUpdateCoverImageLink() {
-    waitForElementByElement(updateCoverImageInput);
+    wait.forElementVisible(updateCoverImageInput);
     updateCoverImageInput.click();
   }
 
@@ -67,23 +67,23 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void verifyDragToRepositionText() {
-    waitForElementByElement(dragToRepositionText);
+    wait.forElementVisible(dragToRepositionText);
     PageObjectLogging.log("verifyDragToRepositionText",
         "Drag to reposition text message is visible", true);
   }
 
   public void clickPublishButton() {
-    waitForElementByElement(imagePublishButton);
+    wait.forElementVisible(imagePublishButton);
     imagePublishButton.click();
   }
 
   public void clickEditDescriptionLink() {
-    waitForElementByElement(editDescriptionButton);
+    wait.forElementVisible(editDescriptionButton);
     editDescriptionButton.click();
   }
 
   public void typeMoMDescription(String momDescription) {
-    waitForElementByElement(descriptionEditField);
+    wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
     PageObjectLogging.log("typeMoMDescription", momDescription + "MoM description was typed in",
@@ -91,18 +91,18 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void clickDescriptionPublishButton() {
-    waitForElementByElement(descriptionPublishButton);
+    wait.forElementVisible(descriptionPublishButton);
     descriptionPublishButton.click();
   }
 
   public void verifyEditedAndPublishedDescriptions(String editedDescription) {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     Assertion.assertEquals(heroPublishedDescription.getText(), editedDescription);
   }
 
   public void verifyAdminStaffButtons() {
-    waitForElementByElement(updateCoverImageLink);
-    waitForElementByElement(editDescriptionButton);
+    wait.forElementVisible(updateCoverImageLink);
+    wait.forElementVisible(editDescriptionButton);
   }
 
   public void verifyNoAdminStaffButtons() {
@@ -111,12 +111,12 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public String getMoMSrc() {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     return heroImageModule.getAttribute("src");
   }
 
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     Assertion.assertNotEquals(newImgSrc, imgSrc);
   }
 
@@ -132,28 +132,28 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void verifyPublishButtonDisability() {
-    waitForElementByElement(editBox);
-    waitForElementByElement(publishButtonDisabled);
+    wait.forElementVisible(editBox);
+    wait.forElementVisible(publishButtonDisabled);
   }
 
   public String getDescriptionText() {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     return heroPublishedDescription.getText();
   }
 
   public void addRandomTextToDescriptionField(String randomText) {
-    waitForElementByElement(editBox);
+    wait.forElementVisible(editBox);
     descriptionEditField.click();
     descriptionEditField.sendKeys(randomText);
   }
 
   public void verifyPublishedTextAndEditor(String publishedText) {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     Assertion.assertEquals(heroPublishedDescription.getText(), publishedText);
   }
 
   public void clickDiscardButton() {
-    waitForElementByElement(descriptionDiscardButton);
+    wait.forElementVisible(descriptionDiscardButton);
     waitForElementClickableByElement(descriptionDiscardButton);
     descriptionDiscardButton.click();
   }

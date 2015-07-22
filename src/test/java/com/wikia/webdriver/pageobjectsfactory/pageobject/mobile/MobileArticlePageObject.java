@@ -80,10 +80,10 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   private List<WebElement> editSectionList;
 
   public void showCommentsSection() {
-    waitForElementByElement(commentsSectionHeader);
+    wait.forElementVisible(commentsSectionHeader);
     scrollToElement(commentsSectionHeader);
-    waitForElementByElement(postCommentButton);
-    waitForElementByElement(commentInputArea);
+    wait.forElementVisible(postCommentButton);
+    wait.forElementVisible(commentInputArea);
     PageObjectLogging.log("showCommentsSection", "comments sections is visible", true, driver);
   }
 
@@ -94,7 +94,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   private void verifyNumberOfComments(int number) {
-    waitForElementByElement(commentsSectionHeader);
+    wait.forElementVisible(commentsSectionHeader);
     Assertion.assertEquals(Integer.parseInt(commentsSectionHeader.getAttribute("data-count")),
                            number + 1,
                            "number of comments was not increased"
@@ -146,10 +146,10 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void addReply(String reply) {
-    waitForElementByElement(replyCommentButton);
+    wait.forElementVisible(replyCommentButton);
     String url = driver.getCurrentUrl();
     replyCommentButton.click();
-    waitForElementByElement(replyInputArea);
+    wait.forElementVisible(replyInputArea);
     verifyURL(url);
     replyInputArea.sendKeys(reply);
     replyInputArea.submit();
@@ -159,15 +159,15 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void clickLoadMoreButton() {
-    waitForElementByElement(loadMoreCommentsButton);
+    wait.forElementVisible(loadMoreCommentsButton);
     scrollAndClick(loadMoreCommentsButton);
-    waitForElementByElement(loadPreviousCommentsButton);
+    wait.forElementVisible(loadPreviousCommentsButton);
   }
 
   public void clickLoadPreviousButton() {
-    waitForElementByElement(loadPreviousCommentsButton);
+    wait.forElementVisible(loadPreviousCommentsButton);
     scrollAndClick(loadPreviousCommentsButton);
-    waitForElementByElement(loadMoreCommentsButton);
+    wait.forElementVisible(loadMoreCommentsButton);
     waitForElementNotVisibleByElement(loadPreviousCommentsButton);
   }
 
@@ -201,7 +201,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
 
   public MobileArticlePageObject openTopbarPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.ARTICLE_TOPBAR);
-    waitForElementByElement(wikiHeader);
+    wait.forElementVisible(wikiHeader);
     PageObjectLogging.log("openTopbarPage", "Topbar page was opened", true, driver);
     return new MobileArticlePageObject(driver);
   }
@@ -224,7 +224,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void verifySectionVisibility() {
-    waitForElementByElement(sectionVisibilityElement);
+    wait.forElementVisible(sectionVisibilityElement);
     PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true);
   }
 
@@ -241,28 +241,28 @@ public class MobileArticlePageObject extends MobileBasePageObject {
 
   public MobileArticlePageObject openModals(String wikiURL) {
     getUrl(wikiURL + URLsContent.ARTICLE_MODAL);
-    waitForElementByElement(modalWrapper);
+    wait.forElementVisible(modalWrapper);
     PageObjectLogging.log("openModals", "modals page was opened", true, driver);
     return new MobileArticlePageObject(driver);
   }
 
   public MobileModalComponentObject clickModal() {
-    waitForElementByElement(modalWrapper);
+    wait.forElementVisible(modalWrapper);
     modalWrapper.click();
-    waitForElementByElement(currentImageModal);
+    wait.forElementVisible(currentImageModal);
     PageObjectLogging.log("clickModal", "modal url verified", true, driver);
     return new MobileModalComponentObject(driver);
   }
 
   public void scrollToImage(int imageNumber) {
-    waitForElementByElement(listOfMediaElements.get(imageNumber));
+    wait.forElementVisible(listOfMediaElements.get(imageNumber));
     scrollToElement(listOfMediaElements.get(imageNumber));
   }
 
   public MobileModalComponentObject clickOpenedImage(int n) {
-    waitForElementByElement(listOfMediaElements.get(n));
+    wait.forElementVisible(listOfMediaElements.get(n));
     scrollAndClick(listOfMediaElements.get(n));
-    waitForElementByElement(openedImage);
+    wait.forElementVisible(openedImage);
     openedImage.click();
     PageObjectLogging.log("clickModal", "modal url verified", true, driver);
     return new MobileModalComponentObject(driver);
@@ -274,7 +274,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public TableOfContentsComponentObject openToc() {
-    waitForElementByElement(openTOCbutton);
+    wait.forElementVisible(openTOCbutton);
     openTOCbutton.click();
     PageObjectLogging.log("openToc", "toc opened", true);
     return new TableOfContentsComponentObject(driver);
@@ -285,25 +285,25 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void verifySectionHeaderOpened(String desiredId) {
-    waitForElementByElement(sectionHeaderOpened);
+    wait.forElementVisible(sectionHeaderOpened);
     String currentId = sectionHeaderOpened.getAttribute("id");
     Assertion.assertEquals(desiredId, currentId, "id's are not equals");
     PageObjectLogging.log("verifySectionHeaderOpened", "header section opened", true);
   }
 
   public void verifySectionOpened(String desiredId, int level) {
-    waitForElementByElement(sectionOpened);
+    wait.forElementVisible(sectionOpened);
     sectionOpened.findElement(By.cssSelector("h" + level + "#" + desiredId));
     PageObjectLogging.log("verifySectionLevel" + level + "Opened", "section opened", true);
   }
 
   public void clickOpenedImage() {
-    waitForElementByElement(openedImage);
+    wait.forElementVisible(openedImage);
     openedImage.click();
   }
 
   private void verifyTopbarButton(WebElement element) {
-    waitForElementByElement(topbarLoginButton);
+    wait.forElementVisible(topbarLoginButton);
     element.click();
     waitForElementNotPresent(curtainNotOpened);
     Assertion.assertEquals("block", curtain.getCssValue("display"), "menu is not opened");
@@ -319,7 +319,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void clickWordmark() {
-    waitForElementByElement(wikiaTopPageLogo);
+    wait.forElementVisible(wikiaTopPageLogo);
     wikiaTopPageLogo.click();
   }
 
@@ -330,7 +330,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void openMenu() {
-    waitForElementByElement(topbarMenuButton);
+    wait.forElementVisible(topbarMenuButton);
     topbarMenuButton.click();
   }
 
@@ -344,7 +344,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
         elem.click();
         for (WebElement elem2 : level2) {
           if (elem2.getAttribute("class").contains("cld")) {
-            waitForElementByElement(level2Visible);
+            wait.forElementVisible(level2Visible);
             waitForElementNotVisibleByElement(level3);
             elem2.click();
             waitForElementVisibleByElement(level3Visible);

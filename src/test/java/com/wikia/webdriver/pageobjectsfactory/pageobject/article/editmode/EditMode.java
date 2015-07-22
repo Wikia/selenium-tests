@@ -74,14 +74,14 @@ public class EditMode extends WikiBasePageObject {
   }
 
   public PhotoAddComponentObject clickPhotoButton() {
-    waitForElementByElement(photoButton);
+    wait.forElementVisible(photoButton);
     scrollAndClick(photoButton);
     PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public VetAddVideoComponentObject clickVideoButton() {
-    waitForElementByElement(videoButton);
+    wait.forElementVisible(videoButton);
     scrollAndClick(videoButton);
     PageObjectLogging.log("clickVideoButton", "video button clicked", true);
     return new VetAddVideoComponentObject(driver);
@@ -94,21 +94,21 @@ public class EditMode extends WikiBasePageObject {
   }
 
   public SliderBuilderComponentObject clickSliderButton() {
-    waitForElementByElement(sliderButton);
+    wait.forElementVisible(sliderButton);
     scrollAndClick(sliderButton);
     PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
     return new SliderBuilderComponentObject(driver);
   }
 
   public SlideshowBuilderComponentObject clickSlideshowButton() {
-    waitForElementByElement(slideshowButton);
+    wait.forElementVisible(slideshowButton);
     scrollAndClick(slideshowButton);
     PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
     return new SlideshowBuilderComponentObject(driver);
   }
 
   public GalleryBuilderComponentObject clickGalleryButton() {
-    waitForElementByElement(galleryButton);
+    wait.forElementVisible(galleryButton);
     scrollAndClick(galleryButton);
     PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
     return new GalleryBuilderComponentObject(driver);

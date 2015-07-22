@@ -27,7 +27,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
-    waitForElementByElement(featuredVideoForm);
+    wait.forElementVisible(featuredVideoForm);
     WebElement addVideoButton = featuredVideoForm.findElement(By.cssSelector(".add-video-button"));
     addVideoButton.click();
     PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true);
@@ -41,7 +41,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
   }
 
   public void verifyVideoTitleUpdated(String name) {
-    waitForElementByElement(featuredVideoForm);
+    wait.forElementVisible(featuredVideoForm);
     WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
     String title = videoTitle.getText();
     Assertion.assertEquals(name, title);
@@ -49,7 +49,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
   }
 
   public void verifyVideoDisplayTitleUpdated(String name) {
-    waitForElementByElement(featuredVideoForm);
+    wait.forElementVisible(featuredVideoForm);
     WebElement displayTitle = featuredVideoForm.findElement(By.cssSelector(".display-title"));
     String title = displayTitle.getAttribute("value");
     Assertion.assertEquals(name, title);

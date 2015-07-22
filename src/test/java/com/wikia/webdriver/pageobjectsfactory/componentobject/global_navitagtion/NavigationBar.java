@@ -34,18 +34,18 @@ public class NavigationBar extends WikiBasePageObject {
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public void triggerSuggestions(String query) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.clear();
     waitForElementClickableByElement(searchInput);
     searchInput.click();
-    waitForElementByBy(jqueryAutocompleteBy);
+    wait.forElementPresent(jqueryAutocompleteBy);
     Typing.sendKeysHumanSpeed(searchInput, query);
     waitForElementByCss(suggestionCss);
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
   }
 
   public void verifySuggestions(String suggestionText) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
     String allSuggestionTexts = "";
     for (int i = 0; i < suggestionsList.size(); i++) {
       if (suggestionsList.get(i).getAttribute("title") != null) {
@@ -59,7 +59,7 @@ public class NavigationBar extends WikiBasePageObject {
    * Arrow down through suggestions, and click enter on the desired one
    */
   public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestionText) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
 
     int position = 0;
     for (WebElement suggestion : suggestionsList) {
@@ -87,7 +87,7 @@ public class NavigationBar extends WikiBasePageObject {
    * click on desired suggestion
    */
   public ArticlePageObject clickSuggestion(String suggestion) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
     for (int i = 0; i < suggestionsList.size(); i++) {
       WebElement currentSuggestion = suggestionsList.get(i);
       if (currentSuggestion.getText().contains(suggestion)) {
@@ -102,7 +102,7 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public void typeQuery(String query) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.clear();
     searchInput.sendKeys(query);
     PageObjectLogging.log("typeQuery", "typed query: " + query, true);

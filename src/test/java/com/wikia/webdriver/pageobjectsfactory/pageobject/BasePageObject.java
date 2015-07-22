@@ -36,6 +36,7 @@ import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -47,7 +48,8 @@ public class BasePageObject {
 
   public WebDriver driver;
   protected int timeOut = 30;
-  public WebDriverWait wait;
+  public WebDriverWait waitFor;
+  public final Wait wait;
   public Actions builder;
   protected UrlBuilder urlBuilder = new UrlBuilder();
 
@@ -62,8 +64,9 @@ public class BasePageObject {
 
   public BasePageObject(WebDriver driver) {
     this.driver = driver;
-    this.wait = new WebDriverWait(driver, timeOut);
+    this.waitFor = new WebDriverWait(driver, timeOut);
     this.builder = new Actions(driver);
+    this.wait = new Wait(driver);
     this.setWindowSizeAndroid();
 
     PageFactory.initElements(driver, this);
@@ -392,36 +395,6 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is present in browser DOM
-   */
-  public WebElement waitForElementByBy(By by) {
-    wait.until(ExpectedConditions.presenceOfElementLocated(by));
-    return driver.findElement(by);
-  }
-
-  /**
-   * Checks if the element is visible on the browser
-   */
-  public WebElement waitForElementVisibleByBy(By by) {
-    wait.until(ExpectedConditions.presenceOfElementLocated(by));
-    return driver.findElement(by);
-  }
-
-  /**
-   * Checks if the element is visible on browser
-   * <p/>
-   * * @param element The element to be checked
-   */
-  public void waitForElementByElement(WebElement element) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      wait.until(ExpectedConditions.visibilityOf(element));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  /**
    * Checks if the element is visible on browser
    * <p/>
    * * @param elementBy The element to be checked
@@ -429,7 +402,7 @@ public class BasePageObject {
   public void waitForElementByElementLocatedBy(By elementBy) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
+      waitFor.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -443,7 +416,7 @@ public class BasePageObject {
   public void waitForElementPresenceByBy(By locator) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      waitFor.until(ExpectedConditions.presenceOfElementLocated(locator));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -455,7 +428,7 @@ public class BasePageObject {
   public void waitForElementVisibleByElement(WebElement element) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.elementVisible(element));
+      waitFor.until(CommonExpectedConditions.elementVisible(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -482,7 +455,7 @@ public class BasePageObject {
   public WebElement waitForElementByCss(String cssSelector) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+      waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
       return driver.findElement(By.cssSelector(cssSelector));
     } finally {
       restoreDeaultImplicitWait();
@@ -490,14 +463,14 @@ public class BasePageObject {
   }
 
   public WebElement waitForElementByXPath(String xPath) {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+    waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
     return driver.findElement(By.xpath(xPath));
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+      waitFor.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -506,25 +479,25 @@ public class BasePageObject {
   public void waitForElementClickableByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.elementToBeClickable(element));
+      waitFor.until(CommonExpectedConditions.elementToBeClickable(element));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {
-    wait.until(CommonExpectedConditions.elementNotToBeClickable(element));
+    waitFor.until(CommonExpectedConditions.elementNotToBeClickable(element));
   }
 
   public void waitForElementById(String id) {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+    waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
   }
 
   public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
       String value) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
+      waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
           By.cssSelector(selector), attribute, value));
     } finally {
       restoreDeaultImplicitWait();
@@ -535,8 +508,8 @@ public class BasePageObject {
       String expectedValue) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
-          cssProperty, expectedValue));
+      waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
+                                                                    cssProperty, expectedValue));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -544,14 +517,14 @@ public class BasePageObject {
 
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
       String attribute, String value) {
-    wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-        value));
+    waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
+                                                                            value));
   }
 
   public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
+      waitFor.until(CommonExpectedConditions.textToBePresentInElement(element, text));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -560,7 +533,7 @@ public class BasePageObject {
   public void waitForTextNotPresentInElementByElementLocatedBy(By by, String text) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
+      waitFor.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -569,23 +542,23 @@ public class BasePageObject {
   public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
+      waitFor.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
   public void waitForTextToBePresentInElementByBy(By by, String text) {
-    wait.until(CommonExpectedConditions.textToBePresentInElement(by, text));
+    waitFor.until(CommonExpectedConditions.textToBePresentInElement(by, text));
   }
 
   public void waitForStringInURL(String givenString) {
-    wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
+    waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
     PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
   }
 
   public void waitForAlertAndAccept() {
-    wait.until(ExpectedConditions.alertIsPresent());
+    waitFor.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     String alertText = alert.getText();
     alert.accept();
@@ -632,14 +605,14 @@ public class BasePageObject {
     // the below method is native click which is the only way to load
     // notification
     notifications_clickOnNotificationsLogo();
-    waitForElementByElement(notificationsLatestNotificationOnWiki);
+    wait.forElementVisible(notificationsLatestNotificationOnWiki);
     waitForTextToBePresentInElementByElement(notificationsLatestNotificationOnWiki, title);
     PageObjectLogging.log("notifications_verifyNotificationTitle",
         "Verify that the latest notification has the following title: " + title, true, driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
-    waitForElementByElement(notificationsShowNotificationsLogo);
+    wait.forElementVisible(notificationsShowNotificationsLogo);
     waitForElementClickableByElement(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
     PageObjectLogging.log("notifications_clickOnNotificationsLogo",
@@ -647,7 +620,7 @@ public class BasePageObject {
   }
 
   public void notifications_showNotifications() {
-    waitForElementByElement(notificationsShowNotificationsLogo);
+    wait.forElementVisible(notificationsShowNotificationsLogo);
     executeScript("$('#WallNotifications ul.subnav').addClass('show')");
     PageObjectLogging.log("norifications_showNotifications",
         "show notifications by adding 'show' class to element", true, driver);
@@ -665,7 +638,7 @@ public class BasePageObject {
    */
   public void waitForElementNotPresent(final By selector) {
     changeImplicitWait(0, TimeUnit.SECONDS);
-    wait.until(CommonExpectedConditions.elementNotPresent(selector));
+    waitFor.until(CommonExpectedConditions.elementNotPresent(selector));
     restoreDeaultImplicitWait();
   }
 
@@ -673,14 +646,14 @@ public class BasePageObject {
    * Wait for element to be in viewport Either position top or left is bigger then -1
    */
   public void waitForElementInViewPort(final WebElement element) {
-    wait.until(CommonExpectedConditions.elementInViewPort(element));
+    waitFor.until(CommonExpectedConditions.elementInViewPort(element));
   }
 
   /**
    * Wait for new window present
    */
   public void waitForNewWindow() {
-    wait.until(CommonExpectedConditions.newWindowPresent());
+    waitFor.until(CommonExpectedConditions.newWindowPresent());
   }
 
   public void appendToUrl(String additionToUrl) {

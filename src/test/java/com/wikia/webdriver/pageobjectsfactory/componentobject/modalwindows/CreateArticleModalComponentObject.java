@@ -37,10 +37,10 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   private void createPage(String title, String layout) {
-    waitForElementByElement(titleInput);
+    wait.forElementVisible(titleInput);
     sendKeys(titleInput, title);
     chooseLayout(layout);
-    waitForElementByElement(createPageButton);
+    wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
     PageObjectLogging.log(
         "PageCreated",
@@ -50,7 +50,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMessageAboutBlockPresent() {
-    waitForElementByElement(phalanxBlockMessageContainer);
+    wait.forElementVisible(phalanxBlockMessageContainer);
     waitForTextToBePresentInElementByElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );

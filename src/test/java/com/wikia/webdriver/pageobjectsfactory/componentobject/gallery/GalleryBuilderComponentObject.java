@@ -89,7 +89,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   }
 
   public void adjustPosition(PositionsGallery positionGallery) {
-    waitForElementByElement(position);
+    wait.forElementVisible(position);
     Select positionDropdown = new Select(position);
     positionDropdown.selectByValue(positionGallery.getPositionGallery());
   }
@@ -98,20 +98,20 @@ public class GalleryBuilderComponentObject extends BasePageObject {
    * @param columnsNo fit to page 1 - 6
    */
   public void adjustColumns(String columnsNo) {
-    waitForElementByElement(columns);
+    wait.forElementVisible(columns);
     Select columnsDropdown = new Select(columns);
     columnsDropdown.selectByVisibleText(columnsNo);
   }
 
   public void adjustSpacing(SpacingGallery spacingGallery) {
-    waitForElementByElement(spacing);
+    wait.forElementVisible(spacing);
     Select spacingDropdown = new Select(spacing);
     spacingDropdown.selectByValue(spacingGallery.getSpacingGallery());
   }
 
 
   public void adjustOrientation(Orientation orientionGallery) {
-    waitForElementByElement(orientation);
+    wait.forElementVisible(orientation);
     switch (orientionGallery) {
       case NONE:
         orientation.findElement(orintationNone);
@@ -133,7 +133,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
-    waitForElementByElement(addPhotoButton);
+    wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
     return new AddPhotoComponentObject(driver);
@@ -141,14 +141,14 @@ public class GalleryBuilderComponentObject extends BasePageObject {
 
   public void verifyPhotosCount(int photos) {
     for (int i = 0; i < photos; i++) {
-      waitForElementByElement(galleryPreviewPhotos.get(i));
+      wait.forElementVisible(galleryPreviewPhotos.get(i));
       PageObjectLogging
           .log("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
 
   public void clickFinish() {
-    waitForElementByElement(finishButton);
+    wait.forElementVisible(finishButton);
     finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }

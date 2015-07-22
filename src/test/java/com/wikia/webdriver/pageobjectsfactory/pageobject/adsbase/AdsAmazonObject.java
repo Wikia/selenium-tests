@@ -47,7 +47,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   private WebElement getAmazonIframe(WebElement slotWithAmazon) {
-    waitForElementByElement(slotWithAmazon);
+    wait.forElementVisible(slotWithAmazon);
     return slotWithAmazon.findElement(By.cssSelector(
         "div[id*=__container__] > iframe"
     ));
@@ -58,7 +58,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           return (Boolean) ((JavascriptExecutor) driver)
               .executeAsyncScript(
@@ -117,7 +117,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     WebElement amazonArticleLink = driver.findElement(
         By.cssSelector(amazonLinkCssSelectors.get(linkName))
     );
-    waitForElementByElement(amazonArticleLink);
+    wait.forElementVisible(amazonArticleLink);
     amazonArticleLink.click();
     waitTitleChangesTo(amazonLinkTitles.get(linkName));
     return this;

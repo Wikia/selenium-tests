@@ -21,7 +21,7 @@ public class ForumHistoryPageObject extends WikiBasePageObject {
   }
 
   public void verifyImportandPageElements() {
-    waitForElementByElement(threadHistoryTable);
+    wait.forElementVisible(threadHistoryTable);
     waitForTextToBePresentInElementByElement(creatorActionCell, "created this thread");
     PageObjectLogging
         .log("verifyImportandPageElements", "thread history page basic content verified", true);

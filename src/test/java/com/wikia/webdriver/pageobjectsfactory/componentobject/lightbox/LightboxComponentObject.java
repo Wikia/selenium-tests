@@ -64,34 +64,34 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;
 
   public void verifyLightboxPopup() {
-    waitForElementByElement(lightBoxModal);
+    wait.forElementVisible(lightBoxModal);
     PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
   }
 
   public void verifyLightboxVideo() {
-    waitForElementByElement(videoContainer);
+    wait.forElementVisible(videoContainer);
     PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
   }
 
   public void verifyLightboxImage() {
-    waitForElementByElement(imageContainer);
+    wait.forElementVisible(imageContainer);
     PageObjectLogging.log("verifyLightboxImage", "Lightbox image appeared", true);
   }
 
   public LightboxComponentObject openLightbox() {
-    waitForElementByElement(imageThumbnail);
+    wait.forElementVisible(imageThumbnail);
     scrollAndClick(imageThumbnail);
     PageObjectLogging.log("openLightbox", "opened ligthbox", true);
     return new LightboxComponentObject(driver);
   }
 
   public void makeHeaderVisible() {
-    waitForElementByElement(titleLink);
+    wait.forElementVisible(titleLink);
     executeScript("$('.LightboxHeader').css('opacity', '1')");
   }
 
   public void clickCloseButton() {
-    waitForElementByElement(closeModalButton);
+    wait.forElementVisible(closeModalButton);
     scrollAndClick(closeModalButton);
     PageObjectLogging.log("clickCloseButton ", "lightbox closed", true);
   }
@@ -105,14 +105,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void clickShareButton() {
-    waitForElementByElement(shareButton);
+    wait.forElementVisible(shareButton);
     shareButton.click();
-    waitForElementByElement(moreInfoThumbnail);
+    wait.forElementVisible(moreInfoThumbnail);
     PageObjectLogging.log("clickShareButton", "share button is clicked", true);
   }
 
   public void clickCloseShareScreenButton() {
-    waitForElementByElement(closeShareScreenButton);
+    wait.forElementVisible(closeShareScreenButton);
     closeShareScreenButton.click();
     PageObjectLogging
         .log("clickCloseShareScreenButton", "close share screen button was clicked", true);
@@ -129,11 +129,11 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void verifyShareButtons() {
-    waitForElementByElement(plusoneShareLink);
-    waitForElementByElement(redditShareLink);
-    waitForElementByElement(stumbleUponShareLink);
-    waitForElementByElement(twitterShareLink);
-    waitForElementByElement(facebookShareLink);
+    wait.forElementVisible(plusoneShareLink);
+    wait.forElementVisible(redditShareLink);
+    wait.forElementVisible(stumbleUponShareLink);
+    wait.forElementVisible(twitterShareLink);
+    wait.forElementVisible(facebookShareLink);
     PageObjectLogging.log("verifyShareButtons", "all share buttons are visible", true);
   }
 
@@ -170,7 +170,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public FilePagePageObject clickTitle() {
-    waitForElementByElement(titleLink);
+    wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
     return new FilePagePageObject(driver);
@@ -183,19 +183,19 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void clickCarouselRight() {
-    waitForElementByElement(carouselRight);
+    wait.forElementVisible(carouselRight);
     carouselRight.click();
     PageObjectLogging.log("clickCarouselRight", "carousel right button is clicked", true);
   }
 
   public void clickCarouselLeft() {
-    waitForElementByElement(carouselLeft);
+    wait.forElementVisible(carouselLeft);
     carouselLeft.click();
     PageObjectLogging.log("clickCarouselLeft", "carousel left button is clicked", true);
   }
 
   public void verifyCarouselLeftDisabled() {
-    waitForElementByElement(carouselLeftDisabled);
+    wait.forElementVisible(carouselLeftDisabled);
     PageObjectLogging.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
   }
 

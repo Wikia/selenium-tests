@@ -62,7 +62,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void verifyPagination() {
-    waitForElementByBy(paginationContainerBy);
+    wait.forElementPresent(paginationContainerBy);
     int i = 1;
     for (WebElement elem : paginationPages) {
       Assertion.assertEquals(elem.getText(), Integer.toString(i));
@@ -71,7 +71,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public boolean isResultPresent() {
-    waitForElementByElement(resultCountMessage);
+    wait.forElementVisible(resultCountMessage);
     return resultCountMessage.isDisplayed();
   }
 

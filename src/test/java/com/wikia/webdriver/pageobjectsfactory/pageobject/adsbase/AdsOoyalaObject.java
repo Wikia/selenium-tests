@@ -47,7 +47,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private void waitForColorAds(WebElement element, Color color) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions
+      waitFor.until(CommonExpectedConditions
                      .elementToHaveColor(element, color, AdsComparison.IMAGES_THRESHOLD_PERCENT));
     } finally {
       restoreDeaultImplicitWait();

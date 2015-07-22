@@ -43,7 +43,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void typeInSearchInput(String searchString) {
     waitForDialogVisible();
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
     PageObjectLogging.log(

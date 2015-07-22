@@ -202,7 +202,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       }
     }
-    waitForElementByElement(articleEditButton);
+    wait.forElementVisible(articleEditButton);
     Assertion.assertTrue(isPresent, "text is not present in the article");
   }
 
@@ -216,7 +216,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       }
     }
-    waitForElementByElement(articleEditButton);
+    wait.forElementVisible(articleEditButton);
     Assertion.assertTrue(isPresent, "text is not present in the article");
   }
 
@@ -243,7 +243,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
-    waitForElementByElement(contributeDropdown);
+    wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
     waitForElementVisibleByElement(addArticleInDropdown);
     addArticleInDropdown.click();
@@ -404,22 +404,22 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyPhoto() {
-    waitForElementByElement(imageArticle);
+    wait.forElementVisible(imageArticle);
     PageObjectLogging.log("verifyPhoto", "photo is visible", true);
   }
 
   public void verifyGallery() {
-    waitForElementByElement(galleryArticle);
+    wait.forElementVisible(galleryArticle);
     PageObjectLogging.log("verifyGallery", "gallery is visible", true);
   }
 
   public void verifySlideshow() {
-    waitForElementByElement(slideshowArticle);
+    wait.forElementVisible(slideshowArticle);
     PageObjectLogging.log("verifySlideshow", "slideshow is visible", true);
   }
 
   public void verifySlider() {
-    waitForElementByElement(sliderArticle);
+    wait.forElementVisible(sliderArticle);
     PageObjectLogging.log("verifySlider", "slider is visible", true);
   }
 
@@ -429,7 +429,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyVideoInline() {
-    waitForElementByElement(videoInline);
+    wait.forElementVisible(videoInline);
     PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
   }
 
@@ -443,7 +443,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   private void verifyTableProperty(String propertyName, int propertyValue) {
-    waitForElementByElement(table);
+    wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
     PageObjectLogging.log(
         "verifyTableProperty",
@@ -465,7 +465,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyTableAlignment(Alignment alignment) {
-    waitForElementByElement(table);
+    wait.forElementVisible(table);
     Assertion.assertEquals(
         table.getCssValue("float").toLowerCase(),
         alignment.toString().toLowerCase()
@@ -474,7 +474,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyTableSize(int width, int height) {
-    waitForElementByElement(table);
+    wait.forElementVisible(table);
     Dimension size = table.getSize();
     Assertion.assertEquals(size.getHeight(), height);
     Assertion.assertEquals(size.getWidth(), width);
@@ -536,21 +536,21 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VetAddVideoComponentObject clickAddVideoPlaceholder() {
-    waitForElementByElement(videoAddPlaceholder);
+    wait.forElementVisible(videoAddPlaceholder);
     scrollAndClick(videoAddPlaceholder);
     return new VetAddVideoComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickAddImagePlaceholder() {
-    waitForElementByElement(imageAddPlaceholder);
+    wait.forElementVisible(imageAddPlaceholder);
     scrollAndClick(imageAddPlaceholder);
     return new PhotoAddComponentObject(driver);
   }
 
   public FilePagePageObject clickVideoDetailsButton() {
-    waitForElementByElement(videoTitle);
+    wait.forElementVisible(videoTitle);
     executeScript("$('a.details.sprite').css('visibility', 'visible')");
-    waitForElementByElement(videoDetailsButton);
+    wait.forElementVisible(videoDetailsButton);
     videoDetailsButton.click();
     PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
     return new FilePagePageObject(driver);
@@ -558,7 +558,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   private void clickAddCategoryButton() {
     scrollAndClick(addCategory);
-    waitForElementByElement(addCategoryInput);
+    wait.forElementVisible(addCategoryInput);
   }
 
   private void typeCategoryName(String category) {
@@ -566,11 +566,11 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifySubmitCategoryEnabled() {
-    waitForElementByElement(categorySaveButtonEnabled);
+    wait.forElementVisible(categorySaveButtonEnabled);
   }
 
   public void verifySubmitCategoryDisabled() {
-    waitForElementByElement(categorySaveButtonDisabled);
+    wait.forElementVisible(categorySaveButtonDisabled);
   }
 
   public void submitCategory() {
@@ -584,7 +584,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     clickAddCategoryButton();
     typeCategoryName(category);
     pressEnter(addCategoryInput);
-    waitForElementByElement(categoryNew);
+    wait.forElementVisible(categoryNew);
     PageObjectLogging.log("addCategory", category + " category added", true);
   }
 
@@ -613,7 +613,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public String addCategorySuggestions(String category, int categoryNumber) {
     clickAddCategoryButton();
     typeCategoryName(category);
-    waitForElementByElement(categorySuggestionsList);
+    wait.forElementVisible(categorySuggestionsList);
     WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
     String desiredCategoryText = desiredCategory.getText();
     desiredCategory.click();
@@ -641,12 +641,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyTOCpresent() {
-    waitForElementByElement(tableOfContents);
+    wait.forElementVisible(tableOfContents);
     PageObjectLogging.log("verifyTOCpresent", "toc is present", true);
   }
 
   public void verifyTOCexpanded() {
-    waitForElementByElement(tableOfContentsOrderedList);
+    wait.forElementVisible(tableOfContentsOrderedList);
     PageObjectLogging.log("verifyTOCexpanded", "toc is expanded", true);
   }
 
@@ -659,7 +659,7 @@ public class ArticlePageObject extends WikiBasePageObject {
    * the method clicks on button show or hide, depending on which one is currently visible
    */
   public void clickTOCshowHideButton() {
-    waitForElementByElement(tableOfContentsShowHideButton);
+    wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
     PageObjectLogging.log("clickTOCshowHideButton",
                           "table of contents 'show/hide' button clicked", true);
@@ -691,7 +691,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void closeNewWikiCongratulationsLightBox() {
-    waitForElementByElement(welcomeLightBoxCloseButton);
+    wait.forElementVisible(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
     PageObjectLogging.log("closeNewWikiCongratulationsLightBox ",
                           "congratulations lightbox closed", true);

@@ -81,7 +81,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
         ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     fillUserNameInput(userName);
-    waitForElementByElement(formForgotPasswordLink);
+    wait.forElementVisible(formForgotPasswordLink);
     scrollAndClick(formForgotPasswordLink);
   }
 
@@ -99,14 +99,14 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public void fillUserNameInput(String userName) {
-    waitForElementByElement(formUsernameInput);
+    wait.forElementVisible(formUsernameInput);
     formUsernameInput.clear();
     sendKeys(formUsernameInput, userName);
     PageObjectLogging.log("UsernameTyped", "UserName input is filled", true);
   }
 
   public void fillPasswordInput(String password) {
-    waitForElementByElement(formPassowrdInput);
+    wait.forElementVisible(formPassowrdInput);
     formPassowrdInput.clear();
     sendKeys(formPassowrdInput, password);
     PageObjectLogging.log("PasswordTyped", "Password input is filled", true);
@@ -124,12 +124,12 @@ public class DropDownComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
     PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
 
-    waitForElementByElement(facebookEmailInput);
+    wait.forElementVisible(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
     PageObjectLogging.log("fillLogin", "Login field on facebook form filled", true);
 
-    waitForElementByElement(facebookPasswordInput);
+    wait.forElementVisible(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
     PageObjectLogging.log("fillPassword", "Password field on facebook form filled", true);
@@ -148,7 +148,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
-    waitForElementByElement(messagePlaceholder);
+    wait.forElementVisible(messagePlaceholder);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",

@@ -32,38 +32,38 @@ public class CreateAMapComponentObject extends BasePageObject {
   private WebElement closeButton;
 
   public CreateACustomMapComponentObject clickCustomMap() {
-    waitForElementByElement(customMapLink);
+    wait.forElementVisible(customMapLink);
     customMapLink.click();
     PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateACustomMapComponentObject(driver);
   }
 
   public CreateRealMapComponentObject clickRealMap() {
-    waitForElementByElement(realMapLink);
+    wait.forElementVisible(realMapLink);
     realMapLink.click();
     PageObjectLogging.log("clickRealMap", "Real Map link clicked", true, driver);
     return new CreateRealMapComponentObject(driver);
   }
 
   public InteractiveMapsPageObject clickCloseButton() {
-    waitForElementByElement(closeButton);
+    wait.forElementVisible(closeButton);
     closeButton.click();
     return new InteractiveMapsPageObject(driver);
   }
 
   public void verifyLearnMoreLinkRedirect(String link) {
-    waitForElementByElement(learnMoreLink);
+    wait.forElementVisible(learnMoreLink);
     Assertion.assertEquals(learnMoreLink.getAttribute("href").contains(link), true);
   }
 
   public void verifyLoginModal() {
-    waitForElementByElement(loginModal);
+    wait.forElementVisible(loginModal);
     PageObjectLogging.log("verifyLoginModal", "Login modal is displayed", true);
   }
 
   public void verifyRealMapAndCustomMapButtons() {
-    waitForElementByElement(realMapLink);
-    waitForElementByElement(customMapLink);
+    wait.forElementVisible(realMapLink);
+    wait.forElementVisible(customMapLink);
     PageObjectLogging
         .log("verifyRealMapAndCustomMapButtons", "Real Map and Custom Map links are visible", true);
   }

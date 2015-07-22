@@ -31,7 +31,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAddTableLightbox() {
-    waitForElementByElement(addTableLightbox);
+    wait.forElementVisible(addTableLightbox);
   }
 
   public void typeAmountOfRows(int rows) {
@@ -97,7 +97,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   }
 
   public void selectHeader(Headers header) {
-    waitForElementByElement(tablePropertiesDropdownOptions.get(0));
+    wait.forElementVisible(tablePropertiesDropdownOptions.get(0));
     Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
     switch (header) {
       case NONE:
@@ -133,7 +133,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   }
 
   public void selectAlignment(Alignment position) {
-    waitForElementByElement(tablePropertiesDropdownOptions.get(1));
+    wait.forElementVisible(tablePropertiesDropdownOptions.get(1));
     Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
     switch (position) {
       case LEFT:
@@ -153,7 +153,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   }
 
   public void submitTable() {
-    waitForElementByElement(submitLightboxButton);
+    wait.forElementVisible(submitLightboxButton);
     submitLightboxButton.click();
     PageObjectLogging.log("submitButton", "Table submited", true);
   }

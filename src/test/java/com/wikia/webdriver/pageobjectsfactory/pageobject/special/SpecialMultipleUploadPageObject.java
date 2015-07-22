@@ -40,7 +40,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
    * at folder PageContent.resourcesPath
    */
   public void selectFilesToUpload(String[] filesNamesList) {
-    waitForElementByElement(multipleUploadForm);
+    wait.forElementVisible(multipleUploadForm);
     for (int i = 0; i < filesNamesList.length; i++) {
       scrollToElement(fileInputs.get(i));
       fileInputs.get(i)
@@ -80,7 +80,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
    * @author Karol 'kkarolk' Kujawiak * @param filesNamesList list of expected names of files
    */
   public void verifySuccessfulUpload(String[] filesNamesList) {
-    waitForElementByElement(uploadedFilesListContener);
+    wait.forElementVisible(uploadedFilesListContener);
     for (int i = 0; i < filesNamesList.length; i++) {
       Assertion.assertStringContains(uploadedFileslist.get(i).getText(), filesNamesList[i]);
     }

@@ -71,24 +71,24 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
    * select theme on Special:ThemeDesigner page
    */
   public String selectTheme(int number) {
-    waitForElementByElement(themes.get(0));
+    wait.forElementVisible(themes.get(0));
     if (number < 5) {
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
-      waitForElementByElement(secondThemesSet);
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(secondThemesSet);
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number == 10) {
       scrollAndClick(nextButton);
-      waitForElementByElement(secondThemesSet);
-      waitForElementByElement(themes.get(7));
+      wait.forElementVisible(secondThemesSet);
+      wait.forElementVisible(themes.get(7));
       scrollAndClick(nextButton);
-      waitForElementByElement(thirdThemesSet);
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(thirdThemesSet);
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     String
@@ -107,7 +107,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
   public void submitThemeSelection() {
     scrollAndClick(saveButton);
-    waitForElementByElement(saveButtonDisabled);
+    wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
   }
 
@@ -123,30 +123,30 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void verifyCustomizeTab() {
-    waitForElementByElement(bgColor);
-    waitForElementByElement(bgImage);
-    waitForElementByElement(pgButtons);
-    waitForElementByElement(pgLinks);
-    waitForElementByElement(pgHeader);
-    waitForElementByElement(pgColor);
+    wait.forElementVisible(bgColor);
+    wait.forElementVisible(bgImage);
+    wait.forElementVisible(pgButtons);
+    wait.forElementVisible(pgLinks);
+    wait.forElementVisible(pgHeader);
+    wait.forElementVisible(pgColor);
   }
 
   public void verifyWordmarkTab() {
-    waitForElementByElement(wordmarkSubmit);
-    waitForElementByElement(wordmarkUpload);
-    waitForElementByElement(faviconSubmit);
-    waitForElementByElement(faviconUpload);
+    wait.forElementVisible(wordmarkSubmit);
+    wait.forElementVisible(wordmarkUpload);
+    wait.forElementVisible(faviconSubmit);
+    wait.forElementVisible(faviconUpload);
   }
 
   public void openImagePicker() {
-    waitForElementByElement(bgImage);
+    wait.forElementVisible(bgImage);
     bgImage.click();
-    waitForElementByElement(bgImagePicker);
+    wait.forElementVisible(bgImagePicker);
     PageObjectLogging.log("openImagePicker", "image picker opened", true, driver);
   }
 
   public void clickOutsideImagePicker() {
-    waitForElementByElement(pgSectionTitle);
+    wait.forElementVisible(pgSectionTitle);
     pgSectionTitle.click();
     PageObjectLogging.log("clickOutsideImageSelectionDialog", "clicked outside Image Picker", true);
   }

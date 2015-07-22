@@ -47,7 +47,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickSearchField() {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.click();
   }
 
@@ -67,7 +67,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickSuggestion(int index) {
-    waitForElementByElement(searchSuggestion);
+    wait.forElementVisible(searchSuggestion);
     searchSuggestion.click();
   }
 
@@ -82,7 +82,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickRandomPageButton() {
-    waitForElementByElement(randomPageButton);
+    wait.forElementVisible(randomPageButton);
     randomPageButton.click();
   }
 

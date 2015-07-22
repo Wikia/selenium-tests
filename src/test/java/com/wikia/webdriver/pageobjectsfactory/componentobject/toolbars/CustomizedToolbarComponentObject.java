@@ -64,7 +64,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickCustomize() {
-    waitForElementByElement(customizeButton);
+    wait.forElementVisible(customizeButton);
     jQueryClick(customizeButton);
     PageObjectLogging.log("clickCustomize", "customize button clicked", true);
   }
@@ -76,7 +76,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickResetDefaults() {
-    waitForElementByElement(resetDefaultsButton);
+    wait.forElementVisible(resetDefaultsButton);
     jQueryClick(resetDefaultsButton);
     PageObjectLogging.log("clickResetDefaults", "reset defaults button clicked", true);
   }
@@ -88,7 +88,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void searchTool(String toolName) {
-    waitForElementByElement(findAToolField);
+    wait.forElementVisible(findAToolField);
     findAToolField.clear();
     findAToolField.sendKeys(toolName);
     PageObjectLogging.log("searchTool", toolName + " typed into search field", true);
@@ -157,7 +157,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyFollowMessage() {
-    waitForElementByElement(pageWatchlistStatusMessage);
+    wait.forElementVisible(pageWatchlistStatusMessage);
     PageObjectLogging.log("verifyFollowMessage", "follow message verified", true);
 
   }
@@ -183,7 +183,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyUnfollowed() {
-    waitForElementByElement(pageWatchlistStatusMessage);
+    wait.forElementVisible(pageWatchlistStatusMessage);
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
                                                     "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
@@ -239,7 +239,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickSave() {
-    waitForElementByElement(saveButton);
+    wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
     PageObjectLogging.log("clickSave", "save button clicked", true);
 

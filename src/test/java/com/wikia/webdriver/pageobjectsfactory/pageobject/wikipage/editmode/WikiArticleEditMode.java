@@ -97,9 +97,9 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public void verifyThatThePhotoAppears(String caption) {
-    waitForElementByElement(visualModeIFrame);
+    wait.forElementVisible(visualModeIFrame);
     driver.switchTo().frame(visualModeIFrame);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(
+    waitFor.until(ExpectedConditions.visibilityOfElementLocated(
         By.cssSelector("img[data-rte-meta*='" + caption + "']")));
     driver.switchTo().defaultContent();
     PageObjectLogging.log("VerifyThatThePhotoAppears",
@@ -109,13 +109,13 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 
   public void verifyTheCaptionOnThePreview(String caption) {
-    wait.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
+    waitFor.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
     PageObjectLogging.log("VerifyTheCaptionOnThePreview",
                           "Verify that the caption of image appears in the preview", true, driver);
   }
 
   public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
-    waitForElementByElement(publishButtonPreview);
+    wait.forElementVisible(publishButtonPreview);
     waitForElementClickableByElement(publishButtonPreview);
     jQueryClick(publishButtonSelector);
     PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode",
@@ -124,19 +124,19 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public SourceEditModePageObject clickOnSourceButton() {
-    waitForElementByElement(sourceModeButton);
+    wait.forElementVisible(sourceModeButton);
     waitForElementClickableByElement(sourceModeButton);
     scrollAndClick(sourceModeButton);
-    waitForElementByElement(sourceModeTextArea);
+    wait.forElementVisible(sourceModeTextArea);
     PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
     return new SourceEditModePageObject(driver);
   }
 
   public void clickOnVisualButton() {
-    waitForElementByElement(visualModeButton);
+    wait.forElementVisible(visualModeButton);
     waitForElementClickableByElement(visualModeButton);
     scrollAndClick(visualModeButton);
-    waitForElementByElement(iFrame);
+    wait.forElementVisible(iFrame);
     PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true);
   }
 
@@ -148,7 +148,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public void deleteArticleContent() {
     driver.switchTo().frame(iFrame);
-    waitForElementByElement(bodyContent);
+    wait.forElementVisible(bodyContent);
     bodyContent.clear();
     driver.switchTo().defaultContent();
     PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
@@ -174,7 +174,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 
   public WikiArticlePageObject clickOnPublishButtonPreview() {
-    waitForElementByElement(publishButtonPreview);
+    wait.forElementVisible(publishButtonPreview);
     waitForElementClickableByElement(publishButtonPreview);
     scrollAndClick(publishButtonPreview);
     PageObjectLogging.log("ClickOnPublishButtonPreview",
@@ -183,9 +183,9 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public void typeInContent(String content) {
-    waitForElementByElement(iFrame);
+    wait.forElementVisible(iFrame);
     driver.switchTo().frame(iFrame);
-    waitForElementByElement(bodyContent);
+    wait.forElementVisible(bodyContent);
     bodyContent.sendKeys(content);
     PageObjectLogging.log("typeInContent", "content " + bodyContent.getText()
                                            + " - type into article body", true, driver);
@@ -193,37 +193,37 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public void clickSourceButton() {
-    waitForElementByElement(sourceButton);
+    wait.forElementVisible(sourceButton);
     sourceButton.click();
     driver.switchTo().defaultContent();
     PageObjectLogging.log("clickSourceButton", "Source button was clicked", true, driver);
   }
 
   public void clickReturnToEditingButton() {
-    waitForElementByElement(returnToEditingButton);
+    wait.forElementVisible(returnToEditingButton);
     returnToEditingButton.click();
     PageObjectLogging.log("clickReturnToEditingButton",
                           "Return to editing button is clicked", true, driver);
   }
 
   public void clickImageLeftAlignment() {
-    waitForElementByElement(imageLeftAlignmentOption);
+    wait.forElementVisible(imageLeftAlignmentOption);
     imageLeftAlignmentOption.click();
     PageObjectLogging.log("clickImageLeftAlignment",
                           "Left allignment option is selected", true, driver);
   }
 
   public void clickImageRightAlignment() {
-    waitForElementByElement(imageRightAlignmentOption);
+    wait.forElementVisible(imageRightAlignmentOption);
     imageRightAlignmentOption.click();
     PageObjectLogging.log("clickImageRightAlignment",
                           "Right allignment option is selected", true, driver);
   }
 
   public void verifyCaptionInEditMode() {
-    waitForElementByElement(iFrame);
+    wait.forElementVisible(iFrame);
     driver.switchTo().frame(iFrame);
-    waitForElementByElement(captionInEditor);
+    wait.forElementVisible(captionInEditor);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("verifyCaptionInEditMode",
                           "Verified existence of caption in editor", true);
@@ -235,7 +235,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public void clickOnModifyImageLink() {
-    waitForElementByElement(modifyButton);
+    wait.forElementVisible(modifyButton);
     modifyButton.click();
     PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
   }
@@ -249,7 +249,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void verifyLeftAlignmentIsSelected() {
     mouseOverInArticleIframe(imageArticleIFrame);
     clickOnModifyImageLink();
-    waitForElementByElement(imageLeftAlignmentOption);
+    wait.forElementVisible(imageLeftAlignmentOption);
 
     if (imageLeftAlignmentOption.isSelected()) {
       PageObjectLogging.log("verifyLeftAlignmentIsSelected",
@@ -260,64 +260,64 @@ public class WikiArticleEditMode extends WikiEditMode {
                             false);
     }
 
-    waitForElementByElement(imageUploadCloseButton);
+    wait.forElementVisible(imageUploadCloseButton);
     imageUploadCloseButton.click();
 
   }
 
   public WikiArticlePageObject addImageForLightboxTesting() {
-    waitForElementByElement(findInputField);
+    wait.forElementVisible(findInputField);
     findInputField.sendKeys("aa");
-    waitForElementByElement(findButton);
+    wait.forElementVisible(findButton);
     findButton.click();
     waitForElementByCss("#ImageUploadProgress2");
     waitForElementByCss("img[src*='AmericaAfrica']");
-    waitForElementByElement(imageUploadHeadline);
-    WebElement addThisPhoto = waitForElementByBy(addThisPhotoLink);
+    wait.forElementVisible(imageUploadHeadline);
+    WebElement addThisPhoto = wait.forElementPresent(addThisPhotoLink);
     addThisPhoto.click();
-    waitForElementByElement(finalAddPhotoButton);
+    wait.forElementVisible(finalAddPhotoButton);
     finalAddPhotoButton.click();
     clickOnPublishButton();
     return new WikiArticlePageObject(driver);
   }
 
   public PhotoAddComponentObject clickPhotoButton() {
-    waitForElementByElement(photoButton);
+    wait.forElementVisible(photoButton);
     scrollAndClick(photoButton);
     PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public VetAddVideoComponentObject clickVideoButton() {
-    waitForElementByElement(videoButton);
+    wait.forElementVisible(videoButton);
     scrollAndClick(videoButton);
     PageObjectLogging.log("clickVideoButton", "video button clicked", true);
     return new VetAddVideoComponentObject(driver);
   }
 
   public SliderBuilderComponentObject clickSliderButton() {
-    waitForElementByElement(sliderButton);
+    wait.forElementVisible(sliderButton);
     scrollAndClick(sliderButton);
     PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
     return new SliderBuilderComponentObject(driver);
   }
 
   public SlideshowBuilderComponentObject clickSlideshowButton() {
-    waitForElementByElement(slideshowButton);
+    wait.forElementVisible(slideshowButton);
     scrollAndClick(slideshowButton);
     PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
     return new SlideshowBuilderComponentObject(driver);
   }
 
   public GalleryBuilderComponentObject clickGalleryButton() {
-    waitForElementByElement(galleryButton);
+    wait.forElementVisible(galleryButton);
     scrollAndClick(galleryButton);
     PageObjectLogging.log("clickGallery", "gallery button clicked", true);
     return new GalleryBuilderComponentObject(driver);
   }
 
   public String getMessageSourceText() {
-    waitForElementByElement(messageSourceModeTextArea);
+    wait.forElementVisible(messageSourceModeTextArea);
     PageObjectLogging.log("getMessageSourceText",
                           "Get text of source mode text of message article page.", true);
     return messageSourceModeTextArea.getText();
@@ -339,7 +339,7 @@ public class WikiArticleEditMode extends WikiEditMode {
       }
       index = previousStarIndex + 1;
     }
-    waitForElementByElement(messageSourceModeTextArea);
+    wait.forElementVisible(messageSourceModeTextArea);
     messageSourceModeTextArea.clear();
     messageSourceModeTextArea.sendKeys("WHITELIST");
     messageSourceModeTextArea.sendKeys(Keys.ENTER);
@@ -357,7 +357,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   }
 
   public void typeContentInSourceMode(String content) {
-    waitForElementByElement(sourceModeTextArea);
+    wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log(
         "typeInContent",
@@ -369,7 +369,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public void typeInTemplateContent(String content) {
     driver.switchTo().defaultContent();
-    waitForElementByElement(messageSourceModeTextArea);
+    wait.forElementVisible(messageSourceModeTextArea);
     messageSourceModeTextArea.sendKeys(content);
     PageObjectLogging.log(
         "typeInContent",
@@ -381,7 +381,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public void verifyEmbededMap(String mapID) {
     driver.switchTo().defaultContent();
-    waitForElementByElement(embededMap);
+    wait.forElementVisible(embededMap);
     String embededMapID = embededMap.getAttribute("data-map-id");
     Assertion.assertEquals(embededMapID, mapID);
   }

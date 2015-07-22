@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -26,9 +25,9 @@ public class AlmostTherePageObject extends WikiBasePageObject {
   }
 
   public void verifyAlmostTherePage() {
-    waitForElementByElement(almostThereText);
-    waitForElementByElement(sendAnotherMail);
-    waitForElementByElement(changeMyEmail);
+    wait.forElementVisible(almostThereText);
+    wait.forElementVisible(sendAnotherMail);
+    wait.forElementVisible(changeMyEmail);
   }
 
   private String getActivationLinkFromMail(String email, String password) {

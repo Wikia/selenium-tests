@@ -15,8 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import java.util.ConcurrentModificationException;
-
 /**
  * Bogna 'bognix' Knychala
  */
@@ -57,7 +55,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   public void verifyMobileTopLeaderboard() {
     removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
 
-    waitForElementByElement(presentLeaderboard);
+    wait.forElementVisible(presentLeaderboard);
     waitForSlotExpanded(presentLeaderboard);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {

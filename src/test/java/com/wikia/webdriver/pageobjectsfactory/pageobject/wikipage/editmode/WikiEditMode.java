@@ -28,7 +28,7 @@ public class WikiEditMode extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public WikiArticlePageObject clickOnPublishButton() {
-    waitForElementByElement(publishButtonGeneral);
+    wait.forElementVisible(publishButtonGeneral);
     waitForElementClickableByElement(publishButtonGeneral);
     publishButtonGeneral.click();
     waitForElementPresenceByBy(editButtonBy);

@@ -387,7 +387,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForSlotExpanded(final WebElement slot) {
-    wait.until(new ExpectedCondition<Object>() {
+    waitFor.until(new ExpectedCondition<Object>() {
       @Override
       public Object apply(WebDriver webDriver) {
         return checkIfSlotExpanded(slot);
@@ -398,7 +398,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
+      waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -615,7 +615,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           try {
             return (boolean) ((JavascriptExecutor) driver)
@@ -642,7 +642,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void waitTitleChangesTo(String desiredArticleTitle) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(
+      waitFor.until(
           ExpectedConditions.titleContains(desiredArticleTitle)
       );
     } finally {
