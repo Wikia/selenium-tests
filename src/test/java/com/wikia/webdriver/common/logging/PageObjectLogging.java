@@ -356,12 +356,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateForward(WebDriver driver) {
-    super.beforeNavigateForward(driver);
+    PageObjectLogging.log("Navigate Froward", "attempting to navigate forward", true);
   }
 
   @Override
   public void afterNavigateForward(WebDriver driver) {
-    super.afterNavigateForward(driver);
+    PageObjectLogging.log("Navigate Froward", "forward page loaded", true);
   }
 
   @Override

@@ -51,7 +51,7 @@ public class NavigationTests extends NewTestTemplate {
     driver.navigate().back();
     UrlChecker.isUrlEqualToCurrentUrl(driver, previousUrl);
 
-    category.navigateForward();
+    driver.navigate().forward();
     UrlChecker.isUrlEqualToCurrentUrl(driver, nextUrl);
   }
 
