@@ -26,8 +26,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_001_loggedOutUser() {
+ public void CreateNewWiki_001_loggedOutUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -48,8 +47,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_002"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_002_wrongPassword() {
+ public void CreateNewWiki_002_wrongPassword() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
@@ -62,7 +60,6 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_003"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_003_blankPassword() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -75,7 +72,6 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_004"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_004_blankUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -87,8 +83,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_005"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_005_invalidUserName() {
+ public void CreateNewWiki_005_invalidUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
