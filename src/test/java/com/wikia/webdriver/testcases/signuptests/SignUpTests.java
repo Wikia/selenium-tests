@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -21,22 +21,21 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.Calendar;
 
 /*
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
- * verified user
+ * verified user 7. signup using facebook account 8. signup with japanese language
  */
 public class SignUpTests extends NewTestTemplate {
 
   private static String userName;
   private static String password;
+  private static String jaTestWiki = "ja.ja-test";
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
@@ -189,6 +188,36 @@ public class SignUpTests extends NewTestTemplate {
     base.appendToUrl("noads=1");
     base.verifyUserLoggedIn(userName);
     base.logOut(wikiURL);
+  }
+
+  @Test(groups = {"SignUp_008", "SignUp"})
+  @Execute(onWikia = "ja.ja-test")
+  public void SignUp_008_signupJapaneseUser() {
+    SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
+    signUp.disableCaptcha();
+    String userName = "品質管理" + signUp.getTimeStamp();
+    String password = "品質管理管理" + signUp.getTimeStamp();
+    String email = credentials.emailQaart2;
+    String emailPassword = credentials.emailPasswordQaart2;
+
+    signUp.typeEmail(email);
+    signUp.typeUserName(userName);
+    signUp.typePassword(password);
+    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
+    ConfirmationPageObject confirmPageAlmostThere =
+            almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
+    confirmPageAlmostThere.typeInUserName(userName);
+    confirmPageAlmostThere.typeInPassword(password);
+    UserProfilePageObject userProfile =
+            confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
+    userProfile.verifyUserLoggedIn(userName);
+    CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+    toolbar.verifyUserToolBar();
+    PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
+    preferences.selectTab(tabNames.EMAIL);
+    preferences.verifyEmailMeSection();
   }
 
   @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)

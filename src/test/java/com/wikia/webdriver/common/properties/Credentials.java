@@ -129,6 +129,9 @@ public class Credentials {
   public final String userNameJapanese;
   public final String passwordJapanese;
 
+  public final String userNameJapanese2;
+  public final String passwordJapanese2;
+
   public final String userNameBrazilianPortuguese;
   public final String passwordBrazilianPortuguese;
 
@@ -204,6 +207,8 @@ public class Credentials {
     passwordPolish = XMLReader.getValue(file, "ci.user.language9.password");
     userNameItalian = XMLReader.getValue(file, "ci.user.language10.username");
     passwordItalian = XMLReader.getValue(file, "ci.user.language10.password");
+    userNameJapanese2 = XMLReader.getValue(file, "ci.user.language11.username");
+    passwordJapanese2 = XMLReader.getValue(file, "ci.user.language11.password");
 
     userNameNonLatin = XMLReader.getValue(file, "ci.user.nonLatin.username");
     userNameNonLatinEncoded = XMLReader.getValue(file, "ci.user.nonLatin.usernameenc");
