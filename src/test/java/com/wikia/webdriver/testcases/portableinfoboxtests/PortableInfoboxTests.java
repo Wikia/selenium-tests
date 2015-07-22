@@ -8,8 +8,10 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
@@ -46,6 +48,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(info.getBoldElements().size() > 0);
     Assertion.assertTrue(info.getItalicElements().size() > 0);
     Assertion.assertTrue(info.getHeaderElements().size() > 0);
+    info.verifyQuotationMarksPresence();
+    info.verifyReferencesPresence();
     info.verifyImagePresence();
     info.verifyInfoboxTitlePresence();
 
@@ -54,19 +58,24 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
+    //Red link
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info.clickRedLink();
+    info.verifyCreateNewArticleModal();
+    //External Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
-    String externalNavigatedURL =.getURL();
+    String externalNavigatedURL = info.getCurrentUrl();
+    info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
+    //Internal Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
-    info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
     String internalLinkName = info.getInternalLinkRedirectTitle();
     info.clickInternalLink();
-    String internalNavigatedURL =.getURL();
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    String internalNavigatedURL = info.getCurrentUrl();
     info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
   }
 
@@ -77,9 +86,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String articleName = info.getNameForArticle();
-    SpecialWhatLinksHerePageObject links = info.openArticleByName(wikiURL, URLsContent.SPECIAL_WHAT_LINKS_HERE);
+    SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
     links.clickPageInputField();
-    links.typeInfoboxImageName(PageContent.FILE_IMAGE_NAME);
+    links.typeInfoboxImageName("FILE:" + PageContent.FILE_IMAGE_NAME);
     links.clickShowbutton();
     links.verifyInfoboxArticleInList(articleName);
   }
@@ -92,9 +101,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     String catName = src.getRandomDigits(9);
     src.addCategoryToSourceCode(catName);
-    TemplatePageObject temp = src.clickPublishButton();
+    TemplatePageObject temp = src.clickPublishButtonInTemplateNamespace();
     temp.verifyCategoryInTemplatePage(catName);
-    info = temp.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     info.verifyCategoryInArticlePage(catName);
   }
 

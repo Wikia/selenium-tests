@@ -38,6 +38,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromoteP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
@@ -419,6 +420,11 @@ public class WikiBasePageObject extends BasePageObject {
   public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS);
     return new InteractiveMapsPageObject(driver);
+  }
+
+  public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
+    return new SpecialWhatLinksHerePageObject(driver);
   }
 
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {

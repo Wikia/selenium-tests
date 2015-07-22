@@ -29,4 +29,8 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   public void typeInfoboxImageName(String imageFileName) {
     pageInputField.sendKeys(imageFileName);
   }
+
+  public void verifyInfoboxArticleInList(String articleName) {
+
+  }
 }

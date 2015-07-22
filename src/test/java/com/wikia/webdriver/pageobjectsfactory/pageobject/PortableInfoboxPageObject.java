@@ -22,9 +22,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = ".portable-infobox-title")
   private WebElement pInfoTitle;
   @FindBy(css = ".portable-infobox-header-font")
-  private WebElement pInfoTitleH3;
-  @FindBy(css = ".portable-infobox-item-value a[href*='org']")
+  private List<WebElement> pInfoTitleH3;
+  @FindBy(css = ".portable-infobox-item-value a[href*='/wiki']")
   private WebElement pInfoExternalLink;
+  @FindBy(css = ".portable-infobox-item-value a[href*='redlink']")
+  private WebElement pInfoRedlLink;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
   @FindBy(css = "i")
@@ -43,6 +45,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement unorderedListElement;
   @FindBy(css = ".portable-infobox-item-value ol li")
   private WebElement orderedListElement;
+  @FindBy(css = ".reference")
+  private List<WebElement> referenceElements;
+  @FindBy(css = ".portable-infobox-item-label")
+  private WebElement h3Elements;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -102,8 +108,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
 
   public String getExternalLinkRedirectTitle() {
-    waitForElementByElement(pInfoExternalLink);
-    return pInfoExternalLink.getAttribute("href");
+    waitForElementByElement(pInfoRedlLink);
+    return pInfoRedlLink.getAttribute("href");
   }
 
   public String getInternalLinkRedirectTitle() {
@@ -145,5 +151,31 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
+
+  public void verifyQuotationMarksPresence() {
+    waitForElementByElement(h3Elements);
+    String h3ElementsString = h3Elements.getText();
+    Assertion.assertStringContains("""", h3ElementsString);
+  }
+
+  public void verifyReferencesPresence() {
+    waitForElementByElement(referenceElements);
+  }
+
+  public void clickRedLink() {
+    waitForElementByElement(pInfoRedlLink);
+    pInfoRedlLink.click();
+  }
+
+  public void verifyCreateNewArticleModal() {
+    //switch to iframe
+    //verify iframe element
+  }
+
+  public void verifyCategoryInArticlePage(String catName) {
+    //
+    //
+  }
+}
 
 }
