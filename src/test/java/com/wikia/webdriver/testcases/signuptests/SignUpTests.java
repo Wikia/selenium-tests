@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -191,9 +191,9 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_008", "SignUp"})
+  @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
-    String wikiJapaneseURL = urlBuilder.getUrlForWiki(jaTestWiki);
-    SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiJapaneseURL);
+    SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "品質管理" + signUp.getTimeStamp();
     String password = "品質管理管理" + signUp.getTimeStamp();
@@ -207,7 +207,7 @@ public class SignUpTests extends NewTestTemplate {
             PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
-            almostTherePage.enterActivationLink(email, emailPassword, wikiJapaneseURL, "ja");
+            almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
     UserProfilePageObject userProfile =

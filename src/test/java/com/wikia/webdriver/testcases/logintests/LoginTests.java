@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -51,9 +52,9 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Login_005", "Login"})
+  @Execute(onWikia = "ja.ja-test")
   public void Login_005_japaneseUserLogin() {
-    String wikiJapaneseURL = urlBuilder.getUrlForWiki(jaTestWiki);
     SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
-    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiJapaneseURL);
+    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiURL);
   }
 }
