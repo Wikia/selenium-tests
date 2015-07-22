@@ -25,7 +25,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
  */
 public class VetArticlePlaceholderTests extends NewTestTemplate {
 
-  @RelatedIssue(issueID = "MAIN-4191")
   @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
   @Execute(asUser = User.USER)
   public void Placeholders_001_PublishedProvider() {

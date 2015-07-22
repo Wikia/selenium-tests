@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mobile;
+package com.wikia.webdriver.testcases.wikiamobiletests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
