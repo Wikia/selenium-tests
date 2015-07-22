@@ -345,6 +345,26 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   @Override
+  public void beforeNavigateBack(WebDriver driver) {
+    PageObjectLogging.log("Navigate Back", "attempting to navigate back", true);
+  }
+
+  @Override
+  public void afterNavigateBack(WebDriver driver) {
+    PageObjectLogging.log("Navigate Back", "previous page loaded", true);
+  }
+
+  @Override
+  public void beforeNavigateForward(WebDriver driver) {
+    super.beforeNavigateForward(driver);
+  }
+
+  @Override
+  public void afterNavigateForward(WebDriver driver) {
+    super.afterNavigateForward(driver);
+  }
+
+  @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
   }

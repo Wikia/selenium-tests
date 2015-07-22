@@ -64,7 +64,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
       }
       PageObjectLogging.log("openFirstPost", "deleted post found on " + i
                                              + " position, trying next one", true);
-      navigateBack();
+      driver.navigate().back();
     }
     return new BlogPageObject(driver);
   }

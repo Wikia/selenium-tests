@@ -47,8 +47,8 @@ public class BasePageObject {
 
   public WebDriver driver;
   protected int timeOut = 30;
-  public WebDriverWait wait = new WebDriverWait(driver, timeOut);
-  public Actions builder = new Actions(driver);
+  public WebDriverWait wait;
+  public Actions builder;
   protected UrlBuilder urlBuilder = new UrlBuilder();
 
   @FindBy(css = "#WallNotifications div.notification div.msg-title")
@@ -62,6 +62,8 @@ public class BasePageObject {
 
   public BasePageObject(WebDriver driver) {
     this.driver = driver;
+    this.wait = new WebDriverWait(driver, timeOut);
+    this.builder = new Actions(driver);
     this.setWindowSizeAndroid();
 
     PageFactory.initElements(driver, this);
@@ -344,16 +346,6 @@ public class BasePageObject {
       PageObjectLogging
           .log("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
-    }
-  }
-
-  public void navigateBack() {
-    try {
-      driver.navigate().back();
-      PageObjectLogging.log("Navigate Back", "previous page loaded", true);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("Navigate Back",
-          "page loaded for more then 30 seconds after navigating back", false);
     }
   }
 

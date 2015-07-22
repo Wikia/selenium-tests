@@ -48,7 +48,7 @@ public class NavigationTests extends NewTestTemplate {
     String nextUrl = driver.getCurrentUrl();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH);
 
-    category.navigateBack();
+    driver.navigate().back();
     UrlChecker.isUrlEqualToCurrentUrl(driver, previousUrl);
 
     category.navigateForward();

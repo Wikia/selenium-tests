@@ -174,7 +174,7 @@ public class HomePageObject extends WikiBasePageObject {
             true
         );
       }
-      newHome.navigateBack();
+      driver.navigate().back();
     }
   }
 }
