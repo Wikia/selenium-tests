@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -38,7 +39,7 @@ public class NavigationBar extends WikiBasePageObject {
     waitForElementClickableByElement(searchInput);
     searchInput.click();
     waitForElementByBy(jqueryAutocompleteBy);
-    sendKeysHumanSpeed(searchInput, query);
+    Typing.sendKeysHumanSpeed(searchInput, query);
     waitForElementByCss(suggestionCss);
     waitForElementByElement(suggestionsList.get(0));
   }
