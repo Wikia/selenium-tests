@@ -137,7 +137,7 @@ public class VisualEditModePageObject extends EditMode {
 
   private void verifyComponent(By componentBy) {
     driver.switchTo().frame(iframe);
-    waitForElementByElementLocatedBy(componentBy);
+    wait.forElementVisible(componentBy);
     driver.switchTo().defaultContent();
   }
 

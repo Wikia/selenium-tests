@@ -395,20 +395,6 @@ public class BasePageObject {
   }
 
   /**
-   * Checks if the element is visible on browser
-   * <p/>
-   * * @param elementBy The element to be checked
-   */
-  public void waitForElementByElementLocatedBy(By elementBy) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  /**
    * Checks if the element is present in DOM
    *
    * @param locator The element to be checked
