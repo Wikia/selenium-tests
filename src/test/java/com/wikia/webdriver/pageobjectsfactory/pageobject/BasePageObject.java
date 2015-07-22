@@ -584,13 +584,6 @@ public class BasePageObject {
   }
 
   /**
-   * Wait for element to be in viewport Either position top or left is bigger then -1
-   */
-  public void waitForElementInViewPort(final WebElement element) {
-    waitFor.until(CommonExpectedConditions.elementInViewPort(element));
-  }
-
-  /**
    * Wait for new window present
    */
   public void waitForNewWindow() {

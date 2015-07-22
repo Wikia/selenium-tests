@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.elemnt;
 
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,7 +56,8 @@ public class Wait {
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions.visibilityOf(element));
+      return new WebDriverWait(webDriver, timeout, polling)
+          .until(ExpectedConditions.visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -67,6 +70,18 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Wait for element to be in viewport Either position top or left is bigger then -1
+   */
+  public boolean forElementInViewPort(final WebElement element) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.elementInViewPort(element));
     } finally {
       restoreDeaultImplicitWait();
     }
