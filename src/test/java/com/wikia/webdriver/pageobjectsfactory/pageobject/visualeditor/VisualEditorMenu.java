@@ -268,7 +268,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
-    waitForElementNotPresent(publishButtonDisabled);
+    wait.forElementNotPresent(publishButtonDisabled);
     wait.forElementVisible(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
     waitForElementClickableByElement(publishButton);

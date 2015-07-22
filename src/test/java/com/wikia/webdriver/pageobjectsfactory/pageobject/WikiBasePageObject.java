@@ -1301,7 +1301,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyAvatarNotPresent() {
-	  waitForElementNotPresent("a[data-id='userpage']");
+	  wait.forElementNotPresent(By.cssSelector("a[data-id='userpage']"));
 	  PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
 

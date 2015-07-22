@@ -183,7 +183,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyNoPagination() {
-    waitForElementNotPresent(paginationContainerBy);
+    wait.forElementNotPresent(paginationContainerBy);
     PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
                           true);
   }

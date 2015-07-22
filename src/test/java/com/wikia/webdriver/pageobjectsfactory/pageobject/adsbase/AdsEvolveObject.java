@@ -30,7 +30,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public void verifyNoEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    waitForElementNotPresent(slotSelector + EVOLVE_SELECTOR);
+    wait.forElementNotPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
     PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 

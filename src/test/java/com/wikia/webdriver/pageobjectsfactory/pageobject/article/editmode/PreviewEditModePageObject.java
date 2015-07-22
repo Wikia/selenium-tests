@@ -79,7 +79,7 @@ public class PreviewEditModePageObject extends EditMode {
 
   public void closePreviewModal() {
     previewModal.findElement(closeButton).click();
-    waitForElementNotPresent(closeButton);
+    wait.forElementNotPresent(closeButton);
     PageObjectLogging.log("closePreviewModal", "preview modal closed", true);
   }
 

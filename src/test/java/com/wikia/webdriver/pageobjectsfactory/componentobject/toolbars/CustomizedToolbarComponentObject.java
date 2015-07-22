@@ -200,7 +200,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void verifyToolNotOnList(String toolName) {
-    waitForElementNotPresent(String.format(toolsListToolCss, toolName));
+    wait.forElementNotPresent(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolNotOnList", toolName + " not visible on the list", true);
 
   }
@@ -272,7 +272,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void verifyToolRemoved(String toolName) {
-    waitForElementNotPresent(
+    wait.forElementNotPresent(
         By.xpath(String.format(addedToolsPath, toolName))
     );
     PageObjectLogging.log("verifyToolRemoved", toolName + " removed from toolbar", true);

@@ -71,7 +71,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
-    waitForElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
+    wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
     PageObjectLogging.log(
         "Check visibility",
         "Clicking light-box close button hides light-box",

@@ -102,8 +102,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShown() {
-    waitForElementNotPresent(adsenseContainer);
-    waitForElementNotPresent(adsenseIns);
+    wait.forElementNotPresent(adsenseContainer);
+    wait.forElementNotPresent(adsenseIns);
     PageObjectLogging.log("verifyAdsenseUnitNotShown", "Adsense unit is not shown", true);
   }
 
@@ -144,7 +144,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShownAboveTitle() {
-    waitForElementNotPresent(slotAboveTitleAdsense);
+    wait.forElementNotPresent(slotAboveTitleAdsense);
     PageObjectLogging.log("verifyAdsenseUnitNotShownAboveTitle",
         "Adsense unit is not shown above the title", true);
   }
@@ -158,7 +158,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShownBelowTitle() {
-    waitForElementNotPresent(slotBelowTitleAdsense);
+    wait.forElementNotPresent(slotBelowTitleAdsense);
     PageObjectLogging.log("verifyAdsenseUnitNotShownBelowTitle",
         "Adsense unit is not shown below the title", true);
   }
@@ -172,7 +172,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShownInContent() {
-    waitForElementNotPresent(slotInContentAdsense);
+    wait.forElementNotPresent(slotInContentAdsense);
     PageObjectLogging.log("verifyAdsenseUnitNotShownInContent",
         "Adsense unit is not shown in content", true);
   }
@@ -186,7 +186,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShownBelowCategory() {
-    waitForElementNotPresent(slotBelowCategoryAdsense);
+    wait.forElementNotPresent(slotBelowCategoryAdsense);
     PageObjectLogging.log("verifyAdsenseUnitNotShownBelowCategory",
         "Adsense unit is not shown below category", true);
   }
@@ -200,7 +200,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAdsenseUnitNotShownAboveFooter() {
-    waitForElementNotPresent(slotAboveFooterAdsense);
+    wait.forElementNotPresent(slotAboveFooterAdsense);
     PageObjectLogging.log("verifyAdsenseUnitNotShownAboveFooter",
         "Adsense unit is not shown above footer", true);
   }
@@ -324,13 +324,13 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAmazonUnitNotShownAboveTitle() {
-    waitForElementNotPresent(slotAboveTitleAmazon);
+    wait.forElementNotPresent(slotAboveTitleAmazon);
     PageObjectLogging.log("verifyAdsenseUnitNotShownAboveTitle",
         "Adsense unit is not shown above the title", true);
   }
 
   public void verifyAmazonUnitNotShownBelowTitle() {
-    waitForElementNotPresent(slotBelowTitleAmazon);
+    wait.forElementNotPresent(slotBelowTitleAmazon);
     PageObjectLogging.log("verifyAdsenseUnitNotShownBelowTitle",
         "Adsense unit is not shown below the title", true);
   }
@@ -352,12 +352,12 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyAmazonUnitNotShown() {
-    waitForElementNotPresent(amazonContainerBy);
+    wait.forElementNotPresent(amazonContainerBy);
     PageObjectLogging.log("verifyAmazonUnitNotShown", "Amazon unit is not shown", true);
   }
 
   public void verifyEcommerceUnitNotShown() {
-    waitForElementNotPresent(ecommerceContainerBy);
+    wait.forElementNotPresent(ecommerceContainerBy);
     PageObjectLogging.log("verifyEcommerceUnitNotShown", "Ecommerce unit is not shown", true);
   }
 
@@ -442,13 +442,13 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyEcommerceUnitNotShownAboveTitle() {
-    waitForElementNotPresent(slotAboveTitleEcommerceBy);
+    wait.forElementNotPresent(slotAboveTitleEcommerceBy);
     PageObjectLogging.log("verifyEcommerceUnitNotShownAboveTitle",
         "Ecommerce unit is not shown above the title", true);
   }
 
   public void verifyEcommerceUnitNotShownBelowTitle() {
-    waitForElementNotPresent(slotBelowTitleEcommerceBy);
+    wait.forElementNotPresent(slotBelowTitleEcommerceBy);
     PageObjectLogging.log("verifyEcommerceUnitNotShownBelowTitle",
         "Ecommerce unit is not shown below the title", true);
   }

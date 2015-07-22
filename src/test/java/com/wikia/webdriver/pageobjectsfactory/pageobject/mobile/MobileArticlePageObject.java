@@ -305,7 +305,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   private void verifyTopbarButton(WebElement element) {
     wait.forElementVisible(topbarLoginButton);
     element.click();
-    waitForElementNotPresent(curtainNotOpened);
+    wait.forElementNotPresent(By.cssSelector(curtainNotOpened));
     Assertion.assertEquals("block", curtain.getCssValue("display"), "menu is not opened");
     element.click();
     waitForElementNotVisibleByElement(curtainClosed);

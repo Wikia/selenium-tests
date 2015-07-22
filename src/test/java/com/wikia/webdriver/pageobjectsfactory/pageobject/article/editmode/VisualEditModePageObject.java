@@ -29,6 +29,10 @@ import java.util.List;
  */
 public class VisualEditModePageObject extends EditMode {
 
+  private static final String IMAGE_COMPONENT_CSS = "img.image";
+  private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
+  @FindBy(css = ".video-thumbnail")
+  protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
   private WebElement contentInput;
   @FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
@@ -43,8 +47,6 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement video;
   @FindBy(css = "img.video-placeholder")
   private WebElement videoPlaceholder;
-  @FindBy(css = ".video-thumbnail")
-  protected WebElement videoArticle;
   @FindBy(css = ".RTEMediaOverlayEdit")
   private WebElement modifyComponentButton;
   @FindBy(css = "[style*=\"block\"] .RTEMediaOverlayDelete")
@@ -75,12 +77,8 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement contextFrame;
   @FindBy(css = ".cke_dialog_body")
   private WebElement addTableLightbox;
-
-  private static final String IMAGE_COMPONENT_CSS = "img.image";
   @FindBy(css = IMAGE_COMPONENT_CSS)
   private WebElement image;
-
-  private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
   private By galleryBy = By.cssSelector("img.image-gallery");
 
   private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -93,10 +91,6 @@ public class VisualEditModePageObject extends EditMode {
       categoryRemoveSelector =
       "li.category[data-name='%categoryName%'] li.removeCategory";
   private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
-
-  public enum Components {
-    PHOTO, GALLERY, SLIDESHOW, SLIDER, VIDEO, VIDEO_PLACEHOLDER
-  }
 
   public VisualEditModePageObject(WebDriver driver) {
     super(driver);
@@ -194,8 +188,8 @@ public class VisualEditModePageObject extends EditMode {
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
     Assertion.assertNumber(
-            widthCurrent, widthDesired,
-            "width should be " + widthDesired + " but is " + widthCurrent
+        widthCurrent, widthDesired,
+        "width should be " + widthDesired + " but is " + widthCurrent
     );
   }
 
@@ -274,19 +268,19 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(iframe);
     switch (component) {
       case PHOTO:
-        waitForElementNotPresent(IMAGE_BY);
+        wait.forElementNotPresent(IMAGE_BY);
         break;
       case GALLERY:
-        waitForElementNotPresent(galleryBy);
+        wait.forElementNotPresent(galleryBy);
         break;
       case SLIDESHOW:
-        waitForElementNotPresent(slideshowBy);
+        wait.forElementNotPresent(slideshowBy);
         break;
       case SLIDER:
-        waitForElementNotPresent(sliderBy);
+        wait.forElementNotPresent(sliderBy);
         break;
       case VIDEO:
-        waitForElementNotPresent(videoBy);
+        wait.forElementNotPresent(videoBy);
         break;
       default:
         PageObjectLogging.log(
@@ -382,7 +376,8 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyCategoryNotPresent(String category) {
-    waitForElementNotPresent(categoryRemovedSelector.replace("%categoryName%", category));
+    wait.forElementNotPresent(
+        By.cssSelector(categoryRemovedSelector.replace("%categoryName%", category)));
     boolean categoryVisible = true;
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
@@ -461,6 +456,10 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
+  }
+
+  public enum Components {
+    PHOTO, GALLERY, SLIDESHOW, SLIDER, VIDEO, VIDEO_PLACEHOLDER
   }
 
 }

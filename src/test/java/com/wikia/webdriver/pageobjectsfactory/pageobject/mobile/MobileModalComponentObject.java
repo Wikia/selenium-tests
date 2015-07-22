@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,13 +45,13 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   public void goToPreviousImage() {
     wait.forElementVisible(previousImageButton);
     previousImageButton.click();
-    waitForElementNotPresent(modalTransition);
+    wait.forElementNotPresent(By.cssSelector(modalTransition));
   }
 
   public void goToNextImage() {
     wait.forElementVisible(nextImageButton);
     nextImageButton.click();
-    waitForElementNotPresent(modalTransition);
+    wait.forElementNotPresent(By.cssSelector(modalTransition));
   }
 
   public String getCurrentImageUrl() {

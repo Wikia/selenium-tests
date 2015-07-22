@@ -78,10 +78,22 @@ public class Wait {
   /**
    * Wait for element to be in viewport Either position top or left is bigger then -1
    */
-  public boolean forElementInViewPort(final WebElement element) {
+  public boolean forElementInViewPort(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(CommonExpectedConditions.elementInViewPort(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Wait for element to not be present in DOM
+   */
+  public boolean forElementNotPresent(By selector) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.elementNotPresent(selector));
     } finally {
       restoreDeaultImplicitWait();
     }

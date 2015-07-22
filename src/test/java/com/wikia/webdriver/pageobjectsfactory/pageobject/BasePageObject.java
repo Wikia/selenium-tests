@@ -568,22 +568,6 @@ public class BasePageObject {
   }
 
   /**
-   * Wait for element to not be present in DOM
-   */
-  public void waitForElementNotPresent(final String cssSelector) {
-    this.waitForElementNotPresent(By.cssSelector(cssSelector));
-  }
-
-  /**
-   * Wait for element to not be present in DOM
-   */
-  public void waitForElementNotPresent(final By selector) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
-    waitFor.until(CommonExpectedConditions.elementNotPresent(selector));
-    restoreDeaultImplicitWait();
-  }
-
-  /**
    * Wait for new window present
    */
   public void waitForNewWindow() {

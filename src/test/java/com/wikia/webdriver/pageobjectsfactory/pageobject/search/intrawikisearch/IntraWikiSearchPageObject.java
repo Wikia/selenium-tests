@@ -222,7 +222,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
     public void verifyPhotosOnly() {
         wait.forElementVisible(thumbnailsImages.get(0));
-        waitForElementNotPresent(thumbnailsVideosGroup);
+        wait.forElementNotPresent(By.cssSelector(thumbnailsVideosGroup));
         for (int i = 0; i < titles.size(); i++) {
             wait.forElementVisible(titles.get(i));
             scrollToElement(titles.get(i));
