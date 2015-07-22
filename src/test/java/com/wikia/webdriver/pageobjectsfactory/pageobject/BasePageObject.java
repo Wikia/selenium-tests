@@ -408,11 +408,6 @@ public class BasePageObject {
     }
   }
 
-  public WebElement waitForElementByXPath(String xPath) {
-    waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
-    return driver.findElement(By.xpath(xPath));
-  }
-
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {

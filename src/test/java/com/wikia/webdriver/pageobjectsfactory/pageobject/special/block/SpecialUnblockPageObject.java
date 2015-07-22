@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,11 +40,11 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
 
   public void verifyUnblockMessage(String userName) {
     wait.forElementVisible(unblockedUserHead);
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName + "' and contains(text(), '"
-        + userName + "')]");
-    waitForElementByXPath(
-        "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]");
+        + userName + "')]"));
+    wait.forElementVisible(By.xpath(
+        "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
     PageObjectLogging.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
   }
 

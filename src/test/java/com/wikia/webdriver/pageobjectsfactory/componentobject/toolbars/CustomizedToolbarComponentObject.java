@@ -243,7 +243,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void verifyToolOnToolbar(String toolName) {
-    waitForElementByXPath(String.format(addedToolsPath, toolName));
+    wait.forElementVisible(By.xpath(String.format(addedToolsPath, toolName)));
     PageObjectLogging.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
   }
 

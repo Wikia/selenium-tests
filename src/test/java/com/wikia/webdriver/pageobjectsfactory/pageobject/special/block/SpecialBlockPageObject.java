@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -75,8 +76,8 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   }
 
   public void verifyBlockedUserSubmitPage(String userName, String password) {
-    waitForElementByXPath("//p/a[contains(text(), '" + userName + "')]");
-    waitForElementByXPath("//p[contains(text(), 'has been blocked')]");
+    wait.forElementVisible(By.xpath("//p/a[contains(text(), '" + userName + "')]"));
+    wait.forElementVisible(By.xpath("//p[contains(text(), 'has been blocked')]"));
     logOut(driver);
   }
 }

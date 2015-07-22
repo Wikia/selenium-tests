@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,11 +45,11 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
   }
 
   public void verifyNewPageOnList(String pageName, String pageContent) {
-    waitForElementByXPath(
-        "//a[@title='" + pageName + "' and contains(text(), '" + pageName + "')]");
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
+        "//a[@title='" + pageName + "' and contains(text(), '" + pageName + "')]"));
+    wait.forElementVisible(By.xpath(
         "//span[@class='comment' and contains(text(), '(Created page with \"" + pageContent
-        + "\")')]");
+        + "\")')]"));
     PageObjectLogging
         .log("verifyNewPageOnList", pageName + " page verified on the contribution list", true);
   }

@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -72,16 +73,16 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   public void verifyBoardCreated(String title, String description) {
-    waitForElementByXPath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
-                          + "')]/../../../p[contains(text(), '" + description + "')]");
+    wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
+                                    + "')]/../../../p[contains(text(), '" + description + "')]"));
     PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);
   }
 
   private void clickDeleteForum(String name) {
     WebElement
         deleteButton =
-        waitForElementByXPath(
-            "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']");
+        wait.forElementVisible(By.xpath(
+            "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
     scrollAndClick(deleteButton);
     PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);
   }
@@ -101,9 +102,9 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void verifyForumDeletedText(String deletedName) {
-    waitForElementByXPath("//div[@class='banner-notification confirm']" +
-                          "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
-                          + "\" has been deleted.')]");
+    wait.forElementVisible(By.xpath("//div[@class='banner-notification confirm']" +
+                                    "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
+                                    + "\" has been deleted.')]"));
     PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
   }
 
@@ -132,7 +133,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumExists", e.getMessage(), false);
     }
-    waitForElementByXPath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]");
+    wait.forElementVisible(By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
     PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
   }
@@ -143,16 +144,16 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumNotExists", e.getMessage(), false);
     }
-    waitForElementByXPath(
-        "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]");
+    wait.forElementVisible(By.xpath(
+        "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
     PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
   }
 
   private void clickModifyForum(String forumName) {
     WebElement
         editPecil =
-        waitForElementByXPath(
-            "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']");
+        wait.forElementVisible(By.xpath(
+            "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
     scrollAndClick(editPecil);
     PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
   }
@@ -177,8 +178,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     String temp = getFirstForumName();
     WebElement
         down =
-        waitForElementByXPath(
-            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']");
+        wait.forElementVisible(By.xpath(
+            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
     down.click();
     Assertion.assertEquals(getSecondForumName(), temp);
     PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
@@ -188,8 +189,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     String temp = getSecondForumName();
     WebElement
         up =
-        waitForElementByXPath(
-            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']");
+        wait.forElementVisible(By.xpath(
+            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
     up.click();
     Assertion.assertEquals(getFirstForumName(), temp);
     PageObjectLogging.log("clickMoveDown", "move up button clicked", true);

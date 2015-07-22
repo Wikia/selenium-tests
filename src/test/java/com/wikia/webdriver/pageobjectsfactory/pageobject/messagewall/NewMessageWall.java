@@ -367,9 +367,9 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyPostedMessageVideo(String title) {
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//div[@class='msg-title']/a[contains(text(), "
-        + "'" + title + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]");
+        + "'" + title + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
   }
 }

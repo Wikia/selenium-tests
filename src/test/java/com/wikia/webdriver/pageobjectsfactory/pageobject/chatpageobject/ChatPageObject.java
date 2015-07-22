@@ -86,7 +86,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyMessageOnChat(String message) {
-    waitForElementByXPath(String.format(MESSAGE_ON_CHAT, message));
+    wait.forElementVisible(By.xpath(String.format(MESSAGE_ON_CHAT, message)));
     PageObjectLogging.log(
         "VerifyMessageOnChatPresent",
         "Message: " + message + " is present on chat board",
@@ -144,7 +144,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageNotification(int notificationCount) {
-    waitForElementByXPath(String.format(NOTIFICATION_COUNTER, notificationCount));
+    wait.forElementVisible(By.xpath(String.format(NOTIFICATION_COUNTER, notificationCount)));
     PageObjectLogging.log(
         "verifyPrivateMessageNotification",
         "private message notification number " + notificationCount + " is visible",
@@ -292,7 +292,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   private void verifyChatUnbanMessage(String userName) {
-    waitForElementByXPath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName));
+    wait.forElementVisible(By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName)));
   }
 
   public void unBanUser(String userName) {

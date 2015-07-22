@@ -106,10 +106,10 @@ public class MobileArticlePageObject extends MobileBasePageObject {
     int firstNumberOfComments = listOfComments.size();
     commentInputArea.sendKeys(comment);
     postCommentButton.click();
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
         + comment + "')]"
-    );
+    ));
     Assertion.assertTrue(listOfComments.size() == (firstNumberOfComments + 1),
                          "size of list was not increased");
     verifyAddedCommentOnTop(comment);
@@ -131,17 +131,17 @@ public class MobileArticlePageObject extends MobileBasePageObject {
     int number = Integer.parseInt(commentsSectionHeader.getAttribute("data-count"));
     commentInputArea.sendKeys(comment);
     postCommentButton.click();
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
         + comment + "')]"
-    );
+    ));
     verifyNumberOfComments(number);
   }
 
   private void verifyAddedReplyOnCommentPage(String reply) {
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//div[@id='wkMdlWrp']//ul[@class='sub-comments']//p[contains(text(), '" + reply + "')]"
-    );
+    ));
     PageObjectLogging.log("verifyAddedReply", "reply " + reply + " is visible", true, driver);
   }
 
@@ -209,7 +209,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   public void clickSection(int sectionNumber) {
     WebElement
         chev =
-        waitForElementByXPath("//div[@id='mw-content-text']/h2[" + sectionNumber + "]");
+        wait.forElementVisible(By.xpath("//div[@id='mw-content-text']/h2[" + sectionNumber + "]"));
     scrollAndClick(chev);
     PageObjectLogging.log("clickSection", "section " + chev.getText() + " clicked", true, driver);
   }
