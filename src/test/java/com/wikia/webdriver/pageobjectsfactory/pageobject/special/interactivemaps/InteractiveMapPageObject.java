@@ -112,9 +112,9 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickEmbedMapCodeButton() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(embedMapCodeButton);
+    wait.forElementVisible(embedMapCodeButton);
     embedMapCodeButton.click();
     PageObjectLogging.log("clickEmbedMapCodeButton", "Embed map code button clicked", true, driver);
     driver.switchTo().defaultContent();
@@ -137,10 +137,10 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public CreatePinTypesComponentObject clickEditPinTypesButton() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(filterBox);
-    waitForElementVisibleByElement(editPinTypesButton);
+    wait.forElementVisible(filterBox);
+    wait.forElementVisible(editPinTypesButton);
     editPinTypesButton.click();
     PageObjectLogging.log("clickEditPinTypesButton",
                           "Edit Pin Types button were clicked", true, driver);
@@ -158,7 +158,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickZoomOutButton() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     waitForElementClickableByElement(zoomOutButton);
     zoomOutButton.click();
@@ -168,10 +168,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void clickOnPin(Integer pinListPosition, boolean ...noFrame) {
     if(noFrame.length == 0) {
-        waitForElementVisibleByElement(mapFrame);
+        wait.forElementVisible(mapFrame);
         driver.switchTo().frame(mapFrame);
     }
-    waitForElementVisibleByElement(pinCollection.get(pinListPosition));
+    wait.forElementVisible(pinCollection.get(pinListPosition));
     scrollToElement(pinCollection.get(pinListPosition));
     Actions actions = new Actions(driver);
     actions.moveToElement(pinCollection.get(pinListPosition));
@@ -180,9 +180,9 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickOnSingleEnabledCategory() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(
+    wait.forElementVisible(
         enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX).click();
     PageObjectLogging.log("clickOnSingleEnabledCategory",
@@ -203,9 +203,9 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void clickOnAllPinTypes() {
     driver.switchTo().defaultContent();
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(allPinTypes);
+    wait.forElementVisible(allPinTypes);
     allPinTypes.click();
     PageObjectLogging.log("clickOnAllCategories", "All categories were clicked", true);
     driver.switchTo().defaultContent();
@@ -222,7 +222,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickOnFilterBoxTitle() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     scrollToElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(filterBoxTitle);
@@ -234,7 +234,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void clickOpenPinTitle(boolean ...noFrame) {
     if(noFrame.length == 0) {
-        waitForElementVisibleByElement(mapFrame);
+        wait.forElementVisible(mapFrame);
         driver.switchTo().frame(mapFrame);
     }
     poiArticleLink.click();
@@ -262,7 +262,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   public AddPinComponentObject placePinInMap() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(addPinButton);
+    wait.forElementVisible(addPinButton);
     addPinButton.click();
     Actions actions = new Actions(driver);
     actions.moveToElement(mapImagesCollection.get(0));
@@ -273,7 +273,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyMapOpened() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     scrollToElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     driver.switchTo().defaultContent();
@@ -281,7 +281,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyMapOpenedForDeleteMapTests() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     PageObjectLogging.log("verifyMapOpenedForDeleteMapTests", "Map was opened", true);
   }
 
@@ -291,9 +291,9 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyCreatedPinTypesForNewMap() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(filterBox);
+    wait.forElementVisible(filterBox);
     Assertion.assertEquals(1, enabledPinTypesCollection.size());
     driver.switchTo().defaultContent();
   }
@@ -306,13 +306,13 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyEmbedMapCode(embedMapDialogButtons button) {
     switch (button) {
       case SMALL:
-        waitForElementVisibleByElement(embedMapCodeSmall);
+        wait.forElementVisible(embedMapCodeSmall);
         break;
       case MEDIUM:
-        waitForElementVisibleByElement(embedMapCodeMedium);
+        wait.forElementVisible(embedMapCodeMedium);
         break;
       case LARGE:
-        waitForElementVisibleByElement(embedMapCodeLarge);
+        wait.forElementVisible(embedMapCodeLarge);
         break;
       default:
         throw new NoSuchElementException("Non-existing dialog button selected");
@@ -322,7 +322,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPopUpVisible() {
-    waitForElementVisibleByElement(pinDescription);
+    wait.forElementVisible(pinDescription);
     Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
     driver.switchTo().defaultContent();
   }
@@ -333,7 +333,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyAllPinTypesIsCheck() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(allPinTypes);
     wait.forElementVisible(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
@@ -346,9 +346,9 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyAllPinTypesIsUncheck() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(allPinTypes);
+    wait.forElementVisible(allPinTypes);
     if (!allPinTypes.getAttribute("class").contains("enabled")) {
       PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", true);
     } else {
@@ -373,21 +373,21 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPinTypesAreCheck() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(
+    wait.forElementVisible(
         enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
     driver.switchTo().defaultContent();
   }
 
   public void verifyPinDataWasChanged(String pinName, String pinDesc) {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(popUpContent);
+    wait.forElementVisible(popUpContent);
     scrollToElement(popUpContent);
-    waitForElementVisibleByElement(pinTitle);
-    waitForElementVisibleByElement(pinDescription);
+    wait.forElementVisible(pinTitle);
+    wait.forElementVisible(pinDescription);
     Assertion.assertNotEquals(pinTitle.getText(), pinName);
     Assertion.assertNotEquals(pinDescription.getText(), pinDesc);
   }
@@ -395,7 +395,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyControlButtonsAreVisible() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(embedMapCodeButton);
+    wait.forElementVisible(embedMapCodeButton);
     Assertion.assertEquals(checkIfElementOnPage(embedMapCodeButton), true);
     Assertion.assertEquals(checkIfElementOnPage(zoomInButton), true);
     Assertion.assertEquals(checkIfElementOnPage(zoomOutButton), true);
@@ -426,7 +426,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPinTypeExists(String pinTypeName) {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     while (createdPinNames.size() - 1 != 0) {
       if (createdPinNames
@@ -451,7 +451,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPinTitleLink() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     Assertion.assertEquals(checkIfElementOnPage(poiArticleLink), true);
     driver.switchTo().defaultContent();

@@ -35,7 +35,7 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public void clickCloseButton() {
-    waitForElementVisibleByElement(closeLightboxButton);
+    wait.forElementVisible(closeLightboxButton);
     closeLightboxButton.click();
   }
 
@@ -55,7 +55,7 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isLightboxOpened() {
     try {
-      waitForElementVisibleByElement(lightboxContent, 5, 1000);
+      wait.forElementVisible(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -63,7 +63,7 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public boolean isCurrentImageVisible() {
-    waitForElementVisibleByElement(currentImage);
+    wait.forElementVisible(currentImage);
     return checkIfElementOnPage(currentImage);
   }
 

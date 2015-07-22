@@ -83,13 +83,13 @@ public class AddPinComponentObject extends BasePageObject {
   }
 
   public void clickSuggestion(int opt) {
-    waitForElementVisibleByElement(suggestedOption.get(opt));
+    wait.forElementVisible(suggestedOption.get(opt));
     WebElement suggestionSelected = suggestedOption.get(opt);
     suggestionSelected.click();
   }
 
   public InteractiveMapPageObject clickDeletePin() {
-    waitForElementVisibleByElement(deleteButton);
+    wait.forElementVisible(deleteButton);
     deleteButton.click();
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);

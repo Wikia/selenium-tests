@@ -76,7 +76,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     waitForElementClickableByElement(mainParentCategorySelector);
     mainParentCategorySelector.click();
     WebElement parentSelected = parentCatOption.get(catValue);
-    waitForElementVisibleByElement(parentSelected);
+    wait.forElementVisible(parentSelected);
     parentSelected.click();
     PageObjectLogging.log("selectParentCategory", "Parent category selected", true);
   }
@@ -122,7 +122,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   }
 
   public void verifyErrorExists() {
-    waitForElementVisibleByElement(pinTypesError);
+    wait.forElementVisible(pinTypesError);
     scrollToElement(pinTypesError);
     Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
   }

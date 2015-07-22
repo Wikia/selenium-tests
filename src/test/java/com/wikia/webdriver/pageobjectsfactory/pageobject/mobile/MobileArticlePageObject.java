@@ -347,7 +347,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
             wait.forElementVisible(level2Visible);
             waitForElementNotVisibleByElement(level3);
             elem2.click();
-            waitForElementVisibleByElement(level3Visible);
+            wait.forElementVisible(level3Visible);
             waitForElementClickableByElement(menuBackButton);
             menuBackButton.click();
             break;

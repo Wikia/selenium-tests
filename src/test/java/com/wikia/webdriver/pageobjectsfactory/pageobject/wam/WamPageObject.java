@@ -192,7 +192,7 @@ public class WamPageObject extends BasePageObject {
 
   public String changeDateToLastMonth() {
     scrollAndClick(datePickerInput);
-    waitForElementVisibleByElement(calendarElement);
+    wait.forElementVisible(calendarElement);
     previousMonthArrow.click();
     DateTime date = DateTime.now().minusMonths(1);
     String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);

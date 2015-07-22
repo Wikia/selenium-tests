@@ -51,6 +51,15 @@ public class Wait {
     }
   }
 
+  public WebElement forElementVisible(WebElement element, int timeout, int polling) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions.visibilityOf(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   /**
    * Checks if the element is visible on the browser
    */

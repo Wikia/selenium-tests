@@ -68,7 +68,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * request. This method waits until this requests completes.
    */
   private void waitForNotificationsMessagesToLoad() {
-    waitForElementVisibleByElement(notificationsDropdown);
+    wait.forElementVisible(notificationsDropdown);
     waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
     waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
   }
@@ -99,7 +99,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * notifications)
    */
   private void waitForNotificationsLoaded() {
-    waitForElementVisibleByElement(emptyNumberOfUnreadNotifications);
+    wait.forElementVisible(emptyNumberOfUnreadNotifications);
   }
 
   /**
@@ -158,7 +158,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
         this.scrollAndClick(this.markNotificationsAsReadThisWiki);
       } else {
         this.scrollAndClick(this.markNotificationsAsRead);
-        this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
+        this.wait.forElementVisible(this.markNotificationsAsReadAllWikis);
         this.scrollAndClick(this.markNotificationsAsReadAllWikis);
       }
       this.waitForElementNotPresent(unreadNotificationReddot);

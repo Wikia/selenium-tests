@@ -48,12 +48,12 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public void clickCommentsHeader() {
-    waitForElementVisibleByElement(commentsHeader);
+    wait.forElementVisible(commentsHeader);
     scrollAndClick(commentsHeader);
   }
 
   public void clickViewReplies(int index) {
-    waitForElementVisibleByElement(showRepliesButtons.get(index));
+    wait.forElementVisible(showRepliesButtons.get(index));
     scrollAndClick(showRepliesButtons.get(index));
   }
 
@@ -136,7 +136,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public boolean isRepliesListExpanded() {
     try {
-      waitForElementVisibleByElement(repliesContent, 5, 1000);
+      wait.forElementVisible(repliesContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -176,6 +176,6 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public void waitForFirstCommentToBeVisible() {
-    waitForElementVisibleByElement(allComments.get(0), 5, 500);
+    wait.forElementVisible(allComments.get(0), 5, 500);
   }
 }

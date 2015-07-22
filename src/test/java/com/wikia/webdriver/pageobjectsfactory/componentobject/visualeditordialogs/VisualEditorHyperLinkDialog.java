@@ -115,7 +115,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   public void clickLinkResult() {
     waitForElementNotVisibleByElement(inputPending);
-    waitForElementVisibleByElement(selectedResult);
+    wait.forElementVisible(selectedResult);
     WebElement matchingResult = driver.findElement(selectedResultBy);
     waitForElementClickableByElement(matchingResult);
     matchingResult.click();

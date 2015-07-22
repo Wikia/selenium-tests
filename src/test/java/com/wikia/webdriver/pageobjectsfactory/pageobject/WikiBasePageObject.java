@@ -705,7 +705,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyNotificationMessage() {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      waitForElementVisibleByElement(flashMessage);
+      wait.forElementVisible(flashMessage);
     } finally {
       driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
@@ -1007,14 +1007,14 @@ public class WikiBasePageObject extends BasePageObject {
 
   public RenamePageObject renameUsingDropdown() {
     actionsClick(articleEditDropdown);
-    waitForElementVisibleByElement(renameDropdown);
+    wait.forElementVisible(renameDropdown);
     renameDropdown.click();
     return new RenamePageObject(driver);
   }
 
   public DeletePageObject deleteUsingDropdown() {
     actionsClick(articleEditDropdown);
-    waitForElementVisibleByElement(deleteDropdown);
+    wait.forElementVisible(deleteDropdown);
     deleteDropdown.click();
     return new DeletePageObject(driver);
   }

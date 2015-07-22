@@ -269,7 +269,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
     waitForElementNotPresent(publishButtonDisabled);
-    waitForElementVisibleByElement(enabledPublishButton);
+    wait.forElementVisible(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
     waitForElementClickableByElement(publishButton);
     publishButton.click();
@@ -277,8 +277,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void verifyVEToolBarPresent() {
-    waitForElementVisibleByElement(veMode);
-    waitForElementVisibleByElement(veToolMenu);
+    wait.forElementVisible(veMode);
+    wait.forElementVisible(veToolMenu);
     PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
   }
 

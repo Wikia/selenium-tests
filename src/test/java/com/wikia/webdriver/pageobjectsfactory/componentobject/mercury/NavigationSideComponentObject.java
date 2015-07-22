@@ -52,17 +52,17 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickSearchButton() {
-    waitForElementVisibleByElement(searchButton);
+    wait.forElementVisible(searchButton);
     searchButton.click();
   }
 
   public void clickBackChevron() {
-    waitForElementVisibleByElement(backChevron);
+    wait.forElementVisible(backChevron);
     backChevron.click();
   }
 
   public void clickCancelButton() {
-    waitForElementVisibleByElement(cancelSearchCaption);
+    wait.forElementVisible(cancelSearchCaption);
     cancelSearchCaption.click();
   }
 
@@ -72,12 +72,12 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickNavListElement(int index) {
-    waitForElementVisibleByElement(navList.get(index));
+    wait.forElementVisible(navList.get(index));
     navList.get(index).click();
   }
 
   public void clickOverlay() {
-    waitForElementVisibleByElement(overlay);
+    wait.forElementVisible(overlay);
     tapOnElement(overlay);
   }
 
@@ -88,7 +88,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSuggestionListDisplayed() {
     try {
-      waitForElementVisibleByElement(searchSuggestion, 5, 1000);
+      wait.forElementVisible(searchSuggestion, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }
@@ -97,7 +97,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isSorryInfoDisplayed() {
     try {
-      waitForElementVisibleByElement(sorrySpan, 5, 1000);
+      wait.forElementVisible(sorrySpan, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }
@@ -113,7 +113,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isBackLinkDisplayed() {
     try {
-      waitForElementVisibleByElement(backChevron, 5, 1000);
+      wait.forElementVisible(backChevron, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }
@@ -122,7 +122,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isRandomPageButtonDisplayed() {
     try {
-      waitForElementVisibleByElement(randomPageButton, 5, 1000);
+      wait.forElementVisible(randomPageButton, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       return false;
     }
@@ -130,7 +130,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public boolean isNavListElementEllipsized(int index) {
-    waitForElementVisibleByElement(navList.get(index));
+    wait.forElementVisible(navList.get(index));
     return navList.get(index).getCssValue("text-overflow").equals("ellipsis");
   }
 
@@ -143,7 +143,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void typeInSearchField(String content) {
-    waitForElementVisibleByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.sendKeys(content);
   }
 

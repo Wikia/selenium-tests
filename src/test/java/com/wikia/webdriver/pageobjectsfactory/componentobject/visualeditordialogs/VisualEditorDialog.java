@@ -28,12 +28,12 @@ public class VisualEditorDialog extends WikiBasePageObject {
   @Deprecated
   public void switchToIFrame() {
     wait.forElementVisible(dialog);
-    waitForElementVisibleByElement(dialog);
+    wait.forElementVisible(dialog);
     driver.switchTo().frame(frame);
   }
 
   public void waitForDialogVisible() {
-    waitForElementVisibleByElement(dialog);
+    wait.forElementVisible(dialog);
   }
 
   @Deprecated

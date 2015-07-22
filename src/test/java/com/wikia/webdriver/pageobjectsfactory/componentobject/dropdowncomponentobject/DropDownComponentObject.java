@@ -114,7 +114,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
   public void logInViaFacebook(String email, String password) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    waitForElementVisibleByElement(formConnectWithFbButton);
+    wait.forElementVisible(formConnectWithFbButton);
     // When clicking via selenium dropdown disappears
     js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
     PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);

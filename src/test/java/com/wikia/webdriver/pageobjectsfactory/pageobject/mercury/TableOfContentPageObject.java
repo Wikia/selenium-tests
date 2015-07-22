@@ -31,7 +31,7 @@ public class TableOfContentPageObject extends BasePageObject {
 
   public boolean isTOCDisplayed() {
     try {
-      waitForElementVisibleByElement(tocAll, 5, 1000);
+      wait.forElementVisible(tocAll, 5, 1000);
     } catch (TimeoutException e) {
       return false;
     }
@@ -49,7 +49,7 @@ public class TableOfContentPageObject extends BasePageObject {
   }
 
   public void clickOnTOCListElement(int index) {
-    waitForElementVisibleByElement(listOfLinks.get(index));
+    wait.forElementVisible(listOfLinks.get(index));
     listOfLinks.get(index).click();
   }
 

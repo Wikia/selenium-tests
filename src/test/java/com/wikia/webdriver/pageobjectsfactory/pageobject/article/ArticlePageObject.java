@@ -182,12 +182,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyArticleTitle(String title) {
-    waitForElementVisibleByElement(articleHeader);
+    wait.forElementVisible(articleHeader);
     Assertion.assertEquals(articleHeader.getText(), title);
   }
 
   public void verifyContent(String content) {
-    waitForElementVisibleByElement(articleContent);
+    wait.forElementVisible(articleContent);
     Assertion.assertStringContains(articleContent.getText(), content);
   }
 
@@ -222,7 +222,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
     actionsClick(contributeDropdown);
-    waitForElementVisibleByElement(addArticleInDropdown);
+    wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);
     return new VisualEditModePageObject(driver);
@@ -230,7 +230,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
     actionsClick(contributeDropdown);
-    waitForElementVisibleByElement(addArticleInDropdown);
+    wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);
     return new SourceEditModePageObject(driver);
@@ -245,7 +245,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
-    waitForElementVisibleByElement(addArticleInDropdown);
+    wait.forElementVisible(addArticleInDropdown);
     addArticleInDropdown.click();
     articleTitleInputModal.sendKeys(articleTitle);
     submitModal.click();
@@ -254,7 +254,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
     openEditDropdown.click();
-    waitForElementVisibleByElement(editUsingClassicEditor);
+    wait.forElementVisible(editUsingClassicEditor);
     editUsingClassicEditor.click();
     return new VisualEditModePageObject(driver);
   }
@@ -266,7 +266,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public MiniEditorComponentObject triggerCommentArea() {
     scrollToElement(allCommentsArea);
-    waitForElementVisibleByElement(commentArea);
+    wait.forElementVisible(commentArea);
     jQueryFocus(commentArea);
     waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
     return new MiniEditorComponentObject(driver);
@@ -337,7 +337,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyCommentCreator(String userName) {
     WebElement mostRecentComment = articleComments.get(0);
     WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
-    waitForElementVisibleByElement(editedByArea);
+    wait.forElementVisible(editedByArea);
     Assertion.assertStringContains(editedByArea.getText(), userName);
   }
 
@@ -358,14 +358,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyCommentReply(String reply) {
     WebElement mostRecentReply = commentReplies.get(0);
-    waitForElementVisibleByElement(mostRecentReply);
+    wait.forElementVisible(mostRecentReply);
     Assertion.assertStringContains(mostRecentReply.getText(), reply);
   }
 
   public void verifyReplyCreator(String userName) {
     WebElement mostRecentReply = commentReplies.get(0);
     WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
-    waitForElementVisibleByElement(editedByArea);
+    wait.forElementVisible(editedByArea);
     Assertion.assertStringContains(editedByArea.getText(), userName);
   }
 
@@ -377,28 +377,28 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyDropdownForAdmin() {
     actionsClick(articleEditDropdown);
-    waitForElementVisibleByElement(renameDropdown);
-    waitForElementVisibleByElement(deleteDropdown);
-    waitForElementVisibleByElement(historyDropdown);
-    waitForElementVisibleByElement(protectDropdown);
-    waitForElementVisibleByElement(veEditButton);
+    wait.forElementVisible(renameDropdown);
+    wait.forElementVisible(deleteDropdown);
+    wait.forElementVisible(historyDropdown);
+    wait.forElementVisible(protectDropdown);
+    wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 5);
     PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for admin", true);
   }
 
   public void verifyDropdownForUser() {
     actionsClick(articleEditDropdown);
-    waitForElementVisibleByElement(historyDropdown);
-    waitForElementVisibleByElement(renameDropdown);
-    waitForElementVisibleByElement(veEditButton);
+    wait.forElementVisible(historyDropdown);
+    wait.forElementVisible(renameDropdown);
+    wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 3);
     PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for user", true);
   }
 
   public void verifyDropdownForAnon() {
     actionsClick(articleEditDropdown);
-    waitForElementVisibleByElement(historyDropdown);
-    waitForElementVisibleByElement(veEditButton);
+    wait.forElementVisible(historyDropdown);
+    wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 2);
     PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
   }
@@ -776,7 +776,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public EmbedMapComponentObject clickViewEmbedMap() {
-    waitForElementVisibleByElement(viewEmbedMapButton);
+    wait.forElementVisible(viewEmbedMapButton);
     scrollToElement(viewEmbedMapButton);
     viewEmbedMapButton.click();
     driver.switchTo().activeElement();
@@ -918,7 +918,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VisualEditModePageObject editArticleInCKUsingDropdown() {
     actionsClick(contributeDropdown);
-    waitForElementVisibleByElement(editArticleInDropDown);
+    wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
   }

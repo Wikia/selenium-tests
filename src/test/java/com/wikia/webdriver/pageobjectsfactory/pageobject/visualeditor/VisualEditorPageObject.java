@@ -90,9 +90,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public void selectMediaAndDelete() {
-    waitForElementVisibleByElement(editArea);
+    wait.forElementVisible(editArea);
     editArea.click();
-    waitForElementVisibleByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     mediaNode.click();
     deleteMediaNode();
     PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
@@ -103,7 +103,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void typeTextArea(String text) {
-    waitForElementVisibleByElement(editArea);
+    wait.forElementVisible(editArea);
     editArea.sendKeys(text);
     PageObjectLogging.log("write", "text " + text + "written", true);
   }
@@ -124,7 +124,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void selectText(String text) {
-    waitForElementVisibleByElement(editArea);
+    wait.forElementVisible(editArea);
     String textDump = editArea.getText();
     int
         from =
@@ -171,8 +171,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyEditorSurfacePresent() {
-    waitForElementVisibleByElement(veMode);
-    waitForElementVisibleByElement(veEditorSurface);
+    wait.forElementVisible(veMode);
+    wait.forElementVisible(veEditorSurface);
     PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
   }
 
@@ -184,7 +184,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyMapPresent() {
-    waitForElementVisibleByElement(mapNode);
+    wait.forElementVisible(mapNode);
     PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
   }
 
@@ -197,7 +197,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideos(int expected) {
-    waitForElementVisibleByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     Assertion.assertNumber(videoNodes.size(), expected,
             "Checking the correct number of video nodes added");
     PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
@@ -205,7 +205,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyGalleries(int expected) {
     if (expected > 0) {
-      waitForElementVisibleByElement(galleryNode);
+      wait.forElementVisible(galleryNode);
     }
     Assertion.assertNumber(
             getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")), expected,
@@ -225,7 +225,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyMedias(int expected) {
     wait.forElementVisible(mediaNode);
-    waitForElementVisibleByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     Assertion.assertNumber(mediaNodes.size(), expected,
             "Checking the correct number of media nodes added");
     PageObjectLogging.log("verifyMedias", mediaNodes.size() + " media displayed", true);
@@ -233,14 +233,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public VisualEditorMediaSettingsDialog openMediaSettings() {
     wait.forElementVisible(editArea);
-    waitForElementVisibleByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     wait.forElementVisible(focusedNode);
     clickContextMenu();
     return new VisualEditorMediaSettingsDialog(driver);
   }
 
   private void clickContextMenu() {
-    waitForElementVisibleByElement(contextMenu);
+    wait.forElementVisible(contextMenu);
     WebElement contextEdit;
     try {
       contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
@@ -252,7 +252,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void typeReturn() {
-    waitForElementVisibleByElement(editArea);
+    wait.forElementVisible(editArea);
     editArea.sendKeys(Keys.RETURN);
   }
 
@@ -306,21 +306,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyPreviewVideoPlay(String providerName) {
-    waitForElementVisibleByElement(previewOverlay);
-    waitForElementVisibleByElement(previewVideoWrapper);
+    wait.forElementVisible(previewOverlay);
+    wait.forElementVisible(previewVideoWrapper);
     VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
     video.verifyVideoAutoplay(providerName, true);
     PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
   }
 
   public void verifyPreviewImage() {
-    waitForElementVisibleByElement(previewOverlay);
-    waitForElementVisibleByElement(previewImage);
+    wait.forElementVisible(previewOverlay);
+    wait.forElementVisible(previewImage);
     PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
   }
 
   public void verifyVideoCaption(String caption) {
-    waitForElementVisibleByElement(mediaNode);
+    wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
     PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
@@ -333,7 +333,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void selectMediaByIndex(int index) {
     WebElement selectedMedia = mediaNodes.get(index);
-    waitForElementVisibleByElement(selectedMedia);
+    wait.forElementVisible(selectedMedia);
     scrollAndClick(selectedMedia, 80);
   }
 
@@ -351,7 +351,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private void resizeMedia(int xOffSet, int yOffset) {
     PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
     selectMedia();
-    waitForElementVisibleByElement(swResizeHandle);
+    wait.forElementVisible(swResizeHandle);
     Actions actions = new Actions(driver);
     actions
         .dragAndDropBy(swResizeHandle, xOffSet, yOffset)
@@ -432,7 +432,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().release().build()
         .perform();
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
-    waitForElementVisibleByElement(contextEdit);
+    wait.forElementVisible(contextEdit);
     PageObjectLogging
         .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
              driver);
@@ -454,8 +454,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorEditTemplateDialog openEditTemplateDialog() {
-    waitForElementVisibleByElement(editArea);
-    waitForElementVisibleByElement(focusedNode);
+    wait.forElementVisible(editArea);
+    wait.forElementVisible(focusedNode);
     clickContextMenu();
     return new VisualEditorEditTemplateDialog(driver);
   }

@@ -43,7 +43,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-    waitForElementVisibleByElement(topContributorsLinks.get(0), 5, 500);
+    wait.forElementVisible(topContributorsLinks.get(0), 5, 500);
     scrollToElement(topContributorsLinks.get(index));
     topContributorsLinks.get(index).click();
   }

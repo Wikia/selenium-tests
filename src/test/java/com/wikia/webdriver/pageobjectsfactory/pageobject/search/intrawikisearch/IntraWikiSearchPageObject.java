@@ -200,7 +200,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyDefaultNamespaces() {
-        waitForElementVisibleByElement(advancedField);
+        wait.forElementVisible(advancedField);
         for (int i = 0; i < advancedOptions.size(); i++) {
             if ("Articles".equals(advancedOptions.get(i).getText())) {
                 Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
@@ -213,7 +213,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void selectPhotosVideos() {
-        waitForElementVisibleByElement(photosVideos);
+        wait.forElementVisible(photosVideos);
         photosVideos.click();
         wait.forElementVisible(sortingOptions);
         PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected",

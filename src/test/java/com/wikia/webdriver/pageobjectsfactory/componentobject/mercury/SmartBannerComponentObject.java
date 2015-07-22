@@ -28,12 +28,12 @@ public class SmartBannerComponentObject extends BasePageObject {
   }
 
   public void clickCloseButton() {
-    waitForElementVisibleByElement(closeButton);
+    wait.forElementVisible(closeButton);
     closeButton.click();
   }
 
   public String getButtonName() {
-    waitForElementVisibleByElement(bannerButton);
+    wait.forElementVisible(bannerButton);
     return bannerButton.getText();
   }
 

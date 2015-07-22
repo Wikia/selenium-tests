@@ -77,14 +77,14 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void clickAddMediaButton() {
-    waitForElementVisibleByElement(addMediaButton);
+    wait.forElementVisible(addMediaButton);
     addMediaButton.click();
   }
 
   public VisualEditorPageObject addMediaByURL(String url) {
     waitForDialogVisible();
     typeInSearchTextField(url);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     waitForElementClickableByElement(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
@@ -100,7 +100,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject addExistingMedia(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
     for (int i = 0; i < number; i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(mediaAddIconBy);
@@ -114,7 +114,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject uploadImage(String fileName) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
@@ -123,7 +123,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject uploadImage(String fileName, String newFileName) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     typeNewFileName(newFileName);
     clickAddMediaButton();
     waitForDialogNotVisible();
@@ -131,7 +131,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   public void selectImageLicense(ImageLicense imageLicense) {
-    waitForElementVisibleByElement(imageLicenseDropdown);
+    wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
     PageObjectLogging
@@ -142,7 +142,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
                                             ImageLicense imageLicense) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     typeNewFileName(newFileName);
     selectImageLicense(imageLicense);
     clickAddMediaButton();
@@ -164,7 +164,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject previewExistingMediaByIndex(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
     targetMedia.click();
     waitForDialogNotVisible();
@@ -192,7 +192,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private WebElement findMediaByTitle(String title) {
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     return getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title", title);
   }
 }

@@ -67,7 +67,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
   }
 
   public void verifyErrorExists() {
-    waitForElementVisibleByElement(mapErrorField);
+    wait.forElementVisible(mapErrorField);
     Assertion.assertFalse(mapErrorField.getText().isEmpty());
   }
 }

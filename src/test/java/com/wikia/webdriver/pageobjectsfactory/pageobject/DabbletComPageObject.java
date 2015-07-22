@@ -34,16 +34,16 @@ public class DabbletComPageObject extends BasePageObject {
   }
 
   public void typeHtmlCode(String htmlCode) {
-    waitForElementVisibleByElement(cssBox);
+    wait.forElementVisible(cssBox);
     cssBox.clear();
-    waitForElementVisibleByElement(htmlBox);
+    wait.forElementVisible(htmlBox);
     htmlBox.clear();
     htmlBox.sendKeys(htmlCode);
     PageObjectLogging.log("verifyMapEmbed", "map was embeded", true, driver);
   }
 
   public void verifyMapEmbed() {
-    waitForElementVisibleByElement(resultBox);
+    wait.forElementVisible(resultBox);
     driver.switchTo().frame(resultBox);
     driver.switchTo().frame(0);
     EmbedMapComponentObject embedMap = new EmbedMapComponentObject(driver);

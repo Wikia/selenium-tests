@@ -43,38 +43,38 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public void clickViewMapButton() {
-    waitForElementVisibleByElement(viewMapButton);
+    wait.forElementVisible(viewMapButton);
     viewMapButton.click();
   }
 
   public void clickCloseButton() {
-    waitForElementVisibleByElement(closeMapLightbox);
+    wait.forElementVisible(closeMapLightbox);
     closeMapLightbox.click();
   }
 
   public void clickFilterBox() {
-    waitForElementVisibleByElement(filterBoxHeader);
+    wait.forElementVisible(filterBoxHeader);
     tapOnElement(filterBoxHeader);
   }
 
   public void clickZoomIn() {
-    waitForElementVisibleByElement(zoomInButton);
+    wait.forElementVisible(zoomInButton);
     tapOnElement(zoomInButton);
   }
 
   public void clickZoomOut() {
-    waitForElementVisibleByElement(zoomOutButton);
+    wait.forElementVisible(zoomOutButton);
     tapOnElement(zoomOutButton);
   }
 
   public void clickPin() {
-    waitForElementVisibleByElement(poiPin);
+    wait.forElementVisible(poiPin);
     tapOnElement(poiPin);
   }
 
   public boolean isFilterBoxWasExpanded() {
     try {
-      waitForElementVisibleByElement(filterBox, 5, 1000);
+      wait.forElementVisible(filterBox, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -83,7 +83,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
 
   public boolean isMapModalVisible() {
     try {
-      waitForElementVisibleByElement(lightbox, 5, 1000);
+      wait.forElementVisible(lightbox, 5, 1000);
     } catch (TimeoutException e) {
       return false;
     }
@@ -91,7 +91,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public boolean isTextInMapTitleHeader() {
-    waitForElementVisibleByElement(mapTitle);
+    wait.forElementVisible(mapTitle);
     return !mapTitle.getText().isEmpty();
   }
 

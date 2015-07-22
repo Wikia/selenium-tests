@@ -102,7 +102,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public void verifySaveNotification() {
-    waitForElementVisibleByElement(saveNotfication);
+    wait.forElementVisible(saveNotfication);
     PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
   }
 

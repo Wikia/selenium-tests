@@ -45,7 +45,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
       scrollToElement(finishButton);
     }
     try {
-      waitForElementVisibleByElement(finishButton);
+      wait.forElementVisible(finishButton);
       return true;
     } catch (TimeoutException e) {
       return false;

@@ -45,7 +45,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
   public void typeCaption(String text) {
     waitForDialogVisible();
-    waitForElementVisibleByElement(captionEditArea);
+    wait.forElementVisible(captionEditArea);
     captionEditArea.sendKeys(text);
     PageObjectLogging.log("typeCaption", "Typed " + text + " in caption area", true);
     driver.switchTo().defaultContent();
@@ -53,7 +53,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
   public VisualEditorPageObject clickApplyChangesButton() {
     waitForDialogVisible();
-    waitForElementVisibleByElement(applyChangesButton);
+    wait.forElementVisible(applyChangesButton);
     waitForElementClickableByElement(applyChangesButton);
     applyChangesButton.click();
     waitForDialogNotVisible();

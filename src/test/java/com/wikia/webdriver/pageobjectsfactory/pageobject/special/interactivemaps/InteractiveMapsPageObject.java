@@ -56,7 +56,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
-    waitForElementVisibleByElement(createMapUnderContribute);
+    wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
     PageObjectLogging.log("clickCreateAMapUnderContributeButton",
                           "create a map button under contribute button clicked", true, driver);

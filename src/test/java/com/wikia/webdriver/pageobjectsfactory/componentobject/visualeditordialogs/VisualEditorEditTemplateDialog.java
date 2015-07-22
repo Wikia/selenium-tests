@@ -37,7 +37,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   @Override
   public void waitForDialogVisible() {
     super.waitForDialogVisible();
-    waitForElementVisibleByElement(templateFocusedMode);
+    wait.forElementVisible(templateFocusedMode);
   }
 
   @Override

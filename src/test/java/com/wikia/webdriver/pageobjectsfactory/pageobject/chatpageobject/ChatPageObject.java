@@ -251,7 +251,7 @@ public class ChatPageObject extends WikiBasePageObject {
     WebElement
         userInPrivateMessageSection =
         getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
-    waitForElementVisibleByElement(userInPrivateMessageSection);
+    wait.forElementVisible(userInPrivateMessageSection);
     PageObjectLogging
         .log("selectPrivateMessageToUser", "private message selected from dropdown", true);
   }

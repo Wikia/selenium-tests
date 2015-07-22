@@ -311,7 +311,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   private void verifyAmazonPrimeShown(By slotBy) {
     WebElement priceElem = findPriceElementFromSlot(slotBy);
-    waitForElementVisibleByElement(priceElem);
+    wait.forElementVisible(priceElem);
     scrollToElement(priceElem);
     PageObjectLogging.log("verifyAmazonPrimeShown", "Amazon prime unit is visible", true);
   }
@@ -481,7 +481,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   }
 
   private void verifyProductThumbVisible(By slotBy) {
-    waitForElementVisibleByElement(driver.findElement(slotBy).findElement(productThumbBy));
+    wait.forElementVisible(driver.findElement(slotBy).findElement(productThumbBy));
     PageObjectLogging.log("verifyProductThumbInvisible", "Product thumbnail is visible in content",
         true);
   }
