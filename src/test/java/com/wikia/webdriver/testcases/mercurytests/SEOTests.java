@@ -100,7 +100,7 @@ public class SEOTests extends NewTestTemplate {
     /*String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    seo.waitForLoadingSpinnerToFinishReloadingPage();
+    seo.waitForLoadingSpinnerToFinish();
 
     PageObjectLogging.logWarning(
         "Site status",

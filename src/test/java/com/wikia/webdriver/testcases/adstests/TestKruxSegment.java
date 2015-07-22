@@ -1,85 +1,66 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
+import static com.wikia.webdriver.common.core.Assertion.assertFalse;
+import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 
 /**
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestKruxSegment extends TemplateDontLogout {
+public class TestKruxSegment extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxRealTimeSegment",
       groups = {"KruxRealtimeSegment", "Ads"}
   )
-  public void testRealTimeSegment(List<Pair> pages, String segmentId) {
+  public void testRealTimeSegment(String wikiName1,
+                                  String article1,
+                                  String wikiName2,
+                                  String article2,
+                                  String segmentId) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
-    for (Pair page : pages) {
-      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
-      adsKruxObject.getUrl(url);
-      adsKruxObject.waitForKrux();
-    }
-    Assertion.assertStringContains(adsKruxObject.getKxsegs(), segmentId);
+    adsKruxObject.initKruxUser(wikiName1);
+    adsKruxObject.getUrl(urlBuilder.getUrlForPath(wikiName1, article1));
+    assertTrue(adsKruxObject.getKxsegs().contains(segmentId));
+    adsKruxObject.getUrl(urlBuilder.getUrlForPath(wikiName2, article2));
+    assertFalse(adsKruxObject.getKxsegs().contains(segmentId));
   }
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandardSegmentOasis",
-      groups = {"KruxSegmentDesktop", "Ads"}
+      dataProvider = "kruxStandardSegment",
+      groups = {"KruxStandardSegment", "Ads"}
   )
-  public void testStandardSegmentOasis(List<Pair> pages, String segment, boolean isPresent,
-                                       String cookie) {
-    testStandardSegment(pages, segment, isPresent, cookie);
-  }
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandardSegmentWikiaMobile",
-      groups = {"KruxSegmentWikiaMobile", "Ads"}
-  )
-  public void testStandardSegmentWikiaMobile(List<Pair> pages, String segment, boolean isPresent,
-                                             String cookie) {
-    testStandardSegment(pages, segment, isPresent, cookie);
-  }
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxStandardSegmentMercury",
-      groups = {"KruxSegmentMercury", "Ads"}
-  )
-  public void testStandardSegmentMercury(List<Pair> pages, String segment, boolean isPresent,
-                                         String cookie) {
-    testStandardSegment(pages, segment, isPresent, cookie);
-  }
-
-  private void testStandardSegment(List<Pair> pages, String segment, boolean isPresent,
-                                   String cookie) {
+  public void testStandardSegment(String wikiName1,
+                                  String article1,
+                                  String wikiName2,
+                                  String article2,
+                                  String segmentId) {
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
-    adsKruxObject.setKruxUserCookie(cookie);
-    for (Pair page : pages) {
-      String url = urlBuilder.getUrlForPath((String) page.getLeft(), (String) page.getRight());
-      adsKruxObject.getUrl(url);
-      adsKruxObject.waitForKrux();
-      adsKruxObject.getKxsegs();
-      adsKruxObject.getKxkuid();
-    }
-    String segmentsLocalStorage = adsKruxObject.getKxsegs();
-    String dataGptPageParams = adsKruxObject.getGptParams("LEADERBOARD", "data-gpt-page-params");
-    Assertion.assertStringContains(dataGptPageParams,
-                                   adsKruxObject.getKsgmntPattern(segmentsLocalStorage)
-    );
-    Assertion.assertEquals(segmentsLocalStorage.contains(segment), isPresent);
+    adsKruxObject.initKruxUser(wikiName1);
+    adsKruxObject.addSegmentToCurrentUser(segmentId, wikiName1);
+    adsKruxObject.getUrl(urlBuilder.getUrlForPath(wikiName1, article1));
+    assertPageParams(adsKruxObject);
+    assertTrue(adsKruxObject.getKxsegs().contains(segmentId));
+    adsKruxObject.initKruxUser(wikiName2);
+    adsKruxObject.getUrl(urlBuilder.getUrlForPath(wikiName2, article2));
+    assertPageParams(adsKruxObject);
+    assertTrue(adsKruxObject.getKxsegs().contains(segmentId));
   }
 
-
+  private void assertPageParams(AdsKruxObject adsKruxObject) {
+    assertStringContains(
+        adsKruxObject.getGptParams(AdsContent.TOP_LB, "data-gpt-page-params"),
+        adsKruxObject.getKxsegs());
+  }
 }

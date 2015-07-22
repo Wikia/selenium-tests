@@ -105,4 +105,6 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
         true
     );
   }
+
+
 }

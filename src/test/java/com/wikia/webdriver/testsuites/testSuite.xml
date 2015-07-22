@@ -32,6 +32,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestEvolveAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestExtraMarker"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxSegment"/>
@@ -117,24 +118,19 @@
             <class name="com.wikia.webdriver.testcases.mediatests.videosmodule.VideosModuleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.ArticlePageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.CuratedMainPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.MainPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.NavigationTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.SectionItemsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationSideTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SEOTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SignupTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.GameGuidesPreview"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileArticleCommentTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileCategoriesTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileEditModeTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileInteractiveMapsTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileLoginTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileModalTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileSearchTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileTopbarTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
             <class name="com.wikia.webdriver.testcases.multiwikifindertests.MultiWikiFinderTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests"/>
@@ -179,7 +175,15 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.MobileSignupTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.GameGuidesPreview"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileArticleCommentTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileCategoriesTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileEditModeTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileInteractiveMapsTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileLoginTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileModalTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileSearchTests"/>
+            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileTopbarTests"/>
         </classes>
     </test>
 </suite>

@@ -2,14 +2,14 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.testng.annotations.Test;
 
-public class TestTopWamWikis extends TemplateDontLogout {
+public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   Credentials credentials = Configuration.getCredentials();
   Integer numberOfTop1kWikis = 998;

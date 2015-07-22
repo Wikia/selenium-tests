@@ -68,7 +68,6 @@ public class AdsDataProvider {
         {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
         {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
@@ -222,6 +221,11 @@ public class AdsDataProvider {
         }, {
             "adtest", "Skin",
             new Dimension(2400, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+        }, {
+            "adtest", "Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
         }
@@ -389,18 +393,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("adtest", "SyntheticTests/Krux/Page_2"),
-                          Pair.of("adtest", "SyntheticTests/Krux/Page_3")),
-            "o8l9bis26"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
         {"elderscrolls", "Skyrim"},
@@ -410,67 +402,27 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegmentOasis() {
+  public static Object[][] kruxRealTimeSegment() {
     return new Object[][]{
         {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL6ozVw"
-        },
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JpYqU4Qn"
+            "adtest",
+            "SyntheticTests/Krux/Page_1",
+            "glee",
+            "Rachel",
+            "o8l9bis26"
         }
     };
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegmentWikiaMobile() {
+  public static Object[][] kruxStandardSegment() {
     return new Object[][]{
         {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL70cvM"
-        },
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JsJ9_bf5"
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxStandardSegmentMercury() {
-    return new Object[][]{
-        {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL7NnTV"
-        },
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JsJ_0XFq"
+            "glee",
+            "Rachel",
+            "adtest",
+            "SyntheticTests/Krux/Page_1",
+            "pqdapsy7l"
         }
     };
   }
@@ -497,6 +449,17 @@ public class AdsDataProvider {
         {"adtest-pad", "Adtest-pad_Wikia", 250},
         {"adtest-pad", "Article_1", 480},
         {"adtest-pad", "Article_2", 480}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] interstitial() {
+    return new Object[][]{
+        // Fixme: ADEN-2231 Page size contains scrollbar width.
+        {"adtest", "SyntheticTests/Interstitial", new Dimension(604, 917), 1.96},
+        {"adtest", "SyntheticTests/Interstitial", new Dimension(1017, 817), 2.752},
+        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(600, 800), 0},
+        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(1200, 600), 0},
     };
   }
 

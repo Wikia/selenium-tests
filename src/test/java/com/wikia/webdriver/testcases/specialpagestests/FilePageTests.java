@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -14,11 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing
- */
 public class FilePageTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -85,10 +84,10 @@ public class FilePageTests extends NewTestTemplate {
    *
    * @author garth
    */
+  @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
   public void filePage004_delete() {
     // Go to Special:Videos to add a video
-    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
@@ -119,7 +118,7 @@ public class FilePageTests extends NewTestTemplate {
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {
-    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
 
     // Go to Special:Videos to add a video

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ import java.util.List;
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
  * @ownership AdEngineering
  */
-public class TestDfpParamsPresentMobile extends TemplateDontLogout {
+public class TestDfpParamsPresentMobile extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,

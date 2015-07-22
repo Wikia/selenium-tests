@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryArticles;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -29,7 +29,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercuryArticles.TOC);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
 
     Assertion.assertTrue(
         toc.isTOCDisplayed(),
@@ -97,7 +97,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = {"MercuryTOCTest_002", "MercuryTOCTests", "Mercury"})
   public void MercuryTOCTest_002_NoH2NoTOC() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercuryArticles.TOC_WITHOUT_H2);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
     PageObjectLogging.log(

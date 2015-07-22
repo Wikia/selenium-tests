@@ -92,7 +92,7 @@ public class LightboxTests extends NewTestTemplate {
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -168,7 +168,7 @@ public class LightboxTests extends NewTestTemplate {
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
-  @RelatedIssue(issueID = "MAIN-4938", comment = "Feature is broken for specific image. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-4938", comment = "Feature is broken for specific image. Please test manually using a different image")
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

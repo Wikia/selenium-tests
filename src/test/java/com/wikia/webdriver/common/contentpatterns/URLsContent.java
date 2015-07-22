@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.contentpatterns;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 public class URLsContent {
 
@@ -68,6 +68,8 @@ public class URLsContent {
   public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
   public static final String SPECIAL_MAPS = "wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "wiki/Special:VideoPageAdmin/edit";
+  public static final String SPECIAL_VERSION = "wiki/Special:Version";
+
 
   // Urls for mobile
   public static final String MOBILETEST_MAINPAGE = "wiki/Mobileregressiontesting_Wiki";

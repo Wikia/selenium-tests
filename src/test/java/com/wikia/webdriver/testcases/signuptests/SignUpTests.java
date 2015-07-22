@@ -75,8 +75,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-  @RelatedIssue(issueID = "SOC-987", comment = "test needs update for the new version of email")
-  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
+    @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -107,7 +106,6 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @RelatedIssue(issueID = "SOC-987", comment = "Automation test is broken and once SOC-987 is fixed, this issue should be as well. Please test manually.")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
@@ -168,7 +166,6 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @RelatedIssue(issueID = "SOC-823", comment = "Automation test is broken. Please test manually")
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
