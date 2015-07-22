@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
 
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEngineering
  */
-public class TestAmazonAds extends TemplateDontLogout {
+public class TestAmazonAds extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

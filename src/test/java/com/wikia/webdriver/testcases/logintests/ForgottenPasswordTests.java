@@ -77,7 +77,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4977", comment = "New P2 Change your password screen appears twice in CNW process. Not possible to test manually.")
+  @RelatedIssue(issueID = "MAIN-4984", comment = "Change your password functionality Stops CNW flow."
+                                                 + " Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )

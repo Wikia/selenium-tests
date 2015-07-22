@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitialObject;
 
 import org.openqa.selenium.Dimension;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestInterstitial extends TemplateDontLogout {
+public class TestInterstitial extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

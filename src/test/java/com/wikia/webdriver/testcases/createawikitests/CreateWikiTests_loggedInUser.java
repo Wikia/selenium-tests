@@ -28,8 +28,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_001_createDeleteWiki() {
+ public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -53,8 +52,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_002_createWikiForChildren() {
+ public void CreateNewWiki_00_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -70,7 +68,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyUserLoggedIn(credentials.userName);
     String newWikiURL = article.getWikiUrl();
-    logOut();
+    article.logOut();
     article.logOut(newWikiURL);
     article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
     SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
@@ -79,8 +77,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_003_createWikiChangedDomain() {
+ public void CreateNewWiki_003_createWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -100,8 +97,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  public void CreateNewWiki_004_createWikiNameExists() {
+  public void CreateNewWiki_004_creatWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -111,7 +107,6 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_005_createWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -122,7 +117,6 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
-  @DontRun(env = {"preview", "dev", "sandbox"})
   public void CreateNewWiki_006_createWikiNoCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);

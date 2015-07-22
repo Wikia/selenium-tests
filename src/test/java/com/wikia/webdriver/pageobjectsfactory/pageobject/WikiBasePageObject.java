@@ -734,11 +734,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new ChatPageObject(driver);
   }
 
-  public ArticlePageObject openRandomArticle(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
-    return new ArticlePageObject(driver);
-  }
-
   public ArticlePageObject openMainPage(String wikiURL) {
       getUrl(wikiURL);
       return new ArticlePageObject(driver);
@@ -948,7 +943,9 @@ public class WikiBasePageObject extends BasePageObject {
 
       String token = responseValue.getString("access_token");
 
-      driver.manage().addCookie(new Cookie("access_token", token, ".wikia.com", null, null));
+      String domian = Configuration.getEnvType().equals("dev")?".wikia-dev.com" : ".wikia.com";
+
+      driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
       if(driver.getCurrentUrl().contains("Logout")){
         driver.get(wikiURL);

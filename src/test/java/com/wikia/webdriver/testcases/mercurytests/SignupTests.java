@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mobile;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * Created by rcunningham on 6/30/15.
  */
 @Test(groups = {"MobileSignup", "Mobile"})
-public class MobileSignupTests extends NewTestTemplate {
+public class SignupTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
   @Test(groups = {"MobileSignup_001"})

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-public class Test71MediaNoAdsForUsers extends TemplateDontLogout {
+public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
 
   private String testedPage;
   private String testedWiki;

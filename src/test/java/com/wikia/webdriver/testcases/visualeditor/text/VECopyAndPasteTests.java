@@ -1,11 +1,8 @@
 package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -22,7 +19,6 @@ import org.testng.annotations.Test;
 
 public class VECopyAndPasteTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
 
   @BeforeMethod(alwaysRun = true)

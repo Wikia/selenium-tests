@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
 
-public class TestFloorAdhesion extends TemplateDontLogout {
+public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   private final String WIKI_NAME = "adtest";
   private final String ARTICLE_TITLE = "FLOOR_ADHESION";

@@ -240,7 +240,7 @@ public class NavigationSideTests extends NewTestTemplate {
 
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
-    searchObject.waitForLoadingSpinnerToFinishReloadingPage();
+    searchObject.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
     PageObjectLogging.log(
@@ -263,7 +263,7 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();
     nav.clickRandomPageButton();
-    nav.waitForLoadingSpinnerToFinishReloadingPage();
+    nav.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
     PageObjectLogging.log(
