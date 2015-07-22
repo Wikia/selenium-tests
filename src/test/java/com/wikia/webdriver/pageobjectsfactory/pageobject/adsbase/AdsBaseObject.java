@@ -533,14 +533,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     // Removing comments section as it expands content downwards
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                     waitForElementByCss("#WikiaArticleFooter"));
+                     wait.forElementVisible(By.cssSelector("#WikiaArticleFooter")));
 
     AdsComparison adsComparison = new AdsComparison();
 
-    scrollToElement(waitForElementByCss("#SPOTLIGHT_FOOTER"));
+    scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
-      WebElement slot = waitForElementByCss(spotlightSelector + " img");
+      WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
       verifySlotExpanded(slot);
 
       adsComparison.isAdVisible(slot, spotlightSelector, driver);

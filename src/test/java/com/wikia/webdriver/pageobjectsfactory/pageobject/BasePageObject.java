@@ -408,16 +408,6 @@ public class BasePageObject {
     }
   }
 
-  public WebElement waitForElementByCss(String cssSelector) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-      return driver.findElement(By.cssSelector(cssSelector));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
   public WebElement waitForElementByXPath(String xPath) {
     waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
     return driver.findElement(By.xpath(xPath));

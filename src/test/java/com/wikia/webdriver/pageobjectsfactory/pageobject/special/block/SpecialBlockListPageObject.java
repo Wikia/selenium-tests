@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +54,8 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserBlocked(String userName) {
-    waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']");
+    wait.forElementVisible(
+        By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
     PageObjectLogging
         .log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list",
              true, driver);

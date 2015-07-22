@@ -234,7 +234,7 @@ public class MobileArticlePageObject extends MobileBasePageObject {
   }
 
   public void clickHideButton() {
-    WebElement hideSectionButton = waitForElementByCss(backCssSelector);
+    WebElement hideSectionButton = wait.forElementVisible(By.cssSelector((backCssSelector)));
     hideSectionButton.click();
     PageObjectLogging.log("clickHideButton", "hide section button clicked", true, driver);
   }

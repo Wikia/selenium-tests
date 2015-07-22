@@ -270,8 +270,8 @@ public class WikiArticleEditMode extends WikiEditMode {
     findInputField.sendKeys("aa");
     wait.forElementVisible(findButton);
     findButton.click();
-    waitForElementByCss("#ImageUploadProgress2");
-    waitForElementByCss("img[src*='AmericaAfrica']");
+    wait.forElementVisible(By.cssSelector("#ImageUploadProgress2"));
+    wait.forElementVisible(By.cssSelector("img[src*='AmericaAfrica']"));
     wait.forElementVisible(imageUploadHeadline);
     WebElement addThisPhoto = wait.forElementPresent(addThisPhotoLink);
     addThisPhoto.click();

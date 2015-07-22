@@ -168,7 +168,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void verifyMercury() {
     try {
-      waitForElementByCss(MERCURY_ARTICLE_CONTAINER_SELECTOR);
+      wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
       PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
       throw e;

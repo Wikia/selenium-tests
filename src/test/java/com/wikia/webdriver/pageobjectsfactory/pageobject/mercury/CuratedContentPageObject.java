@@ -101,7 +101,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isAlertNotificationVisible() {
-    waitForElementByCss(ALERT_NOTIFICATION_CSS);
+    wait.forElementVisible(By.cssSelector(ALERT_NOTIFICATION_CSS));
     PageObjectLogging.log(
         Labels.ALERT_NOTIFICATION.name,
         MercuryMessages.VISIBLE_MSG,

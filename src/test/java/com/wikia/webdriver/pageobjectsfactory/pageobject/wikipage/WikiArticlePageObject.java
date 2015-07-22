@@ -69,7 +69,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle);
     edit.typeInTemplateContent(templateContent);
     edit.clickOnPublish();
-    this.waitForElementByCss("#WikiaArticle");
+    wait.forElementVisible(By.cssSelector("#WikiaArticle"));
 
     PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
 

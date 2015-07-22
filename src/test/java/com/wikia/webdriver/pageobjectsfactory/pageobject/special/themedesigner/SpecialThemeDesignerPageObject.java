@@ -99,7 +99,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void verifyThemeSelected(String themeName) {
-    waitForElementByCss("li.selected[data-theme='" + themeName + "']");
+    wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
     Assertion.assertEquals(executeScriptRet("ThemeDesigner.settings.theme"), themeName);
     PageObjectLogging.log("verifyThemeSelected",
                           "theme " + themeName + " selection verified", true);
@@ -116,9 +116,11 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void selectTab(Tab tabName) {
-    WebElement tab = waitForElementByCss(tabSelector.replace("%tabName%", tabName.toString()));
+    WebElement tab = wait.forElementVisible(
+        By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
     scrollAndClick(tab);
-    waitForElementByCss(selectedTabSelector.replace("%tabName%", tabName.toString()));
+    wait.forElementVisible(
+        By.cssSelector(selectedTabSelector.replace("%tabName%", tabName.toString())));
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 

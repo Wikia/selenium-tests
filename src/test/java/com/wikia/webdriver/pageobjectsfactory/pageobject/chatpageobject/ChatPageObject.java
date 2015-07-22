@@ -114,7 +114,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserIsVisibleOnContactsList(String userName) {
-    waitForElementByCss(String.format(USER_SELECTOR, userName));
+    wait.forElementVisible(By.cssSelector(String.format(USER_SELECTOR, userName)));
     PageObjectLogging.log(
         "verifyUserIsVisibleOnContactsList",
         userName + " is visible on contacts list",
@@ -402,7 +402,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   private WebElement getElementForUser(String userName, String selector) {
     String userCss = String.format(selector, userName);
-    waitForElementByCss(userCss);
+    wait.forElementVisible(By.cssSelector(userCss));
     return driver.findElement(By.cssSelector(userCss));
   }
 

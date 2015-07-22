@@ -40,7 +40,7 @@ public class NavigationBar extends WikiBasePageObject {
     searchInput.click();
     wait.forElementPresent(jqueryAutocompleteBy);
     Typing.sendKeysHumanSpeed(searchInput, query);
-    waitForElementByCss(suggestionCss);
+    wait.forElementVisible(By.cssSelector(suggestionCss));
     wait.forElementVisible(suggestionsList.get(0));
   }
 

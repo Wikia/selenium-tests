@@ -18,10 +18,6 @@ import java.util.List;
  */
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
-  public CustomizedToolbarComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
   private WebElement customizeButton;
   @FindBy(css = "div.msg")
@@ -38,23 +34,24 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private WebElement resetDefaultsButton;
   @FindBy(css = ".overflow-menu > .tools-menu li > a[href*=Special]")
   private List<WebElement> myToolsList;
-
   private By toolsList = By.cssSelector("ul.tools li");
-
   private String searchSuggestionToolCss = "div.autocomplete div[title=\"%s\"]";
   private String toolbarToolCss = "li.overflow a[data-name=\"%s\"]";
   private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
   private String toolsListToolDeleteCss = " img.trash";
   private String toolsListToolEditCss = " img.edit-pencil";
   private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
+  public CustomizedToolbarComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   /**
    * Verifies that user toolbar buttons are visible
    */
   public void verifyUserToolBar() {
-    waitForElementByCss("div.toolbar ul.tools li.overflow");
-    waitForElementByCss("div.toolbar ul.tools li.mytools");
-    waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.overflow"));
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.mytools"));
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li a.tools-customize"));
     PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
   }
 
@@ -144,7 +141,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickOnTool(String toolName) {
     jQueryClick(
-        waitForElementByCss(String.format(toolbarToolCss, toolName))
+        wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
     );
     PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
@@ -197,7 +194,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyToolOnList(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolOnList", toolName + " visible on the list", true);
 
   }
@@ -215,7 +212,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickRemove(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
     PageObjectLogging.log("clickRemove", "remove button for " + toolName + " clicked", true);
   }
@@ -228,7 +225,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickRename(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
     PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
   }
@@ -291,7 +288,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   public void openMoreMenu() {
     executeScript("$('.overflow-menu').mouseover();");
-    waitForElementByCss(".overflow-menu > .tools-menu");
+    wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
     PageObjectLogging.log("openMoreMenu", "more menu opened", true);
   }
 
