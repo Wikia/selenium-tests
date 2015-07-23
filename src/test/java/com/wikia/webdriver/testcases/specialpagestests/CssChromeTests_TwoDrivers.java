@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
@@ -12,7 +13,8 @@ import org.testng.annotations.Test;
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 
   Credentials credentials = Configuration.getCredentials();
-
+  @RelatedIssue(issueID = "QAART-461",
+      comment = "Under investigation. Best way to test is in debug mode on intelliJ")
   @Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
   public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
     //first user opens the special:CSS
