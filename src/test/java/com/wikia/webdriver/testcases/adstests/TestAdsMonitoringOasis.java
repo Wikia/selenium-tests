@@ -64,7 +64,6 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 
   private void setProxy(String countryCode) {
     String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
-    PageObjectLogging.log("Proxy in use", proxyAddress, true);
     Proxy proxy = new Proxy();
     proxy.setHttpProxy(proxyAddress);
     proxy.setSslProxy(proxyAddress);
