@@ -73,9 +73,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
     searchInput.sendKeys(term + Keys.ENTER);
-    waitForElementByElement(searchInput);
     PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyFirstResultTitle(String wikiName) {
@@ -156,14 +155,14 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     scrollAndClick(paginatorPrev);
     PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
     PageObjectLogging.log("nextPage", "Moving to next page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyResultsNumber(int number) {
