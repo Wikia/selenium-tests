@@ -15,7 +15,7 @@ public enum User {
   , USER_9("ci.user.regular9.username", "ci.user.regular9.password"), USER_12(
       "ci.user.regular12.username", "ci.user.regular12.password"), STAFF(
       "ci.user.wikiastaff.username", "ci.user.wikiastaff.password"), ANONYMOUS("anonymous",
-      "anonymous"),LANGUAGE2("ci.user.language2.username", "ci.user.language2.password");
+      "anonymous"),REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password");
 
   private final String userName;
 
