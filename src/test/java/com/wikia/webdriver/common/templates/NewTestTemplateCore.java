@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeUtils;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -124,9 +124,9 @@ public class NewTestTemplateCore {
     boolean isNetworkTrafficDumpSet = false;
     String countryCode = null;
 
-    if (method.isAnnotationPresent(GeoEdgeProxy.class)) {
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
       isGeoEdgeSet = true;
-      countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
+      countryCode = method.getAnnotation(GeoEdgeBrowserMobProxy.class).country();
     }
 
     if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
