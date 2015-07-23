@@ -248,7 +248,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.45.0'
+    def webdriverVersion = '2.46.0'
     testCompile "junit:junit:4.11"
     testCompile 'org.apache.httpcomponents:httpcore:4.3.3'
     testCompile 'net.kennychua:phantomjs-qunit-runner:1.0.14'
