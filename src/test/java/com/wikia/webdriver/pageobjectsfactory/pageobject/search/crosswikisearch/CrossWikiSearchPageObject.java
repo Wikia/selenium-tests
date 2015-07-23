@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -71,21 +72,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchFor", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
+    searchInput.sendKeys(term + Keys.ENTER);
     waitForElementByElement(searchInput);
     PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
-    return new CrossWikiSearchPageObject(driver);
-  }
-
-  public CrossWikiSearchPageObject searchForEnter(String term) {
-    searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchForEnter", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
-    waitForElementByElement(searchInput);
-    PageObjectLogging.log("searchForEnter", "Search button entered", true, driver);
     return new CrossWikiSearchPageObject(driver);
   }
 
