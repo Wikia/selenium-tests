@@ -25,6 +25,16 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 
   private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);
 
+  private String countryCode = Configuration.getCountryCode();
+
+  public TestAdsMonitoringOasis() {
+    super();
+    if (countryCode != null) {
+      // We need to set the proxy in constructor
+      setProxy(countryCode);
+    }
+  }
+
   @Test(
       groups = {"AdsMonitoringOasis"},
       dataProviderClass = AdsDataProvider.class,
@@ -40,8 +50,6 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
 
-    setProxy(countryCode);
-
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, BROWSER_DIMENSION);
 
     if (countryCode == null) {
@@ -55,13 +63,13 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
   }
 
   private void setProxy(String countryCode) {
-    if (countryCode != null) {
-      Proxy proxy = new Proxy();
-      proxy.setHttpProxy(GeoEdgeProxy.getProxyAddress(countryCode));
-      proxy.setSslProxy(GeoEdgeProxy.getProxyAddress(countryCode));
-      DesiredCapabilities capabilities = new DesiredCapabilities();
-      capabilities.setCapability(CapabilityType.PROXY, proxy);
-      setDriverCapabilities(capabilities);
-    }
+    String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
+    PageObjectLogging.log("Proxy in use", proxyAddress, true);
+    Proxy proxy = new Proxy();
+    proxy.setHttpProxy(proxyAddress);
+    proxy.setSslProxy(proxyAddress);
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability(CapabilityType.PROXY, proxy);
+    setDriverCapabilities(capabilities);
   }
 }
