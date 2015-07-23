@@ -638,7 +638,7 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       wait.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
-          if (body.getAttribute("class").contains("skin-monobook")) {
+          if (driver.findElement(By.tagName("body")).getAttribute("class").contains("skin-monobook")) {
             return driver.findElements(
                 By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
                     " ", "_")))).size()>0;// only for verification

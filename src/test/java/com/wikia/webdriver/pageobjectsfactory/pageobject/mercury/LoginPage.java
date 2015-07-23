@@ -52,7 +52,6 @@ public class LoginPage extends WikiBasePageObject {
   }
 
   public LoginPage get() {
-    //driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + urlBuilder.getUrlForWiki(Configuration.getWikiName()));
     String redirectParameter = "";
 
     try{

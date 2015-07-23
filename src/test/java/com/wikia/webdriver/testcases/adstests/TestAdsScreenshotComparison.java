@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -20,6 +21,8 @@ import org.testng.annotations.Test;
     groups = {"Ads_In_Content", "Ads"}
 )
 public class TestAdsScreenshotComparison extends TemplateNoFirstLoad {
+
+  private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);
 
   private String testedPage;
 
@@ -37,7 +40,7 @@ public class TestAdsScreenshotComparison extends TemplateNoFirstLoad {
   }
 
   private void checkAds(String country) {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, BROWSER_DIMENSION);
     Assertion.assertEquals(wikiPage.getCountry(), country);
     wikiPage.checkMedrec();
     wikiPage.checkTopLeaderboard();
