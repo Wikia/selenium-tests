@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 
 /**
  * Created by Ludwik on 2015-02-19.
+ * Added LANGUAGE2 Japanese. By P. Archbold on 2015-07-23
  */
 public enum User {
   USER("ci.user.regular.username", "ci.user.regular.password"), USER_2("ci.user.regular2.username",
@@ -14,7 +15,7 @@ public enum User {
   , USER_9("ci.user.regular9.username", "ci.user.regular9.password"), USER_12(
       "ci.user.regular12.username", "ci.user.regular12.password"), STAFF(
       "ci.user.wikiastaff.username", "ci.user.wikiastaff.password"), ANONYMOUS("anonymous",
-      "anonymous");
+      "anonymous"),LANGUAGE2("ci.user.language2.username", "ci.user.language2.password");
 
   private final String userName;
 
