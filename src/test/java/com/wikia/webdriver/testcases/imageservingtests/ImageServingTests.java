@@ -61,7 +61,7 @@ public class ImageServingTests extends NewTestTemplate {
     String imageThumbnailURL = filePage.getImageThumbnailUrl();
 
    filePage.verifyURLStatus(200, imageURL);
-  filePage.verifyURLStatus(200, imageThumbnailURL);
+   filePage.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageServing_003", "ImageServing"})
@@ -69,7 +69,7 @@ public class ImageServingTests extends NewTestTemplate {
   public void ImageServing_003_SpecialMultipleUploadTest() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);
-    wikiSpecialMU.selectFilesToUpload(PageContent.LIST_OF_FILES);git oul
+    wikiSpecialMU.selectFilesToUpload(PageContent.LIST_OF_FILES);
     wikiSpecialMU.typeInMultiUploadSummary(PageContent.CAPTION);
     wikiSpecialMU.checkIgnoreAnyWarnings();
     wikiSpecialMU.clickUploadButton();
