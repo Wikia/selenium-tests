@@ -19,14 +19,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
-      "Hm, we don't recognize these credentials. Please try again or register a new account.";
+          "Hm, we don't recognize these credentials. Please try again or register a new account.";
 
   @Test
   @Execute(onWikia = "mobileregressiontesting")
   public void validUserCanLogIn() {
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.logUserIn(Configuration.getCredentials().userName10,
-        Configuration.getCredentials().password10);
+            Configuration.getCredentials().password10);
 
     Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
             Configuration.getCredentials().userName10));
@@ -70,10 +70,10 @@ public class LoginTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mobileregressiontesting")
-  public void closeButtonWorksAndRedirectsProperly(){
+  public void closeButtonWorksAndRedirectsProperly() {
     ArticlePageObject homePage = new ArticlePageObject(driver);
     homePage.openMainPage(wikiURL);
-    String expectedHomePageTitle =  homePage.getArticleTitle();
+    String expectedHomePageTitle = homePage.getArticleTitle();
 
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.clickOnCloseButton();
@@ -82,15 +82,15 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute (onWikia = "mobileregressiontesting")
-  public void registerNowLinkWorksAndRedirectsProperly(){
+  @Execute(onWikia = "mobileregressiontesting")
+  public void registerNowLinkWorks() {
     MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
     registrationPage.openRegisterPage();
-    String expectedHeader = registrationPage.getHeadertext();
+    String expectedHeader = registrationPage.getRegisterHeaderText();
 
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.clickOnRegisterLink();
-    String currentHeader = registrationPage.getHeadertext();
+    String currentHeader = registrationPage.getRegisterHeaderText();
     Assertion.assertEquals(expectedHeader, currentHeader);
   }
 
@@ -103,24 +103,34 @@ public class LoginTests extends NewTestTemplate {
     ArticlePageObject homePage = new ArticlePageObject(driver);
     homePage.openMainPage(wikiURL);
     TopBarComponentObject loginIcon = new TopBarComponentObject(driver);
-    loginIcon.clickLoginIcon();
+    loginIcon.clickLogInIcon();
 
     Assertion.assertEquals(joinPage.getJoinTodayText(), expectedMessage);
   }
 
   @Test
   @Execute(onWikia = "mobileregressiontesting")
-  public void registerButtonWorks() {
+  public void registerButtonWorksOnJoinPage() {
     MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
     registrationPage.openRegisterPage();
-    String expectedHeader = registrationPage.getHeadertext();
+    String expectedHeader = registrationPage.getRegisterHeaderText();
 
     JoinPage joinPage = new JoinPage(driver).get();
     joinPage.clickRegisterWithEmail();
 
-    Assertion.assertEquals(registrationPage.getHeadertext(), expectedHeader);
+    Assertion.assertEquals(registrationPage.getRegisterHeaderText(), expectedHeader);
+  }
 
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void signInLinkWorksOnJoinPage() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    String expectedHeader = loginPage.getLoginHeaderText();
+
+    JoinPage joinPage = new JoinPage(driver).get();
+    joinPage.clickSignInLink();
+
+    Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
   }
 }
-
 

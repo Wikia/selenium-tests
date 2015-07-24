@@ -17,7 +17,7 @@ public class TopBarComponentObject extends BasePageObject {
         super(driver);
     }
 
-    public void clickLoginIcon(){
+    public void clickLogInIcon(){
         waitForElementVisibleByElement(loginIcon);
         loginIcon.click();
     }

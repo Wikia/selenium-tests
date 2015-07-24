@@ -20,6 +20,9 @@ public class JoinPage extends BasePageObject {
     @FindBy(css = ".button.signup-provider-email")
     private WebElement registerWithEmailButton;
 
+    @FindBy(css = "a.sign-in")
+    private WebElement signInLink;
+
     public JoinPage(WebDriver driver) {
         super(driver);
     }
@@ -27,23 +30,29 @@ public class JoinPage extends BasePageObject {
     public JoinPage get() {
         String redirectParameter = "";
 
-        try{
+        try {
             redirectParameter = URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
 
-        } catch (UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
         }
         driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "join" + "?redirect=" + redirectParameter);
         return this;
     }
 
-    public String getJoinTodayText(){
+    public String getJoinTodayText() {
         return joinTodayMessage.getText();
     }
 
-    public void clickRegisterWithEmail(){
+    public void clickRegisterWithEmail() {
+        waitForElementVisibleByElement(registerWithEmailButton);
         registerWithEmailButton.click();
     }
-}
 
+    public void clickSignInLink() {
+        waitForElementVisibleByElement(signInLink);
+        signInLink.click();
+    }
+
+}
 
