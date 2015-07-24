@@ -84,11 +84,11 @@ public class LoginTests extends NewTestTemplate {
   public void registerNowLinkWorksAndRedirectsProperly(){
     MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
     registrationPage.openRegisterPage();
-    String expectedHeader = registrationPage.isHeaderCopyCorrect();
+    String expectedHeader = registrationPage.getHeadertext();
 
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.clickOnRegisterLink();
-    String currentHeader = registrationPage.isHeaderCopyCorrect();
+    String currentHeader = registrationPage.getHeadertext();
 
     Assertion.assertEquals(expectedHeader, currentHeader);
   }
