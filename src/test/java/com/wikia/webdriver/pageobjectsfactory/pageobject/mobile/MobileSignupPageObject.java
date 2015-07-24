@@ -1,11 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -43,6 +49,8 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   private WebElement passwordError;
   @FindBy(css = "#signupForm > small.error")
   private WebElement genericError;
+  @FindBy(css = " header.auth-header")
+  private WebElement registerHeader;
 
   public MobileSignupPageObject typeEmailAddress(String email) {
     waitForElementByElement(signupEmail);
@@ -110,4 +118,12 @@ public class MobileSignupPageObject extends MobileBasePageObject {
     waitForElementByElement(genericError);
     Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
   }
+
+  public String getHeadertext() {
+    return registerHeader.getText();
+  }
+  public void openRegisterPage() {
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
+  }
+
 }
