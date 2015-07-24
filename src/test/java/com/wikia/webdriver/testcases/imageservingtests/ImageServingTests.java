@@ -30,7 +30,7 @@ public class ImageServingTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-   SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
     newFiles.clickOnMoreOrFewerOptions();
     newFiles.checkIgnoreAnyWarnings();
