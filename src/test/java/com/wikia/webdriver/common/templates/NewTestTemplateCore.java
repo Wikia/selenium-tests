@@ -73,6 +73,10 @@ public class NewTestTemplateCore {
   protected void loadFirstPage() {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
+  protected void loadFirstPage(WebDriver driver) {
+    driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
+  }
+
 
   protected void logOutCustomDriver(WebDriver customDriver) {
     customDriver.get(wikiURL + URLsContent.LOGOUT);
