@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -81,8 +82,21 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test
+  @Execute (onWikia = "mobileregressiontesting")
+  public void registerNowLinkWorksAndRedirectsProperly(){
+    MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
+    registrationPage.openRegisterPage();
+    String expectedHeader = registrationPage.getHeadertext();
+
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.clickOnRegisterLink();
+    String currentHeader = registrationPage.getHeadertext();
+    Assertion.assertEquals(expectedHeader, currentHeader);
+  }
+
+  @Test
   @Execute(onWikia = "mobileregressiontesting")
-  public void userIsTakenToJoinPage(){
+  public void userIsTakenToJoinPage() {
     JoinPage joinPage = new JoinPage(driver).get();
     String expectedMessage = joinPage.getJoinTodayText();
 
@@ -92,20 +106,16 @@ public class LoginTests extends NewTestTemplate {
     loginIcon.clickLoginIcon();
 
     Assertion.assertEquals(joinPage.getJoinTodayText(), expectedMessage);
+  }
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void registerButtonWorks() {
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void registerButtonWorks() {
 
-
-      JoinPage joinPage = new JoinPage(driver).get();
-      joinPage.clickRegisterWithEmail();
-
-    }
-
-
-
-
+    JoinPage joinPage = new JoinPage(driver).get();
+    joinPage.clickRegisterWithEmail();
 
   }
 }
+
+
