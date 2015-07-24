@@ -111,9 +111,14 @@ public class LoginTests extends NewTestTemplate {
   @Test
   @Execute(onWikia = "mobileregressiontesting")
   public void registerButtonWorks() {
+    MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
+    registrationPage.openRegisterPage();
+    String expectedHeader = registrationPage.getHeadertext();
 
     JoinPage joinPage = new JoinPage(driver).get();
     joinPage.clickRegisterWithEmail();
+
+    Assertion.assertEquals(registrationPage.getHeadertext(), expectedHeader);
 
   }
 }
