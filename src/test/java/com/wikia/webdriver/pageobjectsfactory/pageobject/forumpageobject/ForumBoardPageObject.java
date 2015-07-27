@@ -56,9 +56,9 @@ public class ForumBoardPageObject extends BasePageObject {
 
   public ForumThreadPageObject startDiscussion(String title, String message,
                                                boolean highlight) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -86,8 +86,8 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public ForumThreadPageObject startDiscussionWithoutTitle(String message) {
-    jQueryFocus(discussionTextarea);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(discussionTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -124,9 +124,9 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithImgae(String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki(
         "image", 1);
@@ -143,9 +143,9 @@ public class ForumBoardPageObject extends BasePageObject {
 
   public void startDiscussionWithLink(String internalLink,
                                       String externalLink, String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     // add internal wikia link
     miniEditor.addInternalLink(internalLink);
     // add external link
@@ -172,9 +172,9 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithVideo(String url, String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     miniEditor.addVideoMiniEditor(url);
     PageObjectLogging.log("startDiscussionWithVideo",
                           "discussion with video started" + title, true, driver);

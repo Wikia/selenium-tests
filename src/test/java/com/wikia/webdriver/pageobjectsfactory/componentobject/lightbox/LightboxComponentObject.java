@@ -87,7 +87,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void makeHeaderVisible() {
     wait.forElementVisible(titleLink);
-    executeScript("$('.LightboxHeader').css('opacity', '1')");
+   jsActions.execute("$('.LightboxHeader').css('opacity', '1')");
   }
 
   public void clickCloseButton() {

@@ -994,7 +994,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void follow() {
     wait.forElementVisible(followButton);
-    jQueryClick(followButton);
+    jsActions.click(followButton);
     waitForTextToBePresentInElementByElement(followButton, "Following");
     PageObjectLogging.log("followArticle", "page is followed", true, driver);
   }
@@ -1006,14 +1006,14 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public RenamePageObject renameUsingDropdown() {
-    actionsClick(articleEditDropdown);
+    articleEditDropdown.click();
     wait.forElementVisible(renameDropdown);
     renameDropdown.click();
     return new RenamePageObject(driver);
   }
 
   public DeletePageObject deleteUsingDropdown() {
-    actionsClick(articleEditDropdown);
+    articleEditDropdown.click();
     wait.forElementVisible(deleteDropdown);
     deleteDropdown.click();
     return new DeletePageObject(driver);
@@ -1116,7 +1116,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void addVideoViaAjax(String videoURL) {
-    executeScript(
+    jsActions.execute(
         "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
             "data: {url: '" + videoURL + "'}," +
             "type: 'POST' } );");
@@ -1145,7 +1145,7 @@ public class WikiBasePageObject extends BasePageObject {
    * @author Michal 'justnpT' Nowierski
    */
   public void compareTrackedEventsTo(List<JsonObject> expectedEventsList) {
-    executeScript(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
+    jsActions.execute(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
     List<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
     List<JsonObject> trackedEventsList;
     JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1191,7 +1191,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   private String getArticleName() {
-    return executeScriptRet(WikiaGlobalVariables.WG_PAGE_NAME);
+    return (String) jsActions.execute(WikiaGlobalVariables.WG_PAGE_NAME);
   }
 
   public void verifyArticleName(String targetText) {

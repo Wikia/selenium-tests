@@ -87,13 +87,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
   public void clearCssText() {
     wait.forElementVisible(aceLayerTextArea);
-    executeScript("ace.edit('cssEditorContainer').setValue('');");
+    jsActions.execute("ace.edit('cssEditorContainer').setValue('');");
     PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
   }
 
   public void insertCssText(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
-    executeScript("ace.edit('cssEditorContainer').navigateFileEnd();");
+    jsActions.execute("ace.edit('cssEditorContainer').navigateFileEnd();");
     sendCssText(cssText);
     PageObjectLogging.log(
         "sendAceCssText",

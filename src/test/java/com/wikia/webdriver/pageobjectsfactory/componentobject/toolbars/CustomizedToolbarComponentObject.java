@@ -62,7 +62,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickCustomize() {
     wait.forElementVisible(customizeButton);
-    jQueryClick(customizeButton);
+    jsActions.click(customizeButton);
     PageObjectLogging.log("clickCustomize", "customize button clicked", true);
   }
 
@@ -74,7 +74,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickResetDefaults() {
     wait.forElementVisible(resetDefaultsButton);
-    jQueryClick(resetDefaultsButton);
+    jsActions.click(resetDefaultsButton);
     PageObjectLogging.log("clickResetDefaults", "reset defaults button clicked", true);
   }
 
@@ -140,7 +140,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickOnTool(String toolName) {
-    jQueryClick(
+    jsActions.click(
         wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
     );
     PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
@@ -213,7 +213,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickRemove(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
-    jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
+    jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
     PageObjectLogging.log("clickRemove", "remove button for " + toolName + " clicked", true);
   }
 
@@ -226,7 +226,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickRename(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
-    jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
+    jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
     PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
   }
 
@@ -287,7 +287,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void openMoreMenu() {
-    executeScript("$('.overflow-menu').mouseover();");
+   jsActions.execute("$('.overflow-menu').mouseover();");
     wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
     PageObjectLogging.log("openMoreMenu", "more menu opened", true);
   }

@@ -101,14 +101,14 @@ public class DropDownComponentObject extends WikiBasePageObject {
   public void fillUserNameInput(String userName) {
     wait.forElementVisible(formUsernameInput);
     formUsernameInput.clear();
-    sendKeys(formUsernameInput, userName);
+    formUsernameInput.sendKeys(userName);
     PageObjectLogging.log("UsernameTyped", "UserName input is filled", true);
   }
 
   public void fillPasswordInput(String password) {
     wait.forElementVisible(formPassowrdInput);
     formPassowrdInput.clear();
-    sendKeys(formPassowrdInput, password);
+    formPassowrdInput.sendKeys(password);
     PageObjectLogging.log("PasswordTyped", "Password input is filled", true);
   }
 

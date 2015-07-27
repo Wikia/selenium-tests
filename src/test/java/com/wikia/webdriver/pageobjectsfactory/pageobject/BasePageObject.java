@@ -36,6 +36,7 @@ import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -52,6 +53,7 @@ public class BasePageObject {
   public final Wait wait;
   public Actions builder;
   protected UrlBuilder urlBuilder = new UrlBuilder();
+  protected JavascriptActions jsActions;
 
   @FindBy(css = "#WallNotifications div.notification div.msg-title")
   protected WebElement notificationsLatestNotificationOnWiki;
@@ -67,6 +69,7 @@ public class BasePageObject {
     this.waitFor = new WebDriverWait(driver, timeOut);
     this.builder = new Actions(driver);
     this.wait = new Wait(driver);
+    this.jsActions = new JavascriptActions(driver);
     this.setWindowSizeAndroid();
 
     PageFactory.initElements(driver, this);
@@ -79,7 +82,7 @@ public class BasePageObject {
   }
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
-    executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
+    jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
         + "')).mouseenter()");
     try {
       Thread.sleep(500);
@@ -221,30 +224,6 @@ public class BasePageObject {
     }
   }
 
-  public void jQueryClick(String cssSelector) {
-    executeScript("$('" + cssSelector + "').click()");
-  }
-
-  public void jQueryClick(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("$(arguments[0])[0].click()", element);
-  }
-
-  protected void actionsClick(WebElement element) {
-    Actions actions = new Actions(driver);
-    actions.click(element);
-    actions.perform();
-  }
-
-  public void jQueryFocus(String cssSelector) {
-    executeScript("$('" + cssSelector + "').focus()");
-  }
-
-  public void jQueryFocus(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("$(arguments[0]).focus()", element);
-  }
-
   /*
    * Url helpers
    */
@@ -349,39 +328,6 @@ public class BasePageObject {
       PageObjectLogging
           .log("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
-    }
-  }
-
-  public void executeScript(String script) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(script);
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("executeScript", e.getMessage(), false);
-    }
-  }
-
-  public String executeScriptRet(String script) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (String) js.executeScript("return " + script);
-  }
-
-  public Boolean executeScriptRetBool(String script) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (Boolean) js.executeScript("return " + script);
-  }
-
-  public long executeScriptRetLong(String script) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return (Long) js.executeScript("return " + script);
-  }
-
-  public void sendKeys(WebElement pageElem, String keysToSend) {
-    try {
-      pageElem.sendKeys(keysToSend);
-    } catch (Exception e) {
-      PageObjectLogging.log("sendKeys", e.getMessage(), false);
     }
   }
 
@@ -562,7 +508,7 @@ public class BasePageObject {
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
-    executeScript("$('#WallNotifications ul.subnav').addClass('show')");
+    jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
     PageObjectLogging.log("norifications_showNotifications",
         "show notifications by adding 'show' class to element", true, driver);
   }

@@ -82,7 +82,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public MiniEditorComponentObject triggerMessageArea() {
     while (!postButton.isDisplayed()) {
-      jQueryFocus(messageMainBody);
+      jsActions.focus(messageMainBody);
     }
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
@@ -90,7 +90,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public MiniEditorComponentObject triggerReplyMessageArea() {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
-      jQueryFocus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
+      jsActions.focus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
     }
     PageObjectLogging.log("triggerReplyMessageArea", "reply message area triggered", true);
     return new MiniEditorComponentObject(driver);
@@ -115,7 +115,7 @@ public class NewMessageWall extends WikiBasePageObject {
     WebElement
         saveButton =
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
-    jQueryClick(saveButton);
+    jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
     PageObjectLogging.log("submitEdition", "message edition submitted", true);
   }

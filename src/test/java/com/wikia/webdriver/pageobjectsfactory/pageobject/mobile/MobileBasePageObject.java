@@ -245,7 +245,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public long getPosition() {
-    return executeScriptRetLong("window.pageYOffset");
+    return (Long) jsActions.execute("window.pageYOffset");
   }
 
   public void verifyPositionDifferent(Long firstPosition) {

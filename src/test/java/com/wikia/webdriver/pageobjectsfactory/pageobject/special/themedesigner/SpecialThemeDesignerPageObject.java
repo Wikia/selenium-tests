@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
@@ -19,12 +19,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement saveButton;
   @FindBy(css = ".save[disabled]")
   private WebElement saveButtonDisabled;
-  //theme tab
+  // theme tab
   @FindBys(@FindBy(css = "li[data-theme]"))
   private List<WebElement> themes;
   @FindBy(css = ".next.chevron")
   private WebElement nextButton;
-  //customize tab
+  // customize tab
   @FindBy(css = ".color-body")
   private WebElement bgColor;
   @FindBy(css = ".background-image")
@@ -41,7 +41,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement pgColor;
   @FindBy(css = ".page h1")
   private WebElement pgSectionTitle;
-  //wordmark tab
+  // wordmark tab
   @FindBy(css = "#WordMarkUploadForm [value=Upload]")
   private WebElement wordmarkSubmit;
   @FindBy(css = "#WordMarkUploadFile")
@@ -91,8 +91,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
       wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
-    String
-        themeName =
+    String themeName =
         themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();
     PageObjectLogging.log("selectTheme", "theme " + themeName + " selected", true);
     return themeName;
@@ -100,9 +99,9 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
   public void verifyThemeSelected(String themeName) {
     wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
-    Assertion.assertEquals(executeScriptRet("ThemeDesigner.settings.theme"), themeName);
-    PageObjectLogging.log("verifyThemeSelected",
-                          "theme " + themeName + " selection verified", true);
+    Assertion.assertEquals((String) jsActions.execute("ThemeDesigner.settings.theme"), themeName);
+    PageObjectLogging
+        .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
   public void submitThemeSelection() {
@@ -116,11 +115,11 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void selectTab(Tab tabName) {
-    WebElement tab = wait.forElementVisible(
-        By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
+    WebElement tab =
+        wait.forElementVisible(By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
     scrollAndClick(tab);
-    wait.forElementVisible(
-        By.cssSelector(selectedTabSelector.replace("%tabName%", tabName.toString())));
+    wait.forElementVisible(By.cssSelector(selectedTabSelector.replace("%tabName%",
+        tabName.toString())));
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -136,5 +137,10 @@ public class NavigationBar extends WikiBasePageObject {
     searchSubmit.click();
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject(driver);
+  }
+
+  public void setUpTracking() {
+    jsActions.execute(ClickTrackingScriptsProvider.REDIRECT_BLOCK);
+    jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 }

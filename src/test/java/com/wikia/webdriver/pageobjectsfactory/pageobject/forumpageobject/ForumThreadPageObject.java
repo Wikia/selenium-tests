@@ -78,7 +78,7 @@ public class ForumThreadPageObject extends BasePageObject {
 
   public void reply(String message) {
     wait.forElementVisible(By.cssSelector(wikiaEditorTextarea));
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -117,18 +117,18 @@ public class ForumThreadPageObject extends BasePageObject {
 
   public void clickOnRemoveButton() {
     wait.forElementVisible(removeButton);
-    jQueryClick(".WikiaMenuElement .remove-message");
+    jsActions.click(".WikiaMenuElement .remove-message");
     PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);
   }
 
   public void clickOnMoveThreadButton() {
     wait.forElementVisible(moveThreadButton);
-    jQueryClick(".WikiaMenuElement .move-thread");
+    jsActions.click(".WikiaMenuElement .move-thread");
     PageObjectLogging.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);
   }
 
   public void clickOnMoreButton() {
-    executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+    jsActions.execute("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
     wait.forElementVisible(moreButton);
     waitForElementClickableByElement(moreButton);
     scrollAndClick(moreButton);

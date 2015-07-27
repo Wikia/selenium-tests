@@ -82,11 +82,11 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void focusTextArea() {
-    jQueryFocus(".cke_source");
+    jsActions.focus(".cke_source");
   }
 
   public String getSourceContent() {
-    return executeScriptRet("$('.cke_source').attr('value')");
+    return (String) jsActions.execute("$('.cke_source').attr('value')");
   }
 
   public void checkSourceContent(String desiredContent) {
@@ -272,7 +272,7 @@ public class SourceEditModePageObject extends EditMode {
       clearSource();
       clickMore();
       String content =
-          executeScriptRet(
+          (String) jsActions.execute(
               "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
       driver.findElement(By.xpath(
           "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
@@ -363,7 +363,7 @@ public class SourceEditModePageObject extends EditMode {
 
   public void verifySourceOnlyMode() {
     wait.forElementVisible(sourceOnlyModeTextArea);
-    if (!executeScriptRetBool(WikiaGlobalVariables.WG_IS_ARTICLE)) {
+    if (!(Boolean) jsActions.execute(WikiaGlobalVariables.WG_IS_ARTICLE)) {
       wait.forElementVisible(srcOnlyMode);
       PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
     } else {

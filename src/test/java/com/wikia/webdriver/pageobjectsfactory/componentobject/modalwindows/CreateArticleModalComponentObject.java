@@ -38,7 +38,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
 
   private void createPage(String title, String layout) {
     wait.forElementVisible(titleInput);
-    sendKeys(titleInput, title);
+    titleInput.sendKeys(title);
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);

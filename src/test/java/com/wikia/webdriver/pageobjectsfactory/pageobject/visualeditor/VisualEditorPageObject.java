@@ -99,7 +99,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   private void deleteMediaNode() {
-    executeScript("$(\"figure\").trigger($.Event(\"keydown\", {keyCode: 46}))");
+    jsActions.execute("$(\"figure\").trigger($.Event(\"keydown\", {keyCode: 46}))");
   }
 
   public void typeTextArea(String text) {

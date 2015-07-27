@@ -120,7 +120,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void deleteVideo() {
     openSpecialVideoPageMostRecent(getWikiUrl());
-    executeScript("$('.special-videos-grid .remove').first().show()");
+    jsActions.execute("$('.special-videos-grid .remove').first().show()");
     wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);

@@ -30,7 +30,7 @@ public class NewMessageWallThreadPageObject extends NewMessageWall {
 
   public MiniEditorComponentObject triggerMessageArea() {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
-      jQueryFocus(replyBody);
+      jsActions.focus(replyBody);
     }
     return new MiniEditorComponentObject(driver);
   }

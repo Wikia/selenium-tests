@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -407,7 +408,7 @@ public class VisualEditModePageObject extends EditMode {
             categoryEditSelector.replace("%categoryName%", categoryName)
         )
     );
-    jQueryClick(category);
+    jsActions.click(category);
     PageObjectLogging
         .log("editCategory", "edit category button clicked on category " + categoryName, true);
     return new EditCategoryComponentObject(driver);
@@ -419,7 +420,7 @@ public class VisualEditModePageObject extends EditMode {
             categoryRemoveSelector.replace("%categoryName%", categoryName)
         )
     );
-    jQueryClick(category);
+    jsActions.click(category);
     PageObjectLogging
         .log("removeCategory", "remove category button clicked on category " + categoryName, true);
   }
@@ -456,6 +457,10 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
+  }
+
+  public void startTracking(){
+    jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 
   public enum Components {

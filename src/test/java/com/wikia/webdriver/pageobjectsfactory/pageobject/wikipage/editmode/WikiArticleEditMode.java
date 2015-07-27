@@ -117,7 +117,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
     wait.forElementVisible(publishButtonPreview);
     waitForElementClickableByElement(publishButtonPreview);
-    jQueryClick(publishButtonSelector);
+    jsActions.click(publishButtonSelector);
     PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode",
                           "Click on 'Publish' button in preview mode", true, driver);
     return new WikiArticlePageObject(driver);

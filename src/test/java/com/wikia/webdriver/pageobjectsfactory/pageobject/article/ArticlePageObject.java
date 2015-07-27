@@ -221,7 +221,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
-    actionsClick(contributeDropdown);
+    contributeDropdown.click();
     wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);
@@ -229,7 +229,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
-    actionsClick(contributeDropdown);
+    contributeDropdown.click();
     wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);
@@ -260,14 +260,14 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public SourceEditModePageObject editArticleInSrcUsingDropdown() {
-    actionsClick(editUsingClassicEditor);
+    editUsingClassicEditor.click();
     return new SourceEditModePageObject(driver);
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
     scrollToElement(allCommentsArea);
     wait.forElementVisible(commentArea);
-    jQueryFocus(commentArea);
+    jsActions.focus(commentArea);
     waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
     return new MiniEditorComponentObject(driver);
   }
@@ -376,7 +376,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForAdmin() {
-    actionsClick(articleEditDropdown);
+    articleEditDropdown.click();
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(deleteDropdown);
     wait.forElementVisible(historyDropdown);
@@ -387,7 +387,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForUser() {
-    actionsClick(articleEditDropdown);
+    articleEditDropdown.click();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(veEditButton);
@@ -396,7 +396,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForAnon() {
-    actionsClick(articleEditDropdown);
+    articleEditDropdown.click();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 2);
@@ -549,7 +549,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public FilePagePageObject clickVideoDetailsButton() {
     wait.forElementVisible(videoTitle);
-    executeScript("$('a.details.sprite').css('visibility', 'visible')");
+    jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
     wait.forElementVisible(videoDetailsButton);
     videoDetailsButton.click();
     PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
@@ -758,13 +758,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   private VECreateArticleModalComponentObject clickVERedLink(WebElement redLink) {
     waitForElementClickableByElement(redLink);
-    jQueryClick(redLink);
+    jsActions.click(redLink);
     return new VECreateArticleModalComponentObject(driver);
   }
 
   private CreateArticleModalComponentObject clickRedLink(WebElement redLink) {
     waitForElementClickableByElement(redLink);
-    jQueryClick(redLink);
+    jsActions.click(redLink);
     return new CreateArticleModalComponentObject(driver);
   }
 
@@ -917,7 +917,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditModePageObject editArticleInCKUsingDropdown() {
-    actionsClick(contributeDropdown);
+    contributeDropdown.click();
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);

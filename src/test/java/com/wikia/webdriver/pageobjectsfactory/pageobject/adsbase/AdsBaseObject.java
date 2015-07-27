@@ -692,7 +692,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
-          executeScript(
+          jsActions.execute(
               "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
           return slot.getAttribute("style").contains("visibility: visible;");
         }
