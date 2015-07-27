@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class TestEvolveAds extends TemplateNoFirstLoad {
 
-  @GeoEdgeProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = "CA")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -25,7 +25,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -37,7 +37,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = "NZ")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -49,7 +49,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = "CA")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},

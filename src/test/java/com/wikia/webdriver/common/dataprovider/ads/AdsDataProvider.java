@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -455,11 +454,68 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] interstitial() {
     return new Object[][]{
-        // Fixme: ADEN-2231 Page size contains scrollbar width.
-        {"adtest", "SyntheticTests/Interstitial", new Dimension(604, 917), 1.96},
-        {"adtest", "SyntheticTests/Interstitial", new Dimension(1017, 817), 2.752},
-        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(600, 800), 0},
-        {"adtest", "SyntheticTests/Interstitial/NotScalable", new Dimension(1200, 600), 0},
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(1920, 1080),
+            new Dimension(600, 590),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(1920, 1080),
+            new Dimension(300, 343),
+            false
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(800, 800),
+            new Dimension(569, 564),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(800, 800),
+            new Dimension(300, 343),
+            false
+        },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] interstitialMobile() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(600, 800),
+            new Dimension(590, 491),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(600, 800),
+            new Dimension(300, 258),
+            false
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(800, 500),
+            new Dimension(405, 338),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(800, 500),
+            new Dimension(300, 258),
+            false
+        },
     };
   }
 

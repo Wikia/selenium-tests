@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
@@ -61,7 +61,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("DE");
   }
 
-  @GeoEdgeProxy(country = "JP")
+  @GeoEdgeBrowserMobProxy(country = "JP")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"}
   )
@@ -69,7 +69,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("JP");
   }
 
-  @GeoEdgeProxy(country = "VE")
+  @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_VE"}
   )
@@ -77,7 +77,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("VE");
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_AU"}
   )
@@ -85,7 +85,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("AU");
   }
 
-  @GeoEdgeProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = "NZ")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_NZ"}
   )
@@ -93,7 +93,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("NZ");
   }
 
-  @GeoEdgeProxy(country = "DE")
+  @GeoEdgeBrowserMobProxy(country = "DE")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_DE"}
   )
@@ -101,7 +101,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("DE");
   }
 
-  @GeoEdgeProxy(country = "GB")
+  @GeoEdgeBrowserMobProxy(country = "GB")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_GB"}
   )
@@ -109,7 +109,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("GB");
   }
 
-  @GeoEdgeProxy(country = "LT")
+  @GeoEdgeBrowserMobProxy(country = "LT")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_LT"}
   )
@@ -117,7 +117,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("LT");
   }
 
-  @GeoEdgeProxy(country = "TW")
+  @GeoEdgeBrowserMobProxy(country = "TW")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_TW"}
   )
@@ -125,7 +125,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("TW");
   }
 
-  @GeoEdgeProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = "CA")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_CA"}
   )
@@ -133,7 +133,7 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("CA");
   }
 
-  @GeoEdgeProxy(country = "NO")
+  @GeoEdgeBrowserMobProxy(country = "NO")
   @Test(
       groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"}
   )

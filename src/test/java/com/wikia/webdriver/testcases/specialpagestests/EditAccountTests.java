@@ -1,7 +1,10 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -9,8 +12,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -25,12 +26,10 @@ public class EditAccountTests extends NewTestTemplate {
   private String testedWiki = urlBuilder.getUrlForWiki("community");
 
   @Test(groups = "EditAccountTest")
+  @Execute(asUser = User.STAFF)
   public void EditAccount_001_closeAccount() {
-    EditAccount editAccount =
-        new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
+    EditAccount editAccount = new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
 
-    new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
-        .logIn(credentials.userNameStaff, credentials.passwordStaff);
     editAccount.goToAccountManagement(credentials.userNameClosedAccount);
     editAccount.closeAccount(PageContent.CAPTION);
     editAccount.verifyAccountClosedMessage();
@@ -45,11 +44,9 @@ public class EditAccountTests extends NewTestTemplate {
   }
 
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_002_verifyAccountClosed")
+  @Execute(asUser = User.STAFF)
   public void EditAccount_003_reopenAccount() {
-    EditAccount editAccount =
-        new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
-    new WikiBasePageObject(driver).getVenusGlobalNav().openAccountNAvigation()
-        .logIn(credentials.userNameStaff, credentials.passwordStaff);
+    EditAccount editAccount = new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
 
     editAccount.goToAccountManagement(credentials.userNameClosedAccount);
     editAccount.reopenAccount(credentials.passwordClosedAccount);

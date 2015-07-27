@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitialObject;
@@ -23,10 +22,40 @@ public class TestInterstitial extends TemplateNoFirstLoad {
       String wikiName,
       String article,
       Dimension pageSize,
-      double scaledAdRatio
+      Dimension adSize,
+      boolean shouldAdBeScaled
+  ) {
+    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      groups = "InterstitialMobile",
+      dataProvider = "interstitialMobile"
+  )
+  public void interstitialAdScaledMobile(
+      String wikiName,
+      String article,
+      Dimension pageSize,
+      Dimension adSize,
+      boolean shouldAdBeScaled
+  ) {
+    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+  }
+
+  private void testInterstitial(
+      String wikiName,
+      String article,
+      Dimension pageSize,
+      Dimension adSize,
+      boolean shouldAdBeScaled
   ) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
-    Assertion.assertEquals(adsInterstitial.getScaledAdRatio(), scaledAdRatio);
+    adsInterstitial.waitForPageLoaded();
+    adsInterstitial.verifySize(adSize);
+    if (shouldAdBeScaled) {
+      adsInterstitial.verifyAdRatio();
+    }
   }
 }

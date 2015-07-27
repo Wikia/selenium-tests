@@ -108,7 +108,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String
-      LOGGED_IN_USER_SELECTOR_VENUS = ".AccountNavigation a[href*=%userName%]";
+      LOGGED_IN_USER_SELECTOR_VENUS = ".AccountNavigation a[title*=%userName%]";
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
