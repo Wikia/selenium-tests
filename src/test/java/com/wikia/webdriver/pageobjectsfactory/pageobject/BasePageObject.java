@@ -638,14 +638,8 @@ public class BasePageObject {
   }
 
   public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    wait = new WebDriverWait(driver, newTimeOut);
-    try {
-      wait.until(CommonExpectedConditions.elementToBeClickable(element));
-    } finally {
-      wait = new WebDriverWait(driver, timeOut);
-      restoreDeaultImplicitWait();
-    }
+    new WebDriverWait(driver, newTimeOut).until(
+        CommonExpectedConditions.elementToBeClickable(element));
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {
