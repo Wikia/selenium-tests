@@ -1,6 +1,10 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -20,12 +24,12 @@ import org.testng.annotations.Test;
  */
 public class ImageServingTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ImageServing_001", "ImageServing", "Smoke3"})
+  @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
     newFiles.clickOnMoreOrFewerOptions();
@@ -40,11 +44,12 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
-  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
+ @RelatedIssue(issueID = "OPS-6716", comment = "Please test it manually")
+ @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
+ @Execute(asUser = User.USER)
   public void ImageServing_002_SpecialUploadTest(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
     upload.selectFileToUpload(PageContent.FILE);
     upload.typeFileName(fileName);
@@ -56,14 +61,14 @@ public class ImageServingTests extends NewTestTemplate {
     String imageURL = filePage.getImageUrl();
     String imageThumbnailURL = filePage.getImageThumbnailUrl();
 
-    filePage.verifyURLStatus(200, imageURL);
-    filePage.verifyURLStatus(200, imageThumbnailURL);
+   filePage.verifyURLStatus(200, imageURL);
+   filePage.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageServing_003", "ImageServing"})
+  @Execute(asUser = User.USER)
   public void ImageServing_003_SpecialMultipleUploadTest() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
     SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);
     wikiSpecialMU.selectFilesToUpload(PageContent.LIST_OF_FILES);
     wikiSpecialMU.typeInMultiUploadSummary(PageContent.CAPTION);

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.multiwikifindertests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 public class MultiWikiFinderTests extends NewTestTemplate {
 
   private String pageName = "Wiki";
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"MultiWikiFinder_001", "MultiWikiFinder"})
   public void multiWikiFinderTests_001_notExistingPagename() {

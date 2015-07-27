@@ -1,10 +1,11 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
+public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
 
   private String testedPage;
   private String testedWiki;
@@ -26,21 +27,21 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
   )
   public TestNoAdsLoggedInUsers(String wikiName, String path) {
     super();
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedWiki = urlBuilder.getUrlForWiki(wikiName);
-    if (config.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+    if (Configuration.getQS() != null) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
     }
   }
 
   private void login() {
-    Credentials credentials = config.getCredentials();
+    Credentials credentials = Configuration.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, testedWiki);
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"TestNoAdsForUsers_AU"}
   )
@@ -50,7 +51,7 @@ public class TestNoAdsLoggedInUsers extends TemplateDontLogout {
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @GeoEdgeProxy(country = "VE")
+  @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
       groups = {"TestNoAdsForUsers_VE"}
   )

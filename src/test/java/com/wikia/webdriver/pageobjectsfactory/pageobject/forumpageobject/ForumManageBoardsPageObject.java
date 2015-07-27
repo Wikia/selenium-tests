@@ -180,7 +180,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         waitForElementByXPath(
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']");
     down.click();
-    Assertion.assertEquals(temp, getSecondForumName());
+    Assertion.assertEquals(getSecondForumName(), temp);
     PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
   }
 
@@ -191,7 +191,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         waitForElementByXPath(
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']");
     up.click();
-    Assertion.assertEquals(temp, getFirstForumName());
+    Assertion.assertEquals(getFirstForumName(), temp);
     PageObjectLogging.log("clickMoveDown", "move up button clicked", true);
   }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class ArticleRTETest extends NewTestTemplate {
 
@@ -339,7 +340,7 @@ public class ArticleRTETest extends NewTestTemplate {
 
       e = driver.findElement(By.cssSelector(".cke_source"));
       ;
-      if (Assertion.assertStringContains(wikitext, e.getAttribute("value"))) {
+      if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)) {
         tmp1 = e.getAttribute("value").replace("<", "&lt");
         tmp1.replace(">", "&gt");
         PageObjectLogging

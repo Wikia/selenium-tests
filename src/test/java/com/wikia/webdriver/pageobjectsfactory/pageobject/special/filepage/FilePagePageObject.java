@@ -91,7 +91,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifySelectedTab(String tabName) {
     waitForElementByElement(tabBody);
-    Assertion.assertEquals(tabName, tabBody.getAttribute("data-tab-body"));
+    Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
     PageObjectLogging.log(
         "verified selected tab",
         tabName + " selected",
@@ -170,13 +170,13 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifyTabsExistImage() {
     String[] expectedTabs = {"about", "history"};
     Assertion.assertTrue(expectedTabs.length <= tabs.size());
-    verifyTabsExist(expectedTabs);
+     verifyTabsExist(expectedTabs);
   }
 
   public void verifyTabsExist(String[] expectedTabs) {
     for (int i = 0; i < expectedTabs.length; i++) {
       String tab = tabs.get(i).getAttribute("data-tab");
-      Assertion.assertEquals(expectedTabs[i], tab);
+      Assertion.assertEquals(tab, expectedTabs[i]);
     }
   }
 
@@ -212,8 +212,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifyImageLicense(ImageLicense imageLicense) {
     Assertion.assertStringContains(
-        imageLicense.getText(),
-        imgLicensePlate.getText()
+            imgLicensePlate.getText(), imageLicense.getText()
     );
   }
 }

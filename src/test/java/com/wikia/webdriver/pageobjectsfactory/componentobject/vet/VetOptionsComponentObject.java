@@ -142,7 +142,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
       default:
         desiredPositionId = "desired position not provided";
     }
-    Assertion.assertEquals(desiredPositionId, selectedPositionId);
+    Assertion.assertEquals(selectedPositionId, desiredPositionId);
   }
 
   public void clickUpdateVideo() {
@@ -163,7 +163,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void verifyCaption(String captionDesired) {
     String caption = captionField.getAttribute("value");
-    Assertion.assertEquals(captionDesired, caption);
+    Assertion.assertEquals(caption, captionDesired);
   }
 
   public void verifyNameNotEditable() {

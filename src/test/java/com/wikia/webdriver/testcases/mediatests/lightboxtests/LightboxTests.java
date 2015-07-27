@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -46,10 +48,12 @@ import org.testng.annotations.Test;
  *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
  *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
  *         user)
+ *
+ * @ownership Content X-Wing
  */
 public class LightboxTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
   public void LightboxTest_001_unusedFiles() {
@@ -88,7 +92,7 @@ public class LightboxTests extends NewTestTemplate {
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -148,7 +152,7 @@ public class LightboxTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 
-    int itemNumber = 0;
+    int itemNumber = 2;
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -164,12 +168,13 @@ public class LightboxTests extends NewTestTemplate {
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
+  @RelatedIssue(issueID = "MAIN-4938", comment = "Feature is broken for specific image. Please test manually using a different image")
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
-    int itemNumber = 0;
+    int itemNumber = 2;
 
     LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
     lightbox.verifyLightboxPopup();

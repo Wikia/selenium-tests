@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
@@ -38,7 +39,7 @@ import org.testng.annotations.Test;
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
   public void verifyElementsVisibility() {
@@ -65,14 +66,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyCreateNewArticleModal();
     //External Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info = article.getInfoboxPage();
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
     String externalNavigatedURL = info.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
     //Internal Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info = article.getInfoboxPage();
     String internalLinkName = info.getInternalLinkRedirectTitle();
     info.clickInternalLink();
     String internalNavigatedURL = info.getCurrentUrl();
@@ -86,11 +87,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String articleName = info.getNameForArticle();
-    SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
-    links.clickPageInputField();
-    links.typeInfoboxImageName("FILE:" + PageContent.FILE_IMAGE_NAME);
-    links.clickShowbutton();
-    links.verifyInfoboxArticleInList(articleName);
+//    SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
+//    links.clickPageInputField();
+//    links.typeInfoboxImageName("FILE:" + PageContent.FILE_IMAGE_NAME);
+//    links.clickShowbutton();
+//    links.verifyInfoboxArticleInList(articleName);
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})

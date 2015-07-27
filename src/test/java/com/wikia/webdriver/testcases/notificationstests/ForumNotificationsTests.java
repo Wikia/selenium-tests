@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.notificationstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
@@ -16,7 +17,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
   private String title;
   private String forumBoardTitle;
   private String message;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   /**
    * Test case created to check possible regression of DAR-112 defect <p/>
@@ -77,6 +78,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
         forumBoardTitle.replace("_", " ")
     );
     String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
-    Assertion.assertEquals("#2", anchor);
+    Assertion.assertEquals(anchor, "#2");
   }
 }

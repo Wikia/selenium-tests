@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Robert 'rochan' Chan
@@ -19,10 +19,6 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement cancelButton;
   @FindBy(css = ".normal.primary")
   private WebElement addAPageButton;
-  @FindBy(css = "#CreatePageModalDialog section div")
-  private WebElement modalText;
-  @FindBy(css = "#CreatePageModalDialog h3")
-  private WebElement modalTitle;
   @FindBy(css = "#CreatePageModalDialog")
   private WebElement modal;
 

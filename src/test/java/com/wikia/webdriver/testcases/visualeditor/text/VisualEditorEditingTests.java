@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class VisualEditorEditingTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
 
   private String text = WikiTextContent.TEXT;

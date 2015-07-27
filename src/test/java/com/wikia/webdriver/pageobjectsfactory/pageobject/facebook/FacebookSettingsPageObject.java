@@ -22,17 +22,11 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement removeButton;
   @FindBy(css = ".pop_container_advanced")
   private WebElement removeAppConfirmationModal;
-  @FindBy(css = ".fbSettingsList ")
-  private WebElement settingsList;
   @FindBy(css = "._4bl7")
   private List<WebElement> pageElementList;
-  @FindBy(css = "#u_jsonp_2_4")
-  private WebElement settings;
-  @FindBy(css = "#SettingsPage_Content")
-  private WebElement settingsContent;
   @FindBy(css = "#userNavigationLabel")
   private WebElement fbDropDown;
-  @FindBy(xpath = "//*[contains(@class, 'uiContextualLayerBelowRight')]//span[text()='Log out']")
+  @FindBy(xpath = "//span[text()='Log out']")
   private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {

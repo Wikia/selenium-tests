@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -14,6 +15,11 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   private WebElement pageInputField;
   @FindBy(css = ".namespaceselector + input[type=submit]")
   private WebElement showButton;
+
+  public SpecialWhatLinksHerePageObject(WebDriver driver) {
+    super(driver);
+  }
+
 
   public void clickShowbutton() {
     waitForElementByElement(showButton);

@@ -24,7 +24,7 @@ public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
   By contentWrapper = By.cssSelector("#mw-content-text");
 
   public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
   }
 
   public void publish() {

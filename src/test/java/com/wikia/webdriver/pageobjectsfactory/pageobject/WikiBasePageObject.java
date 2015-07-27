@@ -8,9 +8,10 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -29,6 +30,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDas
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
@@ -63,6 +65,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import freemarker.template.Template;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +91,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -167,8 +182,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
   protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
-  @FindBy(css = "a.ajaxRegister")
-  private WebElement signUpLink;
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".banner-notification div.msg a")
@@ -192,7 +205,6 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
-  private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
@@ -381,6 +393,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCssPageObject(driver);
   }
 
+  public SpecialCuratedContentPageObject openSpecialCuratedContent(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_CURATED_CONTENT);
+    return new SpecialCuratedContentPageObject(driver);
+  }
+
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UPLOAD);
     return new SpecialUploadPageObject(driver);
@@ -422,10 +439,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new InteractiveMapsPageObject(driver);
   }
 
-  public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
-    return new SpecialWhatLinksHerePageObject(driver);
-  }
+//  public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
+//    getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
+//    return new SpecialWhatLinksHerePageObject(driver);
+//  }
 
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
@@ -634,7 +651,7 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       wait.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
-          if (body.getAttribute("class").contains("skin-monobook")) {
+          if (driver.findElement(By.tagName("body")).getAttribute("class").contains("skin-monobook")) {
             return driver.findElements(
                 By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
                     " ", "_")))).size()>0;// only for verification
@@ -730,11 +747,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new ChatPageObject(driver);
   }
 
-  public ArticlePageObject openRandomArticle(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
-    return new ArticlePageObject(driver);
-  }
-  
   public ArticlePageObject openMainPage(String wikiURL) {
       getUrl(wikiURL);
       return new ArticlePageObject(driver);
@@ -820,13 +832,12 @@ public class WikiBasePageObject extends BasePageObject {
     );
   }
 
-  public String receiveMailWithNewPassowrd(String email, String password) {
-    MailFunctions.deleteAllEmails(email, password);
+  public String receiveMailWithNewPassword(String email, String password) {
     String newPassword = MailFunctions.getPasswordFromEmailContent((
                                                                        MailFunctions
                                                                            .getFirstEmailContent(
                                                                                email, password,
-                                                                               "Forgotten password request"
+                                                                               "Reset your Wikia password"
                                                                            )
                                                                    )
     );
@@ -883,7 +894,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void logOut(WebDriver driver) {
     try {
       driver.manage().deleteAllCookies();
-      driver.get(Global.DOMAIN + URLsContent.LOGOUT);
+      driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
@@ -915,103 +926,72 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String logInCookie(String userName, String password, String wikiURL) {
-    getVenusGlobalNav().openAccountNAvigation().logIn(userName, password);
-//    try {
-//      CookieStore cookieStore = new BasicCookieStore();
-//
-//      HttpClient httpclient = HttpClientBuilder.create()
-//          .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
-//          .setDefaultCookieStore(cookieStore)
-//          .disableAutomaticRetries()
-//          .build();
-//      HttpPost httpPost = new HttpPost(wikiURL + "wikia.php");
-//      List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-//
-//      nvps.add(new BasicNameValuePair("controller", "UserLoginSpecial"));
-//      nvps.add(new BasicNameValuePair("format", "json"));
-//      nvps.add(new BasicNameValuePair("method", "retrieveLoginToken"));
-//
-//      httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
-//
-//      HttpResponse response = httpclient.execute(httpPost);
-//      HttpEntity entity = response.getEntity();
-//
-//      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
-//
-//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-//      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-//
-//      String token = responseValue.getString("loginToken");
-//
-//      List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-//
-//      nvps2.add(new BasicNameValuePair("username", userName));
-//      nvps2.add(new BasicNameValuePair("password", password));
-//      nvps2.add(new BasicNameValuePair("loginToken", token));
-//
-//      HttpPost httpPost4 = new HttpPost(wikiURL + "wiki/Special:UserLogin");
-//      httpPost4.setEntity(new UrlEncodedFormEntity(nvps2,
-//                                                   StandardCharsets.UTF_8));
-//
-//      response = httpclient.execute(httpPost4);
-//
-////      entity = response.getEntity();
-////      for (int i = 0; i < 10; i++) {
-////
-////
-////        xmlResponse = EntityUtils.toString(entity);
-////
-////        xmlResponseArr = xmlResponse.split("\"");
-////
-////        if (xmlResponse.contains("WrongPass")) {
-////          throw new WebDriverException("Incorrect password provided for user: " + userName);
-////        }
-////
-////        if (xmlResponseArr.length >= 11) {
-////          break;
-////        }
-////      }
-//
-//      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-////      PageObjectLogging.log("LOGIN RESPONSE: ", xmlResponse, true);
-//
-//      for (org.apache.http.cookie.Cookie cookie : cookieStore.getCookies()) {
-//        System.out.println(cookie.toString());
-//        driver.manage().addCookie(
-//            new Cookie(cookie.getName(), cookie.getValue(), cookie.getDomain(), cookie.getPath(),
-//                       cookie.getExpiryDate(), false));
-//      }
-//
-//      try {
-//        driver.get(wikiURL);
-//      } catch (TimeoutException e) {
-//        PageObjectLogging.log("loginCookie",
-//                              "page timeout after login by cookie", true);
-//      }
-//
+    String client_id = HeliosConfig.getClientId();
+    String client_secret = HeliosConfig.getClientSecret();
+    String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
+
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    HttpPost httpPost = new HttpPost(heliosBaseUrl);
+    List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+    nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
+    nvps.add(new BasicNameValuePair("client_id", client_id));
+    nvps.add(new BasicNameValuePair("client_secret", client_secret));
+    nvps.add(new BasicNameValuePair("username", userName));
+    nvps.add(new BasicNameValuePair("password", password));
+
+    CloseableHttpResponse response = null;
+    httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+    try {
+      response = httpClient.execute(httpPost);
+
+      HttpEntity entity = response.getEntity();
+      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+
+      EntityUtils.consume(entity);
+
+      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
+      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+
+      String token = responseValue.getString("access_token");
+
+      String domian = Configuration.getEnvType().equals("dev")?".wikia-dev.com" : ".wikia.com";
+
+      driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
+
+      if(driver.getCurrentUrl().contains("Logout")){
+        driver.get(wikiURL);
+      }else {
+        driver.navigate().refresh();
+      }
+
       verifyUserLoggedIn(userName);
-//
-//      PageObjectLogging.log("loginCookie",
-//                            "user was logged in by cookie", true, driver);
-//      return token;
-//    } catch (UnsupportedEncodingException e) {
-//      PageObjectLogging.log("logInCookie",
-//                            "UnsupportedEncodingException", false);
-//      return null;
-//    } catch (ClientProtocolException e) {
-//      PageObjectLogging.log("logInCookie", "ClientProtocolException",
-//                            false);
-//      return null;
-//    } catch (ParseException e) {
-//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-//      return null;
-//    } catch (IOException e) {
-//      PageObjectLogging.log("logInCookie", e.getMessage(), false);
-//      return null;
-//    } catch (JSONException e) {
-//      e.printStackTrace();
-//      return null;
-//    }
+      PageObjectLogging.log("loginCookie",
+          "user was logged in by by helios using acces token: " + token, true);
+      return token;
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("loginCookie",
+                              "page timeout after login by cookie", false);
+    } catch (UnsupportedEncodingException | ClientProtocolException e) {
+      PageObjectLogging.log("logInCookie",
+                            "UnsupportedEncodingException", false);
+      throw new WebDriverException();
+    } catch (JSONException e) {
+      PageObjectLogging.log("logInCookie",
+          "Problem with parsing JSON response", false);
+      throw new WebDriverException();
+    } catch (IOException e) {
+      PageObjectLogging.log("logInCookie",
+          "IO Exception", false);
+    } finally {
+      try {
+        response.close();
+      } catch (IOException | NullPointerException e) {
+        PageObjectLogging.log("logInCookie",
+            "IO Exception", false);
+      }
+    }
     return "";
   }
 
@@ -1059,7 +1039,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyHeader(String fileName) {
     waitForElementByElement(wikiFirstHeader);
-    Assertion.assertStringContains(fileName, wikiFirstHeader.getText());
+    Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
   }
 
   public void disableCaptcha() {
@@ -1151,8 +1131,8 @@ public class WikiBasePageObject extends BasePageObject {
   public void addVideoViaAjax(String videoURL) {
     executeScript(
         "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
-        "data: {url: '" + videoURL + "'}," +
-        "type: 'POST' } );");
+            "data: {url: '" + videoURL + "'}," +
+            "type: 'POST' } );");
   }
 
   /**
@@ -1228,7 +1208,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyArticleName(String targetText) {
-    Assertion.assertStringContains(getArticleName(), targetText);
+    Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log(
         "verifyArticleName",
         "The article shows " + targetText,
@@ -1245,7 +1225,7 @@ public class WikiBasePageObject extends BasePageObject {
         true,
         driver
     );
-    Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
+    Assertion.assertStringContains(headerWhereIsMyExtensionPage.getText(), pattern);
   }
 
   protected Boolean isNewGlobalNavPresent() {
@@ -1357,7 +1337,7 @@ public class WikiBasePageObject extends BasePageObject {
     String wikiURL = getCurrentUrl().substring(0,getCurrentUrl().indexOf("wiki/"));
     getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
   }
-  
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }

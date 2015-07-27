@@ -233,8 +233,7 @@ public class NewMessageWall extends WikiBasePageObject {
   public void verifyThreadClosed(String userName, String reason, String message) {
     refreshPage();
     Assertion.assertStringContains(
-        userName + " closed this thread because:\n" + reason,
-        driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText()
+            driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(), userName + " closed this thread because:\n" + reason
     );
     PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
   }
@@ -257,89 +256,88 @@ public class NewMessageWall extends WikiBasePageObject {
   public void verifyMessageText(String title, String message, String userName) {
     waitForTextToBePresentInElementByBy(messageTitleBy, title);
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(), title
+            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText(), message
+            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(), userName
+            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
     );
   }
 
   public void verifyMessageBoldText(String title, String message, String userName) {
     waitForTextToBePresentInElementByBy(messageTitleBy, title);
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(), title
+            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextBoldBy).getText(), message
+            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
+            .findElement(messageTextBoldBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(), userName
+            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
     );
   }
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     waitForTextToBePresentInElementByBy(messageTitleBy, title);
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(), title
+            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextItalicBy).getText(), message
+            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
+            .findElement(messageTextItalicBy).getText()
     );
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(), userName
+            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
     );
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
     waitForElementByElement(editMessageWrapper);
     Assertion.assertEquals(
-        title, editMessageWrapper.findElement(messageTitleBy).getText()
+            editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
     Assertion.assertEquals(
-        message, editMessageWrapper.findElement(messageBodyBy).getText()
+            editMessageWrapper.findElement(messageBodyBy).getText(), message
     );
     Assertion.assertEquals(
-        userName, editMessageWrapper.findElement(messageUserNameBy).getText()
+            editMessageWrapper.findElement(messageUserNameBy).getText(), userName
     );
   }
 
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {
     waitForTextToBePresentInElementByBy(messageTitleBy, title);
     Assertion.assertEquals(
-        title, editMessageWrapper.findElement(messageTitleBy).getText()
+            editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
     Assertion.assertEquals(
-        wikiURL + "wiki/" + target,
-        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-            .getAttribute("href")
+            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+                .getAttribute("href"), wikiURL + "wiki/" + target
     );
     Assertion.assertEquals(
-        text, editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText()
+            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text
     );
   }
 
   public void verifyExternalLink(String title, String target, String text, String wikiURL) {
     waitForTextToBePresentInElementByBy(messageTitleBy, title);
     Assertion.assertEquals(
-        title, editMessageWrapper.findElement(messageTitleBy).getText()
+            editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
     Assertion.assertEquals(
-        target, editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href")
+            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+            .getAttribute("href"), target
     );
     Assertion.assertEquals(
-        text, editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText()
+            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text
     );
   }
 
   public void verifyQuote(String quoteText) {
     Assertion.assertEquals(
-        quoteText, driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy).getText()
+            driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy).getText(), quoteText
     );
   }
 

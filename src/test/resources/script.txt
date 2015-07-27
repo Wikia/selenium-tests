@@ -32,8 +32,21 @@ function markMethodAsFailed() {
 		b.style.backgroundColor = "red";
 	}
 }
-window.addEventListener("load", markMethodAsFailed);
-window.addEventListener("load", createToc);
+function addLinkBackToTheJob() {
+	if (location.pathname.indexOf('/job/') > -1) {
+		var jobPath = location.pathname.replace(/(\/job\/[^/]*)\/.*$/, '$1'),
+			$a = $('<a></a>').attr('href', jobPath).text('Back to job'),
+			$a = $a.wrap('<p></p>');
+			$p = $('p').first();
+		$p.before($a);
+	}
+}
+
+$(document).ready(function () {
+	markMethodAsFailed();
+	createToc();
+	addLinkBackToTheJob();
+});
 
 (function (ctx) {
     var hideButton, showButton, document;

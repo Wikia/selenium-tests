@@ -1,8 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -11,13 +12,13 @@ import org.testng.annotations.Test;
 /**
  * @ownership AdEngineering
  */
-public class TestRoadblocksAfterMultiplePageViews extends TemplateDontLogout {
+public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
 
   private static final int PAGE_VIEWS_COUNT = 5;
 
   public TestRoadblocksAfterMultiplePageViews() {
     super();
-    urlBuilder = new UrlBuilder(config.getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
   }
 
   @Test(

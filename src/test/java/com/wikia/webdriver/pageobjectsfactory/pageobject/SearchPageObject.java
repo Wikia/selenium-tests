@@ -29,10 +29,6 @@ public class SearchPageObject extends WikiBasePageObject {
   protected WebElement paginatorPrev;
   @FindBy(css = ".paginator-page")
   protected List<WebElement> paginationPages;
-  @FindBy(css = ".Results > :nth-child(4)")
-  protected WebElement fourthResult;
-  @FindBy(css = ".Results > :nth-child(4) h1 > a")
-  protected WebElement fourthResultLink;
   @FindBy(css = "h1 > a.result-link")
   protected List<WebElement> resultLinks;
   @FindBys(@FindBy(css = "li.result"))
@@ -62,14 +58,14 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void verifyNoResults() {
-    Assertion.assertEquals("No results found.", noResultsCaption.getText());
+    Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
   }
 
   public void verifyPagination() {
     waitForElementByBy(paginationContainerBy);
     int i = 1;
     for (WebElement elem : paginationPages) {
-      Assertion.assertEquals(Integer.toString(i), elem.getText());
+      Assertion.assertEquals(elem.getText(), Integer.toString(i));
       i++;
     }
   }

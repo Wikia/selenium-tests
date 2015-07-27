@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Set;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Michal 'justnpT' Nowierski
@@ -35,8 +35,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement editInfoProvided;
   @FindBy(xpath = "//input[@type='checkbox'][@value='email']/..")
   private WebElement emailCheckbox;
-  @FindBy(css = ".global-notification .msg")
-  private WebElement notification;
 
   String winHandleBefore;
 
@@ -57,7 +55,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
     if (handles.size() > 1) {
       for (String winHandle : handles) {
-        //Switch to new window opened
+        // Switch to new window opened
         driver.switchTo().window(winHandle);
       }
       waitForElementByElement(appTermsConfirmButton);
@@ -76,7 +74,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
     if (handles.size() > 1) {
       for (String winHandle : handles) {
-        //Switch to new window opened
+        // Switch to new window opened
         driver.switchTo().window(winHandle);
       }
       waitForElementByElement(editInfoProvided);
@@ -119,7 +117,8 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementNotVisibleByElement(createAccountButton);
   }
 
-  public void createAccountNoEmail(String email, String emailPassword, String userName, String password) {
+  public void createAccountNoEmail(String email, String emailPassword, String userName,
+      String password) {
     acceptWikiaAppPolicyNoEmail();
     MailFunctions.deleteAllEmails(email, emailPassword);
     typeUserName(userName);
@@ -131,11 +130,12 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void loginExistingAccount(String userName, String password) {
     waitForElementByElement(existingUsernameField);
     existingUsernameField.sendKeys(userName);
-    PageObjectLogging.log("loginExistingAccount", "username " + userName + " typed into the field", true);
+    PageObjectLogging.log("loginExistingAccount", "username " + userName + " typed into the field",
+        true);
     waitForElementByElement(existingPasswordField);
     existingPasswordField.sendKeys(password);
-    PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field", true);
+    PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field",
+        true);
     loginExistingButton.click();
   }
-
 }

@@ -39,29 +39,27 @@ public class MailFunctions {
       // getInbox
       Folder inbox = store.getFolder("Inbox");
       inbox.open(Folder.READ_ONLY);
-      Message messages[] = null;
+      Message[] messages = null;
 
-      int counter = 0;
       boolean forgottenPasswordMessageFound = false;
       Message magicMessage = null;
-      while (!forgottenPasswordMessageFound) {
-        messages= inbox.getMessages();
+      for (int i = 0; !forgottenPasswordMessageFound; i++) {
+        messages = inbox.getMessages();
 
-        System.out.println("Waiting for message ... \r");
+        PageObjectLogging.log("Mail", "Waiting for the message", true);
         Thread.sleep(2000);
         for (Message message : messages) {
           if (message.getSubject().contains(subject)) {
             forgottenPasswordMessageFound = true;
             magicMessage = message;
           }
-          if (counter > 300) {
-            throw new WebDriverException("Mail timeout exceeded");
-          }
-          counter += 1;
+        }
+        if (i > 15) {
+          throw new WebDriverException("Mail timeout exceeded");
         }
       }
 
-      System.out.println("Mail arrived... \r");
+      PageObjectLogging.log("Mail", "Mail arrived", true);
 
       Message m = magicMessage;
       String line;
@@ -76,16 +74,10 @@ public class MailFunctions {
       return builder.toString();
     } catch (NoSuchProviderException e) {
       PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (MessagingException e) {
+      throw new WebDriverException();
+    } catch (MessagingException | IOException | InterruptedException e) {
       PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
-    } catch (IOException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
-      return e.getMessage();
+      throw new WebDriverException();
     }
   }
 
@@ -107,34 +99,45 @@ public class MailFunctions {
           messages[i].setFlag(Flags.Flag.DELETED, true);
         }
       } else {
-        System.out.println("There is no messages in inbox");
+        PageObjectLogging.log("Mail", "There are no messages in inbox", true);
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      System.out.println("problems : " + e.getMessage());
+      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
     } catch (MessagingException e) {
-      System.out.println("problems : " + e.getMessage());
+      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
     }
   }
 
   public static String getActivationLinkFromEmailContent(String mailContent) {
     // mail content contain '=' chars, which has to be removed
     String content = mailContent.replace("=", "");
-    Pattern p = Pattern.compile("Special:WikiaConfirmEmail/*\\w{3,}<"); // getting activation URL
-                                                                        // from mail content
+    // mail content contain 'upn3D' chars, which has to be changed to 'upn='
+    content = content.replace("upn3D", "upn=");
+    Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*?(?=\")"); // getting activation URL
+    // from mail content
     Matcher m = p.matcher(content);
     if (m.find()) {
-      return m.group(0).substring(0, m.group(0).length() - 1);
+      return m.group(0).replace("button\" href3D\"", "");
       // m.group(0) returns first match for the regexp
-      // last character is '<' so has to be removed
     } else {
-      throw new RuntimeException("There was no match in the following content: \n" + content);
+      throw new WebDriverException("There was no match in the following content: \n" + content);
     }
   }
 
   public static String getPasswordFromEmailContent(String mailContent) {
-    String content = mailContent.replace("\"", "\n");
-    String[] lines = content.split("\n");
-    return lines[1];
+    // mail content contain '=' chars, which has to be removed
+    String content = mailContent.replace("=", "");
+    Pattern p = Pattern.compile("below:[\\s\\S]*?(?=If)"); // getting new password
+    // from mail content
+    Matcher m = p.matcher(content);
+    if (m.find()) {
+      return m.group(0).replace("below:", "");
+      // m.group(0) returns first match for the regexp
+    } else {
+      throw new WebDriverException("There was no match in the following content: \n" + content);
+    }
+
   }
+
 }

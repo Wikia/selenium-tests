@@ -18,6 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Michal 'justnpT' Nowierski
+ * @ownership Content X-Wing
  */
 public class GlobalNavigationClicktracking extends NewTestTemplate {
 

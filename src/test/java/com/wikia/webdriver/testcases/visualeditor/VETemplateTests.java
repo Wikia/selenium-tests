@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class VETemplateTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
   String articleName, mapID;
   InteractiveMapPageObject createdMap;

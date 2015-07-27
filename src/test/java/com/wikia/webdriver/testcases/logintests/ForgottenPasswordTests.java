@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
@@ -22,26 +24,25 @@ import org.testng.annotations.Test;
  */
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
 
-  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
   @Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
   public void ForgottenPassword_001_dropdown() {
     String userName = credentials.userNameForgottenPassword;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropdown = new DropDownComponentObject(driver);
     dropdown.openDropDown();
-    dropdown.remindPassword(userName, credentials.apiToken);
+     dropdown.remindPassword(userName, credentials.apiToken);
 
     dropdown.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        dropdown.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     dropdown.openDropDown();
-    dropdown.logIn(userName, newPassword);
+     dropdown.logIn(userName, newPassword);
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     newPassword = login.setNewPassword();
     login.verifyUserLoggedIn(userName);
@@ -52,13 +53,12 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4642", comment = "Automation test is broken (QAART-597) and Set new password dialog is missing. Please test manually.")
   @Test(
       groups = {"ForgottenPassword_002", "ForgottenPassword"}
   )
   public void ForgottenPassword_002_specialPage() {
     String userName = credentials.userNameForgottenPassword2;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
@@ -66,7 +66,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     login.login(userName, newPassword);
     newPassword = login.setNewPassword();
     login.verifyUserLoggedIn(userName);
@@ -77,23 +77,27 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
+  @RelatedIssue(issueID = "MAIN-4984", comment = "Change your password functionality Stops CNW flow."
+                                                 + " Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
   )
-  @RelatedIssue(issueID = "SOC-843", comment = "Automation test is broken. Please test manually")
   public void ForgottenPassword_003_createWiki() {
+    String userName = credentials.userNameForgottenPassword3;
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
     CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
-    cnwLogin.typeInUserName(credentials.userNameForgottenPassword3);
-    cnwLogin.clickForgotPassword();
+    cnwLogin.typeInUserName(userName);
+    cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
-    String newPassword = cnwLogin.receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
+    String newPassword = cnwLogin.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
+    new SpecialUserLoginPageObject(driver).setNewPassword();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
@@ -101,6 +105,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userNameForgottenPassword3);
+    article.verifyUserLoggedIn(userName);
   }
 }

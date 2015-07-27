@@ -1,8 +1,11 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,22 +15,20 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 
-import org.testng.annotations.Test;
-
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create a wiki and delete 2. Create a wiki for children 3.
  *         Create a wiki with changed domain 4. Try to create a wiki which name exists 5. Try to
  *         create a wiki which name violates naming policy 6. Try to create a wiki without category
  */
+@Test(groups = {"CNW_User"})
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   String wikiDomain;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-4660", comment = "Wikia code defect. Please test manually")
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
-  public void CreateNewWiki_001_createDeleteWiki() {
+ public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -51,7 +52,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
-  public void CreateNewWiki_002_createWikiForChildren() {
+ public void CreateNewWiki_00_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -67,18 +68,16 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyUserLoggedIn(credentials.userName);
     String newWikiURL = article.getWikiUrl();
-    logOut();
+    article.logOut();
     article.logOut(newWikiURL);
     article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
     SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
-    factory.verifyVariableValue(
-        WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-        "true"
-    );
+    factory.verifyVariableValue(WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
+        "true");
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
-  public void CreateNewWiki_003_createWikiChangedDomain() {
+ public void CreateNewWiki_003_createWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -98,7 +97,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
-  public void CreateNewWiki_004_createWikiNameExists() {
+  public void CreateNewWiki_004_creatWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);

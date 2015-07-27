@@ -1,11 +1,5 @@
 package com.wikia.webdriver.common.core.geoedge;
 
-import org.apache.commons.codec.binary.Base64;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,22 +8,27 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.codec.binary.Base64;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
+
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class GeoEdgeUtils {
 
   private Map countriesConfiguration = new HashMap();
-  private String configFilePath;
   private Document doc;
 
-  public GeoEdgeUtils(String configFilePath) {
-    this.configFilePath = configFilePath;
-
+  public GeoEdgeUtils() {
     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
     try {
       DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-      doc = docBuilder.parse(configFilePath);
+      doc = docBuilder.parse(Configuration.getCredentialsFilePath());
     } catch (ParserConfigurationException | SAXException | IOException ex) {
       throw new RuntimeException(ex);
     }
@@ -64,10 +63,8 @@ public class GeoEdgeUtils {
 
     for (int s = 0; s < listOfCountries.getLength(); s++) {
       Element oneCountry = (Element) listOfCountries.item(s);
-      countriesConfiguration.put(
-          oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
-          oneCountry.getElementsByTagName("IP").item(0).getTextContent()
-      );
+      countriesConfiguration.put(oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
+          oneCountry.getElementsByTagName("IP").item(0).getTextContent());
     }
   }
 }
