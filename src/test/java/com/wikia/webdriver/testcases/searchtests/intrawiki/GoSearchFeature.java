@@ -3,10 +3,14 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import javax.jws.soap.SOAPBinding;
 
 /*
  *  AnonFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for anonymous
@@ -41,14 +45,11 @@ public class GoSearchFeature extends IntraWiki {
     }
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"})
+    @Execute(asUser = User.USER_GO_SEARCH_PREFERRED, onWikia = "muppet")
     public void goSearchPreference() {
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage(testedWiki);
-        base.logInCookie(credentials.userNameGoSearchPreferred, credentials.passwordGoSearchPreferred, wikiURL);
+        new WikiBasePageObject(driver).openWikiPage(wikiURL);
         NavigationBar navigation = new NavigationBar(driver);
         ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
         article.verifyArticleName(SearchContent.SEARCH_ARTICLE);
     }
-
-
 }
