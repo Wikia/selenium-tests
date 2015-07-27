@@ -44,4 +44,8 @@ public class JavascriptActions {
       return null;
     }
   }
+
+  public void mouseOver(WebElement element) {
+    js.executeScript("$(arguments[0]).mouseenter()", element);
+  }
 }

@@ -78,7 +78,7 @@ public class HubBasePageObject extends WikiBasePageObject {
     if (n > 4) {
       throw new RuntimeException("please select image index between 0 and 4");
     }
-    mouseOver(mosaicSliderThumbRegionImages.get(n));
+    jsActions.mouseOver(mosaicSliderThumbRegionImages.get(n));
     PageObjectLogging.log("mosaicSliderHoverOverImage", "hover over image number " + n, true);
   }
 

@@ -173,11 +173,6 @@ public class BasePageObject {
     return isElementInElement;
   }
 
-  public void mouseOver(WebElement elem) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("$(arguments[0]).mouseenter()", elem);
-  }
-
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
     element.click();
