@@ -435,8 +435,8 @@ public class AdsDataProvider {
   public static Object[][] kruxStandardSegment() {
     return new Object[][]{
         {
-            "glee",
-            "Rachel",
+            "vim",
+            "Vim_Tips_Wiki",
             "adtest",
             "SyntheticTests/Krux/Page_1",
             "pqdapsy7l"

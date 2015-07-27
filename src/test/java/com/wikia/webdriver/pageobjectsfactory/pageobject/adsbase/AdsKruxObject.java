@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -110,7 +111,7 @@ public class AdsKruxObject extends AdsBaseObject {
   public void initKruxUser(String wikiName) {
     int i = 0;
     while (i < MAX_PAGE_REFRESHES) {
-      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
+      getUrl(urlBuilder.getUrlForWiki(wikiName) + URLsContent.SPECIAL_RANDOM, false);
       waitForPageLoaded();
       try {
         new WebDriverWait(driver, 5).until(
@@ -128,7 +129,8 @@ public class AdsKruxObject extends AdsBaseObject {
       getUrl(ADD_USER_URL + kruxSegs.get(segmentId), false);
       waitForPageLoaded();
       Assertion.assertTrue(driver.getPageSource().contains(segmentId));
-      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
+      getUrl(urlBuilder.getUrlForWiki(wikiName) + URLsContent.SPECIAL_RANDOM, false);
+      refreshPage();
       waitForPageLoaded();
       try {
         new WebDriverWait(driver, 5).until(CommonExpectedConditions.scriptReturnsTrue(
