@@ -136,4 +136,8 @@ public class Configuration {
   public static void clearCustomTestProperties() {
     testConfig.clear();
   }
+
+  public static String getCountryCode() {
+    return getProp("countryCode");
+  }
 }

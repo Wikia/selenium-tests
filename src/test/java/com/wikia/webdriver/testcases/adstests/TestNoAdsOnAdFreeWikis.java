@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -34,7 +34,7 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
     }
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikis_AU"}
   )

@@ -100,7 +100,7 @@ task getSuite << {
 
     if (project.failedOnly.equals('jenkinsDuty')) {
         println "Switching to Jenkins Duty Mode"
-        jobName = "wikia-test-matrix-failed-execution"
+        jobName = "wikia-test-matrix-failed"
 
         try {
             xml = parser.parse(
@@ -242,6 +242,7 @@ test {
                 collect({ path -> new File(path) })
         includeGroups = groups.split(',')
         useDefaultListeners = true
+        testLogging.showStandardStreams = true
     }
 
     outputs.upToDateWhen { false }

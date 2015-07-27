@@ -1,16 +1,15 @@
 package com.wikia.webdriver.common.core.geoedge;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
-public @interface GeoEdgeProxy {
+import java.io.File;
 
-  String country() default "";
+public class GeoEdgeProxy {
+
+  private static final File CONFIG_FILE = new File(Configuration.getCredentialsFilePath());
+
+  public static String getProxyAddress(String countryCode) {
+    return XMLReader.getValue(CONFIG_FILE, "ci.geoedge." + countryCode);
+  }
 }

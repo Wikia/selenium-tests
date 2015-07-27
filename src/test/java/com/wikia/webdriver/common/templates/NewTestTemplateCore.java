@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeUtils;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -73,6 +73,10 @@ public class NewTestTemplateCore {
   protected void loadFirstPage() {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
+  protected void loadFirstPage(WebDriver driver) {
+    driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
+  }
+
 
   protected void logOutCustomDriver(WebDriver customDriver) {
     customDriver.get(wikiURL + URLsContent.LOGOUT);
@@ -124,9 +128,9 @@ public class NewTestTemplateCore {
     boolean isNetworkTrafficDumpSet = false;
     String countryCode = null;
 
-    if (method.isAnnotationPresent(GeoEdgeProxy.class)) {
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
       isGeoEdgeSet = true;
-      countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
+      countryCode = method.getAnnotation(GeoEdgeBrowserMobProxy.class).country();
     }
 
     if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
