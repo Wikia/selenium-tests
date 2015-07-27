@@ -233,7 +233,7 @@ public class BasePageObject {
     try {
       js.executeScript(
           "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));",
+          + "window.scroll(0,parseInt(x.offset().top - 100));",
           element
       );
     } catch (WebDriverException e) {

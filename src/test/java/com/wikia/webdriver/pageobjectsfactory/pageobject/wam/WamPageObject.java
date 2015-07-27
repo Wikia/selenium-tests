@@ -59,6 +59,7 @@ public class WamPageObject extends BasePageObject {
    */
   public void openWamPage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
+    waitForValueToBePresentInElementsAttributeByCss("#CORP_TOP_LEADERBOARD", "class", "hidden");
     PageObjectLogging.log("openWamPage", "WAM page opened", true);
   }
 
@@ -222,10 +223,7 @@ public class WamPageObject extends BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);
-    datePickerInput.sendKeys(date);
-    Actions actions = new Actions(driver);
-    actions.sendKeys(datePickerInput, "\n");
-    actions.perform();
+    new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
   }
 
   private String getFormattedDate(Date date, String format) {
