@@ -137,7 +137,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyCaptchaInvalidMessage() {
-    waitForElementPresenceByBy(recaptchaResponseBy);
+    wait.forElementPresent(recaptchaResponseBy);
     String message = driver.findElement(recaptchaErrorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
   }

@@ -174,4 +174,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       throw e;
     }
   }
+
+  public void waitForSlot(String slotName){
+    wait.forElementVisible(By.cssSelector("#" + slotName));
+  }
 }

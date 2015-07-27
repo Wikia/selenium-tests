@@ -44,7 +44,7 @@ public class SmartBannerComponentObject extends BasePageObject {
   public void scrollToTopAndWaitForShareBarToBeHidden() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("window.scrollTo(0, 0)");
-    waitForElementPresenceByBy(By.cssSelector(".share-feature.pinned.headroom--top"));
+    wait.forElementPresent(By.cssSelector(".share-feature.pinned.headroom--top"));
   }
 
   public boolean isSmartBannerVisible() {

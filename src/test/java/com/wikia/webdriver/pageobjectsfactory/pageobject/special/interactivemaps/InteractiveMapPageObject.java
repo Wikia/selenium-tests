@@ -478,7 +478,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyEscapedFragmentMetaTag() {
     wait.forElementVisible(createdMapTitle);
-    waitForElementPresenceByBy(escapedFragmentMetaDataTag);
+    wait.forElementPresent(escapedFragmentMetaDataTag);
     PageObjectLogging.log("verifyEscapedFragmentMetaTag",
                           "Escaped fragment meta tag is in DOM", true);
   }

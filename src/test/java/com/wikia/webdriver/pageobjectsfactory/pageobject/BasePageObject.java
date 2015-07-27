@@ -335,19 +335,6 @@ public class BasePageObject {
         + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
-  /**
-   * Checks if the element is present in DOM
-   *
-   * @param locator The element to be checked
-   */
-  public void waitForElementPresenceByBy(By locator) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(ExpectedConditions.presenceOfElementLocated(locator));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
@@ -369,10 +356,6 @@ public class BasePageObject {
 
   public void waitForElementNotClickableByElement(WebElement element) {
     waitFor.until(CommonExpectedConditions.elementNotToBeClickable(element));
-  }
-
-  public void waitForElementById(String id) {
-    waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
   }
 
   public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
@@ -416,15 +399,6 @@ public class BasePageObject {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
     } finally {
       restoreDeaultImplicitWait();
     }

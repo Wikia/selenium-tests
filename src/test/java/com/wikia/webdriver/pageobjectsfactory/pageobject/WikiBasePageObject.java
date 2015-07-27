@@ -886,7 +886,7 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
     }
-    waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
+    wait.forElementPresent(LOGIN_BUTTON_CSS);
     PageObjectLogging.log("logOut", "user is logged out", true, driver);
   }
 
@@ -897,7 +897,7 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
     }
-    waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
+    wait.forElementPresent(LOGIN_BUTTON_CSS);
     PageObjectLogging.log("logOut", "user is logged out", true, driver);
   }
 
@@ -908,7 +908,7 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
     }
-    waitForElementPresenceByBy(LOGIN_BUTTON_CSS);
+    wait.forElementPresent(LOGIN_BUTTON_CSS);
     PageObjectLogging.log("logOut", "user is logged out and returned to article", true, driver);
   }
 

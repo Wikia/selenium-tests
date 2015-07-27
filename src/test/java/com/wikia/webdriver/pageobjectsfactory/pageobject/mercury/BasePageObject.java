@@ -68,7 +68,7 @@ public class BasePageObject extends MobileBasePageObject {
       PageObjectLogging.log("Loading spinner", "is not present", true);
     }
     if (spinnerPresent) {
-      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+      wait.forElementPresent(By.cssSelector(".loading-overlay.hidden"));
     }
   }
 

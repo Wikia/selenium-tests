@@ -432,7 +432,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
-    waitForElementPresenceByBy(cssSelector);
+    wait.forElementPresent(cssSelector);
 
     String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
     PageObjectLogging.log("verifyGptIframe", msg, true, driver);

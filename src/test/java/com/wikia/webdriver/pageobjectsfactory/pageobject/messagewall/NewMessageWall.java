@@ -239,7 +239,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyThreadReopened() {
-    waitForElementPresenceByBy(closeButtonBy);
+    wait.forElementPresent(closeButtonBy);
     setDisplayStyle(firstMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     wait.forElementPresent(closeButtonBy);

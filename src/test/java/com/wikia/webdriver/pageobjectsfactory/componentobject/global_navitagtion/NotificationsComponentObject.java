@@ -69,7 +69,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    */
   private void waitForNotificationsMessagesToLoad() {
     wait.forElementVisible(notificationsDropdown);
-    waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
+    wait.forElementPresent(notificationDropdownForCurrentWiki);
     wait.forElementNotPresent(emptyNotificationDropdownForCurrentWiki);
   }
 
