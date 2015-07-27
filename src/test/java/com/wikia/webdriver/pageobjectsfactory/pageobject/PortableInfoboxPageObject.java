@@ -49,6 +49,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> referenceElements;
   @FindBy(css = ".portable-infobox-item-label")
   private WebElement h3Elements;
+  @FindBy(css = ".portable-infobox-item-value .newcategory")
+  private WebElement categoryLink;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -106,7 +108,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(checkIfElementOnPage(unorderedListElement), true);
   }
 
-
   public String getExternalLinkRedirectTitle() {
     waitForElementByElement(pInfoRedlLink);
     return pInfoRedlLink.getAttribute("href");
@@ -132,6 +133,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     pInfoImage.click();
   }
 
+  public void clickCategoryLink() {
+    waitForElementByElement(categoryLink);
+    scrollAndClick(categoryLink);
+  }
+
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
     waitForElementByElement(pInfoImage);
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
@@ -151,7 +157,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
-
+/*
   public void verifyQuotationMarksPresence() {
     waitForElementByElement(h3Elements);
     String h3ElementsString = h3Elements.getText();
@@ -161,7 +167,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyReferencesPresence() {
 //    waitForElementByElement(referenceElements);
   }
-
+*/
   public void clickRedLink() {
     waitForElementByElement(pInfoRedlLink);
     pInfoRedlLink.click();
