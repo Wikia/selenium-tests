@@ -29,7 +29,7 @@ public class AdsPadObject extends AdsBaseObject {
   }
 
   public void verifyNoPadOnPage() {
-    Assertion.assertFalse(checkIfElementOnPage(PAD_IMG_CSS));
+    Assertion.assertFalse(isElementOnPage(PAD_IMG_CSS));
     PageObjectLogging.log("PAD", "PAD is not on the page", true, driver);
   }
 }

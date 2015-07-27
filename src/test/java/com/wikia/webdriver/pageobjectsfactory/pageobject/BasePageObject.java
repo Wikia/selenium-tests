@@ -82,8 +82,9 @@ public class BasePageObject {
   }
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
-    jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
-        + "')).mouseenter()");
+    jsActions.execute(
+        "$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
+            + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -95,19 +96,17 @@ public class BasePageObject {
    * Simple method for checking if element is on page or not. Changing the implicitWait value allows
    * us no need for waiting 30 seconds
    */
-  protected boolean checkIfElementOnPage(String cssSelector) {
+  protected boolean isElementOnPage(String cssSelector) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
-    boolean isElementOnPage = true;
     try {
       if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
-        isElementOnPage = false;
+        return false;
+      }else {
+        return true;
       }
-    } catch (Exception ex) {
-      isElementOnPage = false;
     } finally {
       restoreDeaultImplicitWait();
     }
-    return isElementOnPage;
   }
 
   /*
@@ -307,7 +306,7 @@ public class BasePageObject {
   }
 
   protected Boolean scrollToSelector(String selector) {
-    if (checkIfElementOnPage(selector)) {
+    if (isElementOnPage(selector)) {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
         js.executeScript("var x = $(arguments[0]);"

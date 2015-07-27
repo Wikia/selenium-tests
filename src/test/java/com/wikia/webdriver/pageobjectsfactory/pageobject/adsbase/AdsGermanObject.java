@@ -156,7 +156,7 @@ public class AdsGermanObject extends AdsBaseObject {
     String script = "return $(arguments[0]).find('iframe, object, img').filter(':visible').length;";
 
     for (String elementSelector : combination) {
-      if (checkIfElementOnPage(elementSelector)) {
+      if (isElementOnPage(elementSelector)) {
         if ((Long) js.executeScript(script, elementSelector) < 1) {
           return false;
         }

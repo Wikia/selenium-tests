@@ -150,7 +150,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
-    if (!checkIfSlotExpanded(presentLeaderboard) && checkIfElementOnPage("#jpsuperheader")) {
+    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage("#jpsuperheader")) {
       PageObjectLogging.log("checkTopLeaderboard",
                             "Page has Gotham campaign.", true);
       return;
@@ -211,7 +211,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    if (checkIfElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
+    if (isElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
       String iframeSrc = liftiumIframes.get(0).getAttribute("src");
       if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
         PageObjectLogging
@@ -288,7 +288,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
     for (String selector : slotsSelectors) {
-      if (checkIfElementOnPage(selector)) {
+      if (isElementOnPage(selector)) {
         WebElement element = driver.findElement(By.cssSelector(selector));
         if (
             element.isDisplayed()

@@ -97,7 +97,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyUserJoinToChatMessage(String userName) {
     wait.forElementVisible(chatInlineAlertContinued);
-    if (!checkIfElementOnPage(String.format(USER_SELECTOR, userName))) {
+    if (!isElementOnPage(String.format(USER_SELECTOR, userName))) {
       PageObjectLogging.log(
           "VerifyUserJoinsChat",
           "User: " + userName + " not visible on chat's guests list",

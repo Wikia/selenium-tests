@@ -1130,7 +1130,7 @@ public class WikiBasePageObject extends BasePageObject {
    */
   public boolean refreshUntilElementOnPage(String cssSelector, int limit) {
     for (int refreshCount = 0; refreshCount < limit; refreshCount++) {
-      if (checkIfElementOnPage(cssSelector)) {
+      if (isElementOnPage(cssSelector)) {
         return true;
       }
       refreshPage();

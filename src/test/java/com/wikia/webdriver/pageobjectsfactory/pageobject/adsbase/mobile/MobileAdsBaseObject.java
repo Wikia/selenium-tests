@@ -61,12 +61,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
       extractGptInfo(presentLeaderboardSelector);
 
-      if (checkIfElementOnPage(CELTRA_MASK_SELECTOR)) {
+      if (isElementOnPage(CELTRA_MASK_SELECTOR)) {
         PageObjectLogging.logWarning("Special ad", "Celtra");
         return;
       }
 
-      if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
+      if (isElementOnPage(FLITE_MASK_SELECTOR)) {
         PageObjectLogging.logWarning("Special ad", "Flite");
         return;
       }
@@ -88,7 +88,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   public void verifyNoSlotPresent(String slotName) {
-    if (checkIfElementOnPage("#" + slotName)) {
+    if (isElementOnPage("#" + slotName)) {
       throw new NoSuchElementException("Slot is added to the page");
     }
     PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
@@ -123,7 +123,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
    */
   public void mercuryNavigateToAnArticle(String articleLinkName) {
     String articleLinkSelector = String.format("a[href^='/wiki/%s']", articleLinkName);
-    if (checkIfElementOnPage(articleLinkSelector)) {
+    if (isElementOnPage(articleLinkSelector)) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
       PageObjectLogging.log(
@@ -148,7 +148,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   private void removeElementIfPresent(String cssSelector) {
-    if (checkIfElementOnPage(cssSelector)) {
+    if (isElementOnPage(cssSelector)) {
       PageObjectLogging.log("Removing element", cssSelector, true);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
       JavascriptExecutor js = (JavascriptExecutor) driver;
