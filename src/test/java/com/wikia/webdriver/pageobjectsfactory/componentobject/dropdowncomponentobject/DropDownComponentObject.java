@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponent
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
     super(driver);
   }
 
-  @FindBy(css = "#AccountNavigation")
+  private static final String LOGIN_DROPDOWN_TRIGGER_CSS = "#AccountNavigation";
+  @FindBy(css = LOGIN_DROPDOWN_TRIGGER_CSS)
   private WebElement loginDropdownTrigger;
   @FindBy(css = "#UserLoginDropdown input[name='username']")
   private WebElement formUsernameInput;
@@ -60,7 +62,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
       new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
-          if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
+          if (!driver.findElement(By.cssSelector(LOGIN_DROPDOWN_TRIGGER_CSS)).getAttribute("class")
+              .contains("active")) {
             ((JavascriptExecutor) driver)
                 .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
             return false;
