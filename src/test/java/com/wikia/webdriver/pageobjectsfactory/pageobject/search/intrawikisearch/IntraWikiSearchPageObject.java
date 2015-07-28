@@ -36,7 +36,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     private WebElement filterVideos;
     @FindBy(css = "[name=rank]")
     private WebElement sortingOptions;
-    @FindBy(css = ".Results article h1 .result-link")
+    private static final String TITLES_CSS = ".Results article h1 .result-link";
+    @FindBy(css = TITLES_CSS)
     private List<WebElement> titles;
     @FindBy(css = ".Results article img")
     private List<WebElement> images;
@@ -158,11 +159,14 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
             scrollAndClick(paginationPages.get(paginationPages.size() - 1));
         }
         while (paginationPages.size() > 6);
+      waitForElementByCss(PAGINATION_PAGES_CSS);
         Assertion.assertEquals(paginationPages.size(), 6);
+      waitForElementByCss(TITLES_CSS);
         Assertion.assertTrue(titles.size() <= 25);
     }
 
     public void verifyFirstArticleNameTheSame(String firstResult) {
+      waitForElementByCss(TITLES_CSS);
         Assertion.assertEquals(
                 titles.get(0).getText().toLowerCase(), firstResult.toLowerCase()
         );
@@ -173,6 +177,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyFirstArticleNameNotTheSame(String firstResult) {
+      waitForElementByCss(TITLES_CSS);
         Assertion.assertNotEquals(titles.get(0).getText(), firstResult);
     }
 
