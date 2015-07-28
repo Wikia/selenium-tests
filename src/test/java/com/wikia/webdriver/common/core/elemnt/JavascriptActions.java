@@ -36,7 +36,7 @@ public class JavascriptActions {
   public Object execute(String script) {
     // TODO: Get rid of this wait
     try {
-      Object value = js.executeScript(script);
+      Object value = js.executeScript("return " + script);
       Thread.sleep(1000);
       return value;
     } catch (InterruptedException e) {
