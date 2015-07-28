@@ -1,10 +1,17 @@
 package com.wikia.webdriver.common.core.elemnt;
 
+import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.apache.maven.wagon.WagonException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -45,12 +52,13 @@ public class Wait {
    * Checks if the element is visible on browser <p/> * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
-      return wait.until(ExpectedConditions.visibilityOf(element));
-    } finally {
-      restoreDeaultImplicitWait();
+      element.getTagName();
+    }catch (WebDriverException e){
+      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
+    return forElementVisible(SelectorStack.read());
   }
 
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {

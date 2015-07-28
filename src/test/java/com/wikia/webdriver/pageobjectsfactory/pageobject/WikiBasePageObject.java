@@ -230,12 +230,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialUnusedFilesPageObject(driver);
   }
 
-  public VideoHomePageObject openVideoHomePageObject(String wikiURL) {
-    getUrl(wikiURL);
-    PageObjectLogging.log("openVideoHomePageObject", wikiURL + " opened", true);
-    return new VideoHomePageObject(driver);
-  }
-
   public FeaturedVideoAdminPageObject openVideoPageAdminObject(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_VIDEO_PAGE_ADMIN);
     PageObjectLogging.log("openVideoPageAdminObject", wikiURL + " opened", true);
@@ -892,7 +886,7 @@ public class WikiBasePageObject extends BasePageObject {
     CloseableHttpClient httpClient = HttpClients.createDefault();
 
     HttpPost httpPost = new HttpPost(heliosBaseUrl);
-    List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+    List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
     nvps.add(new BasicNameValuePair("client_id", client_id));

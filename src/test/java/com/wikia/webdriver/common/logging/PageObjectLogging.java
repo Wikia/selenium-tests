@@ -33,6 +33,7 @@ import org.testng.SkipException;
 
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -137,7 +138,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+                                               + "</td><td>" + imageAsBase64
+                                               + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   private static void logJSError(WebDriver driver) {
@@ -187,6 +189,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     lastFindBy = by;
+    SelectorStack.write(by);
   }
 
   @Override

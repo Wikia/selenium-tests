@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -30,6 +32,12 @@ public class VideoHomePageObject extends WikiBasePageObject {
   public VideoHomePageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public VideoHomePageObject open(){
+    getUrl(new UrlBuilder().getUrlForWiki(Configuration.getWikiName()));
+
+    return this;
   }
 
   public void verifyFeaturedSliderInitialized() {
