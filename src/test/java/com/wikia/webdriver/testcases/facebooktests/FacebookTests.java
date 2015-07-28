@@ -53,8 +53,7 @@ public class FacebookTests extends NewTestTemplate {
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
     fbModal.createAccountNoEmail(email, emailPassword, userName, password);
-    signUp.verifyUserLoggedIn(userName);
-
+    
     AlmostTherePageObject almostThere = new AlmostTherePageObject(driver);
     almostThere.confirmAccountAndLogin(email, emailPassword, userName, password, wikiURL);
     almostThere.logOut(wikiURL);
