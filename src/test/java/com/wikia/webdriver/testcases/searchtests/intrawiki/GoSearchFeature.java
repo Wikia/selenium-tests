@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -21,6 +22,9 @@ import javax.jws.soap.SOAPBinding;
 public class GoSearchFeature extends IntraWiki {
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "AnonFromSuggestion"})
+    @RelatedIssue(issueID = "MAIN-5045", comment = "please Type 'GON' in search, arrow down to "
+                                                   + "Gonzo article and enter. If you got to "
+                                                   + "Gonzo article the test passed.")
     public void AnonFromSuggestion() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage(testedWiki);

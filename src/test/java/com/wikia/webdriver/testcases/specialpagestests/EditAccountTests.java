@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -55,6 +56,8 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(groups = {"EditAccountTest", "EditAccountTest_001"},
       dependsOnMethods = "EditAccount_003_reopenAccount")
+  @RelatedIssue(issueID = "MAIN-5043", comment = "If test fails at loginAndVerify, check screenshot."
+                                                 + " If user is logged in the test passed")
   public void EditAccount_004_verifyAccountReopened() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOnWiki(wikiURL);
