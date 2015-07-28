@@ -25,16 +25,21 @@ public class TestAdSkinPresence extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skin",
-      groups = {"TestSkinPresence_GeoEdgeFree"}
+      groups = "TestSkinPresence_GeoEdgeFree"
   )
-  public void TestSkinPresence_GeoEdgeFree(String wikiName, String article,
-                                           Dimension windowResolution,
-                                           String expectedAdSkinLeftPath,
-                                           String expectedAdSkinRightPath) throws IOException {
+  public void TestSkinPresence(String wikiName, String article,
+                               Dimension windowResolution,
+                               String expectedAdSkinLeftPath,
+                               String expectedAdSkinRightPath,
+                               String backgroundColor,
+                               String middleColor) throws IOException {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(windowResolution.width), true);
-    new AdsBaseObject(driver, testedPage, windowResolution).checkSkin(expectedAdSkinLeftPath,
-                                                                      expectedAdSkinRightPath);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, windowResolution);
+    adsBaseObject.checkSkin(expectedAdSkinLeftPath,
+                            expectedAdSkinRightPath,
+                            backgroundColor,
+                            middleColor);
   }
 
 }

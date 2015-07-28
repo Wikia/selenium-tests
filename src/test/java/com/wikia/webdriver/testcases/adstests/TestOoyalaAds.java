@@ -6,7 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Dmytro Rets
