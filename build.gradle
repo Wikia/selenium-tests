@@ -252,7 +252,7 @@ test {
 dependencies {
     def webdriverVersion = '2.45.0'
     testCompile "junit:junit:4.11"
-    testCompile 'org.apache.httpcomponents:httpcore:4.3.3'
+    testCompile 'org.apache.httpcomponents:httpcore:4.4.1'
     testCompile 'net.kennychua:phantomjs-qunit-runner:1.0.14'
     testCompile 'org.eclipse.jetty:jetty-server:8.1.15.v20140411'
     testCompile 'org.eclipse.jetty:jetty-servlet:8.1.15.v20140411'
