@@ -27,7 +27,7 @@ public class AdsKruxObject extends AdsBaseObject {
       SLOT_SELECTOR =
       "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
-  private static final int MAX_PAGE_REFRESHES = 5;
+  private static final int MAX_PAGE_REFRESHES = 3;
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
   private static final String ADD_USER_URL =
       String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
@@ -110,7 +110,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public void initKruxUser(String wikiName) {
     int i = 0;
-    while (i < MAX_PAGE_REFRESHES) {
+    while (i <= MAX_PAGE_REFRESHES) {
       getUrl(urlBuilder.getUrlForWiki(wikiName) + URLsContent.SPECIAL_RANDOM, false);
       waitForPageLoaded();
       try {
@@ -125,7 +125,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public void addSegmentToCurrentUser(String segmentId, String wikiName) {
     int i = 0;
-    while (i < MAX_PAGE_REFRESHES) {
+    while (i <= MAX_PAGE_REFRESHES) {
       getUrl(ADD_USER_URL + kruxSegs.get(segmentId), false);
       waitForPageLoaded();
       Assertion.assertTrue(driver.getPageSource().contains(segmentId));
@@ -133,7 +133,7 @@ public class AdsKruxObject extends AdsBaseObject {
       refreshPage();
       waitForPageLoaded();
       try {
-        new WebDriverWait(driver, 5).until(CommonExpectedConditions.scriptReturnsTrue(
+        new WebDriverWait(driver, 120).until(CommonExpectedConditions.scriptReturnsTrue(
             "return localStorage.kxsegs.includes(arguments[0]);", segmentId));
         break;
       } catch (org.openqa.selenium.TimeoutException ignore) {
