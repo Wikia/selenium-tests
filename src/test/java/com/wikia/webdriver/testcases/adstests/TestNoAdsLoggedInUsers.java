@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -41,7 +41,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
     base.logInCookie(credentials.userName, credentials.password, testedWiki);
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"TestNoAdsForUsers_AU"}
   )
@@ -51,7 +51,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @GeoEdgeProxy(country = "VE")
+  @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
       groups = {"TestNoAdsForUsers_VE"}
   )

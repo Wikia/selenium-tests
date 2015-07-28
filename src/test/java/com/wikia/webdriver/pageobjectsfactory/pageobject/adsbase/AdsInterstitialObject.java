@@ -16,22 +16,28 @@ import java.util.regex.Pattern;
  */
 public class AdsInterstitialObject extends AdsBaseObject {
 
-  @FindBy(css = "iframe[class=wikia-ad-iframe]")
-  private WebElement interstitialAd;
+  @FindBy(css = "iframe.wikia-ad-iframe")
+  private WebElement interstitialAdIframe;
+
+  @FindBy(css = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div")
+  private WebElement interstitialAdWrapper;
 
   public AdsInterstitialObject(WebDriver driver, String testedPage,
                                Dimension resolution) {
     super(driver, testedPage, resolution);
   }
 
-  public Double getScaledAdRatio() {
-    String scaledAdRatio = interstitialAd.getCssValue("transform");
+  public void verifyAdRatio() {
+    String scaledAdRatio = interstitialAdIframe.getCssValue("transform");
     Pattern pattern = Pattern.compile("matrix\\((.*), 0, 0, (.*), 0, 0\\)");
     Matcher matcher = pattern.matcher(scaledAdRatio);
     if (!matcher.find()) {
-      return 0d;
+      throw new AssertionError("Ad is not scaled");
     }
     Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
-    return Double.parseDouble(matcher.group(1));
+  }
+
+  public void verifySize(Dimension size) {
+    Assertion.assertEquals(interstitialAdWrapper.getSize(), size);
   }
 }

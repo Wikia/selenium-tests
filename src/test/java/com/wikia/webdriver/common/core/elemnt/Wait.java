@@ -1,21 +1,17 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.gargoylesoftware.htmlunit.html.ElementFactory;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
-import org.apache.maven.wagon.WagonException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -49,13 +45,15 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param element The element to be checked
+   * Checks if the element is visible on browser
+   * <p/>
+   * * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       element.getTagName();
-    }catch (WebDriverException e){
+    } catch (WebDriverException e) {
       PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
     return forElementVisible(SelectorStack.read());
@@ -64,8 +62,8 @@ public class Wait {
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling)
-          .until(ExpectedConditions.visibilityOf(element));
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
+          .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }

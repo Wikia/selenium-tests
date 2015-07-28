@@ -174,6 +174,7 @@ public class BasePageObject {
 
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
+    waitForElementClickableByElement(element, 5);
     element.click();
   }
 
@@ -185,8 +186,11 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));", element);
+      js.executeScript(
+          "var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 100));",
+          element
+      );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -351,6 +355,11 @@ public class BasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
+    new WebDriverWait(driver, newTimeOut).until(
+        CommonExpectedConditions.elementToBeClickable(element));
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {

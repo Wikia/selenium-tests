@@ -57,26 +57,25 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String LEADERBOARD_GPT_SELECTOR = "div[id*='gpt/TOP_LEADERBOARD']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
-  private static final String MERCURY_LOADING_OVERLAY_SELECTOR = ".loading-overlay";
+
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
+  protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   protected WebElement presentMedrec;
+  protected String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
+
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   protected WebElement incontentBoxad;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
-  protected String presentLeaderboardName;
-  protected String presentLeaderboardSelector;
-  protected String presentMedrecName;
-  // Elements
-  protected String presentMedrecSelector;
+
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
   public AdsBaseObject(WebDriver driver, String page) {
     super(driver);
     getUrl(page, true);
-    setSlots();
   }
 
   public AdsBaseObject(
@@ -87,38 +86,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     networkTrafficInterceptor.startIntercepting(page);
     getUrl(page, true);
     this.networkTrafficInterceptor = networkTrafficInterceptor;
-    setSlots();
   }
 
   public AdsBaseObject(WebDriver driver) {
     super(driver);
-    setSlots();
   }
 
   public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
     super(driver);
     driver.manage().window().setSize(resolution);
     getUrl(testedPage, true);
-    setSlots();
-  }
-
-  private void setSlots() {
-    if (checkIfElementOnPage(presentLeaderboard)) {
-      presentLeaderboardName = presentLeaderboard.getAttribute("id");
-      presentLeaderboardSelector = "#" + presentLeaderboardName;
-    } else {
-      presentLeaderboardName = null;
-      presentLeaderboardSelector = null;
-      presentLeaderboard = null;
-    }
-    if (checkIfElementOnPage(presentMedrec)) {
-      presentMedrecName = presentMedrec.getAttribute("id");
-      presentMedrecSelector = "#" + presentMedrecName;
-    } else {
-      presentMedrec = null;
-      presentMedrecName = null;
-      presentMedrecSelector = null;
-    }
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
@@ -446,7 +423,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String getGptParams(String slotName, String attr) {
     WebElement
         adsDiv =
-        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "']"));
+        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
     return adsDiv.getAttribute(attr);
   }
 

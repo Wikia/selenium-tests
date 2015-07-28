@@ -55,6 +55,9 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_002", "Search", "Search3"})
+  @RelatedIssue(issueID = "MAIN-5044", comment = "make sure there is a pagination, "
+                                                 + "built of 6 or 11 elements depending or what "
+                                                 + "pagination link you enter")
   public void pagination() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);

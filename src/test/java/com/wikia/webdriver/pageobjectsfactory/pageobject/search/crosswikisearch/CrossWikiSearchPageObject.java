@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -71,22 +72,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchFor", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
-    wait.forElementVisible(searchInput);
+    searchInput.sendKeys(term + Keys.ENTER);
     PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
-    return new CrossWikiSearchPageObject(driver);
-  }
-
-  public CrossWikiSearchPageObject searchForEnter(String term) {
-    searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchForEnter", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
-    wait.forElementVisible(searchInput);
-    PageObjectLogging.log("searchForEnter", "Search button entered", true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyFirstResultTitle(String wikiName) {
@@ -167,14 +155,14 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     scrollAndClick(paginatorPrev);
     PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
     PageObjectLogging.log("nextPage", "Moving to next page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyResultsNumber(int number) {
