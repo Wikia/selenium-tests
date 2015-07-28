@@ -51,6 +51,15 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement h3Elements;
   @FindBy(css = ".portable-infobox-item-value .newcategory")
   private WebElement categoryLink;
+  @FindBy(css = ".portable-infobox-item-label")
+  private WebElement itemLabel;
+  @FindBy(css = ".portable-infobox-item-value")
+  private WebElement itemValue;
+  @FindBy(css = "h3.portable-infobox-item-label.portable-infobox-secondary-font")
+  private WebElement horizontalItemLabel;
+  @FindBy(css = "div.portable-infobox-item-value")
+  private WebElement horizontalItemValue;
+
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -118,6 +127,22 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoInternalLink.getAttribute("href");
   }
 
+  public WebElement getItemLabel() {
+    return itemLabel;
+  }
+
+  public WebElement getItemValue() {
+    return itemValue;
+  }
+
+  public WebElement getHorizontalItemLabel() {
+    return horizontalItemLabel;
+  }
+
+  public WebElement getHorizontalItemValue() {
+    return horizontalItemValue;
+  }
+
   public void clickExternalLink() {
     waitForElementByElement(pInfoExternalLink);
     pInfoExternalLink.click();
@@ -182,4 +207,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     //
     //
   }
+
+  public void verifyFontSize(WebElement firstElement, WebElement secondElement)
+  {
+    String firstFontSize = firstElement.getAttribute("font-size");
+    String secondFontSize = secondElement.getAttribute("font-size");
+    Assertion.assertEquals(firstElement, secondElement);
+  }
+
 }

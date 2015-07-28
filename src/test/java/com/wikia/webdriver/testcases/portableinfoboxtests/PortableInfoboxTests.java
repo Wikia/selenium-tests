@@ -20,6 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.S
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.Locale;
@@ -41,6 +42,7 @@ import java.util.Locale;
  * TC09: Verify infobox color has changed after changing colors in wiki Theme Designer
  * TC12: Verify if ordered and unordered lists are parsed correctly after adding them
  * TC13: Verify category links inside infoboxes
+ * TC14: Verify if horizontal group font size matches other elements font
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -178,6 +180,19 @@ public class PortableInfoboxTests extends NewTestTemplate {
     String categoryName = category.getCategoryName();
     category.verifyCategoryPageTitle(categoryName);
   }
+
+ @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
+  public void verifyHorizontalGroupFontSize() {
+   ArticlePageObject article = new ArticlePageObject(driver);
+   article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+   PortableInfoboxPageObject info = article.getInfoboxPage();
+   WebElement horizontalItemLabel = info.getHorizontalItemLabel();
+   WebElement itemLabel = info.getItemLabel();
+   info.verifyFontSize(horizontalItemLabel, itemLabel);
+   WebElement horizontalItemValue = info.getHorizontalItemValue();
+   WebElement itemValue = info.getItemValue();
+   info.verifyFontSize(horizontalItemValue, itemValue);
+ }
 
 }
 
