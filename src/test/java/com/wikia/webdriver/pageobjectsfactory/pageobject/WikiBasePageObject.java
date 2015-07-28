@@ -109,8 +109,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String
       LOGGED_IN_USER_SELECTOR_VENUS = ".AccountNavigation a[href*=%userName%]";
-  @FindBy(css = "body")
-  protected WebElement body;
+  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = ".AccountNavigation a[href*=%userName%]";
+
   @FindBy(css = ".UserLoginModal input[type='submit']")
   protected WebElement modalLoginSubmit;
   @FindBy(css = ".UserLoginModal input[name='password']")
@@ -119,8 +119,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement wikiFirstHeader;
   @FindBy(css = ".UserLoginModal input[name='username']")
   protected WebElement modalUserNameInput;
-  @FindBy(css = "#AccountNavigation > li > a > .avatar")
-  protected WebElement userProfileAvatar;
   @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#AccountNavigation .subnav")
@@ -155,10 +153,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected List<WebElement> sectionEditButtons;
   @FindBy(css = "a.new[href$='redlink=1']")
   protected List<WebElement> redLinks;
-  @FindBy(css = "body.rte_wysiwyg")
-  protected WebElement rteMode;
-  @FindBy(css = "body.rte_source")
-  protected WebElement srcInRteMode;
   @FindBy(css = "body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
   protected WebElement srcOnlyMode;
   @FindBy(css = ".oo-ui-widget-enabled.ve-ui-wikiaFocusWidget")
@@ -178,7 +172,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  protected String navigationAvatarSelector = ".avatar-container.logged-avatar img[src*='/%imageName%']";
   @FindBy(css = "input#wpConfirmB")
   private WebElement deleteConfirmationButton;
   @FindBy(css = ".banner-notification div.msg a")
@@ -623,22 +616,12 @@ public class WikiBasePageObject extends BasePageObject {
     return new LicensedVideoSwapPageObject(driver);
   }
 
-  @Deprecated
-  public void verifyAvatarPresent() {
-    wait.forElementVisible(userProfileAvatar);
-    PageObjectLogging.log(
-        "verifyAvatarPresent",
-        "avatar is visible",
-        true
-    );
-  }
-
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(new ExpectedCondition<Boolean>() {
         @Override public Boolean apply(WebDriver driver) {
-          if (body.getAttribute("class").contains("skin-monobook")) {
+          if (driver.findElement(By.tagName("body")).getAttribute("class").contains("skin-monobook")) {
             return driver.findElements(
                 By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(
                     " ", "_")))).size()>0;// only for verification
@@ -901,17 +884,6 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("logOut", "user is logged out", true, driver);
   }
 
-  public void logOut(String wikiURL, String articleName) {
-    try {
-      getUrl(wikiURL + URLsContent.LOGOUT_RETURNTO + articleName);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut",
-                            "page loads for more than 30 seconds", true);
-    }
-    wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out and returned to article", true, driver);
-  }
-
   public String logInCookie(String userName, String password, String wikiURL) {
     String client_id = HeliosConfig.getClientId();
     String client_secret = HeliosConfig.getClientSecret();
@@ -1058,41 +1030,6 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
   }
 
-  public void verifyWgVariableValuesTheSame(Object[] value1, Object[] value2) {
-    Arrays.sort(value1);
-    Arrays.sort(value2);
-
-    if (Arrays.equals(value1, value2)) {
-      PageObjectLogging.log(
-          "VariablesAreTheSame",
-          "Variable on wiki and on community are the same",
-          true,
-          driver
-      );
-    } else {
-      throw new WebDriverException("Values on community and on wiki are different");
-    }
-  }
-
-  public Object[] getWgVariableKeysFromPage(String url, String variableName) {
-    getUrl(url);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    Map<String, Integer> variableValueFromPage = (Map<String, Integer>) js.executeScript(
-        "return eval(arguments[0])", variableName
-    );
-    return variableValueFromPage.keySet().toArray();
-  }
-
-  protected Object[] extractKeysFromWgVariable(String variableValue) {
-    List<String> keysFromDefaultList = new ArrayList<>();
-    Pattern pattern = Pattern.compile("\'.*\'");
-    Matcher matcher = pattern.matcher(variableValue);
-    while (matcher.find()) {
-      keysFromDefaultList.add(matcher.group().replaceAll("'", ""));
-    }
-    return keysFromDefaultList.toArray();
-  }
-
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(
         urlBuilder.appendQueryStringToURL(
@@ -1103,39 +1040,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditorPageObject(driver);
   }
 
-  public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
-    String randomArticle = wikiURL + URLsContent.WIKI_DIR + getNameForArticle();
-    String randomArticleWithVETrigger = urlBuilder.appendQueryStringToURL(
-        randomArticle, URLsContent.VEACTION_EDIT
-    );
-    String randomArticleWithVEAndRedLink = urlBuilder.appendQueryStringToURL(
-        randomArticleWithVETrigger, URLsContent.REDLINK
-    );
-    getUrl(randomArticleWithVEAndRedLink);
-    return new VisualEditorPageObject(driver);
-  }
-
   public void addVideoViaAjax(String videoURL) {
     jsActions.execute(
         "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
             "data: {url: '" + videoURL + "'}," +
             "type: 'POST' } );");
-  }
-
-  /**
-   * Refresh the page limit number of times until element found by cssSelector appears. Return true
-   * of false depending on success of finding element.
-   *
-   * @return bool
-   */
-  public boolean refreshUntilElementOnPage(String cssSelector, int limit) {
-    for (int refreshCount = 0; refreshCount < limit; refreshCount++) {
-      if (isElementOnPage(cssSelector)) {
-        return true;
-      }
-      refreshPage();
-    }
-    return false;
   }
 
   /**
@@ -1170,19 +1079,6 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementNotVisibleByElement(focusMode);
     waitForElementNotVisibleByElement(veToolMenu);
     PageObjectLogging.log("verifyVEPublishComplete", "Publish is done", true, driver);
-  }
-
-  public void disableOptimizely() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("window['optimizely'].push(['disable']);");
-  }
-
-  public VisualEditorPageObject launchVisualEditorWithMainEdit(String articleName, String wikiURL) {
-    ArticlePageObject article = openArticleByName(wikiURL, articleName);
-    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    return new VisualEditorPageObject(driver);
   }
 
   public WikiHistoryPageObject openArticleHistoryPage() {
@@ -1327,10 +1223,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
-  }
-
-  public enum StyleVideo {
-    CAPTION, NOCAPTION;
   }
 
   public enum HubName {
