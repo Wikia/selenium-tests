@@ -123,7 +123,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   public void verifyClosedAccountMessage() {
-    waitForElementByElement(messagePlaceholder);
+//    waitForElementByElement(messagePlaceholder);
+    waitForElementByCss(".UserLogin .error-msg");
     Assertion.assertEquals(
             messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE
     );
