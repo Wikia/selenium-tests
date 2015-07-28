@@ -51,6 +51,7 @@ public class EditAccount extends BasePageObject {
 
   public void closeAccount(String reason) {
     scrollAndClick(closeAccountButton);
+    wait.forElementVisible(closeResonField);
     closeResonField.sendKeys(reason);
     closeResonField.submit();
     PageObjectLogging.log("closeAccount", "account closed", true);
@@ -70,6 +71,7 @@ public class EditAccount extends BasePageObject {
   }
 
   public void verifyAccountReopenedMessage() {
+    wait.forElementVisible(statusMessage);
     waitForTextToBePresentInElementByElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
     PageObjectLogging.log("verifyAccountReopenedMessage", "verified account reopened", true);
   }
