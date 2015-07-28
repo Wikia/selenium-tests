@@ -77,7 +77,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @RelatedIssue(issueID = "MAIN-4984", comment = "Change your password functionality Stops CNW flow."
+  @RelatedIssue(issueID = "SOC-1088", comment = "Change your password functionality Stops CNW flow."
                                                  + " Not possible to test manually.")
   @Test(
       groups = {"ForgottenPassword_003", "ForgottenPassword"}
