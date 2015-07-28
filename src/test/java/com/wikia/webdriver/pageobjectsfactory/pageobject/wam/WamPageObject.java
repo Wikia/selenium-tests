@@ -79,6 +79,12 @@ public class WamPageObject extends BasePageObject {
     }
   }
 
+  public WamPageObject isLoaded(){
+    waitForValueToBePresentInElementsAttributeByCss("#CORP_TOP_LEADERBOARD", "class", "hidden");
+
+    return this;
+  }
+
   /**
    * @desc Checks if there is a table row different than head one in WAM index table
    */
@@ -169,6 +175,7 @@ public class WamPageObject extends BasePageObject {
   public void selectTab(WamTab tab) {
     scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
         tab.getId()))));
+    isLoaded();
     verifyTabSelected(tab);
   }
 
@@ -214,6 +221,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void verifyDateInDatePicker(String date) {
+  isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
     Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
   }
