@@ -228,8 +228,8 @@ public class NewDriverProvider {
           .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury"));
     }
 
-    if (StringUtils.isNotBlank(System.getProperty("chromeSwitches"))) {
-      chromeOptions.addArguments(System.getProperty("chromeSwitches"));
+    if ("true".equals(Configuration.getDisableFlash())) {
+      chromeOptions.addArguments("disable-bundled-ppapi-flash");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
