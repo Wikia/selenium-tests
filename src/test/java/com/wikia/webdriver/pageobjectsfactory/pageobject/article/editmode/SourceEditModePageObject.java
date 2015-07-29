@@ -73,6 +73,8 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
+  @FindBy(css = "textarea#wpTextbox1")
+  private WebElement textArea;
 
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
@@ -207,6 +209,13 @@ public class SourceEditModePageObject extends EditMode {
   public void addContent(String content) {
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
+  }
+
+  public String copyContent()
+  {
+    waitForElementByElement(textArea);
+    String content = textArea.getText();
+    return content;
   }
 
   public String buildTablePropertiesContent(

@@ -16,6 +16,8 @@ public class TemplatePageObject extends WikiBasePageObject{
 
     @FindBy (css=".wikia-button #edit")
     private WebElement createButton;
+    @FindBy(css = "#ca-edit")
+    protected WebElement editUsingClassicEditor;
 
     public TemplatePageObject(WebDriver driver) {
         super(driver);
@@ -24,6 +26,11 @@ public class TemplatePageObject extends WikiBasePageObject{
     public SourceEditModePageObject clickCreate() {
         waitForElementByElement(createButton);
         createButton.click();
+        return new SourceEditModePageObject(driver);
+    }
+
+    public SourceEditModePageObject editArticleInSrcUsingDropdown() {
+        actionsClick(editUsingClassicEditor);
         return new SourceEditModePageObject(driver);
     }
 

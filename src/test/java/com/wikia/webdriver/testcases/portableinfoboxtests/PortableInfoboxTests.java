@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileCategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
@@ -43,6 +44,7 @@ import java.util.Locale;
  * TC12: Verify if ordered and unordered lists are parsed correctly after adding them
  * TC13: Verify category links inside infoboxes
  * TC14: Verify if horizontal group font size matches other elements font
+ * TC15: Copy syntax from template page to article and verify presence of all new information provided
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -194,5 +196,26 @@ public class PortableInfoboxTests extends NewTestTemplate {
    info.verifyFontSize(horizontalItemValue, itemValue);
  }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_015"})
+  public void verifyCopiedTemplateSyntaxInArticlePresence() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userName10,
+            Configuration.getCredentials().password10);
+    TemplatePageObject template = article.openTemplatePage(wikiURL,
+            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
+    String templateSyntax = editor.copyContent();
+    LoginPage newLoginPage = new LoginPage(driver).get();
+    newLoginPage.logUserIn(Configuration.getCredentials().userName10,
+            Configuration.getCredentials().password10);
+    ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
+    SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
+    newEditor.addContent(templateSyntax);
+    newEditor.submitArticle();
+    PortableInfoboxPageObject info = randomArticle.getInfoboxPage();
+    info.verifyImagePresence();
+    info.verifyInfoboxTitlePresence();
+  }
 }
 
