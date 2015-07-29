@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Rodriuki on 11/06/15.
  * Created by nikodamn on 20/07/15
  */
-public class PortableInfoboxPageObject extends WikiBasePageObject {
+public class PortableInboxPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".portable-infobox-image-wrapper")
   private WebElement pInfoImage;
@@ -53,7 +53,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
 
-  public PortableInfoboxPageObject(WebDriver driver) {
+  public PortableInboxPageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
@@ -176,7 +176,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void verifyCategoryInArticlePage(String catName) {
-    //
-    //
+    // Same as previous case, waiting on Ludwik
   }
 }

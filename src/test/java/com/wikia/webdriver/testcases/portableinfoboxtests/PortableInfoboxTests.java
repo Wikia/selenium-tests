@@ -3,15 +3,16 @@ package com.wikia.webdriver.testcases.portableinfoboxtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+
 import org.testng.annotations.Test;
 
 /**
@@ -33,13 +34,11 @@ import org.testng.annotations.Test;
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
-
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
   public void verifyElementsVisibility() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     Assertion.assertTrue(info.getBoldElements().size() > 0);
     Assertion.assertTrue(info.getItalicElements().size() > 0);
     Assertion.assertTrue(info.getHeaderElements().size() > 0);
@@ -54,7 +53,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     //Red link
     info.clickRedLink();
     info.verifyCreateNewArticleModal();
@@ -79,11 +78,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    String articleName = info.getNameForArticle();
+    PortableInboxPageObject info = article.getInfoboxPage();
+    String articleName = article.getArticleName();
     SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
     links.clickPageInputField();
-    links.typeInfoboxImageName("FILE:" + PageContent.FILE_IMAGE_NAME);
+    links.typeInfoboxImageName(PageContent.FILE_IMAGE_NAME);
     links.clickShowbutton();
     links.verifyInfoboxArticleInList(articleName);
   }
@@ -92,9 +91,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyCategoriesInTemplateInvocation() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     String catName = src.getRandomDigits(9);
+    WikiTextShortCutsComponentObject shortcuts = src.clickMore();
+    src = shortcuts.clickCategory();
     src.addCategoryToSourceCode(catName);
     TemplatePageObject temp = src.clickPublishButtonInTemplateNamespace();
     temp.verifyCategoryInTemplatePage(catName);
@@ -106,7 +107,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyLightboxVisibilityAfterClickingImage() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     info.clickImage();
     info.verifyLightboxPresence();
   }
@@ -115,7 +116,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyVisibilityOfTabberAndItsImages() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     info.verifyTabberPresence();
     info.verifyTabberImagePresence();
   }
@@ -124,7 +125,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyInfoboxLayoutChange() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
     String textThemeDesigner = toolbar.getThemeDesignerText();
     toolbar.clickOnTool(textThemeDesigner);
@@ -149,7 +150,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject editor = template.clickCreate();
     editor.addContent(PortableInfobox.INFOBOX_TEMPLATE);
     editor.clickPublishButton();
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInboxPageObject info = article.getInfoboxPage();
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     editor = article.editArticleInSrcUsingDropdown();
     editor.addContent(PortableInfobox.INFOBOX_INVOCATION);

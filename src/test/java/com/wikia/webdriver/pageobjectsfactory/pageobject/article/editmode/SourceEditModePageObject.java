@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
@@ -73,7 +74,6 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
 
@@ -189,10 +189,11 @@ public class SourceEditModePageObject extends EditMode {
     return new VetAddVideoComponentObject(driver);
   }
 
-  public void clickMore() {
+  public WikiTextShortCutsComponentObject clickMore() {
     focusTextArea();
     more.click();
     PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
+    return new WikiTextShortCutsComponentObject(driver);
   }
 
   public void clearSource() {
@@ -379,7 +380,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void addCategoryToSourceCode(String catName) {
-
+    sourceModeTextArea.sendKeys(catName);
   }
 
   public TemplatePageObject clickPublishButtonInTemplateNamespace() {
