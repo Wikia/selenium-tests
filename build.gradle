@@ -1,0 +1,285 @@
+apply plugin: 'java'
+
+group = 'com.wikia.qa'
+version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+apply from: rootProject.file('gradle/static_checks.gradle')
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+ext {
+    testSuite = 'src/test/java/com/wikia/webdriver/testsuites/testSuite.xml'
+}
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'org.ajoberstar:gradle-git:1.0.0'
+        classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
+    }
+}
+
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperties = System.getProperties()
+}
+
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
+import groovy.json.JsonSlurper
+import groovy.xml.XmlUtil
+import org.ajoberstar.grgit.Credentials
+import org.ajoberstar.grgit.Grgit
+
+task initConfig << {
+    def configPath = "./../config";
+
+    def dest = new File(configPath);
+
+    if (project.hasProperty("user") && project.hasProperty("pass")) {
+        println "User and pass set"
+        def cred = new Credentials(username: user, password: pass);
+
+        if (dest.isDirectory()) {
+            println "directory exists"
+            def repo = Grgit.
+                    open(dir: configPath, creds: new Credentials(username: user, password: pass))
+
+            println "Current Config branch: ${repo.getBranch().getCurrent().getName()}"
+            println "Pulling branch with rebase ..."
+            repo.pull(rebase: true)
+        } else {
+            println "No config directory in location: ${dest.getAbsolutePath()}"
+            println "Cloning configuration ..."
+            def grgit = Grgit.
+                    clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git',
+                          credentials: new Credentials(username: user, password: pass))
+        }
+    } else {
+        println "User and pass missing. "
+        println "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config"
+
+        if (dest.isDirectory()) {
+            println "directory exists"
+            def repo = Grgit.open(configPath)
+
+            println "Current Config branch: ${repo.getBranch().getCurrent().getName()}"
+            println "Can't pull cause of missing user and password ..."
+        } else {
+            println "No config directory in location: ${dest.getAbsolutePath()}"
+            throw new GradleException(
+                    "Can't download configuration without user and password \n (config is a private repository). \n " +
+                    "Please use -Puser=<your_usernam> -Ppass=<your_password> to download config")
+        }
+    }
+}
+
+task getSuite << {
+    def job = project.hasProperty("job") ? project.job : "wikia-test-matrix"
+
+    def jobName = job.split(":")[0]
+    def apiSuffix = "api/json?pretty=true"
+
+    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def reportPath = "/lastBuild/artifact/target/surefire-reports/testng-failed.xml"
+
+    def jsonSlurper = new JsonSlurper()
+    def parser = new XmlSlurper()
+    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+    def xml
+
+    if (project.failedOnly.equals('jenkinsDuty')) {
+        println "Switching to Jenkins Duty Mode"
+        jobName = "wikia-test-matrix-failed"
+        reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
+
+        try {
+            xml = parser.parse(
+                    "${JenkinsURL}view/Wikia-selenium-triggers/job/${jobName}${reportPath}")
+        } catch (all) {
+            throw new GradleException("Problem getting a failed suite")
+        }
+    } else {
+        def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
+
+        def selectedJob
+
+        jobsList.jobs.each {
+            if (jobName.equals(it.name)) {
+                selectedJob = it
+            }
+        }
+
+        if (!selectedJob) {
+            throw new GradleException("Can't find job named '${jobName}'")
+        }
+
+        def activeConfigs = jsonSlurper.
+                parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
+
+        if (activeConfigs) {
+            println "Matrix job detected"
+
+            def failedCOnfigurations = []
+
+            activeConfigs.each {
+                if (it.color == 'red') {
+                    failedCOnfigurations.add(it.url)
+                }
+            }
+            def failedSuites = []
+
+            failedCOnfigurations.each {
+                if (new URL("${it}${reportPath}").openConnection().responseCode != 200) {
+                    println "Failed ocnfiguration: ${it} is missing failed suite"
+                } else {
+                    failedSuites.add(parser.parse("${it}${reportPath}"))
+                }
+            }
+            println "Number of failed onfigurations: ${failedSuites.size()}"
+
+            if (failedSuites.size() > 0) {
+                def first = failedSuites[0]
+                def firstClasses = []
+
+                failedSuites.each {
+                    def myAwesomeSuite = it
+
+                    firstClasses = []
+                    first.test.classes.class.each {
+                        firstClasses.add(it.@name)
+                    }
+
+                    def nodesToAdd = it.'**'.findAll {
+                        node -> node.name() == 'class' && !firstClasses.contains(node.@name)
+                    }
+
+                    if (nodesToAdd.size() > 0) {
+                        first.'test'.classes.appendNode(nodesToAdd)
+                        first = parser.parseText(XmlUtil.serialize(first))
+                    }
+
+                    def present = it.'**'.findAll {
+                        node -> node.name() == 'class' && firstClasses.contains(node.@name)
+                    }
+
+                    present.each {
+                        def methodsPresent = first.'**'.findAll {
+                            node ->
+                                node.name() == 'include' &&
+                                node.parent().parent().@name == it.@name
+                        }
+
+                        def methodsPresentNames = []
+                        methodsPresent.each {
+                            methodsPresentNames.add(it.@name)
+                        }
+
+                        def methodsToAdd = myAwesomeSuite.'**'.findAll {
+                            node ->
+                                node.name() == 'include' &&
+                                !methodsPresentNames.contains(node.@name) &&
+                                node.parent().parent().@name == it.@name
+                        }
+
+                        def magicName = it.@name
+
+                        if (methodsToAdd.size() > 0) {
+                            first.'test'.classes.class.find { it.@name == magicName }.methods.
+                                    appendNode(methodsToAdd)
+                            first = parser.parseText(XmlUtil.serialize(first))
+                        }
+                    }
+                }
+                first.test.groups.replaceNode {}
+                xml = first
+            } else {
+                throw new GradleException("No failed suites to process")
+            }
+        } else {
+            println "Regular job detected"
+
+            try {
+                xml = parser.parse(
+                        "${JenkinsURL}view/Wikia-selenium-triggers/job/${jobName}${reportPath}")
+            } catch (all) {
+                throw new GradleException("Problem getting a failed suite")
+            }
+        }
+    }
+    new File("test.xml").withWriter { it << XmlUtil.serialize(xml) }
+}
+
+task runFailed {
+
+    if (project.hasProperty('failedOnly')) {
+        println "Gathering failed config"
+
+        getSuite.execute();
+
+        def f = new File('test.xml')
+
+        project.testSuite = f.getAbsolutePath().replace('\\', '/')
+    }
+}
+
+// docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
+test {
+    ignoreFailures=true;
+    ext.groups = project.hasProperty('groups') ? groups : System.getProperty('groups', '')
+
+    useTestNG {
+        suiteXmlFiles = testSuite.split(',').
+                collect({ path -> new File(path) })
+        includeGroups = groups.split(',')
+        useDefaultListeners = true
+        testLogging.showStandardStreams = true
+    }
+
+    outputs.upToDateWhen { false }
+}
+
+dependencies {
+    def webdriverVersion = '2.45.0'
+    testCompile "junit:junit:4.11"
+    testCompile 'org.apache.httpcomponents:httpcore:4.3.3'
+    testCompile 'net.kennychua:phantomjs-qunit-runner:1.0.14'
+    testCompile 'org.eclipse.jetty:jetty-server:8.1.15.v20140411'
+    testCompile 'org.eclipse.jetty:jetty-servlet:8.1.15.v20140411'
+    testCompile 'org.eclipse.jetty:jetty-server'
+    testCompile 'org.eclipse.jetty:jetty-servlet'
+    testCompile 'de.sstoehr:har-reader:1.0.0'
+    testCompile 'xmlunit:xmlunit:1.3'
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:selenium-server:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:selenium-java:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
+    testCompile 'org.testng:testng:6.9.4'
+    testCompile 'org.yaml:snakeyaml:1.8'
+    testCompile 'org.apache.httpcomponents:httpclient:4.3.6'
+    testCompile 'javax.mail:mail:1.4.4'
+    testCompile 'commons-io:commons-io:1.3.2'
+    testCompile 'commons-configuration:commons-configuration:1.6'
+    testCompile 'com.github.detro.ghostdriver:phantomjsdriver:1.0.3'
+    testCompile 'com.google.code.gson:gson:2.3.1'
+    testCompile 'javax.json:javax.json-api:1.0'
+    testCompile 'org.glassfish:javax.json:1.0.4'
+    testCompile 'org.json:json:20080701'
+    testCompile 'io.appium:java-client:2.1.0'
+    testCompile 'joda-time:joda-time:2.7'
+    testCompile 'com.jayway.jsonpath:json-path:1.2.0'
+    testCompile('biz.neustar:browsermob-proxy:2.0-beta-7') {
+        exclude group: 'org.eclipse.jetty'
+        exclude group: 'org.slf4j'
+    }
+}

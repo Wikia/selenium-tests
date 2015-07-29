@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -17,7 +17,7 @@ public class ForumBoardTests extends NewTestTemplate {
    * StoryQA0128 - Create test cases for forum https://wikia.fogbugz.com/default.asp?95449
    */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   private String title;
   private String message;
 
@@ -97,8 +97,9 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.verifyTextOnFollowButton(1, "Follow");
   }
 
-  @RelatedIssue(issueID = "CONN-476", comment = "Wikia code defect. Will not be fixed. No need to test manually")
-  @Test(groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
+    @Test(
+        enabled = false, //CONCF-476
+        groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

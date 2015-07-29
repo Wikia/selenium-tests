@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.edithubtests;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,12 +10,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubP
 import org.testng.annotations.Test;
 
 /**
+ * 1. Open edit hub dashboard and check if calendar exists
+ *
  * @author Damian 'kvas' Jóźwiak
- * @ownership Consumer 1. Open edit hub dashboard and check if calendar exists
+ * @ownership Content X-Wing
  */
 public class EditHubTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"EditHub_001", "EditHub"},
       dataProviderClass = HubsDataProvider.class,

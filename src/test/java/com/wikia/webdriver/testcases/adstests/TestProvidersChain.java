@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 
@@ -12,20 +12,24 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestProvidersChain extends TemplateDontLogout {
+public class TestProvidersChain extends TemplateNoFirstLoad {
 
-  @GeoEdgeProxy
+  private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "testProvidersChain",
       groups = {"TestProvidersChain", "Ads"}
   )
-  public void testProvidersChain(String countryCode, String wikiName, String article,
-                                 String slotName, String providers, int times) {
-    setGeoEdge(countryCode);
-    new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
+  public void testProvidersChain(
+      String wikiName,
+      String article,
+      String slotName,
+      String providers,
+      int times) {
+    new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article), BROWSER_DIMENSION)
         .refresh(times)
-        .waitPageLoaded()
+        .waitForPageLoaded()
         .verifyProvidersChain(slotName, providers);
   }
 }

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -20,7 +21,7 @@ import org.testng.annotations.Test;
 
 public class VEGalleryTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
   ArticlePageObject article;
   String articleName;
 

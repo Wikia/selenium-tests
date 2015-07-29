@@ -134,7 +134,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     String deletedVideo =
         "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    Assertion.assertEquals(deletedVideo, getFlashMessageText());
+    Assertion.assertEquals(getFlashMessageText(), deletedVideo);
     PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
         + " was deleted", true);
   }
@@ -145,7 +145,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     addVideoViaAjax(video.getUrl());
     deleteVideo();
     verifyNotificationMessage();
-    Assertion.assertNotEquals(video.getTitle(), getNewestVideoTitle());
+    Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
     PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video "
         + video.getTitle() + " was deleted", true);
   }

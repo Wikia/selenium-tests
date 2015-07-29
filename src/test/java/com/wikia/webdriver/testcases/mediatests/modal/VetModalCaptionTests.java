@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Content X-Wing
  */
 public class VetModalCaptionTests extends NewTestTemplate {
 
@@ -27,10 +29,9 @@ public class VetModalCaptionTests extends NewTestTemplate {
    * editable for premium videos,
    */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   String articleTitleCaption;
-  String articleTitleNoCaption;
   String articleTitleNotEditable;
   String caption;
 

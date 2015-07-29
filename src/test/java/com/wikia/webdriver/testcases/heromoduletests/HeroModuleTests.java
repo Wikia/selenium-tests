@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.heromoduletests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.ModularMainPageObject;
@@ -20,10 +21,12 @@ import org.testng.annotations.Test;
  * TC10: delete description field and then verify a promotional message and Publish button disability
  * TC11: delete text from desc field and click discard to view previous state
  * TC12: delete text from desc field and populate the field with a character to check Publish button is enabled
+ *
+ * @ownership Content X-Wing
  */
 public class HeroModuleTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"HeroModuleTests", "HeroModuleTests_001"})
   public void HeroModuleTests_001_VerifyImageVisibilityAfterRefresh() {

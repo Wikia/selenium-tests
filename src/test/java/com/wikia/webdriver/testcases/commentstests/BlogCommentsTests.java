@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -19,7 +20,7 @@ public class BlogCommentsTests extends NewTestTemplate {
    * existing comment, 4. (Staff) Delete existing comment,
    */
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlogComments_001", "BlogCommentsTests"})
   public void BlogComments_001_Anon_commentReply() {

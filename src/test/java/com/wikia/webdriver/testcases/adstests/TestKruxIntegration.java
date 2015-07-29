@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
@@ -10,14 +10,14 @@ import org.testng.annotations.Test;
  * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
-public class TestKruxIntegration extends TemplateDontLogout {
+public class TestKruxIntegration extends TemplateNoFirstLoad {
 
   static private final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
   static private final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "popularSites",
+      dataProvider = "kruxIntegration",
       groups = {"KruxIntegrationMobile_GeoEdgeFree", "Ads"}
   )
   public void TestKruxIntegrationMobile_GeoEdgeFree(String wikiName, String article) {
@@ -26,7 +26,7 @@ public class TestKruxIntegration extends TemplateDontLogout {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "popularSites",
+      dataProvider = "kruxIntegration",
       groups = {"KruxIntegrationDesktop_GeoEdgeFree", "Ads"}
   )
   public void TestKruxIntegrationDesktop_GeoEdgeFree(String wikiName, String article) {

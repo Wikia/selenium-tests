@@ -4,10 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -67,17 +66,17 @@ public class BasePageObject {
     builder = new Actions(driver);
     PageFactory.initElements(driver, this);
     this.setWindowSizeAndroid();
-    urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
+    urlBuilder = new UrlBuilder(Configuration.getEnv());
   }
 
   protected void setWindowSizeAndroid() {
-    if (!ConfigurationFactory.getConfig().getBrowser().toString().contains("ANDROID")) {
+    if (!Configuration.getBrowser().toString().contains("ANDROID")) {
       driver.manage().window().maximize();
     }
   }
 
   public String getBrowser() {
-    return ConfigurationFactory.getConfig().getBrowser().toString();
+    return Configuration.getBrowser().toString();
   }
 
   public static String getAttributeValue(WebElement element, String attributeName) {
@@ -221,6 +220,7 @@ public class BasePageObject {
 
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
+    waitForElementClickableByElement(element, 5);
     element.click();
   }
 
@@ -234,7 +234,7 @@ public class BasePageObject {
     try {
       js.executeScript(
           "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));",
+          + "window.scroll(0,parseInt(x.offset().top - 100));",
           element
       );
     } catch (WebDriverException e) {
@@ -317,7 +317,7 @@ public class BasePageObject {
 
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
-    Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
+    Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
     PageObjectLogging.log("verifyURLcontains",
                           "current url is the same as expetced url", true);
   }
@@ -336,7 +336,7 @@ public class BasePageObject {
   }
 
   public void verifyURL(String givenURL) {
-    Assertion.assertEquals(givenURL, driver.getCurrentUrl());
+    Assertion.assertEquals(driver.getCurrentUrl(), givenURL);
   }
 
   public String getCurrentUrl() {
@@ -447,10 +447,20 @@ public class BasePageObject {
   public void navigateBack() {
     try {
       driver.navigate().back();
-      PageObjectLogging.log("navigateBack", "previous page loaded", true);
+      PageObjectLogging.log("Navigate Back", "previous page loaded", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("navigateBack",
-                            "page loaded for more then 30 seconds after navigating back", true);
+      PageObjectLogging.log("Navigate Back",
+                            "page loaded for more then 30 seconds after navigating back", false);
+    }
+  }
+
+  public void navigateForward() {
+    try {
+      driver.navigate().forward();
+      PageObjectLogging.log("Navigate Forward", "next page loaded", true);
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("Navigate Forward",
+                            "page loaded for more then 30 seconds after navigating forward", false);
     }
   }
 
@@ -636,6 +646,11 @@ public class BasePageObject {
     }
   }
 
+  public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
+    new WebDriverWait(driver, newTimeOut).until(
+        CommonExpectedConditions.elementToBeClickable(element));
+  }
+
   public void waitForElementNotClickableByElement(WebElement element) {
     wait.until(CommonExpectedConditions.elementNotToBeClickable(element));
   }
@@ -720,7 +735,7 @@ public class BasePageObject {
                           "detected and closed alert with text " + alertText, true);
   }
 
-  public String getTimeStamp() {
+  public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
@@ -750,7 +765,7 @@ public class BasePageObject {
   }
 
   public void openWikiPage() {
-    getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 

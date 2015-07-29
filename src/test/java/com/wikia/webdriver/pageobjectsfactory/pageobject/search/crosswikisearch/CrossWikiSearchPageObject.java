@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -71,22 +72,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchFor", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
-    waitForElementByElement(searchInput);
+    searchInput.sendKeys(term + Keys.ENTER);
     PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
-    return new CrossWikiSearchPageObject(driver);
-  }
-
-  public CrossWikiSearchPageObject searchForEnter(String term) {
-    searchInput.clear();
-    searchInput.sendKeys(term);
-    PageObjectLogging.log("searchForEnter", "Typed search term" + term, true, driver);
-    searchInput.sendKeys(Keys.ENTER);
-    waitForElementByElement(searchInput);
-    PageObjectLogging.log("searchForEnter", "Search button entered", true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyFirstResultTitle(String wikiName) {
@@ -167,19 +155,19 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     scrollAndClick(paginatorPrev);
     PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
     PageObjectLogging.log("nextPage", "Moving to next page of search results.",
                           true, driver);
-    return new CrossWikiSearchPageObject(driver);
+    return this;
   }
 
   public void verifyResultsNumber(int number) {
     waitForElementByElement(searchResultList.get(0));
-    Assertion.assertNumber(number, searchResultList.size(), "checking number of search results");
+    Assertion.assertNumber(searchResultList.size(), number, "checking number of search results");
   }
 
   public void verifyNoPagination() {
@@ -190,22 +178,22 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void verifyNoResultsCaption() {
     waitForElementByElement(noResultsCaption);
-    Assertion.assertEquals("No results found.", noResultsCaption.getText());
+    Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
     PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
                           true);
   }
 
   public void verifyThumbnails(int number) {
-    Assertion.assertNumber(number, thumbnails.size(), "checking number of thumbnails");
+    Assertion.assertNumber(thumbnails.size(), number, "checking number of thumbnails");
     for (WebElement elem : thumbnails) {
-      Assertion.assertStringContains(".png", elem.getAttribute("src"));
+      Assertion.assertStringContains(elem.getAttribute("src"), ".png");
     }
     PageObjectLogging.log("verifyThumbnails", "thumbnails verified",
                           true);
   }
 
   public void verifyDescription(int number) {
-    Assertion.assertNumber(number, descriptions.size(), "checking number of thumbnails");
+    Assertion.assertNumber(descriptions.size(), number, "checking number of thumbnails");
     for (WebElement elem : descriptions) {
       Assertion.assertTrue(!elem.getText().isEmpty(), "checking if description is not empty");
     }
@@ -218,9 +206,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     Assertion.assertEquals(statisticsImages.size(), number);
     Assertion.assertEquals(statisticsVideos.size(), number);
     for (int i = 0; i < number; i++) {
-      Assertion.assertStringContains("PAGE", statisticsPages.get(i).getText());
-      Assertion.assertStringContains("IMAGE", statisticsImages.get(i).getText());
-      Assertion.assertStringContains("VIDEO", statisticsVideos.get(i).getText());
+      Assertion.assertStringContains(statisticsPages.get(i).getText(), "PAGE");
+      Assertion.assertStringContains(statisticsImages.get(i).getText(), "IMAGE");
+      Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
     }
   }
 

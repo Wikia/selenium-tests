@@ -82,6 +82,10 @@ public class MobileBasePageObject extends WikiBasePageObject {
   protected WebElement selectedPageHeader;
   @FindBy(css = "#wkMainCntHdr > a")
   private WebElement editButton;
+  @FindBy(css = ".login")
+  private WebElement newloginButton;
+  @FindBy(css = ".signup-provider-email")
+  private WebElement signupButton;
 
   public void triggerLoginDropDown() {
     waitForElementByElement(loginDropDownTrigger);
@@ -122,7 +126,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   public void verifyFBLogin() {
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    Assertion.assertStringContains(URLsContent.FACEBOOK_DOMAIN, getCurrentUrl());
+    Assertion.assertStringContains(getCurrentUrl(), URLsContent.FACEBOOK_DOMAIN);
     PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
   }
 
@@ -300,5 +304,14 @@ public class MobileBasePageObject extends WikiBasePageObject {
         true
     );
     return new MobileEditModePageObject(driver);
+  }
+
+  public MobileSignupPageObject openMobileSignupPage(String wikiURL) {
+    openHome(wikiURL);
+    waitForElementByElement(newloginButton);
+    newloginButton.click();
+    waitForElementByElement(signupButton);
+    signupButton.click();
+    return new MobileSignupPageObject(driver);
   }
 }

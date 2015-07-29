@@ -299,7 +299,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   public void verifyToolInMoreTool(String toolName) {
     for (WebElement elem : myToolsList) {
-      Assertion.assertEquals(toolName.toLowerCase(), elem.getAttribute("data-name").toLowerCase());
+      Assertion.assertEquals(elem.getAttribute("data-name").toLowerCase(), toolName.toLowerCase());
     }
     PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
   }

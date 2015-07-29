@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.login;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.Properties;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -91,23 +91,18 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   public void remindPassword(String name, String apiToken) {
-    Assertion.assertEquals(
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
-        resetForgotPasswordTime(name, apiToken));
+    Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
+        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickForgotPasswordLink();
   }
 
   public String setNewPassword() {
-    String randomPassword = Properties.password + getTimeStamp();
+    String randomPassword = Configuration.getCredentials().password + getTimeStamp();
     typeInNewPassword(randomPassword);
     retypeInNewPassword(randomPassword);
     clickLoginButton();
-    PageObjectLogging.log(
-        "setNewPassword",
-        "new password is set",
-        true, driver
-    );
+    PageObjectLogging.log("setNewPassword", "new password is set", true, driver);
     return randomPassword;
   }
 
@@ -115,18 +110,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     waitForElementByElement(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     waitForTextToBePresentInElementByElement(messagePlaceholder, message);
-    PageObjectLogging.log(
-        "newPasswordSentMessage",
-        "Message about new password sent present",
-        true, driver
-    );
+    PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
+        true, driver);
   }
 
   public void verifyClosedAccountMessage() {
     waitForElementByElement(messagePlaceholder);
-    Assertion.assertEquals(
-        DISABLED_ACCOUNT_MESSAGE,
-        messagePlaceholder.getText()
-    );
+    Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
   }
 }

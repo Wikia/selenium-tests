@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -19,7 +20,7 @@ public class ForumEditModeTests extends NewTestTemplate {
 	 */
 
   private String title, description, first, second;
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ForumEditModeTests_001", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_001_faq() {

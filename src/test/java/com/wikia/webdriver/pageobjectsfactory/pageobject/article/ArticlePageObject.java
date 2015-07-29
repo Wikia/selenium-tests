@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-  @FindBy(css = "article header h1")
+  @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
   protected WebElement articleContentContainer;
@@ -179,6 +179,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   }
 
+  public ArticlePageObject openRandomArticle(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_RANDOM);
+    return this;
+  }
+
   public void verifyArticleTitle(String title) {
     waitForElementVisibleByElement(articleHeader);
     Assertion.assertEquals(articleHeader.getText(), title);
@@ -186,7 +191,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyContent(String content) {
     waitForElementVisibleByElement(articleContent);
-    Assertion.assertStringContains(content, articleContent.getText());
+    Assertion.assertStringContains(articleContent.getText(), content);
   }
 
 
@@ -242,7 +247,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
     waitForElementByElement(contributeDropdown);
-    actionsClick(contributeDropdown);
+    scrollAndClick(contributeDropdown);
     waitForElementVisibleByElement(addArticleInDropdown);
     addArticleInDropdown.click();
     articleTitleInputModal.sendKeys(articleTitle);
@@ -286,7 +291,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyCommentText(String comment) {
     WebElement mostRecentComment = articleComments.get(0);
     waitForTextToBePresentInElementByElement(mostRecentComment, comment);
-    Assertion.assertStringContains(comment, mostRecentComment.getText());
+    Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 
   public void verifyCommentVideo(String videoName) {
@@ -336,7 +341,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement mostRecentComment = articleComments.get(0);
     WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
     waitForElementVisibleByElement(editedByArea);
-    Assertion.assertStringContains(userName, editedByArea.getText());
+    Assertion.assertStringContains(editedByArea.getText(), userName);
   }
 
   public MiniEditorComponentObject triggerCommentReply() {
@@ -357,14 +362,14 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyCommentReply(String reply) {
     WebElement mostRecentReply = commentReplies.get(0);
     waitForElementVisibleByElement(mostRecentReply);
-    Assertion.assertStringContains(reply, mostRecentReply.getText());
+    Assertion.assertStringContains(mostRecentReply.getText(), reply);
   }
 
   public void verifyReplyCreator(String userName) {
     WebElement mostRecentReply = commentReplies.get(0);
     WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
     waitForElementVisibleByElement(editedByArea);
-    Assertion.assertStringContains(userName, editedByArea.getText());
+    Assertion.assertStringContains(editedByArea.getText(), userName);
   }
 
   public String getArticleName() {
@@ -498,7 +503,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         position = "position is not provided";
         break;
     }
-    Assertion.assertStringContains(position, videoClass);
+    Assertion.assertStringContains(videoClass, position);
   }
 
   public Integer getVideoWidth(WebElement thumbnail) {
@@ -512,9 +517,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyVideoWidth(int widthDesired) {
     int videoWidth = getVideoWidth(videoThumbnail);
     Assertion.assertNumber(
-        widthDesired,
-        videoWidth,
-        "width should be " + widthDesired + " but is " + videoWidth
+            videoWidth, widthDesired,
+            "width should be " + widthDesired + " but is " + videoWidth
     );
   }
 
@@ -522,7 +526,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     String caption = videoThumbnailWrapper.findElement(
         By.className("caption")
     ).getText();
-    Assertion.assertStringContains(captionDesired, caption);
+    Assertion.assertStringContains(caption, captionDesired);
     PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
   }
 
@@ -530,7 +534,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     String name = videoThumbnailWrapper.findElement(
         By.className("title")
     ).getText();
-    Assertion.assertStringContains(nameDesired, name);
+    Assertion.assertStringContains(name, nameDesired);
     PageObjectLogging.log("verifyVideoName", "video has expected name", true);
   }
 
@@ -686,7 +690,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
-    Assertion.assertStringContains(wikiName, welcomeLightBoxTitle.getText());
+    Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
   }
 
   public void closeNewWikiCongratulationsLightBox() {
@@ -697,7 +701,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
-    Assertion.assertStringContains(wikiName, wikiNameHeader.getText());
+    Assertion.assertStringContains(wikiNameHeader.getText(), wikiName);
   }
 
   public void verifyTableRemoved() {

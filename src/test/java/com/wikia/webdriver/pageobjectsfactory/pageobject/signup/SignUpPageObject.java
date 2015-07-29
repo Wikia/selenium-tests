@@ -1,20 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,6 +9,21 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -74,28 +74,17 @@ public class SignUpPageObject extends WikiBasePageObject {
   public void typeEmail(String email) {
     emailField.sendKeys(email);
     emailField.sendKeys(Keys.TAB);
-    PageObjectLogging.log(
-        "typeEmail",
-        email + " typed into email field",
-        true
-    );
+    PageObjectLogging.log("typeEmail", email + " typed into email field", true);
   }
 
   public void typePassword(String password) {
     passwordField.sendKeys(password);
     passwordField.sendKeys(Keys.TAB);
-    PageObjectLogging.log(
-        "typePassword",
-        "password typed into password field",
-        true
-    );
+    PageObjectLogging.log("typePassword", "password typed into password field", true);
   }
 
   public void verifyTooYoungMessage() {
-    String message = birthYearField
-        .findElement(parentBy)
-        .findElement(errorMsgBy)
-        .getText();
+    String message = birthYearField.findElement(parentBy).findElement(errorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_TOO_YOUNG_MESSAGE);
   }
 
@@ -112,11 +101,8 @@ public class SignUpPageObject extends WikiBasePageObject {
       yearSelect.selectByVisibleText(year);
       Thread.sleep(150);
       monthSelect.selectByVisibleText(month);
-      PageObjectLogging.log(
-          "enterBirthDate ",
-          "Birth date: " + day + "/" + month + "/" + year + " selected",
-          true
-      );
+      PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
+          + " selected", true);
     } catch (InterruptedException e) {
       PageObjectLogging.log("enterBirthDate", e.getMessage(), false);
     }
@@ -128,11 +114,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public void typeCaptcha(String captchaWord) {
     captchaField.sendKeys(captchaWord);
-    PageObjectLogging.log(
-        "typeCaptcha ",
-        "captcha typed into captcha field",
-        true
-    );
+    PageObjectLogging.log("typeCaptcha ", "captcha typed into captcha field", true);
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
@@ -150,11 +132,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public AlmostTherePageObject submit() {
     scrollAndClick(signupButton);
-    PageObjectLogging.log(
-        "submit ",
-        "sign up button clicked",
-        true
-    );
+    PageObjectLogging.log("submit ", "sign up button clicked", true);
     return new AlmostTherePageObject(driver);
   }
 
@@ -165,17 +143,16 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserExistsMessage() {
-    String message = userNameField
-        .findElement(parentBy)
-        .findElement(errorMsgBy)
-        .getText();
+    String message = userNameField.findElement(parentBy).findElement(errorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_USER_EXISTS_MESSAGE);
   }
 
   private String getWordFromCaptcha(File captchaFile) {
     try {
       String captchaId = getAttributeValue(blurryWordHidden, "value");
-      String urlAd = Global.DOMAIN + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
+      String urlAd =
+          urlBuilder.getUrlForWiki(Configuration.getWikiName())
+              + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
       URL url = new URL(urlAd);
 
       String md5 = md5(url.openStream());

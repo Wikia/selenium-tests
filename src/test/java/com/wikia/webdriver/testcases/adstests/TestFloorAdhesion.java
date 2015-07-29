@@ -1,49 +1,55 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.ModalSelectorsHelper;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
 
-public class TestFloorAdhesion extends TemplateDontLogout {
-    private final String WIKI_NAME = "adtest";
-    private final String ARTICLE_TITLE = "FLOOR_ADHESION";
+public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
-    @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
-    public void testFloorAdhesionPresence() {
-        String browser = config.getBrowser();
-        String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+  private final String WIKI_NAME = "adtest";
+  private final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
-        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  public void testFloorAdhesionPresence() {
+    String browser = Configuration.getBrowser();
+    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
-        wikiPage.verifyFloorAdhesionPresent();
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
 
-        wikiPage.verifyThereIsNoWikiaBar(browser);
-    }
+    wikiPage.verifyFloorAdhesionPresent(
+        skinContext.getSlotName(),
+        skinContext.getLineItemId(),
+        skinContext.getCreativeId()
+    );
+    wikiPage.verifyThereIsNoWikiaBar(browser);
+  }
 
-    @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
-    public void testFloorAdhesionModal() {
-        String browser = config.getBrowser();
-        String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  public void testFloorAdhesionModal() {
+    String browser = Configuration.getBrowser();
+    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
 
-        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
-        ModalSelectorsHelper modalSelectors = new ModalSelectorsHelper(browser);
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
-        String floorAdhesionModalSelector = modalSelectors.getModalSelector();
-        String floorAdhesionModalCloseSelector = modalSelectors.getModalCloseSelector();
+    String floorAdhesionModalSelector = skinContext.getModalSelector();
+    String floorAdhesionModalCloseSelector = skinContext.getModalCloseSelector();
 
-        wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
+    wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
 
-        wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
-                .verifyThereIsNoModal(floorAdhesionModalSelector);
-    }
+    wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
+        .verifyThereIsNoModal(floorAdhesionModalSelector);
+  }
 
-    @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
-    public void testFloorAdhesionCloseButton() {
-        String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
-        AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
-        wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
-    }
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  public void testFloorAdhesionCloseButton() {
+    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+    wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
+  }
 
 }

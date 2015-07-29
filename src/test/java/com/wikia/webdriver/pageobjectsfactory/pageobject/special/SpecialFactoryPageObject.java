@@ -78,7 +78,7 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
 
   public void verifyVariableValue(WikiFactoryVariables variableName, String expectedValue) {
     selectVariableByVisibleText(variableName);
-    Assertion.assertEquals(expectedValue, variableValue.getText());
+    Assertion.assertEquals(variableValue.getText(), expectedValue);
   }
 
   private void selectVariableByVisibleText(WikiFactoryVariables variableName) {

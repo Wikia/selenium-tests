@@ -92,12 +92,12 @@ public class SourceEditModePageObject extends EditMode {
 
   public void checkSourceContent(String desiredContent) {
     waitForElementClickableByElement(sourceModeTextArea);
-    Assertion.assertEquals(desiredContent, getSourceContent());
+    Assertion.assertEquals(getSourceContent(), desiredContent);
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(desiredContent.substring(1, 38) + desiredContent.substring(48),
-                           getSourceContent().substring(1, 38) + getSourceContent().substring(48));
+    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    );
   }
 
 
@@ -308,7 +308,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void verifyVideoAlignment(PositionsVideo position) {
-    Assertion.assertStringContains(position.toString().toLowerCase(), getContent()
+    Assertion.assertStringContains(getContent(), position.toString().toLowerCase()
     );
   }
 
@@ -318,14 +318,13 @@ public class SourceEditModePageObject extends EditMode {
         content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
     );
     Assertion.assertNumber(
-        width,
-        widthDesired,
-        "width is " + width + " should be " + widthDesired
+            widthDesired, width,
+            "width is " + width + " should be " + widthDesired
     );
   }
 
   public void verifyVideoCaption(String desiredCaption) {
-    Assertion.assertStringContains(desiredCaption, getContent());
+    Assertion.assertStringContains(getContent(), desiredCaption);
   }
 
   /**

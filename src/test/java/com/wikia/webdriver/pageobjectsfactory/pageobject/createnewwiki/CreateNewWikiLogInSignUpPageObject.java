@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -50,7 +51,10 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     PageObjectLogging.log("typeInPassword", "password name was typed", true);
   }
 
-  public void clickForgotPassword() {
+  public void clickForgotPassword(String userName, String apiToken) {
+    Assertion.assertEquals(
+            resetForgotPasswordTime(userName, apiToken), ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE
+    );
     waitForElementByElement(forgotPasswordLink);
     forgotPasswordLink.click();
   }
@@ -71,24 +75,24 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
   public void verifyEmptyUserNameValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE, errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE);
   }
 
   public void verifyInvalidUserNameValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE,
-                           errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE
+    );
   }
 
   public void verifyBlankPasswordValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE);
   }
 
   public void verifyInvalidPasswordValidation() {
     waitForElementByCss(ERROR_MESSAGE_CSS);
-    Assertion.assertEquals(CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE,
-                           errorMessage.getText());
+    Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE
+    );
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
@@ -101,4 +105,6 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
         true
     );
   }
+
+
 }

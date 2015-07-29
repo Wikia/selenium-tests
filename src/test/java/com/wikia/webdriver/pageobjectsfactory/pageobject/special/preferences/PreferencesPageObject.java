@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -34,6 +35,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement facebookPasswordInput;
   @FindBy(css = "#facebook input[name='login']")
   private WebElement facebookSubmitButton;
+  @FindBy(css = "#mw-input-wpusenewrc")
+  private WebElement useAdvancedRecentChangesCheckbox;
 
   public PreferencesPageObject(WebDriver driver) {
     super(driver);
@@ -73,8 +76,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public void verifyEmailMeSection() {
     for (WebElement elem : emailMeSectionRows) {
       PageObjectLogging.log("verifyEmailSection", "verifying " + elem.getText(), true);
-      Assertion.assertEquals("true",
-          elem.findElement(By.cssSelector("input")).getAttribute("checked"));
+      Assertion.assertEquals(elem.findElement(By.cssSelector("input")).getAttribute("checked"), "true"
+      );
     }
   }
 
@@ -83,7 +86,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
     scrollAndClick(facebookDisconnect);
     waitForElementByElement(fbConnect);
     PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook",
-        true);
+                          true);
   }
 
   public PreferencesPageObject clickSaveButton() {
@@ -126,6 +129,32 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
     driver.switchTo().window(windows[0].toString());
     waitForElementByElement(facebookDisconnect);
+  }
+
+  public PreferencesPageObject setAdvancedRecentChangesCheckbox() {
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    waitForElementClickableByElement(useAdvancedRecentChangesCheckbox);
+  useAdvancedRecentChangesCheckbox.click();
+    PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+
+  return this;
+  }
+
+  public boolean getAdvancedRecentChangesCheckboxValue() {
+// Verify that the Get_advanced_recent_changes_checkbox_value is checked
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    return  useAdvancedRecentChangesCheckbox.getAttribute("checked") != null;
+     }
+
+  public PreferencesPageObject setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
+    selectTab(PreferencesPageObject.tabNames.UNDER);
+    if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) {// if Checked
+      useAdvancedRecentChangesCheckbox.click();
+    }
+    clickSaveButton();
+    PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
+
+    return this;
   }
 
   public enum tabNames {

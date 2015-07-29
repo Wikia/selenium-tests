@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 public class ChatTests extends NewTestTemplate_TwoDrivers {
 
-  private Credentials credentials = config.getCredentials();
+  private Credentials credentials = Configuration.getCredentials();
   private String userOne = credentials.userName;
   private String userOnePassword = credentials.password;
   private String userTwo = credentials.userName2;

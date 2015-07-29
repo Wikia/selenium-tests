@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
@@ -40,9 +40,6 @@ public class VenusGlobalNavPageObject {
 
   @FindBy(css = "#searchSelect")
   private WebElement searchSelect;
-
-  @FindBy(css = "#searchLabelSingle")
-  private WebElement inlineSearch;
 
   @FindBy(css = "#searchInput")
   private WebElement searchInput;
@@ -110,7 +107,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public HomePageObject clickWikiaLogo() {
-    String environment = ConfigurationFactory.getConfig().getEnv();
+    String environment = Configuration.getEnv();
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",

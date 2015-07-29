@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +39,18 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationSquare = By.cssSelector("[id*='square']");
   private By orintationLandscape = By.cssSelector("[id*='landscape']");
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
+
+  public boolean isFinishButtonVisibleOnPage() {
+    if (!finishButton.isDisplayed()) {
+      scrollToElement(finishButton);
+    }
+    try {
+      waitForElementVisibleByElement(finishButton);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
 
   public enum PositionsGallery {
     LEFT, CENTER, RIGHT;

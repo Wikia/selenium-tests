@@ -26,8 +26,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.Global;
-import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -111,12 +110,12 @@ public class NewDriverProvider {
 
   private static EventFiringWebDriver getAndroidInstance() {
     DesiredCapabilities destCaps = new DesiredCapabilities();
-    destCaps.setCapability("deviceName", ConfigurationFactory.getConfig().getDeviceName()
+    destCaps.setCapability("deviceName", Configuration.getDeviceName()
         .toString());
     URL url = null;
     try {
       url =
-          new URL("http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
+          new URL("http://" + Configuration.getAppiumIp().toString() + "/wd/hub");
     } catch (MalformedURLException e) {
       PageObjectLogging.log("getAndroindInstance", e.getMessage(), false);
     }
@@ -164,8 +163,6 @@ public class NewDriverProvider {
                 + "resources" + File.separator + "Firebug" + File.separator
                 + "JSErrorCollector.xpi");
         firefoxProfile.addExtension(jsErr);
-        // TODO!
-        Global.JS_ERROR_ENABLED = true;
       } catch (FileNotFoundException e) {
         System.out.println("JS extension file doesn't exist in provided location");
       } catch (IOException e) {
@@ -177,7 +174,7 @@ public class NewDriverProvider {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
-    if (StringUtils.isNotBlank(ConfigurationFactory.getConfig().getDisableFlash())) {
+    if (StringUtils.isNotBlank(Configuration.getDisableFlash())) {
       firefoxProfile.setPreference("plugin.state.flash", 0);
     }
 

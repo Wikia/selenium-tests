@@ -71,6 +71,6 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
   public void verifyLatestEditSummary(String text) {
     String editSummary = getFirstCssRevision();
     editSummary = editSummary.substring(1, editSummary.length() - 1);
-    Assertion.assertEquals(text, editSummary);
+    Assertion.assertEquals(editSummary, text);
   }
 }

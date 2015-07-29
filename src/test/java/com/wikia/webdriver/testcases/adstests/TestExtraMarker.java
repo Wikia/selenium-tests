@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestExtraMarker extends TemplateDontLogout {
+public class TestExtraMarker extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -24,6 +24,6 @@ public class TestExtraMarker extends TemplateDontLogout {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     String logs = wikiPage.getBrowserLogs(slot).toString();
     Assertion.assertStringNotEmpty(logs);
-    Assertion.assertStringContains(extraMarkerMessage, logs);
+    Assertion.assertStringContains(logs, extraMarkerMessage);
   }
 }

@@ -9,10 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @authors: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
- * @ownership: Content - Mercury mobile
+ * @ownership: Content X-Wing
  */
-public class SEOPageObject extends MobileBasePageObject {
+public class SEOPageObject extends BasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;

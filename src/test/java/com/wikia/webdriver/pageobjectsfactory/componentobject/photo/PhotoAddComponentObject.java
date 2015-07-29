@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class PhotoAddComponentObject extends BasePageObject {
 
@@ -17,8 +17,6 @@ public class PhotoAddComponentObject extends BasePageObject {
   private WebElement searchField;
   @FindBy(css = "#ImageUploadFind [value='Find']")
   private WebElement findButton;
-  @FindBy(css = "#ImageUploadProgress2")
-  private WebElement searchProgressThrobber;
   @FindBy(css = "#WMU_source_1")
   private WebElement flickButton;
   @FindBy(css = "#WMU_source_0")
@@ -56,7 +54,7 @@ public class PhotoAddComponentObject extends BasePageObject {
     String oldHeadline = imageUploadHeadline.getText();
     scrollAndClick(findButton);
     waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
-                                                     oldHeadline);
+        oldHeadline);
     PageObjectLogging.log("clickSearch", "search button clicked", true);
   }
 
@@ -110,9 +108,7 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput.sendKeys(
-        getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
-    );
+    chooseFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 

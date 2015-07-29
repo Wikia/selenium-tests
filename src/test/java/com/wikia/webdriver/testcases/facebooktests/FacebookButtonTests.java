@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
  */
 public class FacebookButtonTests extends NewTestTemplate {
 
-  Credentials credentials = config.getCredentials();
+  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"FBButton_001", "FacebookButton"})
   public void FBButton_001_DropDownButton_Visible() {
