@@ -52,6 +52,17 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   private WebElement createArticleModal;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
+  @FindBy(css = ".portable-infobox-item-value .newcategory")
+  private WebElement categoryLink;
+  @FindBy(css = ".portable-infobox-item-label")
+  private WebElement itemLabel;
+  @FindBy(css = ".portable-infobox-item-value")
+  private WebElement itemValue;
+  @FindBy(css = "h3.portable-infobox-item-label.portable-infobox-secondary-font")
+  private WebElement horizontalItemLabel;
+  @FindBy(css = "div.portable-infobox-item-value")
+  private WebElement horizontalItemValue;
+
 
   public PortableInboxPageObject(WebDriver driver) {
     super(driver);
@@ -109,7 +120,6 @@ public class PortableInboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(checkIfElementOnPage(unorderedListElement), true);
   }
 
-
   public String getExternalLinkRedirectTitle() {
     waitForElementByElement(pInfoRedlLink);
     return pInfoRedlLink.getAttribute("href");
@@ -118,6 +128,22 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   public String getInternalLinkRedirectTitle() {
     waitForElementByElement(pInfoInternalLink);
     return pInfoInternalLink.getAttribute("href");
+  }
+
+  public WebElement getItemLabel() {
+    return itemLabel;
+  }
+
+  public WebElement getItemValue() {
+    return itemValue;
+  }
+
+  public WebElement getHorizontalItemLabel() {
+    return horizontalItemLabel;
+  }
+
+  public WebElement getHorizontalItemValue() {
+    return horizontalItemValue;
   }
 
   public void clickExternalLink() {
@@ -133,6 +159,11 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   public void clickImage() {
     waitForElementByElement(pInfoImage);
     pInfoImage.click();
+  }
+
+  public void clickCategoryLink() {
+    waitForElementByElement(categoryLink);
+    scrollAndClick(categoryLink);
   }
 
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
@@ -177,5 +208,11 @@ public class PortableInboxPageObject extends WikiBasePageObject {
 
   public void verifyCategoryInArticlePage(String catName) {
     // Same as previous case, waiting on Ludwik
+  }
+
+  public void verifyFontSize(WebElement firstElement, WebElement secondElement) {
+    String firstFontSize = firstElement.getAttribute("font-size");
+    String secondFontSize = secondElement.getAttribute("font-size");
+    Assertion.assertEquals(firstElement, secondElement);
   }
 }

@@ -71,7 +71,6 @@ public class URLsContent {
   public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "wiki/Special:Version";
 
-
   // Urls for mobile
   public static final String MOBILETEST_MAINPAGE = "wiki/Mobileregressiontesting_Wiki";
   public static final String ARTICLE_SECTIONS = "wiki/Sections";
@@ -168,7 +167,7 @@ public class URLsContent {
   public static final String WIKI_MAINPAGE = "Main_Page";
   public static final String CATEGORY_PAGE = "Category:General_wiki_templates";
   public static final String CATEGORY_HELP = "Category:Help";
-  public static final String TEMPLATE_PAGE = "Template:Infobox";
+  public static final String TEMPLATE_PAGE = "Template:";
   public static final String LIST_PAGE = "List:Listing";
   public static final String MEDIAWIKI = "mediawiki119";
 
