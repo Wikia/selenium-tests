@@ -119,7 +119,7 @@ public class MobileSignupPageObject extends MobileBasePageObject {
     Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
   }
 
-  public String getHeadertext() {
+  public String getRegisterHeaderText() {
     return registerHeader.getText();
   }
   public void openRegisterPage() {

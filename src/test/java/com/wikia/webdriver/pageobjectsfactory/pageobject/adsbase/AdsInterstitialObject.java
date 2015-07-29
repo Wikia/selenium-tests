@@ -16,11 +16,10 @@ import java.util.regex.Pattern;
  */
 public class AdsInterstitialObject extends AdsBaseObject {
 
-  @FindBy(css = "iframe[class=wikia-ad-iframe]")
+  @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
 
-  @FindBy(css = "div[id=ext-wikia-adEngine-template-modal], "
-                + "div[class=lightbox-content-inner] > div")
+  @FindBy(css = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div")
   private WebElement interstitialAdWrapper;
 
   public AdsInterstitialObject(WebDriver driver, String testedPage,

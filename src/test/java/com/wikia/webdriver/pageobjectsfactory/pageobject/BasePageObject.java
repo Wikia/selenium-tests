@@ -220,6 +220,7 @@ public class BasePageObject {
 
   protected void scrollAndClick(WebElement element) {
     scrollToElement(element);
+    waitForElementClickableByElement(element, 5);
     element.click();
   }
 
@@ -233,7 +234,7 @@ public class BasePageObject {
     try {
       js.executeScript(
           "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));",
+          + "window.scroll(0,parseInt(x.offset().top - 100));",
           element
       );
     } catch (WebDriverException e) {
@@ -643,6 +644,11 @@ public class BasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
+    new WebDriverWait(driver, newTimeOut).until(
+        CommonExpectedConditions.elementToBeClickable(element));
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {

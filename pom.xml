@@ -10,7 +10,7 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
-		<webdriver.version>2.46.0</webdriver.version>
+		<webdriver.version>2.45.0</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>
