@@ -148,6 +148,7 @@ public class PageContent {
   public static final String WIKIA_HERO_PROMOTE_MESSAGE = "Add a summary that will promote your wikia in searches and on hubs.";
 
   //Portable Infoboxes content
+  public static final String PORTABLE_INFOBOX02 = "Infobox4Automation01";
   public static final String PORTABLE_INFOBOX01 = "Infobox4Automation02";
   public static final String PORTABLE_INFOBOX_WEBSITE_TEMPLATE = "Template:Infobox_Website";
   public static final String FILE_IMAGE_NAME = "File:WallPaperHD_138.jpg";

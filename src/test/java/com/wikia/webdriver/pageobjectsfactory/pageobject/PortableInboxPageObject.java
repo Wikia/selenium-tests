@@ -38,7 +38,7 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   private WebElement infoboxLayout;
   @FindBy(css = ".tabberlive")
   private WebElement tabber;
-  @FindBy(css = ".tabbertab > .image")
+  @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
   @FindBy(css = ".portable-infobox-item-value ul li")
   private WebElement unorderedListElement;

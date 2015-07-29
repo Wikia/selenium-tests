@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
@@ -123,7 +122,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
   public void verifyVisibilityOfTabberAndItsImages() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX02);
     PortableInboxPageObject info = article.getInfoboxPage();
     info.verifyTabberPresence();
     info.verifyTabberImagePresence();
