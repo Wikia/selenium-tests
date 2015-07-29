@@ -2,21 +2,16 @@ package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.testng.annotations.Test;
 
 /**
@@ -31,10 +26,10 @@ import org.testng.annotations.Test;
  * page will display category in categories section at the bottom of the page automatically
  *
  * Created by nikodamn 20/07/15
- * TC06: Verify lightbox opens when clicking infobox image
- * TC08: Verify visibility of tabber and it's images
- * TC09: Verify infobox color has changed after changing colors in wiki Theme Designer
- * TC12: Verify if ordered and unordered lists are parsed correctly after adding them
+ * TC05: Verify lightbox opens when clicking infobox image
+ * TC06: Verify visibility of tabber and it's images
+ * TC07: Verify infobox color has changed after changing colors in wiki Theme Designer
+ * TC08: Verify if ordered and unordered lists are parsed correctly after adding them
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -58,21 +53,21 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    //Red link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
+    //Red link
     info.clickRedLink();
     info.verifyCreateNewArticleModal();
-    //External Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    article.getInfoboxPage();
+    //External Link
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
     String externalNavigatedURL = info.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
-    //Internal Link
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    article.getInfoboxPage();
+    //Internal Link
     String internalLinkName = info.getInternalLinkRedirectTitle();
     info.clickInternalLink();
     String internalNavigatedURL = info.getCurrentUrl();

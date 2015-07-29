@@ -1,14 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
 import java.util.List;
 
 /**
@@ -21,17 +20,17 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement pInfoImage;
   @FindBy(css = ".portable-infobox-title")
   private WebElement pInfoTitle;
-  @FindBy(css = ".portable-infobox-header-font")
+  @FindBy(css = ".portable-infobox-header")
   private List<WebElement> pInfoTitleH3;
-  @FindBy(css = ".portable-infobox-item-value a[href*='/wiki']")
+  @FindBy(css = ".portable-infobox-navigation a[href*='/wiki']")
   private WebElement pInfoExternalLink;
-  @FindBy(css = ".portable-infobox-item-value a[href*='redlink']")
+  @FindBy(css = ".portable-infobox-navigation a[href*='redlink']")
   private WebElement pInfoRedlLink;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
   @FindBy(css = "i")
   private List<WebElement> italicElements;
-  @FindBy(css = ".portable-infobox-item-value a[href*='cleanup4']")
+  @FindBy(css = ".portable-infobox-navigation a[href*='cleanup4']")
   private WebElement pInfoInternalLink;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
@@ -46,14 +45,18 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = ".portable-infobox-item-value ol li")
   private WebElement orderedListElement;
   @FindBy(css = ".reference")
-  private List<WebElement> referenceElements;
+  private WebElement referenceElements;
   @FindBy(css = ".portable-infobox-item-label")
   private WebElement h3Elements;
+  @FindBy(css = "#CreatePageModalDialog")
+  private WebElement createArticleModal;
+  @FindBy(css = "button[data-event=create]")
+  private WebElement addAPageButton;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
+    PageFactory.initElements(driver, this);
   }
-
 
   public String getBackgroundColor() {
     return infoboxLayout.getAttribute("background-color");
@@ -155,27 +158,25 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyQuotationMarksPresence() {
     waitForElementByElement(h3Elements);
     String h3ElementsString = h3Elements.getText();
-    Assertion.assertStringContains("""", h3ElementsString);
+    Assertion.assertStringContains("\"URL\"", h3ElementsString);
   }
 
   public void verifyReferencesPresence() {
     waitForElementByElement(referenceElements);
   }
 
-  public void clickRedLink() {
+  public CreateArticleModalComponentObject clickRedLink() {
     waitForElementByElement(pInfoRedlLink);
     pInfoRedlLink.click();
+    return new CreateArticleModalComponentObject(driver);
   }
 
   public void verifyCreateNewArticleModal() {
-    //switch to iframe
-    //verify iframe element
+    waitForElementByElement(addAPageButton);
   }
 
   public void verifyCategoryInArticlePage(String catName) {
     //
     //
   }
-}
-
 }
