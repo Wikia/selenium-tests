@@ -19,10 +19,12 @@ public class TestAdsHop extends TemplateNoFirstLoad {
       groups = "TestAdsHop"
   )
   public void testAdsHopPostMessage(String wikiName, String article, String src) {
-    new AdsHopObject(driver, urlBuilder.getUrlForPath(wikiName, article))
-        .verifyClassHidden(AdsContent.MOBILETOP_LB, src)
-        .verifyPostMessage(AdsContent.MOBILETOP_LB, src)
-        .verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
+    String testPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsHopObject adsHopObject = new AdsHopObject(driver, testPage);
+    adsHopObject.waitForPageLoaded();
+    adsHopObject.verifyClassHidden(AdsContent.MOBILETOP_LB, src);
+    adsHopObject.verifyPostMessage(AdsContent.MOBILETOP_LB, src);
+    adsHopObject.verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
   }
 
 }
