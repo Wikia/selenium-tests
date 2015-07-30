@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestAdsHop extends TemplateNoFirstLoad {
+public class TestAdsHopMercury extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "testAdsHopPostMessage",
-      groups = "TestAdsHop"
+      groups = "AdsHopPostMessageMercury"
   )
-  public void testAdsHopPostMessage(String wikiName, String article, String src) {
+  public void adsHopPostMessageMercury(String wikiName, String article, String src) {
     String testPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsHopObject adsHopObject = new AdsHopObject(driver, testPage);
     adsHopObject.waitForPageLoaded();
