@@ -1074,10 +1074,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public UserProfilePageObject clickOnAvatar() {
-    waitForElementClickableByElement(globalNavigationUserChevron);
-    globalNavigationUserChevron.click();
-    wait.forElementVisible(userMenuDropdown);
-    waitForElementClickableByElement(globalNavigationAvatar);
+    getVenusGlobalNav().openAccountNAvigation();
     globalNavigationAvatar.click();
     PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
     return new UserProfilePageObject(driver);
