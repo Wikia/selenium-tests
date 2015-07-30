@@ -95,7 +95,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForSonyReferrer() {
+  public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
