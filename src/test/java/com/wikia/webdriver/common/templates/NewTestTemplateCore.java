@@ -88,7 +88,10 @@ public class NewTestTemplateCore {
       NewDriverProvider.getMobileDriver().quit();
     }*/
     if (driver != null) {
-      driver.quit();
+      try {
+        driver.quit();
+      } catch (Error e) {
+      }
     }
   }
 
