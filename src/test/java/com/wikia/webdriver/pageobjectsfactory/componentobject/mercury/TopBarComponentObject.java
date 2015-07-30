@@ -18,7 +18,7 @@ public class TopBarComponentObject extends BasePageObject {
     }
 
     public void clickLogInIcon(){
-        waitForElementVisibleByElement(loginIcon);
+        wait.forElementVisible(loginIcon);
         loginIcon.click();
     }
 }
