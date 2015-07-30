@@ -25,7 +25,7 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   @FindBy(css = ".portable-infobox-navigation a[href*='/wiki']")
   private WebElement pInfoExternalLink;
   @FindBy(css = ".portable-infobox-navigation a[href*='redlink']")
-  private WebElement pInfoRedlLink;
+  private List<WebElement> pInfoRedlLink;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
   @FindBy(css = "i")
@@ -121,8 +121,8 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   }
 
   public String getExternalLinkRedirectTitle() {
-    waitForElementByElement(pInfoRedlLink);
-    return pInfoRedlLink.getAttribute("href");
+    waitForElementByElement(pInfoExternalLink);
+    return pInfoExternalLink.getAttribute("href");
   }
 
   public String getInternalLinkRedirectTitle() {
@@ -196,9 +196,10 @@ public class PortableInboxPageObject extends WikiBasePageObject {
     waitForElementByElement(referenceElements);
   }
 
-  public CreateArticleModalComponentObject clickRedLink() {
-    waitForElementByElement(pInfoRedlLink);
-    pInfoRedlLink.click();
+  public CreateArticleModalComponentObject clickRedLink(int i) {
+    waitForElementVisibleByElement(pInfoRedlLink.get(i));
+    WebElement redLinkChose = pInfoRedlLink.get(i);
+    redLinkChose.click();
     return new CreateArticleModalComponentObject(driver);
   }
 

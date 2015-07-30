@@ -31,7 +31,6 @@ import org.testng.annotations.Test;
  * page will display category in categories section at the bottom of the page automatically
  *
  * Created by nikodamn 20/07/15
-<<<<<<< HEAD
  * TC05: Verify lightbox opens when clicking infobox image
  * TC06: Verify visibility of tabber and it's images
  * TC07: Verify infobox color has changed after changing colors in wiki Theme Designer
@@ -63,7 +62,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInboxPageObject info = article.getInfoboxPage();
     //Red link
-    info.clickRedLink();
+    info.clickRedLink(0);
     info.verifyCreateNewArticleModal();
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     article.getInfoboxPage();
