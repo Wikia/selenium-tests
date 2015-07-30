@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 
 /**
- * Created by rcunningham on 6/30/15.
+ * @ownership Social
  */
 public class SignupPageObject extends BasePageObject {
 

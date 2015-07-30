@@ -6,7 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObjec
 import org.testng.annotations.Test;
 
 /**
- * Created by rcunningham on 6/30/15.
+ * @ownership Social
  */
 @Test(groups = {"MercurySignupTests", "Mercury"})
 public class SignupTests extends NewTestTemplate {
