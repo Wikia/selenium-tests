@@ -12,13 +12,15 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private final String WIKI_NAME = "adtest";
   private final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
-  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  @Test(
+      groups = {"TestFloorAdhesion", "MercuryAds"},
+      enabled = false // wf ADEN-2255
+  )
   public void testFloorAdhesionPresence() {
     String browser = Configuration.getBrowser();
-    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
-    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
 
     wikiPage.verifyFloorAdhesionPresent(
         skinContext.getSlotName(),
@@ -28,12 +30,14 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     wikiPage.verifyThereIsNoWikiaBar(browser);
   }
 
-  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  @Test(
+      groups = {"TestFloorAdhesion", "MercuryAds"},
+      enabled = false // wf ADEN-2255
+  )
   public void testFloorAdhesionModal() {
     String browser = Configuration.getBrowser();
-    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
 
-    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
     String floorAdhesionModalSelector = skinContext.getModalSelector();
@@ -45,11 +49,17 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
         .verifyThereIsNoModal(floorAdhesionModalSelector);
   }
 
-  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
+  @Test(
+      groups = {"TestFloorAdhesion", "MercuryAds"},
+      enabled = false // wf ADEN-2255
+  )
   public void testFloorAdhesionCloseButton() {
-    String testPage = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
-    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, testPage);
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
     wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
   }
 
+  private String getArticleUrl() {
+    String url = urlBuilder.getUrlForPath(WIKI_NAME, ARTICLE_TITLE);
+    return urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
+  }
 }
