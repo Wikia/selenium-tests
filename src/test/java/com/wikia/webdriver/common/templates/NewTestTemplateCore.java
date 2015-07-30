@@ -97,7 +97,10 @@ public class NewTestTemplateCore {
 
   protected void stopCustomBrowser(WebDriver customDriver) {
     if (customDriver != null) {
-      customDriver.quit();
+      try {
+        customDriver.quit();
+      } catch (Error e) {
+      }
     }
   }
 
