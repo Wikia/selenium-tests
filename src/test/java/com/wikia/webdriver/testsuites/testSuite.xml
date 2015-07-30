@@ -38,7 +38,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxSegment"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsLoggedInUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnSonyReferrer"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestParamValue"/>
