@@ -18,9 +18,9 @@ import org.openqa.selenium.support.FindBy;
  */
 public class BasePageObject extends MobileBasePageObject {
 
-
   @FindBy(css = LOADING_SPINNER_CSS)
   private WebElement loadingSpinner;
+
   private final static String LOADING_SPINNER_CSS = ".loading-overlay";
 
 

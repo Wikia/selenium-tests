@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -84,7 +84,7 @@ public class LoginTests extends NewTestTemplate {
   @Test
   @Execute(onWikia = "mobileregressiontesting")
   public void registerNowLinkWorks() {
-    MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
+    SignupPageObject registrationPage = new SignupPageObject(driver);
     registrationPage.openRegisterPage();
     String expectedHeader = registrationPage.getRegisterHeaderText();
 
@@ -111,7 +111,7 @@ public class LoginTests extends NewTestTemplate {
   @Test
   @Execute(onWikia = "mobileregressiontesting")
   public void registerButtonWorksOnJoinPage() {
-    MobileSignupPageObject registrationPage = new MobileSignupPageObject(driver);
+    SignupPageObject registrationPage = new SignupPageObject(driver);
     registrationPage.openRegisterPage();
     String expectedHeader = registrationPage.getRegisterHeaderText();
 
