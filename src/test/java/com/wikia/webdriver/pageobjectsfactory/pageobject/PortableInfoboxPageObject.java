@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Rodriuki on 11/06/15.
  * Created by nikodamn on 20/07/15
  */
-public class PortableInboxPageObject extends WikiBasePageObject {
+public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".portable-infobox-image-wrapper")
   private WebElement pInfoImage;
@@ -34,16 +34,16 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   private WebElement pInfoInternalLink;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
-  @FindBy(css = ".portable-infobox-layout-default")
+  @FindBy(css = ".portable-infobox")
   private WebElement infoboxLayout;
   @FindBy(css = ".tabberlive")
   private WebElement tabber;
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
   @FindBy(css = ".portable-infobox-item-value ul li")
-  private WebElement unorderedListElement;
+  private List <WebElement> unorderedElementList;
   @FindBy(css = ".portable-infobox-item-value ol li")
-  private WebElement orderedListElement;
+  private List <WebElement> orderedElementList;
   @FindBy(css = ".reference")
   private WebElement referenceElements;
   @FindBy(css = ".portable-infobox-item-label")
@@ -64,13 +64,13 @@ public class PortableInboxPageObject extends WikiBasePageObject {
   private WebElement horizontalItemValue;
 
 
-  public PortableInboxPageObject(WebDriver driver) {
+  public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
 
   public String getBackgroundColor() {
-    return infoboxLayout.getAttribute("background-color");
+    return infoboxLayout.getCssValue("background-color");
   }
 
   public List<WebElement> getBoldElements(){
@@ -110,16 +110,6 @@ public class PortableInboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(checkIfElementOnPage(lightbox), true);
   }
 
-  public void verifyOrderedListPresence(){
-    waitForElementByElement(orderedListElement);
-    Assertion.assertEquals(checkIfElementOnPage(orderedListElement), true);
-  }
-
-  public void verifyUnorderedListPresence(){
-    waitForElementByElement(unorderedListElement);
-    Assertion.assertEquals(checkIfElementOnPage(unorderedListElement), true);
-  }
-
   public String getExternalLinkRedirectTitle() {
     waitForElementByElement(pInfoExternalLink);
     return pInfoExternalLink.getAttribute("href");
@@ -136,6 +126,16 @@ public class PortableInboxPageObject extends WikiBasePageObject {
 
   public WebElement getItemValue() {
     return itemValue;
+  }
+
+  public WebElement getOrderedListItem(int index) {
+    WebElement orderedListItem = orderedElementList.get(index);
+    return orderedListItem;
+  }
+
+  public WebElement getUnorderedListElement(int index) {
+    WebElement unorderedListItem = unorderedElementList.get(index);
+    return unorderedListItem;
   }
 
   public WebElement getHorizontalItemLabel() {
@@ -211,9 +211,9 @@ public class PortableInboxPageObject extends WikiBasePageObject {
     // Same as previous case, waiting on Ludwik
   }
 
-  public void verifyFontSize(WebElement firstElement, WebElement secondElement) {
-    String firstFontSize = firstElement.getAttribute("font-size");
-    String secondFontSize = secondElement.getAttribute("font-size");
-    Assertion.assertEquals(firstElement, secondElement);
+  public void compareFontSizes(WebElement firstElement, WebElement secondElement) {
+    String firstFontSize = firstElement.getCssValue("font-size");
+    String secondFontSize = secondElement.getCssValue("font-size");
+    Assertion.assertEquals(firstFontSize, secondFontSize);
   }
 }
