@@ -12,6 +12,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -22,13 +23,13 @@ import java.io.File;
  * @author drets
  * @ownership AdEng
  */
-public class AdSkinHelper {
+public class SkinHelper {
 
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final int IMAGES_THRESHOLD_PERCENT = 12;
   private final WebDriver driver;
-  private final String pathToLeftPart;
-  private final String pathToRightPart;
+  private String pathToLeftPart;
+  private String pathToRightPart;
   private AdsComparison adsComparison;
   private ImageEditor imageEditor;
   private ImageComparison imageComparison;
@@ -37,12 +38,13 @@ public class AdSkinHelper {
   private int articleRightSideX;
   private int articleLeftSideX;
   private int startSkinY;
+  private int articleBottomY;
 
-
-  public AdSkinHelper(String pathToLeftPart, String pathToRightPart, WebDriver driver) {
+  public SkinHelper(String pathToLeftPart, String pathToRightPart, WebDriver driver) {
     this.pathToLeftPart = pathToLeftPart;
     this.pathToRightPart = pathToRightPart;
     this.driver = driver;
+    init();
   }
 
   private void init() {
@@ -55,11 +57,11 @@ public class AdSkinHelper {
     this.viewPortWidth = globalNavigation.getSize().getWidth();
     this.startSkinY = globalNavigation.getSize().getHeight();
     this.articleLeftSideX = wikiaArticle.getLocation().x;
+    this.articleBottomY = wikiaArticle.getLocation().y + wikiaArticle.getSize().getHeight();
     this.articleRightSideX = wikiaArticle.getLocation().x + wikiaArticle.getSize().getWidth();
   }
 
   public boolean skinPresent() {
-    init();
     return skinPartPresent(true) & skinPartPresent(false);
   }
 
@@ -113,5 +115,21 @@ public class AdSkinHelper {
   private void hideCoveredSkinElements() {
     adsComparison.hideSlot(AdsContent.WIKIA_BAR, driver);
     adsComparison.hideSlot(WIKIA_MESSAGE_BUBLE, driver);
+  }
+
+  public String getMiddleColor() {
+    Point startPoint = new Point((articleLeftSideX + articleRightSideX) / 2, startSkinY + 3);
+    File pixel = shooter.capturePageAndCrop(startPoint, new Dimension(1, 1), driver);
+    return toHex(new Color(imageEditor.fileToImage(pixel).getRGB(0, 0)));
+  }
+
+  public String getBackgroundColor() {
+    Point startPoint = new Point(1, articleBottomY);
+    File pixel = shooter.capturePageAndCrop(startPoint, new Dimension(1, 1), driver);
+    return toHex(new Color(imageEditor.fileToImage(pixel).getRGB(0, 0)));
+  }
+
+  private String toHex(Color color) {
+    return String.format("%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
   }
 }

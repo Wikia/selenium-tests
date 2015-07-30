@@ -24,17 +24,22 @@ public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skinLimited",
-      groups = {"TestRoadblock_GeoEdgeFree"}
+      groups = "TestRoadblock_GeoEdgeFree"
   )
   public void TestRoadblock_GeoEdgeFree(String wikiName, String article, Dimension windowResolution,
                                         String expectedAdSkinLeftPartPath,
-                                        String expectedAdSkinRightPartPath) {
+                                        String expectedAdSkinRightPartPath,
+                                        String backgroundColor,
+                                        String middleColor) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
     for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {
       wikiPage.checkTopLeaderboard();
       wikiPage.checkMedrec();
-      wikiPage.checkSkin(expectedAdSkinLeftPartPath, expectedAdSkinRightPartPath);
+      wikiPage.checkSkin(expectedAdSkinLeftPartPath,
+                         expectedAdSkinRightPartPath,
+                         backgroundColor,
+                         middleColor);
     }
   }
 

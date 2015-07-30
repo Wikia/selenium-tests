@@ -6,10 +6,11 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdSkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SkinHelper;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -36,6 +37,8 @@ import java.util.regex.Pattern;
 public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
+  private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
+
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
@@ -423,7 +426,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String getGptParams(String slotName, String attr) {
     WebElement
         adsDiv =
-        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
+        driver.findElement(
+            By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
     return adsDiv.getAttribute(attr);
   }
 
@@ -640,10 +644,24 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public void checkSkin(String adSkinLeftPath, String adSkinRightPath) {
-    AdSkinHelper skinHelper = new AdSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
+  public void checkSkin(String adSkinLeftPath,
+                        String adSkinRightPath,
+                        String backgroundColor,
+                        String middleColor) {
+    SkinHelper skinHelper = new SkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
+
+    if (!Strings.isNullOrEmpty(backgroundColor)) {
+      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor);
+      PageObjectLogging.log("SKIN", "SKIN has correct background color", true);
+    }
+
+    if (!Strings.isNullOrEmpty(middleColor) &&
+        getWindowSize().getWidth() > MIN_MIDDLE_COLOR_PAGE_WIDTH) {
+      Assertion.assertEquals(skinHelper.getMiddleColor(), middleColor);
+      PageObjectLogging.log("SKIN", "SKIN has correct middle color", true);
+    }
   }
 
   /**
