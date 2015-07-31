@@ -132,5 +132,30 @@ public class LoginTests extends NewTestTemplate {
 
     Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
   }
+
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void redirectToMainPageAfterSuccessfulLogin() {
+    ArticlePageObject homePage = new ArticlePageObject(driver);
+    homePage.openMainPage(wikiURL);
+    String expectedHomePageTitle = homePage.getArticleTitle();
+
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userName10,
+            Configuration.getCredentials().password10);
+
+    Assertion.assertEquals(homePage.getArticleTitle(), expectedHomePageTitle);
+
+  }
+
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void redirectToArticlePageAfterSuccessfulLogin() {
+
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userName10,
+            Configuration.getCredentials().password10);
+
+  }
 }
 
