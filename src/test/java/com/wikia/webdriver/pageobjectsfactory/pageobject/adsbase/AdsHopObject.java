@@ -21,10 +21,9 @@ import java.util.Set;
  */
 public class AdsHopObject extends AdsBaseObject {
 
-  private static final String POST_MESSAGE_SCRIPT_XPATH =
+  private final static String POST_MESSAGE_SCRIPT_XPATH =
       "//script[contains(text(), 'parent.postMessage')]";
-  private static final int AD_SUCCESS_TIMEOUT_SEC = 15;
-
+  private final static int AD_SUCCESS_TIMEOUT_SEC = 15;
   private final static ImmutableMap<String, String> dfpSrc =
       new ImmutableMap.Builder<String, String>()
           .put("DirectGptMobile", "mobile")
