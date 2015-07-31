@@ -43,7 +43,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
-  private ChatPageObject openChatForUser(
+  private ChatPageObject OPENCHATFORUSERS(
       WebDriver driver, String userName, String password
   ) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
