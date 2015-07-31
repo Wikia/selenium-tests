@@ -21,10 +21,10 @@ import java.util.Set;
  */
 public class AdsHopObject extends AdsBaseObject {
 
-  private final static String POST_MESSAGE_SCRIPT_XPATH =
+  private static final String POST_MESSAGE_SCRIPT_XPATH =
       "//script[contains(text(), 'parent.postMessage')]";
-  private final static int AD_SUCCESS_TIMEOUT_SEC = 15;
-  private final static ImmutableMap<String, String> dfpSrc =
+  private static final int AD_SUCCESS_TIMEOUT_SEC = 15;
+  private static final ImmutableMap<String, String> dfpSrc =
       new ImmutableMap.Builder<String, String>()
           .put("DirectGptMobile", "mobile")
           .put("RemnantGptMobile", "mobile_remnant")
@@ -38,7 +38,7 @@ public class AdsHopObject extends AdsBaseObject {
     new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver driver) {
-        return getTestedDiv(slotName, src).getAttribute("class").trim().equals("hidden");
+        return "hidden".equals(getTestedDiv(slotName, src).getAttribute("class").trim());
       }
 
       @Override
