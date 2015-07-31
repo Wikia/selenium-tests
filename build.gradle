@@ -89,7 +89,7 @@ task getSuite << {
     def apiSuffix = "api/json?pretty=true"
 
     def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
-    def reportPath = "/lastBuild/artifact/target/surefire-reports/testng-failed.xml"
+    def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
     def parser = new XmlSlurper()
@@ -101,7 +101,6 @@ task getSuite << {
     if (project.failedOnly.equals('jenkinsDuty')) {
         println "Switching to Jenkins Duty Mode"
         jobName = "wikia-test-matrix-failed"
-        reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
         try {
             xml = parser.parse(
@@ -133,7 +132,7 @@ task getSuite << {
             def failedCOnfigurations = []
 
             activeConfigs.each {
-                if (it.color == 'red') {
+                if (it.color == 'yellow') {
                     failedCOnfigurations.add(it.url)
                 }
             }
