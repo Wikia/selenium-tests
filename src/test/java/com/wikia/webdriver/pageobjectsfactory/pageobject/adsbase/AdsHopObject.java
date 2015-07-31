@@ -8,10 +8,11 @@ import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
@@ -22,8 +23,8 @@ public class AdsHopObject extends AdsBaseObject {
 
   private static final String POST_MESSAGE_SCRIPT_XPATH =
       "//script[contains(text(), 'parent.postMessage')]";
-
-  private final static ImmutableMap<String, String> dfpSrc =
+  private static final int AD_SUCCESS_TIMEOUT_SEC = 15;
+  private static final ImmutableMap<String, String> dfpSrc =
       new ImmutableMap.Builder<String, String>()
           .put("DirectGptMobile", "mobile")
           .put("RemnantGptMobile", "mobile_remnant")
@@ -33,13 +34,21 @@ public class AdsHopObject extends AdsBaseObject {
     super(driver, page);
   }
 
-  public AdsHopObject verifyClassHidden(String slotName, String src) {
-    WebElement testedDiv = getTestedDiv(slotName, src);
-    Assertion.assertEquals(testedDiv.getAttribute("class").trim(), "hidden");
-    return this;
+  public void verifyClassHidden(final String slotName, final String src) {
+    new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver driver) {
+        return "hidden".equals(getTestedDiv(slotName, src).getAttribute("class").trim());
+      }
+
+      @Override
+      public String toString() {
+        return src + " div doesn't have class=\"hidden\"";
+      }
+    });
   }
 
-  public AdsHopObject verifyPostMessage(String slotName, String src) {
+  public void verifyPostMessage(String slotName, String src) {
     WebElement testedDiv = getTestedDiv(slotName, src);
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
     WebElement iframe = testedDiv.findElement(By.cssSelector(iframeSelector));
@@ -48,10 +57,9 @@ public class AdsHopObject extends AdsBaseObject {
     Assertion
         .assertEquals(postMessageScript.getAttribute("innerHTML"), getPostMessagePattern(src));
     driver.switchTo().defaultContent();
-    return this;
   }
 
-  public AdsHopObject verifyLineItemIdsDiffer(String slotName) {
+  public void verifyLineItemIdsDiffer(String slotName) {
     String lineItemIdAttribute = "data-gpt-line-item-id";
     String slotSelector = AdsContent.getSlotSelector(slotName);
     java.util.List<WebElement>
@@ -72,20 +80,29 @@ public class AdsHopObject extends AdsBaseObject {
                             slotName + " slot has the divs with the different line item ids",
                             true);
     }
-    return this;
   }
 
-  private WebElement getTestedDiv(String slotName, String src) {
-    String slotSelector = AdsContent.getSlotSelector(slotName);
-    java.util.List<WebElement>
-        divs =
-        driver.findElements(By.cssSelector(slotSelector + " > div"));
-    for (WebElement div : divs) {
-      if (div.getAttribute("id").contains(src)) {
-        return div.findElement(By.tagName("div"));
-      }
-    }
-    throw new NoSuchElementException(slotName + " does not have the " + src + " div");
+  private WebElement getTestedDiv(final String slotName, final String src) {
+    final String slotSelector = AdsContent.getSlotSelector(slotName);
+    return new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(
+        new ExpectedCondition<WebElement>() {
+          @Override
+          public WebElement apply(WebDriver driver) {
+            java.util.List<WebElement> divs =
+                driver.findElements(By.cssSelector(slotSelector + " > div"));
+            for (WebElement div : divs) {
+              if (div.getAttribute("id").contains(src)) {
+                return div.findElement(By.tagName("div"));
+              }
+            }
+            return null;
+          }
+
+          @Override
+          public String toString() {
+            return slotName + " does not have the " + src + " div";
+          }
+        });
   }
 
   private String getPostMessagePattern(String src) {

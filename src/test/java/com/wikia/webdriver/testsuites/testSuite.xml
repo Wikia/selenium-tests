@@ -18,7 +18,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsHop"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
