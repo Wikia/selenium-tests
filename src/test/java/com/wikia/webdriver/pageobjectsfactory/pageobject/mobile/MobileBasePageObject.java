@@ -82,10 +82,6 @@ public class MobileBasePageObject extends WikiBasePageObject {
   protected WebElement selectedPageHeader;
   @FindBy(css = "#wkMainCntHdr > a")
   private WebElement editButton;
-  @FindBy(css = ".login")
-  private WebElement newloginButton;
-  @FindBy(css = ".signup-provider-email")
-  private WebElement signupButton;
 
   public void triggerLoginDropDown() {
     wait.forElementVisible(loginDropDownTrigger);
@@ -299,14 +295,5 @@ public class MobileBasePageObject extends WikiBasePageObject {
         true
     );
     return new MobileEditModePageObject(driver);
-  }
-
-  public MobileSignupPageObject openMobileSignupPage(String wikiURL) {
-    openHome(wikiURL);
-    wait.forElementVisible(newloginButton);
-    newloginButton.click();
-    wait.forElementVisible(signupButton);
-    signupButton.click();
-    return new MobileSignupPageObject(driver);
   }
 }
