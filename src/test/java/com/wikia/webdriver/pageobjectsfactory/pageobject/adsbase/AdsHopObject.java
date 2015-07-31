@@ -18,7 +18,7 @@ import java.util.Set;
  * @author drets
  * @ownership AdEng
  */
-public class AdsHopObject extends AdsBaseObject {
+public class AdsHopObject extends AdsBaseObject 
 
   private static final String POST_MESSAGE_SCRIPT_XPATH =
       "//script[contains(text(), 'parent.postMessage')]";
