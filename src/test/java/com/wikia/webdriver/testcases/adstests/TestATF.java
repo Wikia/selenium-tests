@@ -17,8 +17,8 @@ import org.testng.annotations.Test;
  */
 public class TestATF extends TemplateNoFirstLoad {
 
-  private final static Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
-  private final static Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
+  private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
+  private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

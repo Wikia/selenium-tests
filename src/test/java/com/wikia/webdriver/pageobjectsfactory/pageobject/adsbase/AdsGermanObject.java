@@ -23,7 +23,6 @@ import java.util.Map;
  */
 public class AdsGermanObject extends AdsBaseObject {
 
-  private static final String IVW2_SCRIPT = "script.ioam.de";
   private static final String JS_SKIN_CALL = "top.loadCustomAd({type:\"skin\",destUrl:\"";
   /*
    * List of all possible combinations for 71M ads with their characteristic slots

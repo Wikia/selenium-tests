@@ -54,7 +54,8 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
       dataProvider = "evolveHopTestPage",
-      enabled = false // wf ADR-254
+      // wf ADR-254
+      enabled = false
   )
   public void testEvolveHop_CA(
       String wikiName,

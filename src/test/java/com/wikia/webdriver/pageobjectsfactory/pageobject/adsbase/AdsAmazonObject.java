@@ -19,21 +19,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
-  private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
-  private final static String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
-  private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
-  private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
-  private final static String
-      AMAZON_SLOTS_CSS_SELECTOR =
+  private static final String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
+  private static final String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private static final String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private static final String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
+  private static final String AMAZON_SLOTS_CSS_SELECTOR =
       "div[id*=_gpt][data-gpt-slot-params*=amznslots]:not(.hidden)";
 
-  private final static ImmutableMap<String, String> amazonLinkCssSelectors =
+  private static final ImmutableMap<String, String> amazonLinkCssSelectors =
       new ImmutableMap.Builder<String, String>()
           .put("AmazonFirstArticle", "a[href='/wiki/Amazon']")
           .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
           .build();
 
-  private final static ImmutableMap<String, String> amazonLinkTitles =
+  private static final ImmutableMap<String, String> amazonLinkTitles =
       new ImmutableMap.Builder<String, String>()
           .put("AmazonFirstArticle", "Amazon")
           .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2")
