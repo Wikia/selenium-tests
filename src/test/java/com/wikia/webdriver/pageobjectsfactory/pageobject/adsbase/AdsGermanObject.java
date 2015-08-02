@@ -10,10 +10,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,58 +94,49 @@ public class AdsGermanObject extends AdsBaseObject {
 
   public void verify71MediaAdsPresent() {
     AdsComparison adsComparison = new AdsComparison();
+    Map testedCombination = Collections.emptyMap();
 
     for (Map<String, Object> combination : combinations) {
-      List<String> combinationSlots = (List) combination.get("slots");
-      if (checkIfCombinationOnPage(combinationSlots)) {
-        PageObjectLogging.log(
-            "Combination present",
-            "Combination present: " + combination.get("name"),
-            true,
-            driver
-        );
-        for (String slotSelector : combinationSlots) {
-          WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-          if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(
-              slot, slotSelector, driver)) {
-            PageObjectLogging.log(
-                "Ad in slot found",
-                "Ad in slot found; CSS: " + slotSelector,
-                true
-            );
-          } else {
-            throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
-          }
-        }
-        return;
+      if (checkIfCombinationOnPage((List<String>) combination.get("slots"))) {
+        testedCombination = combination;
+        break;
       }
     }
 
-    throw new NoSuchElementException("No known combination from 71 media present");
-  }
+    if (testedCombination.isEmpty()) {
+      throw new NoSuchElementException("No known combination from 71 media present");
+    }
 
-  public void verifyNo71MediaAds() {
-    PageObjectLogging.log("PageOpened", "Page opened", true, driver);
-    for (Map<String, Object> combination : combinations) {
-      List<String> combinationSlots = (List) combination.get("slots");
-      if (!checkIfCombinationOnPage(combinationSlots)) {
+    PageObjectLogging.log(
+        "Combination present",
+        "Combination present: " + testedCombination.get("name"),
+        true,
+        driver
+    );
+
+    for (String slotSelector : (List<String>) testedCombination.get("slots")) {
+      WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+      if (hasSkin(slot, slotSelector) ||
+          adsComparison.isAdVisible(slot, slotSelector, driver)) {
         PageObjectLogging.log(
-            "Combination not present",
-            "Combination not present: " + combination.get("name"),
+            "Ad in slot found",
+            "Ad in slot found; CSS: " + slotSelector,
             true
         );
       } else {
-        for (String elementSelector : combinationSlots) {
-          WebElement combinationElement = driver.findElement(By.cssSelector(elementSelector));
-          if (combinationElement.isDisplayed()) {
-            PageObjectLogging.log(
-                "Combination present",
-                "Combination present: " + combination.get("name"),
-                false
-            );
-            throw new WebDriverException("Ads found on page");
-          }
-        }
+        throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
+      }
+    }
+  }
+
+  public void verifyNo71MediaAds() {
+    for (Map<String, Object> combination : combinations) {
+      if (checkIfCombinationOnPage((List<String>) combination.get("slots"))) {
+        PageObjectLogging.log(
+            "Combination present",
+            "Combination present: " + combination.get("name"),
+            false
+        );
       }
     }
   }
