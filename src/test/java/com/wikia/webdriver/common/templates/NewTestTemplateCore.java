@@ -65,8 +65,8 @@ public class NewTestTemplateCore {
     return driver;
   }
 
-  protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
-    driver.register(new PageObjectLogging());
+  protected WebDriver registerDriverListener(WebDriver driver) {
+    ((EventFiringWebDriver)driver).register(new PageObjectLogging());
     return driver;
   }
 
