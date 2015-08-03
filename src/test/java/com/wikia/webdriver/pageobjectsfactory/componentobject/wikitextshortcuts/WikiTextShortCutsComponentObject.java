@@ -7,13 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 /**
  * Created by Rodriuki on 29/07/15.
  */
 public class WikiTextShortCutsComponentObject extends SourceEditModePageObject{
 
   @FindBy (css = "a[onclick*='Category']")
-  private WebElement category;
+  private List<WebElement> categories;
 
 
   public WikiTextShortCutsComponentObject(WebDriver driver) {
@@ -21,9 +23,13 @@ public class WikiTextShortCutsComponentObject extends SourceEditModePageObject{
     PageFactory.initElements(driver, this);
   }
 
+  public WebElement getCategoryShortcut(int index) {
+    return categories.get(index);
+  }
+
   public SourceEditModePageObject clickCategory() {
-    waitForElementByElement(category);
-    category.click();
+    WebElement categoryShortcut = getCategoryShortcut(1);
+    waitForElementByElement(categoryShortcut);
     return new SourceEditModePageObject(driver);
   }
 }

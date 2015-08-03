@@ -22,7 +22,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement pInfoTitle;
   @FindBy(css = ".portable-infobox-header")
   private List<WebElement> pInfoTitleH3;
-  @FindBy(css = ".portable-infobox-navigation a[href*='/wiki']")
+  @FindBy(css = ".portable-infobox .external")
   private WebElement pInfoExternalLink;
   @FindBy(css = ".portable-infobox-navigation a[href*='redlink']")
   private List<WebElement> pInfoRedlLink;
@@ -30,8 +30,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> boldElements;
   @FindBy(css = "i")
   private List<WebElement> italicElements;
-  @FindBy(css = ".portable-infobox-navigation a[href*='cleanup4']")
-  private WebElement pInfoInternalLink;
+  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
+  private List <WebElement> pInfoInternalLinks;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
   @FindBy(css = ".portable-infobox")
@@ -115,9 +115,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoExternalLink.getAttribute("href");
   }
 
-  public String getInternalLinkRedirectTitle() {
-    waitForElementByElement(pInfoInternalLink);
-    return pInfoInternalLink.getAttribute("href");
+  public String getInternalLinkRedirectTitle(int index) {
+    waitForElementByElement(pInfoInternalLinks.get(index));
+    return pInfoInternalLinks.get(index).getAttribute("href");
   }
 
   public WebElement getItemLabel() {
@@ -151,9 +151,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     pInfoExternalLink.click();
   }
 
-  public void clickInternalLink() {
-    waitForElementByElement(pInfoInternalLink);
-    pInfoInternalLink.click();
+  public void clickInternalLink(int index) {
+    scrollToElement(pInfoInternalLinks.get(index));
+    waitForElementByElement(pInfoInternalLinks.get(index));
+    pInfoInternalLinks.get(index).click();
   }
 
   public void clickImage() {
@@ -167,12 +168,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
-    waitForElementByElement(pInfoImage);
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
   }
 
   public void compareURLAndInternalLink(String internalLinkName, String internalNavigatedURL) {
-    waitForElementByElement(pInfoImage);
     Assertion.assertEquals(internalLinkName, internalNavigatedURL);
   }
 
@@ -197,6 +196,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public CreateArticleModalComponentObject clickRedLink(int i) {
+    scrollToElement(pInfoRedlLink.get(i));
     waitForElementVisibleByElement(pInfoRedlLink.get(i));
     WebElement redLinkChose = pInfoRedlLink.get(i);
     redLinkChose.click();

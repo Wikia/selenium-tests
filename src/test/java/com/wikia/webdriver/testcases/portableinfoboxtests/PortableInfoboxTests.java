@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
@@ -21,6 +20,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageOb
 import org.apache.commons.net.nntp.Article;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Rodriuki on 12/06/15.
@@ -74,14 +75,24 @@ public class PortableInfoboxTests extends NewTestTemplate {
     //External Link
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
-    String externalNavigatedURL = info.getCurrentUrl();
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    String externalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     article.getInfoboxPage();
     //Internal Link
-    String internalLinkName = info.getInternalLinkRedirectTitle();
-    info.clickInternalLink();
-    String internalNavigatedURL = info.getCurrentUrl();
+    String internalLinkName = info.getInternalLinkRedirectTitle(0);
+    info.clickInternalLink(0);
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    String internalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
   }
 
@@ -194,16 +205,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_015"})
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    LoginPage loginPage = new LoginPage(driver).get();
-    loginPage.logUserIn(Configuration.getCredentials().userName10,
-            Configuration.getCredentials().password10);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.logInCookie(credentials.userName10,
+            credentials.password10, wikiURL);
     TemplatePageObject template = article.openTemplatePage(wikiURL,
             PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
-    LoginPage newLoginPage = new LoginPage(driver).get();
-    newLoginPage.logUserIn(Configuration.getCredentials().userName10,
-            Configuration.getCredentials().password10);
+    base.logInCookie(credentials.userName10,
+            credentials.password10, wikiURL);
     ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
     SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
     newEditor.addContent(templateSyntax);
