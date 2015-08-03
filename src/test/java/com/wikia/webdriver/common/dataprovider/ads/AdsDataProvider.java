@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.core.url.Page;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -432,15 +434,29 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegment() {
+  public static Object[][] kruxSegments() {
     return new Object[][]{
         {
-            "vim",
-            "Vim_Tips_Wiki",
-            "adtest",
-            "SyntheticTests/Krux/Page_1",
-            "pqdapsy7l"
-        }
+            "J-RIfJI0",
+            new Page("vim", "Vim_Tips_Wiki"),
+            "[\"pqdapsy7l\"]", // Standard segment for visiting adtest before
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            "[\"o8l9bis26\",\"pqdapsy7l\"]", // Both standard and real-time segment for adtest
+        },
+        {
+            null,
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            "[\"o8l9bis26\"]",
+            new Page("glee", "Glee_TV_Show_Wiki"),
+            "[]", // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
+        },
+        {
+            null,
+            new Page("vim", "Vim_Tips_Wiki"),
+            "[]", // No pqdapsy7l (standard segment for adtest)
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            "[\"o8l9bis26\"]", // Real time segment for adtest
+        },
     };
   }
 

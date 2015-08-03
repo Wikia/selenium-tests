@@ -35,7 +35,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestKruxSegment"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxSegments"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsLoggedInUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>

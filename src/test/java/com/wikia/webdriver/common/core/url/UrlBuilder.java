@@ -27,6 +27,13 @@ public class UrlBuilder {
     this.browser = browser;
   }
 
+  public String getUrlForPage(Page page) {
+    if (page.getWikiPath() == null) {
+      return getUrlForWiki(page.getWikiName());
+    }
+    return getUrlForPath(page.getWikiName(), page.getWikiPath());
+  }
+
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";

@@ -28,7 +28,7 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("OpenWikiPage", "Wiki Page opened with success", true);
     changeToMonoBook();
-    PageObjectLogging.log("logOut", "skin is changing for more then 30 seconds", true, driver);
+    PageObjectLogging.log("logOut", "skin is changing for more than 30 seconds", true, driver);
   }
 
   public void changeToMonoBook() {
