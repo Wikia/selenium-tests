@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -38,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
+  private static final int PROVIDER_CHAIN_TIMEOUT_SEC  = 30;
 
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -548,8 +550,23 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
-    Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
+    List<String> actualProviders = getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
+    Assertion.assertEquals(providers, Joiner.on("; ").join(actualProviders));
     return this;
+  }
+
+  private List<String> getProvidersChain(final String slotName, final String expectedProviders, int timeoutSec) {
+    return new WebDriverWait(driver, timeoutSec).until(
+        new ExpectedCondition<List<String>>() {
+          @Override
+          public List<String> apply(WebDriver webDriver) {
+            if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
+              return getProvidersChain(slotName);
+            }
+            return Collections.emptyList();
+          }
+        }
+    );
   }
 
   private List<String> getProvidersChain(String slotName) {
