@@ -178,6 +178,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
             + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(logPath, builder.toString());
       } else {
+        if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")){
+          driver.get(url);
+        }
         logWarning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
