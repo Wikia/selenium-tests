@@ -255,15 +255,10 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
-    openEditDropdown.click();
+    scrollAndClick(openEditDropdown);
     wait.forElementVisible(editUsingClassicEditor);
-    editUsingClassicEditor.click();
+    scrollAndClick(editUsingClassicEditor);
     return new VisualEditModePageObject(driver);
-  }
-
-  public SourceEditModePageObject editArticleInSrcUsingDropdown() {
-    editUsingClassicEditor.click();
-    return new SourceEditModePageObject(driver);
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
