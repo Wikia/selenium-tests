@@ -153,6 +153,10 @@ public class MainPageTests extends NewTestTemplate {
     //TODO: make function from this
     //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     for (PageElements element : PageElements.values()) {
+      if(PageElements.TRENDING_ARTICLES.name.equals(element.name)) {
+        continue;
+      }
+
       int newPosition = cc.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
