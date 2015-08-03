@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -69,7 +70,7 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(String fileName) {
-    WebElement photo = getElementByValue(addThisPhotoList, "title", fileName);
+    WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);

@@ -337,11 +337,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     scrollAndClick(selectedMedia, 80);
   }
 
-  public void selectMediaByTitle(String title) {
-    WebElement selectedMedia = getElementByValue(mediaNodes, "href", title);
-    selectedMedia.click();
-  }
-
   public void randomResizeOnMedia() {
     int randomX = (int) (Math.random() * 100);
     int randomY = (int) (-Math.random() * 100);

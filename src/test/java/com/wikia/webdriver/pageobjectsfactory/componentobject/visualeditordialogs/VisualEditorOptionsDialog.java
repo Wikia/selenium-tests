@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -120,7 +121,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   private void clickCategory(String searchCategory) {
     waitForDialogVisible();
     wait.forElementVisible(categoryItem);
-    WebElement elementFound = getElementByText(categoryItems, searchCategory);
+    WebElement elementFound = Elements.getElementByText(categoryItems, searchCategory);
     WebElement categoryDownIndicator = elementFound.findElement(downIndicatorBy);
     categoryDownIndicator.click();
     wait.forElementVisible(categoryPopUp);

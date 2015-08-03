@@ -362,7 +362,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void submitCategory() {
-    pressEnter(categoryInput);
+    new Actions(driver).sendKeys(categoryInput, Keys.ENTER).perform();
     PageObjectLogging.log("submitCategory", "category submitted", true);
   }
 

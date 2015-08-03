@@ -27,9 +27,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
@@ -583,7 +585,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void addCategory(String category) {
     clickAddCategoryButton();
     typeCategoryName(category);
-    pressEnter(addCategoryInput);
+    new Actions(driver).sendKeys(addCategoryInput, Keys.ENTER).perform();
     wait.forElementVisible(categoryNew);
     PageObjectLogging.log("addCategory", category + " category added", true);
   }

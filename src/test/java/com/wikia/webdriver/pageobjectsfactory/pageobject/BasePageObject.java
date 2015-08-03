@@ -490,12 +490,6 @@ public class BasePageObject {
     PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
   }
 
-  public void pressEnter(WebElement element) {
-    Actions actions = new Actions(driver);
-    actions.sendKeys(element, "\n");
-    actions.build().perform();
-  }
-
   public void pressDownArrow(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("var e = jQuery.Event(\"keydown\"); "
@@ -622,69 +616,9 @@ public class BasePageObject {
         + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
   }
 
-  public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
-    WebElement foundElement = null;
-    for (WebElement element : elements) {
-      String retAttribute = element.getAttribute(attribute);
-      if ("href".equals(attribute)) {
-        retAttribute =
-            retAttribute.substring(retAttribute.indexOf("File:") + 5).replace("%20", " ");
-        if (!element.getAttribute("class").contains("video")) {
-          retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
-        }
-      }
-      if (value.equals(retAttribute)) {
-        foundElement = element;
-        PageObjectLogging.log("getElementByValue", "Element with attribute: " + attribute
-            + " with the value: " + value + " is found from the list", true);
-        break;
-      }
-    }
-    if (foundElement == null) {
-      throw new NoSuchElementException("Element with attribute: " + attribute + " with the value: "
-          + value + " is not found from the list");
-    }
-    return foundElement;
-  }
-
-  public WebElement getElementByText(List<WebElement> elements, String value) {
-    WebElement foundElement = null;
-    for (WebElement element : elements) {
-      if (element.getText().equalsIgnoreCase(value)) {
-        foundElement = element;
-        PageObjectLogging.log("getElementByText", "Element with text: " + value
-            + " is found from the list", true);
-        break;
-      }
-    }
-    if (foundElement == null) {
-      throw new NoSuchElementException("Element with text: " + value
-          + " is not found from the list");
-    }
-    return foundElement;
-  }
-
   public void switchToNewBrowserTab() {
     List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(tabs.get(tabs.size() - 1));
-  }
-
-  public WebElement getElementByChildText(List<WebElement> elements, By childBySelector,
-      String value) {
-    WebElement foundElement = null;
-    for (WebElement element : elements) {
-      if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
-        foundElement = element;
-        PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value
-            + " is found from the list", true);
-        break;
-      }
-    }
-    if (foundElement == null) {
-      throw new NoSuchElementException("Element's child with text: " + value
-          + " is not found from the list");
-    }
-    return foundElement;
   }
 
   /**
