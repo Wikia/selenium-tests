@@ -13,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsPadObject extends AdsBaseObject {
 
-  private final static String PAD_IMG_CSS =
+  private static final String PAD_IMG_CSS =
       "#mw-content-text #pad-test-img, #NATIVE_PAID_ASSET_DROP #pad-test-img";
 
   @FindBy(css = PAD_IMG_CSS)

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 public class TestPad extends TemplateNoFirstLoad {
 
-  private final static String DISASTER_RECOVERY_URL_PARAM_ON =
+  private static final String DISASTER_RECOVERY_URL_PARAM_ON =
       "InstantGlobals.wgSitewideDisablePaidAssetDrop=1";
 
   @Test(

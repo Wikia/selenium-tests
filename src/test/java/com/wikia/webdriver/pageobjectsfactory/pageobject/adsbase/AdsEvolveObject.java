@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 public class AdsEvolveObject extends AdsBaseObject {
 
   private static final String EVOLVE_SELECTOR = " script[src*=\"4403ad\"]";
-  private static final String EVOLVE_DFP_URL = "ad.doubleclick.net/N4403/";
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
