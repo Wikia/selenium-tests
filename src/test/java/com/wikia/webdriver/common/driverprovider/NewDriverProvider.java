@@ -231,6 +231,7 @@ public class NewDriverProvider {
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
       chromeOptions.addArguments("disable-direct-npapi-requests");
+      chromeOptions.addArguments("process-per-site");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
