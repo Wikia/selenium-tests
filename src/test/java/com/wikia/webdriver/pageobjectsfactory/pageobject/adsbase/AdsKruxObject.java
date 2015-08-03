@@ -30,7 +30,7 @@ public class AdsKruxObject extends AdsBaseObject {
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
   private static final String ADD_USER_URL =
       String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
-  private final static ImmutableMap<String, String> kruxSegs =
+  private static final ImmutableMap<String, String> kruxSegs =
       new ImmutableMap.Builder<String, String>()
           .put("pqdapsy7l", "J6IRfe2v")
           .build();

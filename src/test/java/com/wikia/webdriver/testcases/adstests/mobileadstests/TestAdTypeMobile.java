@@ -15,6 +15,8 @@ import org.testng.annotations.Test;
  */
 public class TestAdTypeMobile extends MobileTestTemplate {
 
+  private static final String SRC = "mobile";
+
   @Test(
       groups = {"MobileAds", "TestAdTypeAsync_001", "TestAdType", "MobileAds"},
       dataProviderClass = AdTypeDataProvider.class,
@@ -25,7 +27,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.waitForSlot(slotName);
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
   }
 
@@ -40,8 +42,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
     ads.wait.forElementPresent(By.id(slotName2));
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
-    ads.verifyGptIframe(adUnit, slotName2, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
+    ads.verifyGptIframe(adUnit, slotName2, SRC);
     ads.verifyNoAdInSlot(slotName);
     ads.verifyNoAdInSlot(slotName2);
   }
@@ -56,7 +58,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifySlotExpanded(slotName);
   }
 
@@ -70,7 +72,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifyNoAdInSlot(slotName);
   }
 
@@ -84,7 +86,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifyNoAdInSlot(slotName);
   }
 
@@ -101,8 +103,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotNameWithAd));
     ads.wait.forElementPresent(By.id(slotNameWithoutAd));
-    ads.verifyGptIframe(adUnit, slotNameWithAd, "mobile");
-    ads.verifyGptIframe(adUnit, slotNameWithoutAd, "mobile");
+    ads.verifyGptIframe(adUnit, slotNameWithAd, SRC);
+    ads.verifyGptIframe(adUnit, slotNameWithoutAd, SRC);
     ads.verifyImgAdLoadedInSlot(slotNameWithAd, imgUrl);
     ads.verifyNoAdInSlot(slotNameWithoutAd);
   }
@@ -117,7 +119,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.waitForSlot(slotName);
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifySlotExpanded(slotName);
   }
 
@@ -131,7 +133,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, "mobile");
+    ads.verifyGptIframe(adUnit, slotName, SRC);
     ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
   }
 }

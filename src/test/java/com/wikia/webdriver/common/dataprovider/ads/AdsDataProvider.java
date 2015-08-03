@@ -307,8 +307,6 @@ public class AdsDataProvider {
             "SyntheticTests/DfpParams",
             "wka.ent/_adtest//article",
             "TOP_LEADERBOARD",
-            "115974612",
-            "37674198492",
             Arrays.asList(
                 "\"s0\":\"ent\"",
                 "\"s1\":\"_adtest\"",
