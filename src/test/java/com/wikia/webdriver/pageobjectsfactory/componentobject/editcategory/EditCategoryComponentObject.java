@@ -26,7 +26,7 @@ public class EditCategoryComponentObject extends BasePageObject {
   private WebElement saveButton;
 
   public ArticlePageObject editCategoryName(String newCategoryName) {
-    waitForElementByElement(categoryNameField);
+    wait.forElementVisible(categoryNameField);
     categoryNameField.clear();
     categoryNameField.sendKeys(newCategoryName);
     saveButton.click();

@@ -100,7 +100,7 @@ public class VEMediaTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     // Excluding FF on running this VE-1370
-    if (!"ff".equalsIgnoreCase(ve.getBrowser())) {
+    if (!"ff".equalsIgnoreCase(Configuration.getBrowser())) {
       VisualEditorAddMediaDialog mediaDialog =
           (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
       ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);

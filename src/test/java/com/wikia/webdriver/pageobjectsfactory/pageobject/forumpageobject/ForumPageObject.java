@@ -33,20 +33,20 @@ public class ForumPageObject extends WikiArticlePageObject {
   }
 
   private void openFaqLightBox() {
-    waitForElementByElement(faqButton);
+    wait.forElementVisible(faqButton);
     scrollAndClick(faqButton);
     PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
   }
 
   private void closeFaqLightBox() {
     waitForElementNotVisibleByElement(faqModalLoadingState);
-    waitForElementByElement(closeFaqLightBoxButton);
+    wait.forElementVisible(closeFaqLightBoxButton);
     closeFaqLightBoxButton.click();
     PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
   }
 
   private void checkFaqLightBoxOpened() {
-    waitForElementByElement(faqLightBox);
+    wait.forElementVisible(faqLightBox);
     PageObjectLogging.log("checkFaqLightBoxOpened",
                           "faq lightbox verified", true);
   }
@@ -75,7 +75,7 @@ public class ForumPageObject extends WikiArticlePageObject {
         break;
       }
     }
-    waitForElementByElement(forumBoardLink);
+    wait.forElementVisible(forumBoardLink);
     waitForElementClickableByElement(forumBoardLink);
     scrollAndClick(forumBoardLink);
     PageObjectLogging.log("openForumBoard",

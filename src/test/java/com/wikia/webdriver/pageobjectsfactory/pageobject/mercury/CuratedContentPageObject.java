@@ -64,31 +64,31 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public String getTitle() {
-    waitForElementByElement(sectionTitle);
+    wait.forElementVisible(sectionTitle);
     return sectionTitle.getText();
   }
 
   public int getCuratedContentItemsNumber() {
-    waitForElementByElement(curatedContentItems.get(0));
+    wait.forElementVisible(curatedContentItems.get(0));
     return curatedContentItems.size();
   }
 
   public CuratedContentPageObject clickOnCuratedContentElementByIndex(int elementNumber) {
-    waitForElementByElement(curatedContentItems.get(elementNumber));
+    wait.forElementVisible(curatedContentItems.get(elementNumber));
     scrollToElement(curatedContentItems.get(elementNumber));
     curatedContentItems.get(elementNumber).click();
     return this;
   }
 
   public CuratedContentPageObject clickOnMainPageLink() {
-    waitForElementByElement(linkToMainPage);
+    wait.forElementVisible(linkToMainPage);
     scrollToElement(linkToMainPage);
     linkToMainPage.click();
     return this;
   }
 
   public CuratedContentPageObject clickOnLoadMoreButton() {
-    waitForElementByElement(loadMoreButton);
+    wait.forElementVisible(loadMoreButton);
     scrollToElement(loadMoreButton);
     loadMoreButton.click();
     return this;
@@ -101,7 +101,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isAlertNotificationVisible() {
-    waitForElementByCss(ALERT_NOTIFICATION_CSS);
+    wait.forElementVisible(By.cssSelector(ALERT_NOTIFICATION_CSS));
     PageObjectLogging.log(
         Labels.ALERT_NOTIFICATION.name,
         MercuryMessages.VISIBLE_MSG,

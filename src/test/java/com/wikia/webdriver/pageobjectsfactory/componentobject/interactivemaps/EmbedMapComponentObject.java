@@ -36,28 +36,28 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
   private WebElement brandFooter;
 
   public void verifyMapTitlePresented() {
-    waitForElementVisibleByElement(mapTitle);
+    wait.forElementVisible(mapTitle);
     Assertion.assertEquals(checkIfElementOnPage(mapTitle), true);
   }
 
   public void verifyCloseButtonPresented() {
-    waitForElementVisibleByElement(closeModalButton);
+    wait.forElementVisible(closeModalButton);
     Assertion.assertEquals(checkIfElementOnPage(closeModalButton), true);
   }
 
   public void verifyEmbedMapModalOpened() {
-    waitForElementVisibleByElement(mapModal);
+    wait.forElementVisible(mapModal);
     Assertion.assertEquals(checkIfElementOnPage(mapModal), true);
   }
 
   public void verifyMapElementsPresented() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(filterBox);
+    wait.forElementVisible(filterBox);
     Assertion.assertEquals(checkIfElementOnPage(filterBox), true);
-    waitForElementVisibleByElement(zoomInButton);
+    wait.forElementVisible(zoomInButton);
     Assertion.assertEquals(checkIfElementOnPage(zoomInButton), true);
-    waitForElementVisibleByElement(zoomOutButton);
+    wait.forElementVisible(zoomOutButton);
     Assertion.assertEquals(checkIfElementOnPage(zoomOutButton), true);
     PageObjectLogging.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
     driver.switchTo().defaultContent();

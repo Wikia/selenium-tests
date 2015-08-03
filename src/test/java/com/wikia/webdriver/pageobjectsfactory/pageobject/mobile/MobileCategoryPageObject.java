@@ -40,12 +40,12 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
   }
 
   public void clickShowAllButton() {
-    waitForElementByElement(showAllButton);
+    wait.forElementVisible(showAllButton);
     showAllButton.click();
   }
 
   public void clickHideAllButton() {
-    waitForElementByElement(hideAllButton);
+    wait.forElementVisible(hideAllButton);
     hideAllButton.click();
   }
 
@@ -62,15 +62,15 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
   }
 
   public void verifyShowAll() {
-    waitForElementByElement(showAllButton);
+    wait.forElementVisible(showAllButton);
   }
 
   public void verifyHideAll() {
-    waitForElementByElement(hideAllButton);
+    wait.forElementVisible(hideAllButton);
   }
 
   public void verifyCategoryExhibition() {
-    waitForElementByElement(categoryExhibition.get(0));
+    wait.forElementVisible(categoryExhibition.get(0));
     Assertion.assertTrue(categoryExhibition.size() == 4);
     PageObjectLogging.log("verifyCategoryExhibition",
                           "Category exibition size (should equal 4) verified", true);
@@ -139,13 +139,13 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
   public void showNextArticles(String articlesFirstLetter) {
     getLoadMoreButton(articlesFirstLetter).click();
     ;
-    waitForElementByElement(getLoadPreviousButton(articlesFirstLetter));
+    wait.forElementVisible(getLoadPreviousButton(articlesFirstLetter));
   }
 
   public void showPreviousArticles(String articlesFirstLetter) {
     getLoadPreviousButton(articlesFirstLetter).click();
     ;
-    waitForElementByElement(getLoadMoreButton(articlesFirstLetter));
+    wait.forElementVisible(getLoadMoreButton(articlesFirstLetter));
   }
 
 }

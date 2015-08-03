@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,7 +33,7 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   String modalTransition = "section[style*='transition']";
 
   public void closeModal() {
-    waitForElementByElement(openedModal);
+    wait.forElementVisible(openedModal);
     waitForElementClickableByElement(closeModalButton);
     scrollAndClick(closeModalButton);
   }
@@ -42,15 +43,15 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void goToPreviousImage() {
-    waitForElementByElement(previousImageButton);
+    wait.forElementVisible(previousImageButton);
     previousImageButton.click();
-    waitForElementNotPresent(modalTransition);
+    wait.forElementNotPresent(By.cssSelector(modalTransition));
   }
 
   public void goToNextImage() {
-    waitForElementByElement(nextImageButton);
+    wait.forElementVisible(nextImageButton);
     nextImageButton.click();
-    waitForElementNotPresent(modalTransition);
+    wait.forElementNotPresent(By.cssSelector(modalTransition));
   }
 
   public String getCurrentImageUrl() {
@@ -58,11 +59,11 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void verifyTopBarVisible() {
-    waitForElementByElement(topBarVisible);
+    wait.forElementVisible(topBarVisible);
   }
 
   public void verifyTopBarHidden() {
-    waitForElementByElement(topBarHidden);
+    wait.forElementVisible(topBarHidden);
   }
 
   public void verifyModalClosed() {
@@ -72,12 +73,12 @@ public class MobileModalComponentObject extends MobileBasePageObject {
   }
 
   public void hideTopBar() {
-    waitForElementByElement(topBarVisible);
+    wait.forElementVisible(topBarVisible);
     topBarVisible.click();
   }
 
   public void showTopBar() {
-    waitForElementByElement(topBarHidden);
+    wait.forElementVisible(topBarHidden);
     topBarHidden.click();
   }
 

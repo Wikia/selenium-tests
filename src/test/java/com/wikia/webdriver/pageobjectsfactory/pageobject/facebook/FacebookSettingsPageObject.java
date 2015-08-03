@@ -34,7 +34,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   }
 
   public void verifyPageLogo() {
-    waitForElementByElement(pageLogo);
+    wait.forElementVisible(pageLogo);
     PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
   }
 
@@ -50,14 +50,14 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
-          waitForElementByElement(element);
+          wait.forElementVisible(element);
           element.click();
           WebElement AppRemoveButton =
               element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
           if (AppRemoveButton != null) {
-            waitForElementByElement(AppRemoveButton);
+            wait.forElementVisible(AppRemoveButton);
             AppRemoveButton.click();
-            waitForElementByElement(removeButton);
+            wait.forElementVisible(removeButton);
             removeButton.click();
             waitForElementNotVisibleByElement(removeAppConfirmationModal);
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
@@ -88,9 +88,9 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   }
 
   public void logOutFB() {
-    waitForElementByElement(fbDropDown);
+    wait.forElementVisible(fbDropDown);
     fbDropDown.click();
-    waitForElementByElement(fbLogOut);
+    wait.forElementVisible(fbLogOut);
     fbLogOut.click();
   }
 }

@@ -14,15 +14,15 @@ import org.testng.annotations.Test;
  * @author Piotr 'Rychu' Gabryjeluk
  * @ownership AdEngineering
  */
-public class TestNoAdsOnSonyReferrer extends TemplateNoFirstLoad {
+public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
 
   private String testedPage;
 
   @Factory(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "noAdsForSonyReferrer"
+      dataProvider = "noAdsForSony"
   )
-  public TestNoAdsOnSonyReferrer(String wikiName, String path) {
+  public TestAdsNoAdsForSony(String wikiName, String path) {
     super();
     UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
@@ -32,9 +32,9 @@ public class TestNoAdsOnSonyReferrer extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestNoAdsOnSonyReferrer_Desktop"}
+      groups = {"AdsNoAdsForSonyOasis"}
   )
-  public void TestNoAdsOnSonyReferrer_Desktop() {
+  public void adsNoAdsForSonyOasis() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
     AdsBaseObject wikiPage = sonyPage.goToDestinationPage(testedPage);
 
@@ -42,9 +42,9 @@ public class TestNoAdsOnSonyReferrer extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestNoAdsOnSonyReferrer_Mobile"}
+      groups = {"AdsNoAdsForSonyMobile"}
   )
-  public void TestNoAdsOnSonyReferrer_Mobile() {
+  public void adsNoAdsForSonyMobile() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
     AdsBaseObject wikiPage = sonyPage.goToDestinationPage(testedPage);
 

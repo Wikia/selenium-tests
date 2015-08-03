@@ -119,7 +119,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     String winHandleBefore = driver.getWindowHandle();
-    waitForElementByElement(facebookSignUpButton);
+    wait.forElementVisible(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject(driver, winHandleBefore);
@@ -137,7 +137,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyCaptchaInvalidMessage() {
-    waitForElementPresenceByBy(recaptchaResponseBy);
+    wait.forElementPresent(recaptchaResponseBy);
     String message = driver.findElement(recaptchaErrorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
   }
@@ -149,7 +149,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   private String getWordFromCaptcha(File captchaFile) {
     try {
-      String captchaId = getAttributeValue(blurryWordHidden, "value");
+      String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
               + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;

@@ -26,9 +26,9 @@ public class AlmostTherePageObject extends WikiBasePageObject {
   }
 
   public void verifyAlmostTherePage() {
-    waitForElementByElement(almostThereText);
-    waitForElementByElement(sendAnotherMail);
-    waitForElementByElement(changeMyEmail);
+    wait.forElementVisible(almostThereText);
+    wait.forElementVisible(sendAnotherMail);
+    wait.forElementVisible(changeMyEmail);
   }
 
   private String getActivationLinkFromMail(String email, String password, String language) {

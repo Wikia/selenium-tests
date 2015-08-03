@@ -82,21 +82,17 @@ public class MobileBasePageObject extends WikiBasePageObject {
   protected WebElement selectedPageHeader;
   @FindBy(css = "#wkMainCntHdr > a")
   private WebElement editButton;
-  @FindBy(css = ".login")
-  private WebElement newloginButton;
-  @FindBy(css = ".signup-provider-email")
-  private WebElement signupButton;
 
   public void triggerLoginDropDown() {
-    waitForElementByElement(loginDropDownTrigger);
+    wait.forElementVisible(loginDropDownTrigger);
     loginDropDownTrigger.click();
     PageObjectLogging.log("triggerLoginDropDown",
                           "login drop-dwon triggered", true, driver);
   }
 
   public void typeInUserNameAndPassword(String username, String password) {
-    waitForElementByElement(userNameField);
-    waitForElementByElement(passwordField);
+    wait.forElementVisible(userNameField);
+    wait.forElementVisible(passwordField);
     userNameField.sendKeys(username);
     passwordField.sendKeys(password);
     PageObjectLogging.log("typeInUserNameAndPassword",
@@ -104,7 +100,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public void clickFbWindowTriggerButton() {
-    waitForElementByElement(loginFbButton);
+    wait.forElementVisible(loginFbButton);
 //		if (driver.findElement(By.cssSelector("#ssoFbBtn[disabled]"))
 //				.isDisplayed()) {
     try {
@@ -134,7 +130,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
     triggerLoginDropDown();
     typeInUserNameAndPassword(username, password);
     loginButton.click();
-    waitForElementByElement(avatar);
+    wait.forElementVisible(avatar);
     PageObjectLogging.log("loginDropDown", "user logged in successfully", true,
                           driver);
   }
@@ -162,9 +158,9 @@ public class MobileBasePageObject extends WikiBasePageObject {
 
   public MobileArticlePageObject openRandomPage() {
     triggerMainMenu();
-    waitForElementByElement(randomPageButton);
+    wait.forElementVisible(randomPageButton);
     scrollAndClick(randomPageButton);
-    waitForElementByElement(mainMenuTrigger);
+    wait.forElementVisible(mainMenuTrigger);
     PageObjectLogging.log("openRandomPage", "randomPageOpened", true,
                           driver);
     return new MobileArticlePageObject(driver);
@@ -176,17 +172,17 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public void triggerMainMenu() {
-    waitForElementByElement(mainMenuTrigger);
+    wait.forElementVisible(mainMenuTrigger);
     mainMenuTrigger.click();
     PageObjectLogging.log("mainMenuTrigger", "main menu opened", true,
                           driver);
   }
 
   public void triggerSearch() {
-    waitForElementByElement(searchTrigger);
+    wait.forElementVisible(searchTrigger);
     searchTrigger.click();
-    waitForElementByElement(searchField);
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchField);
+    wait.forElementVisible(searchButton);
     PageObjectLogging.log("triggerSearch", "search drop-down opened", true,
                           driver);
   }
@@ -212,7 +208,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public void verifySuggestions(String query) {
-    waitForElementByElement(suggestions.get(0));
+    wait.forElementVisible(suggestions.get(0));
     for (WebElement elem : suggestions) {
       Assertion.assertTrue(elem.getAttribute("title").startsWith(query),
                            "title Attribute doesn't start with given string"
@@ -222,7 +218,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public void verifySuggestionsPlusButton() {
-    waitForElementByElement(searchSuggestionLast);
+    wait.forElementVisible(searchSuggestionLast);
     Assertion.assertEquals(addSuggestionButton.size(), searchSuggestion.size(),
                            "sizes are not equals");
     PageObjectLogging.log("verifySuggestionsPlusButton",
@@ -230,7 +226,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
   }
 
   public void selectPlusFromSuggestions(int n) {
-    waitForElementByElement(addSuggestionButton.get(n));
+    wait.forElementVisible(addSuggestionButton.get(n));
     String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
     addSuggestionButton.get(n).click();
     Assertion.assertEquals(text, searchField.getAttribute("value"), "strings are not equals");
@@ -239,13 +235,13 @@ public class MobileBasePageObject extends WikiBasePageObject {
   public void selectAndVerifyClickOnSuggestion(int n) {
     String selectedSuggestionText = suggestions.get(n).getAttribute("innerText").replace("+", "");
     suggestions.get(n).click();
-    waitForElementByElement(selectedPageHeader);
+    wait.forElementVisible(selectedPageHeader);
     Assertion.assertTrue(getCurrentUrl().endsWith("/" + selectedSuggestionText),
                          "Url doesn't end with correct string");
   }
 
   public long getPosition() {
-    return executeScriptRetLong("window.pageYOffset");
+    return (Long) jsActions.execute("window.pageYOffset");
   }
 
   public void verifyPositionDifferent(Long firstPosition) {
@@ -256,17 +252,12 @@ public class MobileBasePageObject extends WikiBasePageObject {
     Assertion.assertTrue(firstPosition == getPosition(), "position is different");
   }
 
-  public void clickOnWikiaTopPageLogo() {
-    waitForElementByElement(wikiaTopPageLogo);
-    clickActions(wikiaTopPageLogo);
-  }
-
   public void verifyCurtainOpened() {
     Assertion.assertEquals("block", curtain.getCssValue("display"), "curtain is not opened");
   }
 
   public void clickOutsideSearchField() {
-    waitForElementByElement(curtain);
+    wait.forElementVisible(curtain);
     curtain.click();
   }
 
@@ -282,7 +273,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
       PageObjectLogging.log("logOut",
                             "page loads for more than 30 seconds", true);
     }
-    waitForElementByElement(loginDropDownTrigger);
+    wait.forElementVisible(loginDropDownTrigger);
     PageObjectLogging.log("logOut", "uses is logged out", true, driver);
   }
 
@@ -304,14 +295,5 @@ public class MobileBasePageObject extends WikiBasePageObject {
         true
     );
     return new MobileEditModePageObject(driver);
-  }
-
-  public MobileSignupPageObject openMobileSignupPage(String wikiURL) {
-    openHome(wikiURL);
-    waitForElementByElement(newloginButton);
-    newloginButton.click();
-    waitForElementByElement(signupButton);
-    signupButton.click();
-    return new MobileSignupPageObject(driver);
   }
 }

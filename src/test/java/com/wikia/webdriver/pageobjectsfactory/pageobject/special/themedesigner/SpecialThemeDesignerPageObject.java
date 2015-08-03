@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
@@ -19,12 +19,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement saveButton;
   @FindBy(css = ".save[disabled]")
   private WebElement saveButtonDisabled;
-  //theme tab
+  // theme tab
   @FindBys(@FindBy(css = "li[data-theme]"))
   private List<WebElement> themes;
   @FindBy(css = ".next.chevron")
   private WebElement nextButton;
-  //customize tab
+  // customize tab
   @FindBy(css = ".color-body")
   private WebElement bgColor;
   @FindBy(css = ".background-image")
@@ -41,7 +41,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement pgColor;
   @FindBy(css = ".page h1")
   private WebElement pgSectionTitle;
-  //wordmark tab
+  // wordmark tab
   @FindBy(css = "#WordMarkUploadForm [value=Upload]")
   private WebElement wordmarkSubmit;
   @FindBy(css = "#WordMarkUploadFile")
@@ -71,43 +71,42 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
    * select theme on Special:ThemeDesigner page
    */
   public String selectTheme(int number) {
-    waitForElementByElement(themes.get(0));
+    wait.forElementVisible(themes.get(0));
     if (number < 5) {
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
-      waitForElementByElement(secondThemesSet);
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(secondThemesSet);
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number == 10) {
       scrollAndClick(nextButton);
-      waitForElementByElement(secondThemesSet);
-      waitForElementByElement(themes.get(7));
+      wait.forElementVisible(secondThemesSet);
+      wait.forElementVisible(themes.get(7));
       scrollAndClick(nextButton);
-      waitForElementByElement(thirdThemesSet);
-      waitForElementByElement(themes.get(number));
+      wait.forElementVisible(thirdThemesSet);
+      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
-    String
-        themeName =
+    String themeName =
         themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();
     PageObjectLogging.log("selectTheme", "theme " + themeName + " selected", true);
     return themeName;
   }
 
   public void verifyThemeSelected(String themeName) {
-    waitForElementByCss("li.selected[data-theme='" + themeName + "']");
-    Assertion.assertEquals(executeScriptRet("ThemeDesigner.settings.theme"), themeName);
-    PageObjectLogging.log("verifyThemeSelected",
-                          "theme " + themeName + " selection verified", true);
+    wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
+    Assertion.assertEquals((String) jsActions.execute("ThemeDesigner.settings.theme"), themeName);
+    PageObjectLogging
+        .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
   public void submitThemeSelection() {
     scrollAndClick(saveButton);
-    waitForElementByElement(saveButtonDisabled);
+    wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
   }
 
@@ -116,37 +115,39 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void selectTab(Tab tabName) {
-    WebElement tab = waitForElementByCss(tabSelector.replace("%tabName%", tabName.toString()));
+    WebElement tab =
+        wait.forElementVisible(By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
     scrollAndClick(tab);
-    waitForElementByCss(selectedTabSelector.replace("%tabName%", tabName.toString()));
+    wait.forElementVisible(By.cssSelector(selectedTabSelector.replace("%tabName%",
+        tabName.toString())));
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
   public void verifyCustomizeTab() {
-    waitForElementByElement(bgColor);
-    waitForElementByElement(bgImage);
-    waitForElementByElement(pgButtons);
-    waitForElementByElement(pgLinks);
-    waitForElementByElement(pgHeader);
-    waitForElementByElement(pgColor);
+    wait.forElementVisible(bgColor);
+    wait.forElementVisible(bgImage);
+    wait.forElementVisible(pgButtons);
+    wait.forElementVisible(pgLinks);
+    wait.forElementVisible(pgHeader);
+    wait.forElementVisible(pgColor);
   }
 
   public void verifyWordmarkTab() {
-    waitForElementByElement(wordmarkSubmit);
-    waitForElementByElement(wordmarkUpload);
-    waitForElementByElement(faviconSubmit);
-    waitForElementByElement(faviconUpload);
+    wait.forElementVisible(wordmarkSubmit);
+    wait.forElementVisible(wordmarkUpload);
+    wait.forElementVisible(faviconSubmit);
+    wait.forElementVisible(faviconUpload);
   }
 
   public void openImagePicker() {
-    waitForElementByElement(bgImage);
+    wait.forElementVisible(bgImage);
     bgImage.click();
-    waitForElementByElement(bgImagePicker);
+    wait.forElementVisible(bgImagePicker);
     PageObjectLogging.log("openImagePicker", "image picker opened", true, driver);
   }
 
   public void clickOutsideImagePicker() {
-    waitForElementByElement(pgSectionTitle);
+    wait.forElementVisible(pgSectionTitle);
     pgSectionTitle.click();
     PageObjectLogging.log("clickOutsideImageSelectionDialog", "clicked outside Image Picker", true);
   }

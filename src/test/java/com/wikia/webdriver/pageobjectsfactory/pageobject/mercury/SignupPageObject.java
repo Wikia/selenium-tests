@@ -1,25 +1,19 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import org.openqa.selenium.TimeoutException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
-
 
 /**
- * Created by rcunningham on 6/30/15.
+ * @ownership Social
  */
-public class MobileSignupPageObject extends MobileBasePageObject {
+public class SignupPageObject extends BasePageObject {
 
-  public MobileSignupPageObject(WebDriver driver) {
+  public SignupPageObject(WebDriver driver) {
     super(driver);
   }
 
@@ -38,7 +32,7 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   @FindBy(css = ".birth-year")
   private WebElement signupBirthYear;
   @FindBy(css = "#signupSubmit")
-  private WebElement signupButton;
+  private WebElement signupSubmitButton;
   @FindBy(css = ".avatar")
   private WebElement avatar;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
@@ -51,38 +45,42 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   private WebElement genericError;
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
+  @FindBy(css = ".login")
+  private WebElement newloginButton;
+  @FindBy(css = ".signup-provider-email")
+  private WebElement signupButton;
 
-  public MobileSignupPageObject typeEmailAddress(String email) {
-    waitForElementByElement(signupEmail);
+  public SignupPageObject typeEmailAddress(String email) {
+    wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
-  public MobileSignupPageObject typeUsername(String username) {
-    waitForElementByElement(signupUsername);
+  public SignupPageObject typeUsername(String username) {
+    wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
-  public MobileSignupPageObject typePassword(String password) {
-    waitForElementByElement(signupPassword);
+  public SignupPageObject typePassword(String password) {
+    wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
-  public MobileSignupPageObject typeBirthdate(String month, String day, String year) {
-    waitForElementByElement(signupBirthdate);
+  public SignupPageObject typeBirthdate(String month, String day, String year) {
+    wait.forElementVisible(signupBirthdate);
     scrollAndClick((signupBirthdate));
 
-    waitForElementByElement(signupBirthMonth);
+    wait.forElementVisible(signupBirthMonth);
     scrollAndClick((signupBirthMonth));
     signupBirthMonth.sendKeys(month);
 
-    waitForElementByElement(signupBirthDay);
+    wait.forElementVisible(signupBirthDay);
     signupBirthDay.click();
     signupBirthDay.sendKeys(day);
 
-    waitForElementByElement(signupBirthYear);
+    wait.forElementVisible(signupBirthYear);
     signupBirthYear.click();
     signupBirthYear.sendKeys(year);
 
@@ -90,33 +88,34 @@ public class MobileSignupPageObject extends MobileBasePageObject {
   }
 
   public void register() {
-    waitForElementByElement(signupButton);
-    scrollAndClick(signupButton);
+    wait.forElementVisible(signupSubmitButton);
+    scrollAndClick(signupSubmitButton);
   }
 
   public void verifyAvatarAfterSignup() {
-    waitForElementByElement(avatar);
+    wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
   public void verifyEmailInUseError() {
-    waitForElementByElement(emailError);
+    wait.forElementVisible(emailError);
     Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
   }
 
   public void verifyUsernameTakenError() {
-    waitForElementByElement(usernameError);
+    wait.forElementVisible(usernameError);
     Assertion.assertEquals(usernameError.getText(), "Someone already has this username. Try a different one!");
   }
 
   public void verifyPasswordError() {
-    waitForElementByElement(passwordError);
+    wait.forElementVisible(passwordError);
     Assertion.assertEquals(passwordError.getText(), "Your password must be different from your username.");
   }
 
   public void verifyBirthdateError() {
-    waitForElementByElement(genericError);
-    Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
+    wait.forElementVisible(genericError);
+    Assertion.assertEquals(genericError.getText(),
+        "We can not complete your registration at this time.");
   }
 
   public String getRegisterHeaderText() {
@@ -126,4 +125,12 @@ public class MobileSignupPageObject extends MobileBasePageObject {
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
   }
 
+  public SignupPageObject openMobileSignupPage(String wikiURL) {
+    openHome(wikiURL);
+    wait.forElementVisible(newloginButton);
+    newloginButton.click();
+    wait.forElementVisible(signupButton);
+    signupButton.click();
+    return new SignupPageObject(driver);
+  }
 }

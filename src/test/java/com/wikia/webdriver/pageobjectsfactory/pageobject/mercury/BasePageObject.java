@@ -18,9 +18,9 @@ import org.openqa.selenium.support.FindBy;
  */
 public class BasePageObject extends MobileBasePageObject {
 
-
   @FindBy(css = LOADING_SPINNER_CSS)
   private WebElement loadingSpinner;
+
   private final static String LOADING_SPINNER_CSS = ".loading-overlay";
 
 
@@ -61,14 +61,14 @@ public class BasePageObject extends MobileBasePageObject {
   public void waitForLoadingSpinnerToFinish() {
     boolean spinnerPresent = false;
     try {
-      waitForElementByCss(LOADING_SPINNER_CSS);
-      waitForElementVisibleByElement(loadingSpinner, 4, 1000);
+      wait.forElementVisible(By.cssSelector(LOADING_SPINNER_CSS));
+      wait.forElementVisible(loadingSpinner, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {
       PageObjectLogging.log("Loading spinner", "is not present", true);
     }
     if (spinnerPresent) {
-      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+      wait.forElementPresent(By.cssSelector(".loading-overlay.hidden"));
     }
   }
 
@@ -118,8 +118,8 @@ public class BasePageObject extends MobileBasePageObject {
 
   public boolean isElementVisible(WebElement element) {
     try {
-      waitForElementVisibleByElement(element, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+      wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }

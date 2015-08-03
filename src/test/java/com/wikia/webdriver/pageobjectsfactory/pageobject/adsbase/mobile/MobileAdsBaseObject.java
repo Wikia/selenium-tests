@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -31,7 +32,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     super(driver, page);
     adsComparison = new AdsComparison();
 
-    if (getBrowser().equals("CHROMEMOBILEMERCURY")) {
+    if (Configuration.getBrowser().equals("CHROMEMOBILEMERCURY")) {
       verifyMercury();
     }
 
@@ -54,18 +55,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   public void verifyMobileTopLeaderboard() {
     removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
 
-    waitForElementByElement(presentLeaderboard);
+    wait.forElementVisible(presentLeaderboard);
     waitForSlotExpanded(presentLeaderboard);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
       extractGptInfo(presentLeaderboardSelector);
 
-      if (checkIfElementOnPage(CELTRA_MASK_SELECTOR)) {
+      if (isElementOnPage(CELTRA_MASK_SELECTOR)) {
         PageObjectLogging.logWarning("Special ad", "Celtra");
         return;
       }
 
-      if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
+      if (isElementOnPage(FLITE_MASK_SELECTOR)) {
         PageObjectLogging.logWarning("Special ad", "Flite");
         return;
       }
@@ -87,7 +88,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   public void verifyNoSlotPresent(String slotName) {
-    if (checkIfElementOnPage("#" + slotName)) {
+    if (isElementOnPage("#" + slotName)) {
       throw new NoSuchElementException("Slot is added to the page");
     }
     PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
@@ -122,7 +123,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
    */
   public void mercuryNavigateToAnArticle(String articleLinkName) {
     String articleLinkSelector = String.format("a[href^='/wiki/%s']", articleLinkName);
-    if (checkIfElementOnPage(articleLinkSelector)) {
+    if (isElementOnPage(articleLinkSelector)) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
       PageObjectLogging.log(
@@ -147,7 +148,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   private void removeElementIfPresent(String cssSelector) {
-    if (checkIfElementOnPage(cssSelector)) {
+    if (isElementOnPage(cssSelector)) {
       PageObjectLogging.log("Removing element", cssSelector, true);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
       JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -167,10 +168,14 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void verifyMercury() {
     try {
-      waitForElementByCss(MERCURY_ARTICLE_CONTAINER_SELECTOR);
+      wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
       PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
       throw e;
     }
+  }
+
+  public void waitForSlot(String slotName){
+    wait.forElementVisible(By.cssSelector("#" + slotName));
   }
 }

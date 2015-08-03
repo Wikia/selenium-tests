@@ -6,10 +6,11 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdSkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SkinHelper;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -36,6 +37,8 @@ import java.util.regex.Pattern;
 public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
+  private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
+
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
@@ -127,7 +130,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
-    if (!checkIfSlotExpanded(presentLeaderboard) && checkIfElementOnPage("#jpsuperheader")) {
+    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage("#jpsuperheader")) {
       PageObjectLogging.log("checkTopLeaderboard",
                             "Page has Gotham campaign.", true);
       return;
@@ -188,7 +191,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    if (checkIfElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
+    if (isElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
       String iframeSrc = liftiumIframes.get(0).getAttribute("src");
       if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
         PageObjectLogging
@@ -265,7 +268,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
     for (String selector : slotsSelectors) {
-      if (checkIfElementOnPage(selector)) {
+      if (isElementOnPage(selector)) {
         WebElement element = driver.findElement(By.cssSelector(selector));
         if (
             element.isDisplayed()
@@ -364,7 +367,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForSlotExpanded(final WebElement slot) {
-    wait.until(new ExpectedCondition<Object>() {
+    waitFor.until(new ExpectedCondition<Object>() {
       @Override
       public Object apply(WebDriver webDriver) {
         return checkIfSlotExpanded(slot);
@@ -375,7 +378,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
+      waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -409,7 +412,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
-    waitForElementPresenceByBy(cssSelector);
+    wait.forElementPresent(cssSelector);
 
     String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
     PageObjectLogging.log("verifyGptIframe", msg, true, driver);
@@ -423,7 +426,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String getGptParams(String slotName, String attr) {
     WebElement
         adsDiv =
-        driver.findElement(By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
+        driver.findElement(
+            By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
     return adsDiv.getAttribute(attr);
   }
 
@@ -510,14 +514,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     // Removing comments section as it expands content downwards
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                     waitForElementByCss("#WikiaArticleFooter"));
+                     wait.forElementVisible(By.cssSelector("#WikiaArticleFooter")));
 
     AdsComparison adsComparison = new AdsComparison();
 
-    scrollToElement(waitForElementByCss("#SPOTLIGHT_FOOTER"));
+    scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
-      WebElement slot = waitForElementByCss(spotlightSelector + " img");
+      WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
       verifySlotExpanded(slot);
 
       adsComparison.isAdVisible(slot, spotlightSelector, driver);
@@ -592,7 +596,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           try {
             return (boolean) ((JavascriptExecutor) driver)
@@ -619,7 +623,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void waitTitleChangesTo(String desiredArticleTitle) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      wait.until(
+      waitFor.until(
           ExpectedConditions.titleContains(desiredArticleTitle)
       );
     } finally {
@@ -640,10 +644,24 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public void checkSkin(String adSkinLeftPath, String adSkinRightPath) {
-    AdSkinHelper skinHelper = new AdSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
+  public void checkSkin(String adSkinLeftPath,
+                        String adSkinRightPath,
+                        String backgroundColor,
+                        String middleColor) {
+    SkinHelper skinHelper = new SkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
+
+    if (!Strings.isNullOrEmpty(backgroundColor)) {
+      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor);
+      PageObjectLogging.log("SKIN", "SKIN has correct background color", true);
+    }
+
+    if (!Strings.isNullOrEmpty(middleColor) &&
+        getWindowSize().getWidth() > MIN_MIDDLE_COLOR_PAGE_WIDTH) {
+      Assertion.assertEquals(skinHelper.getMiddleColor(), middleColor);
+      PageObjectLogging.log("SKIN", "SKIN has correct middle color", true);
+    }
   }
 
   /**
@@ -669,7 +687,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
-          executeScript(
+          jsActions.execute(
               "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
           return slot.getAttribute("style").contains("visibility: visible;");
         }

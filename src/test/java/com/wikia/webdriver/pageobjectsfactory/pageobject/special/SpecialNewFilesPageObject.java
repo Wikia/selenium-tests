@@ -81,7 +81,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   }
 
   public void checkIgnoreAnyWarnings() {
-    waitForElementByElement(ignoreAnyWarnings);
+    wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
     PageObjectLogging.log(
         "CheckIgnoreAnyWarnings",

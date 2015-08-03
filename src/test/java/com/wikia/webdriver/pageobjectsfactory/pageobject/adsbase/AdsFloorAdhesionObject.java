@@ -24,7 +24,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   public void verifyFloorAdhesionPresent(String expectedSlotName, String expectedLineItemId,
                                          String expectedCreativeId) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
-    waitForElementByCss(FLOOR_ADHESION_CSS);
+    wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
     PageObjectLogging.log(
         "Check visibility of Floor Adhesion",
         "Floor Adhesion should be displayed",
@@ -62,7 +62,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyModalOpened(String floorAdhesionModalSelector) {
-    waitForElementByCss(floorAdhesionModalSelector);
+    wait.forElementVisible(By.cssSelector(floorAdhesionModalSelector));
     PageObjectLogging.log(
         "Check visibility",
         "Clicking Floor Adhesion opens light-box",
@@ -71,7 +71,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
-    waitForElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
+    wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
     PageObjectLogging.log(
         "Check visibility",
         "Clicking light-box close button hides light-box",

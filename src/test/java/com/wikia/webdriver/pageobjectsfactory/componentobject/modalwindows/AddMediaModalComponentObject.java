@@ -26,7 +26,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
   }
 
   public void closeAddPhotoModal() {
-    waitForElementVisibleByElement(addPhotoModal);
+    wait.forElementVisible(addPhotoModal);
     PageObjectLogging.log(
         "UploadPhotoModalIsPresent",
         "Upload photo modal is present",
@@ -42,7 +42,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
   }
 
   public void closeAddVideoModal() {
-    waitForElementVisibleByElement(addVideoModal);
+    wait.forElementVisible(addVideoModal);
     PageObjectLogging.log(
         "UploadVideoModalIsPresent",
         "Upload video modal is present",

@@ -77,16 +77,16 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyChatPage() {
-    waitForElementByElement(messageWritingArea);
-    waitForElementByElement(chatInlineAlert);
-    waitForElementByElement(sideBar);
-    waitForElementByElement(userName);
-    waitForElementByElement(userAvatar);
+    wait.forElementVisible(messageWritingArea);
+    wait.forElementVisible(chatInlineAlert);
+    wait.forElementVisible(sideBar);
+    wait.forElementVisible(userName);
+    wait.forElementVisible(userAvatar);
     PageObjectLogging.log("verifyChatPage", "Chat page verified", true, driver);
   }
 
   public void verifyMessageOnChat(String message) {
-    waitForElementByXPath(String.format(MESSAGE_ON_CHAT, message));
+    wait.forElementVisible(By.xpath(String.format(MESSAGE_ON_CHAT, message)));
     PageObjectLogging.log(
         "VerifyMessageOnChatPresent",
         "Message: " + message + " is present on chat board",
@@ -96,8 +96,8 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserJoinToChatMessage(String userName) {
-    waitForElementByElement(chatInlineAlertContinued);
-    if (!checkIfElementOnPage(String.format(USER_SELECTOR, userName))) {
+    wait.forElementVisible(chatInlineAlertContinued);
+    if (!isElementOnPage(String.format(USER_SELECTOR, userName))) {
       PageObjectLogging.log(
           "VerifyUserJoinsChat",
           "User: " + userName + " not visible on chat's guests list",
@@ -114,7 +114,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserIsVisibleOnContactsList(String userName) {
-    waitForElementByCss(String.format(USER_SELECTOR, userName));
+    wait.forElementVisible(By.cssSelector(String.format(USER_SELECTOR, userName)));
     PageObjectLogging.log(
         "verifyUserIsVisibleOnContactsList",
         userName + " is visible on contacts list",
@@ -124,7 +124,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageHeader() {
-    waitForElementByElement(privateMessagesHeader);
+    wait.forElementVisible(privateMessagesHeader);
     PageObjectLogging.log(
         "verifyPrivateMessageHeader",
         "private message header is visible",
@@ -134,7 +134,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageNotification() {
-    waitForElementByElement(privateMessageNotification);
+    wait.forElementVisible(privateMessageNotification);
     PageObjectLogging.log(
         "verifyPrivateMessageNotification",
         "private message notification is visible",
@@ -144,7 +144,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateMessageNotification(int notificationCount) {
-    waitForElementByXPath(String.format(NOTIFICATION_COUNTER, notificationCount));
+    wait.forElementVisible(By.xpath(String.format(NOTIFICATION_COUNTER, notificationCount)));
     PageObjectLogging.log(
         "verifyPrivateMessageNotification",
         "private message notification number " + notificationCount + " is visible",
@@ -163,7 +163,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPrivateChatTitle() {
-    waitForElementByElement(privateChatHeader);
+    wait.forElementVisible(privateChatHeader);
     PageObjectLogging.log(
         "verifyPrivateChatTitle",
         "private chat title is correct",
@@ -173,7 +173,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyMainChatIsHighlighted() {
-    waitForElementByElement(mainChatSelection);
+    wait.forElementVisible(mainChatSelection);
     PageObjectLogging.log(
         "verifyPrivateMessageIsHighlighted",
         "private message section is highlighted",
@@ -232,7 +232,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void writeOnChat(String message) {
-    waitForElementByElement(chatLoadedIndicator);
+    wait.forElementVisible(chatLoadedIndicator);
     messageWritingArea.sendKeys(message);
     pressEnter(messageWritingArea);
     PageObjectLogging.log("writeOnChat", "Message: " + message + " written", true, driver);
@@ -246,12 +246,12 @@ public class ChatPageObject extends WikiBasePageObject {
       allowPrivateMessageFromUser(userName);
     }
     clickOnDifferentUser(userName);
-    waitForElementByElement(privateMassageButton);
+    wait.forElementVisible(privateMassageButton);
     privateMassageButton.click();
     WebElement
         userInPrivateMessageSection =
         getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
-    waitForElementVisibleByElement(userInPrivateMessageSection);
+    wait.forElementVisible(userInPrivateMessageSection);
     PageObjectLogging
         .log("selectPrivateMessageToUser", "private message selected from dropdown", true);
   }
@@ -275,7 +275,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   private void clickBanUser(String userName) {
     banUserButton.click();
-    waitForElementByElement(chatBanModal);
+    wait.forElementVisible(chatBanModal);
     PageObjectLogging.log("clickBanUser", "ban user " + userName + " is clicked", true);
   }
 
@@ -292,14 +292,14 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   private void verifyChatUnbanMessage(String userName) {
-    waitForElementByXPath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName));
+    wait.forElementVisible(By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName)));
   }
 
   public void unBanUser(String userName) {
     WebElement unbanLink = driver.findElement(By.xpath(
         String.format(USER_UNBAN_LINK, userName)
     ));
-    waitForElementByElement(unbanLink);
+    wait.forElementVisible(unbanLink);
     unbanLink.click();
     verifyChatUnbanMessage(userName);
     PageObjectLogging.log(
@@ -402,7 +402,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   private WebElement getElementForUser(String userName, String selector) {
     String userCss = String.format(selector, userName);
-    waitForElementByCss(userCss);
+    wait.forElementVisible(By.cssSelector(userCss));
     return driver.findElement(By.cssSelector(userCss));
   }
 

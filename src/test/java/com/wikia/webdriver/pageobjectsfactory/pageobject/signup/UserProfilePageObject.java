@@ -39,7 +39,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public void clickOnBlogTab() {
-    waitForElementByElement(blogTab);
+    wait.forElementVisible(blogTab);
     waitForElementClickableByElement(blogTab);
     blogTab.click();
     PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
@@ -64,13 +64,13 @@ public class UserProfilePageObject extends WikiBasePageObject {
       }
       PageObjectLogging.log("openFirstPost", "deleted post found on " + i
                                              + " position, trying next one", true);
-      navigateBack();
+      driver.navigate().back();
     }
     return new BlogPageObject(driver);
   }
 
   public SpecialCreatePagePageObject clickOnCreateBlogPost() {
-    waitForElementByElement(createBlogPostButton);
+    wait.forElementVisible(createBlogPostButton);
     waitForElementClickableByElement(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
@@ -101,14 +101,14 @@ public class UserProfilePageObject extends WikiBasePageObject {
   public void clickRemoveAvatar() {
     showAvatarControls();
     avatarRemoveButton.click();
-    AlertHandler.acceptPopupWindow(driver);
+    AlertHandler.acceptPopupWindow(driver, 20);
     hideAvatarControls();
-    waitForElementByElement(avatarWrapper);
+    wait.forElementVisible(avatarWrapper);
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
   }
 
   public void verifyAvatar(String fileName) {
-	  waitForElementByCss(avatarSelector.replace("%imageName%", fileName));
+    wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
 	  PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
   }
 

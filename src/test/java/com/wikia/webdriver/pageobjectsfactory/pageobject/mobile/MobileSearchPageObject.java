@@ -30,16 +30,16 @@ public class MobileSearchPageObject extends MobileBasePageObject {
   List<WebElement> resultList;
 
   public void verifySearchResultsList() {
-    waitForElementByElement(searchResultList);
+    wait.forElementVisible(searchResultList);
     PageObjectLogging.log("verifySearchResultsList", "search results list verified", true, driver);
   }
 
   public void verifyNextPageButtonIsVisible() {
-    waitForElementByElement(searchNextPageButton);
+    wait.forElementVisible(searchNextPageButton);
   }
 
   public void verifyPreviousPageButtonIsVisible() {
-    waitForElementByElement(searchPreviousPageButton);
+    wait.forElementVisible(searchPreviousPageButton);
   }
 
   public void clickOnSearchNextPageButton() {

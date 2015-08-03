@@ -47,7 +47,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   private WebElement getAmazonIframe(WebElement slotWithAmazon) {
-    waitForElementByElement(slotWithAmazon);
+    wait.forElementVisible(slotWithAmazon);
     return slotWithAmazon.findElement(By.cssSelector(
         "div[id*=__container__] > iframe"
     ));
@@ -58,7 +58,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           return (Boolean) ((JavascriptExecutor) driver)
               .executeAsyncScript(
@@ -75,7 +75,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   public void verifyAmazonScriptIncluded() {
-    if (checkIfElementOnPage(AMAZON_SCRIPT)) {
+    if (isElementOnPage(AMAZON_SCRIPT)) {
       PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
     } else {
       throw new NoSuchElementException("Amazon script not found on page");
@@ -92,7 +92,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public AdsAmazonObject verifyAdsFromAmazonPresent() {
     driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-    Assertion.assertTrue(checkIfElementOnPage(AMAZON_IFRAME));
+    Assertion.assertTrue(isElementOnPage(AMAZON_IFRAME));
     PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
     driver.switchTo().defaultContent();
     return this;
@@ -117,7 +117,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     WebElement amazonArticleLink = driver.findElement(
         By.cssSelector(amazonLinkCssSelectors.get(linkName))
     );
-    waitForElementByElement(amazonArticleLink);
+    wait.forElementVisible(amazonArticleLink);
     amazonArticleLink.click();
     waitTitleChangesTo(amazonLinkTitles.get(linkName));
     return this;

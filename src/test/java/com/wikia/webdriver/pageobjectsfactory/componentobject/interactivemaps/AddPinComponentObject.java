@@ -48,20 +48,20 @@ public class AddPinComponentObject extends BasePageObject {
   WebElement errorField;
 
   public void clearPinName() {
-    waitForElementByElement(pinNameField);
+    wait.forElementVisible(pinNameField);
     pinNameField.clear();
     PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
   }
 
   public void clearAssociatedArticleField() {
-    waitForElementByElement(associatedArticleField);
+    wait.forElementVisible(associatedArticleField);
     associatedArticleField.clear();
     PageObjectLogging.log("clearAssociatedArticleField",
                           "Associated article field was cleared", true);
   }
 
   public InteractiveMapPageObject clickCancelButton() {
-    waitForElementByElement(cancelButton);
+    wait.forElementVisible(cancelButton);
     cancelButton.click();
     PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
     driver.switchTo().defaultContent();
@@ -69,13 +69,13 @@ public class AddPinComponentObject extends BasePageObject {
   }
 
   public void clearPinDescription() {
-    waitForElementByElement(descriptionField);
+    wait.forElementVisible(descriptionField);
     descriptionField.clear();
     PageObjectLogging.log("clearPinName", "Description input was cleared", true);
   }
 
   public InteractiveMapPageObject clickSaveButton() {
-    waitForElementByElement(saveButton);
+    wait.forElementVisible(saveButton);
     saveButton.click();
     PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
     driver.switchTo().defaultContent();
@@ -83,45 +83,45 @@ public class AddPinComponentObject extends BasePageObject {
   }
 
   public void clickSuggestion(int opt) {
-    waitForElementVisibleByElement(suggestedOption.get(opt));
+    wait.forElementVisible(suggestedOption.get(opt));
     WebElement suggestionSelected = suggestedOption.get(opt);
     suggestionSelected.click();
   }
 
   public InteractiveMapPageObject clickDeletePin() {
-    waitForElementVisibleByElement(deleteButton);
+    wait.forElementVisible(deleteButton);
     deleteButton.click();
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
 
   public String getAssociatedArticleImageSrc() {
-    waitForElementByElement(associatedArticleImage);
+    wait.forElementVisible(associatedArticleImage);
     return articleImageUrl.getAttribute("src");
   }
 
   public void selectPinType() {
-    waitForElementByElement(pinCategorySelector);
+    wait.forElementVisible(pinCategorySelector);
     Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
     pinCategorySelectorDropDown.selectByIndex(1);
     PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
   }
 
   public void typePinName(String pinName) {
-    waitForElementByElement(pinNameField);
+    wait.forElementVisible(pinNameField);
     pinNameField.sendKeys(pinName);
     PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
   }
 
   public void typePinDescription(String pinDescription) {
-    waitForElementByElement(descriptionField);
+    wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(pinDescription);
     PageObjectLogging.log("typePinDescription",
                           pinDescription + "Pin description was typed in", true);
   }
 
   public void typeAssociatedArticle(String associatedArticleName) {
-    waitForElementByElement(associatedArticleField);
+    wait.forElementVisible(associatedArticleField);
     associatedArticleField.sendKeys(associatedArticleName);
     PageObjectLogging.log("typePinName",
                           associatedArticleName + " Associated article is typed in",
@@ -129,52 +129,52 @@ public class AddPinComponentObject extends BasePageObject {
   }
 
   public void verifyPinTitleFieldIsDisplayed() {
-    waitForElementByElement(pinNameField);
+    wait.forElementVisible(pinNameField);
     PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
   }
 
   public void verifyAssociatedArticleFieldIsDisplayed() {
-    waitForElementByElement(associatedArticleField);
+    wait.forElementVisible(associatedArticleField);
     PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed",
                           "Associated article field is visible", true, driver);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
-    waitForElementByElement(pinCategorySelector);
+    wait.forElementVisible(pinCategorySelector);
     PageObjectLogging.log("verifyPinCategorySelector",
                           "Pin category selector is visible", true, driver);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
-    waitForElementByElement(descriptionField);
+    wait.forElementVisible(descriptionField);
     PageObjectLogging.log("verifyDescriptionFieldIsDisplayed",
                           "Description field is visible", true, driver);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
-    waitForElementByElement(associatedArticleImage);
+    wait.forElementVisible(associatedArticleImage);
     PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed",
                           "Associated article image placeholder is visible", true, driver);
   }
 
   public void verifyErrorExists() {
-    waitForElementByElement(errorField);
+    wait.forElementVisible(errorField);
     Assertion.assertEquals(checkIfElementOnPage(errorField), true);
     PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
   }
 
   public void verifyErrorContent(String errorMessage) {
-    waitForElementByElement(errorField);
+    wait.forElementVisible(errorField);
     Assertion.assertEquals(errorField.getText(), errorMessage);
   }
 
   public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
-    waitForElementByElement(articleImageUrl);
+    wait.forElementVisible(articleImageUrl);
     Assertion.assertNotEquals(getAssociatedArticleImageSrc(), placeholderImageSrc);
   }
 
   public void verifyAssociatedArticlePlaceholder() {
-    waitForElementByElement(associatedArticleField);
+    wait.forElementVisible(associatedArticleField);
     Assertion.assertEquals(
         InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
         associatedArticleField.getAttribute("placeholder"),

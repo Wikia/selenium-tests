@@ -35,18 +35,18 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public void clickCloseButton() {
-    waitForElementVisibleByElement(closeLightboxButton);
+    wait.forElementVisible(closeLightboxButton);
     closeLightboxButton.click();
   }
 
   public void clickGalleryImage(int index) {
-    waitForElementByElement(galleryImagesArray.get(index));
+    wait.forElementVisible(galleryImagesArray.get(index));
     scrollToElement(galleryImagesArray.get(index));
     galleryImagesArray.get(index).click();
   }
 
   public String getCurrentImagePath() throws WebDriverException {
-    waitForElementByElement(currentImage);
+    wait.forElementVisible(currentImage);
     if (currentImage.getAttribute("src") == null) {
       throw new WebDriverException("Expected String but got null");
     }
@@ -55,7 +55,7 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isLightboxOpened() {
     try {
-      waitForElementVisibleByElement(lightboxContent, 5, 1000);
+      wait.forElementVisible(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -63,7 +63,7 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public boolean isCurrentImageVisible() {
-    waitForElementVisibleByElement(currentImage);
+    wait.forElementVisible(currentImage);
     return checkIfElementOnPage(currentImage);
   }
 

@@ -81,7 +81,7 @@ public class AdsKruxObject extends AdsBaseObject {
     try {
       String script =
           "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
-      wait.until(CommonExpectedConditions.scriptReturnsTrue(script));
+      waitFor.until(CommonExpectedConditions.scriptReturnsTrue(script));
     } finally {
       restoreDeaultImplicitWait();
     }

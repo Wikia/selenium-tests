@@ -20,6 +20,6 @@ public class WikiArticleHomePage extends WikiArticlePageObject {
    * Check if current page is in fact home page of wiki
    */
   public void verifyThisIsWikiHomePage() {
-    waitForElementByElement(wikiHomePageSpecificElement);
+    wait.forElementVisible(wikiHomePageSpecificElement);
   }
 }

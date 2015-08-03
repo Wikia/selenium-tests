@@ -48,7 +48,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "index.php?title=" + pageName
         + "&action=edit&useFormat=" + layoutNumber);
     String pageNameEnc = pageName.replace("_", " ");
-    waitForElementByElement(driver.findElement(By.cssSelector("a[title='" + pageNameEnc + "']")));
+    wait.forElementVisible(driver.findElement(By.cssSelector("a[title='" + pageNameEnc + "']")));
     return new WikiArticleEditMode(driver);
   }
 
@@ -57,7 +57,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + articlePageName,
         URLsContent.ACTION_EDIT));
     String pageNameEnc = articlePageName.replace("_", " ");
-    waitForElementByElement(driver.findElement(By.cssSelector("a[title='" + pageNameEnc + "']")));
+    wait.forElementVisible(driver.findElement(By.cssSelector("a[title='" + pageNameEnc + "']")));
 
     return new WikiArticleEditMode(driver);
   }
@@ -69,7 +69,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle);
     edit.typeInTemplateContent(templateContent);
     edit.clickOnPublish();
-    this.waitForElementByCss("#WikiaArticle");
+    wait.forElementVisible(By.cssSelector("#WikiaArticle"));
 
     PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
 
@@ -83,7 +83,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
   public WikiArticlePageObject openRandomArticle() {
     scrollAndClick(randomPageButton);
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchButton);
     PageObjectLogging.log("openRandomArticle", "random page button clicked", true, driver);
     return new WikiArticlePageObject(driver);
   }
@@ -99,7 +99,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public WikiArticleEditMode edit() {
-    waitForElementByElement(editButton);
+    wait.forElementVisible(editButton);
     scrollAndClick(editButton);
     PageObjectLogging.log("edit", "Edit article", true);
     return new WikiArticleEditMode(driver);
@@ -111,14 +111,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyImageOnThePage() {
-    waitForElementByBy(imageOnWikiaArticle);
+    wait.forElementPresent(imageOnWikiaArticle);
     PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page",
         true, driver);
   }
 
   public WikiHistoryPageObject openHistoryPage() {
     getUrl(driver.getCurrentUrl() + "?action=history");
-    waitForElementByElement(historyHeadLine);
+    wait.forElementVisible(historyHeadLine);
     return new WikiHistoryPageObject(driver);
   }
 }

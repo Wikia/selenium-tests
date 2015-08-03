@@ -78,7 +78,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.searchFor(SearchContent.SEARCH_PHRASE);
     WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
-    search.navigateBack();
+    driver.navigate().back();
     search.openResult(2);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
   }

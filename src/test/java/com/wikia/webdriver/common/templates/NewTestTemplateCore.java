@@ -88,13 +88,19 @@ public class NewTestTemplateCore {
       NewDriverProvider.getMobileDriver().quit();
     }*/
     if (driver != null) {
-      driver.quit();
+      try {
+        driver.quit();
+      } catch (Error e) {
+      }
     }
   }
 
   protected void stopCustomBrowser(WebDriver customDriver) {
     if (customDriver != null) {
-      customDriver.quit();
+      try {
+        customDriver.quit();
+      } catch (Error e) {
+      }
     }
   }
 

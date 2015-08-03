@@ -112,7 +112,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifySuggestions(String suggestion) {
-        waitForElementByElement(suggestionsList.get(0));
+        wait.forElementVisible(suggestionsList.get(0));
         for (int i = 0; i < suggestionsList.size(); i++) {
             Assertion.assertStringContains(suggestionsList.get(i).getText(), suggestion);
         }
@@ -120,9 +120,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
     public void triggerSuggestions(String query) {
         searchField.click();
-        waitForElementByBy(jqueryAutocompleteBy);
+        wait.forElementPresent(jqueryAutocompleteBy);
         searchField.sendKeys(query);
-        waitForElementByElement(suggestionsList.get(0));	
+        wait.forElementVisible(suggestionsList.get(0));
     }
 
     private void verifyLanguageTranslation(WebElement element) {
@@ -154,7 +154,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     public void verifyLastResultPage() {
         waitForElementClickableByElement(paginationPages.get(paginationPages.size() - 1));
         do {
-            waitForElementByElement(paginationPages.get(paginationPages.size() - 1));
+            wait.forElementVisible(paginationPages.get(paginationPages.size() - 1));
             scrollAndClick(paginationPages.get(paginationPages.size() - 1));
         }
         while (paginationPages.size() > 6);
@@ -186,7 +186,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void chooseAdvancedOption(int i) {
-        waitForElementByElement(advancedField);
+        wait.forElementVisible(advancedField);
         advancedOptionInputs.get(i).click();
         PageObjectLogging.log("chooseAdvancedOption", "chosen advance option is selected",
                 true, driver);
@@ -200,7 +200,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyDefaultNamespaces() {
-        waitForElementVisibleByElement(advancedField);
+        wait.forElementVisible(advancedField);
         for (int i = 0; i < advancedOptions.size(); i++) {
             if ("Articles".equals(advancedOptions.get(i).getText())) {
                 Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
@@ -213,33 +213,33 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void selectPhotosVideos() {
-        waitForElementVisibleByElement(photosVideos);
+        wait.forElementVisible(photosVideos);
         photosVideos.click();
-        waitForElementByElement(sortingOptions);
+        wait.forElementVisible(sortingOptions);
         PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected",
                 true, driver);
     }
 
     public void verifyPhotosOnly() {
-        waitForElementByElement(thumbnailsImages.get(0));
-        waitForElementNotPresent(thumbnailsVideosGroup);
+        wait.forElementVisible(thumbnailsImages.get(0));
+        wait.forElementNotPresent(By.cssSelector(thumbnailsVideosGroup));
         for (int i = 0; i < titles.size(); i++) {
-            waitForElementByElement(titles.get(i));
+            wait.forElementVisible(titles.get(i));
             scrollToElement(titles.get(i));
-            waitForElementByElement(images.get(i));
+            wait.forElementVisible(images.get(i));
         }
     }
 
     public void verifyVideosOnly() {
-        waitForElementByElement(thumbnailsVideos.get(0));
+        wait.forElementVisible(thumbnailsVideos.get(0));
         Assertion.assertTrue(thumbnailsVideos.size() == 25);
         //make sure there are as many videos as play buttons
-        waitForElementByElement(playMovieImages.get(0));
+        wait.forElementVisible(playMovieImages.get(0));
         Assertion.assertEquals(playMovieImages.size(), thumbnailsVideos.size());
         for (int i = 0; i < titles.size(); i++) {
-            waitForElementByElement(titles.get(i));
+            wait.forElementVisible(titles.get(i));
             scrollToElement(titles.get(i));
-            waitForElementByElement(videoImages.get(i));
+            wait.forElementVisible(videoImages.get(i));
         }
     }
 
@@ -266,7 +266,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyTopModule() {
-        waitForElementByElement(topModule);
+        wait.forElementVisible(topModule);
         Assertion.assertNumber(topModuleResults.size(), 7, "Top module has correct amount of results");
         for (int i = 0; i < topModuleResults.size(); i++) {
             Assertion.assertTrue(topModuleArticleThumbnail.get(i).isDisplayed());
@@ -336,16 +336,16 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
 
     public void verifyPushToTopWikiThumbnail() {
-        waitForElementByElement(pushToTopWikiThumbnail);
+        wait.forElementVisible(pushToTopWikiThumbnail);
         PageObjectLogging.log("verifyPushToTopWikiThumbnail",
                 "Push to top wiki thumbnail verified", true, driver);
     }
 
     public void verifyNewSuggestionsTextAndImages(String query) {
         searchField.click();
-        waitForElementByBy(jqueryAutocompleteBy);
+        wait.forElementPresent(jqueryAutocompleteBy);
         searchField.sendKeys(query);
-        waitForElementByElement(newSuggestionsList.get(0));
+        wait.forElementVisible(newSuggestionsList.get(0));
         System.out.println(newSuggestionsList.size());
         for (int i = 0; i < newSuggestionsList.size(); i++) {
             Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);

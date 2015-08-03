@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -72,6 +73,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   // Test: IGN video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
+  @Execute(disableFlash = "false")
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";

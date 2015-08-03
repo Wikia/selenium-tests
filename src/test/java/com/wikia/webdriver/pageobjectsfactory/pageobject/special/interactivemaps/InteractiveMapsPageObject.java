@@ -47,16 +47,16 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   }
 
   public CreateAMapComponentObject clickCreateAMap() {
-    waitForElementByElement(createAMapButton);
+    wait.forElementVisible(createAMapButton);
     scrollAndClick(createAMapButton);
     PageObjectLogging.log("clickCreateAMap", "create a map button clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
   public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
-    waitForElementByElement(contributeDropdown);
+    wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
-    waitForElementVisibleByElement(createMapUnderContribute);
+    wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
     PageObjectLogging.log("clickCreateAMapUnderContributeButton",
                           "create a map button under contribute button clicked", true, driver);
@@ -65,7 +65,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public InteractiveMapPageObject clickMapWithIndex(int mapIndex) {
     WebElement selectedMap = mapList.get(mapIndex);
-    waitForElementByElement(selectedMap);
+    wait.forElementVisible(selectedMap);
     selectedMap.click();
     PageObjectLogging.log("clickMap", "Selected map clicked", true);
     return new InteractiveMapPageObject(driver);
@@ -90,12 +90,12 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   }
 
   public void verifyCreateMapButtonExists() {
-    waitForElementByElement(createAMapButton);
+    wait.forElementVisible(createAMapButton);
     Assert.assertEquals(checkIfElementOnPage(createAMapButton), true);
   }
 
   public void verifyAmountMapOnTheList() {
-    waitForElementByElement(mapCollection.get(0));
+    wait.forElementVisible(mapCollection.get(0));
     Assert.assertEquals(mapCollection.size(), 10);
     PageObjectLogging.log("verifyAmountMapOnTheList",
                           "There are " + mapCollection.size() + " maps on the list",
@@ -103,9 +103,9 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   }
 
   public void verifyCorrectPagination() {
-    waitForElementByElement(paginationList);
+    wait.forElementVisible(paginationList);
     Assert.assertEquals(checkIfElementOnPage(paginationList), true);
-    waitForElementByElement(paginationNext);
+    wait.forElementVisible(paginationNext);
     Assert.assertEquals(checkIfElementOnPage(paginationNext), true);
     PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
   }

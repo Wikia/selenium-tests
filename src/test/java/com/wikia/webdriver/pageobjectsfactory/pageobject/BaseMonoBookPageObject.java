@@ -42,7 +42,7 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
   }
 
   public void verifySkinChanged() {
-    waitForElementByElement(monobookSkinClass);
+    wait.forElementVisible(monobookSkinClass);
     PageObjectLogging.log("skinChangedToMonoBook", "skin is changed to monobook", true);
   }
 }

@@ -88,24 +88,24 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyFirstResultDescription() {
-    waitForElementByElement(firstResultVertical);
+    wait.forElementVisible(firstResultVertical);
     Assertion.assertFalse(firstResult.getText().isEmpty(), "There is no article description.");
   }
 
   public void verifyFirstResultPageCount() {
-    waitForElementByElement(firstResultStatisticsPageCount);
+    wait.forElementVisible(firstResultStatisticsPageCount);
     Assertion.assertFalse(firstResultStatisticsPageCount.getText().isEmpty(),
                           "Page count string is empty.");
   }
 
   public void verifyFirstResultPageImages() {
-    waitForElementByElement(firstResultStatisticsPageImages);
+    wait.forElementVisible(firstResultStatisticsPageImages);
     Assertion
         .assertFalse(firstResultStatisticsPageImages.getText().isEmpty(), "Images count is empty.");
   }
 
   public void verifyFirstResultPageVideos() {
-    waitForElementByElement(firstResultStatisticsPageVideos);
+    wait.forElementVisible(firstResultStatisticsPageVideos);
     Assertion.assertFalse(firstResultStatisticsPageVideos.getText().isEmpty(),
                           "Results count is empty.");
   }
@@ -116,7 +116,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
    * @param expectedResultsPerPage number of results that should appear on result page
    */
   public void verifyResultsCount(int expectedResultsPerPage) {
-    waitForElementByElement(resultsContainer);
+    wait.forElementVisible(resultsContainer);
     Assertion.assertEquals(searchResultList.size(), expectedResultsPerPage,
                            "Wrong number of results per page.");
   }
@@ -128,7 +128,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
    * @param resultsPerPage expected pages per result
    */
   public void verifyResultsPosForPage(int pageNumber, int resultsPerPage) {
-    waitForElementByElement(resultsContainer);
+    wait.forElementVisible(resultsContainer);
     int curNo = pageNumber * resultsPerPage + 1;
     for (WebElement link : resultLinks) {
       String dataPos = link.getAttribute("data-pos");
@@ -146,7 +146,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
    */
   public WikiArticleHomePage openResult(int resultNumeber) {
     WebElement resultLink = resultLinks.get(resultNumeber);
-    waitForElementByElement(resultLink);
+    wait.forElementVisible(resultLink);
     scrollAndClick(resultLink);
     return new WikiArticleHomePage(driver);
   }
@@ -166,18 +166,18 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyResultsNumber(int number) {
-    waitForElementByElement(searchResultList.get(0));
+    wait.forElementVisible(searchResultList.get(0));
     Assertion.assertNumber(searchResultList.size(), number, "checking number of search results");
   }
 
   public void verifyNoPagination() {
-    waitForElementNotPresent(paginationContainerBy);
+    wait.forElementNotPresent(paginationContainerBy);
     PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
                           true);
   }
 
   public void verifyNoResultsCaption() {
-    waitForElementByElement(noResultsCaption);
+    wait.forElementVisible(noResultsCaption);
     Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
     PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
                           true);
