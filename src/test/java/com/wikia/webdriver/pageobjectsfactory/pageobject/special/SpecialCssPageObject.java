@@ -202,7 +202,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyArticleIsNotRemoved(String page) {
-    if (checkIfElementOnPage(removedWarning)) {
+    if (isElementOnPage(removedWarning)) {
       undeleteArticle(page);
       PageObjectLogging.log(
           "articleIsRemoved",

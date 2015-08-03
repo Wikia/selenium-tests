@@ -68,20 +68,20 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public boolean isWikiaLogoVisible() {
-    return checkIfElementOnPage(wikiaLogo);
+    return isElementOnPage(wikiaLogo);
   }
 
   public boolean isSearchButtonVisible() {
-    return checkIfElementOnPage(searchButton);
+    return isElementOnPage(searchButton);
   }
 
   public boolean isTopContributorsSectionVisible() {
     scrollToElement(topContributorsSection);
-    return checkIfElementOnPage(topContributorsSection);
+    return isElementOnPage(topContributorsSection);
   }
 
   public boolean isTopContributorsThumbVisible(int index) {
-    return checkIfElementOnPage(topContributorsThumbs.get(index));
+    return isElementOnPage(topContributorsThumbs.get(index));
   }
 
   public boolean isFooterLogoVisible() {

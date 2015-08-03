@@ -70,7 +70,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   public boolean isUserBlocked(String username) {
     boolean isBlocked = false;
     searchForUser(username);
-    if (!checkIfElementOnPage(expirationDateElement)) {
+    if (!isElementOnPage(expirationDateElement)) {
       return isBlocked;
     }
     SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");

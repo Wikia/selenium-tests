@@ -115,14 +115,14 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(playerPoint);
-    Assertion.assertEquals(checkIfElementOnPage(playerPoint), true);
+    Assertion.assertEquals(isElementOnPage(playerPoint), true);
     driver.switchTo().defaultContent();
   }
 
   public void verifyPoiNotAppearOnMap() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(checkIfElementOnPage(playerPoint), false);
+    Assertion.assertEquals(isElementOnPage(playerPoint), false);
     driver.switchTo().defaultContent();
   }
 }

@@ -94,18 +94,18 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
-    Assertion.assertEquals(checkIfElementOnPage(errorField), true);
+    Assertion.assertEquals(isElementOnPage(errorField), true);
   }
 
   public void verifyThereIsNoError() {
     waitForElementNotVisibleByElement(errorField);
-    Assertion.assertEquals(checkIfElementOnPage(errorField), false);
+    Assertion.assertEquals(isElementOnPage(errorField), false);
   }
 
   public void verifyTemplateWasFound() {
     wait.forElementVisible(templatesBox);
     wait.forElementVisible(thumbCollection.get(0));
-    Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
+    Assertion.assertEquals(isElementOnPage(thumbCollection.get(0)), true);
   }
 
   public void verifyTemplateListElementVisible(int element) {

@@ -82,9 +82,8 @@ public class BasePageObject {
   }
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
-    jsActions.execute(
-        "$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('" + cssSelecotr
-            + "')).mouseenter()");
+    jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
+        + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -92,47 +91,30 @@ public class BasePageObject {
     }
   }
 
-  /*
+  /**
    * Simple method for checking if element is on page or not. Changing the implicitWait value allows
    * us no need for waiting 30 seconds
    */
-  protected boolean isElementOnPage(String cssSelector) {
+  protected boolean isElementOnPage(By by) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     try {
-      if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
-        return false;
-      }else {
-        return true;
-      }
+      return driver.findElements(by).size() > 0;
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  /*
+  /**
    * Simple method for checking if element is on page or not. Changing the implicitWait value allows
    * us no need for waiting 30 seconds
    */
-  protected boolean checkIfElementOnPage(By cssSelectorBy) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
-    try {
-      return driver.findElements(cssSelectorBy).size() > 0;
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  /*
-   * Simple method for checking if element is on page or not. Changing the implicitWait value allows
-   * us no need for waiting 30 seconds
-   */
-  protected boolean checkIfElementOnPage(WebElement element) {
+  protected boolean isElementOnPage(WebElement element) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     boolean isElementOnPage = true;
     try {
       // Get location on WebElement is rising exception when element is not present
       element.getLocation();
-    } catch (Exception ex) {
+    } catch (WebDriverException ex) {
       isElementOnPage = false;
     } finally {
       restoreDeaultImplicitWait();
@@ -140,7 +122,7 @@ public class BasePageObject {
     return isElementOnPage;
   }
 
-  /*
+  /**
    * Simple method for getting number of element on page. Changing the implicitWait value allows us
    * no need for waiting 30 seconds
    */
@@ -149,7 +131,7 @@ public class BasePageObject {
     int numElementOnPage;
     try {
       numElementOnPage = driver.findElements(cssSelectorBy).size();
-    } catch (Exception ex) {
+    } catch (WebDriverException ex) {
       numElementOnPage = 0;
     } finally {
       restoreDeaultImplicitWait();
@@ -157,14 +139,14 @@ public class BasePageObject {
     return numElementOnPage;
   }
 
-  protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
+  protected boolean isElementInContext(String cssSelector, WebElement element) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     boolean isElementInElement = true;
     try {
       if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
         isElementInElement = false;
       }
-    } catch (Exception ex) {
+    } catch (WebDriverException ex) {
       isElementInElement = false;
     } finally {
       restoreDeaultImplicitWait();
@@ -186,11 +168,8 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript(
-          "var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 100));",
-          element
-      );
+      js.executeScript("var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -310,7 +289,7 @@ public class BasePageObject {
   }
 
   protected Boolean scrollToSelector(String selector) {
-    if (isElementOnPage(selector)) {
+    if (isElementOnPage(By.cssSelector(selector))) {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
         js.executeScript("var x = $(arguments[0]);"
@@ -358,8 +337,8 @@ public class BasePageObject {
   }
 
   public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
-    new WebDriverWait(driver, newTimeOut).until(
-        CommonExpectedConditions.elementToBeClickable(element));
+    new WebDriverWait(driver, newTimeOut).until(CommonExpectedConditions
+        .elementToBeClickable(element));
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {
@@ -382,7 +361,7 @@ public class BasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
-                                                                    cssProperty, expectedValue));
+          cssProperty, expectedValue));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -391,7 +370,7 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
       String attribute, String value) {
     waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-                                                                            value));
+        value));
   }
 
   public void waitForTextToBePresentInElementByElement(WebElement element, String text) {

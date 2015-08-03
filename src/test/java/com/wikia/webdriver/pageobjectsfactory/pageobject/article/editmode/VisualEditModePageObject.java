@@ -441,7 +441,7 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(contextFrame);
     option.click();
     driver.switchTo().defaultContent();
-    checkIfElementOnPage(visualModeTable);
+    isElementOnPage(visualModeTable);
   }
 
   public void clickDeleteTableButton() {

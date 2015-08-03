@@ -70,6 +70,6 @@ public class TemplateComponentObject extends BasePageObject {
 
   public void verifyErrorExists() {
     wait.forElementVisible(mapError);
-    Assertion.assertEquals(checkIfElementOnPage(mapError), true);
+    Assertion.assertEquals(isElementOnPage(mapError), true);
   }
 }

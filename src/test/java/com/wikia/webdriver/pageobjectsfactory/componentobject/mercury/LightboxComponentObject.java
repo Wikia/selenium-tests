@@ -64,7 +64,7 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isCurrentImageVisible() {
     wait.forElementVisible(currentImage);
-    return checkIfElementOnPage(currentImage);
+    return isElementOnPage(currentImage);
   }
 
   public boolean isLightboxHeaderDisplayed() {
