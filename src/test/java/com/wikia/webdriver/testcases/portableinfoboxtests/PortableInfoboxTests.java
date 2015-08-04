@@ -76,7 +76,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
     try {
-      Thread.sleep(100);
+      Thread.sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -88,7 +88,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     String internalLinkName = info.getInternalLinkRedirectTitle(0);
     info.clickInternalLink(0);
     try {
-      Thread.sleep(100);
+      Thread.sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -218,7 +218,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
             credentials.password10, wikiURL);
     ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
     SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
-    newEditor.addContent(templateSyntax);
+    newEditor.addContentInSourceMode(templateSyntax);
     newEditor.submitArticle();
     PortableInfoboxPageObject info = randomArticle.getInfoboxPage();
     info.verifyImagePresence();

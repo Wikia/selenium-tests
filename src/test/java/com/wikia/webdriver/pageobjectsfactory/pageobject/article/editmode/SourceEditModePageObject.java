@@ -208,6 +208,12 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void addContent(String content) {
+    waitForElementByElement(textArea);
+    textArea.sendKeys(content);
+    PageObjectLogging.log("addContent", "content was added", true);
+  }
+
+  public void addContentInSourceMode(String content) {
     waitForElementByElement(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);

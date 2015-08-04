@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class CategoryPageObject extends WikiBasePageObject {
 
-    @FindBy(css = "#WikiaPage h1")
+    @FindBy(css = "#WikiaPageHeader h1")
     protected WebElement categoryHeader;
 
 
