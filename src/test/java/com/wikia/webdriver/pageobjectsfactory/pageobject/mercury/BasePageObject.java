@@ -61,7 +61,6 @@ public class BasePageObject extends MobileBasePageObject {
   public void waitForLoadingSpinnerToFinish() {
     boolean spinnerPresent = false;
     try {
-      wait.forElementVisible(By.cssSelector(LOADING_SPINNER_CSS));
       wait.forElementVisible(loadingSpinner, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {

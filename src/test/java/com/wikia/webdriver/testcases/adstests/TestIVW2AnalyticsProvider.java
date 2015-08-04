@@ -15,10 +15,10 @@ import java.io.IOException;
  */
 public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
-  private final static int TIMEOUT_SEC = 30;
+  private static final int TIMEOUT_SEC = 30;
 
   @Test(groups = "TestIVW2AnalyticsProvider")
-  public void TestIVW2AnalyticsProvider() throws IOException {
+  public void testIVW2AnalyticsProvider() throws IOException {
     for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
       String wikiName = (String) data[0];
       String article = (String) data[1];

@@ -8,13 +8,12 @@ import org.openqa.selenium.WebElement;
 
 public class AdsFloorAdhesionObject extends AdsBaseObject {
 
-  private final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
-  private final String
-      FLOOR_ADHESION_AD_FRAME_CSS =
+  private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
+  private static final String FLOOR_ADHESION_AD_FRAME_CSS =
       "#ext-wikia-adEngine-template-footer .ad iframe";
-  private final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
-  private final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-footer .close";
-  private final String WIKIA_BAR_CSS = "#WikiaBar";
+  private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
+  private static final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-footer .close";
+  private static final String WIKIA_BAR_CSS = "#WikiaBar";
 
   public AdsFloorAdhesionObject(WebDriver driver, String testedPage) {
     super(driver);

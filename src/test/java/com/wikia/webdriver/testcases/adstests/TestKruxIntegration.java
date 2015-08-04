@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
  */
 public class TestKruxIntegration extends TemplateNoFirstLoad {
 
-  static private final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
-  static private final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
+  private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
+  private static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

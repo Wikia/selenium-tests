@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -38,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
+  private static final int PROVIDER_CHAIN_TIMEOUT_SEC  = 30;
 
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -64,15 +66,12 @@ public class AdsBaseObject extends WikiBasePageObject {
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
-
-  @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
-  protected WebElement presentMedrec;
-  protected String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
-
-  @FindBy(css = INCONTENT_BOXAD_SELECTOR)
-  protected WebElement incontentBoxad;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
-
+  @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
+  private WebElement presentMedrec;
+  private String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
+  @FindBy(css = INCONTENT_BOXAD_SELECTOR)
+  private WebElement incontentBoxad;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
@@ -142,7 +141,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     checkAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
   }
 
-  protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
+  private void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
     verifySlotExpanded(slot);
     boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
     extractLiftiumTagId(slotSelector);
@@ -155,7 +154,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
   }
 
-  public void verifySlotExpanded(WebElement element) {
+  private void verifySlotExpanded(WebElement element) {
     if (!checkIfSlotExpanded(element)) {
       throw new NoSuchElementException(element.getAttribute("id") + " is collapsed");
     }
@@ -184,7 +183,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           "2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less",
           false, driver
       );
-      throw new Exception("IFrames inside GPT div not found!");
+      throw new NoSuchElementException("IFrames inside GPT div not found!");
     }
   }
 
@@ -241,13 +240,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     return false;
   }
 
-  private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement)
-      throws Exception {
+  private void checkScriptPresentInSlotScripts(String slotName, WebElement slotElement) {
     String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
         "%slot%", slotName
     );
-    boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
-    if (scriptFound) {
+    if (isScriptPresentInElement(slotElement, scriptExpectedResult)) {
       PageObjectLogging.log(
           "PushSlotsScriptFound",
           "Script " + scriptExpectedResult + " found",
@@ -260,9 +257,8 @@ public class AdsBaseObject extends WikiBasePageObject {
           false,
           driver
       );
-      throw new Exception("Script for pushing ads not found in element");
+      throw new NoSuchElementException("Script for pushing ads not found in element");
     }
-    return scriptFound;
   }
 
   private void verifyNoAds() {
@@ -297,7 +293,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private String extractLiftiumTagId(String slotSelector) {
+  private void extractLiftiumTagId(String slotSelector) {
     String liftiumTagId = null;
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
     if (checkIfElementInElement(LIFTIUM_IFRAME_SELECTOR, slot)) {
@@ -328,8 +324,6 @@ public class AdsBaseObject extends WikiBasePageObject {
           true
       );
     }
-
-    return liftiumTagId;
   }
 
   protected void extractGptInfo(String slotSelector) {
@@ -395,7 +389,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void waitForIframeLoaded(WebElement iframe) {
+  private void waitForIframeLoaded(WebElement iframe) {
     PageObjectLogging.log("waitForIframeLoaded", "Switching to adslot iframe", true);
     driver.switchTo().frame(iframe);
     waitForPageLoaded();
@@ -556,8 +550,23 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
-    Assertion.assertEquals(providers, Joiner.on("; ").join(getProvidersChain(slotName)));
+    List<String> actualProviders = getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
+    Assertion.assertEquals(providers, Joiner.on("; ").join(actualProviders));
     return this;
+  }
+
+  private List<String> getProvidersChain(final String slotName, final String expectedProviders, int timeoutSec) {
+    return new WebDriverWait(driver, timeoutSec).until(
+        new ExpectedCondition<List<String>>() {
+          @Override
+          public List<String> apply(WebDriver webDriver) {
+            if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
+              return getProvidersChain(slotName);
+            }
+            return Collections.emptyList();
+          }
+        }
+    );
   }
 
   private List<String> getProvidersChain(String slotName) {
@@ -570,7 +579,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       for (String providerName : PROVIDERS) {
         String
             providerSearch =
-            providerName.equals("Liftium") ? providerName : "/" + providerName + "/";
+            "Liftium".equals(providerName) ? providerName : "/" + providerName + "/";
         if (providerSlotName.contains(providerSearch)) {
           provider = providerName;
           break;
@@ -602,6 +611,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             return (boolean) ((JavascriptExecutor) driver)
                 .executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
+            PageObjectLogging.log("waitForJavaScriptTruthy", e.getMessage(), false);
             return false;
           }
         }
@@ -633,9 +643,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public String getCountry() {
     waitForJavaScriptTruthy("Wikia.geo");
-    return ((String) ((JavascriptExecutor) driver).executeScript(
+    return (String) ((JavascriptExecutor) driver).executeScript(
         "return Wikia.geo.getCountryCode();"
-    ));
+    );
   }
 
   public AdsBaseObject addToUrl(String param) {
@@ -692,8 +702,8 @@ public class AdsBaseObject extends WikiBasePageObject {
           return slot.getAttribute("style").contains("visibility: visible;");
         }
       });
-    } catch (org.openqa.selenium.TimeoutException ignore) {
-      PageObjectLogging.log("Floating Medrec", "Floating Medrec is not visible", true);
+    } catch (org.openqa.selenium.TimeoutException e) {
+      PageObjectLogging.log("Floating Medrec", e.getMessage(), true);
     }
   }
 
