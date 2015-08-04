@@ -54,7 +54,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void clickPrevPaginator() {
-    waitForElementByCss(".paginator-prev");
+    wait.forElementVisible(By.cssSelector(".paginator-prev"));
     scrollAndClick(paginatorPrev);
     PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
   }
