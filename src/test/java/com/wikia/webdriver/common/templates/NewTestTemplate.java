@@ -25,6 +25,9 @@ public class NewTestTemplate extends NewTestTemplateCore {
         if(!method.getAnnotation(Execute.class).onWikia().equals("")){
           Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
         }
+        if(!method.getAnnotation(Execute.class).disableFlash().equals("")){
+          Configuration.setTestValue("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+        }
       }
       prepareURLs();
 
