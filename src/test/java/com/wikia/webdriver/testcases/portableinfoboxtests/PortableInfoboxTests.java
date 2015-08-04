@@ -115,10 +115,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    src.focusTextArea();
     String catName = src.getRandomDigits(9);
+    System.out.println("Random digits: " + catName);
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
     src = shortcuts.clickCategory();
-    src.addCategoryToSourceCode(catName);
+    src.addContent(catName);
     TemplatePageObject temp = src.clickPublishButtonInTemplateNamespace();
     temp.verifyCategoryInTemplatePage(catName);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);

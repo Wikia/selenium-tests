@@ -208,6 +208,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void addContent(String content) {
+    waitForElementByElement(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
   }
@@ -284,7 +285,7 @@ public class SourceEditModePageObject extends EditMode {
       clickMore();
       String content =
           executeScriptRet(
-              "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
+                  "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
       driver.findElement(By.xpath(
           "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
           .click();

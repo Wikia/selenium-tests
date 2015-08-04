@@ -30,6 +30,7 @@ public class WikiTextShortCutsComponentObject extends SourceEditModePageObject{
   public SourceEditModePageObject clickCategory() {
     WebElement categoryShortcut = getCategoryShortcut(1);
     waitForElementByElement(categoryShortcut);
+    categoryShortcut.click();
     return new SourceEditModePageObject(driver);
   }
 }
