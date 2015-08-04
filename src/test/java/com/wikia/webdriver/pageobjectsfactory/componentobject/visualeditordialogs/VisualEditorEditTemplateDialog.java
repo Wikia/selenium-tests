@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -60,8 +61,8 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
   public void typeInParam(String paramName, String text) {
     waitForDialogVisible();
-    if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
-      WebElement targetParam = getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
+    if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
+      WebElement targetParam = Elements.getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
       WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
       targetParamInput.sendKeys(text);
       waitForValueToBePresentInElementsAttributeByElement(targetParamInput, "value", text);
@@ -75,7 +76,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickDone() {
     waitForDialogVisible();
     try {
-      if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+      if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
         waitForElementClickableByElement(doneButton);
         doneButton.click();
       } else {
@@ -90,7 +91,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickCancel() {
     waitForDialogVisible();
     try {
-      if (checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+      if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
         waitForElementClickableByElement(cancelButton);
         cancelButton.click();
       } else {

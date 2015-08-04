@@ -27,9 +27,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
@@ -246,22 +248,17 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
-    addArticleInDropdown.click();
+    scrollAndClick(addArticleInDropdown);
     articleTitleInputModal.sendKeys(articleTitle);
-    submitModal.click();
+    scrollAndClick(submitModal);
     return new VisualEditorPageObject(driver);
   }
 
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
-    openEditDropdown.click();
+    scrollAndClick(openEditDropdown);
     wait.forElementVisible(editUsingClassicEditor);
-    editUsingClassicEditor.click();
+    scrollAndClick(editUsingClassicEditor);
     return new VisualEditModePageObject(driver);
-  }
-
-  public SourceEditModePageObject editArticleInSrcUsingDropdown() {
-    editUsingClassicEditor.click();
-    return new SourceEditModePageObject(driver);
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
@@ -583,7 +580,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void addCategory(String category) {
     clickAddCategoryButton();
     typeCategoryName(category);
-    pressEnter(addCategoryInput);
+    new Actions(driver).sendKeys(addCategoryInput, Keys.ENTER).perform();
     wait.forElementVisible(categoryNew);
     PageObjectLogging.log("addCategory", category + " category added", true);
   }
@@ -616,7 +613,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(categorySuggestionsList);
     WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
     String desiredCategoryText = desiredCategory.getText();
-    desiredCategory.click();
+    scrollAndClick(desiredCategory);
     waitForElementNotVisibleByElement(categorySuggestionsList);
     PageObjectLogging.log("addCategorySuggestions",
                           "category " + category + " added from suggestions", true);
@@ -702,7 +699,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyTableRemoved() {
-    Assertion.assertTrue(!checkIfElementOnPage(table));
+    Assertion.assertTrue(!isElementOnPage(table));
     PageObjectLogging.log("verifyTableRemoved", "table was removed", true);
   }
 

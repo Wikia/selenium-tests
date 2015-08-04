@@ -300,7 +300,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyEmbedMapDialog() {
     wait.forElementVisible(embedMapDialog);
-    checkIfElementOnPage(embedMapCodeSmall);
+    isElementOnPage(embedMapCodeSmall);
   }
 
   public void verifyEmbedMapCode(embedMapDialogButtons button) {
@@ -323,7 +323,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyPopUpVisible() {
     wait.forElementVisible(pinDescription);
-    Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
+    Assertion.assertEquals(isElementOnPage(pinDescription), true);
     driver.switchTo().defaultContent();
   }
 
@@ -396,9 +396,9 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(embedMapCodeButton);
-    Assertion.assertEquals(checkIfElementOnPage(embedMapCodeButton), true);
-    Assertion.assertEquals(checkIfElementOnPage(zoomInButton), true);
-    Assertion.assertEquals(checkIfElementOnPage(zoomOutButton), true);
+    Assertion.assertEquals(isElementOnPage(embedMapCodeButton), true);
+    Assertion.assertEquals(isElementOnPage(zoomInButton), true);
+    Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
     PageObjectLogging.log("verifyControlButtonsAreVisible",
                           "embedMap, zoom in/out buttons were visible", true);
     driver.switchTo().defaultContent();
@@ -407,22 +407,22 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyPinPopupImageIsVisible() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(checkIfElementOnPage(pinPopupImage), true);
+    Assertion.assertEquals(isElementOnPage(pinPopupImage), true);
   }
 
   public void verifyPinPopupImageNotExist() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(checkIfElementOnPage(pinPopupImage), false);
+    Assertion.assertEquals(isElementOnPage(pinPopupImage), false);
   }
 
   public void verifyPinPopUp() {
-    Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
-    Assertion.assertEquals(checkIfElementOnPage(pinEditLink), true);
+    Assertion.assertEquals(isElementOnPage(pinDescription), true);
+    Assertion.assertEquals(isElementOnPage(pinEditLink), true);
   }
 
   public void verifyMapWasNotLoaded() {
-    Assertion.assertEquals(checkIfElementOnPage(map), false);
+    Assertion.assertEquals(isElementOnPage(map), false);
   }
 
   public void verifyPinTypeExists(String pinTypeName) {
@@ -453,7 +453,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyPinTitleLink() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(checkIfElementOnPage(poiArticleLink), true);
+    Assertion.assertEquals(isElementOnPage(poiArticleLink), true);
     driver.switchTo().defaultContent();
   }
 

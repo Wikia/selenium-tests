@@ -129,7 +129,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
-    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage("#jpsuperheader")) {
+    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(By.cssSelector("#jpsuperheader"))) {
       PageObjectLogging.log("checkTopLeaderboard",
                             "Page has Gotham campaign.", true);
       return;
@@ -190,7 +190,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    if (isElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
+    if (isElementOnPage(By.cssSelector(LIFTIUM_IFRAME_SELECTOR))) {
       String iframeSrc = liftiumIframes.get(0).getAttribute("src");
       if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
         PageObjectLogging
@@ -264,7 +264,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
     for (String selector : slotsSelectors) {
-      if (isElementOnPage(selector)) {
+      if (isElementOnPage(By.cssSelector(selector))) {
         WebElement element = driver.findElement(By.cssSelector(selector));
         if (
             element.isDisplayed()
@@ -296,7 +296,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void extractLiftiumTagId(String slotSelector) {
     String liftiumTagId = null;
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-    if (checkIfElementInElement(LIFTIUM_IFRAME_SELECTOR, slot)) {
+    if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slot)) {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       WebElement currentLiftiumIframe = (WebElement) js.executeScript(
           "return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
@@ -329,7 +329,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected void extractGptInfo(String slotSelector) {
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
     String log = "GPT ad not found in slot: " + slotSelector;
-    if (checkIfElementInElement(GPT_DIV_SELECTOR, slot)) {
+    if (isElementInContext(GPT_DIV_SELECTOR, slot)) {
       List<WebElement> gptDivs = slot.findElements(By.cssSelector(GPT_DIV_SELECTOR));
       WebElement lastGptDiv = gptDivs.get(gptDivs.size() - 1);
       log = "GPT ad found in slot: " + lastGptDiv.getAttribute("id");
@@ -381,7 +381,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyNoLiftiumAdsInSlots(List<String> slots) {
     for (String slot : slots) {
       WebElement slotElement = driver.findElement(By.id(slot));
-      if (checkIfElementInElement(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
+      if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
         throw new NoSuchElementException("Liftium found in slot " + slot);
       } else {
         PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);

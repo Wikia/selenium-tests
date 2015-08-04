@@ -100,7 +100,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public boolean isPinPopUp() {
-    return checkIfElementOnPage(poiPopUp);
+    return isElementOnPage(poiPopUp);
   }
 
   public boolean isZoomInButtonEnabled() throws WebDriverException {

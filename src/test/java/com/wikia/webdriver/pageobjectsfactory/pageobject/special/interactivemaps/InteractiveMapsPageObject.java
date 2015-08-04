@@ -91,7 +91,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public void verifyCreateMapButtonExists() {
     wait.forElementVisible(createAMapButton);
-    Assert.assertEquals(checkIfElementOnPage(createAMapButton), true);
+    Assert.assertEquals(isElementOnPage(createAMapButton), true);
   }
 
   public void verifyAmountMapOnTheList() {
@@ -104,19 +104,19 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public void verifyCorrectPagination() {
     wait.forElementVisible(paginationList);
-    Assert.assertEquals(checkIfElementOnPage(paginationList), true);
+    Assert.assertEquals(isElementOnPage(paginationList), true);
     wait.forElementVisible(paginationNext);
-    Assert.assertEquals(checkIfElementOnPage(paginationNext), true);
+    Assert.assertEquals(isElementOnPage(paginationNext), true);
     PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
   }
 
   public void verifyCreateMapModalNotExists() {
-    Assertion.assertEquals(checkIfElementOnPage(createMapModal), false,
+    Assertion.assertEquals(isElementOnPage(createMapModal), false,
                            "Create map modal was not closed");
   }
 
   public void verifyEmptyState() {
-    Assertion.assertTrue(checkIfElementOnPage(emptyStateSection), "Expecting a empty state");
+    Assertion.assertTrue(isElementOnPage(emptyStateSection), "Expecting a empty state");
     PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true, driver);
   }
 }

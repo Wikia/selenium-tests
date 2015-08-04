@@ -159,7 +159,7 @@ public class AddPinComponentObject extends BasePageObject {
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
-    Assertion.assertEquals(checkIfElementOnPage(errorField), true);
+    Assertion.assertEquals(isElementOnPage(errorField), true);
     PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
   }
 

@@ -731,7 +731,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyRevisionMarkedAsMinor() {
-    if (checkIfElementOnPage(cssMinorEdit)) {
+    if (isElementOnPage(cssMinorEdit)) {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
@@ -981,7 +981,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   protected Boolean isNewGlobalNavPresent() {
-    return checkIfElementOnPage(newGlobalNavigation);
+    return isElementOnPage(newGlobalNavigation);
   }
 
   public void setCookie(String name, String value) {
@@ -1045,15 +1045,15 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyModalFBButtonVisible() {
-    Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonModal));
+    Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonModal));
   }
 
   public void verifyFBButtonVisible() {
-    Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonBasic));
+    Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonBasic));
   }
 
   public void verifyDropDownFBButtonVisible() {
-    Assertion.assertTrue(checkIfElementOnPage(formConnectWithFbButtonDropDown));
+    Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonDropDown));
   }
 
   public void verifyAvatarPlaceholder() {

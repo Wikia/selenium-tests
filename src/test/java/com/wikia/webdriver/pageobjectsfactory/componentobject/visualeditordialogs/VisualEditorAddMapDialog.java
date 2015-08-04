@@ -40,7 +40,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
   public CreateAMapComponentObject clickCreateAMapButton() {
     waitForDialogVisible();
-    if (checkIfElementOnPage(emptyStateCreateAMapButton)) {
+    if (isElementOnPage(emptyStateCreateAMapButton)) {
       waitForElementClickableByElement(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
       PageObjectLogging
@@ -57,7 +57,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   public VisualEditorPageObject addExistingMap(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    if (checkIfElementOnPage(mediaResultsWidget)) {
+    if (isElementOnPage(mediaResultsWidget)) {
       wait.forElementVisible(mediaResultsWidget);
       List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
       WebElement map = maps.get(number);
@@ -72,7 +72,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
   public void checkIsEmptyState() {
     waitForDialogVisible();
-    if (checkIfElementOnPage(emptyStateDialogHeadline)) {
+    if (isElementOnPage(emptyStateDialogHeadline)) {
       wait.forElementVisible(emptyStateDialogHeadline);
       wait.forElementVisible(emptyStateDialogText);
       wait.forElementVisible(emptyStateCreateAMapButton);

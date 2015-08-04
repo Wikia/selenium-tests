@@ -37,38 +37,38 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
 
   public void verifyMapTitlePresented() {
     wait.forElementVisible(mapTitle);
-    Assertion.assertEquals(checkIfElementOnPage(mapTitle), true);
+    Assertion.assertEquals(isElementOnPage(mapTitle), true);
   }
 
   public void verifyCloseButtonPresented() {
     wait.forElementVisible(closeModalButton);
-    Assertion.assertEquals(checkIfElementOnPage(closeModalButton), true);
+    Assertion.assertEquals(isElementOnPage(closeModalButton), true);
   }
 
   public void verifyEmbedMapModalOpened() {
     wait.forElementVisible(mapModal);
-    Assertion.assertEquals(checkIfElementOnPage(mapModal), true);
+    Assertion.assertEquals(isElementOnPage(mapModal), true);
   }
 
   public void verifyMapElementsPresented() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(filterBox);
-    Assertion.assertEquals(checkIfElementOnPage(filterBox), true);
+    Assertion.assertEquals(isElementOnPage(filterBox), true);
     wait.forElementVisible(zoomInButton);
-    Assertion.assertEquals(checkIfElementOnPage(zoomInButton), true);
+    Assertion.assertEquals(isElementOnPage(zoomInButton), true);
     wait.forElementVisible(zoomOutButton);
-    Assertion.assertEquals(checkIfElementOnPage(zoomOutButton), true);
+    Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
     PageObjectLogging.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
     driver.switchTo().defaultContent();
   }
 
   public void verifyBrandFooterNotVisible() {
-    Assertion.assertEquals(checkIfElementOnPage(brandFooter), false);
+    Assertion.assertEquals(isElementOnPage(brandFooter), false);
   }
 
   public void verifyBranFooterVisible() {
-    Assertion.assertEquals(checkIfElementOnPage(brandFooter), true);
+    Assertion.assertEquals(isElementOnPage(brandFooter), true);
   }
 
 }
