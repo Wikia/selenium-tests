@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -40,9 +42,8 @@ public class ThemeDesigner extends NewTestTemplate {
   }
 
   @Test(groups = {"ThemeDesigner003", "ThemeDesigner"})
+  @Execute(asUser = User.STAFF)
   public void themeDesigner003_selectThemeFromLastPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
