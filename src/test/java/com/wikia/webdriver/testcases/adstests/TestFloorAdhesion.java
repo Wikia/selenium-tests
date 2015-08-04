@@ -13,9 +13,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"},
-      // wf ADEN-2255
-      enabled = false
+      groups = {"TestFloorAdhesion", "MercuryAds"}
   )
   public void testFloorAdhesionPresence() {
     String browser = Configuration.getBrowser();
@@ -32,9 +30,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"},
-      // wf ADEN-2255
-      enabled = false
+      groups = {"TestFloorAdhesion", "MercuryAds"}
   )
   public void testFloorAdhesionModal() {
     String browser = Configuration.getBrowser();
@@ -52,9 +48,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"},
-      // wf ADEN-2255
-      enabled = false
+      groups = {"TestFloorAdhesion", "MercuryAds"}
   )
   public void testFloorAdhesionCloseButton() {
     AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
