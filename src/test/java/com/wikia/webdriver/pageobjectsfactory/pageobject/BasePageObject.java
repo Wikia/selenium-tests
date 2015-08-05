@@ -39,6 +39,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -83,7 +84,7 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-        + cssSelecotr + "')).mouseenter()");
+                      + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -250,7 +251,7 @@ public class BasePageObject {
       driver.get(url);
     } catch (TimeoutException e) {
       PageObjectLogging.log("getUrl",
-          "page %page% loaded for more then 30 seconds".replace("%page%", url), false);
+          "page %page% loaded for more than 30 seconds".replace("%page%", url), false);
       return;
     }
     if (makeScreenshot) {
@@ -259,13 +260,21 @@ public class BasePageObject {
     }
   }
 
+  public void getUrl(Page page) {
+    getUrl(urlBuilder.getUrlForPage(page));
+  }
+
+  public void getUrl(Page page, String queryString) {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), queryString));
+  }
+
   public void refreshPage() {
     try {
       driver.navigate().refresh();
       PageObjectLogging.log("refreshPage", "page refreshed", true);
     } catch (TimeoutException e) {
       PageObjectLogging
-          .log("refreshPage", "page loaded for more then 30 seconds after click", true);
+          .log("refreshPage", "page loaded for more than 30 seconds after click", true);
     }
   }
 
