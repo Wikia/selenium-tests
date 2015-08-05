@@ -439,23 +439,28 @@ public class AdsDataProvider {
         {
             "J-RIfJI0",
             new Page("vim", "Vim_Tips_Wiki"),
-            "[\"pqdapsy7l\"]", // Standard segment for visiting adtest before
+            // Standard segment for visiting adtest before
+            "[\"pqdapsy7l\"]",
             new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            "[\"o8l9bis26\",\"pqdapsy7l\"]", // Both standard and real-time segment for adtest
+            // Both standard and real-time segment for adtest
+            "[\"o8l9bis26\",\"pqdapsy7l\"]",
         },
         {
             null,
             new Page("adtest", "SyntheticTests/Krux/Page_1"),
             "[\"o8l9bis26\"]",
             new Page("glee", "Glee_TV_Show_Wiki"),
-            "[]", // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
+            // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
+            "[]",
         },
         {
             null,
             new Page("vim", "Vim_Tips_Wiki"),
-            "[]", // No pqdapsy7l (standard segment for adtest)
+            // No pqdapsy7l (standard segment for adtest)
+            "[]",
             new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            "[\"o8l9bis26\"]", // Real time segment for adtest
+            // Real time segment for adtest
+            "[\"o8l9bis26\"]",
         },
     };
   }

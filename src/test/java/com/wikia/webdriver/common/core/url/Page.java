@@ -11,7 +11,6 @@ public class Page {
 
   public Page(String wikiName) {
     this.wikiName = wikiName;
-    this.wikiPath = null;
   }
 
   public String getWikiName() {

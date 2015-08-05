@@ -84,7 +84,7 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   private String wrapSegs(String segmentsLocalStorage) {
-    if (segmentsLocalStorage.equals("")) {
+    if ("".equals(segmentsLocalStorage)) {
       return "[]";
     }
     String ksgmnt = "[";
