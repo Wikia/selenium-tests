@@ -19,21 +19,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
-  private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
-  private final static String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
-  private final static String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
-  private final static String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
-  private final static String
-      AMAZON_SLOTS_CSS_SELECTOR =
+  private static final String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
+  private static final String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private static final String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
+  private static final String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
+  private static final String AMAZON_SLOTS_CSS_SELECTOR =
       "div[id*=_gpt][data-gpt-slot-params*=amznslots]:not(.hidden)";
 
-  private final static ImmutableMap<String, String> amazonLinkCssSelectors =
+  private static final ImmutableMap<String, String> amazonLinkCssSelectors =
       new ImmutableMap.Builder<String, String>()
           .put("AmazonFirstArticle", "a[href='/wiki/Amazon']")
           .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
           .build();
 
-  private final static ImmutableMap<String, String> amazonLinkTitles =
+  private static final ImmutableMap<String, String> amazonLinkTitles =
       new ImmutableMap.Builder<String, String>()
           .put("AmazonFirstArticle", "Amazon")
           .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2")
@@ -47,7 +46,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   private WebElement getAmazonIframe(WebElement slotWithAmazon) {
-    waitForElementByElement(slotWithAmazon);
+    wait.forElementVisible(slotWithAmazon);
     return slotWithAmazon.findElement(By.cssSelector(
         "div[id*=__container__] > iframe"
     ));
@@ -58,7 +57,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 
     try {
-      wait.until(new ExpectedCondition<Boolean>() {
+      waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           return (Boolean) ((JavascriptExecutor) driver)
               .executeAsyncScript(
@@ -75,7 +74,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   public void verifyAmazonScriptIncluded() {
-    if (checkIfElementOnPage(AMAZON_SCRIPT)) {
+    if (isElementOnPage(By.cssSelector(AMAZON_SCRIPT))) {
       PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
     } else {
       throw new NoSuchElementException("Amazon script not found on page");
@@ -92,14 +91,14 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public AdsAmazonObject verifyAdsFromAmazonPresent() {
     driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-    Assertion.assertTrue(checkIfElementOnPage(AMAZON_IFRAME));
+    Assertion.assertTrue(isElementOnPage(By.cssSelector(AMAZON_IFRAME)));
     PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
     driver.switchTo().defaultContent();
     return this;
   }
 
   public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
-    Assertion.assertFalse(checkIfElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
+    Assertion.assertFalse(isElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
     PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
     return this;
   }
@@ -117,7 +116,7 @@ public class AdsAmazonObject extends AdsBaseObject {
     WebElement amazonArticleLink = driver.findElement(
         By.cssSelector(amazonLinkCssSelectors.get(linkName))
     );
-    waitForElementByElement(amazonArticleLink);
+    wait.forElementVisible(amazonArticleLink);
     amazonArticleLink.click();
     waitTitleChangesTo(amazonLinkTitles.get(linkName));
     return this;

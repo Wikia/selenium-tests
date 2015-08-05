@@ -45,13 +45,13 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
   }
 
   public void rollbackPage() {
-    waitForElementByElement(rollbackButton);
+    wait.forElementVisible(rollbackButton);
     scrollAndClick(rollbackButton);
-    waitForElementByElement(rollbackCompleteMessage);
+    wait.forElementVisible(rollbackCompleteMessage);
   }
 
   public WikiArticlePageObject enterPageAfterRollback() {
-    waitForElementByElement(backToPageLinkOnRollbackPage);
+    wait.forElementVisible(backToPageLinkOnRollbackPage);
     scrollAndClick(backToPageLinkOnRollbackPage);
     return new WikiArticlePageObject(driver);
   }
@@ -60,9 +60,9 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
    *
    * */
   public void verifyImportandPageElements() {
-    waitForElementByElement(fromYearField);
-    waitForElementByElement(backToPageLink);
-    waitForElementByElement(goButton);
+    wait.forElementVisible(fromYearField);
+    wait.forElementVisible(backToPageLink);
+    wait.forElementVisible(goButton);
     PageObjectLogging
         .log("verifyImportandPageElements", "several importand history page elements are present",
              true, driver);

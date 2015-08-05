@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,16 +31,16 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   public SpecialBlockPageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
-    waitForElementByElement(blockButton);
+    wait.forElementVisible(blockButton);
   }
 
   public void typeInUserName(String userName) {
-    waitForElementByElement(userNameField);
+    wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
   }
 
   public void selectExpiration(String period) {
-    waitForElementByElement(expiry);
+    wait.forElementVisible(expiry);
     Select exp = new Select(expiry);
     exp.selectByValue(period);
   }
@@ -48,17 +49,17 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
    * @param period you can type here '5 min', '10 year', ...
    */
   public void typeExpiration(String period) {
-    waitForElementByElement(expiryInput);
+    wait.forElementVisible(expiryInput);
     expiryInput.sendKeys(period);
   }
 
   public void typeReason(String reason) {
-    waitForElementByElement(reasonInput);
+    wait.forElementVisible(reasonInput);
     reasonInput.sendKeys(reason);
   }
 
   public void clickBlockButton() {
-    waitForElementByElement(blockButton);
+    wait.forElementVisible(blockButton);
     scrollAndClick(blockButton);
   }
 
@@ -75,8 +76,8 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   }
 
   public void verifyBlockedUserSubmitPage(String userName, String password) {
-    waitForElementByXPath("//p/a[contains(text(), '" + userName + "')]");
-    waitForElementByXPath("//p[contains(text(), 'has been blocked')]");
+    wait.forElementVisible(By.xpath("//p/a[contains(text(), '" + userName + "')]"));
+    wait.forElementVisible(By.xpath("//p[contains(text(), 'has been blocked')]"));
     logOut(driver);
   }
 }

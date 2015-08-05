@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,48 +56,48 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     Assertion.assertEquals(
             resetForgotPasswordTime(userName, apiToken), ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE
     );
-    waitForElementByElement(forgotPasswordLink);
+    wait.forElementVisible(forgotPasswordLink);
     forgotPasswordLink.click();
   }
 
   public CreateNewWikiPageObjectStep2 submitLogin() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     submitButton.click();
     PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public SignUpPageObject submitSignup() {
-    waitForElementByElement(signUpSubmitButton);
+    wait.forElementVisible(signUpSubmitButton);
     signUpSubmitButton.click();
     PageObjectLogging.log("submitSignUp", "signup submit button was clicked", true, driver);
     return new SignUpPageObject(driver);
   }
 
   public void verifyEmptyUserNameValidation() {
-    waitForElementByCss(ERROR_MESSAGE_CSS);
+    wait.forElementVisible(By.cssSelector(ERROR_MESSAGE_CSS));
     Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE);
   }
 
   public void verifyInvalidUserNameValidation() {
-    waitForElementByCss(ERROR_MESSAGE_CSS);
+    wait.forElementVisible(By.cssSelector(ERROR_MESSAGE_CSS));
     Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE
     );
   }
 
   public void verifyBlankPasswordValidation() {
-    waitForElementByCss(ERROR_MESSAGE_CSS);
+    wait.forElementVisible(By.cssSelector(ERROR_MESSAGE_CSS));
     Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE);
   }
 
   public void verifyInvalidPasswordValidation() {
-    waitForElementByCss(ERROR_MESSAGE_CSS);
+    wait.forElementVisible(By.cssSelector(ERROR_MESSAGE_CSS));
     Assertion.assertEquals(errorMessage.getText(), CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE
     );
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
-    waitForElementByElement(usernameValidationText);
+    wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     waitForTextToBePresentInElementByElement(usernameValidationText, newPasswordMsg);
     PageObjectLogging.log(

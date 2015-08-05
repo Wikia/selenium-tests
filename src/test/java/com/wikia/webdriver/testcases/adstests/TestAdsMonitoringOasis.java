@@ -16,8 +16,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
-import java.net.URL;
-
 /**
  * @ownership AdEngineering
  */
@@ -41,8 +39,6 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
       dataProvider = "popularSites"
   )
   public void AdsMonitoringOasis(String wikiName, String path) {
-
-    String countryCode = Configuration.getCountryCode();
     UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);

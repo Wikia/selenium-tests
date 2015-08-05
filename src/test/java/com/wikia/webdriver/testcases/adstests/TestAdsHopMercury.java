@@ -11,18 +11,18 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestAdsHop extends TemplateNoFirstLoad {
+public class TestAdsHopMercury extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "testAdsHopPostMessage",
-      groups = "TestAdsHop"
+      groups = "AdsHopPostMessageMercury"
   )
-  public void testAdsHopPostMessage(String wikiName, String article, String src) {
-    new AdsHopObject(driver, urlBuilder.getUrlForPath(wikiName, article))
-        .verifyClassHidden(AdsContent.MOBILETOP_LB, src)
-        .verifyPostMessage(AdsContent.MOBILETOP_LB, src)
-        .verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
+  public void adsHopPostMessageMercury(String wikiName, String article, String src) {
+    String testPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsHopObject adsHopObject = new AdsHopObject(driver, testPage);
+    adsHopObject.verifyClassHidden(AdsContent.MOBILETOP_LB, src);
+    adsHopObject.verifyPostMessage(AdsContent.MOBILETOP_LB, src);
+    adsHopObject.verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
   }
-
 }

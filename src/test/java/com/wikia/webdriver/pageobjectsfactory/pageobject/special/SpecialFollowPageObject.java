@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,9 +24,9 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   }
 
   public void verifyFollowedArticle(String articleName) {
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '" + articleName
-        + "')]");
+        + "')]"));
     PageObjectLogging.log("verifyFollowedArticle",
                           articleName + "is visible on followed list", true);
   }
@@ -58,9 +59,9 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   }
 
   public void verifyFollowedBlogPost(String blogPostName) {
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + blogPostName
-        + "')]");
+        + "')]"));
     PageObjectLogging.log("verifyFollowedBlogPost",
                           blogPostName + " blog post is visible on followed list", true);
   }

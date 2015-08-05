@@ -15,4 +15,6 @@ public @interface Execute {
   User asUser() default User.ANONYMOUS;
 
   String onWikia() default "";
+
+  String disableFlash() default "";
 }

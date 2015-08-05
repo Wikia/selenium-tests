@@ -28,8 +28,8 @@ public class BlogListPageObject extends BasePageObject {
   public BlogListPageObject verifyBlogListPage(String listName) {
     verifyURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
         + URLsContent.BLOG_LIST.replace("%listName%", listName));
-    waitForElementByElement(blogListHeader);
-    waitForElementByElement(createBlogPostButton);
+    wait.forElementVisible(blogListHeader);
+    wait.forElementVisible(createBlogPostButton);
     return this;
   }
 
@@ -47,7 +47,7 @@ public class BlogListPageObject extends BasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "wiki/Blog:" + name
         + "?action=watch");
     scrollAndClick(followSubmit);
-    waitForElementByElement(followedButton);
+    wait.forElementVisible(followedButton);
     return this;
   }
 }

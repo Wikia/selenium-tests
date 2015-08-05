@@ -95,7 +95,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForSonyReferrer() {
+  public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
@@ -192,41 +192,57 @@ public class AdsDataProvider {
             new Dimension(1200, 1000),
             "src/test/resources/adsResources/no_wikia_skin_left.png",
             "src/test/resources/adsResources/no_wikia_skin_right.png",
+            null,
+            null
         }, {
             "adtest-pluto", "Skin",
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest-pluto", "Skin",
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            ""
         }
     };
   }
@@ -239,12 +255,16 @@ public class AdsDataProvider {
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         },
         {
             "adtest", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }
     };
   }
@@ -287,8 +307,6 @@ public class AdsDataProvider {
             "SyntheticTests/DfpParams",
             "wka.ent/_adtest//article",
             "TOP_LEADERBOARD",
-            "115974612",
-            "37674198492",
             Arrays.asList(
                 "\"s0\":\"ent\"",
                 "\"s1\":\"_adtest\"",

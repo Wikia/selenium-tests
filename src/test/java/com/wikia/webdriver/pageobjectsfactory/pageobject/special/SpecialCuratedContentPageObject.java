@@ -6,7 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * @ownership Content
@@ -38,42 +37,42 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
 
   public void addNewElement(String name, String label) {
-    waitForElementByElement(addItemButton);
+    wait.forElementVisible(addItemButton);
     scrollAndClick(addItemButton);
-    waitForElementByElement(lastElementNameInput);
+    wait.forElementVisible(lastElementNameInput);
     lastElementNameInput.sendKeys(name);
-    waitForElementByElement(lastElementLabelInput);
+    wait.forElementVisible(lastElementLabelInput);
     lastElementLabelInput.sendKeys(label);
   }
 
   public void clickSave() {
-    waitForElementByElement(saveButton);
+    wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
   }
 
   public void verifySuccesfulSave() {
-    waitForElementByElement(successfulSaveMark);
+    wait.forElementVisible(successfulSaveMark);
     PageObjectLogging.log("verifySuccesfulSave", "Curated Content saved with success", true);
   }
 
   public void removeLastElement() {
-    waitForElementByElement(lastElementRemoveIcon);
+    wait.forElementVisible(lastElementRemoveIcon);
     scrollAndClick(lastElementRemoveIcon);
   }
 
   public PhotoAddComponentObject clickImageOnLastElement() {
-    waitForElementByElement(lastElementImage);
+    wait.forElementVisible(lastElementImage);
     scrollAndClick(lastElementImage);
     return new PhotoAddComponentObject(driver);
   }
 
   public void verifyImageInLastElement() {
-    waitForElementByElement(lastElementImageFilled);
+    wait.forElementVisible(lastElementImageFilled);
     PageObjectLogging.log("verifyImageInLastElement", "Image is present in the last element", true);
   }
 
   public void verifyImageErrorInLastElement() {
-    waitForElementByElement(lastElementImageWithError);
+    wait.forElementVisible(lastElementImageWithError);
     PageObjectLogging.log("verifyImageErrorInLastElement", "Image shows error", true);
   }
 

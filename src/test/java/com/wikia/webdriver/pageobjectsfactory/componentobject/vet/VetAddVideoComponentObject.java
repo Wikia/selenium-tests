@@ -48,33 +48,33 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   }
 
   private void typeInUrl(String url) {
-    waitForElementByElement(urlField);
+    wait.forElementVisible(urlField);
     urlField.sendKeys(url);
     PageObjectLogging.log("typeInUrl", url + " typed into url field", true);
   }
 
   private void clickAddButtonProvider() {
-    waitForElementByElement(addUrlButton);
+    wait.forElementVisible(addUrlButton);
     scrollAndClick(addUrlButton);
     PageObjectLogging.log("clickAddButton", "add url button clicked", true, driver);
   }
 
   private void typeInSearchQuery(String query) {
-    waitForElementByElement(findField);
+    wait.forElementVisible(findField);
     findField.sendKeys(query);
     PageObjectLogging.log("typeInSearchQuery",
                           query + " query typed into search video field", true);
   }
 
   private void clickFindButton() {
-    waitForElementByElement(findButton);
+    wait.forElementVisible(findButton);
     scrollAndClick(findButton);
     PageObjectLogging.log("clickFindButton", "find button clicked", true, driver);
   }
 
   private void clickAddVideoLibrary(int videoListItem) {
     WebElement listElem = videoList.get(videoListItem);
-    waitForElementByElement(listElem);
+    wait.forElementVisible(listElem);
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
     this.videoName = addVideoLink.getAttribute("title");
     scrollAndClick(addFromPreviewButton);
@@ -83,13 +83,13 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   }
 
   private void checkIfLibraryIsPresent() {
-    waitForElementByElement(libraryLIs);
+    wait.forElementVisible(libraryLIs);
     PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
   }
 
   public void verifyAddVideoModal() {
-    waitForElementByElement(urlField);
-    waitForElementByElement(addUrlButton);
+    wait.forElementVisible(urlField);
+    wait.forElementVisible(addUrlButton);
     PageObjectLogging.log("verifyAddVideoModal", "add video modal is displayed", true);
   }
 
@@ -115,7 +115,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   }
 
   private void checkVideoPreviewAppearing() {
-    waitForElementByElement(videoPlayer);
+    wait.forElementVisible(videoPlayer);
     waitForValueToBePresentInElementsCssByCss("#VET-preview", "display", "block");
     PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
   }
@@ -125,13 +125,13 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   }
 
   public void verifySuggestionsIsDisplayed() {
-    waitForElementByElement(suggestedVideo);
+    wait.forElementVisible(suggestedVideo);
     PageObjectLogging.log("verifySuggestionsIsDisplayed",
                           "Verified suggested module appeared", true, driver);
   }
 
   public WikiArticleEditMode clickCloseButton() {
-    waitForElementByElement(closeButton);
+    wait.forElementVisible(closeButton);
     scrollAndClick(closeButton);
     PageObjectLogging.log("clickCloseButton", "close button clicked", true);
     return new WikiArticleEditMode(driver);

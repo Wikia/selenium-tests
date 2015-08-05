@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 public class AdsEvolveObject extends AdsBaseObject {
 
   private static final String EVOLVE_SELECTOR = " script[src*=\"4403ad\"]";
-  private static final String EVOLVE_DFP_URL = "ad.doubleclick.net/N4403/";
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
@@ -24,13 +23,13 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    waitForElementPresenceByBy(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
+    wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
     PageObjectLogging.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
   }
 
   public void verifyNoEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    waitForElementNotPresent(slotSelector + EVOLVE_SELECTOR);
+    wait.forElementNotPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
     PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 
@@ -46,7 +45,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
     String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
-    Assertion.assertTrue(checkIfElementOnPage(nextProviderSlotCss));
+    Assertion.assertTrue(isElementOnPage(By.cssSelector(nextProviderSlotCss)));
     PageObjectLogging.log("Evolve", "Evolve hopped to " + nextProviderSrc, true);
   }
 }

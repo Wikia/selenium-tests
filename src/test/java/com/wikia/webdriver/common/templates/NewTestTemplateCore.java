@@ -22,6 +22,7 @@ import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
@@ -56,6 +57,7 @@ public class NewTestTemplateCore {
     driver = registerDriverListener(
         NewDriverProvider.getDriverInstanceForBrowser(Configuration.getBrowser())
     );
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
@@ -65,8 +67,8 @@ public class NewTestTemplateCore {
     return driver;
   }
 
-  protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
-    driver.register(new PageObjectLogging());
+  protected WebDriver registerDriverListener(WebDriver driver) {
+    ((EventFiringWebDriver)driver).register(new PageObjectLogging());
     return driver;
   }
 
@@ -88,13 +90,19 @@ public class NewTestTemplateCore {
       NewDriverProvider.getMobileDriver().quit();
     }*/
     if (driver != null) {
-      driver.quit();
+      try {
+        driver.quit();
+      } catch (Error e) {
+      }
     }
   }
 
   protected void stopCustomBrowser(WebDriver customDriver) {
     if (customDriver != null) {
-      customDriver.quit();
+      try {
+        customDriver.quit();
+      } catch (Error e) {
+      }
     }
   }
 

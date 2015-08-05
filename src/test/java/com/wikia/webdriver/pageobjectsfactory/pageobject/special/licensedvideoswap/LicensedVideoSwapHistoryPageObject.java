@@ -27,7 +27,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
   }
 
   public LicensedVideoSwapPageObject navigateToLvsPage() {
-    waitForElementByElement(backToLvsBtn);
+    wait.forElementVisible(backToLvsBtn);
     backToLvsBtn.click();
     PageObjectLogging.log("navigateToLvsPage", "lvs back button navigates to lvs page", true);
     return new LicensedVideoSwapPageObject(driver);
@@ -46,7 +46,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
   }
 
   public void verifyUndoSucceeded() {
-    waitForElementByElement(notification);
+    wait.forElementVisible(notification);
     String notificationMsg = notification.getText();
     Assertion.assertEquals(notificationMsg, "You have restored the video to this list.");
     PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped video", true);

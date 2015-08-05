@@ -10,6 +10,6 @@ public class MobileTestTemplate extends NewTestTemplate {
 
   @Override
   public void startBrowser() {
-    driver = new MobileDriverProvider().getDriverInstance();
+    driver = registerDriverListener(new MobileDriverProvider().getDriverInstance());
   }
 }

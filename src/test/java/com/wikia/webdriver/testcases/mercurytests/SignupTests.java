@@ -1,24 +1,21 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileSignupPageObject;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
 import org.testng.annotations.Test;
 
 /**
- * Created by rcunningham on 6/30/15.
+ * @ownership Social
  */
-@Test(groups = {"MobileSignup", "Mobile"})
+@Test(groups = {"MercurySignupTests", "Mercury"})
 public class SignupTests extends NewTestTemplate {
 
-  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
-  @Test(groups = {"MobileSignup_001"})
-  public void successfulSignup() {
-
-    MobileSignupPageObject mobileSignup =
-        new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+  @Test(groups = {"MercurySignupTest_001"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercurySignupTest_001_successfulSignup() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
     String userName = "User" + mobileSignup.getTimeStamp();
     String password = "Pass" + mobileSignup.getTimeStamp();
     String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
@@ -27,12 +24,11 @@ public class SignupTests extends NewTestTemplate {
     mobileSignup.verifyAvatarAfterSignup();
   }
 
-  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
-  @Test(groups = {"MobileSignup_002"})
-  public void signupErrorEmailInUse() {
-
-    MobileSignupPageObject mobileSignup =
-          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+  @Test(groups = {"MercurySignupTest_002"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercurySignupTest_002_signupErrorEmailInUse() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
     String userName = "User" + mobileSignup.getTimeStamp();
     String password = "Pass" + mobileSignup.getTimeStamp();
     String email = "qaart001@gmail.com";
@@ -41,12 +37,11 @@ public class SignupTests extends NewTestTemplate {
     mobileSignup.verifyEmailInUseError();
   }
 
-  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
-  @Test(groups = {"MobileSignup_003"})
-  public void signupErrorUsernameTaken() {
-
-    MobileSignupPageObject mobileSignup =
-          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+  @Test(groups = {"MercurySignupTest_003"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercurySignupTest_003_signupErrorUsernameTaken() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
     String userName = "bekcunning";
     String password = "Pass" + mobileSignup.getTimeStamp();
     String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
@@ -55,12 +50,11 @@ public class SignupTests extends NewTestTemplate {
     mobileSignup.verifyUsernameTakenError();
   }
 
-  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
-  @Test(groups = {"MobileSignup_004"})
-  public void signupErrorBadPassword() {
-
-    MobileSignupPageObject mobileSignup =
-          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+  @Test(groups = {"MercurySignupTest_004"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercurySignupTest_004_signupErrorBadPassword() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
     String userName = "User" + mobileSignup.getTimeStamp();
     String password = userName;
     String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
@@ -69,12 +63,11 @@ public class SignupTests extends NewTestTemplate {
     mobileSignup.verifyPasswordError();
   }
 
-  @RelatedIssue(issueID = "QAART-635", comment = "Jenkins problem: Manual testing should be done. ASk Social team how to do it")
-  @Test(groups = {"MobileSignup_005"})
-  public void signupErrorTooYoungUser() {
-
-    MobileSignupPageObject mobileSignup =
-          new MobileBasePageObject(driver).openMobileSignupPage(wikiURL);
+  @Test(groups = {"MercurySignupTest_005"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercurySignupTest_005_signupErrorTooYoungUser() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
     String userName = "User" + mobileSignup.getTimeStamp();
     String password = "Pass" + mobileSignup.getTimeStamp();
     String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -39,18 +40,18 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void verifyAddPhotoModal() {
-    waitForElementByElement(searchField);
-    waitForElementByElement(findButton);
+    wait.forElementVisible(searchField);
+    wait.forElementVisible(findButton);
   }
 
   public void typeSearchQuery(String photoName) {
-    waitForElementByElement(searchField);
+    wait.forElementVisible(searchField);
     searchField.sendKeys(photoName);
     PageObjectLogging.log("typeSearchQuery", photoName + " searching", true);
   }
 
   public void clickFind() {
-    waitForElementByElement(findButton);
+    wait.forElementVisible(findButton);
     String oldHeadline = imageUploadHeadline.getText();
     scrollAndClick(findButton);
     waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
@@ -59,7 +60,7 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
-    waitForElementByElement(addThisPhotoList.get(photoNumber));
+    wait.forElementVisible(addThisPhotoList.get(photoNumber));
     photoName =
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
@@ -69,7 +70,7 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(String fileName) {
-    WebElement photo = getElementByValue(addThisPhotoList, "title", fileName);
+    WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);

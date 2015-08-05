@@ -57,13 +57,13 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
-    waitForElementByElement(addPhotoButton);
+    wait.forElementVisible(addPhotoButton);
     addPhotoButton.click();
     return new AddPhotoComponentObject(driver);
   }
 
   public void clickFinish() {
-    waitForElementByElement(finishButton);
+    wait.forElementVisible(finishButton);
     finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -82,9 +81,9 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public void disconnectFromFacebook() {
-    waitForElementByElement(facebookDisconnect);
+    wait.forElementVisible(facebookDisconnect);
     scrollAndClick(facebookDisconnect);
-    waitForElementByElement(fbConnect);
+    wait.forElementVisible(fbConnect);
     PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook",
                           true);
   }
@@ -103,32 +102,32 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public void verifySaveNotification() {
-    waitForElementVisibleByElement(saveNotfication);
+    wait.forElementVisible(saveNotfication);
     PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
   }
 
   public void connectFacebook(String email, String password) {
     PageObjectLogging.log("connectFacebook", "Connecting FB via FB login dialog", true);
 
-    waitForElementByElement(fbConnect);
+    wait.forElementVisible(fbConnect);
     scrollAndClick(fbConnect);
 
     waitForNewWindow();
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
 
-    waitForElementByElement(facebookEmailInput);
+    wait.forElementVisible(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
 
-    waitForElementByElement(facebookPasswordInput);
+    wait.forElementVisible(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
 
     scrollAndClick(facebookSubmitButton);
 
     driver.switchTo().window(windows[0].toString());
-    waitForElementByElement(facebookDisconnect);
+    wait.forElementVisible(facebookDisconnect);
   }
 
   public PreferencesPageObject setAdvancedRecentChangesCheckbox() {

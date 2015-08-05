@@ -28,21 +28,21 @@ public class PhotoOptionsComponentObject extends BasePageObject {
   }
 
   public void setCaption(String caption) {
-    waitForElementByElement(captionField);
+    wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
     PageObjectLogging.log("setCaption", caption + " set", true);
   }
 
   public void clickAddPhoto() {
-    waitForElementByElement(addPhotoButton);
+    wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     waitForElementNotVisibleByElement(addPhotoButton);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
   }
 
   public void adjustAlignment(int i) {
-    waitForElementByElement(alignmentRow);
+    wait.forElementVisible(alignmentRow);
     switch (i) {
       case 1:
         alignmentLeft.click();

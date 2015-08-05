@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -75,7 +76,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
   public VisualEditorPageObject clickApplyChangesButton() {
     waitForDialogVisible();
-    waitForElementVisibleByElement(applyChangesButton);
+    wait.forElementVisible(applyChangesButton);
     waitForElementClickableByElement(applyChangesButton);
     applyChangesButton.click();
     return new VisualEditorPageObject(driver);
@@ -85,21 +86,21 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     waitForDialogVisible();
     typeCategory(cat);
     clickLinkResult();
-    waitForElementByElement(categoryItem);
+    wait.forElementVisible(categoryItem);
     PageObjectLogging.log("addCategory", "Category: " + cat + " is added", true, driver);
   }
 
   private void typeCategory(String cat) {
-    waitForElementVisibleByElement(categoriesInput);
+    wait.forElementVisible(categoriesInput);
     categoriesInput.clear();
     categoriesInput.sendKeys(cat);
     PageObjectLogging.log("typeCategory", "Typed " + cat + " in the field", true, driver);
   }
 
   public void clickLinkResult() {
-    waitForElementByElement(selectedResult);
+    wait.forElementVisible(selectedResult);
     WebElement matchingResult = selectedResult.findElement(labelElementBy);
-    waitForElementByElement(matchingResult);
+    wait.forElementVisible(matchingResult);
     waitForElementClickableByElement(matchingResult);
     matchingResult.click();
   }
@@ -119,11 +120,11 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
   private void clickCategory(String searchCategory) {
     waitForDialogVisible();
-    waitForElementByElement(categoryItem);
-    WebElement elementFound = getElementByText(categoryItems, searchCategory);
+    wait.forElementVisible(categoryItem);
+    WebElement elementFound = Elements.getElementByText(categoryItems, searchCategory);
     WebElement categoryDownIndicator = elementFound.findElement(downIndicatorBy);
     categoryDownIndicator.click();
-    waitForElementVisibleByElement(categoryPopUp);
+    wait.forElementVisible(categoryPopUp);
   }
 
   public List<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {

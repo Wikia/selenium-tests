@@ -55,7 +55,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   private WebElement miniEditorWrapper;
 
   public void writeMiniEditor(String text) {
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     // This was intensively investigated and sleep is the only way to make the tests more reliable.
     // The reason is the Minieditor defectiveness
     try {
@@ -68,14 +68,14 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void writeMiniEditor(Keys key) {
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     messageBodyField.sendKeys(key);
   }
 
   public void switchAndWrite(String text) {
-    waitForElementByElement(miniEditorIframe);
+    wait.forElementVisible(miniEditorIframe);
     driver.switchTo().frame(miniEditorIframe);
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     messageBodyField.sendKeys(text);
   }
 
@@ -87,14 +87,14 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     if ("Italic".equals(special)) {
       specialKey = "i";
     }
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     messageBodyField.sendKeys(message);
     messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a");
     messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey);
   }
 
   public void addVideoMiniEditor(String url) {
-    waitForElementByElement(addVideoButton);
+    wait.forElementVisible(addVideoButton);
     scrollAndClick(addVideoButton);
     VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
     VetOptionsComponentObject
@@ -105,57 +105,57 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void verifyVideoMiniEditor() {
-    waitForElementByElement(miniEditorIframe);
+    wait.forElementVisible(miniEditorIframe);
     driver.switchTo().frame(miniEditorIframe);
-    waitForElementByElement(videoInMessageEditMode);
+    wait.forElementVisible(videoInMessageEditMode);
     driver.switchTo().defaultContent();
   }
 
   public void addExternalLink(String externalLink) {
-    waitForElementByElement(addLinkButton);
+    wait.forElementVisible(addLinkButton);
     scrollAndClick(addLinkButton);
-    waitForElementByElement(externalLinkOption);
+    wait.forElementVisible(externalLinkOption);
     scrollAndClick(externalLinkOption);
     targetPageOrURL.sendKeys(externalLink);
-    waitForElementByElement(linkExternalIcon);
+    wait.forElementVisible(linkExternalIcon);
     scrollAndClick(linkModalOkButton);
   }
 
   public void addInternalLink(String internalLink) {
-    waitForElementByElement(addLinkButton);
+    wait.forElementVisible(addLinkButton);
     scrollAndClick(addLinkButton);
-    waitForElementByElement(targetPageOrURL);
+    wait.forElementVisible(targetPageOrURL);
     targetPageOrURL.sendKeys(internalLink);
-    waitForElementByElement(linkExistsIcon);
-    waitForElementByElement(linkModalOkButton);
+    wait.forElementVisible(linkExistsIcon);
+    wait.forElementVisible(linkModalOkButton);
     scrollAndClick(linkModalOkButton);
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
-    waitForElementByElement(addVideoButton);
+    wait.forElementVisible(addVideoButton);
     scrollAndClick(addVideoButton);
     return new VetAddVideoComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickAddImage() {
-    waitForElementByElement(addImageButton);
+    wait.forElementVisible(addImageButton);
     scrollAndClick(addImageButton);
     return new PhotoAddComponentObject(driver);
   }
 
   public void switchAndEditComment(String comment) {
-    waitForElementByElement(miniEditorEditCommentIFrame);
+    wait.forElementVisible(miniEditorEditCommentIFrame);
     driver.switchTo().frame(miniEditorEditCommentIFrame);
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(comment);
     PageObjectLogging.log("CommentEdited", "Comment edited", true);
   }
 
   public void switchAndReplyComment(String reply) {
-    waitForElementByElement(replyCommentIFrame);
+    wait.forElementVisible(replyCommentIFrame);
     driver.switchTo().frame(replyCommentIFrame);
-    waitForElementByElement(messageBodyField);
+    wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);
     PageObjectLogging.log("CommentReplied", "Comment replied", true);
@@ -169,7 +169,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void switchAndQuoteMessageWall(String reply) {
-    waitForElementByElement(miniEditorWrapper);
+    wait.forElementVisible(miniEditorWrapper);
     quoteMessageWallFrame = miniEditorWrapper.findElement(By.cssSelector(".cke_contents iframe"));
     driver.switchTo().frame(quoteMessageWallFrame);
     WebElement quoteMessageTextArea = driver.findElement(By.cssSelector("body#bodyContent"));

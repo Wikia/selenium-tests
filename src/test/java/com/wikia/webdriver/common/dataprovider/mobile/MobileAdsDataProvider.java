@@ -57,8 +57,6 @@ public class MobileAdsDataProvider {
             "SyntheticTests/DfpParams",
             "wka.ent/_adtest//article",
             "MOBILE_TOP_LEADERBOARD",
-            "115974612",
-            "50006703732",
             Arrays.asList(
                 "\"s0\":\"ent\"",
                 "\"s1\":\"_adtest\"",

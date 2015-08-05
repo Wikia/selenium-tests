@@ -43,7 +43,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void typeInSearchInput(String searchString) {
     waitForDialogVisible();
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
     PageObjectLogging.log(
@@ -60,7 +60,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public VisualEditorEditTemplateDialog selectSuggestedTemplate(int index) {
     waitForDialogVisible();
-    waitForElementVisibleByElement(suggestedWidget);
+    wait.forElementVisible(suggestedWidget);
     WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
     selected.click();
     PageObjectLogging.log(
@@ -74,7 +74,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   public VisualEditorEditTemplateDialog selectResultTemplate(String searchString, int index) {
     typeInSearchInput(searchString);
     waitForDialogVisible();
-    waitForElementVisibleByElement(resultWidget);
+    wait.forElementVisible(resultWidget);
     WebElement selected = resultTemplates.get(index).findElement(labelBy);
     selected.click();
     PageObjectLogging.log(
@@ -90,7 +90,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public void verifyIsResultTemplate() {
-    waitForElementVisibleByElement(resultWidget);
+    wait.forElementVisible(resultWidget);
     waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() > 0, "No result template shown.");
     PageObjectLogging.log("verifyIsResultTemplate", "Result templates found", true);
@@ -104,7 +104,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void verifyIsSuggestedTemplate() {
     Assertion
-        .assertTrue(checkIfElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
+        .assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
     PageObjectLogging.log("verifyIsSuggestedTemplate", "Suggested templates found", true);
   }
 }

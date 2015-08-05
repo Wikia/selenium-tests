@@ -66,7 +66,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyAceEditorPresence() {
-    waitForElementByElement(aceEditor);
+    wait.forElementVisible(aceEditor);
     PageObjectLogging.log("verifyAceEditorPresence", "Ace Editor is present.", true);
   }
 
@@ -86,14 +86,14 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void clearCssText() {
-    waitForElementByElement(aceLayerTextArea);
-    executeScript("ace.edit('cssEditorContainer').setValue('');");
+    wait.forElementVisible(aceLayerTextArea);
+    jsActions.execute("ace.edit('cssEditorContainer').setValue('');");
     PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
   }
 
   public void insertCssText(String cssText) {
-    waitForElementByElement(aceLayerTextArea);
-    executeScript("ace.edit('cssEditorContainer').navigateFileEnd();");
+    wait.forElementVisible(aceLayerTextArea);
+    jsActions.execute("ace.edit('cssEditorContainer').navigateFileEnd();");
     sendCssText(cssText);
     PageObjectLogging.log(
         "sendAceCssText",
@@ -103,7 +103,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void sendEditSummaryText(String summaryText) {
-    waitForElementByElement(editSummaryField);
+    wait.forElementVisible(editSummaryField);
     editSummaryField.sendKeys(summaryText);
     PageObjectLogging.log(
         "editSummaryField",
@@ -113,7 +113,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void sendCssText(String cssText) {
-    waitForElementByElement(aceLayerTextArea);
+    wait.forElementVisible(aceLayerTextArea);
     aceInputTextArea.sendKeys(cssText);
     PageObjectLogging.log(
         "sendCssText",
@@ -123,17 +123,17 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyAceError() {
-    waitForElementByElement(aceError);
+    wait.forElementVisible(aceError);
     PageObjectLogging.log("verifyAceError", "verify that highlightet ace shows an error", true);
   }
 
   public void verifyPublishButtonAppears() {
-    waitForElementByElement(cssPublishButton);
+    wait.forElementVisible(cssPublishButton);
     PageObjectLogging.log("cssPublishButton", "verify that publish button appears", true);
   }
 
   public void verifyMinorEditAppears() {
-    waitForElementByElement(minorEdit);
+    wait.forElementVisible(minorEdit);
     PageObjectLogging.log("minorEdit", "verify that minor edit checkbox appears", true);
   }
 
@@ -143,7 +143,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
   public void clickPublishButtonDropdown() {
     scrollAndClick(cssPublishButtonDropdown);
-    mouseOver(cssPublishButtonDropdown);
+    jsActions.mouseOver(cssPublishButtonDropdown);
     PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
   }
 
@@ -163,12 +163,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifySaveComplete() {
-    waitForElementByElement(notificationConfirm);
+    wait.forElementVisible(notificationConfirm);
     PageObjectLogging.log("notificationConfirm", "css content saved", true);
   }
 
   public String getAddedLineText() {
-    waitForElementByElement(changesModalAddedLine);
+    wait.forElementVisible(changesModalAddedLine);
     String addedLine = changesModalAddedLine.getText();
     PageObjectLogging.log("changesModalAddedLine", "get added line content", true);
     return addedLine;
@@ -190,7 +190,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyArticleIsRemoved() {
-    waitForElementByBy(removedWarningBy);
+    wait.forElementPresent(removedWarningBy);
     PageObjectLogging.log("verifyArticleIsRemoved", "Article is removed.", true);
   }
 
@@ -202,7 +202,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyArticleIsNotRemoved(String page) {
-    if (checkIfElementOnPage(removedWarning)) {
+    if (isElementOnPage(removedWarning)) {
       undeleteArticle(page);
       PageObjectLogging.log(
           "articleIsRemoved",
@@ -230,7 +230,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public void verifyConflictArea() {
-    waitForElementByElement(cssPublishButton);
+    wait.forElementVisible(cssPublishButton);
     PageObjectLogging.log("verifyConflictArea", "verify that conflict area is present", true);
   }
 
@@ -238,13 +238,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
    * Above the editor area, there should be a box with comparison of yours and the latest changes
    */
   public void verifyLatestRevision() {
-    waitForElementByElement(oRevisionTitle);
+    wait.forElementVisible(oRevisionTitle);
     waitForTextToBePresentInElementByElement(oRevisionTitle, "Latest revision");
     PageObjectLogging.log("verifyLatestRevision", "verify that latest revision is shown", true);
   }
 
   public void verifyTalkBubblePresence() {
-    waitForElementByElement(talkBubble);
+    wait.forElementVisible(talkBubble);
     PageObjectLogging.log("verifyTalkBubblePresence", "Talk bubble is present.", true);
   }
 
@@ -265,12 +265,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
    */
   public int getNumberFromWikaiCssTalkBubble() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "wiki/MediaWiki:Wikia.css");
-    waitForElementByElement(mwTalkBubble);
+    wait.forElementVisible(mwTalkBubble);
     return Integer.parseInt(mwTalkBubble.getText());
   }
 
   public void verifyDeleteButtonPresence() {
-    waitForElementByElement(deleteButton);
+    wait.forElementVisible(deleteButton);
     PageObjectLogging.log("verifyDeleteButtonPresence", "Delete Button is present.", true);
   }
 

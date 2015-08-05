@@ -31,7 +31,9 @@ public class TestInterstitial extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "InterstitialMobile",
-      dataProvider = "interstitialMobile"
+      dataProvider = "interstitialMobile",
+      // wf ADEN-2255
+      enabled = false
   )
   public void interstitialAdScaledMobile(
       String wikiName,
@@ -50,7 +52,8 @@ public class TestInterstitial extends TemplateNoFirstLoad {
       Dimension adSize,
       boolean shouldAdBeScaled
   ) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String url = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
     adsInterstitial.waitForPageLoaded();
     adsInterstitial.verifySize(adSize);

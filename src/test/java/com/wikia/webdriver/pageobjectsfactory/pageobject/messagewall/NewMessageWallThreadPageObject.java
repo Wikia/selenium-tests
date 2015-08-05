@@ -30,13 +30,13 @@ public class NewMessageWallThreadPageObject extends NewMessageWall {
 
   public MiniEditorComponentObject triggerMessageArea() {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
-      jQueryFocus(replyBody);
+      jsActions.focus(replyBody);
     }
     return new MiniEditorComponentObject(driver);
   }
 
   public void verifyLastReply(String userName, String message) {
-    waitForElementByElement(replyBody);
+    wait.forElementVisible(replyBody);
     Assertion.assertEquals(lastReplyEditor.get(lastReplyEditor.size() - 1).getText(), userName);
     Assertion.assertEquals(lastReplyText.get(lastReplyEditor.size() - 1).getText(), message);
   }

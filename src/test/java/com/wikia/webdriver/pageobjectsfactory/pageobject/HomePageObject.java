@@ -42,7 +42,7 @@ public class HomePageObject extends WikiBasePageObject {
 
   public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
     startWikiButton.click();
-    wait.until(ExpectedConditions.presenceOfElementLocated(
+    waitFor.until(ExpectedConditions.presenceOfElementLocated(
         By.cssSelector("form[name='label-wiki-form']")));
     return new CreateNewWikiPageObjectStep1(driver);
   }
@@ -130,7 +130,7 @@ public class HomePageObject extends WikiBasePageObject {
   }
 
   public void verifyLanguageButton() {
-    waitForElementByBy(languageButtonSelectorBy);
+    wait.forElementPresent(languageButtonSelectorBy);
   }
 
   public String getLanguageURL(int index) {
@@ -174,7 +174,7 @@ public class HomePageObject extends WikiBasePageObject {
             true
         );
       }
-      newHome.navigateBack();
+      driver.navigate().back();
     }
   }
 }

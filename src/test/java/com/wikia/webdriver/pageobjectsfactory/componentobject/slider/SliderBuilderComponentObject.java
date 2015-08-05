@@ -30,8 +30,8 @@ public class SliderBuilderComponentObject extends BasePageObject {
   }
 
   public void selectMenuPosition(MenuPositions pos) {
-    waitForElementByElement(hPosition);
-    waitForElementByElement(vPosition);
+    wait.forElementVisible(hPosition);
+    wait.forElementVisible(vPosition);
     switch (pos) {
       case HORIZONTAL:
         hPosition.click();
@@ -47,14 +47,14 @@ public class SliderBuilderComponentObject extends BasePageObject {
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
-    waitForElementByElement(addPhotoButton);
+    wait.forElementVisible(addPhotoButton);
     addPhotoButton.click();
     PageObjectLogging.log("addPhoto", "add photo button clicked", true);
     return new AddPhotoComponentObject(driver);
   }
 
   public void clickFinish() {
-    waitForElementByElement(finishButton);
+    wait.forElementVisible(finishButton);
     finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }

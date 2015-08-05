@@ -15,20 +15,25 @@ import java.util.List;
  */
 public class TestDfpParamsPresent extends TemplateNoFirstLoad {
 
+  private static final String LINE_ITEM_ID = "115974612";
+  private static final String CREATIVE_ID = "37674198492";
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "dfpParams",
       groups = {"TestDfpParamsPresent_GeoEdgeFree", "Ads"}
   )
-  public void TestDfpParamsPresent_GeoEdgeFree(
-      String wikiName, String article, String adUnit, String slot, String lineItemId,
-      String creativeId, List<String> pageParams, List<String> slotParams
-  ) {
+  public void testDfpParamsPresent_GeoEdgeFree(String wikiName,
+                                               String article,
+                                               String adUnit,
+                                               String slot,
+                                               List<String> pageParams,
+                                               List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
-    ads.verifyGptAdInSlot(slot, lineItemId, creativeId);
+    ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
 
   }
 }

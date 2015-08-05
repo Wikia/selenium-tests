@@ -10,13 +10,13 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<testSuite>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</testSuite>
-		<webdriver.version>2.45.0</webdriver.version>
+		<webdriver.version>2.47.1</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>4.3.3</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.kennychua</groupId>
@@ -113,7 +113,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.6</version>
+			<version>4.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>

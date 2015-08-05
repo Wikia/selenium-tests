@@ -145,7 +145,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyTabberImagePresence();
   }
 
-
+  @Execute(asUser = User.STAFF);
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new 

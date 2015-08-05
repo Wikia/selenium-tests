@@ -82,7 +82,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public MiniEditorComponentObject triggerMessageArea() {
     while (!postButton.isDisplayed()) {
-      jQueryFocus(messageMainBody);
+      jsActions.focus(messageMainBody);
     }
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
@@ -90,7 +90,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public MiniEditorComponentObject triggerReplyMessageArea() {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
-      jQueryFocus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
+      jsActions.focus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
     }
     PageObjectLogging.log("triggerReplyMessageArea", "reply message area triggered", true);
     return new MiniEditorComponentObject(driver);
@@ -115,7 +115,7 @@ public class NewMessageWall extends WikiBasePageObject {
     WebElement
         saveButton =
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
-    jQueryClick(saveButton);
+    jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
     PageObjectLogging.log("submitEdition", "message edition submitted", true);
   }
@@ -194,39 +194,39 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void clickSourceModeButton() {
-    waitForElementByElement(sourceModeButton);
+    wait.forElementVisible(sourceModeButton);
     scrollAndClick(sourceModeButton);
     PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
   }
 
   public void clickBoldButton() {
-    waitForElementByElement(boldButton);
+    wait.forElementVisible(boldButton);
     scrollAndClick(boldButton);
     PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
   }
 
   public void clickItalicButton() {
-    waitForElementByElement(italicButton);
+    wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
   public NewMessageWallAddLinkComponentObject clickLinkButton() {
-    waitForElementByElement(linkButton);
+    wait.forElementVisible(linkButton);
     scrollAndClick(linkButton);
     PageObjectLogging.log("clickLinkButton", "link button clicked", true);
     return new NewMessageWallAddLinkComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickImageButton() {
-    waitForElementByElement(imageButton);
+    wait.forElementVisible(imageButton);
     scrollAndClick(imageButton);
     PageObjectLogging.log("clickImageButton", "image button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public void verifyThreadRemoved() {
-    waitForElementByElement(removedThreadMessage);
+    wait.forElementVisible(removedThreadMessage);
     PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
@@ -239,10 +239,10 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyThreadReopened() {
-    waitForElementPresenceByBy(closeButtonBy);
+    wait.forElementPresent(closeButtonBy);
     setDisplayStyle(firstMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
-    waitForElementByBy(closeButtonBy);
+    wait.forElementPresent(closeButtonBy);
     setDisplayStyle(firstMessageMenu, "none");
     PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
   }
@@ -295,7 +295,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
-    waitForElementByElement(editMessageWrapper);
+    wait.forElementVisible(editMessageWrapper);
     Assertion.assertEquals(
             editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
@@ -367,9 +367,9 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyPostedMessageVideo(String title) {
-    waitForElementByXPath(
+    wait.forElementVisible(By.xpath(
         "//div[@class='msg-title']/a[contains(text(), "
-        + "'" + title + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]");
+        + "'" + title + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
   }
 }

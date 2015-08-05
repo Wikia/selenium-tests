@@ -31,7 +31,7 @@ public class TableOfContentPageObject extends BasePageObject {
 
   public boolean isTOCDisplayed() {
     try {
-      waitForElementVisibleByElement(tocAll, 5, 1000);
+      wait.forElementVisible(tocAll, 5, 1000);
     } catch (TimeoutException e) {
       return false;
     }
@@ -39,17 +39,17 @@ public class TableOfContentPageObject extends BasePageObject {
   }
 
   public boolean isTOCUnderArticleName() throws WebDriverException {
-    waitForElementByElement(tocUnderH1);
+    wait.forElementVisible(tocUnderH1);
     return tocUnderH1.isDisplayed() && tocUnderH1.getTagName().equals("nav");
   }
 
   public void clickOnTOC() {
-    waitForElementByElement(tocButton);
+    wait.forElementVisible(tocButton);
     tocButton.click();
   }
 
   public void clickOnTOCListElement(int index) {
-    waitForElementVisibleByElement(listOfLinks.get(index));
+    wait.forElementVisible(listOfLinks.get(index));
     listOfLinks.get(index).click();
   }
 

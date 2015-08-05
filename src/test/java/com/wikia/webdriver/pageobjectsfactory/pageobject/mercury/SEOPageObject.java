@@ -102,7 +102,7 @@ public class SEOPageObject extends BasePageObject {
   }
 
   public boolean isLinkRelCanonical() throws WebDriverException {
-    waitForElementInViewPort(canonicalUrl);
+    wait.forElementInViewPort(canonicalUrl);
     if (canonicalUrl.getAttribute("href") == null) {
       throw new WebDriverException("Expected String but got null");
     }

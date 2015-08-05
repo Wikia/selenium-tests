@@ -68,9 +68,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * request. This method waits until this requests completes.
    */
   private void waitForNotificationsMessagesToLoad() {
-    waitForElementVisibleByElement(notificationsDropdown);
-    waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
-    waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
+    wait.forElementVisible(notificationsDropdown);
+    wait.forElementPresent(notificationDropdownForCurrentWiki);
+    wait.forElementNotPresent(emptyNotificationDropdownForCurrentWiki);
   }
 
   /**
@@ -89,7 +89,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    *        showNotifications method
    */
   public void clickNotifications() {
-    waitForElementByElement(notificationsBubbles);
+    wait.forElementVisible(notificationsBubbles);
     scrollAndClick(notificationsBubbles);
     PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true);
   }
@@ -99,7 +99,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * notifications)
    */
   private void waitForNotificationsLoaded() {
-    waitForElementVisibleByElement(emptyNumberOfUnreadNotifications);
+    wait.forElementVisible(emptyNumberOfUnreadNotifications);
   }
 
   /**
@@ -158,10 +158,10 @@ public class NotificationsComponentObject extends WikiBasePageObject {
         this.scrollAndClick(this.markNotificationsAsReadThisWiki);
       } else {
         this.scrollAndClick(this.markNotificationsAsRead);
-        this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
+        this.wait.forElementVisible(this.markNotificationsAsReadAllWikis);
         this.scrollAndClick(this.markNotificationsAsReadAllWikis);
       }
-      this.waitForElementNotPresent(unreadNotificationReddot);
+      this.wait.forElementNotPresent(unreadNotificationReddot);
     }
   }
 

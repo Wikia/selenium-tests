@@ -6,7 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Dmytro Rets
@@ -14,10 +14,10 @@ import java.awt.*;
  */
 public class TestOoyalaAds extends TemplateNoFirstLoad {
 
-  private final static Color GREEN = new Color(0, 214, 0);
-  private final static Color BLUE = new Color(0, 13, 255);
-  private final static int AD_DURATION_SEC = 30;
-  private final static int VIDEO_DURATION_SEC = 30;
+  private static final Color GREEN = new Color(0, 214, 0);
+  private static final Color BLUE = new Color(0, 13, 255);
+  private static final int AD_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 30;
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
