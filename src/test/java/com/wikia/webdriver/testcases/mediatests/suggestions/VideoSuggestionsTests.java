@@ -44,7 +44,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.userName, credentials.password, wikiURL);
-    article = article.openArticleByName(wikiURL, articleName);
+    article = article.open(articleName);
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
     ck.verifyContentLoaded();
     VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();

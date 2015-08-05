@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class SpecialCssPageObject extends SpecialPageObject {
 
@@ -65,6 +65,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
     super(driver);
   }
 
+  public SpecialCssPageObject open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + URLsContent.MEDIAWIKI_CSS);
+    return this;
+  }
+
   public void verifyAceEditorPresence() {
     wait.forElementVisible(aceEditor);
     PageObjectLogging.log("verifyAceEditorPresence", "Ace Editor is present.", true);
@@ -72,8 +78,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
   public void verifyHighlighting() {
     Assertion.assertNotEquals(aceElementsList.size(), 0);
-    PageObjectLogging.log("verifyHighlighting",
-                          "There are elements highlighted by ace library", true);
+    PageObjectLogging.log("verifyHighlighting", "There are elements highlighted by ace library",
+        true);
   }
 
   public void saveCssContent(String randomText) {
@@ -95,31 +101,22 @@ public class SpecialCssPageObject extends SpecialPageObject {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('cssEditorContainer').navigateFileEnd();");
     sendCssText(cssText);
-    PageObjectLogging.log(
-        "sendAceCssText",
-        "the following text was send to ace editor: " + cssText,
-        true
-    );
+    PageObjectLogging.log("sendAceCssText",
+        "the following text was send to ace editor: " + cssText, true);
   }
 
   public void sendEditSummaryText(String summaryText) {
     wait.forElementVisible(editSummaryField);
     editSummaryField.sendKeys(summaryText);
-    PageObjectLogging.log(
-        "editSummaryField",
-        "the following text was send to ace editor: " + summaryText,
-        true
-    );
+    PageObjectLogging.log("editSummaryField", "the following text was send to ace editor: "
+        + summaryText, true);
   }
 
   public void sendCssText(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
     aceInputTextArea.sendKeys(cssText);
-    PageObjectLogging.log(
-        "sendCssText",
-        "the following text was send to ace editor: " + cssText,
-        true
-    );
+    PageObjectLogging.log("sendCssText", "the following text was send to ace editor: " + cssText,
+        true);
   }
 
   public void verifyAceError() {
@@ -204,11 +201,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   public void verifyArticleIsNotRemoved(String page) {
     if (isElementOnPage(removedWarning)) {
       undeleteArticle(page);
-      PageObjectLogging.log(
-          "articleIsRemoved",
-          "Article is removed, needs to be restored",
-          true
-      );
+      PageObjectLogging.log("articleIsRemoved", "Article is removed, needs to be restored", true);
     } else {
       PageObjectLogging.log("verifyArticleIsNotRemoved", "Article is not removed.", true);
     }

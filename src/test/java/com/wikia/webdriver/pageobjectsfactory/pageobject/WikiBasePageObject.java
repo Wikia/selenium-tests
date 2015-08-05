@@ -46,7 +46,10 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
@@ -382,8 +385,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCreatePagePageObject(driver);
   }
 
-  public SpecialWikiActivityPageObject openSpecialWikiActivity(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WIKI_ACTIVITY);
+  public SpecialWikiActivityPageObject openSpecialWikiActivity() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+        + URLsContent.SPECIAL_WIKI_ACTIVITY);
     return new SpecialWikiActivityPageObject(driver);
   }
 
@@ -648,11 +652,6 @@ public class WikiBasePageObject extends BasePageObject {
     return flashMessage.getText();
   }
 
-  public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    return new ArticlePageObject(driver);
-  }
-
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
     return new BlogPageObject(driver);
@@ -788,35 +787,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String logInCookie(String userName, String password, String wikiURL) {
-    String client_id = HeliosConfig.getClientId();
-    String client_secret = HeliosConfig.getClientSecret();
-    String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-
-    HttpPost httpPost = new HttpPost(heliosBaseUrl);
-    List<NameValuePair> nvps = new ArrayList<>();
-
-    nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
-    nvps.add(new BasicNameValuePair("client_id", client_id));
-    nvps.add(new BasicNameValuePair("client_secret", client_secret));
-    nvps.add(new BasicNameValuePair("username", userName));
-    nvps.add(new BasicNameValuePair("password", password));
-
-    CloseableHttpResponse response = null;
-    httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
     try {
-      response = httpClient.execute(httpPost);
-
-      HttpEntity entity = response.getEntity();
-      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
-
-      EntityUtils.consume(entity);
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-
-      String token = responseValue.getString("access_token");
+      String token = Helios.getAccessToken(userName, password);
 
       String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
 
@@ -834,20 +807,6 @@ public class WikiBasePageObject extends BasePageObject {
       return token;
     } catch (TimeoutException e) {
       PageObjectLogging.log("loginCookie", "page timeout after login by cookie", false);
-    } catch (UnsupportedEncodingException | ClientProtocolException e) {
-      PageObjectLogging.log("logInCookie", "UnsupportedEncodingException", false);
-      throw new WebDriverException();
-    } catch (JSONException e) {
-      PageObjectLogging.log("logInCookie", "Problem with parsing JSON response", false);
-      throw new WebDriverException();
-    } catch (IOException e) {
-      PageObjectLogging.log("logInCookie", "IO Exception", false);
-    } finally {
-      try {
-        response.close();
-      } catch (IOException | NullPointerException e) {
-        PageObjectLogging.log("logInCookie", "IO Exception", false);
-      }
     }
     return "";
   }

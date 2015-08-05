@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -43,7 +44,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("AddModifyGallery");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
@@ -79,7 +80,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("AddDeleteGallery");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
@@ -104,7 +105,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("addModifySlideshow");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
@@ -270,17 +271,24 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_010_addDeleteImage() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.clearContent();
+  public void addImage() {
+    ArticleContent.clear();
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     visualEditMode.verifyPhoto();
     visualEditMode.submitArticle();
-    article.editArticleInRTEUsingDropdown();
+  }
+
+  @Test
+  @Execute(asUser = User.USER)
+  public void deleteImage() {
+    ArticleContent.push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.PHOTO);
     visualEditMode.verifyComponentRemoved(Components.PHOTO);
   }

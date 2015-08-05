@@ -23,7 +23,7 @@ public class GlobalNavigationScrollAction extends NewTestTemplate{
 	)
 	public void scrollDown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-	    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity(wikiURL);
+	    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity();
 	    wikiActivity.verifyGlobalNavigation();
 	    wikiActivity.scrollToFooter();
 	    wikiActivity.verifyGlobalNavigation();

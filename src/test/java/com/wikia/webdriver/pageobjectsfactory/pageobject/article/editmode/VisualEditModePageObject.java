@@ -1,17 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,8 +12,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -64,7 +67,8 @@ public class VisualEditModePageObject extends EditMode {
   private List<WebElement> categoryList;
   @FindBy(css = ".RTEMediaCaption")
   private WebElement caption;
-  @FindBy(xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
+  @FindBy(
+      xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
   private WebElement blockedUserMessage1;
   @FindBy(xpath = "//b[contains(text(), 'Your user name or IP address has been blocked.')]")
   private WebElement blockedUserMessage2;
@@ -88,13 +92,24 @@ public class VisualEditModePageObject extends EditMode {
   private By categorySuggestionsList = By.cssSelector("li > a");
 
   private String categoryEditSelector = "li.category[data-name='%categoryName%'] li.editCategory";
-  private String
-      categoryRemoveSelector =
+  private String categoryRemoveSelector =
       "li.category[data-name='%categoryName%'] li.removeCategory";
   private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
 
   public VisualEditModePageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public VisualEditModePageObject open() {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+        + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(), URLsContent.ACTION_EDIT));
+    return this;
+  }
+
+  public VisualEditModePageObject open(String articleName) {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+        + URLsContent.WIKI_DIR + articleName, URLsContent.ACTION_EDIT));
+    return this;
   }
 
   public void clearContent() {
@@ -188,10 +203,8 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(iframe);
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
-    Assertion.assertNumber(
-        widthCurrent, widthDesired,
-        "width should be " + widthDesired + " but is " + widthCurrent
-    );
+    Assertion.assertNumber(widthCurrent, widthDesired, "width should be " + widthDesired
+        + " but is " + widthCurrent);
   }
 
   public void verifyVideoCaption(String captionDesired) {
@@ -204,18 +217,15 @@ public class VisualEditModePageObject extends EditMode {
     switch (component) {
       case GALLERY:
         verifyComponent(gallery);
-        js.executeScript(
-            "$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
+        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
         break;
       case SLIDESHOW:
         verifyComponent(slideshow);
-        js.executeScript(
-            "$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
+        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
         break;
       case SLIDER:
         verifyComponent(slider);
-        js.executeScript(
-            "$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
+        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
         break;
       case VIDEO:
         verifyComponent(video);
@@ -227,8 +237,7 @@ public class VisualEditModePageObject extends EditMode {
         break;
       case VIDEO_PLACEHOLDER:
         verifyComponent(videoPlaceholder);
-        js.executeScript(
-            "$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
+        js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
         break;
       default:
         break;
@@ -284,11 +293,8 @@ public class VisualEditModePageObject extends EditMode {
         wait.forElementNotPresent(videoBy);
         break;
       default:
-        PageObjectLogging.log(
-            "verifyComponentRemoved",
-            "Invalid component: " + component.name() + " selected",
-            false
-        );
+        PageObjectLogging.log("verifyComponentRemoved", "Invalid component: " + component.name()
+            + " selected", false);
         break;
     }
     driver.switchTo().defaultContent();
@@ -296,8 +302,9 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   /**
-   * Delete unwanted video by its name. Message article page is e.g http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList
-   * This method destination is exactly related videos message article
+   * Delete unwanted video by its name. Message article page is e.g
+   * http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList This method destination is
+   * exactly related videos message article
    *
    * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
    * @author Michal Nowierski
@@ -331,9 +338,8 @@ public class VisualEditModePageObject extends EditMode {
     }
     CommonUtils.setClipboardContents(builder);
     messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    PageObjectLogging
-        .log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true,
-             driver);
+    PageObjectLogging.log("deleteUnwantedVideoFromMessage",
+        "Delete all source code on the article", true, driver);
   }
 
   public void typeCategoryName(String categoryName) {
@@ -377,8 +383,8 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyCategoryNotPresent(String category) {
-    wait.forElementNotPresent(
-        By.cssSelector(categoryRemovedSelector.replace("%categoryName%", category)));
+    wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
+        category)));
     boolean categoryVisible = true;
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
@@ -390,46 +396,40 @@ public class VisualEditModePageObject extends EditMode {
 
   public String selectCategorySuggestions(int categoryNumber) {
     wait.forElementVisible(categorySuggestionsContainer);
-    WebElement categoryItem = categorySuggestionsContainer
-        .findElements(categorySuggestionsList)
-        .get(categoryNumber);
+    WebElement categoryItem =
+        categorySuggestionsContainer.findElements(categorySuggestionsList).get(categoryNumber);
     String categoryName = categoryItem.getText();
     categoryItem.click();
     waitForElementNotVisibleByElement(categorySuggestionsContainer);
-    PageObjectLogging
-        .log("selectCategorySuggestions", categoryNumber + " category selected from suggestions",
-             true);
+    PageObjectLogging.log("selectCategorySuggestions", categoryNumber
+        + " category selected from suggestions", true);
     return categoryName;
   }
 
   public EditCategoryComponentObject editCategory(String categoryName) {
-    WebElement category = driver.findElement(
-        By.cssSelector(
-            categoryEditSelector.replace("%categoryName%", categoryName)
-        )
-    );
+    WebElement category =
+        driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
+            categoryName)));
     jsActions.click(category);
-    PageObjectLogging
-        .log("editCategory", "edit category button clicked on category " + categoryName, true);
+    PageObjectLogging.log("editCategory", "edit category button clicked on category "
+        + categoryName, true);
     return new EditCategoryComponentObject(driver);
   }
 
   public void removeCategory(String categoryName) {
-    WebElement category = driver.findElement(
-        By.cssSelector(
-            categoryRemoveSelector.replace("%categoryName%", categoryName)
-        )
-    );
+    WebElement category =
+        driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
+            categoryName)));
     jsActions.click(category);
-    PageObjectLogging
-        .log("removeCategory", "remove category button clicked on category " + categoryName, true);
+    PageObjectLogging.log("removeCategory", "remove category button clicked on category "
+        + categoryName, true);
   }
 
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
     PageObjectLogging.log("verifyBlockedUserMessage",
-                          "blocked user message when attempting to create article verified", true);
+        "blocked user message when attempting to create article verified", true);
   }
 
   private void selectFromContextMenu(WebElement option) {
@@ -459,7 +459,7 @@ public class VisualEditModePageObject extends EditMode {
     return new ArticlePageObject(driver);
   }
 
-  public void startTracking(){
+  public void startTracking() {
     jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 
