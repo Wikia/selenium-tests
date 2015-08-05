@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
@@ -20,7 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageOb
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import freemarker.template.Template;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
