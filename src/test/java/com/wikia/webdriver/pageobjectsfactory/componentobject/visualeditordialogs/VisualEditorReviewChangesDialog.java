@@ -44,7 +44,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   public void verifyAddedDiffs(List<String> targets) {
     waitForDialogVisible();
-    if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
+    if (isElementOnPage(wikiaAritlceFirstPreview)) {
       verifyNewArticleDiffs(targets);
     } else {
       verifyArticleDiffs(targets, INSERT);
@@ -65,7 +65,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
     for (WebElement currentDiff : diffLines) {
       String currentText;
       //Check to see if the current diff line has inline diff
-      if (checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
+      if (isElementInContext(DIFF_LINE_STRING, currentDiff)) {
         List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
         //iterate through multiple inline diffs
         for (WebElement currentInlineDiff : inlineDiffs) {

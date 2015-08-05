@@ -68,7 +68,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public void typeUserName(String userName) {
     userNameField.sendKeys(userName);
-    userNameField.sendKeys(Keys.TAB);
+    driver.findElement(By.tagName("body")).sendKeys(Keys.TAB);
   }
 
   public void typeEmail(String email) {

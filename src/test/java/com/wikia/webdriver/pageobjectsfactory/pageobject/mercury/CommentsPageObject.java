@@ -119,19 +119,19 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public boolean isUserAvatarInComment(int index) {
-    return checkIfElementOnPage(commentsAvatars.get(index));
+    return isElementOnPage(commentsAvatars.get(index));
   }
 
   public boolean isUserUsernameInComment(int index) {
-    return checkIfElementOnPage(commentsUsernames.get(index));
+    return isElementOnPage(commentsUsernames.get(index));
   }
 
   public boolean isTimeStampInComment(int index) {
-    return checkIfElementOnPage(commentsTimeStamps.get(index));
+    return isElementOnPage(commentsTimeStamps.get(index));
   }
 
   public boolean isContentInComment(int index) {
-    return checkIfElementOnPage(commentsContent.get(index));
+    return isElementOnPage(commentsContent.get(index));
   }
 
   public boolean isRepliesListExpanded() {

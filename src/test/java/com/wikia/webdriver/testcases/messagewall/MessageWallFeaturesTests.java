@@ -3,33 +3,35 @@
  */
 package com.wikia.webdriver.testcases.messagewall;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallAddLinkComponentObject;
 
-import org.testng.annotations.Test;
-
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Write message in source mode, 2. Write message in bold
- *         font, 3. Write message in italic font, 4. Write message with internal link, 5. Write
- *         message with external link, 6. Write message with image,
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. Write message in source mode, 2. Write message in bold font, 3. Write message in
+ *         italic font, 4. Write message with internal link, 5. Write message with external link, 6.
+ *         Write message with image,
  */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_001_sourceMode() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -41,10 +43,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_002_boldMode() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -56,10 +57,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_003_italicMode() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -71,10 +71,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_004_image() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
@@ -87,10 +86,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_005_internalLink() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
@@ -101,10 +99,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
+  @Execute(asUser = User.USER)
   public void MessageWallFeatures_006_externalLink() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();

@@ -189,7 +189,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyNoVideo() {
-    if (checkIfElementOnPage(mediaNode)) {
+    if (isElementOnPage(mediaNode)) {
       throw new AssertionError("Media Node is still on the page");
     } else {
       PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
@@ -335,11 +335,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement selectedMedia = mediaNodes.get(index);
     wait.forElementVisible(selectedMedia);
     scrollAndClick(selectedMedia, 80);
-  }
-
-  public void selectMediaByTitle(String title) {
-    WebElement selectedMedia = getElementByValue(mediaNodes, "href", title);
-    selectedMedia.click();
   }
 
   public void randomResizeOnMedia() {

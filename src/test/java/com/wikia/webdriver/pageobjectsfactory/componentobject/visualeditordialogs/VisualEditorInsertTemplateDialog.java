@@ -104,7 +104,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void verifyIsSuggestedTemplate() {
     Assertion
-        .assertTrue(checkIfElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
+        .assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
     PageObjectLogging.log("verifyIsSuggestedTemplate", "Suggested templates found", true);
   }
 }

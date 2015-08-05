@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +30,7 @@ public class AdsPadObject extends AdsBaseObject {
   }
 
   public void verifyNoPadOnPage() {
-    Assertion.assertFalse(isElementOnPage(PAD_IMG_CSS));
+    Assertion.assertFalse(isElementOnPage(By.cssSelector(PAD_IMG_CSS)));
     PageObjectLogging.log("PAD", "PAD is not on the page", true, driver);
   }
 }

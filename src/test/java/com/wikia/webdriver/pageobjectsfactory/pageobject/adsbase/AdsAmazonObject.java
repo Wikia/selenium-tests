@@ -74,7 +74,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   public void verifyAmazonScriptIncluded() {
-    if (isElementOnPage(AMAZON_SCRIPT)) {
+    if (isElementOnPage(By.cssSelector(AMAZON_SCRIPT))) {
       PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
     } else {
       throw new NoSuchElementException("Amazon script not found on page");
@@ -91,14 +91,14 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public AdsAmazonObject verifyAdsFromAmazonPresent() {
     driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
-    Assertion.assertTrue(isElementOnPage(AMAZON_IFRAME));
+    Assertion.assertTrue(isElementOnPage(By.cssSelector(AMAZON_IFRAME)));
     PageObjectLogging.log("AmazonAd", "Script returned by Amazon present", true);
     driver.switchTo().defaultContent();
     return this;
   }
 
   public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
-    Assertion.assertFalse(checkIfElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
+    Assertion.assertFalse(isElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
     PageObjectLogging.log("AmazonAd", "No Amazon ad present", true);
     return this;
   }

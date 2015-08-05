@@ -362,7 +362,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void submitCategory() {
-    pressEnter(categoryInput);
+    new Actions(driver).sendKeys(categoryInput, Keys.ENTER).perform();
     PageObjectLogging.log("submitCategory", "category submitted", true);
   }
 
@@ -441,7 +441,7 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(contextFrame);
     option.click();
     driver.switchTo().defaultContent();
-    checkIfElementOnPage(visualModeTable);
+    isElementOnPage(visualModeTable);
   }
 
   public void clickDeleteTableButton() {

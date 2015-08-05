@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -10,9 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoCompone
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @author Saipetch Kongkatong, Liz Lee
@@ -31,6 +31,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   // Test: Ooyala video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
+  @Execute(disableFlash = "false")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateLightbox";
@@ -54,6 +55,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   // Test: Ooyala video in inline
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
+  @Execute(disableFlash = "false")
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateInline";

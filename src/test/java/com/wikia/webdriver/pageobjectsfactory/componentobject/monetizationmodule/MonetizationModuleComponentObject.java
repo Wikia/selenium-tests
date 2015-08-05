@@ -84,7 +84,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyMonetizationModuleShown() {
     wait.forElementPresent(monetizationModuleContainer);
-    Assertion.assertTrue(checkIfElementOnPage(monetizationModuleContainer));
+    Assertion.assertTrue(isElementOnPage(monetizationModuleContainer));
     PageObjectLogging.log("verifyMonetizationModuleShown", "Monetization module is visible", true);
   }
 
@@ -96,8 +96,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShown() {
     wait.forElementVisible(adsenseContainer);
-    Assertion.assertTrue(checkIfElementOnPage(adsenseContainer));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseIns));
+    Assertion.assertTrue(isElementOnPage(adsenseContainer));
+    Assertion.assertTrue(isElementOnPage(adsenseIns));
     PageObjectLogging.log("verifyAdsenseUnitShown", "Adsense unit is visible", true);
   }
 
@@ -137,8 +137,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShownAboveTitle() {
     wait.forElementVisible(slotAboveTitleAdsense);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveTitleAdsense));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
+    Assertion.assertTrue(isElementOnPage(slotAboveTitleAdsense));
+    Assertion.assertTrue(isElementOnPage(adsenseInsOthers));
     PageObjectLogging.log("verifyAdsenseUnitShownAboveTitle",
         "Adsense unit is visible above the title", true);
   }
@@ -151,8 +151,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShownBelowTitle() {
     wait.forElementVisible(slotBelowTitleAdsense);
-    Assertion.assertTrue(checkIfElementOnPage(slotBelowTitleAdsense));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
+    Assertion.assertTrue(isElementOnPage(slotBelowTitleAdsense));
+    Assertion.assertTrue(isElementOnPage(adsenseInsOthers));
     PageObjectLogging.log("verifyAdsenseUnitShownBelowTitle",
         "Adsense unit is visible below the title", true);
   }
@@ -165,8 +165,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShownInContent() {
     wait.forElementVisible(slotInContentAdsense);
-    Assertion.assertTrue(checkIfElementOnPage(slotInContentAdsense));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseInsInContent));
+    Assertion.assertTrue(isElementOnPage(slotInContentAdsense));
+    Assertion.assertTrue(isElementOnPage(adsenseInsInContent));
     PageObjectLogging.log("verifyAdsenseUnitShownInContent", "Adsense unit is visible in content",
         true);
   }
@@ -179,8 +179,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShownBelowCategory() {
     wait.forElementVisible(slotBelowCategoryAdsense);
-    Assertion.assertTrue(checkIfElementOnPage(slotBelowCategoryAdsense));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
+    Assertion.assertTrue(isElementOnPage(slotBelowCategoryAdsense));
+    Assertion.assertTrue(isElementOnPage(adsenseInsOthers));
     PageObjectLogging.log("verifyAdsenseUnitShownBelowCategory",
         "Adsense unit is visible below category", true);
   }
@@ -193,8 +193,8 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseUnitShownAboveFooter() {
     wait.forElementVisible(slotAboveFooterAdsense);
-    Assertion.assertTrue(checkIfElementOnPage(slotAboveFooterAdsense));
-    Assertion.assertTrue(checkIfElementOnPage(adsenseInsOthers));
+    Assertion.assertTrue(isElementOnPage(slotAboveFooterAdsense));
+    Assertion.assertTrue(isElementOnPage(adsenseInsOthers));
     PageObjectLogging.log("verifyAdsenseUnitShownAboveFooter",
         "Adsense unit is visible above footer", true);
   }
@@ -229,7 +229,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAdsenseHeaderShown() {
     wait.forElementVisible(adHeader);
-    Assertion.assertTrue(checkIfElementOnPage(adHeader));
+    Assertion.assertTrue(isElementOnPage(adHeader));
     Assertion.assertEquals(adHeader.getText(), ADSENSE_HEADER_VALUE.toUpperCase());
     PageObjectLogging
         .log("verifyAdsenseHeaderShown", "The header of adsense unit is visible", true);
@@ -237,7 +237,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyAmazonUnitShown() {
     wait.forElementVisible(amazonContainerBy);
-    Assertion.assertTrue(checkIfElementOnPage(amazonContainerBy));
+    Assertion.assertTrue(isElementOnPage(amazonContainerBy));
     PageObjectLogging.log("verifyAmazonUnitShown", "Amazon unit is visible", true);
   }
 
@@ -318,7 +318,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   private void verifyAmazonUnitShown(By slotBy) {
     wait.forElementVisible(slotBy);
-    Assertion.assertTrue(checkIfElementOnPage(slotBy));
+    Assertion.assertTrue(isElementOnPage(slotBy));
     scrollToElement(slotBy);
     PageObjectLogging.log("verifyAmazonUnitShown", "Amazon unit is visible", true, driver);
   }
@@ -363,7 +363,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   public void verifyEcommerceUnitShown() {
     wait.forElementVisible(ecommerceContainerBy);
-    Assertion.assertTrue(checkIfElementOnPage(ecommerceContainerBy));
+    Assertion.assertTrue(isElementOnPage(ecommerceContainerBy));
     PageObjectLogging.log("verifyEcommerceUnitShown", "Ecommerce unit is visible", true);
   }
 
@@ -437,7 +437,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
     wait.forElementVisible(slotBy);
     wait.forElementVisible(numOfProductBy);
     scrollToElement(numOfProductBy);
-    Assertion.assertTrue(checkIfElementOnPage(numOfProductBy));
+    Assertion.assertTrue(isElementOnPage(numOfProductBy));
     PageObjectLogging.log("verifyEcommerceUnitShown", "Ecommerce unit is visible", true, driver);
   }
 

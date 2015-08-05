@@ -64,7 +64,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
     waitForElementClickableByElement(publishButton);
-    if (checkIfElementOnPage(recaptchaArea)) {
+    if (isElementOnPage(recaptchaArea)) {
       recaptchaContainer = saveDialogBody.findElement(recaptchaImageBy);
       wait.forElementVisible(recaptchaContainer);
     }
