@@ -96,7 +96,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
@@ -186,8 +185,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".avatar-container")
   private WebElement globalNavigationAvatar;
-  @FindBy(css = ".links-container .chevron")
-  private WebElement globalNavigationUserChevron;
   @FindBy(css = "#WikiaFooter")
   private WebElement footer;
   @FindBy(css = "#globalNavigation")

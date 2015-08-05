@@ -209,8 +209,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     template.openArticleByName(wikiURL,
             PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     ArticlePageObject article = new ArticlePageObject(driver);
-    /*TemplatePageObject template = article.openTemplatePage(wikiURL,
-            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);*/
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
     ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
