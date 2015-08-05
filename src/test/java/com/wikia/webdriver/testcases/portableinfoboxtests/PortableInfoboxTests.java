@@ -43,9 +43,8 @@ import org.testng.annotations.Test;
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
-
   Credentials credentials = Configuration.getCredentials();
+  private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
   public void verifyElementsVisibility() {

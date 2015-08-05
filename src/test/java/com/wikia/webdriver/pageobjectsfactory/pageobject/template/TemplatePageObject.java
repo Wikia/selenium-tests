@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 /**
  * Created by Rodriuki on 16/06/15.
  * Created by nikodamn on 20/07/15.
