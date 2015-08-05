@@ -78,6 +78,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromoteP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
@@ -184,8 +185,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".avatar-container")
   private WebElement globalNavigationAvatar;
-  @FindBy(css = ".links-container .chevron")
-  private WebElement globalNavigationUserChevron;
   @FindBy(css = "#WikiaFooter")
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
@@ -411,6 +410,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new InteractiveMapsPageObject(driver);
   }
 
+  public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
+    return new SpecialWhatLinksHerePageObject(driver);
+  }
+
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
     return new InteractiveMapPageObject(driver);
@@ -465,8 +469,8 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
-        driver);
+    PageObjectLogging.log("openSrcModeWithMainEditButton",
+            "Src main edit button clicked", true, driver);
     return new SourceEditModePageObject(driver);
   }
 
@@ -514,7 +518,12 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditModePageObject goToCurrentArticleEditPage() {
-    getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
+    getUrl(
+        urlBuilder.appendQueryStringToURL(
+            driver.getCurrentUrl(),
+            URLsContent.ACTION_EDIT
+        )
+    );
     return new VisualEditModePageObject(driver);
   }
 
@@ -547,8 +556,11 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging
-        .log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
+    PageObjectLogging.log(
+        "SpecialUserLoginOnWiki",
+        "Special:UserLogin opened on: " + wikiURL,
+        true
+    );
     return new SpecialUserLoginPageObject(driver);
   }
 
@@ -558,6 +570,7 @@ public class WikiBasePageObject extends BasePageObject {
         + wikiURL, true);
     return new LicensedVideoSwapPageObject(driver);
   }
+
 
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
