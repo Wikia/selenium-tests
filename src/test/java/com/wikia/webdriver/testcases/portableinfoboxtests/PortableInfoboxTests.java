@@ -2,6 +2,9 @@ package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -142,11 +145,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyTabberImagePresence();
   }
 
+
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
   public void verifyInfoboxLayoutChange() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff,
-            credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject theme = new 
             SpecialThemeDesignerPageObject(driver);
     theme.openSpecialDesignerPage(wikiURL);
