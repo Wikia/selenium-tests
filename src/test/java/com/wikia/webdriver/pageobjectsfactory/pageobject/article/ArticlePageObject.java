@@ -2,6 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
@@ -16,6 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Creat
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -155,6 +158,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
 
+  private PortableInfoboxPageObject portableInfobox;
+
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
   private static final String COMMENT_AUTHOR_LINK = ".edited-by";
@@ -171,6 +176,18 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public ArticlePageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public ArticlePageObject open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + TestContext.getCurrentMethodName());
+    return this;
+  }
+
+  public ArticlePageObject open(String articleTitle) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + articleTitle);
+    return this;
   }
 
   public String getAtricleTextRaw() {
@@ -248,7 +265,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
-    scrollAndClick(addArticleInDropdown);
+    addArticleInDropdown.click();
+    wait.forElementVisible(articleTitleInputModal);
     articleTitleInputModal.sendKeys(articleTitle);
     scrollAndClick(submitModal);
     return new VisualEditorPageObject(driver);
@@ -918,5 +936,12 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
+  }
+
+  public PortableInfoboxPageObject getInfoboxPage() {
+    if (portableInfobox == null) {
+      portableInfobox = new PortableInfoboxPageObject(driver);
+    }
+    return portableInfobox;
   }
 }

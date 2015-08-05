@@ -38,7 +38,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
     // Agegate works more reliably when logged in (issue tracked here VID-1879)
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.verifyVideo();
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
@@ -62,7 +62,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
     // Age gate works more reliably when logged in (issue tracked here VID-1879)
     base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();

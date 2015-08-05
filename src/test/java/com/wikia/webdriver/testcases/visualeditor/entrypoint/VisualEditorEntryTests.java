@@ -35,7 +35,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
+    article.open(URLsContent.CATEGORY_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -52,7 +52,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, articleName);
+    article.open(articleName);
     article.verifyCreateAPageEditor(expectedEditor, articleName);
   }
 
@@ -68,7 +68,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
+    article.open(URLsContent.LIST_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -84,7 +84,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -100,7 +100,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifyRedLinkEditor(expectedEditor);
   }
 
@@ -116,7 +116,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifySectionEditEditor(expectedEditor);
   }
 
@@ -132,7 +132,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
                         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
+    article.open(URLsContent.TEMPLATE_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 

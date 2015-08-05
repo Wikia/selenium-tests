@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -101,7 +100,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
                      wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
+    article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
     pinTypesDialog.verifyPinTypesDialog();
@@ -116,7 +115,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
     base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
                      wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
+    article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
     addPinModal.typePinName(InteractiveMapsContent.PIN_NAME);

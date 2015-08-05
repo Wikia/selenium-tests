@@ -31,13 +31,14 @@ public class WikiActivityTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void WikiActivityTests_001_newEditionIsRecordedOnAvtivityModule() {
     String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article =
+        new ArticlePageObject(driver).open("NewEditionIsRecordedOnAvtivityModule");
     String articleName = article.getArticleName();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentEdition(articleName, credentials.userName);
   }
 
@@ -57,7 +58,7 @@ public class WikiActivityTests extends NewTestTemplate {
     String articleName = article.getArticleName();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewPage(articleName, credentials.userName);
   }
 
@@ -78,7 +79,7 @@ public class WikiActivityTests extends NewTestTemplate {
     BlogPageObject blogPage = visualEditMode.submitBlog();
     blogPage.verifyBlogTitle(blogTitle);
     blogPage.verifyContent(blogContent);
-    SpecialWikiActivityPageObject wikiActivity = blogPage.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = blogPage.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
   }
 
@@ -88,13 +89,14 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnAvtivityModule() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article =
+        new ArticlePageObject(driver).open("NewCategorizationIsRecordedOnAvtivityModule");
     String articleName = article.getArticleName();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
     article.verifyCategoryPresent(categoryName);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewCategorization(articleName, credentials.userName);
   }
 }

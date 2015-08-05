@@ -36,7 +36,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
   public void VisualEditorMultiplePublish_001() {
     String targetText = PageContent.ARTICLE_TEXT;
     String articleName = base.getNameForArticle();
-    article = base.openArticleByName(wikiURL, articleName);
+    article = new ArticlePageObject(driver).open(articleName);
     ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();

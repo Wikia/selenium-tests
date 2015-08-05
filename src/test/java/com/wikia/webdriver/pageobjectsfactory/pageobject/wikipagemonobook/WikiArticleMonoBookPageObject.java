@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook;
 
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 
@@ -22,6 +24,12 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
   public WikiArticleMonoBookPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public WikiArticleMonoBookPageObject open(String articleTitle) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + articleTitle);
+    return this;
   }
 
   public void clickEdit() {

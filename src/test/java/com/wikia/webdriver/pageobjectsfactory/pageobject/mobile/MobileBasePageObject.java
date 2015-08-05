@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -20,6 +21,12 @@ public class MobileBasePageObject extends WikiBasePageObject {
 
   public MobileBasePageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public MobileBasePageObject open(String articleName) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + articleName);
+    return this;
   }
 
   @Override

@@ -23,8 +23,8 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    String articleName = article.getArticleName();
+    String articleName = "DeleteUndeleteArticle";
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
@@ -39,11 +39,18 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    String articleName = "MoveArticle";
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
     article.verifyNotificationMessage();
     article.verifyArticleTitle(articleNewName);
+
+    article.open(articleNewName);
+    renamePage = article.renameUsingDropdown();
+    renamePage.rename(articleName, false);
+    article.verifyNotificationMessage();
+    article.verifyArticleTitle(articleName);
   }
 }

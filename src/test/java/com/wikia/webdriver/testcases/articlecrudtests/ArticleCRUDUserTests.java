@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -57,7 +58,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("UserAddDropdown");
     VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -84,7 +85,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
-        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by URL");
+        new ArticlePageObject(driver).open("Article to edit by URL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -96,7 +97,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
-        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by Dropdown");
+        new ArticlePageObject(driver).open("Article to edit by Dropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
