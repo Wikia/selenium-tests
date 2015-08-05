@@ -21,8 +21,6 @@ public class TemplatePageObject extends WikiBasePageObject{
     private WebElement createButton;
     @FindBy (css = "#articleCategories")
     private WebElement categoriesModule;
-    @FindBy (css = "#mw-normal-catlinks")
-    private List<WebElement> categoriesList;
     @FindBy(css = "#ca-edit")
     protected WebElement editUsingClassicEditor;
 
@@ -43,9 +41,6 @@ public class TemplatePageObject extends WikiBasePageObject{
 
   public void verifyCategoryInTemplatePage(String catName) {
     waitForElementByElement(categoriesModule);
-    // Ludwik to help out deciding best method for finding specific category in a list
-    // String addedCategory = categoriesList.get();
-    // Assertion.assertStringContains(addedCategory, catName);
   }
 
   public ArticlePageObject openArticleByName(String wikiURL, String articleName) {

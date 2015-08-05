@@ -153,6 +153,9 @@ public class PageContent {
   public static final String PORTABLE_INFOBOX_WEBSITE_TEMPLATE = "Template:Infobox_Website";
   public static final String FILE_IMAGE_NAME = "File:WallPaperHD_138.jpg";
 
+    //Customized toolbar
+    public static final String FOLLOW = "follow";
+
   private PageContent() {
 
   }

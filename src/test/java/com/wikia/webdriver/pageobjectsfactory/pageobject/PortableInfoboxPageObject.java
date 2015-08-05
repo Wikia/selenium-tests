@@ -48,8 +48,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement referenceElements;
   @FindBy(css = ".portable-infobox-item-label")
   private WebElement h3Elements;
-  @FindBy(css = "#CreatePageModalDialog")
-  private WebElement createArticleModal;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
   @FindBy(css = ".portable-infobox-item-value .newcategory")
@@ -129,13 +127,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public WebElement getOrderedListItem(int index) {
-    WebElement orderedListItem = orderedElementList.get(index);
-    return orderedListItem;
+    return orderedElementList.get(index);
   }
 
   public WebElement getUnorderedListElement(int index) {
-    WebElement unorderedListItem = unorderedElementList.get(index);
-    return unorderedListItem;
+    return unorderedElementList.get(index);
   }
 
   public WebElement getHorizontalItemLabel() {

@@ -219,11 +219,9 @@ public class SourceEditModePageObject extends EditMode {
     PageObjectLogging.log("addContent", "content was added", true);
   }
 
-  public String copyContent()
-  {
+  public String copyContent() {
     waitForElementByElement(textArea);
-    String content = textArea.getText();
-    return content;
+    return textArea.getText();
   }
 
   public String buildTablePropertiesContent(
@@ -356,7 +354,7 @@ public class SourceEditModePageObject extends EditMode {
     waitForElementByElement(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-        .log("appendContent", "text: '" + content + "', added to the source mode", true);
+            .log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
@@ -364,7 +362,7 @@ public class SourceEditModePageObject extends EditMode {
     sourceModeTextArea.sendKeys(Keys.ENTER);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-        .log("appendNewLine", "text " + content + " added to the source mode in new line", true);
+            .log("appendNewLine", "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {

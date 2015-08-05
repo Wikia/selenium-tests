@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,10 +19,6 @@ import java.util.List;
  */
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
-  public CustomizedToolbarComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
   private WebElement customizeButton;
   @FindBy(css = "div.msg")
@@ -38,17 +35,21 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private WebElement resetDefaultsButton;
   @FindBy(css = ".overflow-menu > .tools-menu li > a[href*=Special]")
   private List<WebElement> myToolsList;
-  @FindBy(css = ".tools-menu li > a[data-name='themedesigner'")
+  @FindBy(css = ".tools-menu li > a[data-name='themedesigner]'")
   private WebElement themeDesignerButton;
-
   private By toolsList = By.cssSelector("ul.tools li");
-
   private String searchSuggestionToolCss = "div.autocomplete div[title=\"%s\"]";
   private String toolbarToolCss = "li.overflow a[data-name=\"%s\"]";
   private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
   private String toolsListToolDeleteCss = " img.trash";
   private String toolsListToolEditCss = " img.edit-pencil";
   private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
+
+
+  public CustomizedToolbarComponentObject(WebDriver driver) {
+    super(driver);
+  }
+
 
   /**
    * Verifies that user toolbar buttons are visible
@@ -171,7 +172,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyFollowedToolbar() {
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
             "title", "Unfollow");
     PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
 
@@ -186,7 +187,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void verifyUnfollowed() {
     waitForElementByElement(pageWatchlistStatusMessage);
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
                                                     "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
 
@@ -264,7 +265,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     List<WebElement> list = driver.findElements(toolsList);
     for (int i = 0; i < list.size(); i++) {
       if ("Following".equals(list.get(i).getText())) {
-        clickOnTool("follow");
+        clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         waitForTextToBePresentInElementByBy(toolsList, "Follow");
         PageObjectLogging.log("unfollowIfFollowed",
@@ -309,8 +310,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    *
    */
 
-  public String getThemeDesignerText()
-  {
+  public String getThemeDesignerText() {
     return themeDesignerButton.getText();
   }
 

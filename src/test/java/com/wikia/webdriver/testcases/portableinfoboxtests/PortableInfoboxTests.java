@@ -1,12 +1,10 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -17,11 +15,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLink
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
-import org.apache.commons.net.nntp.Article;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Rodriuki on 12/06/15.
@@ -44,6 +42,8 @@ import java.util.concurrent.TimeUnit;
  * TC15: Copy syntax from template page to article and verify presence of all new information provided
  */
 public class PortableInfoboxTests extends NewTestTemplate {
+
+  private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -77,8 +77,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.clickExternalLink();
     try {
       Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    } catch (InterruptedException exception) {
+      LOGGER.log(Level.SEVERE, "Exception occur", exception);
     }
     String externalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
@@ -89,8 +89,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.clickInternalLink(0);
     try {
       Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    } catch (InterruptedException exception) {
+      LOGGER.log(Level.SEVERE, "Exception occur", exception);
     }
     String internalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
@@ -100,7 +100,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
     String articleName = article.getArticleName();
     SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
     links.clickPageInputField();
@@ -117,7 +116,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     src.focusTextArea();
     String catName = src.getRandomDigits(9);
-    System.out.println("Random digits: " + catName);
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
     src = shortcuts.clickCategory();
     src.addContent(catName);
