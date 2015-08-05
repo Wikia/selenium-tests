@@ -44,13 +44,12 @@ import org.testng.annotations.Test;
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
   private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
   public void verifyElementsVisibility() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     Assertion.assertTrue(info.getBoldElements().size() > 0);
     Assertion.assertTrue(info.getItalicElements().size() > 0);
@@ -65,12 +64,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     //Red link
     info.clickRedLink(0);
     info.verifyCreateNewArticleModal();
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     article.getInfoboxPage();
     //External Link
     String externalLinkName = info.getExternalLinkRedirectTitle();
@@ -82,7 +81,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     }
     String externalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     article.getInfoboxPage();
     //Internal Link
     String internalLinkName = info.getInternalLinkRedirectTitle(0);
@@ -99,7 +98,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     String articleName = article.getArticleName();
     SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
     links.clickPageInputField();
@@ -111,7 +110,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})
   public void verifyCategoriesInTemplateInvocation() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     src.focusTextArea();
@@ -121,14 +120,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
     src.addContent(catName);
     TemplatePageObject temp = src.clickPublishButtonInTemplateNamespace();
     temp.verifyCategoryInTemplatePage(catName);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     info.verifyCategoryInArticlePage(catName);
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_006"})
   public void verifyLightboxVisibilityAfterClickingImage() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.clickImage();
     info.verifyLightboxPresence();
@@ -137,7 +136,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
   public void verifyVisibilityOfTabberAndItsImages() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX02);
+    article.open(PageContent.PORTABLE_INFOBOX02);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.verifyTabberPresence();
     info.verifyTabberImagePresence();
@@ -152,13 +151,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
     theme.selectTheme(4);
     theme.submitThemeSelection();
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String oldBackground = info.getBackgroundColor();
     theme.openSpecialDesignerPage(wikiURL);
     theme.selectTheme(1);
     theme.submitThemeSelection();
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     String newBackground = info.getBackgroundColor();
     info.verifyChangedBackground(oldBackground, newBackground);
 
@@ -167,7 +166,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
   public void verifyOrderedAndUnorderedLists() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX02);
+    article.open(PageContent.PORTABLE_INFOBOX02);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     WebElement itemValue = info.getItemValue();
     WebElement orderedListItem = info.getOrderedListItem(1);
@@ -179,7 +178,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_013"})
   public void verifyInfoboxCategoryLink() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+    article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     info.clickCategoryLink();
     CategoryPageObject category = new CategoryPageObject(driver);
@@ -190,7 +189,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
   public void verifyHorizontalGroupFontSize() {
    ArticlePageObject article = new ArticlePageObject(driver);
-   article.openArticleByName(wikiURL, PageContent.PORTABLE_INFOBOX01);
+   article.open(PageContent.PORTABLE_INFOBOX01);
    PortableInfoboxPageObject info = article.getInfoboxPage();
    WebElement horizontalItemLabel = info.getHorizontalItemLabel();
    WebElement itemLabel = info.getItemLabel();
@@ -209,7 +208,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
-    ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
+    ArticlePageObject randomArticle = article.open("Random" + article.getRandomDigits(5));
     SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
     newEditor.addContentInSourceMode(templateSyntax);
     newEditor.submitArticle();
