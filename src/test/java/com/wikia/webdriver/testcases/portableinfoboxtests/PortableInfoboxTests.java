@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -21,6 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageOb
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import freemarker.template.Template;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -145,7 +145,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyTabberImagePresence();
   }
 
-  @Execute(asUser = User.STAFF);
+  @Execute(asUser = User.STAFF)
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new 
@@ -202,18 +202,17 @@ public class PortableInfoboxTests extends NewTestTemplate {
    info.compareFontSizes(horizontalItemValue, itemValue);
  }
 
+  @Execute (asUser = User.USER_9)
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_015"})
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName10,
-            credentials.password10, wikiURL);
-    TemplatePageObject template = article.openTemplatePage(wikiURL,
+    TemplatePageObject template = new TemplatePageObject(driver);
+    template.openArticleByName(wikiURL,
             PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    ArticlePageObject article = new ArticlePageObject(driver);
+    /*TemplatePageObject template = article.openTemplatePage(wikiURL,
+            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);*/
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
-    base.logInCookie(credentials.userName10,
-            credentials.password10, wikiURL);
     ArticlePageObject randomArticle = article.openArticleByName(wikiURL, "Random" + article.getRandomDigits(5));
     SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
     newEditor.addContentInSourceMode(templateSyntax);

@@ -208,19 +208,19 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void addContent(String content) {
-    waitForElementByElement(textArea);
+    wait.forElementVisible(textArea);
     textArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
   }
 
   public void addContentInSourceMode(String content) {
-    waitForElementByElement(sourceModeTextArea);
+    wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
   }
 
   public String copyContent() {
-    waitForElementByElement(textArea);
+    wait.forElementVisible(textArea);
     return textArea.getText();
   }
 
@@ -398,7 +398,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public TemplatePageObject clickPublishButtonInTemplateNamespace() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     submitButton.click();
     return new TemplatePageObject(driver);
   }

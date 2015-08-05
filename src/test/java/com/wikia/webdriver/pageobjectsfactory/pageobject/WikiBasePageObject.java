@@ -574,15 +574,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new LicensedVideoSwapPageObject(driver);
   }
 
-  @Deprecated
-  public void verifyAvatarPresent() {
-    waitForElementByElement(userProfileAvatar);
-    PageObjectLogging.log(
-        "verifyAvatarPresent",
-        "avatar is visible",
-        true
-    );
-  }
 
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);

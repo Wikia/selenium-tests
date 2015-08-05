@@ -27,18 +27,18 @@ public class TemplatePageObject extends WikiBasePageObject{
     }
 
     public SourceEditModePageObject clickCreate() {
-        waitForElementByElement(createButton);
+        wait.forElementVisible(createButton);
         createButton.click();
         return new SourceEditModePageObject(driver);
     }
 
     public SourceEditModePageObject editArticleInSrcUsingDropdown() {
-        actionsClick(editUsingClassicEditor);
+        editUsingClassicEditor.click();
         return new SourceEditModePageObject(driver);
     }
 
   public void verifyCategoryInTemplatePage(String catName) {
-    waitForElementByElement(categoriesModule);
+    wait.forElementVisible(categoriesModule);
   }
 
   public ArticlePageObject openArticleByName(String wikiURL, String articleName) {

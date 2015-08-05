@@ -28,12 +28,12 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   }
 
   public void clickShowbutton() {
-    waitForElementByElement(showButton);
+    wait.forElementVisible(showButton);
     showButton.click();
   }
 
   public void clickPageInputField() {
-    waitForElementByElement(pageInputField);
+    wait.forElementVisible(pageInputField);
     pageInputField.click();
   }
 
@@ -42,7 +42,7 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   }
 
   public void verifyInfoboxArticleInList(String articleName) {
-    waitForElementByElement(filtersSection);
+    wait.forElementVisible(filtersSection);
     String firstResult = whatLinksList.get(0).getText();
     Assertion.assertStringContains(firstResult, articleName);
   }

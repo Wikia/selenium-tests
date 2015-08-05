@@ -27,7 +27,7 @@ public class CategoryPageObject extends WikiBasePageObject {
     }
 
     public void verifyCategoryPageTitle(String title) {
-        waitForElementVisibleByElement(categoryHeader);
+        wait.forElementVisible(categoryHeader);
         Assertion.assertEquals(categoryHeader.getText(), title);
     }
 

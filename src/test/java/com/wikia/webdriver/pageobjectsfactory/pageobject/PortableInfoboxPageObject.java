@@ -84,37 +84,37 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void verifyImagePresence() {
-    waitForElementByElement(pInfoImage);
-    Assertion.assertEquals(checkIfElementOnPage(pInfoImage), true);
+    wait.forElementVisible(pInfoImage);
+    Assertion.assertEquals(isElementOnPage(pInfoImage), true);
   }
 
   public void verifyTabberPresence() {
-    waitForElementByElement(tabber);
-    Assertion.assertEquals(checkIfElementOnPage(tabber), true);
+    wait.forElementVisible(tabber);
+    Assertion.assertEquals(isElementOnPage(tabber), true);
   }
 
   public void verifyTabberImagePresence() {
-    waitForElementByElement(tabberImage);
-    Assertion.assertEquals(checkIfElementOnPage(tabberImage), true);
+    wait.forElementVisible(tabberImage);
+    Assertion.assertEquals(isElementOnPage(tabberImage), true);
   }
 
   public void verifyInfoboxTitlePresence() {
-    waitForElementByElement(pInfoTitle);
-    Assertion.assertEquals(checkIfElementOnPage(pInfoTitle), true);
+    wait.forElementVisible(pInfoTitle);
+    Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
   }
 
   public void verifyLightboxPresence() {
-    waitForElementByElement(lightbox);
-    Assertion.assertEquals(checkIfElementOnPage(lightbox), true);
+    wait.forElementVisible(lightbox);
+    Assertion.assertEquals(isElementOnPage(lightbox), true);
   }
 
   public String getExternalLinkRedirectTitle() {
-    waitForElementByElement(pInfoExternalLink);
+    wait.forElementVisible(pInfoExternalLink);
     return pInfoExternalLink.getAttribute("href");
   }
 
   public String getInternalLinkRedirectTitle(int index) {
-    waitForElementByElement(pInfoInternalLinks.get(index));
+    wait.forElementVisible(pInfoInternalLinks.get(index));
     return pInfoInternalLinks.get(index).getAttribute("href");
   }
 
@@ -143,23 +143,23 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void clickExternalLink() {
-    waitForElementByElement(pInfoExternalLink);
+    wait.forElementVisible(pInfoExternalLink);
     pInfoExternalLink.click();
   }
 
   public void clickInternalLink(int index) {
     scrollToElement(pInfoInternalLinks.get(index));
-    waitForElementByElement(pInfoInternalLinks.get(index));
+    wait.forElementVisible(pInfoInternalLinks.get(index));
     pInfoInternalLinks.get(index).click();
   }
 
   public void clickImage() {
-    waitForElementByElement(pInfoImage);
+    wait.forElementVisible(pInfoImage);
     pInfoImage.click();
   }
 
   public void clickCategoryLink() {
-    waitForElementByElement(categoryLink);
+    wait.forElementVisible(categoryLink);
     scrollAndClick(categoryLink);
   }
 
@@ -172,7 +172,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public String getimgSrc() {
-    waitForElementByElement(pInfoImage);
+    wait.forElementVisible(pInfoImage);
     return pInfoImage.getAttribute("src");
   }
 
@@ -182,25 +182,25 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void verifyQuotationMarksPresence() {
-    waitForElementByElement(h3Elements);
+    wait.forElementVisible(h3Elements);
     String h3ElementsString = h3Elements.getText();
     Assertion.assertStringContains("\"URL\"", h3ElementsString);
   }
 
   public void verifyReferencesPresence() {
-    waitForElementByElement(referenceElements);
+    wait.forElementVisible(referenceElements);
   }
 
   public CreateArticleModalComponentObject clickRedLink(int i) {
     scrollToElement(pInfoRedlLink.get(i));
-    waitForElementVisibleByElement(pInfoRedlLink.get(i));
+    wait.forElementVisible(pInfoRedlLink.get(i));
     WebElement redLinkChose = pInfoRedlLink.get(i);
     redLinkChose.click();
     return new CreateArticleModalComponentObject(driver);
   }
 
   public void verifyCreateNewArticleModal() {
-    waitForElementByElement(addAPageButton);
+    wait.forElementVisible(addAPageButton);
   }
 
   public void verifyCategoryInArticlePage(String catName) {
