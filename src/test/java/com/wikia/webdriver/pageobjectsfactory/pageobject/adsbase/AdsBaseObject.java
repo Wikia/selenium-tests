@@ -698,7 +698,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(
-              "window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 500)");
+              " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
           return slot.getAttribute("style").contains("visibility: visible;");
         }
       });
