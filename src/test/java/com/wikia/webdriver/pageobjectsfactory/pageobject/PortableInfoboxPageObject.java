@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.sitebricks.client.Web;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 
@@ -60,6 +61,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement horizontalItemLabel;
   @FindBy(css = "div.portable-infobox-item-value")
   private WebElement horizontalItemValue;
+  @FindBy(css = ".portable-infobox-navigation")
+  private List<WebElement> navigationElements;
+  @FindBy(css = ".item-type-header")
+  private List<WebElement> groupHeaders;
 
 
   public PortableInfoboxPageObject(WebDriver driver) {
@@ -79,9 +84,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return italicElements;
   }
 
-  public List<WebElement> getHeaderElements() {
-    return pInfoTitleH3;
-  }
+  public List<WebElement> getHeaderElements() { return pInfoTitleH3; }
 
   public void verifyImagePresence() {
     wait.forElementVisible(pInfoImage);
@@ -118,13 +121,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoInternalLinks.get(index).getAttribute("href");
   }
 
-  public WebElement getItemLabel() {
-    return itemLabel;
-  }
+  public WebElement getItemLabel() { return itemLabel; }
 
-  public WebElement getItemValue() {
-    return itemValue;
-  }
+  public WebElement getItemValue() { return itemValue; }
 
   public WebElement getOrderedListItem(int index) {
     return orderedElementList.get(index);
@@ -141,6 +140,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public WebElement getHorizontalItemValue() {
     return horizontalItemValue;
   }
+
+  public WebElement getNavigationElements(int index) { return navigationElements.get(index); }
+
+  public WebElement getGroupHeader(int index) { return groupHeaders.get(index); }
 
   public void clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
@@ -205,6 +208,14 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public void verifyCategoryInArticlePage(String catName) {
     // Same as previous case, waiting on Ludwik
+  }
+
+  public void verifyPadding(WebElement element) {
+    String leftPadding = element.getCssValue("padding-left");
+    System.out.println("Left: " + leftPadding);
+    String rightPadding = element.getCssValue("padding-right");
+    System.out.println("Right: " + rightPadding);
+    Assertion.assertEquals(leftPadding, rightPadding);
   }
 
   public void compareFontSizes(WebElement firstElement, WebElement secondElement) {

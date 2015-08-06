@@ -19,6 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageOb
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.net.nntp.Article;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -41,6 +42,8 @@ import org.testng.annotations.Test;
  * TC13: Verify category links inside infoboxes
  * TC14: Verify if horizontal group font size matches other elements font
  * TC15: Copy syntax from template page to article and verify presence of all new information provided
+ * TC16: Verify if navigation element has same left and right padding
+ * TC17: Verify if group headers and titles has same left and right padding
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -216,5 +219,25 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyImagePresence();
     info.verifyInfoboxTitlePresence();
   }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_016"})
+  public void verifyNavigationElementPadding() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    WebElement element = info.getNavigationElements(1);
+    info.verifyPadding(element);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_017"})
+  public void verifyGroupHeadersPadding() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    WebElement element = info.getGroupHeader(1);
+    info.verifyPadding(element);
+  }
+
+
 }
 
