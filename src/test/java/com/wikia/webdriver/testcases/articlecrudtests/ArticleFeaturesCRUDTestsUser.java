@@ -362,7 +362,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     String table =
         sourceEditMode.buildTablePropertiesContent(border, width, height, cellspacing, cellpadding,
             alignment);
-    sourceEditMode.addContent(table);
+    sourceEditMode.addContentInSourceMode(table);
     sourceEditMode.submitArticle();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clickDeleteTableButton();

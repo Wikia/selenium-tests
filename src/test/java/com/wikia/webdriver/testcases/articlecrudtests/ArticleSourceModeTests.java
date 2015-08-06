@@ -296,7 +296,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
     String videoID = video.getID();
-    source.addContent("<youtube>\n" + videoID + "\n</youtube>");
+    source.addContentInSourceMode("<youtube>\n" + videoID + "\n</youtube>");
     PreviewEditModePageObject preview = source.previewArticle();
     preview.verifyVideoOnPreview(videoID);
   }
@@ -309,7 +309,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
     String videoID = video.getID();
-    source.addContent("<youtube>\n" + videoID + "\n</youtube>");
+    source.addContentInSourceMode("<youtube>\n" + videoID + "\n</youtube>");
     article = source.clickPublishButton();
     article.verifyArticleTitle(articleName);
   }
