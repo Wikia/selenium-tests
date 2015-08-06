@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -44,6 +45,8 @@ import org.testng.annotations.Test;
  * TC15: Copy syntax from template page to article and verify presence of all new information provided
  * TC16: Verify if navigation element has same left and right padding
  * TC17: Verify if group headers and titles has same left and right padding
+ * TC18: Additional <div> wrappers from title, header and image HTML are removed
+ * TC19: Verify that any of the tags which do not have a value won't appear 
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -238,6 +241,28 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyPadding(element);
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_018"})
+  public void verifyDivsWrappersAreNotAppearing() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    //image
+    WebElement imageWrapper = info.getImageWrapper();
+    info.verifyDivsNotAppearing(imageWrapper);
+    //title
+    WebElement titleWrapper = info.getTitleWrapper();
+    info.verifyDivsNotAppearing(titleWrapper);
+    //header
+    WebElement groupHeaderWrapper = info.getGroupHeader(0);
+    info.verifyDivsNotAppearing(groupHeaderWrapper);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_019"})
+  public void verifyEmptyTagsAreNotAppearing() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+  }
 
 }
 

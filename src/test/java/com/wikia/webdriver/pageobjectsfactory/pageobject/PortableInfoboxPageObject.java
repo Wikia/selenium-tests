@@ -64,8 +64,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = ".portable-infobox-navigation")
   private List<WebElement> navigationElements;
   @FindBy(css = ".item-type-header")
-  private List<WebElement> groupHeaders;
-
+  private List<WebElement> groupHeadersWrappers;
+  @FindBy(css = ".item-type-image")
+  private WebElement imageWrapper;
+  @FindBy(css = ".item-type-title")
+  private WebElement titleWrapper;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -143,7 +146,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public WebElement getNavigationElements(int index) { return navigationElements.get(index); }
 
-  public WebElement getGroupHeader(int index) { return groupHeaders.get(index); }
+  public WebElement getGroupHeader(int index) { return groupHeadersWrappers.get(index); }
+
+  public WebElement getImageWrapper() { return imageWrapper; }
+
+  public WebElement getTitleWrapper() { return titleWrapper; }
 
   public void clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
@@ -218,9 +225,24 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(leftPadding, rightPadding);
   }
 
+  public void verifyDivsNotAppearing(WebElement element) {
+    String tagName = element.getTagName();
+    System.out.println("TagName: " + tagName);
+    //change to assertNotEquals after cleanup release!
+    Assertion.assertEquals(tagName, "div");
+  }
+
   public void compareFontSizes(WebElement firstElement, WebElement secondElement) {
     String firstFontSize = firstElement.getCssValue("font-size");
     String secondFontSize = secondElement.getCssValue("font-size");
     Assertion.assertEquals(firstFontSize, secondFontSize);
+  }
+
+  public String getInfoboxContent() {
+    return infoboxLayout.getText();
+  }
+
+  public void verifyEmptyTags(String infoboxContent) {
+    Assertion.assertStringContains(infoboxContent, "Default");
   }
 }
