@@ -58,7 +58,7 @@ public class MobileAdsDataProvider {
             "wka.life/_adtest//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
+                "\"s0\":\"life\"",
                 "\"s1\":\"_adtest\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",

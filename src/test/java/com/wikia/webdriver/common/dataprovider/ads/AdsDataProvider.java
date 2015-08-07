@@ -310,7 +310,7 @@ public class AdsDataProvider {
             "wka.life/_adtest//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
+                "\"s0\":\"life\"",
                 "\"s1\":\"_adtest\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
