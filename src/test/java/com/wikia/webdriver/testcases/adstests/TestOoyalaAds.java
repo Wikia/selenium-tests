@@ -27,6 +27,7 @@ public class TestOoyalaAds extends TemplateNoFirstLoad {
   public void TestOoyalaAds_GeoEdgeFree(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+    wikiPage.verifyFlash();
     wikiPage.verifyLightboxAd(BLUE, AD_DURATION_SEC);
     wikiPage.verifyLightboxVideo(GREEN, VIDEO_DURATION_SEC);
   }
