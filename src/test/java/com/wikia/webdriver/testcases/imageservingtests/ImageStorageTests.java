@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.imageservingtests;
 
 import org.joda.time.DateTime;
@@ -9,11 +6,8 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
@@ -27,8 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
  *         verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
-
-  Credentials credentials = Configuration.getCredentials();
 
   String imageURL;
   String imageThumbnailURL;
@@ -78,11 +70,10 @@ public class ImageStorageTests extends NewTestTemplate {
 
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
+  @Execute(asUser = User.STAFF)
   public void ImageStorage_002_moveImage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-
-    SpecialNewFilesPageObject filesPage = base.openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPageObject filesPage =
+        new SpecialNewFilesPageObject(driver).openSpecialNewFiles(wikiURL);
     filesPage.addPhoto();
     filesPage.selectFileToUpload(PageContent.FILE);
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
@@ -92,13 +83,13 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.clickUploadButton();
     filesPage.verifyFileUploaded(fileName);
 
-    FilePagePageObject file = base.openFilePage(wikiURL, fileName, true);
+    FilePagePageObject file = filesPage.openFilePage(wikiURL, fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = base.openFilePage(wikiURL, imageNewName, true);
+    file = filesPage.openFilePage(wikiURL, imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
     file.verifyNotificationMessage();
