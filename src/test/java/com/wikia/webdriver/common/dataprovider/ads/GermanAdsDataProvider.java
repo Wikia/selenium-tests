@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
  */
 public class GermanAdsDataProvider {
 
-  public static Object[][] IVW2_TEST_DATA = new Object[][]{
+  public static final Object[][] IVW2_TEST_DATA = new Object[][]{
       {"de.wikia", "Wikia", "RC_WIKIA_HOME"},
       {"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
       {"de.wikia", "%C3%9Cber_Wikia", "RC_WIKIA_SVCE"},
