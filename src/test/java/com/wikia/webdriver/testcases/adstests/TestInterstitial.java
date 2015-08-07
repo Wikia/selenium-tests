@@ -22,10 +22,9 @@ public class TestInterstitial extends TemplateNoFirstLoad {
       String wikiName,
       String article,
       Dimension pageSize,
-      Dimension adSize,
       boolean shouldAdBeScaled
   ) {
-    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+    testInterstitial(wikiName, article, pageSize, shouldAdBeScaled);
   }
 
   @Test(
@@ -37,24 +36,22 @@ public class TestInterstitial extends TemplateNoFirstLoad {
       String wikiName,
       String article,
       Dimension pageSize,
-      Dimension adSize,
       boolean shouldAdBeScaled
   ) {
-    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+    testInterstitial(wikiName, article, pageSize, shouldAdBeScaled);
   }
 
   private void testInterstitial(
       String wikiName,
       String article,
       Dimension pageSize,
-      Dimension adSize,
       boolean shouldAdBeScaled
   ) {
     String url = urlBuilder.getUrlForPath(wikiName, article);
     String testedPage = urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
     adsInterstitial.waitForPageLoaded();
-    adsInterstitial.verifySize(adSize);
+    adsInterstitial.verifySize(shouldAdBeScaled);
     if (shouldAdBeScaled) {
       adsInterstitial.verifyAdRatio();
     }

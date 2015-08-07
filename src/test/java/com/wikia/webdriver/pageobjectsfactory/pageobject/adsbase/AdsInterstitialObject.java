@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  * @ownership AdEng
  */
 public class AdsInterstitialObject extends AdsBaseObject {
+  public static final Dimension NOT_SCALED_AD_WRAPPER_SIZE = new Dimension(300, 343);
 
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
@@ -37,7 +38,27 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
   }
 
-  public void verifySize(Dimension size) {
-    Assertion.assertEquals(interstitialAdWrapper.getSize(), size);
+  public void verifySize(boolean shouldAdBeScaled) {
+    if( shouldAdBeScaled ) {
+      Assertion.assertEquals(
+          interstitialAdWrapper.getSize().getWidth() > NOT_SCALED_AD_WRAPPER_SIZE.getWidth(),
+          true
+      );
+
+      Assertion.assertEquals(
+          interstitialAdWrapper.getSize().getHeight() > NOT_SCALED_AD_WRAPPER_SIZE.getHeight(),
+          true
+      );
+    } else {
+      Assertion.assertEquals(
+          interstitialAdWrapper.getSize().getWidth(),
+          NOT_SCALED_AD_WRAPPER_SIZE.getWidth()
+      );
+
+      Assertion.assertEquals(
+          interstitialAdWrapper.getSize().getHeight(),
+          NOT_SCALED_AD_WRAPPER_SIZE.getHeight()
+      );
+    }
   }
 }

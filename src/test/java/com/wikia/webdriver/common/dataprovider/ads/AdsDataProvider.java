@@ -497,28 +497,24 @@ public class AdsDataProvider {
             "adtest",
             "SyntheticTests/Interstitial",
             new Dimension(1920, 1080),
-            new Dimension(600, 590),
             true
         },
         {
             "adtest",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(1920, 1080),
-            new Dimension(300, 343),
             false
         },
         {
             "adtest",
             "SyntheticTests/Interstitial",
             new Dimension(800, 800),
-            new Dimension(569, 564),
             true
         },
         {
             "adtest",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 800),
-            new Dimension(300, 343),
             false
         },
     };
