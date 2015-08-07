@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
@@ -577,7 +578,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   private void typeCategoryName(String category) {
-    addCategoryInput.sendKeys(category);
+    new Actions(driver).sendKeys(addCategoryInput, category + Keys.ENTER).perform();
   }
 
   public void verifySubmitCategoryEnabled() {
