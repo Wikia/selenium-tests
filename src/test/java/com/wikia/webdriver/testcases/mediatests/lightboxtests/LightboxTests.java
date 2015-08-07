@@ -89,7 +89,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = {"LightboxTest", "LightboxTest_005", "Media"})
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
@@ -148,7 +148,7 @@ public class LightboxTests extends NewTestTemplate {
   @Execute(disableFlash = "false")
   public void LightboxTest_008_filepage_video() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 
     int itemNumber = 2;
@@ -170,7 +170,7 @@ public class LightboxTests extends NewTestTemplate {
       comment = "Feature is broken for specific image. Please test manually using a different image")
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
     int itemNumber = 2;

@@ -24,7 +24,7 @@ public class LicensedVideoSwap extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void lvsSetup() {
     WikiBasePageObject wiki = new WikiBasePageObject(driver);
-    wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    wiki.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
   }
 

@@ -94,7 +94,7 @@ public class FacebookTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   public void Facebook_003_connectFBfromPrefs() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.connectFacebook(credentials.emailFB, credentials.passwordFB);

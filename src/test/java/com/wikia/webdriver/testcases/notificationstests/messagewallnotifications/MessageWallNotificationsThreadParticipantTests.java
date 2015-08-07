@@ -34,7 +34,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   )
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName3, credentials.password3, wikiURL);
+    base.loginAs(credentials.userName3, credentials.password3, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -54,7 +54,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   )
   public void threadCreatorNotification_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
@@ -73,7 +73,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   )
   public void threadCreatorNotification_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName3, credentials.password3, wikiURL);
+    base.loginAs(credentials.userName3, credentials.password3, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
     NewMessageWallThreadPageObject thread = wall.openThread(title);
     MiniEditorComponentObject miniReply = thread.triggerMessageArea();
@@ -92,7 +92,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   )
   public void threadCreatorNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     notifications

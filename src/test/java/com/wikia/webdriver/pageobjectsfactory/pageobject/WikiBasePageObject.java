@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,16 +9,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -48,11 +35,9 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -473,8 +458,8 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton",
-            "Src main edit button clicked", true, driver);
+    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
+        driver);
     return new SourceEditModePageObject(driver);
   }
 
@@ -522,12 +507,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditModePageObject goToCurrentArticleEditPage() {
-    getUrl(
-        urlBuilder.appendQueryStringToURL(
-            driver.getCurrentUrl(),
-            URLsContent.ACTION_EDIT
-        )
-    );
+    getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
     return new VisualEditModePageObject(driver);
   }
 
@@ -560,11 +540,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log(
-        "SpecialUserLoginOnWiki",
-        "Special:UserLogin opened on: " + wikiURL,
-        true
-    );
+    PageObjectLogging
+        .log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
     return new SpecialUserLoginPageObject(driver);
   }
 
@@ -786,7 +763,7 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("logOut", "user is logged out", true, driver);
   }
 
-  public String logInCookie(String userName, String password, String wikiURL) {
+  public String loginAs(String userName, String password, String wikiURL) {
 
     try {
       String token = Helios.getAccessToken(userName, password);
@@ -809,6 +786,11 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("loginCookie", "page timeout after login by cookie", false);
     }
     return "";
+  }
+
+  public String loginAs(User user) {
+    return loginAs(user.getUserName(), user.getPassword(),
+        urlBuilder.getUrlForWiki(Configuration.getWikiName()));
   }
 
   public void openWikiPage(String wikiURL) {

@@ -23,7 +23,7 @@ public class CssChromeTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void CssChrome_loginAndOpenSpecialCSS() {
     WikiBasePageObject wiki = new WikiBasePageObject(driver);
-    wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    wiki.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialCss = wiki.openSpecialCss(wikiURL);
     testedPage = specialCss.getCurrentUrl();
   }

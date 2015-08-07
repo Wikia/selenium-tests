@@ -27,7 +27,7 @@ public class SocialButtonsTests extends NewTestTemplate {
   public void SocialButtons_001_differentLanguages(String[] credentials,
       String[] expectedSocialNetworks) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials[0], credentials[1], wikiURL);
+    base.loginAs(credentials[0], credentials[1], wikiURL);
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     SocialButtonsComponentObject buttons = new SocialButtonsComponentObject(driver);
     buttons.verifyShareButtonsPresent();

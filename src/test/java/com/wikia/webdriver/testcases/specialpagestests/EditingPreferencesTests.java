@@ -35,7 +35,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
   public void setup() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.loginAs(credentials.userName5, credentials.password5, wikiURL);
   }
 
   @Test(groups = {"EditingPreferencesTest", "EditPreferences_001"})

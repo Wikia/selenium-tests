@@ -58,7 +58,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (method.isAnnotationPresent(Execute.class)) {
       if(method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
       }else {
-        new WikiBasePageObject(driver).logInCookie(method.getAnnotation(Execute.class).asUser()
+        new WikiBasePageObject(driver).loginAs(method.getAnnotation(Execute.class).asUser()
             .getUserName(), method.getAnnotation(Execute.class).asUser().getPassword(), wikiURL);
       }
     }

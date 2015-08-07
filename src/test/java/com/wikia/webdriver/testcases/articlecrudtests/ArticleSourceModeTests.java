@@ -44,7 +44,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_001"})

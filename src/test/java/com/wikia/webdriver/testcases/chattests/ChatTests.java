@@ -47,7 +47,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
       WebDriver driver, String userName, String password
   ) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(userName, password, wikiURL);
+    base.loginAs(userName, password, wikiURL);
     return base.openChat(wikiURL);
   }
 

@@ -37,7 +37,7 @@ public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
   private void login() {
     Credentials credentials = Configuration.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, testedWiki);
+    base.loginAs(credentials.userName, credentials.password, testedWiki);
   }
 
   @Test(groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})

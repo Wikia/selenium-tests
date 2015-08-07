@@ -27,7 +27,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
       groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
   public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
@@ -41,7 +41,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
   @Test(groups = {"DeleteAndRestoreMapTests_002", "DeleteAndRestoreMapTests", "InteractiveMaps"})
   public void DeleteAndRestoreMapTests_002_DeleteMapByNotOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.loginAs(credentials.userName2, credentials.password2, wikiURL);
     InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[1]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
@@ -54,7 +54,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
         enabled=false)
   public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();

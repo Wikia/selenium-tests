@@ -27,7 +27,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
   public void MessageWall_001_writeEdit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -46,7 +46,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_002", "MessageWall"})
   public void MessageWall_002_writeRemove() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -63,7 +63,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_003", "MessageWall"})
   public void MessageWall_003_writeClose() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -83,7 +83,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_004", "MessageWall"})
   public void MessageWall_004_writeQuote() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -102,7 +102,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_005", "MessageWall"})
   public void MessageWall_005_writePreview() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -118,7 +118,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_006", "MessageWall"})
   public void MessageWall_006_writeReply() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -143,7 +143,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_007", "MessageWall"})
   public void MessageWall_007_unclosedTagPost() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName11, wikiURL);
     wall.triggerMessageArea();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -171,7 +171,7 @@ public class MessageWallTests extends NewTestTemplate {
     SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
     boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
     if (!isUserBlocked) {
-      base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
       SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
       blockPage.typeInUserName(credentials.userNameBlockedAccount);
       blockPage.typeExpiration("10 year");
@@ -179,8 +179,8 @@ public class MessageWallTests extends NewTestTemplate {
       blockPage.deselectAllSelections();
       blockPage.clickBlockButton();
     }
-    base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-                     wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
+        wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userNameBlockedAccount, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();

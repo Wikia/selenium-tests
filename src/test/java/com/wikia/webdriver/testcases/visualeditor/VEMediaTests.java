@@ -243,7 +243,7 @@ public class VEMediaTests extends NewTestTemplate {
     if (!"ff".equalsIgnoreCase(Configuration.getBrowser())) {
       WikiBasePageObject base = new WikiBasePageObject(driver);
       base.logOut(wikiURL);
-      base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
       FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
       filePage.verifyImageLicense(testImageLicense);
       filePage.selectHistoryTab();
