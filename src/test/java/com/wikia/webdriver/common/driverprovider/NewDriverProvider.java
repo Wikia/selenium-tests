@@ -40,7 +40,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver driver;
   private static String browserName;
   private static DesiredCapabilities caps = new DesiredCapabilities();
-  private static FirefoxProfile firefoxProfile = new FirefoxProfile();
+  private static FirefoxProfile firefoxProfile;
   private static ChromeOptions chromeOptions = new ChromeOptions();
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
@@ -154,6 +154,8 @@ public class NewDriverProvider {
       }
       tmpFile.delete();
     }
+
+    firefoxProfile = new FirefoxProfile(new File(ClassLoader.getSystemResource("FirefoxProfiles/Deafult").getPath()));
 
     // If browserName contains CONSOLE activate JSErrorConsole
     if (browserName.contains("CONSOLE")) {

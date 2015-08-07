@@ -240,7 +240,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
-    contributeDropdown.click();
+    scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);

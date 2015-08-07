@@ -95,6 +95,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   // Test: Anyclip video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @Execute(disableFlash = "false")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
@@ -111,5 +112,4 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoObjectVisible();
     video.verifyVideoAnyclipEmbed();
   }
-
 }

@@ -141,10 +141,10 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxVideo();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
   /**
    * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
    */
+  @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
   @Execute(disableFlash = "false")
   public void LightboxTest_008_filepage_video() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

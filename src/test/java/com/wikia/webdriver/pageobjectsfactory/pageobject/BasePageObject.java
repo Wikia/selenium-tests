@@ -167,15 +167,7 @@ public class BasePageObject {
   }
 
   protected void scrollToElement(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    try {
-      js.executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 100));", element);
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
+    new Actions(driver).moveToElement(element).perform();
   }
 
   protected void scrollToElement(WebElement element, int offset) {
