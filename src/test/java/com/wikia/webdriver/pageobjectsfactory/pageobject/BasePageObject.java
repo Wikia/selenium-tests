@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
@@ -167,7 +168,11 @@ public class BasePageObject {
   }
 
   protected void scrollToElement(WebElement element) {
-    new Actions(driver).moveToElement(element).perform();
+    try {
+      new Actions(driver).moveToElement(element, 0, -200).moveToElement(element, 0, 400).perform();
+    }catch (MoveTargetOutOfBoundsException e){
+      PageObjectLogging.log("MOVE", "Move to element", true);
+    }
   }
 
   protected void scrollToElement(WebElement element, int offset) {
