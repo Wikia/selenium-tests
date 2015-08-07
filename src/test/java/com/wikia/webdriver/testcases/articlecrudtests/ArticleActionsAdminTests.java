@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -40,6 +41,9 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
     String articleName = "MoveArticle";
+
+    ArticleContent.clear(articleName);
+
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
