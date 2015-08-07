@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,10 +21,9 @@ public class UserAndRights extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"usersAndRights001", "UsersAndRights"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights001_Block() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialBlockPageObject block = base.openSpecialBlockPage(wikiURL);
+    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).openSpecialBlockPage(wikiURL);
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");
@@ -43,20 +44,22 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods = {
       "usersAndRights001_Block"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights003_BlockListBlocked() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPageObject
+        list =
+        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserBlocked(credentials.userNameBlocked);
   }
 
   @Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods = {
       "usersAndRights001_Block"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights004_Unblock() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialUnblockPageObject unblock = base.openSpecialUnblockPage(wikiURL);
+    SpecialUnblockPageObject
+        unblock =
+        new SpecialUnblockPageObject(driver).openSpecialUnblockPage(wikiURL);
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
   }
