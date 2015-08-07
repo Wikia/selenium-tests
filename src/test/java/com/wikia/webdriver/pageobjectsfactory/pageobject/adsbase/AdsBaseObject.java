@@ -611,7 +611,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             return (boolean) ((JavascriptExecutor) driver)
                 .executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
-            PageObjectLogging.log("waitForJavaScriptTruthy", e.getMessage(), false);
+            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
             return false;
           }
         }
@@ -703,7 +703,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.log("Floating Medrec", e.getMessage(), true);
+      PageObjectLogging.logError("Floating Medrec", e);
     }
   }
 
