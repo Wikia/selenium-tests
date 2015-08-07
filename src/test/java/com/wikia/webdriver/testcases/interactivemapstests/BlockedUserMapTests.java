@@ -46,7 +46,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "",
-      comment = "Functionality is being depracated no need to test manually")
+      comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -78,7 +78,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "",
-      comment = "Functionality is being depracated no need to test manually")
+      comment = "Functionality is being depracated No need to test manually")
   @Test(groups = {"BlockedUserMapTests_004", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_004_VerifyUserCannotCreateCustomMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

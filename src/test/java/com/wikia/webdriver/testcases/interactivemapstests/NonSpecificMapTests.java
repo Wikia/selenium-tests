@@ -152,7 +152,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated no need to test manually")
+      comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
   @NetworkTrafficDump
   public void NonSpecificMapTests_012_VerifyLinkedArticlePontoRequest() {
