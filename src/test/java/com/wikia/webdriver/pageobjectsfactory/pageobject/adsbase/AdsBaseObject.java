@@ -515,7 +515,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
-      WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
+      WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector));
       verifySlotExpanded(slot);
 
       Assertion.assertTrue(adsComparison.isAdVisible(slot, spotlightSelector, driver));
