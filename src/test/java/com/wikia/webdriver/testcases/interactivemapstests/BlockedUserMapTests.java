@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -44,6 +45,8 @@ public class BlockedUserMapTests extends NewTestTemplate {
     editPinTypes.verifyErrorExists();
   }
 
+  @RelatedIssue(issueID = "",
+      comment = "Functionality is being depracated no need to test manually")
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -74,6 +77,8 @@ public class BlockedUserMapTests extends NewTestTemplate {
     realMap.verifyErrorExists();
   }
 
+  @RelatedIssue(issueID = "",
+      comment = "Functionality is being depracated no need to test manually")
   @Test(groups = {"BlockedUserMapTests_004", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_004_VerifyUserCannotCreateCustomMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -150,6 +151,8 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiPointDescription();
   }
 
+  @RelatedIssue(issueID = " ",
+      comment = "Functionality is being depracated no need to test manually")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
   @NetworkTrafficDump
   public void NonSpecificMapTests_012_VerifyLinkedArticlePontoRequest() {
