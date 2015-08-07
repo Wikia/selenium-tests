@@ -71,7 +71,6 @@ public class Shooter {
     return new Object[]{start, size};
   }
 
-
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
     return imageEditor.fileToImage(captureWebElement(element, driver));
   }
