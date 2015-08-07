@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.Dimension;
@@ -9,6 +10,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -44,10 +46,31 @@ public class Shooter {
    * @return File path  - file's handler which was saved in given path
    */
   public File captureWebElement(WebElement element, WebDriver driver) {
-    File image = imageEditor.cropImage(element.getLocation(), element.getSize(), capturePage(driver));
+    Point start = element.getLocation();
+    Dimension size = element.getSize();
+    if (!"FF".equals(Configuration.getBrowser())) {
+      Object[] rect = getBoundingClientRect(element, driver);
+      start = (Point) rect[0];
+      size = (Dimension) rect[1];
+    }
+
+    File image = imageEditor.cropImage(start, size, capturePage(driver));
     PageObjectLogging.logImage("Shooter", image, true);
     return image;
   }
+
+  private Object[] getBoundingClientRect(WebElement element, WebDriver driver) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    ArrayList<String> list = (ArrayList<String>) js.executeScript(
+        "var rect =  arguments[0].getBoundingClientRect();" +
+        "return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+        element
+    );
+    Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
+    Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
+    return new Object[]{start, size};
+  }
+
 
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
     return imageEditor.fileToImage(captureWebElement(element, driver));
