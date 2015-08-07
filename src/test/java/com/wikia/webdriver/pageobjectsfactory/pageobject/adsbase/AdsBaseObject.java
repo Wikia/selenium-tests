@@ -518,7 +518,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
       verifySlotExpanded(slot);
 
-      adsComparison.isAdVisible(slot, spotlightSelector, driver);
+      Assertion.assertTrue(adsComparison.isAdVisible(slot, spotlightSelector, driver));
     }
   }
 

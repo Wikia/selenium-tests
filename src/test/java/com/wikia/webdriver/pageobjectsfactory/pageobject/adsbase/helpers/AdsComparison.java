@@ -90,7 +90,6 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
-      PageObjectLogging.log("", e.getMessage(), false);
       return false;
     }
     return true;
