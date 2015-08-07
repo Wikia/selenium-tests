@@ -152,9 +152,9 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] specialPages() {
     return new Object[][]{
-        {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
+        {"adtest", "Special:Video", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special",
+        {"adtest", "Special:NewFiles", "126608052", "wka.life/_adtest//special",
          "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
@@ -163,10 +163,10 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] filePages() {
     return new Object[][]{
-        {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
+        {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.life/_adtest//file",
          "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
-         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
+         "wka.life/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
          new Dimension(1292, 1000)},
     };
   }
@@ -307,7 +307,7 @@ public class AdsDataProvider {
         {
             "adtest",
             "SyntheticTests/DfpParams",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"ent\"",
