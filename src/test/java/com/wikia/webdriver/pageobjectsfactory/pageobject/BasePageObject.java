@@ -16,14 +16,12 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
@@ -49,11 +47,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  */
 public class BasePageObject {
 
-  public WebDriver driver;
-  protected int timeOut = 30;
-  public WebDriverWait waitFor;
   public final Wait wait;
+  public WebDriver driver;
+  public WebDriverWait waitFor;
   public Actions builder;
+  protected int timeOut = 30;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
@@ -77,6 +75,12 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  public static String getTimeStamp() {
+    Date time = new Date();
+    long timeCurrent = time.getTime();
+    return String.valueOf(timeCurrent);
+  }
+
   protected void setWindowSizeAndroid() {
     if (!Configuration.getBrowser().contains("ANDROID")) {
       driver.manage().window().maximize();
@@ -85,7 +89,7 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                      + cssSelecotr + "')).mouseenter()");
+        + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -169,9 +173,12 @@ public class BasePageObject {
 
   protected void scrollToElement(WebElement element) {
     try {
-      new Actions(driver).moveToElement(element, 0, -200).moveToElement(element, 0, 400).perform();
-    }catch (MoveTargetOutOfBoundsException e){
-      PageObjectLogging.log("MOVE", "Move to element", true);
+      ((JavascriptExecutor) driver).executeScript("var x = $(arguments[0]);"
+          + "window.scroll(0,parseInt(x.offset().top - 100));", element);
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+      }
     }
   }
 
@@ -187,6 +194,10 @@ public class BasePageObject {
     }
   }
 
+  /*
+   * Url helpers
+   */
+
   protected void scrollToElement(By elementBy) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
@@ -198,10 +209,6 @@ public class BasePageObject {
       }
     }
   }
-
-  /*
-   * Url helpers
-   */
 
   public boolean verifyTitle(String title) {
     String currentTitle = driver.getTitle();
@@ -323,7 +330,6 @@ public class BasePageObject {
         + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
-
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
@@ -413,12 +419,6 @@ public class BasePageObject {
     alert.accept();
     PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
         + alertText, true);
-  }
-
-  public static String getTimeStamp() {
-    Date time = new Date();
-    long timeCurrent = time.getTime();
-    return String.valueOf(timeCurrent);
   }
 
   public String getRandomDigits(int length) {
