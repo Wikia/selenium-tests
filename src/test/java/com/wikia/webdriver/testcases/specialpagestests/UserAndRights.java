@@ -23,7 +23,7 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights001", "UsersAndRights"})
   @Execute(asUser = User.STAFF)
   public void usersAndRights001_Block() {
-    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).openSpecialBlockPage(wikiURL);
+    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).open();
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");

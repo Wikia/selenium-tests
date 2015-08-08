@@ -172,7 +172,7 @@ public class MessageWallTests extends NewTestTemplate {
     boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
     if (!isUserBlocked) {
       base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-      SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
+      SpecialBlockPageObject blockPage = new SpecialBlockPageObject(driver).open();
       blockPage.typeInUserName(credentials.userNameBlockedAccount);
       blockPage.typeExpiration("10 year");
       blockPage.typeReason("block QATestsBlockedUser");

@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -31,7 +33,18 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   public SpecialBlockPageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public SpecialBlockPageObject open(){
+    return open(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+  }
+
+  public SpecialBlockPageObject open(String wikiUrl){
+    getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
+    PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);
+
+    return this;
   }
 
   public void typeInUserName(String userName) {

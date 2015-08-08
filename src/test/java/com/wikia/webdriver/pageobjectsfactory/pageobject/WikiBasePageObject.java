@@ -268,12 +268,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialUnblockPageObject(driver);
   }
 
-  public SpecialBlockPageObject openSpecialBlockPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_BLOCK);
-    PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
-    return new SpecialBlockPageObject(driver);
-  }
-
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
         + URLsContent.FILE_NAMESPACE + articlePage, URLsContent.ACTION_HISTORY));
