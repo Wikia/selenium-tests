@@ -5,12 +5,16 @@ import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -183,7 +187,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    testStarted=true;
+    testStarted = true;
   }
 
   public static void stopLogging() {
@@ -223,6 +227,18 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     } else {
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
+
+    Method method = TestContext.getCurrentTestMethod();
+
+    if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
+      TestContext.setFirstLoad(false);
+      User user = method.getAnnotation(Execute.class).asUser();
+      if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
+      } else {
+        new WikiBasePageObject(driver).loginAs(user);
+      }
+    }
+
     logJSError(driver);
   }
 
@@ -230,7 +246,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     lastFindBy = by;
     SelectorStack.write(by);
-    if (element != null){
+    if (element != null) {
       SelectorStack.contextWrite();
     }
   }
@@ -320,7 +336,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestSkipped(ITestResult result) {
-    if(!testStarted){
+    if (!testStarted) {
       start(result.getMethod().getConstructorOrMethod().getMethod());
     }
     if (result.getMethod().getConstructorOrMethod().getMethod()
@@ -333,7 +349,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       result.setThrowable(new SkipException("TEST SKIPPED"));
       onTestFailure(result);
     }
-    if(testStarted){
+    if (testStarted) {
       stopLogging();
     }
   }

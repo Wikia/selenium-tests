@@ -53,15 +53,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
-    loadFirstPage();
-
-    if (method.isAnnotationPresent(Execute.class)) {
-      if(method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
-      }else {
-        new WikiBasePageObject(driver).loginAs(method.getAnnotation(Execute.class).asUser()
-            .getUserName(), method.getAnnotation(Execute.class).asUser().getPassword(), wikiURL);
-      }
-    }
   }
 
   @AfterMethod(alwaysRun = true)
