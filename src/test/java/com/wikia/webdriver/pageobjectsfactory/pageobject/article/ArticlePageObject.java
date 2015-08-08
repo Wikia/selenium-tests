@@ -578,7 +578,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   private void typeCategoryName(String category) {
-    new Actions(driver).sendKeys(addCategoryInput, category + Keys.ENTER).perform();
+    Typing.sendKeysHumanSpeed(addCategoryInput, category);
   }
 
   public void verifySubmitCategoryEnabled() {

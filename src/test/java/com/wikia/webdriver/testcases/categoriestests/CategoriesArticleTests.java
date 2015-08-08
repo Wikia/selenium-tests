@@ -34,12 +34,10 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
-  public void CategoriesTestsArticle_002_anonSuggestions() {
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
-    visualEditMode.navigateToArticleEditPageCK(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-        + visualEditMode.getTimeStamp());
-    visualEditMode.addContent(PageContent.ARTICLE_TEXT);
-    ArticlePageObject article = visualEditMode.submitArticle();
+  public void  CategoriesTestsArticle_002_anonSuggestions() {
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
     article.submitCategory();
     article.verifyCategoryPresent(desiredCategory);
@@ -48,7 +46,9 @@ public class CategoriesArticleTests extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_003_user() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
@@ -82,12 +82,12 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_006_anonDelete() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.openRandomArticle(wikiURL);
-    String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
-    article.addCategory(categoryName);
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
+    article.addCategory("DeleteMe");
     article.verifySubmitCategoryEnabled();
-    article.removeCategory(categoryName);
+    article.removeCategory("DeleteMe");
     article.verifySubmitCategoryDisabled();
   }
 }

@@ -49,7 +49,7 @@ public class PageContent {
   public static final String BLOG_COMMENT_EDIT = "blogCommentEdit";
   public static final String BLOG_LIST_NAME = "BlogPostList";
   //categories
-  public static final String CATEGORY_NAME_PREFIX = "TestCategory";
+  public static final String CATEGORY_NAME_PREFIX = "Cat";
   //generic
   public static final String CAPTION = "QAWebdriverCaption1";
   public static final String CAPTION2 = "QAWebdriverCaption2";
