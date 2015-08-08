@@ -56,28 +56,10 @@ public class Wait {
       PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
     if(SelectorStack.isContextSet()){
-      return forElementVisible(SelectorStack.read(), SelectorStack.contextRead());
+      SelectorStack.contextRead();
+      return wait.until(ExpectedConditions.visibilityOf(element));
     }else{
       return forElementVisible(SelectorStack.read());
-    }
-  }
-
-  public WebElement forElementVisible(final By by, final WebElement context) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    try {
-      return wait.until(new ExpectedCondition<WebElement>() {
-        @Override
-        public WebElement apply(WebDriver input) {
-          WebElement element = context.findElement(by);
-          if (element.isDisplayed()) {
-            return element;
-          } else {
-            return null;
-          }
-        }
-      });
-    } finally {
-      restoreDeaultImplicitWait();
     }
   }
 

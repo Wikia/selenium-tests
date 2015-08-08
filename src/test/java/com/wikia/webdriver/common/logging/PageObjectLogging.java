@@ -231,7 +231,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     lastFindBy = by;
     SelectorStack.write(by);
     if (element != null){
-      SelectorStack.contextWrite(element);
+      SelectorStack.contextWrite();
     }
   }
 
