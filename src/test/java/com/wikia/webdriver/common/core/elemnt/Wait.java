@@ -62,7 +62,7 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(By by, final WebElement context) {
+  public WebElement forElementVisible(final By by, final WebElement context) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(new ExpectedCondition<WebElement>() {
