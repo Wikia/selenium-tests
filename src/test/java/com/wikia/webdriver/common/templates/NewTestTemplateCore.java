@@ -46,6 +46,7 @@ public class NewTestTemplateCore {
   @BeforeMethod(alwaysRun = true)
   public void initTestContext(Method method) {
     TestContext.writeMethodName(method);
+    PageObjectLogging.start(method);
   }
 
   protected void prepareDirectories() {
