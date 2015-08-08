@@ -8,8 +8,11 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
 import org.testng.annotations.Test;
 
@@ -50,6 +53,8 @@ public class UserAvatar extends NewTestTemplate {
   @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
+    new SpecialVersionPage(driver).open();
+
     UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
     profile.verifyProfilePage(credentials.userNameStaff);
   }

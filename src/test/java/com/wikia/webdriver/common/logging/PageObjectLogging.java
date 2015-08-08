@@ -233,7 +233,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
       TestContext.setFirstLoad(false);
       User user = method.getAnnotation(Execute.class).asUser();
-      if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
+      if (user == User.ANONYMOUS) {
       } else {
         new WikiBasePageObject(driver).loginAs(user);
       }
