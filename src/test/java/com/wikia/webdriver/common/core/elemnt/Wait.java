@@ -1,17 +1,18 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -45,9 +46,7 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser
-   * <p/>
-   * * @param element The element to be checked
+   * Checks if the element is visible on browser <p/> * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
@@ -56,14 +55,37 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
-    return forElementVisible(SelectorStack.read());
+    if(SelectorStack.isContextSet()){
+      return forElementVisible(SelectorStack.read(), SelectorStack.contextRead());
+    }else{
+      return forElementVisible(SelectorStack.read());
+    }
+  }
+
+  public WebElement forElementVisible(By by, WebElement context) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(new ExpectedCondition<WebElement>() {
+        @Override
+        public WebElement apply(WebDriver input) {
+          WebElement element = context.findElement(by);
+          if (element.isDisplayed()) {
+            return element;
+          } else {
+            return null;
+          }
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-          .visibilityOf(element));
+                                                                      .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }

@@ -230,6 +230,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     lastFindBy = by;
     SelectorStack.write(by);
+    if (element != null){
+      SelectorStack.contextWrite(element);
+    }
   }
 
   @Override
