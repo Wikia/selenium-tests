@@ -250,23 +250,16 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Smoke4"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_009_addingModifyImage() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.clearContent();
-    PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-    photoOptions.setCaption(PageContent.CAPTION);
-    photoOptions.clickAddPhoto();
-    visualEditMode.verifyPhoto();
-    visualEditMode.submitArticle();
-    article.editArticleInRTEUsingDropdown();
+  public void modifyImage() {
+    ArticleContent.push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.modifyComponent(Components.PHOTO);
+    PhotoOptionsComponentObject photoOptions = new PhotoOptionsComponentObject(driver);
     photoOptions.setCaption(PageContent.CAPTION2);
     photoOptions.clickAddPhoto();
     visualEditMode.verifyPhoto();
-    visualEditMode.submitArticle();
-    article.verifyPhoto();
+    visualEditMode.submitArticle().verifyPhoto();
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
