@@ -125,6 +125,7 @@ public class NewMessageWall extends WikiBasePageObject {
     scrollAndClick(
         driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy)
     );
+    wait.forElementNotPresent(By.cssSelector(".new-reply.loading"));
     PageObjectLogging.log("submitQuote", "message quote submitted", true);
   }
 
