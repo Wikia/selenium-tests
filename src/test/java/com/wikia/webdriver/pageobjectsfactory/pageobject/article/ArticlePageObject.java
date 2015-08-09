@@ -303,7 +303,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyCommentText(String comment) {
     WebElement mostRecentComment = articleComments.get(0);
-    waitForTextToBePresentInElementByElement(mostRecentComment, comment);
+    wait.forTextInElement(mostRecentComment, comment);
     Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 

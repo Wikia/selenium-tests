@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -55,10 +54,10 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
-    if(SelectorStack.isContextSet()){
+    if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
       return wait.until(ExpectedConditions.visibilityOf(element));
-    }else{
+    } else {
       return forElementVisible(SelectorStack.read());
     }
   }
@@ -104,6 +103,35 @@ public class Wait {
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.elementNotPresent(selector));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElement(By by, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBePresentInElement(by, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElement(WebElement element, String text) {
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+    }
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return wait.until(
+            CommonExpectedConditions.textToBePresentInElement(element, text));
+      } else {
+        return forTextInElement(SelectorStack.read(), text);
+      }
     } finally {
       restoreDeaultImplicitWait();
     }

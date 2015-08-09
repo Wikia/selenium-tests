@@ -109,7 +109,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   public void verifyMessageAboutNewPassword(String userName) {
     wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
-    waitForTextToBePresentInElementByElement(messagePlaceholder, message);
+    wait.forTextInElement(messagePlaceholder, message);
     PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
         true, driver);
   }

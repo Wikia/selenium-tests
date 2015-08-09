@@ -89,7 +89,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyArticleText(String content) {
-    waitForTextToBePresentInElementByBy(articleContentBy, content);
+    wait.forTextInElement(articleContentBy, content);
     PageObjectLogging.log("verifyArticleText", "article text is verified", true);
   }
 

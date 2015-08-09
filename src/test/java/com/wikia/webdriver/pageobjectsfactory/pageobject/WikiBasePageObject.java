@@ -654,7 +654,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyLoginReguiredMessage() {
-    waitForTextToBePresentInElementByElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
+    wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
     PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
         true, driver);
   }
@@ -669,7 +669,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyNotLoggedInMessage() {
-    waitForTextToBePresentInElementByElement(wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE);
+    wait.forTextInElement(wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE);
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
@@ -793,14 +793,14 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyPageUnfollowed() {
-    waitForTextToBePresentInElementByElement(followButton, "Follow");
+    wait.forTextInElement(followButton, "Follow");
     PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);
   }
 
   public void follow() {
     wait.forElementVisible(followButton);
     jsActions.click(followButton);
-    waitForTextToBePresentInElementByElement(followButton, "Following");
+    wait.forTextInElement(followButton, "Following");
     PageObjectLogging.log("followArticle", "page is followed", true, driver);
   }
 

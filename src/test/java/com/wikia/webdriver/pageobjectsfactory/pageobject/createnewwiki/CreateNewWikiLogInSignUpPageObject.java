@@ -95,7 +95,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public void verifyMessageAboutNewPassword(String userName) {
     wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
-    waitForTextToBePresentInElementByElement(usernameValidationText, newPasswordMsg);
+    wait.forTextInElement(usernameValidationText, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
         true);
   }

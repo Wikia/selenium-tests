@@ -54,7 +54,7 @@ public class PhotoAddComponentObject extends BasePageObject {
     wait.forElementVisible(findButton);
     String oldHeadline = imageUploadHeadline.getText();
     scrollAndClick(findButton);
-    waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
+    wait.forTextInElement(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
         oldHeadline);
     PageObjectLogging.log("clickSearch", "search button clicked", true);
   }

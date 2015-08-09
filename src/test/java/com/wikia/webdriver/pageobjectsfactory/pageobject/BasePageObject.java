@@ -385,28 +385,6 @@ public class BasePageObject {
         value));
   }
 
-  public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions.textToBePresentInElement(element, text));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  public void waitForTextNotPresentInElementByElementLocatedBy(By by, String text) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  public void waitForTextToBePresentInElementByBy(By by, String text) {
-    waitFor.until(CommonExpectedConditions.textToBePresentInElement(by, text));
-  }
-
   public void waitForStringInURL(String givenString) {
     waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
     PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
@@ -455,7 +433,7 @@ public class BasePageObject {
     // notification
     notifications_clickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
-    waitForTextToBePresentInElementByElement(notificationsLatestNotificationOnWiki, title);
+    wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
     PageObjectLogging.log("notifications_verifyNotificationTitle",
         "Verify that the latest notification has the following title: " + title, true, driver);
   }

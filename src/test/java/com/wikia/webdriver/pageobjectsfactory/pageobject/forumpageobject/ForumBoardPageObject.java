@@ -106,14 +106,14 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void verifyDiscussionTitleAndMessage(String title, String message) {
-    waitForTextToBePresentInElementByElement(discussionTitle, title);
-    waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
+    wait.forTextInElement(discussionTitle, title);
+    wait.forTextInElement(discussionBody.get(0), message);
     PageObjectLogging
         .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
 
   public void verifyBoardDescription(String description) {
-    waitForTextToBePresentInElementByElement(boardDescription, description);
+    wait.forTextInElement(boardDescription, description);
     PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
   }
 
@@ -162,9 +162,9 @@ public class ForumBoardPageObject extends BasePageObject {
 
   public void verifyStartedDiscussionWithLinks(String internalLink,
                                                String externalLink) {
-    waitForTextToBePresentInElementByElement(discussionBody.get(0),
+    wait.forTextInElement(discussionBody.get(0),
                                              internalLink);
-    waitForTextToBePresentInElementByElement(discussionBody.get(1),
+    wait.forTextInElement(discussionBody.get(1),
                                              externalLink);
     PageObjectLogging.log("verifyStartedDiscussionWithLinks",
                           "internal and external links: " + internalLink + " and"
@@ -206,7 +206,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForTextToBePresentInElementByElement(followButton, followStatus);
+    wait.forTextInElement(followButton, followStatus);
     PageObjectLogging.log("verifyTextOnFollowButton",
                           "verify that thread number " + threadNumber
                           + " has the status: " + followStatus, true);

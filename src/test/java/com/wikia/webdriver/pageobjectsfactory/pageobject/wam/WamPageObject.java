@@ -204,7 +204,7 @@ public class WamPageObject extends BasePageObject {
     previousMonthArrow.click();
     DateTime date = DateTime.now().minusMonths(1);
     String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);
-    waitForTextToBePresentInElementByElement(monthInCalendar, previousMonth);
+    wait.forTextInElement(monthInCalendar, previousMonth);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // first day of the current month
