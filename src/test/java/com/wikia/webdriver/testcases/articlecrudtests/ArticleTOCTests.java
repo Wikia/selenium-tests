@@ -114,9 +114,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_006_verifyTOCisExpandedOnPreviewForLoggedInUser() {
     ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
-    article.verifyTOCpresent();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.verifyContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
