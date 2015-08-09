@@ -197,6 +197,7 @@ public class NewMessageWall extends WikiBasePageObject {
   public void clickSourceModeButton() {
     wait.forElementVisible(sourceModeButton);
     scrollAndClick(sourceModeButton);
+    wait.forElementVisible(By.cssSelector(".editor-open.mode-source"));
     PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
   }
 
