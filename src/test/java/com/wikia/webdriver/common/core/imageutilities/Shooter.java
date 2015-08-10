@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.Dimension;
@@ -44,8 +45,15 @@ public class Shooter {
    * @return File path  - file's handler which was saved in given path
    */
   public File captureWebElement(WebElement element, WebDriver driver) {
-    Object[] rect = getBoundingClientRect(element, driver);
-    File image = imageEditor.cropImage((Point) rect[0], (Dimension) rect[1], capturePage(driver));
+    Point start = element.getLocation();
+    Dimension size = element.getSize();
+    if (!"FF".equals(Configuration.getBrowser())) {
+      Object[] rect = getBoundingClientRect(element, driver);
+      start = (Point) rect[0];
+      size = (Dimension) rect[1];
+    }
+
+    File image = imageEditor.cropImage(start, size, capturePage(driver));
     PageObjectLogging.logImage("Shooter", image, true);
     return image;
   }
