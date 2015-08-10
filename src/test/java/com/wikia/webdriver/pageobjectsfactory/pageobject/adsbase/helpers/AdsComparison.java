@@ -65,7 +65,7 @@ public class AdsComparison {
       capturedScreen.delete();
       return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
     } catch (IOException e) {
-      PageObjectLogging.logError("compareImageWithScreenshot", e);
+      PageObjectLogging.log("compareImageWithScreenshot", e.getMessage(), false);
     }
     return false;
   }
@@ -90,7 +90,6 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
-      PageObjectLogging.logError("ScreenshotsComparison", e);
       return false;
     }
     return true;
