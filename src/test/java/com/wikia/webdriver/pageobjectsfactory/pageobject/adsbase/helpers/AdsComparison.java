@@ -90,6 +90,7 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
+      PageObjectLogging.logWarning("ScreenshotsComparison", e);
       return false;
     }
     return true;

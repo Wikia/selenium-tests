@@ -123,6 +123,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, exception.getMessage(), false);
   }
 
+  public static void logWarning(String command, Exception exception) {
+    logWarning(command, exception.getMessage());
+  }
+
   /**
    * This method will log warning to log file (line in yellow color)
    */
