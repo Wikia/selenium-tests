@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,7 +29,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_001_ClickMapAndVerifyCorrectRedirect() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     String mapUrl = specialMap.getMapLink(InteractiveMapsContent.SELECTED_MAP_INDEX);
     String mapTitle = specialMap.getMapTitle(InteractiveMapsContent.SELECTED_MAP_INDEX);
@@ -51,7 +52,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_003_VerifyTemplateSearch() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
@@ -66,7 +67,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -79,7 +80,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_005_VerifyMapListElements() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     specialMap.verifyAmountMapOnTheList();
     specialMap.verifyCreateMapButtonExists();
@@ -89,7 +90,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_006_VerifyLearnMoreLink() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMapModal = specialMap.clickCreateAMap();
     createMapModal.verifyLearnMoreLinkRedirect(InteractiveMapsContent.LEARN_MORE_LINK);
@@ -98,7 +99,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_007_VerifyCreateCustomMapErrors() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMap = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
@@ -122,7 +123,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
     createMap.verifyRealMapAndCustomMapButtons();
@@ -150,6 +151,8 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiPointDescription();
   }
 
+  @RelatedIssue(issueID = " ",
+      comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
   @NetworkTrafficDump
   public void NonSpecificMapTests_012_VerifyLinkedArticlePontoRequest() {

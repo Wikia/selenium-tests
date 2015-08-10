@@ -22,7 +22,7 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
   public void ForumThreadTests_001_replyToThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -36,7 +36,7 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
   public void ForumThreadTests_002_removeThreadAndUndo() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -52,7 +52,7 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_003", "ForumThreadTests", "Forum"})
   public void ForumThreadTests_003_moveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -67,7 +67,7 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_004", "ForumThreadTests", "Forum"})
   public void ForumThreadTests_004_threadHistory() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -81,7 +81,7 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_005", "ForumThreadTests", "Forum"})
   public void ForumThreadTests_005_closeThreadAndReopen() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);

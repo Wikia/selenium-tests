@@ -48,7 +48,7 @@ public class BasicActions extends IntraWiki {
   public void userSearch() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(testedWiki);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NavigationBar navigation = new NavigationBar(driver);
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);

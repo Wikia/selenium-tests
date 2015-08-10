@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,6 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -48,7 +48,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void ArticleCRUDAnon_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("AnonAddDropdown");
     VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -73,7 +73,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDAnon_005"})
   public void ArticleCRUDAnon_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditByURL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -83,7 +83,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDAnon_006"})
   public void ArticleCRUDAnon_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditDropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.clickPublishButton();

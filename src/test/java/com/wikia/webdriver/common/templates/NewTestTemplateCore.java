@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
@@ -17,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
@@ -39,6 +41,12 @@ public class NewTestTemplateCore {
   @BeforeSuite(alwaysRun = true)
   public void beforeSuite() {
     prepareDirectories();
+  }
+
+  @BeforeMethod(alwaysRun = true)
+  public void initTestContext(Method method) {
+    TestContext.writeMethodName(method);
+    PageObjectLogging.start(method);
   }
 
   protected void prepareDirectories() {

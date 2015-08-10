@@ -33,7 +33,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   )
   public void followerNotificationNewMessage_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
     WatchPageObject watch = wall.unfollowCurrentUrl();
     watch.confirmWatchUnwatch();
@@ -49,7 +49,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   )
   public void followerNotificationNewMessage_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
+    base.loginAs(credentials.userName6, credentials.password6, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -69,7 +69,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   )
   public void followerNotificationNewMessage_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName6);

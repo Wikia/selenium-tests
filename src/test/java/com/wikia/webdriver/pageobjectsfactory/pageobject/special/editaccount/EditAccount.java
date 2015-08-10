@@ -58,7 +58,7 @@ public class EditAccount extends BasePageObject {
   }
 
   public void verifyAccountClosedMessage() {
-    waitForTextToBePresentInElementByElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
+    wait.forTextInElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
     PageObjectLogging.log("verifyAccountClosedMessage", "verified account closed", true);
   }
 
@@ -72,7 +72,7 @@ public class EditAccount extends BasePageObject {
 
   public void verifyAccountReopenedMessage() {
     wait.forElementVisible(statusMessage);
-    waitForTextToBePresentInElementByElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
+    wait.forTextInElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
     PageObjectLogging.log("verifyAccountReopenedMessage", "verified account reopened", true);
   }
 }

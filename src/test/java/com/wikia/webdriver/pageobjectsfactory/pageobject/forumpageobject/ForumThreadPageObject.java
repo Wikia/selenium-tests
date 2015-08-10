@@ -70,8 +70,8 @@ public class ForumThreadPageObject extends BasePageObject {
   public void verifyDiscussionTitleAndMessage(String title, String message) {
     wait.forElementVisible(discussionTitle);
     wait.forElementVisible(discussionBody.get(0));
-    waitForTextToBePresentInElementByElement(discussionTitle, title);
-    waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
+    wait.forTextInElement(discussionTitle, title);
+    wait.forTextInElement(discussionBody.get(0), message);
     PageObjectLogging
         .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
@@ -91,7 +91,7 @@ public class ForumThreadPageObject extends BasePageObject {
     WebElement
         replyMessage =
         driver.findElement(By.cssSelector(".replies li:nth-child(" + replyNumber + ") p"));
-    waitForTextToBePresentInElementByElement(replyMessage, message);
+    wait.forTextInElement(replyMessage, message);
     PageObjectLogging.log("verifyReplyMessage", "verify that message number " + replyNumber
                                                 + " has the following message: " + message, true);
   }
@@ -152,7 +152,7 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void verifyThreadRemoved() {
-    waitForTextToBePresentInElementByElement(threadRemovedMessage, "thread has been removed");
+    wait.forTextInElement(threadRemovedMessage, "thread has been removed");
     PageObjectLogging.log("verifyThreadRemoved", "Thread has been removed", true);
   }
 
@@ -206,7 +206,7 @@ public class ForumThreadPageObject extends BasePageObject {
   public void verifyParentBoard(String forumBoardName) {
     wait.forElementVisible(movedThreadText);
     wait.forElementPresent(parentBoardField);
-    waitForTextToBePresentInElementByBy(parentBoardField, forumBoardName);
+    wait.forTextInElement(parentBoardField, forumBoardName);
     PageObjectLogging.log("verifyParentBoard",
                           "verify that the parent board of current thread is the following: "
                           + forumBoardName, true);

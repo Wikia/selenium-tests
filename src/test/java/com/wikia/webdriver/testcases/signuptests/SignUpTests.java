@@ -228,7 +228,7 @@ public class SignUpTests extends NewTestTemplate {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage(wikiURL);
         base.appendToUrl("noads=1");
-        base.logInCookie(userName, password, wikiURL);
+        base.loginAs(userName, password, wikiURL);
         base.verifyUserLoggedIn(userName);
         PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
         preferences.selectTab(tabNames.FACEBOOK);

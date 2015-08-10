@@ -24,7 +24,7 @@ public class MobileInteractiveMapsTests extends NewTestTemplate {
   public void MobileInteractiveMapsTests_001_MapVisibilityWhenUserLoggedOut() {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.openHome(wikiURL);
-    mobile.openArticleByName(wikiURL, "Special:Maps");
+    mobile.open("Special:Maps");
     List<WebElement> mapsList = driver.findElements(By.cssSelector(".map-list a"));
     mapsList.get(0).click();
     try{Thread.sleep(5000);}catch(InterruptedException e){}
@@ -37,7 +37,7 @@ public class MobileInteractiveMapsTests extends NewTestTemplate {
     MobileBasePageObject mobile = new MobileBasePageObject(driver);
     mobile.loginDropDown(credentials.userName, credentials.password);
     mobile.openHome(wikiURL);
-    mobile.openArticleByName(wikiURL, "Special:Maps");
+    mobile.open("Special:Maps");
     List<WebElement> mapsList = driver.findElements(By.cssSelector(".map-list a"));
     mapsList.get(0).click();
     try{Thread.sleep(5000);}catch(InterruptedException e){}

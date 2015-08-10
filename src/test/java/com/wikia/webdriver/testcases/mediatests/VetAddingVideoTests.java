@@ -26,7 +26,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
   public void VetAddVideo_001_MessageWallProvider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -47,7 +47,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
   public void VetAddVideo_002_MessageWallLibrary() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();

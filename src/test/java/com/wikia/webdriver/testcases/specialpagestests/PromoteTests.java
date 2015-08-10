@@ -19,7 +19,7 @@ public class PromoteTests extends NewTestTemplate {
   @Test(groups = {"PromoteTests_001", "PromoteTests"})
   public void PromoteTests_001_changePromoteElements() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialPromotePageObject promote = base.openSpecialPromotePage(wikiURL);
     promote.typeIntoHeadline(PageContent.LOREM_IPSUM_SHORT);
     promote.typeIntoDescription(PageContent.LOREM_IPSUM_LONG);

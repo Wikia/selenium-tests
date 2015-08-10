@@ -11,7 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -72,7 +74,8 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-
+  @FindBy(css = "textarea#wpTextbox1.highlighted")
+  private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
 
@@ -188,10 +191,11 @@ public class SourceEditModePageObject extends EditMode {
     return new VetAddVideoComponentObject(driver);
   }
 
-  public void clickMore() {
+  public WikiTextShortCutsComponentObject clickMore() {
     focusTextArea();
     more.click();
     PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
+    return new WikiTextShortCutsComponentObject(driver);
   }
 
   public void clearSource() {
@@ -204,8 +208,20 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void addContent(String content) {
+    wait.forElementVisible(textArea);
+    textArea.sendKeys(content);
+    PageObjectLogging.log("addContent", "content was added", true);
+  }
+
+  public void addContentInSourceMode(String content) {
+    wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
+  }
+
+  public String copyContent() {
+    wait.forElementVisible(textArea);
+    return textArea.getText();
   }
 
   public String buildTablePropertiesContent(
@@ -338,7 +354,7 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-        .log("appendContent", "text: '" + content + "', added to the source mode", true);
+            .log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
@@ -346,7 +362,7 @@ public class SourceEditModePageObject extends EditMode {
     sourceModeTextArea.sendKeys(Keys.ENTER);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-        .log("appendNewLine", "text " + content + " added to the source mode in new line", true);
+            .log("appendNewLine", "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {
@@ -375,5 +391,15 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
+  }
+
+  public void addCategoryToSourceCode(String catName) {
+    sourceModeTextArea.sendKeys(catName);
+  }
+
+  public TemplatePageObject clickPublishButtonInTemplateNamespace() {
+    wait.forElementVisible(submitButton);
+    submitButton.click();
+    return new TemplatePageObject(driver);
   }
 }

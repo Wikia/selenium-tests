@@ -51,7 +51,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
 
   public void verifyMessageAboutBlockPresent() {
     wait.forElementVisible(phalanxBlockMessageContainer);
-    waitForTextToBePresentInElementByElement(
+    wait.forTextInElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );
     PageObjectLogging.log(

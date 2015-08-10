@@ -1,18 +1,14 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -20,31 +16,10 @@ import org.testng.annotations.Test;
  */
 public class VideoSuggestionsTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
-  /**
-   * TC001 - Verifies video name field is editable for Non-Premium Wikia videos
-   *
-   * @author Rodrigo 'RodriGomez' Molinero
-   */
-
-  @DataProvider
-  private static final Object[][] wikis() {
-    return new Object[][]{
-        {"callofduty", "Frank_Woods"}
-    };
-  }
-
-  @Test(
-      groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"},
-      dataProvider = "wikis"
-  )
-  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
-    wikiURL = urlBuilder.getUrlForWiki(wikiName);
-
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.userName, credentials.password, wikiURL);
-    article = article.openArticleByName(wikiURL, articleName);
+  @Test(groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"})
+  @Execute(onWikia = "callofduty", asUser = User.USER)
+  public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
+    ArticlePageObject article = new ArticlePageObject(driver).open("Frank_Woods");
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
     ck.verifyContentLoaded();
     VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();

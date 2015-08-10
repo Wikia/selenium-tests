@@ -101,6 +101,11 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   }
 
   public void verifyFileUploaded(String fileName) {
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(
         latestWikiaPreviewImg,

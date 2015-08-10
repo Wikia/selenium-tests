@@ -16,7 +16,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -48,11 +47,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  */
 public class BasePageObject {
 
-  public WebDriver driver;
-  protected int timeOut = 30;
-  public WebDriverWait waitFor;
   public final Wait wait;
+  public WebDriver driver;
+  public WebDriverWait waitFor;
   public Actions builder;
+  protected int timeOut = 30;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
@@ -76,6 +75,12 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  public static String getTimeStamp() {
+    Date time = new Date();
+    long timeCurrent = time.getTime();
+    return String.valueOf(timeCurrent);
+  }
+
   protected void setWindowSizeAndroid() {
     if (!Configuration.getBrowser().contains("ANDROID")) {
       driver.manage().window().maximize();
@@ -84,7 +89,7 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                      + cssSelecotr + "')).mouseenter()");
+        + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -167,9 +172,8 @@ public class BasePageObject {
   }
 
   protected void scrollToElement(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript("var x = $(arguments[0]);"
+      ((JavascriptExecutor) driver).executeScript("var x = $(arguments[0]);"
           + "window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
@@ -190,6 +194,10 @@ public class BasePageObject {
     }
   }
 
+  /*
+   * Url helpers
+   */
+
   protected void scrollToElement(By elementBy) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
@@ -201,10 +209,6 @@ public class BasePageObject {
       }
     }
   }
-
-  /*
-   * Url helpers
-   */
 
   public boolean verifyTitle(String title) {
     String currentTitle = driver.getTitle();
@@ -326,7 +330,6 @@ public class BasePageObject {
         + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
-
   public void waitForElementNotVisibleByElement(WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
@@ -382,28 +385,6 @@ public class BasePageObject {
         value));
   }
 
-  public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions.textToBePresentInElement(element, text));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  public void waitForTextNotPresentInElementByElementLocatedBy(By by, String text) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
-  public void waitForTextToBePresentInElementByBy(By by, String text) {
-    waitFor.until(CommonExpectedConditions.textToBePresentInElement(by, text));
-  }
-
   public void waitForStringInURL(String givenString) {
     waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
     PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
@@ -416,12 +397,6 @@ public class BasePageObject {
     alert.accept();
     PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
         + alertText, true);
-  }
-
-  public static String getTimeStamp() {
-    Date time = new Date();
-    long timeCurrent = time.getTime();
-    return String.valueOf(timeCurrent);
   }
 
   public String getRandomDigits(int length) {
@@ -458,7 +433,7 @@ public class BasePageObject {
     // notification
     notifications_clickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
-    waitForTextToBePresentInElementByElement(notificationsLatestNotificationOnWiki, title);
+    wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
     PageObjectLogging.log("notifications_verifyNotificationTitle",
         "Verify that the latest notification has the following title: " + title, true, driver);
   }

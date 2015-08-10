@@ -27,7 +27,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_001"})
   public void ArticleCRUDUser_001_specialPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
@@ -41,7 +41,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_002"})
   public void ArticleCRUDUser_002_addByURL() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject visualEditMode =
@@ -57,7 +57,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open("UserAddDropdown");
     VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -84,7 +84,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
-        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by URL");
+        new ArticlePageObject(driver).open("Article to edit by URL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -96,7 +96,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
-        new ArticlePageObject(driver).openArticleByName(wikiURL, "Article to edit by Dropdown");
+        new ArticlePageObject(driver).open("Article to edit by Dropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();

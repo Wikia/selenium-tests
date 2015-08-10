@@ -54,17 +54,17 @@ public class PhotoAddComponentObject extends BasePageObject {
     wait.forElementVisible(findButton);
     String oldHeadline = imageUploadHeadline.getText();
     scrollAndClick(findButton);
-    waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
-        oldHeadline);
+    wait.forTextInElement(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
+                          oldHeadline);
     PageObjectLogging.log("clickSearch", "search button clicked", true);
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
-    wait.forElementVisible(addThisPhotoList.get(photoNumber));
+    WebElement photo = wait.forElementVisible(addThisPhotoList.get(photoNumber));
     photoName =
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
-    scrollAndClick(addThisPhotoList.get(photoNumber));
+    scrollAndClick(photo);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
     return new PhotoOptionsComponentObject(driver);
   }

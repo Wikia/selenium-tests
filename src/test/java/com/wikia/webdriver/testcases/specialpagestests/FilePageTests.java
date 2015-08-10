@@ -54,7 +54,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
   public void filePage002_tabsLoggedIn() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
 
     FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
@@ -91,7 +91,7 @@ public class FilePageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
@@ -123,7 +123,7 @@ public class FilePageTests extends NewTestTemplate {
 
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete

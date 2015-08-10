@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.createawikitests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
@@ -29,7 +28,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
       comment = "Last throbber takes too long sometimes and makes test fail. Please test manually")
  public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
     String wikiName = cnw1.getWikiName();

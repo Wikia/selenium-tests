@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,10 +21,9 @@ public class UserAndRights extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"usersAndRights001", "UsersAndRights"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights001_Block() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialBlockPageObject block = base.openSpecialBlockPage(wikiURL);
+    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).open();
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");
@@ -33,7 +34,7 @@ public class UserAndRights extends NewTestTemplate {
       "usersAndRights001_Block"})
   public void usersAndRights002_VerifyBlockedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     VisualEditModePageObject
         edit =
         base.goToArticleDefaultContentEditPage(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base
@@ -43,20 +44,22 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods = {
       "usersAndRights001_Block"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights003_BlockListBlocked() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPageObject
+        list =
+        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserBlocked(credentials.userNameBlocked);
   }
 
   @Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods = {
       "usersAndRights001_Block"})
+  @Execute(asUser = User.STAFF)
   public void usersAndRights004_Unblock() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialUnblockPageObject unblock = base.openSpecialUnblockPage(wikiURL);
+    SpecialUnblockPageObject
+        unblock =
+        new SpecialUnblockPageObject(driver).openSpecialUnblockPage(wikiURL);
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
   }
@@ -65,7 +68,7 @@ public class UserAndRights extends NewTestTemplate {
       "usersAndRights004_Unblock"})
   public void usersAndRights005_VerifyUnblockedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         edit =
@@ -79,7 +82,7 @@ public class UserAndRights extends NewTestTemplate {
       "usersAndRights004_Unblock"})
   public void usersAndRights006_BlockListUnblocked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserUnblocked();
@@ -88,7 +91,7 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights007", "UsersAndRights"})
   public void usersAndRights007_Contributions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String pageContent = base.getTimeStamp();
     String pageName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, pageName);

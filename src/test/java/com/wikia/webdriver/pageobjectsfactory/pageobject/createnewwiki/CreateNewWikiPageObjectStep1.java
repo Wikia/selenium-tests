@@ -84,12 +84,12 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
-    waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, wikiName.toLowerCase());
+    wait.forTextInElement(wikiDomainErrorMessage, wikiName.toLowerCase());
     PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
   }
 
   public void verifyIncorrectWikiName() {
-    waitForTextToBePresentInElementByElement(wikiDomainErrorMessage,
+    wait.forTextInElement(wikiDomainErrorMessage,
                                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
     PageObjectLogging.log("verifyIncorrectWikiName",
                           "Verified wiki name violates naming policy", true);
