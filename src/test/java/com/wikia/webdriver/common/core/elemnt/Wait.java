@@ -84,6 +84,29 @@ public class Wait {
     }
   }
 
+  public WebElement forElementVisible(By by, int timeout, int polling) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, timeout, polling)
+          .until(ExpectedConditions.visibilityOfElementLocated(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Wait for element to be either invisible or not present on the DOM.
+   */
+  public boolean forElementNotVisible(By by, int timeout, int polling) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, timeout, polling)
+          .until(ExpectedConditions.invisibilityOfElementLocated(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   /**
    * Wait for element to be in viewport Either position top or left is bigger then -1
    */
