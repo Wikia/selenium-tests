@@ -22,7 +22,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner001", "ThemeDesigner"})
   public void themeDesigner001_selectThemeFromFirstPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
@@ -33,7 +33,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner002", "ThemeDesigner"})
   public void themeDesigner002_selectThemeFromMiddlePage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
@@ -54,7 +54,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner004", "ThemeDesigner"})
   public void themeDesigner004_selectThemeSubmit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
@@ -66,7 +66,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner005", "ThemeDesigner"})
   public void themeDesigner005_customizeTab() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.CUSTOMIZE);
@@ -76,7 +76,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner006", "ThemeDesigner"})
   public void themeDesigner006_wordmarkTab() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.WORDMARK);
@@ -90,7 +90,7 @@ public class ThemeDesigner extends NewTestTemplate {
   @Test(groups = {"ThemeDesigner007", "ThemeDesigner"})
   public void themeDesigner007_closeColorDialogWithOutsideClick() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.CUSTOMIZE);

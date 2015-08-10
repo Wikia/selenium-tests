@@ -26,7 +26,7 @@ public class CuratedContentTests extends NewTestTemplate {
   @Test(groups = {"CuratedContent001", "CuratedContent"})
   public void curatedContent001_saveWithoutImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element without image
     cc.addNewElement(CATEGORY, LABEL);
@@ -39,7 +39,7 @@ public class CuratedContentTests extends NewTestTemplate {
   @Test(groups = {"CuratedContent002", "CuratedContent"})
   public void curatedContent002_saveWithImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
     // add new element and add image to that element
     cc.addNewElement(CATEGORY, LABEL);

@@ -30,7 +30,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
+    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
@@ -39,7 +39,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
 
     filePage.getVenusGlobalNav().openAccountNAvigation().clickLogOut();
-    filePage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
@@ -50,7 +50,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
   public void SpecialVideos_002_Library() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
+    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);

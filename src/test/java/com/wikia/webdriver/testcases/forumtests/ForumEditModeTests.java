@@ -25,7 +25,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_001", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_001_faq() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     forumMainPage.verifyFaqLightBox();
   }
@@ -46,7 +46,7 @@ public class ForumEditModeTests extends NewTestTemplate {
                                                  "ForumEditMode"})
   public void ForumEditModeTests_002_createNewBoard(String name) {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = name + manageForum.getTimeStamp();
@@ -59,7 +59,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_003", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_003_deleteBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -72,7 +72,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_004", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_004_editBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -86,7 +86,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"Forum_005", "Forum", "ForumEditMode"})
   public void forumEditModeTests_005_moveBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -102,7 +102,7 @@ public class ForumEditModeTests extends NewTestTemplate {
     // create a template
     String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
     WikiArticlePageObject article = new WikiArticlePageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     article.createNewTemplate(wikiURL, templateNameAndContent, templateNameAndContent);
 
     // open forum page and create new board

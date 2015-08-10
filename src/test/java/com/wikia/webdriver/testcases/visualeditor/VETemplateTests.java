@@ -39,7 +39,7 @@ public class VETemplateTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
+    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
   }
 
   //AT01

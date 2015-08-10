@@ -267,7 +267,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
       if ("Following".equals(list.get(i).getText())) {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
-        waitForTextToBePresentInElementByBy(toolsList, "Follow");
+        wait.forTextInElement(toolsList, "Follow");
         PageObjectLogging.log("unfollowIfFollowed",
                               "page was followed, unfollow button clicked", true);
         break;

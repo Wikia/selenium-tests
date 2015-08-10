@@ -25,7 +25,7 @@ public class VideoComponentObject extends WikiBasePageObject {
   }
 
   public WebElement getVideoPlayerObject() {
-    return videoEmbed.findElement(By.cssSelector("[name=flashvars]"));
+    return videoEmbed.findElement(By.cssSelector("*[name=flashvars]"));
   }
 
   public WebElement getVideoPlayerIframe() {

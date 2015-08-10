@@ -113,7 +113,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    search.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE);
     String searchDescription = search.getFirstDescription();

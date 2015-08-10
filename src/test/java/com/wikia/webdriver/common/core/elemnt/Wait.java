@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -45,9 +45,7 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser
-   * <p/>
-   * * @param element The element to be checked
+   * Checks if the element is visible on browser <p/> * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
@@ -56,14 +54,19 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
     }
-    return forElementVisible(SelectorStack.read());
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+      return wait.until(ExpectedConditions.visibilityOf(element));
+    } else {
+      return forElementVisible(SelectorStack.read());
+    }
   }
 
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-          .visibilityOf(element));
+                                                                      .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -100,6 +103,35 @@ public class Wait {
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.elementNotPresent(selector));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElement(By by, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBePresentInElement(by, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElement(WebElement element, String text) {
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+    }
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return wait.until(
+            CommonExpectedConditions.textToBePresentInElement(element, text));
+      } else {
+        return forTextInElement(SelectorStack.read(), text);
+      }
     } finally {
       restoreDeaultImplicitWait();
     }

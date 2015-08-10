@@ -27,7 +27,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
                   "NotificationsTests"})
   public void forumNotificationsTests_001_userAStartsDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
+    forumMainPage.loginAs(credentials.userName, credentials.password, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -43,7 +43,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
       dependsOnMethods = {"forumNotificationsTests_001_userAStartsDiscussion"})
   public void forumNotificationsTests_002_userBLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    forumMainPage.loginAs(credentials.userName2, credentials.password2, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
     ForumThreadPageObject forumThread = forumBoard.openDiscussion(title);
@@ -56,7 +56,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
       dependsOnMethods = {"forumNotificationsTests_002_userBLeavesReply"})
   public void forumNotificationsTests_003_userCLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
     ForumThreadPageObject forumThread = forumBoard.openDiscussion(title);
@@ -69,7 +69,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
       dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
   public void forumNotificationsTests_004_userAVerifiesNotifications() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
+    forumMainPage.loginAs(credentials.userName, credentials.password, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     String anchoredLink = notifications.getNotificationLink(

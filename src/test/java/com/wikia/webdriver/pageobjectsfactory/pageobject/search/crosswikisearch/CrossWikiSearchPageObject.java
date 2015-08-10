@@ -78,11 +78,11 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyFirstResultTitle(String wikiName) {
-    waitForTextToBePresentInElementByElement(firstResultLink, wikiName);
+    wait.forTextInElement(firstResultLink, wikiName);
   }
 
   public void verifyFirstResultVertical(String vertical) {
-    waitForTextToBePresentInElementByElement(firstResultVertical, vertical);
+    wait.forTextInElement(firstResultVertical, vertical);
     Assertion
         .assertFalse(firstResultVertical.getText().isEmpty(), "Vertical (Hub) string is empty.");
   }

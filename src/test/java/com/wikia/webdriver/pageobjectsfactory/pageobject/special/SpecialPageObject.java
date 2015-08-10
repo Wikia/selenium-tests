@@ -23,7 +23,7 @@ public class SpecialPageObject extends WikiBasePageObject {
   }
 
   public void verifySpecialPage() {
-    waitForTextToBePresentInElementByElement(
+    wait.forTextInElement(
         specialPageHeader,
         "Special page"
     );

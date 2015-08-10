@@ -32,7 +32,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   )
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName9, credentials.password9, wikiURL);
+    base.loginAs(credentials.userName9, credentials.password9, wikiURL);
     NewMessageWall wall = base.openMessageWall(credentials.userName10, wikiURL);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -52,7 +52,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   )
   public void wallOwnerReceivesNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
+    base.loginAs(credentials.userName10, credentials.password10, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName9);

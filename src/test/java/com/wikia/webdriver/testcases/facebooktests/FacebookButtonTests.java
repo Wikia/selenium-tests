@@ -54,7 +54,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = {"FBButton_005", "FacebookButton"})
   public void FBButton_005_PrefsButton_Visible() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(tabNames.FACEBOOK);
     prefsPage.verifyFBButtonVisible();

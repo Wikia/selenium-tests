@@ -29,7 +29,7 @@ public class BlogTests extends NewTestTemplate {
   @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
   public void BlogTests_001_addFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
@@ -48,7 +48,7 @@ public class BlogTests extends NewTestTemplate {
       groups = {"BlogTests_002", "BlogTests"})
   public void BlogTests_002_addByUrl(String blogTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     String randomBlogTitle = blogTitle + base.getTimeStamp();
     SpecialCreatePagePageObject createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -62,7 +62,7 @@ public class BlogTests extends NewTestTemplate {
   @Test(groups = {"BlogTests_003", "BlogTests"})
   public void BlogTests_003_editFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -78,7 +78,7 @@ public class BlogTests extends NewTestTemplate {
   @Test(groups = {"BlogTests_004", "BlogTests"})
   public void BlogTests_004_deleteUndelete() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -95,7 +95,7 @@ public class BlogTests extends NewTestTemplate {
   @Test(groups = {"BlogTests_005", "BlogTests"})
   public void BlogTests_005_move() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String blogTitleMove = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();

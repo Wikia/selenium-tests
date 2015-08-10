@@ -4,7 +4,6 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -28,7 +27,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_001"})
   public void ArticleCRUDUser_001_specialPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
@@ -42,7 +41,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_002"})
   public void ArticleCRUDUser_002_addByURL() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject visualEditMode =

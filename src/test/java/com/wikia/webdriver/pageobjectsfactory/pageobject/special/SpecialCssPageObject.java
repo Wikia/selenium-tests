@@ -232,7 +232,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
    */
   public void verifyLatestRevision() {
     wait.forElementVisible(oRevisionTitle);
-    waitForTextToBePresentInElementByElement(oRevisionTitle, "Latest revision");
+    wait.forTextInElement(oRevisionTitle, "Latest revision");
     PageObjectLogging.log("verifyLatestRevision", "verify that latest revision is shown", true);
   }
 

@@ -125,6 +125,7 @@ public class NewMessageWall extends WikiBasePageObject {
     scrollAndClick(
         driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy)
     );
+    wait.forElementNotPresent(By.cssSelector(".new-reply.loading"));
     PageObjectLogging.log("submitQuote", "message quote submitted", true);
   }
 
@@ -196,6 +197,7 @@ public class NewMessageWall extends WikiBasePageObject {
   public void clickSourceModeButton() {
     wait.forElementVisible(sourceModeButton);
     scrollAndClick(sourceModeButton);
+    wait.forElementVisible(By.cssSelector(".editor-open.mode-source"));
     PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
   }
 
@@ -248,13 +250,13 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageTitle(String title) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     PageObjectLogging
         .log("verifyMessageTitle", "message with title: " + title + ", verified", true);
   }
 
   public void verifyMessageText(String title, String message, String userName) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
             title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
@@ -267,7 +269,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageBoldText(String title, String message, String userName) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
             title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
@@ -281,7 +283,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageItalicText(String title, String message, String userName) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
             title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
     );
@@ -308,7 +310,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
             editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
@@ -322,7 +324,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyExternalLink(String title, String target, String text, String wikiURL) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
             editMessageWrapper.findElement(messageTitleBy).getText(), title
     );
@@ -342,7 +344,7 @@ public class NewMessageWall extends WikiBasePageObject {
   }
 
   public void verifyImageAdded(String title) {
-    waitForTextToBePresentInElementByBy(messageTitleBy, title);
+    wait.forTextInElement(messageTitleBy, title);
     driver.findElement(firstMessageWrapperBy).findElement(imageBy);
     PageObjectLogging.log("verifyImageAdded", "verifyed image " + title + " added", true);
   }

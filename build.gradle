@@ -60,7 +60,7 @@ task initConfig << {
             println "No config directory in location: ${dest.getAbsolutePath()}"
             println "Cloning configuration ..."
             def grgit = Grgit.
-                    clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-tests.git',
+                    clone(dir: './../config', uri: 'https://github.com/Wikia/selenium-config.git',
                           credentials: new Credentials(username: user, password: pass))
         }
     } else {
