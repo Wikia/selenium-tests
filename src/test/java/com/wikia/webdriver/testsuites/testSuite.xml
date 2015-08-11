@@ -32,7 +32,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestEvolveAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestExtraMarker"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestInterstitial"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxSegments"/>

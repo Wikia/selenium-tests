@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
  * @author drets
  * @ownership AdEng
  */
-public class TestInterstitial extends TemplateNoFirstLoad {
+public class TestAdsInterstitial extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "Interstitial",
-      dataProvider = "interstitial"
+      groups = "TestInterstitialOasis",
+      dataProvider = "interstitialOasis"
   )
-  public void interstitialAdScaled(
+  public void adsInterstitialAdScaledOasis(
       String wikiName,
       String article,
       Dimension pageSize,
@@ -30,10 +30,10 @@ public class TestInterstitial extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "InterstitialMobile",
-      dataProvider = "interstitialMobile"
+      groups = "TestInterstitialMercury",
+      dataProvider = "interstitialMercury"
   )
-  public void interstitialAdScaledMobile(
+  public void adsInterstitialAdScaledMercury(
       String wikiName,
       String article,
       Dimension pageSize,
