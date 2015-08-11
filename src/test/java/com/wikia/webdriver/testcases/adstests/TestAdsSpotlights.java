@@ -6,13 +6,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-public class TestSpotlights extends TemplateNoFirstLoad {
+public class TestAdsSpotlights extends TemplateNoFirstLoad {
 
   @Test(
-      dataProvider = "spotlights", dataProviderClass = AdsDataProvider.class,
-      groups = {"TestSpotlights"}
+      dataProvider = "spotlights",
+      dataProviderClass = AdsDataProvider.class,
+      groups = {"AdsSpotlightsOasis"}
   )
-  public void testSpotlights(String wikiName, String article) {
+  public void adsSpotlightsOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.checkSpotlights();
