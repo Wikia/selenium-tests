@@ -24,7 +24,8 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
    *
    * Unless we visit the pages without ads :-)
    */
-  private static final String NO_ADS_URL_PARAM = "InstantGlobals.wgSitewideDisableGpt=1&InstantGlobals.wgSitewideDisableLiftium=1";
+  private static final String NO_ADS_URL_PARAM =
+      "InstantGlobals.wgSitewideDisableGpt=1&InstantGlobals.wgSitewideDisableLiftium=1";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -32,6 +33,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
       groups = {"AdsKruxSegments", "Ads"}
   )
   public void adsKruxSegments(String kruxKuid,
+                              String segment,
                               Page page1,
                               String expectedSegmentsOnPage1,
                               Page page2,
@@ -55,7 +57,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
     adsKruxObject.waitForKrux();
 
     // Check the segments:
-    assertEquals(adsKruxObject.getKxsegs(), expectedSegmentsOnPage1);
+    assertContainsSegs(adsKruxObject.getKxsegs(), expectedSegmentsOnPage1);
 
     // Refresh once again, this time with ads and check the GPT params:
     adsKruxObject.getUrl(page1);
@@ -72,16 +74,34 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
     adsKruxObject.waitForKrux();
 
     // Check the segments:
-    assertEquals(adsKruxObject.getKxsegs(), expectedSegmentsOnPage2);
+    assertContainsSegs(adsKruxObject.getKxsegs(), expectedSegmentsOnPage2);
 
     // Refresh once again, this time with ads and check the GPT params:
     adsKruxObject.getUrl(page2);
     assertPageParams(adsKruxObject);
+
+    // Set the segment for the current user
+    if (segment != null) {
+      adsKruxObject.addSegmentToCurrentUser(segment);
+    }
   }
 
   private void assertPageParams(AdsKruxObject adsKruxObject) {
     assertStringContains(
         adsKruxObject.getGptParams(AdsContent.TOP_LB, "data-gpt-page-params"),
         "\"ksgmnt\":" + adsKruxObject.getKxsegs());
+  }
+
+  private void assertContainsSegs(String actual, String expected) {
+
+    if ("[]".equals(expected)) {
+      assertEquals(actual, expected);
+    }
+
+    String[] expectedSegs = expected.replace("[", "").replace("]", "").split(",");
+    for (String expectedSeg : expectedSegs) {
+      assertStringContains(actual, expectedSeg);
+    }
+
   }
 }

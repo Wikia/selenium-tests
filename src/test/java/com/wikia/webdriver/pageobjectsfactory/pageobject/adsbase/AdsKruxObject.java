@@ -20,9 +20,12 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String SLOT_SELECTOR = "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
+  private static final String SLOT_SELECTOR =
+      "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
-
+  private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
+  private static final String ADD_USER_URL =
+      String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
 
@@ -97,5 +100,11 @@ public class AdsKruxObject extends AdsBaseObject {
     }
     ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
     return ksgmnt;
+  }
+
+  public void addSegmentToCurrentUser(String segmentId) {
+    getUrl(ADD_USER_URL + segmentId);
+    waitForPageLoaded();
+    Assertion.assertTrue(driver.getPageSource().contains(segmentId));
   }
 }
