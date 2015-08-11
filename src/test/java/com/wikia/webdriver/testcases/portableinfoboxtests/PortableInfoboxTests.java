@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * TC16: Verify if navigation element has same left and right padding
  * TC17: Verify if group headers and titles has same left and right padding
  * TC18: Additional <div> wrappers from title, header and image HTML are removed
- * TC19: Verify that any of the tags which do not have a value won't appear 
+ * TC19: Verify that any of the tags which do not have a value won't appear
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
