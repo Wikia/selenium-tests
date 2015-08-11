@@ -32,7 +32,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_001_VerifyImageVisibilityAfterRefresh() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String prevMoMSrc = mom.getMoMSrc();
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
@@ -47,7 +47,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_002_VerifyImmediateImageVisibility() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
     mom.clickPublishButton();
@@ -58,7 +58,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_003_VerifyImmediateChangesForDescription() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     String momDescription = mom.getTimeStamp();
     mom.typeMoMDescription(momDescription);
@@ -70,10 +70,10 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_004_OnlyAdminsAndStaffCanModify() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.verifyAdminStaffButtons();
     mom.logOut();
-    mom.logInCookie(credentials.userName, credentials.password, wikiURL);
+    mom.loginAs(credentials.userName, credentials.password, wikiURL);
     mom.verifyNoAdminStaffButtons();
     mom.logOut();
     mom.verifyNoAdminStaffButtons();
@@ -83,7 +83,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_005_VerifyImageDiscardDisplaysPreviousState() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String imgSrc = mom.getMoMSrc();
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
@@ -96,7 +96,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_006_VerifyDraggingToRepositionFunctionality() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.selectFileToUpload(PageContent.FILE);
     mom.verifyDragToRepositionText();
     String firstTopValue = mom.getTopAttribute();
@@ -109,7 +109,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_007_DeleteDescriptionAndCheckPublishButtonAvailability() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     mom.deleteDescriptionEditorContent();
     mom.verifyWikiaPromotionalMessage();
@@ -120,7 +120,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_008_DescriptionFieldDiscardChanges() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     String publishedText = mom.getDescriptionText();
     mom.clickEditDescriptionLink();
     String randomString = mom.getRandomDigits(9);
@@ -133,7 +133,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_009_AddDescriptionAndCheckPublishButtonAvailability() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.clickEditDescriptionLink();
     mom.deleteDescriptionEditorContent();
     String randomString = mom.getRandomDigits(9);

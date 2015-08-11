@@ -1,7 +1,11 @@
 package com.wikia.webdriver.testcases.mediatests.videohomepage;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,25 +14,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.LatestVideoAdminPageObject;
 
-import org.testng.annotations.Test;
-
 
 /**
  * Created by Liz Lee on 6/18/14.
+ * 
  * @ownership Content X-Wing
  */
 public class VideoPageAdminTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-  WikiBasePageObject base;
-  String wikiURL;
-
   @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest"})
+  @Execute(asUser = User.STAFF, onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoPageAdmin_001_AddFeaturedVideo() {
-    base = new WikiBasePageObject(driver);
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    FeaturedVideoAdminPageObject featuredVideoAdminObject = base.openVideoPageAdminObject(wikiURL);
+    FeaturedVideoAdminPageObject featuredVideoAdminObject =
+        new FeaturedVideoAdminPageObject(driver).open();
 
     // Add video 1
     VetAddVideoComponentObject vetAddingVideo = featuredVideoAdminObject.clickAddVideo();
@@ -36,8 +34,7 @@ public class VideoPageAdminTests extends NewTestTemplate {
     featuredVideoAdminObject.verifyVideoAdded(VideoContent.PREMIUM_VIDEO_NAME);
 
     // Save the form and navigate back to featured form
-    LatestVideoAdminPageObject
-        latestVideoAdminPageObject =
+    LatestVideoAdminPageObject latestVideoAdminPageObject =
         featuredVideoAdminObject.clickSaveFeaturedVideoForm(driver);
     featuredVideoAdminObject = latestVideoAdminPageObject.clickFeaturedTab(driver);
     featuredVideoAdminObject.verifyVideoAdded(VideoContent.PREMIUM_VIDEO_NAME);

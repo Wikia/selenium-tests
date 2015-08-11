@@ -23,7 +23,7 @@ public class CssChromeTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void CssChrome_loginAndOpenSpecialCSS() {
     WikiBasePageObject wiki = new WikiBasePageObject(driver);
-    wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    wiki.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialCss = wiki.openSpecialCss(wikiURL);
     testedPage = specialCss.getCurrentUrl();
   }
@@ -48,7 +48,7 @@ public class CssChromeTests extends NewTestTemplate {
   public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.saveCssContent(currentTimestamp);
-    specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    specialCss.open();
     String cssContent = specialCss.getWikiaCssContent();
     Assertion.assertEquals(cssContent, currentTimestamp);
   }
@@ -62,7 +62,7 @@ public class CssChromeTests extends NewTestTemplate {
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.sendEditSummaryText(currentTimestamp);
     specialCss.saveCssContent(currentTimestamp);
-    specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    specialCss.open();
     specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
     String editSummary = specialCss.getFirstCssRevision();
     Assertion.assertStringContains(editSummary, currentTimestamp);
@@ -92,7 +92,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.verifyMinorEditAppears();
     specialCss.clickMinorCheckbox();
     specialCss.saveCssContent(currentTimestamp);
-    specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    specialCss.open();
     specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
     specialCss.verifyRevisionMarkedAsMinor();
   }

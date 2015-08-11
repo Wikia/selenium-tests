@@ -31,8 +31,7 @@ public class TestInterstitial extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "InterstitialMobile",
-      dataProvider = "interstitialMobile",
-      enabled = false // wf ADEN-2255
+      dataProvider = "interstitialMobile"
   )
   public void interstitialAdScaledMobile(
       String wikiName,

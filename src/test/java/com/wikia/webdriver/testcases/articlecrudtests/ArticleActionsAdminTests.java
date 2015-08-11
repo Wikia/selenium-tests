@@ -1,8 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.testng.annotations.Test;
-
-import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -11,6 +10,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -23,24 +24,27 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    String articleName = article.getArticleName();
+    ArticleContent.push("LOREM IPSUM");
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
-    restore.verifyArticleName(articleName);
+    restore.verifyArticleName(TestContext.getCurrentMethodName());
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     article.verifyNotificationMessage();
-    article.verifyArticleTitle(articleName);
+    article.verifyArticleTitle(TestContext.getCurrentMethodName());
   }
 
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+    ArticleContent.push("LOREM IPSUM");
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
+    String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
     article.verifyNotificationMessage();

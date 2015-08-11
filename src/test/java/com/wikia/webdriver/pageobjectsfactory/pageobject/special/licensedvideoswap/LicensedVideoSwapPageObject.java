@@ -30,12 +30,12 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
   public LicensedVideoSwapHistoryPageObject navigateToHistoryPage() {
     // Make sure the button has been drawn
-    waitForElementByElement(lvsHistoryBtn);
+    wait.forElementVisible(lvsHistoryBtn);
     lvsHistoryBtn.click();
 
     // Make sure the click above has happened and the browser has responded by looking for an element
     // on the history page
-    waitForElementByElement(backLink);
+    wait.forElementVisible(backLink);
     PageObjectLogging.log("navigateToHistoryPage",
                           "lvs history button navigates to right page", true);
 
@@ -50,14 +50,14 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
   public void verifySwapVideo() {
     // Make sure the element is on page before trying to retrieve it
-    waitForElementByElement(swapCount);
+    wait.forElementVisible(swapCount);
     int initialCount = Integer.parseInt(swapCount.getText());
 
     // Swap the first video
-    waitForElementByElement(firstSwapButton);
+    wait.forElementVisible(firstSwapButton);
     scrollAndClick(firstSwapButton);
 
-    waitForTextToBePresentInElementByElement(swapCount, String.valueOf(initialCount - 1));
+    wait.forTextInElement(swapCount, String.valueOf(initialCount - 1));
 
     PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
   }

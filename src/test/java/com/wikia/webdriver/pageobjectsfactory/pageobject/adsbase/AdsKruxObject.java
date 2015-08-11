@@ -4,12 +4,10 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -22,33 +20,26 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String
-      SLOT_SELECTOR =
+  private static final String SLOT_SELECTOR =
       "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
-  private static final int MAX_PAGE_REFRESHES = 5;
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
   private static final String ADD_USER_URL =
       String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
-  private final static ImmutableMap<String, String> kruxSegs =
-      new ImmutableMap.Builder<String, String>()
-          .put("pqdapsy7l", "J6IRfe2v")
-          .build();
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
-
-  public AdsKruxObject(WebDriver driver, String page) {
-    super(driver, page);
-  }
 
   public AdsKruxObject(WebDriver driver) {
     super(driver);
   }
 
-  @Override
-  public void getUrl(String url) {
-    getUrl(url, false);
-    waitForKrux();
+  public AdsKruxObject(WebDriver driver, String testedPage) {
+    super(driver, testedPage);
+  }
+
+  public void setKruxUserCookie(String userId) {
+    driver.get(KRUX_CDN);
+    setCookie("_kuid_", userId);
   }
 
   /**
@@ -77,11 +68,12 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   public void waitForKrux() {
+    PageObjectLogging.log("waitForKrux", "Waiting for Krux", true);
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
           "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
-      wait.until(CommonExpectedConditions.scriptReturnsTrue(script));
+      waitFor.until(CommonExpectedConditions.scriptReturnsTrue(script));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -95,7 +87,10 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   private String wrapSegs(String segmentsLocalStorage) {
-    String ksgmnt = "\"ksgmnt\":[";
+    if ("".equals(segmentsLocalStorage)) {
+      return "[]";
+    }
+    String ksgmnt = "[";
     String[] segments = segmentsLocalStorage.split(",");
     if (segments.length > MAX_SEGS_NUMBER_GPT) {
       segments = Arrays.copyOfRange(segmentsLocalStorage.split(","), 0, MAX_SEGS_NUMBER_GPT);
@@ -107,36 +102,9 @@ public class AdsKruxObject extends AdsBaseObject {
     return ksgmnt;
   }
 
-  public void initKruxUser(String wikiName) {
-    int i = 0;
-    while (i < MAX_PAGE_REFRESHES) {
-      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
-      waitForPageLoaded();
-      try {
-        new WebDriverWait(driver, 5).until(
-            CommonExpectedConditions.scriptReturnsTrue("return !!localStorage.kxuser;"));
-        break;
-      } catch (org.openqa.selenium.TimeoutException ignore) {
-        i++;
-      }
-    }
-  }
-
-  public void addSegmentToCurrentUser(String segmentId, String wikiName) {
-    int i = 0;
-    while (i < MAX_PAGE_REFRESHES) {
-      getUrl(ADD_USER_URL + kruxSegs.get(segmentId), false);
-      waitForPageLoaded();
-      Assertion.assertTrue(driver.getPageSource().contains(segmentId));
-      getUrl(urlBuilder.getUrlForWiki(wikiName), false);
-      waitForPageLoaded();
-      try {
-        new WebDriverWait(driver, 5).until(CommonExpectedConditions.scriptReturnsTrue(
-            "return localStorage.kxsegs.includes(arguments[0]);", segmentId));
-        break;
-      } catch (org.openqa.selenium.TimeoutException ignore) {
-        i++;
-      }
-    }
+  public void addSegmentToCurrentUser(String segmentId) {
+    getUrl(ADD_USER_URL + segmentId);
+    waitForPageLoaded();
+    Assertion.assertTrue(driver.getPageSource().contains(segmentId));
   }
 }

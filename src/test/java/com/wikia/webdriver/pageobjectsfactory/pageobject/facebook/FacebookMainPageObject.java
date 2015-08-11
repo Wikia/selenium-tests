@@ -31,18 +31,18 @@ public class FacebookMainPageObject extends WikiBasePageObject {
   }
 
   public void clickLoginButton() {
-    waitForElementByElement(loginButton);
+    wait.forElementVisible(loginButton);
     loginButton.click();
     PageObjectLogging.log("clickLoginButton", "facebook login button clicked", true);
   }
 
   private void typePassword(String password) {
-    waitForElementByElement(passwordField);
+    wait.forElementVisible(passwordField);
     passwordField.sendKeys(password);
   }
 
   private void typeEmail(String email) {
-    waitForElementByElement(emailField);
+    wait.forElementVisible(emailField);
     emailField.sendKeys(email);
   }
 

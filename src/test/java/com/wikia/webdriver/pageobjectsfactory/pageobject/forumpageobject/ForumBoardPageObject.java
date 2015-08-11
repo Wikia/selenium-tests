@@ -56,9 +56,9 @@ public class ForumBoardPageObject extends BasePageObject {
 
   public ForumThreadPageObject startDiscussion(String title, String message,
                                                boolean highlight) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -86,8 +86,8 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public ForumThreadPageObject startDiscussionWithoutTitle(String message) {
-    jQueryFocus(discussionTextarea);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(discussionTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -106,14 +106,14 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void verifyDiscussionTitleAndMessage(String title, String message) {
-    waitForTextToBePresentInElementByElement(discussionTitle, title);
-    waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
+    wait.forTextInElement(discussionTitle, title);
+    wait.forTextInElement(discussionBody.get(0), message);
     PageObjectLogging
         .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
 
   public void verifyBoardDescription(String description) {
-    waitForTextToBePresentInElementByElement(boardDescription, description);
+    wait.forTextInElement(boardDescription, description);
     PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
   }
 
@@ -124,9 +124,9 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithImgae(String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki(
         "image", 1);
@@ -136,16 +136,16 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void verifyDiscussionWithImage() {
-    waitForElementByElement(postedImageList.get(0));
+    wait.forElementVisible(postedImageList.get(0));
     PageObjectLogging.log("verifyPostedMessageWithImage",
                           "discussion with image started", true);
   }
 
   public void startDiscussionWithLink(String internalLink,
                                       String externalLink, String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     // add internal wikia link
     miniEditor.addInternalLink(internalLink);
     // add external link
@@ -162,9 +162,9 @@ public class ForumBoardPageObject extends BasePageObject {
 
   public void verifyStartedDiscussionWithLinks(String internalLink,
                                                String externalLink) {
-    waitForTextToBePresentInElementByElement(discussionBody.get(0),
+    wait.forTextInElement(discussionBody.get(0),
                                              internalLink);
-    waitForTextToBePresentInElementByElement(discussionBody.get(1),
+    wait.forTextInElement(discussionBody.get(1),
                                              externalLink);
     PageObjectLogging.log("verifyStartedDiscussionWithLinks",
                           "internal and external links: " + internalLink + " and"
@@ -172,9 +172,9 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithVideo(String url, String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     miniEditor.addVideoMiniEditor(url);
     PageObjectLogging.log("startDiscussionWithVideo",
                           "discussion with video started" + title, true, driver);
@@ -185,7 +185,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForElementByElement(followButton);
+    wait.forElementVisible(followButton);
     if (followButton.getText().contains("Following")) {
       PageObjectLogging
           .log("unfollowIfDiscussionIsFollowed",
@@ -206,7 +206,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForTextToBePresentInElementByElement(followButton, followStatus);
+    wait.forTextInElement(followButton, followStatus);
     PageObjectLogging.log("verifyTextOnFollowButton",
                           "verify that thread number " + threadNumber
                           + " has the status: " + followStatus, true);
@@ -217,7 +217,7 @@ public class ForumBoardPageObject extends BasePageObject {
                                                      .cssSelector(
                                                          ".thread:nth-child(" + threadNumber
                                                          + ") li.follow"));
-    waitForElementByElement(followButton);
+    wait.forElementVisible(followButton);
     waitForElementClickableByElement(followButton);
     scrollAndClick(followButton);
     PageObjectLogging.log("clickOnFollowButton",

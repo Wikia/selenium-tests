@@ -51,13 +51,14 @@ public class EditAccount extends BasePageObject {
 
   public void closeAccount(String reason) {
     scrollAndClick(closeAccountButton);
+    wait.forElementVisible(closeResonField);
     closeResonField.sendKeys(reason);
     closeResonField.submit();
     PageObjectLogging.log("closeAccount", "account closed", true);
   }
 
   public void verifyAccountClosedMessage() {
-    waitForTextToBePresentInElementByElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
+    wait.forTextInElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
     PageObjectLogging.log("verifyAccountClosedMessage", "verified account closed", true);
   }
 
@@ -70,7 +71,8 @@ public class EditAccount extends BasePageObject {
   }
 
   public void verifyAccountReopenedMessage() {
-    waitForTextToBePresentInElementByElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
+    wait.forElementVisible(statusMessage);
+    wait.forTextInElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
     PageObjectLogging.log("verifyAccountReopenedMessage", "verified account reopened", true);
   }
 }

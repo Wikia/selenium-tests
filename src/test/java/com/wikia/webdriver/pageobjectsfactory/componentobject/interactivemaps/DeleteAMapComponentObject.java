@@ -31,13 +31,13 @@ public class DeleteAMapComponentObject extends BasePageObject {
   }
 
   public void clickDeleteMap() {
-    waitForElementVisibleByElement(deleteMapModal);
+    wait.forElementVisible(deleteMapModal);
     waitForElementClickableByElement(deleteMapButton);
     deleteMapButton.click();
   }
 
   public String getDeleteMapError() {
-    waitForElementVisibleByElement(deleteMapError);
+    wait.forElementVisible(deleteMapError);
     return deleteMapError.getText();
   }
 }

@@ -27,7 +27,8 @@ public class SearchPageObject extends WikiBasePageObject {
   protected WebElement paginatorNext;
   @FindBy(css = ".paginator-prev")
   protected WebElement paginatorPrev;
-  @FindBy(css = ".paginator-page")
+  protected static final String PAGINATION_PAGES_CSS = ".paginator-page";
+  @FindBy(css = PAGINATION_PAGES_CSS)
   protected List<WebElement> paginationPages;
   @FindBy(css = "h1 > a.result-link")
   protected List<WebElement> resultLinks;
@@ -53,6 +54,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void clickPrevPaginator() {
+    wait.forElementVisible(By.cssSelector(".paginator-prev"));
     scrollAndClick(paginatorPrev);
     PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
   }
@@ -62,7 +64,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void verifyPagination() {
-    waitForElementByBy(paginationContainerBy);
+    wait.forElementPresent(paginationContainerBy);
     int i = 1;
     for (WebElement elem : paginationPages) {
       Assertion.assertEquals(elem.getText(), Integer.toString(i));
@@ -71,7 +73,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public boolean isResultPresent() {
-    waitForElementByElement(resultCountMessage);
+    wait.forElementVisible(resultCountMessage);
     return resultCountMessage.isDisplayed();
   }
 

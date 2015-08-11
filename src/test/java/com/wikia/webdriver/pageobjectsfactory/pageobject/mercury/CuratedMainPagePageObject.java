@@ -53,7 +53,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isMobileTopLeaderboardVisible() {
     try {
-      waitForElementVisibleByElement(mobileTopLeaderboard, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(mobileTopLeaderboard, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -63,7 +63,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isArticleTitleVisible() {
     try {
-      waitForElementVisibleByElement(articleTitle, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(articleTitle, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -73,7 +73,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isWikiaStatsContainerVisible() {
     try {
-      waitForElementVisibleByElement(wikiaStatsContainer, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(wikiaStatsContainer, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -83,7 +83,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isFeaturedContentVisible() {
     try {
-      waitForElementVisibleByElement(featuredContent, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(featuredContent, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -93,7 +93,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isCuratedContentVisible() {
     try {
-      waitForElementVisibleByElement(curatedContent, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(curatedContent, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -103,7 +103,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isMobileInContentVisible() {
     try {
-      waitForElementVisibleByElement(mobileInContent, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(mobileInContent, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -113,7 +113,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isTrendingArticlesVisible() {
     try {
-      waitForElementVisibleByElement(trendingArticles, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(trendingArticles, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -123,7 +123,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isTrendingVideosVisible() {
     try {
-      waitForElementVisibleByElement(trendingVideos, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(trendingVideos, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
@@ -133,7 +133,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isMobilePrefooterVisible() {
     try {
-      waitForElementVisibleByElement(mobilePrefooter, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(mobilePrefooter, Settings.TIME_OUT_IN_SEC.value,
                                      Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;

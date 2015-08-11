@@ -45,12 +45,12 @@ public class JoinPage extends BasePageObject {
     }
 
     public void clickRegisterWithEmail() {
-        waitForElementVisibleByElement(registerWithEmailButton);
+        wait.forElementVisible(registerWithEmailButton);
         registerWithEmailButton.click();
     }
 
     public void clickSignInLink() {
-        waitForElementVisibleByElement(signInLink);
+        wait.forElementVisible(signInLink);
         signInLink.click();
     }
 

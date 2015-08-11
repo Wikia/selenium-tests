@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,14 +30,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private WebElement expirationDateElement;
 
   private void typeInUserName(String userName) {
-    waitForElementByElement(userNameField);
+    wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
     PageObjectLogging
         .log("Special:BlockList typeInUserName", userName + " typed in username field", true);
   }
 
   private void clickSearchButton() {
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
     PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
   }
@@ -47,13 +48,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   }
 
   public void verifyUserUnblocked() {
-    waitForElementByElement(userUnblockedMessage);
+    wait.forElementVisible(userUnblockedMessage);
     PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
                           "verified that user is not on blocked users list", true, driver);
   }
 
   public void verifyUserBlocked(String userName) {
-    waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']");
+    wait.forElementVisible(
+        By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
     PageObjectLogging
         .log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list",
              true, driver);
@@ -68,7 +70,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   public boolean isUserBlocked(String username) {
     boolean isBlocked = false;
     searchForUser(username);
-    if (!checkIfElementOnPage(expirationDateElement)) {
+    if (!isElementOnPage(expirationDateElement)) {
       return isBlocked;
     }
     SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");

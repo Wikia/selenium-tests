@@ -43,13 +43,13 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickTopContributor(int index) {
-    waitForElementVisibleByElement(topContributorsLinks.get(0), 5, 500);
+    wait.forElementVisible(topContributorsLinks.get(0), 5, 500);
     scrollToElement(topContributorsLinks.get(index));
     topContributorsLinks.get(index).click();
   }
 
   public void clickCategoryButton() {
-    waitForElementByElement(categoryButton);
+    wait.forElementVisible(categoryButton);
     categoryButton.click();
   }
 
@@ -58,39 +58,39 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickOnAnchorInContent(int index) {
-    waitForElementByElement(anchorsInContent.get(index));
+    wait.forElementVisible(anchorsInContent.get(index));
     anchorsInContent.get(index).click();
   }
 
   public void clickOnCategoryListElement(int index) {
-    waitForElementByElement(categoryList.get(index));
+    wait.forElementVisible(categoryList.get(index));
     categoryList.get(index).click();
   }
 
   public boolean isWikiaLogoVisible() {
-    return checkIfElementOnPage(wikiaLogo);
+    return isElementOnPage(wikiaLogo);
   }
 
   public boolean isSearchButtonVisible() {
-    return checkIfElementOnPage(searchButton);
+    return isElementOnPage(searchButton);
   }
 
   public boolean isTopContributorsSectionVisible() {
     scrollToElement(topContributorsSection);
-    return checkIfElementOnPage(topContributorsSection);
+    return isElementOnPage(topContributorsSection);
   }
 
   public boolean isTopContributorsThumbVisible(int index) {
-    return checkIfElementOnPage(topContributorsThumbs.get(index));
+    return isElementOnPage(topContributorsThumbs.get(index));
   }
 
   public boolean isFooterLogoVisible() {
-    waitForElementByElement(footerLogo);
+    wait.forElementVisible(footerLogo);
     return footerLogo.isDisplayed();
   }
 
   public boolean isElementInFooterVisible(String elementName, int index) {
-    waitForElementByElement(footerLinks.get(index));
+    wait.forElementVisible(footerLinks.get(index));
     return footerLinks.get(index).getText().equals(elementName);
   }
 

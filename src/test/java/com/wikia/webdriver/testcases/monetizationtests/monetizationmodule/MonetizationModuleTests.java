@@ -87,7 +87,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName3, credentials.password3, wikiURL);
+    base.loginAs(credentials.userName3, credentials.password3, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
     monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
@@ -106,7 +106,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
     monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
@@ -164,7 +164,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitShown();
     // logged in user
-    base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
+    base.loginAs(credentials.userName6, credentials.password6, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyAdsenseUnitNotShown();
     // anon user
@@ -191,7 +191,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
+    base.loginAs(credentials.userName12, credentials.password12, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyAdsenseUnitNotShown();
     // anon user
@@ -235,7 +235,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyMonetizationModuleNotShown();
     // logged in user
-    base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
+    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
@@ -270,7 +270,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyMonetizationModuleShown();
     // logged in user
-    base.logInCookie(credentials.userName9, credentials.password9, wikiURL);
+    base.loginAs(credentials.userName9, credentials.password9, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
@@ -299,7 +299,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyMonetizationModuleNotShown();
     // logged in user
-    base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
+    base.loginAs(credentials.userName10, credentials.password10, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
@@ -339,7 +339,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyMonetizationModuleNotShown();
     // logged in user
-    base.logInCookie(credentials.userName11, credentials.password11, wikiURL);
+    base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
     // anon user
@@ -377,7 +377,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAdsenseUnitSlot();
     monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
     // logged in user
-    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
+    base.loginAs(credentials.userName12, credentials.password12, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
@@ -408,7 +408,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyAdsenseUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName13, credentials.password13, wikiURL);
+    base.loginAs(credentials.userName13, credentials.password13, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
@@ -446,7 +446,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
     monetizationModule.verifyAdsenseUnitNotShownBelowTitle();
     // logged in user
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.loginAs(credentials.userName2, credentials.password2, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
@@ -481,7 +481,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAdsenseUnitNotShownBelowTitle();
     monetizationModule.verifyAdsenseUnitNotShownInContent();
     // logged in user
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
@@ -544,7 +544,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAmazonUnitNotShownAboveTitle();
     monetizationModule.verifyAmazonUnitNotShownBelowTitle();
     // logged in user
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.loginAs(credentials.userName2, credentials.password2, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyMonetizationModuleNotShown();
   }
@@ -582,7 +582,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyAmazonUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
+    base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyAmazonUnitNotShown();
   }
@@ -647,7 +647,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyAmazonUnitNotShownAboveTitle();
     monetizationModule.verifyAmazonUnitNotShownBelowTitle();
     // logged in user
-    base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+    base.loginAs(credentials.userName2, credentials.password2, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyAmazonUnitNotShown();
   }
@@ -699,7 +699,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     monetizationModule.verifyEcommerceUnitNotShownAboveTitle();
     monetizationModule.verifyEcommerceUnitNotShownBelowTitle();
     // logged in user
-    base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
+    base.loginAs(credentials.userName6, credentials.password6, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyEcommerceUnitNotShown();
   }
@@ -744,7 +744,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
     base.refreshPage();
     monetizationModule.verifyEcommerceUnitNotShown();
     // logged in user
-    base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
+    base.loginAs(credentials.userName12, credentials.password12, wikiURL);
     base.openWikiPage(articleURL);
     monetizationModule.verifyEcommerceUnitNotShown();
   }

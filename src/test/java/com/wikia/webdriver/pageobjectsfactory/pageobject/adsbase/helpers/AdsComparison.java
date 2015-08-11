@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -35,12 +34,10 @@ public class AdsComparison {
   private static final int AD_TIMEOUT_SEC = 15;
   protected ImageComparison imageComparison;
   private Shooter shooter;
-  private ImageEditor imageEditor;
 
   public AdsComparison() {
     imageComparison = new ImageComparison();
     shooter = new Shooter();
-    imageEditor = new ImageEditor();
   }
 
   public void hideSlot(String selector, WebDriver driver) {
@@ -58,7 +55,8 @@ public class AdsComparison {
     );
   }
 
-  public boolean compareImageWithScreenshot(final String imageUrl, final WebElement element,
+  public boolean compareImageWithScreenshot(final String imageUrl,
+                                            final WebElement element,
                                             final WebDriver driver) {
     try {
       String encodedExpectedScreen = readFileAsString(imageUrl);
@@ -67,8 +65,9 @@ public class AdsComparison {
       capturedScreen.delete();
       return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      PageObjectLogging.log("compareImageWithScreenshot", e.getMessage(), false);
     }
+    return false;
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,
@@ -91,6 +90,7 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
+      PageObjectLogging.logWarning("ScreenshotsComparison", e);
       return false;
     }
     return true;

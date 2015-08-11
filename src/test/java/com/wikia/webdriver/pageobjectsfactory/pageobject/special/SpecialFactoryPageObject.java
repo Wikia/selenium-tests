@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.W
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,8 +62,8 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
   }
 
   private void verifyWikiaClosed() {
-    waitForElementById("close-title");
-    waitForElementById("close-info");
+    wait.forElementVisible(By.cssSelector("#close-title"));
+    wait.forElementVisible(By.cssSelector("#close-info"));
     PageObjectLogging.log("verifyWikiaClosed ", "Closed wikia verified", true, driver);
   }
 

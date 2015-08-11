@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponent
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
     super(driver);
   }
 
-  @FindBy(css = "#AccountNavigation")
+  private static final String LOGIN_DROPDOWN_TRIGGER_CSS = "#AccountNavigation";
+  @FindBy(css = LOGIN_DROPDOWN_TRIGGER_CSS)
   private WebElement loginDropdownTrigger;
   @FindBy(css = "#UserLoginDropdown input[name='username']")
   private WebElement formUsernameInput;
@@ -60,7 +62,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
       new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
-          if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
+          if (!driver.findElement(By.cssSelector(LOGIN_DROPDOWN_TRIGGER_CSS)).getAttribute("class")
+              .contains("active")) {
             ((JavascriptExecutor) driver)
                 .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
             return false;
@@ -81,7 +84,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
         ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     fillUserNameInput(userName);
-    waitForElementByElement(formForgotPasswordLink);
+    wait.forElementVisible(formForgotPasswordLink);
     scrollAndClick(formForgotPasswordLink);
   }
 
@@ -99,22 +102,22 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public void fillUserNameInput(String userName) {
-    waitForElementByElement(formUsernameInput);
+    wait.forElementVisible(formUsernameInput);
     formUsernameInput.clear();
-    sendKeys(formUsernameInput, userName);
+    formUsernameInput.sendKeys(userName);
     PageObjectLogging.log("UsernameTyped", "UserName input is filled", true);
   }
 
   public void fillPasswordInput(String password) {
-    waitForElementByElement(formPassowrdInput);
+    wait.forElementVisible(formPassowrdInput);
     formPassowrdInput.clear();
-    sendKeys(formPassowrdInput, password);
+    formPassowrdInput.sendKeys(password);
     PageObjectLogging.log("PasswordTyped", "Password input is filled", true);
   }
 
   public void logInViaFacebook(String email, String password) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    waitForElementVisibleByElement(formConnectWithFbButton);
+    wait.forElementVisible(formConnectWithFbButton);
     // When clicking via selenium dropdown disappears
     js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
     PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
@@ -124,12 +127,12 @@ public class DropDownComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
     PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
 
-    waitForElementByElement(facebookEmailInput);
+    wait.forElementVisible(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
     PageObjectLogging.log("fillLogin", "Login field on facebook form filled", true);
 
-    waitForElementByElement(facebookPasswordInput);
+    wait.forElementVisible(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
     PageObjectLogging.log("fillPassword", "Password field on facebook form filled", true);
@@ -148,9 +151,9 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
-    waitForElementByElement(messagePlaceholder);
+    wait.forElementVisible(messagePlaceholder);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
-    waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
+    wait.forTextInElement(messagePlaceholder, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
         true);
   }

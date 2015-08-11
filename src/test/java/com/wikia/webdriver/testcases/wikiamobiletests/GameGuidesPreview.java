@@ -27,7 +27,7 @@ public class GameGuidesPreview extends NewTestTemplate {
   @Test(groups = {"GameGuidesPreview_001", "MobileGG"})
   public void GameGuidesPreview_001_sections_chevronTest() {
     MobileArticlePageObject article = new MobileArticlePageObject(driver);
-    article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    article.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     driver.get(wikiURL + URLsContent.WIKIA_PHP);
     article.appendToUrl(URLsContent.GAMEGUIDES_CONTROLLER_QS);
     article.appendToUrl(URLsContent.RENDER_FULL_QS);
@@ -41,7 +41,7 @@ public class GameGuidesPreview extends NewTestTemplate {
   @Test(groups = {"GameGuidesPreview_002", "MobileGG"})
   public void GameGuidesPreview_002_sections_hideTest() {
     MobileArticlePageObject article = new MobileArticlePageObject(driver);
-    article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    article.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     driver.get(wikiURL + URLsContent.WIKIA_PHP);
     article.appendToUrl(URLsContent.GAMEGUIDES_CONTROLLER_QS);
     article.appendToUrl(URLsContent.RENDER_FULL_QS);

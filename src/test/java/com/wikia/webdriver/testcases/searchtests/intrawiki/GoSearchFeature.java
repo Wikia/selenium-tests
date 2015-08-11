@@ -11,8 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-import javax.jws.soap.SOAPBinding;
-
 /*
  *  AnonFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for anonymous
  *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user 
@@ -39,7 +37,7 @@ public class GoSearchFeature extends IntraWiki {
     public void UserFromSuggestion() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage(testedWiki);
-        base.logInCookie(credentials.userName, credentials.password, wikiURL);
+        base.loginAs(credentials.userName, credentials.password, wikiURL);
         NavigationBar navigation = new NavigationBar(driver);
         navigation.openWikiPage(testedWiki);
         navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);

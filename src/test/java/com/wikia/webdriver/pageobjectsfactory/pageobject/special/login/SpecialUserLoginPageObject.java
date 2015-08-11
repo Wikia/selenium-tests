@@ -41,14 +41,14 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
   private void typeInUserName(String name) {
-    waitForElementByElement(userName);
+    wait.forElementVisible(userName);
     userName.clear();
     userName.sendKeys(name);
     PageObjectLogging.log("typeInUserName", name + " user name typed", true);
   }
 
   private void typeInPassword(String pass) {
-    waitForElementByElement(password);
+    wait.forElementVisible(password);
     password.clear();
     System.out.println("[DEBUG]" + pass);
     password.sendKeys(pass);
@@ -56,25 +56,25 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   private void typeInNewPassword(String pass) {
-    waitForElementByElement(newPassword);
+    wait.forElementVisible(newPassword);
     newPassword.sendKeys(pass);
     PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
   }
 
   private void retypeInNewPassword(String pass) {
-    waitForElementByElement(retypeNewPassword);
+    wait.forElementVisible(retypeNewPassword);
     retypeNewPassword.sendKeys(pass);
     PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
   }
 
   private void clickLoginButton() {
-    waitForElementByElement(loginButton);
+    wait.forElementVisible(loginButton);
     loginButton.click();
     PageObjectLogging.log("clickLoginButton", "login button clicked", true);
   }
 
   private void clickForgotPasswordLink() {
-    waitForElementByElement(forgotPasswordLink);
+    wait.forElementVisible(forgotPasswordLink);
     scrollAndClick(forgotPasswordLink);
   }
 
@@ -107,15 +107,15 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
-    waitForElementByElement(messagePlaceholder);
+    wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
-    waitForTextToBePresentInElementByElement(messagePlaceholder, message);
+    wait.forTextInElement(messagePlaceholder, message);
     PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
         true, driver);
   }
 
   public void verifyClosedAccountMessage() {
-    waitForElementByElement(messagePlaceholder);
+    wait.forElementVisible(messagePlaceholder);
     Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
   }
 }

@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -33,18 +35,18 @@ public class NavigationBar extends WikiBasePageObject {
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public void triggerSuggestions(String query) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.clear();
     waitForElementClickableByElement(searchInput);
     searchInput.click();
-    waitForElementByBy(jqueryAutocompleteBy);
-    sendKeysHumanSpeed(searchInput, query);
-    waitForElementByCss(suggestionCss);
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementPresent(jqueryAutocompleteBy);
+    Typing.sendKeysHumanSpeed(searchInput, query);
+    wait.forElementVisible(By.cssSelector(suggestionCss));
+    wait.forElementVisible(suggestionsList.get(0));
   }
 
   public void verifySuggestions(String suggestionText) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
     String allSuggestionTexts = "";
     for (int i = 0; i < suggestionsList.size(); i++) {
       if (suggestionsList.get(i).getAttribute("title") != null) {
@@ -58,7 +60,7 @@ public class NavigationBar extends WikiBasePageObject {
    * Arrow down through suggestions, and click enter on the desired one
    */
   public ArticlePageObject ArrowDownAndEnterSuggestion(String suggestionText) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
 
     int position = 0;
     for (WebElement suggestion : suggestionsList) {
@@ -86,7 +88,7 @@ public class NavigationBar extends WikiBasePageObject {
    * click on desired suggestion
    */
   public ArticlePageObject clickSuggestion(String suggestion) {
-    waitForElementByElement(suggestionsList.get(0));
+    wait.forElementVisible(suggestionsList.get(0));
     for (int i = 0; i < suggestionsList.size(); i++) {
       WebElement currentSuggestion = suggestionsList.get(i);
       if (currentSuggestion.getText().contains(suggestion)) {
@@ -101,7 +103,7 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public void typeQuery(String query) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.clear();
     searchInput.sendKeys(query);
     PageObjectLogging.log("typeQuery", "typed query: " + query, true);
@@ -135,5 +137,10 @@ public class NavigationBar extends WikiBasePageObject {
     searchSubmit.click();
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject(driver);
+  }
+
+  public void setUpTracking() {
+    jsActions.execute(ClickTrackingScriptsProvider.REDIRECT_BLOCK);
+    jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 }

@@ -28,13 +28,13 @@ public class TableOfContentsComponentObject extends MobileBasePageObject {
   private List<WebElement> tocLevel1Sections;
 
   public void verifyTocElements() {
-    waitForElementByElement(tocSideMenu);
-    waitForElementByElement(tocList);
+    wait.forElementVisible(tocSideMenu);
+    wait.forElementVisible(tocList);
     PageObjectLogging.log("verifyTocElements", "toc elements verified", true);
   }
 
   public void closeToc() {
-    waitForElementByElement(closeTOCbutton);
+    wait.forElementVisible(closeTOCbutton);
     closeTOCbutton.click();
     PageObjectLogging.log("closeToc", "toc closed", true);
   }

@@ -33,9 +33,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.CATEGORY_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -50,9 +50,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, articleName);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(articleName);
     article.verifyCreateAPageEditor(expectedEditor, articleName);
   }
 
@@ -66,9 +66,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.LIST_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -82,9 +82,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -98,9 +98,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifyRedLinkEditor(expectedEditor);
   }
 
@@ -114,9 +114,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.TESTINGPAGE);
     article.verifySectionEditEditor(expectedEditor);
   }
 
@@ -130,9 +130,9 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.open(URLsContent.TEMPLATE_PAGE);
     article.verifyMainEditEditor(expectedEditor);
   }
 
@@ -146,8 +146,8 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.verifyURLActionEditEditor(expectedEditor, URLsContent.TESTINGPAGE, wikiURL);
   }
 
@@ -161,8 +161,8 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref),
-                        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+    article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
+        credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.verifyURLVEActionEditEditor(expectedEditor, wikiURL);
   }
 }

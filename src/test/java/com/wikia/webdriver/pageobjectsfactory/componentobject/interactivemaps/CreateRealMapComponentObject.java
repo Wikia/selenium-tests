@@ -35,39 +35,39 @@ public class CreateRealMapComponentObject extends BasePageObject {
   private WebElement mapErrorField;
 
   public CreateAMapComponentObject clickBack() {
-    waitForElementByElement(backButton);
+    wait.forElementVisible(backButton);
     backButton.click();
     PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
   public CreatePinTypesComponentObject clickNext() {
-    waitForElementByElement(nextButton);
+    wait.forElementVisible(nextButton);
     nextButton.click();
     PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
   public InteractiveMapsPageObject clickClose() {
-    waitForElementByElement(closeButton);
+    wait.forElementVisible(closeButton);
     closeButton.click();
     return new InteractiveMapsPageObject(driver);
   }
 
   public void typeMapName(String mapName) {
-    waitForElementByElement(mapTitleField);
+    wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
     PageObjectLogging.log("typeMapName", mapName + " title for map is typed in", true);
   }
 
   public void verifyRealMapPreviewImage() {
-    waitForElementByElement(realMapImagePreview);
+    wait.forElementVisible(realMapImagePreview);
     Assertion.assertFalse(realMapImagePreview.getAttribute("src").isEmpty());
     PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
   }
 
   public void verifyErrorExists() {
-    waitForElementVisibleByElement(mapErrorField);
+    wait.forElementVisible(mapErrorField);
     Assertion.assertFalse(mapErrorField.getText().isEmpty());
   }
 }

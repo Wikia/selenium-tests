@@ -81,7 +81,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   }
 
   public void checkIgnoreAnyWarnings() {
-    waitForElementByElement(ignoreAnyWarnings);
+    wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
     PageObjectLogging.log(
         "CheckIgnoreAnyWarnings",
@@ -101,6 +101,11 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   }
 
   public void verifyFileUploaded(String fileName) {
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(
         latestWikiaPreviewImg,

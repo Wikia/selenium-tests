@@ -78,7 +78,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.searchFor(SearchContent.SEARCH_PHRASE);
     WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
-    search.navigateBack();
+    driver.navigate().back();
     search.openResult(2);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
   }
@@ -113,7 +113,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    search.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE);
     String searchDescription = search.getFirstDescription();

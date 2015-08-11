@@ -39,22 +39,22 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public ArticlePageObject savePage() {
-    waitForElementInViewPort(editSummary);
-    waitForElementInViewPort(reviewChangesButton);
-    waitForElementVisibleByElement(savePanel);
+    wait.forElementInViewPort(editSummary);
+    wait.forElementInViewPort(reviewChangesButton);
+    wait.forElementVisible(savePanel);
     publishButton.click();
     return new ArticlePageObject(driver);
   }
 
   public void verifyRecaptchaIsVisible() {
-    waitForElementVisibleByElement(recaptchaContainer);
+    wait.forElementVisible(recaptchaContainer);
     driver.switchTo().defaultContent();
     PageObjectLogging
         .log("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
   }
 
   public String getRecaptchaImageSrc() {
-    waitForElementVisibleByElement(recaptchaContainer);
+    wait.forElementVisible(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
     PageObjectLogging
         .log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
@@ -64,9 +64,9 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
     waitForElementClickableByElement(publishButton);
-    if (checkIfElementOnPage(recaptchaArea)) {
+    if (isElementOnPage(recaptchaArea)) {
       recaptchaContainer = saveDialogBody.findElement(recaptchaImageBy);
-      waitForElementVisibleByElement(recaptchaContainer);
+      wait.forElementVisible(recaptchaContainer);
     }
     publishButton.click();
     return new VisualEditorSaveChangesDialog(driver);
@@ -78,7 +78,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorReviewChangesDialog clickReviewYourChanges() {
-    waitForElementVisibleByElement(reviewChangesButton);
+    wait.forElementVisible(reviewChangesButton);
     waitForElementClickableByElement(reviewChangesButton);
     reviewChangesButton.click();
     return new VisualEditorReviewChangesDialog(driver);
@@ -90,7 +90,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void typeEditSummary(String text) {
-    waitForElementVisibleByElement(editSummary);
+    wait.forElementVisible(editSummary);
     editSummary.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editSummary, "value", text);
   }

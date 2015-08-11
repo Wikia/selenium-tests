@@ -53,7 +53,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   }
 
   public void setCaption(String caption) {
-    waitForElementByElement(captionField);
+    wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
     PageObjectLogging.log("setCaption", "caption was set to: " + caption, true);
@@ -61,27 +61,27 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void adjustWith(int width) {
     String widthString = Integer.toString(width);
-    waitForElementByElement(widthInputField);
+    wait.forElementVisible(widthInputField);
     widthInputField.clear();
     widthInputField.sendKeys(widthString);
     PageObjectLogging.log("adjustWith", "width set to: " + width, true, driver);
   }
 
   private void clickAddaVideo() {
-    waitForElementByElement(addAvideo);
+    wait.forElementVisible(addAvideo);
     waitForElementClickableByElement(addAvideo);
     scrollAndClick(addAvideo);
     PageObjectLogging.log("clickAddaVideo", "add video button clicked", true, driver);
   }
 
   private void clickRetunToEditing() {
-    waitForElementByElement(returnToEditing);
+    wait.forElementVisible(returnToEditing);
     scrollAndClick(returnToEditing);
     PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked", true, driver);
   }
 
   private void verifyVideoThumbnail() {
-    waitForElementByElement(videoThumbnail);
+    wait.forElementVisible(videoThumbnail);
     Dimension dim = videoThumbnail.getSize();
     int w = dim.getWidth();
     Assertion.assertEquals(w, 350);
@@ -106,7 +106,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   }
 
   public void adjustPosition(PositionsVideo position) {
-    waitForElementByElement(videoEmbedLayotRow);
+    wait.forElementVisible(videoEmbedLayotRow);
     switch (position) {
       case LEFT:
         positionLayoutLeft.click();
@@ -124,7 +124,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   }
 
   public void verifyVideoAlignmentSelected(PositionsVideo positions) {
-    waitForElementByElement(videoEmbedLayotRow);
+    wait.forElementVisible(videoEmbedLayotRow);
     String selectedPositionId = videoEmbedLayotRow
         .findElement(By.cssSelector(".selected"))
         .getAttribute("id");
@@ -146,14 +146,14 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   }
 
   public void clickUpdateVideo() {
-    waitForElementByElement(updateVideoButton);
+    wait.forElementVisible(updateVideoButton);
     scrollAndClick(updateVideoButton);
     PageObjectLogging.log("updateVideoButton", "update video button clicked", true, driver);
   }
 
 
   public void verifyVideoWidth(int widthDesired) {
-    waitForElementByElement(widthInputField);
+    wait.forElementVisible(widthInputField);
     int width = Integer.parseInt(widthInputField.getAttribute("value"));
     Assertion.assertEquals(
         widthDesired,

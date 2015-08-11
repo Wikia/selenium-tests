@@ -14,10 +14,10 @@ import java.awt.Color;
  */
 public class TestOoyalaAds extends TemplateNoFirstLoad {
 
-  private final static Color GREEN = new Color(0, 214, 0);
-  private final static Color BLUE = new Color(0, 13, 255);
-  private final static int AD_DURATION_SEC = 30;
-  private final static int VIDEO_DURATION_SEC = 30;
+  private static final Color GREEN = new Color(0, 214, 0);
+  private static final Color BLUE = new Color(0, 13, 255);
+  private static final int AD_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 30;
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -27,6 +27,7 @@ public class TestOoyalaAds extends TemplateNoFirstLoad {
   public void TestOoyalaAds_GeoEdgeFree(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+    wikiPage.verifyFlash();
     wikiPage.verifyLightboxAd(BLUE, AD_DURATION_SEC);
     wikiPage.verifyLightboxVideo(GREEN, VIDEO_DURATION_SEC);
   }

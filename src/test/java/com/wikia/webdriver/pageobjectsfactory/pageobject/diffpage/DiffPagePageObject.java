@@ -18,7 +18,7 @@ public class DiffPagePageObject extends BasePageObject {
   private WebElement diffTable;
 
   public void verifyDiffTablePresent() {
-    waitForElementByElement(diffTable);
+    wait.forElementVisible(diffTable);
     PageObjectLogging.log("Verify diff table", "diff table is visible", true);
   }
 

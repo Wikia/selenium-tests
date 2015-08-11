@@ -100,7 +100,7 @@ public class VEMediaTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     // Excluding FF on running this VE-1370
-    if (!"ff".equalsIgnoreCase(ve.getBrowser())) {
+    if (!"ff".equalsIgnoreCase(Configuration.getBrowser())) {
       VisualEditorAddMediaDialog mediaDialog =
           (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
       ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
@@ -243,7 +243,7 @@ public class VEMediaTests extends NewTestTemplate {
     if (!"ff".equalsIgnoreCase(Configuration.getBrowser())) {
       WikiBasePageObject base = new WikiBasePageObject(driver);
       base.logOut(wikiURL);
-      base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
       FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
       filePage.verifyImageLicense(testImageLicense);
       filePage.selectHistoryTab();

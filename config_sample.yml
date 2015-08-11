@@ -11,6 +11,7 @@ qs: null
 disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
+takeScreenshots: true
 
 #Config related with mobile devices
 platform: ANDROID #acceptable values: IOS and ANDROID

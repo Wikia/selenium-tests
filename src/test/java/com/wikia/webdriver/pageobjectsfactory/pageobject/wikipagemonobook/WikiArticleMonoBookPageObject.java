@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook;
 
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 
@@ -24,18 +26,24 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
     super(driver);
   }
 
+  public WikiArticleMonoBookPageObject open(String articleTitle) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + articleTitle);
+    return this;
+  }
+
   public void clickEdit() {
     scrollAndClick(editLink);
     PageObjectLogging.log("clickEdit", "click on Edit link", true);
   }
 
   public void verifyEditionArea() {
-    waitForElementByElement(editionArea);
+    wait.forElementVisible(editionArea);
     PageObjectLogging.log("verifyEditArea", "verify that edition area is present", true);
   }
 
   public void verifyOasisOnly() {
-    waitForElementByElement(oasisOnly);
+    wait.forElementVisible(oasisOnly);
     PageObjectLogging.log("verifyOasisOnly", "Oasis only warning is present", true);
   }
 }

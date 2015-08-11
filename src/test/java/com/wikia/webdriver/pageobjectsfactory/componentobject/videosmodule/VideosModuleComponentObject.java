@@ -27,12 +27,12 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
   }
 
   public void verifyVideosModuleShowing() {
-    Assertion.assertTrue(checkIfElementOnPage(videosModuleContainer));
+    Assertion.assertTrue(isElementOnPage(videosModuleContainer));
     PageObjectLogging.log("verifyVideosModuleShowing", "Videos Module showing", true);
   }
 
   public void verifyVideosModuleNotShowing() {
-    Assertion.assertTrue(!checkIfElementOnPage(videosModuleContainer));
+    Assertion.assertTrue(!isElementOnPage(videosModuleContainer));
     PageObjectLogging.log("verifyVideosModuleNotShowing",
                           "Videos Module not showing (test passed)", true);
   }

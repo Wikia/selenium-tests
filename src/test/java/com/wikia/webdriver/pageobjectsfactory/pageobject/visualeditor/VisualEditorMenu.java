@@ -99,7 +99,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private void clickStyleItemFromDropDown(By styleBy) {
     WebElement styleListElement = toolListDropDowns.get(STYLE_LIST);
     WebElement styleItems = toolListItems.get(STYLE_LIST);
-    waitForElementByElement(styleListElement);
+    wait.forElementVisible(styleListElement);
     Actions actions = new Actions(driver);
     actions.click(styleListElement).click(styleItems.findElement(styleBy)).build().perform();
   }
@@ -268,8 +268,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public VisualEditorSaveChangesDialog clickPublishButton() {
-    waitForElementNotPresent(publishButtonDisabled);
-    waitForElementVisibleByElement(enabledPublishButton);
+    wait.forElementNotPresent(publishButtonDisabled);
+    wait.forElementVisible(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
     waitForElementClickableByElement(publishButton);
     publishButton.click();
@@ -277,8 +277,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void verifyVEToolBarPresent() {
-    waitForElementVisibleByElement(veMode);
-    waitForElementVisibleByElement(veToolMenu);
+    wait.forElementVisible(veMode);
+    wait.forElementVisible(veToolMenu);
     PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
   }
 

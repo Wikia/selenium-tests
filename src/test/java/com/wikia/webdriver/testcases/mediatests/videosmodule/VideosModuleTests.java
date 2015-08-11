@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -42,7 +41,7 @@ public class VideosModuleTests extends NewTestTemplate {
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
     base.openWikiPage(wikiURL);
     videosModule.verifyVideosModuleNotShowing();
-    base.openSpecialWikiActivity(wikiURL);
+    base.openSpecialWikiActivity();
     videosModule.verifyVideosModuleNotShowing();
   }
 

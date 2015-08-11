@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,11 +19,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class BasePageObject extends MobileBasePageObject {
 
-  @FindBy(css = LOADING_SPINNER_CSS)
-  private WebElement loadingSpinner;
-
-  private final static String LOADING_SPINNER_CSS = ".loading-overlay";
-
+  private final static By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
 
   public BasePageObject(WebDriver driver) {
     super(driver);
@@ -61,16 +58,16 @@ public class BasePageObject extends MobileBasePageObject {
   public void waitForLoadingSpinnerToFinish() {
     boolean spinnerPresent = false;
     try {
-      waitForElementByCss(LOADING_SPINNER_CSS);
-      waitForElementVisibleByElement(loadingSpinner, 4, 1000);
+      wait.forElementVisible(LOADING_SPINNER_BY, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {
       PageObjectLogging.log("Loading spinner", "is not present", true);
     }
     if (spinnerPresent) {
-      waitForElementPresenceByBy(By.cssSelector(".loading-overlay.hidden"));
+      wait.forElementNotVisible(LOADING_SPINNER_BY, 4, 3000);
     }
   }
+
 
   //TODO: Remove this and use combination from logUrl
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
@@ -118,8 +115,8 @@ public class BasePageObject extends MobileBasePageObject {
 
   public boolean isElementVisible(WebElement element) {
     try {
-      waitForElementVisibleByElement(element, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+      wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }

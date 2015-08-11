@@ -44,18 +44,18 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   String beforeImageName = "116x116-";
 
   public void clearSearchTitle() {
-    waitForElementByElement(searchField);
+    wait.forElementVisible(searchField);
     searchField.clear();
   }
 
   public InteractiveMapsPageObject clickCloseButton() {
-    waitForElementByElement(closeButton);
+    wait.forElementVisible(closeButton);
     closeButton.click();
     return new InteractiveMapsPageObject(driver);
   }
 
   public CreateAMapComponentObject clickBack() {
-    waitForElementByElement(backButton);
+    wait.forElementVisible(backButton);
     backButton.click();
     PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
@@ -80,36 +80,36 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   }
 
   public TemplateComponentObject selectTemplate(int templateId) {
-    waitForElementByElement(templateList.get(templateId));
+    wait.forElementVisible(templateList.get(templateId));
     templateList.get(templateId).click();
     return new TemplateComponentObject(driver);
   }
 
   public void typeSearchTile(String templateName) {
-    waitForElementByElement(searchField);
+    wait.forElementVisible(searchField);
     searchField.sendKeys(templateName);
     PageObjectLogging
         .log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
   }
 
   public void verifyErrorExists() {
-    waitForElementVisibleByElement(errorField);
-    Assertion.assertEquals(checkIfElementOnPage(errorField), true);
+    wait.forElementVisible(errorField);
+    Assertion.assertEquals(isElementOnPage(errorField), true);
   }
 
   public void verifyThereIsNoError() {
     waitForElementNotVisibleByElement(errorField);
-    Assertion.assertEquals(checkIfElementOnPage(errorField), false);
+    Assertion.assertEquals(isElementOnPage(errorField), false);
   }
 
   public void verifyTemplateWasFound() {
-    waitForElementVisibleByElement(templatesBox);
-    waitForElementVisibleByElement(thumbCollection.get(0));
-    Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
+    wait.forElementVisible(templatesBox);
+    wait.forElementVisible(thumbCollection.get(0));
+    Assertion.assertEquals(isElementOnPage(thumbCollection.get(0)), true);
   }
 
   public void verifyTemplateListElementVisible(int element) {
-    waitForElementByElement(templateList.get(element));
+    wait.forElementVisible(templateList.get(element));
     PageObjectLogging.log("verifyTemplateListElementVisible", "Template element is visible ", true);
   }
 }

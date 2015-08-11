@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
@@ -17,11 +18,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
@@ -40,6 +43,12 @@ public class NewTestTemplateCore {
     prepareDirectories();
   }
 
+  @BeforeMethod(alwaysRun = true)
+  public void initTestContext(Method method) {
+    TestContext.writeMethodName(method);
+    PageObjectLogging.start(method);
+  }
+
   protected void prepareDirectories() {
     CommonUtils.deleteDirectory("." + File.separator + "logs");
     CommonUtils.createDirectory("." + File.separator + "logs");
@@ -56,6 +65,7 @@ public class NewTestTemplateCore {
     driver = registerDriverListener(
         NewDriverProvider.getDriverInstanceForBrowser(Configuration.getBrowser())
     );
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
@@ -65,8 +75,8 @@ public class NewTestTemplateCore {
     return driver;
   }
 
-  protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
-    driver.register(new PageObjectLogging());
+  protected WebDriver registerDriverListener(WebDriver driver) {
+    ((EventFiringWebDriver)driver).register(new PageObjectLogging());
     return driver;
   }
 
@@ -88,13 +98,19 @@ public class NewTestTemplateCore {
       NewDriverProvider.getMobileDriver().quit();
     }*/
     if (driver != null) {
-      driver.quit();
+      try {
+        driver.quit();
+      } catch (Error e) {
+      }
     }
   }
 
   protected void stopCustomBrowser(WebDriver customDriver) {
     if (customDriver != null) {
-      customDriver.quit();
+      try {
+        customDriver.quit();
+      } catch (Error e) {
+      }
     }
   }
 

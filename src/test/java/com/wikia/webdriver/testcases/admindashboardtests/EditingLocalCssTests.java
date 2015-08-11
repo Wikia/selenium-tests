@@ -28,8 +28,8 @@ public class EditingLocalCssTests extends NewTestTemplate {
   @Test(groups = {"EditingLocalCss_001", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_001_UserWithAdminRightsTriesToEditWikiaCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
     VisualEditModePageObject edit = article.goToCurrentArticleEditPage();
     edit.verifyUrl(URLsContent.SPECIAL_CSS);
   }
@@ -41,12 +41,12 @@ public class EditingLocalCssTests extends NewTestTemplate {
   @Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
     article.goToCurrentArticleEditPage();
     article.verifyPermissionsErrorsPresent();
-    article.logInCookie(credentials.userName, credentials.password, wikiURL);
-    article.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    article.loginAs(credentials.userName, credentials.password, wikiURL);
+    article.open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
     article.goToCurrentArticleEditPage();
     article.verifyPermissionsErrorsPresent();
@@ -58,9 +58,9 @@ public class EditingLocalCssTests extends NewTestTemplate {
   @Test(groups = {"EditingLocalCss_003", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_003_MonobookUserWithAdminRightsEditsWikiaCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
+    base.loginAs(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
     WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
-    monobookArticle.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+    monobookArticle.open(URLsContent.MEDIAWIKI_CSS);
     monobookArticle.clickEdit();
     monobookArticle.verifyEditionArea();
   }
@@ -71,7 +71,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   @Test(groups = {"EditingLocalCss_004", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_004_MonobookUserWithAdminRightsOpensSpecialCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
+    base.loginAs(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
     WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
     monobookArticle.openSpecialCss(wikiURL);
     monobookArticle.verifyOasisOnly();
@@ -83,7 +83,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   @Test(groups = {"EditingLocalCss_005", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_005_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialAdminDashboardPageObject adminDashboard = base.openSpecialAdminDashboard(wikiURL);
     adminDashboard.clickCssTool();
     adminDashboard.verifyUrl(URLsContent.SPECIAL_CSS);

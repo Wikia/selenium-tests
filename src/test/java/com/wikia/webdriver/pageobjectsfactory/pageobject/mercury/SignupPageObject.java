@@ -51,36 +51,36 @@ public class SignupPageObject extends BasePageObject {
   private WebElement signupButton;
 
   public SignupPageObject typeEmailAddress(String email) {
-    waitForElementByElement(signupEmail);
+    wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
   public SignupPageObject typeUsername(String username) {
-    waitForElementByElement(signupUsername);
+    wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
   public SignupPageObject typePassword(String password) {
-    waitForElementByElement(signupPassword);
+    wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
   public SignupPageObject typeBirthdate(String month, String day, String year) {
-    waitForElementByElement(signupBirthdate);
+    wait.forElementVisible(signupBirthdate);
     scrollAndClick((signupBirthdate));
 
-    waitForElementByElement(signupBirthMonth);
+    wait.forElementVisible(signupBirthMonth);
     scrollAndClick((signupBirthMonth));
     signupBirthMonth.sendKeys(month);
 
-    waitForElementByElement(signupBirthDay);
+    wait.forElementVisible(signupBirthDay);
     signupBirthDay.click();
     signupBirthDay.sendKeys(day);
 
-    waitForElementByElement(signupBirthYear);
+    wait.forElementVisible(signupBirthYear);
     signupBirthYear.click();
     signupBirthYear.sendKeys(year);
 
@@ -88,33 +88,34 @@ public class SignupPageObject extends BasePageObject {
   }
 
   public void register() {
-    waitForElementByElement(signupSubmitButton);
+    wait.forElementVisible(signupSubmitButton);
     scrollAndClick(signupSubmitButton);
   }
 
   public void verifyAvatarAfterSignup() {
-    waitForElementByElement(avatar);
+    wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
   public void verifyEmailInUseError() {
-    waitForElementByElement(emailError);
+    wait.forElementVisible(emailError);
     Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
   }
 
   public void verifyUsernameTakenError() {
-    waitForElementByElement(usernameError);
+    wait.forElementVisible(usernameError);
     Assertion.assertEquals(usernameError.getText(), "Someone already has this username. Try a different one!");
   }
 
   public void verifyPasswordError() {
-    waitForElementByElement(passwordError);
+    wait.forElementVisible(passwordError);
     Assertion.assertEquals(passwordError.getText(), "Your password must be different from your username.");
   }
 
   public void verifyBirthdateError() {
-    waitForElementByElement(genericError);
-    Assertion.assertEquals(genericError.getText(), "We can not complete your registration at this time.");
+    wait.forElementVisible(genericError);
+    Assertion.assertEquals(genericError.getText(),
+        "We can not complete your registration at this time.");
   }
 
   public String getRegisterHeaderText() {
@@ -126,9 +127,9 @@ public class SignupPageObject extends BasePageObject {
 
   public SignupPageObject openMobileSignupPage(String wikiURL) {
     openHome(wikiURL);
-    waitForElementByElement(newloginButton);
+    wait.forElementVisible(newloginButton);
     newloginButton.click();
-    waitForElementByElement(signupButton);
+    wait.forElementVisible(signupButton);
     signupButton.click();
     return new SignupPageObject(driver);
   }

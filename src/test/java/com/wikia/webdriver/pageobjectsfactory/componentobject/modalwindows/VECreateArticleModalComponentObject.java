@@ -28,7 +28,7 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   public void createPage() {
-    waitForElementVisibleByElement(modal);
+    wait.forElementVisible(modal);
     waitForElementClickableByElement(addAPageButton);
     addAPageButton.click();
     PageObjectLogging.log("createPage", "Add A Page button is clicked", true);

@@ -45,16 +45,16 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
   }
 
   public MobileEditModePageObject clickKeepEditing() {
-    waitForElementByElement(keepEditingButton);
+    wait.forElementVisible(keepEditingButton);
     waitForElementClickableByElement(keepEditingButton);
-    jQueryClick(keepEditingButton);
+    jsActions.click(keepEditingButton);
     return new MobileEditModePageObject(driver);
   }
 
   public MobileArticlePageObject clickPublish() {
-    waitForElementByElement(publishButton);
+    wait.forElementVisible(publishButton);
     waitForElementClickableByElement(publishButton);
-    jQueryClick(publishButton);
+    jsActions.click(publishButton);
     return new MobileArticlePageObject(driver);
   }
 
@@ -63,7 +63,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
   }
 
   public void verifySummaryText(String targetText) {
-    waitForElementByElement(previewZoomer);
+    wait.forElementVisible(previewZoomer);
     waitForValueToBePresentInElementsAttributeByElement(
         summaryTextBox,
         "value",

@@ -50,7 +50,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public void selectLanguage(String lang) {
     scrollAndClick(languageSelectorTrigger);
-    waitForElementByElement(languageSelector);
+    wait.forElementVisible(languageSelector);
     Select language = new Select(languageSelector);
     List<WebElement> langList = language.getOptions();
     for (int i = 0; i < langList.size(); i++) {
@@ -78,18 +78,18 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
    * @author Karol Kujawiak
    */
   public void verifySuccessIcon() {
-    waitForElementByElement(successIcon);
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(successIcon);
+    wait.forElementVisible(submitButton);
     PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
-    waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, wikiName.toLowerCase());
+    wait.forTextInElement(wikiDomainErrorMessage, wikiName.toLowerCase());
     PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
   }
 
   public void verifyIncorrectWikiName() {
-    waitForTextToBePresentInElementByElement(wikiDomainErrorMessage,
+    wait.forTextInElement(wikiDomainErrorMessage,
                                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
     PageObjectLogging.log("verifyIncorrectWikiName",
                           "Verified wiki name violates naming policy", true);

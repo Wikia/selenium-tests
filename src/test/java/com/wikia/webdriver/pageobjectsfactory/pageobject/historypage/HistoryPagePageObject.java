@@ -24,7 +24,8 @@ public class HistoryPagePageObject extends BasePageObject {
 
   public DiffPagePageObject goToDiffPageFromHistoryPage() {
     historySubmit.get(0).click();
-    waitForTextToBePresentInElementByElement(diffHeader, "Changes");
+    wait.forElementVisible(diffHeader);
+    wait.forTextInElement(diffHeader, "Changes");
     return new DiffPagePageObject(driver);
   }
 }

@@ -34,7 +34,7 @@ public class FollowArticleTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void FollowArticle_002_follow() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).openArticleByName(wikiURL, articleName);
+        new ArticlePageObject(driver).open(articleName);
     article.follow();
   }
 
