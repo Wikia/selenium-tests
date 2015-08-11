@@ -53,9 +53,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
   }
 
   public void verifySize(Dimension size) {
-    Assertion.assertEquals(
+    Assertion.assertTrue(
         isSizeCorrect(interstitialAdWrapper.getSize().getWidth(), size.getWidth()),
-        true
+        "The size of ad unit is within tolerance range"
     );
 
     Assertion.assertEquals(
