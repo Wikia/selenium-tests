@@ -29,7 +29,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
    *
    * @see AdsInterstitialObject::isSizeCorrect()
    */
-  private final static int SIZE_DIFFERENCE_TOLERANCE = 1;
+  private final static int SIZE_DIFFERENCE_TOLERANCE = 32;
 
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
@@ -52,21 +52,35 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
   }
 
-  public void verifySize(Dimension size) {
+  public void verifySize(Dimension expectedSize) {
+    Dimension actualSize = interstitialAdWrapper.getSize();
+
     Assertion.assertTrue(
-        isSizeCorrect(interstitialAdWrapper.getSize().getWidth(), size.getWidth()),
-        "The size of ad unit is within tolerance range"
+        isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
+        String.format(
+            "The width of ad unit is not within tolerance range " +
+            "[actual: %d, expected: %d, tolerance: +-%d]",
+            actualSize.getWidth(),
+            expectedSize.getWidth(),
+            SIZE_DIFFERENCE_TOLERANCE
+        )
     );
 
-    Assertion.assertEquals(
-        isSizeCorrect(interstitialAdWrapper.getSize().getHeight(), size.getHeight()),
-        true
+    Assertion.assertTrue(
+        isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
+        String.format(
+            "The height of ad unit is not within tolerance range " +
+            "[actual: %d, expected: %d, tolerance: +-%d]",
+            actualSize.getHeight(),
+            expectedSize.getHeight(),
+            SIZE_DIFFERENCE_TOLERANCE
+        )
     );
   }
 
   private boolean isSizeCorrect(int actualSize, int expectedSize) {
     return
-        actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE ||
+        actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE &&
         actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
   }
 }
