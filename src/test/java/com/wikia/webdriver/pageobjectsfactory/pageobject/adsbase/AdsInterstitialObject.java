@@ -29,7 +29,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
    *
    * @see AdsInterstitialObject::isSizeCorrect()
    */
-  private final static int SIZE_DIFFERENCE_TOLERANCE = 32;
+  private static final int SIZE_DIFFERENCE_TOLERANCE = 32;
 
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
