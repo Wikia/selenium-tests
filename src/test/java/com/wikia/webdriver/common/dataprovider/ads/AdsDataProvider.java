@@ -438,6 +438,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "J-RIfJI0",
+            "pqdapsy7l",
             new Page("vim", "Vim_Tips_Wiki"),
             // Standard segment for visiting adtest before
             "[\"pqdapsy7l\"]",
@@ -447,6 +448,7 @@ public class AdsDataProvider {
         },
         {
             null,
+            null,
             new Page("adtest", "SyntheticTests/Krux/Page_1"),
             "[\"o8l9bis26\"]",
             new Page("glee", "Glee_TV_Show_Wiki"),
@@ -454,6 +456,7 @@ public class AdsDataProvider {
             "[]",
         },
         {
+            null,
             null,
             new Page("vim", "Vim_Tips_Wiki"),
             // No pqdapsy7l (standard segment for adtest)
