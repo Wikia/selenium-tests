@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 
 import org.openqa.selenium.Dimension;
@@ -558,6 +559,18 @@ public class AdsDataProvider {
             new Dimension(300, 258),
             false
         },
+    };
+  }
+
+  @DataProvider
+  public static String[][] adsSlotsOasis() {
+    return new String[][]{
+        {AdsContent.TOP_LB},
+        {AdsContent.MEDREC},
+        {AdsContent.LEFT_SKYSCRAPPER_2},
+        {AdsContent.LEFT_SKYSCRAPPER_3},
+        {AdsContent.PREFOOTER_LEFT},
+        {AdsContent.PREFOOTER_RIGHT}
     };
   }
 
