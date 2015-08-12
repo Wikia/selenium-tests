@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -24,24 +25,25 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
-    ArticleContent.push("LOREM IPSUM");
+    String articleTitle = "DeleteUndeleArticle";
+    ArticleContent.push(PageContent.ARTICLE_TEXT, articleTitle);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
-    restore.verifyArticleName(TestContext.getCurrentMethodName());
+    restore.verifyArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     article.verifyNotificationMessage();
-    article.verifyArticleTitle(TestContext.getCurrentMethodName());
+    article.verifyArticleTitle(articleTitle);
   }
 
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
-    ArticleContent.push("LOREM IPSUM");
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
