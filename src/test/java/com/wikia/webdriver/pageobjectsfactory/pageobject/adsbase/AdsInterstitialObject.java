@@ -16,6 +16,21 @@ import java.util.regex.Pattern;
  */
 public class AdsInterstitialObject extends AdsBaseObject {
 
+  /**
+   * Checks if the actual size (width or height) is within the "range of correctness" ;)
+   *
+   * We don't want to be pixel perfect in terms of checking the size of element because
+   * it depends on many things such as in example components of a browser's window.
+   *
+   * We also don't want to just check if the content of scalable interstitial is bigger
+   * than the original image. So, we came up with a reasonable size difference margin.
+   *
+   * The size defined here is doubled at the end.
+   *
+   * @see AdsInterstitialObject::isSizeCorrect()
+   */
+  private static final int SIZE_DIFFERENCE_TOLERANCE = 32;
+
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
 
@@ -37,7 +52,35 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
   }
 
-  public void verifySize(Dimension size) {
-    Assertion.assertEquals(interstitialAdWrapper.getSize(), size);
+  public void verifySize(Dimension expectedSize) {
+    Dimension actualSize = interstitialAdWrapper.getSize();
+
+    Assertion.assertTrue(
+        isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
+        String.format(
+            "The width of ad unit is not within tolerance range " +
+            "[actual: %d, expected: %d, tolerance: +-%d]",
+            actualSize.getWidth(),
+            expectedSize.getWidth(),
+            SIZE_DIFFERENCE_TOLERANCE
+        )
+    );
+
+    Assertion.assertTrue(
+        isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
+        String.format(
+            "The height of ad unit is not within tolerance range " +
+            "[actual: %d, expected: %d, tolerance: +-%d]",
+            actualSize.getHeight(),
+            expectedSize.getHeight(),
+            SIZE_DIFFERENCE_TOLERANCE
+        )
+    );
+  }
+
+  private boolean isSizeCorrect(int actualSize, int expectedSize) {
+    return
+        actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE &&
+        actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
   }
 }

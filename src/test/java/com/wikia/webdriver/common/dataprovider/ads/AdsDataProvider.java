@@ -494,7 +494,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] interstitial() {
+  public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
             "adtest",
@@ -528,7 +528,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] interstitialMobile() {
+  public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
             "adtest",
