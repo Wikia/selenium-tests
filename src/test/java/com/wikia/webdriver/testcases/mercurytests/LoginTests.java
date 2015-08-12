@@ -1,16 +1,16 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
-import org.testng.annotations.Test;
-
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * Created by Qaga on 2015-06-29.
@@ -131,6 +131,16 @@ public class LoginTests extends NewTestTemplate {
     joinPage.clickSignInLink();
 
     Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
+  }
+
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void japaneseUserLogIn() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userNameJapanese2,
+                        Configuration.getCredentials().passwordJapanese2);
+    Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
+        Configuration.getCredentials().userNameJapanese2));
   }
 }
 
