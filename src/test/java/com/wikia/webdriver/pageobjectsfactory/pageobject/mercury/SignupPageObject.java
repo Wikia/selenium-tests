@@ -71,10 +71,10 @@ public class SignupPageObject extends BasePageObject {
 
   private SignupPageObject typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
-    scrollAndClick((signupBirthdate));
+    scrollAndClick(signupBirthdate);
 
     wait.forElementVisible(signupBirthMonth);
-    scrollAndClick((signupBirthMonth));
+    scrollAndClick(signupBirthMonth);
     signupBirthMonth.sendKeys(month);
 
     wait.forElementVisible(signupBirthDay);
