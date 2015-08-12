@@ -75,4 +75,17 @@ public class SignupTests extends NewTestTemplate {
           .typeBirthdate("12", "12", "2009").register();
     mobileSignup.verifyBirthdateError();
   }
+
+  @Test(groups = {"MercurySignupTest_006"})
+  @Execute(onWikia = "ja.ja-test")
+  public void MercurySignupTest_006_japaneseUserSignup() {
+    SignupPageObject mobileSignup = new SignupPageObject(driver);
+    mobileSignup.openMobileSignupPage(wikiURL);
+    String userName = "ユーザー" + mobileSignup.getTimeStamp();
+    String password = "パス" + mobileSignup.getTimeStamp();
+    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
+    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
+            .typeBirthdate("12", "12", "1952").register();
+    mobileSignup.verifyAvatarAfterSignup();
+  }
 }
