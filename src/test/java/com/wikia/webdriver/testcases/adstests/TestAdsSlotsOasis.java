@@ -11,19 +11,28 @@ import org.testng.annotations.Test;
  * @ownership AdEng
  */
 public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
+  private AdsBaseObject ads;
 
   @Test(
-      groups = "TestSlotsOasis",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsSlotsOasis"
+      groups = "TestSlotsOasis"
   )
-  public void adsSlotOasis(String slotName) {
+  public void adsSmokeTestSlotsOasis() {
     String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/OasisSlots");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    ads = new AdsBaseObject(driver, testedPage);
     ads.waitForPageLoaded();
 
-    Assertion.assertTrue(ads.isSlotOnPageLoaded(slotName));
+    for(String slotName : AdsDataProvider.OASIS_SLOTS_TO_SMOKE_TEST) {
+      smokeTestSlot(slotName);
+    }
+  }
+
+  private void smokeTestSlot(String slotName) {
+    verifySlotIsLoaded(slotName);
     ads.verifyGptIframe("wka.ent/_adtest//article", slotName, "gpt");
+  }
+
+  private void verifySlotIsLoaded(String slotName) {
+    Assertion.assertTrue(ads.isSlotOnPageLoaded(slotName));
   }
 
 }

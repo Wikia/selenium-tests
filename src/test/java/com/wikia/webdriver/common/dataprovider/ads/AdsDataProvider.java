@@ -13,6 +13,15 @@ import java.util.Arrays;
  */
 public class AdsDataProvider {
 
+  public final static String[] OASIS_SLOTS_TO_SMOKE_TEST = {
+      AdsContent.TOP_LB,
+      AdsContent.MEDREC,
+      AdsContent.LEFT_SKYSCRAPPER_2,
+      AdsContent.LEFT_SKYSCRAPPER_3,
+      AdsContent.PREFOOTER_LEFT,
+      AdsContent.PREFOOTER_RIGHT
+  };
+
   private AdsDataProvider() {
 
   }
@@ -559,18 +568,6 @@ public class AdsDataProvider {
             new Dimension(300, 258),
             false
         },
-    };
-  }
-
-  @DataProvider
-  public static String[][] adsSlotsOasis() {
-    return new String[][]{
-        {AdsContent.TOP_LB},
-        {AdsContent.MEDREC},
-        {AdsContent.LEFT_SKYSCRAPPER_2},
-        {AdsContent.LEFT_SKYSCRAPPER_3},
-        {AdsContent.PREFOOTER_LEFT},
-        {AdsContent.PREFOOTER_RIGHT}
     };
   }
 
