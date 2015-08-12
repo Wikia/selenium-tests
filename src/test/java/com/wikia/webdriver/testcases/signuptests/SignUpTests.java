@@ -35,8 +35,7 @@ public class SignUpTests extends NewTestTemplate {
 
   private static String userName;
   private static String password;
-  private static String jaTestWiki = "ja.ja-test";
-  Credentials credentials = Configuration.getCredentials();
+ Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
