@@ -6,8 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -17,6 +15,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriverException;
+import org.seleniumhq.jetty7.util.URIUtil;
 
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -46,7 +45,7 @@ public class ArticleContent {
     try {
       CloseableHttpClient httpClient = HttpClients.createDefault();
 
-      HttpPost httpPost = new HttpPost(URIUtil.encodeQuery(baseURL + articleTitle));
+      HttpPost httpPost = new HttpPost(URIUtil.encodePath(baseURL + articleTitle));
       List<NameValuePair> nvps = new ArrayList<>();
 
       httpPost.addHeader("Authorization", "Bearer " + Helios.getAccessToken(User.STAFF));
@@ -60,7 +59,7 @@ public class ArticleContent {
 
       PageObjectLogging.log("CONTENT PUSH", "Content pushed to article: " + baseURL + articleTitle,
           true);
-    } catch (ClientProtocolException | URIException e) {
+    } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", e.toString(), false);
       throw new WebDriverException("Problem with content pushing");
     } catch (IOException e) {
