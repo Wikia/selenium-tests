@@ -25,7 +25,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_001_VerifyPinModalContent() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -45,7 +45,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -68,7 +68,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_003_VerifyPinCreationErrors() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -91,7 +91,7 @@ public class PinMapTests extends NewTestTemplate {
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"},
-      dependsOnMethods = "PinMapTests_006_VerifyChangePinData",enabled = false)
+      dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
   public void PinMapTests_004_VerifyPopUpAfterClickPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -107,7 +107,7 @@ public class PinMapTests extends NewTestTemplate {
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
-      dependsOnMethods = "PinMapTests_006_VerifyChangePinData",enabled = false)
+      dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
   public void PinMapTests_005_VerifyDeletePin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -127,7 +127,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_006_VerifyChangePinData() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -155,7 +155,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.clickOnPin(0);
   }
 
-  @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -174,7 +174,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.EXTERNAL_LINK);
   }
 
-  @Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
@@ -194,7 +194,7 @@ public class PinMapTests extends NewTestTemplate {
     ));
   }
 
-  @Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"},enabled = false)
+  @Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_009_VerifyArticlePlaceholder() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
