@@ -1,5 +1,18 @@
 package com.wikia.webdriver.common.templates;
 
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
@@ -12,21 +25,10 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.browsermob.proxy.ProxyServer;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
+import net.lightbody.bmp.proxy.ProxyServer;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
-
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class, com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
+    com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;
@@ -62,27 +64,26 @@ public class NewTestTemplateCore {
   }
 
   protected void startBrowser() {
-    driver = registerDriverListener(
-        NewDriverProvider.getDriverInstanceForBrowser(Configuration.getBrowser())
-    );
+    driver =
+        registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(Configuration
+            .getBrowser()));
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
-    driver = registerDriverListener(
-        NewDriverProvider.getDriverInstanceForBrowser(browserName)
-    );
+    driver = registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(browserName));
     return driver;
   }
 
   protected WebDriver registerDriverListener(WebDriver driver) {
-    ((EventFiringWebDriver)driver).register(new PageObjectLogging());
+    ((EventFiringWebDriver) driver).register(new PageObjectLogging());
     return driver;
   }
 
   protected void loadFirstPage() {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
+
   protected void loadFirstPage(WebDriver driver) {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
@@ -93,10 +94,11 @@ public class NewTestTemplateCore {
   }
 
   protected void stopBrowser() {
-    /*if (NewDriverProvider.getMobileDriver() != null
-        && NewDriverProvider.getMobileDriver().getSessionId() != null) {
-      NewDriverProvider.getMobileDriver().quit();
-    }*/
+    /*
+     * if (NewDriverProvider.getMobileDriver() != null &&
+     * NewDriverProvider.getMobileDriver().getSessionId() != null) {
+     * NewDriverProvider.getMobileDriver().quit(); }
+     */
     if (driver != null) {
       try {
         driver.quit();
@@ -117,9 +119,7 @@ public class NewTestTemplateCore {
   protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
     capabilities = new DesiredCapabilities();
     try {
-      capabilities.setCapability(
-          CapabilityType.PROXY, server.seleniumProxy()
-      );
+      capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -169,9 +169,7 @@ public class NewTestTemplateCore {
 
   public void setGeoEdge(String countryCode) {
     GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils();
-    String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
     String ip = geoEdgeUtils.getIPForCountry(countryCode);
     networkTrafficInterceptor.setProxyServer(ip);
-    networkTrafficInterceptor.changeHeader("Proxy-Authorization", credentialsBase64);
   }
 }

@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -487,17 +488,17 @@ public class BasePageObject {
   }
 
   private void purge(String url) throws Exception {
-    HttpClient client = new HttpClient();
-    HttpMethod method = new PurgeMethod(url);
+    CloseableHttpClient client = HttpClients.createDefault();
+    HttpUriRequest method = new PurgeMethod(url);
     try {
-      int status = client.executeMethod(method);
+      int status = client.execute(method).getStatusLine().getStatusCode();
       if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
         throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
       }
       PageObjectLogging.log("purge", url, true);
       return;
     } finally {
-      method.releaseConnection();
+      client.close();
     }
   }
 

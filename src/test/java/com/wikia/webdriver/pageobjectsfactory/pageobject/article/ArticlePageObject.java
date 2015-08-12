@@ -1,5 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
@@ -27,19 +40,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.List;
 
 /**
  * @author Bogna 'bognix' Knychała
@@ -168,12 +168,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   final Integer minInlineVideoSize = 400;
 
-  String editCategorySelector =
-      "li[data-name='%categoryName%'] .toolbar .editCategory";
-  String removeCategorySelector =
-      "li[data-name='%categoryName%'] .toolbar .removeCategory";
-  String videoInCommentsSelector =
-      ".speech-bubble-message img[data-video-name*='%videoName%']";
+  String editCategorySelector = "li[data-name='%categoryName%'] .toolbar .editCategory";
+  String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
+  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
   public ArticlePageObject(WebDriver driver) {
     super(driver);
@@ -182,6 +179,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public ArticlePageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
         + TestContext.getCurrentMethodName());
+
     return this;
   }
 
@@ -308,9 +306,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyCommentVideo(String videoName) {
-    driver.findElement(
-        By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
-    );
+    driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
     PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
   }
 
@@ -318,10 +314,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(
-        "arguments[0].querySelector(arguments[1]).click()",
-        mostRecentComment, EDIT_BUTTON_SELECTOR
-    );
+    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
+        EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
 
@@ -329,10 +323,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(
-        "arguments[0].querySelector(arguments[1]).click()",
-        mostRecentComment, DELETE_BUTTON_SELECTOR
-    );
+    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
+        DELETE_BUTTON_SELECTOR);
     return new DeletePageObject(driver);
   }
 
@@ -342,8 +334,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         Assertion.assertTrue(!comment.equals(elem.getText()));
       }
     }
-    PageObjectLogging.log("verifyCommentDeleted", "comment " + comment
-                                                  + " was deleted", true);
+    PageObjectLogging.log("verifyCommentDeleted", "comment " + comment + " was deleted", true);
   }
 
   public String getFirstCommentText() {
@@ -461,11 +452,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private void verifyTableProperty(String propertyName, int propertyValue) {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
-    PageObjectLogging.log(
-        "verifyTableProperty",
-        "table has correct " + propertyName + " property",
-        true
-    );
+    PageObjectLogging.log("verifyTableProperty", "table has correct " + propertyName + " property",
+        true);
   }
 
   public void verifyTableBorder(int propertyValue) {
@@ -482,10 +470,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyTableAlignment(Alignment alignment) {
     wait.forElementVisible(table);
-    Assertion.assertEquals(
-        table.getCssValue("float").toLowerCase(),
-        alignment.toString().toLowerCase()
-    );
+    Assertion.assertEquals(table.getCssValue("float").toLowerCase(), alignment.toString()
+        .toLowerCase());
     PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
   }
 
@@ -498,9 +484,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyVideoAlignment(PositionsVideo positions) {
-    String videoClass = videoThumbnail.findElement(
-        By.xpath("./..")
-    ).getAttribute("class");
+    String videoClass = videoThumbnail.findElement(By.xpath("./..")).getAttribute("class");
     String position;
     switch (positions) {
       case LEFT:
@@ -520,33 +504,26 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public Integer getVideoWidth(WebElement thumbnail) {
-    int videoWidth = Integer.parseInt(thumbnail.findElement(
-        By.tagName("img")
-    ).getAttribute("width"));
+    int videoWidth =
+        Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
     PageObjectLogging.log("getVideoWidth", "Video width is " + videoWidth, true);
     return videoWidth;
   }
 
   public void verifyVideoWidth(int widthDesired) {
     int videoWidth = getVideoWidth(videoThumbnail);
-    Assertion.assertNumber(
-            videoWidth, widthDesired,
-            "width should be " + widthDesired + " but is " + videoWidth
-    );
+    Assertion.assertNumber(videoWidth, widthDesired, "width should be " + widthDesired + " but is "
+        + videoWidth);
   }
 
   public void verifyVideoCaption(String captionDesired) {
-    String caption = videoThumbnailWrapper.findElement(
-        By.className("caption")
-    ).getText();
+    String caption = videoThumbnailWrapper.findElement(By.className("caption")).getText();
     Assertion.assertStringContains(caption, captionDesired);
     PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
   }
 
   public void verifyVideoName(String nameDesired) {
-    String name = videoThumbnailWrapper.findElement(
-        By.className("title")
-    ).getText();
+    String name = videoThumbnailWrapper.findElement(By.className("title")).getText();
     Assertion.assertStringContains(name, nameDesired);
     PageObjectLogging.log("verifyVideoName", "video has expected name", true);
   }
@@ -605,25 +582,21 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public EditCategoryComponentObject editCategory(String category) {
-    WebElement editCategory = driver.findElement(
-        By.cssSelector(
-            editCategorySelector.replace("%categoryName%", category)
-        )
-    );
+    WebElement editCategory =
+        driver
+            .findElement(By.cssSelector(editCategorySelector.replace("%categoryName%", category)));
     scrollAndClick(editCategory);
     PageObjectLogging.log("editCategory", "edit button on category " + category + " clicked", true);
     return new EditCategoryComponentObject(driver);
   }
 
   public void removeCategory(String category) {
-    WebElement editCategory = driver.findElement(
-        By.cssSelector(
-            removeCategorySelector.replace("%categoryName%", category)
-        )
-    );
+    WebElement editCategory =
+        driver.findElement(By.cssSelector(removeCategorySelector
+            .replace("%categoryName%", category)));
     scrollAndClick(editCategory);
-    PageObjectLogging.log("removeCategory",
-                          "remove button on category " + category + " clicked", true);
+    PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked",
+        true);
   }
 
   public String addCategorySuggestions(String category, int categoryNumber) {
@@ -634,8 +607,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     String desiredCategoryText = desiredCategory.getText();
     scrollAndClick(desiredCategory);
     waitForElementNotVisibleByElement(categorySuggestionsList);
-    PageObjectLogging.log("addCategorySuggestions",
-                          "category " + category + " added from suggestions", true);
+    PageObjectLogging.log("addCategorySuggestions", "category " + category
+        + " added from suggestions", true);
     return desiredCategoryText;
   }
 
@@ -677,8 +650,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void clickTOCshowHideButton() {
     wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
-    PageObjectLogging.log("clickTOCshowHideButton",
-                          "table of contents 'show/hide' button clicked", true);
+    PageObjectLogging.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked",
+        true);
   }
 
   /**
@@ -698,8 +671,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertNotEquals(sectionYbefore, sectionYafter);
     // assume that if section is less than 5px from top, it is scrolled up properly
     Assertion.assertTrue(sectionYafter < 5);
-    PageObjectLogging.log("verifyTOCsectionLinkWorks",
-                          "choosen section " + sectionID + " was scrolled up", true);
+    PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID
+        + " was scrolled up", true);
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -710,7 +683,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
     PageObjectLogging.log("closeNewWikiCongratulationsLightBox ",
-                          "congratulations lightbox closed", true);
+        "congratulations lightbox closed", true);
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
@@ -914,8 +887,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         src.clickPublishButton();
         break;
       default:
-        throw new NoSuchElementException(
-            "Invalid expected editor chosen: " + expectedEditor.name());
+        throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
     }
   }
 
@@ -927,8 +899,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         ve.verifyEditorSurfacePresent();
         break;
       default:
-        throw new NoSuchElementException(
-            "Invalid expected editor chosen: " + expectedEditor.name());
+        throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
     }
   }
 

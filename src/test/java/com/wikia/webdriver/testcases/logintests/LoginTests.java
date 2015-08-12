@@ -17,8 +17,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  String jaTestWiki = "ja.ja-test";
-
+  
   @Test(groups = {"Login_001", "Login", "Smoke5"})
   public void Login_001_specialPageUser() {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
