@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class AdsDataProvider {
 
-  public final static String[] OASIS_SLOTS_TO_SMOKE_TEST = {
+  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
       AdsContent.TOP_LB,
       AdsContent.MEDREC,
       AdsContent.LEFT_SKYSCRAPPER_2,
