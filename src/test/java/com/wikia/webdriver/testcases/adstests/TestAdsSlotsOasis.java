@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 /**
  * @ownership AdEng
  */
-public class TestSlotsOasis extends TemplateNoFirstLoad {
+public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
 
   @Test(
-      groups = {"TestSlotsOasis"},
+      groups = "TestSlotsOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsSlotsOasis"
   )
