@@ -19,17 +19,17 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
-          "Hm, we don't recognize these credentials. Please try again or register a new account.";
+      "Hm, we don't recognize these credentials. Please try again or register a new account.";
 
   @Test(groups = {"MercuryLoginTest_001"})
   @Execute(onWikia = "mobileregressiontesting")
   public void MercuryLoginTest_001_validUserCanLogIn() {
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.logUserIn(Configuration.getCredentials().userName10,
-            Configuration.getCredentials().password10);
+                        Configuration.getCredentials().password10);
 
     Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
-            Configuration.getCredentials().userName10));
+        Configuration.getCredentials().userName10));
   }
 
   @Test(groups = {"MercuryLoginTest_002"})
@@ -142,5 +142,18 @@ public class LoginTests extends NewTestTemplate {
                         Configuration.getCredentials().passwordJapanese2);
     Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
         Configuration.getCredentials().userNameJapanese2));
+  }
+
+  @Test(groups = {"MercuryLoginTest_012"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_011_passwordTogglerWorks() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.typePassword(Configuration.getCredentials().password10);
+
+    Assertion.assertTrue(loginPage.isPasswordTogglerDisabled(), "password should be disabled");
+
+    loginPage.clickOnPasswordToggler();
+
+    Assertion.assertTrue(loginPage.isPasswordTogglerEnabled(), "password should be enabled");
   }
 }
