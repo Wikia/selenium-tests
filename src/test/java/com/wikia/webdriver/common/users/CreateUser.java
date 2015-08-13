@@ -8,7 +8,9 @@ public class CreateUser {
   private String email = "qaart001+" + DateTime.now().getMillis() + "@gmail.com";
   private DateTime birthday = new DateTime(1952, 12, 12, 12, 0, 0);
 
-  public CreateUser() {}
+  public CreateUser() {
+
+  }
 
   public CreateUser withName(String userName) {
     this.userName = userName;
