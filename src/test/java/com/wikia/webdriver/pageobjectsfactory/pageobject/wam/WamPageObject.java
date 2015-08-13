@@ -59,7 +59,7 @@ public class WamPageObject extends BasePageObject {
    */
   public void openWamPage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
-    waitForValueToBePresentInElementsAttributeByCss("#CORP_TOP_LEADERBOARD", "class", "hidden");
+    waitForPageLoad();
     PageObjectLogging.log("openWamPage", "WAM page opened", true);
   }
 
@@ -79,8 +79,8 @@ public class WamPageObject extends BasePageObject {
     }
   }
 
-  public WamPageObject isLoaded(){
-    waitForValueToBePresentInElementsAttributeByCss("#CORP_TOP_LEADERBOARD", "class", "hidden");
+  public WamPageObject isLoaded() {
+    waitForPageLoad();
 
     return this;
   }
@@ -221,7 +221,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void verifyDateInDatePicker(String date) {
-  isLoaded();
+    isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
     Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
   }

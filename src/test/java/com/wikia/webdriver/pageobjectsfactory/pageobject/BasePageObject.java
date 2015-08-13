@@ -76,6 +76,10 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  public void waitForPageLoad(){
+    wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
+  }
+
   public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
