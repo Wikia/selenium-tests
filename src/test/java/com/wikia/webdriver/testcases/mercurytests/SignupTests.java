@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.common.users.CreateUser;
+import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @ownership Social
@@ -15,65 +15,52 @@ import org.testng.annotations.Test;
 @Test(groups = {"MercurySignupTests", "Mercury"})
 public class SignupTests extends NewTestTemplate {
 
-  private String regularUserName;
-  private String regularPassword;
-  private String regularEmail;
-  private DateTime regularBirthday;
-
-  @BeforeMethod(alwaysRun = true)
-  public void beforeTest() {
-    regularUserName = "User" + BasePageObject.getTimeStamp();
-    regularPassword = "Pass" + BasePageObject.getTimeStamp();
-    regularEmail = "qaart001+" + BasePageObject.getTimeStamp() + "@gmail.com";
-    regularBirthday = new DateTime(1952, 12, 12, 12, 0, 0);
-  }
-
   @Test(groups = "MercurySignupTest_001")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_001_successfulSignup() {
-    signUp(regularUserName, regularPassword, regularEmail, regularBirthday)
-        .verifyAvatarAfterSignup();
+    signUp(new CreateUser().create()).verifyAvatarAfterSignup();
   }
 
   @Test(groups = "MercurySignupTest_002")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_002_signupErrorEmailInUse() {
-    signUp(regularUserName, regularPassword, "qaart001@gmail.com", regularBirthday)
-        .verifyEmailInUseError();
+    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
   }
 
   @Test(groups = "MercurySignupTest_003")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_003_signupErrorUsernameTaken() {
-    signUp("bekcunning", regularPassword, regularEmail, regularBirthday)
-        .verifyUsernameTakenError();
+    String userNameTaken = "bekcunning";
+
+    signUp(new CreateUser().withName(userNameTaken).create()).verifyUsernameTakenError();
   }
 
   @Test(groups = "MercurySignupTest_004")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_004_signupErrorBadPassword() {
-    signUp(regularUserName, regularUserName, regularEmail, regularBirthday)
-        .verifyPasswordError();
+    signUp(new CreateUser().withPass("WRONG PASS").create()).verifyPasswordError();
   }
 
   @Test(groups = "MercurySignupTest_005")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_005_signupErrorTooYoungUser() {
-    signUp(regularUserName, regularPassword, regularEmail, new DateTime(2009, 12, 12, 12, 0, 0))
-        .verifyBirthdateError();
+    DateTime wrongBirthDate = new DateTime(2009, 12, 12, 12, 0, 0);
+
+    signUp(new CreateUser().withBirthday(wrongBirthDate).create()).verifyBirthdateError();
   }
 
   @Test(groups = "MercurySignupTest_006")
   @Execute(onWikia = "ja.ja-test")
   public void MercurySignupTest_006_japaneseUserSignup() {
-    signUp("ユーザー" + BasePageObject.getTimeStamp(), "パス" + BasePageObject.getTimeStamp(),
-           regularEmail, regularBirthday)
+    String japanName = "ユーザー" + DateTime.now().getMillis();
+    String japanPAssword = "ユーザー" + DateTime.now().getMillis();
+
+    signUp(new CreateUser().withName(japanName).withPass(japanPAssword).create())
         .verifyAvatarAfterSignup();
   }
 
-  private SignupPageObject signUp(String user, String password, String email, DateTime birthday) {
-    return new SignupPageObject(driver)
-        .openMobileSignupPage(wikiURL)
-        .signUp(user, password, email, birthday);
+  private SignupPageObject signUp(TestUser user) {
+    return new SignupPageObject(driver).openMobileSignupPage(wikiURL).signUp(user.getUserName(),
+        user.getPassword(), user.getEmail(), user.getBirthdate());
   }
 }
