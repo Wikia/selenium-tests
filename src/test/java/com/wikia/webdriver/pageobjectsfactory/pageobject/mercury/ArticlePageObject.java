@@ -36,6 +36,8 @@ public class ArticlePageObject extends BasePageObject {
   private WebElement articleTitle;
   @FindBy(css = ".article-content a")
   private List<WebElement> anchorsInContent;
+  @FindBy(css = ".mstAvaImg")
+  private WebElement userAvatar;
 
 
   public ArticlePageObject(WebDriver driver) {
@@ -95,6 +97,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public boolean isUrlContainingUserPage() {
+    wait.forElementVisible(userAvatar, 5, 500);
     return driver.getCurrentUrl().contains("/wiki/User:");
   }
 

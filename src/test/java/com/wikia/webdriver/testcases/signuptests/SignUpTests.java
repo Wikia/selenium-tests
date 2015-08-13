@@ -195,8 +195,8 @@ public class SignUpTests extends NewTestTemplate {
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
-    String userName = "品質管理" + signUp.getTimeStamp();
-    String password = "品質管理管理" + signUp.getTimeStamp();
+    String userName = "ユーザー" + signUp.getTimeStamp();
+    String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
 
