@@ -127,18 +127,22 @@ public class LoginPage extends WikiBasePageObject {
     return loginHeader.getText();
   }
 
-  public void typePassword(String password) { passwordField.sendKeys(password); }
+  public void typePassword(String password) {
+    passwordField.sendKeys(password);
+  }
 
-  public void clickOnPasswordToggler() { passwordToggler.click(); };
+  public void clickOnPasswordToggler() {
+    passwordToggler.click();
+  }
 
   public Boolean isPasswordTogglerDisabled() {
     String togglerDisabled = passwordField.getAttribute("type");
-    return togglerDisabled.equals("password");
+    return "password".equals(togglerDisabled);
   }
 
   public Boolean isPasswordTogglerEnabled() {
     String togglerDisabled = passwordField.getAttribute("type");
-    return togglerDisabled.equals("text");
+    return "text".equals(togglerDisabled);
   }
 
 }
