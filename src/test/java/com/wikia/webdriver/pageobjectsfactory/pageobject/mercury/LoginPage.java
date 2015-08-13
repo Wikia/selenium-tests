@@ -42,6 +42,9 @@ public class LoginPage extends WikiBasePageObject {
   @FindBy(css = "header.auth-header")
   private WebElement loginHeader;
 
+  @FindBy(css = ".password-toggler")
+  private  WebElement passwordToggler;
+
   private NavigationSideComponentObject nav;
 
   public LoginPage(WebDriver driver) {
@@ -123,4 +126,19 @@ public class LoginPage extends WikiBasePageObject {
   public String getLoginHeaderText(){
     return loginHeader.getText();
   }
+
+  public void typePassword(String password) { passwordField.sendKeys(password); }
+
+  public void clickOnPasswordToggler() { passwordToggler.click(); };
+
+  public Boolean isPasswordTogglerDisabled() {
+    String togglerDisabled = passwordField.getAttribute("type");
+    return togglerDisabled.equals("password");
+  }
+
+  public Boolean isPasswordTogglerEnabled() {
+    String togglerDisabled = passwordField.getAttribute("type");
+    return togglerDisabled.equals("text");
+  }
+
 }

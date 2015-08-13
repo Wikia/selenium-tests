@@ -132,5 +132,19 @@ public class LoginTests extends NewTestTemplate {
 
     Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
   }
+
+  @Test
+  @Execute(onWikia = "mobileregressiontesting")
+  public void passwordTogglerWorks() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.typePassword(Configuration.getCredentials().password10) ;
+
+    Assertion.assertTrue(loginPage.isPasswordTogglerDisabled(),"password should be disabled");
+
+    loginPage.clickOnPasswordToggler();
+
+    Assertion.assertTrue(loginPage.isPasswordTogglerEnabled(),"password should be enabled");
+
+  }
 }
 
