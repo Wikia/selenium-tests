@@ -228,8 +228,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyDivsNotAppearing(WebElement element) {
     String tagName = element.getTagName();
     System.out.println("TagName: " + tagName);
-    //change to assertNotEquals after cleanup release!
-    Assertion.assertEquals(tagName, "div");
+    Assertion.assertNotEquals(tagName, "div");
   }
 
   public void compareFontSizes(WebElement firstElement, WebElement secondElement) {

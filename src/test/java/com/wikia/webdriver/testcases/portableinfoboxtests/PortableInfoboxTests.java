@@ -262,6 +262,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
     PortableInfoboxPageObject info = article.getInfoboxPage();
+    info.verifyEmptyTags(info.getInfoboxContent());
   }
 
 }
