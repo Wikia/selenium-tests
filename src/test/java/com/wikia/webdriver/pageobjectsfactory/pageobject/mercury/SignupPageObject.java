@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
 /**
  * @ownership Social
  */
@@ -119,6 +118,7 @@ public class SignupPageObject extends BasePageObject {
   }
 
   public String getRegisterHeaderText() {
+    wait.forElementVisible(registerHeader);
     return registerHeader.getText();
   }
   public void openRegisterPage() {
