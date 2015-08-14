@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
-import com.google.common.base.Joiner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -166,8 +165,11 @@ public class AdsGermanObject extends AdsBaseObject {
   }
 
   public void verify71MediaParams(String expectedParams) {
-    String actualParams = Joiner.on("; ").join(get71MediaParams());
-    Assertion.assertEquals(actualParams, expectedParams);
+    ArrayList<String> actual = get71MediaParams();
+    String[] expected = expectedParams.split("; ");
+    for (int i = 0; i < expected.length; i++) {
+      Assertion.assertEquals(actual.get(i), expected[i]);
+    }
   }
 
   private ArrayList<String> get71MediaParams() {
