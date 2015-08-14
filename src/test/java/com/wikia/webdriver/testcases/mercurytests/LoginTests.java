@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
@@ -28,6 +29,7 @@ public class LoginTests extends NewTestTemplate {
     loginPage.logUserIn(Configuration.getCredentials().userName10,
                         Configuration.getCredentials().password10);
 
+    new ArticlePageObject(driver).waitForFooterToBeVisible();
     Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
         Configuration.getCredentials().userName10));
   }

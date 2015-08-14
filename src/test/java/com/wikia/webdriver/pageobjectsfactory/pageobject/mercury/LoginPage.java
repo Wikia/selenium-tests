@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,16 +12,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Qaga on 2015-06-30.
+ * @ownership Social
  */
 public class LoginPage extends WikiBasePageObject {
 
@@ -43,7 +43,7 @@ public class LoginPage extends WikiBasePageObject {
   private WebElement loginHeader;
 
   @FindBy(css = ".password-toggler")
-  private  WebElement passwordToggler;
+  private WebElement passwordToggler;
 
   private NavigationSideComponentObject nav;
 
@@ -60,14 +60,16 @@ public class LoginPage extends WikiBasePageObject {
   public LoginPage get() {
     String redirectParameter = "";
 
-    try{
-      redirectParameter = URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
+    try {
+      redirectParameter =
+          URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
 
-    } catch (UnsupportedEncodingException e){
-      PageObjectLogging.log("encoding","problem occured during URL encoding",false);
+    } catch (UnsupportedEncodingException e) {
+      PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + redirectParameter);
-        return this;
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
+               + redirectParameter);
+    return this;
   }
 
   public NavigationSideComponentObject getNav() {
@@ -89,12 +91,11 @@ public class LoginPage extends WikiBasePageObject {
 
   /**
    * Check if button is disabled for the @duration
-   * 
+   *
    * @param duration in seconds
-   * @return
    */
   public boolean isSubmitButtonDisabled(int duration) {
-    changeImplicitWait((duration*1000)/4, TimeUnit.MILLISECONDS);
+    changeImplicitWait((duration * 1000) / 4, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, duration, (duration * 1000) / 2)
           .until(new ExpectedCondition<Boolean>() {
@@ -111,19 +112,19 @@ public class LoginPage extends WikiBasePageObject {
     }
   }
 
-  public String getCloseButtonURL(){
+  public String getCloseButtonURL() {
     return closeButton.getAttribute("href");
   }
 
-  public void clickOnCloseButton(){
+  public void clickOnCloseButton() {
     closeButton.click();
   }
 
-  public void clickOnRegisterLink(){
+  public void clickOnRegisterLink() {
     registerNowLink.click();
   }
 
-  public String getLoginHeaderText(){
+  public String getLoginHeaderText() {
     return loginHeader.getText();
   }
 
@@ -144,5 +145,4 @@ public class LoginPage extends WikiBasePageObject {
     String togglerDisabled = passwordField.getAttribute("type");
     return "text".equals(togglerDisabled);
   }
-
 }
