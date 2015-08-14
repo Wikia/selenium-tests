@@ -189,6 +189,23 @@ public class CommonExpectedConditions {
     };
   }
 
+  public static ExpectedCondition<Boolean> textToBePresentInElement(
+      final List<WebElement> givenElement, final int index, final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        String elementText = givenElement.get(index).getText();
+        return elementText.contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String.format("text ('%s') to be present in element %s",
+            text, givenElement.get(index).getTagName());
+      }
+    };
+  }
+
   /**
    * An expectation for checking if the given text is present in the specified element.
    */
@@ -229,6 +246,26 @@ public class CommonExpectedConditions {
       public String toString() {
         return String.format("text ('%s') to be present in element %s",
                              text, selectorBy.toString());
+      }
+    };
+  }
+
+  /**
+   * An expectation for checking if the given text is present in the specified element.
+   */
+  public static ExpectedCondition<Boolean> textToBePresentInElement(
+      final By selectorBy, final int index, final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        String elementText = driver.findElements(selectorBy).get(index).getText();
+        return elementText.contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String.format("text ('%s') to be present in element %s",
+            text, selectorBy.toString());
       }
     };
   }

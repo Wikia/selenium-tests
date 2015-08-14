@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -140,6 +141,15 @@ public class Wait {
     }
   }
 
+  public boolean forTextInElement(By by, int index, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBePresentInElement(by, index, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public boolean forTextInElement(WebElement element, String text) {
     try {
       element.getTagName();
@@ -154,6 +164,26 @@ public class Wait {
             CommonExpectedConditions.textToBePresentInElement(element, text));
       } else {
         return forTextInElement(SelectorStack.read(), text);
+      }
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElement(List<WebElement> elements, int index, String text) {
+    try {
+      elements.get(0).getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+    }
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return wait.until(
+            CommonExpectedConditions.textToBePresentInElement(elements, index, text));
+      } else {
+        return forTextInElement(SelectorStack.read(), index, text);
       }
     } finally {
       restoreDeaultImplicitWait();
