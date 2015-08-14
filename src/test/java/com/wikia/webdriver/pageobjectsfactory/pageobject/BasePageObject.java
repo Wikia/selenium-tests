@@ -256,13 +256,7 @@ public class BasePageObject {
   }
 
   public void getUrl(String url, boolean makeScreenshot) {
-    try {
       driver.get(url);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("getUrl",
-          "page %page% loaded for more than 30 seconds".replace("%page%", url), false);
-      return;
-    }
     if (makeScreenshot) {
       PageObjectLogging.log("Take screenshot",
           String.format("Screenshot After Navigation to: %s", url), true, driver);

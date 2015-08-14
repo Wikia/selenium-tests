@@ -43,9 +43,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).open("AddModifyGallery");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+  public void addGallery() {
+    ArticleContent.clear();
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -58,12 +59,19 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
     visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+    visualEditMode.submitArticle().verifyGallery();
+  }
 
-    article.editArticleInRTEUsingDropdown();
-    visualEditMode.modifyComponent(Components.GALLERY);
-    galleryBuiler.clickAddPhoto();
+  @Test(groups = {"Smoke"})
+  @Execute(asUser = User.USER)
+  public void modifyGallery() {
+    ArticleContent.push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
+        + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    GalleryBuilderComponentObject galleryBuiler =
+        (GalleryBuilderComponentObject) visualEditMode.modifyComponent(Components.GALLERY);
+    AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
     galleryAddPhoto.choosePhotos(2);
     galleryAddPhoto.clickSelect();
@@ -73,31 +81,16 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     galleryBuiler.adjustOrientation(Orientation.PORTRAIT);
     galleryBuiler.clickFinish();
     visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+    visualEditMode.submitArticle().verifyGallery();
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).open("AddDeleteGallery");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.clearContent();
-    GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
-    AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
-    galleryAddPhoto.search("image");
-    galleryAddPhoto.choosePhotos(4);
-    galleryAddPhoto.clickSelect();
-    galleryBuiler.adjustPosition(PositionsGallery.CENTER);
-    galleryBuiler.adjustColumns("2");
-    galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
-    galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
-    galleryBuiler.clickFinish();
-    visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+  public void deleteGallery() {
+    ArticleContent.push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
+        + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n" + "Image007.jpg\n" + "</gallery>");
 
-    article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.GALLERY);
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }

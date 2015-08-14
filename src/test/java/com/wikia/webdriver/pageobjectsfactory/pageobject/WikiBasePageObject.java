@@ -761,8 +761,6 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-
-    try {
       String token = Helios.getAccessToken(userName, password);
 
       String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
@@ -779,10 +777,6 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
           + token, true);
       return token;
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("loginCookie", "page timeout after login by cookie", false);
-    }
-    return "";
   }
 
   public String loginAs(User user) {
