@@ -123,9 +123,13 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoInternalLinks.get(index).getAttribute("href");
   }
 
-  public WebElement getItemLabel() { return itemLabel; }
+  public WebElement getItemLabel() {
+    return itemLabel;
+  }
 
-  public WebElement getItemValue() { return itemValue; }
+  public WebElement getItemValue() {
+    return itemValue;
+  }
 
   public WebElement getOrderedListItem(int index) {
     return orderedElementList.get(index);
@@ -143,13 +147,21 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return horizontalItemValue;
   }
 
-  public WebElement getNavigationElements(int index) { return navigationElements.get(index); }
+  public WebElement getNavigationElements(int index) {
+    return navigationElements.get(index);
+  }
 
-  public WebElement getGroupHeader(int index) { return groupHeadersWrappers.get(index); }
+  public WebElement getGroupHeader(int index) {
+    return groupHeadersWrappers.get(index);
+  }
 
-  public WebElement getImageWrapper() { return imageWrapper; }
+  public WebElement getImageWrapper() {
+    return imageWrapper;
+  }
 
-  public WebElement getTitleWrapper() { return titleWrapper; }
+  public WebElement getTitleWrapper() {
+    return titleWrapper;
+  }
 
   public void clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
