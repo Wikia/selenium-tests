@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -26,12 +27,13 @@ public class LoginTests extends NewTestTemplate {
   @Execute(onWikia = "mobileregressiontesting")
   public void MercuryLoginTest_001_validUserCanLogIn() {
     LoginPage loginPage = new LoginPage(driver).get();
+    NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     loginPage.logUserIn(Configuration.getCredentials().userName10,
                         Configuration.getCredentials().password10);
 
     new ArticlePageObject(driver).waitForFooterToBeVisible();
-    Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
-        Configuration.getCredentials().userName10));
+    
+    Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
   }
 
   @Test(groups = {"MercuryLoginTest_002"})
