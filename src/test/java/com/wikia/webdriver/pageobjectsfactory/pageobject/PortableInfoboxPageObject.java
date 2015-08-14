@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.sitebricks.client.Web;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 
