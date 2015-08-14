@@ -28,7 +28,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
 
   private void smokeTestSlot(String slotName) {
     verifySlotIsLoaded(slotName);
-    ads.verifyGptIframe("wka.ent/_adtest//article", slotName, "gpt");
+    ads.verifyGptIframe("wka.life/_adtest//article", slotName, "gpt");
   }
 
   private void verifySlotIsLoaded(String slotName) {

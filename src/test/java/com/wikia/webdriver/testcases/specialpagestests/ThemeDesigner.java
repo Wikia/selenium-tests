@@ -20,9 +20,8 @@ public class ThemeDesigner extends NewTestTemplate {
   private String themeName;
 
   @Test(groups = {"ThemeDesigner001", "ThemeDesigner"})
+  @Execute(asUser = User.STAFF)
   public void themeDesigner001_selectThemeFromFirstPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
@@ -31,9 +30,8 @@ public class ThemeDesigner extends NewTestTemplate {
   }
 
   @Test(groups = {"ThemeDesigner002", "ThemeDesigner"})
+  @Execute(asUser = User.STAFF)
   public void themeDesigner002_selectThemeFromMiddlePage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.THEME);
