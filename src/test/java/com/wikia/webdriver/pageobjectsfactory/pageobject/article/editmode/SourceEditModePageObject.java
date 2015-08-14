@@ -74,7 +74,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-  @FindBy(css = "textarea#wpTextbox1.highlighted")
+  @FindBy(css = "#editarea .ace_scroller")
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;

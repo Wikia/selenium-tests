@@ -4,8 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
@@ -19,6 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageOb
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.net.nntp.Article;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -41,6 +40,10 @@ import org.testng.annotations.Test;
  * TC13: Verify category links inside infoboxes
  * TC14: Verify if horizontal group font size matches other elements font
  * TC15: Copy syntax from template page to article and verify presence of all new information provided
+ * TC16: Verify if navigation element has same left and right padding
+ * TC17: Verify if group headers and titles has same left and right padding
+ * TC18: Additional <div> wrappers from title, header and image HTML are removed
+ * TC19: Verify that any of the tags which do not have a value won't appear
  */
 public class PortableInfoboxTests extends NewTestTemplate {
 
@@ -112,7 +115,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
-    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
     src.focusTextArea();
     String catName = src.getRandomDigits(9);
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
@@ -204,7 +207,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
     template.openArticleByName(wikiURL,
-            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+            PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
     ArticlePageObject article = new ArticlePageObject(driver);
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
@@ -216,5 +219,48 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyImagePresence();
     info.verifyInfoboxTitlePresence();
   }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_016"})
+  public void verifyNavigationElementPadding() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    WebElement element = info.getNavigationElements(1);
+    info.verifyPadding(element);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_017"})
+  public void verifyGroupHeadersPadding() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    WebElement element = info.getGroupHeader(1);
+    info.verifyPadding(element);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_018"})
+  public void verifyDivsWrappersAreNotAppearing() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    //image
+    WebElement imageWrapper = info.getImageWrapper();
+    info.verifyDivsNotAppearing(imageWrapper);
+    //title
+    WebElement titleWrapper = info.getTitleWrapper();
+    info.verifyDivsNotAppearing(titleWrapper);
+    //header
+    WebElement groupHeaderWrapper = info.getGroupHeader(0);
+    info.verifyDivsNotAppearing(groupHeaderWrapper);
+  }
+
+  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_019"})
+  public void verifyEmptyTagsAreNotAppearing() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
+    PortableInfoboxPageObject info = article.getInfoboxPage();
+    info.verifyEmptyTags(info.getInfoboxContent());
+  }
+
 }
 
