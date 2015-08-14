@@ -17,15 +17,15 @@ import java.util.List;
  */
 public class PortableInfoboxPageObject extends WikiBasePageObject {
 
-  @FindBy(css = ".portable-infobox-image-wrapper")
+  @FindBy(css = ".pi-image")
   private WebElement pInfoImage;
-  @FindBy(css = ".portable-infobox-title")
+  @FindBy(css = ".pi-title")
   private WebElement pInfoTitle;
-  @FindBy(css = ".portable-infobox-header")
+  @FindBy(css = ".pi-header")
   private List<WebElement> pInfoTitleH3;
-  @FindBy(css = ".portable-infobox .external")
+  @FindBy(css = ".pi-item .external")
   private WebElement pInfoExternalLink;
-  @FindBy(css = ".portable-infobox-navigation a[href*='redlink']")
+  @FindBy(css = ".pi-navigation a[href*='redlink']")
   private List<WebElement> pInfoRedlLink;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
@@ -41,33 +41,33 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement tabber;
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
-  @FindBy(css = ".portable-infobox-item-value ul li")
+  @FindBy(css = ".pi-data-value ul li")
   private List <WebElement> unorderedElementList;
-  @FindBy(css = ".portable-infobox-item-value ol li")
+  @FindBy(css = ".pi-data-value ol li")
   private List <WebElement> orderedElementList;
   @FindBy(css = ".reference")
   private WebElement referenceElements;
-  @FindBy(css = ".portable-infobox-item-label")
+  @FindBy(css = ".pi-data-label")
   private WebElement h3Elements;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
-  @FindBy(css = ".portable-infobox-item-value .newcategory")
+  @FindBy(css = ".pi-data-value .newcategory")
   private WebElement categoryLink;
-  @FindBy(css = ".portable-infobox-item-label")
+  @FindBy(css = ".pi-data-label")
   private WebElement itemLabel;
-  @FindBy(css = ".portable-infobox-item-value")
+  @FindBy(css = ".pi-data-value")
   private WebElement itemValue;
-  @FindBy(css = "h3.portable-infobox-item-label.portable-infobox-secondary-font")
+  @FindBy(css = "h3.pi-data-label.pi-secondary-font")
   private WebElement horizontalItemLabel;
-  @FindBy(css = "div.portable-infobox-item-value")
+  @FindBy(css = "div.pi-data-value")
   private WebElement horizontalItemValue;
-  @FindBy(css = ".portable-infobox-navigation")
+  @FindBy(css = ".pi-navigation")
   private List<WebElement> navigationElements;
-  @FindBy(css = ".item-type-header")
+  @FindBy(css = ".pi-header")
   private List<WebElement> groupHeadersWrappers;
-  @FindBy(css = ".item-type-image")
+  @FindBy(css = ".pi-image")
   private WebElement imageWrapper;
-  @FindBy(css = ".item-type-title")
+  @FindBy(css = ".pi-title")
   private WebElement titleWrapper;
 
   public PortableInfoboxPageObject(WebDriver driver) {
@@ -219,15 +219,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public void verifyPadding(WebElement element) {
     String leftPadding = element.getCssValue("padding-left");
-    System.out.println("Left: " + leftPadding);
     String rightPadding = element.getCssValue("padding-right");
-    System.out.println("Right: " + rightPadding);
     Assertion.assertEquals(leftPadding, rightPadding);
   }
 
   public void verifyDivsNotAppearing(WebElement element) {
     String tagName = element.getTagName();
-    System.out.println("TagName: " + tagName);
     Assertion.assertNotEquals(tagName, "div");
   }
 

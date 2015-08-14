@@ -118,7 +118,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
-    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
     src.focusTextArea();
     String catName = src.getRandomDigits(9);
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
@@ -210,7 +210,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
     template.openArticleByName(wikiURL,
-            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
+            PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
     ArticlePageObject article = new ArticlePageObject(driver);
     SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
     String templateSyntax = editor.copyContent();
