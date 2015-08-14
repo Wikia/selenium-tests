@@ -31,7 +31,7 @@ public class MobileDriverProvider {
   public WebDriver getDriverInstance() {
     WebDriver driver = null;
 
-    if ("CHROMEMOBILE".equals(browser) || "CHROMEMOBILEMERCURY".equals(browser)) {
+    if ("CHROMEMOBILEMERCURY".equals(browser)) {
       return NewDriverProvider.getDriverInstanceForBrowser(browser);
     }
 

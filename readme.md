@@ -51,10 +51,6 @@ All commands must be run from the `selenium-tests` directory cloned during setup
 
     mvn clean test -Dbrowser=CHROME -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
-##### Running tests on devbox for muppet wikia on a Chrome pretending to be an Android device
-
-    mvn clean test -Dbrowser=CHROMEMOBILE -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
-
 ##### Running tests on local instance of Mercury (which fetches data from devbox) for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
 
     mvn clean test -Dbrowser=CHROMEMOBILEMERCURY -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
@@ -85,7 +81,6 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 * FF
 * CHROME
-* CHROMEMOBILE
 * CHROMEMOBILEMERCURY
 * IE
 * GHOST (phantomjs)
