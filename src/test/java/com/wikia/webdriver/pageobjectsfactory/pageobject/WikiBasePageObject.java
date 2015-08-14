@@ -69,7 +69,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
@@ -550,6 +549,9 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      if (driver.findElement(By.cssSelector("#PreviewFrame")).isDisplayed()) {
+        driver.switchTo().frame("PreviewFrame");
+      }
       waitFor.until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver driver) {
@@ -572,6 +574,7 @@ public class WikiBasePageObject extends BasePageObject {
       });
     } finally {
       restoreDeaultImplicitWait();
+      driver.switchTo().defaultContent();
     }
     PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
   }

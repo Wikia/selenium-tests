@@ -73,22 +73,18 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public String selectTheme(int number) {
     wait.forElementVisible(themes.get(0));
     if (number < 5) {
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number == 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
-      wait.forElementVisible(themes.get(7));
       scrollAndClick(nextButton);
       wait.forElementVisible(thirdThemesSet);
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     String themeName =
