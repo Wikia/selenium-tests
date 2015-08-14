@@ -146,7 +146,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"MercuryLoginTest_012"})
   @Execute(onWikia = "mobileregressiontesting")
-  public void MercuryLoginTest_011_passwordTogglerWorks() {
+  public void MercuryLoginTest_012_passwordTogglerWorks() {
     LoginPage loginPage = new LoginPage(driver).get();
     loginPage.typePassword(Configuration.getCredentials().password10);
 
