@@ -1,8 +1,7 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -46,7 +46,9 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param element The element to be checked
+   * Checks if the element is visible on browser
+   * <p/>
+   * * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
@@ -67,7 +69,7 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-                                                                      .visibilityOf(element));
+          .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -88,8 +90,8 @@ public class Wait {
   public WebElement forElementVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling)
-          .until(ExpectedConditions.visibilityOfElementLocated(by));
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
+          .visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -101,8 +103,8 @@ public class Wait {
   public boolean forElementNotVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling)
-          .until(ExpectedConditions.invisibilityOfElementLocated(by));
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
+          .invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -160,8 +162,7 @@ public class Wait {
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
-        return wait.until(
-            CommonExpectedConditions.textToBePresentInElement(element, text));
+        return wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
       } else {
         return forTextInElement(SelectorStack.read(), text);
       }
@@ -180,8 +181,7 @@ public class Wait {
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
-        return wait.until(
-            CommonExpectedConditions.textToBePresentInElement(elements, index, text));
+        return wait.until(CommonExpectedConditions.textToBePresentInElement(elements, index, text));
       } else {
         return forTextInElement(SelectorStack.read(), index, text);
       }

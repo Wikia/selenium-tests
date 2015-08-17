@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.ArticleContent;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -202,7 +203,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_007", "Media"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();

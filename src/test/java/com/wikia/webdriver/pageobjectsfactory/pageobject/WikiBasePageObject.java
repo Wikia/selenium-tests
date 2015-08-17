@@ -9,6 +9,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -549,7 +550,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      if (driver.findElements(By.cssSelector("#PreviewFrame")).size()>0) {
+      if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
       waitFor.until(new ExpectedCondition<Boolean>() {
@@ -761,22 +762,23 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-      String token = Helios.getAccessToken(userName, password);
+    String token = Helios.getAccessToken(userName, password);
 
-      String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
+    String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
 
-      driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
+    driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
-      if (driver.getCurrentUrl().contains("Logout")) {
-        driver.get(wikiURL);
-      } else {
-        driver.navigate().refresh();
-      }
+    if (driver.getCurrentUrl().contains("Logout")) {
+      driver.get(wikiURL);
+    } else {
+      driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
+          + DateTime.now().getMillis()));
+    }
 
-      verifyUserLoggedIn(userName);
-      PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-          + token, true);
-      return token;
+    verifyUserLoggedIn(userName);
+    PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
+        + token, true);
+    return token;
   }
 
   public String loginAs(User user) {
