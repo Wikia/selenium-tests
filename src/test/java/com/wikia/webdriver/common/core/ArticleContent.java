@@ -2,12 +2,13 @@ package com.wikia.webdriver.common.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -46,7 +47,11 @@ public class ArticleContent {
     try {
       CloseableHttpClient httpClient = HttpClients.createDefault();
 
-      HttpPost httpPost = new HttpPost(URIUtil.encodeQuery(baseURL + articleTitle));
+      URL url = new URL(baseURL + articleTitle);
+
+      HttpPost httpPost =
+          new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
+              url.getPath(), url.getQuery(), url.getRef()));
       List<NameValuePair> nvps = new ArrayList<>();
 
       httpPost.addHeader("Authorization", "Bearer " + Helios.getAccessToken(User.STAFF));
@@ -60,11 +65,14 @@ public class ArticleContent {
 
       PageObjectLogging.log("CONTENT PUSH", "Content pushed to article: " + baseURL + articleTitle,
           true);
-    } catch (ClientProtocolException | URIException e) {
+    } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", e.toString(), false);
       throw new WebDriverException("Problem with content pushing");
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION", e.toString(), false);
+      throw new WebDriverException("Problem with content pushing");
+    } catch (URISyntaxException e) {
+      PageObjectLogging.log("URI_SYNTAX EXCEPTION", e.toString(), false);
       throw new WebDriverException("Problem with content pushing");
     }
   }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 
 import org.openqa.selenium.Dimension;
@@ -11,6 +12,15 @@ import java.util.Arrays;
  * @author Bogna 'bognix' Knychala
  */
 public class AdsDataProvider {
+
+  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
+      AdsContent.TOP_LB,
+      AdsContent.MEDREC,
+      AdsContent.LEFT_SKYSCRAPPER_2,
+      AdsContent.LEFT_SKYSCRAPPER_3,
+      AdsContent.PREFOOTER_LEFT,
+      AdsContent.PREFOOTER_RIGHT
+  };
 
   private AdsDataProvider() {
 

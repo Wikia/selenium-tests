@@ -64,6 +64,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     customMapDialog.verifyTemplateListElementVisible(0);
   }
 
+  @RelatedIssue(issueID = "", comment = "Functionaliy will be deprecated. No need to test manually")
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
