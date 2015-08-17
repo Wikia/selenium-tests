@@ -3,7 +3,10 @@
  */
 package com.wikia.webdriver.testcases.categoriestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,20 +14,16 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditC
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 
-import org.testng.annotations.Test;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
 public class CategoriesTestsEditMode extends NewTestTemplate {
 
-	/*
-         * Add category to article edit mode as anon
-	 * Add category to article edit mode from suggestion list as anon
-	 * Add category to article edit mode as user
-	 * Add category to article edit mode from suggestion list as user
-	 * Add category to article edit mode as anon edit, delete
-	 */
+  /**
+   * Add category to article edit mode as anon Add category to article edit mode from suggestion
+   * list as anon Add category to article edit mode as user Add category to article edit mode from
+   * suggestion list as user Add category to article edit mode as anon edit, delete
+   */
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -45,9 +44,9 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticleEdit_002", "CategoriesTestsArticleEditMode"})
   public void CategoriesTestsArticleEdit_002_anonDelete() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
+    ArticleContent.clear();
+
+    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
     visual.typeCategoryName(categoryName);
     visual.submitCategory();
