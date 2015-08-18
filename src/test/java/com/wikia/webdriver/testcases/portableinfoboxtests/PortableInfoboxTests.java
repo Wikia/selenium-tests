@@ -129,18 +129,20 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_006"})
   public void verifyLightboxVisibilityAfterClickingImage() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
     info.clickImage();
     info.verifyLightboxPresence();
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
   public void verifyVisibilityOfTabberAndItsImages() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX02);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .getInfoboxPage();
+
     info.verifyTabberPresence();
     info.verifyTabberImagePresence();
   }
@@ -231,11 +233,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_017"})
   public void verifyGroupHeadersPadding() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    WebElement element = info.getGroupHeader(1);
-    info.verifyPadding(element);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
+    info.verifyGroupHeaderPadding(1);
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_018"})
@@ -256,11 +258,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_019"})
   public void verifyEmptyTagsAreNotAppearing() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
+        .getInfoboxPage();
+
     info.verifyEmptyTags(info.getInfoboxContent());
   }
 
 }
-
