@@ -183,14 +183,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_013"})
   public void verifyInfoboxCategoryLinks() {
-    CategoryPageObject category = new CategoryPageObject(driver);
     PortableInfoboxPageObject info = new ArticlePageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
         .getInfoboxPage();
 
-    info.clickCategoryLink();
-    System.out.println(category.getCategoryName());
-    category.verifyCategoryPageTitle(category.getCategoryName());
+    String categoryLinkName = info.getCategoryLinkName();
+    CategoryPageObject categoryPage = info.clickCategoryLink();
+    Assertion.assertEquals(categoryLinkName, "Category:" + categoryPage.getCategoryName());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
@@ -215,7 +214,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
     newEditor.addContentInSourceMode(templateSyntax);
     newEditor.submitArticle();
-    PortableInfoboxPageObject info = randomArticle.getInfoboxPage();
+    PortableInfoboxPageObject info = article.getInfoboxPage();
     info.verifyImagePresence();
     info.verifyInfoboxTitlePresence();
   }

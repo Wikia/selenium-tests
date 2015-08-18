@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,8 +51,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement h3Elements;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
-  @FindBy(css = ".newcategory")
-  private List<WebElement> categoryLinks;
+  @FindBy(css = ".pi-data-value .newcategory")
+  private WebElement categoryLink;
   @FindBy(css = ".pi-data-label")
   private WebElement itemLabel;
   @FindBy(css = ".pi-data-value")
@@ -179,9 +180,15 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     pInfoImage.click();
   }
 
-  public void clickCategoryLink() {
-    wait.forElementVisible(categoryLinks.get(0));
-    scrollAndClick(categoryLinks.get(0));
+  public CategoryPageObject clickCategoryLink() {
+    wait.forElementVisible(categoryLink);
+    scrollAndClick(categoryLink);
+    return new CategoryPageObject(driver);
+  }
+
+  public String getCategoryLinkName() {
+    wait.forElementVisible(categoryLink);
+    return categoryLink.getText();
   }
 
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
