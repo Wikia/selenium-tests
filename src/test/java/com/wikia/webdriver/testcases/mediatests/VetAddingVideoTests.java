@@ -14,6 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**

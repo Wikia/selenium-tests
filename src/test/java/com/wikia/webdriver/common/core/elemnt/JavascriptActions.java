@@ -1,10 +1,10 @@
 package com.wikia.webdriver.common.core.elemnt;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by Ludwik on 2015-07-27.
@@ -47,5 +47,12 @@ public class JavascriptActions {
 
   public void mouseOver(WebElement element) {
     js.executeScript("$(arguments[0]).mouseenter()", element);
+  }
+
+  public boolean isElementInViewPort(WebElement element) {
+    return (Boolean) js.executeScript(
+        "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
+        + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
+        element);
   }
 }

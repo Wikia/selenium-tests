@@ -94,7 +94,7 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-        + cssSelecotr + "')).mouseenter()");
+                      + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -166,7 +166,9 @@ public class BasePageObject {
   }
 
   protected void scrollAndClick(WebElement element) {
-    scrollToElement(element);
+    if(!jsActions.isElementInViewPort(element)){
+      scrollToElement(element);
+    }
     waitForElementClickableByElement(element, 5);
     element.click();
   }

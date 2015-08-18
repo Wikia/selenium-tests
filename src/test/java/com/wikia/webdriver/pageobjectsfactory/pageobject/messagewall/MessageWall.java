@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -113,6 +114,7 @@ public class MessageWall extends WikiBasePageObject {
   public void submit() {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
+    new Actions(driver).moveByOffset(0, 0).perform();
     PageObjectLogging.log("submit", "message submitted", true);
   }
 
