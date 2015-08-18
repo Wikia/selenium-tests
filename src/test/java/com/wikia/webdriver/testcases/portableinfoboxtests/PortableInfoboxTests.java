@@ -117,11 +117,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject
         src =
         info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
-    System.out.println("1");
     src.focusTextArea();
-    System.out.println("2");
     String catName = src.getRandomDigits(9);
-    System.out.println("3");
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
     src = shortcuts.clickCategory();
     src.addContent(catName);
