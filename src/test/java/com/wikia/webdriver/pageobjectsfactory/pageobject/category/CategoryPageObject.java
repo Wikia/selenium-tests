@@ -10,25 +10,24 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by nikodem on 27.07.15.
  */
+// TODO: What is this class about?
 public class CategoryPageObject extends WikiBasePageObject {
 
     @FindBy(css = "#WikiaPageHeader h1")
     protected WebElement categoryHeader;
 
-
     public CategoryPageObject(WebDriver driver) {
         super(driver);
     }
 
-    public String getCategoryName() {
-        String categoryName = categoryHeader.getText();
-        PageObjectLogging.log("getCategoryname", "the name of the category is: " + categoryName, true);
-        return categoryName;
-    }
-
-    public void verifyCategoryPageTitle(String title) {
+    public void verifyCategoryPageTitle() {
         wait.forElementVisible(categoryHeader);
+        String title = categoryHeader.getText();
+        PageObjectLogging.log(
+            "getCategoryname",
+            "the name of the category is: " + title,
+            true
+        );
         Assertion.assertEquals(categoryHeader.getText(), title);
     }
-
 }

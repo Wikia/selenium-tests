@@ -45,11 +45,13 @@ import java.util.logging.Logger;
  * TC18: Additional <div> wrappers from title, header and image HTML are removed
  * TC19: Verify that any of the tags which do not have a value won't appear
  */
+@Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
   private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
+  // TODO: compress this test
+  @Test(groups = "PortableInfoboxTests_001")
   public void verifyElementsVisibility() {
     PortableInfoboxPageObject info = new ArticlePageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -64,7 +66,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyInfoboxTitlePresence();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
+  // TODO: compress this test
+  @Test(groups = "PortableInfoboxTests_002")
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
@@ -97,7 +100,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
+  // TODO: compress this test
+  @Test(groups = "PortableInfoboxTests_003")
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01);
@@ -109,7 +113,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     links.verifyInfoboxArticleInList(articleName);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})
+  // TODO: compress this test
+  @Test(groups = "PortableInfoboxTests_004")
   public void verifyCategoriesInTemplateInvocation() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
@@ -128,31 +133,27 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyCategoryInArticlePage(catName);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_006"})
+  @Test(groups = "PortableInfoboxTests_006")
   public void verifyLightboxVisibilityAfterClickingImage() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInfoboxPage();
-
-    info.clickImage();
-    info.verifyLightboxPresence();
+        .clickImage()
+        .verifyLightboxPresence();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
+  @Test(groups = "PortableInfoboxTests_008")
   public void verifyVisibilityOfTabberAndItsImages() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX02)
-        .getInfoboxPage();
-
-    info.verifyTabberPresence();
-    info.verifyTabberImagePresence();
+        .verifyTabberPresence()
+        .verifyTabberImagePresence();
   }
 
+  // TODO: compress this test
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
+  @Test(groups = "PortableInfoboxTests_009")
   public void verifyInfoboxLayoutChange() {
-    SpecialThemeDesignerPageObject theme = new
-        SpecialThemeDesignerPageObject(driver);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver);
     theme.openSpecialDesignerPage(wikiURL);
     theme.selectTheme(4);
@@ -168,37 +169,34 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
+  @Test(groups = "PortableInfoboxTests_012")
   public void verifyOrderedAndUnorderedLists() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX02)
-        .getInfoboxPage();
-
-    info.compareListsFontSizes();
+        .compareFontSizesBetweenItemValueAndOrderedListItem(1)
+        .compareFontSizesBetweenItemValueAndUnorderedListItem(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_013"})
-  public void verifyInfoboxCategoryLinks() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+  @Test(groups = "PortableInfoboxTests_013")
+  public void verifyInfoboxCategoryLink() {
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInfoboxPage();
-
-    String categoryLinkName = info.getCategoryLinkName();
-    CategoryPageObject categoryPage = info.clickCategoryLink();
-    Assertion.assertEquals(categoryLinkName, "Category:" + categoryPage.getCategoryName());
+        .clickCategoryLink();
+    new CategoryPageObject(driver)
+        .verifyCategoryPageTitle();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
+  @Test(groups = "PortableInfoboxTests_014")
   public void verifyHorizontalGroupFontSize() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
-        .open(PageContent.PORTABLE_INFOBOX02)
-        .getInfoboxPage();
-
-    info.compareHorizontalGroupFontSizes();
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .compareFontSizesBetweenHorizontalItemLabelAndItemLabel()
+        .compareFontSizesBetweenHorizontalItemValueAndItemValue();
   }
 
+  // TODO: compress this test
   @Execute(asUser = User.USER_9)
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_015"})
+  @Test(groups = "PortableInfoboxTests_015")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
     template.openArticleByName(wikiURL,
@@ -215,40 +213,33 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyInfoboxTitlePresence();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_016"})
+  @Test(groups = "PortableInfoboxTests_016")
   public void verifyNavigationElementPadding() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInfoboxPage();
-
-    info.verifyNavigationPadding();
+        .verifyPaddingNavigationElement(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_017"})
+  @Test(groups = "PortableInfoboxTest_017")
   public void verifyGroupHeadersPadding() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInfoboxPage();
-
-    info.verifyGroupHeaderPadding(1);
+        .verifyGroupHeaderPadding(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_018"})
+  @Test(groups = "PortableInfoboxTest_018")
   public void verifyDivsWrappersAreNotAppearing() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInfoboxPage();
-
-    info.verifyElementsNotWrappedByDivs();
+        .verifyDivsNotAppearingInImage()
+        .verifyDivsNotAppearingInTitle()
+        .verifyDivsNotAppearingInHeader(0);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_019"})
+  @Test(groups = "PortableInfoboxTest_019")
   public void verifyEmptyTagsAreNotAppearing() {
-    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+    new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
-        .getInfoboxPage();
-
-    info.verifyEmptyTags(info.getInfoboxContent());
+        .verifyEmptyTags();
   }
-
 }

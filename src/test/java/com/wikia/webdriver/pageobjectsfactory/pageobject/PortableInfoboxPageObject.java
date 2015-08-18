@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 
@@ -15,6 +17,7 @@ import java.util.List;
  * Created by Rodriuki on 11/06/15.
  * Created by nikodamn on 20/07/15
  */
+// TODO: Clean up
 public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".pi-image")
@@ -89,29 +92,34 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public List<WebElement> getHeaderElements() { return pInfoTitleH3; }
 
-  public void verifyImagePresence() {
+  public PortableInfoboxPageObject verifyImagePresence() {
     wait.forElementVisible(pInfoImage);
     Assertion.assertEquals(isElementOnPage(pInfoImage), true);
+    return this;
   }
 
-  public void verifyTabberPresence() {
+  public PortableInfoboxPageObject verifyTabberPresence() {
     wait.forElementVisible(tabber);
     Assertion.assertEquals(isElementOnPage(tabber), true);
+    return this;
   }
 
-  public void verifyTabberImagePresence() {
+  public PortableInfoboxPageObject verifyTabberImagePresence() {
     wait.forElementVisible(tabberImage);
     Assertion.assertEquals(isElementOnPage(tabberImage), true);
+    return this;
   }
 
-  public void verifyInfoboxTitlePresence() {
+  public PortableInfoboxPageObject verifyInfoboxTitlePresence() {
     wait.forElementVisible(pInfoTitle);
     Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
+    return this;
   }
 
-  public void verifyLightboxPresence() {
+  public PortableInfoboxPageObject verifyLightboxPresence() {
     wait.forElementVisible(lightbox);
     Assertion.assertEquals(isElementOnPage(lightbox), true);
+    return this;
   }
 
   public String getExternalLinkRedirectTitle() {
@@ -175,9 +183,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     pInfoInternalLinks.get(index).click();
   }
 
-  public void clickImage() {
+  public PortableInfoboxPageObject clickImage() {
     wait.forElementVisible(pInfoImage);
     pInfoImage.click();
+    return this;
   }
 
   public CategoryPageObject clickCategoryLink() {
@@ -235,15 +244,37 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     // Same as previous case, waiting on Ludwik
   }
 
-  public void verifyPadding(WebElement element) {
+  public PortableInfoboxPageObject verifyPadding(WebElement element) {
     String leftPadding = element.getCssValue("padding-left");
     String rightPadding = element.getCssValue("padding-right");
     Assertion.assertEquals(leftPadding, rightPadding);
+    return this;
   }
 
-  public void verifyDivsNotAppearing(WebElement element) {
+  public PortableInfoboxPageObject verifyPaddingNavigationElement(int index) {
+    verifyPadding(getNavigationElements(index));
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyDivsNotAppearing(WebElement element) {
     String tagName = element.getTagName();
     Assertion.assertNotEquals(tagName, "div");
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyDivsNotAppearingInImage() {
+    Assertion.assertNotEquals(imageWrapper.getTagName(), "div");
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyDivsNotAppearingInTitle() {
+    Assertion.assertNotEquals(titleWrapper.getTagName(), "div");
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyDivsNotAppearingInHeader(int index) {
+    Assertion.assertNotEquals(groupHeadersWrappers.get(index).getTagName(), "div");
+    return this;
   }
 
   public void verifyElementsNotWrappedByDivs() {
@@ -252,10 +283,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     verifyDivsNotAppearing(groupHeadersWrappers.get(0));
   }
 
-  public void compareFontSizes(WebElement firstElement, WebElement secondElement) {
+  public PortableInfoboxPageObject compareFontSizes(WebElement firstElement, WebElement secondElement) {
     String firstFontSize = firstElement.getCssValue("font-size");
     String secondFontSize = secondElement.getCssValue("font-size");
     Assertion.assertEquals(firstFontSize, secondFontSize);
+    return this;
   }
 
   public void compareListsFontSizes() {
@@ -272,16 +304,43 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return infoboxLayout.getText();
   }
 
-  public void verifyEmptyTags(String infoboxContent) {
-    Assertion.assertStringContains(infoboxContent, "Default");
+  public PortableInfoboxPageObject compareFontSizesBetweenHorizontalItemLabelAndItemLabel() {
+    compareFontSizes(horizontalItemLabel, itemLabel);
+    return this;
   }
 
-  public void verifyGroupHeaderPadding(int index) {
+  public PortableInfoboxPageObject compareFontSizesBetweenHorizontalItemValueAndItemValue() {
+    compareFontSizes(horizontalItemValue, itemValue);
+    return this;
+  }
+
+  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndOrderedListItem(int index) {
+    compareFontSizes(itemValue, orderedElementList.get(index));
+    return this;
+  }
+
+  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItem(int index) {
+    compareFontSizes(itemValue, unorderedElementList.get(index));
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyEmptyTags() {
+    Assertion.assertStringContains(infoboxLayout.getText(), "Default");
+    return this;
+  }
+
+  public PortableInfoboxPageObject verifyGroupHeaderPadding(int index) {
     verifyPadding(getGroupHeader(index));
+    return this;
   }
 
   public void verifyNavigationPadding() {
     verifyPadding(navigationElements.get(1));
   }
 
+  public PortableInfoboxPageObject open(String articleTitle) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+           + articleTitle);
+    return this;
+  }
 }
