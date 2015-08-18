@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -15,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLink
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.logging.Level;
@@ -64,7 +62,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyReferencesPresence();
     info.verifyImagePresence();
     info.verifyInfoboxTitlePresence();
-
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
@@ -120,8 +117,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     SourceEditModePageObject
         src =
         info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
+    System.out.println("1");
     src.focusTextArea();
+    System.out.println("2");
     String catName = src.getRandomDigits(9);
+    System.out.println("3");
     WikiTextShortCutsComponentObject shortcuts = src.clickMore();
     src = shortcuts.clickCategory();
     src.addContent(catName);
@@ -163,13 +163,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String oldBackground = info.getBackgroundColor();
+
     theme.openSpecialDesignerPage(wikiURL);
     theme.selectTheme(1);
     theme.submitThemeSelection();
     article.open(PageContent.PORTABLE_INFOBOX01);
-    String newBackground = info.getBackgroundColor();
-    info.verifyChangedBackground(oldBackground, newBackground);
-
+    info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
