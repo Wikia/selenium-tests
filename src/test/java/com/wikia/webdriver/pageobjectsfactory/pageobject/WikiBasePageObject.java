@@ -50,7 +50,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
@@ -417,11 +417,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(url);
 
     return new FilePagePageObject(driver);
-  }
-
-  public NewMessageWall openMessageWall(String userName, String wikiURL) {
-    getUrl(wikiURL + URLsContent.USER_MESSAGE_WALL + userName);
-    return new NewMessageWall(driver);
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {

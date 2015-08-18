@@ -11,22 +11,22 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class NewMessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
+public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".wall-action-reason")
   private WebElement removeReasonField;
   @FindBy(css = "#WikiaConfirmOk")
   private WebElement removeConfirmButton;
 
-  public NewMessageWallCloseRemoveThreadPageObject(WebDriver driver) {
+  public MessageWallCloseRemoveThreadPageObject(WebDriver driver) {
     super(driver);
   }
 
-  public NewMessageWall closeRemoveThread(String reason) {
+  public MessageWall closeRemoveThread(String reason) {
     removeReasonField.sendKeys(reason);
     removeConfirmButton.click();
     wait.forElementNotPresent(By.cssSelector(modalWrapper));
     PageObjectLogging.log("closeRemoveThread", "thread removed with reason " + reason, true);
-    return new NewMessageWall(driver);
+    return new MessageWall(driver);
   }
 }
