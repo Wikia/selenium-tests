@@ -252,4 +252,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void verifyEmptyTags(String infoboxContent) {
     Assertion.assertStringContains(infoboxContent, "Default");
   }
+
+  public void verifyGroupHeaderPadding(int index)
+  {
+    verifyPadding(getGroupHeader(index));
+  }
+
 }
