@@ -108,7 +108,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogFeatures_005", "BlogFeaturesTests"})
-  public void BlogFeatures_005_AddingImage() {
+  public void addingImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
