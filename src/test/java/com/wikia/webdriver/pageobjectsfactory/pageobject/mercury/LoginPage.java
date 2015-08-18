@@ -52,6 +52,7 @@ public class LoginPage extends WikiBasePageObject {
   }
 
   public void logUserIn(String username, String password) {
+    wait.forElementVisible(usernameField);
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     submitButton.click();
