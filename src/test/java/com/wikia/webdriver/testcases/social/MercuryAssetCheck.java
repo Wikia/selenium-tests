@@ -19,7 +19,7 @@ public class MercuryAssetCheck extends NewTestTemplate {
   public void checkAssetsOnJoin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     networkTrafficInterceptor.startIntercepting("MercurryAssets");
-    base.getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/join");
+    base.getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "join");
     networkTrafficInterceptor.checkAssetsStatuses(".wikia.com");
   }
 }
