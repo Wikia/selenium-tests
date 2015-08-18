@@ -16,7 +16,7 @@ public class MercuryAssetCheck extends NewTestTemplate {
   @Test(groups = "CheckAssetsOnJoin")
   @NetworkTrafficDump
   @Execute(onWikia = "glee")
-  public void CheckAssetsOnJoin() {
+  public void checkAssetsOnJoin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     networkTrafficInterceptor.startIntercepting("MercurryAssets");
     base.getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/join");
