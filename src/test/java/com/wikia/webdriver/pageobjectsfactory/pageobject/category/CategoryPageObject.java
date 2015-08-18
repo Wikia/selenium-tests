@@ -28,6 +28,7 @@ public class CategoryPageObject extends WikiBasePageObject {
 
     public void verifyCategoryPageTitle(String title) {
         wait.forElementVisible(categoryHeader);
+        System.out.println("Category Header: " + categoryHeader.getText());
         Assertion.assertEquals(categoryHeader.getText(), title);
     }
 

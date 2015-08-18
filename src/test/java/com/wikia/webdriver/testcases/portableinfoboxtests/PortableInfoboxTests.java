@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -52,9 +53,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
   public void verifyElementsVisibility() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
     Assertion.assertTrue(info.getBoldElements().size() > 0);
     Assertion.assertTrue(info.getItalicElements().size() > 0);
     Assertion.assertTrue(info.getHeaderElements().size() > 0);
@@ -70,12 +72,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
-    //Red link
+    //Verify if red link redirects
     info.clickRedLink(0);
     info.verifyCreateNewArticleModal();
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    article.getInfoboxPage();
-    //External Link
+    //Verify if external link redirects
+    article.open(PageContent.PORTABLE_INFOBOX01).getInfoboxPage();
     String externalLinkName = info.getExternalLinkRedirectTitle();
     info.clickExternalLink();
     try {
@@ -85,9 +86,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     }
     String externalNavigatedURL = driver.getCurrentUrl();
     info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
+    //Verify if internal link redirects
     article.open(PageContent.PORTABLE_INFOBOX01);
     article.getInfoboxPage();
-    //Internal Link
     String internalLinkName = info.getInternalLinkRedirectTitle(0);
     info.clickInternalLink(0);
     try {
@@ -101,8 +102,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
   public void verifyImagesInWhatLinksHerePage() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
+    ArticlePageObject article = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01);
     String articleName = article.getArticleName();
     SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
     links.clickPageInputField();
@@ -155,10 +156,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new
         SpecialThemeDesignerPageObject(driver);
+    ArticlePageObject article = new ArticlePageObject(driver);
     theme.openSpecialDesignerPage(wikiURL);
     theme.selectTheme(4);
     theme.submitThemeSelection();
-    ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
     String oldBackground = info.getBackgroundColor();
@@ -173,38 +174,32 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
   public void verifyOrderedAndUnorderedLists() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX02);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    WebElement itemValue = info.getItemValue();
-    WebElement orderedListItem = info.getOrderedListItem(1);
-    info.compareFontSizes(itemValue, orderedListItem);
-    WebElement unorderedListItem = info.getUnorderedListElement(1);
-    info.compareFontSizes(itemValue, unorderedListItem);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .getInfoboxPage();
+
+    info.compareListsFontSizes();
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_013"})
-  public void verifyInfoboxCategoryLink() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    info.clickCategoryLink();
+  public void verifyInfoboxCategoryLinks() {
     CategoryPageObject category = new CategoryPageObject(driver);
-    String categoryName = category.getCategoryName();
-    category.verifyCategoryPageTitle(categoryName);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
+    info.clickCategoryLink();
+    System.out.println(category.getCategoryName());
+    category.verifyCategoryPageTitle(category.getCategoryName());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
   public void verifyHorizontalGroupFontSize() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    WebElement horizontalItemLabel = info.getHorizontalItemLabel();
-    WebElement itemLabel = info.getItemLabel();
-    info.compareFontSizes(horizontalItemLabel, itemLabel);
-    WebElement horizontalItemValue = info.getHorizontalItemValue();
-    WebElement itemValue = info.getItemValue();
-    info.compareFontSizes(horizontalItemValue, itemValue);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .getInfoboxPage();
+
+    info.compareHorizontalGroupFontSizes();
   }
 
   @Execute(asUser = User.USER_9)
@@ -227,11 +222,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_016"})
   public void verifyNavigationElementPadding() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    WebElement element = info.getNavigationElements(1);
-    info.verifyPadding(element);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
+    info.verifyNavigationPadding();
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_017"})
@@ -245,18 +240,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_018"})
   public void verifyDivsWrappersAreNotAppearing() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    //image
-    WebElement imageWrapper = info.getImageWrapper();
-    info.verifyDivsNotAppearing(imageWrapper);
-    //title
-    WebElement titleWrapper = info.getTitleWrapper();
-    info.verifyDivsNotAppearing(titleWrapper);
-    //header
-    WebElement groupHeaderWrapper = info.getGroupHeader(0);
-    info.verifyDivsNotAppearing(groupHeaderWrapper);
+    PortableInfoboxPageObject info = new ArticlePageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInfoboxPage();
+
+    info.verifyElementsNotWrappedByDivs();
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTest_019"})

@@ -50,8 +50,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement h3Elements;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
-  @FindBy(css = ".pi-data-value .newcategory")
-  private WebElement categoryLink;
+  @FindBy(css = ".newcategory")
+  private List<WebElement> categoryLinks;
   @FindBy(css = ".pi-data-label")
   private WebElement itemLabel;
   @FindBy(css = ".pi-data-value")
@@ -180,8 +180,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public void clickCategoryLink() {
-    wait.forElementVisible(categoryLink);
-    scrollAndClick(categoryLink);
+    wait.forElementVisible(categoryLinks.get(0));
+    scrollAndClick(categoryLinks.get(0));
   }
 
   public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
@@ -239,10 +239,26 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertNotEquals(tagName, "div");
   }
 
+  public void verifyElementsNotWrappedByDivs() {
+    verifyDivsNotAppearing(imageWrapper);
+    verifyDivsNotAppearing(titleWrapper);
+    verifyDivsNotAppearing(groupHeadersWrappers.get(0));
+  }
+
   public void compareFontSizes(WebElement firstElement, WebElement secondElement) {
     String firstFontSize = firstElement.getCssValue("font-size");
     String secondFontSize = secondElement.getCssValue("font-size");
     Assertion.assertEquals(firstFontSize, secondFontSize);
+  }
+
+  public void compareListsFontSizes() {
+    compareFontSizes(itemValue, orderedElementList.get(0));
+    compareFontSizes(itemValue, unorderedElementList.get(0));
+  }
+
+  public void compareHorizontalGroupFontSizes() {
+    compareFontSizes(itemLabel, horizontalItemLabel);
+    compareFontSizes(itemValue, horizontalItemValue);
   }
 
   public String getInfoboxContent() {
@@ -253,9 +269,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertStringContains(infoboxContent, "Default");
   }
 
-  public void verifyGroupHeaderPadding(int index)
-  {
+  public void verifyGroupHeaderPadding(int index) {
     verifyPadding(getGroupHeader(index));
+  }
+
+  public void verifyNavigationPadding() {
+    verifyPadding(navigationElements.get(1));
   }
 
 }
