@@ -169,7 +169,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB);
+        credentials.passwordFB).logOutFB();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
@@ -218,24 +218,5 @@ public class SignUpTests extends NewTestTemplate {
     PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
-  }
-
-  @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
-  public void disconnectFromFB() {
-    startBrowser();
-    try {
-      if (userName != null) {
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage(wikiURL);
-        base.appendToUrl("noads=1");
-        base.loginAs(userName, password, wikiURL);
-        base.verifyUserLoggedIn(userName);
-        PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
-        preferences.selectTab(tabNames.FACEBOOK);
-        preferences.disconnectFromFacebook();
-      }
-    } finally {
-      stopBrowser();
-    }
   }
 }
