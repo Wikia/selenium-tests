@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
@@ -52,6 +53,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   // TODO: compress this test
   @Test(groups = "PortableInfoboxTests_001")
+  @Execute(onWikia = "mediawiki119")
   public void verifyElementsVisibility() {
     PortableInfoboxPageObject info = new ArticlePageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -68,11 +70,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   // TODO: compress this test
   @Test(groups = "PortableInfoboxTests_002")
+  @Execute(onWikia = "mediawiki119")
   public void verifyElementsRedirects() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
     PortableInfoboxPageObject info = article.getInfoboxPage();
-    //Verify if red link redirects
+    //Verify if red link44 passed*, *0 failed*, *0 skipped redirects
     info.clickRedLink(0);
     info.verifyCreateNewArticleModal();
     //Verify if external link redirects
@@ -102,6 +105,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   // TODO: compress this test
   @Test(groups = "PortableInfoboxTests_003")
+  @Execute(onWikia = "mediawiki119")
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01);
@@ -115,6 +119,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   // TODO: compress this test
   @Test(groups = "PortableInfoboxTests_004")
+  @Execute(onWikia = "mediawiki119")
   public void verifyCategoriesInTemplateInvocation() {
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(PageContent.PORTABLE_INFOBOX01);
@@ -134,6 +139,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_006")
+  @Execute(onWikia = "mediawiki119")
   public void verifyLightboxVisibilityAfterClickingImage() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -142,6 +148,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_008")
+  @Execute(onWikia = "mediawiki119")
   public void verifyVisibilityOfTabberAndItsImages() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX02)
@@ -150,7 +157,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   // TODO: compress this test
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   @Test(groups = "PortableInfoboxTests_009")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
@@ -170,6 +177,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_012")
+  @Execute(onWikia = "mediawiki119")
   public void verifyOrderedAndUnorderedLists() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX02)
@@ -178,6 +186,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_013")
+  @Execute(onWikia = "mediawiki119")
   public void verifyInfoboxCategoryLink() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -187,6 +196,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_014")
+  @Execute(onWikia = "mediawiki119")
   public void verifyHorizontalGroupFontSize() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -195,7 +205,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   // TODO: compress this test
-  @Execute(asUser = User.USER_9)
+  @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   @Test(groups = "PortableInfoboxTests_015")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
@@ -214,6 +224,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTests_016")
+  @Execute(onWikia = "mediawiki119")
   public void verifyNavigationElementPadding() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -221,6 +232,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTest_017")
+  @Execute(onWikia = "mediawiki119")
   public void verifyGroupHeadersPadding() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -228,6 +240,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTest_018")
+  @Execute(onWikia = "mediawiki119")
   public void verifyDivsWrappersAreNotAppearing() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -237,6 +250,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "PortableInfoboxTest_019")
+  @Execute(onWikia = "mediawiki119")
   public void verifyEmptyTagsAreNotAppearing() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
