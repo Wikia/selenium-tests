@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -82,18 +82,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return infoboxLayout.getCssValue("background-color");
   }
 
-  public List<WebElement> getBoldElements(){
-    return boldElements;
-  }
-
-  public List<WebElement> getItalicElements() {
-    return italicElements;
-  }
-
-  public List<WebElement> getHeaderElements() {
-    return pInfoTitleH3;
-  }
-
   public PortableInfoboxPageObject verifyImagePresence() {
     wait.forElementVisible(pInfoImage);
     Assertion.assertEquals(isElementOnPage(pInfoImage), true);
@@ -134,44 +122,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoInternalLinks.get(index).getAttribute("href");
   }
 
-  public WebElement getItemLabel() {
-    return itemLabel;
-  }
-
-  public WebElement getItemValue() {
-    return itemValue;
-  }
-
-  public WebElement getOrderedListItem(int index) {
-    return orderedElementList.get(index);
-  }
-
-  public WebElement getUnorderedListElement(int index) {
-    return unorderedElementList.get(index);
-  }
-
-  public WebElement getHorizontalItemLabel() {
-    return horizontalItemLabel;
-  }
-
-  public WebElement getHorizontalItemValue() {
-    return horizontalItemValue;
-  }
-
   public WebElement getNavigationElements(int index) {
     return navigationElements.get(index);
   }
 
   public WebElement getGroupHeader(int index) {
     return groupHeadersWrappers.get(index);
-  }
-
-  public WebElement getImageWrapper() {
-    return imageWrapper;
-  }
-
-  public WebElement getTitleWrapper() {
-    return titleWrapper;
   }
 
   public PortableInfoboxPageObject clickExternalLink() {
@@ -199,11 +155,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return new CategoryPageObject(driver);
   }
 
-  public String getCategoryLinkName() {
-    wait.forElementVisible(categoryLink);
-    return categoryLink.getText();
-  }
-
   public PortableInfoboxPageObject compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
     return this;
@@ -212,12 +163,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public void compareURLAndInternalLink(String internalLinkName, String internalNavigatedURL) {
     Assertion.assertEquals(internalLinkName, internalNavigatedURL);
   }
-
-  public String getimgSrc() {
-    wait.forElementVisible(pInfoImage);
-    return pInfoImage.getAttribute("src");
-  }
-
 
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
@@ -280,31 +225,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public void verifyElementsNotWrappedByDivs() {
-    verifyDivsNotAppearing(imageWrapper);
-    verifyDivsNotAppearing(titleWrapper);
-    verifyDivsNotAppearing(groupHeadersWrappers.get(0));
-  }
-
   public PortableInfoboxPageObject compareFontSizes(WebElement firstElement, WebElement secondElement) {
     String firstFontSize = firstElement.getCssValue("font-size");
     String secondFontSize = secondElement.getCssValue("font-size");
     Assertion.assertEquals(firstFontSize, secondFontSize);
     return this;
-  }
-
-  public void compareListsFontSizes() {
-    compareFontSizes(itemValue, orderedElementList.get(0));
-    compareFontSizes(itemValue, unorderedElementList.get(0));
-  }
-
-  public void compareHorizontalGroupFontSizes() {
-    compareFontSizes(itemLabel, horizontalItemLabel);
-    compareFontSizes(itemValue, horizontalItemValue);
-  }
-
-  public String getInfoboxContent() {
-    return infoboxLayout.getText();
   }
 
   public PortableInfoboxPageObject compareFontSizesBetweenHorizontalItemLabelAndItemLabel() {
@@ -337,10 +262,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public void verifyNavigationPadding() {
-    verifyPadding(navigationElements.get(1));
-  }
-
   public PortableInfoboxPageObject open(String articleTitle) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
            + articleTitle);
@@ -348,17 +269,17 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject areBoldElementsMoreThanOne() {
-    Assertion.assertTrue(boldElements.size() > 0);
+    Assertion.assertFalse(boldElements.isEmpty());
     return this;
   }
 
   public PortableInfoboxPageObject areItalicElementsMoreThanOne() {
-    Assertion.assertTrue(italicElements.size() > 0);
+    Assertion.assertFalse(italicElements.isEmpty());
     return this;
   }
 
   public PortableInfoboxPageObject areHeadersMoreThanOne() {
-    Assertion.assertTrue(pInfoTitleH3.size() > 0);
+    Assertion.assertFalse(pInfoTitleH3.isEmpty());
     return this;
   }
 
