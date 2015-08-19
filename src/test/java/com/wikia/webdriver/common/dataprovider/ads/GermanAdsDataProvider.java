@@ -75,39 +75,37 @@ public class GermanAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] popularDEArticlesWithParams() {
+  public static final Object[][] popularDEArticlesWithParams() {
     return new Object[][]{
         {"de.clashofclans", "Clash_of_Clans_Wiki",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: mobile,casual,strategy,war,rts,declashofc"},
         {"de.harry-potter", "Severus_Snape",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.harry-potter", "Hauptseite",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.terraria", "Terraria_Wiki",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: deterraria; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,adventure,rpg,deterraria"},
         {"de.gameofthrones", "Game_of_Thrones_Wiki",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: usseries; SOI_SUB3SITE: degameofthrones; "
-         +
-         "SOI_CONTENT: content; SOI_WERBUNG: true; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: usseries; " +
+         "SOI_SUB3SITE: degameofthrones; SOI_CONTENT: content; SOI_WERBUNG: true; " +
          "SOI_KEYWORDS: pc,ps3,xbox360,tv,book,movie,adventure,strategy,rpg,adventure,drama,degameofth"},
         {"dietributevonpanem", "Lied_vom_Henkersbaum_(The_Hanging_Tree)",
-         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dedietributevonpanem; SOI_SUB3SITE: ; " +
-         "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: dedietribu"},
+         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dedietributevonpanem; " +
+         "SOI_SUB3SITE: ; SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: dedietribu"},
         {"jedipedia", "Jedipedia:Hauptseite",
-         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dejedipedia; SOI_SUB3SITE: ; "
-         +
-         "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,ps3,xbox360,nintendo,movie,scifi,dejedipedi"},
+         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dejedipedia; " +
+         "SOI_SUB3SITE: ; SOI_CONTENT: content; SOI_WERBUNG: true; " +
+         "SOI_KEYWORDS: pc,ps3,xbox360,nintendo,movie,scifi,dejedipedi"},
         {"de.clashofclans", "Kategorie:Truppen",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: mobile,casual,strategy,war,rts,declashofc"},
         {"de.gta", "Fahrzeuge_(V)",
-         "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: degta; SOI_SUB3SITE: ; SOI_CONTENT: content; "
-         +
-         "SOI_WERBUNG: true; SOI_KEYWORDS: pc,ps3,xbox360,nintendo,shooter,degta"},
+         "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: degta; SOI_SUB3SITE: ; " +
+         "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,ps3,xbox360,nintendo,shooter,degta"},
         {"de.clashofclans", "Dorfaufbau",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: mobile,casual,strategy,war,rts,declashofc"},

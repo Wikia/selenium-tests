@@ -14,8 +14,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallAddLinkComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallAddLinkComponentObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -31,7 +31,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_001_sourceMode() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -45,7 +45,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_002_boldMode() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -59,7 +59,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_003_italicMode() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -73,7 +73,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_004_image() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
@@ -88,11 +88,11 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_005_internalLink() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
-    NewMessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
+    MessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
     addLink.addInternalLink(PageContent.REDIRECT_LINK, PageContent.TEXT_LINK);
     wall.submit();
     wall.verifyInternalLink(title, PageContent.REDIRECT_LINK, PageContent.TEXT_LINK, wikiURL);
@@ -101,11 +101,11 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
   public void MessageWallFeatures_006_externalLink() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
-    NewMessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
+    MessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
     addLink.addExternalLink(PageContent.EXTERNAL_LINK, PageContent.TEXT_LINK);
     wall.submit();
     wall.verifyExternalLink(title, PageContent.EXTERNAL_LINK, PageContent.TEXT_LINK, wikiURL);

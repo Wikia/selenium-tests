@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class NewMessageWallAddLinkComponentObject extends WikiBasePageObject {
+public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".linkEditorDialog > div")
   private WebElement addLinkModal;
@@ -23,7 +23,7 @@ public class NewMessageWallAddLinkComponentObject extends WikiBasePageObject {
       externalRadioButtonBy =
       By.cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
 
-  public NewMessageWallAddLinkComponentObject(WebDriver driver) {
+  public MessageWallAddLinkComponentObject(WebDriver driver) {
     super(driver);
   }
 

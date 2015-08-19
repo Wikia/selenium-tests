@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +48,15 @@ public class NetworkTrafficInterceptor extends ProxyServer {
       }
     }
     return false;
+  }
+
+  public void checkAssetsStatuses(String domain) {
+    har = getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      if (entry.getRequest().getUrl().contains(domain)) {
+        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+      }
+    }
   }
 
   public void setProxyServer(String ip) {

@@ -10,8 +10,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallThreadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallThreadPageObject;
 
 import org.testng.annotations.Test;
 
@@ -35,7 +35,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName3);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -55,7 +55,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   public void threadCreatorNotification_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName3);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndQuoteMessageWall(reply);
@@ -74,8 +74,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   public void threadCreatorNotification_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
-    NewMessageWallThreadPageObject thread = wall.openThread(title);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName3);
+    MessageWallThreadPageObject thread = wall.openThread(title);
     MiniEditorComponentObject miniReply = thread.triggerMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndWrite(reply);

@@ -2,6 +2,9 @@ package com.wikia.webdriver.testcases.mediatests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.ArticleContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,8 +12,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -24,10 +29,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
+  @Execute(asUser = User.USER)
   public void VetAddVideo_001_MessageWallProvider() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -45,10 +49,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
+  @Execute(asUser = User.USER)
   public void VetAddVideo_002_MessageWallLibrary() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     MiniEditorComponentObject mini = wall.triggerMessageArea();

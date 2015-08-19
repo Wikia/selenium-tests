@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class NewMessageWallThreadPageObject extends NewMessageWall {
+public class MessageWallThreadPageObject extends MessageWall {
 
   @FindBy(css = ".replyBody")
   private WebElement replyBody;
@@ -24,7 +24,7 @@ public class NewMessageWallThreadPageObject extends NewMessageWall {
   @FindBy(css = ".replies .msg-body")
   private List<WebElement> lastReplyText;
 
-  public NewMessageWallThreadPageObject(WebDriver driver) {
+  public MessageWallThreadPageObject(WebDriver driver) {
     super(driver);
   }
 

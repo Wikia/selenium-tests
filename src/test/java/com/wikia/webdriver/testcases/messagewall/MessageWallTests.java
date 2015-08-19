@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,33 +14,30 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallCloseRemoveThreadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Write and edit message, 2. Write and remove message, 3.
- *         Write and close message,, 4. Write and quote message, 5. Write and preview message, 6.
- *         Write and reply message,
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. Write and edit message, 2. Write and remove message, 3. Write and close message,, 4.
+ *         Write and quote message, 5. Write and preview message, 6. Write and reply message,
  */
 public class MessageWallTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @BeforeMethod
-  public void mouseMove(){
-    new Actions(driver).moveByOffset(0,0).perform();
+  public void mouseMove() {
+    new Actions(driver).moveByOffset(0, 0).perform();
   }
 
   @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
   @Execute(asUser = User.USER)
   public void MessageWall_001_writeEdit() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -52,10 +53,9 @@ public class MessageWallTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWall_002", "MessageWall"})
+  @Execute(asUser = User.USER)
   public void MessageWall_002_writeRemove() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -63,7 +63,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.writeTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName);
-    NewMessageWallCloseRemoveThreadPageObject remove = wall.clickRemoveThread();
+    MessageWallCloseRemoveThreadPageObject remove = wall.clickRemoveThread();
     remove.closeRemoveThread("adss");
     wall.verifyThreadRemoved();
   }
@@ -71,9 +71,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_003", "MessageWall"})
   @Execute(asUser = User.STAFF)
   public void MessageWall_003_writeClose() {
-    NewMessageWall
-        wall =
-        new NewMessageWall(driver).openMessageWall(credentials.userNameStaff, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -81,7 +79,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.writeTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userNameStaff);
-    NewMessageWallCloseRemoveThreadPageObject remove = wall.clickCloseThread();
+    MessageWallCloseRemoveThreadPageObject remove = wall.clickCloseThread();
     String reason = PageContent.CLOSE_REASON + wall.getTimeStamp();
     remove.closeRemoveThread(reason);
     wall.verifyThreadClosed(credentials.userNameStaff, reason, title);
@@ -92,9 +90,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_004", "MessageWall"})
   @Execute(asUser = User.STAFF)
   public void MessageWall_004_writeQuote() {
-    NewMessageWall
-        wall =
-        new NewMessageWall(driver).openMessageWall(credentials.userNameStaff, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -112,7 +108,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_005", "MessageWall"})
   @Execute(asUser = User.USER)
   public void MessageWall_005_writePreview() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -127,7 +123,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_006", "MessageWall"})
   @Execute(asUser = User.USER)
   public void MessageWall_006_writeReply() {
-    NewMessageWall wall = new NewMessageWall(driver).openMessageWall(credentials.userName, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -144,16 +140,14 @@ public class MessageWallTests extends NewTestTemplate {
 
   /**
    * DAR-985 bug prevention test case details fogbugz: https://wikia.fogbugz.com/default.asp?31293,
-   * details jira:    https://wikia-inc.atlassian.net/browse/DAR-985 1. Go to a messageWall and add
+   * details jira: https://wikia-inc.atlassian.net/browse/DAR-985 1. Go to a messageWall and add
    * unClosedDivComment 2. refresh the page 3. make sure that reply area avatar doesn't appear by
    * default
    */
   @Test(groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall"})
   @Execute(asUser = User.USER)
   public void MessageWall_007_unclosedTagPost() {
-    NewMessageWall
-        wall =
-        new NewMessageWall(driver).openMessageWall(credentials.userName11, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName11);
     wall.triggerMessageArea();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.clickSourceModeButton();
@@ -166,7 +160,7 @@ public class MessageWallTests extends NewTestTemplate {
   }
 
   /**
-   * DAR-2133 bug prevention test case details jira:    https://wikia-inc.atlassian.net/browse/DAR-2133
+   * DAR-2133 bug prevention test case details jira: https://wikia-inc.atlassian.net/browse/DAR-2133
    * pre: test makes sure that QATestsBlockedUser is blocked on tested wikia. 1. user
    * QATestsBlockedUser is allowed to post on his own MessageWall 2. as QATestsBlockedUser go to his
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
@@ -186,9 +180,8 @@ public class MessageWallTests extends NewTestTemplate {
       blockPage.deselectAllSelections();
       blockPage.clickBlockButton();
     }
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-                 wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userNameBlockedAccount, wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userNameBlockedAccount);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();

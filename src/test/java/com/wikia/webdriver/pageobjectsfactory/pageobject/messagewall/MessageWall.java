@@ -1,23 +1,26 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class NewMessageWall extends WikiBasePageObject {
+public class MessageWall extends WikiBasePageObject {
 
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
@@ -48,8 +51,7 @@ public class NewMessageWall extends WikiBasePageObject {
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
 
-  private String
-      newMessageMenu =
+  private String newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
   private String closeButtonString = ".close-thread";
@@ -70,14 +72,20 @@ public class NewMessageWall extends WikiBasePageObject {
   By quoteMessageBy = By.cssSelector(".replies p");
   By saveChangesButtonBy = By.cssSelector(".save-edit");
   By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  By
-      firstMessageWrapperBy =
-      By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  By firstMessageWrapperBy = By
+      .cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
   By replyButtonBy = By.cssSelector(".replyButton");
   By replyBodyBy = By.cssSelector(".replyBody");
 
-  public NewMessageWall(WebDriver driver) {
+  public MessageWall(WebDriver driver) {
     super(driver);
+  }
+
+  public MessageWall open(String userName) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
+        + userName);
+    waitForPageLoad();
+    return new MessageWall(driver);
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
@@ -107,13 +115,13 @@ public class NewMessageWall extends WikiBasePageObject {
   public void submit() {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
+    new Actions(driver).moveByOffset(0, 0).perform();
     PageObjectLogging.log("submit", "message submitted", true);
   }
 
   public void submitEdition() {
     driver.switchTo().defaultContent();
-    WebElement
-        saveButton =
+    WebElement saveButton =
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
     jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
@@ -122,9 +130,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public void submitQuote() {
     driver.switchTo().defaultContent();
-    scrollAndClick(
-        driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy)
-    );
+    scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy));
     wait.forElementNotPresent(By.cssSelector(".new-reply.loading"));
     PageObjectLogging.log("submitQuote", "message quote submitted", true);
   }
@@ -156,17 +162,17 @@ public class NewMessageWall extends WikiBasePageObject {
     PageObjectLogging.log("writeSourceMode", "message " + text + " written in source mode", true);
   }
 
-  public NewMessageWallCloseRemoveThreadPageObject clickRemoveThread() {
+  public MessageWallCloseRemoveThreadPageObject clickRemoveThread() {
     refreshPage();
     setDisplayStyle(newMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(removeButtonBy));
     setDisplayStyle(newMessageMenu, "none");
     PageObjectLogging.log("clickRemoveThread", "remove thread button clicked", true);
-    return new NewMessageWallCloseRemoveThreadPageObject(driver);
+    return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
-  public NewMessageWallCloseRemoveThreadPageObject clickCloseThread() {
+  public MessageWallCloseRemoveThreadPageObject clickCloseThread() {
     refreshPage();
     setDisplayStyle(newMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
@@ -175,7 +181,7 @@ public class NewMessageWall extends WikiBasePageObject {
     scrollAndClick(closeButton);
     setDisplayStyle(newMessageMenu, "none");
     PageObjectLogging.log("clickCloseThread", "close thread button clicked", true);
-    return new NewMessageWallCloseRemoveThreadPageObject(driver);
+    return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
   public MiniEditorComponentObject clickQuoteButton() {
@@ -213,11 +219,11 @@ public class NewMessageWall extends WikiBasePageObject {
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
-  public NewMessageWallAddLinkComponentObject clickLinkButton() {
+  public MessageWallAddLinkComponentObject clickLinkButton() {
     wait.forElementVisible(linkButton);
     scrollAndClick(linkButton);
     PageObjectLogging.log("clickLinkButton", "link button clicked", true);
-    return new NewMessageWallAddLinkComponentObject(driver);
+    return new MessageWallAddLinkComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickImageButton() {
@@ -235,8 +241,8 @@ public class NewMessageWall extends WikiBasePageObject {
   public void verifyThreadClosed(String userName, String reason, String message) {
     refreshPage();
     Assertion.assertStringContains(
-            driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(), userName + " closed this thread because:\n" + reason
-    );
+        driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
+        userName + " closed this thread because:\n" + reason);
     PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
   }
 
@@ -257,90 +263,66 @@ public class NewMessageWall extends WikiBasePageObject {
 
   public void verifyMessageText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(
-            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
-    );
-    Assertion.assertEquals(
-            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText()
-    );
-    Assertion.assertEquals(
-            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
-    );
+    Assertion.assertEquals(title,
+        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
+    Assertion.assertEquals(message,
+        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText());
+    Assertion.assertEquals(userName,
+        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
 
   public void verifyMessageBoldText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
+    Assertion.assertEquals(title,
+        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
     Assertion.assertEquals(
-            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
-    );
-    Assertion.assertEquals(
-            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextBoldBy).getText()
-    );
-    Assertion.assertEquals(
-            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
-    );
+        message,
+        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
+            .findElement(messageTextBoldBy).getText());
+    Assertion.assertEquals(userName,
+        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
+    Assertion.assertEquals(title,
+        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
     Assertion.assertEquals(
-            title, driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText()
-    );
-    Assertion.assertEquals(
-            message, driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextItalicBy).getText()
-    );
-    Assertion.assertEquals(
-            userName, driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText()
-    );
+        message,
+        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
+            .findElement(messageTextItalicBy).getText());
+    Assertion.assertEquals(userName,
+        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
     wait.forElementVisible(editMessageWrapper);
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageTitleBy).getText(), title
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageBodyBy).getText(), message
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageUserNameBy).getText(), userName
-    );
+    Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).getText(), message);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
   }
 
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageTitleBy).getText(), title
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-                .getAttribute("href"), wikiURL + "wiki/" + target
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text
-    );
+    Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getAttribute("href"), wikiURL + "wiki/" + target);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getText(), text);
   }
 
   public void verifyExternalLink(String title, String target, String text, String wikiURL) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageTitleBy).getText(), title
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-            .getAttribute("href"), target
-    );
-    Assertion.assertEquals(
-            editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text
-    );
+    Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getAttribute("href"), target);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getText(), text);
   }
 
   public void verifyQuote(String quoteText) {
-    Assertion.assertEquals(
-            driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy).getText(), quoteText
-    );
+    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy)
+                               .getText(), quoteText);
   }
 
   public void verifyImageAdded(String title) {
@@ -349,29 +331,29 @@ public class NewMessageWall extends WikiBasePageObject {
     PageObjectLogging.log("verifyImageAdded", "verifyed image " + title + " added", true);
   }
 
-  public NewMessageWallThreadPageObject openThread(String threadName) {
-    for (WebElement thread : threadList) {
-      if (thread.getText().contains(threadName)) {
-        scrollAndClick(thread);
-        break;
+  public MessageWallThreadPageObject openThread(String threadName) {
+    try {
+      for (WebElement thread : threadList) {
+        if (thread.getText().contains(threadName)) {
+          scrollAndClick(thread);
+          break;
+        }
       }
+      return new MessageWallThreadPageObject(driver);
+    }finally {
+      waitForPageLoad();
     }
-    return new NewMessageWallThreadPageObject(driver);
   }
 
   public void verifyReplyAreaAvatarNotVisible() {
     waitForElementNotVisibleByElement(replyAreaAvatars);
-    PageObjectLogging.log(
-        "verifyReplyAreaAvatarNotVisible",
-        "as expected, avatar next to reply area is not visible",
-        true
-    );
+    PageObjectLogging.log("verifyReplyAreaAvatarNotVisible",
+        "as expected, avatar next to reply area is not visible", true);
   }
 
   public void verifyPostedMessageVideo(String title) {
-    wait.forElementVisible(By.xpath(
-        "//div[@class='msg-title']/a[contains(text(), "
-        + "'" + title + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
+    wait.forElementVisible(By.xpath("//div[@class='msg-title']/a[contains(text(), " + "'" + title
+        + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
   }
 }

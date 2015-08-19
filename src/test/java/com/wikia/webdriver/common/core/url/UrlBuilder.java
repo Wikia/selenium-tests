@@ -39,10 +39,6 @@ public class UrlBuilder {
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
     url = url + separator + wikiPath;
 
-    if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
-      return appendQueryStringToURL(url, "useskin=wikiamobile");
-    }
-
     return url;
   }
 
