@@ -322,7 +322,7 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyQuote(String quoteText) {
     Assertion.assertEquals(driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy)
-        .getText(), quoteText);
+                               .getText(), quoteText);
   }
 
   public void verifyImageAdded(String title) {
@@ -332,13 +332,17 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MessageWallThreadPageObject openThread(String threadName) {
-    for (WebElement thread : threadList) {
-      if (thread.getText().contains(threadName)) {
-        scrollAndClick(thread);
-        break;
+    try {
+      for (WebElement thread : threadList) {
+        if (thread.getText().contains(threadName)) {
+          scrollAndClick(thread);
+          break;
+        }
       }
+      return new MessageWallThreadPageObject(driver);
+    }finally {
+      waitForPageLoad();
     }
-    return new MessageWallThreadPageObject(driver);
   }
 
   public void verifyReplyAreaAvatarNotVisible() {
