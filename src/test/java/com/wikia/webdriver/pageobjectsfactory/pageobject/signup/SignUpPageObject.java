@@ -18,6 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -32,9 +33,6 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public SignUpPageObject(WebDriver driver) {
     super(driver);
-    yearSelect = new Select(birthYearField);
-    daySelect = new Select(birthDayField);
-    monthSelect = new Select(birthMonthField);
   }
 
   @FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
@@ -62,9 +60,11 @@ public class SignUpPageObject extends WikiBasePageObject {
   private By recaptchaResponseBy = By.cssSelector("#g-recaptcha-response");
   private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
 
-  private Select yearSelect;
-  private Select daySelect;
-  private Select monthSelect;
+  public SignUpPageObject open() {
+    driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
+
+    return this;
+  }
 
   public void typeUserName(String userName) {
     userNameField.sendKeys(userName);
@@ -90,17 +90,17 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public void enterBirthDate(String month, String day, String year) {
     try {
-      monthSelect.selectByVisibleText(month);
+      new Select(birthMonthField).selectByVisibleText(month);
       Thread.sleep(150);
-      daySelect.selectByVisibleText(day);
+      new Select(birthDayField).selectByVisibleText(day);
       Thread.sleep(150);
-      yearSelect.selectByVisibleText(year);
+      new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
-      daySelect.selectByVisibleText(day);
+      new Select(birthDayField).selectByVisibleText(day);
       Thread.sleep(150);
-      yearSelect.selectByVisibleText(year);
+      new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
-      monthSelect.selectByVisibleText(month);
+      new Select(birthMonthField).selectByVisibleText(month);
       PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
           + " selected", true);
     } catch (InterruptedException e) {
@@ -118,11 +118,10 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    String winHandleBefore = driver.getWindowHandle();
     wait.forElementVisible(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
-    return new FacebookSignupModalComponentObject(driver, winHandleBefore);
+    return new FacebookSignupModalComponentObject(driver);
   }
 
   public AlmostTherePageObject submit(String email, String password) {

@@ -13,15 +13,9 @@ public class RemoveFacebookPageObject extends FacebookMainPageObject {
     super(driver);
   }
 
-  public void removeWikiaApps(String email, String password) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-    FacebookUserPageObject userFB = fbLogin.login(email, password);
-    userFB.verifyPageLogo();
-    FacebookSettingsPageObject settingsFB = userFB.fbOpenSettings();
-    settingsFB.openApps();
-    settingsFB.removeAppIfPresent();
-    settingsFB.openApps();
-    settingsFB.logOutFB();
+  public FacebookSettingsPageObject removeWikiaApps(String email, String password) {
+    FacebookSettingsPageObject settingsFB = new FacebookSettingsPageObject(driver).open();
+    new FacebookMainPageObject(driver).login(email, password);
+    return settingsFB.removeAppIfPresent();
   }
 }
