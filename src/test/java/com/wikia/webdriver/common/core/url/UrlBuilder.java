@@ -42,6 +42,10 @@ public class UrlBuilder {
     return url;
   }
 
+  public String getUrlForWiki() {
+    return getUrlForWiki(Configuration.getWikiName());
+  }
+
   public String getUrlForWiki(String wikiName) {
     String prefix = getUrlPrefix(wikiName);
     String suffix = getUrlSuffix(wikiName);

@@ -33,20 +33,21 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     super(driver);
   }
 
+  public FacebookSettingsPageObject open() {
+    getUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
+
+    return this;
+  }
+
   public void verifyPageLogo() {
     wait.forElementVisible(pageLogo);
     PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
   }
 
-  public void openApps() {
-    getUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
-    PageObjectLogging.log("openApps", "Apps tab opened", true);
-  }
-
   /**
    * This method removes Wikia App from facebook Apps.
    */
-  public void removeAppIfPresent() {
+  public FacebookSettingsPageObject removeAppIfPresent() {
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
@@ -60,6 +61,13 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             wait.forElementVisible(removeButton);
             removeButton.click();
             waitForElementNotVisibleByElement(removeAppConfirmationModal);
+            driver.navigate().refresh();
+            try {
+              Thread.sleep(3000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
           }
         } else {
@@ -67,6 +75,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
         }
       }
     }
+    return this;
   }
 
   /**
