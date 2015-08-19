@@ -1,11 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,8 +54,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement referenceElements;
   @FindBy(css = ".pi-data-label")
   private WebElement h3Elements;
-  @FindBy(css = "button[data-event=create]")
-  private WebElement addAPageButton;
   @FindBy(css = ".pi-data-value .newcategory")
   private WebElement categoryLink;
   @FindBy(css = ".pi-data-label")
@@ -90,7 +90,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return italicElements;
   }
 
-  public List<WebElement> getHeaderElements() { return pInfoTitleH3; }
+  public List<WebElement> getHeaderElements() {
+    return pInfoTitleH3;
+  }
 
   public PortableInfoboxPageObject verifyImagePresence() {
     wait.forElementVisible(pInfoImage);
@@ -172,15 +174,17 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return titleWrapper;
   }
 
-  public void clickExternalLink() {
+  public PortableInfoboxPageObject clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
     pInfoExternalLink.click();
+    return this;
   }
 
-  public void clickInternalLink(int index) {
+  public PortableInfoboxPageObject clickInternalLink(int index) {
     scrollToElement(pInfoInternalLinks.get(index));
     wait.forElementVisible(pInfoInternalLinks.get(index));
     pInfoInternalLinks.get(index).click();
+    return this;
   }
 
   public PortableInfoboxPageObject clickImage() {
@@ -200,8 +204,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return categoryLink.getText();
   }
 
-  public void compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
+  public PortableInfoboxPageObject compareURLAndExternalLink(String externalLinkName, String externalNavigatedURL) {
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
+    return this;
   }
 
   public void compareURLAndInternalLink(String internalLinkName, String internalNavigatedURL) {
@@ -218,14 +223,16 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
 
-  public void verifyQuotationMarksPresence() {
+  public PortableInfoboxPageObject verifyQuotationMarksPresence() {
     wait.forElementVisible(h3Elements);
     String h3ElementsString = h3Elements.getText();
     Assertion.assertStringContains("\"URL\"", h3ElementsString);
+    return this;
   }
 
-  public void verifyReferencesPresence() {
+  public PortableInfoboxPageObject verifyReferencesPresence() {
     wait.forElementVisible(referenceElements);
+    return this;
   }
 
   public CreateArticleModalComponentObject clickRedLink(int i) {
@@ -234,10 +241,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     WebElement redLinkChose = pInfoRedlLink.get(i);
     redLinkChose.click();
     return new CreateArticleModalComponentObject(driver);
-  }
-
-  public void verifyCreateNewArticleModal() {
-    wait.forElementVisible(addAPageButton);
   }
 
   public void verifyCategoryInArticlePage(String catName) {
@@ -343,4 +346,30 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
            + articleTitle);
     return this;
   }
+
+  public PortableInfoboxPageObject areBoldElementsMoreThanOne() {
+    Assertion.assertTrue(boldElements.size() > 0);
+    return this;
+  }
+
+  public PortableInfoboxPageObject areItalicElementsMoreThanOne() {
+    Assertion.assertTrue(italicElements.size() > 0);
+    return this;
+  }
+
+  public PortableInfoboxPageObject areHeadersMoreThanOne() {
+    Assertion.assertTrue(pInfoTitleH3.size() > 0);
+    return this;
+  }
+
+  public String getUrlFromExternalLinkaAfterPageIsLoaded() {
+    wait.forElementPresent(By.id("#footer"));
+    return driver.getCurrentUrl();
+  }
+
+  public String getUrlFromInternalLinkaAfterPageIsLoaded() {
+    wait.forElementPresent(By.id("#footer"));
+    return driver.getCurrentUrl();
+  }
+
 }

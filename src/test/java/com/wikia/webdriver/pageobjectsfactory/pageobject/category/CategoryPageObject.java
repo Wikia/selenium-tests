@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by nikodem on 27.07.15.
  */
-// TODO: What is this class about?
+
 public class CategoryPageObject extends WikiBasePageObject {
 
     @FindBy(css = "#WikiaPageHeader h1")

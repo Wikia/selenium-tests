@@ -62,9 +62,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public void openSpecialDesignerPage(String wikiURL) {
+  public SpecialThemeDesignerPageObject openSpecialDesignerPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_THEME_DESIGNER);
     PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
+    return this;
   }
 
   /**
