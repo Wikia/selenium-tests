@@ -137,7 +137,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     facebookPasswordInput.sendKeys(password);
     PageObjectLogging.log("fillPassword", "Password field on facebook form filled", true);
 
-    scrollAndClick(facebookSubmitButton);
+    facebookSubmitButton.click();
     PageObjectLogging.log("logInDropDownFB", "facebook log in submit button clicked", true);
 
     driver.switchTo().window(windows[0].toString());

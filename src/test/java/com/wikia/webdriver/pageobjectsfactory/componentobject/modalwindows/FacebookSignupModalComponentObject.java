@@ -1,12 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import java.util.Set;
+import javax.annotation.Nullable;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -36,60 +40,51 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   @FindBy(xpath = "//input[@type='checkbox'][@value='email']/..")
   private WebElement emailCheckbox;
 
-  String winHandleBefore;
-
-  public FacebookSignupModalComponentObject(WebDriver driver, String winHandleBeforeFBClick) {
+  public FacebookSignupModalComponentObject(WebDriver driver) {
     super(driver);
-    winHandleBefore = winHandleBeforeFBClick;
   }
 
   public void acceptWikiaAppPolicy() {
-    // If policies are already accepted, give facebook popup window time to disappear
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("acceptWikiaAppPolicy", e.getMessage(), false);
-    }
-
-    Set<String> handles = driver.getWindowHandles();
-
-    if (handles.size() > 1) {
-      for (String winHandle : handles) {
-        // Switch to new window opened
-        driver.switchTo().window(winHandle);
+    new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
+      @Nullable
+      @Override
+      public Boolean apply(WebDriver input) {
+        return input.getWindowHandles().size() > 1;
       }
-      wait.forElementVisible(appTermsConfirmButton);
-      appTermsConfirmButton.click();
-      PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
-      // Switch back to original browser (first window)
-      driver.switchTo().window(winHandleBefore);
-    } else {
-      PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies allready accepted", true);
-    }
+    });
+
+    Object[] handles = driver.getWindowHandles().toArray();
+
+    driver.switchTo().window(handles[1].toString());
+    wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
+    appTermsConfirmButton.click();
+    PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
+    driver.switchTo().window(handles[0].toString());
   }
 
   public void acceptWikiaAppPolicyNoEmail() {
 
-    Set<String> handles = driver.getWindowHandles();
-
-    if (handles.size() > 1) {
-      for (String winHandle : handles) {
-        // Switch to new window opened
-        driver.switchTo().window(winHandle);
+    new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
+      @Nullable
+      @Override
+      public Boolean apply(WebDriver input) {
+        return input.getWindowHandles().size() > 1;
       }
-      wait.forElementVisible(editInfoProvided);
-      editInfoProvided.click();
-      PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "editing info provided", true);
-      wait.forElementVisible(emailCheckbox);
-      emailCheckbox.click();
-      PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", true);
-      wait.forElementVisible(appTermsConfirmButton);
-      appTermsConfirmButton.click();
-      // Switch back to original browser (first window)
-      driver.switchTo().window(winHandleBefore);
-    } else {
-      PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies already accepted", true);
-    }
+    });
+
+    Object[] handles = driver.getWindowHandles().toArray();
+
+    driver.switchTo().window(handles[1].toString());
+    wait.forElementVisible(editInfoProvided);
+    editInfoProvided.click();
+    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "editing info provided", true);
+    wait.forElementVisible(emailCheckbox);
+    emailCheckbox.click();
+    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", true);
+    wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
+    appTermsConfirmButton.click();
+    driver.switchTo().window(handles[0].toString());
+
   }
 
   public void typeUserName(String userName) {
