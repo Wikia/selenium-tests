@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.oasis;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -17,6 +19,14 @@ public class MainPage extends ArticlePageObject {
 
   public MainPage(WebDriver driver) {
     super(driver);
+  }
+
+  /*
+  This method opens main page of the current wiki
+   */
+  public MainPage open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    return this;
   }
 
   public CuratedContentToolModal clickCuratedContentToolButton() {
