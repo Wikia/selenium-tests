@@ -24,6 +24,9 @@ public class Wait {
    */
 
   private static final int DEFAULT_TIMEOUT = 30;
+  private static final String INIT_MESSAGE = "INIT ELEMENT";
+  private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
+
 
   private WebDriverWait wait;
   private WebDriver webDriver;
@@ -55,7 +58,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -87,7 +90,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -202,7 +205,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -221,7 +224,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
