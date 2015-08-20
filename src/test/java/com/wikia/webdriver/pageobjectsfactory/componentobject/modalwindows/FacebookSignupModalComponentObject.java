@@ -56,7 +56,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     Object[] handles = driver.getWindowHandles().toArray();
 
     driver.switchTo().window(handles[1].toString());
-    new Wait(driver).forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
+    wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
     PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
     driver.switchTo().window(handles[0].toString());
