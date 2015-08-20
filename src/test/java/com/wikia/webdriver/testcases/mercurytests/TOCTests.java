@@ -107,4 +107,19 @@ public class TOCTests extends NewTestTemplate {
         result
     );
   }
+
+  // TOCT03
+  @Test(groups = {"MercuryTOCTest_003", "MercuryTOCTests", "Mercury"})
+  public void MercuryTOCTest_003_ListRedirectionDirectlyFromLink() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC + "#Second_header");
+
+    boolean result = toc.isUserMovedToRightSection(1);
+    PageObjectLogging.log(
+        "TOC redirection",
+        "works",
+        "does not work",
+        result
+    );
+  }
 }
