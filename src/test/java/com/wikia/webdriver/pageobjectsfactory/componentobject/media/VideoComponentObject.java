@@ -93,7 +93,7 @@ public class VideoComponentObject extends WikiBasePageObject {
     String embedCode = "";
     switch (providerName) {
       case "screenplay":
-        autoplayStr = "autostart=" + status;
+        autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
         embedCode = getVideoPlayerObject().getAttribute("value");
         break;
       case "ign":

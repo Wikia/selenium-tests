@@ -126,17 +126,6 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     promote.verifyCrossWikiSearchImage(searchImage);
   }
 
-  // TODO when Jakub K. agrees final functionality
-  // @Test(dataProviderClass=SearchDataProvider.class,
-  // dataProvider="getExpectedWikiResults",
-  // groups = {"CrossWikiSearchTests_008", "Search, "CrossWikiSearch""})
-  public void crossWikiSearch_008_wikimatch(String expectedWikiTitle) {
-    CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.goToSearchPage(wikiCorporateURL);
-    search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS_SAME_ORDER);
-    search.verifyQuery(expectedWikiTitle);
-  }
-
   /**
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
