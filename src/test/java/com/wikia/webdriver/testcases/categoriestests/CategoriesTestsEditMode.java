@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.ArticleContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -67,11 +69,11 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticleEdit_004", "CategoriesTestsArticleEditMode"})
+  @Execute(asUser = User.USER)
   public void CategoriesTestsArticleEdit_004_user() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
+    ArticleContent.push(PageContent.ARTICLE_TEXT);
+
+    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
     visual.typeCategoryName(categoryName);
     visual.submitCategory();
