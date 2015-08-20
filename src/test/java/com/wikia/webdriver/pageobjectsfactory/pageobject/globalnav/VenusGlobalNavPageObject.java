@@ -72,7 +72,7 @@ public class VenusGlobalNavPageObject {
                                                 .valueToBePresentInElementsAttribute(destinationHub,
                                                                                      "class",
                                                                                      "active"));
-    destinationHub.click();
+    hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText()))).click();
 
     new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(getHubLink(destinationHub)));
 
