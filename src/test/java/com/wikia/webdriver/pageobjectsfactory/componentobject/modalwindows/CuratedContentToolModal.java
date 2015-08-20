@@ -9,15 +9,15 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by wikia on 2015-08-19.
  */
-public class CuratedContentToolModal extends WikiBasePageObject {
+public class curatedContentToolModal extends WikiBasePageObject {
   @FindBy(css = "#CuratedContentToolModal")
   protected WebElement CuratedContentToolModal;
 
-  public CuratedContentToolModal(WebDriver driver) {
+  public curatedContentToolModal(WebDriver driver) {
     super(driver);
   }
 
-  public void verify() {
+  public void verifyModal() {
     wait.forElementVisible(CuratedContentToolModal);
   }
 }
