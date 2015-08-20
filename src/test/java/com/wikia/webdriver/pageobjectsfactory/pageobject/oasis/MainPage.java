@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by wikia on 2015-08-19.
- */
 public class MainPage extends ArticlePageObject {
 
   @FindBy(css = "#CuratedContentTool")
