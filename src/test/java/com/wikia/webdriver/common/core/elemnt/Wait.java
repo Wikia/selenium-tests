@@ -49,7 +49,7 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is clickable on browser
+   * Checks if the element is clickable in browser
    * <p/>
    * * @param element The element to be checked
    */
@@ -81,7 +81,7 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser
+   * Checks if the element is visible in browser
    * <p/>
    * * @param element The element to be checked
    */

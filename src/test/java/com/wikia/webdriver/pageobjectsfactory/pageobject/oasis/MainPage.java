@@ -20,9 +20,6 @@ public class MainPage extends ArticlePageObject {
     super(driver);
   }
 
-  /**
-   * Open wiki main page
-   */
   public MainPage open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
     return this;
@@ -30,7 +27,7 @@ public class MainPage extends ArticlePageObject {
 
   public curatedContentToolModal clickCuratedContentToolButton() {
     wait.forElementClickable(curatedContentToolButton);
-    curatedContentToolButton.click();
+    scrollAndClick(curatedContentToolButton);
     return new curatedContentToolModal(driver);
   }
 }

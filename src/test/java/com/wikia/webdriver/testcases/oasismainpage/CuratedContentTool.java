@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.oasismainpage;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -21,6 +22,6 @@ public class CuratedContentTool extends NewTestTemplate {
   public void verifyModal() {
     MainPage main = new MainPage(driver).open();
     curatedContentToolModal modal = main.clickCuratedContentToolButton();
-    modal.verifyModal();
+    Assertion.assertTrue(modal.isModalVisible());
   }
 }
