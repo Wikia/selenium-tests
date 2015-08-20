@@ -32,6 +32,15 @@ public class BasePageObject extends MobileBasePageObject {
     return new ArticlePageObject(driver);
   }
 
+  public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName,
+                                                    String hashId) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName +
+           "?cb=" + DateTime.now().getMillis() + "#" + hashId);
+    PageObjectLogging.log("openMercuryArticleByName", "Article" + articleName + " with #" + hashId +
+                                                      " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
   public void tapOnElement(WebElement element) {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);
