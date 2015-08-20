@@ -29,7 +29,7 @@ public class MainPage extends ArticlePageObject {
   }
 
   public curatedContentToolModal clickCuratedContentToolButton() {
-    wait.forElementVisible(curatedContentToolButton);
+    wait.forElementClickable(curatedContentToolButton);
     curatedContentToolButton.click();
     return new curatedContentToolModal(driver);
   }

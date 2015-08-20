@@ -46,6 +46,38 @@ public class Wait {
   }
 
   /**
+   * Checks if the element is clickable on browser
+   * <p/>
+   * * @param element The element to be checked
+   */
+  public WebElement forElementClickable(WebElement element) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+      return wait.until(ExpectedConditions.elementToBeClickable(element));
+    } else {
+      return forElementClickable(SelectorStack.read());
+    }
+  }
+
+  /**
+   * Checks if the element is clickable on the browser
+   */
+  public WebElement forElementClickable(By by) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(ExpectedConditions.elementToBeClickable(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
    * Checks if the element is visible on browser
    * <p/>
    * * @param element The element to be checked
