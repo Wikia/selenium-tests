@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests", "Mercury"})
 public class NavigationTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -24,9 +25,8 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT06
-  @Test(groups = {"MercuryCuratedNavigationTests_001", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_001_navigateThroughCategory() {
+  @Test(groups = "MercuryCuratedNavigationTest_001")
+  public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
@@ -56,9 +56,8 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT07
-  @Test(groups = {"MercuryCuratedNavigationTests_002", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_002_navigateThroughSection() {
+  @Test(groups = "MercuryCuratedNavigationTest_002")
+  public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
@@ -75,9 +74,8 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT11
-  @Test(groups = {"MercuryCuratedNavigationTests_003", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_003_navigateThroughNamespaces() {
+  @Test(groups = "MercuryCuratedNavigationTest_003")
+  public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
@@ -110,9 +108,8 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   // CCT09
-  @Test(groups = {"MercuryCuratedNavigationTests_004", "MercuryCuratedNavigationTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercuryCuratedNavigationTests_004_navigateThroughDifferentUrl() {
+  @Test(groups = "MercuryCuratedNavigationTest_004")
+  public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
 
     String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
