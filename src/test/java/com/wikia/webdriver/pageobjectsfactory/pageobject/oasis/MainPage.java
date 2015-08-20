@@ -21,7 +21,7 @@ public class MainPage extends ArticlePageObject {
   }
 
   /**
-   *  Open wiki main page
+   * Open wiki main page
    */
   public MainPage open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
