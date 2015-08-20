@@ -20,8 +20,8 @@ public class MainPage extends ArticlePageObject {
     super(driver);
   }
 
-  /*
-  open main page of the current wiki
+  /**
+   *  Open wiki main page
    */
   public MainPage open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));

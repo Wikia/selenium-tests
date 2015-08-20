@@ -53,5 +53,4 @@ public class CuratedContentTests extends NewTestTemplate {
     cc.clickSave();
     cc.verifySuccesfulSave();
   }
-
 }
