@@ -177,7 +177,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   /**
-  * Open article which name is the following combination:
+  * Open article with name that is the following combination:
   * TEST CLASS NAME + TEST METHOD NAME
   */
   public ArticlePageObject open() {
