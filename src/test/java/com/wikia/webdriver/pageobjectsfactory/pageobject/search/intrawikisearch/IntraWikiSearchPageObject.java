@@ -106,8 +106,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void searchFor(String query) {
-    searchField.sendKeys(query);
-    searchField.sendKeys(Keys.ENTER);
+    searchField.sendKeys(query + Keys.ENTER);
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
   }
 
@@ -215,7 +214,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void selectPhotosVideos() {
     wait.forElementVisible(photosVideos);
-    photosVideos.click();
+    scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
     PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true,
         driver);
@@ -276,7 +275,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void selectPhotosOnly() {
-    filterPhotos.click();
+    scrollAndClick(filterPhotos);
     PageObjectLogging.log("selectPhotosOnly", "Photos option is selected", true, driver);
   }
 
