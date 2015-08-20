@@ -54,22 +54,4 @@ public class CuratedContentTests extends NewTestTemplate {
     cc.verifySuccesfulSave();
   }
 
-  @CreationTicket(ticketID = "CONCF-1073")
-  @Test(groups = {"CuratedContent003", "CuratedContent"})
-  public void curatedContent003_open() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialCuratedContentPageObject cc = base.openSpecialCuratedContent(wikiURL);
-    // add new element and add image to that element
-    cc.addNewElement(CATEGORY, LABEL);
-    PhotoAddComponentObject addPhotoModal = cc.clickImageOnLastElement();
-    addPhotoModal.clickAddThisPhoto(1);
-    cc.verifyImageInLastElement();
-    cc.clickSave();
-    cc.verifySuccesfulSave();
-    //clean the added element
-    cc.removeLastElement();
-    cc.clickSave();
-    cc.verifySuccesfulSave();
-  }
 }
