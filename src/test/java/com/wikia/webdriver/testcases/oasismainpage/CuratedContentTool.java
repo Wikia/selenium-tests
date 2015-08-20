@@ -17,9 +17,6 @@ import org.testng.annotations.Test;
 @Test(groups = "CuratedContent")
 public class CuratedContentTool extends NewTestTemplate {
 
-  private static final String CATEGORY = URLsContent.CATEGORY_HELP;
-  private static final String LABEL = PageContent.LOREM_IPSUM_SHORT;
-
   @Test
   @Execute(asUser = User.STAFF)
   @CreationTicket(ticketID = "CONCF-1073")
