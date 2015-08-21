@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.TimeoutException;
@@ -21,6 +22,7 @@ public class CuratedContentToolModal extends WikiBasePageObject {
       WebElement modal = wait.forElementVisible(CuratedContentToolModal);
       return modal.isDisplayed();
     } catch (TimeoutException e) {
+      PageObjectLogging.log("isModalVisible", e.getMessage(), false);
       return false;
     }
   }
