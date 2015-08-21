@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 public class CuratedContentToolModal extends WikiBasePageObject {
 
   @FindBy(css = "#CuratedContentToolModal")
-  protected WebElement CuratedContentToolModal;
+  protected WebElement curatedContentToolModal;
 
   public CuratedContentToolModal(WebDriver driver) {
     super(driver);
@@ -19,7 +19,7 @@ public class CuratedContentToolModal extends WikiBasePageObject {
 
   public boolean isModalVisible() {
     try {
-      WebElement modal = wait.forElementVisible(CuratedContentToolModal);
+      WebElement modal = wait.forElementVisible(curatedContentToolModal);
       return modal.isDisplayed();
     } catch (TimeoutException e) {
       PageObjectLogging.log("isModalVisible", e.getMessage(), false);
