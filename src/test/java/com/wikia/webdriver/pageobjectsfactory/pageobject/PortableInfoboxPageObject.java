@@ -51,7 +51,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = ".pi-data-label")
   private WebElement h3Elements;
   @FindBy(css = ".pi-data-value .newcategory")
-  private WebElement categoryLink;
+  private WebElement categoryLinkInInfobox;
   @FindBy(css = ".pi-data-label")
   private WebElement itemLabel;
   @FindBy(css = ".pi-data-value")
@@ -100,6 +100,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return driver.getCurrentUrl();
   }
 
+  public String getCategoryLinkName() {
+    wait.forElementVisible(categoryLinkInInfobox);
+    return categoryLinkInInfobox.getText();
+  }
+
   public String getUrlFromInternalLinkaAfterPageIsLoaded() {
     wait.forElementPresent(By.id("#footer"));
     return driver.getCurrentUrl();
@@ -125,8 +130,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public CategoryPageObject clickCategoryLink() {
-    wait.forElementVisible(categoryLink);
-    scrollAndClick(categoryLink);
+    wait.forElementVisible(categoryLinkInInfobox);
+    scrollAndClick(categoryLinkInInfobox);
     return new CategoryPageObject(driver);
   }
 
@@ -182,53 +187,13 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject verifyImagePresence() {
-    wait.forElementVisible(pInfoImage);
-    Assertion.assertEquals(isElementOnPage(pInfoImage), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject verifyTabberPresence() {
-    wait.forElementVisible(tabber);
-    Assertion.assertEquals(isElementOnPage(tabber), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject verifyTabberImagePresence() {
-    wait.forElementVisible(tabberImage);
-    Assertion.assertEquals(isElementOnPage(tabberImage), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject verifyInfoboxTitlePresence() {
-    wait.forElementVisible(pInfoTitle);
-    Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject verifyLightboxPresence() {
-    wait.forElementVisible(lightbox);
-    Assertion.assertEquals(isElementOnPage(lightbox), true);
-    return this;
-  }
-
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
-  }
-
-  public PortableInfoboxPageObject verifyQuotationMarksPresence() {
-    wait.forElementVisible(h3Elements);
-    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
-    return this;
   }
 
   public PortableInfoboxPageObject verifyReferencesPresence() {
     wait.forElementVisible(referenceElements);
     return this;
-  }
-
-  public void verifyCategoryInArticlePage(String catName) {
-    // Same as previous case, waiting on Ludwik
   }
 
   public PortableInfoboxPageObject verifyPadding(WebElement element) {
@@ -283,4 +248,41 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     Assertion.assertFalse(pInfoTitleH3.isEmpty());
     return this;
   }
+
+  public PortableInfoboxPageObject isImagePresented() {
+    wait.forElementVisible(pInfoImage);
+    Assertion.assertEquals(isElementOnPage(pInfoImage), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isTabberPresented() {
+    wait.forElementVisible(tabber);
+    Assertion.assertEquals(isElementOnPage(tabber), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isTabberImagePresented() {
+    wait.forElementVisible(tabberImage);
+    Assertion.assertEquals(isElementOnPage(tabberImage), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isInfoboxTitlePresented() {
+    wait.forElementVisible(pInfoTitle);
+    Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isLightboxPresented() {
+    wait.forElementVisible(lightbox);
+    Assertion.assertEquals(isElementOnPage(lightbox), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject areQuotationMarksPresented() {
+    wait.forElementVisible(h3Elements);
+    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
+    return this;
+  }
+
 }

@@ -19,7 +19,7 @@ public class CategoryPageObject extends WikiBasePageObject {
         super(driver);
     }
 
-    public void verifyCategoryPageTitle() {
+    public void verifyCategoryPageTitle(String categoryLinkName) {
         wait.forElementVisible(categoryHeader);
         String title = categoryHeader.getText();
         PageObjectLogging.log(
@@ -27,7 +27,6 @@ public class CategoryPageObject extends WikiBasePageObject {
             "the name of the category is: " + title,
             true
         );
-        // It is the same
-        Assertion.assertEquals(categoryHeader.getText(), title);
+        Assertion.assertEquals("Category:" + title, categoryLinkName);
     }
 }

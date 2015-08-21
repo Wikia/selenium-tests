@@ -31,14 +31,14 @@ import org.testng.annotations.Test;
  * TC06: Verify visibility of tabber and it's images
  * TC07: Verify infobox color has changed after changing colors in wiki Theme Designer
  * TC08: Verify if ordered and unordered lists are parsed correctly after adding them
- * TC13: Verify category links inside infoboxes
- * TC14: Verify if horizontal group font size matches other elements font
- * TC15: Copy syntax from template page to article and verify presence of all new information
+ * TC09: Verify category links inside infoboxes
+ * TC10: Verify if horizontal group font size matches other elements font
+ * TC11: Copy syntax from template page to article and verify presence of all new information
  * provided
- * TC16: Verify if navigation element has same left and right padding
- * TC17: Verify if group headers and titles has same left and right padding
- * TC18: Additional <div> wrappers from title, header and image HTML are removed
- * TC19: Verify that any of the tags which do not have a value won't appear
+ * TC12: Verify if navigation element has same left and right padding
+ * TC13: Verify if group headers and titles has same left and right padding
+ * TC14: Additional <div> wrappers from title, header and image HTML are removed
+ * TC15: Verify that any of the tags which do not have a value won't appear
  *
  * @ownership Content West Wing
  */
@@ -53,10 +53,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areBoldElementsMoreThanOne()
         .areItalicElementsMoreThanOne()
         .areHeadersMoreThanOne()
-        .verifyQuotationMarksPresence()
+        .areQuotationMarksPresented()
         .verifyReferencesPresence()
-        .verifyImagePresence()
-        .verifyInfoboxTitlePresence();
+        .isImagePresented()
+        .isInfoboxTitlePresented();
   }
 
   @Test(groups = "PortableInfoboxTests_002")
@@ -129,29 +129,30 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickPublishButtonInTemplateNamespace()
         .verifyCategoryInTemplatePage(categoryName);
 
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    info.verifyCategoryInArticlePage(categoryName);
+    article
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = "PortableInfoboxTests_006")
+  @Test(groups = "PortableInfoboxTests_005")
   @Execute(onWikia = "mediawiki119")
   public void verifyLightboxVisibilityAfterClickingImage() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
         .clickImage()
-        .verifyLightboxPresence();
+        .isLightboxPresented();
   }
 
-  @Test(groups = "PortableInfoboxTests_008")
+  @Test(groups = "PortableInfoboxTests_006")
   @Execute(onWikia = "mediawiki119")
   public void verifyVisibilityOfTabberAndItsImages() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX02)
-        .verifyTabberPresence()
-        .verifyTabberImagePresence();
+        .isTabberPresented()
+        .isTabberImagePresented();
   }
 
-  @Test(groups = "PortableInfoboxTests_009")
+  @Test(groups = "PortableInfoboxTests_007")
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
@@ -178,7 +179,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
   }
 
-  @Test(groups = "PortableInfoboxTests_012")
+  @Test(groups = "PortableInfoboxTests_08")
   @Execute(onWikia = "mediawiki119")
   public void verifyOrderedAndUnorderedLists() {
     new PortableInfoboxPageObject(driver)
@@ -187,17 +188,18 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareFontSizesBetweenItemValueAndUnorderedListItem(1);
   }
 
-  @Test(groups = "PortableInfoboxTests_013")
+  @Test(groups = "PortableInfoboxTests_09")
   @Execute(onWikia = "mediawiki119")
-  public void verifyInfoboxCategoryLink() {
-    new PortableInfoboxPageObject(driver)
-        .open(PageContent.PORTABLE_INFOBOX01)
-        .clickCategoryLink();
-    new CategoryPageObject(driver)
-        .verifyCategoryPageTitle();
+  public void verifyInfoboxCategoryLinks() {
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01);
+
+    String categoryLinkName = info.getCategoryLinkName();
+    info.clickCategoryLink();
+    new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
   }
 
-  @Test(groups = "PortableInfoboxTests_014")
+  @Test(groups = "PortableInfoboxTests_010")
   @Execute(onWikia = "mediawiki119")
   public void verifyHorizontalGroupFontSize() {
     new PortableInfoboxPageObject(driver)
@@ -206,7 +208,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareFontSizesBetweenHorizontalItemValueAndItemValue();
   }
 
-  @Test(groups = "PortableInfoboxTests_015")
+  @Test(groups = "PortableInfoboxTests_011")
   @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
@@ -224,11 +226,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .submitArticle();
 
     new PortableInfoboxPageObject(driver)
-        .verifyImagePresence()
-        .verifyInfoboxTitlePresence();
+        .isImagePresented()
+        .isInfoboxTitlePresented();
   }
 
-  @Test(groups = "PortableInfoboxTests_016")
+  @Test(groups = "PortableInfoboxTests_012")
   @Execute(onWikia = "mediawiki119")
   public void verifyNavigationElementPadding() {
     new PortableInfoboxPageObject(driver)
@@ -236,7 +238,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyPaddingNavigationElement(1);
   }
 
-  @Test(groups = "PortableInfoboxTest_017")
+  @Test(groups = "PortableInfoboxTest_013")
   @Execute(onWikia = "mediawiki119")
   public void verifyGroupHeadersPadding() {
     new PortableInfoboxPageObject(driver)
@@ -244,7 +246,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyGroupHeaderPadding(1);
   }
 
-  @Test(groups = "PortableInfoboxTest_018")
+  @Test(groups = "PortableInfoboxTest_014")
   @Execute(onWikia = "mediawiki119")
   public void verifyDivsWrappersAreNotAppearing() {
     new PortableInfoboxPageObject(driver)
@@ -254,7 +256,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyDivsNotAppearingInHeader(0);
   }
 
-  @Test(groups = "PortableInfoboxTest_019")
+  @Test(groups = "PortableInfoboxTest_015")
   @Execute(onWikia = "mediawiki119")
   public void verifyEmptyTagsAreNotAppearing() {
     new PortableInfoboxPageObject(driver)
