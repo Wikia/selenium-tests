@@ -187,6 +187,57 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
+  public PortableInfoboxPageObject isImagePresented() {
+    wait.forElementVisible(pInfoImage);
+    Assertion.assertEquals(isElementOnPage(pInfoImage), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isTabberPresented() {
+    wait.forElementVisible(tabber);
+    Assertion.assertEquals(isElementOnPage(tabber), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isTabberImagePresented() {
+    wait.forElementVisible(tabberImage);
+    Assertion.assertEquals(isElementOnPage(tabberImage), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isInfoboxTitlePresented() {
+    wait.forElementVisible(pInfoTitle);
+    Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject isLightboxPresented() {
+    wait.forElementVisible(lightbox);
+    Assertion.assertEquals(isElementOnPage(lightbox), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject areQuotationMarksPresented() {
+    wait.forElementVisible(h3Elements);
+    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
+    return this;
+  }
+
+  public PortableInfoboxPageObject areBoldElementsMoreThanOne() {
+    Assertion.assertFalse(boldElements.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxPageObject areItalicElementsMoreThanOne() {
+    Assertion.assertFalse(italicElements.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxPageObject areHeadersMoreThanOne() {
+    Assertion.assertFalse(pInfoTitleH3.isEmpty());
+    return this;
+  }
+
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
@@ -233,56 +284,4 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     verifyPadding(getGroupHeader(index));
     return this;
   }
-
-  public PortableInfoboxPageObject areBoldElementsMoreThanOne() {
-    Assertion.assertFalse(boldElements.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxPageObject areItalicElementsMoreThanOne() {
-    Assertion.assertFalse(italicElements.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxPageObject areHeadersMoreThanOne() {
-    Assertion.assertFalse(pInfoTitleH3.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxPageObject isImagePresented() {
-    wait.forElementVisible(pInfoImage);
-    Assertion.assertEquals(isElementOnPage(pInfoImage), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject isTabberPresented() {
-    wait.forElementVisible(tabber);
-    Assertion.assertEquals(isElementOnPage(tabber), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject isTabberImagePresented() {
-    wait.forElementVisible(tabberImage);
-    Assertion.assertEquals(isElementOnPage(tabberImage), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject isInfoboxTitlePresented() {
-    wait.forElementVisible(pInfoTitle);
-    Assertion.assertEquals(isElementOnPage(pInfoTitle), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject isLightboxPresented() {
-    wait.forElementVisible(lightbox);
-    Assertion.assertEquals(isElementOnPage(lightbox), true);
-    return this;
-  }
-
-  public PortableInfoboxPageObject areQuotationMarksPresented() {
-    wait.forElementVisible(h3Elements);
-    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
-    return this;
-  }
-
 }
