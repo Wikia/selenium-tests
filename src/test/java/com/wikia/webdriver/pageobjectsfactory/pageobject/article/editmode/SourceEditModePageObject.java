@@ -81,7 +81,6 @@ public class SourceEditModePageObject extends EditMode {
 
   public SourceEditModePageObject(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
   }
 
   public SourceEditModePageObject focusTextArea() {
@@ -103,13 +102,11 @@ public class SourceEditModePageObject extends EditMode {
     );
   }
 
-
   public void clickBold() {
     focusTextArea();
     bold.click();
     PageObjectLogging.log("clickBold", "bold button was clicked", true, driver);
   }
-
 
   public void clickItalic() {
     focusTextArea();

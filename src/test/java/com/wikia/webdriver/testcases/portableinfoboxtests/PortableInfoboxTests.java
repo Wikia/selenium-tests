@@ -39,6 +39,8 @@ import org.testng.annotations.Test;
  * TC17: Verify if group headers and titles has same left and right padding
  * TC18: Additional <div> wrappers from title, header and image HTML are removed
  * TC19: Verify that any of the tags which do not have a value won't appear
+ *
+ * @ownership Content West Wing
  */
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
@@ -107,11 +109,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mediawiki119")
   public void verifyCategoriesInTemplateInvocation() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
-     ArticlePageObject article = new ArticlePageObject(driver)
-            .open(PageContent.PORTABLE_INFOBOX01);
+    ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
 
     SourceEditModePageObject src = info
         .navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
+
     String categoryName = src
         .focusTextArea()
         .getRandomDigits(9);
@@ -120,8 +122,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickMore();
 
     shortcuts
-        .clickCategory()
+        .clickCategory(1)
         .addContent(categoryName);
+
     src
         .clickPublishButtonInTemplateNamespace()
         .verifyCategoryInTemplatePage(categoryName);
@@ -148,8 +151,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyTabberImagePresence();
   }
 
-  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   @Test(groups = "PortableInfoboxTests_009")
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver);
@@ -203,8 +206,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareFontSizesBetweenHorizontalItemValueAndItemValue();
   }
 
-  @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   @Test(groups = "PortableInfoboxTests_015")
+  @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver);

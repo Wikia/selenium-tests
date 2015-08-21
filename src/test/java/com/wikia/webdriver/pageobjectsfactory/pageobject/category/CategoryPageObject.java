@@ -8,13 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by nikodem on 27.07.15.
+ * @ownership Content West Wing
  */
-
 public class CategoryPageObject extends WikiBasePageObject {
 
     @FindBy(css = "#WikiaPageHeader h1")
-    protected WebElement categoryHeader;
+    private WebElement categoryHeader;
 
     public CategoryPageObject(WebDriver driver) {
         super(driver);
@@ -28,6 +27,7 @@ public class CategoryPageObject extends WikiBasePageObject {
             "the name of the category is: " + title,
             true
         );
+        // It is the same
         Assertion.assertEquals(categoryHeader.getText(), title);
     }
 }
