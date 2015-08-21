@@ -41,8 +41,8 @@ public class TemplatePageObject extends WikiBasePageObject{
     wait.forElementVisible(categoriesModule);
   }
 
-  public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
+  public TemplatePageObject openArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    return new ArticlePageObject(driver);
+    return new TemplatePageObject(driver);
   }
 }

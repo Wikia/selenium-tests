@@ -26,6 +26,8 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement createPageButton;
   @FindBy(css = "#createPageErrorMsg")
   private WebElement phalanxBlockMessageContainer;
+  @FindBy(css = "button[data-event=create]")
+  private WebElement addAPageButton;
 
   public CreateArticleModalComponentObject(WebDriver driver) {
     super(driver);
@@ -85,4 +87,9 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
       scrollAndClick(topListRadioButton);
     }
   }
+
+  public void verifyCreateNewArticleModal() {
+    wait.forElementVisible(addAPageButton);
+  }
+
 }
