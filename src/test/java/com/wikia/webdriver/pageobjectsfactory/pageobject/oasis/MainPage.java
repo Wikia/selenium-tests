@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.oasis;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.curatedContentToolModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -22,9 +22,9 @@ public class MainPage extends ArticlePageObject {
     return this;
   }
 
-  public curatedContentToolModal clickCuratedContentToolButton() {
+  public CuratedContentToolModal clickCuratedContentToolButton() {
     wait.forElementClickable(curatedContentToolButton);
     scrollAndClick(curatedContentToolButton);
-    return new curatedContentToolModal(driver);
+    return new CuratedContentToolModal(driver);
   }
 }

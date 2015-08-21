@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.curatedContentToolModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import org.testng.annotations.Test;
@@ -21,7 +21,7 @@ public class CuratedContentTool extends NewTestTemplate {
   @CreationTicket(ticketID = "CONCF-1073")
   public void verifyModal() {
     MainPage main = new MainPage(driver).open();
-    curatedContentToolModal modal = main.clickCuratedContentToolButton();
+    CuratedContentToolModal modal = main.clickCuratedContentToolButton();
     Assertion.assertTrue(modal.isModalVisible());
   }
 }
