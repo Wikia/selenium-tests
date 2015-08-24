@@ -913,11 +913,4 @@ public class ArticlePageObject extends WikiBasePageObject {
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
   }
-
-  public PortableInfoboxPageObject getInfoboxPage() {
-    if (portableInfobox == null) {
-      portableInfobox = new PortableInfoboxPageObject(driver);
-    }
-    return portableInfobox;
-  }
 }

@@ -8,27 +8,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by nikodem on 27.07.15.
+ * @ownership Content West Wing
  */
 public class CategoryPageObject extends WikiBasePageObject {
 
     @FindBy(css = "#WikiaPageHeader h1")
-    protected WebElement categoryHeader;
-
+    private WebElement categoryHeader;
 
     public CategoryPageObject(WebDriver driver) {
         super(driver);
     }
 
-    public String getCategoryName() {
-        String categoryName = categoryHeader.getText();
-        PageObjectLogging.log("getCategoryname", "the name of the category is: " + categoryName, true);
-        return categoryName;
-    }
-
-    public void verifyCategoryPageTitle(String title) {
+    public void verifyCategoryPageTitle(String categoryLinkName) {
         wait.forElementVisible(categoryHeader);
-        Assertion.assertEquals(categoryHeader.getText(), title);
+        String title = categoryHeader.getText();
+        PageObjectLogging.log(
+            "getCategoryname",
+            "the name of the category is: " + title,
+            true
+        );
+        Assertion.assertEquals("Category:" + title, categoryLinkName);
     }
-
 }
