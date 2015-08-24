@@ -176,10 +176,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  /**
-  * Open article with name that is the following combination:
-  * TEST CLASS NAME + TEST METHOD NAME
-  */
   public ArticlePageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
         + TestContext.getCurrentMethodName());
