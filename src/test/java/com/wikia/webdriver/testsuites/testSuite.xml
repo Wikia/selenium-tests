@@ -187,6 +187,7 @@
             <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileSearchTests"/>
             <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileTopbarTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck" />
+            <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP" />
         </classes>
     </test>
 </suite>
