@@ -73,7 +73,8 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     Pattern pt = Pattern.compile("(correlator=)\\d*");
 
     for (HarEntry entry : har.getLog().getEntries()) {
-      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net")) {
+      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net")
+          && entry.getRequest().getQueryString().toString().contains("_adtest,home,gpt")) {
         Matcher matcher = pt.matcher(entry.getRequest().getQueryString().toString());
         if (matcher.find()) {
           String correlatorID = matcher.group(0);
