@@ -1,15 +1,18 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import net.lightbody.bmp.proxy.ProxyServer;
 
 import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -54,7 +57,37 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
+            .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+      }
+    }
+  }
+
+  /**
+   * Looks for correlator pattern in requests query strings to DFP domain, and logs if all the calls
+   * have the same correlator ID. Any difference is ID is logged as failure.
+   */
+  public void logDFP() {
+    har = getHar();
+    String expectedCorrelator = null;
+    Pattern pt = Pattern.compile("(correlator=)\\d*");
+
+    for (HarEntry entry : har.getLog().getEntries()) {
+      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net")
+          && entry.getRequest().getQueryString().toString().contains("_adtest,home,gpt")) {
+        Matcher matcher = pt.matcher(entry.getRequest().getQueryString().toString());
+        if (matcher.find()) {
+          String correlatorID = matcher.group(0);
+
+          if (expectedCorrelator == null) {
+            expectedCorrelator = correlatorID;
+          }
+
+          PageObjectLogging.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
+              correlatorID.equals(expectedCorrelator));
+        } else {
+          throw new WebDriverException("Missing correlator param in query string");
+        }
       }
     }
   }
