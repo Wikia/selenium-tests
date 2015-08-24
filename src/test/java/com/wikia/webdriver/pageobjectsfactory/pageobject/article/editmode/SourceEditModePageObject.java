@@ -81,11 +81,11 @@ public class SourceEditModePageObject extends EditMode {
 
   public SourceEditModePageObject(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
   }
 
-  public void focusTextArea() {
+  public SourceEditModePageObject focusTextArea() {
     jsActions.focus(".cke_source");
+    return this;
   }
 
   public String getSourceContent() {
@@ -102,13 +102,11 @@ public class SourceEditModePageObject extends EditMode {
     );
   }
 
-
   public void clickBold() {
     focusTextArea();
     bold.click();
     PageObjectLogging.log("clickBold", "bold button was clicked", true, driver);
   }
-
 
   public void clickItalic() {
     focusTextArea();
@@ -213,10 +211,11 @@ public class SourceEditModePageObject extends EditMode {
     PageObjectLogging.log("addContent", "content was added", true);
   }
 
-  public void addContentInSourceMode(String content) {
+  public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
+    return this;
   }
 
   public String copyContent() {

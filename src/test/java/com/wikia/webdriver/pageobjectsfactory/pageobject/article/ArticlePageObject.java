@@ -605,7 +605,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(categorySuggestionsList);
     WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
     String desiredCategoryText = desiredCategory.getText();
-    scrollAndClick(desiredCategory);
+    scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
     waitForElementNotVisibleByElement(categorySuggestionsList);
     PageObjectLogging.log("addCategorySuggestions", "category " + category
         + " added from suggestions", true);
@@ -908,12 +908,5 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
-  }
-
-  public PortableInfoboxPageObject getInfoboxPage() {
-    if (portableInfobox == null) {
-      portableInfobox = new PortableInfoboxPageObject(driver);
-    }
-    return portableInfobox;
   }
 }

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing
  */
+@Test(groups = {"MercuryTOCTests", "Mercury"})
 public class TOCTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -26,7 +28,7 @@ public class TOCTests extends NewTestTemplate {
   private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
-  @Test(groups = {"MercuryTOCTest_001", "MercuryTOCTests", "Mercury"})
+  @Test(groups = "MercuryTOCTest_001")
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
@@ -94,7 +96,7 @@ public class TOCTests extends NewTestTemplate {
   }
 
   // TOCT02
-  @Test(groups = {"MercuryTOCTest_002", "MercuryTOCTests", "Mercury"})
+  @Test(groups = "MercuryTOCTest_002")
   public void MercuryTOCTest_002_NoH2NoTOC() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
@@ -104,6 +106,54 @@ public class TOCTests extends NewTestTemplate {
         "TOC",
         "is hidden",
         "is displayed",
+        result
+    );
+  }
+
+  // TOCT03
+  @Test(groups = "MercuryTOCTest_003")
+  public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
+
+    boolean result = toc.isUserMovedToRightSection(1);
+    PageObjectLogging.log(
+        "Redirection to header directly from link",
+        "works",
+        "does not work",
+        result
+    );
+  }
+
+  // TOCT04
+  @Test(groups = "MercuryTOCTest_004")
+  public void MercuryTOCTest_004_RedirectionToHeaderFromCurrentPage() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
+    new ArticlePageObject(driver).clickOnAnchorInContent(0);
+
+    boolean result = toc.isUserMovedToRightSection(1);
+    PageObjectLogging.log(
+        "Redirection to header from current page",
+        "works",
+        "does not work",
+        result
+    );
+  }
+
+  // TOCT05
+  @Test(groups = "MercuryTOCTest_005")
+  public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
+    new ArticlePageObject(driver).clickOnAnchorInContent(0);
+    toc.waitForLoadingSpinnerToFinish();
+
+    boolean result = toc.isUserMovedToRightSection(1);
+    PageObjectLogging.log(
+        "Redirection to header from other page",
+        "works",
+        "does not work",
         result
     );
   }

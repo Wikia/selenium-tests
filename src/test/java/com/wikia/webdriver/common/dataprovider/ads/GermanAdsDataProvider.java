@@ -81,10 +81,10 @@ public class GermanAdsDataProvider {
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: mobile,casual,strategy,war,rts,declashofc"},
         {"de.harry-potter", "Severus_Snape",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.harry-potter", "Hauptseite",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.terraria", "Terraria_Wiki",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: deterraria; SOI_SUB3SITE: ; " +
