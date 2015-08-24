@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 
@@ -38,6 +39,13 @@ public class HomePageObject extends WikiBasePageObject {
   public HomePageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public HomePageObject open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    waitForPageLoad();
+
+    return this;
   }
 
   public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
