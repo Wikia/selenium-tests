@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -24,6 +24,9 @@ public class Wait {
    */
 
   private static final int DEFAULT_TIMEOUT = 30;
+  private static final String INIT_MESSAGE = "INIT ELEMENT";
+  private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
+
 
   private WebDriverWait wait;
   private WebDriver webDriver;
@@ -46,7 +49,38 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser
+   * Checks if the element is clickable in browser
+   * @param element The element to be checked
+   */
+  public WebElement forElementClickable(WebElement element) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+      return wait.until(ExpectedConditions.elementToBeClickable(element));
+    } else {
+      return forElementClickable(SelectorStack.read());
+    }
+  }
+
+  /**
+   * Checks if the element is clickable on the browser
+   */
+  public WebElement forElementClickable(By by) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(ExpectedConditions.elementToBeClickable(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Checks if the element is visible in browser
    * <p/>
    * * @param element The element to be checked
    */
@@ -55,7 +89,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -170,7 +204,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -189,7 +223,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
