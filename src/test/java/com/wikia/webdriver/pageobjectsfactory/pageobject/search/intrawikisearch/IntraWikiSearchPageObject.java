@@ -207,7 +207,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     for (int i = 0; i < advancedOptions.size(); i++) {
 
       String optionName = advancedOptions.get(i).getText();
-      String optionState = (advancedOptionInputs.get(i).getAttribute("checked"));
+      String optionState = advancedOptionInputs.get(i).getAttribute("checked");
 
       if (optionName.equals("Articles") | optionName.equals("Category")) {
         Assertion.assertEquals(optionState, "true");
