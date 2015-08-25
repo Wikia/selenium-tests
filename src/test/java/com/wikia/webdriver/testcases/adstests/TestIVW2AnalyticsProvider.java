@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
-  private static final int TIMEOUT_SEC = 30;
+  private static final int TIMEOUT_SEC = 60;
 
   @Test(groups = "TestIVW2AnalyticsProvider")
   public void testIVW2AnalyticsProvider() throws IOException {
