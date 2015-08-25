@@ -1,14 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -21,6 +13,16 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.ElementStateHelper;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 public class VenusGlobalNavPageObject {
 
@@ -69,9 +71,7 @@ public class VenusGlobalNavPageObject {
     new Actions(driver).moveToElement(destinationHub).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-                                                .valueToBePresentInElementsAttribute(destinationHub,
-                                                                                     "class",
-                                                                                     "active"));
+        .valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
     hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText()))).click();
 
     new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(getHubLink(destinationHub)));
@@ -84,41 +84,30 @@ public class VenusGlobalNavPageObject {
   }
 
   private VenusGlobalNavPageObject openHubsMenu() {
-    new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver webDriver) {
-        try {
-          if (!hubsMenu.isDisplayed()) {
-            menuButton.click();
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, 20, 5000).until(new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver webDriver) {
+          try {
+            if (!hubsMenu.isDisplayed()) {
+              new Actions(driver).click(menuButton).perform();
+              return false;
+            }
+            return true;
+          } catch (StaleElementReferenceException e) {
             return false;
           }
-          return true;
-        } catch (StaleElementReferenceException e) {
-          return false;
         }
-      }
-    });
-
-    return this;
-  }
-
-  public VenusGlobalNavPageObject openHubsMenuViaHover() {
-    new Actions(driver).moveToElement(menuButton).perform();
-
-    new WebDriverWait(driver, 5).until(CommonExpectedConditions.elementVisible(hubsMenu));
-    return this;
-  }
-
-  public boolean isHubsMenuOpened() {
-    return hubsMenu.isDisplayed();
+      });
+      return this;
+    } finally {
+      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
   }
 
   public boolean isGameStarLogoDisplayed() {
     return ElementStateHelper.isElementVisible(gameStarLink, driver);
-  }
-
-  public WebElement getMenuScreenShotArea() {
-    return hubsMenuList;
   }
 
   public HomePageObject clickWikiaLogo() {
@@ -126,7 +115,7 @@ public class VenusGlobalNavPageObject {
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
-                                                                              environment));
+          environment));
     }
 
     wikiaLogo.click();
@@ -164,8 +153,7 @@ public class VenusGlobalNavPageObject {
   }
 
   public enum Hub {
-    COMICS("Comics"), TV("TV"), MOVIES("Movies"), MUSIC("Music"), BOOKS("Books"), GAMES(
-        "Games"), LIFESTYLE(
+    COMICS("Comics"), TV("TV"), MOVIES("Movies"), MUSIC("Music"), BOOKS("Books"), GAMES("Games"), LIFESTYLE(
         "Lifestyle");
 
     private final String labelText;
