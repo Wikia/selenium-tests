@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -22,6 +20,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

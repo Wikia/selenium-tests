@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core;
 
-import java.lang.reflect.Method;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Method;
 
 /**
  * Created by Ludwik on 2015-08-05.

@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.Stack;
 

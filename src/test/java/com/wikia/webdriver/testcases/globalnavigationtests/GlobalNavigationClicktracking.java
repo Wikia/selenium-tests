@@ -1,12 +1,5 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.json.JsonObject;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.clicktracking.events.EventsGlobalNavigation;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.AlertHandler;
@@ -14,6 +7,13 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.json.JsonObject;
 
 /**
  * @author Michal 'justnpT' Nowierski

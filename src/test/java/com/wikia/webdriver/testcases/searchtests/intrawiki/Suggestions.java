@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
+
+import org.testng.annotations.Test;
 
 /*
 *  dropDownSuggestions: Type at least 3 chars and verify suggestions are displaying and contain given phrase

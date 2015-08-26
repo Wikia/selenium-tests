@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class AlertHandler {
   private AlertHandler() {}
