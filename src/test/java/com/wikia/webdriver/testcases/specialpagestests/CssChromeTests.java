@@ -1,40 +1,27 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 public class CssChromeTests extends NewTestTemplate {
-
-  Credentials credentials = Configuration.getCredentials();
-
-  SpecialCssPageObject specialCss;
-  private String testedPage;
-
-  @BeforeMethod(alwaysRun = true)
-  public void CssChrome_loginAndOpenSpecialCSS() {
-    WikiBasePageObject wiki = new WikiBasePageObject(driver);
-    wiki.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    specialCss = wiki.openSpecialCss(wikiURL);
-    testedPage = specialCss.getCurrentUrl();
-  }
 
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-285
    */
   @Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"})
-  public void CssChrome_001_showingErrorWhenWrongSyntax() {
-    specialCss.verifyAceEditorPresence();
-    specialCss.verifyHighlighting();
+  @Execute(asUser = User.STAFF)
+  public void showingErrorWhenWrongSyntax() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     specialCss.clearCssText();
     specialCss.sendCssText(CssEditorContent.INVALID_CSS_ERROR);
     specialCss.verifyAceError();
@@ -44,8 +31,11 @@ public class CssChromeTests extends NewTestTemplate {
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
   @Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
+  @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
-  public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
+  public void verifyPublishButtonAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.saveCssContent(currentTimestamp);
     specialCss.open();
@@ -57,8 +47,11 @@ public class CssChromeTests extends NewTestTemplate {
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
   @Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
+  @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
-  public void CssChrome_003_verifyEditSummaryAppearsAndWorks() {
+  public void verifyEditSummaryAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.sendEditSummaryText(currentTimestamp);
     specialCss.saveCssContent(currentTimestamp);
@@ -71,8 +64,11 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-   @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
-  public void CssChrome_004_verifyChangesAppearsAndWorks() {
+  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
+  @Execute(asUser = User.STAFF)
+  public void verifyChangesAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     String currentTimestamp = specialCss.getTimeStamp();
     specialCss.insertCssText("\n" + currentTimestamp);
     specialCss.clickPublishButtonDropdown();
@@ -86,9 +82,12 @@ public class CssChromeTests extends NewTestTemplate {
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
   @Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"})
+  @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
-  public void CssChrome_005_verifyMinorEditAppearsAndWorks() {
-    String currentTimestamp = specialCss.getTimeStamp();
+  public void verifyMinorEditAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
+    String currentTimestamp = String.valueOf(DateTime.now().getMillis());
     specialCss.verifyMinorEditAppears();
     specialCss.clickMinorCheckbox();
     specialCss.saveCssContent(currentTimestamp);
@@ -98,14 +97,20 @@ public class CssChromeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CssChrome_006", "CssChrome", "AdminDashboard"})
-  public void CssChrome_006_verifyHistoryButtonAppearsAndWorks() {
+  @Execute(asUser = User.STAFF)
+  public void verifyHistoryButtonAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
     specialCss.clickPublishButtonDropdown();
     specialCss.clickHistoryButton();
     specialCss.verifyUrl("action=history");
   }
 
   @Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
-  public void CssChrome_007_verifyDeleteButtonAppearsAndWorks() {
+  @Execute(asUser = User.STAFF)
+  public void verifyDeleteButtonAppearsAndWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+    String testedPage = driver.getCurrentUrl();
+
     specialCss.verifyAceEditorPresence();
     specialCss.verifyArticleIsNotRemoved(testedPage);
     specialCss.clickPublishButtonDropdown();
@@ -128,7 +133,10 @@ public class CssChromeTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
    */
   @Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
-  public void CssChrome_008_verifyOnLeaveMessageWorks() {
+  @Execute(asUser = User.STAFF)
+  public void verifyOnLeaveMessageWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     specialCss.verifyAceEditorPresence();
     specialCss.sendCssText(CssEditorContent.VALID_CSS);
     driver.get(wikiURL);
@@ -139,7 +147,10 @@ public class CssChromeTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-999
    */
   @Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"})
-  public void CssChrome_009_verifyTalkButtonWorks() {
+  @Execute(asUser = User.STAFF)
+  public void verifyTalkButtonWorks() {
+    SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
+
     specialCss.verifyTalkBubblePresence();
     int commentsFromSpecialCss = specialCss.getNumberFromCssTalkBubble();
     specialCss.clickTalkButton();

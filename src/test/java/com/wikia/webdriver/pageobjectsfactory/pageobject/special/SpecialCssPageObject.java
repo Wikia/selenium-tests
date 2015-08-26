@@ -71,6 +71,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
     return this;
   }
 
+  public SpecialCssPageObject  openEditor() {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + URLsContent.MEDIAWIKI_CSS, "action=edit"));
+    return this;
+  }
+
+
   public void verifyAceEditorPresence() {
     wait.forElementVisible(aceEditor);
     PageObjectLogging.log("verifyAceEditorPresence", "Ace Editor is present.", true);
