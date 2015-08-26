@@ -25,8 +25,12 @@ import java.util.List;
 
 public class CuratedContent {
 
+  private CuratedContent() {
+  }
+
   private static String secret;
   private static String baseURL;
+  private static String errorMessage = "Problem with content clearing";
 
   private static void init() {
     File configFile = new File(Configuration.getCredentialsFilePath());
@@ -63,13 +67,13 @@ public class CuratedContent {
       PageObjectLogging.log("CONTENT CLEAR", "Curated Content cleared on: ", true);
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", e.toString(), false);
-      throw new WebDriverException("Problem with content clearing");
+      throw new WebDriverException(errorMessage);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION", e.toString(), false);
-      throw new WebDriverException("Problem with content clearing");
+      throw new WebDriverException(errorMessage);
     } catch (URISyntaxException e) {
       PageObjectLogging.log("URI_SYNTAX EXCEPTION", e.toString(), false);
-      throw new WebDriverException("Problem with content clearing");
+      throw new WebDriverException(errorMessage);
     }
   }
 }
