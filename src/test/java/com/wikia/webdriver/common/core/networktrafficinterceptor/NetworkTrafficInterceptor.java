@@ -67,14 +67,14 @@ public class NetworkTrafficInterceptor extends ProxyServer {
    * Looks for correlator pattern in requests query strings to DFP domain, and logs if all the calls
    * have the same correlator ID. Any difference is ID is logged as failure.
    */
-  public void logDFP() {
+  public void logDFP(String skinCorrelator) {
     har = getHar();
     String expectedCorrelator = null;
     Pattern pt = Pattern.compile("(correlator=)\\d*");
 
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net")
-          && entry.getRequest().getQueryString().toString().contains("_adtest,home,gpt")) {
+          && entry.getRequest().getQueryString().toString().contains(skinCorrelator)) {
         Matcher matcher = pt.matcher(entry.getRequest().getQueryString().toString());
         if (matcher.find()) {
           String correlatorID = matcher.group(0);
