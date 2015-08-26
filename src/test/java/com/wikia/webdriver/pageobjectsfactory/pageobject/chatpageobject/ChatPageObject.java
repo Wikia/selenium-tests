@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject;
 
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,9 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatPageObject extends WikiBasePageObject {
 

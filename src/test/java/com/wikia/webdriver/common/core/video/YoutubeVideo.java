@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.core.video;
 
-import java.util.Map;
-
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 /**
  * Created by Ludwik Kaźmierczak on 2015-02-12.

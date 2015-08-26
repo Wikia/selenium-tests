@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create wiki in different languages

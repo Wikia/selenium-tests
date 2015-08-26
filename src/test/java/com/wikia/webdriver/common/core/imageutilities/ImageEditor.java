@@ -3,7 +3,6 @@ package com.wikia.webdriver.common.core.imageutilities;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

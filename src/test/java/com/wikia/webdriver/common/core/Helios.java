@@ -1,9 +1,8 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -18,9 +17,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ludwik on 2015-08-05.

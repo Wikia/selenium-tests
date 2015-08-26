@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ludwik on 2015-07-22.
