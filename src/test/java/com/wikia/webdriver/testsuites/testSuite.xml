@@ -140,6 +140,7 @@
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsOwnerTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadCreatorTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
+            <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentTool"/>
             <class name="com.wikia.webdriver.testcases.portableinfoboxtests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
@@ -177,15 +178,6 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.GameGuidesPreview"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileArticleCommentTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileCategoriesTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileEditModeTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileInteractiveMapsTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileLoginTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileModalTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileSearchTests"/>
-            <class name="com.wikia.webdriver.testcases.wikiamobiletests.MobileTopbarTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck" />
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP" />
         </classes>

@@ -1,18 +1,17 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import net.lightbody.bmp.proxy.ProxyServer;
-
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Bogna 'bognix' Knychala

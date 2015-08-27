@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,6 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

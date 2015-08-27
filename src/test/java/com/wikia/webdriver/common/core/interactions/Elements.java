@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
 
 /**
  * Created by Ludwik on 2015-08-03.

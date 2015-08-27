@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.File;
-
 import org.apache.commons.configuration.XMLConfiguration;
+
+import java.io.File;
 
 public class XMLReader {
 

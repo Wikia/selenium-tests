@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.annotations;
 
-import java.io.File;
-
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+
+import java.io.File;
 
 /**
  * Created by Ludwik on 2015-02-19. Added LANGUAGE2 Japanese. By P. Archbold on 2015-07-23

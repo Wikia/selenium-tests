@@ -1,15 +1,15 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.properties.Credentials;
+
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.yaml.snakeyaml.Yaml;
-
-import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
@@ -68,20 +68,8 @@ public class Configuration {
     return getProp("wikiName");
   }
 
-  public static String getPlatformVersion() {
-    return getProp("platformVersion");
-  }
-
   public static String getPlatform() {
     return getProp("platform");
-  }
-
-  public static String getDeviceId() {
-    return getProp("deviceId");
-  }
-
-  public static String geMobileConfig() {
-    return getProp("mobileConfig");
   }
 
   public static String getCredentialsFilePath() {
