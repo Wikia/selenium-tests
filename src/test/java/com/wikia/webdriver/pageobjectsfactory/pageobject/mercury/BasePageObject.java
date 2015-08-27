@@ -30,6 +30,14 @@ public class BasePageObject extends WikiBasePageObject {
     return new ArticlePageObject(driver);
   }
 
+  public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
+                                                                     String articleName) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
+    PageObjectLogging
+        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName,
                                                     String hashId) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName +
@@ -46,7 +54,8 @@ public class BasePageObject extends WikiBasePageObject {
 
   /**
    * It will wait and log reason
-   * @param time - in milliseconds
+   *
+   * @param time   - in milliseconds
    * @param reason - i.e. Wait for message to disappear
    */
   public void waitMilliseconds(int time, String reason) {

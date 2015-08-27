@@ -30,7 +30,7 @@ public class MainPageTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  private static final String ROOT_PATH = "/";
+  private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
 
   /**
    * Page elements in correct order
@@ -477,7 +477,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
-    ccp.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     String oldUrl = driver.getCurrentUrl();
     ccp
