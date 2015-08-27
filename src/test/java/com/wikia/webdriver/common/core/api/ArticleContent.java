@@ -20,6 +20,9 @@ public class ArticleContent extends ApiCall {
   private static String secret;
   private static String baseURL;
 
+  private ArticleContent() {
+  }
+
   private static void init() {
     File configFile = new File(Configuration.getCredentialsFilePath());
     secret = XMLReader.getValue(configFile, "edit_controller.secret");

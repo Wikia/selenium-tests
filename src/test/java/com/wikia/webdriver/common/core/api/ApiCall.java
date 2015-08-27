@@ -13,7 +13,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.WebDriverException;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -32,15 +31,16 @@ public abstract class ApiCall {
   protected static User user = null;
   protected static List<NameValuePair> nvps = null;
 
-  public ApiCall() {
+  protected ApiCall() {
     user = null;
     nvps = new ArrayList<>();
   }
 
   public static void call() {
     try {
+      URL url = new URL(URL_STRING);
       CloseableHttpClient httpClient = HttpClients.createDefault();
-      HttpPost httpPost = getHtppPost();
+      HttpPost httpPost = getHtppPost(url);
       //set header
       if (user != null) {
         httpPost.addHeader("Authorization", "Bearer " + Helios.getAccessToken(user));
@@ -67,12 +67,10 @@ public abstract class ApiCall {
     }
   }
 
-  public static HttpPost getHtppPost() throws URISyntaxException, MalformedURLException {
-    URL url = new URL(URL_STRING);
-    HttpPost httpPost =
+  public static HttpPost getHtppPost(URL url) throws URISyntaxException {
+    return
         new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
                              url.getPath(), url.getQuery(), url.getRef()));
-    return httpPost;
   }
 }
 
