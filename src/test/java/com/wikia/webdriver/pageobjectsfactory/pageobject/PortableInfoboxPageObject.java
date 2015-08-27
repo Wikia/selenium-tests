@@ -96,7 +96,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public String getUrlFromExternalLinkaAfterPageIsLoaded() {
-    wait.forElementPresent(By.id("#footer"));
+    wait.forElementPresent(By.id("#www-wikipedia-org"));
     return driver.getCurrentUrl();
   }
 

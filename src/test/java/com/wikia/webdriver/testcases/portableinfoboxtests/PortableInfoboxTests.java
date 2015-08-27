@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -107,7 +108,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfoboxTests_004")
   @Execute(onWikia = "mediawiki119")
-  public void verifyCategoriesInTemplateInvocation() {
+  public void verifyCategoriesInTemplateInvocation()  {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
 
