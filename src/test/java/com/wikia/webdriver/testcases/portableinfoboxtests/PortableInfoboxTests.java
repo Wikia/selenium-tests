@@ -264,4 +264,20 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
         .verifyEmptyTags();
   }
+
+  @Test(groups = "PortableInfobox_016")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyInsertingEmptyInfoboxinVE() {
+    ArticleContent.clear();
+    ArticlePageObject article = new ArticlePageObject(driver);
+
+    article
+        .openVEOnArticle(wikiURL, "ABCDS89")
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .clickButtonContaining("Apply changes")
+        .verifyInsertedInfoboxPresence();
+  }
+
 }

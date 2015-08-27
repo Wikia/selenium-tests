@@ -84,6 +84,9 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement addTableLightbox;
   @FindBy(css = IMAGE_COMPONENT_CSS)
   private WebElement image;
+
+
+
   private By galleryBy = By.cssSelector("img.image-gallery");
 
   private By slideshowBy = By.cssSelector("img.image-slideshow");
