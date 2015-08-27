@@ -279,12 +279,19 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyInsertedInfoboxPresence();
   }
 
+  @Test(groups = "PortableInfobox_017")
+  @Execute(onWikia = "mediawiki119")
   public void verifyInsertingInfoboxWithParametersInVE() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    ArticleContent.clear();
 
     article
-        .openVEModeWithMainEditButton();
+         .openVEOnArticle(wikiURL, "321d1dd32u1")
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .selectParameterField(1, "typeThisText")
+        .clickButtonContaining("Apply changes")
+        .verifyInsertedInfoboxPresence();
   }
 
 }

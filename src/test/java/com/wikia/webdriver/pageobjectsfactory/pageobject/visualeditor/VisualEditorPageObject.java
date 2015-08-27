@@ -84,17 +84,17 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
   private WebElement focusedHighlight;
   @FindBy(css = ".oo-ui-popupToolGroup-handle")
-  private List <WebElement> toolsList;
+  private List<WebElement> toolsList;
   @FindBy(css = ".oo-ui-tool-title")
   private List <WebElement> insertMenuTools;
   @FindBy(css = ".oo-ui-window-frame .oo-ui-labelElement")
   private List <WebElement> infoboxTemplatesList;
-  @FindBy(css = ".ve-ui-mwParameterPage-field")
+  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget")
   private List<WebElement> parametersFieldList;
+  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
+  private List<WebElement> parameterFieldTextAreaList;
   @FindBy(css = ".oo-ui-buttonElement-button")
   private List<WebElement> buttonsList;
-  @FindBy(css = ".ve-ce-focusableNode-highlights")
-  private WebElement insertedInfobox;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -230,7 +230,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     String count = className.substring(className.indexOf("count-"));
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
     Assertion.assertNumber(numOfMediasInGallery, expected,
-            "Checking the correct number of media in gallery");
+                           "Checking the correct number of media in gallery");
     PageObjectLogging
         .log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
@@ -393,7 +393,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyNumberOfBlockTransclusion(int expected) {
     Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy), expected,
-            "The number of blocked transclusion node is not equal");
+                           "The number of blocked transclusion node is not equal");
   }
 
   public void verifyNumberOfInlineTransclusion(int expected) {
@@ -495,9 +495,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject selectParameterField(int i, String parameter) {
-    wait.forElementVisible(parametersFieldList.get(i));
+    //wait.forElementVisible(parametersFieldList.get(i));
     parametersFieldList.get(i).click();
+    this.focusParameterFieldTextArea(i);
     parametersFieldList.get(i).sendKeys(parameter);
+    return this;
+  }
+  public VisualEditorPageObject focusParameterFieldTextArea(int i) {
+    jsActions.focus(parameterFieldTextAreaList.get(i));
     return this;
   }
 
@@ -507,7 +512,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
       System.out.println("Button " + buttonsList.get(i).getText());
       if (buttonsList.get(i).getText().contentEquals(buttonName))
       {
-        wait.forElementVisible(buttonsList.get(i));
+        //wait.forElementVisible(buttonsList.get(i));
         buttonsList.get(i).click();
       }
     }
@@ -515,8 +520,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject verifyInsertedInfoboxPresence() {
-    wait.forElementVisible(insertedInfobox);
-    Assertion.assertEquals(isElementOnPage(insertedInfobox), true);
+    wait.forElementVisible(focusedHighlight);
+    Assertion.assertEquals(isElementOnPage(focusedHighlight), true);
     return this;
   }
 
