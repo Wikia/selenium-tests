@@ -267,8 +267,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfobox_016")
   @Execute(onWikia = "mediawiki119")
-  public void verifyInsertingEmptyInfoboxinVE() {
-    ArticleContent.clear();
+  public void verifyInsertingEmptyInfoboxInVE() {
     ArticlePageObject article = new ArticlePageObject(driver);
 
     article
@@ -278,6 +277,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .selectInfoboxTemplate(2)
         .clickButtonContaining("Apply changes")
         .verifyInsertedInfoboxPresence();
+  }
+
+  public void verifyInsertingInfoboxWithParametersInVE() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticleContent.clear();
+
+    article
+        .openVEModeWithMainEditButton();
   }
 
 }
