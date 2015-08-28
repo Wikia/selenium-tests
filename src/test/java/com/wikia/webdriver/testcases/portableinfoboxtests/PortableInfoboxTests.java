@@ -223,8 +223,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .editArticleInSrcUsingDropdown()
         .copyContent();
 
+    ArticleContent.clear();
+
     article
-        .open("Random" + article.getRandomDigits(5))
+        .open()
         .openCurrectArticleSourceMode()
         .addContentInSourceMode(templateSyntax)
         .submitArticle();
@@ -252,7 +254,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfoboxTest_014")
   @Execute(onWikia = "mediawiki119")
-  public void verifyDivsWrappersAreNotAppearing() {
+  public void verifyDivsWrappersAreNotIncluded() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
         .verifyDivsNotAppearingInImage()
@@ -271,19 +273,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_016")
   @Execute(onWikia = "mediawiki119")
   public void insertEmptyInfoboxInVE() {
-
-    ArticlePageObject article = new ArticlePageObject(driver);
-
-    article
-        .openVEOnArticle(wikiURL, "ABCDS89")
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
-        .clickButtonContaining("Apply changes")
-        .isInfoboxInsertedInEditorArea();
-
-  /*
     ArticleContent.clear();
+
     new ArticlePageObject(driver)
         .open()
         .openVEModeWithMainEditButton()
@@ -292,52 +283,46 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .selectInfoboxTemplate(2)
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
-  */
   }
 
   @Test(groups = "PortableInfobox_017")
   @Execute(onWikia = "mediawiki119")
   public void insertInfoboxWithParametersInVE() {
-    /*
-    ArticlePageObject article = new ArticlePageObject(driver);
-
-    article
-        .openVEOnArticle(wikiURL, "324343d32u1")
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
-        .selectParameterField(0, "typeThisText")
-        .clickButtonContaining("Apply changes")
-        .isInfoboxInsertedInEditorArea();
-    */
     ArticleContent.clear();
+
     new ArticlePageObject(driver)
         .open()
-        .openVEOnArticle(wikiURL, "324343d32u1")
+        .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
-        .selectParameterField(0, "typeThisText")
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
-
   }
 
   @Test(groups = "PortableInfobox_018")
   @Execute(onWikia = "mediawiki119")
   public void editInfoboxInVEbyPopup() {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticleContent.clear();
 
-    article
-        .openVEOnArticle(wikiURL, "Sth84398493")
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
-        .selectParameterField(0, "testing it")
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea()
         .clickInfoboxPopup()
-        .selectParameterField(2, "testing again")
+        .typeInParameterField(
+            2,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
   }
@@ -345,30 +330,26 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_019")
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+    ArticleContent.clear();
 
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     theme
         .openSpecialDesignerPage(wikiURL)
-        .selectTheme(4);
+        .selectTheme(3);
     theme
         .submitThemeSelection();
 
-    article
-        .openVEOnArticle(wikiURL, "InfoboxThemeTest432")
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
-        .selectParameterField(0, "typeThisText")
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
-
-    //get default style
-    theme
-        .openSpecialDesignerPage(wikiURL)
-        .selectTheme(1);
-    theme
-        .submitThemeSelection();
   }
 
 }

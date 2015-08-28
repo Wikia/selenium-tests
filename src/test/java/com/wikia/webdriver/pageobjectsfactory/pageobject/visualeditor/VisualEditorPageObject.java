@@ -494,7 +494,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject selectParameterField(int i, String parameter) {
+  public VisualEditorPageObject typeInParameterField(int i, String parameter) {
     parametersFieldList.get(i).click();
     parametersFieldList.get(i).sendKeys(parameter);
     return this;
@@ -522,13 +522,5 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     infoboxPopup.click();
     return this;
   }
-
-  public VisualEditorPageObject doubleClickInfoboxInVE() {
-    wait.forElementVisible(focusedHighlight);
-    focusedHighlight.click();
-    focusedHighlight.click();
-    return this;
-  }
-
 
 }
