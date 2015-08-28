@@ -1,16 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,12 +15,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.ElementStateHelper;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 public class VenusGlobalNavPageObject {
 
   private static final String HUBS_XPATH_FORMAT =
-      ".//a[./span[@class='label'][contains(text(),'%s')]]";
+      "//a[./span[@class='label'][contains(text(),'%s')]]";
 
   @FindBy(css = ".hubs-entry-point")
   private WebElement menuButton;
@@ -72,7 +73,7 @@ public class VenusGlobalNavPageObject {
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
         .valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
-    hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText()))).click();
+    destinationHub.click();
 
     new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(getHubLink(destinationHub)));
 
@@ -86,12 +87,12 @@ public class VenusGlobalNavPageObject {
   private VenusGlobalNavPageObject openHubsMenu() {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 20, 5000).until(new ExpectedCondition<Boolean>() {
+      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
           try {
             if (!hubsMenu.isDisplayed()) {
-              new Actions(driver).click(menuButton).perform();
+              ((JavascriptExecutor) driver).executeScript("$j('.hubs-menu-wrapper').trigger('click')");
               return false;
             }
             return true;
