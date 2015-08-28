@@ -27,13 +27,12 @@ public class CuratedContent extends ApiCall {
     return null;
   }
 
-  /*
-  * Clear Curated Content of current wiki
-  * Sets empty array as value of wgWikiaCuratedContent wikifactory variable.
-  *
-  * Add to test body:
-  * new CuratedContent().clear();
-  */
+  /**
+   * Clear Curated Content of current wiki Sets empty array as value of wgWikiaCuratedContent
+   * wikifactory variable.
+   *
+   * Add to test body: new CuratedContent().clear();
+   */
   public void clear() {
     call();
   }
