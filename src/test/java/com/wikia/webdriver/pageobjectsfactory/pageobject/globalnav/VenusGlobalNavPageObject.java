@@ -66,9 +66,8 @@ public class VenusGlobalNavPageObject {
   public HubBasePageObject openHub(Hub hub) {
     openHubsMenu();
 
-    final WebElement destinationHub =
-        hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
-
+    WebElement destinationHub =
+        wait.forElementPresent(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
     new Actions(driver).moveToElement(destinationHub).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
@@ -92,7 +91,8 @@ public class VenusGlobalNavPageObject {
         public Boolean apply(WebDriver webDriver) {
           try {
             if (!hubsMenu.isDisplayed()) {
-              ((JavascriptExecutor) driver).executeScript("$j('.hubs-menu-wrapper').trigger('click')");
+              ((JavascriptExecutor) driver)
+                  .executeScript("$j('.hubs-menu-wrapper').trigger('click')");
               return false;
             }
             return true;
