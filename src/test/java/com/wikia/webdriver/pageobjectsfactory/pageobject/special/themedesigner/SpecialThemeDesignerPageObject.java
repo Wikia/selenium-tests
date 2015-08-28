@@ -29,6 +29,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement bgColor;
   @FindBy(css = ".background-image")
   private WebElement bgImage;
+  @FindBy(css = "#tile-background")
+  private WebElement bgTileOption;
+  @FindBy(css = "#fix-background")
+  private WebElement bgFixOption;
+  @FindBy(css = "#not-split-background")
+  private WebElement bgNoSplitOption;
   @FindBy(css = ".ThemeDesignerPicker.image")
   private WebElement bgImagePicker;
   @FindBy(css = ".color-buttons")
@@ -101,7 +107,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
         .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
-  public void submitThemeSelection() {
+  public void submitTheme() {
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
@@ -120,9 +126,16 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
+  /**
+   * no split option appears only for backgrounds that are over 2000px wide
+   */
   public void verifyCustomizeTab() {
     wait.forElementVisible(bgColor);
     wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgTileOption);
+    wait.forElementVisible(bgFixOption);
+    wait.forElementVisible(bgNoSplitOption);
     wait.forElementVisible(pgButtons);
     wait.forElementVisible(pgLinks);
     wait.forElementVisible(pgHeader);

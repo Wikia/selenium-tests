@@ -163,7 +163,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .openSpecialDesignerPage(wikiURL)
         .selectTheme(4);
     theme
-        .submitThemeSelection();
+        .submitTheme();
 
     String oldBackground = info
         .open(PageContent.PORTABLE_INFOBOX01)
@@ -173,7 +173,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .openSpecialDesignerPage(wikiURL)
         .selectTheme(1);
     theme
-        .submitThemeSelection();
+        .submitTheme();
 
     article.open(PageContent.PORTABLE_INFOBOX01);
     info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
