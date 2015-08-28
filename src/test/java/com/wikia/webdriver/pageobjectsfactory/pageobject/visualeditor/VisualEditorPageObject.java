@@ -89,10 +89,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List <WebElement> insertMenuTools;
   @FindBy(css = ".oo-ui-window-frame .oo-ui-labelElement")
   private List <WebElement> infoboxTemplatesList;
-  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget")
-  private List<WebElement> parametersFieldList;
   @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
-  private List<WebElement> parameterFieldTextAreaList;
+  private List<WebElement> parametersFieldList;
   @FindBy(css = ".oo-ui-buttonElement-button")
   private List<WebElement> buttonsList;
 
@@ -495,34 +493,27 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject selectParameterField(int i, String parameter) {
-    //wait.forElementVisible(parametersFieldList.get(i));
     parametersFieldList.get(i).click();
-    this.focusParameterFieldTextArea(i);
     parametersFieldList.get(i).sendKeys(parameter);
-    return this;
-  }
-  public VisualEditorPageObject focusParameterFieldTextArea(int i) {
-    jsActions.focus(parameterFieldTextAreaList.get(i));
     return this;
   }
 
   public VisualEditorPageObject clickButtonContaining(String buttonName) {
     for (int i=0; i<buttonsList.size(); i++)
     {
-      System.out.println("Button " + buttonsList.get(i).getText());
       if (buttonsList.get(i).getText().contentEquals(buttonName))
       {
-        //wait.forElementVisible(buttonsList.get(i));
         buttonsList.get(i).click();
       }
     }
     return this;
   }
 
-  public VisualEditorPageObject verifyInsertedInfoboxPresence() {
+  public VisualEditorPageObject isInfoboxInsertedInEditorArea() {
     wait.forElementVisible(focusedHighlight);
     Assertion.assertEquals(isElementOnPage(focusedHighlight), true);
     return this;
   }
+
 
 }

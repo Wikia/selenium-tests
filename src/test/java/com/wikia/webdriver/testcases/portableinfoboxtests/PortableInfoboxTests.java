@@ -276,7 +276,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
         .clickButtonContaining("Apply changes")
-        .verifyInsertedInfoboxPresence();
+        .isInfoboxInsertedInEditorArea();
   }
 
   @Test(groups = "PortableInfobox_017")
@@ -285,13 +285,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver);
 
     article
-         .openVEOnArticle(wikiURL, "321d1dd32u1")
+        .openVEOnArticle(wikiURL, "324343d32u1")
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
-        .selectParameterField(1, "typeThisText")
+        .selectParameterField(0, "typeThisText")
         .clickButtonContaining("Apply changes")
-        .verifyInsertedInfoboxPresence();
+        .isInfoboxInsertedInEditorArea();
   }
 
 }
