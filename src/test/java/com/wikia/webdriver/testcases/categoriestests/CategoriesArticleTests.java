@@ -34,7 +34,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_002_anonSuggestions() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
@@ -45,7 +45,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_003_user() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
@@ -57,7 +57,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_004_userSuggestions() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
@@ -67,7 +67,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_005_anonEdit() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + DateTime.now().getMillis();
@@ -81,7 +81,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_006_anonDelete() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.addCategory("DeleteMe");

@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.categoriestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -13,8 +15,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -46,7 +46,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticleEdit_002", "CategoriesTestsArticleEditMode"})
   public void CategoriesTestsArticleEdit_002_anonDelete() {
-    ArticleContent.clear();
+    new ArticleContent().clear();
 
     VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
@@ -71,7 +71,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticleEdit_004", "CategoriesTestsArticleEditMode"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticleEdit_004_user() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();

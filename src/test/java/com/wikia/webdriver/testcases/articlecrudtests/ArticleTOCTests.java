@@ -43,7 +43,7 @@ public class ArticleTOCTests extends NewTestTemplate {
    */
   @Test(groups = {"ArticleTOCTests", "ArticleTOCTests_002"})
   public void ArticleTOCTests_002_verifyTOChideShowButtonsWorkForAnon() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
@@ -60,7 +60,7 @@ public class ArticleTOCTests extends NewTestTemplate {
    */
   @Test(groups = {"ArticleTOCTests", "ArticleTOCTests_003"})
   public void ArticleTOCTests_003_verifyTOCisCollapsedOnPreviewForAnon() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
@@ -78,7 +78,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   @Test(enabled = false, // QAART-262
       groups = {"ArticleTOCTests", "ArticleTOCTests_004"})
   public void ArticleTOCTests_004_verifyTOCtakesAnonToSectionClicked() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
@@ -94,7 +94,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   @Test(groups = {"ArticleTOCTests", "ArticleTOCTests_005"})
   @Execute(asUser = User.USER)
   public void ArticleTOCTests_005_verifyTOChideShowButtonsWorkForLoggedInUser() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
@@ -112,7 +112,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   @Test(groups = {"ArticleTOCTests", "ArticleTOCTests_006"})
   @Execute(asUser = User.USER_12)
   public void ArticleTOCTests_006_verifyTOCisExpandedOnPreviewForLoggedInUser() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.verifyContentLoaded();
@@ -129,7 +129,7 @@ public class ArticleTOCTests extends NewTestTemplate {
       groups = {"ArticleTOCTests", "ArticleTOCTests_007"})
   @Execute(asUser = User.USER_12)
   public void ArticleTOCTests_007_verifyTOCtakesLoggedInUserToSectionClicked() {
-    ArticleContent.push(PageContent.ARTICLE_WITH_TOC_LINES);
+    new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();

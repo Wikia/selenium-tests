@@ -26,7 +26,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
     String articleTitle = "DeleteUndeleArticle";
-    ArticleContent.push(PageContent.ARTICLE_TEXT, articleTitle);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT, articleTitle);
 
     ArticlePageObject article = new ArticlePageObject(driver).open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
@@ -43,7 +43,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();

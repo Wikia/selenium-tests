@@ -44,7 +44,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
   public void addGallery() {
-    ArticleContent.clear();
+    new ArticleContent().clear();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.clearContent();
@@ -65,7 +65,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"Smoke"})
   @Execute(asUser = User.USER)
   public void modifyGallery() {
-    ArticleContent.push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
+    new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
                         + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
@@ -87,7 +87,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   @Execute(asUser = User.USER)
   public void deleteGallery() {
-    ArticleContent.push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
+    new ArticleContent().push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
                         + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n" + "Image007.jpg\n"
                         + "</gallery>");
 
@@ -203,7 +203,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_007", "Media"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
@@ -247,7 +247,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Smoke4"})
   @Execute(asUser = User.USER)
   public void modifyImage() {
-    ArticleContent.push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
+    new ArticleContent().push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.modifyComponent(Components.PHOTO);
@@ -261,7 +261,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
   @Execute(asUser = User.USER)
   public void addImage() {
-    ArticleContent.clear();
+    new ArticleContent().clear();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -275,7 +275,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER)
   public void deleteImage() {
-    ArticleContent.push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
+    new ArticleContent().push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.PHOTO);
