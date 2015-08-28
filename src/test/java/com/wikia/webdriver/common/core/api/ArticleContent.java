@@ -7,12 +7,10 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ludwik on 2015-08-05.
@@ -21,38 +19,39 @@ public class ArticleContent extends ApiCall {
 
   private static String secret;
   private static String baseURL;
+  private static String URL_STRING;
+  private static ArrayList<BasicNameValuePair> PARAMS;
 
   public ArticleContent() {
+    baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+              + "wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
+
+    File configFile = new File(Configuration.getCredentialsFilePath());
+    if (StringUtils.isBlank(secret)) {
+      secret = XMLReader.getValue(configFile, "edit_controller.secret");
+    }
+    PARAMS = new ArrayList<BasicNameValuePair>();
+    PARAMS.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
+    PARAMS.add(new BasicNameValuePair("secret", secret));
   }
 
   @Override protected String getURL() {
-    return null;
+    return URL_STRING;
   }
 
   @Override protected User getUser() {
-    return null;
+    return User.STAFF;
   }
 
-  @Override protected List<NameValuePair> getParams() {
-    return null;
-  }
+  @Override
+  protected ArrayList<BasicNameValuePair> getParams() {
 
-  private void init() {
-
+    return PARAMS;
   }
 
   public void push(String text, String articleTitle) {
-    if (StringUtils.isBlank(secret)) {
-      init();
-    }
-
     URL_STRING = baseURL + articleTitle;
-
-//    nvps = new ArrayList<>();
-//    nvps.add(new BasicNameValuePair("text", text));
-//    nvps.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
-//    nvps.add(new BasicNameValuePair("secret", secret));
-
+    PARAMS.add(new BasicNameValuePair("text", text));
     call();
   }
 

@@ -66,7 +66,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void modifyGallery() {
     new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
-                        + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
+                              + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     GalleryBuilderComponentObject galleryBuiler =
@@ -88,8 +88,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void deleteGallery() {
     new ArticleContent().push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
-                        + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n" + "Image007.jpg\n"
-                        + "</gallery>");
+                              + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n"
+                              + "Image007.jpg\n"
+                              + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.GALLERY);

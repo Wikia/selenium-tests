@@ -1,23 +1,23 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  * Created by wikia on 2015-08-27.
@@ -32,11 +32,22 @@ public abstract class ApiCall {
 
   }
 
+
   abstract protected String getURL();
 
+  /**
+   * Return null if API call doesn't require to be logged in as specific user
+   *
+   * @return User to be logged in while executing API call
+   */
   abstract protected User getUser();
 
-  abstract protected List<NameValuePair> getParams();
+  /**
+   * Return null when no params should be added to API call
+   *
+   * @return params
+   */
+  abstract protected ArrayList<BasicNameValuePair> getParams();
 
   public void call() {
     try {
