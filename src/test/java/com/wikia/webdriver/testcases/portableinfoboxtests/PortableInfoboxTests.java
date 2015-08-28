@@ -40,7 +40,10 @@ import org.testng.annotations.Test;
  * TC13: Verify if group headers and titles has same left and right padding
  * TC14: Additional <div> wrappers from title, header and image HTML are removed
  * TC15: Verify that any of the tags which do not have a value won't appear
- *
+ * TC16: Verify inserting portable infobox without parameters in Visual Editor
+ * TC17: Verify inserting portable infobox with parameters in Visual Editor
+ * TC18: Verify editing portable infobox in VE by clicking on 'Infobox' popup
+ * TC19: Verify inserting portable infobox in VE in dark theme
  * @ownership Content West Wing
  */
 @Test(groups = "PortableInfoboxTests")
@@ -267,7 +270,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfobox_016")
   @Execute(onWikia = "mediawiki119")
-  public void verifyInsertingEmptyInfoboxInVE() {
+  public void insertEmptyInfoboxInVE() {
+
     ArticlePageObject article = new ArticlePageObject(driver);
 
     article
@@ -277,11 +281,24 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .selectInfoboxTemplate(2)
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
+
+  /*
+    ArticleContent.clear();
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .clickButtonContaining("Apply changes")
+        .isInfoboxInsertedInEditorArea();
+  */
   }
 
   @Test(groups = "PortableInfobox_017")
   @Execute(onWikia = "mediawiki119")
-  public void verifyInsertingInfoboxWithParametersInVE() {
+  public void insertInfoboxWithParametersInVE() {
+    /*
     ArticlePageObject article = new ArticlePageObject(driver);
 
     article
@@ -292,6 +309,66 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .selectParameterField(0, "typeThisText")
         .clickButtonContaining("Apply changes")
         .isInfoboxInsertedInEditorArea();
+    */
+    ArticleContent.clear();
+    new ArticlePageObject(driver)
+        .open()
+        .openVEOnArticle(wikiURL, "324343d32u1")
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .selectParameterField(0, "typeThisText")
+        .clickButtonContaining("Apply changes")
+        .isInfoboxInsertedInEditorArea();
+
+  }
+
+  @Test(groups = "PortableInfobox_018")
+  @Execute(onWikia = "mediawiki119")
+  public void editInfoboxInVEbyPopup() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+
+    article
+        .openVEOnArticle(wikiURL, "Sth84398493")
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .selectParameterField(0, "testing it")
+        .clickButtonContaining("Apply changes")
+        .isInfoboxInsertedInEditorArea()
+        .clickInfoboxPopup()
+        .selectParameterField(2, "testing again")
+        .clickButtonContaining("Apply changes")
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_019")
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
+  public void insertInfoboxWithParamsInVEusingDarkTheme() {
+    ArticlePageObject article = new ArticlePageObject(driver);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(4);
+    theme
+        .submitThemeSelection();
+
+    article
+        .openVEOnArticle(wikiURL, "InfoboxThemeTest432")
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .selectParameterField(0, "typeThisText")
+        .clickButtonContaining("Apply changes")
+        .isInfoboxInsertedInEditorArea();
+
+    //get default style
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(1);
+    theme
+        .submitThemeSelection();
   }
 
 }

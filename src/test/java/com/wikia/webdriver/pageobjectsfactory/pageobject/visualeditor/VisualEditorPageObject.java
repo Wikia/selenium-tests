@@ -93,6 +93,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> parametersFieldList;
   @FindBy(css = ".oo-ui-buttonElement-button")
   private List<WebElement> buttonsList;
+  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
+  private WebElement infoboxPopup;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -512,6 +514,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public VisualEditorPageObject isInfoboxInsertedInEditorArea() {
     wait.forElementVisible(focusedHighlight);
     Assertion.assertEquals(isElementOnPage(focusedHighlight), true);
+    return this;
+  }
+
+  public VisualEditorPageObject clickInfoboxPopup() {
+    wait.forElementVisible(infoboxPopup);
+    infoboxPopup.click();
+    return this;
+  }
+
+  public VisualEditorPageObject doubleClickInfoboxInVE() {
+    wait.forElementVisible(focusedHighlight);
+    focusedHighlight.click();
+    focusedHighlight.click();
     return this;
   }
 
