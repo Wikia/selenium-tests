@@ -281,7 +281,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
-        .clickButtonContaining("Apply changes")
+        .clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
 
@@ -299,7 +299,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .typeInParameterField(
             0,
             new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickButtonContaining("Apply changes")
+        .clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
 
@@ -317,13 +317,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .typeInParameterField(
             0,
             new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickButtonContaining("Apply changes")
+        .clickApplyChanges()
         .isInfoboxInsertedInEditorArea()
         .clickInfoboxPopup()
         .typeInParameterField(
             2,
             new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickButtonContaining("Apply changes")
+        .clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
 
@@ -348,7 +348,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .typeInParameterField(
             0,
             new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickButtonContaining("Apply changes")
+        .clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
 

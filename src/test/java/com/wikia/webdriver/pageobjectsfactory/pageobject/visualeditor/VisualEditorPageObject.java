@@ -49,14 +49,24 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> numList;
   @FindBy(css = "ul.ve-ce-branchNode > li")
   private List<WebElement> bullList;
-  @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
-  private WebElement veEditorSurface;
+  @FindBy(css = ".oo-ui-popupToolGroup-handle")
+  private List<WebElement> toolsList;
+  @FindBy(css = ".oo-ui-tool-title")
+  private List <WebElement> insertMenuTools;
+  @FindBy(css = ".oo-ui-window-frame .oo-ui-labelElement")
+  private List <WebElement> infoboxTemplatesList;
+  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
+  private List<WebElement> parametersFieldList;
+  @FindBy(css = ".oo-ui-buttonElement-button")
+  private List<WebElement> buttonsList;
   @FindBy(css = ".image.video.video-thumbnail.medium")
   private List<WebElement> videoNodes;
-  @FindBy(css = "figure.ve-ce-branchNode")
-  private WebElement mediaNode;
   @FindBy(css = "figure.ve-ce-branchNode a")
   private List<WebElement> mediaNodes;
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
+  private List<WebElement> galleryNodes;
+  @FindBy(css = "figure.ve-ce-branchNode")
+  private WebElement mediaNode;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
   @FindBy(css = ".ve-ui-wikiaMediaPreviewWidget-overlay")
@@ -77,22 +87,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mainContent;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
   private WebElement galleryNode;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
-  private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
   @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
   private WebElement focusedHighlight;
-  @FindBy(css = ".oo-ui-popupToolGroup-handle")
-  private List<WebElement> toolsList;
-  @FindBy(css = ".oo-ui-tool-title")
-  private List <WebElement> insertMenuTools;
-  @FindBy(css = ".oo-ui-window-frame .oo-ui-labelElement")
-  private List <WebElement> infoboxTemplatesList;
-  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
-  private List<WebElement> parametersFieldList;
-  @FindBy(css = ".oo-ui-buttonElement-button")
-  private List<WebElement> buttonsList;
+  @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
+  private WebElement veEditorSurface;
   @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
   private WebElement infoboxPopup;
 
@@ -468,10 +468,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickInsertToolButton() {
-    for (int i=0; i<toolsList.size(); i++)
-    {
-      if (toolsList.get(i).getText().contentEquals("Insert"))
-      {
+    for (int i=0; i<toolsList.size(); i++) {
+      if (toolsList.get(i).getText().contentEquals("Insert")) {
         toolsList.get(i).click();
       }
     }
@@ -479,10 +477,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickInsertInfoboxFromInsertToolMenu() {
-    for (int i=0; i<insertMenuTools.size(); i++)
-    {
-      if (insertMenuTools.get(i).getText().contentEquals("Infobox"))
-      {
+    for (int i=0; i<insertMenuTools.size(); i++) {
+      if (insertMenuTools.get(i).getText().contentEquals("Infobox")) {
         insertMenuTools.get(i).click();
       }
     }
@@ -500,11 +496,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject clickButtonContaining(String buttonName) {
-    for (int i=0; i<buttonsList.size(); i++)
-    {
-      if (buttonsList.get(i).getText().contentEquals(buttonName))
-      {
+  public VisualEditorPageObject clickApplyChanges() {
+    for (int i=0; i<buttonsList.size(); i++) {
+      if (buttonsList.get(i).getText().contentEquals("Apply changes")) {
         buttonsList.get(i).click();
       }
     }
