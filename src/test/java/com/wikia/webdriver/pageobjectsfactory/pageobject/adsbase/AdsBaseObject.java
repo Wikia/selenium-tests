@@ -38,7 +38,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
-  private static final int PROVIDER_CHAIN_TIMEOUT_SEC  = 30;
+  private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
 
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -128,7 +128,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
-    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(By.cssSelector("#jpsuperheader"))) {
+    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
+        By.cssSelector("#jpsuperheader"))) {
       PageObjectLogging.log("checkTopLeaderboard",
                             "Page has Gotham campaign.", true);
       return;
@@ -549,12 +550,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
-    List<String> actualProviders = getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
+    List<String>
+        actualProviders =
+        getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
     Assertion.assertEquals(Joiner.on("; ").join(actualProviders), providers);
     return this;
   }
 
-  private List<String> getProvidersChain(final String slotName, final String expectedProviders, int timeoutSec) {
+  private List<String> getProvidersChain(final String slotName,
+                                         final String expectedProviders,
+                                         int timeoutSec) {
     return new WebDriverWait(driver, timeoutSec).until(
         new ExpectedCondition<List<String>>() {
           @Override
@@ -563,6 +568,12 @@ public class AdsBaseObject extends WikiBasePageObject {
               return getProvidersChain(slotName);
             }
             return null;
+          }
+
+          @Override
+          public String toString() {
+            return String.format("Expected: %s, Actual: %s", expectedProviders,
+                                 Joiner.on("; ").join(getProvidersChain(slotName)));
           }
         }
     );
