@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class AdsHopObject extends AdsBaseObject {

@@ -9,7 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class TestAdsDisableGpt extends TemplateNoFirstLoad {

@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class TestUrlBuilder extends TemplateNoFirstLoad {
