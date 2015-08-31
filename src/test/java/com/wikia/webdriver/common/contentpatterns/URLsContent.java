@@ -5,31 +5,18 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 public class URLsContent {
 
-  // api
-  public static final String WIKIA_PHP = "wikia.php";
-
-  public static final String FOLLOWING_TOOLBAR_TEST = "QAautoPage";
-
   // Common url component
   public static final String WIKI_DIR = "wiki/";
   public static final String WIKIA_DIR = "Wikia";
 
-  // Hubs
-  public static final String VIDEOGAMES_HUB_URL = "/Video_Games";
-  public static final String ENTERTAINMENT_HUB_URL = "/Entertainment";
-  public static final String LIFESTYLE_HUB_URL = "/Lifestyle";
-
   // Special Urls - links to special pages
   public static final String SPECIAL_USER_LOGIN = "wiki/Special:UserLogin";
   public static final String SPECIAL_USER_SIGNUP = "wiki/Special:UserSignup";
-  public static final String SPECIAL_ADD_BLOG_LISTING_PAGE = "wiki/Special:CreateBlogListingPage";
   public static final String SPECIAL_NEW_FILES = "wiki/Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "wiki/Special:Videos";
   public static final String SPECIAL_UPLOAD = "wiki/Special:Upload";
   public static final String SPECIAL_MULTIPLE_UPLOAD = "wiki/Special:MultipleUpload";
   public static final String SPECIAL_WATCHLIST = "wiki/Special:Watchlist";
-  public static final String SPECIAL_PHALANX = "wiki/Special:Phalanx";
-  public static final String SPECIAL_PHALANXTEST = "wiki/Special:Phalanx/test";
   public static final String SPECIAL_PREFERENCES = "wiki/Special:Preferences";
   public static final String SPECIAL_EDITING_PREFERENCES =
       "wiki/Special:Preferences#mw-prefsection-editing";
@@ -48,8 +35,6 @@ public class URLsContent {
   public static final String USER_MESSAGE_WALL = "wiki/Message_Wall:";
   public static final String SPECIAL_MULTI_WIKI_FINDER = "wiki/Special:Multiwikifinder";
   public static final String LOGOUT = "wiki/Special:UserLogout?noexternals=1";
-  public static final String LOGOUT_RETURNTO = "wiki/Special:UserLogout?returnto=";
-  public static final String SPECIAL_UNDELETE = "wiki/Special:Undelete";
   public static final String USER_PROFILE = "wiki/User:%userName%";
   public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
   public static final String SPECIAL_WIKI_FACTORY = "wiki/Special:WikiFactory";
@@ -71,17 +56,6 @@ public class URLsContent {
   public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "wiki/Special:Version";
 
-  // Urls for mobile
-  public static final String MOBILETEST_MAINPAGE = "wiki/Mobileregressiontesting_Wiki";
-  public static final String ARTICLE_SECTIONS = "wiki/Sections";
-  public static final String ARTICLE_MODAL = "wiki/Modal";
-  public static final String ARTICLE_COMMENTS = "wiki/Article_comments";
-  public static final String CATEGORY_PMG = "wiki/Category:PMG";
-  public static final String ARTICLE_TOPBAR = "wiki/Topbar";
-  public static final String GAMEGUIDES_CONTROLLER_QS = "controller=GameGuides";
-  public static final String RENDER_FULL_QS = "method=renderFullPage";
-  public static final String PAGENAME = "page=";
-
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
 
@@ -91,49 +65,32 @@ public class URLsContent {
 
   // Mediawiki template url
   public static final String TEMPLATE_NAMESPACE = "Template";
-  public static final String TEMPLATE_URL = "wiki/" + TEMPLATE_NAMESPACE + ":%name%";
 
   // Extra switches - appear after ? in link
   public static final String NOEXTERNALS = "?noexternals=1";
   public static final String ACTION_EDIT = "action=edit";
   public static final String VEACTION_EDIT = "veaction=edit";
   public static final String USE_DEFAULT_FORMAT = "useFormat=1";
-  public static final String WIKIA_TRACKER = "og_level=info";
   public static final String ACTION_UNFOLLOW = "action=unwatch";
   public static final String ACTION_DELETE = "action=delete";
   public static final String DISABLE_CAPTCHA = "nocaptchatest=1";
   public static final String SOURCE_MODE = "useeditor=source";
-  public static final String REDLINK = "redlink=1";
   public static final String MOST_RECENT = "?sort=recent";
 
   // WAM Scores page url
   public static final String WAM_PAGE = "WAM";
 
-  // Preview url for testing video suggestions
-  public static final String VIDEO_SUGGESTIONS_URL =
-      "http://preview.callofduty.wikia.com/wiki/Frank_Woods";
-
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
-  public static final String VIEW_ARTICLE = "index.php?title=%title%";
   public static final String API_URL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
       + "api.php";
 
   // File Pages
   public static final String FILE_NAMESPACE = "File:";
   public static final String FILENAME_001 = "Grammy_Muppet_Critics.jpeg";
-  public static final String FILENAME_002 = "New_Batman_Year_One_Clip";
 
   // History Pages
   public static final String ACTION_HISTORY = "action=history";
-
-  // Article Pages
-  public static final String ARTICLENAME_001 = "TestVid001";
-  public static final String ARTICLENAME_002 = "TestVid002";
-  public static final String ARTICLENAME_003 = "TestVid003";
-  public static final String ARTICLENAME_004 = "TestVid004";
-
-  public static final String SPECIAL_SEARCH = "wiki/Special:Search";
 
   // languages
   public static final String TRANSLATABLE_LANGUAGE = "uselang=qqx";
@@ -150,8 +107,6 @@ public class URLsContent {
   public static final String FACEBOOK_SETTINGSPAGE = "http://www.facebook.com/settings";
   public static final String FACEBOOK_SETTINGS_APP_TAB =
       "http://www.facebook.com/settings?tab=applications";
-  public static final String FACEBOOK_WIKIA_APP_ID = "112328095453510";
-  public static final String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
 
   // avatars
   public static final String AVATAR_GENERIC = "Avatar.jpg";
@@ -164,12 +119,10 @@ public class URLsContent {
   public static final String TESTINGPAGE = "Testingpage";
 
   // Urls for different namespace pages
-  public static final String WIKI_MAINPAGE = "Main_Page";
   public static final String CATEGORY_PAGE = "Category:General_wiki_templates";
   public static final String CATEGORY_HELP = "Category:Help";
   public static final String TEMPLATE_PAGE = "Template:";
   public static final String LIST_PAGE = "List:Listing";
-  public static final String MEDIAWIKI = "mediawiki119";
 
   // Other wikis to test on
   public static final String VIDEO_TEST_WIKI = "sktest123";
@@ -184,11 +137,6 @@ public class URLsContent {
   // Escaped frament URL for Maps
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
 
-  // Wikis with smart banners
-  public static final String SMART_BANNER_GTA = "gta";
-  public static final String SMART_BANNER_GLEE = "glee";
-
   private URLsContent() {
-
   }
 }

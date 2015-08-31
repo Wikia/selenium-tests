@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.social;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * Created by Ludwik on 2015-08-14.

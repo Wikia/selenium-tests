@@ -551,7 +551,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
     List<String> actualProviders = getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
-    Assertion.assertEquals(providers, Joiner.on("; ").join(actualProviders));
+    Assertion.assertEquals(Joiner.on("; ").join(actualProviders), providers);
     return this;
   }
 

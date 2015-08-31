@@ -1,13 +1,12 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

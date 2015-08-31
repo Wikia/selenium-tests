@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

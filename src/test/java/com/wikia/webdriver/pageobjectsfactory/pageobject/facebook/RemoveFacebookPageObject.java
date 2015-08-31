@@ -2,8 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
 import org.openqa.selenium.WebDriver;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
  * Created by rcunningham on 4/2/15.
  */

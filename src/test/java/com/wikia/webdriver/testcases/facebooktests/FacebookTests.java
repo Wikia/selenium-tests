@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -13,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebook
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
+import org.testng.annotations.Test;
 
 @Test(groups = {"Facebook"})
 public class FacebookTests extends NewTestTemplate {

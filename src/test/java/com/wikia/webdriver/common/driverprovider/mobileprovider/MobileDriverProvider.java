@@ -8,23 +8,13 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class MobileDriverProvider {
 
-  private MobileDriversRegistry mobileDriversRegistry;
   private String platform;
-  private String platformVersion;
-  private String deviceId;
-  private String mobileConfig;
   private String browser;
 
   public MobileDriverProvider() {
     platform = Configuration.getPlatform();
-    platformVersion = Configuration.getPlatformVersion();
-    deviceId = Configuration.getDeviceId();
-    mobileConfig = Configuration.geMobileConfig();
     browser = Configuration.getBrowser();
   }
 
@@ -37,8 +27,7 @@ public class MobileDriverProvider {
 
     switch (platform.toUpperCase()) {
       case "ANDROID":
-        mobileDriversRegistry = new MobileDriversRegistry(platform, mobileConfig);
-        driver = getChromeDriver(platformVersion, deviceId);
+        driver = getChromeDriver();
         break;
       case "IOS":
         //@TODO
@@ -54,19 +43,9 @@ public class MobileDriverProvider {
     return driver;
   }
 
-  private WebDriver getChromeDriver(String platformVersion, String deviceId) {
+  private WebDriver getChromeDriver() {
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.setExperimentalOption("androidPackage", "com.android.chrome");
-    if (deviceId != null) {
-      chromeOptions.setExperimentalOption(
-          "androidDeviceSerial", deviceId
-      );
-    } else if (platformVersion != null) {
-      chromeOptions.setExperimentalOption(
-          "androidDeviceSerial",
-          mobileDriversRegistry.getDeviceForAndroidVersion(platformVersion)
-      );
-    }
     return new ChromeDriver(chromeOptions);
   }
 }

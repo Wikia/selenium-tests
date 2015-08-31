@@ -1,21 +1,18 @@
 package com.wikia.webdriver.testcases.hubstests;
 
-import java.util.Map;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.Map;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

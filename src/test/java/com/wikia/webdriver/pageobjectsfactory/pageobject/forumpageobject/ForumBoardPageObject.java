@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,11 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class ForumBoardPageObject extends BasePageObject {
 

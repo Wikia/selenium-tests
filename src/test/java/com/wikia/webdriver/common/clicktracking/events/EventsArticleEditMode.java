@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.clicktracking.events;
 
+import com.wikia.webdriver.common.clicktracking.EventParameter;
+
 import javax.json.Json;
 import javax.json.JsonObject;
-
-import com.wikia.webdriver.common.clicktracking.EventParameter;
 
 public class EventsArticleEditMode {
 

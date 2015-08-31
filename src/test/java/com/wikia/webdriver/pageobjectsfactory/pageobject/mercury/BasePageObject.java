@@ -3,21 +3,19 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * @ownership: Content X-Wing
  */
-public class BasePageObject extends MobileBasePageObject {
+public class BasePageObject extends WikiBasePageObject {
 
   private final static By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
 
@@ -27,6 +25,14 @@ public class BasePageObject extends MobileBasePageObject {
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
+    PageObjectLogging
+        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
+  public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
+                                                                     String articleName) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
@@ -48,7 +54,8 @@ public class BasePageObject extends MobileBasePageObject {
 
   /**
    * It will wait and log reason
-   * @param time - in milliseconds
+   *
+   * @param time   - in milliseconds
    * @param reason - i.e. Wait for message to disappear
    */
   public void waitMilliseconds(int time, String reason) {
@@ -130,5 +137,9 @@ public class BasePageObject extends MobileBasePageObject {
       return false;
     }
     return true;
+  }
+
+  public void openHome(String wikiURL) {
+    getUrl(wikiURL);
   }
 }

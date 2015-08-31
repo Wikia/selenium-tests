@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import javax.annotation.Nullable;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,10 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import javax.annotation.Nullable;
 
 /**
  * @author Michal 'justnpT' Nowierski

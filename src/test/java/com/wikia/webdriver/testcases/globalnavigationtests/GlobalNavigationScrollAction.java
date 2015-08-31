@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * @ownership Content X-Wing
