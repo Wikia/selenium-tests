@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -16,6 +17,7 @@ public class TestProvidersChain extends TemplateNoFirstLoad {
 
   private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);
 
+  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "testProvidersChain",
