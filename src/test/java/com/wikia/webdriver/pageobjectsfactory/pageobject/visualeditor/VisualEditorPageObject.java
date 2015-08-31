@@ -43,20 +43,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     super(driver);
   }
 
-  @FindBy(css = ".ve-ce-documentNode")
-  private WebElement editArea;
-  @FindBy(css = "ol.ve-ce-branchNode > li")
-  private List<WebElement> numList;
-  @FindBy(css = "ul.ve-ce-branchNode > li")
-  private List<WebElement> bullList;
-  @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
-  private WebElement veEditorSurface;
-  @FindBy(css = ".image.video.video-thumbnail.medium")
-  private List<WebElement> videoNodes;
-  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
-  @FindBy(css = "figure.ve-ce-branchNode a")
-  private List<WebElement> mediaNodes;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
   @FindBy(css = ".ve-ui-wikiaMediaPreviewWidget-overlay")
@@ -77,12 +64,43 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement mainContent;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode")
   private WebElement galleryNode;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
-  private List<WebElement> galleryNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode .toggler")
   private WebElement toggler;
   @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
   private WebElement focusedHighlight;
+  @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
+  private WebElement veSurface;
+  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
+  private WebElement infoboxPopup;
+  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
+  private WebElement applyChangesButton;
+  @FindBy(css = ".oo-ui-labelElement.oo-ui-popupToolGroup.oo-ui-listToolGroup")
+  private WebElement insertDropdownMenuButton;
+  @FindBy(css = ".oo-ui-toolGroup-tools .oo-ui-icon-infobox")
+  private WebElement infoboxInDropdownMenu;
+  @FindBy(css = ".ve-ce-documentNode")
+  private WebElement editArea;
+  @FindBy(css = "ol.ve-ce-branchNode > li")
+  private List<WebElement> numList;
+  @FindBy(css = "ul.ve-ce-branchNode > li")
+  private List<WebElement> bullList;
+  @FindBy(css = ".oo-ui-popupToolGroup-handle")
+  private List<WebElement> toolsList;
+  @FindBy(css = ".oo-ui-tool-title")
+  private List<WebElement> insertMenuTools;
+  @FindBy(css = ".oo-ui-labelElement.oo-ui-optionWidget")
+  private List<WebElement> infoboxTemplatesList;
+  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
+  private List<WebElement> parametersFieldList;
+  @FindBy(css = ".oo-ui-buttonElement-button")
+  private List<WebElement> buttonsList;
+  @FindBy(css = ".image.video.video-thumbnail.medium")
+  private List<WebElement> videoNodes;
+  @FindBy(css = "figure.ve-ce-branchNode a")
+  private List<WebElement> mediaNodes;
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
+  private List<WebElement> galleryNodes;
+  @FindBy(css = "figure.ve-ce-branchNode")
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -172,7 +190,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyEditorSurfacePresent() {
     wait.forElementVisible(veMode);
-    wait.forElementVisible(veEditorSurface);
+    wait.forElementVisible(veSurface);
     PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
   }
 
@@ -208,8 +226,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
       wait.forElementVisible(galleryNode);
     }
     Assertion.assertNumber(
-            getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")), expected,
-            "Checking the correct number of gallery nodes");
+        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")), expected,
+        "Checking the correct number of gallery nodes");
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -218,7 +236,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     String count = className.substring(className.indexOf("count-"));
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
     Assertion.assertNumber(numOfMediasInGallery, expected,
-            "Checking the correct number of media in gallery");
+                           "Checking the correct number of media in gallery");
     PageObjectLogging
         .log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
@@ -227,7 +245,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaNode);
     Assertion.assertNumber(mediaNodes.size(), expected,
-            "Checking the correct number of media nodes added");
+                           "Checking the correct number of media nodes added");
     PageObjectLogging.log("verifyMedias", mediaNodes.size() + " media displayed", true);
   }
 
@@ -381,12 +399,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyNumberOfBlockTransclusion(int expected) {
     Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy), expected,
-            "The number of blocked transclusion node is not equal");
+                           "The number of blocked transclusion node is not equal");
   }
 
   public void verifyNumberOfInlineTransclusion(int expected) {
     Assertion.assertNumber(getNumOfElementOnPage(inlineTransclusionBy), expected,
-            "The number of inline transclusion node is not equal");
+                           "The number of inline transclusion node is not equal");
   }
 
 
@@ -454,4 +472,45 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     clickContextMenu();
     return new VisualEditorEditTemplateDialog(driver);
   }
+
+  public VisualEditorPageObject clickInsertToolButton() {
+    insertDropdownMenuButton.click();
+    return this;
+  }
+
+  public VisualEditorPageObject clickInsertInfoboxFromInsertToolMenu() {
+    wait.forElementVisible(infoboxInDropdownMenu);
+    infoboxInDropdownMenu.click();
+    return this;
+  }
+
+  public VisualEditorPageObject selectInfoboxTemplate(int i) {
+    infoboxTemplatesList.get(i).click();
+    return this;
+  }
+
+  public VisualEditorPageObject typeInParameterField(int i, String parameter) {
+    parametersFieldList.get(i).click();
+    parametersFieldList.get(i).sendKeys(parameter);
+    return this;
+  }
+
+  public VisualEditorPageObject clickApplyChanges() {
+    wait.forElementVisible(applyChangesButton);
+    applyChangesButton.click();
+    return this;
+  }
+
+  public VisualEditorPageObject isInfoboxInsertedInEditorArea() {
+    wait.forElementVisible(focusedHighlight);
+    Assertion.assertEquals(isElementOnPage(focusedHighlight), true);
+    return this;
+  }
+
+  public VisualEditorPageObject clickInfoboxPopup() {
+    wait.forElementVisible(infoboxPopup);
+    infoboxPopup.click();
+    return this;
+  }
+
 }

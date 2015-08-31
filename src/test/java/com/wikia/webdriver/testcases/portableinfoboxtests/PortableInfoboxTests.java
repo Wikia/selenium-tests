@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -39,7 +40,10 @@ import org.testng.annotations.Test;
  * TC13: Verify if group headers and titles has same left and right padding
  * TC14: Additional <div> wrappers from title, header and image HTML are removed
  * TC15: Verify that any of the tags which do not have a value won't appear
- *
+ * TC16: Verify inserting portable infobox without parameters in Visual Editor
+ * TC17: Verify inserting portable infobox with parameters in Visual Editor
+ * TC18: Verify editing portable infobox in VE by clicking on 'Infobox' popup
+ * TC19: Verify inserting portable infobox in VE in dark theme
  * @ownership Content West Wing
  */
 @Test(groups = "PortableInfoboxTests")
@@ -107,7 +111,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfoboxTests_004")
   @Execute(onWikia = "mediawiki119")
-  public void verifyCategoriesInTemplateInvocation() {
+  public void verifyCategoriesInTemplateInvocation()  {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
 
@@ -219,8 +223,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .editArticleInSrcUsingDropdown()
         .copyContent();
 
+    ArticleContent.clear();
+
     article
-        .open("Random" + article.getRandomDigits(5))
+        .open()
         .openCurrectArticleSourceMode()
         .addContentInSourceMode(templateSyntax)
         .submitArticle();
@@ -248,7 +254,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "PortableInfoboxTest_014")
   @Execute(onWikia = "mediawiki119")
-  public void verifyDivsWrappersAreNotAppearing() {
+  public void verifyDivsWrappersAreNotIncluded() {
     new PortableInfoboxPageObject(driver)
         .open(PageContent.PORTABLE_INFOBOX01)
         .verifyDivsNotAppearingInImage()
@@ -263,4 +269,87 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
         .verifyEmptyTags();
   }
+
+  @Test(groups = "PortableInfobox_016")
+  @Execute(onWikia = "mediawiki119")
+  public void insertEmptyInfoboxInVE() {
+    ArticleContent.clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_017")
+  @Execute(onWikia = "mediawiki119")
+  public void insertInfoboxWithParametersInVE() {
+    ArticleContent.clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_018")
+  @Execute(onWikia = "mediawiki119")
+  public void editInfoboxInVEbyPopup() {
+    ArticleContent.clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea()
+        .clickInfoboxPopup()
+        .typeInParameterField(
+            2,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_019")
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
+  public void insertInfoboxWithParamsInVEusingDarkTheme() {
+    ArticleContent.clear();
+
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(3);
+    theme
+        .submitThemeSelection();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
 }
