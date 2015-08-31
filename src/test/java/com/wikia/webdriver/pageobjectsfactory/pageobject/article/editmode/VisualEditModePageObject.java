@@ -85,10 +85,7 @@ public class VisualEditModePageObject extends EditMode {
   @FindBy(css = IMAGE_COMPONENT_CSS)
   private WebElement image;
 
-
-
   private By galleryBy = By.cssSelector("img.image-gallery");
-
   private By slideshowBy = By.cssSelector("img.image-slideshow");
   private By sliderBy = By.cssSelector("img.image-gallery-slider");
   private By videoBy = By.cssSelector("img.video");

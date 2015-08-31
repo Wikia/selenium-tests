@@ -68,6 +68,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement imageWrapper;
   @FindBy(css = ".pi-title")
   private WebElement titleWrapper;
+  @FindBy(css = "body")
+  private WebElement bodyElement;
+  @FindBy(css = ".header-title")
+  private WebElement headerTitle;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -96,7 +100,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public String getUrlFromExternalLinkaAfterPageIsLoaded() {
-    wait.forElementPresent(By.cssSelector("body"));
+    wait.forElementVisible(bodyElement);
     return driver.getCurrentUrl();
   }
 
@@ -106,7 +110,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public String getUrlFromInternalLinkaAfterPageIsLoaded() {
-    wait.forElementPresent(By.cssSelector(".header-title"));
+    wait.forElementVisible(headerTitle);
     return driver.getCurrentUrl();
   }
 

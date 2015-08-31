@@ -52,9 +52,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   @FindBy(css = ".oo-ui-popupToolGroup-handle")
   private List<WebElement> toolsList;
   @FindBy(css = ".oo-ui-tool-title")
-  private List <WebElement> insertMenuTools;
-  @FindBy(css = ".oo-ui-window-frame .oo-ui-labelElement")
-  private List <WebElement> infoboxTemplatesList;
+  private List<WebElement> insertMenuTools;
+  @FindBy(css = ".oo-ui-labelElement.oo-ui-optionWidget")
+  private List<WebElement> infoboxTemplatesList;
   @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
   private List<WebElement> parametersFieldList;
   @FindBy(css = ".oo-ui-buttonElement-button")
@@ -92,9 +92,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   @FindBy(css = ".ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight")
   private WebElement focusedHighlight;
   @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
-  private WebElement veEditorSurface;
+  private WebElement veSurface;
   @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
   private WebElement infoboxPopup;
+  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
+  private WebElement applyChangesButton;
+  @FindBy(css = ".oo-ui-labelElement.oo-ui-popupToolGroup.oo-ui-listToolGroup")
+  private WebElement insertDropdownMenuButton;
+  @FindBy(css = ".oo-ui-toolGroup-tools .oo-ui-icon-infobox")
+  private WebElement infoboxInDropdownMenu;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -184,7 +190,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyEditorSurfacePresent() {
     wait.forElementVisible(veMode);
-    wait.forElementVisible(veEditorSurface);
+    wait.forElementVisible(veSurface);
     PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
   }
 
@@ -468,20 +474,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickInsertToolButton() {
-    for (int i=0; i<toolsList.size(); i++) {
-      if (toolsList.get(i).getText().contentEquals("Insert")) {
-        toolsList.get(i).click();
-      }
-    }
+    insertDropdownMenuButton.click();
     return this;
   }
 
   public VisualEditorPageObject clickInsertInfoboxFromInsertToolMenu() {
-    for (int i=0; i<insertMenuTools.size(); i++) {
-      if (insertMenuTools.get(i).getText().contentEquals("Infobox")) {
-        insertMenuTools.get(i).click();
-      }
-    }
+    wait.forElementVisible(infoboxInDropdownMenu);
+    infoboxInDropdownMenu.click();
     return this;
   }
 
@@ -497,11 +496,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickApplyChanges() {
-    for (int i=0; i<buttonsList.size(); i++) {
-      if (buttonsList.get(i).getText().contentEquals("Apply changes")) {
-        buttonsList.get(i).click();
-      }
-    }
+    wait.forElementVisible(applyChangesButton);
+    applyChangesButton.click();
     return this;
   }
 
