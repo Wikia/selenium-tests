@@ -1,9 +1,9 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
@@ -223,7 +223,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .editArticleInSrcUsingDropdown()
         .copyContent();
 
-    ArticleContent.clear();
+    (new ArticleContent()).clear();
 
     article
         .open()
@@ -273,7 +273,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_016")
   @Execute(onWikia = "mediawiki119")
   public void insertEmptyInfoboxInVE() {
-    ArticleContent.clear();
+    (new ArticleContent()).clear();
 
     new ArticlePageObject(driver)
         .open()
@@ -288,7 +288,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_017")
   @Execute(onWikia = "mediawiki119")
   public void insertInfoboxWithParametersInVE() {
-    ArticleContent.clear();
+    (new ArticleContent()).clear();
 
     new ArticlePageObject(driver)
         .open()
@@ -306,7 +306,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_018")
   @Execute(onWikia = "mediawiki119")
   public void editInfoboxInVEbyPopup() {
-    ArticleContent.clear();
+    (new ArticleContent()).clear();
 
     new ArticlePageObject(driver)
         .open()
@@ -330,7 +330,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "PortableInfobox_019")
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
-    ArticleContent.clear();
+    (new ArticleContent()).clear();
 
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     theme
