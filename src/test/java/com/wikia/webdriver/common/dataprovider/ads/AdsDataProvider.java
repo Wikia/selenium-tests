@@ -394,7 +394,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testProvidersChain() {
+  public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain",
@@ -412,7 +412,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testDisableGptAds() {
+  public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",

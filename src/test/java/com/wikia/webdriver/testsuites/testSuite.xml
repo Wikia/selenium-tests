@@ -29,7 +29,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestATF"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestDisableGptAds"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestEvolveAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestExtraMarker"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
@@ -43,7 +43,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestParamValue"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestProvidersChain"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
