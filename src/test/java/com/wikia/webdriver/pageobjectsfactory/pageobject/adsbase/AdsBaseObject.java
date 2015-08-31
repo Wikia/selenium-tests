@@ -25,7 +25,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -563,7 +562,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
               return getProvidersChain(slotName);
             }
-            return Collections.emptyList();
+            return null;
           }
         }
     );
