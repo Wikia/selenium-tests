@@ -38,7 +38,6 @@ public class TestDisableGptAds extends TemplateNoFirstLoad {
   private void testDisableGpt(String wikiName, String article, String instantGlobals,
                               String slotName, String providers, String disasterProviders) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
-        .waitForPageLoaded()
         .verifyProvidersChain(slotName, providers)
         .addToUrl(instantGlobals)
         .verifyProvidersChain(slotName, disasterProviders);

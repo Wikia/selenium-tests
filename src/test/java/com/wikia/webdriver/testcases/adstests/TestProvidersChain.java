@@ -31,7 +31,6 @@ public class TestProvidersChain extends TemplateNoFirstLoad {
       int times) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article), BROWSER_DIMENSION)
         .refresh(times)
-        .waitForPageLoaded()
         .verifyProvidersChain(slotName, providers);
   }
 }
