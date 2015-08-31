@@ -43,29 +43,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     super(driver);
   }
 
-  @FindBy(css = ".ve-ce-documentNode")
-  private WebElement editArea;
-  @FindBy(css = "ol.ve-ce-branchNode > li")
-  private List<WebElement> numList;
-  @FindBy(css = "ul.ve-ce-branchNode > li")
-  private List<WebElement> bullList;
-  @FindBy(css = ".oo-ui-popupToolGroup-handle")
-  private List<WebElement> toolsList;
-  @FindBy(css = ".oo-ui-tool-title")
-  private List<WebElement> insertMenuTools;
-  @FindBy(css = ".oo-ui-labelElement.oo-ui-optionWidget")
-  private List<WebElement> infoboxTemplatesList;
-  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
-  private List<WebElement> parametersFieldList;
-  @FindBy(css = ".oo-ui-buttonElement-button")
-  private List<WebElement> buttonsList;
-  @FindBy(css = ".image.video.video-thumbnail.medium")
-  private List<WebElement> videoNodes;
-  @FindBy(css = "figure.ve-ce-branchNode a")
-  private List<WebElement> mediaNodes;
-  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
-  private List<WebElement> galleryNodes;
-  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
@@ -101,6 +78,29 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement insertDropdownMenuButton;
   @FindBy(css = ".oo-ui-toolGroup-tools .oo-ui-icon-infobox")
   private WebElement infoboxInDropdownMenu;
+  @FindBy(css = ".ve-ce-documentNode")
+  private WebElement editArea;
+  @FindBy(css = "ol.ve-ce-branchNode > li")
+  private List<WebElement> numList;
+  @FindBy(css = "ul.ve-ce-branchNode > li")
+  private List<WebElement> bullList;
+  @FindBy(css = ".oo-ui-popupToolGroup-handle")
+  private List<WebElement> toolsList;
+  @FindBy(css = ".oo-ui-tool-title")
+  private List<WebElement> insertMenuTools;
+  @FindBy(css = ".oo-ui-labelElement.oo-ui-optionWidget")
+  private List<WebElement> infoboxTemplatesList;
+  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
+  private List<WebElement> parametersFieldList;
+  @FindBy(css = ".oo-ui-buttonElement-button")
+  private List<WebElement> buttonsList;
+  @FindBy(css = ".image.video.video-thumbnail.medium")
+  private List<WebElement> videoNodes;
+  @FindBy(css = "figure.ve-ce-branchNode a")
+  private List<WebElement> mediaNodes;
+  @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
+  private List<WebElement> galleryNodes;
+  @FindBy(css = "figure.ve-ce-branchNode")
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
