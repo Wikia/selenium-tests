@@ -68,6 +68,8 @@ public class ThemeDesigner extends NewTestTemplate {
     SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
     designer.openSpecialDesignerPage(wikiURL);
     designer.selectTab(Tab.CUSTOMIZE);
+    designer.openImagePicker();
+    designer.uploadLargeImage();
     designer.verifyCustomizeTab();
   }
 

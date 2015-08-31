@@ -60,6 +60,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement secondThemesSet;
   @FindBy(css = "ul[style='margin-left: -1520px;']")
   private WebElement thirdThemesSet;
+  @FindBy(id = "backgroundImageUploadFile")
+  private WebElement fileUploadInput;
+  @FindBy(css = "#BackgroundImageForm [type='submit']")
+  private WebElement imageSubmit;
 
   String tabSelector = "a[rel='%tabName%Tab']";
   String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
@@ -111,6 +115,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+  }
+
+  public void uploadLargeImage() {
+    fileUploadInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+            "ImagesForUploadTests/2000x150.png").getPath()));
+    imageSubmit.click();
   }
 
   public enum Tab {
