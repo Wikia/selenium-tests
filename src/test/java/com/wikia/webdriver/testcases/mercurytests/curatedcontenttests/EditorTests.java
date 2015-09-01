@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -21,9 +22,11 @@ public class EditorTests extends NewTestTemplate {
     new CuratedContent().clear();
   }
 
+  public static final String MAIN_EDIT_ROOT = "/main/edit";
+
   @Test(groups = "MercuryCuratedEditorTests_001")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-
+    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
   }
 
   @Test(groups = "MercuryCuratedEditorTests_002")
