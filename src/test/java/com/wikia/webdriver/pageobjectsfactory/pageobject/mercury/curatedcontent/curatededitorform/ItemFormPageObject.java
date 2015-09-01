@@ -18,4 +18,8 @@ public class ItemFormPageObject extends CuratedEditorFormPageObject {
     super(driver);
   }
 
+  public void typePageName(String pageName) {
+    waitAndSendKeys(pageNameField, pageName);
+  }
+
 }

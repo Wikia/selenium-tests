@@ -41,11 +41,23 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTests_001")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
+    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, "");
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(FEATURE_SECTION_ITEM_DISPLAY_NAME);
     itemFormPageObject.typePageName(FEATURE_SECTION_ITEM_PAGE_NAME);
+
     UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
+    SearchForImagePageObject search = upload.clickSearchForImageButton();
+    search.type(ON_WIKI_IMAGE_PREFIX);
+    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    croppingTool.clickDone();
+
+    itemFormPageObject.clickDone();
+    itemFormPageObject.waitMilliseconds(5000, "dupa");
+    new EditorHomePageObject(driver).publish();
+
+    // Check that element is correctly added
   }
 
   @Test(groups = "MercuryCuratedEditorTests_002")
@@ -59,7 +71,7 @@ public class EditorTests extends NewTestTemplate {
     SearchForImagePageObject search = upload.clickSearchForImageButton();
     search.type(ON_WIKI_IMAGE_PREFIX);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
-    section = (SectionFormPageObject) croppingTool.clickDone();
+    croppingTool.clickDone();
     home = section.clickDone();
     CuratedMainPagePageObject mainPage = home.publish();
   }

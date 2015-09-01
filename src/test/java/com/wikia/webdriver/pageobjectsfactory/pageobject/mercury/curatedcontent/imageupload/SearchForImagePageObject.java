@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class SearchForImagePageObject extends BasePageObject {
 
-  @FindBy(css = "#search")
+  @FindBy(css = "input#search")
   private WebElement searchInput;
   @FindBys(@FindBy(css = ".search-results img"))
   private List<WebElement> images;
