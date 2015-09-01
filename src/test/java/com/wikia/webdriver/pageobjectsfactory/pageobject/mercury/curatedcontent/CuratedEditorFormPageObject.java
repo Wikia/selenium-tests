@@ -28,8 +28,12 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
     super(driver);
   }
 
-  public void typeName(String name) {
-    waitAndSendKeys(displayNameField, name);
+  public void typeDisplayName(String displayName) {
+    waitAndSendKeys(displayNameField, displayName);
+  }
+
+  public void typePageName(String pageName) {
+    waitAndSendKeys(displayNameField, pageName);
   }
 
   public UploadImageModalComponentObject clickOnImage() {

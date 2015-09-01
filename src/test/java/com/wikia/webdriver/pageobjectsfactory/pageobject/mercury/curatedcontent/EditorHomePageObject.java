@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.CategoryFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -40,8 +41,9 @@ public class EditorHomePageObject extends BasePageObject {
     waitAndClick(publishButton);
   }
 
-  public void clickAddFeaturedContent() {
+  public ItemFormPageObject clickAddFeaturedContent() {
     waitAndClick(addFeaturedContentButton);
+    return new ItemFormPageObject(driver);
   }
 
   public SectionFormPageObject clickAddSection() {
@@ -49,8 +51,9 @@ public class EditorHomePageObject extends BasePageObject {
     return new SectionFormPageObject(driver);
   }
 
-  public void clickAddCategory() {
+  public ItemFormPageObject clickAddCategory() {
     waitAndClick(addCategoryButton);
+    return new ItemFormPageObject(driver);
   }
 
   public SectionFormPageObject clickFeaturedContent(int featuredContentIndex) {

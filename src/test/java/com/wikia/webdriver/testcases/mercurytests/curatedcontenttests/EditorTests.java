@@ -1,12 +1,17 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,13 +26,21 @@ public class EditorTests extends NewTestTemplate {
   public void prepareTest() {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
     new CuratedContent().clear();
+    new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
+                        Configuration.getCredentials().passwordStaff2);
   }
 
-  public static final String MAIN_EDIT_ROOT = "/main/edit";
+  public static final String MAIN_EDIT_ROOT = "main/edit";
+  public static final String FEATURE_SECTION_ITEM_DISPLAY_NAME = "Templates";
+  public static final String FEATURE_SECTION_ITEM_PAGE_NAME = "Category:Templates";
 
   @Test(groups = "MercuryCuratedEditorTests_001")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddFeaturedContent();
+    itemFormPageObject.typeDisplayName(FEATURE_SECTION_ITEM_DISPLAY_NAME);
+    itemFormPageObject.typePageName(FEATURE_SECTION_ITEM_PAGE_NAME);
+    UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
   }
 
   @Test(groups = "MercuryCuratedEditorTests_002")
@@ -35,7 +48,7 @@ public class EditorTests extends NewTestTemplate {
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     EditorHomePageObject home = new EditorHomePageObject(driver);
     SectionFormPageObject section = home.clickAddSection();
-    section.typeName("section Name");
+    section.typeDisplayName("section Name");
     UploadImageModalComponentObject upload = section.clickOnImage();
 
   }
