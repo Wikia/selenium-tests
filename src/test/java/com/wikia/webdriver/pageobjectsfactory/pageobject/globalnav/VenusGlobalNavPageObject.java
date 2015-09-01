@@ -1,6 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.ElementStateHelper;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,15 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 public class VenusGlobalNavPageObject {
 
@@ -66,17 +66,21 @@ public class VenusGlobalNavPageObject {
   public HubBasePageObject openHub(Hub hub) {
     openHubsMenu();
 
-    WebElement destinationHub =
-        wait.forElementPresent(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
-    new Actions(driver).moveToElement(destinationHub).perform();
+    new Actions(driver).moveToElement(getDestinationHub(hub)).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-        .valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
-    destinationHub.click();
+                                                .valueToBePresentInElementsAttribute(
+                                                    getDestinationHub(hub), "class", "active"));
+    getDestinationHub(hub).click();
 
-    new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(getHubLink(destinationHub)));
+    new WebDriverWait(driver, 30)
+        .until(ExpectedConditions.urlToBe(getHubLink(getDestinationHub(hub))));
 
     return new HubBasePageObject(driver);
+  }
+
+  private WebElement getDestinationHub(Hub hub) {
+    return wait.forElementPresent(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
   }
 
   public String getHubLink(WebElement hub) {
