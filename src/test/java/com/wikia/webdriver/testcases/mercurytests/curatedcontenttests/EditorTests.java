@@ -54,10 +54,10 @@ public class EditorTests extends NewTestTemplate {
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     EditorHomePageObject home = new EditorHomePageObject(driver);
     SectionFormPageObject section = home.clickAddSection();
-    section.typeDisplayName("section Name");
+    section.typeDisplayName(SECTION_NAME);
     UploadImageModalComponentObject upload = section.clickOnImage();
     SearchForImagePageObject search = upload.clickSearchForImageButton();
-    search.type("ON_WIKI_IMAGE_PREFIX");
+    search.type(ON_WIKI_IMAGE_PREFIX);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
     section = (SectionFormPageObject) croppingTool.clickDone();
     home = section.clickDone();
