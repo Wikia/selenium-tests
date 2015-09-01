@@ -45,9 +45,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
-  @RelatedIssue(issueID = "MAIN-4491",
-      comment = "Last throbber takes too long sometimes and makes test fail. Please test manually")
- public void langSecondHalf(String lang) {
+   public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }
 }
