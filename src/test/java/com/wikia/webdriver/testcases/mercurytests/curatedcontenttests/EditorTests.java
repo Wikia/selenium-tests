@@ -10,31 +10,34 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * Created by wikia on 2015-09-01.
+ * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryCuratedEditorTests", "MercuryCuratedContentTests", "Mercury"})
 public class EditorTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
+    new CuratedContent().clear();
   }
 
-  // CCT08
-  @Test(groups = "MercuryCuratedEditorTest_001")
-  public void MercuryCuratedEditorTest_001_addItem() {
-    new CuratedContent().clear();
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
+  @Test(groups = "MercuryCuratedEditorTests_001")
+  public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
 
-    category
-        .isCurrentNumberOfItemsExpected(24)
-        .isLoadMoreButtonVisible()
-        .clickOnLoadMoreButton()
-        .waitForLoadingSpinnerToFinish();
+  }
 
-    category
-        .isCurrentNumberOfItemsExpected(28)
-        .areItemsInCuratedContentUnique()
-        .isLoadMoreButtonHidden();
+  @Test(groups = "MercuryCuratedEditorTests_002")
+  public void MercuryCuratedEditorTest_002_addAndSaveSection() {
+
+  }
+
+  @Test(groups = "MercuryCuratedEditorTests_003")
+  public void MercuryCuratedEditorTest_003_addAndSaveItemToSection() {
+
+  }
+
+  @Test(groups = "MercuryCuratedEditorTests_004")
+  public void MercuryCuratedEditorTest_004_addAndSaveItemToOptionalSection() {
+
   }
 }
