@@ -44,8 +44,9 @@ public class EditorHomePageObject extends BasePageObject {
     waitAndClick(addFeaturedContentButton);
   }
 
-  public void clickAddSection() {
+  public SectionFormPageObject clickAddSection() {
     waitAndClick(addNewSectionButton);
+    return new SectionFormPageObject(driver);
   }
 
   public void clickAddCategory() {

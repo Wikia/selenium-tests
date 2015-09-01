@@ -150,4 +150,9 @@ public class BasePageObject extends WikiBasePageObject {
     element.click();
   }
 
+  protected void waitAndSendKeys(WebElement element, String keys) {
+    wait.forElementClickable(element);
+    element.sendKeys(keys);
+  }
+
 }

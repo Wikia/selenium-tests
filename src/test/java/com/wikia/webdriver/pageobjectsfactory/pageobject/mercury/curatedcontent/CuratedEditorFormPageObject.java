@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,15 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
 
   public CuratedEditorFormPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public void typeName(String name) {
+    waitAndSendKeys(displayNameField, name);
+  }
+
+  public UploadImageModalComponentObject clickOnImage() {
+    waitAndClick(imageField);
+    return new UploadImageModalComponentObject(driver);
   }
 
 }
