@@ -337,7 +337,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .openSpecialDesignerPage(wikiURL)
         .selectTheme(3);
     theme
-        .submitThemeSelection();
+        .submitTheme();
 
     new ArticlePageObject(driver)
         .open()
