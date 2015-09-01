@@ -29,6 +29,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement bgColor;
   @FindBy(css = ".background-image")
   private WebElement bgImage;
+  @FindBy(css = "#tile-background")
+  private WebElement bgTileOption;
+  @FindBy(css = "#fix-background")
+  private WebElement bgFixOption;
+  @FindBy(css = "#not-split-background")
+  private WebElement bgNoSplitOption;
   @FindBy(css = ".ThemeDesignerPicker.image")
   private WebElement bgImagePicker;
   @FindBy(css = ".color-buttons")
@@ -54,6 +60,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement secondThemesSet;
   @FindBy(css = "ul[style='margin-left: -1520px;']")
   private WebElement thirdThemesSet;
+  @FindBy(id = "backgroundImageUploadFile")
+  private WebElement fileUploadInput;
+  @FindBy(css = "#BackgroundImageForm [type='submit']")
+  private WebElement imageSubmit;
 
   String tabSelector = "a[rel='%tabName%Tab']";
   String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
@@ -101,10 +111,16 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
         .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
-  public void submitThemeSelection() {
+  public void submitTheme() {
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+  }
+
+  public void uploadLargeImage() {
+    fileUploadInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+            "ImagesForUploadTests/2000x150.png").getPath()));
+    imageSubmit.click();
   }
 
   public enum Tab {
@@ -120,9 +136,16 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
+  /**
+   * no split option appears only for backgrounds that are over 2000px wide
+   */
   public void verifyCustomizeTab() {
     wait.forElementVisible(bgColor);
     wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgTileOption);
+    wait.forElementVisible(bgFixOption);
+    wait.forElementVisible(bgNoSplitOption);
     wait.forElementVisible(pgButtons);
     wait.forElementVisible(pgLinks);
     wait.forElementVisible(pgHeader);
