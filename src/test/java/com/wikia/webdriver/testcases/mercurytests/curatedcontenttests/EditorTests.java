@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
 
@@ -21,7 +22,7 @@ public class EditorTests extends NewTestTemplate {
   // CCT08
   @Test(groups = "MercuryCuratedEditorTest_001")
   public void MercuryCuratedEditorTest_001_addItem() {
-    CuratedContent
+    new CuratedContent().clear();
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
 
