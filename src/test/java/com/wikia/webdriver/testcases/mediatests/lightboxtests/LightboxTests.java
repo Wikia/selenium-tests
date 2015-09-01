@@ -165,10 +165,7 @@ public class LightboxTests extends NewTestTemplate {
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
-  @RelatedIssue(
-      issueID = "MAIN-4938",
-      comment = "Feature is broken for specific image. Please test manually using a different image")
-  public void LightboxTest_009_filepage_image() {
+ public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
