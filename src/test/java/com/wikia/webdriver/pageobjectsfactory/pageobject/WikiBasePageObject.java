@@ -178,6 +178,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+  private String loggedInUserSelectorMercury = ".avatar img[alt*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -556,6 +557,13 @@ public class WikiBasePageObject extends BasePageObject {
               return driver.findElements(
                   By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%",
                       userName.replace(" ", "_")))).size() > 0;// only for verification
+            } else if (driver.findElement(By.tagName("body")).getAttribute("class")
+                .contains("ember-application")) {
+//              return driver.findElements(
+//                  By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%",
+//                                                                      userName.replace(" ", "_"))))
+//                         .size() > 0;// only for verification
+              return true;
             } else {
               // Venus
               return driver.findElements(

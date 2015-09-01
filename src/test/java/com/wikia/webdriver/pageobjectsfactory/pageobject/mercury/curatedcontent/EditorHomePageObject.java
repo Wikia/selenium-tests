@@ -37,8 +37,9 @@ public class EditorHomePageObject extends BasePageObject {
     super(driver);
   }
 
-  public void publish() {
+  public CuratedMainPagePageObject publish() {
     waitAndClick(publishButton);
+    return new CuratedMainPagePageObject(driver);
   }
 
   public ItemFormPageObject clickAddFeaturedContent() {
