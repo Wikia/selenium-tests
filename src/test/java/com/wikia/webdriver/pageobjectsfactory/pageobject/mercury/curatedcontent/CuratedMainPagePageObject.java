@@ -1,4 +1,6 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -54,7 +56,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isMobileTopLeaderboardVisible() {
     try {
       wait.forElementVisible(mobileTopLeaderboard, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -64,7 +66,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isArticleTitleVisible() {
     try {
       wait.forElementVisible(articleTitle, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -74,7 +76,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isWikiaStatsContainerVisible() {
     try {
       wait.forElementVisible(wikiaStatsContainer, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -84,7 +86,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isFeaturedContentVisible() {
     try {
       wait.forElementVisible(featuredContent, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -94,7 +96,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isCuratedContentVisible() {
     try {
       wait.forElementVisible(curatedContent, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -104,7 +106,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isMobileInContentVisible() {
     try {
       wait.forElementVisible(mobileInContent, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -114,7 +116,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isTrendingArticlesVisible() {
     try {
       wait.forElementVisible(trendingArticles, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -124,7 +126,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isTrendingVideosVisible() {
     try {
       wait.forElementVisible(trendingVideos, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -134,7 +136,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isMobilePrefooterVisible() {
     try {
       wait.forElementVisible(mobilePrefooter, Settings.TIME_OUT_IN_SEC.value,
-                                     Settings.CHECK_OUT_IN_MILLI_SEC.value);
+                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
