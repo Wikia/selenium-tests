@@ -144,4 +144,10 @@ public class BasePageObject extends WikiBasePageObject {
   public void openHome(String wikiURL) {
     getUrl(wikiURL);
   }
+
+  protected void waitAndClick(WebElement element) {
+    wait.forElementClickable(element);
+    element.click();
+  }
+
 }
