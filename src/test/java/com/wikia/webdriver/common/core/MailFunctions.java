@@ -103,9 +103,9 @@ public class MailFunctions {
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
+      PageObjectLogging.log("Mail", e.getMessage(), false);
     } catch (MessagingException e) {
-      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
+      PageObjectLogging.log("Mail", e.getMessage(), false);
     }
   }
 
