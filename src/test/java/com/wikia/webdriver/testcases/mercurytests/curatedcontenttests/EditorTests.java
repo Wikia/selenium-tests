@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
@@ -29,6 +31,8 @@ public class EditorTests extends NewTestTemplate {
   public void prepareTest() {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
     new CuratedContent().clear();
+
+    // This login is temporary solution, use @Execute after QAART-669 is done
     new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
                                           Configuration.getCredentials().passwordStaff2);
   }
@@ -40,8 +44,17 @@ public class EditorTests extends NewTestTemplate {
   public static final String ON_WIKI_IMAGE_PREFIX = "U";
 
   @Test(groups = "MercuryCuratedEditorTests_001")
+  @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, "");
+    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
+    PageObjectLogging.log(
+        "Featured Content",
+        MercuryMessages.INVISIBLE_MSG,
+        MercuryMessages.VISIBLE_MSG,
+        result
+    );
+
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(FEATURE_SECTION_ITEM_DISPLAY_NAME);
@@ -54,14 +67,20 @@ public class EditorTests extends NewTestTemplate {
     croppingTool.clickDone();
 
     itemFormPageObject.clickDone();
-    itemFormPageObject.waitMilliseconds(5000, "dupa");
+    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
     new EditorHomePageObject(driver).publish();
 
-    // Check that element is correctly added
+    result = curatedMainPagePageObject.isFeaturedContentVisible();
+    PageObjectLogging.log(
+        "Featured Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
   }
 
   @Test(groups = "MercuryCuratedEditorTests_002")
-  @Execute(asUser = User.STAFF)
+  @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     EditorHomePageObject home = new EditorHomePageObject(driver);
@@ -80,11 +99,13 @@ public class EditorTests extends NewTestTemplate {
       groups = "MercuryCuratedEditorTests_003",
       dependsOnMethods = {"MercuryCuratedEditorTest_002_addAndSaveSection"}
   )
+  @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToSection() {
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
   }
 
   @Test(groups = "MercuryCuratedEditorTests_004")
+  @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_004_addAndSaveItemToOptionalSection() {
 
   }
