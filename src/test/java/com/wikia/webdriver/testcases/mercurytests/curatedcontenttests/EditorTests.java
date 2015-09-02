@@ -41,8 +41,6 @@ public class EditorTests extends NewTestTemplate {
   public static final String MAIN_EDIT_ROOT = "main/edit";
   public static final String ITEM_DISPLAY_NAME = "Templates";
   public static final String ITEM_PAGE_NAME = "Category:Templates";
-  public static final String FEATURE_SECTION_ITEM_DISPLAY_NAME = "Templates";
-  public static final String FEATURE_SECTION_ITEM_PAGE_NAME = "Category:Templates";
   public static final String SECTION_NAME = "Section for testing";
   public static final String CATEGORY_DISPLAY_NAME = "Category for testing";
   public static final String CATEGORY_NAME = "Category:Help";
@@ -52,6 +50,8 @@ public class EditorTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+
     Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
     PageObjectLogging.log(
         "Featured Content",
@@ -60,8 +60,8 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
-    ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddFeaturedContent();
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
     itemFormPageObject.typePageName(ITEM_PAGE_NAME);
 
@@ -71,10 +71,10 @@ public class EditorTests extends NewTestTemplate {
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
     croppingTool.clickDone();
 
-    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
+    itemFormPageObject.waitForDeleteButtonToBeVisible();
     itemFormPageObject.clickDone();
-    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
-    new EditorHomePageObject(driver).publish();
+    editorHomePageObject.waitForAddCategoryButtonToBeVisible();
+    editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isFeaturedContentVisible();
     PageObjectLogging.log(
@@ -128,6 +128,8 @@ public class EditorTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_004_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     PageObjectLogging.log(
         "Curated Content",
@@ -136,8 +138,8 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
-    ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddCategory();
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
     itemFormPageObject.typePageName(ITEM_PAGE_NAME);
 
@@ -147,10 +149,10 @@ public class EditorTests extends NewTestTemplate {
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
     croppingTool.clickDone();
 
-    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
+    itemFormPageObject.waitForDeleteButtonToBeVisible();
     itemFormPageObject.clickDone();
-    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
-    new EditorHomePageObject(driver).publish();
+    editorHomePageObject.waitForAddCategoryButtonToBeVisible();
+    editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
     PageObjectLogging.log(

@@ -11,6 +11,9 @@ import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
+/**
+ * @ownership: Content X-Wing
+ */
 public class SectionItemListPageObject extends BasePageObject {
 
   @FindBy(css = ".sub-head--done")
@@ -38,5 +41,4 @@ public class SectionItemListPageObject extends BasePageObject {
     waitAndClick(addCategoryButton);
     return new CategoryFormPageObject(driver);
   }
-
 }

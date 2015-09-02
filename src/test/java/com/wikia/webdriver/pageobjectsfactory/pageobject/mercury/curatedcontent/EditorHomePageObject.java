@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
- * Created by wikia on 2015-09-01.
+ * @ownership: Content X-Wing
  */
 public class EditorHomePageObject extends BasePageObject {
 
@@ -77,5 +77,9 @@ public class EditorHomePageObject extends BasePageObject {
 
   public void verifySection(String sectionName) {
     verifyTextInListElements(section, sectionLabel, sectionName);
+  }
+
+  public void waitForAddCategoryButtonToBeVisible() {
+    wait.forElementVisible(addCategoryButton);
   }
 }

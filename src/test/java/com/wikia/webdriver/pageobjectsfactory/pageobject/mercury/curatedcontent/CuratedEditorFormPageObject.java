@@ -42,4 +42,7 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
     return new SectionItemListPageObject(driver);
   }
 
+  public void waitForDeleteButtonToBeVisible() {
+    wait.forElementVisible(deleteItemButton);
+  }
 }
