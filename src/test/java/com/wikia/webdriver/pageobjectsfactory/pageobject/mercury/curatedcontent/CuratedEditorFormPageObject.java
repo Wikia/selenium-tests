@@ -37,8 +37,9 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
     return new UploadImageModalComponentObject(driver);
   }
 
-  public EditorHomePageObject clickDone() {
+  public SectionItemListPageObject clickDone() {
     waitAndClick(doneButton);
-    return new EditorHomePageObject(driver);
+    return new SectionItemListPageObject(driver);
   }
+
 }

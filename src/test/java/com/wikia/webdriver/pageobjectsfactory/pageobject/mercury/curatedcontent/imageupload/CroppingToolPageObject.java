@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedEditorFormPageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

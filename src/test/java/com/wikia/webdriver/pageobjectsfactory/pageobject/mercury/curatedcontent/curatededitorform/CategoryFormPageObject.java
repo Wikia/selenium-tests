@@ -18,4 +18,7 @@ public class CategoryFormPageObject extends CuratedEditorFormPageObject {
     super(driver);
   }
 
+  public void typeCategoryName(String pageName) {
+    waitAndSendKeys(pageNameField, pageName);
+  }
 }

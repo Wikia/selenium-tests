@@ -34,7 +34,7 @@ public class SectionItemListPageObject extends BasePageObject {
     return new ItemFormPageObject(driver);
   }
 
-  public CategoryFormPageObject clickCategory() {
+  public CategoryFormPageObject clickAddCategory() {
     waitAndClick(addCategoryButton);
     return new CategoryFormPageObject(driver);
   }

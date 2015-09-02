@@ -11,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.SectionItemListPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.CategoryFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.CroppingToolPageObject;
@@ -39,7 +41,11 @@ public class EditorTests extends NewTestTemplate {
   public static final String MAIN_EDIT_ROOT = "main/edit";
   public static final String ITEM_DISPLAY_NAME = "Templates";
   public static final String ITEM_PAGE_NAME = "Category:Templates";
-  public static final String SECTION_NAME = "Add and save section test";
+  public static final String FEATURE_SECTION_ITEM_DISPLAY_NAME = "Templates";
+  public static final String FEATURE_SECTION_ITEM_PAGE_NAME = "Category:Templates";
+  public static final String SECTION_NAME = "Section for testing";
+  public static final String CATEGORY_DISPLAY_NAME = "Category for testing";
+  public static final String CATEGORY_NAME = "Category:Help";
   public static final String ON_WIKI_IMAGE_PREFIX = "U";
 
   @Test(groups = "MercuryCuratedEditorTests_001")
@@ -91,8 +97,22 @@ public class EditorTests extends NewTestTemplate {
     search.type(ON_WIKI_IMAGE_PREFIX);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
     croppingTool.clickDone();
-    home = section.clickDone();
+    SectionItemListPageObject sectionItems = section.clickDone();
+
+    CategoryFormPageObject category = sectionItems.clickAddCategory();
+    category.typeDisplayName(CATEGORY_DISPLAY_NAME);
+    category.typeCategoryName(CATEGORY_NAME);
+    upload = category.clickOnImage();
+    search = upload.clickSearchForImageButton();
+    search.type(ON_WIKI_IMAGE_PREFIX);
+    croppingTool = search.clickOnImage(0);
+    croppingTool.clickDone();
+    sectionItems = section.clickDone();
+    home = sectionItems.clickDone();
+
+    home.verifySection(SECTION_NAME);
     CuratedMainPagePageObject mainPage = home.publish();
+    mainPage.verifySection(SECTION_NAME);
   }
 
   @Test(

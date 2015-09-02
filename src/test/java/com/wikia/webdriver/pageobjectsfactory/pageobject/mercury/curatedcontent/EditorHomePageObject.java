@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +32,8 @@ public class EditorHomePageObject extends BasePageObject {
   private List<WebElement> section;
   @FindBys(@FindBy(css = "section:nth-of-type(3) .curated-content-editor-row"))
   private List<WebElement> category;
+
+  private By sectionLabel = By.cssSelector(".title");
 
 
   public EditorHomePageObject(WebDriver driver) {
@@ -72,5 +75,7 @@ public class EditorHomePageObject extends BasePageObject {
     return new CategoryFormPageObject(driver);
   }
 
-
+  public void verifySection(String sectionName) {
+    verifyTextInListElements(section, sectionLabel, sectionName);
+  }
 }

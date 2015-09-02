@@ -7,6 +7,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -32,6 +35,13 @@ public class CuratedMainPagePageObject extends BasePageObject {
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
 
+  @FindBys(@FindBy(css = ".curated-content-item .clamp"))
+  private List<WebElement> sectionLabelList;
+
+  public void verifySection(String sectionName) {
+    verifyTextInListElements(sectionLabelList, sectionName);
+  }
+
   private enum Settings {
     TIME_OUT_IN_SEC(5),
     CHECK_OUT_IN_MILLI_SEC(1000);
@@ -54,88 +64,44 @@ public class CuratedMainPagePageObject extends BasePageObject {
   }
 
   public boolean isMobileTopLeaderboardVisible() {
-    try {
-      wait.forElementVisible(mobileTopLeaderboard, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(mobileTopLeaderboard);
   }
 
   public boolean isArticleTitleVisible() {
-    try {
-      wait.forElementVisible(articleTitle, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(articleTitle);
   }
 
   public boolean isWikiaStatsContainerVisible() {
-    try {
-      wait.forElementVisible(wikiaStatsContainer, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(wikiaStatsContainer);
   }
 
   public boolean isFeaturedContentVisible() {
-    try {
-      wait.forElementVisible(featuredContent, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(featuredContent);
   }
 
   public boolean isCuratedContentVisible() {
-    try {
-      wait.forElementVisible(curatedContent, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(curatedContent);
   }
 
   public boolean isMobileInContentVisible() {
-    try {
-      wait.forElementVisible(mobileInContent, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(mobileInContent);
   }
 
   public boolean isTrendingArticlesVisible() {
-    try {
-      wait.forElementVisible(trendingArticles, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(trendingArticles);
   }
 
   public boolean isTrendingVideosVisible() {
-    try {
-      wait.forElementVisible(trendingVideos, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
-    } catch (TimeoutException e) {
-      return false;
-    }
-    return true;
+    return isCuratedElementVisible(trendingVideos);
   }
 
   public boolean isMobilePrefooterVisible() {
+    return isCuratedElementVisible(mobilePrefooter);
+  }
+
+  private boolean isCuratedElementVisible(WebElement element) {
     try {
-      wait.forElementVisible(mobilePrefooter, Settings.TIME_OUT_IN_SEC.value,
+      wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
                              Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
