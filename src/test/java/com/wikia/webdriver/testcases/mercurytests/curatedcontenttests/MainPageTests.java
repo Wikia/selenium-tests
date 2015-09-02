@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -59,7 +60,8 @@ public class MainPageTests extends NewTestTemplate {
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
 
   // CCT01
-  @Test(groups = "MercuryCuratedMainPageTest_001")
+  @Test(groups = "MercuryCuratedMainPageTest_001", enabled = false)
+  @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
@@ -473,7 +475,8 @@ public class MainPageTests extends NewTestTemplate {
   // TODO: add description to test
   // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006")
+  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
+  @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
