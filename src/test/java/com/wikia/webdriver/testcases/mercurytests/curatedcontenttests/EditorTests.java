@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -38,8 +37,8 @@ public class EditorTests extends NewTestTemplate {
   }
 
   public static final String MAIN_EDIT_ROOT = "main/edit";
-  public static final String FEATURE_SECTION_ITEM_DISPLAY_NAME = "Templates";
-  public static final String FEATURE_SECTION_ITEM_PAGE_NAME = "Category:Templates";
+  public static final String ITEM_DISPLAY_NAME = "Templates";
+  public static final String ITEM_PAGE_NAME = "Category:Templates";
   public static final String SECTION_NAME = "Add and save section test";
   public static final String ON_WIKI_IMAGE_PREFIX = "U";
 
@@ -57,8 +56,8 @@ public class EditorTests extends NewTestTemplate {
 
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddFeaturedContent();
-    itemFormPageObject.typeDisplayName(FEATURE_SECTION_ITEM_DISPLAY_NAME);
-    itemFormPageObject.typePageName(FEATURE_SECTION_ITEM_PAGE_NAME);
+    itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
+    itemFormPageObject.typePageName(ITEM_PAGE_NAME);
 
     UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
     SearchForImagePageObject search = upload.clickSearchForImageButton();
@@ -66,6 +65,7 @@ public class EditorTests extends NewTestTemplate {
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
     croppingTool.clickDone();
 
+    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
     itemFormPageObject.clickDone();
     itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
     new EditorHomePageObject(driver).publish();
@@ -107,6 +107,37 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTests_004")
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_004_addAndSaveItemToOptionalSection() {
+    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
+    PageObjectLogging.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
 
+    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    ItemFormPageObject itemFormPageObject = new EditorHomePageObject(driver).clickAddCategory();
+    itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
+    itemFormPageObject.typePageName(ITEM_PAGE_NAME);
+
+    UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
+    SearchForImagePageObject search = upload.clickSearchForImageButton();
+    search.type(ON_WIKI_IMAGE_PREFIX);
+    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    croppingTool.clickDone();
+
+    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
+    itemFormPageObject.clickDone();
+    itemFormPageObject.waitMilliseconds(1500, "wait for view to switch");
+    new EditorHomePageObject(driver).publish();
+
+    result = curatedMainPagePageObject.isCuratedContentVisible();
+    PageObjectLogging.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
   }
 }
