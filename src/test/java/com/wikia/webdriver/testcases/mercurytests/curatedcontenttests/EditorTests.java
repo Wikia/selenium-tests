@@ -34,7 +34,8 @@ public class EditorTests extends NewTestTemplate {
     new CuratedContent().clear();
 
     // This login is temporary solution, use @Execute after QAART-669 is done
-    new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
+    LoginPage loginPage = new LoginPage(driver);
+    loginPage.get().logUserIn(Configuration.getCredentials().userNameStaff2,
                                           Configuration.getCredentials().passwordStaff2);
   }
 
@@ -88,6 +89,8 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTests_002")
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
+    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    curatedMainPagePageObject.isCuratedContentVisible();
     new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
     EditorHomePageObject home = new EditorHomePageObject(driver);
     SectionFormPageObject section = home.clickAddSection();
@@ -106,8 +109,8 @@ public class EditorTests extends NewTestTemplate {
     search = upload.clickSearchForImageButton();
     search.type(ON_WIKI_IMAGE_PREFIX);
     croppingTool = search.clickOnImage(0);
-    croppingTool.clickDone();
-    sectionItems = section.clickDone();
+    category = (CategoryFormPageObject) croppingTool.clickDone();
+    sectionItems = category.clickDone();
     home = sectionItems.clickDone();
 
     home.verifySection(SECTION_NAME);

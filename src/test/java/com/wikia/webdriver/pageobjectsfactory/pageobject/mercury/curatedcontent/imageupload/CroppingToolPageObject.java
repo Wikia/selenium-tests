@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedEditorFormPageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,8 @@ public class CroppingToolPageObject extends BasePageObject {
     super(driver);
   }
 
-  public void clickDone() {
+  public CuratedEditorFormPageObject clickDone() {
     waitAndClick(doneButton);
+    return new CuratedEditorFormPageObject(driver);
   }
 }

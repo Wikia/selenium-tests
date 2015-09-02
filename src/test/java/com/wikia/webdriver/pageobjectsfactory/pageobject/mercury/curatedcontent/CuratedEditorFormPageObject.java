@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public abstract class CuratedEditorFormPageObject extends BasePageObject {
+public class CuratedEditorFormPageObject extends BasePageObject {
 
   @FindBy(css = "input#label")
   private WebElement displayNameField;
