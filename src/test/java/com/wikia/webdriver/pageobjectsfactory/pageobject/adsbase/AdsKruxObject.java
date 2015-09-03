@@ -19,8 +19,6 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String SLOT_SELECTOR =
-      "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
   private static final String ADD_USER_URL =
@@ -54,11 +52,11 @@ public class AdsKruxObject extends AdsBaseObject {
   /**
    * Test whether the Krux user id is not empty and added to GPT calls
    */
-  public void verifyKruxUserParam() {
+  public void verifyKruxUserParam(String slotName) {
     waitForKrux();
     String user = (String) ((JavascriptExecutor) driver)
         .executeScript("return localStorage.kxuser;");
-    Assertion.assertStringContains(getGptPageParams(SLOT_SELECTOR), "u\":\"" + user);
+    Assertion.assertStringContains(getGptPageParams(slotName), "u\":\"" + user);
   }
 
   public void waitForKrux() {
