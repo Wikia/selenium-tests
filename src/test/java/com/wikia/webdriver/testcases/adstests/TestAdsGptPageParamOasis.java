@@ -16,18 +16,16 @@ public class TestAdsGptPageParamOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsGptPageParam",
+      dataProvider = "adsGptPageParamOasis",
       groups = "AdsGptPageParamOasis"
   )
   @UseUnstablePageLoadStrategy
   public void adsGptPageParamOasis(String wikiName,
                                    String article,
-                                   String paramName,
-                                   String paramValue,
+                                   String gptPattern,
                                    Boolean paramShouldPresent) {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article));
     String gptPageParams = wikiPage.getGptPageParams(AdsContent.TOP_LB);
-    String gptPattern = String.format("\"%s\":\"%s\"", paramName, paramValue);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);
     } else {
