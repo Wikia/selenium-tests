@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -40,6 +41,9 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleActionsAdmin_002"})
+  @RelatedIssue(
+          issueID = "QAART-671",
+          comment = "Please test this manually")
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
