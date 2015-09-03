@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -9,6 +10,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.SectionItemListPageObject;
@@ -109,27 +111,24 @@ public class EditorTests extends NewTestTemplate {
     search = upload.clickSearchForImageButton();
     search.type(ON_WIKI_IMAGE_PREFIX);
     croppingTool = search.clickOnImage(0);
-    category = (CategoryFormPageObject) croppingTool.clickDone();
+    //category = (CategoryFormPageObject) croppingTool.clickDone();
+    croppingTool.clickDone();
     sectionItems = category.clickDone();
+    sectionItems.verifyItem(CATEGORY_DISPLAY_NAME);
     home = sectionItems.clickDone();
 
     home.verifySection(SECTION_NAME);
     CuratedMainPagePageObject mainPage = home.publish();
-    mainPage.verifySection(SECTION_NAME);
+    mainPage.verifyItem(SECTION_NAME);
+    CuratedContentPageObject sectionView = mainPage.clickOnItem(SECTION_NAME);
+    sectionView.waitForLoadingSpinnerToFinish();
+    Assertion.assertEqualsIgnoreCase(sectionView.getTitle(), SECTION_NAME);
+    sectionView.verifyItem(CATEGORY_DISPLAY_NAME);
   }
 
-  @Test(
-      groups = "MercuryCuratedEditorTests_003",
-      dependsOnMethods = {"MercuryCuratedEditorTest_002_addAndSaveSection"}
-  )
+  @Test(groups = "MercuryCuratedEditorTests_003")
   @Execute(onWikia = "mercuryemptycceditor")
-  public void MercuryCuratedEditorTest_003_addAndSaveItemToSection() {
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
-  }
-
-  @Test(groups = "MercuryCuratedEditorTests_004")
-  @Execute(onWikia = "mercuryemptycceditor")
-  public void MercuryCuratedEditorTest_004_addAndSaveItemToOptionalSection() {
+  public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 

@@ -8,11 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class represents all the levels below Curated Main Page
+ *
  * @ownership: Content X-Wing
  */
 public class CuratedContentPageObject extends BasePageObject {
@@ -40,6 +43,9 @@ public class CuratedContentPageObject extends BasePageObject {
   @FindBy(css = ALERT_NOTIFICATION_CSS)
   private WebElement alertNotification;
 
+  @FindBys(@FindBy(css = ".curated-content-item .clamp"))
+  private List<WebElement> itemDisplayNameList;
+
   private static final String ALERT_NOTIFICATION_CSS = ".alert-notification";
 
   private enum Labels {
@@ -62,6 +68,10 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public void verifyItem(String itemDisplayName) {
+    verifyTextInListElements(itemDisplayNameList, itemDisplayName);
   }
 
   public String getTitle() {

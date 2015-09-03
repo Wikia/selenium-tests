@@ -36,10 +36,15 @@ public class CuratedMainPagePageObject extends BasePageObject {
   private WebElement mobilePrefooter;
 
   @FindBys(@FindBy(css = ".curated-content-item .clamp"))
-  private List<WebElement> sectionLabelList;
+  private List<WebElement> itemDisplayNameList;
 
-  public void verifySection(String sectionName) {
-    verifyTextInListElements(sectionLabelList, sectionName);
+  public void verifyItem(String itemDisplayName) {
+    verifyTextInListElements(itemDisplayNameList, itemDisplayName);
+  }
+
+  public CuratedContentPageObject clickOnItem(String itemDisplayName) {
+    clickByListElementText(itemDisplayNameList, itemDisplayName);
+    return new CuratedContentPageObject(driver);
   }
 
   private enum Settings {

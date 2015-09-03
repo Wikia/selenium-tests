@@ -34,6 +34,12 @@ public class Assertion extends Assert {
     return assertion;
   }
 
+  public static void assertEqualsIgnoreCase(String current, String pattern) {
+    current = current.toLowerCase();
+    pattern = pattern.toLowerCase();
+    assertEquals(current, pattern);
+  }
+
   public static void assertEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);

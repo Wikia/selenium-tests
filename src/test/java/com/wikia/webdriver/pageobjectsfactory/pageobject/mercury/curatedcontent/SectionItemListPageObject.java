@@ -4,6 +4,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.CategoryFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,9 @@ public class SectionItemListPageObject extends BasePageObject {
   @FindBys(@FindBy(css = ".curated-content-editor-row"))
   private List<WebElement> item;
 
+  By itemDisplayNameLocator = By.cssSelector(".title");
+
+
   public SectionItemListPageObject(WebDriver driver) {
     super(driver);
   }
@@ -40,5 +44,9 @@ public class SectionItemListPageObject extends BasePageObject {
   public CategoryFormPageObject clickAddCategory() {
     waitAndClick(addCategoryButton);
     return new CategoryFormPageObject(driver);
+  }
+
+  public void verifyItem(String itemDisplayName) {
+    verifyTextInListElements(item, itemDisplayNameLocator, itemDisplayName);
   }
 }

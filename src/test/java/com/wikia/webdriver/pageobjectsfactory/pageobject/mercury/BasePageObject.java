@@ -196,4 +196,22 @@ public class BasePageObject extends WikiBasePageObject {
     }
   }
 
+  /**
+   * Verify if element of the provided list has given text.
+   *
+   * @param list List that contains the element
+   * @param text Text to be compared
+   */
+  protected void clickByListElementText(List<WebElement> list, String text) {
+    for (WebElement elem : list) {
+      wait.forElementVisible(elem);
+      if (elem.getText().equals(text)) {
+        waitAndClick(elem);
+        return;
+      }
+    }
+    throw new RuntimeException("element with text " + text + "not found in the list");
+  }
+
+
 }
