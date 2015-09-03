@@ -49,7 +49,7 @@ public class EditorTests extends NewTestTemplate {
   public static final String CATEGORY_NAME = "Category:Help";
   public static final String ON_WIKI_IMAGE_PREFIX = "U";
 
-  @Test(groups = "MercuryCuratedEditorTests_001")
+  @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
@@ -88,7 +88,7 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCuratedEditorTests_002")
+  @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
@@ -126,7 +126,7 @@ public class EditorTests extends NewTestTemplate {
     sectionView.verifyItem(CATEGORY_DISPLAY_NAME);
   }
 
-  @Test(groups = "MercuryCuratedEditorTests_003")
+  @Test(groups = "MercuryCuratedEditorTest_003")
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
