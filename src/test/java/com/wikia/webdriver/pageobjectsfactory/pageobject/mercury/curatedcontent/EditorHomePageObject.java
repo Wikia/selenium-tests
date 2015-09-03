@@ -14,6 +14,9 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
+ * This class represents the main editor view on mercury.
+ * The editor home is responsible for adding top level curated content items
+ *
  * @ownership: Content X-Wing
  */
 public class EditorHomePageObject extends BasePageObject {
@@ -60,17 +63,17 @@ public class EditorHomePageObject extends BasePageObject {
     return new ItemFormPageObject(driver);
   }
 
-  public SectionFormPageObject clickFeaturedContent(int featuredContentIndex) {
+  public SectionFormPageObject clickFeaturedContentByIndex(int featuredContentIndex) {
     waitAndClick(section.get(featuredContentIndex));
     return new SectionFormPageObject(driver);
   }
 
-  public SectionItemListPageObject clickSection(int sectionIndex) {
+  public SectionItemListPageObject clickSectionByIndex(int sectionIndex) {
     waitAndClick(section.get(sectionIndex));
     return new SectionItemListPageObject(driver);
   }
 
-  public CategoryFormPageObject clickCategory(int categoryIndex) {
+  public CategoryFormPageObject clickCategoryByIndex(int categoryIndex) {
     waitAndClick(section.get(categoryIndex));
     return new CategoryFormPageObject(driver);
   }

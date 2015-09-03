@@ -172,16 +172,22 @@ public class BasePageObject extends WikiBasePageObject {
   /**
    * Verify if element inside element of the provided list has given text. This method assumes list
    * element is not the final target of verification This method assumes list element is the parent
-   * of target element *
+   * of target element
    *
    * @param list           List that contains the parent element
    * @param elementLocator Locator of target element, that is child of its parent element
    * @param text           Text to be compared
    */
   protected void verifyTextInListElements(List<WebElement> list, By elementLocator, String text) {
+    WebElement innerElem;
     for (WebElement elem : list) {
-      verifyTextInElement(elem.findElement(elementLocator), text);
+      wait.forElementVisible(elem);
+      innerElem = elem.findElement(elementLocator);
+      if (innerElem.getText().equals(text)) {
+        return;
+      }
     }
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
   }
 
   /**
@@ -192,8 +198,12 @@ public class BasePageObject extends WikiBasePageObject {
    */
   protected void verifyTextInListElements(List<WebElement> list, String text) {
     for (WebElement elem : list) {
-      verifyTextInElement(elem, text);
+      wait.forElementVisible(elem);
+      if (elem.getText().equals(text)) {
+        return;
+      }
     }
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
   }
 
   /**
@@ -210,7 +220,11 @@ public class BasePageObject extends WikiBasePageObject {
         return;
       }
     }
-    throw new RuntimeException("element with text " + text + "not found in the list");
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
+  }
+
+  private String getNoTextInListErrorMessage(String text) {
+    return "element with text " + text + "not found in the list";
   }
 
 

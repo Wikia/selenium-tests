@@ -19,8 +19,6 @@ public class CuratedEditorFormPageObject extends BasePageObject {
 
   @FindBy(css = ".sub-head--cancel")
   private WebElement backButton;
-  @FindBy(css = ".sub-head--done")
-  private WebElement doneButton;
   @FindBy(css = ".curated-content-editor-remove")
   private WebElement deleteItemButton;
 
@@ -35,11 +33,6 @@ public class CuratedEditorFormPageObject extends BasePageObject {
   public UploadImageModalComponentObject clickOnImage() {
     waitAndClick(imageField);
     return new UploadImageModalComponentObject(driver);
-  }
-
-  public SectionItemListPageObject clickDone() {
-    waitAndClick(doneButton);
-    return new SectionItemListPageObject(driver);
   }
 
   public void waitForDeleteButtonToBeVisible() {

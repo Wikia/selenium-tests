@@ -1,10 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedEditorFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.SectionItemListPageObject;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-/**
+/** This class represents Section editor Form
+ * That object differs from Category and Item Form:
+ * Done button redirects to section items view
+ * It has one  text fields to fill instead of two
+ * It doesn't allow any namespace, it creates a section
+ *
  * @ownership: Content X-Wing
  */
 public class SectionFormPageObject extends CuratedEditorFormPageObject {
@@ -12,4 +20,16 @@ public class SectionFormPageObject extends CuratedEditorFormPageObject {
   public SectionFormPageObject(WebDriver driver) {
     super(driver);
   }
+<<<<<<< HEAD
+=======
+
+  @FindBy(css = ".sub-head--done")
+  private WebElement doneButton;
+
+  public SectionItemListPageObject clickDone() {
+    waitAndClick(doneButton);
+    return new SectionItemListPageObject(driver);
+  }
+
+>>>>>>> code review fixes
 }
