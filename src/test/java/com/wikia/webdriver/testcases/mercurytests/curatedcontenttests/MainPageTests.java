@@ -60,7 +60,7 @@ public class MainPageTests extends NewTestTemplate {
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
 
   // CCT01
-  @Test(groups = "MercuryCuratedMainPageTest_001", enabled = false)
+  @Test(groups = "MercuryCuratedMainPageTest_001")
   @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
@@ -475,7 +475,7 @@ public class MainPageTests extends NewTestTemplate {
   // TODO: add description to test
   // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
+  @Test(groups = "MercuryCuratedMainPageTest_006")
   @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
