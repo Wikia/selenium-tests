@@ -425,6 +425,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return adsDiv.getAttribute(attr);
   }
 
+  public String getGptPageParams(String slotName) {
+    return getGptParams(slotName, "data-gpt-page-params");
+  }
+
   private WebElement getIframe(String slotName, String src) {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
@@ -479,29 +483,6 @@ public class AdsBaseObject extends WikiBasePageObject {
         true,
         driver
     );
-  }
-
-  protected boolean isGptParamPresent(String slotName, String key, String value) {
-    WebElement slot = driver.findElement(By.cssSelector(slotName));
-    String
-        dataGptPageParams =
-        slot.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
-    String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
-    PageObjectLogging.log(
-        "GPT parameter search",
-        "searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
-        true
-    );
-    return dataGptPageParams.contains(gptParamPattern);
-  }
-
-  public void verifyParamValue(String paramName, String paramValue, boolean expected) {
-    Assertion
-        .assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue),
-                      expected,
-                      "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
-                                              + expected, true, driver);
   }
 
   public void checkSpotlights() {

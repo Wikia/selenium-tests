@@ -340,7 +340,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] parameterValueProvider() {
+  public static Object[][] adsGptPageParam() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
         {"mobileregressiontesting", "PMG", "top", "1k", false},

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Dmytro Rets
  * @ownership AdEngineering
  */
 public class AdsKruxObject extends AdsBaseObject {
@@ -56,15 +55,10 @@ public class AdsKruxObject extends AdsBaseObject {
    * Test whether the Krux user id is not empty and added to GPT calls
    */
   public void verifyKruxUserParam() {
-    String script = "return localStorage.kxuser;";
     waitForKrux();
-    String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
-    refreshPage();
-    waitForKrux();
-    String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
-    // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
-    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
-                         isGptParamPresent(SLOT_SELECTOR, "u", user2));
+    String user = (String) ((JavascriptExecutor) driver)
+        .executeScript("return localStorage.kxuser;");
+    Assertion.assertStringContains(getGptPageParams(SLOT_SELECTOR), "u\":\"" + user);
   }
 
   public void waitForKrux() {

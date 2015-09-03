@@ -42,7 +42,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestParamValue"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
