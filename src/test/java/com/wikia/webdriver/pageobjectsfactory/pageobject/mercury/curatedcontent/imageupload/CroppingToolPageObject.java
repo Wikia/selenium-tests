@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by wikia on 2015-09-01.
+ * @ownership: Content X-Wing
  */
 public class CroppingToolPageObject extends BasePageObject {
 

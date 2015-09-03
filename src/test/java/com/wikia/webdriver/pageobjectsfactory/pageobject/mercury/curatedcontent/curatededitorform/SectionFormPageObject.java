@@ -12,5 +12,4 @@ public class SectionFormPageObject extends CuratedEditorFormPageObject {
   public SectionFormPageObject(WebDriver driver) {
     super(driver);
   }
-
 }

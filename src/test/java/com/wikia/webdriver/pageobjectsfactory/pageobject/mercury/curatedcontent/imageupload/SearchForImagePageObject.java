@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
- * Created by wikia on 2015-09-01.
+ * @ownership: Content X-Wing
  */
 public class SearchForImagePageObject extends BasePageObject {
 
@@ -31,5 +31,4 @@ public class SearchForImagePageObject extends BasePageObject {
     waitAndClick(images.get(imageIndex));
     return new CroppingToolPageObject(driver);
   }
-
 }

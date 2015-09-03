@@ -26,7 +26,6 @@ public class SectionItemListPageObject extends BasePageObject {
 
   By itemDisplayNameLocator = By.cssSelector(".title");
 
-
   public SectionItemListPageObject(WebDriver driver) {
     super(driver);
   }

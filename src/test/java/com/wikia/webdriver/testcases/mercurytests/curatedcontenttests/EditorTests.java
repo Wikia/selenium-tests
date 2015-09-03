@@ -111,7 +111,6 @@ public class EditorTests extends NewTestTemplate {
     search = upload.clickSearchForImageButton();
     search.type(ON_WIKI_IMAGE_PREFIX);
     croppingTool = search.clickOnImage(0);
-    //category = (CategoryFormPageObject) croppingTool.clickDone();
     croppingTool.clickDone();
     sectionItems = category.clickDone();
     sectionItems.verifyItem(CATEGORY_DISPLAY_NAME);

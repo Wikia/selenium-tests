@@ -21,5 +21,4 @@ public class ItemFormPageObject extends CuratedEditorFormPageObject {
   public void typePageName(String pageName) {
     waitAndSendKeys(pageNameField, pageName);
   }
-
 }
