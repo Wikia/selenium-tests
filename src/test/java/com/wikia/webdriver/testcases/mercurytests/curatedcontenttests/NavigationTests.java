@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
@@ -111,10 +110,8 @@ public class NavigationTests extends NewTestTemplate {
 
   // CCT09
   @Test(groups = "MercuryCuratedNavigationTest_004")
-  @RelatedIssue(issueID = "XW-171", comment = "remove quotes after ticket is fixed")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
-
     String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
@@ -123,11 +120,11 @@ public class NavigationTests extends NewTestTemplate {
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    /*expectedUrl = wikiURL;
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_QWERTY);
+    expectedUrl = wikiURL + "wiki/mercury_cc_wikia";
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_EMPTY_CATEGORY);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_QWERTY);
-    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);*/
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_NOT_EXISTING_SECTION);
+    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 }

@@ -34,10 +34,25 @@ public class Assertion extends Assert {
     return assertion;
   }
 
-  public static void assertEqualsIgnoreCase(String current, String pattern) {
-    current = current.toLowerCase();
-    pattern = pattern.toLowerCase();
-    assertEquals(current, pattern);
+  public static boolean assertStringNotContains(String current, String pattern) {
+    String currentEncoded = encodeSpecialChars(current);
+    String patternEncoded = encodeSpecialChars(pattern);
+    boolean assertion = true;
+    try {
+      if (current.contains(pattern)) {
+        throw new AssertionError();
+      }
+    } catch (AssertionError ass) {
+      addVerificationFailure(ass);
+      assertion = false;
+    }
+    PageObjectLogging.log(
+        "assertStringNotContains",
+        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
+        + patternEncoded + "\"",
+        assertion
+    );
+    return assertion;
   }
 
   public static void assertEquals(String current, String pattern) {
