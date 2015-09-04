@@ -550,28 +550,24 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
-    List<String>
-        actualProviders =
-        getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
-    Assertion.assertEquals(Joiner.on("; ").join(actualProviders), providers);
+    waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
     return this;
   }
 
-  private List<String> getProvidersChain(final String slotName,
-                                         final String expectedProviders,
-                                         int timeoutSec) {
-    return new WebDriverWait(driver, timeoutSec).until(
-        new ExpectedCondition<List<String>>() {
+  private void waitForProvidersChain(final String slotName,
+                                     final String expectedProviders,
+                                     int timeoutSec) {
+    new WebDriverWait(driver, timeoutSec).until(
+        new ExpectedCondition<Boolean>() {
           @Override
-          public List<String> apply(WebDriver webDriver) {
-            if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
-              return getProvidersChain(slotName);
-            }
-            return null;
+          public Boolean apply(WebDriver webDriver) {
+            return expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)));
           }
 
           @Override
           public String toString() {
+            extractLiftiumTagId(AdsContent.getSlotSelector(slotName));
+            extractGptInfo(AdsContent.getSlotSelector(slotName));
             return String.format("Expected: [%s], Actual: [%s]", expectedProviders,
                                  Joiner.on("; ").join(getProvidersChain(slotName)));
           }
