@@ -554,17 +554,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  private List<String> waitForProvidersChain(final String slotName,
-                                             final String expectedProviders,
-                                             int timeoutSec) {
-    return new WebDriverWait(driver, timeoutSec).until(
-        new ExpectedCondition<List<String>>() {
+  private void waitForProvidersChain(final String slotName,
+                                     final String expectedProviders,
+                                     int timeoutSec) {
+    new WebDriverWait(driver, timeoutSec).until(
+        new ExpectedCondition<Boolean>() {
           @Override
-          public List<String> apply(WebDriver webDriver) {
-            if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
-              return getProvidersChain(slotName);
-            }
-            return null;
+          public Boolean apply(WebDriver webDriver) {
+            return expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)));
           }
 
           @Override
