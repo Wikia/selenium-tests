@@ -13,15 +13,12 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Dmytro Rets
  * @ownership AdEngineering
  */
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String SLOT_SELECTOR =
-      "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
   private static final String ADD_USER_URL =
@@ -55,16 +52,20 @@ public class AdsKruxObject extends AdsBaseObject {
   /**
    * Test whether the Krux user id is not empty and added to GPT calls
    */
-  public void verifyKruxUserParam() {
+  public void verifyKruxUserParam(String slotName) {
     String script = "return localStorage.kxuser;";
     waitForKrux();
     String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
     refreshPage();
     waitForKrux();
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    String gptPageParams = getGptPageParams(slotName);
+    PageObjectLogging.log("gpt page params", gptPageParams, true);
+    PageObjectLogging.log("krux users", user1 + ", " + user2, true);
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
-    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
-                         isGptParamPresent(SLOT_SELECTOR, "u", user2));
+    if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
+      throw new AssertionError("Gpt page params don't have the krux users from localStorage");
+    }
   }
 
   public void waitForKrux() {
