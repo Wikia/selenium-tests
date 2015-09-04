@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -64,12 +65,12 @@ public class Helios {
 
       token = responseValue.getString("access_token");
     } catch (JSONException e) {
-      PageObjectLogging.log("JSON EXCEPTION", e.toString(), false);
+      PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", e.toString(), false);
+      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" + e.toString(),
-          false);
+      PageObjectLogging.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
+                                            ExceptionUtils.getStackTrace(e), false);
     }
 
     return token;
