@@ -2,8 +2,6 @@ package com.wikia.webdriver.common.contentpatterns;
 
 public class MercurySubpages {
 
-  private MercurySubpages() {}
-
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
   public static final String GALLERY = "Gallery";
@@ -53,4 +51,7 @@ public class MercurySubpages {
 
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "Mercury_empty_CC_Wikia";
+
+  private MercurySubpages() {
+  }
 }
