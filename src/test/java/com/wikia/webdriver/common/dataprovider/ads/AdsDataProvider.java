@@ -342,13 +342,13 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsGptPageParamOasis() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
-        {"mobileregressiontesting", "PMG", "top", "1k", false},
-        {"assassinscreed", "Tunguska", "esrb", "mature", true},
-        {"101dalmatians", "Jewel", "esrb", "ec", true},
-        {"tardis", "Mang", "esrb", "teen", true},
-        {"adtest", "LB", "s0v", "lifestyle", true},
-        {"adtest", "LB", "s0c", "ent\",\"tech", true}
+        {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
+        {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
+        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
+        {"tardis", "Mang", "\"esrb\":\"teen\"", true},
+        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
+        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
     };
   }
 
