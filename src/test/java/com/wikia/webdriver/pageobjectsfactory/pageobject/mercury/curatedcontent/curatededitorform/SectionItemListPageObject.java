@@ -1,8 +1,7 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.CategoryFormPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedEditorFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +14,8 @@ import java.util.List;
 /**
  * @ownership: Content X-Wing
  */
-public class SectionItemListPageObject extends BasePageObject {
+public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 
-  @FindBy(css = ".sub-head--done")
-  private WebElement doneButton;
   @FindBy(css = ".curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
   @FindBys(@FindBy(css = ".curated-content-editor-row"))
@@ -47,5 +44,9 @@ public class SectionItemListPageObject extends BasePageObject {
 
   public void verifyItem(String itemDisplayName) {
     verifyTextInListElements(item, itemDisplayNameLocator, itemDisplayName);
+  }
+
+  public void waitForAddCategoryButtonToBeVisible() {
+    wait.forElementVisible(addCategoryButton);
   }
 }

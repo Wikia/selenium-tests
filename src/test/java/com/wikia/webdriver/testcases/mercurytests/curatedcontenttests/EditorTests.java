@@ -9,21 +9,19 @@ import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.SectionItemListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.CategoryFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionItemListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.CroppingToolPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.SearchForImagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -91,9 +89,18 @@ public class EditorTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryemptycceditor")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    curatedMainPagePageObject.isCuratedContentVisible();
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
+    CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
     EditorHomePageObject home = new EditorHomePageObject(driver);
+
+    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
+    PageObjectLogging.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
+
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
     UploadImageModalComponentObject upload = section.clickOnImage();
@@ -111,17 +118,31 @@ public class EditorTests extends NewTestTemplate {
     search.type(SEARCH_IMAGE_QUERY);
     croppingTool = search.clickOnImage(0);
     croppingTool.clickDoneButton();
+
     sectionItems = category.clickDone();
     sectionItems.verifyItem(ITEM_DISPLAY_NAME);
-    home = sectionItems.clickDone();
 
-    home.verifySection(SECTION_DISPLAY_NAME);
-    CuratedMainPagePageObject mainPage = home.publish();
-    mainPage.verifyItem(SECTION_DISPLAY_NAME);
-    CuratedContentPageObject sectionView = mainPage.clickOnItem(SECTION_DISPLAY_NAME);
-    sectionView.waitForLoadingSpinnerToFinish();
-    Assertion.assertEqualsIgnoreCase(sectionView.getTitle(), SECTION_DISPLAY_NAME);
-    sectionView.verifyItem(ITEM_DISPLAY_NAME);
+    sectionItems.waitForAddCategoryButtonToBeVisible();
+    home = sectionItems.clickDone();
+    home.waitForAddCategoryButtonToBeVisible();
+    home.publish();
+
+    result = curatedMainPagePageObject.isCuratedContentVisible();
+    PageObjectLogging.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
+
+    curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
+    curatedContentPageObject.waitForLoadingSpinnerToFinish();
+
+    Assertion.assertNumber(
+        curatedContentPageObject.getCuratedContentItemsNumber(),
+        1,
+        "New section items")
+    ;
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")

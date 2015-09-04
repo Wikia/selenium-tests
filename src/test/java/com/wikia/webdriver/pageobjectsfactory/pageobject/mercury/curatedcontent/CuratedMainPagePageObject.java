@@ -7,9 +7,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -34,18 +31,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
   private WebElement trendingVideos;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
-
-  @FindBys(@FindBy(css = ".curated-content-item .clamp"))
-  private List<WebElement> itemDisplayNameList;
-
-  public void verifyItem(String itemDisplayName) {
-    verifyTextInListElements(itemDisplayNameList, itemDisplayName);
-  }
-
-  public CuratedContentPageObject clickOnItem(String itemDisplayName) {
-    clickByListElementText(itemDisplayNameList, itemDisplayName);
-    return new CuratedContentPageObject(driver);
-  }
 
   private enum Settings {
     TIME_OUT_IN_SEC(5),
