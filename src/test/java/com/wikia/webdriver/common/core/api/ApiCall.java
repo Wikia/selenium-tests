@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -67,13 +68,13 @@ public abstract class ApiCall {
 
       PageObjectLogging.log("CONTENT PUSH", "Content posted to: " + URL_STRING, true);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("EXCEPTION", e.toString(), false);
+      PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", e.toString(), false);
+      PageObjectLogging.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (URISyntaxException e) {
-      PageObjectLogging.log("URI_SYNTAX EXCEPTION", e.toString(), false);
+      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     }
   }
