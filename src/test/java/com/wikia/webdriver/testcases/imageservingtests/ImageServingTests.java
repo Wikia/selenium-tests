@@ -44,7 +44,6 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
- @RelatedIssue(issueID = "OPS-6716", comment = "Please test it manually")
  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
  @Execute(asUser = User.USER)

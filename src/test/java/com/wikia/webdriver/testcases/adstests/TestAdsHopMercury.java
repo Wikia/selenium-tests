@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsHopObject;
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class TestAdsHopMercury extends TemplateNoFirstLoad {

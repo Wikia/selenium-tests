@@ -8,7 +8,6 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class TestAdsInterstitial extends TemplateNoFirstLoad {
