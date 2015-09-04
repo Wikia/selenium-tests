@@ -10,29 +10,42 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class CuratedEditorFormPageObject extends BasePageObject {
+public abstract class CuratedEditorFormPageObject extends BasePageObject {
 
   @FindBy(css = "input#label")
-  private WebElement displayNameField;
-  @FindBy(css = ".curated-content-editor-photo")
-  private WebElement imageField;
+  protected WebElement displayNameField;
+  @FindBy(css = "input#title")
+  protected WebElement pageNameField;
 
   @FindBy(css = ".sub-head--cancel")
-  private WebElement backButton;
+  protected WebElement backButton;
+  @FindBy(css = ".sub-head--done")
+  protected WebElement doneButton;
+
   @FindBy(css = ".curated-content-editor-remove")
-  private WebElement deleteItemButton;
+  protected WebElement deleteItemButton;
+  @FindBy(css = ".curated-content-editor-photo")
+  protected WebElement imageField;
 
   public CuratedEditorFormPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public void clickDoneButton() {
+    waitAndClick(doneButton);
+  }
+
+  public UploadImageModalComponentObject clickOnImage() {
+    waitAndClick(imageField);
+    return new UploadImageModalComponentObject(driver);
   }
 
   public void typeDisplayName(String displayName) {
     waitAndSendKeys(displayNameField, displayName);
   }
 
-  public UploadImageModalComponentObject clickOnImage() {
-    waitAndClick(imageField);
-    return new UploadImageModalComponentObject(driver);
+  public void typePageName(String pageName) {
+    waitAndSendKeys(pageNameField, pageName);
   }
 
   public void waitForDeleteButtonToBeVisible() {

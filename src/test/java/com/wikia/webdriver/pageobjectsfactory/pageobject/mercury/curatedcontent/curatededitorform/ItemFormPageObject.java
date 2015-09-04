@@ -4,8 +4,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * This class represents item editor Form
@@ -19,17 +17,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class ItemFormPageObject extends CuratedEditorFormPageObject {
 
-  @FindBy(css = "input#title")
-  private WebElement pageNameField;
-  @FindBy(css = ".sub-head--done")
-  private WebElement doneButton;
-
   public ItemFormPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  public void typePageName(String pageName) {
-    waitAndSendKeys(pageNameField, pageName);
   }
 
   public EditorHomePageObject clickDone() {

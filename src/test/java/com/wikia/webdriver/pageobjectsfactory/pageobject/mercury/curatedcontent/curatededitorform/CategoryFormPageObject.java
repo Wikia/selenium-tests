@@ -4,8 +4,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.SectionItemListPageObject;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * This class represents category editor Form
@@ -20,17 +18,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class CategoryFormPageObject extends CuratedEditorFormPageObject {
 
-  @FindBy(css = "input#title")
-  private WebElement pageNameField;
-  @FindBy(css = ".sub-head--done")
-  private WebElement doneButton;
-
   public CategoryFormPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  public void typeCategoryName(String pageName) {
-    waitAndSendKeys(pageNameField, pageName);
   }
 
   public SectionItemListPageObject clickDone() {

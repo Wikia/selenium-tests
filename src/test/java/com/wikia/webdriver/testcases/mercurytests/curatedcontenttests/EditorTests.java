@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
+import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -22,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -31,23 +33,20 @@ import org.testng.annotations.Test;
 public class EditorTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
+  public void beforeMethod() {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
+
     new CuratedContent().clear();
 
     // This login is temporary solution, use @Execute after QAART-669 is done
-    LoginPage loginPage = new LoginPage(driver);
-    loginPage.get().logUserIn(Configuration.getCredentials().userNameStaff2,
+    new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
                                           Configuration.getCredentials().passwordStaff2);
   }
 
-  public static final String MAIN_EDIT_ROOT = "main/edit";
   public static final String ITEM_DISPLAY_NAME = "Templates";
   public static final String ITEM_PAGE_NAME = "Category:Templates";
-  public static final String SECTION_NAME = "Section for testing";
-  public static final String CATEGORY_DISPLAY_NAME = "Category for testing";
-  public static final String CATEGORY_NAME = "Category:Help";
-  public static final String ON_WIKI_IMAGE_PREFIX = "U";
+  public static final String SECTION_DISPLAY_NAME = "New Section";
+  public static final String SEARCH_IMAGE_QUERY = "U";
 
   @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = "mercuryemptycceditor")
@@ -63,16 +62,16 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
     itemFormPageObject.typePageName(ITEM_PAGE_NAME);
 
     UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
     SearchForImagePageObject search = upload.clickSearchForImageButton();
-    search.type(ON_WIKI_IMAGE_PREFIX);
+    search.type(SEARCH_IMAGE_QUERY);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
-    croppingTool.clickDone();
+    croppingTool.clickDoneButton();
 
     itemFormPageObject.waitForDeleteButtonToBeVisible();
     itemFormPageObject.clickDone();
@@ -93,36 +92,36 @@ public class EditorTests extends NewTestTemplate {
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     curatedMainPagePageObject.isCuratedContentVisible();
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     EditorHomePageObject home = new EditorHomePageObject(driver);
     SectionFormPageObject section = home.clickAddSection();
-    section.typeDisplayName(SECTION_NAME);
+    section.typeDisplayName(SECTION_DISPLAY_NAME);
     UploadImageModalComponentObject upload = section.clickOnImage();
     SearchForImagePageObject search = upload.clickSearchForImageButton();
-    search.type(ON_WIKI_IMAGE_PREFIX);
+    search.type(SEARCH_IMAGE_QUERY);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
-    croppingTool.clickDone();
+    croppingTool.clickDoneButton();
     SectionItemListPageObject sectionItems = section.clickDone();
 
     CategoryFormPageObject category = sectionItems.clickAddCategory();
-    category.typeDisplayName(CATEGORY_DISPLAY_NAME);
-    category.typeCategoryName(CATEGORY_NAME);
+    category.typeDisplayName(ITEM_DISPLAY_NAME);
+    category.typePageName(ITEM_PAGE_NAME);
     upload = category.clickOnImage();
     search = upload.clickSearchForImageButton();
-    search.type(ON_WIKI_IMAGE_PREFIX);
+    search.type(SEARCH_IMAGE_QUERY);
     croppingTool = search.clickOnImage(0);
-    croppingTool.clickDone();
+    croppingTool.clickDoneButton();
     sectionItems = category.clickDone();
-    sectionItems.verifyItem(CATEGORY_DISPLAY_NAME);
+    sectionItems.verifyItem(ITEM_DISPLAY_NAME);
     home = sectionItems.clickDone();
 
-    home.verifySection(SECTION_NAME);
+    home.verifySection(SECTION_DISPLAY_NAME);
     CuratedMainPagePageObject mainPage = home.publish();
-    mainPage.verifyItem(SECTION_NAME);
-    CuratedContentPageObject sectionView = mainPage.clickOnItem(SECTION_NAME);
+    mainPage.verifyItem(SECTION_DISPLAY_NAME);
+    CuratedContentPageObject sectionView = mainPage.clickOnItem(SECTION_DISPLAY_NAME);
     sectionView.waitForLoadingSpinnerToFinish();
-    Assertion.assertEqualsIgnoreCase(sectionView.getTitle(), SECTION_NAME);
-    sectionView.verifyItem(CATEGORY_DISPLAY_NAME);
+    Assertion.assertEqualsIgnoreCase(sectionView.getTitle(), SECTION_DISPLAY_NAME);
+    sectionView.verifyItem(ITEM_DISPLAY_NAME);
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
@@ -139,16 +138,16 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MAIN_EDIT_ROOT);
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
     itemFormPageObject.typePageName(ITEM_PAGE_NAME);
 
     UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
     SearchForImagePageObject search = upload.clickSearchForImageButton();
-    search.type(ON_WIKI_IMAGE_PREFIX);
+    search.type(SEARCH_IMAGE_QUERY);
     CroppingToolPageObject croppingTool = search.clickOnImage(0);
-    croppingTool.clickDone();
+    croppingTool.clickDoneButton();
 
     itemFormPageObject.waitForDeleteButtonToBeVisible();
     itemFormPageObject.clickDone();
