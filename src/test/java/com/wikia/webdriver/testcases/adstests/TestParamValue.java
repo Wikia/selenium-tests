@@ -19,7 +19,8 @@ public class TestParamValue extends TemplateNoFirstLoad {
   }
 
   @Test(
-      dataProvider = "parameterValueProvider", dataProviderClass = AdsDataProvider.class,
+      dataProvider = "parameterValueProvider",
+      dataProviderClass = AdsDataProvider.class,
       groups = {"paramValue_GEF"}
   )
   public void TestParamValue_GeoEdgeFree(String wikiName, String article, String paramName,
