@@ -489,19 +489,27 @@ public class AdsBaseObject extends WikiBasePageObject {
     String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
     PageObjectLogging.log(
         "GPT parameter search",
-        "searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
+        "searching for: " + gptParamPattern + " in " + dataGptPageParams,
         true
     );
+
     return dataGptPageParams.contains(gptParamPattern);
   }
 
   public void verifyParamValue(String paramName, String paramValue, boolean expected) {
     Assertion
-        .assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue),
-                      expected,
-                      "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
-                                              + expected, true, driver);
+        .assertEquals(
+            isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue),
+            expected,
+            "parameter \"" + paramName + "\" with value \"" + paramValue + "\" not found"
+        );
+
+    PageObjectLogging.log(
+        "verifyParamState",
+        "parameter \"" + paramName + "\" as expected: " + expected,
+        true,
+        driver
+    );
   }
 
   public void checkSpotlights() {
