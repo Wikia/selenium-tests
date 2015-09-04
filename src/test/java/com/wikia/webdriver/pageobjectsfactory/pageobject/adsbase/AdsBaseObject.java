@@ -484,7 +484,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         driver
     );
   }
-
+  
   public void checkSpotlights() {
     // Removing comments section as it expands content downwards
     JavascriptExecutor js = (JavascriptExecutor) driver;
