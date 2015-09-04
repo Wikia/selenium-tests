@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 
+  private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     //This is fix for problem which was occurring long time ago
@@ -30,8 +32,6 @@ public class MainPageTests extends NewTestTemplate {
     //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
-
-  private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
 
   /**
    * Page elements in correct order
@@ -58,7 +58,6 @@ public class MainPageTests extends NewTestTemplate {
 
   //TODO: Move logging methods to page object
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
-
   // CCT01
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @RelatedIssue(issueID = "XW-209")
@@ -123,15 +122,8 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    // TODO: find way to show trending articles on mercuryntvcc.wikia.com
+    // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
-    /*result = cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
-        PageElements.TRENDING_ARTICLES.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );*/
 
     result = cc.isTrendingVideosVisible();
     PageObjectLogging.log(
@@ -365,23 +357,8 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    // TODO: find way to show trending articles on mercuryntvcc.wikia.com
+    // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
-/*    result = cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
-        PageElements.TRENDING_ARTICLES.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );*/
 
     result = !cc.isTrendingVideosVisible();
     PageObjectLogging.log(
