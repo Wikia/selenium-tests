@@ -83,7 +83,6 @@ public class NavigationTests extends NewTestTemplate {
         .isArticleIconVisible()
         .clickOnCuratedContentElementByIndex(0)
         .waitForLoadingSpinnerToFinish();
-    category.isArticle();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category

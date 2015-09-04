@@ -135,16 +135,6 @@ public class CuratedContentPageObject extends BasePageObject {
     return this;
   }
 
-  public CuratedContentPageObject isArticle() {
-    PageObjectLogging.log(
-        Labels.ARTICLE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        isElementVisible(articleWrapper)
-    );
-    return this;
-  }
-
   public CuratedContentPageObject isTitleVisible() {
     PageObjectLogging.log(
         Labels.SECTION_TITLE.name,
