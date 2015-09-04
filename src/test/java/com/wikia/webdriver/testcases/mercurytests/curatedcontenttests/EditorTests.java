@@ -30,6 +30,11 @@ import org.testng.annotations.Test;
 @Test(groups = {"MercuryCuratedEditorTests", "MercuryCuratedContentTests", "Mercury"})
 public class EditorTests extends NewTestTemplate {
 
+  public static final String ITEM_DISPLAY_NAME = "Templates";
+  public static final String ITEM_PAGE_NAME = "Category:Templates";
+  public static final String SECTION_DISPLAY_NAME = "New Section";
+  public static final String SEARCH_IMAGE_QUERY = "U";
+
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
@@ -40,11 +45,6 @@ public class EditorTests extends NewTestTemplate {
     new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
                                           Configuration.getCredentials().passwordStaff2);
   }
-
-  public static final String ITEM_DISPLAY_NAME = "Templates";
-  public static final String ITEM_PAGE_NAME = "Category:Templates";
-  public static final String SECTION_DISPLAY_NAME = "New Section";
-  public static final String SEARCH_IMAGE_QUERY = "U";
 
   @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = "mercuryemptycceditor")

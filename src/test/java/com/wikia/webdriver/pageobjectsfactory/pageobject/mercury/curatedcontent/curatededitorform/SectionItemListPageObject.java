@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 
   @FindBy(css = ".curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
-  @FindBys(@FindBy(css = ".curated-content-editor-row"))
+  @FindBy(css = ".curated-content-editor-row")
   private List<WebElement> item;
 
   By itemDisplayNameLocator = By.cssSelector(".title");
@@ -30,11 +29,6 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
   public EditorHomePageObject clickDone() {
     waitAndClick(doneButton);
     return new EditorHomePageObject(driver);
-  }
-
-  public ItemFormPageObject clickItem(int itemIndex) {
-    waitAndClick(item.get(itemIndex));
-    return new ItemFormPageObject(driver);
   }
 
   public CategoryFormPageObject clickAddCategory() {
