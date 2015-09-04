@@ -28,14 +28,17 @@ import java.util.List;
  */
 public class Helios {
 
+  private Helios() {
+  }
+
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
   }
 
   public static String getAccessToken(String userName, String password) {
 
-    String client_id = HeliosConfig.getClientId();
-    String client_secret = HeliosConfig.getClientSecret();
+    String clientId = HeliosConfig.getClientId();
+    String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
     CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -44,8 +47,8 @@ public class Helios {
     List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
-    nvps.add(new BasicNameValuePair("client_id", client_id));
-    nvps.add(new BasicNameValuePair("client_secret", client_secret));
+    nvps.add(new BasicNameValuePair("client_id", clientId));
+    nvps.add(new BasicNameValuePair("client_secret", clientSecret));
     nvps.add(new BasicNameValuePair("username", userName));
     nvps.add(new BasicNameValuePair("password", password));
 
