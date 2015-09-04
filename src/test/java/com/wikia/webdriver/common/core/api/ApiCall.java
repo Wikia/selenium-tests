@@ -56,7 +56,7 @@ public abstract class ApiCall {
       HttpPost httpPost = getHtppPost(url);
       // set header
       if (getUser() != null) {
-        httpPost.addHeader("Authorization", "Bearer " + Helios.getAccessToken(getUser()));
+        httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
       }
       // set query params
       if (getParams() != null) {
