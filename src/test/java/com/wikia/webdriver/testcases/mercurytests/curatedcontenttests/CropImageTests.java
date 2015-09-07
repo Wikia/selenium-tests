@@ -34,25 +34,25 @@ public class CropImageTests extends NewTestTemplate {
         CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
 
         //@TODO this shouldn't be necessary
-        //Should be removed when login via helios is enabled.
+        //QAART-669 - Should be removed when login via helios is enabled.
         curatedMainPagePageObject.isArticleTitleVisible();
 
         curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
         EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
         ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
-        UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
+        UploadImageModalComponentObject imageModal = itemFormPageObject.clickOnImage();
 
-        Assertion.assertFalse(upload.isCropOptionEnabled(), "Crop option enabled - Should be disabled");
+        Assertion.assertFalse(imageModal.isCropOptionEnabled(), "Crop option enabled - Should be disabled");
 
-        SearchForImagePageObject search = upload.clickSearchForImageButton();
+        SearchForImagePageObject search = imageModal.clickSearchForImageButton();
         search.type(SEARCH_IMAGE_QUERY);
         CroppingToolPageObject croppingTool = search.clickOnImage(0);
         croppingTool.clickDoneButton();
         itemFormPageObject.clickOnImage();
 
-        Assertion.assertTrue(upload.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
+        Assertion.assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
 
-        upload.selectRecrop();
+        imageModal.selectCrop();
         Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");
     }
 }

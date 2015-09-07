@@ -29,7 +29,7 @@ public class UploadImageModalComponentObject extends BasePageObject {
     return !cropImageButton.getAttribute("class").contains("disabled");
   }
 
-  public CroppingToolPageObject selectRecrop() {
+  public CroppingToolPageObject selectCrop() {
     cropImageButton.click();
     return new CroppingToolPageObject(driver);
   }
