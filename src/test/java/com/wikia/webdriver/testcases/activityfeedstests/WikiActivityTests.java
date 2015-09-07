@@ -47,7 +47,7 @@ public class WikiActivityTests extends NewTestTemplate {
    */
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_002_newPageCretionIsRecordedOnActivityModule() {
+  public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
     SpecialCreatePagePageObject specialCreatePage =
         new WikiBasePageObject(driver).openSpecialCreatePage(wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
