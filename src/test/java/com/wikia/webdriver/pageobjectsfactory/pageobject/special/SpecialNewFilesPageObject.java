@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
@@ -92,7 +93,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void selectFileToUpload(String file) {
     browseForFileInput.sendKeys(
-        getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
+        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");

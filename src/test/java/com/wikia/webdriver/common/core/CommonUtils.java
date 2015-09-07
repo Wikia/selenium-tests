@@ -74,6 +74,14 @@ public class CommonUtils {
     }
   }
 
+  public static String getAbsolutePathForFile(String relativePath) {
+    File fileCheck = new File(relativePath);
+    if (!fileCheck.isFile()) {
+      throw new RuntimeException("file " + relativePath + " doesn't exists");
+    }
+    return fileCheck.getAbsolutePath();
+  }
+
   public static String sendPost(String apiUrl, String[][] param) {
     try {
       DefaultHttpClient httpclient = new DefaultHttpClient();

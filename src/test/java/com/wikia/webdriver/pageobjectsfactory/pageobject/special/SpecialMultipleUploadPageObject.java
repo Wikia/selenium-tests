@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -45,7 +46,8 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
       scrollToElement(fileInputs.get(i));
       fileInputs.get(i)
           .sendKeys(
-              getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
+              CommonUtils.getAbsolutePathForFile(
+                  PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
     }
     PageObjectLogging.log(
         "typeInFilesToUpload",

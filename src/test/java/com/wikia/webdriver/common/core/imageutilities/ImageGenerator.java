@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import java.awt.*;
@@ -64,9 +65,10 @@ public class ImageGenerator {
     }
   }
 
-  public String getImagePath() {
-    return imagePath;
+  public String getImageAbsolutePath() {
+    return CommonUtils.getAbsolutePathForFile(imagePath);
   }
+
 
   private String getRandomText(int textLength) {
     SecureRandom random = new SecureRandom();

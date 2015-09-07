@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
@@ -84,7 +85,8 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   public void selectFileToUpload(String file, String typeOfFile) {
     unhideElementByClassChange("wpUploadFile", "poi-category-marker-image-upload");
     uploadInputsCollection.get(0)
-        .sendKeys(getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
 
   }

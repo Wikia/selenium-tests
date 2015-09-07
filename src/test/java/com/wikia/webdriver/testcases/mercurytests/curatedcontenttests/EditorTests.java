@@ -187,18 +187,24 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTest_004")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
-  public void MercuryCuratedEditorTest_004_saveDuplicatedPhoto() {
+  public void MercuryCuratedEditorTest_004_saveNewPhoto() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+
+    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
 
     ImageGenerator generator = new ImageGenerator();
     generator.generateImageWithRandomText();
-    String imagePath = generator.getImagePath();
+    String imagePath = generator.getImageAbsolutePath();
 
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-    SectionFormPageObject section = editorHomePageObject.clickOnSectionByIndex(0);
-    UploadImageModalComponentObject upload = section.clickOnImage();
-    upload.uploadImage(imagePath);
-
+    ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
+    UploadImageModalComponentObject upload = item.clickOnImage();
+    upload.clickUpload();
+    CroppingToolPageObject
+        crop =
+        upload.uploadImage(
+            "C:\\workspace\\selenium-tests\\src\\test\\resources\\ImagesForUploadTests\\random_image.png");
+    crop.clickDoneButton();
   }
 }

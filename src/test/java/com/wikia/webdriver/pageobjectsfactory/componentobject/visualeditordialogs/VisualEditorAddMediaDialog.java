@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -170,7 +171,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private void selectFileToUpload(String fileName) {
     fileUploadInput
-        .sendKeys(getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
+        .sendKeys(CommonUtils.getAbsolutePathForFile(
+            PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
     PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
   }
 

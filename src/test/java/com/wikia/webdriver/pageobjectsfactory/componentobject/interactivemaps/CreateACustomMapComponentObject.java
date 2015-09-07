@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
@@ -75,7 +76,8 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 
   public TemplateComponentObject selectFileToUpload(String file) {
     browseForFileInput
-        .sendKeys(getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
     return new TemplateComponentObject(driver);
   }
