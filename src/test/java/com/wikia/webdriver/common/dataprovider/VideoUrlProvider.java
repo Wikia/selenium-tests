@@ -31,11 +31,6 @@ public class VideoUrlProvider {
             //screenplay
             "http://video.wikia.com/wiki/File:Greek_Chapter_Four_(2010)_-_Clip_What_Would_You_Do%3F",
             "Greek Chapter Four (2010) - Clip What Would You Do?"
-        },
-        // Non-Premium Provider Links
-        {
-            "http://blip.tv/q-tv/ken-jeong-in-studio-q-6609739",
-            "Q on CBC - Ken Jeong in Studio Q-"
         }, {
             "http://www.dailymotion.com/video/x101vdw_robert-pattison-y-kristen-stewart-se-dan-un-tiempo_people#.UZovsrWnqXw",
             "Robert Pattison y Kristen Stewart se dan un tiempo"
