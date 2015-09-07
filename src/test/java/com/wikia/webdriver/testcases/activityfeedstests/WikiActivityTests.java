@@ -29,10 +29,10 @@ public class WikiActivityTests extends NewTestTemplate {
    */
   @Test(groups = {"WikiActivity", "WikiActivity_001", "darwin"})
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_001_newEditionIsRecordedOnAvtivityModule() {
+  public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
     String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
     ArticlePageObject article =
-        new ArticlePageObject(driver).open("NewEditionIsRecordedOnAvtivityModule");
+        new ArticlePageObject(driver).open("NewEditionIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
@@ -47,7 +47,7 @@ public class WikiActivityTests extends NewTestTemplate {
    */
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_002_newPageCretionIsRecordedOnAvtivityModule() {
+  public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
     SpecialCreatePagePageObject specialCreatePage =
         new WikiBasePageObject(driver).openSpecialCreatePage(wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
@@ -67,7 +67,7 @@ public class WikiActivityTests extends NewTestTemplate {
    */
   @Test(groups = {"WikiActivity", "WikiActivity_003", "darwin"})
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_003_newBlogCreationIsRecordedOnAvtivityModule() {
+  public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     UserProfilePageObject userProfile =
@@ -88,9 +88,9 @@ public class WikiActivityTests extends NewTestTemplate {
    */
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_004_newCategorizationIsRecordedOnAvtivityModule() {
+  public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open("NewCategorizationIsRecordedOnAvtivityModule");
+        new ArticlePageObject(driver).open("NewCategorizationIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
