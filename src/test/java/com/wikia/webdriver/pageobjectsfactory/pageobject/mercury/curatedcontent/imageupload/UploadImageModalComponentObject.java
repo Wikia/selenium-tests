@@ -30,7 +30,7 @@ public class UploadImageModalComponentObject extends BasePageObject {
   }
 
   public CroppingToolPageObject selectCrop() {
-    cropImageButton.click();
+    waitAndClick(cropImageButton);
     return new CroppingToolPageObject(driver);
   }
 }

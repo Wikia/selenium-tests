@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -29,7 +30,7 @@ public class CropImageTests extends NewTestTemplate {
     }
 
     @Test(groups = "CropImageTest_001")
-    @Execute(onWikia = "mercuryemptycceditor")
+    @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
     public void CropImageTest_001_cropOptionInModal() {
         CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
 
