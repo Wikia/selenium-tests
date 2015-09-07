@@ -107,6 +107,8 @@ public class Configuration {
   public static String getEnvType() {
     if (getEnv().contains("prod")) {
       return "prod";
+    } else if (getEnv().contains("verify")) {
+      return "verify";
     } else if (getEnv().contains("preview")) {
       return "preview";
     } else if (getEnv().contains("sandbox")) {

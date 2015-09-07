@@ -50,6 +50,9 @@ public class VEAddVideoTests extends NewTestTemplate {
 
   //AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
+  @RelatedIssue(
+          issueID = "VE-1912",
+          comment = "Please test this manually")
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     VisualEditorPageObject ve =

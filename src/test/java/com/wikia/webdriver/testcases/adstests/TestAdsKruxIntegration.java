@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -8,10 +9,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 import org.testng.annotations.Test;
 
 /**
- * @author Piotr Gabryjeluk
- * @ownership AdEngineering
+ * @ownership AdEng
  */
-public class TestKruxIntegration extends TemplateNoFirstLoad {
+public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
 
   private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
   private static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
@@ -19,24 +19,27 @@ public class TestKruxIntegration extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxIntegration",
-      groups = {"KruxIntegrationMobile_GeoEdgeFree", "Ads"}
+      groups = "AdsKruxIntegrationMercury"
   )
   @UseUnstablePageLoadStrategy
-  public void TestKruxIntegrationMobile_GeoEdgeFree(String wikiName, String article) {
-    testKruxIntegration(wikiName, article, KRUX_SITE_ID_MOBILE);
+  public void adsKruxIntegrationMercury(String wikiName, String article) {
+    adsKruxIntegration(wikiName, article, KRUX_SITE_ID_MOBILE, AdsContent.MOBILETOP_LB);
   }
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxIntegration",
-      groups = {"KruxIntegrationDesktop_GeoEdgeFree", "Ads"}
+      groups = "AdsKruxIntegrationOasis"
   )
   @UseUnstablePageLoadStrategy
-  public void TestKruxIntegrationDesktop_GeoEdgeFree(String wikiName, String article) {
-    testKruxIntegration(wikiName, article, KRUX_SITE_ID_DESKTOP);
+  public void adsKruxIntegrationOasis(String wikiName, String article) {
+    adsKruxIntegration(wikiName, article, KRUX_SITE_ID_DESKTOP, AdsContent.TOP_LB);
   }
 
-  private void testKruxIntegration(String wikiName, String article, String kruxSiteId) {
+  private void adsKruxIntegration(String wikiName,
+                                  String article,
+                                  String kruxSiteId,
+                                  String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsKruxObject ads = new AdsKruxObject(driver, testedPage);
     ads.verifyKruxControlTag(kruxSiteId);
@@ -49,6 +52,6 @@ public class TestKruxIntegration extends TemplateNoFirstLoad {
     ads.refreshPage();
     ads.verifyKruxControlTag(kruxSiteId);
 
-    ads.verifyKruxUserParam();
+    ads.verifyKruxUserParam(slotName);
   }
 }

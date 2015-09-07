@@ -76,7 +76,7 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void waitForPageLoad(){
+  public void waitForPageLoad() {
     wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
   }
 
@@ -166,7 +166,7 @@ public class BasePageObject {
   }
 
   protected void scrollAndClick(WebElement element) {
-    if(!jsActions.isElementInViewPort(element)){
+    if (!jsActions.isElementInViewPort(element)) {
       scrollToElement(element);
     }
     waitForElementClickableByElement(element, 5);
@@ -181,7 +181,8 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element) {
     try {
       ((JavascriptExecutor) driver).executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 100));", element);
+                                                  + "window.scroll(0,parseInt(x.offset().top - 100));",
+                                                  element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -193,7 +194,8 @@ public class BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
       js.executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element, offset);
+                       + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element,
+                       offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -209,7 +211,8 @@ public class BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
       js.executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));", driver.findElement(elementBy));
+                       + "window.scroll(0,parseInt(x.offset().top - 60));",
+                       driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -258,10 +261,10 @@ public class BasePageObject {
   }
 
   public void getUrl(String url, boolean makeScreenshot) {
-      driver.get(url);
+    driver.get(url);
     if (makeScreenshot) {
       PageObjectLogging.log("Take screenshot",
-          String.format("Screenshot After Navigation to: %s", url), true, driver);
+                            String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
 
@@ -307,8 +310,8 @@ public class BasePageObject {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
         js.executeScript("var x = $(arguments[0]);"
-            + "window.scroll(0,x.position()['top']+x.height()+100);"
-            + "$(window).trigger('scroll');", selector);
+                         + "window.scroll(0,x.position()['top']+x.height()+100);"
+                         + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
           PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -324,11 +327,11 @@ public class BasePageObject {
 
   // You can get access to hidden elements by changing class
   public void unhideElementByClassChange(String elementName, String classWithoutHidden,
-      int... optionalIndex) {
+                                         int... optionalIndex) {
     int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem
-        + "].setAttribute('class', '" + classWithoutHidden + "');");
+                      + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
@@ -351,7 +354,7 @@ public class BasePageObject {
 
   public void waitForElementClickableByElement(WebElement element, int newTimeOut) {
     new WebDriverWait(driver, newTimeOut).until(CommonExpectedConditions
-        .elementToBeClickable(element));
+                                                    .elementToBeClickable(element));
   }
 
   public void waitForElementNotClickableByElement(WebElement element) {
@@ -359,7 +362,7 @@ public class BasePageObject {
   }
 
   public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
-      String value) {
+                                                              String value) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
@@ -370,20 +373,20 @@ public class BasePageObject {
   }
 
   public void waitForValueToBePresentInElementsCssByCss(String selector, String cssProperty,
-      String expectedValue) {
+                                                        String expectedValue) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
-          cssProperty, expectedValue));
+                                                                       cssProperty, expectedValue));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
-      String attribute, String value) {
+                                                                  String attribute, String value) {
     waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-        value));
+                                                                               value));
   }
 
   public void waitForStringInURL(String givenString) {
@@ -397,7 +400,7 @@ public class BasePageObject {
     String alertText = alert.getText();
     alert.accept();
     PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
-        + alertText, true);
+                                                   + alertText, true);
   }
 
   public String getRandomDigits(int length) {
@@ -410,8 +413,8 @@ public class BasePageObject {
   public String getRandomString(int length) {
     char[] alphabet =
         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+         'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+         'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     Random rnd = new Random();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
@@ -436,7 +439,8 @@ public class BasePageObject {
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
     PageObjectLogging.log("notifications_verifyNotificationTitle",
-        "Verify that the latest notification has the following title: " + title, true, driver);
+                          "Verify that the latest notification has the following title: " + title,
+                          true, driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
@@ -444,14 +448,14 @@ public class BasePageObject {
     waitForElementClickableByElement(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
     PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-        "click on notifications logo on the upper right corner", true, driver);
+                          "click on notifications logo on the upper right corner", true, driver);
   }
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
     PageObjectLogging.log("norifications_showNotifications",
-        "show notifications by adding 'show' class to element", true, driver);
+                          "show notifications by adding 'show' class to element", true, driver);
   }
 
   /**
@@ -478,13 +482,13 @@ public class BasePageObject {
   public void pressDownArrow(WebElement element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("var e = jQuery.Event(\"keydown\"); "
-        + "e.which=40; $(arguments[0]).trigger(e);", element);
+                     + "e.which=40; $(arguments[0]).trigger(e);", element);
   }
 
   public void setDisplayStyle(String selector, String style) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
-        style);
+                     style);
   }
 
   private void purge(String url) throws Exception {
@@ -513,8 +517,8 @@ public class BasePageObject {
       connection.disconnect();
       connection.setRequestMethod("GET");
       connection.setRequestProperty("User-Agent",
-          "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) "
-              + "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
+                                    "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) "
+                                    + "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
       int status = connection.getResponseCode();
       connection.disconnect();
       return status;
@@ -580,10 +584,11 @@ public class BasePageObject {
     Point target = element.getLocation();
     if (source.x == target.x && source.y == target.y) {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
-          + "New coordinate (" + target.x + "," + target.y + ")");
+                     + "New coordinate (" + target.x + "," + target.y + ")");
     }
     PageObjectLogging.log("verifyElementMoved", "Element did move. From (" + source.x + ","
-        + source.y + ") to (" + target.x + "," + target.y + ")", true, driver);
+                                                + source.y + ") to (" + target.x + "," + target.y
+                                                + ")", true, driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -595,10 +600,11 @@ public class BasePageObject {
 
     if (sourceWidth == targetWidth && sourceHeight == targetHeight) {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
-          + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
+                     + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
     PageObjectLogging.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
+                                                + sourceHeight + ") to (" + targetWidth + ","
+                                                + targetHeight + ")", true, driver);
   }
 
   public void switchToNewBrowserTab() {

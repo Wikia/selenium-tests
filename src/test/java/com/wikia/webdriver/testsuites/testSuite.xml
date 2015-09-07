@@ -35,14 +35,14 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxSegments"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsLoggedInUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestParamValue"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParamOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestRoadblocksAfterMultiplePageViews"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
@@ -119,6 +119,7 @@
             <class name="com.wikia.webdriver.testcases.mediatests.videosmodule.VideosModuleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.ArticlePageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.EditorTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.SectionItemsTests"/>

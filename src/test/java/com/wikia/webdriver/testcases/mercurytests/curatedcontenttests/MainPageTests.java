@@ -3,11 +3,12 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedMainPagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 
+  private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     //This is fix for problem which was occurring long time ago
@@ -29,8 +32,6 @@ public class MainPageTests extends NewTestTemplate {
     //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
-
-  private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
 
   /**
    * Page elements in correct order
@@ -57,9 +58,9 @@ public class MainPageTests extends NewTestTemplate {
 
   //TODO: Move logging methods to page object
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
-
   // CCT01
   @Test(groups = "MercuryCuratedMainPageTest_001")
+  @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
@@ -121,15 +122,8 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    // TODO: find way to show trending articles on mercuryntvcc.wikia.com
+    // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
-    /*result = cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
-        PageElements.TRENDING_ARTICLES.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );*/
 
     result = cc.isTrendingVideosVisible();
     PageObjectLogging.log(
@@ -153,7 +147,7 @@ public class MainPageTests extends NewTestTemplate {
     //TODO: make function from this
     //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
     for (PageElements element : PageElements.values()) {
-      if(PageElements.TRENDING_ARTICLES.name.equals(element.name)) {
+      if (PageElements.TRENDING_ARTICLES.name.equals(element.name)) {
         continue;
       }
 
@@ -363,23 +357,8 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    // TODO: find way to show trending articles on mercuryntvcc.wikia.com
+    // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
-/*    result = cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
-        PageElements.TRENDING_ARTICLES.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
-    result = cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );*/
 
     result = !cc.isTrendingVideosVisible();
     PageObjectLogging.log(
@@ -474,6 +453,7 @@ public class MainPageTests extends NewTestTemplate {
   // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT12
   @Test(groups = "MercuryCuratedMainPageTest_006")
+  @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);

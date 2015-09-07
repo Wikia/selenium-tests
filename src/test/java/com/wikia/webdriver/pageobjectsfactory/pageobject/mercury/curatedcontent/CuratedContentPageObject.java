@@ -1,17 +1,21 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class represents all the levels below Curated Main Page
+ *
  * @ownership: Content X-Wing
  */
 public class CuratedContentPageObject extends BasePageObject {
@@ -217,11 +221,11 @@ public class CuratedContentPageObject extends BasePageObject {
     List<String> itemsLabels = new ArrayList<>();
     boolean conflict = false;
 
-    for(WebElement element : curatedContentItems) {
+    for (WebElement element : curatedContentItems) {
       element = element.findElement(By.cssSelector("div.item-caption"));
       String label = element.getText();
 
-      if(itemsLabels.contains(label)) {
+      if (itemsLabels.contains(label)) {
         conflict = true;
         break;
       }
