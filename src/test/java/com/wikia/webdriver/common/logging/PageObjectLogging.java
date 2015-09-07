@@ -102,6 +102,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, ifLowLevel);
   }
 
+  /**
+   * log not user facing action that can be hidden in the log.html file
+   */
+  public static void logOnLowLevel(String command, String description, boolean success) {
+    log(command, description, success, true);
+  }
+
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
     logsResults.add(success);
     String escapedDescription = escapeHtml(description);

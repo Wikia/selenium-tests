@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.imageutilities.ImageGenerator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
@@ -47,7 +48,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -86,7 +87,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
@@ -146,7 +147,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -182,5 +183,22 @@ public class EditorTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
+  }
+
+  @Test(groups = "MercuryCuratedEditorTest_004")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
+  public void MercuryCuratedEditorTest_004_saveDuplicatedPhoto() {
+    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
+
+    ImageGenerator generator = new ImageGenerator();
+    generator.generateImageWithRandomText();
+    String imagePath = generator.getImagePath();
+
+    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+    SectionFormPageObject section = editorHomePageObject.clickOnSectionByIndex(0);
+    UploadImageModalComponentObject upload = section.clickOnImage();
+    upload.uploadImage(imagePath);
+
   }
 }

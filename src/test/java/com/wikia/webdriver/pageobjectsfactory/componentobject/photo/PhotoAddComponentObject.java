@@ -103,7 +103,8 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+    chooseFileInput
+        .sendKeys(getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 

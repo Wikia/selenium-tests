@@ -44,7 +44,8 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
     for (int i = 0; i < filesNamesList.length; i++) {
       scrollToElement(fileInputs.get(i));
       fileInputs.get(i)
-          .sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + filesNamesList[i]));
+          .sendKeys(
+              getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
     }
     PageObjectLogging.log(
         "typeInFilesToUpload",

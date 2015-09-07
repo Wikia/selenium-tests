@@ -13,6 +13,8 @@ public class UploadImageModalComponentObject extends BasePageObject {
 
   @FindBy(css = ".modal-dialog li:nth-of-type(2)")
   private WebElement searchForImageButton;
+  @FindBy(css = "#fileUpload")
+  private WebElement uploadInput;
 
   public UploadImageModalComponentObject(WebDriver driver) {
     super(driver);
@@ -21,5 +23,9 @@ public class UploadImageModalComponentObject extends BasePageObject {
   public SearchForImagePageObject clickSearchForImageButton() {
     waitAndClick(searchForImageButton);
     return new SearchForImagePageObject(driver);
+  }
+
+  public void uploadImage(String filePath) {
+    waitAndSendKeys(uploadInput, filePath);
   }
 }

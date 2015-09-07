@@ -61,7 +61,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     modifyThumbnailButton.click();
     wait.forElementVisible(uploadFileInput);
     uploadFileInput.sendKeys(
-        getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
+        getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
     PageObjectLogging.log(
         "modifyThumnailImage",
@@ -94,7 +94,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     scrollAndClick(addPhotoButton);
     wait.forElementVisible(uploadFileInput);
     uploadFileInput.sendKeys(
-        getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
+        getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
     PageObjectLogging.log(
         "uploadThumbnailImage",
@@ -119,7 +119,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   }
 
   public void verifyUploadedImage(String fileName) {
-    File expectedImageFile = new File(PageContent.RESOURCES_PATH + fileName);
+    File expectedImageFile = new File(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName);
     File actualImageFile = getUploadedImage();
     ImageComparison comparer = new ImageComparison();
     Boolean ifEqual = comparer.areFilesTheSame(expectedImageFile, actualImageFile);
@@ -135,7 +135,9 @@ public class SpecialPromotePageObject extends BasePageObject {
    */
   public File getUploadedImage() {
     wait.forElementVisible(thumbnailImage);
-    File uploadedImageFile = new File(PageContent.RESOURCES_PATH + "shouldBeDeleted.png");
+    File
+        uploadedImageFile =
+        new File(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + "shouldBeDeleted.png");
     try {
       URL url = new URL(thumbnailImage.getAttribute("src"));
       BufferedImage bufImgOne = ImageIO.read(url);

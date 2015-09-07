@@ -74,7 +74,8 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   }
 
   public TemplateComponentObject selectFileToUpload(String file) {
-    browseForFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+    browseForFileInput
+        .sendKeys(getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
     return new TemplateComponentObject(driver);
   }
