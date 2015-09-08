@@ -24,7 +24,7 @@ public class ImageGenerator {
 
   private String imagePath;
   private String imageFolder = PageContent.IMAGE_UPLOAD_RESOURCES_PATH;
-  BufferedImage imageBuffer;
+  private BufferedImage imageBuffer;
   private int imageWidth = 200;
   private int imageHeight = 200;
 
@@ -39,14 +39,15 @@ public class ImageGenerator {
    */
   public void generateImageWithRandomText() {
 
-    String imageExtension = "png";
-    imagePath = imageFolder + "random_image." + imageExtension;
-    String fontName = "TimesRoman";
     int fontStyle = Font.BOLD;
     int fontSize = 20;
-    Color fontColor = Color.BLUE;
     int textLength = 16;
+    String fontName = "TimesRoman";
+    String imageExtension = "png";
     String imageText = getRandomText(textLength);
+    Color fontColor = Color.BLUE;
+
+    this.imagePath = imageFolder + "random_image." + imageExtension;
 
     String actionName = "generate random image";
     String actionDescription = "generated image with random text: " + imageText;
@@ -75,7 +76,6 @@ public class ImageGenerator {
   }
 
   private String getRandomText(int textLength) {
-    SecureRandom random = new SecureRandom();
-    return new BigInteger(5 * textLength, random).toString(32);
+    return new BigInteger(5 * textLength, new SecureRandom()).toString(32);
   }
 }
