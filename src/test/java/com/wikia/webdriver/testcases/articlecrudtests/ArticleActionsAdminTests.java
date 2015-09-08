@@ -41,9 +41,6 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleActionsAdmin_002"})
-  @RelatedIssue(
-          issueID = "QAART-671",
-          comment = "Please test this manually")
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
