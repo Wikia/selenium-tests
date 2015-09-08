@@ -3,8 +3,12 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.lang.exception.ExceptionUtils;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +57,6 @@ public class ImageGenerator {
     g2.setFont(font);
     FontMetrics fontMetrics = g2.getFontMetrics();
     int stringWidth = fontMetrics.stringWidth(imageText);
-    int stringHeight = fontMetrics.getAscent();
 
     // Draw the text in the middle of the image
     g2.drawString(imageText, (imageWidth - stringWidth) / 2, imageHeight / 2);
@@ -63,7 +66,7 @@ public class ImageGenerator {
         PageObjectLogging.logOnLowLevel(actionName, actionDescription, true);
       }
     } catch (IOException e) {
-      throw new RuntimeException("new image couldn't be saved");
+      throw new RuntimeException(ExceptionUtils.getStackTrace(e));
     }
   }
 
