@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -118,8 +119,8 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void uploadLargeImage() {
-    fileUploadInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
-            "ImagesForUploadTests/2000x150.png").getPath()));
+    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
+        "ImagesForUploadTests/2000x150.png").getPath()));
     imageSubmit.click();
   }
 

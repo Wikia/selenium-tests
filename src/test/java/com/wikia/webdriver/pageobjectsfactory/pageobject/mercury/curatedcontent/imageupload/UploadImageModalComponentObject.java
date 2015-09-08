@@ -13,6 +13,10 @@ public class UploadImageModalComponentObject extends BasePageObject {
 
   @FindBy(css = ".modal-dialog li:nth-of-type(3)")
   private WebElement searchForImageButton;
+  @FindBy(css = ".modal-dialog-wrapper.menu .modal-dialog")
+  private WebElement modal;
+  @FindBy(css = "#fileUpload")
+  private WebElement uploadInput;
   @FindBy(css = ".modal-dialog .crop-image")
   private WebElement cropImageButton;
 
@@ -23,6 +27,13 @@ public class UploadImageModalComponentObject extends BasePageObject {
   public SearchForImagePageObject clickSearchForImageButton() {
     waitAndClick(searchForImageButton);
     return new SearchForImagePageObject(driver);
+  }
+
+  public CroppingToolPageObject uploadImage(String filePath) {
+    wait.forElementVisible(modal);
+    uploadInput.sendKeys(filePath);
+    uploadInput.submit();
+    return new CroppingToolPageObject(driver);
   }
 
   public boolean isCropOptionEnabled() {

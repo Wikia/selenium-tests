@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang3.StringUtils;
@@ -61,7 +62,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void selectFileToUpload(String file) {
-    updateCoverImageInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+    updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
         "ImagesForUploadTests/" + file).getPath()));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }

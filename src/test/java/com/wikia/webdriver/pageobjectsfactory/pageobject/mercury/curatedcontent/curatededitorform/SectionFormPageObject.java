@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
  * This class represents Section editor Form
  * That object differs from Category and Item Form:
  * Done button redirects to section items view
- * It has one  text fields to fill instead of two
- * It doesn't allow any namespace, it creates a section
+ * It has one text field to fill instead of two
+ * It doesn't allow adding namespace item, it creates a section
  *
  * @ownership: Content X-Wing
  */

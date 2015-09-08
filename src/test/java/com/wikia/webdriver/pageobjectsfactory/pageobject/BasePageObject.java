@@ -34,7 +34,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -560,14 +559,6 @@ public class BasePageObject {
 
   protected void restoreDeaultImplicitWait() {
     changeImplicitWait(timeOut, TimeUnit.SECONDS);
-  }
-
-  protected String getAbsolutePathForFile(String relativePath) {
-    File fileCheck = new File(relativePath);
-    if (!fileCheck.isFile()) {
-      throw new RuntimeException("file " + relativePath + " doesn't exists");
-    }
-    return fileCheck.getAbsolutePath();
   }
 
   public void verifyUrlInNewWindow(String url) {

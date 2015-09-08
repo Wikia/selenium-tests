@@ -63,7 +63,7 @@ public class PageContent {
       "Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
       "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
   };
-  public static final String RESOURCES_PATH =
+  public static final String IMAGE_UPLOAD_RESOURCES_PATH =
       "." + File.separator + "src" + File.separator +
       "test" + File.separator + "resources" + File.separator +
       "ImagesForUploadTests" + File.separator;

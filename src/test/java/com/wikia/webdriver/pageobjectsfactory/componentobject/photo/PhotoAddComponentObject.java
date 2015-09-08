@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -103,7 +104,9 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+    chooseFileInput
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 
