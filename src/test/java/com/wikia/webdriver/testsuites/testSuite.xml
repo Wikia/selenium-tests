@@ -121,6 +121,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.EditorTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.CropImageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.ImageUploadTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.curatedcontenttests.SectionItemsTests"/>

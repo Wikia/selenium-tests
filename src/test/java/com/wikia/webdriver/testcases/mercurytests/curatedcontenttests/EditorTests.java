@@ -185,27 +185,4 @@ public class EditorTests extends NewTestTemplate {
         result
     );
   }
-
-  @Test(groups = "MercuryCuratedEditorTest_004")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-      allowedDriver = Driver.ChromeMobileMercury)
-  public void MercuryCuratedEditorTest_004_saveNewPhoto() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-
-    curatedMainPagePageObject.isCuratedContentVisible();
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-
-    ImageGenerator generator = new ImageGenerator();
-    generator.generateImageWithRandomText();
-    String imagePath = generator.getImageAbsolutePath();
-
-    ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
-    UploadImageModalComponentObject upload = item.clickOnImage();
-    CroppingToolPageObject
-        crop =
-        upload.uploadImage(
-            imagePath);
-    crop.waitForCropperToBeLoaded();
-  }
 }
