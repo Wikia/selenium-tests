@@ -35,6 +35,18 @@ public class BasePageObject extends WikiBasePageObject {
     return new ArticlePageObject(driver);
   }
 
+  public ArticlePageObject openMercuryArticleByNameWithCbAndNoAds(String wikiURL,
+                                                                  String articleName) {
+    getUrl(
+        wikiURL + URLsContent.WIKI_DIR + articleName +
+        "?cb=" + DateTime.now().getMillis() +
+        "&noads=1"
+    );
+    PageObjectLogging
+        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
   public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
                                                                      String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
