@@ -21,4 +21,8 @@ public class CroppingToolPageObject extends CuratedEditorFormPageObject {
   public boolean isCropperLoaded() {
     return isElementOnPage(cropperContainer);
   }
+
+  public void waitForCropper() {
+    wait.forElementVisible(cropperContainer);
+  }
 }
