@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebDriverException;
 
 import java.awt.*;
@@ -81,7 +82,7 @@ public class ImageGenerator {
     try {
       Process pr = rt.exec("adb push" + pathOnLocalMachine + " " + pathOnMobile);
     } catch (IOException e) {
-      throw  new WebDriverException();
+      throw  new WebDriverException(ExceptionUtils.getStackTrace(e));
     }
     return pathOnMobile + "random_image.png";
   }
