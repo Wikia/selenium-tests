@@ -11,14 +11,15 @@ import org.openqa.selenium.support.FindBy;
  */
 public class UploadImageModalComponentObject extends BasePageObject {
 
-  @FindBy(css = ".modal-dialog li:nth-of-type(2)")
+  @FindBy(css = ".modal-dialog li:nth-of-type(3)")
   private WebElement searchForImageButton;
   @FindBy(css = ".modal-dialog-wrapper.menu .modal-dialog")
   private WebElement modal;
-  @FindBy(css = ".file-upload-label")
-  private WebElement uploadButton;
   @FindBy(css = "#fileUpload")
   private WebElement uploadInput;
+  @FindBy(css = ".modal-dialog .crop-image")
+  private WebElement cropImageButton;
+
 
   public UploadImageModalComponentObject(WebDriver driver) {
     super(driver);
@@ -39,7 +40,12 @@ public class UploadImageModalComponentObject extends BasePageObject {
     return new CroppingToolPageObject(driver);
   }
 
-  public void clickUpload() {
-    waitAndClick(uploadButton);
+  public boolean isCropOptionEnabled() {
+    return !cropImageButton.getAttribute("class").contains("disabled");
+  }
+
+  public CroppingToolPageObject selectCrop() {
+    waitAndClick(cropImageButton);
+    return new CroppingToolPageObject(driver);
   }
 }
