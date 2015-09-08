@@ -193,7 +193,7 @@ public class EditorTests extends NewTestTemplate {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
-    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
+    curatedMainPagePageObject.isCuratedContentVisible();
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
 
     ImageGenerator generator = new ImageGenerator();

@@ -103,7 +103,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   /**
-   * log not user facing action that can be hidden in the log.html file
+   * Log an action that is not user facing.
+   * Log file reader can hide these actions to increase test readability
    */
   public static void logOnLowLevel(String command, String description, boolean success) {
     log(command, description, success, true);

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.annotations;
 
 /**
- * Created by Ludwik on 2015-02-19. Added LANGUAGE2 Japanese. By P. Archbold on 2015-07-23
+ * These values should resemble the configuration values
  */
 public class Driver {
 

@@ -33,7 +33,7 @@ public class ImageGenerator {
   }
 
   /**
-   * draw image in the middle
+   * Generates unique  200x200(px) .png image, with random text in its center
    */
   public void generateImageWithRandomText() {
 
