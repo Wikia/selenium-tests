@@ -32,6 +32,9 @@ public class ImageGenerator {
                           BufferedImage.TYPE_INT_ARGB);
   }
 
+  /**
+   * draw image in the middle
+   */
   public void generateImageWithRandomText() {
 
     String imageExtension = "png";
@@ -54,6 +57,7 @@ public class ImageGenerator {
     int stringWidth = fontMetrics.stringWidth(imageText);
     int stringHeight = fontMetrics.getAscent();
 
+    // Draw the text in the middle of the image
     g2.drawString(imageText, (imageWidth - stringWidth) / 2, imageHeight / 2);
 
     try {

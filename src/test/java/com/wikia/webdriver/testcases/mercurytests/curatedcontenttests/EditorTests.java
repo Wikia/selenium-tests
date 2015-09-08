@@ -200,11 +200,10 @@ public class EditorTests extends NewTestTemplate {
 
     ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
     UploadImageModalComponentObject upload = item.clickOnImage();
-    upload.clickUpload();
     CroppingToolPageObject
         crop =
         upload.uploadImage(
-            "C:\\workspace\\selenium-tests\\src\\test\\resources\\ImagesForUploadTests\\random_image.png");
+            imagePath);
     crop.clickDoneButton();
   }
 }
