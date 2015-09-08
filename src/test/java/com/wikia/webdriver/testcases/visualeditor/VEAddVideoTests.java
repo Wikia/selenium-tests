@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,9 +27,6 @@ public class VEAddVideoTests extends NewTestTemplate {
   // AM01
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
       "VEAddExternalVideoTests_004"})
-  @RelatedIssue(
-      issueID = "OPS-6181",
-      comment = "The related OPS issue is purely sandbox related. If the test fails on production it needs verification")
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
     VisualEditorPageObject ve =
@@ -50,9 +46,6 @@ public class VEAddVideoTests extends NewTestTemplate {
 
   //AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
-  @RelatedIssue(
-          issueID = "VE-1912",
-          comment = "Please test this manually")
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     VisualEditorPageObject ve =
