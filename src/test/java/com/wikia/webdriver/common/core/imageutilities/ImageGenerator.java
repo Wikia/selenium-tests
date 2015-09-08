@@ -21,19 +21,17 @@ public class ImageGenerator {
   private String imagePath;
   private String imageFolder = PageContent.IMAGE_UPLOAD_RESOURCES_PATH;
   BufferedImage imageBuffer;
-  private int imageWidth;
-  private int imageHeight;
+  private int imageWidth = 200;
+  private int imageHeight = 200;
 
   public ImageGenerator() {
-    imageWidth = 200;
-    imageHeight = 200;
     imageBuffer =
         new BufferedImage(imageWidth, imageHeight,
                           BufferedImage.TYPE_INT_ARGB);
   }
 
   /**
-   * Generates unique  200x200(px) .png image, with random text in its center
+   * Generates unique 200x200(px) .png image, with random text in its center
    */
   public void generateImageWithRandomText() {
 
@@ -65,7 +63,7 @@ public class ImageGenerator {
         PageObjectLogging.logOnLowLevel(actionName, actionDescription, true);
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException("new image couldn't be saved");
     }
   }
 

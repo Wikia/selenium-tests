@@ -227,6 +227,5 @@ public class BasePageObject extends WikiBasePageObject {
   private String getNoTextInListErrorMessage(String text) {
     return "element with text " + text + "not found in the list";
   }
-
-
+  
 }

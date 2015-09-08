@@ -19,7 +19,7 @@ public @interface Execute {
   /**
    * Restrict the test to be executed on certain driver
    */
-  String onDriver() default "";
+  String allowedDriver() default "";
 
   String disableFlash() default "";
 }
