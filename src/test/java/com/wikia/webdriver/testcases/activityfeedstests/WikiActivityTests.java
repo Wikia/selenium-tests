@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.activityfeedstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -86,6 +87,7 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
+  @RelatedIssue(issueID = "QAART-673", comment = "Test will fail if article does not exist therefore test manually.")
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
