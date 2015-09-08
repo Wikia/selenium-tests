@@ -20,7 +20,6 @@ public class UploadImageModalComponentObject extends BasePageObject {
   @FindBy(css = ".modal-dialog .crop-image")
   private WebElement cropImageButton;
 
-
   public UploadImageModalComponentObject(WebDriver driver) {
     super(driver);
   }

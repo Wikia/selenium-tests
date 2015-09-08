@@ -22,7 +22,7 @@ public class CroppingToolPageObject extends CuratedEditorFormPageObject {
     return isElementOnPage(cropperContainer);
   }
 
-  public void waitForCropper() {
+  public void waitForCropperToBeLoaded() {
     wait.forElementVisible(cropperContainer);
   }
 }

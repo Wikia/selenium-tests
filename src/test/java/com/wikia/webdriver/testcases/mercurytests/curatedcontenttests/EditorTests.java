@@ -206,6 +206,6 @@ public class EditorTests extends NewTestTemplate {
         crop =
         upload.uploadImage(
             imagePath);
-    crop.waitForCropper();
+    crop.waitForCropperToBeLoaded();
   }
 }
