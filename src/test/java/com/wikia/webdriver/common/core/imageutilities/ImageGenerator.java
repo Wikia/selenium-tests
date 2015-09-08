@@ -77,7 +77,7 @@ public class ImageGenerator {
 
   public String getImageAbsolutePathForMobile() {
     String pathOnLocalMachine = this.getImageAbsolutePath();
-    String pathOnMobile = "/data/local";
+    String pathOnMobile = "/data/local/";
     Runtime rt = Runtime.getRuntime();
     try {
       Process pr = rt.exec("adb push" + pathOnLocalMachine + " " + pathOnMobile);
