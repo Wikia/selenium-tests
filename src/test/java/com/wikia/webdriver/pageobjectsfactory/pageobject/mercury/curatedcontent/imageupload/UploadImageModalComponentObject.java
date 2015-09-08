@@ -32,11 +32,8 @@ public class UploadImageModalComponentObject extends BasePageObject {
 
   public CroppingToolPageObject uploadImage(String filePath) {
     wait.forElementVisible(modal);
-    System.out.println("before send keys");
     uploadInput.sendKeys(filePath);
-    System.out.println("after send keys, before submit");
     uploadInput.submit();
-    System.out.println("after submit");
     return new CroppingToolPageObject(driver);
   }
 

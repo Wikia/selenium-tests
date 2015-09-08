@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.WebDriverException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -73,6 +74,17 @@ public class ImageGenerator {
     return CommonUtils.getAbsolutePathForFile(imagePath);
   }
 
+  public String getImageAbsolutePathForMobile() {
+    String pathOnLocalMachine = this.getImageAbsolutePath();
+    String pathOnMobile = "/data/local";
+    Runtime rt = Runtime.getRuntime();
+    try {
+      Process pr = rt.exec("adb push" + pathOnLocalMachine + " " + pathOnMobile);
+    } catch (IOException e) {
+      throw  new WebDriverException();
+    }
+    return pathOnMobile + "random_image.png";
+  }
 
   private String getRandomText(int textLength) {
     SecureRandom random = new SecureRandom();

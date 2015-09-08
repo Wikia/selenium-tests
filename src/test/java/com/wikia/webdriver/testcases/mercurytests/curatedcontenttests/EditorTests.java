@@ -196,7 +196,7 @@ public class EditorTests extends NewTestTemplate {
 
     ImageGenerator generator = new ImageGenerator();
     generator.generateImageWithRandomText();
-    String imagePath = generator.getImageAbsolutePath();
+    String imagePath = generator.getImageAbsolutePathForMobile();
 
     ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
     UploadImageModalComponentObject upload = item.clickOnImage();
