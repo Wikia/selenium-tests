@@ -188,7 +188,7 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTest_004")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-      onDriver = Driver.Firefox)
+      onDriver = Driver.ChromeMobileMercury)
   public void MercuryCuratedEditorTest_004_saveNewPhoto() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
