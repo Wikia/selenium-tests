@@ -16,5 +16,10 @@ public @interface Execute {
 
   String onWikia() default "";
 
+  /**
+   * Restrict the test to be executed on certain driver
+   */
+  String onDriver() default "";
+
   String disableFlash() default "";
 }

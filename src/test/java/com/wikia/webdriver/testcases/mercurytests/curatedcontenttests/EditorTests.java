@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Driver;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -186,7 +187,8 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_004")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+      onDriver = Driver.Firefox)
   public void MercuryCuratedEditorTest_004_saveNewPhoto() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -196,7 +198,7 @@ public class EditorTests extends NewTestTemplate {
 
     ImageGenerator generator = new ImageGenerator();
     generator.generateImageWithRandomText();
-    String imagePath = generator.getImageAbsolutePathForMobile();
+    String imagePath = generator.getImageAbsolutePath();
 
     ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
     UploadImageModalComponentObject upload = item.clickOnImage();
