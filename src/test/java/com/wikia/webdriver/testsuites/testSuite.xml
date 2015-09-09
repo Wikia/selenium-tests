@@ -133,6 +133,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.VerbatimTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
