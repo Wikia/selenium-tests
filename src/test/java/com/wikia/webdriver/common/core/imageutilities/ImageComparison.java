@@ -73,6 +73,9 @@ public class ImageComparison {
     return true;
   }
 
+  /**
+   * @return true if image has one color
+   */
   public boolean isMonocolorImage(BufferedImage image) {
     for (int x = 1; x < image.getWidth(); x++) {
       for (int y = 1; y < image.getHeight(); y++) {
