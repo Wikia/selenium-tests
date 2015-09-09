@@ -340,13 +340,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] parameterValueProvider() {
+  public static Object[][] adsGptPageParamOasis() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
-        {"mobileregressiontesting", "PMG", "top", "1k", false},
-        {"assassinscreed", "Tunguska", "esrb", "mature", true},
-        {"101dalmatians", "Jewel", "esrb", "ec", true},
-        {"tardis", "Mang", "esrb", "teen", true}
+        {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
+        {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
+        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
+        {"tardis", "Mang", "\"esrb\":\"teen\"", true}
     };
   }
 
@@ -394,7 +394,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testProvidersChain() {
+  public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain",
@@ -412,7 +412,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testDisableGptAds() {
+  public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",

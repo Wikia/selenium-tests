@@ -178,6 +178,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+  private String loggedInUserSelectorMercury = ".avatar img[alt*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {

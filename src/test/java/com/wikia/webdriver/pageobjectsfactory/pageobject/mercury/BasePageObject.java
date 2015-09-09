@@ -1,9 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
@@ -11,6 +14,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -25,6 +30,26 @@ public class BasePageObject extends WikiBasePageObject {
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
+    PageObjectLogging
+        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
+  public ArticlePageObject openMercuryArticleByNameWithCbAndNoAds(String wikiURL,
+                                                                  String articleName) {
+    getUrl(
+        wikiURL + URLsContent.WIKI_DIR + articleName +
+        "?cb=" + DateTime.now().getMillis() +
+        "&noads=1"
+    );
+    PageObjectLogging
+        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    return new ArticlePageObject(driver);
+  }
+
+  public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
+                                                                     String articleName) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
     PageObjectLogging
         .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
@@ -46,7 +71,8 @@ public class BasePageObject extends WikiBasePageObject {
 
   /**
    * It will wait and log reason
-   * @param time - in milliseconds
+   *
+   * @param time   - in milliseconds
    * @param reason - i.e. Wait for message to disappear
    */
   public void waitMilliseconds(int time, String reason) {
@@ -133,4 +159,84 @@ public class BasePageObject extends WikiBasePageObject {
   public void openHome(String wikiURL) {
     getUrl(wikiURL);
   }
+
+  /**
+   * Make sure element is ready to be clicked and click on it The separation of this method has
+   * particular reason. It allows global modification of such click usages. This way it is very easy
+   * to control what criteria have to be met in order to click on element
+   *
+   * @param element to be clicked on
+   */
+  protected void waitAndClick(WebElement element) {
+    wait.forElementClickable(element).click();
+  }
+
+  protected void waitAndSendKeys(WebElement element, String keys) {
+    wait.forElementVisible(element);
+    element.sendKeys(keys);
+  }
+
+  protected void verifyTextInElement(WebElement element, String text) {
+    wait.forElementVisible(element);
+    Assertion.assertEquals(element.getText(), text);
+  }
+
+  /**
+   * Verify if element inside element of the provided list has given text. This method assumes list
+   * element is not the final target of verification This method assumes list element is the parent
+   * of target element
+   *
+   * @param list           List that contains the parent element
+   * @param elementLocator Locator of target element, that is child of its parent element
+   * @param text           Text to be compared
+   */
+  protected void verifyTextInListElements(List<WebElement> list, By elementLocator, String text) {
+    WebElement innerElem;
+    for (WebElement elem : list) {
+      wait.forElementVisible(elem);
+      innerElem = elem.findElement(elementLocator);
+      if (innerElem.getText().equals(text)) {
+        return;
+      }
+    }
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
+  }
+
+  /**
+   * Verify if element of the provided list has given text.
+   *
+   * @param list List that contains the element
+   * @param text Text to be compared
+   */
+  protected void verifyTextInListElements(List<WebElement> list, String text) {
+    for (WebElement elem : list) {
+      wait.forElementVisible(elem);
+      if (elem.getText().equals(text)) {
+        return;
+      }
+    }
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
+  }
+
+  /**
+   * Verify if element of the provided list has given text.
+   *
+   * @param list List that contains the element
+   * @param text Text to be compared
+   */
+  protected void clickByListElementText(List<WebElement> list, String text) {
+    for (WebElement elem : list) {
+      wait.forElementVisible(elem);
+      if (elem.getText().equals(text)) {
+        waitAndClick(elem);
+        return;
+      }
+    }
+    throw new RuntimeException(getNoTextInListErrorMessage(text));
+  }
+  
+  private String getNoTextInListErrorMessage(String text) {
+    return "element with text " + text + "not found in the list";
+  }
+
 }

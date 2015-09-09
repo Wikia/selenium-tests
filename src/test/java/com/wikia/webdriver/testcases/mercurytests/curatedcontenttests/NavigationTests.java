@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -70,7 +70,8 @@ public class NavigationTests extends NewTestTemplate {
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
+    UrlChecker
+        .isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
   }
 
   // CCT11
@@ -82,7 +83,6 @@ public class NavigationTests extends NewTestTemplate {
         .isArticleIconVisible()
         .clickOnCuratedContentElementByIndex(0)
         .waitForLoadingSpinnerToFinish();
-    category.isArticle();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
@@ -111,7 +111,6 @@ public class NavigationTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedNavigationTest_004")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
-
     String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
@@ -120,11 +119,11 @@ public class NavigationTests extends NewTestTemplate {
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl = wikiURL;
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_QWERTY);
+    expectedUrl = wikiURL + "wiki/mercury_cc_wikia";
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_EMPTY_CATEGORY);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_QWERTY);
+    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_NOT_EXISTING_SECTION);
     UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 }

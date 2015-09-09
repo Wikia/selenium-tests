@@ -25,7 +25,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -39,7 +38,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
-  private static final int PROVIDER_CHAIN_TIMEOUT_SEC  = 30;
+  private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
 
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -129,7 +128,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void checkTopLeaderboard() {
-    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(By.cssSelector("#jpsuperheader"))) {
+    if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
+        By.cssSelector("#jpsuperheader"))) {
       PageObjectLogging.log("checkTopLeaderboard",
                             "Page has Gotham campaign.", true);
       return;
@@ -425,6 +425,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return adsDiv.getAttribute(attr);
   }
 
+  public String getGptPageParams(String slotName) {
+    return getGptParams(slotName, "data-gpt-page-params");
+  }
+
   private WebElement getIframe(String slotName, String src) {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
@@ -481,29 +485,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  protected boolean isGptParamPresent(String slotName, String key, String value) {
-    WebElement slot = driver.findElement(By.cssSelector(slotName));
-    String
-        dataGptPageParams =
-        slot.getAttribute("data-gpt-page-params").replaceAll("[\\[\\]]", "");
-    String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
-    PageObjectLogging.log(
-        "GPT parameter search",
-        "searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
-        true
-    );
-    return dataGptPageParams.contains(gptParamPattern);
-  }
-
-  public void verifyParamValue(String paramName, String paramValue, boolean expected) {
-    Assertion
-        .assertEquals(isGptParamPresent(LEADERBOARD_GPT_SELECTOR, paramName, paramValue),
-                      expected,
-                      "parameter \"" + paramName + "\" not found");
-    PageObjectLogging.log("verifyParamState", "parameter \"" + paramName + "\" as expected: "
-                                              + expected, true, driver);
-  }
-
   public void checkSpotlights() {
     // Removing comments section as it expands content downwards
     JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -550,20 +531,26 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
-    List<String> actualProviders = getProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
-    Assertion.assertEquals(providers, Joiner.on("; ").join(actualProviders));
+    waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
     return this;
   }
 
-  private List<String> getProvidersChain(final String slotName, final String expectedProviders, int timeoutSec) {
-    return new WebDriverWait(driver, timeoutSec).until(
-        new ExpectedCondition<List<String>>() {
+  private void waitForProvidersChain(final String slotName,
+                                     final String expectedProviders,
+                                     int timeoutSec) {
+    new WebDriverWait(driver, timeoutSec).until(
+        new ExpectedCondition<Boolean>() {
           @Override
-          public List<String> apply(WebDriver webDriver) {
-            if (expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)))) {
-              return getProvidersChain(slotName);
-            }
-            return Collections.emptyList();
+          public Boolean apply(WebDriver webDriver) {
+            return expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)));
+          }
+
+          @Override
+          public String toString() {
+            extractLiftiumTagId(AdsContent.getSlotSelector(slotName));
+            extractGptInfo(AdsContent.getSlotSelector(slotName));
+            return String.format("Expected: [%s], Actual: [%s]", expectedProviders,
+                                 Joiner.on("; ").join(getProvidersChain(slotName)));
           }
         }
     );

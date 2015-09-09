@@ -5,9 +5,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-/**
- * @author drets
- */
 public class UrlBuilder {
 
   private String browser;

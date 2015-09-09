@@ -196,18 +196,23 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     clickAdvancedButton();
     chooseAdvancedOption(0);
     PageObjectLogging.log("selectAllAdvancedOptions", "All advance options are selected", true,
-        driver);
+                          driver);
   }
 
+  /*
+  * Make sure namespace checkboxes are empty, except Articles and Category
+  */
   public void verifyDefaultNamespaces() {
     wait.forElementVisible(advancedField);
     for (int i = 0; i < advancedOptions.size(); i++) {
-      if ("Articles".equals(advancedOptions.get(i).getText())) {
-        Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
-      } else if ("Category".equals(advancedOptions.get(i).getText())) {
-        Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
+
+      String optionName = advancedOptions.get(i).getText();
+      String optionState = advancedOptionInputs.get(i).getAttribute("checked");
+
+      if (optionName.equals("Articles") | optionName.equals("Category")) {
+        Assertion.assertEquals(optionState, "true");
       } else {
-        Assertion.assertNull(advancedOptionInputs.get(i).getAttribute("checked"));
+        Assertion.assertNull(optionState);
       }
     }
   }
@@ -217,7 +222,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
     PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true,
-        driver);
+                          driver);
   }
 
   public void verifyPhotosOnly() {
@@ -338,7 +343,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
     PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
-        true, driver);
+                          true, driver);
   }
 
   public void verifyNewSuggestionsTextAndImages(String query) {
@@ -352,7 +357,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
     }
     PageObjectLogging.log("verifyNewSuggestionsTextAndImages",
-        "Image and text next to every suggestion is verified", true);
+                          "Image and text next to every suggestion is verified", true);
   }
 
   public void searchForInGlobalNavIfPresent(String query) {

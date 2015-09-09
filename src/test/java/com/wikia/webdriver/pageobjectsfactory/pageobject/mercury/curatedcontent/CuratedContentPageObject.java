@@ -1,17 +1,21 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class represents all the levels below Curated Main Page
+ *
  * @ownership: Content X-Wing
  */
 public class CuratedContentPageObject extends BasePageObject {
@@ -36,10 +40,8 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement imageItemIcon;
   @FindBy(css = "#namespace-video")
   private WebElement videoItemIcon;
-  @FindBy(css = ALERT_NOTIFICATION_CSS)
+  @FindBy(css = ".alert-notification")
   private WebElement alertNotification;
-
-  private static final String ALERT_NOTIFICATION_CSS = ".alert-notification";
 
   private enum Labels {
     ARTICLE("Article wrapper"),
@@ -101,7 +103,6 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isAlertNotificationVisible() {
-    wait.forElementVisible(By.cssSelector(ALERT_NOTIFICATION_CSS));
     PageObjectLogging.log(
         Labels.ALERT_NOTIFICATION.name,
         MercuryMessages.VISIBLE_MSG,
@@ -128,16 +129,6 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isVideoIconVisible() {
     isElementVisible(videoItemIcon);
-    return this;
-  }
-
-  public CuratedContentPageObject isArticle() {
-    PageObjectLogging.log(
-        Labels.ARTICLE.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        isElementVisible(articleWrapper)
-    );
     return this;
   }
 
@@ -217,11 +208,11 @@ public class CuratedContentPageObject extends BasePageObject {
     List<String> itemsLabels = new ArrayList<>();
     boolean conflict = false;
 
-    for(WebElement element : curatedContentItems) {
+    for (WebElement element : curatedContentItems) {
       element = element.findElement(By.cssSelector("div.item-caption"));
       String label = element.getText();
 
-      if(itemsLabels.contains(label)) {
+      if (itemsLabels.contains(label)) {
         conflict = true;
         break;
       }

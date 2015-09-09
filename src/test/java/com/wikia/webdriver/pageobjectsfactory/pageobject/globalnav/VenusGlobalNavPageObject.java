@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class VenusGlobalNavPageObject {
 
   private static final String HUBS_XPATH_FORMAT =
-      ".//a[./span[@class='label'][contains(text(),'%s')]]";
+      "//a[./span[@class='label'][contains(text(),'%s')]]";
 
   @FindBy(css = ".hubs-entry-point")
   private WebElement menuButton;
@@ -65,18 +66,21 @@ public class VenusGlobalNavPageObject {
   public HubBasePageObject openHub(Hub hub) {
     openHubsMenu();
 
-    final WebElement destinationHub =
-        hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
-
-    new Actions(driver).moveToElement(destinationHub).perform();
+    new Actions(driver).moveToElement(getDestinationHub(hub)).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-        .valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
-    hubsMenu.findElement(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText()))).click();
+                                                .valueToBePresentInElementsAttribute(
+                                                    getDestinationHub(hub), "class", "active"));
+    getDestinationHub(hub).click();
 
-    new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(getHubLink(destinationHub)));
+    new WebDriverWait(driver, 30)
+        .until(ExpectedConditions.urlToBe(getHubLink(getDestinationHub(hub))));
 
     return new HubBasePageObject(driver);
+  }
+
+  private WebElement getDestinationHub(Hub hub) {
+    return wait.forElementPresent(By.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
   }
 
   public String getHubLink(WebElement hub) {
@@ -86,12 +90,13 @@ public class VenusGlobalNavPageObject {
   private VenusGlobalNavPageObject openHubsMenu() {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 20, 5000).until(new ExpectedCondition<Boolean>() {
+      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
           try {
             if (!hubsMenu.isDisplayed()) {
-              new Actions(driver).click(menuButton).perform();
+              ((JavascriptExecutor) driver)
+                  .executeScript("$j('.hubs-menu-wrapper').trigger('click')");
               return false;
             }
             return true;
