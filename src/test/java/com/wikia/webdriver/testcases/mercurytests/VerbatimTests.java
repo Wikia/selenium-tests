@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.verbatim.TwitterPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.widgets.TwitterPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -38,6 +38,6 @@ public class VerbatimTests extends NewTestTemplate {
 
     TwitterPageObject twitterPageObject = new TwitterPageObject(driver);
     twitterPageObject.openMercuryArticleByName(wikiURL, MercurySubpages.TWITTER_VERBATIM);
-    twitterPageObject.isLoaded();
+    twitterPageObject.isLoadedOnMercury();
   }
 }

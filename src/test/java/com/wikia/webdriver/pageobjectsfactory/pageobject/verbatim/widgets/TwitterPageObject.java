@@ -1,6 +1,6 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.verbatim;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.widgets;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.VerbatimPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.VerbatimPageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,13 +19,16 @@ public class TwitterPageObject extends VerbatimPageObject {
 
   public TwitterPageObject(WebDriver driver) {
     super(driver);
+
   }
 
-  public WebElement getElement() {
-    return elementInVebatim;
+  protected boolean isTagLoadedOnOasis() {
+    // to be implemented
+    return isElementVisible(elementInVebatim);
   }
 
-  public String getTagName() {
-    return tagName;
+  protected boolean isTagLoadedOnMercury() {
+    // to be implemented
+    return isElementVisible(elementInVebatim);
   }
 }
