@@ -47,7 +47,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -86,7 +86,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
@@ -146,7 +146,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
-  @Execute(onWikia = "mercuryemptycceditor")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);

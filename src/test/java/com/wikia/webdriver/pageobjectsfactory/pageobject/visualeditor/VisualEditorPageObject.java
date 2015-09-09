@@ -215,7 +215,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyVideos(int expected) {
-    wait.forElementVisible(mediaNode);
+    wait.forElementVisible(editArea);
     Assertion.assertNumber(videoNodes.size(), expected,
             "Checking the correct number of video nodes added");
     PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);

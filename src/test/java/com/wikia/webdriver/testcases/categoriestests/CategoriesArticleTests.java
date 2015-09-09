@@ -38,6 +38,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
+    article.submitCategory();
     article.verifyCategoryPresent(desiredCategory);
   }
 
@@ -60,6 +61,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
+    article.submitCategory();
     article.verifyCategoryPresent(desiredCategory);
   }
 

@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * This class represents the main editor view on mercury.
  * The editor home is responsible for adding top level curated content items
@@ -25,6 +27,8 @@ public class EditorHomePageObject extends BasePageObject {
   private WebElement addNewSectionButton;
   @FindBy(css = "section:nth-of-type(3) .curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
+  @FindBy(css = "section:nth-of-type(1) .curated-content-editor-row")
+  private List<WebElement> featuredContentItem;
 
   private By sectionLabel = By.cssSelector(".title");
 
@@ -54,5 +58,10 @@ public class EditorHomePageObject extends BasePageObject {
 
   public void waitForAddCategoryButtonToBeVisible() {
     wait.forElementVisible(addCategoryButton);
+  }
+
+  public SectionFormPageObject clickOnItemByIndex(int itemIndex) {
+    waitAndClick(featuredContentItem.get(itemIndex));
+    return new SectionFormPageObject(driver);
   }
 }
