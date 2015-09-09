@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
@@ -10,11 +10,11 @@ import org.openqa.selenium.WebDriver;
 /**
  * @ownership: Content X-Wing
  */
-public abstract class VerbatimPageObject extends BasePageObject {
+public abstract class WidgetPageObject extends BasePageObject {
 
   protected String tagName;
 
-  protected VerbatimPageObject(WebDriver driver) {
+  protected WidgetPageObject(WebDriver driver) {
     super(driver);
   }
 

@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.widgets.TwitterPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-// Uncoment after finish all verbatim tags
-//@Test(groups = {"MercuryVerbatimTests", "Mercury"})
-public class VerbatimTests extends NewTestTemplate {
+// Uncoment after finish all widget tags
+//@Test(groups = {"MercuryWidgetTests", "Mercury"})
+public class WidgetTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
@@ -29,15 +29,15 @@ public class VerbatimTests extends NewTestTemplate {
                                           Configuration.getCredentials().passwordStaff2);
   }
 
-  @Test(groups = "MercuryVerbatimTest_001")
+  @Test(groups = "MercuryWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryVerbatimTest_001_Twitter() {
+  public void MercuryWidgetTest_001_Twitter() {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(MercurySubpages.TWITTER_VERBATIM);
     articleContent.push("<twitter>", MercurySubpages.TWITTER_VERBATIM);
 
-    TwitterPageObject twitterPageObject = new TwitterPageObject(driver);
-    twitterPageObject.openMercuryArticleByName(wikiURL, MercurySubpages.TWITTER_VERBATIM);
-    twitterPageObject.isLoadedOnMercury();
+    TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
+    twitterWidgetPageObject.openMercuryArticleByName(wikiURL, MercurySubpages.TWITTER_VERBATIM);
+    twitterWidgetPageObject.isLoadedOnMercury();
   }
 }

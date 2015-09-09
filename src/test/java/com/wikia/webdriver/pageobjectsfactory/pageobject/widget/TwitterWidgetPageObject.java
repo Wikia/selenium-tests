@@ -1,6 +1,6 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.widgets;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.verbatim.VerbatimPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class TwitterPageObject extends VerbatimPageObject {
+public class TwitterWidgetPageObject extends WidgetPageObject {
 
   // set proper css in future
   @FindBy(css = "div[data-tag=twitter] > div")
@@ -17,7 +17,7 @@ public class TwitterPageObject extends VerbatimPageObject {
 
   private String tagName = "twitter";
 
-  public TwitterPageObject(WebDriver driver) {
+  public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
 
   }
