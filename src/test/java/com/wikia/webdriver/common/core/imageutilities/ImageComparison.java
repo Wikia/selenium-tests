@@ -74,6 +74,17 @@ public class ImageComparison {
     return true;
   }
 
+  public boolean isMonocolorImage(BufferedImage image) {
+    for (int x = 1; x < image.getWidth(); x++) {
+      for (int y = 1; y < image.getHeight(); y++) {
+        if (image.getRGB(x - 1, y - 1) != image.getRGB(x, y)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   /**
    * @param threshold in percentage between 0 and 100. If images have less than threshold percent of
    *                  different pixels return false
