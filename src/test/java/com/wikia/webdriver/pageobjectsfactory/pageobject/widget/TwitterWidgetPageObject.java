@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +17,6 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
-
   }
 
   protected boolean isTagLoadedOnOasis() {

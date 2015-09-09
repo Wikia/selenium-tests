@@ -17,8 +17,6 @@ public class MercurySubpages {
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
 
-  public static final String TWITTER_WIDGET = "TwitterWidget";
-
   /**
    * Legend:
    * FC - Featured Content

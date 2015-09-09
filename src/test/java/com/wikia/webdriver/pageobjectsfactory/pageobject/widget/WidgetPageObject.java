@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
@@ -26,9 +26,24 @@ public abstract class WidgetPageObject extends BasePageObject {
     return tagName;
   }
 
+  private String getArticleName() {
+    return tagName.substring(0, 1).toUpperCase() + tagName.substring(1).toLowerCase() + "Widget";
+  }
+
+  private String getTag() {
+    return "<" + getTagName() + ">";
+  }
+
+  public void createAndNavigate(String wikiUrl) {
+    ArticleContent articleContent = new ArticleContent();
+    articleContent.clear(getArticleName());
+    articleContent.push(getTag(), getArticleName());
+
+    openMercuryArticleByName(wikiUrl, getArticleName());
+  }
+
   public boolean isLoadedOnMercury() {
     boolean result = isTagLoadedOnMercury();
-    Assertion.assertTrue(result, MercuryMessages.INVISIBLE_MSG);
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }

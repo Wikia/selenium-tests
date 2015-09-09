@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;

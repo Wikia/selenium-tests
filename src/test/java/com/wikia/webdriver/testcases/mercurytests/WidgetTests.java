@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
@@ -32,12 +32,12 @@ public class WidgetTests extends NewTestTemplate {
   @Test(groups = "MercuryWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWidgetTest_001_Twitter() {
-    ArticleContent articleContent = new ArticleContent();
-    articleContent.clear(MercurySubpages.TWITTER_VERBATIM);
-    articleContent.push("<twitter>", MercurySubpages.TWITTER_VERBATIM);
-
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
-    twitterWidgetPageObject.openMercuryArticleByName(wikiURL, MercurySubpages.TWITTER_VERBATIM);
-    twitterWidgetPageObject.isLoadedOnMercury();
+
+    twitterWidgetPageObject.createAndNavigate(wikiURL);
+    Assertion.assertTrue(
+        twitterWidgetPageObject.isLoadedOnMercury(),
+        MercuryMessages.INVISIBLE_MSG
+    );
   }
 }
