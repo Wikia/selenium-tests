@@ -38,7 +38,9 @@ public class SignupTests extends NewTestTemplate {
   @Test(groups = "MercurySignupTest_004")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_004_signupErrorBadPassword() {
-    signUp(new CreateUser().withPass("WRONG PASS").create()).verifyPasswordError();
+    String random = "User" + DateTime.now().getMillis();
+
+    signUp(new CreateUser().withName(random).withPass(random).create()).verifyPasswordError();
   }
 
   @Test(groups = "MercurySignupTest_005")

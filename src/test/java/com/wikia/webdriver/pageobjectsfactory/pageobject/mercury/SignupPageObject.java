@@ -105,20 +105,18 @@ public class SignupPageObject extends BasePageObject {
 
   public void verifyUsernameTakenError() {
     wait.forElementVisible(usernameError);
-    Assertion.assertEquals(usernameError.getText(),
-                           "Someone already has this username. Try a different one!");
+    Assertion.assertEquals(usernameError.getText(), "Username is taken");
   }
 
   public void verifyPasswordError() {
     wait.forElementVisible(passwordError);
-    Assertion.assertEquals(passwordError.getText(),
-                           "Your password must be different from your username.");
+    Assertion.assertEquals(passwordError.getText(), "Password and username cannot match");
   }
 
   public void verifyBirthdateError() {
     wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(),
-                           "We can not complete your registration at this time.");
+                           "We cannot complete your registration at this time");
   }
 
   public String getRegisterHeaderText() {
