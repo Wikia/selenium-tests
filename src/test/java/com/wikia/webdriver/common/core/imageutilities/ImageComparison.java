@@ -59,7 +59,6 @@ public class ImageComparison {
    */
   public boolean isColorImage(BufferedImage image, Color color, int accuracy) {
     int count = image.getHeight() * image.getWidth();
-    ;
     int diffCount = 0;
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
