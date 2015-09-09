@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,10 +13,6 @@ import org.openqa.selenium.support.FindBy;
  * @ownership Social
  */
 public class SignupPageObject extends BasePageObject {
-
-  public SignupPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "#signupEmail")
   private WebElement signupEmail;
@@ -50,30 +47,34 @@ public class SignupPageObject extends BasePageObject {
   @FindBy(css = ".signup-provider-email")
   private WebElement signupButton;
 
-  public SignupPageObject typeEmailAddress(String email) {
+  public SignupPageObject(WebDriver driver) {
+    super(driver);
+  }
+
+  private SignupPageObject typeEmailAddress(String email) {
     wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
-  public SignupPageObject typeUsername(String username) {
+  private SignupPageObject typeUsername(String username) {
     wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
-  public SignupPageObject typePassword(String password) {
+  private SignupPageObject typePassword(String password) {
     wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
-  public SignupPageObject typeBirthdate(String month, String day, String year) {
+  private SignupPageObject typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
-    scrollAndClick((signupBirthdate));
+    scrollAndClick(signupBirthdate);
 
     wait.forElementVisible(signupBirthMonth);
-    scrollAndClick((signupBirthMonth));
+    scrollAndClick(signupBirthMonth);
     signupBirthMonth.sendKeys(month);
 
     wait.forElementVisible(signupBirthDay);
@@ -115,12 +116,13 @@ public class SignupPageObject extends BasePageObject {
   public void verifyBirthdateError() {
     wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(),
-        "We cannot complete your registration at this time");
+                           "We cannot complete your registration at this time");
   }
 
   public String getRegisterHeaderText() {
     return registerHeader.getText();
   }
+
   public void openRegisterPage() {
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
   }
@@ -132,5 +134,17 @@ public class SignupPageObject extends BasePageObject {
     wait.forElementVisible(signupButton);
     signupButton.click();
     return new SignupPageObject(driver);
+  }
+
+  public SignupPageObject signUp(String user, String password, String email, DateTime birthday) {
+    typeEmailAddress(email).
+        typeUsername(user).
+        typePassword(password).
+        typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
+                      String.valueOf(birthday.getDayOfMonth()),
+                      String.valueOf(birthday.getYear())).
+        register();
+
+    return this;
   }
 }
