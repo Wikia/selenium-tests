@@ -142,13 +142,21 @@ public class NavigationSideComponentObject extends BasePageObject {
     return resultField.getCssValue("visibility").equals("visible");
   }
 
+  public boolean isUserLoggedIn(String username) {
+    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
+           > 0;
+  }
+
   public void typeInSearchField(String content) {
     wait.forElementVisible(searchInput);
     searchInput.sendKeys(content);
   }
 
-  public boolean isUserLoggedIn(String username) {
-    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
-           > 0;
+  public void navigateToArticle(String articleName) {
+    clickSearchButton();
+    clickSearchField();
+    typeInSearchField(articleName);
+    clickSuggestion(0);
+    waitForLoadingSpinnerToFinish();
   }
 }

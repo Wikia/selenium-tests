@@ -3,19 +3,21 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @ownership: Content X-Wing
  */
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
-  // set proper css in future
-  @FindBy(css = "div[data-tag=twitter] > div")
-  private WebElement elementInVebatim;
+  @FindBy(css = ".widget-twitter iframe")
+  private WebElement twitterIframe;
+  @FindBy(css = "div.timeline")
+  private WebElement twitterBody;
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
+  private static final String TAG =
+      "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />";
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -30,16 +32,30 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   protected String getTag() {
-    return "<" + getTagName() + ">";
+    return TAG;
   }
 
   protected boolean isTagLoadedOnMercury() {
-    throw new NotImplementedException();
-    //return isElementVisible(elementInVebatim);
+    if(!isElementVisible(twitterIframe)) {
+      return false;
+    }
+
+    driver.switchTo().frame(twitterIframe);
+    boolean result = isElementVisible(twitterBody);
+    driver.switchTo().parentFrame();
+
+    return result;
   }
 
   protected boolean isTagLoadedOnOasis() {
-    throw new NotImplementedException();
-    //return isElementVisible(elementInVebatim);
+    if(!isElementVisible(twitterIframe)) {
+      return false;
+    }
+
+    driver.switchTo().frame(twitterIframe);
+    boolean result = isElementVisible(twitterBody);
+    driver.switchTo().parentFrame();
+
+    return result;
   }
 }
