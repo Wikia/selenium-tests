@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by qaga on 2015-07-24.
+ * @ownership Social
  */
 public class TopBarComponentObject extends BasePageObject {
 

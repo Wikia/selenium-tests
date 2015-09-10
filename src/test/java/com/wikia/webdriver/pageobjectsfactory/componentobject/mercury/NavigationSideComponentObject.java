@@ -41,6 +41,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   private WebElement menuView;
   @FindBy(xpath = "//span[contains(.,'Sorry, we could')]")
   private WebElement sorrySpan;
+  @FindBy(css = "div.side-nav-toggle")
+  private WebElement openListIcon;
 
   public NavigationSideComponentObject(WebDriver driver) {
     super(driver);
@@ -143,8 +145,9 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public boolean isUserLoggedIn(String username) {
-    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
-           > 0;
+    By avatar = By.cssSelector("figure.avatar img[alt='" + username + "']");
+    wait.forElementVisible(avatar, 10, 500);
+    return driver.findElements(avatar).size() > 0;
   }
 
   public void typeInSearchField(String content) {
