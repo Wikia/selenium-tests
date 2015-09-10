@@ -33,13 +33,13 @@ public class AddPhotoComponentObject extends BasePageObject {
   }
 
   private void typeSearchQuery(String query) {
-    waitForElementByElement(searchField);
+    wait.forElementVisible(searchField);
     searchField.sendKeys(query);
     PageObjectLogging.log("typeSearchQuery", query + " search query typed in", true);
   }
 
   private void clickSearchButton() {
-    waitForElementByElement(searchButton);
+    wait.forElementVisible(searchButton);
     searchButton.click();
     PageObjectLogging.log("clickSearchButton", "search button clicked", true);
   }
@@ -64,7 +64,7 @@ public class AddPhotoComponentObject extends BasePageObject {
 
 
   public void clickSelect() {
-    waitForElementByElement(selectButton);
+    wait.forElementVisible(selectButton);
     selectButton.click();
     PageObjectLogging.log("clickSelect", "select button clicked", true);
   }

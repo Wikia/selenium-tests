@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -55,7 +54,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = {"FBButton_005", "FacebookButton"})
   public void FBButton_005_PrefsButton_Visible() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(tabNames.FACEBOOK);
     prefsPage.verifyFBButtonVisible();

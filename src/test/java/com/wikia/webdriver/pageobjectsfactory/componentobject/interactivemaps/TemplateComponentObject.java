@@ -47,29 +47,29 @@ public class TemplateComponentObject extends BasePageObject {
   }
 
   public void typeMapName(String mapName) {
-    waitForElementByElement(mapTitleField);
+    wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
     PageObjectLogging.log("typeMapName", mapName + " title for map typed in", true, driver);
   }
 
   public void typeTemplateName(String templateName) {
-    waitForElementByElement(nameTemplateField);
+    wait.forElementVisible(nameTemplateField);
     nameTemplateField.sendKeys(templateName);
     PageObjectLogging
         .log("typeTemplateName", templateName + " title for template typed in", true, driver);
   }
 
   public void verifyTemplateImagePreview() {
-    waitForElementByElement(templateImagePreview);
+    wait.forElementVisible(templateImagePreview);
   }
 
   public void verifyTemplateImage(String selectedTemplateName) {
-    waitForElementByElement(templateImagePreview);
+    wait.forElementVisible(templateImagePreview);
     Assertion.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
   }
 
   public void verifyErrorExists() {
-    waitForElementByElement(mapError);
-    Assertion.assertEquals(checkIfElementOnPage(mapError), true);
+    wait.forElementVisible(mapError);
+    Assertion.assertEquals(isElementOnPage(mapError), true);
   }
 }

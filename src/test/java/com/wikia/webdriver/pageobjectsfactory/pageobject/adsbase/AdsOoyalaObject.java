@@ -47,10 +47,17 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private void waitForColorAds(WebElement element, Color color) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(CommonExpectedConditions
-                     .elementToHaveColor(element, color, AdsComparison.IMAGES_THRESHOLD_PERCENT));
+      waitFor.until(CommonExpectedConditions
+                        .elementToHaveColor(element, color,
+                                            AdsComparison.IMAGES_THRESHOLD_PERCENT));
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void verifyFlash() {
+    Boolean hasFlash = (Boolean) jsActions.execute(
+        "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
+    PageObjectLogging.log("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class BlogListPageObject extends BasePageObject {
 
@@ -28,8 +28,8 @@ public class BlogListPageObject extends BasePageObject {
   public BlogListPageObject verifyBlogListPage(String listName) {
     verifyURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
         + URLsContent.BLOG_LIST.replace("%listName%", listName));
-    waitForElementByElement(blogListHeader);
-    waitForElementByElement(createBlogPostButton);
+    wait.forElementVisible(blogListHeader);
+    wait.forElementVisible(createBlogPostButton);
     return this;
   }
 
@@ -47,7 +47,7 @@ public class BlogListPageObject extends BasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "wiki/Blog:" + name
         + "?action=watch");
     scrollAndClick(followSubmit);
-    waitForElementByElement(followedButton);
+    wait.forElementVisible(followedButton);
     return this;
   }
 }

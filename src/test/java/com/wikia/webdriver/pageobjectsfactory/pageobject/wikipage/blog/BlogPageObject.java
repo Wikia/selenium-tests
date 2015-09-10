@@ -30,7 +30,7 @@ public class BlogPageObject extends ArticlePageObject {
   }
 
   public void verifyBlogTitle(String title) {
-    waitForElementByElement(blogHeader);
+    wait.forElementVisible(blogHeader);
     Assertion.assertEquals(blogHeader.getText(), title);
   }
 

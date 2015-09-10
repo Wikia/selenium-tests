@@ -13,26 +13,30 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Dmytro Rets
  * @ownership AdEngineering
  */
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final int MAX_SEGS_NUMBER_GPT = 27;
-  private static final String
-      SLOT_SELECTOR =
-      "div[id*='wikia_gpt/5441'],div[id*='wikia_gpt_helper/5441']";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
+  private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
+  private static final String ADD_USER_URL =
+      String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
 
-  public AdsKruxObject(WebDriver driver, String page) {
-    super(driver, page);
-  }
-
   public AdsKruxObject(WebDriver driver) {
     super(driver);
+  }
+
+  public AdsKruxObject(WebDriver driver, String testedPage) {
+    super(driver, testedPage);
+  }
+
+  public void setKruxUserCookie(String userId) {
+    driver.get(KRUX_CDN);
+    setCookie("_kuid_", userId);
   }
 
   /**
@@ -48,51 +52,46 @@ public class AdsKruxObject extends AdsBaseObject {
   /**
    * Test whether the Krux user id is not empty and added to GPT calls
    */
-  public void verifyKruxUserParam() {
+  public void verifyKruxUserParam(String slotName) {
     String script = "return localStorage.kxuser;";
     waitForKrux();
     String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
     refreshPage();
     waitForKrux();
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
+    String gptPageParams = getGptPageParams(slotName);
+    PageObjectLogging.log("gpt page params", gptPageParams, true);
+    PageObjectLogging.log("krux users", user1 + ", " + user2, true);
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
-    Assertion.assertTrue(isGptParamPresent(SLOT_SELECTOR, "u", user1) ||
-                         isGptParamPresent(SLOT_SELECTOR, "u", user2));
+    if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
+      throw new AssertionError("Gpt page params don't have the krux users from localStorage");
+    }
   }
 
   public void waitForKrux() {
+    PageObjectLogging.log("waitForKrux", "Waiting for Krux", true);
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
           "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
-      wait.until(CommonExpectedConditions.scriptReturnsTrue(script));
+      waitFor.until(CommonExpectedConditions.scriptReturnsTrue(script));
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  public void setKruxUserCookie(String userId) {
-    getUrl(KRUX_CDN);
-    waitForPageLoaded();
-    setCookie("_kuid_", userId);
   }
 
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String segments = (String) js.executeScript("return localStorage.kxsegs;");
     PageObjectLogging.log("krux segments: ", segments, true, driver);
-    return segments;
+    return wrapSegs(segments);
   }
 
-  public String getKxkuid() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String kxkuid = (String) js.executeScript("return localStorage.kxkuid;");
-    PageObjectLogging.log("krux kuid: ", kxkuid, true, driver);
-    return kxkuid;
-  }
-
-  public String getKsgmntPattern(String segmentsLocalStorage) {
-    String ksgmnt = "\"ksgmnt\":[";
+  private String wrapSegs(String segmentsLocalStorage) {
+    if ("".equals(segmentsLocalStorage)) {
+      return "[]";
+    }
+    String ksgmnt = "[";
     String[] segments = segmentsLocalStorage.split(",");
     if (segments.length > MAX_SEGS_NUMBER_GPT) {
       segments = Arrays.copyOfRange(segmentsLocalStorage.split(","), 0, MAX_SEGS_NUMBER_GPT);
@@ -102,5 +101,11 @@ public class AdsKruxObject extends AdsBaseObject {
     }
     ksgmnt = ksgmnt.substring(0, ksgmnt.length() - 1) + "]";
     return ksgmnt;
+  }
+
+  public void addSegmentToCurrentUser(String segmentId) {
+    getUrl(ADD_USER_URL + segmentId);
+    waitForPageLoaded();
+    Assertion.assertTrue(driver.getPageSource().contains(segmentId));
   }
 }

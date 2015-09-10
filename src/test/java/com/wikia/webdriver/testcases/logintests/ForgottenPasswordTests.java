@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -21,16 +21,15 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @author Karol 'kkarolk' Kujawiak
  */
-@Test(groups = {"ForgottenPassword"})
+@Test(groups = "ForgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-
   @Test
   public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropdown = new DropDownComponentObject(driver);
@@ -40,7 +39,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        dropdown.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     dropdown.openDropDown();
     dropdown.logIn(userName, newPassword);
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -53,10 +52,11 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
+
   @Test
   public void remindPasswordOnSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
-
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
@@ -64,7 +64,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyMessageAboutNewPassword(userName);
     String
         newPassword =
-        login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
+        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     login.login(userName, newPassword);
     newPassword = login.setNewPassword();
     login.verifyUserLoggedIn(userName);
@@ -78,6 +78,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test
   public void remindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword3;
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -90,9 +91,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         cnwLogin
-            .receiveMailWithNewPassowrd(credentials.emailQaart1, credentials.emailPasswordQaart1);
+            .receiveMailWithNewPassword(credentials.emailQaart1, credentials.emailPasswordQaart1);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
+    new SpecialUserLoginPageObject(driver).setNewPassword();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);

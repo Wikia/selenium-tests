@@ -24,7 +24,7 @@ public class EditHubTests extends NewTestTemplate {
       dataProvider = "provideHubDBName")
   public void EditHub_001_dashboardSelectVertical(String hubDBName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialEditHubPageObject
         pageObject =
         base.openSpecialEditHub(urlBuilder.getUrlForWiki(hubDBName));

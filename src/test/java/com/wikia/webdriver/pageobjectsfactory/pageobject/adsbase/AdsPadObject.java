@@ -3,17 +3,17 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class AdsPadObject extends AdsBaseObject {
 
-  private final static String PAD_IMG_CSS =
+  private static final String PAD_IMG_CSS =
       "#mw-content-text #pad-test-img, #NATIVE_PAID_ASSET_DROP #pad-test-img";
 
   @FindBy(css = PAD_IMG_CSS)
@@ -29,7 +29,7 @@ public class AdsPadObject extends AdsBaseObject {
   }
 
   public void verifyNoPadOnPage() {
-    Assertion.assertFalse(checkIfElementOnPage(PAD_IMG_CSS));
+    Assertion.assertFalse(isElementOnPage(By.cssSelector(PAD_IMG_CSS)));
     PageObjectLogging.log("PAD", "PAD is not on the page", true, driver);
   }
 }

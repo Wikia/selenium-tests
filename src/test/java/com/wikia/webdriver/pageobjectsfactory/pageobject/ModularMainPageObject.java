@@ -1,5 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by RodriGomez on 02/04/15.
@@ -51,39 +52,39 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void verifyMoMImage() {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     PageObjectLogging.log("verifyMoMImage", "Hero module image is visible", true);
   }
 
   public void clickUpdateCoverImageLink() {
-    waitForElementByElement(updateCoverImageInput);
+    wait.forElementVisible(updateCoverImageInput);
     updateCoverImageInput.click();
   }
 
   public void selectFileToUpload(String file) {
-    updateCoverImageInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+    updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
         "ImagesForUploadTests/" + file).getPath()));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 
   public void verifyDragToRepositionText() {
-    waitForElementByElement(dragToRepositionText);
+    wait.forElementVisible(dragToRepositionText);
     PageObjectLogging.log("verifyDragToRepositionText",
         "Drag to reposition text message is visible", true);
   }
 
   public void clickPublishButton() {
-    waitForElementByElement(imagePublishButton);
+    wait.forElementVisible(imagePublishButton);
     imagePublishButton.click();
   }
 
   public void clickEditDescriptionLink() {
-    waitForElementByElement(editDescriptionButton);
+    wait.forElementVisible(editDescriptionButton);
     editDescriptionButton.click();
   }
 
   public void typeMoMDescription(String momDescription) {
-    waitForElementByElement(descriptionEditField);
+    wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
     PageObjectLogging.log("typeMoMDescription", momDescription + "MoM description was typed in",
@@ -91,18 +92,18 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void clickDescriptionPublishButton() {
-    waitForElementByElement(descriptionPublishButton);
+    wait.forElementVisible(descriptionPublishButton);
     descriptionPublishButton.click();
   }
 
   public void verifyEditedAndPublishedDescriptions(String editedDescription) {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     Assertion.assertEquals(heroPublishedDescription.getText(), editedDescription);
   }
 
   public void verifyAdminStaffButtons() {
-    waitForElementByElement(updateCoverImageLink);
-    waitForElementByElement(editDescriptionButton);
+    wait.forElementVisible(updateCoverImageLink);
+    wait.forElementVisible(editDescriptionButton);
   }
 
   public void verifyNoAdminStaffButtons() {
@@ -111,12 +112,12 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public String getMoMSrc() {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     return heroImageModule.getAttribute("src");
   }
 
   public void verifySrcTxtAreDifferent(String imgSrc, String newImgSrc) {
-    waitForElementByElement(heroImageModule);
+    wait.forElementVisible(heroImageModule);
     Assertion.assertNotEquals(newImgSrc, imgSrc);
   }
 
@@ -132,28 +133,28 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void verifyPublishButtonDisability() {
-    waitForElementByElement(editBox);
-    waitForElementByElement(publishButtonDisabled);
+    wait.forElementVisible(editBox);
+    wait.forElementVisible(publishButtonDisabled);
   }
 
   public String getDescriptionText() {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     return heroPublishedDescription.getText();
   }
 
   public void addRandomTextToDescriptionField(String randomText) {
-    waitForElementByElement(editBox);
+    wait.forElementVisible(editBox);
     descriptionEditField.click();
     descriptionEditField.sendKeys(randomText);
   }
 
   public void verifyPublishedTextAndEditor(String publishedText) {
-    waitForElementByElement(heroPublishedDescription);
+    wait.forElementVisible(heroPublishedDescription);
     Assertion.assertEquals(heroPublishedDescription.getText(), publishedText);
   }
 
   public void clickDiscardButton() {
-    waitForElementByElement(descriptionDiscardButton);
+    wait.forElementVisible(descriptionDiscardButton);
     waitForElementClickableByElement(descriptionDiscardButton);
     descriptionDiscardButton.click();
   }

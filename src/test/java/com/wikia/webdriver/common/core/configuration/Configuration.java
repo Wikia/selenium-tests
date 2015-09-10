@@ -1,14 +1,15 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.properties.Credentials;
+
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
-
-import org.yaml.snakeyaml.Yaml;
-
-import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
@@ -21,6 +22,7 @@ public class Configuration {
   private Configuration() {}
 
   private static Map<String, String> config;
+  private static Map<String, String> testConfig = new HashMap<>();
 
   private static Map<String, String> readConfiguration() {
     if (config == null) {
@@ -46,10 +48,12 @@ public class Configuration {
   }
 
   private static String getProp(String propertyName) {
-    String value =
-        System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-            : getPropertyFromFile(propertyName);
-    return value;
+    if (testConfig.get(propertyName) == null) {
+      return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
+          : getPropertyFromFile(propertyName);
+    } else {
+      return testConfig.get(propertyName);
+    }
   }
 
   public static String getBrowser() {
@@ -64,20 +68,8 @@ public class Configuration {
     return getProp("wikiName");
   }
 
-  public static String getPlatformVersion() {
-    return getProp("platformVersion");
-  }
-
   public static String getPlatform() {
     return getProp("platform");
-  }
-
-  public static String getDeviceId() {
-    return getProp("deviceId");
-  }
-
-  public static String geMobileConfig() {
-    return getProp("mobileConfig");
   }
 
   public static String getCredentialsFilePath() {
@@ -100,9 +92,13 @@ public class Configuration {
     return getProp("disableFlash");
   }
 
-  public static String getJSErrorsEnabled() {return getProp("jsErrorsEnabled");}
+  public static String getJSErrorsEnabled() {
+    return getProp("jsErrorsEnabled");
+  }
 
-  public static String getLogEnabled() {return getProp("logEnabled");}
+  public static String getLogEnabled() {
+    return getProp("logEnabled");
+  }
 
   public static Credentials getCredentials() {
     return new Credentials();
@@ -111,6 +107,8 @@ public class Configuration {
   public static String getEnvType() {
     if (getEnv().contains("prod")) {
       return "prod";
+    } else if (getEnv().contains("verify")) {
+      return "verify";
     } else if (getEnv().contains("preview")) {
       return "preview";
     } else if (getEnv().contains("sandbox")) {
@@ -119,5 +117,17 @@ public class Configuration {
       return "dev";
     }
     return "";
+  }
+
+  public static void setTestValue(String key, String value) {
+    testConfig.put(key, value);
+  }
+
+  public static void clearCustomTestProperties() {
+    testConfig.clear();
+  }
+
+  public static String getCountryCode() {
+    return getProp("countryCode");
   }
 }

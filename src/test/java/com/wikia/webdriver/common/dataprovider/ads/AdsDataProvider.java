@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
-import org.apache.commons.lang3.tuple.Pair;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.Page;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -10,6 +12,15 @@ import java.util.Arrays;
  * @author Bogna 'bognix' Knychala
  */
 public class AdsDataProvider {
+
+  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
+      AdsContent.TOP_LB,
+      AdsContent.MEDREC,
+      AdsContent.LEFT_SKYSCRAPPER_2,
+      AdsContent.LEFT_SKYSCRAPPER_3,
+      AdsContent.PREFOOTER_LEFT,
+      AdsContent.PREFOOTER_RIGHT
+  };
 
   private AdsDataProvider() {
 
@@ -68,7 +79,6 @@ public class AdsDataProvider {
         {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
         {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
@@ -97,7 +107,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForSonyReferrer() {
+  public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
@@ -152,9 +162,9 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] specialPages() {
     return new Object[][]{
-        {"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD",
+        {"adtest", "Special:Video", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special",
+        {"adtest", "Special:NewFiles", "126608052", "wka.life/_adtest//special",
          "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
@@ -163,10 +173,10 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] filePages() {
     return new Object[][]{
-        {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file",
+        {"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.life/_adtest//file",
          "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
-         "wka.ent/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
+         "wka.life/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
          new Dimension(1292, 1000)},
     };
   }
@@ -194,36 +204,57 @@ public class AdsDataProvider {
             new Dimension(1200, 1000),
             "src/test/resources/adsResources/no_wikia_skin_left.png",
             "src/test/resources/adsResources/no_wikia_skin_right.png",
+            null,
+            null
         }, {
             "adtest-pluto", "Skin",
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest-pluto", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest-pluto", "Skin",
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }, {
             "adtest", "Skin",
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            "adtest", "Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
+            "src/test/resources/adsResources/wikia_skin_left.png",
+            "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            ""
         }
     };
   }
@@ -236,12 +267,16 @@ public class AdsDataProvider {
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         },
         {
             "adtest", "Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
+            "AAAAAA",
+            "FFFFFF"
         }
     };
   }
@@ -282,12 +317,10 @@ public class AdsDataProvider {
         {
             "adtest",
             "SyntheticTests/DfpParams",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "TOP_LEADERBOARD",
-            "115974612",
-            "37674198492",
             Arrays.asList(
-                "\"s0\":\"ent\"",
+                "\"s0\":\"life\"",
                 "\"s1\":\"_adtest\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -307,13 +340,15 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] parameterValueProvider() {
+  public static Object[][] adsGptPageParamOasis() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
-        {"mobileregressiontesting", "PMG", "top", "1k", false},
-        {"assassinscreed", "Tunguska", "esrb", "mature", true},
-        {"101dalmatians", "Jewel", "esrb", "ec", true},
-        {"tardis", "Mang", "esrb", "teen", true}
+        {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
+        {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
+        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
+        {"tardis", "Mang", "\"esrb\":\"teen\"", true},
+        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
+        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
     };
   }
 
@@ -361,7 +396,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testProvidersChain() {
+  public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain",
@@ -379,24 +414,12 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testDisableGptAds() {
+  public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
             "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
         },
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("adtest", "SyntheticTests/Krux/Page_2"),
-                          Pair.of("adtest", "SyntheticTests/Krux/Page_3")),
-            "o8l9bis26"
-        }
     };
   }
 
@@ -410,68 +433,50 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegmentOasis() {
+  public static Object[][] kruxRealTimeSegment() {
     return new Object[][]{
         {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL6ozVw"
-        },
-        {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JpYqU4Qn"
+            "adtest",
+            "SyntheticTests/Krux/Page_1",
+            "glee",
+            "Rachel",
+            "o8l9bis26"
         }
     };
   }
 
   @DataProvider
-  public static Object[][] kruxStandardSegmentWikiaMobile() {
+  public static Object[][] kruxSegments() {
     return new Object[][]{
         {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL70cvM"
+            "J-RIfJI0",
+            "pqdapsy7l",
+            new Page("vim", "Vim_Tips_Wiki"),
+            // Standard segment for visiting adtest before
+            "[\"pqdapsy7l\"]",
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            // Both standard and real-time segment for adtest
+            "[\"o8l9bis26\",\"pqdapsy7l\"]",
         },
         {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JsJ9_bf5"
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxStandardSegmentMercury() {
-    return new Object[][]{
-        {
-            Arrays.asList(Pair.of("pokemon", "Barry%27s_Roserade"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Rachel_Berry")),
-            "mf20tfg50",
-            true,
-            "JtL7NnTV"
+            null,
+            null,
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            "[\"o8l9bis26\"]",
+            new Page("glee", "Glee_TV_Show_Wiki"),
+            // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
+            "[]",
         },
         {
-            Arrays.asList(Pair.of("adtest", "SyntheticTests/Krux/Page_1"),
-                          Pair.of("glee", "Glee_TV_Show_Wiki"),
-                          Pair.of("glee", "Kurt_Hummel")),
-            "mf20tfg50",
-            false,
-            "JsJ_0XFq"
-        }
+            null,
+            null,
+            new Page("vim", "Vim_Tips_Wiki"),
+            // No pqdapsy7l (standard segment for adtest)
+            "[]",
+            new Page("adtest", "SyntheticTests/Krux/Page_1"),
+            // Real time segment for adtest
+            "[\"o8l9bis26\"]",
+        },
     };
   }
 
@@ -497,6 +502,74 @@ public class AdsDataProvider {
         {"adtest-pad", "Adtest-pad_Wikia", 250},
         {"adtest-pad", "Article_1", 480},
         {"adtest-pad", "Article_2", 480}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] interstitialOasis() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(1920, 1080),
+            new Dimension(600, 590),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(1920, 1080),
+            new Dimension(300, 343),
+            false
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(800, 800),
+            new Dimension(569, 564),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(800, 800),
+            new Dimension(300, 343),
+            false
+        },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] interstitialMercury() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(600, 800),
+            new Dimension(590, 491),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(600, 800),
+            new Dimension(300, 258),
+            false
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial",
+            new Dimension(800, 500),
+            new Dimension(405, 338),
+            true
+        },
+        {
+            "adtest",
+            "SyntheticTests/Interstitial/NotScalable",
+            new Dimension(800, 500),
+            new Dimension(300, 258),
+            false
+        },
     };
   }
 

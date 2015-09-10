@@ -32,14 +32,13 @@ public class VetModalCaptionTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   String articleTitleCaption;
-  String articleTitleNoCaption;
   String articleTitleNotEditable;
   String caption;
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_001", "Media"})
   public void VetModalCaption_001_captionOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -65,7 +64,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
                   "Media"}, dependsOnGroups = "VetModalCaption_001")
   public void VetModalCaption_002_captionInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPageCK(wikiURL, articleTitleCaption);
@@ -77,7 +76,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   @Test(groups = {"VetModalCaption", "VetModalCaption_005", "Media"})
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =

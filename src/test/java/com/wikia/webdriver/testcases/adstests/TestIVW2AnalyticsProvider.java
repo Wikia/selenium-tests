@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
@@ -13,12 +13,12 @@ import java.io.IOException;
 /**
  * @ownership AdEngineering
  */
-public class TestIVW2AnalyticsProvider extends TemplateDontLogout {
+public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
-  private final static int TIMEOUT_SEC = 30;
+  private static final int TIMEOUT_SEC = 60;
 
   @Test(groups = "TestIVW2AnalyticsProvider")
-  public void TestIVW2AnalyticsProvider() throws IOException {
+  public void testIVW2AnalyticsProvider() throws IOException {
     for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
       String wikiName = (String) data[0];
       String article = (String) data[1];

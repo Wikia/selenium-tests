@@ -1,5 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,10 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,6 +33,18 @@ public class LoginPage extends WikiBasePageObject {
   @FindBy(css = "small.error")
   private WebElement errorMessage;
 
+  @FindBy(css = "a.close")
+  private WebElement closeButton;
+
+  @FindBy(css = "a.footer-callout-link")
+  private WebElement registerNowLink;
+
+  @FindBy(css = "header.auth-header")
+  private WebElement loginHeader;
+
+  @FindBy(css = ".password-toggler")
+  private  WebElement passwordToggler;
+
   private NavigationSideComponentObject nav;
 
   public LoginPage(WebDriver driver) {
@@ -43,9 +58,16 @@ public class LoginPage extends WikiBasePageObject {
   }
 
   public LoginPage get() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login");
+    String redirectParameter = "";
 
-    return this;
+    try{
+      redirectParameter = URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
+
+    } catch (UnsupportedEncodingException e){
+      PageObjectLogging.log("encoding","problem occured during URL encoding",false);
+    }
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + redirectParameter);
+        return this;
   }
 
   public NavigationSideComponentObject getNav() {
@@ -88,4 +110,39 @@ public class LoginPage extends WikiBasePageObject {
       restoreDeaultImplicitWait();
     }
   }
+
+  public String getCloseButtonURL(){
+    return closeButton.getAttribute("href");
+  }
+
+  public void clickOnCloseButton(){
+    closeButton.click();
+  }
+
+  public void clickOnRegisterLink(){
+    registerNowLink.click();
+  }
+
+  public String getLoginHeaderText(){
+    return loginHeader.getText();
+  }
+
+  public void typePassword(String password) {
+    passwordField.sendKeys(password);
+  }
+
+  public void clickOnPasswordToggler() {
+    passwordToggler.click();
+  }
+
+  public Boolean isPasswordTogglerDisabled() {
+    String togglerDisabled = passwordField.getAttribute("type");
+    return "password".equals(togglerDisabled);
+  }
+
+  public Boolean isPasswordTogglerEnabled() {
+    String togglerDisabled = passwordField.getAttribute("type");
+    return "text".equals(togglerDisabled);
+  }
+
 }

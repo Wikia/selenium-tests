@@ -18,7 +18,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "googlesyndication.com/simgad/8216620376696319112",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
         }
@@ -30,7 +30,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in_content",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "googlesyndication.com/simgad/8216620376696319112",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
         }
@@ -42,7 +42,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "googlesyndication.com/simgad/8216620376696319112",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
         }
@@ -55,12 +55,10 @@ public class MobileAdsDataProvider {
         {
             "adtest",
             "SyntheticTests/DfpParams",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
             "MOBILE_TOP_LEADERBOARD",
-            "115974612",
-            "50006703732",
             Arrays.asList(
-                "\"s0\":\"ent\"",
+                "\"s0\":\"life\"",
                 "\"s1\":\"_adtest\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -88,7 +86,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testDisableGptAds() {
+  public static Object[][] disableGptMercury() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
@@ -104,7 +102,7 @@ public class MobileAdsDataProvider {
             "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
             "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
             "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
-            "wka.ent/_adtest//article",
+            "wka.life/_adtest//article",
         }
     };
   }

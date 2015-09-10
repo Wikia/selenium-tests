@@ -39,14 +39,14 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
   }
 
   public void findPageName(String pagename) {
-    waitForElementByElement(enterPagenameField);
+    wait.forElementVisible(enterPagenameField);
     enterPagenameField.sendKeys(pagename);
-    waitForElementByElement(findButton);
+    wait.forElementVisible(findButton);
     findButton.click();
   }
 
   public void verifyEmptyPagename() {
-    waitForElementNotPresent(".mw-spcontent > p");
+    wait.forElementNotPresent(By.cssSelector(".mw-spcontent > p"));
     PageObjectLogging.log(
         "verifyEmptyPageName",
         "Empty pagename is not founded",
@@ -56,14 +56,14 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   public void compareResultsCount(int limit) {
     if (limit == 0) {
-      waitForElementNotPresent(LIST_OF_LINKS_SELECTOR);
+      wait.forElementNotPresent(By.cssSelector(LIST_OF_LINKS_SELECTOR));
       PageObjectLogging.log(
           "verifyNoPagenameFounded",
           "Not existing pagename is not founded",
           true, driver
       );
     } else {
-      waitForElementByElement(listOfLinks.get(0));
+      wait.forElementVisible(listOfLinks.get(0));
       Assertion.assertTrue(listOfLinks.size() <= limit);
     }
   }
@@ -72,11 +72,13 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
     String firstLinkOnFirstPage = listOfLinks.get(0).getAttribute("href");
     String lastLinkOnFirstPage = listOfLinks.get(listOfLinks.size() - 1).getAttribute("href");
     nextResultsButton.click();
+    waitForPageLoad();
     String firstLinkOnSecondPage = listOfLinks.get(0).getAttribute("href");
     String lastLinkOnSecondPage = listOfLinks.get(listOfLinks.size() - 1).getAttribute("href");
     Assertion.assertNotEquals(firstLinkOnSecondPage, firstLinkOnFirstPage);
     Assertion.assertNotEquals(lastLinkOnSecondPage, lastLinkOnFirstPage);
     previousResultsButton.click();
+    waitForPageLoad();
     String firstLinkAfterBack = listOfLinks.get(0).getAttribute("href");
     String lastLinkAfterBack = listOfLinks.get(listOfLinks.size() - 1).getAttribute("href");
     Assertion.assertEquals(firstLinkAfterBack, firstLinkOnFirstPage);

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -12,13 +12,12 @@ import org.testng.annotations.Test;
 
 
 /**
- * @author drets
  * @ownership AdEng
  */
-public class TestATF extends TemplateDontLogout {
+public class TestATF extends TemplateNoFirstLoad {
 
-  private final static Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
-  private final static Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
+  private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
+  private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

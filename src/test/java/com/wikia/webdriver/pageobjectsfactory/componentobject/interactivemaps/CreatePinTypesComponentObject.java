@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
@@ -50,7 +51,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   private int amountPinTypeTitleInputs, amountUploadMarker, amountParentCatElements;
 
   public InteractiveMapPageObject clickSave() {
-    waitForElementByElement(saveButton);
+    wait.forElementVisible(saveButton);
     saveButton.click();
     PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
     driver.switchTo().defaultContent();
@@ -58,7 +59,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   }
 
   public void clickAddAnotherPinType() {
-    waitForElementByElement(addMorePinTypesLink);
+    wait.forElementVisible(addMorePinTypesLink);
     addMorePinTypesLink.click();
     PageObjectLogging
         .log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal",
@@ -76,7 +77,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     waitForElementClickableByElement(mainParentCategorySelector);
     mainParentCategorySelector.click();
     WebElement parentSelected = parentCatOption.get(catValue);
-    waitForElementVisibleByElement(parentSelected);
+    wait.forElementVisible(parentSelected);
     parentSelected.click();
     PageObjectLogging.log("selectParentCategory", "Parent category selected", true);
   }
@@ -84,14 +85,15 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   public void selectFileToUpload(String file, String typeOfFile) {
     unhideElementByClassChange("wpUploadFile", "poi-category-marker-image-upload");
     uploadInputsCollection.get(0)
-        .sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
 
   }
 
   public void typePinTypeTitle(String pinTypeName, int index) {
     WebElement firstPin = pinTypeTitleInputs.get(index);
-    waitForElementByElement(firstPin);
+    wait.forElementVisible(firstPin);
     firstPin.clear();
     firstPin.sendKeys(pinTypeName);
     PageObjectLogging
@@ -101,7 +103,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
     for (Integer i = 0; i < amountFields; i++) {
       clickAddAnotherPinType();
-      waitForElementByElement(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
+      wait.forElementVisible(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
       pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);
     }
     PageObjectLogging
@@ -110,7 +112,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
   public void verifyPinTypesDialog() {
     driver.switchTo().activeElement();
-    waitForElementByElement(creatingPinDialog);
+    wait.forElementVisible(creatingPinDialog);
     PageObjectLogging.log("verifyPinTypesDialog", "Pin types dialog was showed", true);
   }
 
@@ -122,13 +124,13 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   }
 
   public void verifyErrorExists() {
-    waitForElementVisibleByElement(pinTypesError);
+    wait.forElementVisible(pinTypesError);
     scrollToElement(pinTypesError);
     Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
   }
 
   public void deletePinTypes() {
-    waitForElementByElement(deletePinTypeButton);
+    wait.forElementVisible(deletePinTypeButton);
     while (pinTypeTitleInputs.size() > 1) {
       deletePinTypeButton.click();
     }

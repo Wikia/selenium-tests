@@ -40,7 +40,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
   public CreateAMapComponentObject clickCreateAMapButton() {
     waitForDialogVisible();
-    if (checkIfElementOnPage(emptyStateCreateAMapButton)) {
+    if (isElementOnPage(emptyStateCreateAMapButton)) {
       waitForElementClickableByElement(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
       PageObjectLogging
@@ -57,8 +57,8 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   public VisualEditorPageObject addExistingMap(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    if (checkIfElementOnPage(mediaResultsWidget)) {
-      waitForElementVisibleByElement(mediaResultsWidget);
+    if (isElementOnPage(mediaResultsWidget)) {
+      wait.forElementVisible(mediaResultsWidget);
       List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
       WebElement map = maps.get(number);
       map.click();
@@ -72,10 +72,10 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
   public void checkIsEmptyState() {
     waitForDialogVisible();
-    if (checkIfElementOnPage(emptyStateDialogHeadline)) {
-      waitForElementVisibleByElement(emptyStateDialogHeadline);
-      waitForElementVisibleByElement(emptyStateDialogText);
-      waitForElementVisibleByElement(emptyStateCreateAMapButton);
+    if (isElementOnPage(emptyStateDialogHeadline)) {
+      wait.forElementVisible(emptyStateDialogHeadline);
+      wait.forElementVisible(emptyStateDialogText);
+      wait.forElementVisible(emptyStateCreateAMapButton);
       PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
     } else {
       throw new NoSuchElementException(
@@ -87,7 +87,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   public void verifyNumOfMaps(int num) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
     Assertion
         .assertEquals(maps.size(), num, "Expecting " + num + " of maps. Actual is " + maps.size());

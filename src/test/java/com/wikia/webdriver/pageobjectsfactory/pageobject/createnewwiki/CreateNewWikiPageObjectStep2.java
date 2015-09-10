@@ -34,21 +34,21 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void describeYourTopic(String description) {
-    waitForElementByElement(descriptionField);
+    wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(description);
     PageObjectLogging
         .log("describeYourTopic", "describe your topic populated with: " + description, true);
   }
 
   public void selectCategory(String category) {
-    waitForElementByElement(wikiCategory);
+    wait.forElementVisible(wikiCategory);
     Select dropList = new Select(wikiCategory);
     dropList.selectByVisibleText(category);
     PageObjectLogging.log("selectCategory", "selected " + category + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
-    waitForElementByElement(submitButton);
+    wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
     PageObjectLogging.log("submit", "Submit button clicked", true);
     return new CreateNewWikiPageObjectStep3(driver);
@@ -60,7 +60,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void verifyCategoryError() {
-    waitForElementByElement(categoryErrorMsg);
+    wait.forElementVisible(categoryErrorMsg);
     Assertion.assertEquals(categoryErrorMsg.getText(), CreateWikiMessages.CATEGORY_ERROR_MESSAGE);
   }
 }

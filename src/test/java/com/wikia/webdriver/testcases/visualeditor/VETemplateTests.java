@@ -3,7 +3,8 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
@@ -39,7 +40,7 @@ public class VETemplateTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
+    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
   }
 
   //AT01

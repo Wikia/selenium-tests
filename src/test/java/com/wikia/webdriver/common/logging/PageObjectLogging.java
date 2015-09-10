@@ -2,17 +2,19 @@ package com.wikia.webdriver.common.logging;
 
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -31,14 +33,17 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -50,6 +55,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static String logPath = reportPath + logFileName;
   private static String jiraPath = "https://wikia-inc.atlassian.net/browse/";
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
+  private static boolean testStarted = false;
   private By lastFindBy;
   private WebDriver driver;
 
@@ -67,9 +73,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
-        + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
-        + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-        + ".html'>HTML Source</a></td></tr>");
+                   + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                   + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                   + ".html'>HTML Source</a></td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(driver);
   }
@@ -79,7 +85,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success) {
+                         boolean success) {
     String description = descriptionOnFail;
     if (success) {
       description = descriptionOnSuccess;
@@ -87,14 +93,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, false);
   }
 
+  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
+                         boolean success, boolean ifLowLevel) {
+    String description = descriptionOnFail;
+    if (success) {
+      description = descriptionOnSuccess;
+    }
+    log(command, description, success, ifLowLevel);
+  }
+
   /**
-   * This method will log warning to log file (line in yellow color)
+   * Log an action that is not user facing.
+   * Log file reader can hide these actions to increase test readability
    */
-  public static void logWarning(String command, String description) {
-    StringBuilder builder =
-        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
-            + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+  public static void logOnLowLevel(String command, String description, boolean success) {
+    log(command, description, success, true);
   }
 
   private static void log(String command, String description, boolean success, boolean ifLowLevel) {
@@ -105,15 +118,32 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
       builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command
-          + "</td><td>" + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
+                     + "</td><td>" + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     } else {
       builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>"
-          + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
+                     + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(NewDriverProvider.getWebDriver());
   }
 
+  public static void logError(String command, Exception exception) {
+    log(command, exception.getMessage(), false);
+  }
+
+  public static void logWarning(String command, Exception exception) {
+    logWarning(command, exception.getMessage());
+  }
+
+  /**
+   * This method will log warning to log file (line in yellow color)
+   */
+  public static void logWarning(String command, String description) {
+    StringBuilder builder =
+        new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
+                                   + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
 
   public static void logImage(String command, File image, boolean success) {
     byte[] bytes = new byte[0];
@@ -129,7 +159,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+                                           + "</td><td>" + imageAsBase64
+                                           + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   private static void logJSError(WebDriver driver) {
@@ -140,7 +171,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       if (!error.isEmpty()) {
         StringBuilder builder = new StringBuilder();
         builder.append("<tr class=\"error\"><td>click</td><td>" + error
-            + "</td><td> <br/> &nbsp;</td></tr>");
+                       + "</td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(logPath, builder.toString());
       }
     }
@@ -150,11 +181,42 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     return logsResults;
   }
 
+  public static void start(Method testMethod) {
+    StringBuilder builder = new StringBuilder();
+    String testName = testMethod.getName();
+    String className = testMethod.getDeclaringClass().getCanonicalName();
+
+    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
+    if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
+      String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
+      String jiraUrl = jiraPath + issueID;
+      builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
+                     + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
+                     + testMethod.getAnnotation(RelatedIssue.class).comment()
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+    } else {
+      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+    }
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+    testStarted = true;
+  }
+
+  public static void stopLogging() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>STOP LOGGING METHOD  "
+                   + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
+                   + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+    testStarted = false;
+  }
+
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
-        + "</td><td> <br/> &nbsp;</td></tr>");
+    builder.append(
+        "<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
+        + "</a></td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(driver);
   }
@@ -165,20 +227,40 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (!AlertHandler.isAlertPresent(driver)) {
       if (url.equals(driver.getCurrentUrl())) {
         builder.append("<tr class=\"success\"><td>Url after navigation</td><td>"
-            + driver.getCurrentUrl() + "</td><td> <br/> &nbsp;</td></tr>");
+                       + "<a href='" + driver.getCurrentUrl() + "'>" + driver.getCurrentUrl()
+                       + "</a></td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(logPath, builder.toString());
       } else {
+        if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
+          driver.get(url);
+        }
         logWarning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
+
+    Method method = TestContext.getCurrentTestMethod();
+
+    if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
+      TestContext.setFirstLoad(false);
+      User user = method.getAnnotation(Execute.class).asUser();
+      if (user == User.ANONYMOUS) {
+      } else {
+        new WikiBasePageObject(driver).loginAs(user);
+      }
+    }
+
     logJSError(driver);
   }
 
   @Override
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     lastFindBy = by;
+    SelectorStack.write(by);
+    if (element != null) {
+      SelectorStack.contextWrite();
+    }
   }
 
   @Override
@@ -190,7 +272,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterClickOn(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
-        + "</td><td> <br/> &nbsp;</td></tr>");
+                   + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -198,42 +280,38 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterChangeValueOf(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>"
-        + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
+                   + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
   @Override
   public void onTestStart(ITestResult result) {
     logsResults.clear();
-    StringBuilder builder = new StringBuilder();
+//    StringBuilder builder = new StringBuilder();
     String testName = result.getName().toString();
     String className = result.getTestClass().getName().toString();
-
-    Method testMethod = result.getMethod().getConstructorOrMethod().getMethod();
-
-    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
-    if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
-      String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
-      String jiraUrl = jiraPath + issueID;
-      builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
-          + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
-          + testMethod.getAnnotation(RelatedIssue.class).comment()
-          + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
-    } else {
-      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
-          + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
-    }
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+//
+//    Method testMethod = result.getMethod().getConstructorOrMethod().getMethod();
+//
+//    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
+//    if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
+//      String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
+//      String jiraUrl = jiraPath + issueID;
+//      builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
+//                     + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
+//                     + testMethod.getAnnotation(RelatedIssue.class).comment()
+//                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+//    } else {
+//      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
+//                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+//    }
+//    CommonUtils.appendTextToFile(logPath, builder.toString());
     System.out.println(className + " " + testName);
   }
 
   @Override
   public void onTestSuccess(ITestResult result) {
-    StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>STOP LOGGING METHOD  "
-        + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
-        + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
-    CommonUtils.appendTextToFile(logPath, builder.toString());
+    stopLogging();
   }
 
   @Override
@@ -255,22 +333,26 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       String exception =
           escapeHtml(result.getThrowable().toString() + "\n"
-              + ExceptionUtils.getStackTrace(result.getThrowable()));
+                     + ExceptionUtils.getStackTrace(result.getThrowable()));
 
       StringBuilder builder = new StringBuilder();
-      builder.append("<tr class=\"error\"><td>error</td><td>" + exception
-          + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
-          + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-          + ".html'>HTML Source</a></td></tr>");
+      builder.append("<tr class=\"error\"><td>error</td><td><pre>" + exception
+                     + "</pre></td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                     + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                     + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
       logJSError(driver);
-      onTestSuccess(result);
+      stopLogging();
     }
   }
 
   @Override
   public void onTestSkipped(ITestResult result) {
-    if (result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(DontRun.class)) {
+    if (!testStarted) {
+      start(result.getMethod().getConstructorOrMethod().getMethod());
+    }
+    if (result.getMethod().getConstructorOrMethod().getMethod()
+        .isAnnotationPresent(DontRun.class)) {
       log("Test SKIPPED", "this test is not supported in this environment", true);
       result.setStatus(ITestResult.SUCCESS);
       onTestSuccess(result);
@@ -279,10 +361,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       result.setThrowable(new SkipException("TEST SKIPPED"));
       onTestFailure(result);
     }
+    if (testStarted) {
+      stopLogging();
+    }
   }
 
   @Override
-  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {}
+  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+  }
 
   @Override
   public void onStart(ITestContext context) {
@@ -294,28 +380,28 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder = new StringBuilder();
     builder
         .append("<html><style>"
-            + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
-            + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
-            + "tr.warning{color:black;background-color:#FEE01E;}"
-            + "tr.error{color:black;background-color:#FFCCCC;}"
-            + "tr.step{color:white;background:grey}"
-            + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-            + "<style>td { border-top: 1px solid grey; } </style></head><body>"
-            + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
-            + "<p>Date: "
-            + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
+                + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
+                + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
+                + "tr.warning{color:black;background-color:#FEE01E;}"
+                + "tr.error{color:black;background-color:#FFCCCC;}"
+                + "tr.step{color:white;background:grey}"
+                + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
+                + "<style>td { border-top: 1px solid grey; } </style></head><body>"
+                + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
+                + "<p>Date: "
+                + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
             DateTime.now(DateTimeZone.UTC))
-            + "</p>"
-            + "<p>Polish Time: "
-            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
+                + "</p>"
+                + "<p>Polish Time: "
+                + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
             DateTime.now().withZone(
                 DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
-            + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
-            + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
-            + new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-            + "</p>" + "<p>Testing environment: " + Configuration.getEnv() + "</p>"
-            + "<p>Tested version: " + "TO DO: GET WIKI VERSION HERE" + "</p>"
-            + "<div id='toc'></div>");
+                + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
+                + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
+                + new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+                + "</p>" + "<p>Testing environment: " + Configuration.getEnv() + "</p>"
+                + "<p>Tested version: " + "TO DO: GET WIKI VERSION HERE" + "</p>"
+                + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     appendShowHideButtons();
     try {
@@ -334,6 +420,26 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     builder.append(hideButton);
     builder.append(showButton);
     CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
+
+  @Override
+  public void beforeNavigateBack(WebDriver driver) {
+    PageObjectLogging.log("Navigate Back", "attempting to navigate back", true);
+  }
+
+  @Override
+  public void afterNavigateBack(WebDriver driver) {
+    PageObjectLogging.log("Navigate Back", "previous page loaded", true);
+  }
+
+  @Override
+  public void beforeNavigateForward(WebDriver driver) {
+    PageObjectLogging.log("Navigate Froward", "attempting to navigate forward", true);
+  }
+
+  @Override
+  public void afterNavigateForward(WebDriver driver) {
+    PageObjectLogging.log("Navigate Froward", "forward page loaded", true);
   }
 
   @Override

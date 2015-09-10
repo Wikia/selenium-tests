@@ -1,15 +1,10 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.apache.commons.lang3.StringUtils;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,10 +21,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import io.appium.java_client.android.AndroidDriver;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 
 /**
@@ -40,7 +38,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver driver;
   private static String browserName;
   private static DesiredCapabilities caps = new DesiredCapabilities();
-  private static FirefoxProfile firefoxProfile = new FirefoxProfile();
+  private static FirefoxProfile firefoxProfile;
   private static ChromeOptions chromeOptions = new ChromeOptions();
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
@@ -155,6 +153,8 @@ public class NewDriverProvider {
       tmpFile.delete();
     }
 
+    firefoxProfile = new FirefoxProfile(new File(ClassLoader.getSystemResource("FirefoxProfiles/Deafult").getPath()));
+
     // If browserName contains CONSOLE activate JSErrorConsole
     if (browserName.contains("CONSOLE")) {
       try {
@@ -174,7 +174,7 @@ public class NewDriverProvider {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
-    if (StringUtils.isNotBlank(Configuration.getDisableFlash())) {
+    if ("true".equals(Configuration.getDisableFlash())) {
       firefoxProfile.setPreference("plugin.state.flash", 0);
     }
 
@@ -220,16 +220,14 @@ public class NewDriverProvider {
             .getPath());
 
     // TODO change mobile tests to use @UserAgent annotation
-    if ("CHROMEMOBILE".equals(browserName)) {
-      chromeOptions.addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone"));
-    }
     if ("CHROMEMOBILEMERCURY".equals(browserName)) {
       chromeOptions
           .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury"));
     }
 
-    if (StringUtils.isNotBlank(System.getProperty("chromeSwitches"))) {
-      chromeOptions.addArguments(System.getProperty("chromeSwitches"));
+    if ("true".equals(Configuration.getDisableFlash())) {
+      chromeOptions.addArguments("disable-bundled-ppapi-flash");
+      chromeOptions.addArguments("process-per-site");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

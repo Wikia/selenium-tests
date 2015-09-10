@@ -48,25 +48,22 @@ public class ForumBoardPageObject extends BasePageObject {
   private void checkHighlightCheckbox(boolean isHighLighted) {
     if (isHighLighted) {
       highlight.click();
-      PageObjectLogging.log("checkHighlightCheckbox",
-                            "highlight checkbox clicked", true, driver);
+      PageObjectLogging.log("checkHighlightCheckbox", "highlight checkbox clicked", true, driver);
     }
 
   }
 
-  public ForumThreadPageObject startDiscussion(String title, String message,
-                                               boolean highlight) {
-    jQueryFocus(discussionTextarea);
+  public ForumThreadPageObject startDiscussion(String title, String message, boolean highlight) {
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     checkHighlightCheckbox(highlight);
     clickPostButton();
-    PageObjectLogging.log("startDiscussion", "discussion with message: "
-                                             + message + ", with title " + title + " posted", true,
-                          driver);
+    PageObjectLogging.log("startDiscussion", "discussion with message: " + message
+        + ", with title " + title + " posted", true, driver);
     return new ForumThreadPageObject(driver);
   }
 
@@ -74,46 +71,43 @@ public class ForumBoardPageObject extends BasePageObject {
     for (WebElement elem : threadTitlesList) {
       if (elem.getText().contains(title)) {
         scrollAndClick(elem);
-        PageObjectLogging.log("openDiscussion",
-                              "discussion with title: " + title + ", opened", true,
-                              driver);
+        PageObjectLogging.log("openDiscussion", "discussion with title: " + title + ", opened",
+            true, driver);
         return new ForumThreadPageObject(driver);
       }
     }
-    PageObjectLogging.log("openDiscussion", "discussion with title: "
-                                            + title + ", not found", false, driver);
+    PageObjectLogging.log("openDiscussion", "discussion with title: " + title + ", not found",
+        false, driver);
     return null;
   }
 
   public ForumThreadPageObject startDiscussionWithoutTitle(String message) {
-    jQueryFocus(discussionTextarea);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(discussionTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
-    PageObjectLogging.log("startDiscussionWithoutTitle",
-                          "discussion with message: " + message
-                          + " without title, posted", true, driver);
+    PageObjectLogging.log("startDiscussionWithoutTitle", "discussion with message: " + message
+        + " without title, posted", true, driver);
     return new ForumThreadPageObject(driver);
   }
 
   public void clickPostButton() {
     waitForElementClickableByElement(postButton);
     scrollAndClick(postButton);
-    PageObjectLogging.log("clickPostButton", "post button clicked", true,
-                          driver);
+    PageObjectLogging.log("clickPostButton", "post button clicked", true, driver);
   }
 
   public void verifyDiscussionTitleAndMessage(String title, String message) {
-    waitForTextToBePresentInElementByElement(discussionTitle, title);
-    waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
-    PageObjectLogging
-        .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
+    wait.forTextInElement(discussionTitle, title);
+    wait.forTextInElement(discussionBody.get(0), message);
+    PageObjectLogging.log("verifyDiscussionWithTitle",
+        "discussion with title and message verified", true);
   }
 
   public void verifyBoardDescription(String description) {
-    waitForTextToBePresentInElementByElement(boardDescription, description);
+    wait.forTextInElement(boardDescription, description);
     PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
   }
 
@@ -124,28 +118,25 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithImgae(String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
-    PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki(
-        "image", 1);
+    PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
     photoOptions.clickAddPhoto();
-    PageObjectLogging.log("startDiscussionWithImgae",
-                          "discussion with image started" + title, true, driver);
+    PageObjectLogging.log("startDiscussionWithImgae", "discussion with image started" + title,
+        true, driver);
   }
 
   public void verifyDiscussionWithImage() {
-    waitForElementByElement(postedImageList.get(0));
-    PageObjectLogging.log("verifyPostedMessageWithImage",
-                          "discussion with image started", true);
+    wait.forElementVisible(postedImageList.get(0));
+    PageObjectLogging.log("verifyPostedMessageWithImage", "discussion with image started", true);
   }
 
-  public void startDiscussionWithLink(String internalLink,
-                                      String externalLink, String title) {
-    jQueryFocus(discussionTextarea);
+  public void startDiscussionWithLink(String internalLink, String externalLink, String title) {
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     // add internal wikia link
     miniEditor.addInternalLink(internalLink);
     // add external link
@@ -154,75 +145,60 @@ public class ForumBoardPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(Keys.ENTER);
     driver.switchTo().defaultContent();
     miniEditor.addExternalLink(externalLink);
-    PageObjectLogging.log("startDiscussionWithLink",
-                          "internal and external links: " + internalLink + " and"
-                          + externalLink + "added", true, driver);
+    PageObjectLogging.log("startDiscussionWithLink", "internal and external links: " + internalLink
+        + " and" + externalLink + "added", true, driver);
 
   }
 
-  public void verifyStartedDiscussionWithLinks(String internalLink,
-                                               String externalLink) {
-    waitForTextToBePresentInElementByElement(discussionBody.get(0),
-                                             internalLink);
-    waitForTextToBePresentInElementByElement(discussionBody.get(1),
-                                             externalLink);
-    PageObjectLogging.log("verifyStartedDiscussionWithLinks",
-                          "internal and external links: " + internalLink + " and"
-                          + externalLink + "verified", true);
+  public void verifyStartedDiscussionWithLinks(String internalLink, String externalLink) {
+    wait.forTextInElement(discussionBody, 0, internalLink);
+    wait.forTextInElement(discussionBody, 1, externalLink);
+    PageObjectLogging.log("verifyStartedDiscussionWithLinks", "internal and external links: "
+        + internalLink + " and" + externalLink + "verified", true);
   }
 
   public void startDiscussionWithVideo(String url, String title) {
-    jQueryFocus(discussionTextarea);
+    jsActions.focus(discussionTextarea);
     discussionTitleArea.sendKeys(title);
-    jQueryFocus(wikiaEditorTextarea);
+    jsActions.focus(wikiaEditorTextarea);
     miniEditor.addVideoMiniEditor(url);
-    PageObjectLogging.log("startDiscussionWithVideo",
-                          "discussion with video started" + title, true, driver);
+    PageObjectLogging.log("startDiscussionWithVideo", "discussion with video started" + title,
+        true, driver);
   }
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
-    WebElement followButton = driver.findElement(By
-                                                     .cssSelector(
-                                                         ".thread:nth-child(" + threadNumber
-                                                         + ") li.follow"));
-    waitForElementByElement(followButton);
+    WebElement followButton =
+        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
+    wait.forElementVisible(followButton);
     if (followButton.getText().contains("Following")) {
-      PageObjectLogging
-          .log("unfollowIfDiscussionIsFollowed",
-               "discussion is followed. Preparing to click \"unfollowed\"",
-               true);
+      PageObjectLogging.log("unfollowIfDiscussionIsFollowed",
+          "discussion is followed. Preparing to click \"unfollowed\"", true);
       waitForElementClickableByElement(followButton);
       scrollAndClick(followButton);
-      PageObjectLogging.log("unfollowIfDiscussionIsFollowed",
-                            "discussion unfollowed", true, driver);
+      PageObjectLogging
+          .log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true, driver);
     } else {
-      PageObjectLogging.log("unfollowIfDiscussionIsFollowed",
-                            "discussion was unfollowed already", true);
+      PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion was unfollowed already",
+          true);
     }
   }
 
   public void verifyTextOnFollowButton(int threadNumber, String followStatus) {
-    WebElement followButton = driver.findElement(By
-                                                     .cssSelector(
-                                                         ".thread:nth-child(" + threadNumber
-                                                         + ") li.follow"));
-    waitForTextToBePresentInElementByElement(followButton, followStatus);
-    PageObjectLogging.log("verifyTextOnFollowButton",
-                          "verify that thread number " + threadNumber
-                          + " has the status: " + followStatus, true);
+    WebElement followButton =
+        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
+    wait.forTextInElement(followButton, followStatus);
+    PageObjectLogging.log("verifyTextOnFollowButton", "verify that thread number " + threadNumber
+        + " has the status: " + followStatus, true);
   }
 
   public void clickOnFollowButton(int threadNumber) {
-    WebElement followButton = driver.findElement(By
-                                                     .cssSelector(
-                                                         ".thread:nth-child(" + threadNumber
-                                                         + ") li.follow"));
-    waitForElementByElement(followButton);
+    WebElement followButton =
+        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
+    wait.forElementVisible(followButton);
     waitForElementClickableByElement(followButton);
     scrollAndClick(followButton);
-    PageObjectLogging.log("clickOnFollowButton",
-                          "click on follow button of thread number " + threadNumber,
-                          true, driver);
+    PageObjectLogging.log("clickOnFollowButton", "click on follow button of thread number "
+        + threadNumber, true, driver);
   }
 
   public String getTitle() {

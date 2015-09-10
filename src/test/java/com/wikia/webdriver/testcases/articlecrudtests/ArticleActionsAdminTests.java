@@ -1,11 +1,12 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -17,34 +18,35 @@ import org.testng.annotations.Test;
  * @author: Bogna 'bognix' Knychała
  * @ownership: Content X-Wing
  */
+@Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
-  @Test(groups = {"ArticleActionsAdmin_001", "ArticleActionsAdmin"})
+  @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
-  public void ArticleActionsAdmin_001_deleteUndelete() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
-    String articleName = article.getArticleName();
+  @Execute(asUser = User.STAFF)
+  public void deleteUndeleteArticle() {
+    String articleTitle = "DeleteUndeleArticle";
+    new ArticleContent().push(PageContent.ARTICLE_TEXT, articleTitle);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = base.undeleteByFlashMessage();
-    restore.verifyArticleName(articleName);
+    SpecialRestorePageObject restore = article.undeleteByFlashMessage();
+    restore.verifyArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     article.verifyNotificationMessage();
-    article.verifyArticleTitle(articleName);
+    article.verifyArticleTitle(articleTitle);
   }
 
-  @Test(groups = {"ArticleActionsAdmin_002", "ArticleActionsAdmin"})
+  @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
-  public void ArticleActionsAdmin_002_move() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
-    String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+  @Execute(asUser = User.STAFF)
+  public void moveArticle() {
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
+    String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
     article.verifyNotificationMessage();

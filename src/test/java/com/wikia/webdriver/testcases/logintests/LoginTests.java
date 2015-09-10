@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,11 +13,12 @@ import org.testng.annotations.Test;
 /**
  * @author Karol 'kkarolk' Kujawiak <p/> 1. Login user using Special:UserLogin page, 2. Login user
  *         using drop-down 3. Login staff user using Special:UserLogin page, 4. Login staff user
- *         using drop-down
+ *         using drop-down 5. Login japanese user
  */
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
+  String jaTestWiki = "ja.ja-test";
 
   @Test(groups = {"Login_001", "Login", "Smoke5"})
   public void Login_001_specialPageUser() {
@@ -48,5 +50,12 @@ public class LoginTests extends NewTestTemplate {
     dropDown.openDropDown();
     dropDown.logIn(credentials.userNameStaff, credentials.passwordStaff);
     base.verifyUserLoggedIn(credentials.userNameStaff);
+  }
+
+  @Test(groups = {"Login_005", "Login"})
+  @Execute(onWikia = "ja.ja-test")
+  public void Login_005_japaneseUserLogin() {
+    SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
+    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiURL);
   }
 }

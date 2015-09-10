@@ -1,20 +1,18 @@
 package com.wikia.webdriver.testcases.hubstests;
 
-import java.util.Map;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
+import java.util.Map;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -22,10 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWi
  * @author Robert 'rochan' Chan
  * @ownership Content X-Wing
  */
-public class HubsTests extends NewTestTemplateBeforeClass {
-
-  private static final String CORP_WIKI_NAME = "corp";
-  Credentials credentials = Configuration.getCredentials();
+public class HubsTests extends NewTestTemplate {
 
   @DataProvider
   private final Object[][] provideHubName() {
@@ -78,10 +73,10 @@ public class HubsTests extends NewTestTemplateBeforeClass {
   /**
    * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
    */
+  @Execute(asUser = User.USER_2)
   public void HubsTest_003_VerifyArticleSuggestionWorksProperly(String hubDBName) {
-    HomePageObject home = new HomePageObject(driver);
-    home.logInCookie(credentials.userName2, credentials.password2, wikiURL);
-    HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
+    HubBasePageObject hub =
+        new HubBasePageObject(driver).openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
     hub.clickGetPromoted();
     hub.verifySuggestAVideoOrArticleModalAppeared();
     hub.verifySuggestAVideoOrArticleModalTopic();
@@ -97,25 +92,22 @@ public class HubsTests extends NewTestTemplateBeforeClass {
     hub.verifySuggestVideoOrArticleButtonNotClickable();
     hub.closeSuggestAVideoOrArticleCancelButton();
     hub.verifySuggestAVideoOrArticleModalDisappeared();
-    logOut();
   }
 
   /**
    * skipped due "promoted wikis" feature
    */
   @Test(enabled = false, groups = {"HubsTest_004", "Hubs"})
+  @Execute(asUser = User.STAFF)
   public void HubsTests_004_VerifyCorporateSlotCollection() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    String wikiCorpSetupURL = urlBuilder.getUrlForWiki(CORP_WIKI_NAME);
-    SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
+    SpecialManageWikiaHome manageWikia =
+        new HubBasePageObject(driver).openSpecialManageWikiaHomePage(wikiCorporateURL);
     Map<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
-    HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);
+    HomePageObject home = new HomePageObject(driver).openCorporateHomePage(wikiCorporateURL);
     Map<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
-  @RelatedIssue(issueID = "MAIN-4507", comment = "Wikia code defect. Please test manually")
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
   /**
    * Verify that each language drop down  goes to the correct page

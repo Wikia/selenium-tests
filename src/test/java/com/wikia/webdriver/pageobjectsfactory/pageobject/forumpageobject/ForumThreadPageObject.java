@@ -68,17 +68,17 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void verifyDiscussionTitleAndMessage(String title, String message) {
-    waitForElementByElement(discussionTitle);
-    waitForElementByElement(discussionBody.get(0));
-    waitForTextToBePresentInElementByElement(discussionTitle, title);
-    waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
+    wait.forElementVisible(discussionTitle);
+    wait.forElementVisible(discussionBody.get(0));
+    wait.forTextInElement(discussionTitle, title);
+    wait.forTextInElement(discussionBody.get(0), message);
     PageObjectLogging
         .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
 
   public void reply(String message) {
-    waitForElementByCss(wikiaEditorTextarea);
-    jQueryFocus(wikiaEditorTextarea);
+    wait.forElementVisible(By.cssSelector(wikiaEditorTextarea));
+    jsActions.focus(wikiaEditorTextarea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -91,24 +91,25 @@ public class ForumThreadPageObject extends BasePageObject {
     WebElement
         replyMessage =
         driver.findElement(By.cssSelector(".replies li:nth-child(" + replyNumber + ") p"));
-    waitForTextToBePresentInElementByElement(replyMessage, message);
+    wait.forTextInElement(replyMessage, message);
     PageObjectLogging.log("verifyReplyMessage", "verify that message number " + replyNumber
                                                 + " has the following message: " + message, true);
   }
 
   public void clickReplyButton() {
-    waitForElementByElement(replyButton);
+    wait.forElementVisible(replyButton);
     waitForElementClickableByElement(replyButton);
     scrollAndClick(replyButton);
+    wait.forElementVisible(By.cssSelector(".speech-bubble-buttons"));
     PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);
   }
 
   public void removeThread(String reason) {
     clickOnMoreButton();
     clickOnRemoveButton();
-    waitForElementByElement(removeThreadModalTextarea);
+    wait.forElementVisible(removeThreadModalTextarea);
     removeThreadModalTextarea.sendKeys(reason);
-    waitForElementByElement(removeThreadModalRemoveButton);
+    wait.forElementVisible(removeThreadModalRemoveButton);
     waitForElementClickableByElement(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
     PageObjectLogging
@@ -116,27 +117,27 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void clickOnRemoveButton() {
-    waitForElementByElement(removeButton);
-    jQueryClick(".WikiaMenuElement .remove-message");
+    wait.forElementVisible(removeButton);
+    jsActions.click(".WikiaMenuElement .remove-message");
     PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);
   }
 
   public void clickOnMoveThreadButton() {
-    waitForElementByElement(moveThreadButton);
-    jQueryClick(".WikiaMenuElement .move-thread");
+    wait.forElementVisible(moveThreadButton);
+    jsActions.click(".WikiaMenuElement .move-thread");
     PageObjectLogging.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);
   }
 
   public void clickOnMoreButton() {
-    executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
-    waitForElementByElement(moreButton);
+    jsActions.execute("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+    wait.forElementVisible(moreButton);
     waitForElementClickableByElement(moreButton);
     scrollAndClick(moreButton);
     PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true);
   }
 
   public void clickOnCloseThreadButton() {
-    waitForElementByElement(closeThreadButton);
+    wait.forElementVisible(closeThreadButton);
     waitForElementClickableByElement(closeThreadButton);
     scrollAndClick(closeThreadButton);
     PageObjectLogging
@@ -144,7 +145,7 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void clickOnReopenThreadButton() {
-    waitForElementByElement(reopenThreadButton);
+    wait.forElementVisible(reopenThreadButton);
     waitForElementClickableByElement(reopenThreadButton);
     scrollAndClick(reopenThreadButton);
     PageObjectLogging
@@ -152,12 +153,12 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void verifyThreadRemoved() {
-    waitForTextToBePresentInElementByElement(threadRemovedMessage, "thread has been removed");
+    wait.forTextInElement(threadRemovedMessage, "thread has been removed");
     PageObjectLogging.log("verifyThreadRemoved", "Thread has been removed", true);
   }
 
   public void verifyThreadClosed() {
-    waitForElementByElement(closeThreadMessage);
+    wait.forElementVisible(closeThreadMessage);
     PageObjectLogging.log("verifyThreadClosed", "Thread has been closed", true);
   }
 
@@ -167,7 +168,7 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void undoRemove() {
-    waitForElementByElement(undoThreadRemoveButton);
+    wait.forElementVisible(undoThreadRemoveButton);
     waitForElementClickableByElement(undoThreadRemoveButton);
     scrollAndClick(undoThreadRemoveButton);
     PageObjectLogging.log("undoRemove", "click on 'undo' button", true, driver);
@@ -176,7 +177,7 @@ public class ForumThreadPageObject extends BasePageObject {
   public void moveThread(String forumBoardName) {
     clickOnMoreButton();
     clickOnMoveThreadButton();
-    waitForElementByElement(moveThreadModalSelectElement);
+    wait.forElementVisible(moveThreadModalSelectElement);
     Select dropList = new Select(moveThreadModalSelectElement);
     dropList.selectByVisibleText(forumBoardName);
     waitForElementClickableByElement(moveThreadModalMoveThreadButton);
@@ -188,9 +189,9 @@ public class ForumThreadPageObject extends BasePageObject {
   public void closeThread(String reason) {
     clickOnMoreButton();
     clickOnCloseThreadButton();
-    waitForElementByElement(closeThreadTextarea);
+    wait.forElementVisible(closeThreadTextarea);
     closeThreadTextarea.sendKeys(reason);
-    waitForElementByElement(removeThreadModalRemoveButton);
+    wait.forElementVisible(removeThreadModalRemoveButton);
     waitForElementClickableByElement(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
     PageObjectLogging
@@ -204,9 +205,9 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void verifyParentBoard(String forumBoardName) {
-    waitForElementByElement(movedThreadText);
-    waitForElementByBy(parentBoardField);
-    waitForTextToBePresentInElementByBy(parentBoardField, forumBoardName);
+    wait.forElementVisible(movedThreadText);
+    wait.forElementPresent(parentBoardField);
+    wait.forTextInElement(parentBoardField, forumBoardName);
     PageObjectLogging.log("verifyParentBoard",
                           "verify that the parent board of current thread is the following: "
                           + forumBoardName, true);

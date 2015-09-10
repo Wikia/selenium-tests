@@ -1,43 +1,29 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * @author Saipetch Kongkatong, Liz Lee
  * @ownership Content X-Wing
  */
+
 public class PlayingVideoTests extends NewTestTemplate {
 
-  WikiBasePageObject base;
-  Credentials credentials = Configuration.getCredentials();
-
-  @BeforeMethod(alwaysRun = true)
-  public void setup_Preferred() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    base = new WikiBasePageObject(driver);
-  }
-
-  // Test: Ooyala video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
+  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateLightbox";
 
-    // Agegate works more reliably when logged in (issue tracked here VID-1879)
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.verifyVideo();
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
@@ -52,15 +38,13 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoOoyalaEmbed();
   }
 
-  // Test: Ooyala video in inline
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
+  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123")
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateInline";
 
-    // Age gate works more reliably when logged in (issue tracked here VID-1879)
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();
@@ -71,14 +55,15 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoOoyalaEmbed();
   }
 
-  // Test: IGN video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
+  @Execute(disableFlash = "false", onWikia = "sktest123")
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";
     String queryString = "provider=" + providerName;
 
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
+    SpecialVideosPageObject specialVideos =
+        new SpecialVideosPageObject(driver).openSpecialVideoPage(wikiURL, queryString);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -90,14 +75,15 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  // Test: Anyclip video in lightbox
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @Execute(disableFlash = "false", onWikia = "sktest123")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
     String queryString = "provider=" + providerName;
 
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
+    SpecialVideosPageObject specialVideos =
+        new SpecialVideosPageObject(driver).openSpecialVideoPage(wikiURL, queryString);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -108,5 +94,4 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoObjectVisible();
     video.verifyVideoAnyclipEmbed();
   }
-
 }

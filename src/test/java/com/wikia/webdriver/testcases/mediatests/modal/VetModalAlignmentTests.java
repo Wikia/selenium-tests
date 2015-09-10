@@ -41,7 +41,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Test(groups = {"VetModalAlignment", "VetModalAlignment_001", "Media"})
   public void Vet_Modal_001_leftOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitle1 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -67,7 +67,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
                   "Media"}, dependsOnMethods = "Vet_Modal_001_leftOnPage")
   public void Vet_Modal_002_leftInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPageCK(wikiURL, articleTitle1);
@@ -79,7 +79,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Test(groups = {"VetModalAlignment", "VetModalAlignment_003", "Media"})
   public void Vet_Modal_003_centerOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitle2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -105,7 +105,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
                   "Media"}, dependsOnMethods = "Vet_Modal_003_centerOnPage")
   public void Vet_Modal_004_centerInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPageCK(wikiURL, articleTitle2);
@@ -117,7 +117,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Test(groups = {"VetModalAlignment", "VetModalAlignment_005", "Media"})
   public void Vet_Modal_005_rightOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitle3 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -143,7 +143,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
                   "Media"}, dependsOnMethods = "Vet_Modal_005_rightOnPage")
   public void Vet_Modal_006_rightInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPageCK(wikiURL, articleTitle3);

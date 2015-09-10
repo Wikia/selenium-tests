@@ -26,6 +26,8 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement createPageButton;
   @FindBy(css = "#createPageErrorMsg")
   private WebElement phalanxBlockMessageContainer;
+  @FindBy(css = "button[data-event=create]")
+  private WebElement addAPageButton;
 
   public CreateArticleModalComponentObject(WebDriver driver) {
     super(driver);
@@ -37,10 +39,10 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   private void createPage(String title, String layout) {
-    waitForElementByElement(titleInput);
-    sendKeys(titleInput, title);
+    wait.forElementVisible(titleInput);
+    titleInput.sendKeys(title);
     chooseLayout(layout);
-    waitForElementByElement(createPageButton);
+    wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
     PageObjectLogging.log(
         "PageCreated",
@@ -50,8 +52,8 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   public void verifyMessageAboutBlockPresent() {
-    waitForElementByElement(phalanxBlockMessageContainer);
-    waitForTextToBePresentInElementByElement(
+    wait.forElementVisible(phalanxBlockMessageContainer);
+    wait.forTextInElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );
     PageObjectLogging.log(
@@ -85,4 +87,9 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
       scrollAndClick(topListRadioButton);
     }
   }
+
+  public void verifyCreateNewArticleModal() {
+    wait.forElementVisible(addAPageButton);
+  }
+
 }

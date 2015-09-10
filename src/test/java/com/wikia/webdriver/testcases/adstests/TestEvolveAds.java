@@ -1,8 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 
 import org.testng.annotations.Test;
@@ -11,9 +12,10 @@ import org.testng.annotations.Test;
  * @author Dmytro Rets
  * @ownership AdEngineering
  */
-public class TestEvolveAds extends TemplateDontLogout {
+public class TestEvolveAds extends TemplateNoFirstLoad {
 
-  @GeoEdgeProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = "CA")
+  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -25,7 +27,8 @@ public class TestEvolveAds extends TemplateDontLogout {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
+  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -37,7 +40,8 @@ public class TestEvolveAds extends TemplateDontLogout {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = "NZ")
+  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
@@ -49,12 +53,14 @@ public class TestEvolveAds extends TemplateDontLogout {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = "CA")
+  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
       dataProvider = "evolveHopTestPage",
-      enabled = false // wf ADR-254
+      // wf ADR-254
+      enabled = false
   )
   public void testEvolveHop_CA(
       String wikiName,

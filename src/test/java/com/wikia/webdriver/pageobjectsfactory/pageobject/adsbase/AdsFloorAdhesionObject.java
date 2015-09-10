@@ -8,13 +8,12 @@ import org.openqa.selenium.WebElement;
 
 public class AdsFloorAdhesionObject extends AdsBaseObject {
 
-  private final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-footer";
-  private final String
-      FLOOR_ADHESION_AD_FRAME_CSS =
-      "#ext-wikia-adEngine-template-footer .ad iframe";
-  private final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
-  private final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-footer .close";
-  private final String WIKIA_BAR_CSS = "#WikiaBar";
+  private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor";
+  private static final String FLOOR_ADHESION_AD_FRAME_CSS =
+      "#ext-wikia-adEngine-template-floor .ad iframe";
+  private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
+  private static final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-floor .close";
+  private static final String WIKIA_BAR_CSS = "#WikiaBar";
 
   public AdsFloorAdhesionObject(WebDriver driver, String testedPage) {
     super(driver);
@@ -24,7 +23,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   public void verifyFloorAdhesionPresent(String expectedSlotName, String expectedLineItemId,
                                          String expectedCreativeId) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
-    waitForElementByCss(FLOOR_ADHESION_CSS);
+    wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
     PageObjectLogging.log(
         "Check visibility of Floor Adhesion",
         "Floor Adhesion should be displayed",
@@ -62,7 +61,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyModalOpened(String floorAdhesionModalSelector) {
-    waitForElementByCss(floorAdhesionModalSelector);
+    wait.forElementVisible(By.cssSelector(floorAdhesionModalSelector));
     PageObjectLogging.log(
         "Check visibility",
         "Clicking Floor Adhesion opens light-box",
@@ -71,7 +70,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
-    waitForElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
+    wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
     PageObjectLogging.log(
         "Check visibility",
         "Clicking light-box close button hides light-box",

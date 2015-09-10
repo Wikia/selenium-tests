@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -33,22 +35,18 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
   private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget");
   private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
-  private By
-      mediaTitlesBy =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
+  private By mediaTitlesBy = By
+      .cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
 
   public enum ImageLicense {
-    NONESELECTED("None selected", ""),
-    FAIRUSE("Fairuse", ""),
-    SELF("Self", "This file was uploaded by the photographer or author."),
-    FROMWIKIMEDIA("From Wikimedia",
-                  "This file was originally uploaded on Wikipedia or another Wikimedia project."),
-    CCBYSA("CC-BY-SA",
-           "This file is licensed under the Creative Commons Attribution-Share Alike License"),
-    OTHERFREE("Other free", "This file is licensed under a free license."),
-    PD("PD", "This file is in the public domain"),
-    PERMISSION("Permission",
-               "This file is copyrighted. The copyright holder has given permission for its use.");
+    NONESELECTED("None selected", ""), FAIRUSE("Fairuse", ""), SELF("Self",
+        "This file was uploaded by the photographer or author."), FROMWIKIMEDIA("From Wikimedia",
+        "This file was originally uploaded on Wikipedia or another Wikimedia project."), CCBYSA(
+        "CC-BY-SA",
+        "This file is licensed under the Creative Commons Attribution-Share Alike License"), OTHERFREE(
+        "Other free", "This file is licensed under a free license."), PD("PD",
+        "This file is in the public domain"), PERMISSION("Permission",
+        "This file is copyrighted. The copyright holder has given permission for its use.");
 
     private String displayName;
     private String displayText;
@@ -72,19 +70,19 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void typeInSearchTextField(String input) {
-    waitForElementByElement(searchInput);
+    wait.forElementVisible(searchInput);
     searchInput.sendKeys(input);
   }
 
   private void clickAddMediaButton() {
-    waitForElementVisibleByElement(addMediaButton);
+    wait.forElementVisible(addMediaButton);
     addMediaButton.click();
   }
 
   public VisualEditorPageObject addMediaByURL(String url) {
     waitForDialogVisible();
     typeInSearchTextField(url);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     waitForElementClickableByElement(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
@@ -100,7 +98,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject addExistingMedia(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
     for (int i = 0; i < number; i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(mediaAddIconBy);
@@ -114,7 +112,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject uploadImage(String fileName) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
@@ -123,7 +121,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject uploadImage(String fileName, String newFileName) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     typeNewFileName(newFileName);
     clickAddMediaButton();
     waitForDialogNotVisible();
@@ -131,18 +129,18 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   public void selectImageLicense(ImageLicense imageLicense) {
-    waitForElementVisibleByElement(imageLicenseDropdown);
+    wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
-    PageObjectLogging
-        .log("selectImageLicense", "License: " + imageLicense.toString() + " selected", true);
+    PageObjectLogging.log("selectImageLicense",
+        "License: " + imageLicense.toString() + " selected", true);
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName,
-                                            ImageLicense imageLicense) {
+      ImageLicense imageLicense) {
     waitForDialogVisible();
     selectFileToUpload(fileName);
-    waitForElementVisibleByElement(topUploadButton);
+    wait.forElementVisible(topUploadButton);
     typeNewFileName(newFileName);
     selectImageLicense(imageLicense);
     clickAddMediaButton();
@@ -151,7 +149,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void typeNewFileName(String newFileName) {
-    waitForElementByElement(fileNameInput);
+    wait.forElementVisible(fileNameInput);
     if (Boolean.parseBoolean(fileNameInput.getAttribute("readonly"))) {
       throw new NoSuchElementException(
           "File name input is read only! This file already exist on this wiki");
@@ -164,7 +162,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject previewExistingMediaByIndex(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
     targetMedia.click();
     waitForDialogNotVisible();
@@ -172,14 +170,10 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void selectFileToUpload(String fileName) {
-    fileUploadInput.sendKeys(
-        getAbsolutePathForFile(PageContent.RESOURCES_PATH + fileName)
-    );
-    PageObjectLogging.log(
-        "selectFileToUpload",
-        "file " + fileName + " added to upload",
-        true
-    );
+    fileUploadInput
+        .sendKeys(CommonUtils.getAbsolutePathForFile(
+            PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
+    PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
   }
 
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
@@ -192,7 +186,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private WebElement findMediaByTitle(String title) {
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    waitForElementVisibleByElement(mediaResultsWidget);
-    return getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title", title);
+    wait.forElementVisible(mediaResultsWidget);
+    return Elements.getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title",
+        title);
   }
 }

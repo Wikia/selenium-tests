@@ -40,7 +40,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public PalantirContent deletePlayerPosition() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
     Object res = jsexec.executeAsyncScript(PalantirContent.PONTO_REMOVEPLAYER);
@@ -49,7 +49,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 
   public PalantirContent setAndVerifyPlayerPosition(double lat, double lng, double zoom,
                                                     boolean centerMap) {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
     Object res = jsexec.executeAsyncScript(
@@ -63,7 +63,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public PalantirContent updateMapPosition(double lat, double lng, int zoom) {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
     Object res = jsexec.executeAsyncScript(
@@ -112,17 +112,17 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public void verifyPoiAppearOnMap() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(playerPoint);
-    Assertion.assertEquals(checkIfElementOnPage(playerPoint), true);
+    wait.forElementVisible(playerPoint);
+    Assertion.assertEquals(isElementOnPage(playerPoint), true);
     driver.switchTo().defaultContent();
   }
 
   public void verifyPoiNotAppearOnMap() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(checkIfElementOnPage(playerPoint), false);
+    Assertion.assertEquals(isElementOnPage(playerPoint), false);
     driver.switchTo().defaultContent();
   }
 }

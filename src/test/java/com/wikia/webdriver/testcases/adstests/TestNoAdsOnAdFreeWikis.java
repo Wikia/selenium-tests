@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
-import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Factory;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Test(
     groups = {"NoAdsOnAdFreeWikis", "Ads"}
 )
-public class TestNoAdsOnAdFreeWikis extends TemplateDontLogout {
+public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
 
   private String testedPage;
 
@@ -34,20 +34,11 @@ public class TestNoAdsOnAdFreeWikis extends TemplateDontLogout {
     }
   }
 
-  @GeoEdgeProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikis_AU"}
   )
   public void TestNoAdsOnAdsFreeWikis_AU() {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
-  }
-
-  @GeoEdgeProxy(country = "VE")
-  @Test(
-      groups = {"TestNoAdsOnAdsFreeWikis_VE"}
-  )
-  public void TestNoAdsOnAdsFreeWikis_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnPage();
   }

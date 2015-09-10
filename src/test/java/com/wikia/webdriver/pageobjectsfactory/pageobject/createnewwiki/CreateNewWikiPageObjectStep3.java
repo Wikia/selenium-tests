@@ -1,6 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,10 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Karol
@@ -32,7 +32,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
   }
 
   public void selectThemeByName(String name) {
-    waitForElementByCss(DATA_THEME_LIST);
+    wait.forElementVisible(By.cssSelector(DATA_THEME_LIST));
     String themeName = themeLocator.replace("%name%", name);
     scrollAndClick(driver.findElement(By.cssSelector(themeName)));
     PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);

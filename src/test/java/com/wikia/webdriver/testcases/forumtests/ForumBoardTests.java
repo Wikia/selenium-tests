@@ -1,16 +1,15 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+
+import org.testng.annotations.Test;
 
 public class ForumBoardTests extends NewTestTemplate {
 
@@ -25,7 +24,7 @@ public class ForumBoardTests extends NewTestTemplate {
   @Test(groups = {"ForumBoardTests_001", "ForumBoardTests", "Forum", "Smoke3"})
   public void ForumBoardTests_001_startDiscussionWithTitleAndMessage() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -37,7 +36,7 @@ public class ForumBoardTests extends NewTestTemplate {
   @Test(groups = {"ForumBoardTests_002", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_002_startDiscussionWithoutTitle() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -49,7 +48,7 @@ public class ForumBoardTests extends NewTestTemplate {
   @Test(groups = {"ForumBoardTests_003", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_003_startDiscussionWithImage() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -63,7 +62,7 @@ public class ForumBoardTests extends NewTestTemplate {
     String externalLink = PageContent.EXTERNAL_LINK;
     String internalLink = PageContent.REDIRECT_LINK;
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -75,7 +74,7 @@ public class ForumBoardTests extends NewTestTemplate {
   @Test(groups = {"ForumBoardTests_005", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_005_startDiscussionWithVideo() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -86,7 +85,7 @@ public class ForumBoardTests extends NewTestTemplate {
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_006_followDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -103,7 +102,7 @@ public class ForumBoardTests extends NewTestTemplate {
         groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -20,6 +21,13 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
   @Override
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
+    Configuration.clearCustomTestProperties();
+    if (method.isAnnotationPresent(Execute.class)) {
+      if(!method.getAnnotation(Execute.class).onWikia().equals("")){
+        Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
+      }
+    }
+    prepareURLs();
 
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnv = method.getAnnotation(DontRun.class).env();
@@ -31,9 +39,9 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
     }
 
     driverOne = startCustomBrowser(Configuration.getBrowser());
-    logOutCustomDriver(driverOne);
+    loadFirstPage(driverOne);
     driverTwo = startCustomBrowser(Configuration.getBrowser());
-    logOutCustomDriver(driverTwo);
+    loadFirstPage(driverTwo);
     this.driver = driverOne;
   }
 

@@ -21,7 +21,7 @@ public class FacebookUserPageObject extends WikiBasePageObject {
   }
 
   public void verifyPageLogo() {
-    waitForElementByElement(pageLogo);
+    wait.forElementVisible(pageLogo);
     PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
   }
 

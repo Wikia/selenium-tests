@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.activityfeedstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,6 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 /**
@@ -25,17 +29,17 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_001", "darwin"})
-  public void WikiActivityTests_001_newEditionIsRecordedOnAvtivityModule() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    String articleContent = PageContent.ARTICLE_TEXT + base.getTimeStamp(); //timeStamp required
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+  @Execute(asUser = User.USER)
+  public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
+    String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
+    ArticlePageObject article =
+        new ArticlePageObject(driver).open("NewEditionIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentEdition(articleName, credentials.userName);
   }
 
@@ -43,19 +47,19 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
-  public void WikiActivityTests_002_newPageCretionIsRecordedOnAvtivityModule() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
+  @Execute(asUser = User.USER)
+  public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
+    SpecialCreatePagePageObject specialCreatePage =
+        new WikiBasePageObject(driver).openSpecialCreatePage(wikiURL);
     String articleContent = PageContent.ARTICLE_TEXT;
-    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     String articleName = article.getArticleName();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewPage(articleName, credentials.userName);
   }
 
@@ -63,12 +67,12 @@ public class WikiActivityTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
   @Test(groups = {"WikiActivity", "WikiActivity_003", "darwin"})
-  public void WikiActivityTests_003_newBlogCreationIsRecordedOnAvtivityModule() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
-    String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
+  @Execute(asUser = User.USER)
+  public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
+    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+    UserProfilePageObject userProfile =
+        new WikiBasePageObject(driver).openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
@@ -76,24 +80,25 @@ public class WikiActivityTests extends NewTestTemplate {
     BlogPageObject blogPage = visualEditMode.submitBlog();
     blogPage.verifyBlogTitle(blogTitle);
     blogPage.verifyContent(blogContent);
-    SpecialWikiActivityPageObject wikiActivity = blogPage.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = blogPage.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
   }
 
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
+  @RelatedIssue(issueID = "QAART-673", comment = "Test will fail if article does not exist therefore test manually.")
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
-  public void WikiActivityTests_004_newCategorizationIsRecordedOnAvtivityModule() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = base.openRandomArticle(wikiURL);
+  @Execute(asUser = User.USER)
+  public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
+    ArticlePageObject article =
+        new ArticlePageObject(driver).open("NewCategorizationIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
     article.verifyCategoryPresent(categoryName);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity(wikiURL);
+    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
     wikiActivity.verifyRecentNewCategorization(articleName, credentials.userName);
   }
 }

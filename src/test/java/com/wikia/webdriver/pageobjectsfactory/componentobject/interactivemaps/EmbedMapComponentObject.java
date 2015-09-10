@@ -36,39 +36,39 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
   private WebElement brandFooter;
 
   public void verifyMapTitlePresented() {
-    waitForElementVisibleByElement(mapTitle);
-    Assertion.assertEquals(checkIfElementOnPage(mapTitle), true);
+    wait.forElementVisible(mapTitle);
+    Assertion.assertEquals(isElementOnPage(mapTitle), true);
   }
 
   public void verifyCloseButtonPresented() {
-    waitForElementVisibleByElement(closeModalButton);
-    Assertion.assertEquals(checkIfElementOnPage(closeModalButton), true);
+    wait.forElementVisible(closeModalButton);
+    Assertion.assertEquals(isElementOnPage(closeModalButton), true);
   }
 
   public void verifyEmbedMapModalOpened() {
-    waitForElementVisibleByElement(mapModal);
-    Assertion.assertEquals(checkIfElementOnPage(mapModal), true);
+    wait.forElementVisible(mapModal);
+    Assertion.assertEquals(isElementOnPage(mapModal), true);
   }
 
   public void verifyMapElementsPresented() {
-    waitForElementVisibleByElement(mapFrame);
+    wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    waitForElementVisibleByElement(filterBox);
-    Assertion.assertEquals(checkIfElementOnPage(filterBox), true);
-    waitForElementVisibleByElement(zoomInButton);
-    Assertion.assertEquals(checkIfElementOnPage(zoomInButton), true);
-    waitForElementVisibleByElement(zoomOutButton);
-    Assertion.assertEquals(checkIfElementOnPage(zoomOutButton), true);
+    wait.forElementVisible(filterBox);
+    Assertion.assertEquals(isElementOnPage(filterBox), true);
+    wait.forElementVisible(zoomInButton);
+    Assertion.assertEquals(isElementOnPage(zoomInButton), true);
+    wait.forElementVisible(zoomOutButton);
+    Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
     PageObjectLogging.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
     driver.switchTo().defaultContent();
   }
 
   public void verifyBrandFooterNotVisible() {
-    Assertion.assertEquals(checkIfElementOnPage(brandFooter), false);
+    Assertion.assertEquals(isElementOnPage(brandFooter), false);
   }
 
   public void verifyBranFooterVisible() {
-    Assertion.assertEquals(checkIfElementOnPage(brandFooter), true);
+    Assertion.assertEquals(isElementOnPage(brandFooter), true);
   }
 
 }

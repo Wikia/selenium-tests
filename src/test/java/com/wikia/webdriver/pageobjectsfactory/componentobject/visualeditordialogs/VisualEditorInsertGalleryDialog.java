@@ -58,7 +58,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   }
 
   private void clickAddGalleryButton() {
-    waitForElementVisibleByElement(doneButton);
+    wait.forElementVisible(doneButton);
     waitForElementClickableByElement(doneButton);
     doneButton.click();
   }
@@ -75,7 +75,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public VisualEditorPageObject addExistingMedia(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
     //only selects available number of media
     for (int i = 0; i < Math.min(number, mediaResults.size()); i++) {
@@ -89,7 +89,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public void removeMediaFromCart(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_CHECKED_ICON_BY);
     for (int i = 0; i < number; i++) {
       mediaResults.get(i).click();
@@ -104,7 +104,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public void addMediaToCart(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_ADD_ICON_BY);
     for (int i = 0; i < number; i++) {
       mediaResults.get(i).click();
@@ -114,7 +114,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickTitleToPreview(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_TITLES_BY).get(index);
     scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);
@@ -123,7 +123,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickMetaDataToPreview(int index) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
-    waitForElementVisibleByElement(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_META_BY).get(index);
     scrollAndClick(targetMedia);
     return new VisualEditorPageObject(driver);

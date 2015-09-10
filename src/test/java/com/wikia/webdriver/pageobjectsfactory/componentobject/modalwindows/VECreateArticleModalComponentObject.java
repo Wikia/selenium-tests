@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Robert 'rochan' Chan
@@ -28,7 +28,7 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   public void createPage() {
-    waitForElementVisibleByElement(modal);
+    wait.forElementVisible(modal);
     waitForElementClickableByElement(addAPageButton);
     addAPageButton.click();
     PageObjectLogging.log("createPage", "Add A Page button is clicked", true);

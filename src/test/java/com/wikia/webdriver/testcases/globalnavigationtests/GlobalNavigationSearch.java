@@ -65,7 +65,7 @@ public class GlobalNavigationSearch extends NewTestTemplate {
     HomePageObject homePage = new HomePageObject(driver);
     String wikiUrl = urlBuilder.getUrlForWiki(wikiName);
     homePage.getUrl(wikiUrl);
-    homePage.logInCookie(credentials.userName, credentials.password, wikiUrl);
+    homePage.loginAs(credentials.userName, credentials.password, wikiUrl);
     SearchPageObject search = homePage.getVenusGlobalNav()
         .searchGlobally(query);
 

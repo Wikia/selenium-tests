@@ -1,5 +1,9 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import org.openqa.selenium.WebDriverException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,10 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
-
-import org.openqa.selenium.WebDriverException;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -103,9 +103,9 @@ public class MailFunctions {
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
+      PageObjectLogging.log("Mail", e.getMessage(), false);
     } catch (MessagingException e) {
-      PageObjectLogging.log("Mail", "Problem with delete8ing messages", false);
+      PageObjectLogging.log("Mail", e.getMessage(), false);
     }
   }
 

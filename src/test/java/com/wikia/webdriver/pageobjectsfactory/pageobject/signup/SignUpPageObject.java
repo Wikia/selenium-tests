@@ -1,5 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,21 +26,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
@@ -32,9 +33,6 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public SignUpPageObject(WebDriver driver) {
     super(driver);
-    yearSelect = new Select(birthYearField);
-    daySelect = new Select(birthDayField);
-    monthSelect = new Select(birthMonthField);
   }
 
   @FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
@@ -62,13 +60,15 @@ public class SignUpPageObject extends WikiBasePageObject {
   private By recaptchaResponseBy = By.cssSelector("#g-recaptcha-response");
   private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
 
-  private Select yearSelect;
-  private Select daySelect;
-  private Select monthSelect;
+  public SignUpPageObject open() {
+    driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
+
+    return this;
+  }
 
   public void typeUserName(String userName) {
     userNameField.sendKeys(userName);
-    userNameField.sendKeys(Keys.TAB);
+    driver.findElement(By.tagName("body")).sendKeys(Keys.TAB);
   }
 
   public void typeEmail(String email) {
@@ -90,17 +90,17 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public void enterBirthDate(String month, String day, String year) {
     try {
-      monthSelect.selectByVisibleText(month);
+      new Select(birthMonthField).selectByVisibleText(month);
       Thread.sleep(150);
-      daySelect.selectByVisibleText(day);
+      new Select(birthDayField).selectByVisibleText(day);
       Thread.sleep(150);
-      yearSelect.selectByVisibleText(year);
+      new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
-      daySelect.selectByVisibleText(day);
+      new Select(birthDayField).selectByVisibleText(day);
       Thread.sleep(150);
-      yearSelect.selectByVisibleText(year);
+      new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
-      monthSelect.selectByVisibleText(month);
+      new Select(birthMonthField).selectByVisibleText(month);
       PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
           + " selected", true);
     } catch (InterruptedException e) {
@@ -118,11 +118,10 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    String winHandleBefore = driver.getWindowHandle();
-    waitForElementByElement(facebookSignUpButton);
+    wait.forElementVisible(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
-    return new FacebookSignupModalComponentObject(driver, winHandleBefore);
+    return new FacebookSignupModalComponentObject(driver);
   }
 
   public AlmostTherePageObject submit(String email, String password) {
@@ -137,7 +136,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public void verifyCaptchaInvalidMessage() {
-    waitForElementPresenceByBy(recaptchaResponseBy);
+    wait.forElementPresent(recaptchaResponseBy);
     String message = driver.findElement(recaptchaErrorMsgBy).getText();
     Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
   }
@@ -149,7 +148,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   private String getWordFromCaptcha(File captchaFile) {
     try {
-      String captchaId = getAttributeValue(blurryWordHidden, "value");
+      String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
               + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;

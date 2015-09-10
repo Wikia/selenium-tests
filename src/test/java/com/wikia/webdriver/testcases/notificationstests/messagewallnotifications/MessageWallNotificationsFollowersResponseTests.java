@@ -10,8 +10,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallThreadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
@@ -36,8 +36,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   )
   public void followerNotificationResponse_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
+    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     WatchPageObject watch = wall.unfollowCurrentUrl();
     watch.confirmWatchUnwatch();
   }
@@ -51,8 +51,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   )
   public void followerNotificationResponse_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
+    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -71,8 +71,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   )
   public void followerNotificationResponse_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
+    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     wall.follow();
   }
 
@@ -85,9 +85,9 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   )
   public void followerNotificationResponse_setup_4() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
-    NewMessageWallThreadPageObject thread = wall.openThread(title);
+    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName8);
+    MessageWallThreadPageObject thread = wall.openThread(title);
     MiniEditorComponentObject miniReply = thread.triggerMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndWrite(reply);
@@ -105,7 +105,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   )
   public void followerNotificationResponse_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
+    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName8);

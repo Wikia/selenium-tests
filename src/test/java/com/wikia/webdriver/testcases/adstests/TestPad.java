@@ -1,18 +1,17 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateDontLogout;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPadObject;
 
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
-public class TestPad extends TemplateDontLogout {
+public class TestPad extends TemplateNoFirstLoad {
 
-  private final static String DISASTER_RECOVERY_URL_PARAM_ON =
+  private static final String DISASTER_RECOVERY_URL_PARAM_ON =
       "InstantGlobals.wgSitewideDisablePaidAssetDrop=1";
 
   @Test(

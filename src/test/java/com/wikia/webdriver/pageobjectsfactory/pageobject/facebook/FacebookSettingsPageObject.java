@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 /**
  * @author Michal 'justnpT' Nowierski
@@ -33,33 +33,41 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public void verifyPageLogo() {
-    waitForElementByElement(pageLogo);
-    PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
+  public FacebookSettingsPageObject open() {
+    getUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
+
+    return this;
   }
 
-  public void openApps() {
-    getUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
-    PageObjectLogging.log("openApps", "Apps tab opened", true);
+  public void verifyPageLogo() {
+    wait.forElementVisible(pageLogo);
+    PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
   }
 
   /**
    * This method removes Wikia App from facebook Apps.
    */
-  public void removeAppIfPresent() {
+  public FacebookSettingsPageObject removeAppIfPresent() {
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
-          waitForElementByElement(element);
+          wait.forElementVisible(element);
           element.click();
           WebElement AppRemoveButton =
               element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
           if (AppRemoveButton != null) {
-            waitForElementByElement(AppRemoveButton);
+            wait.forElementVisible(AppRemoveButton);
             AppRemoveButton.click();
-            waitForElementByElement(removeButton);
+            wait.forElementVisible(removeButton);
             removeButton.click();
             waitForElementNotVisibleByElement(removeAppConfirmationModal);
+            driver.navigate().refresh();
+            try {
+              Thread.sleep(3000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
           }
         } else {
@@ -67,6 +75,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
         }
       }
     }
+    return this;
   }
 
   /**
@@ -88,9 +97,9 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   }
 
   public void logOutFB() {
-    waitForElementByElement(fbDropDown);
+    wait.forElementVisible(fbDropDown);
     fbDropDown.click();
-    waitForElementByElement(fbLogOut);
+    wait.forElementVisible(fbLogOut);
     fbLogOut.click();
   }
 }

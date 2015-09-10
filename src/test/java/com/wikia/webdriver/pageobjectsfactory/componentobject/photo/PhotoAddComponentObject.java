@@ -1,15 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.interactions.Elements;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class PhotoAddComponentObject extends BasePageObject {
 
@@ -28,10 +30,6 @@ public class PhotoAddComponentObject extends BasePageObject {
   @FindBy(css = "tr.ImageUploadFindImages td a")
   private List<WebElement> addThisPhotoList;
 
-  private static final String IMAGE_UPLOAD_HEADLINE_CSS = "#ImageUploadHeadline";
-  @FindBy(css = IMAGE_UPLOAD_HEADLINE_CSS)
-  private WebElement imageUploadHeadline;
-
   private String photoName;
 
   public PhotoAddComponentObject(WebDriver driver) {
@@ -39,37 +37,35 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void verifyAddPhotoModal() {
-    waitForElementByElement(searchField);
-    waitForElementByElement(findButton);
+    wait.forElementVisible(searchField);
+    wait.forElementVisible(findButton);
   }
 
   public void typeSearchQuery(String photoName) {
-    waitForElementByElement(searchField);
+    wait.forElementVisible(searchField);
     searchField.sendKeys(photoName);
     PageObjectLogging.log("typeSearchQuery", photoName + " searching", true);
   }
 
   public void clickFind() {
-    waitForElementByElement(findButton);
-    String oldHeadline = imageUploadHeadline.getText();
+    wait.forElementVisible(findButton);
     scrollAndClick(findButton);
-    waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
-        oldHeadline);
+    wait.forElementNotVisible(By.cssSelector("#ImageUploadProgress2"));
     PageObjectLogging.log("clickSearch", "search button clicked", true);
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
-    waitForElementByElement(addThisPhotoList.get(photoNumber));
+    WebElement photo = wait.forElementVisible(addThisPhotoList.get(photoNumber));
     photoName =
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
-    scrollAndClick(addThisPhotoList.get(photoNumber));
+    scrollAndClick(photo);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
     return new PhotoOptionsComponentObject(driver);
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(String fileName) {
-    WebElement photo = getElementByValue(addThisPhotoList, "title", fileName);
+    WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
     PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
@@ -108,7 +104,9 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+    chooseFileInput
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 

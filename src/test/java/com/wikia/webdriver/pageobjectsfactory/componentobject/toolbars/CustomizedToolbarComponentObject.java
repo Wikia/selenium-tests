@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -18,10 +19,6 @@ import java.util.List;
  */
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
-  public CustomizedToolbarComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
   private WebElement customizeButton;
   @FindBy(css = "div.msg")
@@ -38,9 +35,9 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private WebElement resetDefaultsButton;
   @FindBy(css = ".overflow-menu > .tools-menu li > a[href*=Special]")
   private List<WebElement> myToolsList;
-
+  @FindBy(css = ".tools-menu li > a[data-name='themedesigner]'")
+  private WebElement themeDesignerButton;
   private By toolsList = By.cssSelector("ul.tools li");
-
   private String searchSuggestionToolCss = "div.autocomplete div[title=\"%s\"]";
   private String toolbarToolCss = "li.overflow a[data-name=\"%s\"]";
   private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
@@ -48,13 +45,19 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private String toolsListToolEditCss = " img.edit-pencil";
   private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
 
+
+  public CustomizedToolbarComponentObject(WebDriver driver) {
+    super(driver);
+  }
+
+
   /**
    * Verifies that user toolbar buttons are visible
    */
   public void verifyUserToolBar() {
-    waitForElementByCss("div.toolbar ul.tools li.overflow");
-    waitForElementByCss("div.toolbar ul.tools li.mytools");
-    waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.overflow"));
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.mytools"));
+    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li a.tools-customize"));
     PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
   }
 
@@ -64,8 +67,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickCustomize() {
-    waitForElementByElement(customizeButton);
-    jQueryClick(customizeButton);
+    wait.forElementVisible(customizeButton);
+    jsActions.click(customizeButton);
     PageObjectLogging.log("clickCustomize", "customize button clicked", true);
   }
 
@@ -76,8 +79,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickResetDefaults() {
-    waitForElementByElement(resetDefaultsButton);
-    jQueryClick(resetDefaultsButton);
+    wait.forElementVisible(resetDefaultsButton);
+    jsActions.click(resetDefaultsButton);
     PageObjectLogging.log("clickResetDefaults", "reset defaults button clicked", true);
   }
 
@@ -88,7 +91,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void searchTool(String toolName) {
-    waitForElementByElement(findAToolField);
+    wait.forElementVisible(findAToolField);
     findAToolField.clear();
     findAToolField.sendKeys(toolName);
     PageObjectLogging.log("searchTool", toolName + " typed into search field", true);
@@ -143,8 +146,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickOnTool(String toolName) {
-    jQueryClick(
-        waitForElementByCss(String.format(toolbarToolCss, toolName))
+    jsActions.click(
+        wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
     );
     PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
@@ -157,7 +160,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyFollowMessage() {
-    waitForElementByElement(pageWatchlistStatusMessage);
+    wait.forElementVisible(pageWatchlistStatusMessage);
     PageObjectLogging.log("verifyFollowMessage", "follow message verified", true);
 
   }
@@ -169,8 +172,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyFollowedToolbar() {
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
-                                                    "title", "Unfollow");
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
+            "title", "Unfollow");
     PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
 
   }
@@ -183,8 +186,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyUnfollowed() {
-    waitForElementByElement(pageWatchlistStatusMessage);
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, "follow"),
+    waitForElementClickableByElement(pageWatchlistStatusMessage);
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
                                                     "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
 
@@ -197,13 +200,13 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyToolOnList(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolOnList", toolName + " visible on the list", true);
 
   }
 
   public void verifyToolNotOnList(String toolName) {
-    waitForElementNotPresent(String.format(toolsListToolCss, toolName));
+    wait.forElementNotPresent(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolNotOnList", toolName + " not visible on the list", true);
 
   }
@@ -215,8 +218,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickRemove(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
-    jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
+    jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
     PageObjectLogging.log("clickRemove", "remove button for " + toolName + " clicked", true);
   }
 
@@ -228,8 +231,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickRename(String toolName) {
-    waitForElementByCss(String.format(toolsListToolCss, toolName));
-    jQueryClick(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
+    jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
     PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
   }
 
@@ -239,14 +242,14 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickSave() {
-    waitForElementByElement(saveButton);
+    wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
     PageObjectLogging.log("clickSave", "save button clicked", true);
 
   }
 
   public void verifyToolOnToolbar(String toolName) {
-    waitForElementByXPath(String.format(addedToolsPath, toolName));
+    wait.forElementVisible(By.xpath(String.format(addedToolsPath, toolName)));
     PageObjectLogging.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
   }
 
@@ -262,9 +265,9 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     List<WebElement> list = driver.findElements(toolsList);
     for (int i = 0; i < list.size(); i++) {
       if ("Following".equals(list.get(i).getText())) {
-        clickOnTool("follow");
+        clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
-        waitForTextToBePresentInElementByBy(toolsList, "Follow");
+        wait.forTextInElement(toolsList, "Follow");
         PageObjectLogging.log("unfollowIfFollowed",
                               "page was followed, unfollow button clicked", true);
         break;
@@ -275,7 +278,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void verifyToolRemoved(String toolName) {
-    waitForElementNotPresent(
+    wait.forElementNotPresent(
         By.xpath(String.format(addedToolsPath, toolName))
     );
     PageObjectLogging.log("verifyToolRemoved", toolName + " removed from toolbar", true);
@@ -290,8 +293,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void openMoreMenu() {
-    executeScript("$('.overflow-menu').mouseover();");
-    waitForElementByCss(".overflow-menu > .tools-menu");
+   jsActions.execute("$('.overflow-menu').mouseover();");
+    wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
     PageObjectLogging.log("openMoreMenu", "more menu opened", true);
   }
 
@@ -301,4 +304,14 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     }
     PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
   }
+
+  /**
+   * Get text string from Theme Designer button in My Tools menu
+   *
+   */
+
+  public String getThemeDesignerText() {
+    return themeDesignerButton.getText();
+  }
+
 }

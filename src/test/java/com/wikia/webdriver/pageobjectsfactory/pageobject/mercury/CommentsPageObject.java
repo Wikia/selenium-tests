@@ -48,27 +48,27 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public void clickCommentsHeader() {
-    waitForElementVisibleByElement(commentsHeader);
+    wait.forElementVisible(commentsHeader);
     scrollAndClick(commentsHeader);
   }
 
   public void clickViewReplies(int index) {
-    waitForElementVisibleByElement(showRepliesButtons.get(index));
+    wait.forElementVisible(showRepliesButtons.get(index));
     scrollAndClick(showRepliesButtons.get(index));
   }
 
   public void clickNextCommentPageButton() {
-    waitForElementByElement(nextCommentPageButton);
+    wait.forElementVisible(nextCommentPageButton);
     nextCommentPageButton.click();
   }
 
   public void clickPreviousCommentPageButton() {
-    waitForElementByElement(previousCommentPageButton);
+    wait.forElementVisible(previousCommentPageButton);
     previousCommentPageButton.click();
   }
 
   public void clickOnUsername(int index) {
-    waitForElementByElement(commentsUsernames.get(index));
+    wait.forElementVisible(commentsUsernames.get(index));
     commentsUsernames.get(index).click();
   }
 
@@ -84,7 +84,7 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public String getUserUsername(int index) {
-    waitForElementByElement(commentsUsernames.get(index));
+    wait.forElementVisible(commentsUsernames.get(index));
     return commentsUsernames.get(index).getText();
   }
 
@@ -119,24 +119,24 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public boolean isUserAvatarInComment(int index) {
-    return checkIfElementOnPage(commentsAvatars.get(index));
+    return isElementOnPage(commentsAvatars.get(index));
   }
 
   public boolean isUserUsernameInComment(int index) {
-    return checkIfElementOnPage(commentsUsernames.get(index));
+    return isElementOnPage(commentsUsernames.get(index));
   }
 
   public boolean isTimeStampInComment(int index) {
-    return checkIfElementOnPage(commentsTimeStamps.get(index));
+    return isElementOnPage(commentsTimeStamps.get(index));
   }
 
   public boolean isContentInComment(int index) {
-    return checkIfElementOnPage(commentsContent.get(index));
+    return isElementOnPage(commentsContent.get(index));
   }
 
   public boolean isRepliesListExpanded() {
     try {
-      waitForElementVisibleByElement(repliesContent, 5, 1000);
+      wait.forElementVisible(repliesContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
       return false;
     }
@@ -176,6 +176,6 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public void waitForFirstCommentToBeVisible() {
-    waitForElementVisibleByElement(allComments.get(0), 5, 500);
+    wait.forElementVisible(allComments.get(0), 5, 500);
   }
 }

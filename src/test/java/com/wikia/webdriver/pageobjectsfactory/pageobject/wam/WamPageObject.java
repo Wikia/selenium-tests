@@ -1,10 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -17,10 +16,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class WamPageObject extends BasePageObject {
 
@@ -59,6 +59,7 @@ public class WamPageObject extends BasePageObject {
    */
   public void openWamPage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
+    waitForPageLoad();
     PageObjectLogging.log("openWamPage", "WAM page opened", true);
   }
 
@@ -78,11 +79,17 @@ public class WamPageObject extends BasePageObject {
     }
   }
 
+  public WamPageObject isLoaded() {
+    waitForPageLoad();
+
+    return this;
+  }
+
   /**
    * @desc Checks if there is a table row different than head one in WAM index table
    */
   public void verifyWamIndexIsNotEmpty() {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
@@ -98,7 +105,7 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if there are as many rows in the WAM index table as we expect
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals "
         + expectedRowsNo);
   }
@@ -132,7 +139,7 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if "Vertical" column in WAM index has the same values for each row
    */
   public void verifyVerticalColumnValuesAreTheSame() {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     String selectedValue = tabSelected.getAttribute("data-vertical-id");
 
     for (int i = 1; i < wamIndexRows.size(); ++i) {
@@ -151,7 +158,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
-    waitForElementByBy(WAM_INDEX_TABLE);
+    wait.forElementPresent(WAM_INDEX_TABLE);
     List<String> current = getCurrentIndexNo();
     for (int i = 0; i <= endElement - startElement; i++) {
       Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
@@ -160,7 +167,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void clickNextPaginator() {
-    waitForElementByElement(paginationNext);
+    wait.forElementVisible(paginationNext);
     scrollAndClick(paginationNext);
     PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
   }
@@ -168,6 +175,7 @@ public class WamPageObject extends BasePageObject {
   public void selectTab(WamTab tab) {
     scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
         tab.getId()))));
+    isLoaded();
     verifyTabSelected(tab);
   }
 
@@ -175,7 +183,7 @@ public class WamPageObject extends BasePageObject {
     Assertion.assertTrue(driver
         .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
         .getAttribute("class").contains("icon-vertical-selected"));
-    waitForElementByElement(tabSelected);
+    wait.forElementVisible(tabSelected);
   }
 
   public String getSelectedHeaderName() {
@@ -192,11 +200,11 @@ public class WamPageObject extends BasePageObject {
 
   public String changeDateToLastMonth() {
     scrollAndClick(datePickerInput);
-    waitForElementVisibleByElement(calendarElement);
+    wait.forElementVisible(calendarElement);
     previousMonthArrow.click();
     DateTime date = DateTime.now().minusMonths(1);
     String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);
-    waitForTextToBePresentInElementByElement(monthInCalendar, previousMonth);
+    wait.forTextInElement(monthInCalendar, previousMonth);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // first day of the current month
@@ -213,6 +221,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void verifyDateInDatePicker(String date) {
+    isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
     Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
   }
@@ -222,10 +231,7 @@ public class WamPageObject extends BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);
-    datePickerInput.sendKeys(date);
-    Actions actions = new Actions(driver);
-    actions.sendKeys(datePickerInput, "\n");
-    actions.perform();
+    new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
   }
 
   private String getFormattedDate(Date date, String format) {

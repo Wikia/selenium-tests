@@ -25,7 +25,7 @@ public class VideoComponentObject extends WikiBasePageObject {
   }
 
   public WebElement getVideoPlayerObject() {
-    return videoEmbed.findElement(By.cssSelector("[name=flashvars]"));
+    return videoEmbed.findElement(By.cssSelector("*[name=flashvars]"));
   }
 
   public WebElement getVideoPlayerIframe() {
@@ -54,17 +54,17 @@ public class VideoComponentObject extends WikiBasePageObject {
     WebElement container = videoEmbed.findElement(By.tagName("div"));
     String containerId = "ooyalaplayer-";
     Assertion.assertStringContains(container.getAttribute("id"), containerId);
-    waitForElementVisibleByElement(container.findElement(By.tagName("object")));
+    wait.forElementVisible(container.findElement(By.tagName("object")));
     PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
   }
 
   public void verifyVideoObjectVisible() {
-    waitForElementVisibleByElement(videoEmbed.findElement(By.tagName("object")));
+    wait.forElementVisible(videoEmbed.findElement(By.tagName("object")));
     PageObjectLogging.log("verifyVideoObjectVisible", "Video object is visible", true);
   }
 
   public void verifyVideoIframeVisible() {
-    waitForElementVisibleByElement(videoEmbed.findElement(By.tagName("iframe")));
+    wait.forElementVisible(videoEmbed.findElement(By.tagName("iframe")));
     PageObjectLogging.log("verifyVideoIframeVisible", "Video iframe is visible", true);
   }
 
@@ -80,7 +80,7 @@ public class VideoComponentObject extends WikiBasePageObject {
     Assertion.assertStringContains(container.getAttribute("id"), containerId);
 
     WebElement object = container.findElement(By.tagName("object"));
-    waitForElementVisibleByElement(object);
+    wait.forElementVisible(object);
     Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id")
     );
     PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
@@ -93,7 +93,7 @@ public class VideoComponentObject extends WikiBasePageObject {
     String embedCode = "";
     switch (providerName) {
       case "screenplay":
-        autoplayStr = "autostart=" + status;
+        autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
         embedCode = getVideoPlayerObject().getAttribute("value");
         break;
       case "ign":

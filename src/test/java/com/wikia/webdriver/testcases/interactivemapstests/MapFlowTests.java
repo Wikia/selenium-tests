@@ -30,7 +30,7 @@ public class MapFlowTests extends NewTestTemplate {
   @Test(groups = {"MapFlowTests_001", "MapFlowTests", "InteractiveMaps"}, enabled = false)
   public void MapFlowTests_001_CreateCustomMapNewImageUpload() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -52,7 +52,7 @@ public class MapFlowTests extends NewTestTemplate {
   @Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
   public void MapFlowTests_002_CreateCustomMapWithExistingTemplate() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -77,7 +77,7 @@ public class MapFlowTests extends NewTestTemplate {
   @Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
   public void MapFlowTests_003_CreateRealMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateRealMapComponentObject realMap = map.clickRealMap();
@@ -94,7 +94,7 @@ public class MapFlowTests extends NewTestTemplate {
   @Test(groups = {"MapFlowTests_004", "MapFlowTests", "InteractiveMaps"})
   public void MapFlowTests_004_VerifyBackButtonWorksCorrectly() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -115,7 +115,7 @@ public class MapFlowTests extends NewTestTemplate {
   @Test(groups = {"MapFlowTests_005", "MapFlowTests", "InteractiveMaps"})
   public void MapFlowTests_005_VerifyCloseButtonsInCreationMapFlow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.logInCookie(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMapModal = specialMap.clickCreateAMap();
     specialMap = createMapModal.clickCloseButton();
