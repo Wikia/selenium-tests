@@ -23,13 +23,8 @@ public class PageContent {
       "Ut enim ad minim veniam, quis nostrud exercitation " +
       "ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   public static final String COMMENT_TEXT = "Lorem ipsum dolor sit amet, comment";
-  public static final String COMMENT_TEXT2 = "QAComment";
-  public static final String
-      COMMENT_TEXT_NON_LATIN =
-      "QAComment 한국어 위키백과에 На Вама је да одлучите 佛教藝術";
-  public static final String COMMENT_TEXT_EDIT = "Brand new comment";
   public static final String REPLY_TEXT = "Brand new reply";
-  public static final String REPLY_TEXT2 = "QAReply";
+
   //articles with TOC
   public static final String ARTICLE_WITH_TOC_LINES =
       "==First Heading==\n" +
@@ -40,28 +35,27 @@ public class PageContent {
       "text of the sub-heading number 1\n" +
       "===sub-heading number 2===\n" +
       "text of the sub-heading number 2\n";
+
   //blogs
   public static final String BLOG_POST_NAME_PREFIX = "blogPost";
   public static final String BLOG_CONTENT = "blogContent";
-  public static final String BLOG_CONTENT_EDIT = "blogContentEdit";
-  public static final String BLOG_COMMENT = "blogComment";
-  public static final String BLOG_COMMENT_REPLY = "blogCommentReply";
-  public static final String BLOG_COMMENT_EDIT = "blogCommentEdit";
-  public static final String BLOG_LIST_NAME = "BlogPostList";
+
   //categories
   public static final String CATEGORY_NAME_PREFIX = "Cat";
+
   //generic
   public static final String CAPTION = "QAWebdriverCaption1";
   public static final String CAPTION2 = "QAWebdriverCaption2";
   public static final String WIKIA_CONTRIBUTOR = "A Wikia contributor";
+
   //image serving
   public static final String FILE = "Image001.jpg";
   public static final String FILEPNG = "Image001.png";
   public static final String FILE2PNG = "Image002.png";
   public static final String SMALLFILE = "Image011-Small-image.png";
   public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
+
   //image storage
-  public static final String FILE_DELETE_AND_RESTORE = "Constantine_test.png";
   public static final String FILERENAME = "Image003.jpg";
   public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
@@ -69,16 +63,15 @@ public class PageContent {
       "Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
       "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
   };
-  public static final String RESOURCES_PATH =
+  public static final String IMAGE_UPLOAD_RESOURCES_PATH =
       "." + File.separator + "src" + File.separator +
       "test" + File.separator + "resources" + File.separator +
       "ImagesForUploadTests" + File.separator;
+
   //message wall
   public static final String MESSAGE_WALL_TITLE_PREFIX = "QAMessageWallTitle";
-  public static final String MESSAGE_WALL_TITLE_EDIT_PREFIX = "QAMessageWallTitleEdit";
   public static final String MESSAGE_WALL_MESSAGE_PREFIX = "QAMessageWallMessage";
   public static final String MESSAGE_WALL_MESSAGE_EDIT_PREFIX = "QAMessageWallEditMessage";
-  public static final String MESSAGE_WALL_MESSAGE_NON_LATIN_PREFIX = "Гсторыя śćąęłńó";
   public static final String MESSAGE_WALL_QUOTE_PREFIX = "QAQuote";
 
   //links
@@ -106,16 +99,11 @@ public class PageContent {
   public static final String CLOSE_REASON = "QA reason";
 
   //Messages
-  public static final String ARTICLE_DELETED_MESSAGE = "This page has been deleted.";
-  public static final String CREATE_NEW_BLOG_POST_MESSAGE = "Create a new blog post";
   public static final String LOGIN_REQUIRED = "Login required";
   public static final String NOT_LOGGED_IN_MESSAGE = "Not logged in";
   public static final String
       NEW_PASSWORD_SENT_MESSAGE =
       "We've sent a new password to the email address for %userName%.";
-  public static final String
-      PHALANX_BLOCK_MESSAGE =
-      "The page you wanted to save was blocked by the spam filter.";
   public static final String
       PHALANX_BLOCK_TITLE_MESSAGE =
       "Sorry, the page title was rejected by our spam filter. Please use a different title.";
@@ -129,14 +117,8 @@ public class PageContent {
       SIGN_UP_USER_EXISTS_MESSAGE =
       "Someone already has this username. Try a different one!";
 
-  //Blocks for Phalanx
-  public static final String TITLE_FILTER_PLAIN = "BadContent";
-
   //wikiText
   public static final String WIKI_TEXT_PHOTO = "[[File:%photoName%|thumb|%s]]";
-  public static final String
-      WIKI_TEXT_SLIDESHOW =
-      "<gallery type=\"slideshow\" position=\"center\">\n%image1%\n%image2%\n%image3%\n%image4%\n</gallery>";
 
   //SignUp correct
   public static final String WIKI_SIGN_UP_BIRTHDAY = "11";
@@ -145,18 +127,20 @@ public class PageContent {
   public static final int MIN_AGE = 12;
 
   //Hero Module edit field default message
-  public static final String WIKIA_HERO_PROMOTE_MESSAGE = "Add a summary that will promote your wikia in searches and on hubs.";
+  public static final String
+      WIKIA_HERO_PROMOTE_MESSAGE =
+      "Add a summary that will promote your wikia in searches and on hubs.";
 
   //Portable Infoboxes content
   public static final String PORTABLE_INFOBOX02 = "Infobox4Automation01";
   public static final String PORTABLE_INFOBOX01 = "Infobox4Automation02";
-  public static final String PORTABLE_INFOBOX_WEBSITE_TEMPLATE = "Template:Infobox_Website";
+  public static final String PORTABLE_INFOBOX_EMPTY_TAGS = "Infobox4Automation09";
+  public static final String PI_TEMPLATE_WEBSITE_SIMPLE = "Template:Infobox_Website_Simple";
   public static final String FILE_IMAGE_NAME = "File:WallPaperHD_138.jpg";
 
-    //Customized toolbar
-    public static final String FOLLOW = "follow";
+  //Customized toolbar
+  public static final String FOLLOW = "follow";
 
   private PageContent() {
-
   }
 }

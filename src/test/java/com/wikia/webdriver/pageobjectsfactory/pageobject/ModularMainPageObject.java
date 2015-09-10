@@ -1,5 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by RodriGomez on 02/04/15.
@@ -61,7 +62,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void selectFileToUpload(String file) {
-    updateCoverImageInput.sendKeys(getAbsolutePathForFile(ClassLoader.getSystemResource(
+    updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
         "ImagesForUploadTests/" + file).getPath()));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }

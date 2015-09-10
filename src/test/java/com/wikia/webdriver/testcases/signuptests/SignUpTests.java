@@ -21,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-import org.testng.annotations.AfterGroups;
+
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -169,7 +169,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB);
+        credentials.passwordFB).logOutFB();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
@@ -195,8 +195,8 @@ public class SignUpTests extends NewTestTemplate {
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
-    String userName = "品質管理" + signUp.getTimeStamp();
-    String password = "品質管理管理" + signUp.getTimeStamp();
+    String userName = "ユーザー" + signUp.getTimeStamp();
+    String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
 
@@ -218,24 +218,5 @@ public class SignUpTests extends NewTestTemplate {
     PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
-  }
-
-  @AfterGroups(groups = {"SignUp_007"}, alwaysRun = true)
-  public void disconnectFromFB() {
-    startBrowser();
-    try {
-      if (userName != null) {
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage(wikiURL);
-        base.appendToUrl("noads=1");
-        base.loginAs(userName, password, wikiURL);
-        base.verifyUserLoggedIn(userName);
-        PreferencesPageObject preferences = base.openSpecialPreferencesPage(wikiURL);
-        preferences.selectTab(tabNames.FACEBOOK);
-        preferences.disconnectFromFacebook();
-      }
-    } finally {
-      stopBrowser();
-    }
   }
 }

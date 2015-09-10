@@ -14,62 +14,24 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.kennychua</groupId>
-			<artifactId>phantomjs-qunit-runner</artifactId>
-			<version>1.0.14</version>
-		</dependency>
-		<!-- QAART-397 Overriding jetty-server version that browsermob-proxy uses -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>8.1.15.v20140411</version>
-		</dependency>
-		<!-- QAART-397 Overriding jetty-servlet version that browsermob-proxy uses -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>8.1.15.v20140411</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.7.10</version>
-		</dependency>
-		<dependency>
-			<groupId>biz.neustar</groupId>
-			<artifactId>browsermob-proxy</artifactId>
-			<version>2.0-beta-7</version>
-			<!-- QAART-397 Added exclusions as browsermob-proxy uses version 7.3.0.v20110203 -->
-			<!-- which no longer return http 200 -->
+			<groupId>com.codeborne</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.2.1</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-jdk14</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-remote-driver</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-server</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-servlet</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-chrome-driver</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>de.sstoehr</groupId>
-			<artifactId>har-reader</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>xmlunit</groupId>
-			<artifactId>xmlunit</artifactId>
-			<version>1.3</version>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>2.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -78,15 +40,28 @@
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
 			<version>${webdriver.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
+			<artifactId>selenium-firefox-driver</artifactId>
 			<version>${webdriver.version}</version>
-			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-ie-driver</artifactId>
+			<version>${webdriver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-safari-driver</artifactId>
+			<version>${webdriver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${webdriver.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -94,16 +69,25 @@
 			<version>${webdriver.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>jetty-repacked</artifactId>
+			<version>7.6.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8.8</version>
+			<version>6.9.6</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<scope>test</scope>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.yaml</groupId>
@@ -121,24 +105,9 @@
 			<version>1.4.4</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.detro.ghostdriver</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>1.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.json</groupId>
@@ -146,20 +115,9 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.json</artifactId>
-			<version>1.0.4</version>
-		</dependency>
-		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20080701</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.appium</groupId>
-			<artifactId>java-client</artifactId>
-			<version>2.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -170,6 +128,11 @@
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.lightbody.bmp</groupId>
+			<artifactId>browsermob-core</artifactId>
+			<version>2.1.0-beta-2</version>
 		</dependency>
 	</dependencies>
 	<build>

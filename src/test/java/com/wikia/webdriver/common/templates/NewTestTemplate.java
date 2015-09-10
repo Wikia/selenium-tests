@@ -49,7 +49,17 @@ public class NewTestTemplate extends NewTestTemplateCore {
       NewDriverProvider.setUnstablePageLoadStrategy(true);
     }
 
+    if (method.isAnnotationPresent(Execute.class)) {
+      String onDriver = method.getAnnotation(Execute.class).allowedDriver();
+      if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
+        throw new SkipException(
+            "The test can not be run on driver " + Configuration
+                .getBrowser() + ". The test is restricted to driver " + onDriver);
+      }
+    }
+
     startBrowser();
+
     if (method.isAnnotationPresent(Execute.class)) {
       if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
         loadFirstPage();

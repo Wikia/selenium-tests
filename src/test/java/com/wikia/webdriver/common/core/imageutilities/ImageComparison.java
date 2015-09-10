@@ -59,7 +59,6 @@ public class ImageComparison {
    */
   public boolean isColorImage(BufferedImage image, Color color, int accuracy) {
     int count = image.getHeight() * image.getWidth();
-    ;
     int diffCount = 0;
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
@@ -69,6 +68,20 @@ public class ImageComparison {
       }
       if (diffCount > ((100 - accuracy) * count) / 100D) {
         return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * @return true if image has one color
+   */
+  public boolean isMonocolorImage(BufferedImage image) {
+    for (int x = 1; x < image.getWidth(); x++) {
+      for (int y = 1; y < image.getHeight(); y++) {
+        if (image.getRGB(x - 1, y - 1) != image.getRGB(x, y)) {
+          return false;
+        }
       }
     }
     return true;

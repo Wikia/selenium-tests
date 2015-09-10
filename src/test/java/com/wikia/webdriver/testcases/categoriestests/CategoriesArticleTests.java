@@ -1,16 +1,15 @@
 package com.wikia.webdriver.testcases.categoriestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -34,8 +33,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
-  public void  CategoriesTestsArticle_002_anonSuggestions() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+  public void CategoriesTestsArticle_002_anonSuggestions() {
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
@@ -46,7 +45,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_003_user() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
@@ -58,7 +57,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_004_userSuggestions() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
@@ -68,7 +67,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_005_anonEdit() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + DateTime.now().getMillis();
@@ -82,7 +81,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})
   public void CategoriesTestsArticle_006_anonDelete() {
-    ArticleContent.push(PageContent.ARTICLE_TEXT);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.addCategory("DeleteMe");

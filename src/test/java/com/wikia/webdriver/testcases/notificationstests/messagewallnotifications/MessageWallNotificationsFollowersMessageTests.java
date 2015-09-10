@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
@@ -34,7 +34,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   public void followerNotificationNewMessage_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName6);
     WatchPageObject watch = wall.unfollowCurrentUrl();
     watch.confirmWatchUnwatch();
     wall.follow();
@@ -50,7 +50,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   public void followerNotificationNewMessage_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName6, credentials.password6, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName6);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();

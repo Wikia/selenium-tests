@@ -1,10 +1,10 @@
 package com.wikia.webdriver.common.properties;
 
-import java.io.File;
-
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.EditorPref;
+
+import java.io.File;
 
 /**
  * @author Bogna 'bognix' Knychała

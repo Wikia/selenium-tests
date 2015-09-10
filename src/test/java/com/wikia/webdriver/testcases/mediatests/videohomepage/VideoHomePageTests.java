@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.mediatests.videohomepage;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHomePageObject;
 
 import org.testng.annotations.Test;

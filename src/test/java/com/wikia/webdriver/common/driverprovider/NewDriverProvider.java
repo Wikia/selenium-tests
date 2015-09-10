@@ -1,15 +1,10 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.apache.commons.lang3.StringUtils;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,10 +21,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import io.appium.java_client.android.AndroidDriver;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 
 /**
@@ -222,9 +220,6 @@ public class NewDriverProvider {
             .getPath());
 
     // TODO change mobile tests to use @UserAgent annotation
-    if ("CHROMEMOBILE".equals(browserName)) {
-      chromeOptions.addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone"));
-    }
     if ("CHROMEMOBILEMERCURY".equals(browserName)) {
       chromeOptions
           .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury"));
@@ -232,7 +227,6 @@ public class NewDriverProvider {
 
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
-      chromeOptions.addArguments("disable-direct-npapi-requests");
       chromeOptions.addArguments("process-per-site");
     }
 

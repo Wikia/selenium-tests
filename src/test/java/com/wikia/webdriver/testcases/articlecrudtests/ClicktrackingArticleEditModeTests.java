@@ -1,17 +1,17 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.json.JsonObject;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.clicktracking.events.EventsArticleEditMode;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.json.JsonObject;
 
 /**
  * @ownership Content X-Wing

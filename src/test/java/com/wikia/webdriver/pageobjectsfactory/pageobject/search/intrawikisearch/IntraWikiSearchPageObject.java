@@ -1,8 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,10 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
@@ -106,8 +106,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void searchFor(String query) {
-    searchField.sendKeys(query);
-    searchField.sendKeys(Keys.ENTER);
+    searchField.sendKeys(query + Keys.ENTER);
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
   }
 
@@ -197,28 +196,33 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     clickAdvancedButton();
     chooseAdvancedOption(0);
     PageObjectLogging.log("selectAllAdvancedOptions", "All advance options are selected", true,
-        driver);
+                          driver);
   }
 
+  /*
+  * Make sure namespace checkboxes are empty, except Articles and Category
+  */
   public void verifyDefaultNamespaces() {
     wait.forElementVisible(advancedField);
     for (int i = 0; i < advancedOptions.size(); i++) {
-      if ("Articles".equals(advancedOptions.get(i).getText())) {
-        Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
-      } else if ("Category".equals(advancedOptions.get(i).getText())) {
-        Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
+
+      String optionName = advancedOptions.get(i).getText();
+      String optionState = advancedOptionInputs.get(i).getAttribute("checked");
+
+      if (optionName.equals("Articles") | optionName.equals("Category")) {
+        Assertion.assertEquals(optionState, "true");
       } else {
-        Assertion.assertNull(advancedOptionInputs.get(i).getAttribute("checked"));
+        Assertion.assertNull(optionState);
       }
     }
   }
 
   public void selectPhotosVideos() {
     wait.forElementVisible(photosVideos);
-    photosVideos.click();
+    scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
     PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true,
-        driver);
+                          driver);
   }
 
   public void verifyPhotosOnly() {
@@ -276,7 +280,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void selectPhotosOnly() {
-    filterPhotos.click();
+    scrollAndClick(filterPhotos);
     PageObjectLogging.log("selectPhotosOnly", "Photos option is selected", true, driver);
   }
 
@@ -339,7 +343,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
     PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
-        true, driver);
+                          true, driver);
   }
 
   public void verifyNewSuggestionsTextAndImages(String query) {
@@ -353,7 +357,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
     }
     PageObjectLogging.log("verifyNewSuggestionsTextAndImages",
-        "Image and text next to every suggestion is verified", true);
+                          "Image and text next to every suggestion is verified", true);
   }
 
   public void searchForInGlobalNavIfPresent(String query) {

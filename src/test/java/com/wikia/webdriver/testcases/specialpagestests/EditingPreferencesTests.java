@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -52,8 +51,6 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
   }
 
-  @RelatedIssue(issueID = "QAART-665",
-      comment = "Automation test is broken. Please test manually")
   @Test(groups = {"EditingPreferencesTest", "EditPreferences_002"})
   public void EditPreferences_002_selectCK() {
     EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);

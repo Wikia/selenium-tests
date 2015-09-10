@@ -12,7 +12,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -20,7 +20,6 @@ import java.io.File;
  * Class represents helper functionality for working with Ad Skin (such as checking whether ad skin
  * present on the page or not)
  *
- * @author drets
  * @ownership AdEng
  */
 public class SkinHelper {

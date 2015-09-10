@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
@@ -44,7 +43,6 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
- @RelatedIssue(issueID = "OPS-6716", comment = "Please test it manually")
  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
  @Execute(asUser = User.USER)

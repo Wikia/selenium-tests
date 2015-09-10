@@ -17,3 +17,4 @@ config.xml
 config.yml
 .gradle/
 build/
+src/test/resources/ImagesForUploadTests/random_image.png

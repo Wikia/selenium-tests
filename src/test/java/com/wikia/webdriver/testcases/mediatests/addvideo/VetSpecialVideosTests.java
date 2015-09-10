@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -15,6 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

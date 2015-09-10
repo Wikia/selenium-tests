@@ -1,14 +1,6 @@
 package com.wikia.webdriver.common.core;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
@@ -21,7 +13,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CommonUtils {
@@ -72,6 +72,14 @@ public class CommonUtils {
     } catch (SecurityException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public static String getAbsolutePathForFile(String relativePath) {
+    File fileCheck = new File(relativePath);
+    if (!fileCheck.isFile()) {
+      throw new RuntimeException("file " + relativePath + " doesn't exists");
+    }
+    return fileCheck.getAbsolutePath();
   }
 
   public static String sendPost(String apiUrl, String[][] param) {

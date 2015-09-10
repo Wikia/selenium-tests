@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
@@ -29,6 +30,12 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement bgColor;
   @FindBy(css = ".background-image")
   private WebElement bgImage;
+  @FindBy(css = "#tile-background")
+  private WebElement bgTileOption;
+  @FindBy(css = "#fix-background")
+  private WebElement bgFixOption;
+  @FindBy(css = "#not-split-background")
+  private WebElement bgNoSplitOption;
   @FindBy(css = ".ThemeDesignerPicker.image")
   private WebElement bgImagePicker;
   @FindBy(css = ".color-buttons")
@@ -54,6 +61,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement secondThemesSet;
   @FindBy(css = "ul[style='margin-left: -1520px;']")
   private WebElement thirdThemesSet;
+  @FindBy(id = "backgroundImageUploadFile")
+  private WebElement fileUploadInput;
+  @FindBy(css = "#BackgroundImageForm [type='submit']")
+  private WebElement imageSubmit;
 
   String tabSelector = "a[rel='%tabName%Tab']";
   String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
@@ -62,9 +73,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public void openSpecialDesignerPage(String wikiURL) {
+  public SpecialThemeDesignerPageObject openSpecialDesignerPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_THEME_DESIGNER);
     PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
+    return this;
   }
 
   /**
@@ -73,22 +85,18 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public String selectTheme(int number) {
     wait.forElementVisible(themes.get(0));
     if (number < 5) {
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     if (number == 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
-      wait.forElementVisible(themes.get(7));
       scrollAndClick(nextButton);
       wait.forElementVisible(thirdThemesSet);
-      wait.forElementVisible(themes.get(number));
       scrollAndClick(themes.get(number));
     }
     String themeName =
@@ -104,10 +112,16 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
         .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
-  public void submitThemeSelection() {
+  public void submitTheme() {
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+  }
+
+  public void uploadLargeImage() {
+    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
+        "ImagesForUploadTests/2000x150.png").getPath()));
+    imageSubmit.click();
   }
 
   public enum Tab {
@@ -123,9 +137,16 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
+  /**
+   * no split option appears only for backgrounds that are over 2000px wide
+   */
   public void verifyCustomizeTab() {
     wait.forElementVisible(bgColor);
     wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgImage);
+    wait.forElementVisible(bgTileOption);
+    wait.forElementVisible(bgFixOption);
+    wait.forElementVisible(bgNoSplitOption);
     wait.forElementVisible(pgButtons);
     wait.forElementVisible(pgLinks);
     wait.forElementVisible(pgHeader);

@@ -1,6 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
 
-import java.util.List;
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.interactions.Typing;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,13 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.interactions.Typing;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
+import java.util.List;
 
 public class NavigationBar extends WikiBasePageObject {
 

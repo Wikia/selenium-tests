@@ -27,23 +27,27 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void clickShowbutton() {
+  public SpecialWhatLinksHerePageObject clickShowbutton() {
     wait.forElementVisible(showButton);
     showButton.click();
+    return this;
   }
 
-  public void clickPageInputField() {
+  public SpecialWhatLinksHerePageObject clickPageInputField() {
     wait.forElementVisible(pageInputField);
     pageInputField.click();
+    return this;
   }
 
-  public void typeInfoboxImageName(String imageFileName) {
+  public SpecialWhatLinksHerePageObject typeInfoboxImageName(String imageFileName) {
     pageInputField.sendKeys(imageFileName);
+    return this;
   }
 
-  public void verifyInfoboxArticleInList(String articleName) {
+  public SpecialWhatLinksHerePageObject verifyInfoboxArticleInList(String articleName) {
     wait.forElementVisible(filtersSection);
     String firstResult = whatLinksList.get(0).getText();
     Assertion.assertStringContains(firstResult, articleName);
+    return this;
   }
 }
