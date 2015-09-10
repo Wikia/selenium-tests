@@ -152,11 +152,12 @@ public class NavigationSideComponentObject extends BasePageObject {
     searchInput.sendKeys(content);
   }
 
-  public void navigateToArticle(String articleName) {
+  public NavigationSideComponentObject navigateToArticle(String articleName) {
     clickSearchButton();
     clickSearchField();
     typeInSearchField(articleName);
     clickSuggestion(0);
     waitForLoadingSpinnerToFinish();
+    return this;
   }
 }

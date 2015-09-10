@@ -26,19 +26,20 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract boolean isTagLoadedOnOasis();
 
-  public void create() {
+  public WidgetPageObject create() {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(getArticleName());
     articleContent.push(getTag(), getArticleName());
+    return this;
   }
 
-  public void navigate(String wikiUrl) {
+  public WidgetPageObject navigate(String wikiUrl) {
     openMercuryArticleByNameWithCbAndNoAds(wikiUrl, getArticleName());
+    return this;
   }
 
-  public void createAndNavigate(String wikiUrl) {
-    create();
-    navigate(wikiUrl);
+  public WidgetPageObject createAndNavigate(String wikiUrl) {
+    return create().navigate(wikiUrl);
   }
 
   public boolean isLoadedOnMercury() {

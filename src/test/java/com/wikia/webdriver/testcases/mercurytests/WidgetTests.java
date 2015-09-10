@@ -43,8 +43,8 @@ public class WidgetTests extends NewTestTemplate {
   public void MercuryWidgetTest_002_Twitter_FirstVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
-    twitterWidgetPageObject.create();
     twitterWidgetPageObject
+        .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(TWITTER_ARTICLE_NAME);
 
@@ -56,12 +56,12 @@ public class WidgetTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWidgetTest_003_Twitter_SecondVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
-    NavigationSideComponentObject navigationSideComponentObject =
-        new NavigationSideComponentObject(driver);
 
     twitterWidgetPageObject.createAndNavigate(wikiURL);
-    navigationSideComponentObject.navigateToArticle(MAPS_ARTICLE_NAME);
-    navigationSideComponentObject.navigateToArticle(TWITTER_ARTICLE_NAME);
+
+    new NavigationSideComponentObject(driver)
+        .navigateToArticle(MAPS_ARTICLE_NAME)
+        .navigateToArticle(TWITTER_ARTICLE_NAME);
 
     Assertion
         .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
