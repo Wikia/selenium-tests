@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
-      "Hm, we don't recognize these credentials. Please try again or register a new account.";
+      "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = {"MercuryLoginTest_001"})
   @Execute(onWikia = "mobileregressiontesting")
@@ -32,7 +32,7 @@ public class LoginTests extends NewTestTemplate {
                         Configuration.getCredentials().password10);
 
     new ArticlePageObject(driver).waitForFooterToBeVisible();
-    
+
     Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
   }
 
