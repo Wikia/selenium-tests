@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @ownership: Content X-Wing
@@ -33,12 +34,12 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    // to be implemented
-    return isElementVisible(elementInVebatim);
+    throw new NotImplementedException();
+    //return isElementVisible(elementInVebatim);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    // to be implemented
-    return isElementVisible(elementInVebatim);
+    throw new NotImplementedException();
+    //return isElementVisible(elementInVebatim);
   }
 }
