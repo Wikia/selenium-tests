@@ -4,8 +4,10 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
@@ -13,147 +15,149 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObjec
 import org.testng.annotations.Test;
 
 /**
- * Created by Qaga on 2015-06-29.
+ * @ownership Social
  */
-@Test(groups = {"MercuryMobileLogin"})
+@Test(groups = {"MercuryLoginTests", "Mercury"})
 public class LoginTests extends NewTestTemplate {
 
-    private static final String ERROR_MESSAGE =
-            "Hm, we don't recognize these credentials. Please try again or register a new account.";
+  private static final String ERROR_MESSAGE =
+      "We don't recognize these credentials. Try again or register a new account.";
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void validUserCanLogIn() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn(Configuration.getCredentials().userName10,
-                Configuration.getCredentials().password10);
+  @Test(groups = {"MercuryLoginTest_001"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_001_validUserCanLogIn() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
+    loginPage.logUserIn(Configuration.getCredentials().userName10,
+                        Configuration.getCredentials().password10);
 
-        Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
-                Configuration.getCredentials().userName10));
-    }
+    new ArticlePageObject(driver).waitForFooterToBeVisible();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void userCanNotLogInWithWrongPassword() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn(Configuration.getCredentials().userName10, "thisIsWrongPassword");
+    Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
+  }
 
-        Assertion.assertEquals(loginPage.getErrorMessage(), ERROR_MESSAGE);
-    }
+  @Test(groups = {"MercuryLoginTest_002"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_002_userCanNotLogInWithWrongPassword() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userName10, "thisIsWrongPassword");
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void invalidUserCanNotLogIn() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn("notExistingUserName", Configuration.getCredentials().password10);
+    Assertion.assertEquals(loginPage.getErrorMessage(), ERROR_MESSAGE);
+  }
 
-        Assertion.assertEquals(loginPage.getErrorMessage(), ERROR_MESSAGE);
-    }
+  @Test(groups = {"MercuryLoginTest_003"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_003_invalidUserCanNotLogIn() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn("notExistingUserName", Configuration.getCredentials().password10);
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void notPossibleToLogInWhenUsernameFieldBlank() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn("", Configuration.getCredentials().password10);
+    Assertion.assertEquals(loginPage.getErrorMessage(), ERROR_MESSAGE);
+  }
 
-        Assertion.assertTrue(loginPage.isSubmitButtonDisabled(2));
-    }
+  @Test(groups = {"MercuryLoginTest_004"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_004_notPossibleToLogInWhenUsernameFieldBlank() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn("", Configuration.getCredentials().password10);
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void notPossibleToLogInWhenPasswordFieldBlank() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn(Configuration.getCredentials().userName10, "");
+    Assertion.assertTrue(loginPage.isSubmitButtonDisabled(2));
+  }
 
-        Assertion.assertTrue(loginPage.isSubmitButtonDisabled(2));
-    }
+  @Test(groups = {"MercuryLoginTest_005"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_005_notPossibleToLogInWhenPasswordFieldBlank() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userName10, "");
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void closeButtonWorksAndRedirectsProperly() {
-        ArticlePageObject homePage = new ArticlePageObject(driver);
-        homePage.openMainPage(wikiURL);
-        String expectedHomePageTitle = homePage.getArticleTitle();
+    Assertion.assertTrue(loginPage.isSubmitButtonDisabled(2));
+  }
 
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.clickOnCloseButton();
+  @Test(groups = {"MercuryLoginTest_006"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_006_closeButtonWorksAndRedirectsProperly() {
+    ArticlePageObject homePage = new ArticlePageObject(driver);
+    homePage.openMainPage(wikiURL);
+    String expectedHomePageTitle = homePage.getArticleTitle();
 
-        Assertion.assertEquals(expectedHomePageTitle, homePage.getArticleTitle());
-    }
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.clickOnCloseButton();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void registerNowLinkWorks() {
-        SignupPageObject registrationPage = new SignupPageObject(driver);
-        registrationPage.openRegisterPage();
-        String expectedHeader = registrationPage.getRegisterHeaderText();
+    homePage.isFooterLogoVisible();
+    Assertion.assertEquals(expectedHomePageTitle, homePage.getArticleTitle());
+  }
 
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.clickOnRegisterLink();
-        String currentHeader = registrationPage.getRegisterHeaderText();
-        Assertion.assertEquals(expectedHeader, currentHeader);
-    }
+  @Test(groups = {"MercuryLoginTest_007"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_007_registerNowLinkWorks() {
+    SignupPageObject registrationPage = new SignupPageObject(driver);
+    registrationPage.openRegisterPage();
+    String expectedHeader = registrationPage.getRegisterHeaderText();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void userIsTakenToJoinPage() {
-        JoinPage joinPage = new JoinPage(driver).get();
-        String expectedMessage = joinPage.getJoinTodayText();
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.clickOnRegisterLink();
+    String currentHeader = registrationPage.getRegisterHeaderText();
+    Assertion.assertEquals(expectedHeader, currentHeader);
+  }
 
-        ArticlePageObject homePage = new ArticlePageObject(driver);
-        homePage.openMainPage(wikiURL);
-        TopBarComponentObject loginIcon = new TopBarComponentObject(driver);
-        loginIcon.clickLogInIcon();
+  @Test(groups = {"MercuryLoginTest_008"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_008_userIsTakenToJoinPage() {
+    JoinPage joinPage = new JoinPage(driver).get();
+    String expectedMessage = joinPage.getJoinTodayText();
 
-        Assertion.assertEquals(joinPage.getJoinTodayText(), expectedMessage);
-    }
+    ArticlePageObject homePage = new ArticlePageObject(driver);
+    homePage.openMainPage(wikiURL);
+    TopBarComponentObject loginIcon = new TopBarComponentObject(driver);
+    loginIcon.clickLogInIcon();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void registerButtonWorksOnJoinPage() {
-        SignupPageObject registrationPage = new SignupPageObject(driver);
-        registrationPage.openRegisterPage();
-        String expectedHeader = registrationPage.getRegisterHeaderText();
+    Assertion.assertEquals(joinPage.getJoinTodayText(), expectedMessage);
+  }
 
-        JoinPage joinPage = new JoinPage(driver).get();
-        joinPage.clickRegisterWithEmail();
+  @Test(groups = {"MercuryLoginTest_009"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_009_registerButtonWorksOnJoinPage() {
+    SignupPageObject registrationPage = new SignupPageObject(driver);
+    registrationPage.openRegisterPage();
+    String expectedHeader = registrationPage.getRegisterHeaderText();
 
-        Assertion.assertEquals(registrationPage.getRegisterHeaderText(), expectedHeader);
-    }
+    JoinPage joinPage = new JoinPage(driver).get();
+    joinPage.clickRegisterWithEmail();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void signInLinkWorksOnJoinPage() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        String expectedHeader = loginPage.getLoginHeaderText();
+    Assertion.assertEquals(registrationPage.getRegisterHeaderText(), expectedHeader);
+  }
 
-        JoinPage joinPage = new JoinPage(driver).get();
-        joinPage.clickSignInLink();
+  @Test(groups = {"MercuryLoginTest_010"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_010_signInLinkWorksOnJoinPage() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    String expectedHeader = loginPage.getLoginHeaderText();
 
-        Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
-    }
+    JoinPage joinPage = new JoinPage(driver).get();
+    joinPage.clickSignInLink();
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void passwordTogglerWorks() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.typePassword(Configuration.getCredentials().password10);
+    Assertion.assertEquals(loginPage.getLoginHeaderText(), expectedHeader);
+  }
 
-        Assertion.assertTrue(loginPage.isPasswordTogglerDisabled(), "password should be disabled");
+  @Test(groups = {"MercuryLoginTest_011"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_011_japaneseUserLogIn() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.logUserIn(Configuration.getCredentials().userNameJapanese2,
+                        Configuration.getCredentials().passwordJapanese2);
+    Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
+        Configuration.getCredentials().userNameJapanese2));
+  }
 
-        loginPage.clickOnPasswordToggler();
+  @Test(groups = {"MercuryLoginTest_012"})
+  @Execute(onWikia = "mobileregressiontesting")
+  public void MercuryLoginTest_012_passwordTogglerWorks() {
+    LoginPage loginPage = new LoginPage(driver).get();
+    loginPage.typePassword(Configuration.getCredentials().password10);
 
-        Assertion.assertTrue(loginPage.isPasswordTogglerEnabled(), "password should be enabled");
-    }
+    Assertion.assertTrue(loginPage.isPasswordTogglerDisabled(), "password should be disabled");
 
-    @Test
-    @Execute(onWikia = "mobileregressiontesting")
-    public void japaneseUserLogIn() {
-        LoginPage loginPage = new LoginPage(driver).get();
-        loginPage.logUserIn(Configuration.getCredentials().userNameJapanese2,
-                Configuration.getCredentials().passwordJapanese2);
-        Assertion.assertTrue(loginPage.getNav().isUserLoggedIn(
-                Configuration.getCredentials().userNameJapanese2));
-    }
+    loginPage.clickOnPasswordToggler();
+
+    Assertion.assertTrue(loginPage.isPasswordTogglerEnabled(), "password should be enabled");
+  }
 }
-

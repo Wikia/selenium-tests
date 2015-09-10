@@ -148,7 +148,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public boolean isUserLoggedIn(String username) {
-    return driver.findElements(By.cssSelector("figure.avatar img[alt='" + username + "']")).size()
-           > 0;
+    By avatar = By.cssSelector("figure.avatar img[alt='" + username + "']");
+    wait.forElementVisible(avatar, 10, 500);
+    return driver.findElements(avatar).size() > 0;
   }
 }

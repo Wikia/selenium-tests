@@ -115,4 +115,8 @@ public class ArticlePageObject extends BasePageObject {
   public String getArticleTitle() {
     return articleTitle.getText();
   }
+
+  public void waitForFooterToBeVisible() {
+    wait.forElementVisible(footerLogo, 10, 500);
+  }
 }
