@@ -41,6 +41,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   private WebElement menuView;
   @FindBy(xpath = "//span[contains(.,'Sorry, we could')]")
   private WebElement sorrySpan;
+  @FindBy(css = "div.side-nav-toggle")
+  private WebElement openListIcon;
 
   public NavigationSideComponentObject(WebDriver driver) {
     super(driver);

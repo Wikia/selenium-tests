@@ -19,46 +19,34 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Social
  */
-public class LoginPage extends WikiBasePageObject {
+public class LoginPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
-
   @FindBy(css = "#loginPassword")
   private WebElement passwordField;
-
   @FindBy(css = "#loginSubmit")
   private WebElement submitButton;
-
   @FindBy(css = "small.error")
   private WebElement errorMessage;
-
   @FindBy(css = "a.close")
   private WebElement closeButton;
-
   @FindBy(css = "a.footer-callout-link")
   private WebElement registerNowLink;
-
   @FindBy(css = "header.auth-header")
   private WebElement loginHeader;
-
   @FindBy(css = ".password-toggler")
   private WebElement passwordToggler;
+  @FindBy(css = ".sign-in")
+  private WebElement signInButton;
 
   private NavigationSideComponentObject nav;
 
-  public LoginPage(WebDriver driver) {
+  public LoginPageObject(WebDriver driver) {
     super(driver);
   }
 
-  public void logUserIn(String username, String password) {
-    wait.forElementVisible(usernameField);
-    usernameField.sendKeys(username);
-    passwordField.sendKeys(password);
-    submitButton.click();
-  }
-
-  public LoginPage get() {
+  public LoginPageObject get() {
     String redirectParameter = "";
 
     try {
@@ -73,17 +61,39 @@ public class LoginPage extends WikiBasePageObject {
     return this;
   }
 
+  public String getErrorMessage() {
+    return errorMessage.getText();
+
+  }
+
+  public String getLoginHeaderText() {
+    return loginHeader.getText();
+  }
+
+  public LoginPageObject clickOnSignInButton() {
+    wait.forElementVisible(signInButton);
+    signInButton.click();
+    return this;
+  }
+
+  public void clickOnCloseButton() {
+    closeButton.click();
+  }
+
+  public void clickOnRegisterLink() {
+    registerNowLink.click();
+  }
+
+  public void clickOnPasswordToggler() {
+    passwordToggler.click();
+  }
+
   public NavigationSideComponentObject getNav() {
     if (nav == null) {
       nav = new NavigationSideComponentObject(driver);
     }
 
     return nav;
-  }
-
-  public String getErrorMessage() {
-    return errorMessage.getText();
-
   }
 
   public boolean isSubmitButtonDisabled() {
@@ -113,30 +123,6 @@ public class LoginPage extends WikiBasePageObject {
     }
   }
 
-  public String getCloseButtonURL() {
-    return closeButton.getAttribute("href");
-  }
-
-  public void clickOnCloseButton() {
-    closeButton.click();
-  }
-
-  public void clickOnRegisterLink() {
-    registerNowLink.click();
-  }
-
-  public String getLoginHeaderText() {
-    return loginHeader.getText();
-  }
-
-  public void typePassword(String password) {
-    passwordField.sendKeys(password);
-  }
-
-  public void clickOnPasswordToggler() {
-    passwordToggler.click();
-  }
-
   public Boolean isPasswordTogglerDisabled() {
     String togglerDisabled = passwordField.getAttribute("type");
     return "password".equals(togglerDisabled);
@@ -145,5 +131,16 @@ public class LoginPage extends WikiBasePageObject {
   public Boolean isPasswordTogglerEnabled() {
     String togglerDisabled = passwordField.getAttribute("type");
     return "text".equals(togglerDisabled);
+  }
+
+  public void logUserIn(String username, String password) {
+    wait.forElementVisible(usernameField);
+    usernameField.sendKeys(username);
+    passwordField.sendKeys(password);
+    submitButton.click();
+  }
+
+  public void typePassword(String password) {
+    passwordField.sendKeys(password);
   }
 }

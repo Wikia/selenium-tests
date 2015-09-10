@@ -113,6 +113,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public String getArticleTitle() {
+    wait.forElementVisible(articleTitle);
     return articleTitle.getText();
   }
 

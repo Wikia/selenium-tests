@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 /**
  * Created by qaga on 2015-07-24.
  */
-public class JoinPage extends BasePageObject {
+public class JoinPageObject extends BasePageObject {
 
     @FindBy(css = ".register-message:last-child")
     private WebElement joinTodayMessage;
@@ -24,11 +24,11 @@ public class JoinPage extends BasePageObject {
     @FindBy(css = "a.sign-in")
     private WebElement signInLink;
 
-    public JoinPage(WebDriver driver) {
+    public JoinPageObject(WebDriver driver) {
         super(driver);
     }
 
-    public JoinPage get() {
+    public JoinPageObject get() {
         String redirectParameter = "";
 
         try {
