@@ -12,27 +12,19 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class WidgetPageObject extends BasePageObject {
 
-  protected String tagName;
-
   protected WidgetPageObject(WebDriver driver) {
     super(driver);
   }
 
+  protected abstract String getArticleName();
+
+  protected abstract String getTagName();
+
+  protected abstract String getTag();
+
   protected abstract boolean isTagLoadedOnMercury();
 
   protected abstract boolean isTagLoadedOnOasis();
-
-  protected String getTagName() {
-    return tagName;
-  }
-
-  private String getArticleName() {
-    return tagName.substring(0, 1).toUpperCase() + tagName.substring(1).toLowerCase() + "Widget";
-  }
-
-  private String getTag() {
-    return "<" + getTagName() + ">";
-  }
 
   public void createAndNavigate(String wikiUrl) {
     ArticleContent articleContent = new ArticleContent();

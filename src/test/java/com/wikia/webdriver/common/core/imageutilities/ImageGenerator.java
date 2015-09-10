@@ -6,7 +6,10 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
