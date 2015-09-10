@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 
 import java.awt.Color;

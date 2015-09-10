@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.CroppingToolPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

@@ -134,6 +134,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.WidgetTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
@@ -165,7 +166,8 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
-            <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar"/>
+            <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar" />
+            <class name="com.wikia.webdriver.testcases.widgettests.WidgetTests" />
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEAndRTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEDisabledEditorEntryAnonTests"/>
