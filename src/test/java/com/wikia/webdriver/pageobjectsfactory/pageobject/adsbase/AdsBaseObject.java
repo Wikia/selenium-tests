@@ -694,4 +694,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
+  public void verifyMonocolorAd(String slotName) {
+    String slotSelector = AdsContent.getSlotSelector(slotName);
+    WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+    waitForSlotExpanded(slot);
+    Assertion.assertFalse(new AdsComparison().isAdVisible(slot, slotSelector, driver));
+  }
+
 }
