@@ -81,23 +81,23 @@ public class GermanAdsDataProvider {
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: declashofclans; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: mobile,casual,strategy,war,rts,declashofc"},
         {"de.harry-potter", "Severus_Snape",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: ent; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.harry-potter", "Hauptseite",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ent; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: ent; SOI_SUB2SITE: dehpw; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,xbox360,ps3,nintendo,wii,fantasy,dehpw"},
         {"de.terraria", "Terraria_Wiki",
          "SOI_SITE: wikia; SOI_SUBSITE: gaming; SOI_SUB2SITE: deterraria; SOI_SUB3SITE: ; " +
          "SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: pc,adventure,rpg,deterraria"},
         {"de.gameofthrones", "Game_of_Thrones_Wiki",
-         "SOI_SITE: wikia; SOI_SUBSITE: lifestyle; SOI_SUB2SITE: usseries; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: ent; SOI_SUB2SITE: usseries; " +
          "SOI_SUB3SITE: degameofthrones; SOI_CONTENT: content; SOI_WERBUNG: true; " +
          "SOI_KEYWORDS: pc,ps3,xbox360,tv,book,movie,adventure,strategy,rpg,adventure,drama,degameofth"},
         {"dietributevonpanem", "Lied_vom_Henkersbaum_(The_Hanging_Tree)",
-         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dedietributevonpanem; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: ent; SOI_SUB2SITE: dedietributevonpanem; " +
          "SOI_SUB3SITE: ; SOI_CONTENT: content; SOI_WERBUNG: true; SOI_KEYWORDS: dedietribu"},
         {"jedipedia", "Jedipedia:Hauptseite",
-         "SOI_SITE: wikia; SOI_SUBSITE: entertainment; SOI_SUB2SITE: dejedipedia; " +
+         "SOI_SITE: wikia; SOI_SUBSITE: ent; SOI_SUB2SITE: dejedipedia; " +
          "SOI_SUB3SITE: ; SOI_CONTENT: content; SOI_WERBUNG: true; " +
          "SOI_KEYWORDS: pc,ps3,xbox360,nintendo,movie,scifi,dejedipedi"},
         {"de.clashofclans", "Kategorie:Truppen",
