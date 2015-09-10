@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,13 +12,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 public class PreferencesPageObject extends WikiBasePageObject {
 
-  @FindBy(css = ".fb-disconnect")
+  @FindBy(css = "a.fb-disconnect")
   private WebElement facebookDisconnect;
   @FindBy(css = "#fbConnectPreferences .wikia-button-facebook")
   private WebElement fbConnect;
@@ -41,6 +43,12 @@ public class PreferencesPageObject extends WikiBasePageObject {
     super(driver);
   }
 
+  public PreferencesPageObject open(){
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_PREFERENCES);
+    PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+
+    return this;
+  }
   public PreferencesPageObject selectTab(tabNames tab) {
     int tabNum = -1;
     switch (tab) {
@@ -124,9 +132,12 @@ public class PreferencesPageObject extends WikiBasePageObject {
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
 
-    scrollAndClick(facebookSubmitButton);
+    facebookSubmitButton.click();
 
     driver.switchTo().window(windows[0].toString());
+
+    new FacebookSignupModalComponentObject(driver).acceptWikiaAppPolicy();
+
     wait.forElementVisible(facebookDisconnect);
   }
 

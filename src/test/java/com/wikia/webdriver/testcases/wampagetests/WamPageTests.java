@@ -1,15 +1,14 @@
 package com.wikia.webdriver.testcases.wampagetests;
 
-import java.util.EnumSet;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
+import java.util.EnumSet;
 
 /**
  * @author Qaga

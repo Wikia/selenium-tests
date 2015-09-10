@@ -119,7 +119,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {
 
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("apple");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("music");
 
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);

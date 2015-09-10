@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.clicktracking;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import java.util.List;
 
 import javax.json.JsonObject;
-
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class ClickTrackingSupport {
 

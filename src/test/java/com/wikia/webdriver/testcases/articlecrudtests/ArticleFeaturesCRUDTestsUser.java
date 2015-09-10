@@ -1,13 +1,10 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.core.ArticleContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -32,6 +29,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @ownership Content X-Wing
@@ -43,9 +43,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).open("AddModifyGallery");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+  public void addGallery() {
+    new ArticleContent().clear();
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -58,12 +59,19 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
     visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+    visualEditMode.submitArticle().verifyGallery();
+  }
 
-    article.editArticleInRTEUsingDropdown();
-    visualEditMode.modifyComponent(Components.GALLERY);
-    galleryBuiler.clickAddPhoto();
+  @Test(groups = {"Smoke"})
+  @Execute(asUser = User.USER)
+  public void modifyGallery() {
+    new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
+                              + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    GalleryBuilderComponentObject galleryBuiler =
+        (GalleryBuilderComponentObject) visualEditMode.modifyComponent(Components.GALLERY);
+    AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
     galleryAddPhoto.choosePhotos(2);
     galleryAddPhoto.clickSelect();
@@ -73,31 +81,18 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     galleryBuiler.adjustOrientation(Orientation.PORTRAIT);
     galleryBuiler.clickFinish();
     visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+    visualEditMode.submitArticle().verifyGallery();
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   @Execute(asUser = User.USER)
-  public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).open("AddDeleteGallery");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.clearContent();
-    GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
-    AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
-    galleryAddPhoto.search("image");
-    galleryAddPhoto.choosePhotos(4);
-    galleryAddPhoto.clickSelect();
-    galleryBuiler.adjustPosition(PositionsGallery.CENTER);
-    galleryBuiler.adjustColumns("2");
-    galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
-    galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
-    galleryBuiler.clickFinish();
-    visualEditMode.verifyGallery();
-    visualEditMode.submitArticle();
-    article.verifyGallery();
+  public void deleteGallery() {
+    new ArticleContent().push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
+                              + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n"
+                              + "Image007.jpg\n"
+                              + "</gallery>");
 
-    article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.GALLERY);
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }
@@ -209,7 +204,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_007", "Media"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
@@ -251,7 +248,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Smoke4"})
   @Execute(asUser = User.USER)
   public void modifyImage() {
-    ArticleContent.push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
+    new ArticleContent().push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.modifyComponent(Components.PHOTO);
@@ -265,7 +262,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
   @Execute(asUser = User.USER)
   public void addImage() {
-    ArticleContent.clear();
+    new ArticleContent().clear();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -279,7 +276,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER)
   public void deleteImage() {
-    ArticleContent.push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
+    new ArticleContent().push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.removeComponent(Components.PHOTO);
@@ -290,7 +287,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
       dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_011"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_011_addingTable(int border, int width, int height,
-      int cellspacing, int cellpadding, Alignment alignment) {
+                                                      int cellspacing, int cellpadding,
+                                                      Alignment alignment) {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.clearContent();
@@ -319,13 +317,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
       enabled = false)
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_012_modifyTable(int border, int width, int height,
-      int cellspacing, int cellpadding, Alignment alignment) {
+                                                      int cellspacing, int cellpadding,
+                                                      Alignment alignment) {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
     sourceEditMode.clearSource();
     String table =
         sourceEditMode.buildTablePropertiesContent(border, width, height, cellspacing, cellpadding,
-            alignment);
+                                                   alignment);
     sourceEditMode.addContent(table);
     sourceEditMode.submitArticle();
     article.verifyTableBorder(border);
@@ -348,13 +347,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
       dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_013"})
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_013_deleteTable(int border, int width, int height,
-      int cellspacing, int cellpadding, Alignment alignment) {
+                                                      int cellspacing, int cellpadding,
+                                                      Alignment alignment) {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
     SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
     sourceEditMode.clearSource();
     String table =
         sourceEditMode.buildTablePropertiesContent(border, width, height, cellspacing, cellpadding,
-            alignment);
+                                                   alignment);
     sourceEditMode.addContentInSourceMode(table);
     sourceEditMode.submitArticle();
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();

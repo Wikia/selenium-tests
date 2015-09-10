@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CuratedContentPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "Mercury"})
 public class SectionItemsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -22,9 +23,8 @@ public class SectionItemsTests extends NewTestTemplate {
   }
 
   // CCT08
-  @Test(groups = {"MercurySectionItemsTests_001", "MercurySectionItemsTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercurySectionItemsTests_001_curatedContentItemsAreVisibleAndExpandable() {
+  @Test(groups = "MercuryCuratedSectionItemsTest_001")
+  public void MercuryCuratedSectionItemsTest_001_curatedContentItemsAreVisibleAndExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
 
@@ -41,9 +41,8 @@ public class SectionItemsTests extends NewTestTemplate {
   }
 
   // CCT10
-  @Test(groups = {"MercurySectionItemsTests_002", "MercurySectionItemsTests",
-                  "MercuryCuratedContentTests", "Mercury"})
-  public void MercurySectionItemsTests_002_curatedContentItemsAreVisibleAndNotExpandable() {
+  @Test(groups = "MercuryCuratedSectionItemsTest_002")
+  public void MercuryCuratedSectionItemsTest_002_curatedContentItemsAreVisibleAndNotExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 

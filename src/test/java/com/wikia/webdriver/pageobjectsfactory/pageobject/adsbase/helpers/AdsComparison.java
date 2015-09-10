@@ -83,7 +83,7 @@ public class AdsComparison {
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
           PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
-          if (adImg.getHeight() == 1) {
+          if (adImg.getHeight() == 1 || imageComparison.isMonocolorImage(adImg)) {
             return false;
           }
           return imageComparison.areImagesDifferent(backgroundImg, adImg, IMAGES_THRESHOLD_PERCENT);

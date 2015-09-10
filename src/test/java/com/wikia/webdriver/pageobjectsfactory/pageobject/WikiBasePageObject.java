@@ -1,30 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -49,7 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
@@ -87,6 +61,32 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedV
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -178,6 +178,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+  private String loggedInUserSelectorMercury = ".avatar img[alt*=%userName%]";
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -418,11 +419,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new FilePagePageObject(driver);
   }
 
-  public NewMessageWall openMessageWall(String userName, String wikiURL) {
-    getUrl(wikiURL + URLsContent.USER_MESSAGE_WALL + userName);
-    return new NewMessageWall(driver);
-  }
-
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
     return new CreateNewWikiPageObjectStep1(driver);
@@ -549,7 +545,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      if (driver.findElements(By.cssSelector("#PreviewFrame")).size()>0) {
+      if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
       waitFor.until(new ExpectedCondition<Boolean>() {
@@ -761,28 +757,23 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
+    String token = Helios.getAccessToken(userName, password);
 
-    try {
-      String token = Helios.getAccessToken(userName, password);
+    String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
 
-      String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
+    driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
-      driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
-
-      if (driver.getCurrentUrl().contains("Logout")) {
-        driver.get(wikiURL);
-      } else {
-        driver.navigate().refresh();
-      }
-
-      verifyUserLoggedIn(userName);
-      PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-          + token, true);
-      return token;
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("loginCookie", "page timeout after login by cookie", false);
+    if (driver.getCurrentUrl().contains("Logout")) {
+      driver.get(wikiURL);
+    } else {
+      driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
+          + DateTime.now().getMillis()));
     }
-    return "";
+
+    verifyUserLoggedIn(userName);
+    PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
+        + token, true);
+    return token;
   }
 
   public String loginAs(User user) {

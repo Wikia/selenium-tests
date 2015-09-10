@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
@@ -13,6 +9,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
+
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /*
  * anonSearch: As anon basic search action and verify you are on search result page. This also

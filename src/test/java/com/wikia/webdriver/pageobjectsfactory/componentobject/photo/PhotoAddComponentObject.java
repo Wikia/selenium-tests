@@ -1,16 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.interactions.Elements;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class PhotoAddComponentObject extends BasePageObject {
 
@@ -28,10 +29,6 @@ public class PhotoAddComponentObject extends BasePageObject {
   private WebElement uploadButton;
   @FindBy(css = "tr.ImageUploadFindImages td a")
   private List<WebElement> addThisPhotoList;
-
-  private static final String IMAGE_UPLOAD_HEADLINE_CSS = "#ImageUploadHeadline";
-  @FindBy(css = IMAGE_UPLOAD_HEADLINE_CSS)
-  private WebElement imageUploadHeadline;
 
   private String photoName;
 
@@ -52,10 +49,8 @@ public class PhotoAddComponentObject extends BasePageObject {
 
   public void clickFind() {
     wait.forElementVisible(findButton);
-    String oldHeadline = imageUploadHeadline.getText();
     scrollAndClick(findButton);
-    wait.forTextInElement(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS),
-                          oldHeadline);
+    wait.forElementNotVisible(By.cssSelector("#ImageUploadProgress2"));
     PageObjectLogging.log("clickSearch", "search button clicked", true);
   }
 
@@ -109,7 +104,9 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
+    chooseFileInput
+        .sendKeys(
+            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 

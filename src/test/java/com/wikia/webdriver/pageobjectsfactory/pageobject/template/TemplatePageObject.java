@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.template;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -41,8 +40,8 @@ public class TemplatePageObject extends WikiBasePageObject{
     wait.forElementVisible(categoriesModule);
   }
 
-  public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
+  public TemplatePageObject openArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    return new ArticlePageObject(driver);
+    return new TemplatePageObject(driver);
   }
 }

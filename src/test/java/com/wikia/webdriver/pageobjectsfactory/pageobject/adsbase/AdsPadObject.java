@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class AdsPadObject extends AdsBaseObject {

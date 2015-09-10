@@ -1,13 +1,10 @@
 package com.wikia.webdriver.common.core.url;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-
-/**
- * @author drets
- */
 public class UrlBuilder {
 
   private String browser;
@@ -39,11 +36,11 @@ public class UrlBuilder {
     String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
     url = url + separator + wikiPath;
 
-    if ("CHROMEMOBILE".equalsIgnoreCase(browser)) {
-      return appendQueryStringToURL(url, "useskin=wikiamobile");
-    }
-
     return url;
+  }
+
+  public String getUrlForWiki() {
+    return getUrlForWiki(Configuration.getWikiName());
   }
 
   public String getUrlForWiki(String wikiName) {

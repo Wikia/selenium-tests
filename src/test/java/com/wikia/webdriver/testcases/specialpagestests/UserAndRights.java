@@ -7,13 +7,12 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 public class UserAndRights extends NewTestTemplate {
@@ -22,17 +21,23 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights001", "UsersAndRights"})
   @Execute(asUser = User.STAFF)
-  public void usersAndRights001_Block() {
+  public void staffCanBlockUser() {
     SpecialBlockPageObject block = new SpecialBlockPageObject(driver).open();
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");
     block.clickBlockButton();
+
+    SpecialBlockListPageObject
+        list =
+        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
+    list.searchForUser(credentials.userNameBlocked);
+    list.verifyUserBlocked(credentials.userNameBlocked);
   }
 
   @Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods = {
-      "usersAndRights001_Block"})
-  public void usersAndRights002_VerifyBlockedUser() {
+      "staffCanBlockUser"})
+  public void blockedUserShouldSeeMessageOnArticleEdit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     VisualEditModePageObject
@@ -42,31 +47,25 @@ public class UserAndRights extends NewTestTemplate {
     edit.verifyBlockedUserMessage();
   }
 
-  @Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods = {
-      "usersAndRights001_Block"})
-  @Execute(asUser = User.STAFF)
-  public void usersAndRights003_BlockListBlocked() {
-    SpecialBlockListPageObject
-        list =
-        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
-    list.searchForUser(credentials.userNameBlocked);
-    list.verifyUserBlocked(credentials.userNameBlocked);
-  }
 
   @Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods = {
-      "usersAndRights001_Block"})
+      "staffCanBlockUser"})
   @Execute(asUser = User.STAFF)
-  public void usersAndRights004_Unblock() {
+  public void staffCanUnblockUser() {
     SpecialUnblockPageObject
         unblock =
         new SpecialUnblockPageObject(driver).openSpecialUnblockPage(wikiURL);
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
+
+    SpecialBlockListPageObject list = unblock.openSpecialBlockListPage(wikiURL);
+    list.searchForUser(credentials.userNameBlocked);
+    list.verifyUserUnblocked();
   }
 
   @Test(groups = {"usersAndRights005", "UsersAndRights"}, dependsOnMethods = {
-      "usersAndRights004_Unblock"})
-  public void usersAndRights005_VerifyUnblockedUser() {
+      "staffCanUnblockUser"})
+  public void unblockedUserCanEditUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -74,33 +73,8 @@ public class UserAndRights extends NewTestTemplate {
         edit =
         base.navigateToArticleEditPageCK(wikiURL,
                                          PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
-    ArticlePageObject article = edit.submitArticle();
-    article.verifyArticleTitle(title);
-  }
-
-  @Test(groups = {"usersAndRights006", "UsersAndRights"}, dependsOnMethods = {
-      "usersAndRights004_Unblock"})
-  public void usersAndRights006_BlockListUnblocked() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
-    SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
-    list.searchForUser(credentials.userNameBlocked);
-    list.verifyUserUnblocked();
-  }
-
-  @Test(groups = {"usersAndRights007", "UsersAndRights"})
-  public void usersAndRights007_Contributions() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    String pageContent = base.getTimeStamp();
-    String pageName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, pageName);
     edit.clearContent();
-    edit.addContent(pageContent);
-    ArticlePageObject article = edit.submitArticle();
-    article.verifyContent(pageContent);
-    SpecialContributionsPageObject contribution = base.openContributionsPage(wikiURL);
-    contribution.searchContributions(credentials.userNameStaff);
-    contribution.verifyNewPageOnList(pageName, pageContent);
+    edit.addContent(String.valueOf(DateTime.now().getMillis()));
+    edit.submitArticle().verifyArticleTitle(title);
   }
 }

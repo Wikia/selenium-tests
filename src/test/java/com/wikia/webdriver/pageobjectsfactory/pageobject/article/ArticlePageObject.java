@@ -1,18 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
@@ -40,6 +27,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 /**
  * @author Bogna 'bognix' Knychała
@@ -176,6 +176,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     super(driver);
   }
 
+  /**
+  * Open article with name that is the following combination:
+  * TEST CLASS NAME + TEST METHOD NAME
+  */
   public ArticlePageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
         + TestContext.getCurrentMethodName());
@@ -605,7 +609,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(categorySuggestionsList);
     WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
     String desiredCategoryText = desiredCategory.getText();
-    scrollAndClick(desiredCategory);
+    scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
     waitForElementNotVisibleByElement(categorySuggestionsList);
     PageObjectLogging.log("addCategorySuggestions", "category " + category
         + " added from suggestions", true);
@@ -908,12 +912,5 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
-  }
-
-  public PortableInfoboxPageObject getInfoboxPage() {
-    if (portableInfobox == null) {
-      portableInfobox = new PortableInfoboxPageObject(driver);
-    }
-    return portableInfobox;
   }
 }

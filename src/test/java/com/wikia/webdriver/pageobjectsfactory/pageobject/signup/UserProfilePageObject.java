@@ -1,12 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -14,6 +7,13 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.Avatar
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class UserProfilePageObject extends WikiBasePageObject {
 

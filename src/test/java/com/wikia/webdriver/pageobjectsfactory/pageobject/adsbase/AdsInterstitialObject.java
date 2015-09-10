@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class AdsInterstitialObject extends AdsBaseObject {

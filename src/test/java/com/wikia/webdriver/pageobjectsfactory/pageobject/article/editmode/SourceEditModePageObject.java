@@ -21,7 +21,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class SourceEditModePageObject extends EditMode {
 
@@ -74,18 +73,18 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-  @FindBy(css = "textarea#wpTextbox1.highlighted")
+  @FindBy(css = "#editarea .ace_scroller")
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
   }
 
-  public void focusTextArea() {
+  public SourceEditModePageObject focusTextArea() {
     jsActions.focus(".cke_source");
+    return this;
   }
 
   public String getSourceContent() {
@@ -102,13 +101,11 @@ public class SourceEditModePageObject extends EditMode {
     );
   }
 
-
   public void clickBold() {
     focusTextArea();
     bold.click();
     PageObjectLogging.log("clickBold", "bold button was clicked", true, driver);
   }
-
 
   public void clickItalic() {
     focusTextArea();
@@ -213,10 +210,11 @@ public class SourceEditModePageObject extends EditMode {
     PageObjectLogging.log("addContent", "content was added", true);
   }
 
-  public void addContentInSourceMode(String content) {
+  public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "content was added", true);
+    return this;
   }
 
   public String copyContent() {

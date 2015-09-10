@@ -1,32 +1,26 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 /**
- * Created by Rodriuki on 12/06/15.
- * Set of Test Cases found on https://one.wikia-inc.com/wiki/Portable_Infoboxes_Test_Plan
+ * Created by Rodriuki on 12/06/15. Set of Test Cases found on
+ * https://one.wikia-inc.com/wiki/Portable_Infoboxes_Test_Plan
  *
- * TC01: Verify elements visibility: infobox title, image, headers, italic, bold, quotation marks, references
+ * TC01: Verify elements visibility: infobox title, image, headers, italic, bold, quotation marks,
+ * references
  * TC02: Verify correct redirects in mediawiki119.wikia.com/wiki/RodriInfobox01 for:
  * external links, internal links, red links
  * TC03: Verify images used in infoboxes appear in Special:WhatLinksHere page
@@ -38,183 +32,324 @@ import org.testng.annotations.Test;
  * TC06: Verify visibility of tabber and it's images
  * TC07: Verify infobox color has changed after changing colors in wiki Theme Designer
  * TC08: Verify if ordered and unordered lists are parsed correctly after adding them
- * TC13: Verify category links inside infoboxes
- * TC14: Verify if horizontal group font size matches other elements font
- * TC15: Copy syntax from template page to article and verify presence of all new information provided
+ * TC09: Verify category links inside infoboxes
+ * TC10: Verify if horizontal group font size matches other elements font
+ * TC11: Copy syntax from template page to article and verify presence of all new information
+ * provided
+ * TC12: Verify if navigation element has same left and right padding
+ * TC13: Verify if group headers and titles has same left and right padding
+ * TC14: Additional <div> wrappers from title, header and image HTML are removed
+ * TC15: Verify that any of the tags which do not have a value won't appear
+ * TC16: Verify inserting portable infobox without parameters in Visual Editor
+ * TC17: Verify inserting portable infobox with parameters in Visual Editor
+ * TC18: Verify editing portable infobox in VE by clicking on 'Infobox' popup
+ * TC19: Verify inserting portable infobox in VE in dark theme
+ * @ownership Content West Wing
  */
+@Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  private final static Logger LOGGER = Logger.getLogger(PortableInfoboxTests.class.getName());
-
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_001"})
+  @Test(groups = "PortableInfoboxTests_001")
+  @Execute(onWikia = "mediawiki119")
   public void verifyElementsVisibility() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    Assertion.assertTrue(info.getBoldElements().size() > 0);
-    Assertion.assertTrue(info.getItalicElements().size() > 0);
-    Assertion.assertTrue(info.getHeaderElements().size() > 0);
-    info.verifyQuotationMarksPresence();
-    info.verifyReferencesPresence();
-    info.verifyImagePresence();
-    info.verifyInfoboxTitlePresence();
-
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .areBoldElementsMoreThanOne()
+        .areItalicElementsMoreThanOne()
+        .areHeadersMoreThanOne()
+        .areQuotationMarksPresented()
+        .verifyReferencesPresence()
+        .isImagePresented()
+        .isInfoboxTitlePresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_002"})
+  @Test(groups = "PortableInfoboxTests_002")
+  @Execute(onWikia = "mediawiki119")
   public void verifyElementsRedirects() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    //Red link
-    info.clickRedLink(0);
-    info.verifyCreateNewArticleModal();
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    article.getInfoboxPage();
-    //External Link
-    String externalLinkName = info.getExternalLinkRedirectTitle();
-    info.clickExternalLink();
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException exception) {
-      LOGGER.log(Level.SEVERE, "Exception occur", exception);
-    }
-    String externalNavigatedURL = driver.getCurrentUrl();
-    info.compareURLAndExternalLink(externalLinkName, externalNavigatedURL);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    article.getInfoboxPage();
-    //Internal Link
-    String internalLinkName = info.getInternalLinkRedirectTitle(0);
-    info.clickInternalLink(0);
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException exception) {
-      LOGGER.log(Level.SEVERE, "Exception occur", exception);
-    }
-    String internalNavigatedURL = driver.getCurrentUrl();
-    info.compareURLAndInternalLink(internalLinkName, internalNavigatedURL);
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
+
+    info
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .clickRedLink(0)
+        .verifyCreateNewArticleModal();
+
+    String externalLinkName = info
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getExternalLinkRedirectTitle();
+
+    String externalUrl = info
+        .clickExternalLink()
+        .getUrlFromExternalLinkaAfterPageIsLoaded();
+
+    String internalLinkName = info
+        .compareURLAndExternalLink(externalLinkName, externalUrl)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInternalLinkRedirectTitle(0);
+
+    String internalURL = info
+        .clickInternalLink(0)
+        .getUrlFromInternalLinkaAfterPageIsLoaded();
+
+    info.compareURLAndInternalLink(internalLinkName, internalURL);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_003"})
+  @Test(groups = "PortableInfoboxTests_003")
+  @Execute(onWikia = "mediawiki119")
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    String articleName = article.getArticleName();
-    SpecialWhatLinksHerePageObject links = article.openSpecialWhatLinksHere(wikiURL);
-    links.clickPageInputField();
-    links.typeInfoboxImageName(PageContent.FILE_IMAGE_NAME);
-    links.clickShowbutton();
-    links.verifyInfoboxArticleInList(articleName);
+    String articleName = article
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getArticleName();
+
+    article
+        .openSpecialWhatLinksHere(wikiURL)
+        .clickPageInputField()
+        .typeInfoboxImageName(PageContent.FILE_IMAGE_NAME)
+        .clickShowbutton()
+        .verifyInfoboxArticleInList(articleName);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_004"})
-  public void verifyCategoriesInTemplateInvocation() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    SourceEditModePageObject src = info.navigateToArticleEditPageSrc(wikiURL, PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
-    src.focusTextArea();
-    String catName = src.getRandomDigits(9);
-    WikiTextShortCutsComponentObject shortcuts = src.clickMore();
-    src = shortcuts.clickCategory();
-    src.addContent(catName);
-    TemplatePageObject temp = src.clickPublishButtonInTemplateNamespace();
-    temp.verifyCategoryInTemplatePage(catName);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    info.verifyCategoryInArticlePage(catName);
+  @Test(groups = "PortableInfoboxTests_004")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyCategoriesInTemplateInvocation()  {
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
+    ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
+
+    SourceEditModePageObject src = info
+        .navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
+
+    String categoryName = src
+        .focusTextArea()
+        .getRandomDigits(9);
+
+    WikiTextShortCutsComponentObject shortcuts = src
+        .clickMore();
+
+    shortcuts
+        .clickCategory(1)
+        .addContent(categoryName);
+
+    src
+        .clickPublishButtonInTemplateNamespace()
+        .verifyCategoryInTemplatePage(categoryName);
+
+    article
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .verifyCategoryPresent(categoryName);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_006"})
+  @Test(groups = "PortableInfoboxTests_005")
+  @Execute(onWikia = "mediawiki119")
   public void verifyLightboxVisibilityAfterClickingImage() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    info.clickImage();
-    info.verifyLightboxPresence();
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .clickImage()
+        .isLightboxPresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_008"})
+  @Test(groups = "PortableInfoboxTests_006")
+  @Execute(onWikia = "mediawiki119")
   public void verifyVisibilityOfTabberAndItsImages() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX02);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    info.verifyTabberPresence();
-    info.verifyTabberImagePresence();
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .isTabberPresented()
+        .isTabberImagePresented();
   }
 
-  @Execute(asUser = User.STAFF)
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_009"})
+  @Test(groups = "PortableInfoboxTests_007")
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
-    SpecialThemeDesignerPageObject theme = new 
-            SpecialThemeDesignerPageObject(driver);
-    theme.openSpecialDesignerPage(wikiURL);
-    theme.selectTheme(4);
-    theme.submitThemeSelection();
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    String oldBackground = info.getBackgroundColor();
-    theme.openSpecialDesignerPage(wikiURL);
-    theme.selectTheme(1);
-    theme.submitThemeSelection();
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    String newBackground = info.getBackgroundColor();
-    info.verifyChangedBackground(oldBackground, newBackground);
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
 
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(4);
+    theme
+        .submitTheme();
+
+    String oldBackground = info
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getBackgroundColor();
+
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(1);
+    theme
+        .submitTheme();
+
+    article.open(PageContent.PORTABLE_INFOBOX01);
+    info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_012"})
+  @Test(groups = "PortableInfoboxTests_08")
+  @Execute(onWikia = "mediawiki119")
   public void verifyOrderedAndUnorderedLists() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX02);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
-    WebElement itemValue = info.getItemValue();
-    WebElement orderedListItem = info.getOrderedListItem(1);
-    info.compareFontSizes(itemValue, orderedListItem);
-    WebElement unorderedListItem = info.getUnorderedListElement(1);
-    info.compareFontSizes(itemValue, unorderedListItem);
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .compareFontSizesBetweenItemValueAndOrderedListItem(1)
+        .compareFontSizesBetweenItemValueAndUnorderedListItem(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_013"})
-  public void verifyInfoboxCategoryLink() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(PageContent.PORTABLE_INFOBOX01);
-    PortableInfoboxPageObject info = article.getInfoboxPage();
+  @Test(groups = "PortableInfoboxTests_09")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyInfoboxCategoryLinks() {
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01);
+
+    String categoryLinkName = info.getCategoryLinkName();
     info.clickCategoryLink();
-    CategoryPageObject category = new CategoryPageObject(driver);
-    String categoryName = category.getCategoryName();
-    category.verifyCategoryPageTitle(categoryName);
+    new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
   }
 
- @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_014"})
+  @Test(groups = "PortableInfoboxTests_010")
+  @Execute(onWikia = "mediawiki119")
   public void verifyHorizontalGroupFontSize() {
-   ArticlePageObject article = new ArticlePageObject(driver);
-   article.open(PageContent.PORTABLE_INFOBOX01);
-   PortableInfoboxPageObject info = article.getInfoboxPage();
-   WebElement horizontalItemLabel = info.getHorizontalItemLabel();
-   WebElement itemLabel = info.getItemLabel();
-   info.compareFontSizes(horizontalItemLabel, itemLabel);
-   WebElement horizontalItemValue = info.getHorizontalItemValue();
-   WebElement itemValue = info.getItemValue();
-   info.compareFontSizes(horizontalItemValue, itemValue);
- }
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .compareFontSizesBetweenHorizontalItemLabelAndItemLabel()
+        .compareFontSizesBetweenHorizontalItemValueAndItemValue();
+  }
 
-  @Execute (asUser = User.USER_9)
-  @Test(groups = {"PortableInfoboxTests", "PortableInfoboxTests_015"})
+  @Test(groups = "PortableInfoboxTests_011")
+  @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePageObject template = new TemplatePageObject(driver);
-    template.openArticleByName(wikiURL,
-            PageContent.PORTABLE_INFOBOX_WEBSITE_TEMPLATE);
     ArticlePageObject article = new ArticlePageObject(driver);
-    SourceEditModePageObject editor = template.editArticleInSrcUsingDropdown();
-    String templateSyntax = editor.copyContent();
-    ArticlePageObject randomArticle = article.open("Random" + article.getRandomDigits(5));
-    SourceEditModePageObject newEditor = randomArticle.openCurrectArticleSourceMode();
-    newEditor.addContentInSourceMode(templateSyntax);
-    newEditor.submitArticle();
-    PortableInfoboxPageObject info = randomArticle.getInfoboxPage();
-    info.verifyImagePresence();
-    info.verifyInfoboxTitlePresence();
-  }
-}
 
+    String templateSyntax = template
+        .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
+        .editArticleInSrcUsingDropdown()
+        .copyContent();
+
+    (new ArticleContent()).clear();
+
+    article
+        .open()
+        .openCurrectArticleSourceMode()
+        .addContentInSourceMode(templateSyntax)
+        .submitArticle();
+
+    new PortableInfoboxPageObject(driver)
+        .isImagePresented()
+        .isInfoboxTitlePresented();
+  }
+
+  @Test(groups = "PortableInfoboxTests_012")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyNavigationElementPadding() {
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .verifyPaddingNavigationElement(1);
+  }
+
+  @Test(groups = "PortableInfoboxTest_013")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyGroupHeadersPadding() {
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .verifyGroupHeaderPadding(1);
+  }
+
+  @Test(groups = "PortableInfoboxTest_014")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyDivsWrappersAreNotIncluded() {
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .verifyDivsNotAppearingInImage()
+        .verifyDivsNotAppearingInTitle()
+        .verifyDivsNotAppearingInHeader(0);
+  }
+
+  @Test(groups = "PortableInfoboxTest_015")
+  @Execute(onWikia = "mediawiki119")
+  public void verifyEmptyTagsAreNotAppearing() {
+    new PortableInfoboxPageObject(driver)
+        .open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
+        .verifyEmptyTags();
+  }
+
+  @Test(groups = "PortableInfobox_016")
+  @Execute(onWikia = "mediawiki119")
+  public void insertEmptyInfoboxInVE() {
+    (new ArticleContent()).clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_017")
+  @Execute(onWikia = "mediawiki119")
+  public void insertInfoboxWithParametersInVE() {
+    (new ArticleContent()).clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_018")
+  @Execute(onWikia = "mediawiki119")
+  public void editInfoboxInVEbyPopup() {
+    (new ArticleContent()).clear();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea()
+        .clickInfoboxPopup()
+        .typeInParameterField(
+            2,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+  @Test(groups = "PortableInfobox_019")
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
+  public void insertInfoboxWithParamsInVEusingDarkTheme() {
+    (new ArticleContent()).clear();
+
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+    theme
+        .openSpecialDesignerPage(wikiURL)
+        .selectTheme(3);
+    theme
+        .submitTheme();
+
+    new ArticlePageObject(driver)
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .typeInParameterField(
+            0,
+            new SourceEditModePageObject(driver).getRandomDigits(5))
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
+  }
+
+}

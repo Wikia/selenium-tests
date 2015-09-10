@@ -24,6 +24,9 @@ public class Wait {
    */
 
   private static final int DEFAULT_TIMEOUT = 30;
+  private static final String INIT_MESSAGE = "INIT ELEMENT";
+  private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
+
 
   private WebDriverWait wait;
   private WebDriver webDriver;
@@ -46,14 +49,47 @@ public class Wait {
   }
 
   /**
-   * Checks if the element is visible on browser <p/> * @param element The element to be checked
+   * Checks if the element is clickable in browser
+   * @param element The element to be checked
+   */
+  public WebElement forElementClickable(WebElement element) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+      return wait.until(ExpectedConditions.elementToBeClickable(element));
+    } else {
+      return forElementClickable(SelectorStack.read());
+    }
+  }
+
+  /**
+   * Checks if the element is clickable on the browser
+   */
+  public WebElement forElementClickable(By by) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(ExpectedConditions.elementToBeClickable(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Checks if the element is visible in browser
+   * <p/>
+   * * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -67,7 +103,7 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-                                                                      .visibilityOf(element));
+          .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -88,8 +124,22 @@ public class Wait {
   public WebElement forElementVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling)
-          .until(ExpectedConditions.visibilityOfElementLocated(by));
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
+                                                                      .visibilityOfElementLocated(
+                                                                          by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Wait for element to be either invisible or not present on the DOM.
+   */
+  public boolean forElementNotVisible(By by) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, DEFAULT_TIMEOUT).until(ExpectedConditions
+                                                                      .invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -101,8 +151,8 @@ public class Wait {
   public boolean forElementNotVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling)
-          .until(ExpectedConditions.invisibilityOfElementLocated(by));
+      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
+          .invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -154,14 +204,13 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
-        return wait.until(
-            CommonExpectedConditions.textToBePresentInElement(element, text));
+        return wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
       } else {
         return forTextInElement(SelectorStack.read(), text);
       }
@@ -174,14 +223,13 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log("INIT ELEMENT", "PROBLEM WITH ELEMENT INIT", true);
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
-        return wait.until(
-            CommonExpectedConditions.textToBePresentInElement(elements, index, text));
+        return wait.until(CommonExpectedConditions.textToBePresentInElement(elements, index, text));
       } else {
         return forTextInElement(SelectorStack.read(), index, text);
       }

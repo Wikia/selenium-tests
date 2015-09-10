@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
 import org.testng.annotations.Test;
 
@@ -33,7 +33,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName9, credentials.password9, wikiURL);
-    NewMessageWall wall = base.openMessageWall(credentials.userName10, wikiURL);
+    MessageWall wall = new MessageWall(driver).open(credentials.userName10);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -57,5 +57,4 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName9);
   }
-
 }

@@ -12,4 +12,5 @@ public class MercuryWikis {
   public static final String MERCURY_NTV_CC = "mercuryntvcc";
   public static final String MERCURY_NTAV_CC = "mercuryntavcc";
   public static final String MERCURY_EMPTY_CC = "mercuryemptycc";
+  public static final String MERCURY_EMPTY_CC_EDITOR = "mercuryemptycceditor";
 }

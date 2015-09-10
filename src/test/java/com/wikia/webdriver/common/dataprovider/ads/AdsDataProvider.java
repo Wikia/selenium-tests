@@ -76,10 +76,10 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] corporatePages() {
     return new Object[][]{
-        {"wikia", "Wikia", "wka.life/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "About_Us", "wka.life/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "Alliance", "wka.life/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"es.wikia", "Wikia", "wka.life/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
+        {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
+        {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+        {"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+        {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
@@ -340,13 +340,15 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] parameterValueProvider() {
+  public static Object[][] adsGptPageParamOasis() {
     return new Object[][]{
-        {"pl.assassinscreed", "Ercole_Massimo", "top", "1k", true},
-        {"mobileregressiontesting", "PMG", "top", "1k", false},
-        {"assassinscreed", "Tunguska", "esrb", "mature", true},
-        {"101dalmatians", "Jewel", "esrb", "ec", true},
-        {"tardis", "Mang", "esrb", "teen", true}
+        {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
+        {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
+        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
+        {"tardis", "Mang", "\"esrb\":\"teen\"", true},
+        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
+        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
     };
   }
 
@@ -394,7 +396,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testProvidersChain() {
+  public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain",
@@ -412,7 +414,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testDisableGptAds() {
+  public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",

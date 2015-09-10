@@ -1,6 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.interactions.Elements;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -9,10 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
@@ -169,7 +170,9 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void selectFileToUpload(String fileName) {
-    fileUploadInput.sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + fileName));
+    fileUploadInput
+        .sendKeys(CommonUtils.getAbsolutePathForFile(
+            PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
     PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
   }
 

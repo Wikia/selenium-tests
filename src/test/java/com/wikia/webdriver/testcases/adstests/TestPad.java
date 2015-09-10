@@ -7,7 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPadObject;
 import org.testng.annotations.Test;
 
 /**
- * @author drets
  * @ownership AdEng
  */
 public class TestPad extends TemplateNoFirstLoad {
