@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by wikia on 2015-09-11.
+ * @ownership: Content X-Wing
  */
 public class WeiboTests extends NewTestTemplate {
 
