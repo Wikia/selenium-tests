@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests;
+package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @ownership: Content X-Wing
  */
 // Uncoment after finish all widget tags
-//@Test(groups = {"MercuryWidgetTests", "Mercury"})
-public class WidgetTests extends NewTestTemplate {
+//@Test(groups = {"MercuryTwitterWidgetTests", "MercuryWidgetTests", "Mercury"})
+public class TwitterTests extends NewTestTemplate {
 
   private static final String TWITTER_ARTICLE_NAME = "TwitterWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
@@ -28,9 +28,9 @@ public class WidgetTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  @Test(groups = "MercuryWidgetTest_001")
+  @Test(groups = "MercuryTwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_001_Twitter_isLoadedOnFirstVisitDirectlyFromUrl() {
+  public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject.createAndNavigate(wikiURL);
@@ -38,9 +38,9 @@ public class WidgetTests extends NewTestTemplate {
         .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryWidgetTest_002")
+  @Test(groups = "MercuryTwitterWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_002_Twitter_isLoadedOnFirstVisitFromDifferentArticle() {
+  public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject
@@ -52,9 +52,9 @@ public class WidgetTests extends NewTestTemplate {
         .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryWidgetTest_003")
+  @Test(groups = "MercuryTwitterWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_003_Twitter_isLoadedOnSecondVisitFromDifferentArticle() {
+  public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject.createAndNavigate(wikiURL);
