@@ -4,23 +4,23 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 
 import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing
  */
-public class TwitterTests extends NewTestTemplate {
+public class SoundCloudTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void TwitterWidgetTest_001_isLoaded() {
-    TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
+  public void SoundCloudWidgetTest_001_isLoaded() {
+    SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    twitterWidgetPageObject.createAndNavigate(wikiURL);
+    soundCloudWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(
-        twitterWidgetPageObject.isLoadedOnOasis(),
+        soundCloudWidget.isLoadedOnOasis(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
