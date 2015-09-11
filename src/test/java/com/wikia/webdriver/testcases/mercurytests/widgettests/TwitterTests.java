@@ -31,39 +31,39 @@ public class TwitterTests extends NewTestTemplate {
   @Test(groups = "MercuryTwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidgetPageObject.createAndNavigate(wikiURL);
+    twitterWidget.createAndNavigate(wikiURL);
     Assertion
-        .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+        .assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidgetPageObject
+    twitterWidget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(TWITTER_ARTICLE_NAME);
 
     Assertion
-        .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+        .assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidgetPageObject.createAndNavigate(wikiURL);
+    twitterWidget.createAndNavigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(TWITTER_ARTICLE_NAME);
 
     Assertion
-        .assertTrue(twitterWidgetPageObject.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+        .assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 }
