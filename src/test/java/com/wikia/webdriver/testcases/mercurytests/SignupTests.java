@@ -55,7 +55,7 @@ public class SignupTests extends NewTestTemplate {
   @Execute(onWikia = "ja.ja-test")
   public void MercurySignupTest_006_japaneseUserSignup() {
     String japanName = "ユーザー" + DateTime.now().getMillis();
-    String japanPAssword = "ユーザー" + DateTime.now().getMillis();
+    String japanPAssword = "ユーザザー" + DateTime.now().getMillis();
 
     signUp(new CreateUser().withName(japanName).withPass(japanPAssword).create())
         .verifyAvatarAfterSignup();
