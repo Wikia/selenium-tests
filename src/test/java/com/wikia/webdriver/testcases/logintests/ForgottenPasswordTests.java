@@ -91,7 +91,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         cnwLogin
-            .receiveMailWithNewPassword(credentials.emailQaart1, credentials.emailPasswordQaart1);
+            .receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
     new SpecialUserLoginPageObject(driver).setNewPassword();
