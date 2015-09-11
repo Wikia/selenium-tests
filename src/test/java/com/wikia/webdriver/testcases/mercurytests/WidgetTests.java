@@ -30,7 +30,7 @@ public class WidgetTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_001_Twitter_FirstVisitDirectlyFromUrl() {
+  public void MercuryWidgetTest_001_Twitter_isLoadedOnFirstVisitDirectlyFromUrl() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject.createAndNavigate(wikiURL);
@@ -40,7 +40,7 @@ public class WidgetTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_002_Twitter_FirstVisitFromDifferentArticle() {
+  public void MercuryWidgetTest_002_Twitter_isLoadedOnFirstVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject
@@ -54,7 +54,7 @@ public class WidgetTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetTest_003_Twitter_SecondVisitFromDifferentArticle() {
+  public void MercuryWidgetTest_003_Twitter_isLoadedOnSecondVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidgetPageObject = new TwitterWidgetPageObject(driver);
 
     twitterWidgetPageObject.createAndNavigate(wikiURL);
