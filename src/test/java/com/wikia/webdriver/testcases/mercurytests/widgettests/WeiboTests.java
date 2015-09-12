@@ -64,5 +64,4 @@ public class WeiboTests extends NewTestTemplate {
     Assertion
         .assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
-
 }

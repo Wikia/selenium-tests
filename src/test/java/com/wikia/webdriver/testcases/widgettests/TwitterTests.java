@@ -15,13 +15,10 @@ public class TwitterTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void WidgetTest_001_Twitter_isLoaded() {
+  public void Twitter_WidgetTest_001_isLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
     twitterWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(
-        twitterWidget.isLoadedOnOasis(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(twitterWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 }

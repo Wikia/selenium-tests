@@ -16,8 +16,7 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "weibo";
   private static final String ARTICLE_NAME = "WeiboWidget";
-  private static final String TAG =
-      "<weibo uids=\"1642909335,1782515283\">";
+  private static final String TAG = "<weibo uids=\"1642909335,1782515283\" />";
 
   public WeiboWidgetPageObject(WebDriver driver) {
     super(driver);
