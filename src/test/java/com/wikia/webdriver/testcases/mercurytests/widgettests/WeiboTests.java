@@ -32,8 +32,7 @@ public class WeiboTests extends NewTestTemplate {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
     weiboWidget.createAndNavigate(wikiURL);
-    Assertion
-        .assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
@@ -46,8 +45,7 @@ public class WeiboTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
@@ -61,7 +59,6 @@ public class WeiboTests extends NewTestTemplate {
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 }
