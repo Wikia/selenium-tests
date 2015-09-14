@@ -61,7 +61,6 @@ public class PollsnackTests extends NewTestTemplate {
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 }
