@@ -378,8 +378,8 @@ public class AdsDataProvider {
         {
             "adtest",
             "SyntheticTests/Async/Hop/ExtraMarker?log_level=9&log_group=Wikia.Tracker",
-            "TOP_RIGHT_BOXAD",
-            "adType=async;method=hop;pos=TOP_RIGHT_BOXAD;sp=no;test-marker=42"
+            "adType=async;method=hop;pos=TOP_RIGHT_BOXAD;",
+            "test-marker=42"
         }
     };
   }
