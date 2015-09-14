@@ -19,9 +19,6 @@ public class WeiboTests extends NewTestTemplate {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
     weiboWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(
-        weiboWidget.isLoadedOnOasis(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(weiboWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 }
