@@ -23,7 +23,7 @@ public class LoginTests extends NewTestTemplate {
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
 
-  @Test(groups = {"MercuryLoginTest_001"})
+  @Test(groups = {"MercuryLoginTest_001"}, enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryLoginTest_001_validUserCanLogIn() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
@@ -144,7 +144,7 @@ public class LoginTests extends NewTestTemplate {
     Assertion.assertEquals(loginPageObject.getLoginHeaderText(), expectedHeader);
   }
 
-  @Test(groups = {"MercuryLoginTest_011"})
+  @Test(groups = {"MercuryLoginTest_011"}, enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryLoginTest_011_japaneseUserLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
