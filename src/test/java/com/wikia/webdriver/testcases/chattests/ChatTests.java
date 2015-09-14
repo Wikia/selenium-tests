@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
@@ -201,6 +202,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_007", "Chat", "Modals"})
+  @RelatedIssue(issueID = "MAIN-5315", comment = "please test this manually")
   public void Chat_007_banUser() {
     switchToWindow(driverOne);
     openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);

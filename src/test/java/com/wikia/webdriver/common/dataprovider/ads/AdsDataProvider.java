@@ -346,7 +346,9 @@ public class AdsDataProvider {
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
         {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
-        {"tardis", "Mang", "\"esrb\":\"teen\"", true}
+        {"tardis", "Mang", "\"esrb\":\"teen\"", true},
+        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
+        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
     };
   }
 

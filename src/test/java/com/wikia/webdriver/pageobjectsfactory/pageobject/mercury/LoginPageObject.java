@@ -17,57 +17,75 @@ import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Qaga on 2015-06-30.
+ * @ownership Social
  */
-public class LoginPage extends WikiBasePageObject {
+public class LoginPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
-
   @FindBy(css = "#loginPassword")
   private WebElement passwordField;
-
   @FindBy(css = "#loginSubmit")
   private WebElement submitButton;
-
   @FindBy(css = "small.error")
   private WebElement errorMessage;
-
   @FindBy(css = "a.close")
   private WebElement closeButton;
-
   @FindBy(css = "a.footer-callout-link")
   private WebElement registerNowLink;
-
   @FindBy(css = "header.auth-header")
   private WebElement loginHeader;
-
   @FindBy(css = ".password-toggler")
-  private  WebElement passwordToggler;
+  private WebElement passwordToggler;
+  @FindBy(css = ".sign-in")
+  private WebElement signInButton;
 
   private NavigationSideComponentObject nav;
 
-  public LoginPage(WebDriver driver) {
+  public LoginPageObject(WebDriver driver) {
     super(driver);
   }
 
-  public void logUserIn(String username, String password) {
-    usernameField.sendKeys(username);
-    passwordField.sendKeys(password);
-    submitButton.click();
-  }
-
-  public LoginPage get() {
+  public LoginPageObject get() {
     String redirectParameter = "";
 
-    try{
-      redirectParameter = URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
+    try {
+      redirectParameter =
+          URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
 
-    } catch (UnsupportedEncodingException e){
-      PageObjectLogging.log("encoding","problem occured during URL encoding",false);
+    } catch (UnsupportedEncodingException e) {
+      PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect=" + redirectParameter);
-        return this;
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
+               + redirectParameter);
+    return this;
+  }
+
+  public String getErrorMessage() {
+    return errorMessage.getText();
+
+  }
+
+  public String getLoginHeaderText() {
+    return loginHeader.getText();
+  }
+
+  public LoginPageObject clickOnSignInButton() {
+    wait.forElementVisible(signInButton);
+    signInButton.click();
+    return this;
+  }
+
+  public void clickOnCloseButton() {
+    closeButton.click();
+  }
+
+  public void clickOnRegisterLink() {
+    registerNowLink.click();
+  }
+
+  public void clickOnPasswordToggler() {
+    passwordToggler.click();
   }
 
   public NavigationSideComponentObject getNav() {
@@ -78,23 +96,17 @@ public class LoginPage extends WikiBasePageObject {
     return nav;
   }
 
-  public String getErrorMessage() {
-    return errorMessage.getText();
-
-  }
-
   public boolean isSubmitButtonDisabled() {
     return "true".equals(submitButton.getAttribute("disabled"));
   }
 
   /**
    * Check if button is disabled for the @duration
-   * 
+   *
    * @param duration in seconds
-   * @return
    */
   public boolean isSubmitButtonDisabled(int duration) {
-    changeImplicitWait((duration*1000)/4, TimeUnit.MILLISECONDS);
+    changeImplicitWait((duration * 1000) / 4, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, duration, (duration * 1000) / 2)
           .until(new ExpectedCondition<Boolean>() {
@@ -111,30 +123,6 @@ public class LoginPage extends WikiBasePageObject {
     }
   }
 
-  public String getCloseButtonURL(){
-    return closeButton.getAttribute("href");
-  }
-
-  public void clickOnCloseButton(){
-    closeButton.click();
-  }
-
-  public void clickOnRegisterLink(){
-    registerNowLink.click();
-  }
-
-  public String getLoginHeaderText(){
-    return loginHeader.getText();
-  }
-
-  public void typePassword(String password) {
-    passwordField.sendKeys(password);
-  }
-
-  public void clickOnPasswordToggler() {
-    passwordToggler.click();
-  }
-
   public Boolean isPasswordTogglerDisabled() {
     String togglerDisabled = passwordField.getAttribute("type");
     return "password".equals(togglerDisabled);
@@ -145,4 +133,14 @@ public class LoginPage extends WikiBasePageObject {
     return "text".equals(togglerDisabled);
   }
 
+  public void logUserIn(String username, String password) {
+    wait.forElementVisible(usernameField);
+    usernameField.sendKeys(username);
+    passwordField.sendKeys(password);
+    submitButton.click();
+  }
+
+  public void typePassword(String password) {
+    passwordField.sendKeys(password);
+  }
 }

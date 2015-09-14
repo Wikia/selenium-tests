@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;

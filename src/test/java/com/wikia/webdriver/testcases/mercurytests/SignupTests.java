@@ -1,10 +1,13 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.users.CreateUser;
+import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership Social
@@ -12,81 +15,54 @@ import org.testng.annotations.Test;
 @Test(groups = {"MercurySignupTests", "Mercury"})
 public class SignupTests extends NewTestTemplate {
 
-  @Test(groups = {"MercurySignupTest_001"})
+  @Test(groups = "MercurySignupTest_001")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_001_successfulSignup() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "User" + mobileSignup.getTimeStamp();
-    String password = "Pass" + mobileSignup.getTimeStamp();
-    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-        .typeBirthdate("12", "12", "1952").register();
-    mobileSignup.verifyAvatarAfterSignup();
+    signUp(new CreateUser().create()).verifyAvatarAfterSignup();
   }
 
-  @Test(groups = {"MercurySignupTest_002"})
+  @Test(groups = "MercurySignupTest_002")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_002_signupErrorEmailInUse() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "User" + mobileSignup.getTimeStamp();
-    String password = "Pass" + mobileSignup.getTimeStamp();
-    String email = "qaart001@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-          .typeBirthdate("12", "12", "1952").register();
-    mobileSignup.verifyEmailInUseError();
+    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
   }
 
-  @Test(groups = {"MercurySignupTest_003"})
+  @Test(groups = "MercurySignupTest_003")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_003_signupErrorUsernameTaken() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "bekcunning";
-    String password = "Pass" + mobileSignup.getTimeStamp();
-    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-          .typeBirthdate("12", "12", "1952").register();
-    mobileSignup.verifyUsernameTakenError();
+    String userNameTaken = "bekcunning";
+
+    signUp(new CreateUser().withName(userNameTaken).create()).verifyUsernameTakenError();
   }
 
-  @Test(groups = {"MercurySignupTest_004"})
+  @Test(groups = "MercurySignupTest_004")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_004_signupErrorBadPassword() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "User" + mobileSignup.getTimeStamp();
-    String password = userName;
-    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-          .typeBirthdate("12", "12", "1952").register();
-    mobileSignup.verifyPasswordError();
+    String random = "User" + DateTime.now().getMillis();
+
+    signUp(new CreateUser().withName(random).withPass(random).create()).verifyPasswordError();
   }
 
-  @Test(groups = {"MercurySignupTest_005"})
+  @Test(groups = "MercurySignupTest_005")
   @Execute(onWikia = "mobileregressiontesting")
   public void MercurySignupTest_005_signupErrorTooYoungUser() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "User" + mobileSignup.getTimeStamp();
-    String password = "Pass" + mobileSignup.getTimeStamp();
-    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-          .typeBirthdate("12", "12", "2009").register();
-    mobileSignup.verifyBirthdateError();
+    DateTime wrongBirthDate = new DateTime(2009, 12, 12, 12, 0, 0);
+
+    signUp(new CreateUser().withBirthday(wrongBirthDate).create()).verifyBirthdateError();
   }
 
-  @Test(groups = {"MercurySignupTest_006"})
+  @Test(groups = "MercurySignupTest_006")
   @Execute(onWikia = "ja.ja-test")
   public void MercurySignupTest_006_japaneseUserSignup() {
-    SignupPageObject mobileSignup = new SignupPageObject(driver);
-    mobileSignup.openMobileSignupPage(wikiURL);
-    String userName = "ユーザー" + mobileSignup.getTimeStamp();
-    String password = "パス" + mobileSignup.getTimeStamp();
-    String email = "qaart001+" + mobileSignup.getTimeStamp() + "@gmail.com";
-    mobileSignup.typeEmailAddress(email).typeUsername(userName).typePassword(password)
-            .typeBirthdate("12", "12", "1952").register();
-    mobileSignup.verifyAvatarAfterSignup();
+    String japanName = "ユーザー" + DateTime.now().getMillis();
+    String japanPAssword = "ユーザザー" + DateTime.now().getMillis();
+
+    signUp(new CreateUser().withName(japanName).withPass(japanPAssword).create())
+        .verifyAvatarAfterSignup();
+  }
+
+  private SignupPageObject signUp(TestUser user) {
+    return new SignupPageObject(driver).openMobileSignupPage(wikiURL).signUp(user.getUserName(),
+        user.getPassword(), user.getEmail(), user.getBirthdate());
   }
 }

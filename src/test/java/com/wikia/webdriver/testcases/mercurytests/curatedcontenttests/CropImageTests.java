@@ -6,13 +6,14 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.CroppingToolPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.SearchForImagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,7 +26,7 @@ public class CropImageTests extends NewTestTemplate {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod() {
-        new LoginPage(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
+        new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
                 Configuration.getCredentials().passwordStaff2);
     }
 
