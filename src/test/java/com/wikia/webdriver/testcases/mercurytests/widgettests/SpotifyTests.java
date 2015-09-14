@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
