@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class VKWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = "#vk_groups iframe")
+  @FindBy(css = "[data-wikia-widget='vk'] iframe")
   private WebElement vkIframe;
   @FindBy(css = ".widget_body")
   private WebElement vkBody;
