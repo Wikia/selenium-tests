@@ -15,7 +15,7 @@ public class TwitterTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void Twitter_WidgetTest_001_isLoaded() {
+  public void TwitterWidgetTest_001_isLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
     twitterWidget.createAndNavigate(wikiURL);

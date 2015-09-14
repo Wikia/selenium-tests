@@ -14,7 +14,7 @@ public class VKTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void WidgetTest_001_Vk_isLoaded() {
+  public void VkWidgetTest_001_isLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
     vkWidget.createAndNavigate(wikiURL);
