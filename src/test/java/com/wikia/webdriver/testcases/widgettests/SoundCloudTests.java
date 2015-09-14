@@ -19,9 +19,6 @@ public class SoundCloudTests extends NewTestTemplate {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
     soundCloudWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(
-        soundCloudWidget.isLoadedOnOasis(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(soundCloudWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 }

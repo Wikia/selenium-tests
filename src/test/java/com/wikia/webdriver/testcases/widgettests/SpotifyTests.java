@@ -4,20 +4,21 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
+
 import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing
  */
-public class VKTests extends NewTestTemplate {
+public class SpotifyTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void VkWidgetTest_001_isLoaded() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+  public void SpotifyWidgetTest_001_isLoaded() {
+    SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    spotifyWidget.createAndNavigate(wikiURL);
+    Assertion.assertTrue(spotifyWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 }
