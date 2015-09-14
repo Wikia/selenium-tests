@@ -15,7 +15,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void WidgetTest_001_Weibo_isLoaded() {
+  public void WeiboWidgetTest_001_isLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
     weiboWidget.createAndNavigate(wikiURL);

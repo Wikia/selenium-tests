@@ -4,21 +4,23 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing
  */
-public class TwitterTests extends NewTestTemplate {
+public class VKTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void TwitterWidgetTest_001_isLoaded() {
-    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+  public void VkWidgetTest_001_isLoaded() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    twitterWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    vkWidget.createAndNavigate(wikiURL);
+    Assertion.assertTrue(
+        vkWidget.isLoadedOnOasis(),
+        MercuryMessages.INVISIBLE_MSG
+    );
   }
 }
