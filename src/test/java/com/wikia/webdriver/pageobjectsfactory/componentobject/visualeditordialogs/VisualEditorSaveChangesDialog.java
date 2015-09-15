@@ -63,7 +63,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
-    waitForElementClickableByElement(publishButton);
+    wait.forElementClickable(publishButton);
     if (isElementOnPage(recaptchaArea)) {
       recaptchaContainer = saveDialogBody.findElement(recaptchaImageBy);
       wait.forElementVisible(recaptchaContainer);
@@ -79,7 +79,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public VisualEditorReviewChangesDialog clickReviewYourChanges() {
     wait.forElementVisible(reviewChangesButton);
-    waitForElementClickableByElement(reviewChangesButton);
+    wait.forElementClickable(reviewChangesButton);
     reviewChangesButton.click();
     return new VisualEditorReviewChangesDialog(driver);
   }
@@ -96,7 +96,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void clickMinorEdit() {
-    waitForElementClickableByElement(minorEdit);
+    wait.forElementClickable(minorEdit);
     minorEdit.click();
   }
 }

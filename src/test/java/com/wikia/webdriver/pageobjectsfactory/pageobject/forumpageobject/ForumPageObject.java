@@ -76,7 +76,7 @@ public class ForumPageObject extends WikiArticlePageObject {
       }
     }
     wait.forElementVisible(forumBoardLink);
-    waitForElementClickableByElement(forumBoardLink);
+    wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
     PageObjectLogging.log("openForumBoard",
                           "click on the forum Board", true,

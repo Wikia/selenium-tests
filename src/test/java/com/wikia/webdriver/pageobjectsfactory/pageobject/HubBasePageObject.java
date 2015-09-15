@@ -105,7 +105,7 @@ public class HubBasePageObject extends WikiBasePageObject {
   public void clickGetPromoted() {
     wait.forElementVisible(getPromotedButton);
     scrollToElement(getPromotedButton);
-    waitForElementClickableByElement(getPromotedButton);
+    wait.forElementClickable(getPromotedButton);
     scrollAndClick(getPromotedButton);
     PageObjectLogging.log("clickGetPromoted", "Click on suggest an article button", true);
   }
@@ -167,7 +167,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    * Verify that Suggest Video or Article submit button is enabled
    */
   public void verifySuggestVideoOrArticleButtonClickable() {
-    waitForElementClickableByElement(submitButton);
+    wait.forElementClickable(submitButton);
     PageObjectLogging.log("verifySuggestVideoOrArticleButtonClickable",
         "Verify that Suggest Video or Article submit button is enabled", true);
   }
@@ -258,7 +258,7 @@ public class HubBasePageObject extends WikiBasePageObject {
         element = lifestyleWikiaBarLink;
         break;
     }
-    waitForElementClickableByElement(element);
+    wait.forElementClickable(element);
     element.click();
 
     PageObjectLogging.log("clickWikiaBarLink", "Click hub link in WikiaBar", true);

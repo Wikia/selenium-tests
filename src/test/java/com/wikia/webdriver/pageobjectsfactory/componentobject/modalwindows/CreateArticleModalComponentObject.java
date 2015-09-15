@@ -73,17 +73,17 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
    */
   private void chooseLayout(String layout) {
     if ("standard".equals(layout)) {
-      waitForElementClickableByElement(standardRadioButton);
+      wait.forElementClickable(standardRadioButton);
       scrollAndClick(standardRadioButton);
       return;
     }
     if ("blank".equals(layout)) {
-      waitForElementClickableByElement(blankRadioButton);
+      wait.forElementClickable(blankRadioButton);
       scrollAndClick(blankRadioButton);
       return;
     }
     if ("top".equals(layout)) {
-      waitForElementClickableByElement(topListRadioButton);
+      wait.forElementClickable(topListRadioButton);
       scrollAndClick(topListRadioButton);
     }
   }

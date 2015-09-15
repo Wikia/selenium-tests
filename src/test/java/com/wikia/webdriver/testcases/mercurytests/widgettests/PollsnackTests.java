@@ -6,8 +6,8 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -62,5 +62,14 @@ public class PollsnackTests extends NewTestTemplate {
         .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
     Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryPollsnackWidgetTest_005")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryPollsnackWidgetTest_005_isErrorPresent() {
+    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+
+    pollsnackWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(pollsnackWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

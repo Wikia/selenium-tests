@@ -470,7 +470,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
-    waitForElementClickableByElement(sectionEditButton);
+    wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log("openVEModeWithSectionEditButton", "VE edit button clicked at section: "
         + section, true, driver);

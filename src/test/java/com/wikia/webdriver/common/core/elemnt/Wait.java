@@ -1,8 +1,7 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -50,6 +50,7 @@ public class Wait {
 
   /**
    * Checks if the element is clickable in browser
+   * 
    * @param element The element to be checked
    */
   public WebElement forElementClickable(WebElement element) {
@@ -67,6 +68,36 @@ public class Wait {
     }
   }
 
+  public WebElement forElementClickable(WebElement element, int timeout) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+    }
+    return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+        .elementToBeClickable(element));
+  }
+
+  public WebElement forElementClickable(List<WebElement> elements, int index, int timeout) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      elements.get(0).getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+          .elementToBeClickable(elements.get(index)));
+    } else {
+      return forElementClickable(SelectorStack.read(), timeout);
+    }
+  }
+
   /**
    * Checks if the element is clickable on the browser
    */
@@ -74,6 +105,19 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.elementToBeClickable(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
+   * Checks if the element is clickable on the browser
+   */
+  public WebElement forElementClickable(By by, int timeout) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+          .elementToBeClickable(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -125,8 +169,7 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-                                                                      .visibilityOfElementLocated(
-                                                                          by));
+          .visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -139,7 +182,7 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return new WebDriverWait(webDriver, DEFAULT_TIMEOUT).until(ExpectedConditions
-                                                                      .invisibilityOfElementLocated(by));
+          .invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }

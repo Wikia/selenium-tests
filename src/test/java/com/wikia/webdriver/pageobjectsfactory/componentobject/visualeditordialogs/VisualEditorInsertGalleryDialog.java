@@ -45,27 +45,27 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   }
 
   private void typeInSearchTextField(String input) {
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.sendKeys(input);
     PageObjectLogging.log("typeInSearchTextField", "Typed " + input + " in the search field", true);
   }
 
   private void clickClearInputButton() {
     if (clearInputButton.isDisplayed()) {
-      waitForElementClickableByElement(clearInputButton);
+      wait.forElementClickable(clearInputButton);
       clearInputButton.click();
     }
   }
 
   private void clickAddGalleryButton() {
     wait.forElementVisible(doneButton);
-    waitForElementClickableByElement(doneButton);
+    wait.forElementClickable(doneButton);
     doneButton.click();
   }
 
   public VisualEditorInsertGalleryDialog searchMedia(String searchText) {
     waitForDialogVisible();
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.clear();
     typeInSearchTextField(searchText);
     waitForElementNotVisibleByElement(queryPending);
