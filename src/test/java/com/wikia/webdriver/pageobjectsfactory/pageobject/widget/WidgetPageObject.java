@@ -84,8 +84,8 @@ public abstract class WidgetPageObject extends BasePageObject {
   public boolean areLoaded() {
     boolean result = true;
 
-    for (WebElement iframe: getWidgetList()) {
-      if (!isWidgetVisible(iframe, getWidgetBody())) {
+    for (WebElement widget: getWidgetList()) {
+      if (!isWidgetVisible(widget, getWidgetBody())) {
         result = false;
         break;
       }
@@ -101,12 +101,12 @@ public abstract class WidgetPageObject extends BasePageObject {
     return result;
   }
 
-  private boolean isWidgetVisible(WebElement widgetIframe, WebElement widgetBody) {
-    if (!isElementVisible(widgetIframe)) {
+  private boolean isWidgetVisible(WebElement widget, WebElement widgetBody) {
+    if (!isElementVisible(widget)) {
       return false;
     }
 
-    driver.switchTo().frame(widgetIframe);
+    driver.switchTo().frame(widget);
     boolean result = isElementVisible(widgetBody);
     driver.switchTo().parentFrame();
 
