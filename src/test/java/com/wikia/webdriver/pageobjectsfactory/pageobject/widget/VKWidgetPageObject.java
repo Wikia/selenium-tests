@@ -22,7 +22,7 @@ public class VKWidgetPageObject extends WidgetPageObject {
   private static final String ARTICLE_NAME = "VKWidget";
   private static final String[] TAGS = {
       "<vk group-id=\"59925174\" />",
-      "<vk group-id=\"12345\" />",
+      "<vk group-id=\"53477573\" />",
   };
   private static final String INCORRECT_TAG = "<vk />";
   private static final String ERROR_MESSAGE = "Failed to render the VK widget. Please check if all required parameters are in place.";
