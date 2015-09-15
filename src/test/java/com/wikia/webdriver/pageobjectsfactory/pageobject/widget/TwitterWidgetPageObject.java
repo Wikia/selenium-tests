@@ -12,8 +12,6 @@ import java.util.List;
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".widget-twitter iframe")
-  private WebElement widgetIframe;
-  @FindBy(css = ".widget-twitter iframe")
   private List<WebElement> widgetIframeList;
   @FindBy(css = "div.timeline")
   private WebElement widgetBody;
@@ -56,7 +54,7 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {

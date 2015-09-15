@@ -13,8 +13,6 @@ import java.util.List;
 public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private WebElement widgetIframe;
-  @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
   private List<WebElement> widgetIframeList;
   @FindBy(css = "div.widget")
   private WebElement widgetBody;
@@ -65,7 +63,7 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {

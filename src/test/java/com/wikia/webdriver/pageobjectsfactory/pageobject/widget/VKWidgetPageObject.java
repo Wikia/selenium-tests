@@ -12,8 +12,6 @@ import java.util.List;
 public class VKWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".widget-vk iframe")
-  private WebElement widgetIframe;
-  @FindBy(css = ".widget-vk iframe")
   private List<WebElement> widgetIframeList;
   @FindBy(css = ".widget_body")
   private WebElement widgetBody;
@@ -56,7 +54,7 @@ public class VKWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {

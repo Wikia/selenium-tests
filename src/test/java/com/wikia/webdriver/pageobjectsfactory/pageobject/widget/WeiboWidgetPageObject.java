@@ -12,8 +12,6 @@ import java.util.List;
 public class WeiboWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='weibo']")
-  private WebElement widgetIframe;
-  @FindBy(css = "iframe[data-wikia-widget='weibo']")
   private List<WebElement> widgetIframeList;
   @FindBy(css = "div.tsina_open")
   private WebElement widgetBody;
@@ -56,7 +54,7 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {

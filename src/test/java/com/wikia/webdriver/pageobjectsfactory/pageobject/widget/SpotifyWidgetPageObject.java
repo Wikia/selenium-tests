@@ -12,8 +12,6 @@ import java.util.List;
 public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
-  private WebElement widgetIframe;
-  @FindBy(css = "iframe[data-wikia-widget='spotify']")
   private List<WebElement> widgetIframeList;
   @FindBy(css = "#widgetContainer")
   private WebElement widgetBody;
@@ -56,7 +54,7 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {

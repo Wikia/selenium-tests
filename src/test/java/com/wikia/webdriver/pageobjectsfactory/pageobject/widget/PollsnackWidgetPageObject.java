@@ -12,8 +12,6 @@ import java.util.List;
 public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
-  private WebElement widgetIframe;
-  @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
   private List<WebElement> widgetIframeList;
   @FindBy(css = "iframe")
   private WebElement widgetBody;
@@ -56,7 +54,7 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   }
 
   protected WebElement getWidget() {
-    return widgetIframe;
+    return widgetIframeList.get(0);
   }
 
   protected List<WebElement> getWidgetList() {
