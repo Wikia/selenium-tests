@@ -97,14 +97,14 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public PreferencesPageObject clickSaveButton() {
-    waitForElementClickableByElement(saveButton);
+    wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
     PageObjectLogging.log("clickSaveButton", "Save button clicked", true);
     return new PreferencesPageObject(driver);
   }
 
   public void clickRestoreLink() {
-    waitForElementClickableByElement(restoreDefaultLink);
+    wait.forElementClickable(restoreDefaultLink);
     restoreDefaultLink.click();
     PageObjectLogging.log("clickRestoreLink", "Restore Deault Link clicked", true);
   }
@@ -143,7 +143,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public PreferencesPageObject setAdvancedRecentChangesCheckbox() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    waitForElementClickableByElement(useAdvancedRecentChangesCheckbox);
+    wait.forElementClickable(useAdvancedRecentChangesCheckbox);
   useAdvancedRecentChangesCheckbox.click();
     PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
 

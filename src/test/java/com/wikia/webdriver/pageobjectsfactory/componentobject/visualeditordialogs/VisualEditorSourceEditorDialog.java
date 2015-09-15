@@ -23,7 +23,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 
   public VisualEditorPageObject clickApplyChangesButton() {
     waitForDialogVisible();
-    waitForElementClickableByElement(applyChangesButton);
+    wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     waitForElementNotVisibleByElement(loadingIndicator);
     waitForDialogNotVisible();
@@ -34,7 +34,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
     waitForDialogVisible();
     waitForElementNotVisibleByElement(loadingIndicator);
     WebElement editArea = dialog.findElement(editAreaBy);
-    waitForElementClickableByElement(editArea);
+    wait.forElementClickable(editArea);
     editArea.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
     PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);

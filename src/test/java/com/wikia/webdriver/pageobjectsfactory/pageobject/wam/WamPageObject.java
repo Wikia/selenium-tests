@@ -227,7 +227,7 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void typeDateInDatePicker(String date) {
-    waitForElementClickableByElement(datePickerInput);
+    wait.forElementClickable(datePickerInput);
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);

@@ -77,7 +77,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
     waitForDialogVisible();
     try {
       if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
-        waitForElementClickableByElement(doneButton);
+        wait.forElementClickable(doneButton);
         doneButton.click();
       } else {
         throw new NoSuchElementException("This template has no param.");
@@ -92,7 +92,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
     waitForDialogVisible();
     try {
       if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
-        waitForElementClickableByElement(cancelButton);
+        wait.forElementClickable(cancelButton);
         cancelButton.click();
       } else {
         throw new NoSuchElementException("This template has no param.");

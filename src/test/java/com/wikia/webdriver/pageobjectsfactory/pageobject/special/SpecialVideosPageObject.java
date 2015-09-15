@@ -76,7 +76,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   protected void verifyAddVideoButton() {
-    waitForElementClickableByElement(addVideo);
+    wait.forElementClickable(addVideo);
   }
 
   protected void verifySortDropdown() {

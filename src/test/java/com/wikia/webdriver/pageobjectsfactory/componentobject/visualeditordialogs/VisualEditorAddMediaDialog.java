@@ -83,7 +83,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     waitForDialogVisible();
     typeInSearchTextField(url);
     wait.forElementVisible(topUploadButton);
-    waitForElementClickableByElement(topUploadButton);
+    wait.forElementClickable(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);

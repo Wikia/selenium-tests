@@ -308,7 +308,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void copyAndPaste() {
-    waitForElementClickableByElement(editArea);
+    wait.forElementClickable(editArea);
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
@@ -410,7 +410,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
-    waitForElementClickableByElement(selectedGallery);
+    wait.forElementClickable(selectedGallery);
     selectedGallery.click();
 
   }

@@ -151,7 +151,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyLastResultPage() {
-    waitForElementClickableByElement(paginationPages.get(paginationPages.size() - 1));
+    wait.forElementClickable(paginationPages.get(paginationPages.size() - 1));
     do {
       wait.forElementVisible(paginationPages.get(paginationPages.size() - 1));
       scrollAndClick(paginationPages.get(paginationPages.size() - 1));

@@ -17,7 +17,7 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
   private WebElement preferredEditorDropdown;
 
   public void selectPreferredEditor(String value) {
-    waitForElementClickableByElement(preferredEditorDropdown);
+    wait.forElementClickable(preferredEditorDropdown);
     Select select = new Select(preferredEditorDropdown);
     select.selectByValue(value);
     PageObjectLogging.log("selectPreferredEditor", "Selected " + value + " from preference", true);
