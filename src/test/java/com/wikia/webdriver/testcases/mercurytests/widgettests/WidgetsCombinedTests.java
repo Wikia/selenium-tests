@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by wikia on 2015-09-15.
+ * @ownership: Content X-Wing
  */
 public class WidgetsCombinedTests extends NewTestTemplate {
 
