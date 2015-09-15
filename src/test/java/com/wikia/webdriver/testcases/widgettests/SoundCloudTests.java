@@ -27,9 +27,7 @@ public class SoundCloudTests extends NewTestTemplate {
   public void SoundCloudWidgetTest_002_areLoaded() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget
-        .create(2)
-        .navigate(wikiURL);
+    soundCloudWidget.create(2).navigate(wikiURL);
 
     Assertion.assertTrue(
         soundCloudWidget.areLoadedOnOasis(),

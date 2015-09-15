@@ -27,9 +27,7 @@ public class WeiboTests extends NewTestTemplate {
   public void WeiboWidgetTest_002_areLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget
-        .create(2)
-        .navigate(wikiURL);
+    weiboWidget.create(2).navigate(wikiURL);
 
     Assertion.assertTrue(
         weiboWidget.areLoadedOnOasis(),

@@ -27,9 +27,7 @@ public class PollsnackTests extends NewTestTemplate {
   public void PollsnackWidgetTest_002_areLoaded() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget
-        .create(2)
-        .navigate(wikiURL);
+    pollsnackWidget.create(2).navigate(wikiURL);
 
     Assertion.assertTrue(
         pollsnackWidget.areLoadedOnOasis(),

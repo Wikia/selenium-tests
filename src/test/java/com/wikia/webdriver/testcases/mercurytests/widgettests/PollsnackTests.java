@@ -69,9 +69,7 @@ public class PollsnackTests extends NewTestTemplate {
   public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget
-        .create(2)
-        .navigate(wikiURL);
+    pollsnackWidget.create(2).navigate(wikiURL);
 
     Assertion.assertTrue(pollsnackWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
