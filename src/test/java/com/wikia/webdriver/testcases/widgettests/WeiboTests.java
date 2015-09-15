@@ -11,9 +11,10 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"WeiboWidgetTests", "WidgetTests"})
 public class WeiboTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "WeiboWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_001_isLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);

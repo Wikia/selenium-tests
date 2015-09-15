@@ -11,9 +11,10 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"PollsnackWidgetTests", "WidgetTests"})
 public class PollsnackTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "PollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_001_isLoaded() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);

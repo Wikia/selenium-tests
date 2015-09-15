@@ -11,9 +11,10 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"TwitterWidgetTests", "WidgetTests"})
 public class TwitterTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "TwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_001_isLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);

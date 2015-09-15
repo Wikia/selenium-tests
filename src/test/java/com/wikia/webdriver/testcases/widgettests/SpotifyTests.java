@@ -11,9 +11,10 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"SpotifyWidgetTests", "WidgetTests"})
 public class SpotifyTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "SpotifyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_001_isLoaded() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
