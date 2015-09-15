@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 import org.testng.annotations.Test;
 
@@ -19,5 +20,14 @@ public class VKTests extends NewTestTemplate {
 
     vkWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "VKWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void VKWidgetTest_003_isErrorPresent() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+
+    vkWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(vkWidget.isErrorPresentOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 }

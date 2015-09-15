@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifykWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,7 +31,7 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "MercuryPollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    SpotifykWidgetPageObject pollsnackWidget = new SpotifykWidgetPageObject(driver);
 
     pollsnackWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
@@ -40,7 +40,7 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "MercuryPollsnackWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    SpotifykWidgetPageObject pollsnackWidget = new SpotifykWidgetPageObject(driver);
 
     pollsnackWidget
         .create()
@@ -53,7 +53,7 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "MercuryPollsnackWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    SpotifykWidgetPageObject pollsnackWidget = new SpotifykWidgetPageObject(driver);
 
     pollsnackWidget.createAndNavigate(wikiURL);
 

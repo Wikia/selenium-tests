@@ -21,4 +21,13 @@ public class TwitterTests extends NewTestTemplate {
     twitterWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(twitterWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "TwitterWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void TwitterWidgetTest_003_isErrorPresent() {
+    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+
+    twitterWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(twitterWidget.isErrorPresentOnOasis(), MercuryMessages.INVISIBLE_MSG);
+  }
 }
