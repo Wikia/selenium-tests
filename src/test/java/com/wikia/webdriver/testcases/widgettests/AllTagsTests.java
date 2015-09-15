@@ -31,6 +31,8 @@ public class AllTagsTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
+    widgets = new ArrayList<>();
     widgets.add(new PollsnackWidgetPageObject(driver));
     widgets.add(new SoundCloudWidgetPageObject(driver));
     widgets.add(new SpotifyWidgetPageObject(driver));

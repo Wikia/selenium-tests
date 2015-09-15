@@ -135,7 +135,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.AllTagsWidgetTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.PollsnackTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SpotifyTests"/>

@@ -20,20 +20,23 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership: Content X-Wing
  */
-public class AllTagsWidgetTests extends NewTestTemplate {
+public class AllTagsTests extends NewTestTemplate {
 
-  private static final String ARTICLE_NAME = "WidgetsCombined";
+  private static final String ARTICLE_NAME = "AllTagsWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
-  private static ArrayList<WidgetPageObject> widgets;
+  private static List<WidgetPageObject> widgets;
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
+    widgets = new ArrayList<>();
     widgets.add(new PollsnackWidgetPageObject(driver));
     widgets.add(new SoundCloudWidgetPageObject(driver));
     widgets.add(new SpotifyWidgetPageObject(driver));
