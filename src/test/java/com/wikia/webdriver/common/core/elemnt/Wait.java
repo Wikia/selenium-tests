@@ -49,7 +49,7 @@ public class Wait {
       PageObjectLogging.log(
           ELEMENT_PRESENT_MESSAGE,
           String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()),
-          true
+          false
       );
       throw e;
     } finally {
