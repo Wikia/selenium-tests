@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
@@ -23,11 +23,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-public class WidgetsCombinedTests extends NewTestTemplate {
+public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "WidgetsCombined";
-  private static final String MAPS_ARTICLE_NAME = "Map";
-  private static ArrayList<WidgetPageObject> widgets = new ArrayList<WidgetPageObject>();
+  private static ArrayList<WidgetPageObject> widgets;
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
@@ -38,11 +37,7 @@ public class WidgetsCombinedTests extends NewTestTemplate {
     widgets.add(new TwitterWidgetPageObject(driver));
     widgets.add(new VKWidgetPageObject(driver));
     widgets.add(new WeiboWidgetPageObject(driver));
-  }
 
-  @Test(groups = "MercuryWidgetsCombinedTest_001")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetsCombinedTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     String content = "";
     for (WidgetPageObject widget : widgets) {
       content += widget.getTag();
@@ -51,9 +46,12 @@ public class WidgetsCombinedTests extends NewTestTemplate {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(ARTICLE_NAME);
     articleContent.push(content, ARTICLE_NAME);
+  }
 
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(ARTICLE_NAME);
+  @Test
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void AllTagsWidgetTest_001_isLoaded() {
+    new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
