@@ -90,14 +90,14 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
-      scrollAndClick(themes.get(number));
+      scrollAndClick(themes, number);
     }
     if (number == 10) {
       scrollAndClick(nextButton);
       wait.forElementVisible(secondThemesSet);
       scrollAndClick(nextButton);
       wait.forElementVisible(thirdThemesSet);
-      scrollAndClick(themes.get(number));
+      scrollAndClick(themes, number);
     }
     String themeName =
         themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();

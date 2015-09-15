@@ -172,6 +172,14 @@ public class BasePageObject {
     element.click();
   }
 
+  protected void scrollAndClick(List<WebElement> elements, int index) {
+    if (!jsActions.isElementInViewPort(elements.get(index))) {
+      scrollToElement(elements.get(index));
+    }
+    wait.forElementClickable(elements.get(index), 5);
+    elements.get(index).click();
+  }
+
   protected void scrollAndClick(WebElement element, int offset) {
     scrollToElement(element, offset);
     element.click();
