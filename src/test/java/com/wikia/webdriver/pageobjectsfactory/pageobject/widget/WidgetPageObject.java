@@ -25,6 +25,8 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getTagName();
 
+  protected abstract String getTag();
+
   protected abstract String[] getTags();
 
   protected abstract String getIncorrectTag();

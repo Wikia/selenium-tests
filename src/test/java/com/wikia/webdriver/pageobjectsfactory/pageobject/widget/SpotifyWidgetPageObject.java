@@ -39,6 +39,10 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
+  protected String getTag() {
+    return TAGS[0];
+  }
+
   protected String[] getTags() {
     return TAGS;
   }
