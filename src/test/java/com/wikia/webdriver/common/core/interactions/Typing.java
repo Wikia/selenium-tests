@@ -1,11 +1,17 @@
 package com.wikia.webdriver.common.core.interactions;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.openqa.selenium.WebElement;
 
 /**
  * Created by Ludwik on 2015-07-22.
  */
 public class Typing {
+
+  private Typing() {
+
+  }
 
   /**
    * Send keys at the speed of good typist human. based on research:
@@ -21,7 +27,7 @@ public class Typing {
       try {
         Thread.sleep(interval);
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        PageObjectLogging.log("ERROR WHILE TYPING", e.getMessage(), false);
       }
     }
   }
