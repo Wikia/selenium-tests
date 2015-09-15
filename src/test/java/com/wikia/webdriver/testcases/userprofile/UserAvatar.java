@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.userprofile;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -32,6 +33,8 @@ public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_001"})
   @Execute(asUser = User.STAFF)
   public void uploadAvatar() {
@@ -46,7 +49,8 @@ public class UserAvatar extends NewTestTemplate {
     String avatarURL = profile.getAvatarUrl();
     profile.verifyURLStatus(200, avatarURL);
   }
-
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
@@ -56,6 +60,8 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
