@@ -72,5 +72,4 @@ public class PollsnackTests extends NewTestTemplate {
     pollsnackWidget.createIncorrectAndNavigate(wikiURL);
     Assertion.assertTrue(pollsnackWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
-
 }

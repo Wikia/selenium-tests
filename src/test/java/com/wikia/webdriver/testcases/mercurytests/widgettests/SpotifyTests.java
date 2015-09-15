@@ -26,6 +26,7 @@ public class SpotifyTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
     //@TODO XW-314 - Login is necessary to bypass cache
     new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
             Configuration.getCredentials().passwordStaff2);
