@@ -77,8 +77,22 @@ public class Wait {
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
+    }
+    return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+        .elementToBeClickable(element));
+  }
+
+  public WebElement forElementClickable(List<WebElement> elements, int index, int timeout) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      elements.get(0).getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    if (SelectorStack.isContextSet()) {
+      SelectorStack.contextRead();
       return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .elementToBeClickable(element));
+          .elementToBeClickable(elements.get(index)));
     } else {
       return forElementClickable(SelectorStack.read(), timeout);
     }

@@ -7,11 +7,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @ownership: Content X-Wing
  */
 public abstract class WidgetPageObject extends BasePageObject {
+
+  @FindBy(css = "strong.error")
+  protected WebElement error;
 
   protected WidgetPageObject(WebDriver driver) {
     super(driver);
@@ -22,6 +26,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   protected abstract String getTagName();
 
   protected abstract String[] getTags();
+
+  protected abstract String getIncorrectTag();
+
+  protected abstract String getErrorMessage();
 
   protected abstract boolean isTagLoadedOnMercury();
 
@@ -48,6 +56,13 @@ public abstract class WidgetPageObject extends BasePageObject {
 
     articleContent.push(articleContentString, getArticleName());
 
+    return this;
+  }
+
+  public WidgetPageObject createIncorrect() {
+    ArticleContent articleContent = new ArticleContent();
+    articleContent.clear(getArticleName());
+    articleContent.push(getIncorrectTag(), getArticleName());
     return this;
   }
 
@@ -93,6 +108,16 @@ public abstract class WidgetPageObject extends BasePageObject {
     boolean result = isElementVisible(widgetBody);
     driver.switchTo().parentFrame();
 
+    return result;
+  }
+
+  public WidgetPageObject createIncorrectAndNavigate(String wikiURL) {
+    return createIncorrect().navigate(wikiURL);
+  }
+
+  public boolean isErrorPresent() {
+    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
+    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 }

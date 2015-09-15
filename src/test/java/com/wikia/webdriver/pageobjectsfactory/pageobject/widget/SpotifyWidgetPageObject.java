@@ -24,6 +24,8 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
   };
+  private static final String INCORRECT_TAG = "<spotify />";
+  private static final String ERROR_MESSAGE = "Failed to render the Spotify widget. Please check if all required parameters are in place.";
 
   public SpotifyWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -39,6 +41,14 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   protected String[] getTags() {
     return TAGS;
+  }
+
+  protected String getIncorrectTag() {
+    return INCORRECT_TAG;
+  }
+
+  protected String getErrorMessage() {
+    return ERROR_MESSAGE;
   }
 
   protected boolean isTagLoadedOnMercury() {

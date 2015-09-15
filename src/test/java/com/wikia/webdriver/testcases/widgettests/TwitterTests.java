@@ -36,4 +36,13 @@ public class TwitterTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG
     );
   }
+
+  @Test(groups = "TwitterWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void TwitterWidgetTest_003_isErrorPresent() {
+    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+
+    twitterWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(twitterWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+  }
 }
