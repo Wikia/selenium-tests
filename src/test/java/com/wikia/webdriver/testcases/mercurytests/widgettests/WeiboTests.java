@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -60,5 +61,14 @@ public class WeiboTests extends NewTestTemplate {
         .navigateToArticle(WEIBO_ARTICLE_NAME);
 
     Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryWeiboWidgetTest_006")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryWeiboWidgetTest_006_isErrorPresent() {
+    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+
+    weiboWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

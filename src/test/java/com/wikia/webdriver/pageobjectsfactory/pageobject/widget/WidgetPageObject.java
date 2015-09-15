@@ -74,7 +74,7 @@ public abstract class WidgetPageObject extends BasePageObject {
     return createIncorrect().navigate(wikiURL);
   }
 
-  public boolean isErrorPresentOnOasis() {
+  public boolean isErrorPresent() {
     boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;

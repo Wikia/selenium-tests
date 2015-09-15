@@ -28,6 +28,6 @@ public class TwitterTests extends NewTestTemplate {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
     twitterWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isErrorPresentOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(twitterWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

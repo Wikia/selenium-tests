@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -60,5 +61,14 @@ public class VKTests extends NewTestTemplate {
         .navigateToArticle(VK_ARTICLE_NAME);
 
     Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryVKWidgetTest_006")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryVKWidgetTest_006_isErrorPresent() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+
+    vkWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(vkWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

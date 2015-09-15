@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -60,5 +61,14 @@ public class SpotifyTests extends NewTestTemplate {
         .navigateToArticle(SPOTIFY_ARTICLE_NAME);
 
     Assertion.assertTrue(spotifyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercurySpotifyWidgetTest_006")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercurySpotifyWidgetTest_006_isErrorPresent() {
+    SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
+
+    spotifyWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(spotifyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

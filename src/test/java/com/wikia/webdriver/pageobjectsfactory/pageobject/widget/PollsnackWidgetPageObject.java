@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership: Content X-Wing
  */
-public class SpotifykWidgetPageObject extends WidgetPageObject {
+public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
   private WebElement pollsnackIframe;
@@ -20,7 +20,7 @@ public class SpotifykWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<pollsnack />";
   private static final String ERROR_MESSAGE = "Failed to render the PollSnack widget. Please check if all required parameters are in place.";
 
-  public SpotifykWidgetPageObject(WebDriver driver) {
+  public PollsnackWidgetPageObject(WebDriver driver) {
     super(driver);
   }
 

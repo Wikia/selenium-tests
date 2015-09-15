@@ -28,6 +28,6 @@ public class SpotifyTests extends NewTestTemplate {
   SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
     spotifyWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(spotifyWidget.isErrorPresentOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(spotifyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
