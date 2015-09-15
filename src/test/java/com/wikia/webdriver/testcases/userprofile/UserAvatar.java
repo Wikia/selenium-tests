@@ -33,7 +33,8 @@ public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-5356", comment = "Wikia code defect not possible to test manually")
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_001"})
   @Execute(asUser = User.STAFF)
   public void uploadAvatar() {
@@ -48,7 +49,8 @@ public class UserAvatar extends NewTestTemplate {
     String avatarURL = profile.getAvatarUrl();
     profile.verifyURLStatus(200, avatarURL);
   }
-  @RelatedIssue(issueID = "MAIN-5356", comment = "Wikia code defect not possible to test manually")
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
@@ -58,7 +60,8 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @RelatedIssue(issueID = "MAIN-5356", comment = "Wikia code defect not possible to test manually")
+  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
+          + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
