@@ -61,4 +61,13 @@ public class WeiboTests extends NewTestTemplate {
 
     Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "MercuryWeiboWidgetTest_005")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryWeiboWidgetTest_005_isErrorPresent() {
+    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+
+    weiboWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+  }
 }

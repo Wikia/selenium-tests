@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,22 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   protected String getTag() {
     return TAG;
+  }
+
+  /**
+   * There is no such thing as incorrect tag in soundcloud
+   * @throws NotImplementedException
+   */
+  protected String getIncorrectTag() {
+    throw new NotImplementedException();
+  }
+
+  /**
+   * There is no such thing as incorrect tag in soundcloud
+   * @throws NotImplementedException
+   */
+  protected String getErrorMessage() {
+      throw new NotImplementedException();
   }
 
   protected boolean isTagLoadedOnMercury() {

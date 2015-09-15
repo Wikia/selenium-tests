@@ -6,11 +6,16 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @ownership: Content X-Wing
  */
 public abstract class WidgetPageObject extends BasePageObject {
+
+  @FindBy(css = "strong.error")
+  protected WebElement error;
 
   protected WidgetPageObject(WebDriver driver) {
     super(driver);
@@ -22,6 +27,10 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getTag();
 
+  protected abstract String getIncorrectTag();
+
+  protected abstract String getErrorMessage();
+
   protected abstract boolean isTagLoadedOnMercury();
 
   protected abstract boolean isTagLoadedOnOasis();
@@ -30,6 +39,13 @@ public abstract class WidgetPageObject extends BasePageObject {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(getArticleName());
     articleContent.push(getTag(), getArticleName());
+    return this;
+  }
+
+  public WidgetPageObject createIncorrect() {
+    ArticleContent articleContent = new ArticleContent();
+    articleContent.clear(getArticleName());
+    articleContent.push(getIncorrectTag(), getArticleName());
     return this;
   }
 
@@ -50,6 +66,16 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean isLoadedOnOasis() {
     boolean result = isTagLoadedOnOasis();
+    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  public WidgetPageObject createIncorrectAndNavigate(String wikiURL) {
+    return createIncorrect().navigate(wikiURL);
+  }
+
+  public boolean isErrorPresent() {
+    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
