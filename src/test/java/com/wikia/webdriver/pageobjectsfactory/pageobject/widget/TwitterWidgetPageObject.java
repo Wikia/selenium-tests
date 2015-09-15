@@ -31,7 +31,7 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
+  public String getTag() {
     return TAG;
   }
 

@@ -1,13 +1,11 @@
-package com.wikia.webdriver.testcases.mercurytests.widgettests;
+package com.wikia.webdriver.testcases.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
@@ -58,45 +56,7 @@ public class WidgetsCombinedTests extends NewTestTemplate {
     article.open(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+      Assertion.assertTrue(widget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
     }
   }
-
-  @Test(groups = "MercuryWidgetsCombinedTest_002")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetsCombinedTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    String content = "";
-    for (WidgetPageObject widget : widgets) {
-      content += widget.getTag();
-    }
-
-    ArticlePageObject article = new ArticlePageObject(driver);
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    article.open(ARTICLE_NAME);
-
-    for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
-    }
-  }
-
-  @Test(groups = "MercuryWidgetsCombinedTest_003")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryWidgetsCombinedTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    String content = "";
-    for (WidgetPageObject widget : widgets) {
-      content += widget.getTag();
-    }
-
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.open(ARTICLE_NAME);
-    BasePageObject base = new BasePageObject(driver);
-    base.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MAPS_ARTICLE_NAME);
-    article.open(ARTICLE_NAME);
-
-    for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
-    }
-  }
-
 }
