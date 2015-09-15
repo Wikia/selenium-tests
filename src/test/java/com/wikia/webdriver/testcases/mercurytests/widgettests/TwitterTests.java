@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-// Uncoment after finish all widget tags
-//@Test(groups = {"MercuryTwitterWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Test(groups = {"MercuryTwitterWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class TwitterTests extends NewTestTemplate {
 
   private static final String TWITTER_ARTICLE_NAME = "TwitterWidget";

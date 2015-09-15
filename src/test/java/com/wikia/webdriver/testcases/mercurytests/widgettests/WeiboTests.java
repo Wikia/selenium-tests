@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryWeiboWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class WeiboTests extends NewTestTemplate {
 
   private static final String WEIBO_ARTICLE_NAME = "WeiboWidget";

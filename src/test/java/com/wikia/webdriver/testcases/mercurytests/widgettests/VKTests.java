@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryVKWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class VKTests extends NewTestTemplate {
 
   private static final String VK_ARTICLE_NAME = "VKWidget";
