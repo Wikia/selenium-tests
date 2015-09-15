@@ -12,11 +12,11 @@ import java.util.List;
 public class VKWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".widget-vk iframe")
-  private WebElement vkIframe;
+  private WebElement widgetIframe;
   @FindBy(css = ".widget-vk iframe")
-  private List<WebElement> vkIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = ".widget_body")
-  private WebElement vkBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "vk";
   private static final String ARTICLE_NAME = "VKWidget";
@@ -56,16 +56,16 @@ public class VKWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(vkIframe, vkBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(vkIframe, vkBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: vkIframeList) {
-      if (!isWidgetVisible(iframe, vkBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class VKWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: vkIframeList) {
-      if (!isWidgetVisible(iframe, vkBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }

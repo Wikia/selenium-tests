@@ -12,11 +12,11 @@ import java.util.List;
 public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
-  private WebElement pollsnackIframe;
+  private WebElement widgetIframe;
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
-  private List<WebElement> pollsnackIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = "iframe")
-  private WebElement pollsnackBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "pollsnack";
   private static final String ARTICLE_NAME = "PollsnackWidget";
@@ -56,16 +56,16 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(pollsnackIframe, pollsnackBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(pollsnackIframe, pollsnackBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: pollsnackIframeList) {
-      if (!isWidgetVisible(iframe, pollsnackBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: pollsnackIframeList) {
-      if (!isWidgetVisible(iframe, pollsnackBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }

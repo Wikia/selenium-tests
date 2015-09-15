@@ -12,11 +12,11 @@ import java.util.List;
 public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
-  private WebElement spotifyIframe;
+  private WebElement widgetIframe;
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
-  private List<WebElement> spotifyIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = "#widgetContainer")
-  private WebElement spotifyBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "spotify";
   private static final String ARTICLE_NAME = "spotifyWidget";
@@ -56,16 +56,16 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(spotifyIframe, spotifyBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(spotifyIframe, spotifyBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: spotifyIframeList) {
-      if (!isWidgetVisible(iframe, spotifyBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: spotifyIframeList) {
-      if (!isWidgetVisible(iframe, spotifyBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }

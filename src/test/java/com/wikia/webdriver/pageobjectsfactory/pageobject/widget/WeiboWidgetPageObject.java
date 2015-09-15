@@ -12,11 +12,11 @@ import java.util.List;
 public class WeiboWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='weibo']")
-  private WebElement weiboIframe;
+  private WebElement widgetIframe;
   @FindBy(css = "iframe[data-wikia-widget='weibo']")
-  private List<WebElement> weiboIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = "div.tsina_open")
-  private WebElement weiboBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "weibo";
   private static final String ARTICLE_NAME = "WeiboWidget";
@@ -56,16 +56,16 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(weiboIframe, weiboBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(weiboIframe, weiboBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: weiboIframeList) {
-      if (!isWidgetVisible(iframe, weiboBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: weiboIframeList) {
-      if (!isWidgetVisible(iframe, weiboBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }

@@ -13,11 +13,11 @@ import java.util.List;
 public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private WebElement soundCloudIframe;
+  private WebElement widgetIframe;
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private List<WebElement> soundCloudIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = "div.widget")
-  private WebElement soundCloudBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "soundcloud";
   private static final String ARTICLE_NAME = "SoundCloudWidget";
@@ -65,16 +65,16 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(soundCloudIframe, soundCloudBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(soundCloudIframe, soundCloudBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: soundCloudIframeList) {
-      if (!isWidgetVisible(iframe, soundCloudBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -82,8 +82,8 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: soundCloudIframeList) {
-      if (!isWidgetVisible(iframe, soundCloudBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }

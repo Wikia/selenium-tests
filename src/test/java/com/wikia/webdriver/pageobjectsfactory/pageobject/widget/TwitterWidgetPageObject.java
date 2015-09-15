@@ -12,11 +12,11 @@ import java.util.List;
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".widget-twitter iframe")
-  private WebElement twitterIframe;
+  private WebElement widgetIframe;
   @FindBy(css = ".widget-twitter iframe")
-  private List<WebElement> twitterIframeList;
+  private List<WebElement> widgetIframeList;
   @FindBy(css = "div.timeline")
-  private WebElement twitterBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
@@ -56,16 +56,16 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(twitterIframe, twitterBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(twitterIframe, twitterBody);
+    return isWidgetVisible(widgetIframe, widgetBody);
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: twitterIframeList) {
-      if (!isWidgetVisible(iframe, twitterBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: twitterIframeList) {
-      if (!isWidgetVisible(iframe, twitterBody)) {
+    for (WebElement iframe: widgetIframeList) {
+      if (!isWidgetVisible(iframe, widgetBody)) {
         return false;
       }
     }
