@@ -73,7 +73,7 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.create(2).navigate(wikiURL);
+    spotifyWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(spotifyWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }

@@ -27,7 +27,7 @@ public class TwitterTests extends NewTestTemplate {
   public void TwitterWidgetTest_002_areLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.create(2).navigate(wikiURL);
+    twitterWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
         twitterWidget.areLoadedOnOasis(),

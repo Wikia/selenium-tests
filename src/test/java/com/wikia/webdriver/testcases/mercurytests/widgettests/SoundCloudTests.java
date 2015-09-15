@@ -70,7 +70,7 @@ public class SoundCloudTests extends NewTestTemplate {
   public void MercurySoundcloudWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget.create(2).navigate(wikiURL);
+    soundCloudWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(soundCloudWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }

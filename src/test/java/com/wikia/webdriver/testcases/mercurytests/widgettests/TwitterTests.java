@@ -69,7 +69,7 @@ public class TwitterTests extends NewTestTemplate {
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.create(2).navigate(wikiURL);
+    twitterWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(twitterWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }

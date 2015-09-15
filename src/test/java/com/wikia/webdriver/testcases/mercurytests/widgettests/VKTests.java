@@ -67,7 +67,7 @@ public class VKTests extends NewTestTemplate {
   public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.create(2).navigate(wikiURL);
+    vkWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(vkWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }

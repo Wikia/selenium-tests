@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -42,18 +44,20 @@ public abstract class WidgetPageObject extends BasePageObject {
   protected abstract boolean areTagsLoadedOnMercury();
 
   public WidgetPageObject create() {
-    return create(1);
+    ArticleContent articleContent = new ArticleContent();
+    articleContent.push(getTag(), getArticleName());
+    return this;
   }
 
-  public WidgetPageObject create(int numberOfTags) {
+  public WidgetPageObject createMultiple() {
     String[] tags = getTags();
     String articleContentString = "";
     ArticleContent articleContent = new ArticleContent();
 
     articleContent.clear(getArticleName());
 
-    for (int i = 0; i < numberOfTags; i++) {
-      articleContentString += tags[i] + "\n";
+    for (String tag: tags) {
+      articleContentString += tag + "\n";
     }
 
     articleContent.push(articleContentString, getArticleName());

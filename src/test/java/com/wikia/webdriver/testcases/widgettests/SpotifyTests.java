@@ -27,7 +27,7 @@ public class SpotifyTests extends NewTestTemplate {
   public void SpotifyWidgetTest_002_areLoaded() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.create(2).navigate(wikiURL);
+    spotifyWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
         spotifyWidget.areLoadedOnOasis(),
