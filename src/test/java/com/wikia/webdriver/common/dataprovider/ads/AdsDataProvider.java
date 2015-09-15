@@ -84,9 +84,8 @@ public class AdsDataProvider {
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub",
-         "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -26,7 +27,8 @@ public class Wait {
   private static final int DEFAULT_TIMEOUT = 30;
   private static final String INIT_MESSAGE = "INIT ELEMENT";
   private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
-
+  private static final String ELEMENT_PRESENT_MESSAGE = "ELEMENT PRESENT";
+  private static final String ELEMENT_PRESENT_ERROR_FORMAT = "PROBLEM WITH FINDING ELEMENT %s";
 
   private WebDriverWait wait;
   private WebDriver webDriver;
@@ -43,6 +45,13 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    } catch(TimeoutException e) {
+      PageObjectLogging.log(
+          ELEMENT_PRESENT_MESSAGE,
+          String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()),
+          false
+      );
+      throw e;
     } finally {
       restoreDeaultImplicitWait();
     }
