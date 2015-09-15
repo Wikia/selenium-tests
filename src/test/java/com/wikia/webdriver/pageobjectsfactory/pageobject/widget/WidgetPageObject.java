@@ -95,7 +95,13 @@ public abstract class WidgetPageObject extends BasePageObject {
     return result;
   }
 
-  public boolean isWidgetVisible(WebElement widgetIframe, WebElement widgetBody) {
+  public boolean isErrorPresent() {
+    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
+    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  private boolean isWidgetVisible(WebElement widgetIframe, WebElement widgetBody) {
     if (!isElementVisible(widgetIframe)) {
       return false;
     }
@@ -104,12 +110,6 @@ public abstract class WidgetPageObject extends BasePageObject {
     boolean result = isElementVisible(widgetBody);
     driver.switchTo().parentFrame();
 
-    return result;
-  }
-
-  public boolean isErrorPresent() {
-    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 }
