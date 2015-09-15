@@ -268,7 +268,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
-    addArticleInDropdown.click();
+    scrollAndClick(addArticleInDropdown);
     wait.forElementVisible(articleTitleInputModal);
     articleTitleInputModal.sendKeys(articleTitle);
     scrollAndClick(submitModal);
