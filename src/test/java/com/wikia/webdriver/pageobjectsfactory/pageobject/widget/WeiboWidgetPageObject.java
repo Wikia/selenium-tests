@@ -64,8 +64,8 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnOasis() {
-    for (WebElement vkIframe: weiboIframeList) {
-      if (!isWidgetVisible(vkIframe, weiboBody)) {
+    for (WebElement iframe: weiboIframeList) {
+      if (!isWidgetVisible(iframe, weiboBody)) {
         return false;
       }
     }
@@ -73,8 +73,8 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean areTagsLoadedOnMercury() {
-    for (WebElement vkIframe: weiboIframeList) {
-      if (!isWidgetVisible(vkIframe, weiboBody)) {
+    for (WebElement iframe: weiboIframeList) {
+      if (!isWidgetVisible(iframe, weiboBody)) {
         return false;
       }
     }
