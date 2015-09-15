@@ -25,8 +25,6 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getTagName();
 
-  protected abstract String getTag();
-
   protected abstract String getIncorrectTag();
 
   protected abstract String getErrorMessage();
@@ -34,6 +32,8 @@ public abstract class WidgetPageObject extends BasePageObject {
   protected abstract boolean isTagLoadedOnMercury();
 
   protected abstract boolean isTagLoadedOnOasis();
+
+  public abstract String getTag();
 
   public WidgetPageObject create() {
     ArticleContent articleContent = new ArticleContent();
