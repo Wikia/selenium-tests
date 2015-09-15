@@ -18,8 +18,8 @@ public class TwitterTests extends NewTestTemplate {
   public void TwitterWidgetTest_001_isLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    twitterWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(twitterWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class TwitterTests extends NewTestTemplate {
     twitterWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        twitterWidget.areLoadedOnOasis(),
+        twitterWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -40,7 +40,7 @@ public class TwitterTests extends NewTestTemplate {
   public void TwitterWidgetTest_003_isErrorPresent() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createIncorrectAndNavigate(wikiURL);
+    twitterWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(twitterWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

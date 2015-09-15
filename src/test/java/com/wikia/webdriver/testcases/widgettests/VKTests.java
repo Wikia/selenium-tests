@@ -18,8 +18,8 @@ public class VKTests extends NewTestTemplate {
   public void VKWidgetTest_001_isLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    vkWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(vkWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class VKTests extends NewTestTemplate {
     vkWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        vkWidget.areLoadedOnOasis(),
+        vkWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -40,7 +40,7 @@ public class VKTests extends NewTestTemplate {
   public void VKWidgetTest_003_isErrorPresent() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.createIncorrectAndNavigate(wikiURL);
+    vkWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(vkWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

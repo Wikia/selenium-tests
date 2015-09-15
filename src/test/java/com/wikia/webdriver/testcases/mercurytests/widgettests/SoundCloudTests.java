@@ -33,8 +33,8 @@ public class SoundCloudTests extends NewTestTemplate {
   public void MercurySoundCloudWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(soundCloudWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    soundCloudWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(soundCloudWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySoundCloudWidgetTest_002")
@@ -47,7 +47,7 @@ public class SoundCloudTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
-    Assertion.assertTrue(soundCloudWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(soundCloudWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySoundCloudWidgetTest_003")
@@ -55,14 +55,14 @@ public class SoundCloudTests extends NewTestTemplate {
   public void MercurySoundCloudWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget.createAndNavigate(wikiURL);
+    soundCloudWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
     Assertion
-        .assertTrue(soundCloudWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+        .assertTrue(soundCloudWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySoundcloudWidgetTest_004")
@@ -72,6 +72,6 @@ public class SoundCloudTests extends NewTestTemplate {
 
     soundCloudWidget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(soundCloudWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(soundCloudWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 }

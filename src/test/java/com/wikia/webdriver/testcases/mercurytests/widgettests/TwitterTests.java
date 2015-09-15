@@ -33,8 +33,8 @@ public class TwitterTests extends NewTestTemplate {
   public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    twitterWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(twitterWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_002")
@@ -47,7 +47,7 @@ public class TwitterTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(TWITTER_ARTICLE_NAME);
 
-    Assertion.assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(twitterWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_003")
@@ -55,13 +55,13 @@ public class TwitterTests extends NewTestTemplate {
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createAndNavigate(wikiURL);
+    twitterWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(TWITTER_ARTICLE_NAME);
 
-    Assertion.assertTrue(twitterWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(twitterWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_004")
@@ -71,7 +71,7 @@ public class TwitterTests extends NewTestTemplate {
 
     twitterWidget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(twitterWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(twitterWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_005")
@@ -79,7 +79,7 @@ public class TwitterTests extends NewTestTemplate {
   public void MercuryTwitterWidgetTest_005_isErrorPresent() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createIncorrectAndNavigate(wikiURL);
+    twitterWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(twitterWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

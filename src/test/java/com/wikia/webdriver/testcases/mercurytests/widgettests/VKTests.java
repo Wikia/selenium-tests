@@ -31,8 +31,8 @@ public class VKTests extends NewTestTemplate {
   public void MercuryVKWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    vkWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(vkWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_002")
@@ -45,7 +45,7 @@ public class VKTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(VK_ARTICLE_NAME);
 
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(vkWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_003")
@@ -53,13 +53,13 @@ public class VKTests extends NewTestTemplate {
   public void MercuryVKWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
+    vkWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(VK_ARTICLE_NAME);
 
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(vkWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_004")
@@ -69,7 +69,7 @@ public class VKTests extends NewTestTemplate {
 
     vkWidget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(vkWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(vkWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_005")
@@ -77,7 +77,7 @@ public class VKTests extends NewTestTemplate {
   public void MercuryVKWidgetTest_005_isErrorPresent() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
-    vkWidget.createIncorrectAndNavigate(wikiURL);
+    vkWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(vkWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

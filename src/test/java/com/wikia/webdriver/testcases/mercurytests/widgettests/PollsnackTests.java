@@ -33,8 +33,8 @@ public class PollsnackTests extends NewTestTemplate {
   public void MercuryPollsnackWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    pollsnackWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_002")
@@ -47,7 +47,7 @@ public class PollsnackTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
-    Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_003")
@@ -55,13 +55,13 @@ public class PollsnackTests extends NewTestTemplate {
   public void MercuryPollsnackWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createAndNavigate(wikiURL);
+    pollsnackWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
-    Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_004")
@@ -69,9 +69,9 @@ public class PollsnackTests extends NewTestTemplate {
   public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createMultiple().navigate(wikiURL);
+    pollsnackWidget.create().navigate(wikiURL);
 
-    Assertion.assertTrue(pollsnackWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(pollsnackWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_005")
@@ -79,7 +79,7 @@ public class PollsnackTests extends NewTestTemplate {
   public void MercuryPollsnackWidgetTest_005_isErrorPresent() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createIncorrectAndNavigate(wikiURL);
+    pollsnackWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(pollsnackWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

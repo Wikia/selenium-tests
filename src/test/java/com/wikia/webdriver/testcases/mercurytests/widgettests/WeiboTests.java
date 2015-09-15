@@ -31,8 +31,8 @@ public class WeiboTests extends NewTestTemplate {
   public void MercuryWeiboWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    weiboWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
@@ -45,7 +45,7 @@ public class WeiboTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
@@ -53,13 +53,13 @@ public class WeiboTests extends NewTestTemplate {
   public void MercuryWeiboWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createAndNavigate(wikiURL);
+    weiboWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion.assertTrue(weiboWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_004")
@@ -69,7 +69,7 @@ public class WeiboTests extends NewTestTemplate {
 
     weiboWidget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(weiboWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(weiboWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_005")
@@ -77,7 +77,7 @@ public class WeiboTests extends NewTestTemplate {
   public void MercuryWeiboWidgetTest_005_isErrorPresent() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createIncorrectAndNavigate(wikiURL);
+    weiboWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

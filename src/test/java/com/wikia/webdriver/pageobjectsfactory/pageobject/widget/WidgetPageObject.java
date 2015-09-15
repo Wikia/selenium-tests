@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -33,13 +35,11 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getErrorMessage();
 
-  protected abstract boolean isTagLoadedOnMercury();
+  protected abstract WebElement getWidget();
 
-  protected abstract boolean isTagLoadedOnOasis();
+  protected abstract List<WebElement> getWidgetList();
 
-  protected abstract boolean areTagsLoadedOnOasis();
-
-  protected abstract boolean areTagsLoadedOnMercury();
+  protected abstract WebElement getWidgetBody();
 
   public WidgetPageObject create() {
     ArticleContent articleContent = new ArticleContent();
@@ -75,30 +75,22 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
-  public WidgetPageObject createAndNavigate(String wikiUrl) {
-    return create().navigate(wikiUrl);
-  }
-
-  public boolean isLoadedOnMercury() {
-    boolean result = isTagLoadedOnMercury();
+  public boolean isLoaded() {
+    boolean result = isWidgetVisible(getWidget(), getWidgetBody());
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 
-  public boolean isLoadedOnOasis() {
-    boolean result = isTagLoadedOnOasis();
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
-    return result;
-  }
+  public boolean areLoaded() {
+    boolean result = true;
 
-  public boolean areLoadedOnMercury() {
-    boolean result = areTagsLoadedOnMercury();
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
-    return result;
-  }
+    for (WebElement iframe: getWidgetList()) {
+      if (!isWidgetVisible(iframe, getWidgetBody())) {
+        result = false;
+        break;
+      }
+    }
 
-  public boolean areLoadedOnOasis() {
-    boolean result = areTagsLoadedOnOasis();
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
@@ -113,10 +105,6 @@ public abstract class WidgetPageObject extends BasePageObject {
     driver.switchTo().parentFrame();
 
     return result;
-  }
-
-  public WidgetPageObject createIncorrectAndNavigate(String wikiURL) {
-    return createIncorrect().navigate(wikiURL);
   }
 
   public boolean isErrorPresent() {

@@ -18,8 +18,8 @@ public class SoundCloudTests extends NewTestTemplate {
   public void SoundCloudWidgetTest_001_isLoaded() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(soundCloudWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    soundCloudWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(soundCloudWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class SoundCloudTests extends NewTestTemplate {
     soundCloudWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        soundCloudWidget.areLoadedOnOasis(),
+        soundCloudWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }

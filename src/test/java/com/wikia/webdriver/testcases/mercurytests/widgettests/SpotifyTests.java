@@ -37,8 +37,8 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(spotifyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    spotifyWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(spotifyWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_002")
@@ -51,7 +51,7 @@ public class SpotifyTests extends NewTestTemplate {
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(SPOTIFY_ARTICLE_NAME);
 
-    Assertion.assertTrue(spotifyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(spotifyWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_003")
@@ -59,13 +59,13 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createAndNavigate(wikiURL);
+    spotifyWidget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SPOTIFY_ARTICLE_NAME);
 
-    Assertion.assertTrue(spotifyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(spotifyWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_004")
@@ -75,7 +75,7 @@ public class SpotifyTests extends NewTestTemplate {
 
     spotifyWidget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(spotifyWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(spotifyWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_005")
@@ -83,7 +83,7 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_005_isErrorPresent() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createIncorrectAndNavigate(wikiURL);
+    spotifyWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(spotifyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

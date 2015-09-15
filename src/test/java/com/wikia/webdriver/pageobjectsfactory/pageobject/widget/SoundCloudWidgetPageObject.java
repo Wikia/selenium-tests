@@ -40,7 +40,7 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
+  public String getTag() {
     return TAGS[0];
   }
 
@@ -64,29 +64,15 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
       throw new NotImplementedException();
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    return isWidgetVisible(widgetIframe, widgetBody);
+  protected WebElement getWidget() {
+    return widgetIframe;
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    return isWidgetVisible(widgetIframe, widgetBody);
+  protected List<WebElement> getWidgetList() {
+    return widgetIframeList;
   }
 
-  protected boolean areTagsLoadedOnOasis() {
-    for (WebElement iframe: widgetIframeList) {
-      if (!isWidgetVisible(iframe, widgetBody)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  protected boolean areTagsLoadedOnMercury() {
-    for (WebElement iframe: widgetIframeList) {
-      if (!isWidgetVisible(iframe, widgetBody)) {
-        return false;
-      }
-    }
-    return true;
+  protected WebElement getWidgetBody() {
+    return widgetBody;
   }
 }

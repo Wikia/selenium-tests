@@ -18,8 +18,8 @@ public class WeiboTests extends NewTestTemplate {
   public void WeiboWidgetTest_001_isLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    weiboWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class WeiboTests extends NewTestTemplate {
     weiboWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        weiboWidget.areLoadedOnOasis(),
+        weiboWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -40,7 +40,7 @@ public class WeiboTests extends NewTestTemplate {
   public void WeiboKWidgetTest_003_isErrorPresent() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createIncorrectAndNavigate(wikiURL);
+    weiboWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

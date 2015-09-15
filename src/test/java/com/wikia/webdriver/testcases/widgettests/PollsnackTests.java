@@ -18,8 +18,8 @@ public class PollsnackTests extends NewTestTemplate {
   public void PollsnackWidgetTest_001_isLoaded() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(pollsnackWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    pollsnackWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class PollsnackTests extends NewTestTemplate {
     pollsnackWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        pollsnackWidget.areLoadedOnOasis(),
+        pollsnackWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -40,7 +40,7 @@ public class PollsnackTests extends NewTestTemplate {
   public void PollsnackWidgetTest_003_isErrorPresent() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createIncorrectAndNavigate(wikiURL);
+    pollsnackWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(pollsnackWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

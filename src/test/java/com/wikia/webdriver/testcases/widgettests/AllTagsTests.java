@@ -56,7 +56,7 @@ public class AllTagsTests extends NewTestTemplate {
     new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+      Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
     }
   }
 }

@@ -18,8 +18,8 @@ public class SpotifyTests extends NewTestTemplate {
   public void SpotifyWidgetTest_001_isLoaded() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(spotifyWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    spotifyWidget.create().navigate(wikiURL);
+    Assertion.assertTrue(spotifyWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class SpotifyTests extends NewTestTemplate {
     spotifyWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        spotifyWidget.areLoadedOnOasis(),
+        spotifyWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -40,7 +40,7 @@ public class SpotifyTests extends NewTestTemplate {
   public void SpotifyWidgetTest_003_isErrorPresent() {
   SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createIncorrectAndNavigate(wikiURL);
+    spotifyWidget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(spotifyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
