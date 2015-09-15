@@ -61,4 +61,16 @@ public class VKTests extends NewTestTemplate {
 
     Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "MercuryVKWidgetTest_004")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+
+    vkWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(vkWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -11,12 +13,17 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
   private WebElement spotifyIframe;
+  @FindBy(css = "iframe[data-wikia-widget='spotify']")
+  private List<WebElement> spotifyIframeList;
   @FindBy(css = "#widgetContainer")
   private WebElement spotifyBody;
 
   private static final String TAG_NAME = "spotify";
   private static final String ARTICLE_NAME = "spotifyWidget";
-  private static final String TAG = "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />";
+  private static final String TAGS[] = {
+      "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
+      "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
+  };
 
   public SpotifyWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -30,31 +37,33 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
-    return TAG;
+  protected String[] getTags() {
+    return TAGS;
   }
 
   protected boolean isTagLoadedOnMercury() {
-    if (!isElementVisible(spotifyIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(spotifyIframe);
-    boolean result = isElementVisible(spotifyBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+    return isWidgetVisible(spotifyIframe, spotifyBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    if (!isElementVisible(spotifyIframe)) {
-      return false;
+    return isWidgetVisible(spotifyIframe, spotifyBody);
+  }
+
+  protected boolean areTagsLoadedOnOasis() {
+    for (WebElement iframe: spotifyIframeList) {
+      if (!isWidgetVisible(iframe, spotifyBody)) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    driver.switchTo().frame(spotifyIframe);
-    boolean result = isElementVisible(spotifyBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected boolean areTagsLoadedOnMercury() {
+    for (WebElement iframe: spotifyIframeList) {
+      if (!isWidgetVisible(iframe, spotifyBody)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

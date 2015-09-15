@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @ownership: Content X-Wing
@@ -20,16 +21,33 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getTagName();
 
-  protected abstract String getTag();
+  protected abstract String[] getTags();
 
   protected abstract boolean isTagLoadedOnMercury();
 
   protected abstract boolean isTagLoadedOnOasis();
 
+  protected abstract boolean areTagsLoadedOnOasis();
+
+  protected abstract boolean areTagsLoadedOnMercury();
+
   public WidgetPageObject create() {
+    return create(1);
+  }
+
+  public WidgetPageObject create(int numberOfTags) {
+    String[] tags = getTags();
+    String articleContentString = "";
     ArticleContent articleContent = new ArticleContent();
+
     articleContent.clear(getArticleName());
-    articleContent.push(getTag(), getArticleName());
+
+    for (int i = 0; i < numberOfTags; i++) {
+      articleContentString += tags[i] + "\n";
+    }
+
+    articleContent.push(articleContentString, getArticleName());
+
     return this;
   }
 
@@ -51,6 +69,30 @@ public abstract class WidgetPageObject extends BasePageObject {
   public boolean isLoadedOnOasis() {
     boolean result = isTagLoadedOnOasis();
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  public boolean areLoadedOnMercury() {
+    boolean result = areTagsLoadedOnMercury();
+    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  public boolean areLoadedOnOasis() {
+    boolean result = areTagsLoadedOnOasis();
+    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  public boolean isWidgetVisible(WebElement widgetIframe, WebElement widgetBody) {
+    if (!isElementVisible(widgetIframe)) {
+      return false;
+    }
+
+    driver.switchTo().frame(widgetIframe);
+    boolean result = isElementVisible(widgetBody);
+    driver.switchTo().parentFrame();
+
     return result;
   }
 }

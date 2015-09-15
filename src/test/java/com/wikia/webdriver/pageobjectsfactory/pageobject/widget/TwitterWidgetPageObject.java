@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -11,13 +13,17 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".widget-twitter iframe")
   private WebElement twitterIframe;
+  @FindBy(css = ".widget-twitter iframe")
+  private List<WebElement> twitterIframeList;
   @FindBy(css = "div.timeline")
   private WebElement twitterBody;
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
-  private static final String TAG =
-      "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />";
+  private static final String TAGS[] = {
+      "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />",
+      "<twitter widget-id=\"522824386202447873\" />",
+  };
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -31,31 +37,33 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
-    return TAG;
+  protected String[] getTags() {
+    return TAGS;
   }
 
   protected boolean isTagLoadedOnMercury() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+    return isWidgetVisible(twitterIframe, twitterBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
+    return isWidgetVisible(twitterIframe, twitterBody);
+  }
+
+  protected boolean areTagsLoadedOnOasis() {
+    for (WebElement iframe: twitterIframeList) {
+      if (!isWidgetVisible(iframe, twitterBody)) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected boolean areTagsLoadedOnMercury() {
+    for (WebElement iframe: twitterIframeList) {
+      if (!isWidgetVisible(iframe, twitterBody)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

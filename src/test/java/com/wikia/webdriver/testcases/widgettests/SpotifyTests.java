@@ -21,4 +21,19 @@ public class SpotifyTests extends NewTestTemplate {
     spotifyWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(spotifyWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void SpotifyWidgetTest_002_areLoaded() {
+    SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
+
+    spotifyWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(
+        spotifyWidget.areLoadedOnOasis(),
+        MercuryMessages.INVISIBLE_MSG
+    );
+  }
 }

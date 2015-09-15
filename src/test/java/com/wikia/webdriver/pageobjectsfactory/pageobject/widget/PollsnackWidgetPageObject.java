@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -11,12 +13,17 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
   private WebElement pollsnackIframe;
+  @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
+  private List<WebElement> pollsnackIframeList;
   @FindBy(css = "iframe")
   private WebElement pollsnackBody;
 
   private static final String TAG_NAME = "pollsnack";
   private static final String ARTICLE_NAME = "PollsnackWidget";
-  private static final String TAG = "<pollsnack hash=\"q7kiw9kz\"/>";
+  private static final String TAGS[] = {
+      "<pollsnack hash=\"q7kiw9kz\"/>",
+      "<pollsnack hash=\"q7kiw9kz\"/>",
+  };
 
   public PollsnackWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -30,31 +37,33 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
-    return TAG;
+  protected String[] getTags() {
+    return TAGS;
   }
 
   protected boolean isTagLoadedOnMercury() {
-    if (!isElementVisible(pollsnackIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(pollsnackIframe);
-    boolean result = isElementVisible(pollsnackBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+    return isWidgetVisible(pollsnackIframe, pollsnackBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    if (!isElementVisible(pollsnackIframe)) {
-      return false;
+    return isWidgetVisible(pollsnackIframe, pollsnackBody);
+  }
+
+  protected boolean areTagsLoadedOnOasis() {
+    for (WebElement iframe: pollsnackIframeList) {
+      if (!isWidgetVisible(iframe, pollsnackBody)) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    driver.switchTo().frame(pollsnackIframe);
-    boolean result = isElementVisible(pollsnackBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected boolean areTagsLoadedOnMercury() {
+    for (WebElement iframe: pollsnackIframeList) {
+      if (!isWidgetVisible(iframe, pollsnackBody)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

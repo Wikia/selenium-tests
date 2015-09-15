@@ -21,4 +21,19 @@ public class WeiboTests extends NewTestTemplate {
     weiboWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(weiboWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void WeiboWidgetTest_002_areLoaded() {
+    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+
+    weiboWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(
+        weiboWidget.areLoadedOnOasis(),
+        MercuryMessages.INVISIBLE_MSG
+    );
+  }
 }

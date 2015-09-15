@@ -21,4 +21,20 @@ public class PollsnackTests extends NewTestTemplate {
     pollsnackWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(pollsnackWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void PollsnackWidgetTest_002_areLoaded() {
+    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+
+    pollsnackWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(
+        pollsnackWidget.areLoadedOnOasis(),
+        MercuryMessages.INVISIBLE_MSG
+    );
+  }
 }
+

@@ -14,10 +14,25 @@ public class VKTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "mercuryautomationtesting")
-  public void VkWidgetTest_001_isLoaded() {
+  public void VKWidgetTest_001_isLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
     vkWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void VKWidgetTest_002_areLoaded() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+
+    vkWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(
+        vkWidget.areLoadedOnOasis(),
+        MercuryMessages.INVISIBLE_MSG
+    );
   }
 }

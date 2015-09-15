@@ -64,4 +64,16 @@ public class SoundCloudTests extends NewTestTemplate {
     Assertion
         .assertTrue(soundCloudWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "MercurySoundcloudWidgetTest_004")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercurySoundcloudWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
+
+    soundCloudWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(soundCloudWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
 }

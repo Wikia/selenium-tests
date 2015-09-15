@@ -63,4 +63,16 @@ public class PollsnackTests extends NewTestTemplate {
 
     Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "MercuryPollsnackWidgetTest_004")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+
+    pollsnackWidget
+        .create(2)
+        .navigate(wikiURL);
+
+    Assertion.assertTrue(pollsnackWidget.areLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+  }
 }
