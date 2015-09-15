@@ -20,7 +20,7 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
-  private static final String TAGS[] = {
+  private static final String[] TAGS = {
       "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />",
       "<twitter widget-id=\"522824386202447873\" />",
   };

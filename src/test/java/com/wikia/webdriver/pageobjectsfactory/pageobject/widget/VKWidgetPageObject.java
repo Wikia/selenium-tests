@@ -20,7 +20,7 @@ public class VKWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "vk";
   private static final String ARTICLE_NAME = "VKWidget";
-  private static final String TAGS[] = {
+  private static final String[] TAGS = {
       "<vk group-id=\"59925174\" />",
       "<vk group-id=\"12345\" />",
   };

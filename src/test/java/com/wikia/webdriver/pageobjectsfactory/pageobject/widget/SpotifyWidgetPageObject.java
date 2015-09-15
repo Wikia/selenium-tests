@@ -20,7 +20,7 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "spotify";
   private static final String ARTICLE_NAME = "spotifyWidget";
-  private static final String TAGS[] = {
+  private static final String[] TAGS = {
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
   };

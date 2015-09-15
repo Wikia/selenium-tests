@@ -20,7 +20,7 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "weibo";
   private static final String ARTICLE_NAME = "WeiboWidget";
-  private static final String TAGS[] = {
+  private static final String[] TAGS = {
       "<weibo uids=\"1642909335,1782515283\" />",
       "<weibo uids=\"1642909335,1782515283\" />",
   };

@@ -20,7 +20,7 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "pollsnack";
   private static final String ARTICLE_NAME = "PollsnackWidget";
-  private static final String TAGS[] = {
+  private static final String[] TAGS = {
       "<pollsnack hash=\"q7kiw9kz\"/>",
       "<pollsnack hash=\"q7kiw9kz\"/>",
   };
