@@ -78,6 +78,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement fliteTag;
   @FindBy(css = FLITE_TAG_BROKEN_SELECTOR)
   private WebElement fliteTagBroken;
+  @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
   public AdsBaseObject(WebDriver driver, String page) {
