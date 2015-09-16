@@ -17,6 +17,14 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement mainImage;
   @FindBy(css= ".portable-infobox .pi-hero-title")
   private WebElement title;
+  @FindBy(css= ".portable-infobox .pi-expand-button")
+  private WebElement expandButton;
+  @FindBy(css =".portable-infobox .new")
+  private List<WebElement> internalLinksToEmptyArticle;
+  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
+  private List<WebElement> internalLinks;
+  @FindBy(css =".portable-infobox .external")
+  private List<WebElement> externalLinks;
   @FindBy(css= ".pi-item .pi-data-label")
   private List<WebElement> dataLabels;
   @FindBy(css =".pi-item .pi-data-value")
@@ -24,6 +32,12 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject(WebDriver driver) {
     super(driver);
+  }
+
+  public PortableInfoboxObject expandInfobox() {
+    wait.forElementVisible(expandButton);
+    expandButton.click();
+    return this;
   }
 
   public PortableInfoboxObject isMainImageVisible() {
@@ -43,5 +57,14 @@ public class PortableInfoboxObject extends BasePageObject {
     Assertion.assertEquals(isElementOnPage(title), true);
     return this;
   }
+
+  public PortableInfoboxObject areLinksVisible() {
+    expandInfobox();
+    //Assertion.assertFalse(internalLinks.isEmpty());
+    Assertion.assertFalse(externalLinks.isEmpty());
+    //Assertion.assertFalse(internalLinksToEmptyArticle.isEmpty());
+    return this;
+  }
+
 
 }
