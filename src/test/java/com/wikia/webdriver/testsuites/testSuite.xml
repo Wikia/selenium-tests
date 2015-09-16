@@ -198,6 +198,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.TwitterTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
         </classes>
     </test>
 </suite>
