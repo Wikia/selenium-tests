@@ -372,6 +372,32 @@ public class AdsDataProvider {
         {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
   }
 
+
+  @DataProvider
+  public static Object[][] fliteTagBrokenTag() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTagBrokenTag"}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTagBrokenHeight() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTagBrokenHeight"}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTagBrokenWidth() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTagBrokenWidth"}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTag() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTag"},
+        {"adtest", "SyntheticTests/FliteTagModifiedTag"}};
+  }
+
   @DataProvider
   public static Object[][] extraMarker() {
     return new Object[][]{
