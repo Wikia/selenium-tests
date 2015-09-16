@@ -1,74 +1,78 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @ownership: Content X-Wing
  */
 public class GoogleFormWidgetPageObject extends WidgetPageObject {
 
-    @FindBy(css = "iframe[data-wikia-widget=\"googleform\"]")
-    private WebElement googleFormIframe;
-    @FindBy(css = "div.widget")
-    private WebElement googleFormBody;
+  @FindBy(css = "iframe[data-wikia-widget=\"googleform\"]")
+  private List<WebElement> widgetIFrameList;
+  @FindBy(css = "div.widget")
+  private WebElement widgetBody;
 
-    private static final String TAG_NAME = "googleform";
-    private static final String ARTICLE_NAME = "GoogleFormWidget";
-    private static final String TAG =
-        "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
-        "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />";
-    private static final String INCORRECT_TAG = "<googleform />";
-    private static final String ERROR_MESSAGE =
-        "Failed to render the Google Form widget. Please check if \"url\" param" +
-        " is properly coped from Embed dialog in Google.";
+  private static final String TAG_NAME = "googleform";
+  private static final String ARTICLE_NAME = "GoogleFormWidget";
+  private static final String[] TAGS = {
+      "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
+      "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
+      "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
+      "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
+  };
+  private static final String INCORRECT_TAG = "<googleform />";
+  private static final String ERROR_MESSAGE =
+      "Failed to render the Google Form widget. Please check if \"url\" param" +
+      " is properly coped from Embed dialog in Google.";
 
-    public GoogleFormWidgetPageObject(WebDriver driver) {
-        super(driver);
-    }
+  public GoogleFormWidgetPageObject(WebDriver driver) {
+    super(driver);
+  }
 
-    protected String getArticleName() {
-        return ARTICLE_NAME;
-    }
+  protected String getArticleName() {
+    return ARTICLE_NAME;
+  }
 
-    protected String getTagName() {
-        return TAG_NAME;
-    }
+  protected String getTagName() {
+    return TAG_NAME;
+  }
 
-    public String getTag() {
-        return TAG;
-    }
+  public String getTag() {
+    return TAGS[0];
+  }
 
-    protected String getIncorrectTag() {
-        return INCORRECT_TAG;
-    }
+  protected String[] getTags() {
+    return TAGS;
+  }
 
-    protected String getErrorMessage() {
-        return ERROR_MESSAGE;
-    }
+  protected String getIncorrectTag() {
+    return INCORRECT_TAG;
+  }
 
-    protected boolean isTagLoadedOnMercury() {
-        if(!isElementVisible(googleFormIframe)) {
-            return false;
-        }
+  protected String getErrorMessage() {
+    return ERROR_MESSAGE;
+  }
 
-        driver.switchTo().frame(googleFormIframe);
-        boolean result = isElementVisible(googleFormBody);
-        driver.switchTo().parentFrame();
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "Google Form widgets are loaded directly as inline frames and have no wrapper."
+    );
+  }
 
-        return result;
-    }
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
 
-    protected boolean isTagLoadedOnOasis() {
-        if(!isElementVisible(googleFormIframe)) {
-            return false;
-        }
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
+  }
 
-        driver.switchTo().frame(googleFormIframe);
-        boolean result = isElementVisible(googleFormBody);
-        driver.switchTo().parentFrame();
-
-        return result;
-    }
+  protected WebElement getWidgetBody() {
+    return widgetBody;
+  }
 }

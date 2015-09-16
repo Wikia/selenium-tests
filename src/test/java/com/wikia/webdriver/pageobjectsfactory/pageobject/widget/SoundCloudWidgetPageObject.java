@@ -46,20 +46,14 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
     return TAGS;
   }
 
-  /**
-   * There is no such thing as incorrect tag in soundcloud
-   * @throws NotImplementedException
-   */
   protected String getIncorrectTag() {
-    throw new NotImplementedException();
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
   }
 
-  /**
-   * There is no such thing as incorrect tag in soundcloud
-   * @throws NotImplementedException
-   */
   protected String getErrorMessage() {
-      throw new NotImplementedException();
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
   }
 
   protected List<WebElement> getWidgetWrapperList() {

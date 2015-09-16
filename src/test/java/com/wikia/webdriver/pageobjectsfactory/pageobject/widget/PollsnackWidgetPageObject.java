@@ -61,7 +61,6 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
     );
   }
 
-
   protected List<WebElement> getWidgetIFrameList() {
     return widgetIFrameList;
   }
