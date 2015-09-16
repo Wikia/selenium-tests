@@ -142,6 +142,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.TwitterTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.WeiboTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
