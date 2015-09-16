@@ -464,6 +464,6 @@ public class MainPageTests extends NewTestTemplate {
         .clickOnCuratedContentElementByIndex(2)
         .isAlertNotificationVisible()
         .waitForLoadingSpinnerToFinish();
-    UrlChecker.isUrlEqualToCurrentUrl(driver, oldUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }
 }

@@ -49,10 +49,10 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH);
 
     driver.navigate().back();
-    UrlChecker.isUrlEqualToCurrentUrl(driver, previousUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, previousUrl);
 
     driver.navigate().forward();
-    UrlChecker.isUrlEqualToCurrentUrl(driver, nextUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, nextUrl);
   }
 
   // CCT07
@@ -113,17 +113,17 @@ public class NavigationTests extends NewTestTemplate {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
-    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = wikiURL + MercurySubpages.CC_SECTION_CATEGORIES;
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
-    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = wikiURL + "wiki/mercury_cc_wikia";
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_EMPTY_CATEGORY);
-    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_NOT_EXISTING_SECTION);
-    UrlChecker.isUrlEqualToCurrentUrl(driver, expectedUrl);
+    UrlChecker.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 }

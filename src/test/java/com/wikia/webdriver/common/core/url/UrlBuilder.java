@@ -39,12 +39,27 @@ public class UrlBuilder {
     return url;
   }
 
+  public String getUrlForPathWithWWW(String wikiName, String wikiPath) {
+    String url = getUrlForWikiWithWWW(wikiName);
+    String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    url = url + separator + wikiPath;
+
+    return url;
+  }
+
   public String getUrlForWiki() {
     return getUrlForWiki(Configuration.getWikiName());
   }
 
   public String getUrlForWiki(String wikiName) {
     String prefix = getUrlPrefix(wikiName);
+    String suffix = getUrlSuffix(wikiName);
+
+    return composeUrl(prefix, wikiName, suffix);
+  }
+
+  public String getUrlForWikiWithWWW(String wikiName) {
+    String prefix = "www.";
     String suffix = getUrlSuffix(wikiName);
 
     return composeUrl(prefix, wikiName, suffix);
