@@ -129,6 +129,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationSideTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SEOTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
