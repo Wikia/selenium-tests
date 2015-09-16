@@ -31,10 +31,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   private WebElement saveButton;
   @FindBy(css = ".addPoiCategory")
   private WebElement addMorePinTypesLink;
-  @FindBy(css = ".poi-category-dropdown")
-  private WebElement mainParentCategorySelector;
-  @FindBy(css = ".poi-category-dropdown > option")
-  private List<WebElement> parentCatOption;
   @FindBy(css = "select[name='poiCategories[][parent_poi_category_id]']")
   private List<WebElement> parentCatElements;
   @FindBy(css = ".modal.medium.int-map-modal")
@@ -69,15 +65,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     amountUploadMarker = uploadMarker.size();
     amountParentCatElements = parentCatElements.size();
     PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
-  }
-
-  public void selectParentCategory(int catValue) {
-    wait.forElementClickable(mainParentCategorySelector);
-    mainParentCategorySelector.click();
-    WebElement parentSelected = parentCatOption.get(catValue);
-    wait.forElementVisible(parentSelected);
-    parentSelected.click();
-    PageObjectLogging.log("selectParentCategory", "Parent category selected", true);
   }
 
   public void selectFileToUpload(String file, String typeOfFile) {
