@@ -22,7 +22,7 @@ public class GoogleFormTests extends NewTestTemplate {
         Assertion.assertTrue(googleFormWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
     }
 
-    @Test(groups = "PollsnackWidgetTest_003")
+    @Test(groups = "GoogleFormWidgetTest_003")
     @Execute(onWikia = "mercuryautomationtesting")
     public void GoogleFormWidgetTest_003_isErrorPresent() {
         GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
