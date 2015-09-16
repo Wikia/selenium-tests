@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class GoogleFormTests extends NewTestTemplate {
 
-    @Test
+    @Test(groups = "GoogleFormWidgetTest_001")
     @Execute(onWikia = "mercuryautomationtesting")
     public void GoogleFormWidgetTest_001_isLoaded() {
         GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
@@ -22,7 +22,7 @@ public class GoogleFormTests extends NewTestTemplate {
         Assertion.assertTrue(googleFormWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
     }
 
-    @Test(groups = "PollsnackWidgetTest_003")
+    @Test(groups = "GoogleFormWidgetTest_003")
     @Execute(onWikia = "mercuryautomationtesting")
     public void GoogleFormWidgetTest_003_isErrorPresent() {
         GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);

@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class TwitterTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "TwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_001_isLoaded() {
     TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);

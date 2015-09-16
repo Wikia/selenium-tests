@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class SoundCloudTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "SoundCloudWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SoundCloudWidgetTest_001_isLoaded() {
     SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
