@@ -61,6 +61,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String LEADERBOARD_GPT_SELECTOR = "div[id*='gpt/TOP_LEADERBOARD']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
+  private static final String FLITE_TAG_SELECTOR = ".flite-tag-extension";
+  private static final String FLITE_TAG_BROKEN_SELECTOR = "#mw-content-text .error";
+
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
@@ -71,6 +74,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   private String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   private WebElement incontentBoxad;
+  @FindBy(css = FLITE_TAG_SELECTOR)
+  private WebElement fliteTag;
+  @FindBy(css = FLITE_TAG_BROKEN_SELECTOR)
+  private WebElement fliteTagBroken;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
@@ -139,6 +146,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void checkIncontentBoxad() {
     checkAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
+  }
+
+  public void checkFliteTag() {
+    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_SELECTOR)));
+    verifySlotExpanded(fliteTag);
+  }
+
+  public void checkFliteTagBroken(String error) {
+    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_BROKEN_SELECTOR)));
+    Assertion.assertEquals(fliteTagBroken.getText(), error);
   }
 
   private void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
