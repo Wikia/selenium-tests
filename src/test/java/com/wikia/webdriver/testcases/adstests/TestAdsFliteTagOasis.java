@@ -15,7 +15,7 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteTag",
-      groups = {"AdsFliteTagOasis"}
+      groups = "AdsFliteTagOasis"
   )
   public void adsFliteTagOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
@@ -26,9 +26,9 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteTagBroken",
-      groups = {"AdsFliteTagOasis"}
+      groups = "AdsFliteTagOasis"
   )
-  public void adsFliteTagBrokenWidthOasis(String wikiName, String article, String error) {
+  public void adsFliteTagBrokenOasis(String wikiName, String article, String error) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.checkFliteTagBroken(error);
