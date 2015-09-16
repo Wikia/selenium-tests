@@ -36,8 +36,6 @@ public class UrlChecker {
   }
 
   public static boolean isUrlEqualToCurrentUrl(WebDriver driver, String url) {
-    String currentUrl = driver.getCurrentUrl().toLowerCase();
-    String urlLowerCased = url.toLowerCase();
-    return currentUrl.equals(urlLowerCased);
+    return driver.getCurrentUrl().equalsIgnoreCase(url);
   }
 }
