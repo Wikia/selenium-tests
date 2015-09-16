@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class WeiboTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "WeiboWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_001_isLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
@@ -22,7 +22,7 @@ public class WeiboTests extends NewTestTemplate {
     Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test
+  @Test(groups = "WeiboWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_002_areLoaded() {
     WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);

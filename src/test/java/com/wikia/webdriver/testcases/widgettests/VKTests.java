@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class VKTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "VKWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void VKWidgetTest_001_isLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
@@ -22,7 +22,7 @@ public class VKTests extends NewTestTemplate {
     Assertion.assertTrue(vkWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test
+  @Test(groups = "VKWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void VKWidgetTest_002_areLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);

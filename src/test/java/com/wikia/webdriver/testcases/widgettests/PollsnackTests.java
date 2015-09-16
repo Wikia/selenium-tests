@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class PollsnackTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "PollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_001_isLoaded() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
@@ -22,7 +22,7 @@ public class PollsnackTests extends NewTestTemplate {
     Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test
+  @Test(groups = "PollsnackWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_002_areLoaded() {
     PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
