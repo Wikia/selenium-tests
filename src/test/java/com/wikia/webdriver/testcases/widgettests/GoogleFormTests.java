@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class GoogleFormTests extends NewTestTemplate {
 
-    @Test
+    @Test(groups = "PollsnackWidgetTest_001")
     @Execute(onWikia = "mercuryautomationtesting")
     public void GoogleFormWidgetTest_001_isLoaded() {
         GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);

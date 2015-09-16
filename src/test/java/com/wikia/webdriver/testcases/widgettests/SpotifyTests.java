@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class SpotifyTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "SpotifyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_001_isLoaded() {
     SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
