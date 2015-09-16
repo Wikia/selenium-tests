@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +13,8 @@ import java.util.List;
 public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"pollsnack\"]")
-  private List<WebElement> widgetIframeList;
-  @FindBy(css = "iframe")
+  private List<WebElement> widgetIFrameList;
+  @FindBy(css = "body")
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "pollsnack";
@@ -53,12 +54,19 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected WebElement getWidget() {
-    return widgetIframeList.get(0);
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "Pollsnack widgets are loaded directly as inline frames and have no wrapper."
+    );
   }
 
-  protected List<WebElement> getWidgetList() {
-    return widgetIframeList;
+
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

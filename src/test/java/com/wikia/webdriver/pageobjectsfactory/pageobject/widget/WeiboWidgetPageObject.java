@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +13,7 @@ import java.util.List;
 public class WeiboWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='weibo']")
-  private List<WebElement> widgetIframeList;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.tsina_open")
   private WebElement widgetBody;
 
@@ -53,12 +54,18 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected WebElement getWidget() {
-    return widgetIframeList.get(0);
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "Weibo widgets are loaded directly as inline frames and have no wrapper."
+    );
   }
 
-  protected List<WebElement> getWidgetList() {
-    return widgetIframeList;
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

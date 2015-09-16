@@ -29,55 +29,55 @@ public class WeiboTests extends NewTestTemplate {
   @Test(groups = "MercuryWeiboWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.create().navigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget
+    widget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.create().navigate(wikiURL);
+    widget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(WEIBO_ARTICLE_NAME);
 
-    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createMultiple().navigate(wikiURL);
+    widget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(weiboWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_005")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_005_isErrorPresent() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createIncorrect().navigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

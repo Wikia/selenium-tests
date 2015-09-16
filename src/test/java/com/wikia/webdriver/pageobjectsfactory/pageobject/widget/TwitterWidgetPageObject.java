@@ -11,8 +11,10 @@ import java.util.List;
  */
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
+  @FindBy(css = ".widget-twitter")
+  private List<WebElement> widgetWrapperList;
   @FindBy(css = ".widget-twitter iframe")
-  private List<WebElement> widgetIframeList;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.timeline")
   private WebElement widgetBody;
 
@@ -57,12 +59,16 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected WebElement getWidget() {
-    return widgetIframeList.get(0);
+  protected List<WebElement> getWidgetWrapperList() {
+    return widgetWrapperList;
   }
 
-  protected List<WebElement> getWidgetList() {
-    return widgetIframeList;
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

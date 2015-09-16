@@ -13,7 +13,7 @@ import java.util.List;
 public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private List<WebElement> widgetIframeList;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.widget")
   private WebElement widgetBody;
 
@@ -62,12 +62,18 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
       throw new NotImplementedException();
   }
 
-  protected WebElement getWidget() {
-    return widgetIframeList.get(0);
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "SoundCloud widgets are loaded directly as inline frames and have no wrapper."
+    );
   }
 
-  protected List<WebElement> getWidgetList() {
-    return widgetIframeList;
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

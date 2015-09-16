@@ -35,9 +35,11 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract String getErrorMessage();
 
-  protected abstract WebElement getWidget();
+  protected abstract List<WebElement> getWidgetWrapperList();
 
-  protected abstract List<WebElement> getWidgetList();
+  protected abstract List<WebElement> getWidgetIFrameList();
+
+  protected abstract WebElement getWidgetIFrame();
 
   protected abstract WebElement getWidgetBody();
 
@@ -76,22 +78,36 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   public boolean isLoaded() {
-    boolean result = isWidgetVisible(getWidget(), getWidgetBody());
+    boolean result = isWidgetVisible(getWidgetIFrame(), getWidgetBody());
     PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    return result;
+  }
+
+  public boolean areAllValidSwappedForIFrames() {
+    boolean result = getWidgetWrapperList().size() == getWidgetIFrameList().size();
+    PageObjectLogging.log(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG, result);
     return result;
   }
 
   public boolean areLoaded() {
     boolean result = true;
+    int i = 1;
+    List<WebElement> widgetIFrameList = getWidgetIFrameList();
 
-    for (WebElement widget: getWidgetList()) {
-      if (!isWidgetVisible(widget, getWidgetBody())) {
-        result = false;
-        break;
-      }
+    if (widgetIFrameList.isEmpty()) {
+      result = false;
     }
 
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    for (WebElement widgetIFrame: widgetIFrameList) {
+      if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
+        result = false;
+        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+        break;
+      }
+      PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
+    }
+
+    PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 
@@ -101,12 +117,12 @@ public abstract class WidgetPageObject extends BasePageObject {
     return result;
   }
 
-  private boolean isWidgetVisible(WebElement widget, WebElement widgetBody) {
-    if (!isElementVisible(widget)) {
+  private boolean isWidgetVisible(WebElement widgetIFrame, WebElement widgetBody) {
+    if (!isElementVisible(widgetIFrame)) {
       return false;
     }
 
-    driver.switchTo().frame(widget);
+    driver.switchTo().frame(widgetIFrame);
     boolean result = isElementVisible(widgetBody);
     driver.switchTo().parentFrame();
 

@@ -30,6 +30,11 @@ public class TwitterTests extends NewTestTemplate {
     twitterWidget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
+        twitterWidget.areAllValidSwappedForIFrames(),
+        MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
+    );
+
+    Assertion.assertTrue(
         twitterWidget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );

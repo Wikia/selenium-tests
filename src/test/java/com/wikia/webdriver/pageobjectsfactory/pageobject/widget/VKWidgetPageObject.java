@@ -11,8 +11,10 @@ import java.util.List;
  */
 public class VKWidgetPageObject extends WidgetPageObject {
 
+  @FindBy(css = ".widget-vk")
+  private List<WebElement> widgetWrapperList;
   @FindBy(css = ".widget-vk iframe")
-  private List<WebElement> widgetIframeList;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = ".widget_body")
   private WebElement widgetBody;
 
@@ -53,12 +55,16 @@ public class VKWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected WebElement getWidget() {
-    return widgetIframeList.get(0);
+  protected List<WebElement> getWidgetWrapperList() {
+    return widgetWrapperList;
   }
 
-  protected List<WebElement> getWidgetList() {
-    return widgetIframeList;
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

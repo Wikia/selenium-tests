@@ -16,21 +16,21 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "PollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_001_isLoaded() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.create().navigate(wikiURL);
-    Assertion.assertTrue(pollsnackWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "PollsnackWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_002_areLoaded() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createMultiple().navigate(wikiURL);
+    widget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        pollsnackWidget.areLoaded(),
+        widget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -38,10 +38,10 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "PollsnackWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_003_isErrorPresent() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createIncorrect().navigate(wikiURL);
-    Assertion.assertTrue(pollsnackWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
 

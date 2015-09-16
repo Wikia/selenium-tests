@@ -16,21 +16,21 @@ public class WeiboTests extends NewTestTemplate {
   @Test(groups = "WeiboWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_001_isLoaded() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.create().navigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "WeiboWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_002_areLoaded() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createMultiple().navigate(wikiURL);
+    widget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        weiboWidget.areLoaded(),
+        widget.areLoaded(),
         MercuryMessages.INVISIBLE_MSG
     );
   }
@@ -38,9 +38,9 @@ public class WeiboTests extends NewTestTemplate {
   @Test(groups = "WeiboWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboKWidgetTest_003_isErrorPresent() {
-    WeiboWidgetPageObject weiboWidget = new WeiboWidgetPageObject(driver);
+    WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    weiboWidget.createIncorrect().navigate(wikiURL);
-    Assertion.assertTrue(weiboWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
