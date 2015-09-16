@@ -12,18 +12,18 @@ import org.testng.annotations.Test;
 
 public class RedirectsTests extends NewTestTemplate {
 
-  private final static String articleName = MercurySubpages.MAIN_PAGE;
-  private final static String queryString = "noads=1";
+  private static final String ARTICLE_NAME = MercurySubpages.MAIN_PAGE;
+  private static final String QUERY_STRING = "noads=1";
   private String url;
   private String expectedUrl;
 
   @BeforeMethod(alwaysRun = true)
   public void prepareURL() {
-    String articleUrl = urlBuilder.getUrlForPathWithWWW(Configuration.getWikiName(), articleName);
-    url = urlBuilder.appendQueryStringToURL(articleUrl, queryString);
+    String articleUrl = urlBuilder.getUrlForPathWithWWW(Configuration.getWikiName(), ARTICLE_NAME);
+    url = urlBuilder.appendQueryStringToURL(articleUrl, QUERY_STRING);
 
-    String expectedArticleUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), articleName);
-    expectedUrl = urlBuilder.appendQueryStringToURL(expectedArticleUrl, queryString);
+    String expectedArticleUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), ARTICLE_NAME);
+    expectedUrl = urlBuilder.appendQueryStringToURL(expectedArticleUrl, QUERY_STRING);
   }
 
   @Test(groups = {"RedirectsTest_001", "Mercury"})

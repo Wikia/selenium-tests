@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class UrlBuilder {
 
+  private static final String WOW_WIKI = "wowwiki";
   private String browser;
   private String env;
 
@@ -33,7 +34,7 @@ public class UrlBuilder {
 
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
-    String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
     return url;
@@ -41,7 +42,7 @@ public class UrlBuilder {
 
   public String getUrlForPathWithWWW(String wikiName, String wikiPath) {
     String url = getUrlForWikiWithWWW(wikiName);
-    String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
     return url;
