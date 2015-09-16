@@ -18,7 +18,8 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   private static final String ARTICLE_NAME = "spotifyWidget";
   private static final String TAG = "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />";
   private static final String INCORRECT_TAG = "<spotify />";
-  private static final String ERROR_MESSAGE = "Failed to render the Spotify widget. Please check if all required parameters are in place.";
+  private static final String ERROR_MESSAGE =
+    "Failed to render the Spotify widget. Please check if all required parameters are in place.";
 
 
   public SpotifyWidgetPageObject(WebDriver driver) {
