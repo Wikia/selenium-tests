@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -20,10 +20,6 @@ import java.util.List;
  */
 
 public class CreateACustomMapComponentObject extends BasePageObject {
-
-  public CreateACustomMapComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "#intMapUpload")
   private WebElement browseForFileInput;
@@ -35,14 +31,14 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   private List<WebElement> templateList;
   @FindBy(css = "#intMapError")
   private WebElement errorField;
-  @FindBy(css = ".tile-set-thumb")
-  private List<WebElement> thumbCollection;
-  @FindBy(css = "#intMapTileSetsList")
-  private WebElement templatesBox;
   @FindBy(css = ".close")
   private WebElement closeButton;
 
-  String beforeImageName = "116x116-";
+  private String beforeImageName = "116x116-";
+
+  public CreateACustomMapComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public void clearSearchTitle() {
     wait.forElementVisible(searchField);
@@ -63,21 +59,17 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   }
 
   public String getSelectedTemplateImageName(int selectedImageIndex) {
-    int
-        imageNameIndex =
+    int imageNameIndex =
         templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
-    String
-        selectedTemplateImageName =
-        templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
-                                                                           + beforeImageName
-            .length());
+    String selectedTemplateImageName =
+        templateList.get(selectedImageIndex).getAttribute("src")
+            .substring(imageNameIndex + beforeImageName.length());
     return selectedTemplateImageName;
   }
 
   public TemplateComponentObject selectFileToUpload(String file) {
-    browseForFileInput
-        .sendKeys(
-            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    browseForFileInput.sendKeys(CommonUtils
+        .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
     return new TemplateComponentObject(driver);
   }
@@ -91,24 +83,13 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public void typeSearchTile(String templateName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(templateName);
-    PageObjectLogging
-        .log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
+    PageObjectLogging.log("typeTilesetName", "title (" + templateName
+        + ") for template is typed in", true);
   }
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
     Assertion.assertEquals(isElementOnPage(errorField), true);
-  }
-
-  public void verifyThereIsNoError() {
-    waitForElementNotVisibleByElement(errorField);
-    Assertion.assertEquals(isElementOnPage(errorField), false);
-  }
-
-  public void verifyTemplateWasFound() {
-    wait.forElementVisible(templatesBox);
-    wait.forElementVisible(thumbCollection.get(0));
-    Assertion.assertEquals(isElementOnPage(thumbCollection.get(0)), true);
   }
 
   public void verifyTemplateListElementVisible(int element) {

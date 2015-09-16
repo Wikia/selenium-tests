@@ -60,11 +60,15 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    if (SelectorStack.isContextSet()) {
-      SelectorStack.contextRead();
-      return wait.until(ExpectedConditions.elementToBeClickable(element));
-    } else {
-      return forElementClickable(SelectorStack.read());
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+      } else {
+        return forElementClickable(SelectorStack.read());
+      }
+    }finally {
+      restoreDeaultImplicitWait();
     }
   }
 
@@ -75,11 +79,15 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    if (SelectorStack.isContextSet()) {
-      SelectorStack.contextRead();
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+      }
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+          .elementToBeClickable(element));
+    }finally {
+      restoreDeaultImplicitWait();
     }
-    return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-        .elementToBeClickable(element));
   }
 
   public WebElement forElementClickable(List<WebElement> elements, int index, int timeout) {
@@ -89,12 +97,16 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    if (SelectorStack.isContextSet()) {
-      SelectorStack.contextRead();
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .elementToBeClickable(elements.get(index)));
-    } else {
-      return forElementClickable(SelectorStack.read(), timeout);
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+            .elementToBeClickable(elements.get(index)));
+      } else {
+        return forElementClickable(SelectorStack.read(), timeout);
+      }
+    }finally {
+      restoreDeaultImplicitWait();
     }
   }
 

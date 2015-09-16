@@ -25,7 +25,8 @@ public class VKWidgetPageObject extends WidgetPageObject {
       "<vk group-id=\"53477573\" />",
   };
   private static final String INCORRECT_TAG = "<vk />";
-  private static final String ERROR_MESSAGE = "Failed to render the VK widget. Please check if all required parameters are in place.";
+  private static final String ERROR_MESSAGE =
+      "Failed to render the VK widget. Please check if all required parameters are in place.";
 
   public VKWidgetPageObject(WebDriver driver) {
     super(driver);

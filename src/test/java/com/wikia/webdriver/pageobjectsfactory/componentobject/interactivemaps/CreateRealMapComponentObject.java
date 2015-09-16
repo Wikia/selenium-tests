@@ -1,25 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  */
 
 public class CreateRealMapComponentObject extends BasePageObject {
-
-  public CreateRealMapComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "input[name=map-title]")
   private WebElement mapTitleField;
@@ -33,6 +27,10 @@ public class CreateRealMapComponentObject extends BasePageObject {
   private WebElement closeButton;
   @FindBy(css = "#intMapError")
   private WebElement mapErrorField;
+
+  public CreateRealMapComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);

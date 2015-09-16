@@ -29,7 +29,8 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
       "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",
   };
   private static final String INCORRECT_TAG = "<twitter />";
-  private static final String ERROR_MESSAGE = "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
+  private static final String ERROR_MESSAGE =
+      "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
