@@ -1,8 +1,11 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,8 +22,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -141,14 +142,14 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   /**
-   * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
+   * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file
+   * page (logged-in user)
    */
   @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
-  @Execute(disableFlash = "false")
+  @Execute(asUser = User.STAFF, disableFlash = "false")
   public void LightboxTest_008_filepage_video() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPageObject specialVideos =
+        new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
 
     int itemNumber = 2;
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
@@ -164,7 +165,7 @@ public class LightboxTests extends NewTestTemplate {
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
- public void LightboxTest_009_filepage_image() {
+  public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
