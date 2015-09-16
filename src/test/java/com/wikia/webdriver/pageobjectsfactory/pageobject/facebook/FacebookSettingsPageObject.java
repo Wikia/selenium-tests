@@ -65,7 +65,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             try {
               Thread.sleep(3000);
             } catch (InterruptedException e) {
-              e.printStackTrace();
+              PageObjectLogging.log("SLEEP INTERRUPTED", e.getMessage(), false);
             }
 
             PageObjectLogging.log("removeApp", "Wikia App removed", true);

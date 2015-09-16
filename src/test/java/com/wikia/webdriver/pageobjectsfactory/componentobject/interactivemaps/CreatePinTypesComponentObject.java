@@ -74,7 +74,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   }
 
   public void selectParentCategory(int catValue) {
-    waitForElementClickableByElement(mainParentCategorySelector);
+    wait.forElementClickable(mainParentCategorySelector);
     mainParentCategorySelector.click();
     WebElement parentSelected = parentCatOption.get(catValue);
     wait.forElementVisible(parentSelected);

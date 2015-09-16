@@ -259,7 +259,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
-    waitForElementClickableByElement(addArticleInDropdown);
+    wait.forElementClickable(addArticleInDropdown);
     addArticleInDropdown.click();
     return new CreateArticleModalComponentObject(driver);
   }
@@ -268,7 +268,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(contributeDropdown);
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
-    addArticleInDropdown.click();
+    scrollAndClick(addArticleInDropdown);
     wait.forElementVisible(articleTitleInputModal);
     articleTitleInputModal.sendKeys(articleTitle);
     scrollAndClick(submitModal);
@@ -362,7 +362,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void submitReplyComment() {
     driver.switchTo().defaultContent();
-    waitForElementClickableByElement(replyCommentSubmitButton);
+    wait.forElementClickable(replyCommentSubmitButton);
     scrollAndClick(replyCommentSubmitButton);
     waitForElementNotVisibleByElement(replyCommentSubmitButton);
   }
@@ -571,7 +571,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void submitCategory() {
-    waitForElementClickableByElement(saveCategory);
+    wait.forElementClickable(saveCategory);
     saveCategory.click();
     waitForElementNotVisibleByElement(addCategoryInput);
     PageObjectLogging.log("submitCategory", "submit category clicked", true);
@@ -700,14 +700,14 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public LightboxComponentObject clickThumbnailImage() {
-    waitForElementClickableByElement(thumbnailImageArticle);
+    wait.forElementClickable(thumbnailImageArticle);
     thumbnailImageArticle.click();
     PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
     return new LightboxComponentObject(driver);
   }
 
   public LightboxComponentObject clickThumbnailVideoLightbox() {
-    waitForElementClickableByElement(videoThumbnail);
+    wait.forElementClickable(videoThumbnail);
     videoThumbnail.click();
     PageObjectLogging.log("clickThumbnailVideoLightbox", "Video thumbnail is clicked", true);
     return new LightboxComponentObject(driver);
@@ -715,7 +715,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public VideoComponentObject clickThumbnailVideoInline() {
     WebElement thumbnail = getThumbnailVideoInline();
-    waitForElementClickableByElement(thumbnail);
+    wait.forElementClickable(thumbnail);
     thumbnail.click();
     PageObjectLogging.log("clickThumbnailVideoInline", "Video thumbnail is clicked", true);
     verifyVideoInline();
@@ -750,13 +750,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   private VECreateArticleModalComponentObject clickVERedLink(WebElement redLink) {
-    waitForElementClickableByElement(redLink);
+    wait.forElementClickable(redLink);
     jsActions.click(redLink);
     return new VECreateArticleModalComponentObject(driver);
   }
 
   private CreateArticleModalComponentObject clickRedLink(WebElement redLink) {
-    waitForElementClickableByElement(redLink);
+    wait.forElementClickable(redLink);
     jsActions.click(redLink);
     return new CreateArticleModalComponentObject(driver);
   }

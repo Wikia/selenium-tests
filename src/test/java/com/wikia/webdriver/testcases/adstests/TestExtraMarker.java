@@ -18,12 +18,14 @@ public class TestExtraMarker extends TemplateNoFirstLoad {
       groups = {"TestExtraMarker_GHOST"},
       dataProvider = "extraMarker"
   )
-  public void TestExtraMarker_GHOST(String wikiName, String article, String slot,
-                                    String extraMarkerMessage) {
+  public void TestExtraMarker_GHOST(String wikiName,
+                                    String article,
+                                    String adType,
+                                    String message) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    String logs = wikiPage.getBrowserLogs(slot).toString();
+    String logs = wikiPage.getBrowserLogs(adType).toString();
     Assertion.assertStringNotEmpty(logs);
-    Assertion.assertStringContains(logs, extraMarkerMessage);
+    Assertion.assertStringContains(logs, message);
   }
 }

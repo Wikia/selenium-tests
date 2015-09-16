@@ -40,7 +40,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
   public void clickOnBlogTab() {
     wait.forElementVisible(blogTab);
-    waitForElementClickableByElement(blogTab);
+    wait.forElementClickable(blogTab);
     blogTab.click();
     PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
   }
@@ -71,7 +71,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
   public SpecialCreatePagePageObject clickOnCreateBlogPost() {
     wait.forElementVisible(createBlogPostButton);
-    waitForElementClickableByElement(createBlogPostButton);
+    wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
                           true, driver);

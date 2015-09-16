@@ -69,7 +69,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   private void clickAddaVideo() {
     wait.forElementVisible(addAvideo);
-    waitForElementClickableByElement(addAvideo);
+    wait.forElementClickable(addAvideo);
     scrollAndClick(addAvideo);
     PageObjectLogging.log("clickAddaVideo", "add video button clicked", true, driver);
   }
