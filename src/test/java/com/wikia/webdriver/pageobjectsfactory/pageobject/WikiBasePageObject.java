@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.NewAuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -184,6 +185,10 @@ public class WikiBasePageObject extends BasePageObject {
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public NewAuthModal getNewAuthModal(){
+    return new NewAuthModal(driver);
   }
 
   public String getWikiUrl() {
@@ -542,7 +547,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
 
-  public void verifyUserLoggedIn(final String userName) {
+  public void :qverifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
