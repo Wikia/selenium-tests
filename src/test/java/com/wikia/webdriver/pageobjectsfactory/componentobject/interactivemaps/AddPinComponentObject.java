@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -19,10 +19,6 @@ import java.util.List;
  */
 
 public class AddPinComponentObject extends BasePageObject {
-
-  public AddPinComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "input[name=name]")
   private WebElement pinNameField;
@@ -45,7 +41,7 @@ public class AddPinComponentObject extends BasePageObject {
   @FindBy(css = ".article-image-url")
   private WebElement articleImageUrl;
   @FindBy(css = ".error")
-  WebElement errorField;
+  private WebElement errorField;
 
   public void clearPinName() {
     wait.forElementVisible(pinNameField);
@@ -53,11 +49,15 @@ public class AddPinComponentObject extends BasePageObject {
     PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
   }
 
+  public AddPinComponentObject(WebDriver driver) {
+    super(driver);
+  }
+
   public void clearAssociatedArticleField() {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.clear();
-    PageObjectLogging.log("clearAssociatedArticleField",
-                          "Associated article field was cleared", true);
+    PageObjectLogging.log("clearAssociatedArticleField", "Associated article field was cleared",
+        true);
   }
 
   public InteractiveMapPageObject clickCancelButton() {
@@ -116,16 +116,15 @@ public class AddPinComponentObject extends BasePageObject {
   public void typePinDescription(String pinDescription) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(pinDescription);
-    PageObjectLogging.log("typePinDescription",
-                          pinDescription + "Pin description was typed in", true);
+    PageObjectLogging.log("typePinDescription", pinDescription + "Pin description was typed in",
+        true);
   }
 
   public void typeAssociatedArticle(String associatedArticleName) {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.sendKeys(associatedArticleName);
-    PageObjectLogging.log("typePinName",
-                          associatedArticleName + " Associated article is typed in",
-                          true);
+    PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in",
+        true);
   }
 
   public void verifyPinTitleFieldIsDisplayed() {
@@ -136,25 +135,25 @@ public class AddPinComponentObject extends BasePageObject {
   public void verifyAssociatedArticleFieldIsDisplayed() {
     wait.forElementVisible(associatedArticleField);
     PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed",
-                          "Associated article field is visible", true, driver);
+        "Associated article field is visible", true, driver);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
     wait.forElementVisible(pinCategorySelector);
-    PageObjectLogging.log("verifyPinCategorySelector",
-                          "Pin category selector is visible", true, driver);
+    PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible", true,
+        driver);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
     wait.forElementVisible(descriptionField);
-    PageObjectLogging.log("verifyDescriptionFieldIsDisplayed",
-                          "Description field is visible", true, driver);
+    PageObjectLogging.log("verifyDescriptionFieldIsDisplayed", "Description field is visible",
+        true, driver);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
     wait.forElementVisible(associatedArticleImage);
     PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed",
-                          "Associated article image placeholder is visible", true, driver);
+        "Associated article image placeholder is visible", true, driver);
   }
 
   public void verifyErrorExists() {
@@ -175,10 +174,8 @@ public class AddPinComponentObject extends BasePageObject {
 
   public void verifyAssociatedArticlePlaceholder() {
     wait.forElementVisible(associatedArticleField);
-    Assertion.assertEquals(
-        InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
+    Assertion.assertEquals(InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
         associatedArticleField.getAttribute("placeholder"),
-        "Associated article place holder is not correct"
-    );
+        "Associated article place holder is not correct");
   }
 }
