@@ -50,7 +50,7 @@ public class AllTagsTests extends NewTestTemplate {
     articleContent.push(content, ARTICLE_NAME);
   }
 
-  @Test
+  @Test(groups = "AllTagsWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void AllTagsWidgetTest_001_isLoaded() {
     new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
