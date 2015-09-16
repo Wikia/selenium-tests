@@ -372,23 +372,15 @@ public class AdsDataProvider {
         {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
   }
 
-
   @DataProvider
-  public static Object[][] fliteTagBrokenTag() {
+  public static Object[][] fliteTagBroken() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/FliteTagBrokenTag"}};
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenHeight() {
-    return new Object[][]{
-        {"adtest", "SyntheticTests/FliteTagBrokenHeight"}};
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenWidth() {
-    return new Object[][]{
-        {"adtest", "SyntheticTests/FliteTagBrokenWidth"}};
+        {"adtest", "SyntheticTests/FliteTagBrokenWidth",
+         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenHeight",
+         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenTag",
+         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."}};
   }
 
   @DataProvider

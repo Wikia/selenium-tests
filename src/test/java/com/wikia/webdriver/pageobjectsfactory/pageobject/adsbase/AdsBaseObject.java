@@ -71,7 +71,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
-
   private String presentMedrecSelector = "div[id*='TOP_RIGHT_BOXAD']";
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   private WebElement incontentBoxad;
