@@ -50,16 +50,16 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   public WidgetPageObject createMultiple() {
-    String articleContentString = "";
+    String text = "";
     ArticleContent articleContent = new ArticleContent();
 
     articleContent.clear(getArticleName());
 
     for (String tag : getTags()) {
-      articleContentString += tag + "\n";
+      text += tag + "\n";
     }
 
-    articleContent.push(articleContentString, getArticleName());
+    articleContent.push(text, getArticleName());
 
     return this;
   }
