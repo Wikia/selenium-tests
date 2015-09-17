@@ -130,7 +130,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   public void clickFormatting(By formatBy) {
-    waitForElementClickableByElement(formattingDropDown);
+    wait.forElementClickable(formattingDropDown);
     Actions actions = new Actions(driver);
     actions.click(formattingDropDown)
         .click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy)).build()
@@ -248,13 +248,13 @@ public class VisualEditorMenu extends WikiBasePageObject {
   }
 
   private void clickItemFromDropDown(WebElement list, WebElement item, By insertBy) {
-    waitForElementClickableByElement(list);
+    wait.forElementClickable(list);
     Actions actions = new Actions(driver);
     actions.click(list).click(item.findElement(insertBy)).build().perform();
   }
 
   public VisualEditorHyperLinkDialog clickLinkButton() {
-    waitForElementClickableByElement(linkButton);
+    wait.forElementClickable(linkButton);
     linkButton.click();
     return new VisualEditorHyperLinkDialog(driver);
   }
@@ -271,7 +271,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
     wait.forElementNotPresent(publishButtonDisabled);
     wait.forElementVisible(enabledPublishButton);
     WebElement publishButton = enabledPublishButton.findElement(labelBy);
-    waitForElementClickableByElement(publishButton);
+    wait.forElementClickable(publishButton);
     publishButton.click();
     return new VisualEditorSaveChangesDialog(driver);
   }

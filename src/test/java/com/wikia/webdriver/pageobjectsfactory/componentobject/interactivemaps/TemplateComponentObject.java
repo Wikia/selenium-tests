@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -14,10 +14,6 @@ import org.openqa.selenium.support.FindBy;
  */
 
 public class TemplateComponentObject extends BasePageObject {
-
-  public TemplateComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "input[name='map-title']")
   private WebElement mapTitleField;
@@ -32,15 +28,19 @@ public class TemplateComponentObject extends BasePageObject {
   @FindBy(css = "#intMapError")
   private WebElement mapError;
 
+  public TemplateComponentObject(WebDriver driver) {
+    super(driver);
+  }
+
   public CreatePinTypesComponentObject clickNext() {
-    waitForElementClickableByElement(nextButton);
+    wait.forElementClickable(nextButton);
     nextButton.click();
     PageObjectLogging.log("clickNext", "clicked next button in naming map modal", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
   public CreateACustomMapComponentObject clickBack() {
-    waitForElementClickableByElement(backButton);
+    wait.forElementClickable(backButton);
     backButton.click();
     PageObjectLogging.log("clickBack", "clicked back button in naming map modal", true, driver);
     return new CreateACustomMapComponentObject(driver);
@@ -55,8 +55,8 @@ public class TemplateComponentObject extends BasePageObject {
   public void typeTemplateName(String templateName) {
     wait.forElementVisible(nameTemplateField);
     nameTemplateField.sendKeys(templateName);
-    PageObjectLogging
-        .log("typeTemplateName", templateName + " title for template typed in", true, driver);
+    PageObjectLogging.log("typeTemplateName", templateName + " title for template typed in", true,
+        driver);
   }
 
   public void verifyTemplateImagePreview() {

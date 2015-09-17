@@ -177,7 +177,7 @@ public class MessageWall extends WikiBasePageObject {
     setDisplayStyle(newMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     WebElement closeButton = driver.findElement(closeButtonBy);
-    waitForElementClickableByElement(closeButton);
+    wait.forElementClickable(closeButton);
     scrollAndClick(closeButton);
     setDisplayStyle(newMessageMenu, "none");
     PageObjectLogging.log("clickCloseThread", "close thread button clicked", true);

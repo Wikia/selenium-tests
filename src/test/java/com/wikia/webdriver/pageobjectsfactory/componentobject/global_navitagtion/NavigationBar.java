@@ -37,7 +37,7 @@ public class NavigationBar extends WikiBasePageObject {
   public void triggerSuggestions(String query) {
     wait.forElementVisible(searchInput);
     searchInput.clear();
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.click();
     wait.forElementPresent(jqueryAutocompleteBy);
     Typing.sendKeysHumanSpeed(searchInput, query);
@@ -116,14 +116,14 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public IntraWikiSearchPageObject clickEnterToSearch() {
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.sendKeys(Keys.ENTER);
     PageObjectLogging.log("clickEnterInSearch", "clicked enter in search", true);
     return new IntraWikiSearchPageObject(driver);
   }
 
   public IntraWikiSearchPageObject clickSearchButton() {
-    waitForElementClickableByElement(searchSubmit);
+    wait.forElementClickable(searchSubmit);
     searchSubmit.click();
     PageObjectLogging.log("clickSearchButton", "clicked on search button", true);
     return new IntraWikiSearchPageObject(driver);

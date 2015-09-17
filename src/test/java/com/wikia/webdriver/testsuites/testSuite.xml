@@ -135,12 +135,14 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.PollsnackTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SpotifyTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.TwitterTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.WeiboTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
@@ -190,12 +192,14 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PollsnackTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SpotifyTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.TwitterTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
         </classes>
     </test>
 </suite>

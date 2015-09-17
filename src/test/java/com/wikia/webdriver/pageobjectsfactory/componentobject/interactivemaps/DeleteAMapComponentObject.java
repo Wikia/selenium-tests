@@ -32,7 +32,7 @@ public class DeleteAMapComponentObject extends BasePageObject {
 
   public void clickDeleteMap() {
     wait.forElementVisible(deleteMapModal);
-    waitForElementClickableByElement(deleteMapButton);
+    wait.forElementClickable(deleteMapButton);
     deleteMapButton.click();
   }
 

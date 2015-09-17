@@ -66,8 +66,8 @@ public class PalantirContent {
     this.message = message;
   }
 
-  public String getSuccess() {
-    return this.success;
+  public Boolean getSuccess() {
+    return Boolean.parseBoolean(this.success);
   }
 
   public String getResponseCode() {
@@ -76,14 +76,6 @@ public class PalantirContent {
 
   public String getMessage() {
     return this.message;
-  }
-
-  public void setSuccess(String success) {
-    this.success = success;
-  }
-
-  public void setResponseCode(String responseCode) {
-    this.responseCode = responseCode;
   }
 
   public void setMessage(String message) {

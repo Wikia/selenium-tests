@@ -21,4 +21,13 @@ public class VKTests extends NewTestTemplate {
     vkWidget.createAndNavigate(wikiURL);
     Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
+
+  @Test(groups = "VKWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void VKWidgetTest_003_isErrorPresent() {
+    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+
+    vkWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(vkWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+  }
 }

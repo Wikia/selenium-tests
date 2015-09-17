@@ -186,7 +186,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyUnfollowed() {
-    waitForElementClickableByElement(pageWatchlistStatusMessage);
+    wait.forElementClickable(pageWatchlistStatusMessage);
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
                                                     "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);

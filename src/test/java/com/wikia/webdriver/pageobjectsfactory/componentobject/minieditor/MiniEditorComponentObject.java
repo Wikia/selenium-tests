@@ -162,6 +162,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void switchAndEditMessageWall(String reply) {
+    wait.forElementVisible(editMessageWallFrame);
     driver.switchTo().frame(editMessageWallFrame);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);

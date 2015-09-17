@@ -16,8 +16,10 @@ public class VKWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "vk";
   private static final String ARTICLE_NAME = "VKWidget";
-  private static final String TAG =
-      "<vk group-id=\"12345\" />";
+  private static final String TAG = "<vk group-id=\"12345\" />";
+  private static final String INCORRECT_TAG = "<vk />";
+  private static final String ERROR_MESSAGE =
+          "Failed to render the VK widget. Please check if all required parameters are in place.";
 
   public VKWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -31,8 +33,16 @@ public class VKWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
+  public String getTag() {
     return TAG;
+  }
+
+  protected String getIncorrectTag() {
+    return INCORRECT_TAG;
+  }
+
+  protected String getErrorMessage() {
+    return ERROR_MESSAGE;
   }
 
   protected boolean isTagLoadedOnMercury() {

@@ -1,7 +1,11 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -15,12 +19,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 
 public class CommonExpectedConditions {
 
@@ -97,38 +97,6 @@ public class CommonExpectedConditions {
         Boolean contains;
         contains = driver.getCurrentUrl().contains(givenString);
         return contains;
-      }
-    };
-  }
-
-  /**
-   * An Expectation for checking an element is visible and enabled such that you can click it.
-   *
-   * @param givenElement element to be checked
-   * @author Michal Nowierski
-   */
-  public static ExpectedCondition<WebElement> elementToBeClickable(final WebElement givenElement) {
-    return new ExpectedCondition<WebElement>() {
-
-      public ExpectedCondition<WebElement> visibilityOfElement = ExpectedConditions
-          .visibilityOf(givenElement);
-
-      public WebElement apply(WebDriver driver) {
-        WebElement element = visibilityOfElement.apply(driver);
-        try {
-          if (element != null && element.isEnabled()) {
-            return element;
-          } else {
-            return null;
-          }
-        } catch (StaleElementReferenceException e) {
-          return null;
-        }
-      }
-
-      @Override
-      public String toString() {
-        return "element to be clickable: " + givenElement.getTagName();
       }
     };
   }

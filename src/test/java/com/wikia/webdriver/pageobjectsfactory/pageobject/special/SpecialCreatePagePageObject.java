@@ -27,7 +27,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
   public VisualEditModePageObject populateTitleField(String title) {
     wait.forElementVisible(titleInput);
     titleInput.sendKeys(title);
-    waitForElementClickableByElement(submitTitleInput);
+    wait.forElementClickable(submitTitleInput);
     submitTitleInput.click();
     waitForElementNotVisibleByElement(submitTitleInput);
     return new VisualEditModePageObject(driver);

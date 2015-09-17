@@ -116,7 +116,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
     wait.forElementVisible(publishButtonPreview);
-    waitForElementClickableByElement(publishButtonPreview);
+    wait.forElementClickable(publishButtonPreview);
     jsActions.click(publishButtonSelector);
     PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode",
                           "Click on 'Publish' button in preview mode", true, driver);
@@ -125,7 +125,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public SourceEditModePageObject clickOnSourceButton() {
     wait.forElementVisible(sourceModeButton);
-    waitForElementClickableByElement(sourceModeButton);
+    wait.forElementClickable(sourceModeButton);
     scrollAndClick(sourceModeButton);
     wait.forElementVisible(sourceModeTextArea);
     PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
@@ -134,14 +134,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public void clickOnVisualButton() {
     wait.forElementVisible(visualModeButton);
-    waitForElementClickableByElement(visualModeButton);
+    wait.forElementClickable(visualModeButton);
     scrollAndClick(visualModeButton);
     wait.forElementVisible(iFrame);
     PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true);
   }
 
   public void clickOnPublish() {
-    waitForElementClickableByElement(publishButton);
+    wait.forElementClickable(publishButton);
     publishButton.click();
     PageObjectLogging.log("clickOnPublish", "publish button clicked", true, driver);
   }
@@ -175,7 +175,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public WikiArticlePageObject clickOnPublishButtonPreview() {
     wait.forElementVisible(publishButtonPreview);
-    waitForElementClickableByElement(publishButtonPreview);
+    wait.forElementClickable(publishButtonPreview);
     scrollAndClick(publishButtonPreview);
     PageObjectLogging.log("ClickOnPublishButtonPreview",
                           "Click on 'Publish' button in preview", true, driver);

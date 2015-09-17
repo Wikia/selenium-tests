@@ -37,7 +37,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement
         generalSetting =
         outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
-    waitForElementClickableByElement(generalSetting);
+    wait.forElementClickable(generalSetting);
     generalSetting.click();
     PageObjectLogging.log("selectSettings", setting.toString() + " setting is selected", true);
     driver.switchTo().defaultContent();
@@ -54,7 +54,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
   public VisualEditorPageObject clickApplyChangesButton() {
     waitForDialogVisible();
     wait.forElementVisible(applyChangesButton);
-    waitForElementClickableByElement(applyChangesButton);
+    wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
@@ -77,7 +77,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
   public void clickAlignment(Alignment align) {
     waitForDialogVisible();
     WebElement button = positionButtons.get(align.ordinal()).findElement(labelElementBy);
-    waitForElementClickableByElement(button);
+    wait.forElementClickable(button);
     button.click();
     PageObjectLogging.log("clickAlignment", align.toString() + " align is selected", true);
     driver.switchTo().defaultContent();

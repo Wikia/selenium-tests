@@ -69,12 +69,13 @@ public class VenusGlobalNavPageObject {
     new Actions(driver).moveToElement(getDestinationHub(hub)).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-                                                .valueToBePresentInElementsAttribute(
-                                                    getDestinationHub(hub), "class", "active"));
+        .valueToBePresentInElementsAttribute(
+            getDestinationHub(hub), "class", "active"));
+    String expectedHref = getHubLink(getDestinationHub(hub));
     getDestinationHub(hub).click();
 
     new WebDriverWait(driver, 30)
-        .until(ExpectedConditions.urlToBe(getHubLink(getDestinationHub(hub))));
+        .until(ExpectedConditions.urlToBe(expectedHref));
 
     return new HubBasePageObject(driver);
   }

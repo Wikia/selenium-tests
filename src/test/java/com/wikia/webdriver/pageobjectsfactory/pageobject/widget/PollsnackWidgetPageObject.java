@@ -17,6 +17,9 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   private static final String TAG_NAME = "pollsnack";
   private static final String ARTICLE_NAME = "PollsnackWidget";
   private static final String TAG = "<pollsnack hash=\"q7kiw9kz\"/>";
+  private static final String INCORRECT_TAG = "<pollsnack />";
+  private static final String ERROR_MESSAGE =
+    "Failed to render the PollSnack widget. Please check if all required parameters are in place.";
 
   public PollsnackWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -30,8 +33,16 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
+  public String getTag() {
     return TAG;
+  }
+
+  protected String getIncorrectTag() {
+    return INCORRECT_TAG;
+  }
+
+  protected String getErrorMessage() {
+    return ERROR_MESSAGE;
   }
 
   protected boolean isTagLoadedOnMercury() {

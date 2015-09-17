@@ -155,7 +155,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
   public void clickDiscardButton() {
     wait.forElementVisible(descriptionDiscardButton);
-    waitForElementClickableByElement(descriptionDiscardButton);
+    wait.forElementClickable(descriptionDiscardButton);
     descriptionDiscardButton.click();
   }
 

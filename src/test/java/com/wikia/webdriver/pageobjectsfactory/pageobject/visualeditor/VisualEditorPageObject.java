@@ -39,10 +39,6 @@ import java.util.Map;
  */
 public class VisualEditorPageObject extends VisualEditorMenu {
 
-  public VisualEditorPageObject(WebDriver driver) {
-    super(driver);
-  }
-
   private WebElement mediaNode;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
@@ -106,6 +102,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
   private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
+
+  public VisualEditorPageObject(WebDriver driver) {
+    super(driver);
+  }
 
   public void selectMediaAndDelete() {
     wait.forElementVisible(editArea);
@@ -308,7 +308,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void copyAndPaste() {
-    waitForElementClickableByElement(editArea);
+    wait.forElementClickable(editArea);
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
@@ -410,7 +410,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
-    waitForElementClickableByElement(selectedGallery);
+    wait.forElementClickable(selectedGallery);
     selectedGallery.click();
 
   }
