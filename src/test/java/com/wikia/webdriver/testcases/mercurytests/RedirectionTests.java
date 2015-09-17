@@ -10,6 +10,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObje
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Content X-Wing
+ */
+@Test(groups = {"RedirectionTests", "Mercury"})
 public class RedirectionTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = MercurySubpages.MAIN_PAGE;
@@ -26,11 +30,10 @@ public class RedirectionTests extends NewTestTemplate {
     expectedUrl = urlBuilder.appendQueryStringToURL(expectedArticleUrl, QUERY_STRING);
   }
 
-  @Test(groups = {"RedirectsTest_001", "Mercury"})
+  @Test(groups = "RedirectionTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void RedirectsTest_001_RedirectFromWWW() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.openWikiPage(url);
+  public void RedirectionTest_001_RedirectFromWWW() {
+    new ArticlePageObject(driver).openWikiPage(url);
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 }
