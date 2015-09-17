@@ -16,33 +16,33 @@ public class TwitterTests extends NewTestTemplate {
   @Test(groups = "TwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_001_isLoaded() {
-    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.create().navigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "TwitterWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_002_areLoaded() {
-    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createMultiple().navigate(wikiURL);
+    widget.createMultiple().navigate(wikiURL);
 
     Assertion.assertTrue(
-        twitterWidget.areAllValidSwappedForIFrames(),
+        widget.areAllValidSwappedForIFrames(),
         MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
     );
 
-    Assertion.assertTrue(twitterWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "TwitterWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_003_isErrorPresent() {
-    TwitterWidgetPageObject twitterWidget = new TwitterWidgetPageObject(driver);
+    TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    twitterWidget.createIncorrect().navigate(wikiURL);
-    Assertion.assertTrue(twitterWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
