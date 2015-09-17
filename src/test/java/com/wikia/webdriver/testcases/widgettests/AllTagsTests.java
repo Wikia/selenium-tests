@@ -6,7 +6,13 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"AllTagsWidgetTests", "WidgetTests"})
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "WidgetsCombined";
@@ -33,7 +40,9 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new TwitterWidgetPageObject(driver));
     widgets.add(new VKWidgetPageObject(driver));
     widgets.add(new WeiboWidgetPageObject(driver));
-    widgets.add(new GoogleFormWidgetPageObject(driver));
+
+    // Uncomment after 22-sep
+    //widgets.add(new GoogleFormWidgetPageObject(driver));
 
     String content = "";
     for (WidgetPageObject widget : widgets) {

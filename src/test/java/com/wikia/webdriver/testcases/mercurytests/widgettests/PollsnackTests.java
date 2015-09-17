@@ -16,11 +16,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-// Uncoment after finish all widget tags
-//@Test(groups = {"MercuryPollsnackWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Test(groups = {"MercuryPollsnackWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class PollsnackTests extends NewTestTemplate {
 
-  private static final String SOUND_CLOUD_ARTICLE_NAME = "PollsnackWidget";
+  private static final String POLLSNACK_ARTICLE_NAME = "PollsnackWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)
@@ -45,7 +44,7 @@ public class PollsnackTests extends NewTestTemplate {
     pollsnackWidget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    new NavigationSideComponentObject(driver).navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
+    new NavigationSideComponentObject(driver).navigateToArticle(POLLSNACK_ARTICLE_NAME);
 
     Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -59,7 +58,7 @@ public class PollsnackTests extends NewTestTemplate {
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
-        .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
+        .navigateToArticle(POLLSNACK_ARTICLE_NAME);
 
     Assertion.assertTrue(pollsnackWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }

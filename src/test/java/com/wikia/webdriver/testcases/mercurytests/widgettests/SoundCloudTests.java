@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-// Uncoment after finish all widget tags
-//@Test(groups = {"MercurySoundCloudWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Test(groups = {"MercurySoundCloudWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class SoundCloudTests extends NewTestTemplate {
 
   private static final String SOUND_CLOUD_ARTICLE_NAME = "SoundCloudWidget";

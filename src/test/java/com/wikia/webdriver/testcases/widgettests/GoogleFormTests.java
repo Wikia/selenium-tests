@@ -11,23 +11,25 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+// Uncomment after 22-sep
+//@Test(groups = {"GoogleFormWidgetTests", "WidgetTests"})
 public class GoogleFormTests extends NewTestTemplate {
 
-    @Test
-    @Execute(onWikia = "mercuryautomationtesting")
-    public void GoogleFormWidgetTest_001_isLoaded() {
-        GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
+  @Test(groups = "GoogleFormWidgetTest_001")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void GoogleFormWidgetTest_001_isLoaded() {
+    GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
 
-        googleFormWidget.createAndNavigate(wikiURL);
-        Assertion.assertTrue(googleFormWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
-    }
+    googleFormWidget.createAndNavigate(wikiURL);
+    Assertion.assertTrue(googleFormWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+  }
 
-    @Test(groups = "GoogleFormWidgetTest_003")
-    @Execute(onWikia = "mercuryautomationtesting")
-    public void GoogleFormWidgetTest_003_isErrorPresent() {
-        GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
+  @Test(groups = "GoogleFormWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void GoogleFormWidgetTest_003_isErrorPresent() {
+    GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
 
-        googleFormWidget.createIncorrectAndNavigate(wikiURL);
-        Assertion.assertTrue(googleFormWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
-    }
+    googleFormWidget.createIncorrectAndNavigate(wikiURL);
+    Assertion.assertTrue(googleFormWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+  }
 }

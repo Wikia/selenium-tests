@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"VKWidgetTests", "WidgetTests"})
 public class VKTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "VKWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void VkWidgetTest_001_isLoaded() {
+  public void VKWidgetTest_001_isLoaded() {
     VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
 
     vkWidget.createAndNavigate(wikiURL);
