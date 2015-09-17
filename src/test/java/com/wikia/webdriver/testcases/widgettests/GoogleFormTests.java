@@ -24,9 +24,9 @@ public class GoogleFormTests extends NewTestTemplate {
     Assertion.assertTrue(googleFormWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "GoogleFormWidgetTest_003")
+  @Test(groups = "GoogleFormWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void GoogleFormWidgetTest_003_isErrorPresent() {
+  public void GoogleFormWidgetTest_002_isErrorPresent() {
     GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
 
     googleFormWidget.createIncorrectAndNavigate(wikiURL);
