@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"SpotifyWidgetTests", "WidgetTests"})
 public class SpotifyTests extends NewTestTemplate {
 
   @Test(groups = "SpotifyWidgetTest_001")

@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-// Uncoment after finish all widget tags
+// Enable after 22-sep
 //@Test(groups = {"MercuryGoogleFormWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class GoogleFormTests extends NewTestTemplate {
 
-  private static final String GOOGLE_FORM_ARTICLE_NAME = "widget";
+  private static final String GOOGLE_FORM_ARTICLE_NAME = "GoogleFormWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)

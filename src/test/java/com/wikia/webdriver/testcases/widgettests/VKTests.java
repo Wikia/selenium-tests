@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"VKWidgetTests", "WidgetTests"})
 public class VKTests extends NewTestTemplate {
 
   @Test(groups = "VKWidgetTest_001")
@@ -21,6 +22,7 @@ public class VKTests extends NewTestTemplate {
     widget.create().navigate(wikiURL);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
+
 
   @Test(groups = "VKWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")

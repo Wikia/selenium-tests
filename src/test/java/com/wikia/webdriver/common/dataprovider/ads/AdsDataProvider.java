@@ -84,9 +84,8 @@ public class AdsDataProvider {
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub",
-         "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };
@@ -370,6 +369,24 @@ public class AdsDataProvider {
   public static Object[][] incontentBoxad() {
     return new Object[][]{
         {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTagBroken() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTagBrokenWidth",
+         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenHeight",
+         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenTag",
+         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTag() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTag"},
+        {"adtest", "SyntheticTests/FliteTagModifiedTag"}};
   }
 
   @DataProvider

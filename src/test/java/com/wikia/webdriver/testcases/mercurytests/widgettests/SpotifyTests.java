@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercurySpotifyWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class SpotifyTests extends NewTestTemplate {
 
   private static final String SPOTIFY_ARTICLE_NAME = "SpotifyWidget";

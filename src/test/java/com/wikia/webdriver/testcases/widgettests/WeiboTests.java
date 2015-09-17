@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"WeiboWidgetTests", "WidgetTests"})
 public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "WeiboWidgetTest_001")

@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"SoundCloudWidgetTests", "WidgetTests"})
 public class SoundCloudTests extends NewTestTemplate {
 
   @Test(groups = "SoundCloudWidgetTest_001")
