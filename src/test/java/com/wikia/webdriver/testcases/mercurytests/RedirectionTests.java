@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObje
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class RedirectsTests extends NewTestTemplate {
+public class RedirectionTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = MercurySubpages.MAIN_PAGE;
   private static final String QUERY_STRING = "noads=1";
