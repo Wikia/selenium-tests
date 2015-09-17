@@ -40,8 +40,14 @@ public class UrlBuilder {
     return url;
   }
 
-  public String getUrlForPathWithWWW(String wikiName, String wikiPath) {
-    String url = getUrlForWikiWithWWW(wikiName);
+  /**
+   * Returns URL with www (world wide web) in the domain.
+   *
+   * @param wikiName name of the wiki
+   * @param wikiPath the part of url path that should appear after resource indicator /wiki/
+   */
+  public String getWebUrlForPath(String wikiName, String wikiPath) {
+    String url = getWebUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
@@ -59,7 +65,10 @@ public class UrlBuilder {
     return composeUrl(prefix, wikiName, suffix);
   }
 
-  public String getUrlForWikiWithWWW(String wikiName) {
+  /**
+   * Returns URL with www (world wide web) in the domain, without the path part
+   */
+  public String getWebUrlForWiki(String wikiName) {
     String prefix = "www.";
     String suffix = getUrlSuffix(wikiName);
 
