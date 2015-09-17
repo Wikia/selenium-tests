@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-@Test(groups = {"MercuryGoogleFormWidgetTests", "MercuryWidgetTests", "Mercury"})
+// Enable after 22-sep
+//@Test(groups = {"MercuryGoogleFormWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class GoogleFormTests extends NewTestTemplate {
 
   private static final String GOOGLE_FORM_ARTICLE_NAME = "GoogleFormWidget";

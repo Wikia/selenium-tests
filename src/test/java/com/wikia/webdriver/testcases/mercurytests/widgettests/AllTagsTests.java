@@ -45,7 +45,9 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new TwitterWidgetPageObject(driver));
     widgets.add(new VKWidgetPageObject(driver));
     widgets.add(new WeiboWidgetPageObject(driver));
-    widgets.add(new GoogleFormWidgetPageObject(driver));
+
+    // Uncomment after 22-sep
+    //widgets.add(new GoogleFormWidgetPageObject(driver));
 
     String content = "";
     for (WidgetPageObject widget : widgets) {
