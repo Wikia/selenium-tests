@@ -55,7 +55,7 @@ public abstract class WidgetPageObject extends BasePageObject {
 
     articleContent.clear(getArticleName());
 
-    for (String tag: getTags()) {
+    for (String tag : getTags()) {
       articleContentString += tag + "\n";
     }
 
@@ -97,7 +97,7 @@ public abstract class WidgetPageObject extends BasePageObject {
       result = false;
     }
 
-    for (WebElement widgetIFrame: widgetIFrameList) {
+    for (WebElement widgetIFrame : widgetIFrameList) {
       if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
         result = false;
         PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);

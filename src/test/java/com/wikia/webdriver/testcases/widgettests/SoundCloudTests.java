@@ -29,9 +29,6 @@ public class SoundCloudTests extends NewTestTemplate {
 
     widget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(
-        widget.areLoaded(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 }

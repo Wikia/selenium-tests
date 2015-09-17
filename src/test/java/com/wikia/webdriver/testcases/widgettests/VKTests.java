@@ -34,10 +34,7 @@ public class VKTests extends NewTestTemplate {
         MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
     );
 
-    Assertion.assertTrue(
-        widget.areLoaded(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "VKWidgetTest_003")

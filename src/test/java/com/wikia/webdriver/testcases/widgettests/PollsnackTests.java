@@ -29,10 +29,7 @@ public class PollsnackTests extends NewTestTemplate {
 
     widget.createMultiple().navigate(wikiURL);
 
-    Assertion.assertTrue(
-        widget.areLoaded(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "PollsnackWidgetTest_003")

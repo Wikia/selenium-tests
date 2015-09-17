@@ -34,10 +34,7 @@ public class TwitterTests extends NewTestTemplate {
         MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
     );
 
-    Assertion.assertTrue(
-        twitterWidget.areLoaded(),
-        MercuryMessages.INVISIBLE_MSG
-    );
+    Assertion.assertTrue(twitterWidget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "TwitterWidgetTest_003")

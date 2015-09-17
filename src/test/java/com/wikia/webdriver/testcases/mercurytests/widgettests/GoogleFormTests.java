@@ -61,8 +61,7 @@ public class GoogleFormTests extends NewTestTemplate {
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(GOOGLE_FORM_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_004")

@@ -61,8 +61,7 @@ public class SoundCloudTests extends NewTestTemplate {
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SOUND_CLOUD_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySoundcloudWidgetTest_004")
