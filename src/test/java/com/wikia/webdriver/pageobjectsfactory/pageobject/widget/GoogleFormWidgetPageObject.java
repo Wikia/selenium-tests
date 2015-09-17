@@ -23,8 +23,8 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
       "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
       "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
 
-      "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
-      "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
+      "<googleform url=\"https://docs.google.com/forms/d/" +
+      "1U4YFynXUCktrSAdm-w0oCULTT2YuEXMgLgUYApTwIwg/viewform?embedded=true\" />",
   };
   private static final String INCORRECT_TAG = "<googleform />";
   private static final String ERROR_MESSAGE =
