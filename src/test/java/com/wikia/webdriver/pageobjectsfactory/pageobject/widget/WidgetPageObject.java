@@ -95,15 +95,15 @@ public abstract class WidgetPageObject extends BasePageObject {
 
     if (widgetIFrameList.isEmpty()) {
       result = false;
-    }
-
-    for (WebElement widgetIFrame : widgetIFrameList) {
-      if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
-        result = false;
-        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
-        break;
+    } else {
+      for (WebElement widgetIFrame : widgetIFrameList) {
+        if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
+          result = false;
+          PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+          break;
+        }
+        PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
       }
-      PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
     }
 
     PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
