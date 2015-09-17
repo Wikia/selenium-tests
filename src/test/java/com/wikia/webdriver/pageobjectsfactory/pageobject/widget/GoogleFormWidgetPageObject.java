@@ -14,7 +14,7 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"googleform\"]")
   private List<WebElement> widgetIFrameList;
-  @FindBy(css = "div.widget")
+  @FindBy(css = "div.ss-form-container")
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "googleform";
