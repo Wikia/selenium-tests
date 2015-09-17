@@ -96,7 +96,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
-    wait.forElementClickable(videoItem, itemNumber, 30);
     scrollAndClick(videoItem, itemNumber);
     return new LightboxComponentObject(driver);
   }
