@@ -41,4 +41,3 @@ public class PollsnackTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
-
