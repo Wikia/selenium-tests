@@ -22,6 +22,7 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   private static final String[] TAGS = {
       "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
       "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
+
       "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
       "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
   };
