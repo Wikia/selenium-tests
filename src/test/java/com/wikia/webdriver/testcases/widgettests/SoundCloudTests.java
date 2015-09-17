@@ -17,9 +17,19 @@ public class SoundCloudTests extends NewTestTemplate {
   @Test(groups = "SoundCloudWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SoundCloudWidgetTest_001_isLoaded() {
-    SoundCloudWidgetPageObject soundCloudWidget = new SoundCloudWidgetPageObject(driver);
+    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
 
-    soundCloudWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(soundCloudWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "SoundCloudWidgetTest_002")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void SoundCloudWidgetTest_002_areLoaded() {
+    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 }

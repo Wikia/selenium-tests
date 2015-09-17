@@ -5,21 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
 public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private WebElement soundCloudIframe;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.widget")
-  private WebElement soundCloudBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "soundcloud";
   private static final String ARTICLE_NAME = "SoundCloudWidget";
-  private static final String TAG =
+  private static final String[] TAGS = {
       "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
-      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />";
+      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
+      "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
+      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
+  };
 
   public SoundCloudWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -34,46 +39,38 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   }
 
   public String getTag() {
-    return TAG;
+    return TAGS[0];
   }
 
-  /**
-   * There is no such thing as incorrect tag in soundcloud
-   * @throws NotImplementedException
-   */
+  protected String[] getTags() {
+    return TAGS;
+  }
+
   protected String getIncorrectTag() {
-    throw new NotImplementedException();
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
   }
 
-  /**
-   * There is no such thing as incorrect tag in soundcloud
-   * @throws NotImplementedException
-   */
   protected String getErrorMessage() {
-      throw new NotImplementedException();
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    if(!isElementVisible(soundCloudIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(soundCloudIframe);
-    boolean result = isElementVisible(soundCloudBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "SoundCloud widgets are loaded directly as inline frames and have no wrapper."
+    );
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    if(!isElementVisible(soundCloudIframe)) {
-      return false;
-    }
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
 
-    driver.switchTo().frame(soundCloudIframe);
-    boolean result = isElementVisible(soundCloudBody);
-    driver.switchTo().parentFrame();
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
+  }
 
-    return result;
+  protected WebElement getWidgetBody() {
+    return widgetBody;
   }
 }

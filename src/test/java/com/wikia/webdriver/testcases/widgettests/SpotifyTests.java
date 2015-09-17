@@ -17,18 +17,28 @@ public class SpotifyTests extends NewTestTemplate {
   @Test(groups = "SpotifyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_001_isLoaded() {
-    SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
+    SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(spotifyWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "SpotifyWidgetTest_002")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void SpotifyWidgetTest_002_areLoaded() {
+    SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "SpotifyWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_003_isErrorPresent() {
-  SpotifyWidgetPageObject spotifyWidget = new SpotifyWidgetPageObject(driver);
+  SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    spotifyWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(spotifyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

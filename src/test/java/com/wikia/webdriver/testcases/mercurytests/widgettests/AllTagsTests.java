@@ -64,7 +64,7 @@ public class AllTagsTests extends NewTestTemplate {
     new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+      Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
     }
   }
 
@@ -76,7 +76,7 @@ public class AllTagsTests extends NewTestTemplate {
     new NavigationSideComponentObject(driver).navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+      Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
     }
   }
 
@@ -90,7 +90,7 @@ public class AllTagsTests extends NewTestTemplate {
         .navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
-      Assertion.assertTrue(widget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+      Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
     }
   }
 }
