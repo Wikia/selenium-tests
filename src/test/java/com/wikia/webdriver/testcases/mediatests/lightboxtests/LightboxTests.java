@@ -150,8 +150,7 @@ public class LightboxTests extends NewTestTemplate {
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 
-    int itemNumber = 2;
-    LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
+    LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
     FilePagePageObject filePage = lightbox.clickTitle();
