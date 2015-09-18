@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -199,7 +200,7 @@ public class BasePageObject extends WikiBasePageObject {
         return;
       }
     }
-    throw new RuntimeException(getNoTextInListErrorMessage(text));
+    throw new WebDriverException(getNoTextInListErrorMessage(text));
   }
 
   /**
@@ -215,7 +216,7 @@ public class BasePageObject extends WikiBasePageObject {
         return;
       }
     }
-    throw new RuntimeException(getNoTextInListErrorMessage(text));
+    throw new WebDriverException(getNoTextInListErrorMessage(text));
   }
 
   /**
@@ -232,7 +233,7 @@ public class BasePageObject extends WikiBasePageObject {
         return;
       }
     }
-    throw new RuntimeException(getNoTextInListErrorMessage(text));
+    throw new WebDriverException(getNoTextInListErrorMessage(text));
   }
   
   private String getNoTextInListErrorMessage(String text) {

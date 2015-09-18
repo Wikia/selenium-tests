@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -80,7 +81,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
       Date currentDate = new Date();
       isBlocked = currentDate.before(expirationDate);
     } catch (ParseException ex) {
-      throw new RuntimeException("Can't parse expirationDateText: " + expirationDateText);
+      throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
     PageObjectLogging
         .log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);

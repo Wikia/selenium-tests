@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -79,10 +80,10 @@ public class SignUpPageObject extends WikiBasePageObject {
       return output;
     } catch (NoSuchAlgorithmException e) {
       PageObjectLogging.log("md5", e.toString(), false);
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("md5", e.toString(), false);
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
   }
 
@@ -199,9 +200,9 @@ public class SignUpPageObject extends WikiBasePageObject {
       PageObjectLogging.log("getWordFromCaptcha", "Captcha word not decoded", false);
       return null;
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
 
   }
