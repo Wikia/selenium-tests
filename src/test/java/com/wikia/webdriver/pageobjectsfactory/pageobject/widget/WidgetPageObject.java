@@ -46,12 +46,17 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract WebElement getWidgetBody();
 
+  protected abstract Boolean isWidgetInIFrame();
+
   public WidgetPageObject create() {
     ArticleContent articleContent = new ArticleContent();
     articleContent.push(getTag(), getArticleName());
     return this;
   }
 
+  /**
+   * Creates as many tags as defined in widget page object tags field
+   */
   public WidgetPageObject createMultiple() {
     String text = "";
     ArticleContent articleContent = new ArticleContent();
@@ -67,6 +72,9 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
+  /**
+   * Creates incorrect tag of the widget that causes an error on the page
+   */
   public WidgetPageObject createIncorrect() {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(getArticleName());
@@ -84,7 +92,13 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   public boolean isLoaded() {
-    boolean result = isWidgetVisible(getWidgetIFrame(), getWidgetBody());
+    boolean result;
+    if (isWidgetInIFrame()) {
+      result = isWidgetVisible(getWidgetIFrame(), getWidgetBody());
+    } else {
+      result = isElementVisible(getWidgetBody());
+    }
+
     logVisibility(result);
     return result;
   }
@@ -136,18 +150,14 @@ public abstract class WidgetPageObject extends BasePageObject {
    * If a widget is wrapped into IFrame, verify it's visibility
    */
   private boolean isWidgetVisible(WebElement widgetIFrame, WebElement widgetBody) {
-    if (widgetIFrame != null) {
-      if (!isElementVisible(widgetIFrame)) {
-        return false;
-      }
-
-      driver.switchTo().frame(widgetIFrame);
-      boolean result = isElementVisible(widgetBody);
-      driver.switchTo().parentFrame();
-
-      return result;
-    } else {
-      return isElementVisible(widgetBody);
+    if (!isElementVisible(widgetIFrame)) {
+      return false;
     }
+
+    driver.switchTo().frame(widgetIFrame);
+    boolean result = isElementVisible(widgetBody);
+    driver.switchTo().parentFrame();
+
+    return result;
   }
 }

@@ -71,4 +71,9 @@ public class VKWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
+
+  @Override
+  protected Boolean isWidgetInIFrame() {
+    return true;
+  }
 }

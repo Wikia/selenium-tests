@@ -76,4 +76,9 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
+
+  @Override
+  protected Boolean isWidgetInIFrame() {
+    return true;
+  }
 }

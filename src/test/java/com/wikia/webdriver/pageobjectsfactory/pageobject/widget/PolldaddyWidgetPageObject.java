@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,22 +54,30 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
   @Override
   protected List<WebElement> getWidgetWrapperList() {
-    return null;
+    throw new NotImplementedException(
+        "There is currently no need to implement wrapper list for the widget, none of tests uses it");
   }
 
   @Override
   protected List<WebElement> getWidgetIFrameList() {
-    return null;
+    throw new NotImplementedException(
+        "Polldaddy widget is not kept inside any IFrame");
   }
 
   @Override
   protected WebElement getWidgetIFrame() {
-    return null;
+    throw new NotImplementedException(
+        "Polldaddy widget is not kept inside any IFrame");
   }
 
   @Override
   protected WebElement getWidgetBody() {
     return polldaddyBody;
+  }
+
+  @Override
+  protected Boolean isWidgetInIFrame() {
+    return false;
   }
 
 }
