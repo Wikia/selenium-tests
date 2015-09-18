@@ -575,4 +575,19 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] adsSynthetic() {
+    return new Object[][]{
+        {
+            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
+            "MOBILE_TOP_LEADERBOARD",
+            320,
+            100,
+            136987812,
+            "mobile",
+            "src/test/resources/adsResources/mobiletl320x100"
+        }
+    };
+  }
+
 }

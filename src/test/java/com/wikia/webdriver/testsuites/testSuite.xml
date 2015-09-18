@@ -12,7 +12,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestDfpParamsPresentMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSlotsMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSynthetic"/>
+            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdsSynthetic"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
