@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class PortableInfoboxObject extends BasePageObject {
 
+  @FindBy(css = "body")
+  private WebElement bodyElement;
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
   @FindBy(css= ".pi-hero .article-image")
@@ -24,6 +26,10 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement expandButton;
   @FindBy(css=".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
+  @FindBy(css=".tabber .article-image")
+  private WebElement imageInTabber;
+  @FindBy(css=".tabber figcaption")
+  private WebElement captionInTabber;
   @FindBy(css =".portable-infobox .new")
   private List<WebElement> internalLinksToEmptyArticle;
   @FindBy(css = ".portable-infobox a[href*='/wiki/']")
@@ -38,7 +44,7 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> boldElements;
   @FindBy(css = "i")
   private List<WebElement> italicElements;
-  @FindBy(css = "portable-infobox .reference")
+  @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
 
   public PortableInfoboxObject(WebDriver driver) {
@@ -49,6 +55,27 @@ public class PortableInfoboxObject extends BasePageObject {
     wait.forElementVisible(expandButton);
     expandButton.click();
     return this;
+  }
+
+  public PortableInfoboxObject clickExternalLink(int index) {
+    Assertion.assertFalse(externalLinks.isEmpty());
+    wait.forElementVisible(externalLinks.get(index));
+    externalLinks.get(index).click();
+    return this;
+  }
+
+  public String getExternalLinkName(int index) {
+    Assertion.assertFalse(externalLinks.isEmpty());
+    wait.forElementVisible(externalLinks.get(index));
+    String externalLinkName = externalLinks.get(index).getText();
+    System.out.println(externalLinkName);
+    return externalLinkName;
+  }
+
+  public String getUrlFromExternalLinkaAfterPageIsLoaded() {
+    wait.forElementVisible(bodyElement);
+    System.out.println(driver.getCurrentUrl());
+    return driver.getCurrentUrl();
   }
 
   public PortableInfoboxObject tapInfoboxContent() {
@@ -79,6 +106,15 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject isImageInTabberVisible() {
+    Assertion.assertEquals(isElementVisible(imageInTabber), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isImageCaptionInTabberVisible() {
+    Assertion.assertEquals(isElementVisible(captionInTabber), true);
+    return this;
+  }
 
   public PortableInfoboxObject verifyDataItemsVisibility() {
     Assertion.assertFalse(dataLabels.isEmpty());
@@ -95,6 +131,11 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject verifyReferencesVisibility() {
     Assertion.assertFalse(references.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String URL) {
+    Assertion.assertStringContains(URL, name);
     return this;
   }
 

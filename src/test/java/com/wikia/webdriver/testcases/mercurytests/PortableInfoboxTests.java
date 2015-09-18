@@ -59,5 +59,45 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
+  //TC03
+  @Test(groups = {"MercuryPortableInfoboxTest_003", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_003_VerifyExternalRedirecting() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    PortableInfoboxObject info = new PortableInfoboxObject(driver);
+
+    String externalLinkName = info
+        .clickExpandButton()
+        .verifyLinksVisibility()
+        .getExternalLinkName(0);
+
+    String externalURL = info
+        .clickExternalLink(0)
+        .getUrlFromExternalLinkaAfterPageIsLoaded();
+
+    info.verifyExternalLinkNameAndURL(externalLinkName, externalURL);
+  }
+
+  //TC04
+  @Test(groups = {"MercuryPortableInfoboxTest_004", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_004_VerifyTabberVisibility() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    new PortableInfoboxObject(driver)
+        .isImageInTabberVisible()
+        .isImageCaptionInTabberVisible();
+  }
+
+  //TC05
+  @Test(groups = {"MercuryPortableInfoboxTest_005", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_005_VerifyLightboxPresence() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    new PortableInfoboxObject(driver)
+        
+  }
 
 }
