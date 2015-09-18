@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"MercuryPolldaddyWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class PolldaddyTests extends NewTestTemplate {
 
-  private static final String POLLSNACK_ARTICLE_NAME = "PolldaddyWidget";
+  private static final String POLLDADDY_ARTICLE_NAME = "PolldaddyWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)
@@ -44,7 +44,7 @@ public class PolldaddyTests extends NewTestTemplate {
     widget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    new NavigationSideComponentObject(driver).navigateToArticle(POLLSNACK_ARTICLE_NAME);
+    new NavigationSideComponentObject(driver).navigateToArticle(POLLDADDY_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -58,7 +58,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
-        .navigateToArticle(POLLSNACK_ARTICLE_NAME);
+        .navigateToArticle(POLLDADDY_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

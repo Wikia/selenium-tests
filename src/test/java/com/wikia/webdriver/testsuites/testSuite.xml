@@ -138,6 +138,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.PollsnackTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.SpotifyTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.widgettests.TwitterTests"/>
@@ -195,6 +196,7 @@
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PollsnackTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SpotifyTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.TwitterTests"/>
