@@ -588,7 +588,7 @@ public class AdsDataProvider {
                 .put("src", "mobile")
                 .build(),
             new Dimension(360, 567),
-            "src/test/resources/adsResources/mobiletl320x100"
+            "src/test/resources/adsResources/mobiletl320x100.png"
         }
     };
   }
