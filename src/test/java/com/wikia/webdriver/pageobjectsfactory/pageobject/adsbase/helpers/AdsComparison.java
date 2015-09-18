@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -124,7 +125,7 @@ public class AdsComparison {
         PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e, false, driver);
+      PageObjectLogging.log("verifyColorAd", ExceptionUtils.getMessage(e), false, driver);
     }
   }
 
