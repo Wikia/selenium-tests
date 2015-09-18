@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 //@Test(groups = {"GoogleFormWidgetTests", "WidgetTests"})
 public class GoogleFormTests extends NewTestTemplate {
 
-  @Test(groups = "GoogleFormWidgetTest_001")
+  @Test(groups = {"GoogleFormWidgetTest_001", "WidgetTests"})
   @Execute(onWikia = "mercuryautomationtesting")
   public void GoogleFormWidgetTest_001_isLoaded() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
@@ -24,7 +24,7 @@ public class GoogleFormTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "GoogleFormWidgetTest_002")
+  @Test(groups = {"GoogleFormWidgetTest_002", "WidgetTests"})
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_002_areLoaded() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
@@ -34,9 +34,9 @@ public class GoogleFormTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "GoogleFormWidgetTest_002")
+  @Test(groups = {"GoogleFormWidgetTest_003", "WidgetTests"})
   @Execute(onWikia = "mercuryautomationtesting")
-  public void GoogleFormWidgetTest_002_isErrorPresent() {
+  public void GoogleFormWidgetTest_003_isErrorPresent() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
     widget.createIncorrect().navigate(wikiURL);
