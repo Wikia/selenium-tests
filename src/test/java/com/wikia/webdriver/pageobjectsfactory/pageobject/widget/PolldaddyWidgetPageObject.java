@@ -45,10 +45,17 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    return isElementVisible(polldaddyBody);
+    return isTagLoaded();
   }
 
   protected boolean isTagLoadedOnOasis() {
+    return isTagLoaded();
+  }
+
+  /**
+   * The widget html has no difference between mercury and oasis skins
+   */
+  private boolean isTagLoaded() {
     return isElementVisible(polldaddyBody);
   }
 }
