@@ -27,13 +27,28 @@ public class PortableInfoboxTests extends NewTestTemplate {
   //TC01
   @Test(groups = {"MercuryPortableInfoboxTest_001", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_001_VerifyElementsVisible() {
-    new ArticlePageObject(driver).openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
 
     new PortableInfoboxObject(driver)
         .isMainImageVisible()
-        .verifyDataItemsVisibility()
         .isTitleVisible()
-        .areLinksVisible();
+        .clickExpandButton()
+        .verifyDataItemsVisibility()
+        .verifyLinksVisibility()
+        .verifyReferencesVisibility();
+  }
+
+  //TC02
+  @Test(groups = {"MercuryPortableInfoboxTest_002", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_002_VerifyCollapsing() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    new PortableInfoboxObject(driver)
+        .isInfoboxCollapsed()
+        .clickExpandButton()
+        .isInfoboxExpanded();
   }
 
 
