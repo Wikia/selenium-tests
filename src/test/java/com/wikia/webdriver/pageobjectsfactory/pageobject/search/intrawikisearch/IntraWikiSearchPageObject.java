@@ -351,7 +351,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementPresent(jqueryAutocompleteBy);
     searchField.sendKeys(query);
     wait.forElementVisible(newSuggestionsList.get(0));
-    System.out.println(newSuggestionsList.size());
     for (int i = 0; i < newSuggestionsList.size(); i++) {
       Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());

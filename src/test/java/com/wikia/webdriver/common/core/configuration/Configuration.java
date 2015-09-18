@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.properties.Credentials;
 
 import org.yaml.snakeyaml.Yaml;
@@ -36,7 +37,7 @@ public class Configuration {
         try {
           input = new FileInputStream(new File("config_sample.yml"));
         } catch (FileNotFoundException ex2) {
-          System.out.println("CAN'T LOCATE CONFIG FILE");
+          throw new TestEnvInitFailedException("CAN'T LOCATE CONFIG FILE");
         }
       }
       config = (Map<String, String>) yaml.load(input);
