@@ -181,21 +181,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] gptAdsInToolbar() {
-    return new Object[][]{
-        {
-            "adtest", "Toolbar/320x70",
-            "src/test/resources/adsResources/toolbar320x50",
-            new Dimension(320, 70)
-        }, {
-            "adtest", "Toolbar/320x50",
-            "src/test/resources/adsResources/toolbar320x50",
-            new Dimension(320, 50)
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] skin() {
     return new Object[][]{
         {
