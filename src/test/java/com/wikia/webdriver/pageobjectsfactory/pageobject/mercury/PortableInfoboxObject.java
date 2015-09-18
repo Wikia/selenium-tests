@@ -30,6 +30,15 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement imageInTabber;
   @FindBy(css=".tabber figcaption")
   private WebElement captionInTabber;
+  @FindBy(css=".lightbox-media")
+  private WebElement lightbox;
+  @FindBy(css=".lightbox-close-button")
+  private WebElement lightboxCloseButton;
+  @FindBy(css=".portable-infobox .article-video")
+  private WebElement video;
+  @FindBy(css=".portable-infobox .article-video figcaption")
+  private WebElement videoCaption;
+
   @FindBy(css =".portable-infobox .new")
   private List<WebElement> internalLinksToEmptyArticle;
   @FindBy(css = ".portable-infobox a[href*='/wiki/']")
@@ -46,22 +55,13 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> italicElements;
   @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
+  @FindBy(css = ".portable-infobox ul li")
+  private List<WebElement> unorderedLists;
+  @FindBy(css = ".portable-infobox ol li")
+  private List<WebElement> orderedLists;
 
   public PortableInfoboxObject(WebDriver driver) {
     super(driver);
-  }
-
-  public PortableInfoboxObject clickExpandButton() {
-    wait.forElementVisible(expandButton);
-    expandButton.click();
-    return this;
-  }
-
-  public PortableInfoboxObject clickExternalLink(int index) {
-    Assertion.assertFalse(externalLinks.isEmpty());
-    wait.forElementVisible(externalLinks.get(index));
-    externalLinks.get(index).click();
-    return this;
   }
 
   public String getExternalLinkName(int index) {
@@ -84,9 +84,44 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject clickExpandButton() {
+    wait.forElementVisible(expandButton);
+    expandButton.click();
+    return this;
+  }
+
+  public PortableInfoboxObject clickExternalLink(int index) {
+    Assertion.assertFalse(externalLinks.isEmpty());
+    wait.forElementVisible(externalLinks.get(index));
+    externalLinks.get(index).click();
+    return this;
+  }
+
+  public PortableInfoboxObject closeLightbox() {
+    wait.forElementVisible(lightboxCloseButton);
+    lightboxCloseButton.click();
+    return this;
+  }
+
+  public PortableInfoboxObject clickMainImage() {
+    wait.forElementVisible(mainImage);
+    mainImage.click();
+    return this;
+  }
+
+  public PortableInfoboxObject clickVideo() {
+    video.click();
+    return this;
+  }
+
   public PortableInfoboxObject isMainImageVisible() {
     wait.forElementVisible(mainImage);
     Assertion.assertEquals(isElementOnPage(mainImage), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isLightboxOpened() {
+    Assertion.assertEquals(isElementVisible(lightbox), true);
     return this;
   }
 
@@ -113,6 +148,16 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject isImageCaptionInTabberVisible() {
     Assertion.assertEquals(isElementVisible(captionInTabber), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isVideoVisible() {
+    Assertion.assertEquals(isElementVisible(video), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isVideoCaptionVisible() {
+    Assertion.assertEquals(isElementVisible(videoCaption), true);
     return this;
   }
 
@@ -144,11 +189,33 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject areItalicElementsPresnted() {
+  public PortableInfoboxObject areItalicElementsPresented() {
     Assertion.assertFalse(italicElements.isEmpty());
     return this;
   }
 
+  public PortableInfoboxObject areUnorderedListsVisible() {
+    Assertion.assertFalse(unorderedLists.isEmpty());
+    return this;
+  }
 
+  public PortableInfoboxObject areOrderedListsVisible() {
+    Assertion.assertFalse(orderedLists.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject compareListsAndDataValuesMargin() {
+    Assertion.assertEquals(
+        unorderedLists.get(0).getCssValue("margin"),
+        dataValues.get(0).getCssValue("margin")
+    );
+
+    Assertion.assertEquals(
+        orderedLists.get(0).getCssValue("margin"),
+        dataValues.get(0).getCssValue("margin")
+    );
+
+    return this;
+  }
 
 }

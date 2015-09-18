@@ -97,7 +97,35 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
 
     new PortableInfoboxObject(driver)
-        
+        .clickMainImage()
+        .isLightboxOpened()
+        .closeLightbox()
+        .isTitleVisible();
   }
 
+  //TC06
+  @Test(groups = {"MercuryPortableInfoboxTest_006", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_006_VerifyListsMargin() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    new PortableInfoboxObject(driver)
+        .clickExpandButton()
+        .areUnorderedListsVisible()
+        .areOrderedListsVisible()
+        .compareListsAndDataValuesMargin();
+  }
+
+  //TC07
+  public void MercuryPortableInfoboxTest_007_VideoInDataFields() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
+
+    new PortableInfoboxObject(driver)
+        .clickExpandButton()
+        .isVideoVisible()
+        .isVideoCaptionVisible()
+        .clickVideo()
+        .isLightboxOpened();
+  }
 }
