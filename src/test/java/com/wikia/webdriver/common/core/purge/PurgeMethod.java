@@ -9,13 +9,13 @@ import java.net.URI;
  */
 public class PurgeMethod extends HttpRequestBase {
 
-  @Override
-  public String getMethod() {
-    return "PURGE";
-  }
-
   public PurgeMethod(final String uri) {
     super();
     setURI(URI.create(uri));
+  }
+
+  @Override
+  public String getMethod() {
+    return "PURGE";
   }
 }

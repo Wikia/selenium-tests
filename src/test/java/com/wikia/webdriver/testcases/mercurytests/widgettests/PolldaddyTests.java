@@ -30,45 +30,46 @@ public class PolldaddyTests extends NewTestTemplate {
   @Test(groups = "MercuryPolldaddyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    PolldaddyWidgetPageObject polldaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    polldaddyWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(polldaddyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    widget.createAndNavigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    PolldaddyWidgetPageObject polldaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    polldaddyWidget
+    widget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(POLLSNACK_ARTICLE_NAME);
 
-    Assertion.assertTrue(polldaddyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    PolldaddyWidgetPageObject polldaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    polldaddyWidget.createAndNavigate(wikiURL);
+    widget.createAndNavigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(POLLSNACK_ARTICLE_NAME);
 
-    Assertion.assertTrue(polldaddyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_004_isErrorPresent() {
-    PolldaddyWidgetPageObject polldaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    polldaddyWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(polldaddyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

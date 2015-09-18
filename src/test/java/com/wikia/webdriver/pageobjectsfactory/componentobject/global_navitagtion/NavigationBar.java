@@ -19,10 +19,6 @@ import java.util.List;
 
 public class NavigationBar extends WikiBasePageObject {
 
-  public NavigationBar(WebDriver driver) {
-    super(driver);
-  }
-
   final private String suggestionCss = ".autocomplete div";
 
   @FindBy(css = "#searchInput")
@@ -33,6 +29,10 @@ public class NavigationBar extends WikiBasePageObject {
   private List<WebElement> suggestionsList;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
+
+  public NavigationBar(WebDriver driver) {
+    super(driver);
+  }
 
   public void triggerSuggestions(String query) {
     wait.forElementVisible(searchInput);
@@ -77,7 +77,7 @@ public class NavigationBar extends WikiBasePageObject {
       }
       searchInput.sendKeys(Keys.ENTER);
       PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-          + suggestionText + "and clicked enter", true);
+                                                     + suggestionText + "and clicked enter", true);
       return new ArticlePageObject(driver);
     } else {
       return null;

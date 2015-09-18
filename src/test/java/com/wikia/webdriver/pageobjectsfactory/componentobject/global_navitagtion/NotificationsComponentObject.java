@@ -17,10 +17,6 @@ import java.util.List;
 
 public class NotificationsComponentObject extends WikiBasePageObject {
 
-  public NotificationsComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "div.bubbles")
   protected WebElement notificationsBubbles;
   @FindBys(@FindBy(css = ".notification.unread"))
@@ -39,12 +35,19 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private WebElement emptyNumberOfUnreadNotifications;
   @FindBy(css = "#notificationsEntryPoint")
   private WebElement accountNavigationEntryPoint;
+
   private By notificationDropdownForCurrentWiki = By
       .cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
+
   private By emptyNotificationDropdownForCurrentWiki =
       By.cssSelector(
           "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
+
   private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
+
+  public NotificationsComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   /**
    * hover the mouse over the notification bubble and wait for it to expand
@@ -86,7 +89,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * click notifications bubble
    *
    * @todo: is this needed? the notifications expand on mouse hover so we should use the
-   *        showNotifications method
+   * showNotifications method
    */
   public void clickNotifications() {
     wait.forElementVisible(notificationsBubbles);
@@ -110,12 +113,12 @@ public class NotificationsComponentObject extends WikiBasePageObject {
       if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
           .contains(text)) {
         PageObjectLogging.log("getNotificationLink", "get addres that of " + i + 1
-            + " notification points to", true);
+                                                     + " notification points to", true);
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
     PageObjectLogging.log("getNotificationLink",
-        "No notification that contains the following text: " + text, false);
+                          "No notification that contains the following text: " + text, false);
     return null;
   }
 

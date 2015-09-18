@@ -31,37 +31,55 @@ public class GoogleFormTests extends NewTestTemplate {
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
+    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    googleFormWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(googleFormWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
+    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    googleFormWidget
+    widget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(GOOGLE_FORM_ARTICLE_NAME);
 
-    Assertion.assertTrue(googleFormWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    GoogleFormWidgetPageObject googleFormWidget = new GoogleFormWidgetPageObject(driver);
+    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    googleFormWidget.createAndNavigate(wikiURL);
+    widget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(GOOGLE_FORM_ARTICLE_NAME);
 
-    Assertion
-        .assertTrue(googleFormWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryGoogleFormWidgetTest_004")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryGoogleFormWidgetTest_005")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
+    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
+
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

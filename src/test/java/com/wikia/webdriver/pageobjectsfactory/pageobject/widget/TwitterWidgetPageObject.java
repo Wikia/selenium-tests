@@ -4,22 +4,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
+  @FindBy(css = ".widget-twitter")
+  private List<WebElement> widgetWrapperList;
   @FindBy(css = ".widget-twitter iframe")
-  private WebElement twitterIframe;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.timeline")
-  private WebElement twitterBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
-  private static final String TAG = "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />";
+  private static final String[] TAGS = {
+      //twitter.com/Wikia
+      "<twitter widget-id=\"345311016592228352\" />",
+
+      //twitter.com/Nukapedia
+      "<twitter widget-id=\"430155638820200448\" />",
+
+      //twitter.com/Nukapedia overridden to SFBART
+      "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",
+  };
   private static final String INCORRECT_TAG = "<twitter />";
   private static final String ERROR_MESSAGE =
-    "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
+      "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -34,7 +47,11 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   }
 
   public String getTag() {
-    return TAG;
+    return TAGS[0];
+  }
+
+  protected String[] getTags() {
+    return TAGS;
   }
 
   protected String getIncorrectTag() {
@@ -45,27 +62,19 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected List<WebElement> getWidgetWrapperList() {
+    return widgetWrapperList;
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
-    }
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
 
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
+  protected WebElement getWidgetIFrame() {
+    return widgetIFrameList.get(0);
+  }
 
-    return result;
+  protected WebElement getWidgetBody() {
+    return widgetBody;
   }
 }

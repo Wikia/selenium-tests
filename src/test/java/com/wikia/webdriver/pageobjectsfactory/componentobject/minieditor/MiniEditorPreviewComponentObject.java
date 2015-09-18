@@ -12,16 +12,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
 
-  public MiniEditorPreviewComponentObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
+  By publishButton = By.cssSelector(".buttons .primary");
+  By contentWrapper = By.cssSelector("#mw-content-text");
 
   @FindBy(css = "#WallPreviewModal")
   private WebElement previewModal;
 
-  By publishButton = By.cssSelector(".buttons .primary");
-  By contentWrapper = By.cssSelector("#mw-content-text");
+  public MiniEditorPreviewComponentObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   public void verifyTextContent(String desiredText) {
     Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);

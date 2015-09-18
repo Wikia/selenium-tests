@@ -18,14 +18,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class NavigationSideTests extends NewTestTemplate {
 
+  private final static String SEARCH_PASS = "Gallery";
+  private final static String SEARCH_FAIL = "te";
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
-
-  private final static String SEARCH_PASS = "Gallery";
-  private final static String SEARCH_FAIL = "te";
 
   // NST01
   @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})

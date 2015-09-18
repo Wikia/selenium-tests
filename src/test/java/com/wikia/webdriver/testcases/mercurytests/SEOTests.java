@@ -16,13 +16,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class SEOTests extends NewTestTemplate {
 
+  private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki("muppet");
   }
-
-  private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
 
   // SEOT01
   @RelatedIssue(issueID = "HG-671")

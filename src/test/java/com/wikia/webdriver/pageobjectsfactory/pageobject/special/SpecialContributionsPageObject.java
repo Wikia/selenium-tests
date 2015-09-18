@@ -9,16 +9,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class SpecialContributionsPageObject extends SpecialPageObject {
 
-  public SpecialContributionsPageObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = ".mw-contributions-table #user")
   private WebElement userNameRadio;
   @FindBy(css = "[name='target']")
   private WebElement userNameField;
   @FindBy(css = ".mw-contributions-table [type='submit']")
   private WebElement searchButton;
+
+  public SpecialContributionsPageObject(WebDriver driver) {
+    super(driver);
+  }
 
   private void selectContributorUserName() {
     wait.forElementVisible(userNameRadio);

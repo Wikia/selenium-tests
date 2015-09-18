@@ -40,6 +40,10 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationLandscape = By.cssSelector("[id*='landscape']");
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
+  public GalleryBuilderComponentObject(WebDriver driver) {
+    super(driver);
+  }
+
   public boolean isFinishButtonVisibleOnPage() {
     if (!finishButton.isDisplayed()) {
       scrollToElement(finishButton);
@@ -50,42 +54,6 @@ public class GalleryBuilderComponentObject extends BasePageObject {
     } catch (TimeoutException e) {
       return false;
     }
-  }
-
-  public enum PositionsGallery {
-    LEFT, CENTER, RIGHT;
-
-    private final String label;
-
-    PositionsGallery() {
-      this.label = this.toString().toLowerCase();
-    }
-
-    public String getPositionGallery() {
-      return this.label;
-    }
-  }
-
-  public enum SpacingGallery {
-    SMALL, MEDIUM, LARGE;
-
-    private final String label;
-
-    SpacingGallery() {
-      this.label = this.toString().toLowerCase();
-    }
-
-    public String getSpacingGallery() {
-      return this.label;
-    }
-  }
-
-  public enum Orientation {
-    NONE, SQUARE, LANDSCAPE, PORTRAIT
-  }
-
-  public GalleryBuilderComponentObject(WebDriver driver) {
-    super(driver);
   }
 
   public void adjustPosition(PositionsGallery positionGallery) {
@@ -108,7 +76,6 @@ public class GalleryBuilderComponentObject extends BasePageObject {
     Select spacingDropdown = new Select(spacing);
     spacingDropdown.selectByValue(spacingGallery.getSpacingGallery());
   }
-
 
   public void adjustOrientation(Orientation orientionGallery) {
     wait.forElementVisible(orientation);
@@ -151,6 +118,38 @@ public class GalleryBuilderComponentObject extends BasePageObject {
     wait.forElementVisible(finishButton);
     finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
+  }
+
+  public enum PositionsGallery {
+    LEFT, CENTER, RIGHT;
+
+    private final String label;
+
+    PositionsGallery() {
+      this.label = this.toString().toLowerCase();
+    }
+
+    public String getPositionGallery() {
+      return this.label;
+    }
+  }
+
+  public enum SpacingGallery {
+    SMALL, MEDIUM, LARGE;
+
+    private final String label;
+
+    SpacingGallery() {
+      this.label = this.toString().toLowerCase();
+    }
+
+    public String getSpacingGallery() {
+      return this.label;
+    }
+  }
+
+  public enum Orientation {
+    NONE, SQUARE, LANDSCAPE, PORTRAIT
   }
 }
 

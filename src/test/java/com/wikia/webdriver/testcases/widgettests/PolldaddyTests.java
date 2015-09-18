@@ -17,18 +17,18 @@ public class PolldaddyTests extends NewTestTemplate {
   @Test(groups = "PolldaddyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PolldaddyWidgetTest_001_isLoaded() {
-    PolldaddyWidgetPageObject pollydaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    pollydaddyWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(pollydaddyWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    widget.createAndNavigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "PolldaddyWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PolldaddyKWidgetTest_002_isErrorPresent() {
-    PolldaddyWidgetPageObject pollydaddyWidget = new PolldaddyWidgetPageObject(driver);
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    pollydaddyWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(pollydaddyWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
@@ -36,6 +38,11 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
     return TAG;
   }
 
+  @Override
+  protected String[] getTags() {
+    return null;
+  }
+
   protected String getIncorrectTag() {
     return INCORRECT_TAG;
   }
@@ -44,18 +51,24 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    return isTagLoaded();
+  @Override
+  protected List<WebElement> getWidgetWrapperList() {
+    return null;
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    return isTagLoaded();
+  @Override
+  protected List<WebElement> getWidgetIFrameList() {
+    return null;
   }
 
-  /**
-   * The widget html has no difference between mercury and oasis skins
-   */
-  private boolean isTagLoaded() {
-    return isElementVisible(polldaddyBody);
+  @Override
+  protected WebElement getWidgetIFrame() {
+    return null;
   }
+
+  @Override
+  protected WebElement getWidgetBody() {
+    return polldaddyBody;
+  }
+
 }

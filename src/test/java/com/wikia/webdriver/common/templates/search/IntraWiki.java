@@ -7,25 +7,19 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 public class IntraWiki extends NewTestTemplate {
 
-    protected Credentials credentials = Configuration.getCredentials();
+  protected static final String SEARCH_SUGGESTION_PHRASE = "Gon";
+  protected static final String SEARCH_ARTICLE = "Gonzo";
 
-    protected String testedWiki;
-    protected String communityWiki;
-    protected String searchSuggestionsWiki;
 
-    public IntraWiki() {
-        UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
-        testedWiki = urlBuilder.getUrlForWiki("muppet");
-        communityWiki = urlBuilder.getUrlForWiki("community");
-        searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
-    }
+  protected Credentials credentials = Configuration.getCredentials();
+  protected String testedWiki;
+  protected String communityWiki;
+  protected String searchSuggestionsWiki;
 
-    protected static final int RESULTS_PER_PAGE = 25;
-    protected static final String SEARCH_PHRASE_RESULTS = "A";
-    protected static final String SEARCH_PAGINATION_RESULTS = "what";
-    protected static final String SEARCH_RESULT_WITH_EXTENSION = "betweenlions";
-    protected static final String SEARCH_PHRASE_NO_RESULTS = "qazwsxedcrfvtgb";
-    protected static final String SEARCH_SUGGESTION_PHRASE = "Gon";
-    protected static final String SEARCH_ARTICLE = "Gonzo";
-    protected static final String SEARCH_WIKI = "Marvel";
+  public IntraWiki() {
+    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
+    testedWiki = urlBuilder.getUrlForWiki("muppet");
+    communityWiki = urlBuilder.getUrlForWiki("community");
+    searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
+  }
 }
