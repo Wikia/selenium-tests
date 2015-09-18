@@ -16,10 +16,10 @@ import org.openqa.selenium.support.FindBy;
  */
 public class LightboxComponentObject extends WikiBasePageObject {
 
-  public LightboxComponentObject(WebDriver driver) {
-    super(driver);
-  }
+  private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;
 
+  @FindBy(css = ".LightboxHeader button.close.wikia-chiclet-button")
+  protected WebElement closeModalButton;
   @FindBy(css = ".thumb.thumbinner")
   private WebElement imageThumbnail;
   @FindBy(css = "#LightboxModal")
@@ -58,10 +58,10 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement carouselLeftDisabled;
   @FindBy(css = "button.more-info-close")
   private WebElement closeShareScreenButton;
-  @FindBy(css = ".LightboxHeader button.close.wikia-chiclet-button")
-  protected WebElement closeModalButton;
 
-  private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;
+  public LightboxComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public void verifyLightboxPopup() {
     wait.forElementVisible(lightBoxModal);
@@ -87,7 +87,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void makeHeaderVisible() {
     wait.forElementVisible(titleLink);
-   jsActions.execute("$('.LightboxHeader').css('opacity', '1')");
+    jsActions.execute("$('.LightboxHeader').css('opacity', '1')");
   }
 
   public void clickCloseButton() {
