@@ -15,11 +15,6 @@ import java.util.Date;
 
 public class SpecialBlockListPageObject extends WikiBasePageObject {
 
-  public SpecialBlockListPageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
   @FindBy(css = "input.mw-htmlform-submit")
@@ -28,6 +23,11 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private WebElement userUnblockedMessage;
   @FindBy(css = ".mw-blocklist td:nth-child(3)")
   private WebElement expirationDateElement;
+
+  public SpecialBlockListPageObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);

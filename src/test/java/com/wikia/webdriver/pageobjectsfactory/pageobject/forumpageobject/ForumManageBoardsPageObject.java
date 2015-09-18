@@ -16,11 +16,6 @@ import java.net.URLEncoder;
 
 public class ForumManageBoardsPageObject extends BasePageObject {
 
-  public ForumManageBoardsPageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
   @FindBy(css = "#CreateNewBoardButton")
   private WebElement createBoardButton;
   @FindBy(css = "[name='boardTitle']")
@@ -39,6 +34,11 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private WebElement firstForumLink;
   @FindBy(xpath = "//ul[@class='boards']//li[2]//a")
   private WebElement secondForumLink;
+
+  public ForumManageBoardsPageObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   private void openCreateNewBoardForm() {
     wait.forElementVisible(createBoardButton);
@@ -133,7 +133,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumExists", e.getMessage(), false);
     }
-    wait.forElementVisible(By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
+    wait.forElementVisible(
+        By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
     PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
   }

@@ -16,23 +16,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MiniEditorComponentObject extends WikiBasePageObject {
 
-  public MiniEditorComponentObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
-  @FindBy(css = "body#bodyContent")
-  private WebElement messageBodyField;
   @FindBy(css = ".cke_contents iframe")
   public WebElement miniEditorIframe;
-  @FindBy(css = ".speech-bubble-message .cke_contents iframe")
-  protected WebElement miniEditorEditCommentIFrame;
-  @FindBy(css = ".article-comm-edit-box iframe")
-  protected WebElement replyCommentIFrame;
   @FindBy(css = ".comments .cke_contents iframe")
   public WebElement editMessageWallFrame;
   @FindBy(css = ".replies .cke_contents iframe")
   public WebElement quoteMessageWallFrame;
+  @FindBy(css = ".speech-bubble-message .cke_contents iframe")
+  protected WebElement miniEditorEditCommentIFrame;
+  @FindBy(css = ".article-comm-edit-box iframe")
+  protected WebElement replyCommentIFrame;
+  @FindBy(css = "body#bodyContent")
+  private WebElement messageBodyField;
   @FindBy(css = ".RTEImageButton .cke_icon")
   private WebElement addImageButton;
   @FindBy(css = ".RTEVideoButton .cke_icon")
@@ -53,6 +48,11 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   private WebElement linkExternalIcon;
   @FindBy(css = ".MiniEditorWrapper.active.editor-open")
   private WebElement miniEditorWrapper;
+
+  public MiniEditorComponentObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   public void writeMiniEditor(String text) {
     wait.forElementVisible(messageBodyField);
