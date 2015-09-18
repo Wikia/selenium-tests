@@ -65,7 +65,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             try {
               Thread.sleep(3000);
             } catch (InterruptedException e) {
-              PageObjectLogging.log("SLEEP INTERRUPTED", e.getMessage(), false);
+              PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
             }
 
             PageObjectLogging.log("removeApp", "Wikia App removed", true);
@@ -85,7 +85,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("isAppPresent", e.getMessage(), false);
+      PageObjectLogging.log("isAppPresent", e, false);
     }
     boolean isPresent = false;
     for (WebElement element : pageElementList) {

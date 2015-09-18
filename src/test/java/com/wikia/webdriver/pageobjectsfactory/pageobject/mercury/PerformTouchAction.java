@@ -139,7 +139,7 @@ public class PerformTouchAction {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(methodName, e, false);
     }
   }
 
@@ -153,7 +153,7 @@ public class PerformTouchAction {
     try {
       mobileDriver.context(contextName);
     } catch (NoSuchContextException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(methodName, e, false);
     }
   }
 

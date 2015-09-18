@@ -97,7 +97,7 @@ public class BasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOverInArticleIframe", e.getMessage(), false);
+      PageObjectLogging.log("mouseOverInArticleIframe", e, false);
     }
   }
 
@@ -300,7 +300,7 @@ public class BasePageObject {
         windows = driver.getWindowHandles().toArray();
         sumDelay += 500;
       } catch (InterruptedException e) {
-        PageObjectLogging.log(windowName, e.getMessage(), false);
+        PageObjectLogging.log(windowName, e, false);
       }
       if (sumDelay > 5000) {
         PageObjectLogging.log(windowName, comment, false);

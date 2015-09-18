@@ -130,7 +130,7 @@ public class SignUpPageObject extends WikiBasePageObject {
       PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
                                                + " selected", true);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("enterBirthDate", e.getMessage(), false);
+      PageObjectLogging.log("enterBirthDate", e, false);
     }
   }
 

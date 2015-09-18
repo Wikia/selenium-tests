@@ -131,7 +131,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
 
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumExists", e.getMessage(), false);
+      PageObjectLogging.log("verifyForumExists", e, false);
     }
     wait.forElementVisible(
         By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
@@ -143,7 +143,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     try {
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumNotExists", e.getMessage(), false);
+      PageObjectLogging.log("verifyForumNotExists", e, false);
     }
     wait.forElementVisible(By.xpath(
         "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));

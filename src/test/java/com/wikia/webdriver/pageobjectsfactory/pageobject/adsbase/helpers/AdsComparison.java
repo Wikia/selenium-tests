@@ -65,7 +65,7 @@ public class AdsComparison {
       capturedScreen.delete();
       return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
     } catch (IOException e) {
-      PageObjectLogging.log("compareImageWithScreenshot", e.getMessage(), false);
+      PageObjectLogging.log("compareImageWithScreenshot", e, false);
     }
     return false;
   }
@@ -124,7 +124,7 @@ public class AdsComparison {
         PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e.getMessage(), false, driver);
+      PageObjectLogging.log("verifyColorAd", e, false, driver);
     }
   }
 

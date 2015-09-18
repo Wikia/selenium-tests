@@ -105,7 +105,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("SLEEP INTERRUPTED", e.getMessage(), false);
+      PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
     }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(

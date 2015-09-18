@@ -80,7 +80,7 @@ public class BasePageObject extends WikiBasePageObject {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(reason, e.getMessage(), false);
+      PageObjectLogging.log(reason, e, false);
     }
   }
 

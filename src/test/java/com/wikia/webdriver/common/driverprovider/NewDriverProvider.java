@@ -142,6 +142,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, mozillaPath);
         } catch (IOException ex) {
+          PageObjectLogging.log("Can't create file", ex , false);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                mozillaPath
                                                                                    .getAbsolutePath()));
@@ -150,6 +151,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, homePath);
         } catch (IOException ex) {
+          PageObjectLogging.log("Can't create file", ex , false);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                homePath
                                                                                    .getAbsolutePath()));
