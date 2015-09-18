@@ -46,9 +46,17 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
 
     new PortableInfoboxObject(driver)
+        //expand by clicking button
         .isInfoboxCollapsed()
         .clickExpandButton()
-        .isInfoboxExpanded();
+        .isInfoboxExpanded()
+        .clickExpandButton()
+        .isInfoboxCollapsed()
+        //expand by tapping Infobox's content
+        .tapInfoboxContent()
+        .isInfoboxExpanded()
+        .tapInfoboxContent()
+        .isInfoboxCollapsed();
   }
 
 

@@ -51,6 +51,12 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject tapInfoboxContent() {
+    Assertion.assertFalse(dataLabels.isEmpty());
+    dataLabels.get(0).click();
+    return this;
+  }
+
   public PortableInfoboxObject isMainImageVisible() {
     wait.forElementVisible(mainImage);
     Assertion.assertEquals(isElementOnPage(mainImage), true);
