@@ -33,10 +33,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new PortableInfoboxObject(driver)
         .isMainImageVisible()
         .isTitleVisible()
+        .isImageInTitleNotVisible()
         .clickExpandButton()
         .verifyDataItemsVisibility()
         .verifyLinksVisibility()
-        .verifyReferencesVisibility();
+        .verifyReferencesVisibility()
+        .areHeadersVisible();
   }
 
   //TC02

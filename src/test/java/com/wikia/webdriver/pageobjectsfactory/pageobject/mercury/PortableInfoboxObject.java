@@ -38,6 +38,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement video;
   @FindBy(css=".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
+  @FindBy(css=".pi-title img")
+  private WebElement imageInTitle;
 
   @FindBy(css =".portable-infobox .new")
   private List<WebElement> internalLinksToEmptyArticle;
@@ -59,6 +61,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> unorderedLists;
   @FindBy(css = ".portable-infobox ol li")
   private List<WebElement> orderedLists;
+  @FindBy(css = ".pi-header")
+  private List<WebElement> headers;
 
   public PortableInfoboxObject(WebDriver driver) {
     super(driver);
@@ -128,6 +132,11 @@ public class PortableInfoboxObject extends BasePageObject {
   public PortableInfoboxObject isTitleVisible() {
     wait.forElementVisible(title);
     Assertion.assertEquals(isElementOnPage(title), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isImageInTitleNotVisible() {
+    Assertion.assertEquals(isElementVisible(imageInTitle), false);
     return this;
   }
 
@@ -204,6 +213,11 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject areHeadersVisible() {
+    Assertion.assertFalse(headers.isEmpty());
+    return this;
+  }
+
   public PortableInfoboxObject compareListsAndDataValuesMargin() {
     Assertion.assertEquals(
         unorderedLists.get(0).getCssValue("margin"),
@@ -214,7 +228,6 @@ public class PortableInfoboxObject extends BasePageObject {
         orderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
-
     return this;
   }
 
