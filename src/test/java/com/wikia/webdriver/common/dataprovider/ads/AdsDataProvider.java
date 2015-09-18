@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.dataprovider.ads;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -580,11 +581,13 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             new Page("adtest", "SyntheticTests/MobileLeaderboard"),
-            "MOBILE_TOP_LEADERBOARD",
-            320,
-            100,
-            136987812,
-            "mobile",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", "MOBILE_TOP_LEADERBOARD")
+                .put("slotSize", new Dimension(320, 100))
+                .put("lineItemId", 136987812)
+                .put("src", "mobile")
+                .build(),
+            new Dimension(360, 567),
             "src/test/resources/adsResources/mobiletl320x100"
         }
     };
