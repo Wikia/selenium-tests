@@ -32,7 +32,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     super(driver, page);
     adsComparison = new AdsComparison();
 
-    if (Configuration.getBrowser().equals("CHROMEMOBILEMERCURY")) {
+    if ("CHROMEMOBILEMERCURY".equals(Configuration.getBrowser())) {
       verifyMercury();
     }
 

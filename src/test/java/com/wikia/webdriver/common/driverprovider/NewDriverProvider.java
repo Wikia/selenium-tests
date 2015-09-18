@@ -72,7 +72,7 @@ public class NewDriverProvider {
       driver = new EventFiringWebDriver(new HtmlUnitDriver());
     } else if ("GHOST".equals(browserName)) {
       driver = getPhantomJSInstance();
-    } else if (browserName.equals("ANDROID")) {
+    } else if ("ANDROID".equals(browserName)) {
       driver = getAndroidInstance();
     } else {
       throw new WebDriverException("Provided driver is not supported.");

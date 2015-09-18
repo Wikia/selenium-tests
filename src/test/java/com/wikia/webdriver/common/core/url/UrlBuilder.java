@@ -33,7 +33,7 @@ public class UrlBuilder {
 
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = getUrlForWiki(wikiName);
-    String separator = wikiName.endsWith("wikia") || wikiName.equals("wowwiki") ? "" : "wiki/";
+    String separator = wikiName.endsWith("wikia") || "wowwiki".equals(wikiName) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
     return url;
@@ -56,7 +56,7 @@ public class UrlBuilder {
   }
 
   private String getUrlPrefix(String wikiName) {
-    return wikiName.equals("wikia") ? "www." : "";
+    return "wikia".equals(wikiName) ? "www." : "";
   }
 
   private String getUrlSuffix(String wikiName) {
@@ -91,12 +91,12 @@ public class UrlBuilder {
   }
 
   private Boolean isMercuryBrowser() {
-    return browser != null && browser.equalsIgnoreCase("CHROMEMOBILEMERCURY");
+    return browser != null && "CHROMEMOBILEMERCURY".equalsIgnoreCase(browser);
   }
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
     if (env != null) {
-      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !env.equals("prod")) {
+      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !"prod".equals(env)) {
         prefix = env + "." + prefix;
       }
 

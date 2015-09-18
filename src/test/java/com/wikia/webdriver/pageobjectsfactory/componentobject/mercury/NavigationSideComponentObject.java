@@ -138,15 +138,15 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isNavListElementEllipsized(int index) {
     wait.forElementVisible(navList.get(index));
-    return navList.get(index).getCssValue("text-overflow").equals("ellipsis");
+    return "ellipsis".equals(navList.get(index).getCssValue("text-overflow"));
   }
 
   public boolean isMenuFieldVisible() {
-    return menuField.getCssValue("visibility").equals("visible");
+    return "visible".equals(menuField.getCssValue("visibility"));
   }
 
   public boolean isResultFieldVisible() {
-    return resultField.getCssValue("visibility").equals("visible");
+    return "visible".equals(resultField.getCssValue("visibility"));
   }
 
   public boolean isUserLoggedIn(String username) {
