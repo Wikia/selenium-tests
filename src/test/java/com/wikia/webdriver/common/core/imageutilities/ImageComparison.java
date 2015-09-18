@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.WebDriverException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,7 +31,7 @@ public class ImageComparison {
       fileInBytes1 = FileUtils.readFileToByteArray(file1);
       fileInBytes2 = FileUtils.readFileToByteArray(file2);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
     return Arrays.equals(fileInBytes1, fileInBytes2);
   }
@@ -94,7 +95,7 @@ public class ImageComparison {
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      throw new RuntimeException("Images have different sizes");
+      throw new WebDriverException("Images have different sizes");
     }
     int count = image1.getHeight() * image1.getWidth();
     for (int x = 0; x < image1.getWidth(); x++) {
