@@ -30,7 +30,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   public abstract String getTag();
 
   /**
-   * If you want to verify that more than one tag is present
+   * Get all tags defined in the widget page object
    */
   protected abstract String[] getTags();
 
@@ -55,7 +55,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Creates as many tags as defined in widget page object tags field
+   * Create all tags as defined in widget page object tags field
    */
   public WidgetPageObject createMultiple() {
     String text = "";
@@ -73,7 +73,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Creates incorrect tag of the widget that causes an error on the page
+   * Create incorrect widget tag
    */
   public WidgetPageObject createIncorrect() {
     ArticleContent articleContent = new ArticleContent();
@@ -110,7 +110,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Check if there are more than one widget and they are loaded
+   * Check if there are more than one widget loaded
    */
   public boolean areLoaded() {
     boolean result = true;
