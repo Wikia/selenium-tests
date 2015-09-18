@@ -22,6 +22,7 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
         result.setStatus(ITestResult.FAILURE);
         result.setThrowable(new TestFailedException());
       }
+      //todo transofrm result into better exception
       if (verificationFailures.size() > 0) {
         // set the test to failed
         result.setStatus(ITestResult.FAILURE);

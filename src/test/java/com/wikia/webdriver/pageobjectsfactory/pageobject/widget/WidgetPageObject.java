@@ -60,13 +60,13 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean isLoadedOnMercury() {
     boolean result = isTagLoadedOnMercury();
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    logVisibility(result);
     return result;
   }
 
   public boolean isLoadedOnOasis() {
     boolean result = isTagLoadedOnOasis();
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    logVisibility(result);
     return result;
   }
 
@@ -76,7 +76,13 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean isErrorPresent() {
     boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    logVisibility(result);
     return result;
+  }
+
+  private void logVisibility(boolean result) {
+    PageObjectLogging
+        .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+             result);
   }
 }

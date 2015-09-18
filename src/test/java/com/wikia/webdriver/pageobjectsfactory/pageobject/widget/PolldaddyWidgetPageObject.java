@@ -9,19 +9,16 @@ import org.openqa.selenium.support.FindBy;
  */
 public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = "iframe[data-wikia-widget=\"googleform\"]")
-  private WebElement polldaddyIframe;
-  @FindBy(css = "div.widget")
+  @FindBy(css = ".PDS_Poll *")
   private WebElement polldaddyBody;
 
   private static final String TAG_NAME = "pollydaddy";
   private static final String ARTICLE_NAME = "PolldaddyWidget";
   private static final String TAG =
       "<polldaddy id=\"8956579\">";
-  private static final String INCORRECT_TAG = "<pollydaddy />";
+  private static final String INCORRECT_TAG = "<polldaddy />";
   private static final String ERROR_MESSAGE =
-      "Failed to render the Polldaddy widget. Please check if \"url\" param" +
-      " is properly coped from Embed dialog in Google.";
+      "Failed to render the Polldaddy widget. Please check if all required parameters are in place.";
 
   public PolldaddyWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -48,26 +45,10 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isTagLoadedOnMercury() {
-    if (!isElementVisible(polldaddyIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(polldaddyIframe);
-    boolean result = isElementVisible(polldaddyBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+    return isElementVisible(polldaddyBody);
   }
 
   protected boolean isTagLoadedOnOasis() {
-    if (!isElementVisible(polldaddyIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(polldaddyIframe);
-    boolean result = isElementVisible(polldaddyBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+    return isElementVisible(polldaddyBody);
   }
 }

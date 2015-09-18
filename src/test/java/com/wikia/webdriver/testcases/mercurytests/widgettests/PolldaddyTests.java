@@ -63,9 +63,9 @@ public class PolldaddyTests extends NewTestTemplate {
     Assertion.assertTrue(polldaddyWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPolldaddyWidgetTest_005")
+  @Test(groups = "MercuryPolldaddyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
+  public void MercuryPolldaddyWidgetTest_004_isErrorPresent() {
     PolldaddyWidgetPageObject polldaddyWidget = new PolldaddyWidgetPageObject(driver);
 
     polldaddyWidget.createIncorrectAndNavigate(wikiURL);
