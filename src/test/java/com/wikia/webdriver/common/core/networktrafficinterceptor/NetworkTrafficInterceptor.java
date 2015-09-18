@@ -34,7 +34,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
       start();
       return seleniumProxy();
     } catch (Exception ex) {
-      throw new RuntimeException(ex);
+      throw new WebDriverException(ex);
     }
   }
 
@@ -102,7 +102,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     try {
       super.stop();
     } catch (Exception ex) {
-      throw new RuntimeException(ex);
+      throw new WebDriverException(ex);
     }
   }
 }
