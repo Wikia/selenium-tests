@@ -5,9 +5,6 @@ import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -19,8 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -64,7 +59,7 @@ public class AdsComparison {
     BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
     BufferedImage actualImage = imageEditor.fileToImage(
         shooter.captureWebElement(element, driver));
-    return !imageComparison.areImagesDifferent(actualImage, expectedImage, 0);
+    return imageComparison.areImagesTheSame(actualImage, expectedImage);
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,
@@ -91,17 +86,6 @@ public class AdsComparison {
       return false;
     }
     return true;
-  }
-
-  private String readFileAndEncodeToBase(File file) throws IOException {
-    Base64 coder = new Base64();
-    return IOUtils.toString(
-        coder.encode(FileUtils.readFileToByteArray(file)), "UTF-8"
-    );
-  }
-
-  private String readFileAsString(String filePath) throws IOException {
-    return IOUtils.toString(new FileInputStream(new File(filePath)), "UTF-8");
   }
 
   /**

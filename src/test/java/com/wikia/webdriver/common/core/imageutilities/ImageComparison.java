@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
 
@@ -46,13 +45,6 @@ public class ImageComparison {
     double difference = (double) file1.length() / file2.length();
     return (difference >= accuracy && difference <= 1.0) || (difference >= 1.0
                                                              && difference <= 2.0 - accuracy);
-  }
-
-  public boolean areBase64StringsTheSame(String base1, String base2) {
-    Base64 coder = new Base64();
-    byte[] baseInBytes1 = coder.decode(base1);
-    byte[] baseInBytes2 = coder.decode(base2);
-    return Arrays.equals(baseInBytes1, baseInBytes2);
   }
 
   /**
@@ -106,6 +98,20 @@ public class ImageComparison {
       }
       if (sameCount > ((100 - threshold) * count) / 100D) {
         return false;
+      }
+    }
+    return true;
+  }
+
+  public boolean areImagesTheSame(BufferedImage image1, BufferedImage image2) {
+    if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
+      throw new WebDriverException("Images have different sizes");
+    }
+    for (int x = 0; x < image1.getWidth(); x++) {
+      for (int y = 0; y < image1.getHeight(); y++) {
+        if (image1.getRGB(x, y) != image2.getRGB(x, y)) {
+          return false;
+        }
       }
     }
     return true;
