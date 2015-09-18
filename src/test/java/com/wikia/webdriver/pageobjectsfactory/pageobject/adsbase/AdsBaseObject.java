@@ -548,6 +548,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     Assertion
         .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
     PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+
     return this;
   }
 

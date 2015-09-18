@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -34,10 +35,12 @@ public class AdsComparison {
   private static final int AD_TIMEOUT_SEC = 15;
   protected ImageComparison imageComparison;
   private Shooter shooter;
+  private ImageEditor imageEditor;
 
   public AdsComparison() {
     imageComparison = new ImageComparison();
     shooter = new Shooter();
+    imageEditor = new ImageEditor();
   }
 
   public void hideSlot(String selector, WebDriver driver) {
@@ -55,19 +58,13 @@ public class AdsComparison {
     );
   }
 
-  public boolean compareImageWithScreenshot(final String imageUrl,
+  public boolean compareImageWithScreenshot(final String pathToImage,
                                             final WebElement element,
                                             final WebDriver driver) {
-    try {
-      String encodedExpectedScreen = readFileAsString(imageUrl);
-      File capturedScreen = shooter.captureWebElement(element, driver);
-      String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
-      capturedScreen.delete();
-      return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
-    } catch (IOException e) {
-      PageObjectLogging.log("compareImageWithScreenshot", e, false);
-    }
-    return false;
+    BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
+    BufferedImage actualImage = imageEditor.fileToImage(
+        shooter.captureWebElement(element, driver));
+    return !imageComparison.areImagesDifferent(actualImage, expectedImage, 0);
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,
