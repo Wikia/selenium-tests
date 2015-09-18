@@ -22,11 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class DropDownComponentObject extends WikiBasePageObject {
 
-  public DropDownComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   private static final String LOGIN_DROPDOWN_TRIGGER_CSS = "#AccountNavigation";
+
   @FindBy(css = LOGIN_DROPDOWN_TRIGGER_CSS)
   private WebElement loginDropdownTrigger;
   @FindBy(css = "#UserLoginDropdown input[name='username']")
@@ -51,6 +48,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
   private WebElement signUpLink;
   @FindBy(css = "a[data-id='logout']")
   private WebElement logOutButton;
+
+  public DropDownComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   /**
    * Open dropdown - we need to move mouse outside the element and move back to element to trigger
@@ -82,7 +83,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
   public void remindPassword(String userName, String apiToken) {
     Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     fillUserNameInput(userName);
     wait.forElementVisible(formForgotPasswordLink);
     scrollAndClick(formForgotPasswordLink);
@@ -155,6 +156,6 @@ public class DropDownComponentObject extends WikiBasePageObject {
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
-        true);
+                          true);
   }
 }

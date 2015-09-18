@@ -13,9 +13,7 @@ import java.util.List;
 
 public class SearchPageObject extends WikiBasePageObject {
 
-  public SearchPageObject(WebDriver driver) {
-    super(driver);
-  }
+  protected static final String PAGINATION_PAGES_CSS = ".paginator-page";
 
   @FindBy(css = "#searchInput")
   protected WebElement searchInput;
@@ -27,7 +25,6 @@ public class SearchPageObject extends WikiBasePageObject {
   protected WebElement paginatorNext;
   @FindBy(css = ".paginator-prev")
   protected WebElement paginatorPrev;
-  protected static final String PAGINATION_PAGES_CSS = ".paginator-page";
   @FindBy(css = PAGINATION_PAGES_CSS)
   protected List<WebElement> paginationPages;
   @FindBy(css = "h1 > a.result-link")
@@ -43,10 +40,14 @@ public class SearchPageObject extends WikiBasePageObject {
   @FindBy(css = ".results-wrapper i")
   protected WebElement noResultsCaption;
 
+  protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
+
   @FindBy(css = ".everything")
   private WebElement filterEverything;
 
-  protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
+  public SearchPageObject(WebDriver driver) {
+    super(driver);
+  }
 
   public void clickNextPaginator() {
     scrollAndClick(paginatorNext);
@@ -83,8 +84,8 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void setSearchTab(SearchTab tab) {
-	  WebElement tabElem = driver.findElement(tab.getBy());
-	  scrollAndClick(tabElem);
+    WebElement tabElem = driver.findElement(tab.getBy());
+    scrollAndClick(tabElem);
   }
 
   public enum SearchTab {
@@ -93,7 +94,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
     private final String cssSelector;
 
-    private SearchTab(String cssSelector) {
+    SearchTab(String cssSelector) {
       this.cssSelector = cssSelector;
     }
 

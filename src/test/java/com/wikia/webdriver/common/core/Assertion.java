@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class Assertion extends Assert {
 
+  private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
+
   public static boolean assertStringContains(String current, String pattern) {
     String currentEncoded = encodeSpecialChars(current);
     String patternEncoded = encodeSpecialChars(pattern);
@@ -102,8 +104,6 @@ public class Assertion extends Assert {
     PageObjectLogging.log("assertNumber", message + ", expected: "
                                           + expected + ", got: " + actual, assertion);
   }
-
-  private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
 
   private static void addVerificationFailure(Throwable e) {
     List verificationFailures = getVerificationFailures();
