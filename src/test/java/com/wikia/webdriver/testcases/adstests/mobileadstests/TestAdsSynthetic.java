@@ -24,7 +24,7 @@ public class TestAdsSynthetic extends TemplateNoFirstLoad {
   public void adsSynthetic(Page page,
                            Map<String, Object> slotInfo,
                            Dimension pageSize,
-                           String imageUrl) {
+                           String pathToImage) {
     String slotName = (String) slotInfo.get("slotName");
     String src = (String) slotInfo.get("src");
     Integer lineItemId = (Integer) slotInfo.get("lineItemId");
@@ -36,6 +36,6 @@ public class TestAdsSynthetic extends TemplateNoFirstLoad {
     adsBaseObject
         .verifyLineItemId(slotName, lineItemId)
         .verifySize(slotName, src, slotSize.getWidth(), slotSize.getHeight())
-        .verifyAdImage(slotName, src, imageUrl);
+        .verifyAdImage(slotName, src, pathToImage);
   }
 }
