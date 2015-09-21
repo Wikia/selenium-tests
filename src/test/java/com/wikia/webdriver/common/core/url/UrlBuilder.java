@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class UrlBuilder {
 
   private static final String WOW_WIKI = "wowwiki";
+  private static final String SANDBOX_MERCURY_DEV = "sandbox-mercurydev";
   private String browser;
   private String env;
 
@@ -85,7 +86,7 @@ public class UrlBuilder {
   }
 
   private String getUrlSuffix(String wikiName) {
-    if (env.contains("dev") && !env.contains("sandbox-mercurydev")) {
+    if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV)) {
       String devBoxOwner = env.split("-")[1];
       return "." + devBoxOwner + "." + "wikia-dev.com";
     }
@@ -104,33 +105,24 @@ public class UrlBuilder {
     return js.executeScript("return location.pathname").toString();
   }
 
-  /**
-   * Return url parameters i.e. from mlp.wikia.com/wiki/Main_Page?noads=1 returns ?noads=1
-   * 
-   * @param driver WebDriver
-   * @return String
-   */
-  public String getUrlParams(WebDriver driver) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return js.executeScript("return location.search").toString();
-  }
-
   private Boolean isMercuryBrowser() {
     return browser != null && "CHROMEMOBILEMERCURY".equalsIgnoreCase(browser);
   }
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
+    String overwrittenWikiName = wikiName;
+    String overwrittenPrefix = prefix;
     if (env != null) {
-      if ((!env.contains("dev") || env.contains("sandbox-mercurydev")) && !"prod".equals(env)) {
-        prefix = env + "." + prefix;
+      if ((!env.contains("dev") || env.contains(SANDBOX_MERCURY_DEV)) && !"prod".equals(env)) {
+        overwrittenPrefix = env + "." + prefix;
       }
 
-      if (env.contains("dev") && !env.contains("sandbox-mercurydev") && !isMercuryBrowser()
+      if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV) && !isMercuryBrowser()
           && wikiName.endsWith("wikia")) {
-        wikiName = "wikiaglobal";
+        overwrittenWikiName = "wikiaglobal";
       }
     }
 
-    return "http://" + prefix + wikiName + suffix + "/";
+    return "http://" + prefix + overwrittenWikiName + overwrittenPrefix + "/";
   }
 }
