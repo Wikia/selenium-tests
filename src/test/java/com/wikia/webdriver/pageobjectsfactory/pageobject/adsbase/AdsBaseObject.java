@@ -106,6 +106,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     getUrl(testedPage, true);
   }
 
+  public AdsBaseObject(WebDriver driver, Dimension resolution) {
+    super(driver);
+    driver.manage().window().setSize(resolution);
+  }
+
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
     for (String slot : slots) {
       WebElement slotElement = driver.findElement(By.id(slot));
@@ -543,6 +548,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     Assertion
         .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
     PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+
     return this;
   }
 
