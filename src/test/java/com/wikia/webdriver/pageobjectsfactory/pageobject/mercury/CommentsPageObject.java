@@ -153,7 +153,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public boolean isMediaThumbnailInComment(String mediaType, int index) {
     WebElement mediaInComment;
-    if (mediaType.equals("Video")) {
+    if ("Video".equals(mediaType)) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
@@ -163,7 +163,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public boolean isMediaLinkInComment(String mediaType, int index) throws WebDriverException {
     WebElement mediaInComment;
-    if (mediaType.equals("Video")) {
+    if ("Video".equals(mediaType)) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));

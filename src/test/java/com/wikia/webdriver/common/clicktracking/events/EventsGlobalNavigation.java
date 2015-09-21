@@ -7,8 +7,6 @@ import javax.json.JsonObject;
 
 public class EventsGlobalNavigation {
 
-  private EventsGlobalNavigation() {}
-
   /**
    * search test flow: action - expected event navigate to main page trigger suggestion -
    * search-suggest-show click enter on suggestion - search-suggest-enter click enter after
@@ -29,7 +27,6 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder()
               .add(EventParameter.LABEL.getEventParameter(), "search-suggest")).build();
-
   public static JsonObject searchSuggestShow = Json
       .createObjectBuilder()
       .add(
@@ -41,7 +38,6 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder().add(EventParameter.ACTION.getEventParameter(), "view")
               .add(EventParameter.LABEL.getEventParameter(), "search-suggest-show")).build();
-
   public static JsonObject searchAfterSuggestionButtonClick = Json
       .createObjectBuilder()
       .add(
@@ -52,8 +48,7 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-              "search-after-suggest-button")).build();
-
+                                         "search-after-suggest-button")).build();
   public static JsonObject searchAfterSuggestionEnter = Json
       .createObjectBuilder()
       .add(
@@ -64,8 +59,7 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-              "search-after-suggest-enter")).build();
-
+                                         "search-after-suggest-enter")).build();
   public static JsonObject searchSuggestionEnter = Json
       .createObjectBuilder()
       .add(
@@ -76,5 +70,9 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-              "search-suggest-enter")).build();
+                                         "search-suggest-enter")).build();
+
+  private EventsGlobalNavigation() {
+
+  }
 }

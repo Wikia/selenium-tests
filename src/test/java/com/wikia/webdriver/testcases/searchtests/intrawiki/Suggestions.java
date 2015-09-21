@@ -13,20 +13,20 @@ import org.testng.annotations.Test;
 @Test(groups = {"IntraWikiSearchSuggestions"})
 public class Suggestions extends IntraWiki {
 
-	  @Test(groups = {"dropDownSuggestions", "IntraWikiSearch", "Search"})
-	  public void dropDownSuggestions() {
-	    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-	    search.openWikiPage(testedWiki);
-	    search.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
-	    search.verifySuggestions(SearchContent.SEARCH_ARTICLE);
-	    
-	  }
-	  
-	  @Test(enabled = false, groups = {"searchSuggestionsVisibility", "IntraWikiSearch", "Search"})
-	  public void searchSuggestionsVisibility() {
-	    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
-	    search.openWikiPage(searchSuggestionsWiki);
-	    search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
-	  }
-	  
+  @Test(groups = {"dropDownSuggestions", "IntraWikiSearch", "Search"})
+  public void dropDownSuggestions() {
+    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+    search.openWikiPage(testedWiki);
+    search.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
+    search.verifySuggestions(SearchContent.SEARCH_ARTICLE);
+
+  }
+
+  @Test(enabled = false, groups = {"searchSuggestionsVisibility", "IntraWikiSearch", "Search"})
+  public void searchSuggestionsVisibility() {
+    IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+    search.openWikiPage(searchSuggestionsWiki);
+    search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
+  }
+
 }

@@ -5,28 +5,46 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
+
 import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"VKWidgetTests", "WidgetTests"})
 public class VKTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "VKWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void VkWidgetTest_001_isLoaded() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+  public void VKWidgetTest_001_isLoaded() {
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+
+  @Test(groups = "VKWidgetTest_002")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void VKWidgetTest_002_areLoaded() {
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(
+        widget.areAllValidSwappedForIFrames(),
+        MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
+    );
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "VKWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void VKWidgetTest_003_isErrorPresent() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    vkWidget.createIncorrectAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

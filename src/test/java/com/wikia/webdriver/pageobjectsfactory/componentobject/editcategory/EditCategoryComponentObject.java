@@ -16,14 +16,14 @@ import org.openqa.selenium.support.FindBy;
  */
 public class EditCategoryComponentObject extends BasePageObject {
 
-  public EditCategoryComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = ".WikiaForm .categoryName > input")
   private WebElement categoryNameField;
   @FindBy(css = "#categorySelectEditModal button.primary")
   private WebElement saveButton;
+
+  public EditCategoryComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public ArticlePageObject editCategoryName(String newCategoryName) {
     wait.forElementVisible(categoryNameField);

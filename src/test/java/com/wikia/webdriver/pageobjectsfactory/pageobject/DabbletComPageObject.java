@@ -22,12 +22,11 @@ public class DabbletComPageObject extends BasePageObject {
   @FindBy(css = "#result")
   private WebElement resultBox;
 
+  private String outUrl = "http://dabblet.com/";
+
   public DabbletComPageObject(WebDriver driver) {
     super(driver);
   }
-
-  private String outUrl = "http://dabblet.com/";
-
 
   public void openOutPage() {
     getUrl(outUrl);

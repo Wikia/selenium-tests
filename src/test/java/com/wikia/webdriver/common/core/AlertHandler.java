@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AlertHandler {
-  private AlertHandler() {}
+
+  private AlertHandler() {
+  }
 
   public static boolean isAlertPresent(WebDriver driver) {
     try {
@@ -18,6 +21,7 @@ public class AlertHandler {
       driver.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
+      PageObjectLogging.log("NO ALERT PRESENT", "", true);
       return false;
     }
   }
@@ -26,14 +30,14 @@ public class AlertHandler {
     driver.switchTo().alert().accept();
   }
 
-  public static void acceptPopupWindow(WebDriver driver, int timeout){
+  public static void acceptPopupWindow(WebDriver driver, int timeout) {
     new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver webDriver) {
-        if(isAlertPresent(webDriver)){
+        if (isAlertPresent(webDriver)) {
           webDriver.switchTo().alert().accept();
           return true;
-        }else {
+        } else {
           return false;
         }
       }

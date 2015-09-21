@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.openqa.selenium.WebDriverException;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -68,7 +69,7 @@ public class ImageGenerator {
         PageObjectLogging.logOnLowLevel(actionName, actionDescription, true);
       }
     } catch (IOException e) {
-      throw new RuntimeException(ExceptionUtils.getStackTrace(e));
+      throw new WebDriverException(ExceptionUtils.getStackTrace(e));
     }
   }
 

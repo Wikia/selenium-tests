@@ -80,8 +80,27 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     logJSError(driver);
   }
 
+  public static void log(String command, Throwable e, boolean success, WebDriver driver) {
+    logsResults.add(success);
+    imageCounter += 1;
+    new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
+    CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
+    String className = success ? "success" : "error";
+    StringBuilder builder = new StringBuilder();
+    builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + e.getMessage()
+                   + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                   + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                   + ".html'>HTML Source</a></td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+    logJSError(driver);
+  }
+
   public static void log(String command, String description, boolean success) {
     log(command, description, success, false);
+  }
+
+  public static void log(String command, Throwable e, boolean success) {
+    log(command, e.getMessage(), success, false);
   }
 
   public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
@@ -287,25 +306,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onTestStart(ITestResult result) {
     logsResults.clear();
-//    StringBuilder builder = new StringBuilder();
     String testName = result.getName().toString();
     String className = result.getTestClass().getName().toString();
-//
-//    Method testMethod = result.getMethod().getConstructorOrMethod().getMethod();
-//
-//    builder.append("<table>" + "<h1>Class: <em>" + className + "." + testName + " </em></h1>");
-//    if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
-//      String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
-//      String jiraUrl = jiraPath + issueID;
-//      builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
-//                     + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
-//                     + testMethod.getAnnotation(RelatedIssue.class).comment()
-//                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
-//    } else {
-//      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
-//                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
-//    }
-//    CommonUtils.appendTextToFile(logPath, builder.toString());
     System.out.println(className + " " + testName);
   }
 

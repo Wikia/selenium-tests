@@ -17,17 +17,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class CommentsTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
   private static final String MEDIA_TYPE_VIDEO = "Video";
   private static final String MEDIA_TYPE_IMAGE = "Image";
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
+
+  @BeforeMethod(alwaysRun = true)
+  public void prepareTest() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
+  }
 
   // CT01
   @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})

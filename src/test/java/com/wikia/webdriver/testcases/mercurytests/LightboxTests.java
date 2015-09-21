@@ -25,18 +25,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class LightboxTests extends NewTestTemplate {
 
+  private static final String DIRECTION_LEFT = "left";
+  private static final String DIRECTION_RIGHT = "right";
+  private static final String DIRECTION_UP = "up";
+  private static final String DIRECTION_DOWN = "down";
+  private static final double ACCURACY = 0.83;
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
-
-  private static final String DIRECTION_LEFT = "left";
-  private static final String DIRECTION_RIGHT = "right";
-  private static final String DIRECTION_UP = "up";
-  private static final String DIRECTION_DOWN = "down";
-
-  private static final double ACCURACY = 0.83;
 
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})

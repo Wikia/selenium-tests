@@ -1,5 +1,8 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 
 import java.io.File;
@@ -20,8 +23,10 @@ public class XMLReader {
     try {
       XMLConfiguration xml = new XMLConfiguration(file);
       return xml.getString(key);
-    } catch (Exception e) {
-      return e.toString();
+    } catch (ConfigurationException e) {
+      PageObjectLogging.log("Error while reading XML config", e, false);
+
+      return e.getMessage();
     }
   }
 }

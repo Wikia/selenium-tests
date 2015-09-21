@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -92,6 +93,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(searchSuggestion, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
+      PageObjectLogging.log("Suggestion list not displayed", e, true);
       return false;
     }
     return true;
@@ -101,6 +103,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(sorrySpan, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
+      PageObjectLogging.log("Sorry info not displayed", e, true);
       return false;
     }
     return true;
@@ -117,6 +120,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(backChevron, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
+      PageObjectLogging.log("Black link not displayed", e, true);
       return false;
     }
     return true;
@@ -126,6 +130,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(randomPageButton, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
+      PageObjectLogging.log("Random page button not displayed", e, true);
       return false;
     }
     return true;
@@ -133,15 +138,15 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public boolean isNavListElementEllipsized(int index) {
     wait.forElementVisible(navList.get(index));
-    return navList.get(index).getCssValue("text-overflow").equals("ellipsis");
+    return "ellipsis".equals(navList.get(index).getCssValue("text-overflow"));
   }
 
   public boolean isMenuFieldVisible() {
-    return menuField.getCssValue("visibility").equals("visible");
+    return "visible".equals(menuField.getCssValue("visibility"));
   }
 
   public boolean isResultFieldVisible() {
-    return resultField.getCssValue("visibility").equals("visible");
+    return "visible".equals(resultField.getCssValue("visibility"));
   }
 
   public boolean isUserLoggedIn(String username) {

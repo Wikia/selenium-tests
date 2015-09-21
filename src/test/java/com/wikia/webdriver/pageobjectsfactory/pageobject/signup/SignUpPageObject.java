@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -30,10 +31,6 @@ import java.security.NoSuchAlgorithmException;
  * @author Karol 'kkarolk' Kujawiak
  */
 public class SignUpPageObject extends WikiBasePageObject {
-
-  public SignUpPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
   private WebElement userNameField;
@@ -59,6 +56,36 @@ public class SignUpPageObject extends WikiBasePageObject {
   private By errorMsgBy = By.className("error-msg");
   private By recaptchaResponseBy = By.cssSelector("#g-recaptcha-response");
   private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
+
+  public SignUpPageObject(WebDriver driver) {
+    super(driver);
+  }
+
+  private static String md5(InputStream is) {
+    try {
+      String output;
+      MessageDigest digest = MessageDigest.getInstance("MD5");
+      byte[] buffer = new byte[8192];
+      int read = 0;
+      try {
+        while ((read = is.read(buffer)) > 0) {
+          digest.update(buffer, 0, read);
+        }
+        byte[] md5sum = digest.digest();
+        BigInteger bigInt = new BigInteger(1, md5sum);
+        output = String.format("%0" + (md5sum.length << 1) + "x", bigInt);
+      } finally {
+        is.close();
+      }
+      return output;
+    } catch (NoSuchAlgorithmException e) {
+      PageObjectLogging.log("md5", e.toString(), false);
+      throw new WebDriverException(e);
+    } catch (IOException e) {
+      PageObjectLogging.log("md5", e.toString(), false);
+      throw new WebDriverException(e);
+    }
+  }
 
   public SignUpPageObject open() {
     driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
@@ -102,9 +129,9 @@ public class SignUpPageObject extends WikiBasePageObject {
       Thread.sleep(150);
       new Select(birthMonthField).selectByVisibleText(month);
       PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
-          + " selected", true);
+                                               + " selected", true);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("enterBirthDate", e.getMessage(), false);
+      PageObjectLogging.log("enterBirthDate", e, false);
     }
   }
 
@@ -151,7 +178,7 @@ public class SignUpPageObject extends WikiBasePageObject {
       String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
-              + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
+          + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
       URL url = new URL(urlAd);
 
       String md5 = md5(url.openStream());
@@ -173,37 +200,11 @@ public class SignUpPageObject extends WikiBasePageObject {
       PageObjectLogging.log("getWordFromCaptcha", "Captcha word not decoded", false);
       return null;
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
 
-  }
-
-  private static String md5(InputStream is) {
-    try {
-      String output;
-      MessageDigest digest = MessageDigest.getInstance("MD5");
-      byte[] buffer = new byte[8192];
-      int read = 0;
-      try {
-        while ((read = is.read(buffer)) > 0) {
-          digest.update(buffer, 0, read);
-        }
-        byte[] md5sum = digest.digest();
-        BigInteger bigInt = new BigInteger(1, md5sum);
-        output = String.format("%0" + (md5sum.length << 1) + "x", bigInt);
-      } finally {
-        is.close();
-      }
-      return output;
-    } catch (NoSuchAlgorithmException e) {
-      PageObjectLogging.log("md5", e.toString(), false);
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      PageObjectLogging.log("md5", e.toString(), false);
-      throw new RuntimeException(e);
-    }
   }
 
 }

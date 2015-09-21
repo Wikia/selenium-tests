@@ -12,16 +12,16 @@ import org.openqa.selenium.support.FindBy;
  */
 public class FacebookMainPageObject extends WikiBasePageObject {
 
-  public FacebookMainPageObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "#email")
   private WebElement emailField;
   @FindBy(css = "#pass")
   private WebElement passwordField;
   @FindBy(css = "#loginbutton")
   private WebElement loginButton;
+
+  public FacebookMainPageObject(WebDriver driver) {
+    super(driver);
+  }
 
   public FacebookUserPageObject login(String facebookEmail, String facebookPassword) {
     typeEmail(facebookEmail);
@@ -45,5 +45,4 @@ public class FacebookMainPageObject extends WikiBasePageObject {
     wait.forElementVisible(emailField);
     emailField.sendKeys(email);
   }
-
 }

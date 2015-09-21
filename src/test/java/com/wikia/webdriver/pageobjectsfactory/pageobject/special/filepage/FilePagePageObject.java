@@ -27,14 +27,6 @@ public class FilePagePageObject extends WikiBasePageObject {
   public static final int HISTORY_TAB = 1;
   public static final int METADATA_TAB = 2;
 
-  public FilePagePageObject(WebDriver driver) {
-    super(driver);
-  }
-
-  public FilePagePageObject(WebDriver driver, String fileName) {
-    super(driver);
-  }
-
   @FindBys(@FindBy(css = "ul.tabs li a"))
   private List<WebElement> tabList;
   @FindBy(css = "section[data-listing-type='local'] h3.page-listing-title a")
@@ -64,7 +56,16 @@ public class FilePagePageObject extends WikiBasePageObject {
   @FindBy(css = ".boilerplate b")
   private WebElement imgLicensePlate;
   @FindBy(css = ".tabBody.selected")
+
   private WebElement tabBody;
+
+  public FilePagePageObject(WebDriver driver) {
+    super(driver);
+  }
+
+  public FilePagePageObject(WebDriver driver, String fileName) {
+    super(driver);
+  }
 
   public void clickTab(int tab) {
     WebElement currentTab = tabList.get(tab);
@@ -170,7 +171,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifyTabsExistImage() {
     String[] expectedTabs = {"about", "history"};
     Assertion.assertTrue(expectedTabs.length <= tabs.size());
-     verifyTabsExist(expectedTabs);
+    verifyTabsExist(expectedTabs);
   }
 
   public void verifyTabsExist(String[] expectedTabs) {
@@ -212,7 +213,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifyImageLicense(ImageLicense imageLicense) {
     Assertion.assertStringContains(
-            imgLicensePlate.getText(), imageLicense.getText()
+        imgLicensePlate.getText(), imageLicense.getText()
     );
   }
 }
