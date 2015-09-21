@@ -123,6 +123,6 @@ public class UrlBuilder {
       }
     }
 
-    return "http://" + prefix + overwrittenWikiName + overwrittenPrefix + "/";
+    return "http://" + overwrittenPrefix + overwrittenWikiName + suffix + "/";
   }
 }
