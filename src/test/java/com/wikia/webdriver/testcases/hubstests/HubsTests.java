@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.hubstests;
 
+import java.util.Map;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -9,11 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.Map;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -109,10 +109,9 @@ public class HubsTests extends NewTestTemplate {
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
-  @RelatedIssue(issueID = "QAART-677", comment = "Automated test needs updating. Please test manually")
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
   @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please check that "
-                                              + "language button redirects to proper java homepage")
+      + "language button redirects to proper java homepage")
   /**
    * Verify that each language drop down  goes to the correct page
    */
