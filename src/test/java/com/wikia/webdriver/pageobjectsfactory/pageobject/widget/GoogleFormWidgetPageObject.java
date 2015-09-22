@@ -29,7 +29,7 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<googleform />";
   private static final String ERROR_MESSAGE =
       "Failed to render the Google Form widget. Please check if \"url\" param" +
-      " is properly coped from Embed dialog in Google.";
+      " is properly copied from Embed dialog in Google.";
 
   public GoogleFormWidgetPageObject(WebDriver driver) {
     super(driver);
