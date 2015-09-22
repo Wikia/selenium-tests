@@ -29,6 +29,9 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public abstract String getTag();
 
+  /**
+   * Get all tags defined in the widget page object
+   */
   protected abstract String[] getTags();
 
   protected abstract String getIncorrectTag();
@@ -39,8 +42,6 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract List<WebElement> getWidgetIFrameList();
 
-  protected abstract WebElement getWidgetIFrame();
-
   protected abstract WebElement getWidgetBody();
 
   public WidgetPageObject create() {
@@ -49,6 +50,9 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
+  /**
+   * Create all tags as defined in widget page object tags field on the tested article
+   */
   public WidgetPageObject createMultiple() {
     String text = "";
     ArticleContent articleContent = new ArticleContent();
@@ -64,6 +68,9 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
+  /**
+   * Create incorrect widget tag on the tested article
+   */
   public WidgetPageObject createIncorrect() {
     ArticleContent articleContent = new ArticleContent();
     articleContent.clear(getArticleName());
@@ -71,14 +78,20 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
+  /**
+   * Navigate to the tested article
+   */
   public WidgetPageObject navigate(String wikiUrl) {
     openMercuryArticleByNameWithCbAndNoAds(wikiUrl, getArticleName());
     return this;
   }
 
+  /**
+   * Make sure that there is a widget of its type loaded on the page.
+   */
   public boolean isLoaded() {
-    boolean result = isWidgetVisible(getWidgetIFrame(), getWidgetBody());
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    boolean result = isWidgetVisible(0);
+    logVisibility(result);
     return result;
   }
 
@@ -88,43 +101,56 @@ public abstract class WidgetPageObject extends BasePageObject {
     return result;
   }
 
+  /**
+   * Make sure that all tags defined in the widget tags field are loaded.
+   */
   public boolean areLoaded() {
     boolean result = true;
-    int i = 1;
-    List<WebElement> widgetIFrameList = getWidgetIFrameList();
-
-    if (widgetIFrameList.isEmpty()) {
-      result = false;
-    } else {
-      for (WebElement widgetIFrame : widgetIFrameList) {
-        if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
-          result = false;
-          PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
-          break;
-        }
-        PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
+    String[] tags = getTags();
+    for (int i = 0; i < tags.length; i++) {
+      if (!isWidgetVisible(i)) {
+        result = false;
+        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
+        return result;
       }
+      PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
-
     PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 
   public boolean isErrorPresent() {
     boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
-    PageObjectLogging.log(getTagName(), MercuryMessages.VISIBLE_MSG, result);
+    logVisibility(result);
     return result;
   }
 
-  private boolean isWidgetVisible(WebElement widgetIFrame, WebElement widgetBody) {
-    if (!isElementVisible(widgetIFrame)) {
-      return false;
+  protected void logVisibility(boolean result) {
+    PageObjectLogging
+        .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+             result);
+  }
+
+  /**
+   * Verify a widget presence, based of its index position among other widgets of its type. The
+   * method assumes there may be more than one widgets of certain type on the article.
+   */
+  protected boolean isWidgetVisible(int widgetIndex) {
+    boolean result = true;
+    List<WebElement> widgetIFrameList = getWidgetIFrameList();
+    if (widgetIFrameList.isEmpty()) {
+      result = false;
+    } else {
+      WebElement widgetIFrame = widgetIFrameList.get(widgetIndex);
+      if (!isElementVisible(widgetIFrame)) {
+        return false;
+      } else {
+        driver.switchTo().frame(widgetIFrame);
+        result = isElementVisible(getWidgetBody());
+        driver.switchTo().parentFrame();
+      }
     }
-
-    driver.switchTo().frame(widgetIFrame);
-    boolean result = isElementVisible(widgetBody);
-    driver.switchTo().parentFrame();
-
+    logVisibility(result);
     return result;
   }
 }

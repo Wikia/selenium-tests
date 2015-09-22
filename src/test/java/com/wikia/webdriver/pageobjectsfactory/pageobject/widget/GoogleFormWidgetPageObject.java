@@ -69,10 +69,6 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
     return widgetIFrameList;
   }
 
-  protected WebElement getWidgetIFrame() {
-    return widgetIFrameList.get(0);
-  }
-
   protected WebElement getWidgetBody() {
     return widgetBody;
   }

@@ -25,7 +25,7 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   };
   private static final String INCORRECT_TAG = "<weibo />";
   private static final String ERROR_MESSAGE =
-          "Failed to render the Weibo widget. Please check if all required parameters are in place.";
+      "Failed to render the Weibo widget. Please check if all required parameters are in place.";
 
   public WeiboWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -63,10 +63,6 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
 
   protected List<WebElement> getWidgetIFrameList() {
     return widgetIFrameList;
-  }
-
-  protected WebElement getWidgetIFrame() {
-    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {

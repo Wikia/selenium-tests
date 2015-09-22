@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
@@ -42,6 +43,7 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new VKWidgetPageObject(driver));
     widgets.add(new WeiboWidgetPageObject(driver));
     widgets.add(new GoogleFormWidgetPageObject(driver));
+    widgets.add(new PolldaddyWidgetPageObject(driver));
 
     String content = "";
     for (WidgetPageObject widget : widgets) {

@@ -25,7 +25,7 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   };
   private static final String INCORRECT_TAG = "<spotify />";
   private static final String ERROR_MESSAGE =
-    "Failed to render the Spotify widget. Please check if all required parameters are in place.";
+      "Failed to render the Spotify widget. Please check if all required parameters are in place.";
 
   public SpotifyWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -63,10 +63,6 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   protected List<WebElement> getWidgetIFrameList() {
     return widgetIFrameList;
-  }
-
-  protected WebElement getWidgetIFrame() {
-    return widgetIFrameList.get(0);
   }
 
   protected WebElement getWidgetBody() {
