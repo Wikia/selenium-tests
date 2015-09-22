@@ -110,8 +110,8 @@ public class HubsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
-  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please check that "
-      + "language button redirects to proper java homepage")
+  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please manually verify that "
+      + "language button redirects to proper url i.e. ja.wikia/Wikia. This will fail until MAIN-5376 is fixed")
   /**
    * Verify that each language drop down  goes to the correct page
    */
