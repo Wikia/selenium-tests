@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
  * @ownership Seo
  */
 public class Our404HandlerTest extends NewTestTemplate {
+
+  @java.lang.SuppressWarnings("all") // Lot's of duplication is fine in data providers
   @DataProvider
   private Object[][] testCasesForOur404Handler() {
     return new Object[][]{
