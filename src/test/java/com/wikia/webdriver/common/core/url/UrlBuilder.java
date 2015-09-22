@@ -42,10 +42,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
-    String url = getUrlForWiki(wikiName);
-    url = url + wikiPath;
-
-    return url;
+    return getUrlForWiki(wikiName) + wikiPath;
   }
 
   /**

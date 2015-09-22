@@ -114,12 +114,10 @@ public class NavigationTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedNavigationTest_004")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
-    String testUrl;
-    String expectedUrl;
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
 
-    expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_CATEGORY_TEMPLATES);
-    testUrl = expectedUrl;
+    String expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_CATEGORY_TEMPLATES);
+    String testUrl = expectedUrl;
     section.openWikiPage(testUrl);
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
