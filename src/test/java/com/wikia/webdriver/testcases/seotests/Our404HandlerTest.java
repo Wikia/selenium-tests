@@ -53,10 +53,11 @@ public class Our404HandlerTest extends NewTestTemplate {
   public void testOur404Handler(String wiki, String inputPath, String expectedPath) {
     String wikiBase = urlBuilder.getUrlForWiki(wiki);
     String inputUrl = wikiBase + inputPath;
-    String expectedUrl = expectedPath;
+    String expectedUrl = wikiBase + expectedPath;
 
-    if (!expectedUrl.startsWith("http://")) {
-      expectedUrl = wikiBase + expectedUrl;
+    // Special case for favicon:
+    if (expectedPath.startsWith("http://")) {
+      expectedUrl = expectedPath;
     }
 
     driver.get(inputUrl);
