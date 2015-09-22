@@ -66,16 +66,8 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
     return widgetIFrameList;
   }
 
-  protected WebElement getWidgetIFrame() {
-    return widgetIFrameList.get(0);
-  }
-
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
 
-  @Override
-  protected Boolean isWidgetInIFrame() {
-    return true;
-  }
 }

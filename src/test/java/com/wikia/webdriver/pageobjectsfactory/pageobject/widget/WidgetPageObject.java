@@ -42,11 +42,7 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract List<WebElement> getWidgetIFrameList();
 
-  protected abstract WebElement getWidgetIFrame();
-
   protected abstract WebElement getWidgetBody();
-
-  protected abstract Boolean isWidgetInIFrame();
 
   public WidgetPageObject create() {
     ArticleContent articleContent = new ArticleContent();

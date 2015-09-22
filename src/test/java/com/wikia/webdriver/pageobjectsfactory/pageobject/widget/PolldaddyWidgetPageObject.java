@@ -71,19 +71,8 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   @Override
-  protected WebElement getWidgetIFrame() {
-    throw new NotImplementedException(
-        "Polldaddy widget is not kept inside any IFrame");
-  }
-
-  @Override
   protected WebElement getWidgetBody() {
     return polldaddyDivList.get(0).findElement(polldaddyBody);
-  }
-
-  @Override
-  protected Boolean isWidgetInIFrame() {
-    return false;
   }
 
   @Override
