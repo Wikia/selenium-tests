@@ -65,7 +65,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+  public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget.createMultiple().navigate(wikiURL);

@@ -35,7 +35,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "PolldaddyWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void PolldaddyKWidgetTest_002_isErrorPresent() {
+  public void PolldaddyKWidgetTest_003_isErrorPresent() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget.createIncorrect().navigate(wikiURL);
