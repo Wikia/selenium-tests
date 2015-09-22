@@ -72,5 +72,4 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
-
 }

@@ -19,8 +19,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "pollydaddy";
   private static final String ARTICLE_NAME = "PolldaddyWidget";
-  private static final String TAG =
-      "<polldaddy id=\"8956579\"/>";
   private static final String[] TAGS = {
       "<polldaddy id=\"8956579\"/>",
       "<polldaddy id=\"9022741\"/>"
@@ -42,10 +40,9 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   public String getTag() {
-    return TAG;
+    return TAGS[0];
   }
 
-  @Override
   protected String[] getTags() {
     return TAGS;
   }
@@ -58,24 +55,20 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
     return ERROR_MESSAGE;
   }
 
-  @Override
   protected List<WebElement> getWidgetWrapperList() {
     throw new NotImplementedException(
         "There is currently no need to implement wrapper list for the widget, none of tests uses it");
   }
 
-  @Override
   protected List<WebElement> getWidgetIFrameList() {
     throw new NotImplementedException(
         "Polldaddy widget is not kept inside any IFrame");
   }
 
-  @Override
   protected WebElement getWidgetBody() {
     return polldaddyDivList.get(0).findElement(polldaddyBody);
   }
 
-  @Override
   protected boolean isWidgetVisible(int widgetIndex) {
     boolean result = true;
     if (polldaddyDivList.isEmpty()) {
@@ -91,5 +84,4 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
     logVisibility(result);
     return result;
   }
-
 }

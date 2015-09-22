@@ -69,5 +69,4 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
-
 }

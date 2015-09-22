@@ -87,7 +87,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Make sure that there a widget of its type loaded on the page.
+   * Make sure that there is a widget of its type loaded on the page.
    */
   public boolean isLoaded() {
     boolean result = isWidgetVisible(0);
@@ -110,8 +110,8 @@ public abstract class WidgetPageObject extends BasePageObject {
     for (int i = 0; i < tags.length; i++) {
       if (!isWidgetVisible(i)) {
         result = false;
-        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
-        break;
+        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
+        return result;
       }
       PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
@@ -132,8 +132,8 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Verify a widget presence, based of its index position among other widgets of its type.
-   * The method assumes there may be more than one widgets of certain type on the article.
+   * Verify a widget presence, based of its index position among other widgets of its type. The
+   * method assumes there may be more than one widgets of certain type on the article.
    */
   protected boolean isWidgetVisible(int widgetIndex) {
     boolean result = true;

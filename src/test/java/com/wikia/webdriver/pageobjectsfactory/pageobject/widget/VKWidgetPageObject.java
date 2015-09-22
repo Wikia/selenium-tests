@@ -67,5 +67,4 @@ public class VKWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
-
 }

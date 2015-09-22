@@ -73,5 +73,4 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
-
 }

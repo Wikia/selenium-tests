@@ -68,5 +68,4 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   protected WebElement getWidgetBody() {
     return widgetBody;
   }
-
 }
