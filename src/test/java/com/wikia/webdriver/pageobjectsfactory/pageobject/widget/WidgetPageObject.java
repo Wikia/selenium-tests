@@ -51,7 +51,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Create all tags as defined in widget page object tags field
+   * Create all tags as defined in widget page object tags field on the tested article
    */
   public WidgetPageObject createMultiple() {
     String text = "";
@@ -69,7 +69,7 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Create incorrect widget tag
+   * Create incorrect widget tag on the tested article
    */
   public WidgetPageObject createIncorrect() {
     ArticleContent articleContent = new ArticleContent();
@@ -78,17 +78,16 @@ public abstract class WidgetPageObject extends BasePageObject {
     return this;
   }
 
+  /**
+   * Navigate to the tested article
+   */
   public WidgetPageObject navigate(String wikiUrl) {
     openMercuryArticleByNameWithCbAndNoAds(wikiUrl, getArticleName());
     return this;
   }
 
-  public WidgetPageObject createAndNavigate(String wikiUrl) {
-    return create().navigate(wikiUrl);
-  }
-
   /**
-   * Make sure that there is one widget of its type loaded on the page.
+   * Make sure that there a widget of its type loaded on the page.
    */
   public boolean isLoaded() {
     boolean result = isWidgetVisible(0);
@@ -114,7 +113,7 @@ public abstract class WidgetPageObject extends BasePageObject {
         PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
         break;
       }
-      PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
+      PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
     PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;

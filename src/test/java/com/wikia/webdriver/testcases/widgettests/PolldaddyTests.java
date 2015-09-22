@@ -19,7 +19,7 @@ public class PolldaddyTests extends NewTestTemplate {
   public void PolldaddyWidgetTest_001_isLoaded() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createAndNavigate(wikiURL);
+    widget.create().navigate(wikiURL);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 

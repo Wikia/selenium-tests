@@ -32,7 +32,7 @@ public class PolldaddyTests extends NewTestTemplate {
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createAndNavigate(wikiURL);
+    widget.create().navigate(wikiURL);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -54,7 +54,7 @@ public class PolldaddyTests extends NewTestTemplate {
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createAndNavigate(wikiURL);
+    widget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
