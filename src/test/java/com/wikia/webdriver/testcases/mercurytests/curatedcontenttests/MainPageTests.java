@@ -449,11 +449,8 @@ public class MainPageTests extends NewTestTemplate {
     );
   }
 
-  // TODO: add description to test
-  // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
-  @RelatedIssue(issueID = "XW-209")
+  @Test(groups = "MercuryCuratedMainPageTest_006")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);

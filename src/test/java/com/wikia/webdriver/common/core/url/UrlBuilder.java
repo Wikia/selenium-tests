@@ -41,6 +41,10 @@ public class UrlBuilder {
     return url;
   }
 
+  public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
+    return getUrlForWiki(wikiName) + wikiPath;
+  }
+
   /**
    * Returns URL with www (world wide web) in the domain.
    *

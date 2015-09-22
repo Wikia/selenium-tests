@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
@@ -110,21 +112,33 @@ public class NavigationTests extends NewTestTemplate {
 
   // CCT09
   @Test(groups = "MercuryCuratedNavigationTest_004")
+  @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
-    String expectedUrl = wikiURL + MercurySubpages.CC_CATEGORY_TEMPLATES;
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_TEMPLATES);
+
+    String expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_CATEGORY_TEMPLATES);
+    String testUrl = expectedUrl;
+    section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl = wikiURL + MercurySubpages.CC_SECTION_CATEGORIES;
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
+    expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_SECTION_CATEGORIES);
+    testUrl = expectedUrl;
+    section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl = wikiURL + "wiki/mercury_cc_wikia";
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_EMPTY_CATEGORY);
+    expectedUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
+    testUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_EMPTY_CATEGORY);
+    section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    section.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_NOT_EXISTING_SECTION);
+    expectedUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
+    testUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_NOT_EXISTING_SECTION);
+    section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
+    section.isAlertNotificationVisible();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 }
