@@ -17,7 +17,7 @@ public class Our404HandlerTest extends NewTestTemplate {
     return new Object[][]{
         {"muppet", "sitemap-index.xml", "sitemap-index.xml"},
         {"muppet", "robots.txt", "robots.txt"},
-        {"muppet", "Miss_Piggy", "wiki/Miss_Piggy"},
+        {"muppet", "Honeysuckle_Rose", "wiki/Honeysuckle_Rose"},
         {"pl.gta", "Special:Version", "wiki/Specjalna:Wersja"},
         {"pl.gta", "Special:Wersja", "wiki/Specjalna:Wersja"},
         {"pl.gta", "Specjalna:Version", "wiki/Specjalna:Wersja"},
@@ -26,15 +26,15 @@ public class Our404HandlerTest extends NewTestTemplate {
 // Current code doesn't redirect to non-existing articles:
 //        {"wowwiki", "NoSuchPage", "wiki/NoSuchPage"},
 //        {"muppet", "NoSuchPage", "wiki/NoSuchPage"},
-        {"muppet", "wiki/Miss_Piggy", "wiki/Miss_Piggy"},
+        {"muppet", "wiki/Honeysuckle_Rose", "wiki/Honeysuckle_Rose"},
         {"www", "About", "About"},
 // Does not work on Mercury:
 //        {"www", "wiki/About", "About"},
         {"muppet", "favicon.ico", "http://images.wikia.com/central/images/6/64/Favicon.ico"},
-        {"muppet", "index.php?title=Miss_Piggy", "index.php?title=Miss_Piggy"},
+        {"muppet", "index.php?title=Honeysuckle_Rose", "index.php?title=Honeysuckle_Rose"},
         {"muppet", "index.php?title=NoSuchPage", "index.php?title=NoSuchPage"},
         {"muppet", "api.php", "api.php"},
-        {"muppet", "Miss_Piggy?action=edit", "wiki/Miss_Piggy?action=edit"},
+        {"muppet", "Honeysuckle_Rose?action=edit", "wiki/Honeysuckle_Rose?action=edit"},
         {"wikiality", "Help:Achievements", "wiki/Help:Achievements"},
 // Current code doesn't redirect to non-existing articles:
 //        {"kirkburn", "File:Penguin.png", "wiki/File:Penguin.png"},
