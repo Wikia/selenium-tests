@@ -620,7 +620,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
     String slotName = element.getAttribute("id").replace("wikia_gpt","google_ads_iframe_");
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
-    String adTypeScriptXpath = String.format("//script[contains(text(), '%s')]", hopAdType);
+    String adTypeScriptXpath = String.format("//script[contains(text(), \"%s\")]", hopAdType);
     WebElement iframe = element.findElement(By.cssSelector(iframeSelector));
     driver.switchTo().frame(iframe);
     List<WebElement> adTypeScripts = driver.findElements(By.xpath(adTypeScriptXpath));
