@@ -119,21 +119,25 @@ public class NavigationTests extends NewTestTemplate {
     String expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_CATEGORY_TEMPLATES);
     String testUrl = expectedUrl;
     section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_SECTION_CATEGORIES);
     testUrl = expectedUrl;
     section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
     testUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_EMPTY_CATEGORY);
     section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
     testUrl = urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(), MercurySubpages.CC_NOT_EXISTING_SECTION);
     section.openWikiPage(testUrl);
+    section.waitForLoadingSpinnerToFinish();
     section.isAlertNotificationVisible();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
