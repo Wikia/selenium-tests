@@ -1,7 +1,9 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -151,6 +153,19 @@ public class Assertion extends Assert {
         "assertStringNotEmpty",
         "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
         assertion
+    );
+  }
+
+  /**
+   * This method checks that URL equals current URL and logs result The method is case-insensitive
+   */
+  public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
+    String currentUrl = driver.getCurrentUrl().toLowerCase();
+    PageObjectLogging.log(
+        "Log Url",
+        "Url " + url + " is equal to current Url " + currentUrl,
+        "Url " + url + " isn't equal to current Url " + currentUrl,
+        UrlChecker.isUrlEqualToCurrentUrl(driver, url)
     );
   }
 }
