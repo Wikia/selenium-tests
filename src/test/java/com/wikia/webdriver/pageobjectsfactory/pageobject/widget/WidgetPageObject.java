@@ -91,14 +91,11 @@ public abstract class WidgetPageObject extends BasePageObject {
     return create().navigate(wikiUrl);
   }
 
+  /**
+   * Make sure that there is one widget of its type loaded on the page.
+   */
   public boolean isLoaded() {
-    boolean result;
-    if (isWidgetInIFrame()) {
-      result = isWidgetVisible(getWidgetIFrame(), getWidgetBody());
-    } else {
-      result = isElementVisible(getWidgetBody());
-    }
-
+    boolean result = isWidgetVisible(0);
     logVisibility(result);
     return result;
   }
@@ -110,26 +107,19 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   /**
-   * Check if there are more than one widget loaded
+   * Make sure that all tags defined in the widget tags field are loaded.
    */
   public boolean areLoaded() {
     boolean result = true;
-    int i = 1;
-    List<WebElement> widgetIFrameList = getWidgetIFrameList();
-
-    if (widgetIFrameList.isEmpty()) {
-      result = false;
-    } else {
-      for (WebElement widgetIFrame : widgetIFrameList) {
-        if (!isWidgetVisible(widgetIFrame, getWidgetBody())) {
-          result = false;
-          PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
-          break;
-        }
-        PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
+    String[] tags = getTags();
+    for (int i = 0; i < tags.length; i++) {
+      if (!isWidgetVisible(i)) {
+        result = false;
+        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+        break;
       }
+      PageObjectLogging.log(getTagName() + " #" + i++, MercuryMessages.VISIBLE_MSG, result);
     }
-
     PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
@@ -140,24 +130,32 @@ public abstract class WidgetPageObject extends BasePageObject {
     return result;
   }
 
-  private void logVisibility(boolean result) {
+  protected void logVisibility(boolean result) {
     PageObjectLogging
         .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
              result);
   }
 
   /**
-   * If a widget is wrapped into IFrame, verify it's visibility
+   * Verify a widget presence, based of its index position among other widgets of its type.
+   * The method assumes there may be more than one widgets of certain type on the article.
    */
-  private boolean isWidgetVisible(WebElement widgetIFrame, WebElement widgetBody) {
-    if (!isElementVisible(widgetIFrame)) {
-      return false;
+  protected boolean isWidgetVisible(int widgetIndex) {
+    boolean result = true;
+    List<WebElement> widgetIFrameList = getWidgetIFrameList();
+    if (widgetIFrameList.isEmpty()) {
+      result = false;
+    } else {
+      WebElement widgetIFrame = widgetIFrameList.get(widgetIndex);
+      if (!isElementVisible(widgetIFrame)) {
+        return false;
+      } else {
+        driver.switchTo().frame(widgetIFrame);
+        result = isElementVisible(getWidgetBody());
+        driver.switchTo().parentFrame();
+      }
     }
-
-    driver.switchTo().frame(widgetIFrame);
-    boolean result = isElementVisible(widgetBody);
-    driver.switchTo().parentFrame();
-
+    logVisibility(result);
     return result;
   }
 }

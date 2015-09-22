@@ -65,7 +65,17 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPolldaddyWidgetTest_004_isErrorPresent() {
+  public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryPolldaddyWidgetTest_005")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget.createIncorrect().navigate(wikiURL);
