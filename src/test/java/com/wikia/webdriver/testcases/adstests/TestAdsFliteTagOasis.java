@@ -20,7 +20,7 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
   public void adsFliteTagOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.checkFliteTag();
+    wikiPage.verifyFliteTag();
   }
 
   @Test(
@@ -31,6 +31,6 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
   public void adsFliteTagBrokenOasis(String wikiName, String article, String error) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.checkFliteTagBroken(error);
+    wikiPage.verifyFliteTagBroken(error);
   }
 }

@@ -32,22 +32,22 @@ public class TestATF extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
 
     if (isWgVarOn) {
-      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
-      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
-      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
-      Assertion.assertFalse(adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
+      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
+      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
+      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
+      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
       Thread.sleep(1000 * delaySec);
     }
 
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
   }
 
   @Test(
@@ -62,18 +62,18 @@ public class TestATF extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.MEDREC));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
 
     Assertion.assertNotEquals(
-        adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn);
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn);
     Assertion.assertNotEquals(
-        adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn);
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn);
     Assertion.assertNotEquals(
-        adsBaseObject.isSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn);
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn);
     Assertion.assertNotEquals(
-        adsBaseObject.isSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn);
   }
 
   /**
@@ -92,9 +92,9 @@ public class TestATF extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.TOP_LB));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
-    Assertion.assertTrue(adsBaseObject.isSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT));
   }
 
 }

@@ -81,14 +81,6 @@ public class AdsAmazonObject extends AdsBaseObject {
     }
   }
 
-  public void verifyCallToAmazonIssued() {
-    if (networkTrafficInterceptor.searchRequestUrlInHar(AMAZON_SCRIPT_URL)) {
-      PageObjectLogging.log("RequestToAmazonIssued", "Request to Amazon issued", true);
-    } else {
-      throw new NoSuchElementException("Request to Amazon not issued");
-    }
-  }
-
   public AdsAmazonObject verifyAdsFromAmazonPresent() {
     driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
     Assertion.assertTrue(isElementOnPage(By.cssSelector(AMAZON_IFRAME)));

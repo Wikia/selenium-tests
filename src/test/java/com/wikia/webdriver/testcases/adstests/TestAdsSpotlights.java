@@ -16,6 +16,6 @@ public class TestAdsSpotlights extends TemplateNoFirstLoad {
   public void adsSpotlightsOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.checkSpotlights();
+    wikiPage.verifySpotlights();
   }
 }

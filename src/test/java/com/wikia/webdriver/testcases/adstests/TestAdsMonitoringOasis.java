@@ -54,8 +54,8 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
       Assertion.assertEquals(wikiPage.getCountry(), countryCode);
     }
 
-    wikiPage.checkMedrec();
-    wikiPage.checkTopLeaderboard();
+    wikiPage.verifyMedrec();
+    wikiPage.verifyTopLeaderboard();
   }
 
   private void setProxy(String countryCode) {
