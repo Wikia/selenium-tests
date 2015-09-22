@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.hubstests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -109,6 +110,8 @@ public class HubsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
+  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please check that "
+                                              + "language button redirects to proper java homepage")
   /**
    * Verify that each language drop down  goes to the correct page
    */
