@@ -7,7 +7,7 @@ import javax.json.JsonObject;
 
 public class EventsArticleEditMode {
 
-  public static JsonObject previewEvent = Json
+  public static final JsonObject PREVIEW_EVENT = Json
       .createObjectBuilder()
       .add(
           "0",

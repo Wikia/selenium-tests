@@ -61,7 +61,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("writeMiniEditor", e.getMessage(), false);
+      PageObjectLogging.log("writeMiniEditor", e, false);
     }
     messageBodyField.clear();
     messageBodyField.sendKeys(text);

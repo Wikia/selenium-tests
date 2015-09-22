@@ -52,7 +52,7 @@ public class SmartBannerTests extends NewTestTemplate {
         "Smart banner is closed"
     );
 
-    if (Configuration.getPlatform().equals("ANDROID")) {
+    if ("ANDROID".equals(Configuration.getPlatform())) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;

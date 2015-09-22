@@ -50,7 +50,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private void typeInPassword(String pass) {
     wait.forElementVisible(password);
     password.clear();
-    System.out.println("[DEBUG]" + pass);
     password.sendKeys(pass);
     PageObjectLogging.log("typeInUserPassword", "password typed", true);
   }

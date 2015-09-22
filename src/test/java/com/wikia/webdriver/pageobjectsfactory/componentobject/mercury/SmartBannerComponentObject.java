@@ -48,7 +48,7 @@ public class SmartBannerComponentObject extends BasePageObject {
   }
 
   public boolean isSmartBannerVisible() {
-    return !smartBanner.getCssValue("display").equals("none");
+    return !"none".equals(smartBanner.getCssValue("display"));
   }
 
   public boolean isSmartBannerColorCorrect(String color) {

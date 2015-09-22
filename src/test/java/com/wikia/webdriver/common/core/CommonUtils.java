@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.io.FileUtils;
@@ -47,7 +48,7 @@ public class CommonUtils {
       out.flush();
       out.close();
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new TestEnvInitFailedException();
     }
   }
 
@@ -58,7 +59,7 @@ public class CommonUtils {
     try {
       FileUtils.deleteDirectory(new File(dirName));
     } catch (IOException e) {
-      PageObjectLogging.log("deleteDirectory", e.getMessage(), false);
+      PageObjectLogging.log("deleteDirectory", e, false);
     }
   }
 
@@ -70,14 +71,14 @@ public class CommonUtils {
       new File(fileName).mkdir();
       System.out.println("directory " + fileName + " created");
     } catch (SecurityException e) {
-      throw new RuntimeException(e);
+      throw new TestEnvInitFailedException();
     }
   }
 
   public static String getAbsolutePathForFile(String relativePath) {
     File fileCheck = new File(relativePath);
     if (!fileCheck.isFile()) {
-      throw new RuntimeException("file " + relativePath + " doesn't exists");
+      throw new TestEnvInitFailedException("file " + relativePath + " doesn't exists");
     }
     return fileCheck.getAbsolutePath();
   }
@@ -99,13 +100,13 @@ public class CommonUtils {
       HttpEntity entity = response.getEntity();
       return EntityUtils.toString(entity);
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("sendPost", e.getMessage(), false);
+      PageObjectLogging.log("sendPost", e, false);
       return null;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("sendPost", e.getMessage(), false);
+      PageObjectLogging.log("sendPost", e, false);
       return null;
     } catch (IOException e) {
-      PageObjectLogging.log("sendPost", e.getMessage(), false);
+      PageObjectLogging.log("sendPost", e, false);
       return null;
     }
   }

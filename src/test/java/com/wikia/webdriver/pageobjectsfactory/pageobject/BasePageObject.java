@@ -93,11 +93,11 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-        + cssSelecotr + "')).mouseenter()");
+                      + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOverInArticleIframe", e.getMessage(), false);
+      PageObjectLogging.log("mouseOverInArticleIframe", e, false);
     }
   }
 
@@ -216,7 +216,8 @@ public class BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
       js.executeScript("var x = $(arguments[0]);"
-          + "window.scroll(0,parseInt(x.offset().top - 60));", driver.findElement(elementBy));
+                       + "window.scroll(0,parseInt(x.offset().top - 60));",
+                       driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -300,7 +301,7 @@ public class BasePageObject {
         windows = driver.getWindowHandles().toArray();
         sumDelay += 500;
       } catch (InterruptedException e) {
-        PageObjectLogging.log(windowName, e.getMessage(), false);
+        PageObjectLogging.log(windowName, e, false);
       }
       if (sumDelay > 5000) {
         PageObjectLogging.log(windowName, comment, false);
@@ -335,7 +336,7 @@ public class BasePageObject {
     int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem
-        + "].setAttribute('class', '" + classWithoutHidden + "');");
+                      + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
@@ -376,7 +377,7 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
       String attribute, String value) {
     waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-        value));
+                                                                               value));
   }
 
   public void waitForStringInURL(String givenString) {
@@ -444,7 +445,7 @@ public class BasePageObject {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
     PageObjectLogging.log("norifications_showNotifications",
-        "show notifications by adding 'show' class to element", true, driver);
+                          "show notifications by adding 'show' class to element", true, driver);
   }
 
   /**
@@ -512,7 +513,7 @@ public class BasePageObject {
       connection.disconnect();
       return status;
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
   }
 
@@ -536,7 +537,7 @@ public class BasePageObject {
           break;
         }
       } catch (InterruptedException e) {
-        throw new RuntimeException(e);
+        throw new WebDriverException(e);
       }
     }
     Assertion.assertEquals(statusCode, desiredStatus);

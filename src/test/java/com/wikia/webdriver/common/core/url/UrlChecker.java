@@ -21,18 +21,7 @@ public class UrlChecker {
     );
   }
 
-  /**
-   * This method checks that URL equals current URL and logs result
-   * The method is case-insensitive 
-   */
-  public static void isUrlEqualToCurrentUrl(WebDriver driver, String url) {
-    String currentUrl = driver.getCurrentUrl().toLowerCase();
-    url = url.toLowerCase();
-    PageObjectLogging.log(
-        "Log Url",
-        "Url " + url + " is equal to current Url " + currentUrl,
-        "Url " + url + " isn't equal to current Url " + currentUrl,
-        currentUrl.equals(url)
-    );
+  public static boolean isUrlEqualToCurrentUrl(WebDriver driver, String url) {
+    return driver.getCurrentUrl().equalsIgnoreCase(url);
   }
 }
