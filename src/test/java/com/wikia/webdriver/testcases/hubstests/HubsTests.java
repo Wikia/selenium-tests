@@ -109,6 +109,7 @@ public class HubsTests extends NewTestTemplate {
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
+  @RelatedIssue(issueID = "QAART-677", comment = "Automated test needs updating. Please test manually")
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
   @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please check that "
                                               + "language button redirects to proper java homepage")
