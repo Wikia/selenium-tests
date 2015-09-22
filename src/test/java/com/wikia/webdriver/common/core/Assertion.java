@@ -160,7 +160,7 @@ public class Assertion extends Assert {
    * This method checks that URL equals current URL and logs result The method is case-insensitive
    */
   public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
-    String currentUrl = driver.getCurrentUrl().toLowerCase();
+    String currentUrl = driver.getCurrentUrl();
     PageObjectLogging.log(
         "Log Url",
         "Url " + url + " is equal to current Url " + currentUrl,
