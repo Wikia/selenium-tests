@@ -34,12 +34,12 @@ public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
     for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {
-      wikiPage.checkTopLeaderboard();
-      wikiPage.checkMedrec();
-      wikiPage.checkSkin(expectedAdSkinLeftPartPath,
-                         expectedAdSkinRightPartPath,
-                         backgroundColor,
-                         middleColor);
+      wikiPage.verifyTopLeaderboard();
+      wikiPage.verifyMedrec();
+      wikiPage.verifySkin(expectedAdSkinLeftPartPath,
+                          expectedAdSkinRightPartPath,
+                          backgroundColor,
+                          middleColor);
     }
   }
 

@@ -22,6 +22,6 @@ public class TestIncontentBoxad extends TemplateNoFirstLoad {
                                                 Dimension windowResolution) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-    wikiPage.checkIncontentBoxad();
+    wikiPage.verifyIncontentBoxad();
   }
 }
