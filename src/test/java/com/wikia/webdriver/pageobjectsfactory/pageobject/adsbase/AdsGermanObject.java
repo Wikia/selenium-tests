@@ -157,7 +157,7 @@ public class AdsGermanObject extends AdsBaseObject {
   }
 
   private boolean hasSkin(WebElement element, String elementSelector) {
-    if (isScriptPresentInElement(element, JS_SKIN_CALL)) {
+    if (checkScriptPresentInElement(element, JS_SKIN_CALL)) {
       PageObjectLogging.log("Found skin call", "skin call found in " + elementSelector, true);
       return true;
     }
