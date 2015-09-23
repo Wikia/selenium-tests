@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.PortableInfobox;
 import com.wikia.webdriver.common.core.Assertion;
 
 import org.openqa.selenium.WebDriver;
@@ -74,8 +73,7 @@ public class PortableInfoboxObject extends BasePageObject {
   public String getExternalLinkName(int index) {
     Assertion.assertFalse(externalLinks.isEmpty());
     wait.forElementVisible(externalLinks.get(index));
-    String externalLinkName = externalLinks.get(index).getText();
-    return externalLinkName;
+    return externalLinks.get(index).getText();
   }
 
   public String getUrlFromExternalLinkaAfterPageIsLoaded() {
