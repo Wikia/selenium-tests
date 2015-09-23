@@ -22,6 +22,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement mainImage;
   @FindBy(css= ".portable-infobox .pi-hero-title")
   private WebElement title;
+  @FindBy(css= ".portable-infobox .pi-title")
+  private WebElement titleSmallImage;
   @FindBy(css= ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
   @FindBy(css=".article-content .collapsed")
@@ -40,7 +42,6 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement videoCaption;
   @FindBy(css=".pi-title img")
   private WebElement imageInTitle;
-
   @FindBy(css =".portable-infobox .new")
   private List<WebElement> internalLinksToEmptyArticle;
   @FindBy(css = ".portable-infobox a[href*='/wiki/']")
@@ -63,6 +64,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> orderedLists;
   @FindBy(css = ".pi-header")
   private List<WebElement> headers;
+  @FindBy(css = ".portable-infobox .pi-image img")
+  private List<WebElement> images;
 
   public PortableInfoboxObject(WebDriver driver) {
     super(driver);
@@ -72,13 +75,11 @@ public class PortableInfoboxObject extends BasePageObject {
     Assertion.assertFalse(externalLinks.isEmpty());
     wait.forElementVisible(externalLinks.get(index));
     String externalLinkName = externalLinks.get(index).getText();
-    System.out.println(externalLinkName);
     return externalLinkName;
   }
 
   public String getUrlFromExternalLinkaAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);
-    System.out.println(driver.getCurrentUrl());
     return driver.getCurrentUrl();
   }
 
@@ -114,6 +115,7 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject clickVideo() {
+    wait.forElementVisible(video);
     video.click();
     return this;
   }
@@ -129,9 +131,15 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject isTitleVisible() {
+  public PortableInfoboxObject isTitleOverImageVisible() {
     wait.forElementVisible(title);
     Assertion.assertEquals(isElementOnPage(title), true);
+    return this;
+  }
+
+  public PortableInfoboxObject isTitleAboveImageVisible() {
+    wait.forElementVisible(titleSmallImage);
+    Assertion.assertEquals(isElementOnPage(titleSmallImage), true);
     return this;
   }
 
@@ -170,26 +178,8 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject verifyDataItemsVisibility() {
-    Assertion.assertFalse(dataLabels.isEmpty());
-    Assertion.assertFalse(dataValues.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxObject verifyLinksVisibility() {
-    //Assertion.assertFalse(internalLinks.isEmpty());
-    Assertion.assertFalse(externalLinks.isEmpty());
-    //Assertion.assertFalse(internalLinksToEmptyArticle.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxObject verifyReferencesVisibility() {
-    Assertion.assertFalse(references.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String URL) {
-    Assertion.assertStringContains(URL, name);
+  public PortableInfoboxObject isHeroImageCentered() {
+    Assertion.assertEquals(images.get(0).getCssValue("text-align"), "center");
     return this;
   }
 
@@ -215,6 +205,27 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject areHeadersVisible() {
     Assertion.assertFalse(headers.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject verifyDataItemsVisibility() {
+    Assertion.assertFalse(dataLabels.isEmpty());
+    Assertion.assertFalse(dataValues.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject verifyLinksVisibility() {
+    Assertion.assertFalse(externalLinks.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject verifyReferencesVisibility() {
+    Assertion.assertFalse(references.isEmpty());
+    return this;
+  }
+
+  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String URL) {
+    Assertion.assertStringContains(URL, name);
     return this;
   }
 

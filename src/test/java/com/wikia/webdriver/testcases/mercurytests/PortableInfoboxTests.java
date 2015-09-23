@@ -24,7 +24,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
 
-  //TC01
   @Test(groups = {"MercuryPortableInfoboxTest_001", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_001_VerifyElementsVisible() {
     new ArticlePageObject(driver)
@@ -32,7 +31,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     new PortableInfoboxObject(driver)
         .isMainImageVisible()
-        .isTitleVisible()
+        .isTitleOverImageVisible()
         .isImageInTitleNotVisible()
         .clickExpandButton()
         .verifyDataItemsVisibility()
@@ -41,7 +40,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areHeadersVisible();
   }
 
-  //TC02
   @Test(groups = {"MercuryPortableInfoboxTest_002", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_002_VerifyCollapsing() {
     new ArticlePageObject(driver)
@@ -61,7 +59,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
-  //TC03
   @Test(groups = {"MercuryPortableInfoboxTest_003", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_003_VerifyExternalRedirecting() {
     new ArticlePageObject(driver)
@@ -81,7 +78,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyExternalLinkNameAndURL(externalLinkName, externalURL);
   }
 
-  //TC04
   @Test(groups = {"MercuryPortableInfoboxTest_004", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_004_VerifyTabberVisibility() {
     new ArticlePageObject(driver)
@@ -92,7 +88,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isImageCaptionInTabberVisible();
   }
 
-  //TC05
   @Test(groups = {"MercuryPortableInfoboxTest_005", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_005_VerifyLightboxPresence() {
     new ArticlePageObject(driver)
@@ -102,10 +97,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickMainImage()
         .isLightboxOpened()
         .closeLightbox()
-        .isTitleVisible();
+        .isTitleOverImageVisible();
   }
 
-  //TC06
   @Test(groups = {"MercuryPortableInfoboxTest_006", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_006_VerifyListsMargin() {
     new ArticlePageObject(driver)
@@ -118,7 +112,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareListsAndDataValuesMargin();
   }
 
-  //TC07
+  @Test(groups = {"MercuryPortableInfoboxTest_007", "MercuryPortableInfoboxTests"})
   public void MercuryPortableInfoboxTest_007_VideoInDataFields() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -130,4 +124,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickVideo()
         .isLightboxOpened();
   }
+
+  @Test(groups = {"MercuryPortableInfoboxTest_008", "MercuryPortableInfoboxTests"})
+  public void MercuryPortableInfoboxTest_008_SmallImages() {
+    new ArticlePageObject(driver)
+        .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_2);
+
+    new PortableInfoboxObject(driver)
+        .isTitleAboveImageVisible()
+        .isHeroImageCentered();
+  }
+
 }
