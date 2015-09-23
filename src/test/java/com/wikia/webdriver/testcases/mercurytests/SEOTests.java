@@ -164,4 +164,42 @@ public class SEOTests extends NewTestTemplate {
     section.clickOnMainPageLink();
     Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
   }
+
+  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_003_MetaTags_Robots_CategoryToMainPage() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject category = new CuratedContentPageObject(driver);
+    category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
+
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    category.clickOnMainPageLink();
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+  }
+
+  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_004_MetaTags_Robots_MainPageToSection() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
+    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+  }
+
+  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_005_MetaTags_Robots_MainPageToCategory() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
+    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+  }
 }
