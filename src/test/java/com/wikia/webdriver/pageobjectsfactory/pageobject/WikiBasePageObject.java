@@ -547,7 +547,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
 
-  public void :qverifyUserLoggedIn(final String userName) {
+  public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Created by qaga on 2015-09-16.
+ * @ownership Social
  */
 public class NewAuthModal {
 
@@ -19,17 +19,19 @@ public class NewAuthModal {
   private WebElement passwordField;
   @FindBy(css = "#loginSubmit")
   private WebElement signInButton;
+  @FindBy(css = ".auth-modal iframe")
+  private WebElement iFrame;
 
   private WebDriver webDriver;
 
-  public NewAuthModal(WebDriver webdriver){
-    this.webDriver = webdriver;
+  public NewAuthModal(WebDriver webDriver){
+    this.webDriver = webDriver;
 
-    PageFactory.initElements(webdriver, this);
+    PageFactory.initElements(webDriver, this);
   }
 
   private void switchToFrame(){
-    webDriver.switchTo().frame(webDriver.findElement(By.cssSelector(".auth-modal iframe")));
+    webDriver.switchTo().frame(iFrame);
   }
 
   private void switchBack(){
@@ -38,9 +40,9 @@ public class NewAuthModal {
 
   public boolean isOpened(){
     switchToFrame();
-    newAuthModal.isDisplayed();
+    boolean isOpenedResult = newAuthModal.isDisplayed();
     switchBack();
-    return true;
+    return isOpenedResult;
   }
 
   public void login(String username, String password){
