@@ -1,4 +1,7 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
+package com.wikia.webdriver.common.core;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -6,10 +9,13 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
-public class SEOPageObject extends BasePageObject {
+public class SEOUtils extends BasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -27,8 +33,10 @@ public class SEOPageObject extends BasePageObject {
   private WebElement ogSiteName;
   @FindBy(css = "link[rel='canonical']")
   private WebElement canonicalUrl;
+  @FindBy(css = "meta[name='robots']")
+  private WebElement robots;
 
-  public SEOPageObject(WebDriver driver) {
+  public SEOUtils(WebDriver driver) {
     super(driver);
   }
 
@@ -105,5 +113,19 @@ public class SEOPageObject extends BasePageObject {
       throw new WebDriverException("Expected String but got null");
     }
     return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
+  }
+
+  public boolean isRobots(List<String> expectedAttributes) {
+    String[] currentAttributes = robots.getAttribute("content").split("[, ]+");
+
+    if (currentAttributes.length != expectedAttributes.size()) {
+      PageObjectLogging.log(
+          "isRobots",
+          "Number of current attributes is different than expected",
+          false);
+      return false;
+    }
+
+    return Arrays.asList(currentAttributes).containsAll(expectedAttributes);
   }
 }

@@ -1,14 +1,20 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.SEOUtils;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,20 +22,24 @@ import java.util.concurrent.TimeUnit;
  */
 public class SEOTests extends NewTestTemplate {
 
+  private static final List<String> ROBOTS_TAG_ATTRIBUTES_INDEX =
+      Arrays.asList("index", "follow");
+  private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX =
+      Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki("muppet");
   }
 
   // SEOT01
   @RelatedIssue(issueID = "HG-671")
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
+    wikiURL = urlBuilder.getUrlForWiki("muppet");
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    SEOPageObject seo = new SEOPageObject(driver);
+    SEOUtils seo = new SEOUtils(driver);
     seo.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
 
     // Uncomment after issue is fixed - related to HG-668
@@ -141,5 +151,17 @@ public class SEOTests extends NewTestTemplate {
         "is wrong",
         seo.isOgTypeArticle()
     );*/
+  }
+
+  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_002_MetaTags_Robots_SectionToMainPage() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject section = new CuratedContentPageObject(driver);
+    section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
+
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    section.clickOnMainPageLink();
+    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
   }
 }
