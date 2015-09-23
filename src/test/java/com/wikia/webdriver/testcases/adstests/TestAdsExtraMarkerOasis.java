@@ -14,6 +14,8 @@ import org.testng.annotations.Test;
  */
 public class TestAdsExtraMarkerOasis extends TemplateNoFirstLoad {
 
+  private static final int TIMEOUT_SEC = 30;
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "AdsExtraMarkerOasis",
@@ -25,7 +27,7 @@ public class TestAdsExtraMarkerOasis extends TemplateNoFirstLoad {
                                   final String message) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     final AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    new WebDriverWait(driver, 30).until(new ExpectedCondition<Boolean>() {
+    new WebDriverWait(driver, TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver driver) {
         return wikiPage.getBrowserLogs(adType).toString().contains(message);
