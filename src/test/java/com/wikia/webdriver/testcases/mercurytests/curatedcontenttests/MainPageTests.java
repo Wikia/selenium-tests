@@ -450,7 +450,7 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006")
+  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
