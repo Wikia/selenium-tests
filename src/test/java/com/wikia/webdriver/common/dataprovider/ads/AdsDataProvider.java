@@ -376,7 +376,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] extraMarker() {
+  public static Object[][] adsExtraMarkerOasis() {
     return new Object[][]{
         {
             "adtest",
