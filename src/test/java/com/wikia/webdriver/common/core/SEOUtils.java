@@ -1,21 +1,28 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * @ownership: Content X-Wing
+ *
+ * This class serves to perform search engine optimization tests
+ * The class methods can be used to verify meta tags attributes
  */
-public class SEOUtils extends BasePageObject {
+public class SEOUtils {
+
+  private final Wait wait;
+  private WebDriver driver;
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -37,7 +44,8 @@ public class SEOUtils extends BasePageObject {
   private WebElement robots;
 
   public SEOUtils(WebDriver driver) {
-    super(driver);
+    this.wait = new Wait(driver);
+    PageFactory.initElements(driver, this);
   }
 
   public String getDescription() throws WebDriverException {
@@ -115,17 +123,16 @@ public class SEOUtils extends BasePageObject {
     return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 
-  public boolean isRobots(List<String> expectedAttributes) {
+  public boolean isValuePresentInRobotsMetaTag(List<String> expectedAttributes) {
     String[] currentAttributes = robots.getAttribute("content").split("[, ]+");
 
     if (currentAttributes.length != expectedAttributes.size()) {
       PageObjectLogging.log(
-          "isRobots",
+          "isValuePresentInRobotsMetaTag",
           "Number of current attributes is different than expected",
           false);
       return false;
     }
-
     return Arrays.asList(currentAttributes).containsAll(expectedAttributes);
   }
 }

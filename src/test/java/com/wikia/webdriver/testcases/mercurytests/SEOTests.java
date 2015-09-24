@@ -40,7 +40,7 @@ public class SEOTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
     SEOUtils seo = new SEOUtils(driver);
-    seo.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
+    leftNav.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
 
     // Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(
