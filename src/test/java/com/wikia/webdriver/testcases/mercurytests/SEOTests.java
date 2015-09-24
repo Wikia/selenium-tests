@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class SEOTests extends NewTestTemplate {
 
-  private static final List<String> ROBOTS_TAG_ATTRIBUTES_INDEX =
+  private static final List<String> ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW =
       Arrays.asList("index", "follow");
-  private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX =
+  private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
 
@@ -160,9 +160,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
 
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
     section.clickOnMainPageLink();
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
   }
 
   @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
@@ -172,9 +174,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
     category.clickOnMainPageLink();
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
   }
 
   @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
@@ -184,9 +188,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
     mainPage.clickOnCuratedContentElementByIndex(0);
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
   }
 
   @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
@@ -196,10 +202,12 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_INDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
     mainPage.clickOnCuratedContentElementByIndex(0);
-    Assertion.assertTrue(seoUtils.isRobots(ROBOTS_TAG_ATTRIBUTES_NOINDEX));
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
   }
 }

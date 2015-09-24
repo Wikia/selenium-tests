@@ -16,8 +16,8 @@ import java.util.List;
 /**
  * @ownership: Content X-Wing
  *
- * This class serves to perform search engine optimization tests
- * The class methods can be used to verify meta tags attributes
+ * This class serves to perform search engine optimization tests The class methods can be used to
+ * verify meta tags attributes
  */
 public class SEOUtils {
 
@@ -123,12 +123,12 @@ public class SEOUtils {
     return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
   }
 
-  public boolean isValuePresentInRobotsMetaTag(List<String> expectedAttributes) {
+  public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
     String[] currentAttributes = robots.getAttribute("content").split("[, ]+");
 
     if (currentAttributes.length != expectedAttributes.size()) {
       PageObjectLogging.log(
-          "isValuePresentInRobotsMetaTag",
+          "isAttributesListPresentInRobotsMetaTag",
           "Number of current attributes is different than expected",
           false);
       return false;
