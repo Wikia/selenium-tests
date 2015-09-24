@@ -22,14 +22,14 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "dfpParamsSyntheticOasis",
-      groups = {"TestDfpParamsPresent_GeoEdgeFree", "Ads"}
+      groups = {"TestDfpParamsPresentSyntheticOasis", "Ads"}
   )
   public void testDfpParamsPresentSyntheticOasis(String wikiName,
-                                               String article,
-                                               String adUnit,
-                                               String slot,
-                                               List<String> pageParams,
-                                               List<String> slotParams) {
+                                                 String article,
+                                                 String adUnit,
+                                                 String slot,
+                                                 List<String> pageParams,
+                                                 List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
@@ -37,17 +37,18 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
 
   }
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "dfpParamsOasis",
-      groups = {"TestDfpParamsPresent_GeoEdgeFree", "Ads"}
+      groups = {"TestDfpParamsPresentOasis", "Ads"}
   )
   public void testDfpParamsPresentOasis(String wikiName,
-                                               String article,
-                                               String adUnit,
-                                               String slot,
-                                               List<String> pageParams,
-                                               List<String> slotParams) {
+                                        String article,
+                                        String adUnit,
+                                        String slot,
+                                        List<String> pageParams,
+                                        List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");

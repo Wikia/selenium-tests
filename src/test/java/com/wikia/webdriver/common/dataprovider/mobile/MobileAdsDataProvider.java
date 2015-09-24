@@ -49,35 +49,35 @@ public class MobileAdsDataProvider {
     };
   }
 
-    @DataProvider
-    public static Object[][] dfpParamsSynthetic() {
-        return new Object[][]{
-            {
-                "adtest",
-                "SyntheticTests/DfpParams",
-                "wka.life/_adtest//article",
-                "MOBILE_TOP_LEADERBOARD",
-                Arrays.asList(
-                    "\"s0\":\"life\"",
-                    "\"s1\":\"_adtest\"",
-                    "\"s2\":\"article\"",
-                    "\"dmn\":\"wikiacom\"",
-                    "\"hostpre\":\"",
-                    "\"skin\":\"mercury\"",
-                    "\"wpage\":\"synthetictests/dfpparams\"",
-                    "\"ref\":\"direct\"",
-                    "\"lang\":\"en\"",
-                    "\"skin\":\"mercury\"",
-                    "\"esrb\":\"teen\""
+  @DataProvider
+  public static Object[][] dfpParamsSynthetic() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/DfpParams",
+            "wka.life/_adtest//article",
+            "MOBILE_TOP_LEADERBOARD",
+            Arrays.asList(
+                "\"s0\":\"life\"",
+                "\"s1\":\"_adtest\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"",
+                "\"skin\":\"mercury\"",
+                "\"wpage\":\"synthetictests/dfpparams\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"skin\":\"mercury\"",
+                "\"esrb\":\"teen\""
 
-                ),
-                Arrays.asList(
-                    "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                    "\"src\":\"mobile\""
-                )
-            }
-        };
-    }
+            ),
+            Arrays.asList(
+                "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+                "\"src\":\"mobile\""
+            )
+        }
+    };
+  }
 
   @DataProvider
   public static Object[][] dfpParams() {
@@ -115,32 +115,32 @@ public class MobileAdsDataProvider {
             "Dark_Magician",
             "wka.ent/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
-              Arrays.asList(
-                  "\"s0\":\"ent\"",
-                  "\"s0v\":\"comics\"",
-                  "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
-                  "\"s1\":\"_yugioh\"",
-                  "\"s2\":\"article\"",
-                  "\"dmn\":\"wikiacom\"",
-                  "\"hostpre\":\"yugioh\"",
-                  "\"ab\":[",
-                  "\"dmn\":\"",
-                  "\"skin\":\"mercury\"",
-                  "\"ar\":\"4:3\"",
-                  "\"artid\":\"278\"",
-                  "\"wpage\":\"dark_magician\"",
-                  "\"ref\":\"direct\"",
-                  "\"lang\":\"en\"",
-                  "\"pv\":\"1\"",
-                  "\"top\":\"1k\"",
-                  "\"esrb\":[\"everyone\"]",
-                  "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                  "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                  "\"media\":[\"tv\",\"cards\"]",
-                  "\"pform\":[\"pc\",\"psp\"]",
-                  "\"sex\":[\"m\"]"
+            Arrays.asList(
+                "\"s0\":\"ent\"",
+                "\"s0v\":\"comics\"",
+                "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
+                "\"s1\":\"_yugioh\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"yugioh\"",
+                "\"ab\":[",
+                "\"dmn\":\"",
+                "\"skin\":\"mercury\"",
+                "\"ar\":\"4:3\"",
+                "\"artid\":\"278\"",
+                "\"wpage\":\"dark_magician\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"pv\":\"1\"",
+                "\"top\":\"1k\"",
+                "\"esrb\":[\"everyone\"]",
+                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
+                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
+                "\"media\":[\"tv\",\"cards\"]",
+                "\"pform\":[\"pc\",\"psp\"]",
+                "\"sex\":[\"m\"]"
 
-              ),
+            ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
