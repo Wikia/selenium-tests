@@ -59,7 +59,6 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName);
   }
 
-
   @Test(groups = {"ForcedLogin_002_video", "Media"})
   public void ForcedLogin_002_video() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
