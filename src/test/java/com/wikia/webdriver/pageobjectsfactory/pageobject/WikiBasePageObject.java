@@ -13,7 +13,7 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.NewAuthModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -187,8 +187,8 @@ public class WikiBasePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public NewAuthModal getNewAuthModal(){
-    return new NewAuthModal(driver);
+  public AuthModal getNewAuthModal(){
+    return new AuthModal(driver);
   }
 
   public String getWikiUrl() {

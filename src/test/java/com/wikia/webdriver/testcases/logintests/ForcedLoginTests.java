@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.NewAuthModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -49,7 +49,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifySpecialPage();
     specialPage.addPhoto();
-    NewAuthModal newAuthModal = specialPage.getNewAuthModal();
+    AuthModal newAuthModal = specialPage.getNewAuthModal();
     Assert.assertTrue(newAuthModal.isOpened());
 
     newAuthModal.login(credentials.userName, credentials.password);
@@ -79,7 +79,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
-    NewAuthModal newAuthModal = specialPage.getNewAuthModal();
+    AuthModal newAuthModal = specialPage.getNewAuthModal();
     Assert.assertTrue(newAuthModal.isOpened());
 
     newAuthModal.login(credentials.userName, credentials.password);
@@ -135,7 +135,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
     edit.clickPhotoButton();
-    NewAuthModal newAuthModal = edit.getNewAuthModal();
+    AuthModal newAuthModal = edit.getNewAuthModal();
     Assert.assertTrue(newAuthModal.isOpened());
 
     newAuthModal.login(credentials.userName, credentials.password);

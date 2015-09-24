@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * @ownership Social
  */
-public class NewAuthModal {
+public class AuthModal {
 
   @FindBy(css = ".auth.desktop.signin-page")
   private WebElement newAuthModal;
@@ -23,7 +23,7 @@ public class NewAuthModal {
 
   private WebDriver webDriver;
 
-  public NewAuthModal(WebDriver webDriver){
+  public AuthModal(WebDriver webDriver){
     this.webDriver = webDriver;
 
     PageFactory.initElements(webDriver, this);
