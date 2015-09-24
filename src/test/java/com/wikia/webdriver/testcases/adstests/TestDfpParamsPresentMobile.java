@@ -21,31 +21,32 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParamsSynthetic",
-      groups = {"MobileAds", "TestDfpParamsPresentMobile_GeoEdgeFree"}
+      groups = {"MobileAds", "TestDfpParamsPresentSyntheticMercury"}
   )
   public void testDfpParamsPresentSyntheticMercury(String wikiName,
-                                                     String article,
-                                                     String adUnit,
-                                                     String slot,
-                                                     List<String> pageParams,
-                                                     List<String> slotParams) {
+                                                   String article,
+                                                   String adUnit,
+                                                   String slot,
+                                                   List<String> pageParams,
+                                                   List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "mobile");
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
+
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParams",
-      groups = {"MobileAds", "TestDfpParamsPresentMobile_GeoEdgeFree"}
+      groups = {"MobileAds", "TestDfpParamsPresentMercury"}
   )
   public void testDfpParamsPresentMercury(String wikiName,
-                                                     String article,
-                                                     String adUnit,
-                                                     String slot,
-                                                     List<String> pageParams,
-                                                     List<String> slotParams) {
+                                          String article,
+                                          String adUnit,
+                                          String slot,
+                                          List<String> pageParams,
+                                          List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "mobile");
