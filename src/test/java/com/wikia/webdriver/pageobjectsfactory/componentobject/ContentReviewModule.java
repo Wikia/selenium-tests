@@ -14,6 +14,8 @@ public class ContentReviewModule extends WikiBasePageObject {
 
     @FindBy(css = ".content-review-module")
     private WebElement contentReviewModule;
+    @FindBy(css = "#content-review-module-submit")
+    private WebElement submitForReviewLink;
 
     public ContentReviewModule(WebDriver driver) {
         super(driver);
@@ -21,10 +23,21 @@ public class ContentReviewModule extends WikiBasePageObject {
 
     public boolean isModuleVisible(){
         try {
-            wait.forElementVisible(contentReviewModule, 10, 1);
+            wait.forElementVisible(contentReviewModule, 5, 1);
             return true;
         }catch (TimeoutException e){
             return false;
         }
+    }
+
+    public boolean isSubmitLinkVisible() {
+        boolean isLinkVisible = false;
+        try {
+            wait.forElementVisible(submitForReviewLink, 3, 1);
+            isLinkVisible = true;
+        } catch(TimeoutException e) {
+            isLinkVisible = false;
+        }
+        return isModuleVisible() && isLinkVisible;
     }
 }

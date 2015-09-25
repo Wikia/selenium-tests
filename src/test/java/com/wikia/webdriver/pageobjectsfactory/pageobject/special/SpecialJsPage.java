@@ -15,41 +15,41 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  */
 public class SpecialJsPage extends WikiBasePageObject {
 
-  @FindBy(css = ".source-javascript")
-  private WebElement scriptArea;
+    @FindBy(css = ".source-javascript")
+    private WebElement scriptArea;
 
-  private ContentReviewModule contentReviewModule;
+    private ContentReviewModule contentReviewModule;
 
-  public SpecialJsPage(WebDriver driver) {
-    super(driver);
-  }
-
-  /**
-   * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
-   */
-  public SpecialJsPage open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + String.format("mediawiki:%s.js", TestContext.getCurrentMethodName()));
-
-    return this;
-  }
-
-  public SpecialJsPage open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + String.format("mediawiki:%s.js", articleTitle));
-    return this;
-  }
-
-  public String getScriptCoentent() {
-    wait.forElementVisible(scriptArea);
-
-    return scriptArea.getText();
-  }
-
-  public ContentReviewModule getReviewModule() {
-    if (contentReviewModule == null) {
-      contentReviewModule = new ContentReviewModule(driver);
+    public SpecialJsPage(WebDriver driver) {
+        super(driver);
     }
-    return contentReviewModule;
-  }
+
+    /**
+     * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
+     */
+    public SpecialJsPage open() {
+        getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+                + String.format("mediawiki:%s.js", TestContext.getCurrentMethodName()));
+
+        return this;
+    }
+
+    public SpecialJsPage open(String articleTitle) {
+        getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+                + String.format("mediawiki:%s.js", articleTitle));
+        return this;
+    }
+
+    public String getScriptCoentent() {
+        wait.forElementVisible(scriptArea);
+
+        return scriptArea.getText();
+    }
+
+    public ContentReviewModule getReviewModule() {
+        if (contentReviewModule == null) {
+            contentReviewModule = new ContentReviewModule(driver);
+        }
+        return contentReviewModule;
+    }
 }

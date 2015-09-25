@@ -85,6 +85,8 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement addTableLightbox;
   @FindBy(css = IMAGE_COMPONENT_CSS)
   private WebElement image;
+  @FindBy(css = "#wpApprove")
+  private WebElement autoApproveCheckbox;
 
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -214,7 +216,7 @@ public class VisualEditModePageObject extends EditMode {
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
     Assertion.assertNumber(widthCurrent, widthDesired, "width should be " + widthDesired
-        + " but is " + widthCurrent);
+            + " but is " + widthCurrent);
   }
 
   public void verifyVideoCaption(String captionDesired) {
@@ -394,7 +396,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyCategoryNotPresent(String category) {
     wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
-        category)));
+            category)));
     boolean categoryVisible = true;
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
@@ -439,7 +441,7 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
     PageObjectLogging.log("verifyBlockedUserMessage",
-        "blocked user message when attempting to create article verified", true);
+            "blocked user message when attempting to create article verified", true);
   }
 
   private void selectFromContextMenu(WebElement option) {
@@ -471,6 +473,12 @@ public class VisualEditModePageObject extends EditMode {
 
   public void startTracking() {
     jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
+  }
+
+  public VisualEditModePageObject clickAutoApproveCheckbox() {
+    wait.forElementVisible(autoApproveCheckbox);
+    autoApproveCheckbox.click();
+    return this;
   }
 
   public enum Components {
