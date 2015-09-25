@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -21,9 +20,9 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "dfpParamsSyntheticOasis",
-      groups = {"TestDfpParamsPresentSyntheticOasis", "Ads"}
+      groups = {"DfpParamsPresentSyntheticOasis", "Ads"}
   )
-  public void testDfpParamsPresentSyntheticOasis(String wikiName,
+  public void dfpParamsPresentSyntheticOasis(String wikiName,
                                                  String article,
                                                  String adUnit,
                                                  String slot,
@@ -40,9 +39,9 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "dfpParamsOasis",
-      groups = {"TestDfpParamsPresentOasis", "Ads"}
+      groups = {"DfpParamsPresentOasis", "Ads"}
   )
-  public void testDfpParamsPresentOasis(String wikiName,
+  public void dfpParamsPresentOasis(String wikiName,
                                         String article,
                                         String adUnit,
                                         String slot,
