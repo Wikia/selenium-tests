@@ -22,8 +22,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class SEOTests extends NewTestTemplate {
 
-  private static final List<String> ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW =
-      Arrays.asList("index", "follow");
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
@@ -160,11 +158,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
 
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
     section.clickOnMainPageLink();
-    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
   }
 
   @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
@@ -174,10 +172,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set not when supposed to");
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
     category.clickOnMainPageLink();
-    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet());
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
   }
 
   @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
@@ -187,11 +186,12 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
     mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
   }
 
   @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
@@ -201,12 +201,13 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
     mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
   }
 }

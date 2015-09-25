@@ -1,15 +1,12 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +18,6 @@ import java.util.List;
  * verify meta tags attributes
  */
 public class SEOUtils extends BasePageObject {
-
-  private WebDriver driver;
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
