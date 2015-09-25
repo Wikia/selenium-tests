@@ -21,18 +21,10 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement pInfoImage;
   @FindBy(css = ".pi-title")
   private WebElement pInfoTitle;
-  @FindBy(css = ".pi-header")
-  private List<WebElement> pInfoTitleH3;
+  @FindBy(css = ".pi-image img")
+  private WebElement pInfoImageTag;
   @FindBy(css = ".pi-item .external")
   private WebElement pInfoExternalLink;
-  @FindBy(css = ".pi-navigation a[href*='redlink']")
-  private List<WebElement> pInfoRedlLink;
-  @FindBy(css = "b")
-  private List<WebElement> boldElements;
-  @FindBy(css = "i")
-  private List<WebElement> italicElements;
-  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
-  private List<WebElement> pInfoInternalLinks;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
   @FindBy(css = ".portable-infobox")
@@ -41,10 +33,14 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement tabber;
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
-  @FindBy(css = ".pi-data-value ul li")
-  private List<WebElement> unorderedElementList;
-  @FindBy(css = ".pi-data-value ol li")
-  private List<WebElement> orderedElementList;
+  @FindBy(css = ".pi-image")
+  private WebElement imageWrapper;
+  @FindBy(css = ".pi-title")
+  private WebElement titleWrapper;
+  @FindBy(css = "body")
+  private WebElement bodyElement;
+  @FindBy(css = ".header-title")
+  private WebElement headerTitle;
   @FindBy(css = ".reference")
   private WebElement referenceElements;
   @FindBy(css = ".pi-data-label")
@@ -63,14 +59,22 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> navigationElements;
   @FindBy(css = ".pi-header")
   private List<WebElement> groupHeadersWrappers;
-  @FindBy(css = ".pi-image")
-  private WebElement imageWrapper;
-  @FindBy(css = ".pi-title")
-  private WebElement titleWrapper;
-  @FindBy(css = "body")
-  private WebElement bodyElement;
-  @FindBy(css = ".header-title")
-  private WebElement headerTitle;
+  @FindBy(css = "#articleCategories .category a")
+  private List<WebElement> categories;
+  @FindBy(css = ".pi-navigation a[href*='redlink']")
+  private List<WebElement> pInfoRedlLink;
+  @FindBy(css = "b")
+  private List<WebElement> boldElements;
+  @FindBy(css = "i")
+  private List<WebElement> italicElements;
+  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
+  private List<WebElement> pInfoInternalLinks;
+  @FindBy(css = ".pi-data-value ul li")
+  private List<WebElement> unorderedElementList;
+  @FindBy(css = ".pi-data-value ol li")
+  private List<WebElement> orderedElementList;
+  @FindBy(css = ".pi-header")
+  private List<WebElement> pInfoTitleH3;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -113,6 +117,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return driver.getCurrentUrl();
   }
 
+  public String getDataImageName() {
+    wait.forElementVisible(pInfoImageTag);
+    return pInfoImageTag.getAttribute("data-image-name");
+  }
+
   public PortableInfoboxPageObject clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
     pInfoExternalLink.click();
@@ -135,6 +144,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public CategoryPageObject clickCategoryLink() {
     wait.forElementVisible(categoryLinkInInfobox);
     scrollAndClick(categoryLinkInInfobox);
+    return new CategoryPageObject(driver);
+  }
+
+  public CategoryPageObject clickCategory(int index) {
+    wait.forElementVisible(categories.get(index));
+    scrollAndClick(categories.get(index));
     return new CategoryPageObject(driver);
   }
 
@@ -187,6 +202,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItem(int index) {
     compareFontSizes(itemValue, unorderedElementList.get(index));
+    return this;
+  }
+
+  public PortableInfoboxPageObject compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
+    Assertion.assertStringContains(imageName, categoryImageURL);
     return this;
   }
 
