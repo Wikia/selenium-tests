@@ -260,4 +260,23 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges().isInfoboxInsertedInEditorArea();
   }
+
+  @Test(groups = {"PortableInfoboxTests_020", "PortableInfoboxTests_2"})
+  public void infoboxImageOnCategoryPage() {
+    PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
+
+    String imageName = info
+        .open(PageContent.PORTABLE_INFOBOX02)
+        .getDataImageName();
+
+    String articleName = info.getHeaderText();
+    CategoryPageObject categoryPage = info.clickCategory(0);
+
+    String categoryImageURL = categoryPage.getPageImageURL(
+            categoryPage.getArticleIndexInGalleryByName(articleName)
+        );
+
+    info.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
+  }
+
 }
