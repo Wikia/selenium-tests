@@ -25,6 +25,9 @@ public class SEOTests extends NewTestTemplate {
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
+  private static final String ROBOTS_META_TAG_NOT_PRESENT_MESSAGE = "Robot Meta Tags are set when not supposed to";
+  private static final String ROBOTS_META_TAG_PRESENT_MESSAGE = "Robot Meta Tags are not set when supposed to";
+  private static final String ROBOTS_META_TAG_DIFFERENT_MESSAGE =  "Robot Meta Tags are different than expected";
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
@@ -158,11 +161,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
     section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
 
-    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
     section.clickOnMainPageLink();
-    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
   }
 
   @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
@@ -172,11 +175,11 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
-    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set not when supposed to");
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
     category.clickOnMainPageLink();
-    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
   }
 
   @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
@@ -186,12 +189,12 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
-    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
   }
 
   @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
@@ -201,13 +204,13 @@ public class SEOTests extends NewTestTemplate {
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
     mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
-    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are set when not supposed to");
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
-    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), "Robot Meta Tags are not set when supposed to");
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), "Robot Meta Tags are different than expected");
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
   }
 }
