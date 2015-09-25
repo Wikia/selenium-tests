@@ -39,10 +39,8 @@ public class CategoryPageObject extends WikiBasePageObject {
 
     public int getArticleIndexInGalleryByName(String articleName) {
         int index = -1;
-        for(int i=0; i<categoryGalleryItemsName.size(); i++)
-        {
-            if(articleName.equals(categoryGalleryItemsName.get(i).getText()))
-            {
+        for(int i=0; i<categoryGalleryItemsName.size(); i++) {
+            if(articleName.equals(categoryGalleryItemsName.get(i).getText())) {
                 index = i;
             }
         }
