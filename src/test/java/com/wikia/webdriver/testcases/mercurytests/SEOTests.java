@@ -177,8 +177,7 @@ public class SEOTests extends NewTestTemplate {
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW));
     category.clickOnMainPageLink();
-    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
-        ROBOTS_TAG_ATTRIBUTES_INDEX_FOLLOW));
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet());
   }
 
   @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})

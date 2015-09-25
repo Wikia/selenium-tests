@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -19,9 +20,8 @@ import java.util.List;
  * This class serves to perform search engine optimization tests The class methods can be used to
  * verify meta tags attributes
  */
-public class SEOUtils {
+public class SEOUtils extends BasePageObject {
 
-  private final Wait wait;
   private WebDriver driver;
 
   @FindBy(css = "meta[property='og:type']")
@@ -44,8 +44,7 @@ public class SEOUtils {
   private WebElement robots;
 
   public SEOUtils(WebDriver driver) {
-    this.wait = new Wait(driver);
-    PageFactory.initElements(driver, this);
+    super(driver);
   }
 
   public String getDescription() throws WebDriverException {
@@ -60,13 +59,6 @@ public class SEOUtils {
       throw new WebDriverException("Expected String but got null");
     }
     return ogType.getAttribute("content").contains("website");
-  }
-
-  public boolean isOgTypeArticle() throws WebDriverException {
-    if (ogType.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return ogType.getAttribute("content").contains("article");
   }
 
   public boolean isOgTitleWithWiki() throws WebDriverException {
@@ -115,24 +107,24 @@ public class SEOUtils {
     return !ogFbApp.getAttribute("content").isEmpty();
   }
 
-  public boolean isLinkRelCanonical() throws WebDriverException {
-    wait.forElementInViewPort(canonicalUrl);
-    if (canonicalUrl.getAttribute("href") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
+  public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
+    List<String> currentAttributes = Arrays.asList(robots.getAttribute("content").split("[, ]+"));
+
+    PageObjectLogging.log(
+      "Robots Meta Tag passed: " + expectedAttributes,
+      "Robots Meta Tag found on page: " + currentAttributes,
+      true
+    );
+
+    return currentAttributes.equals(expectedAttributes);
   }
 
-  public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
-    String[] currentAttributes = robots.getAttribute("content").split("[, ]+");
-
-    if (currentAttributes.length != expectedAttributes.size()) {
-      PageObjectLogging.log(
-          "isAttributesListPresentInRobotsMetaTag",
-          "Number of current attributes is different than expected",
-          false);
-      return false;
-    }
-    return Arrays.asList(currentAttributes).containsAll(expectedAttributes);
+  public boolean isRobotsMetaTagSet() {
+    PageObjectLogging.log(
+      "Robots Meta Tag",
+      "Checking if robots meta tag is present on page",
+      true
+    );
+    return isElementOnPage(robots);
   }
 }
