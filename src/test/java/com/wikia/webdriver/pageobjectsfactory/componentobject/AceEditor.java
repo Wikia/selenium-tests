@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,7 +40,9 @@ public class AceEditor extends WikiBasePageObject {
 
   private AceEditor sendContent(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
-    aceInputTextArea.sendKeys(cssText);
+    for(char character : cssText.toCharArray()){
+      aceInputTextArea.sendKeys((String.valueOf(character)));
+    }
     PageObjectLogging.log("sendCssText", "the following text was send to ace editor: " + cssText,
         true);
 
