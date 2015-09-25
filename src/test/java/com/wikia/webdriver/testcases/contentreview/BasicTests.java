@@ -10,9 +10,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
 
-/**
- * Created by Ludwik on 2015-09-23.
- */
 @Test(groups = "ContentReview")
 public class BasicTests extends NewTestTemplate {
 
