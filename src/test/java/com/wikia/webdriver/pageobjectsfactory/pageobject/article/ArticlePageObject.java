@@ -161,7 +161,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement viewEmbedMapButton;
 
   private PortableInfoboxPageObject portableInfobox;
-  private ContentReviewModule contentReviewModule;
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
@@ -194,13 +193,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     return this;
   }
 
-  public ContentReviewModule getReviewModule() {
-    if (contentReviewModule == null) {
-      contentReviewModule = new ContentReviewModule(driver);
-    }
-    return contentReviewModule;
-  }
-
   public String getAtricleTextRaw() {
     return pageContentContainer.getText();
 
@@ -221,6 +213,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(articleContent.getText(), content);
   }
 
+  public String getContent() {
+    wait.forElementVisible(articleContent);
+
+    return articleContent.getText();
+  }
 
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);
