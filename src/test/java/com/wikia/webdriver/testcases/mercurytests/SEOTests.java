@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing
  */
+@Test(groups = {"MercurySEOTests", "Mercury"})
 public class SEOTests extends NewTestTemplate {
 
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
@@ -36,7 +37,7 @@ public class SEOTests extends NewTestTemplate {
 
   // SEOT01
   @RelatedIssue(issueID = "HG-671")
-  @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
+  @Test(groups = "MercurySEOTest_001")
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
@@ -154,7 +155,7 @@ public class SEOTests extends NewTestTemplate {
     );*/
   }
 
-  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"}, enabled = false)
+  @Test(groups = "MercurySEOTest_002")
   public void MercurySEOTest_002_MetaTags_Robots_SectionToMainPage() {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
@@ -168,7 +169,7 @@ public class SEOTests extends NewTestTemplate {
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
   }
 
-  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"}, enabled = false)
+  @Test(groups = "MercurySEOTest_003")
   public void MercurySEOTest_003_MetaTags_Robots_CategoryToMainPage() {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
@@ -182,7 +183,7 @@ public class SEOTests extends NewTestTemplate {
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
   }
 
-  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"}, enabled = false)
+  @Test(groups = "MercurySEOTest_004")
   public void MercurySEOTest_004_MetaTags_Robots_MainPageToSection() {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
@@ -197,7 +198,7 @@ public class SEOTests extends NewTestTemplate {
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
   }
 
-  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"}, enabled = false)
+  @Test(groups = "MercurySEOTest_005")
   public void MercurySEOTest_005_MetaTags_Robots_MainPageToCategory() {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
