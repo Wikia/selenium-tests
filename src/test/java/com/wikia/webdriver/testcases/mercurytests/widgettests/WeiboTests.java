@@ -63,7 +63,7 @@ public class WeiboTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryWeiboWidgetTest_004")
+  @Test(groups = "MercuryWeiboWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
@@ -73,7 +73,7 @@ public class WeiboTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryWeiboWidgetTest_005")
+  @Test(groups = "MercuryWeiboWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryWeiboWidgetTest_005_isErrorPresent() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);

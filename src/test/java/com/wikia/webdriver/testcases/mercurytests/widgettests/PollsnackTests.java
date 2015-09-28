@@ -63,7 +63,7 @@ public class PollsnackTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPollsnackWidgetTest_004")
+  @Test(groups = "MercuryPollsnackWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
@@ -73,7 +73,7 @@ public class PollsnackTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPollsnackWidgetTest_005")
+  @Test(groups = "MercuryPollsnackWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_005_isErrorPresent() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
