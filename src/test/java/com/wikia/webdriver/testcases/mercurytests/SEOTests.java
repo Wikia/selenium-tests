@@ -207,6 +207,9 @@ public class SEOTests extends NewTestTemplate {
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
     mainPage.waitForLoadingSpinnerToFinish();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
