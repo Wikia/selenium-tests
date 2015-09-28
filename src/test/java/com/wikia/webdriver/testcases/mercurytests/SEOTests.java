@@ -1,14 +1,20 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.SEOUtils;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SEOPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,21 +22,26 @@ import java.util.concurrent.TimeUnit;
  */
 public class SEOTests extends NewTestTemplate {
 
+  private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
+      Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
+  private static final String ROBOTS_META_TAG_NOT_PRESENT_MESSAGE = "Robot Meta Tags are set when not supposed to";
+  private static final String ROBOTS_META_TAG_PRESENT_MESSAGE = "Robot Meta Tags are not set when supposed to";
+  private static final String ROBOTS_META_TAG_DIFFERENT_MESSAGE =  "Robot Meta Tags are different than expected";
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki("muppet");
   }
 
   // SEOT01
   @RelatedIssue(issueID = "HG-671")
   @Test(groups = {"MercurySEOTest_001", "MercurySEOTests", "Mercury"})
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
+    wikiURL = urlBuilder.getUrlForWiki("muppet");
     NavigationSideComponentObject leftNav = new NavigationSideComponentObject(driver);
-    SEOPageObject seo = new SEOPageObject(driver);
-    seo.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
+    SEOUtils seo = new SEOUtils(driver);
+    leftNav.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
 
     // Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(
@@ -141,5 +152,68 @@ public class SEOTests extends NewTestTemplate {
         "is wrong",
         seo.isOgTypeArticle()
     );*/
+  }
+
+  @Test(groups = {"MercurySEOTest_002", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_002_MetaTags_Robots_SectionToMainPage() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject section = new CuratedContentPageObject(driver);
+    section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
+
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
+    section.clickOnMainPageLink();
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
+  }
+
+  @Test(groups = {"MercurySEOTest_003", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_003_MetaTags_Robots_CategoryToMainPage() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject category = new CuratedContentPageObject(driver);
+    category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
+
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
+    category.clickOnMainPageLink();
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
+  }
+
+  @Test(groups = {"MercurySEOTest_004", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_004_MetaTags_Robots_MainPageToSection() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
+    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
+  }
+
+  @Test(groups = {"MercurySEOTest_005", "MercurySEOTests", "Mercury"})
+  public void MercurySEOTest_005_MetaTags_Robots_MainPageToCategory() {
+    SEOUtils seoUtils = new SEOUtils(driver);
+    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
+    CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
+    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+
+    Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
+    mainPage.clickOnCuratedContentElementByIndex(0);
+    mainPage.waitForLoadingSpinnerToFinish();
+    Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
+    Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
+        ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
   }
 }
