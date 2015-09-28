@@ -9,7 +9,7 @@ import java.util.Map;
 public class AdsContent {
 
   //HashMap with slots selector
-  public static Map<String, String> SLOTS_SELECTORS;
+  public static final Map<String, String> SLOTS_SELECTORS;
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
