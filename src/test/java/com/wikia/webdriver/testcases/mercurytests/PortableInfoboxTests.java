@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownshership: Content West-Wing
  */
-@Test(groups = "MercuryPortableInfoboxTests, Mercury")
+@Test(groups = {"MercuryPortableInfoboxTests", "Mercury"})
 public class PortableInfoboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
