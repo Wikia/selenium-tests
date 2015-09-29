@@ -133,7 +133,7 @@ public class PortableInfoboxObject extends BasePageObject {
   public PortableInfoboxObject isTitleOverImageVisible() {
     wait.forElementVisible(title);
     Assertion.assertEquals(isElementOnPage(title), true);
-    PageObjectLogging.log("Main image title", MercuryMessages.VISIBLE_MSG, true);
+    PageObjectLogging.log("Title over image", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
@@ -141,7 +141,7 @@ public class PortableInfoboxObject extends BasePageObject {
   public PortableInfoboxObject isTitleAboveImageVisible() {
     wait.forElementVisible(titleSmallImage);
     Assertion.assertEquals(isElementOnPage(titleSmallImage), true);
-    PageObjectLogging.log("Main title", MercuryMessages.VISIBLE_MSG, true);
+    PageObjectLogging.log("Title above image", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }

@@ -23,7 +23,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_001_VerifyElementsVisible() {
+  public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
@@ -40,7 +40,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_002_VerifyCollapsing() {
+  public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
@@ -62,7 +62,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_003_VerifyExternalRedirecting() {
+  public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
@@ -80,7 +80,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_004_VerifyTabberVisibility() {
+  public void MercuryPortableInfoboxTest_004_TabberVisibility() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
@@ -91,7 +91,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_005")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_005_VerifyLightboxPresence() {
+  public void MercuryPortableInfoboxTest_005_ImageOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
@@ -104,7 +104,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_006")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_006_VerifyListsMargin() {
+  public void MercuryPortableInfoboxTest_006_ListsMargin() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
