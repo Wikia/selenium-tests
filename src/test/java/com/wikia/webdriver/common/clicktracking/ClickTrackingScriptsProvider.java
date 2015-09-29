@@ -7,8 +7,6 @@ package com.wikia.webdriver.common.clicktracking;
  */
 public class ClickTrackingScriptsProvider {
 
-  public ClickTrackingScriptsProvider() {}
-
   private static String enableWikiaTracker = "document.cookie='log_level=3';"
       + "document.cookie='log_group=Wikia.Tracker';";
 
@@ -25,7 +23,6 @@ public class ClickTrackingScriptsProvider {
   private static String seleniumAddEventFunction = "function selenium_addEvent(args) {"
       + "	   var events = selenium_getEvents();" + "	   events.push( args ); "
       + "	   localStorage.setItem('seleniumEvents', JSON.stringify(events));" + "};";
-
 
   public static final String TRACKER_INSTALLATION = enableWikiaTracker + enableSeleniumTracker
       + seleniumGetEventsFunction + seleniumAddEventFunction;
@@ -44,4 +41,8 @@ public class ClickTrackingScriptsProvider {
 
   public static final String REDIRECT_BLOCK =
       "window.onbeforeunload = function () {return 'blocking redirect - performing clicktracking test';}";
+
+  private ClickTrackingScriptsProvider() {
+
+  }
 }

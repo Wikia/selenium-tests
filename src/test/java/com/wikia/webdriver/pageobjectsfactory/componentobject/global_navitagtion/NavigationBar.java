@@ -19,10 +19,6 @@ import java.util.List;
 
 public class NavigationBar extends WikiBasePageObject {
 
-  public NavigationBar(WebDriver driver) {
-    super(driver);
-  }
-
   final private String suggestionCss = ".autocomplete div";
 
   @FindBy(css = "#searchInput")
@@ -34,10 +30,14 @@ public class NavigationBar extends WikiBasePageObject {
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
+  public NavigationBar(WebDriver driver) {
+    super(driver);
+  }
+
   public void triggerSuggestions(String query) {
     wait.forElementVisible(searchInput);
     searchInput.clear();
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.click();
     wait.forElementPresent(jqueryAutocompleteBy);
     Typing.sendKeysHumanSpeed(searchInput, query);
@@ -77,7 +77,7 @@ public class NavigationBar extends WikiBasePageObject {
       }
       searchInput.sendKeys(Keys.ENTER);
       PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-          + suggestionText + "and clicked enter", true);
+                                                     + suggestionText + "and clicked enter", true);
       return new ArticlePageObject(driver);
     } else {
       return null;
@@ -116,14 +116,14 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public IntraWikiSearchPageObject clickEnterToSearch() {
-    waitForElementClickableByElement(searchInput);
+    wait.forElementClickable(searchInput);
     searchInput.sendKeys(Keys.ENTER);
     PageObjectLogging.log("clickEnterInSearch", "clicked enter in search", true);
     return new IntraWikiSearchPageObject(driver);
   }
 
   public IntraWikiSearchPageObject clickSearchButton() {
-    waitForElementClickableByElement(searchSubmit);
+    wait.forElementClickable(searchSubmit);
     searchSubmit.click();
     PageObjectLogging.log("clickSearchButton", "clicked on search button", true);
     return new IntraWikiSearchPageObject(driver);

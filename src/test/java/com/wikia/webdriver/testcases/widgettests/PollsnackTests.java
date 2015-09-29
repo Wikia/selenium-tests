@@ -11,14 +11,34 @@ import org.testng.annotations.Test;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"PollsnackWidgetTests", "WidgetTests"})
 public class PollsnackTests extends NewTestTemplate {
 
-  @Test
+  @Test(groups = "PollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_001_isLoaded() {
-    PollsnackWidgetPageObject pollsnackWidget = new PollsnackWidgetPageObject(driver);
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    pollsnackWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(pollsnackWidget.isLoadedOnOasis(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "PollsnackWidgetTest_002")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void PollsnackWidgetTest_002_areLoaded() {
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "PollsnackWidgetTest_003")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void PollsnackWidgetTest_003_isErrorPresent() {
+    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
+
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

@@ -40,7 +40,7 @@ public class TableOfContentPageObject extends BasePageObject {
 
   public boolean isTOCUnderArticleName() throws WebDriverException {
     wait.forElementVisible(tocUnderH1);
-    return tocUnderH1.isDisplayed() && tocUnderH1.getTagName().equals("nav");
+    return tocUnderH1.isDisplayed() && "nav".equals(tocUnderH1.getTagName());
   }
 
   public void clickOnTOC() {
@@ -75,6 +75,6 @@ public class TableOfContentPageObject extends BasePageObject {
   }
 
   public boolean isTOCMenuVisible() {
-    return !TOCMenu.getCssValue("display").equals("none");
+    return !"none".equals(TOCMenu.getCssValue("display"));
   }
 }

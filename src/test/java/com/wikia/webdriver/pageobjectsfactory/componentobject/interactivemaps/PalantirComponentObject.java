@@ -19,14 +19,14 @@ import java.util.concurrent.TimeUnit;
 
 public class PalantirComponentObject extends InteractiveMapPageObject {
 
-  public PalantirComponentObject(WebDriver driver) {
-    super(driver);
-  }
-
   @FindBy(css = "iframe[name=wikia-interactive-map]")
   private WebElement mapFrame;
   @FindBy(css = "img[src*='player_location_marker.png']")
   private WebElement playerPoint;
+
+  public PalantirComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   private PalantirContent getResponse(Object response, String methodName) {
     Map<String, String> map = (Map) response;
@@ -76,37 +76,37 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public void verifyMapPositionUpdated(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertTrue(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "200");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_MAPPOS_SUCCESS);
   }
 
   public void verifyCorrectPlayerPos(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertTrue(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "200");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_PLAYER_SUCCESS);
   }
 
   public void verifyWrongPlayerPos(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertFalse(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "422");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_MAP_OUTOFBOUNDARIES);
   }
 
   public void verifyWrongZoomLevel(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertFalse(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "422");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_WRONG_ZOOM);
   }
 
   public void verifyDecimalZoomLevel(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "false");
+    Assertion.assertFalse(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "422");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_WRONG_PARAMETER);
   }
 
   public void verifyPlayerPosDeleted(PalantirContent handle) {
-    Assertion.assertEquals(handle.getSuccess(), "true");
+    Assertion.assertTrue(handle.getSuccess());
     Assertion.assertEquals(handle.getResponseCode(), "200");
     Assertion.assertEquals(handle.getMessage(), PalantirContent.PONTOMSG_REMOVEPLAYER);
   }

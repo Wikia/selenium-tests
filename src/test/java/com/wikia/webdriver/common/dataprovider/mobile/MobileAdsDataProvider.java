@@ -77,15 +77,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testSynthetic() {
-    return new Object[][]{
-        {"adtest", "SyntheticTests/MobileLeaderboard", "MOBILE_TOP_LEADERBOARD", 320, 100,
-         136987812,
-         "mobile", "src/test/resources/adsResources/mobiletl320x100"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{
         {

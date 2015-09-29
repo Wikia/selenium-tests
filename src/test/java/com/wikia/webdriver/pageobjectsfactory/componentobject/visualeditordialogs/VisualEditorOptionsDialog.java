@@ -70,14 +70,14 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
   private void selectFromOutlineMenu(int index) {
     WebElement menuItem = outlineMenuItems.get(index).findElement(labelElementBy);
-    waitForElementClickableByElement(menuItem);
+    wait.forElementClickable(menuItem);
     menuItem.click();
   }
 
   public VisualEditorPageObject clickApplyChangesButton() {
     waitForDialogVisible();
     wait.forElementVisible(applyChangesButton);
-    waitForElementClickableByElement(applyChangesButton);
+    wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     return new VisualEditorPageObject(driver);
   }
@@ -101,7 +101,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     wait.forElementVisible(selectedResult);
     WebElement matchingResult = selectedResult.findElement(labelElementBy);
     wait.forElementVisible(matchingResult);
-    waitForElementClickableByElement(matchingResult);
+    wait.forElementClickable(matchingResult);
     matchingResult.click();
   }
 

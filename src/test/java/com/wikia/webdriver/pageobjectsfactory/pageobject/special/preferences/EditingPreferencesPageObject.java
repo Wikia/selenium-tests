@@ -9,18 +9,17 @@ import org.openqa.selenium.support.ui.Select;
 
 public class EditingPreferencesPageObject extends PreferencesPageObject {
 
+  @FindBy(css = "select#mw-input-wpeditor")
+  private WebElement preferredEditorDropdown;
+
   public EditingPreferencesPageObject(WebDriver driver) {
     super(driver);
   }
 
-  @FindBy(css = "select#mw-input-wpeditor")
-  private WebElement preferredEditorDropdown;
-
   public void selectPreferredEditor(String value) {
-    waitForElementClickableByElement(preferredEditorDropdown);
+    wait.forElementClickable(preferredEditorDropdown);
     Select select = new Select(preferredEditorDropdown);
     select.selectByValue(value);
     PageObjectLogging.log("selectPreferredEditor", "Selected " + value + " from preference", true);
   }
-
 }

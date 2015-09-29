@@ -21,16 +21,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArticlePageTests extends NewTestTemplate {
 
+  private static final String[]
+      FOOTER_ELEMENTS =
+      {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
+       "Privacy Policy", "Feedback"};
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
-
-  private static final String[]
-      FOOTER_ELEMENTS =
-      {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
-       "Privacy Policy", "Feedback"};
 
   // APT01
   @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})

@@ -1,12 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -18,8 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -34,10 +30,12 @@ public class AdsComparison {
   private static final int AD_TIMEOUT_SEC = 15;
   protected ImageComparison imageComparison;
   private Shooter shooter;
+  private ImageEditor imageEditor;
 
   public AdsComparison() {
     imageComparison = new ImageComparison();
     shooter = new Shooter();
+    imageEditor = new ImageEditor();
   }
 
   public void hideSlot(String selector, WebDriver driver) {
@@ -55,19 +53,13 @@ public class AdsComparison {
     );
   }
 
-  public boolean compareImageWithScreenshot(final String imageUrl,
+  public boolean compareImageWithScreenshot(final String pathToImage,
                                             final WebElement element,
                                             final WebDriver driver) {
-    try {
-      String encodedExpectedScreen = readFileAsString(imageUrl);
-      File capturedScreen = shooter.captureWebElement(element, driver);
-      String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
-      capturedScreen.delete();
-      return imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen);
-    } catch (IOException e) {
-      PageObjectLogging.log("compareImageWithScreenshot", e.getMessage(), false);
-    }
-    return false;
+    BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
+    BufferedImage actualImage = imageEditor.fileToImage(
+        shooter.captureWebElement(element, driver));
+    return imageComparison.areImagesTheSame(actualImage, expectedImage);
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,
@@ -96,17 +88,6 @@ public class AdsComparison {
     return true;
   }
 
-  private String readFileAndEncodeToBase(File file) throws IOException {
-    Base64 coder = new Base64();
-    return IOUtils.toString(
-        coder.encode(FileUtils.readFileToByteArray(file)), "UTF-8"
-    );
-  }
-
-  private String readFileAsString(String filePath) throws IOException {
-    return IOUtils.toString(new FileInputStream(new File(filePath)), "UTF-8");
-  }
-
   /**
    * @param durationSec time until element should have a color.
    */
@@ -124,7 +105,7 @@ public class AdsComparison {
         PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e.getMessage(), false, driver);
+      PageObjectLogging.log("verifyColorAd", e, false, driver);
     }
   }
 

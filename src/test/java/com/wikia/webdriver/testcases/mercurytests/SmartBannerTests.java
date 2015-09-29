@@ -17,29 +17,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class SmartBannerTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
-  /**
-   * HUB color definition
-   */
-  private enum Colors {
-    LIGHT_GREEN("#94d11f"),
-    LIGHT_ORANGE("#ff7f26"),
-    DARK_ORANGE("#ff5400"),
-    LIGHT_BLUE("#00b7e0"),
-    CYAN("#09d3bf"),
-    YELLOW("#ffd000"),
-    MAGENTA("#c819ad");
-    private String hex;
-
-    private Colors(String hex) {
-      this.hex = hex;
-    }
-  }
-
   /**
    * Wiki name, Main page, HUB color
    */
@@ -52,9 +29,13 @@ public class SmartBannerTests extends NewTestTemplate {
       {"lego", "LEGO_Wiki", Colors.YELLOW.hex},
       {"ladygaga", "Gagapedia", Colors.MAGENTA.hex}
   };
-
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
+
+  @BeforeMethod(alwaysRun = true)
+  public void prepareTest() {
+    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+  }
 
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
@@ -71,7 +52,7 @@ public class SmartBannerTests extends NewTestTemplate {
         "Smart banner is closed"
     );
 
-    if (Configuration.getPlatform().equals("ANDROID")) {
+    if ("ANDROID".equals(Configuration.getPlatform())) {
       buttonName = BUTTON_NAME_FOR_ANDROID;
     } else {
       buttonName = BUTTON_NAME_FOR_IOS;
@@ -111,7 +92,8 @@ public class SmartBannerTests extends NewTestTemplate {
   // SBT02
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
-    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);;
+    SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
+    ;
     boolean result;
 
     for (String[] WIKI : WIKIS) {
@@ -133,6 +115,24 @@ public class SmartBannerTests extends NewTestTemplate {
           "is wrong",
           result
       );
+    }
+  }
+
+  /**
+   * HUB color definition
+   */
+  private enum Colors {
+    LIGHT_GREEN("#94d11f"),
+    LIGHT_ORANGE("#ff7f26"),
+    DARK_ORANGE("#ff5400"),
+    LIGHT_BLUE("#00b7e0"),
+    CYAN("#09d3bf"),
+    YELLOW("#ffd000"),
+    MAGENTA("#c819ad");
+    private String hex;
+
+    private Colors(String hex) {
+      this.hex = hex;
     }
   }
 }

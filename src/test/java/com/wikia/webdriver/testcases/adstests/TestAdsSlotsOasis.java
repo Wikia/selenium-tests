@@ -32,7 +32,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
   }
 
   private void verifySlotIsLoaded(String slotName) {
-    Assertion.assertTrue(ads.isSlotOnPageLoaded(slotName));
+    Assertion.assertTrue(ads.checkSlotOnPageLoaded(slotName));
   }
 
 }

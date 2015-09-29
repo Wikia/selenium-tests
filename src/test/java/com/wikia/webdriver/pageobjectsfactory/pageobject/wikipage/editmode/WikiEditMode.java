@@ -14,13 +14,13 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class WikiEditMode extends WikiBasePageObject {
 
+  @FindBy(css = "#wpSave")
+  private WebElement publishButtonGeneral;
+
   public WikiEditMode(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
-
-  @FindBy(css = "#wpSave")
-  private WebElement publishButtonGeneral;
 
   /**
    * Click  on Publish button
@@ -29,7 +29,7 @@ public class WikiEditMode extends WikiBasePageObject {
    */
   public WikiArticlePageObject clickOnPublishButton() {
     wait.forElementVisible(publishButtonGeneral);
-    waitForElementClickableByElement(publishButtonGeneral);
+    wait.forElementClickable(publishButtonGeneral);
     publishButtonGeneral.click();
     wait.forElementPresent(editButtonBy);
 

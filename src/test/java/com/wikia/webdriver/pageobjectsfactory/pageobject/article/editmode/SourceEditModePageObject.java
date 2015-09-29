@@ -92,7 +92,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceContent(String desiredContent) {
-    waitForElementClickableByElement(sourceModeTextArea);
+    wait.forElementClickable(sourceModeTextArea);
     Assertion.assertEquals(getSourceContent(), desiredContent);
   }
 

@@ -18,10 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
-  public SpecialUserLoginPageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
+  private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
   @FindBy(css = ".WikiaArticle input[name='username']")
   private WebElement userName;
@@ -38,7 +35,10 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   @FindBy(css = ".UserLogin .error-msg")
   private WebElement messagePlaceholder;
 
-  private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
+  public SpecialUserLoginPageObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   private void typeInUserName(String name) {
     wait.forElementVisible(userName);
@@ -50,7 +50,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private void typeInPassword(String pass) {
     wait.forElementVisible(password);
     password.clear();
-    System.out.println("[DEBUG]" + pass);
     password.sendKeys(pass);
     PageObjectLogging.log("typeInUserPassword", "password typed", true);
   }
@@ -92,7 +91,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
   public void remindPassword(String name, String apiToken) {
     Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickForgotPasswordLink();
   }
@@ -111,7 +110,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, message);
     PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
-        true, driver);
+                          true, driver);
   }
 
   public void verifyClosedAccountMessage() {

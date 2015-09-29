@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.wampagetests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
@@ -44,7 +45,9 @@ public class WamPageTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
+  @RelatedIssue(issueID = "CONCF-6", comment = "Test manually."
+            + " Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores.")
+          @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumn(1, 20);
     wam.clickNextPaginator();

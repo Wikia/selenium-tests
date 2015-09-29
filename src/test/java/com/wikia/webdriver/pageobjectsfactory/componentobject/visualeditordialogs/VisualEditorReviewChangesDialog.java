@@ -33,7 +33,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   }
 
   public VisualEditorSaveChangesDialog clickReturnToSaveFormButton() {
-    waitForElementClickableByElement(returnToSaveFormButton);
+    wait.forElementClickable(returnToSaveFormButton);
     returnToSaveFormButton.click();
     return new VisualEditorSaveChangesDialog(driver);
   }

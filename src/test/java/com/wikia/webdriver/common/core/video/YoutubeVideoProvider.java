@@ -72,7 +72,7 @@ public class YoutubeVideoProvider {
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
     } catch (IOException e) {
-      PageObjectLogging.log("A problem occurred while receiving a YouTube video", e.getMessage(),
+      PageObjectLogging.log("A problem occurred while receiving a YouTube video", e,
           false);
     }
 

@@ -20,10 +20,10 @@ public class NewTestTemplate extends NewTestTemplateCore {
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
     if (method.isAnnotationPresent(Execute.class)) {
-      if (!method.getAnnotation(Execute.class).onWikia().equals("")) {
+      if (!"".equals(method.getAnnotation(Execute.class).onWikia())) {
         Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
       }
-      if (!method.getAnnotation(Execute.class).disableFlash().equals("")) {
+      if (!"".equals(method.getAnnotation(Execute.class).disableFlash())) {
         Configuration
             .setTestValue("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       }

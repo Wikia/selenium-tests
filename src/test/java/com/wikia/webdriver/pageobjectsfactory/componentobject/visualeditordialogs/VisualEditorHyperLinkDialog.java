@@ -55,7 +55,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   public void typeInLinkInput(String text) {
     waitForDialogVisible();
-    waitForElementClickableByElement(linkInput);
+    wait.forElementClickable(linkInput);
     linkInput.sendKeys(text);
     waitForElementNotVisibleByElement(inputPending);
     waitForValueToBePresentInElementsAttributeByElement(linkInput, "value", text);
@@ -117,7 +117,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     waitForElementNotVisibleByElement(inputPending);
     wait.forElementVisible(selectedResult);
     WebElement matchingResult = driver.findElement(selectedResultBy);
-    waitForElementClickableByElement(matchingResult);
+    wait.forElementClickable(matchingResult);
     matchingResult.click();
   }
 }

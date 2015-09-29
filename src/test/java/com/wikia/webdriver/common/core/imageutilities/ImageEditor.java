@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriverException;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,7 +27,7 @@ public class ImageEditor {
     try {
       FileUtils.copyFile(imageFile, new File(newPath));
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
   }
 
@@ -38,7 +39,7 @@ public class ImageEditor {
     try {
       subImg = File.createTempFile("screenshot", ".png");
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
     if (width < 1) {
       width = 1;
@@ -52,7 +53,7 @@ public class ImageEditor {
     try {
       ImageIO.write(dest, "png", subImg);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
     return subImg;
   }
@@ -67,7 +68,7 @@ public class ImageEditor {
     try {
       img = ImageIO.read(file);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new WebDriverException(e);
     }
     return img;
   }

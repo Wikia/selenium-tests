@@ -16,23 +16,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MiniEditorComponentObject extends WikiBasePageObject {
 
-  public MiniEditorComponentObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
-  @FindBy(css = "body#bodyContent")
-  private WebElement messageBodyField;
   @FindBy(css = ".cke_contents iframe")
   public WebElement miniEditorIframe;
-  @FindBy(css = ".speech-bubble-message .cke_contents iframe")
-  protected WebElement miniEditorEditCommentIFrame;
-  @FindBy(css = ".article-comm-edit-box iframe")
-  protected WebElement replyCommentIFrame;
   @FindBy(css = ".comments .cke_contents iframe")
   public WebElement editMessageWallFrame;
   @FindBy(css = ".replies .cke_contents iframe")
   public WebElement quoteMessageWallFrame;
+  @FindBy(css = ".speech-bubble-message .cke_contents iframe")
+  protected WebElement miniEditorEditCommentIFrame;
+  @FindBy(css = ".article-comm-edit-box iframe")
+  protected WebElement replyCommentIFrame;
+  @FindBy(css = "body#bodyContent")
+  private WebElement messageBodyField;
   @FindBy(css = ".RTEImageButton .cke_icon")
   private WebElement addImageButton;
   @FindBy(css = ".RTEVideoButton .cke_icon")
@@ -54,6 +49,11 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   @FindBy(css = ".MiniEditorWrapper.active.editor-open")
   private WebElement miniEditorWrapper;
 
+  public MiniEditorComponentObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
+
   public void writeMiniEditor(String text) {
     wait.forElementVisible(messageBodyField);
     // This was intensively investigated and sleep is the only way to make the tests more reliable.
@@ -61,7 +61,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("writeMiniEditor", e.getMessage(), false);
+      PageObjectLogging.log("writeMiniEditor", e, false);
     }
     messageBodyField.clear();
     messageBodyField.sendKeys(text);
@@ -162,6 +162,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void switchAndEditMessageWall(String reply) {
+    wait.forElementVisible(editMessageWallFrame);
     driver.switchTo().frame(editMessageWallFrame);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);

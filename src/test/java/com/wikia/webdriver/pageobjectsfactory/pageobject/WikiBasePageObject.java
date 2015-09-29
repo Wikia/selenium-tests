@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -184,6 +185,10 @@ public class WikiBasePageObject extends BasePageObject {
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+  public AuthModal getNewAuthModal(){
+    return new AuthModal(driver);
   }
 
   public String getWikiUrl() {
@@ -470,7 +475,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
-    waitForElementClickableByElement(sectionEditButton);
+    wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log("openVEModeWithSectionEditButton", "VE edit button clicked at section: "
         + section, true, driver);
@@ -759,7 +764,7 @@ public class WikiBasePageObject extends BasePageObject {
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
 
-    String domian = Configuration.getEnvType().equals("dev") ? ".wikia-dev.com" : ".wikia.com";
+    String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 

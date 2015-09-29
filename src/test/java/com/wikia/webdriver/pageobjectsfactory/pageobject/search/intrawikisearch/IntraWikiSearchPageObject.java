@@ -151,7 +151,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public void verifyLastResultPage() {
-    waitForElementClickableByElement(paginationPages.get(paginationPages.size() - 1));
+    wait.forElementClickable(paginationPages.get(paginationPages.size() - 1));
     do {
       wait.forElementVisible(paginationPages.get(paginationPages.size() - 1));
       scrollAndClick(paginationPages.get(paginationPages.size() - 1));
@@ -209,7 +209,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       String optionName = advancedOptions.get(i).getText();
       String optionState = advancedOptionInputs.get(i).getAttribute("checked");
 
-      if (optionName.equals("Articles") | optionName.equals("Category")) {
+      if ("Articles".equals(optionName) | "Category".equals(optionName)) {
         Assertion.assertEquals(optionState, "true");
       } else {
         Assertion.assertNull(optionState);
@@ -351,7 +351,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementPresent(jqueryAutocompleteBy);
     searchField.sendKeys(query);
     wait.forElementVisible(newSuggestionsList.get(0));
-    System.out.println(newSuggestionsList.size());
     for (int i = 0; i < newSuggestionsList.size(); i++) {
       Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());

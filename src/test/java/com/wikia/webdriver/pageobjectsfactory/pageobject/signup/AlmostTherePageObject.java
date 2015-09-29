@@ -34,7 +34,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 
   private String getActivationLinkFromMail(String email, String password, String language) {
     String mailSubject;
-    if (language.equals("ja")) {
+    if ("ja".equals(language)) {
       mailSubject = "メールアドレスの認証を行ってウィキアを始めよう！";
     } else {
       mailSubject = "Confirm your email and get started on Wikia!";

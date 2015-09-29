@@ -101,37 +101,6 @@ public class PerformTouchAction {
   }
 
   /**
-   * That method return value of all resolution variables.
-   */
-  public void varStatus() {
-    System.out.println("=======================================");
-    System.out.println("nativeHeight: " + nativeHeight);
-    System.out.println("nativeWidth: " + nativeWidth);
-    System.out.println("webviewHeight: " + webviewHeight);
-    System.out.println("webviewWidth: " + webviewWidth);
-    System.out.println("ratio (nativeWidth / appWebviewWidth): " + ratio);
-    System.out.println("=======================================");
-    System.out.println("taskbarNativeHeight: " + taskbarNativeHeight);
-    System.out.println("taskbarNativeWidth: " + taskbarNativeWidth);
-    System.out.println("taskbarWebviewHeight: " + taskbarWebviewHeight);
-    System.out.println("taskbarWebviewWidth: " + taskbarWebviewWidth);
-    System.out.println("=======================================");
-    System.out.println("appNativeWidth: " + appNativeWidth);
-    System.out.println("appNativeHeight: " + appNativeHeight);
-    System.out.println("appWebviewHeight: " + appWebviewHeight);
-    System.out.println("appWebviewWidth: " + appWebviewWidth);
-    System.out.println("=======================================");
-    System.out.println("addressbarNativeHeight: " + addressbarNativeHeight);
-    System.out.println("addressbarNativeWidth: " + addressbarNativeWidth);
-    System.out.println("addressbarWebviewHeight: " + addressbarWebviewHeight);
-    System.out.println("addressbarWebviewWidth: " + addressbarWebviewWidth);
-    System.out.println("=======================================");
-    System.out.println("loadedPageHeight: " + loadedPageHeight);
-    System.out.println("loadedPageWidth: " + loadedPageWidth);
-    System.out.println("=======================================");
-  }
-
-  /**
    * @param time       In milliseconds
    * @param methodName Used in log if fail
    */
@@ -139,7 +108,7 @@ public class PerformTouchAction {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(methodName, e, false);
     }
   }
 
@@ -153,7 +122,7 @@ public class PerformTouchAction {
     try {
       mobileDriver.context(contextName);
     } catch (NoSuchContextException e) {
-      PageObjectLogging.log(methodName, e.getMessage(), false);
+      PageObjectLogging.log(methodName, e, false);
     }
   }
 

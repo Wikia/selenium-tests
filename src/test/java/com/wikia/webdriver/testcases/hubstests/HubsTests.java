@@ -1,6 +1,12 @@
 package com.wikia.webdriver.testcases.hubstests;
 
+import java.util.Map;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -8,11 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.Map;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -109,6 +110,8 @@ public class HubsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"HubsTest_005", "Hubs", "new"})
+  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please manually verify that "
+      + "language button redirects to proper url i.e. ja.wikia/Wikia. This will fail until MAIN-5376 is fixed")
   /**
    * Verify that each language drop down  goes to the correct page
    */

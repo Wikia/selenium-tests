@@ -7,9 +7,7 @@ import javax.json.JsonObject;
 
 public class EventsArticleEditMode {
 
-  private EventsArticleEditMode() {}
-
-  public static JsonObject previewEvent = Json
+  public static final JsonObject PREVIEW_EVENT = Json
       .createObjectBuilder()
       .add(
           "0",
@@ -19,5 +17,8 @@ public class EventsArticleEditMode {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-              "preview-desktop")).build();
+                                         "preview-desktop")).build();
+
+  private EventsArticleEditMode() {
+  }
 }

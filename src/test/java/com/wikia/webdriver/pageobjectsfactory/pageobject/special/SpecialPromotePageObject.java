@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -144,7 +145,7 @@ public class SpecialPromotePageObject extends BasePageObject {
       BufferedImage bufImgOne = ImageIO.read(url);
       ImageIO.write(bufImgOne, "png", uploadedImageFile);
     } catch (IOException e) {
-      throw new RuntimeException();
+      throw new WebDriverException();
     }
     return uploadedImageFile;
   }

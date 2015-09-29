@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -20,10 +20,6 @@ import java.util.List;
  */
 
 public class CreatePinTypesComponentObject extends BasePageObject {
-
-  public CreatePinTypesComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = "input[name='poiCategories[][name]']")
   private List<WebElement> pinTypeTitleInputs;
@@ -35,10 +31,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   private WebElement saveButton;
   @FindBy(css = ".addPoiCategory")
   private WebElement addMorePinTypesLink;
-  @FindBy(css = ".poi-category-dropdown")
-  private WebElement mainParentCategorySelector;
-  @FindBy(css = ".poi-category-dropdown > option")
-  private List<WebElement> parentCatOption;
   @FindBy(css = "select[name='poiCategories[][parent_poi_category_id]']")
   private List<WebElement> parentCatElements;
   @FindBy(css = ".modal.medium.int-map-modal")
@@ -47,8 +39,11 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   private WebElement pinTypesError;
   @FindBy(css = ".delete-icon")
   private WebElement deletePinTypeButton;
-
   private int amountPinTypeTitleInputs, amountUploadMarker, amountParentCatElements;
+
+  public CreatePinTypesComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public InteractiveMapPageObject clickSave() {
     wait.forElementVisible(saveButton);
@@ -61,9 +56,8 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   public void clickAddAnotherPinType() {
     wait.forElementVisible(addMorePinTypesLink);
     addMorePinTypesLink.click();
-    PageObjectLogging
-        .log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal",
-             true);
+    PageObjectLogging.log("clickAddAnotherPinType",
+        "clicked add more pin types link in create pin types modal", true);
   }
 
   public void savePinTypesListState() {
@@ -73,20 +67,10 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
   }
 
-  public void selectParentCategory(int catValue) {
-    waitForElementClickableByElement(mainParentCategorySelector);
-    mainParentCategorySelector.click();
-    WebElement parentSelected = parentCatOption.get(catValue);
-    wait.forElementVisible(parentSelected);
-    parentSelected.click();
-    PageObjectLogging.log("selectParentCategory", "Parent category selected", true);
-  }
-
   public void selectFileToUpload(String file, String typeOfFile) {
     unhideElementByClassChange("wpUploadFile", "poi-category-marker-image-upload");
-    uploadInputsCollection.get(0)
-        .sendKeys(
-            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    uploadInputsCollection.get(0).sendKeys(
+        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     PageObjectLogging.log("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
 
   }
@@ -96,8 +80,8 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     wait.forElementVisible(firstPin);
     firstPin.clear();
     firstPin.sendKeys(pinTypeName);
-    PageObjectLogging
-        .log("typePinTypeTitle", pinTypeName + " title for pin type was typed in", true, driver);
+    PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type was typed in",
+        true, driver);
   }
 
   public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
@@ -106,8 +90,8 @@ public class CreatePinTypesComponentObject extends BasePageObject {
       wait.forElementVisible(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
       pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);
     }
-    PageObjectLogging
-        .log("typeManyPinTypeTitle", "Added " + amountFields + " pin types", true, driver);
+    PageObjectLogging.log("typeManyPinTypeTitle", "Added " + amountFields + " pin types", true,
+        driver);
   }
 
   public void verifyPinTypesDialog() {

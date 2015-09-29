@@ -41,12 +41,12 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   public CreateAMapComponentObject clickCreateAMapButton() {
     waitForDialogVisible();
     if (isElementOnPage(emptyStateCreateAMapButton)) {
-      waitForElementClickableByElement(emptyStateCreateAMapButton);
+      wait.forElementClickable(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
       PageObjectLogging
           .log("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
     } else {
-      waitForElementClickableByElement(createAMapButton);
+      wait.forElementClickable(createAMapButton);
       createAMapButton.click();
       PageObjectLogging.log("clickCreateAMapButton", "Create A Map button is clicked", true);
     }

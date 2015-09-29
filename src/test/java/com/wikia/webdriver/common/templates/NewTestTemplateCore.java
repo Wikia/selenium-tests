@@ -117,11 +117,7 @@ public class NewTestTemplateCore {
 
   protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
     capabilities = new DesiredCapabilities();
-    try {
       capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
     return capabilities;
   }
 

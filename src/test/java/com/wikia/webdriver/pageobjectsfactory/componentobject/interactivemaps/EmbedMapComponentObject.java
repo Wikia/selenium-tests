@@ -1,22 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 /**
  * @author Łukasz Nowak (Dyktus)
  */
 
 public class EmbedMapComponentObject extends InteractiveMapPageObject {
-
-  public EmbedMapComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   @FindBy(css = ".leaflet-control-zoom-in")
   private WebElement zoomInButton;
@@ -34,6 +30,10 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
   private WebElement mapModal;
   @FindBy(css = "#attr")
   private WebElement brandFooter;
+
+  public EmbedMapComponentObject(WebDriver driver) {
+    super(driver);
+  }
 
   public void verifyMapTitlePresented() {
     wait.forElementVisible(mapTitle);
@@ -70,5 +70,4 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
   public void verifyBranFooterVisible() {
     Assertion.assertEquals(isElementOnPage(brandFooter), true);
   }
-
 }

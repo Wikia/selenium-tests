@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.dataprovider.ads;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -84,9 +85,8 @@ public class AdsDataProvider {
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub",
-         "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
+        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };
@@ -178,21 +178,6 @@ public class AdsDataProvider {
         {"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052",
          "wka.life/_adtest//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
          new Dimension(1292, 1000)},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] gptAdsInToolbar() {
-    return new Object[][]{
-        {
-            "adtest", "Toolbar/320x70",
-            "src/test/resources/adsResources/toolbar320x50",
-            new Dimension(320, 70)
-        }, {
-            "adtest", "Toolbar/320x50",
-            "src/test/resources/adsResources/toolbar320x50",
-            new Dimension(320, 50)
-        }
     };
   }
 
@@ -373,7 +358,25 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] extraMarker() {
+  public static Object[][] fliteTagBroken() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTagBrokenWidth",
+         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenHeight",
+         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."},
+        {"adtest", "SyntheticTests/FliteTagBrokenTag",
+         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTag() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTag"},
+        {"adtest", "SyntheticTests/FliteTagModifiedTag"}};
+  }
+
+  @DataProvider
+  public static Object[][] adsExtraMarkerOasis() {
     return new Object[][]{
         {
             "adtest",
@@ -570,6 +573,23 @@ public class AdsDataProvider {
             new Dimension(300, 258),
             false
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsSynthetic() {
+    return new Object[][]{
+        {
+            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", "MOBILE_TOP_LEADERBOARD")
+                .put("slotSize", new Dimension(320, 100))
+                .put("lineItemId", 136987812)
+                .put("src", "mobile")
+                .build(),
+            new Dimension(360, 567),
+            "src/test/resources/adsResources/mobiletl320x100.png"
+        }
     };
   }
 

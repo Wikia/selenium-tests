@@ -9,13 +9,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class DiffPagePageObject extends BasePageObject {
 
+  @FindBy(css = "#mw-imagepage-content table.diff")
+  private WebElement diffTable;
+
   public DiffPagePageObject(WebDriver driver) {
     super(driver);
     // TODO Auto-generated constructor stub
   }
-
-  @FindBy(css = "#mw-imagepage-content table.diff")
-  private WebElement diffTable;
 
   public void verifyDiffTablePresent() {
     wait.forElementVisible(diffTable);

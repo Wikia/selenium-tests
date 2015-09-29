@@ -73,10 +73,10 @@ public class MailFunctions {
 
       return builder.toString();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
+      PageObjectLogging.log("getFirstEmailContent", e, false);
       throw new WebDriverException();
     } catch (MessagingException | IOException | InterruptedException e) {
-      PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
+      PageObjectLogging.log("getFirstEmailContent", e, false);
       throw new WebDriverException();
     }
   }
@@ -103,9 +103,9 @@ public class MailFunctions {
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("Mail", e.getMessage(), false);
+      PageObjectLogging.log("Mail", e, false);
     } catch (MessagingException e) {
-      PageObjectLogging.log("Mail", e.getMessage(), false);
+      PageObjectLogging.log("Mail", e, false);
     }
   }
 

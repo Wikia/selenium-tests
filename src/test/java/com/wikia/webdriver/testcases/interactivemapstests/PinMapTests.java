@@ -155,6 +155,8 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.clickOnPin(0);
   }
 
+  @RelatedIssue(issueID = " ",
+          comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

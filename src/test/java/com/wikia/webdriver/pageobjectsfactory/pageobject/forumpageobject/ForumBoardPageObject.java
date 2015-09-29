@@ -94,7 +94,7 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void clickPostButton() {
-    waitForElementClickableByElement(postButton);
+    wait.forElementClickable(postButton);
     scrollAndClick(postButton);
     PageObjectLogging.log("clickPostButton", "post button clicked", true, driver);
   }
@@ -112,7 +112,7 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void clickPostNotitleButton() {
-    waitForElementClickableByElement(postButton);
+    wait.forElementClickable(postButton);
     scrollAndClick(postButton);
     scrollAndClick(postButton);
   }
@@ -173,7 +173,7 @@ public class ForumBoardPageObject extends BasePageObject {
     if (followButton.getText().contains("Following")) {
       PageObjectLogging.log("unfollowIfDiscussionIsFollowed",
           "discussion is followed. Preparing to click \"unfollowed\"", true);
-      waitForElementClickableByElement(followButton);
+      wait.forElementClickable(followButton);
       scrollAndClick(followButton);
       PageObjectLogging
           .log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true, driver);
@@ -195,7 +195,7 @@ public class ForumBoardPageObject extends BasePageObject {
     WebElement followButton =
         driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
     wait.forElementVisible(followButton);
-    waitForElementClickableByElement(followButton);
+    wait.forElementClickable(followButton);
     scrollAndClick(followButton);
     PageObjectLogging.log("clickOnFollowButton", "click on follow button of thread number "
         + threadNumber, true, driver);

@@ -1,8 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -10,15 +13,18 @@ import org.openqa.selenium.support.FindBy;
 public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"soundcloud\"]")
-  private WebElement soundCloudIframe;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.widget")
-  private WebElement soundCloudBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "soundcloud";
   private static final String ARTICLE_NAME = "SoundCloudWidget";
-  private static final String TAG =
+  private static final String[] TAGS = {
       "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
-      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />";
+      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
+      "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
+      "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
+  };
 
   public SoundCloudWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -32,31 +38,35 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
-    return TAG;
+  public String getTag() {
+    return TAGS[0];
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    if(!isElementVisible(soundCloudIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(soundCloudIframe);
-    boolean result = isElementVisible(soundCloudBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected String[] getTags() {
+    return TAGS;
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    if(!isElementVisible(soundCloudIframe)) {
-      return false;
-    }
+  protected String getIncorrectTag() {
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
+  }
 
-    driver.switchTo().frame(soundCloudIframe);
-    boolean result = isElementVisible(soundCloudBody);
-    driver.switchTo().parentFrame();
+  protected String getErrorMessage() {
+    throw new NotImplementedException(
+        "There is no such thing as incorrect tag in SoundCloud. SoundCloud parser tag with no attributes is still valid.");
+  }
 
-    return result;
+  protected List<WebElement> getWidgetWrapperList() {
+    throw new NotImplementedException(
+        "SoundCloud widgets are loaded directly as inline frames and have no wrapper."
+    );
+  }
+
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetBody() {
+    return widgetBody;
   }
 }

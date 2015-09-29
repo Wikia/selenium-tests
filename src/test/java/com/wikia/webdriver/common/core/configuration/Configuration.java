@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.properties.Credentials;
 
 import org.yaml.snakeyaml.Yaml;
@@ -19,10 +20,12 @@ import java.util.Map;
  * specified in config files
  */
 public class Configuration {
-  private Configuration() {}
 
   private static Map<String, String> config;
   private static Map<String, String> testConfig = new HashMap<>();
+
+  private Configuration() {
+  }
 
   private static Map<String, String> readConfiguration() {
     if (config == null) {
@@ -34,7 +37,7 @@ public class Configuration {
         try {
           input = new FileInputStream(new File("config_sample.yml"));
         } catch (FileNotFoundException ex2) {
-          System.out.println("CAN'T LOCATE CONFIG FILE");
+          throw new TestEnvInitFailedException("CAN'T LOCATE CONFIG FILE");
         }
       }
       config = (Map<String, String>) yaml.load(input);
@@ -50,7 +53,7 @@ public class Configuration {
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-          : getPropertyFromFile(propertyName);
+                                                      : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }

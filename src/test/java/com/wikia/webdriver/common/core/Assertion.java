@@ -1,7 +1,9 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -12,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Assertion extends Assert {
+
+  private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
 
   public static boolean assertStringContains(String current, String pattern) {
     String currentEncoded = encodeSpecialChars(current);
@@ -103,8 +107,6 @@ public class Assertion extends Assert {
                                           + expected + ", got: " + actual, assertion);
   }
 
-  private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
-
   private static void addVerificationFailure(Throwable e) {
     List verificationFailures = getVerificationFailures();
     verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
@@ -151,6 +153,19 @@ public class Assertion extends Assert {
         "assertStringNotEmpty",
         "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
         assertion
+    );
+  }
+
+  /**
+   * This method checks that URL equals current URL and logs result The method is case-insensitive
+   */
+  public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
+    String currentUrl = driver.getCurrentUrl();
+    PageObjectLogging.log(
+        "Log Url",
+        "Url " + url + " is equal to current Url " + currentUrl,
+        "Url " + url + " isn't equal to current Url " + currentUrl,
+        UrlChecker.isUrlEqualToCurrentUrl(driver, url)
     );
   }
 }

@@ -4,20 +4,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
  */
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
+  @FindBy(css = ".widget-twitter")
+  private List<WebElement> widgetWrapperList;
   @FindBy(css = ".widget-twitter iframe")
-  private WebElement twitterIframe;
+  private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.timeline")
-  private WebElement twitterBody;
+  private WebElement widgetBody;
 
   private static final String TAG_NAME = "twitter";
   private static final String ARTICLE_NAME = "TwitterWidget";
-  private static final String TAG =
-      "<twitter widget-id=\"522824386202447873\" screen-name=\"sfbart\" />";
+  private static final String[] TAGS = {
+      //twitter.com/Wikia
+      "<twitter widget-id=\"345311016592228352\" />",
+
+      //twitter.com/Nukapedia
+      "<twitter widget-id=\"430155638820200448\" />",
+
+      //twitter.com/Nukapedia overridden to SFBART
+      "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",
+  };
+  private static final String INCORRECT_TAG = "<twitter />";
+  private static final String ERROR_MESSAGE =
+      "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -31,31 +46,31 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  protected String getTag() {
-    return TAG;
+  public String getTag() {
+    return TAGS[0];
   }
 
-  protected boolean isTagLoadedOnMercury() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
-    }
-
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
-
-    return result;
+  protected String[] getTags() {
+    return TAGS;
   }
 
-  protected boolean isTagLoadedOnOasis() {
-    if(!isElementVisible(twitterIframe)) {
-      return false;
-    }
+  protected String getIncorrectTag() {
+    return INCORRECT_TAG;
+  }
 
-    driver.switchTo().frame(twitterIframe);
-    boolean result = isElementVisible(twitterBody);
-    driver.switchTo().parentFrame();
+  protected String getErrorMessage() {
+    return ERROR_MESSAGE;
+  }
 
-    return result;
+  protected List<WebElement> getWidgetWrapperList() {
+    return widgetWrapperList;
+  }
+
+  protected List<WebElement> getWidgetIFrameList() {
+    return widgetIFrameList;
+  }
+
+  protected WebElement getWidgetBody() {
+    return widgetBody;
   }
 }

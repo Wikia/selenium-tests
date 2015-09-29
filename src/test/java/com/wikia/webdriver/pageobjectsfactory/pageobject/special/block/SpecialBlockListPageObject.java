@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,11 +16,6 @@ import java.util.Date;
 
 public class SpecialBlockListPageObject extends WikiBasePageObject {
 
-  public SpecialBlockListPageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
   @FindBy(css = "input.mw-htmlform-submit")
@@ -28,6 +24,11 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private WebElement userUnblockedMessage;
   @FindBy(css = ".mw-blocklist td:nth-child(3)")
   private WebElement expirationDateElement;
+
+  public SpecialBlockListPageObject(WebDriver driver) {
+    super(driver);
+    PageFactory.initElements(driver, this);
+  }
 
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
@@ -80,7 +81,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
       Date currentDate = new Date();
       isBlocked = currentDate.before(expirationDate);
     } catch (ParseException ex) {
-      throw new RuntimeException("Can't parse expirationDateText: " + expirationDateText);
+      throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
     PageObjectLogging
         .log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);

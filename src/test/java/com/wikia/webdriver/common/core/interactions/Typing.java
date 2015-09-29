@@ -27,7 +27,7 @@ public class Typing {
       try {
         Thread.sleep(interval);
       } catch (InterruptedException e) {
-        PageObjectLogging.log("ERROR WHILE TYPING", e.getMessage(), false);
+        PageObjectLogging.log("ERROR WHILE TYPING", e, false);
       }
     }
   }

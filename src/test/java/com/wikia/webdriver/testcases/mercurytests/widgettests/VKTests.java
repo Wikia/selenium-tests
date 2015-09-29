@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
+@Test(groups = {"MercuryVKWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class VKTests extends NewTestTemplate {
 
   private static final String VK_ARTICLE_NAME = "VKWidget";
@@ -29,36 +30,60 @@ public class VKTests extends NewTestTemplate {
   @Test(groups = "MercuryVKWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    widget.create().navigate(wikiURL);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    vkWidget
+    widget
         .create()
         .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(VK_ARTICLE_NAME);
 
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryVKWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    VKWidgetPageObject vkWidget = new VKWidgetPageObject(driver);
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    vkWidget.createAndNavigate(wikiURL);
+    widget.create().navigate(wikiURL);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(VK_ARTICLE_NAME);
 
-    Assertion.assertTrue(vkWidget.isLoadedOnMercury(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryVKWidgetTest_004", enabled = false)
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+
+    widget.createMultiple().navigate(wikiURL);
+
+    Assertion.assertTrue(
+        widget.areAllValidSwappedForIFrames(),
+        MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
+    );
+
+    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+  }
+
+  @Test(groups = "MercuryVKWidgetTest_005", enabled = false)
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryVKWidgetTest_005_isErrorPresent() {
+    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+
+    widget.createIncorrect().navigate(wikiURL);
+    Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

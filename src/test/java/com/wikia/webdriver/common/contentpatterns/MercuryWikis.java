@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.contentpatterns;
 
 public class MercuryWikis {
-  private MercuryWikis() {}
 
   // Normal wiki
   public static final String MERCURY_AUTOMATION_TESTING = "mercuryautomationtesting";
@@ -13,4 +12,7 @@ public class MercuryWikis {
   public static final String MERCURY_NTAV_CC = "mercuryntavcc";
   public static final String MERCURY_EMPTY_CC = "mercuryemptycc";
   public static final String MERCURY_EMPTY_CC_EDITOR = "mercuryemptycceditor";
+
+  private MercuryWikis() {
+  }
 }

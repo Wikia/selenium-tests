@@ -19,13 +19,13 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"MercuryTOCTests", "Mercury"})
 public class TOCTests extends NewTestTemplate {
 
+  private final static int H2_PADDING_TOP = 40;
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
-
-  private final static int H2_PADDING_TOP = 40;
 
   // TOCT01
   @Test(groups = "MercuryTOCTest_001")
