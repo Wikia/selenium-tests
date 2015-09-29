@@ -71,14 +71,12 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -92,8 +90,13 @@ import javax.json.JsonReader;
 public class WikiBasePageObject extends BasePageObject {
 
   protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
-  private static final String LOGGED_IN_USER_SELECTOR_VENUS =
+  private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY +
+                                                        "," + LOGGED_IN_USER_SELECTOR_OASIS +
+                                                        "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -178,8 +181,7 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
-  private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-  private String loggedInUserSelectorMercury = ".avatar img[alt*=%userName%]";
+
   private VenusGlobalNavPageObject venusGlobalNav;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -553,26 +555,21 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      waitFor.until(new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-          try {
-            if (driver.findElement(By.tagName("body")).getAttribute("class")
-                .contains("skin-monobook")) {
-              return driver.findElements(
-                  By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%",
-                      userName.replace(" ", "_")))).size() > 0;// only for verification
-            } else {
-              // Venus
-              return driver.findElements(
-                  By.cssSelector(LOGGED_IN_USER_SELECTOR_VENUS.replace("%userName%", userName)))
-                  .size() > 0;// only for verification
-            }
-          } catch (StaleElementReferenceException e) {
-            return false;
-          }
-        }
-      });
+      wait.forElementVisible(By.cssSelector(
+          LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
+//      waitFor.until(new ExpectedCondition<Boolean>() {
+//        @Override
+//        public Boolean apply(WebDriver driver) {
+//          try {
+//            return driver.findElements(
+//                By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
+//                                                               userName.replace(" ", "_")))).size()
+//                   > 0;// only for verification
+//          } catch (StaleElementReferenceException e) {
+//            return false;
+//          }
+//        }
+//      });
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
@@ -694,7 +691,8 @@ public class WikiBasePageObject extends BasePageObject {
   public String receiveMailWithNewPassword(String email, String password) {
     String newPassword =
         MailFunctions.getPasswordFromEmailContent((MailFunctions.getFirstEmailContent(email,
-            password, "Reset your Wikia password")));
+                                                                                      password,
+                                                                                      "Reset your Wikia password")));
     PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
         true);
 
@@ -713,7 +711,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
     PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "
-        + summary, true);
+                                            + summary, true);
     return summary;
   }
 
@@ -777,13 +775,13 @@ public class WikiBasePageObject extends BasePageObject {
 
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-        + token, true);
+                                         + token, true);
     return token;
   }
 
   public String loginAs(User user) {
     return loginAs(user.getUserName(), user.getPassword(),
-        urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+                   urlBuilder.getUrlForWiki(Configuration.getWikiName()));
   }
 
   public void openWikiPage(String wikiURL) {
@@ -805,7 +803,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public WatchPageObject unfollowCurrentUrl() {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
-        URLsContent.ACTION_UNFOLLOW));
+                                                 URLsContent.ACTION_UNFOLLOW));
     return new WatchPageObject(driver);
   }
 
@@ -862,14 +860,15 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
-        URLsContent.VEACTION_EDIT));
+                                             URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject(driver);
   }
 
   public void addVideoViaAjax(String videoURL) {
     jsActions.execute("$.ajax('" + getWikiUrl()
-        + "wikia.php?controller=Videos&method=addVideo&format=json', {" + "data: {url: '"
-        + videoURL + "'}," + "type: 'POST' } );");
+                      + "wikia.php?controller=Videos&method=addVideo&format=json', {"
+                      + "data: {url: '"
+                      + videoURL + "'}," + "type: 'POST' } );");
   }
 
   /**

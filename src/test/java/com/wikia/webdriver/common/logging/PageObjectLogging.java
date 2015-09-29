@@ -267,6 +267,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       if (user == User.ANONYMOUS) {
       } else {
         new WikiBasePageObject(driver).loginAs(user);
+        // make sure the original navigation destination doesn't change
+        driver.get(url);
       }
     }
 
