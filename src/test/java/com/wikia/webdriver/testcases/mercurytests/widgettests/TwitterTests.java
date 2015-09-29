@@ -63,7 +63,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_004")
+  @Test(groups = "MercuryTwitterWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
@@ -78,7 +78,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_005")
+  @Test(groups = "MercuryTwitterWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryTwitterWidgetTest_005_isErrorPresent() {
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);

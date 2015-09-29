@@ -63,7 +63,7 @@ public class PolldaddyTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPolldaddyWidgetTest_004")
+  @Test(groups = "MercuryPolldaddyWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
@@ -73,7 +73,7 @@ public class PolldaddyTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPolldaddyWidgetTest_005")
+  @Test(groups = "MercuryPolldaddyWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);

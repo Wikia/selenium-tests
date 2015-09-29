@@ -63,7 +63,7 @@ public class SoundCloudTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercurySoundcloudWidgetTest_004")
+  @Test(groups = "MercurySoundcloudWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercurySoundcloudWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);

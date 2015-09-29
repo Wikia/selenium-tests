@@ -63,7 +63,7 @@ public class GoogleFormTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryGoogleFormWidgetTest_004")
+  @Test(groups = "MercuryGoogleFormWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
@@ -73,7 +73,7 @@ public class GoogleFormTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryGoogleFormWidgetTest_005")
+  @Test(groups = "MercuryGoogleFormWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);

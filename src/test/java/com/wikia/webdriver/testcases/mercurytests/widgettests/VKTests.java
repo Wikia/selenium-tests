@@ -63,7 +63,7 @@ public class VKTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryVKWidgetTest_004")
+  @Test(groups = "MercuryVKWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
@@ -78,7 +78,7 @@ public class VKTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryVKWidgetTest_005")
+  @Test(groups = "MercuryVKWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_005_isErrorPresent() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);

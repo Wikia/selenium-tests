@@ -21,30 +21,26 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement pInfoImage;
   @FindBy(css = ".pi-title")
   private WebElement pInfoTitle;
-  @FindBy(css = ".pi-header")
-  private List<WebElement> pInfoTitleH3;
+  @FindBy(css = ".pi-image img")
+  private WebElement pInfoImageTag;
   @FindBy(css = ".pi-item .external")
   private WebElement pInfoExternalLink;
-  @FindBy(css = ".pi-navigation a[href*='redlink']")
-  private List<WebElement> pInfoRedlLink;
-  @FindBy(css = "b")
-  private List<WebElement> boldElements;
-  @FindBy(css = "i")
-  private List<WebElement> italicElements;
-  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
-  private List<WebElement> pInfoInternalLinks;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
   @FindBy(css = ".portable-infobox")
-  private WebElement infoboxLayout;
+  private WebElement pInfoLayout;
   @FindBy(css = ".tabberlive")
   private WebElement tabber;
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
-  @FindBy(css = ".pi-data-value ul li")
-  private List<WebElement> unorderedElementList;
-  @FindBy(css = ".pi-data-value ol li")
-  private List<WebElement> orderedElementList;
+  @FindBy(css = ".pi-image")
+  private WebElement imageWrapper;
+  @FindBy(css = ".pi-title")
+  private WebElement titleWrapper;
+  @FindBy(css = "body")
+  private WebElement bodyElement;
+  @FindBy(css = ".header-title")
+  private WebElement headerTitle;
   @FindBy(css = ".reference")
   private WebElement referenceElements;
   @FindBy(css = ".pi-data-label")
@@ -63,21 +59,29 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> navigationElements;
   @FindBy(css = ".pi-header")
   private List<WebElement> groupHeadersWrappers;
-  @FindBy(css = ".pi-image")
-  private WebElement imageWrapper;
-  @FindBy(css = ".pi-title")
-  private WebElement titleWrapper;
-  @FindBy(css = "body")
-  private WebElement bodyElement;
-  @FindBy(css = ".header-title")
-  private WebElement headerTitle;
+  @FindBy(css = "#articleCategories .category a")
+  private List<WebElement> categories;
+  @FindBy(css = ".pi-navigation a[href*='redlink']")
+  private List<WebElement> pInfoRedlLinkList;
+  @FindBy(css = "b")
+  private List<WebElement> boldElements;
+  @FindBy(css = "i")
+  private List<WebElement> italicElements;
+  @FindBy(css = ".portable-infobox a[href*='/wiki/']")
+  private List<WebElement> pInfoInternalLinkList;
+  @FindBy(css = ".pi-data-value ul li")
+  private List<WebElement> unorderedElementList;
+  @FindBy(css = ".pi-data-value ol li")
+  private List<WebElement> orderedElementList;
+  @FindBy(css = ".pi-header")
+  private List<WebElement> pInfoTitleH3;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
   }
 
   public String getBackgroundColor() {
-    return infoboxLayout.getCssValue("background-color");
+    return pInfoLayout.getCssValue("background-color");
   }
 
   public String getExternalLinkRedirectTitle() {
@@ -86,8 +90,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public String getInternalLinkRedirectTitle(int index) {
-    wait.forElementVisible(pInfoInternalLinks.get(index));
-    return pInfoInternalLinks.get(index).getAttribute("href");
+    wait.forElementVisible(pInfoInternalLinkList.get(index));
+    return pInfoInternalLinkList.get(index).getAttribute("href");
   }
 
   public WebElement getNavigationElements(int index) {
@@ -113,6 +117,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return driver.getCurrentUrl();
   }
 
+  public String getDataImageName() {
+    wait.forElementVisible(pInfoImageTag);
+    return pInfoImageTag.getAttribute("data-image-name");
+  }
+
   public PortableInfoboxPageObject clickExternalLink() {
     wait.forElementVisible(pInfoExternalLink);
     pInfoExternalLink.click();
@@ -120,9 +129,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject clickInternalLink(int index) {
-    wait.forElementVisible(pInfoInternalLinks.get(index));
-    scrollToElement(pInfoInternalLinks.get(index));
-    pInfoInternalLinks.get(index).click();
+    wait.forElementVisible(pInfoInternalLinkList.get(index));
+    scrollToElement(pInfoInternalLinkList.get(index));
+    pInfoInternalLinkList.get(index).click();
     return this;
   }
 
@@ -138,10 +147,16 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return new CategoryPageObject(driver);
   }
 
+  public CategoryPageObject clickCategory(int index) {
+    wait.forElementVisible(categories.get(index));
+    scrollAndClick(categories.get(index));
+    return new CategoryPageObject(driver);
+  }
+
   public CreateArticleModalComponentObject clickRedLink(int index) {
-    wait.forElementVisible(pInfoRedlLink.get(index));
-    scrollToElement(pInfoRedlLink.get(index));
-    pInfoRedlLink.get(index).click();
+    wait.forElementVisible(pInfoRedlLinkList.get(index));
+    scrollToElement(pInfoRedlLinkList.get(index));
+    pInfoRedlLinkList.get(index).click();
     return new CreateArticleModalComponentObject(driver);
   }
 
@@ -187,6 +202,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItem(int index) {
     compareFontSizes(itemValue, unorderedElementList.get(index));
+    return this;
+  }
+
+  public PortableInfoboxPageObject compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
+    Assertion.assertStringContains(imageName, categoryImageURL);
     return this;
   }
 
@@ -279,7 +299,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject verifyEmptyTags() {
-    Assertion.assertStringContains(infoboxLayout.getText(), "Default");
+    Assertion.assertStringContains(pInfoLayout.getText(), "Default");
     return this;
   }
 

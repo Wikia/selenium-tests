@@ -69,7 +69,7 @@ public class SpotifyTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercurySpotifyWidgetTest_004")
+  @Test(groups = "MercurySpotifyWidgetTest_004", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercurySpotifyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
@@ -79,7 +79,7 @@ public class SpotifyTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercurySpotifyWidgetTest_005")
+  @Test(groups = "MercurySpotifyWidgetTest_005", enabled = false)
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercurySpotifyWidgetTest_005_isErrorPresent() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);

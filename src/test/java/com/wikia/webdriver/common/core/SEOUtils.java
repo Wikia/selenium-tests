@@ -1,15 +1,23 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
+package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @ownership: Content X-Wing
+ *
+ * This class serves to perform search engine optimization tests The class methods can be used to
+ * verify meta tags attributes
  */
-public class SEOPageObject extends BasePageObject {
+public class SEOUtils extends BasePageObject {
 
   @FindBy(css = "meta[property='og:type']")
   private WebElement ogType;
@@ -27,8 +35,10 @@ public class SEOPageObject extends BasePageObject {
   private WebElement ogSiteName;
   @FindBy(css = "link[rel='canonical']")
   private WebElement canonicalUrl;
+  @FindBy(css = "meta[name='robots']")
+  private WebElement robots;
 
-  public SEOPageObject(WebDriver driver) {
+  public SEOUtils(WebDriver driver) {
     super(driver);
   }
 
@@ -44,13 +54,6 @@ public class SEOPageObject extends BasePageObject {
       throw new WebDriverException("Expected String but got null");
     }
     return ogType.getAttribute("content").contains("website");
-  }
-
-  public boolean isOgTypeArticle() throws WebDriverException {
-    if (ogType.getAttribute("content") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return ogType.getAttribute("content").contains("article");
   }
 
   public boolean isOgTitleWithWiki() throws WebDriverException {
@@ -99,11 +102,24 @@ public class SEOPageObject extends BasePageObject {
     return !ogFbApp.getAttribute("content").isEmpty();
   }
 
-  public boolean isLinkRelCanonical() throws WebDriverException {
-    wait.forElementInViewPort(canonicalUrl);
-    if (canonicalUrl.getAttribute("href") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return driver.getCurrentUrl().equals(canonicalUrl.getAttribute("href"));
+  public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
+    List<String> currentAttributes = Arrays.asList(robots.getAttribute("content").split("[, ]+"));
+
+    PageObjectLogging.log(
+      "Robots Meta Tag passed: " + expectedAttributes,
+      "Robots Meta Tag found on page: " + currentAttributes,
+      true
+    );
+
+    return currentAttributes.equals(expectedAttributes);
+  }
+
+  public boolean isRobotsMetaTagSet() {
+    PageObjectLogging.log(
+      "Robots Meta Tag",
+      "Checking if robots meta tag is present on page",
+      true
+    );
+    return isElementOnPage(robots);
   }
 }
