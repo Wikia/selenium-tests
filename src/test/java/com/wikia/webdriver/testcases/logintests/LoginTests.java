@@ -4,10 +4,13 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
+import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -41,13 +44,16 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
-  public void Login_003_globalNavLogin() {
+  public void Login_003_newAuthInGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
-    DropDownComponentObject dropDown = new DropDownComponentObject(driver);
-    dropDown.openDropDown();
-    dropDown.logIn(credentials.userName2, credentials.password2);
-    base.verifyUserLoggedIn(credentials.userName2);
+    NavigationBar signInLink = new NavigationBar(driver);
+    signInLink.clickOnSignIn();
+    AuthModal newAuthModal = signInLink.getNewAuthModal();
+    Assert.assertTrue(newAuthModal.isOpened());
+
+    newAuthModal.login(credentials.userName, credentials.password);
+    base.verifyUserLoggedIn(credentials.userName);
   }
 
   @Test(groups = "Login_004")
