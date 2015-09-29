@@ -20,31 +20,31 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement bodyElement;
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
-  @FindBy(css= ".pi-hero .article-image")
+  @FindBy(css = ".pi-hero .article-image")
   private WebElement mainImage;
-  @FindBy(css= ".portable-infobox .pi-hero-title")
+  @FindBy(css = ".portable-infobox .pi-hero-title")
   private WebElement title;
-  @FindBy(css= ".portable-infobox .pi-title")
+  @FindBy(css = ".portable-infobox .pi-title")
   private WebElement titleSmallImage;
-  @FindBy(css= ".portable-infobox .pi-expand-button")
+  @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
-  @FindBy(css=".article-content .collapsed")
+  @FindBy(css = ".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
-  @FindBy(css=".tabber .article-image")
+  @FindBy(css = ".tabber .article-image")
   private WebElement imageInTabber;
-  @FindBy(css=".tabber figcaption")
+  @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
-  @FindBy(css=".portable-infobox .article-video")
+  @FindBy(css = ".portable-infobox .article-video")
   private WebElement video;
-  @FindBy(css=".portable-infobox .article-video figcaption")
+  @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
-  @FindBy(css=".pi-title img")
+  @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
-  @FindBy(css =".portable-infobox .external")
+  @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
-  @FindBy(css= ".pi-item .pi-data-label")
+  @FindBy(css = ".pi-item .pi-data-label")
   private List<WebElement> dataLabels;
-  @FindBy(css =".pi-item .pi-data-value")
+  @FindBy(css = ".pi-item .pi-data-value")
   private List<WebElement> dataValues;
   @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
@@ -64,7 +64,7 @@ public class PortableInfoboxObject extends BasePageObject {
   public String getExternalLinkName(int index) {
     Assertion.assertFalse(externalLinks.isEmpty());
     wait.forElementVisible(externalLinks.get(index));
-    
+
     return externalLinks.get(index).getText();
   }
 
