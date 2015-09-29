@@ -239,5 +239,4 @@ public class PortableInfoboxObject extends BasePageObject {
     );
     return this;
   }
-
 }

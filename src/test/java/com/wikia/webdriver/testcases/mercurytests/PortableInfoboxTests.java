@@ -6,8 +6,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
 
-import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @ownshership: Content West-Wing
  */
 
-@Test(groups = {"MercuryPortableInfoboxTests"})
+@Test(groups = "MercuryPortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -24,7 +24,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_001", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_001")
   public void MercuryPortableInfoboxTest_001_VerifyElementsVisible() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -40,7 +40,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areHeadersVisible();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_002", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_002")
   public void MercuryPortableInfoboxTest_002_VerifyCollapsing() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -59,7 +59,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_003", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_003")
   public void MercuryPortableInfoboxTest_003_VerifyExternalRedirecting() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -78,7 +78,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyExternalLinkNameAndURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_004", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_004")
   public void MercuryPortableInfoboxTest_004_VerifyTabberVisibility() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -88,7 +88,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isImageCaptionInTabberVisible();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_005", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_005")
   public void MercuryPortableInfoboxTest_005_VerifyLightboxPresence() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -100,7 +100,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isTitleOverImageVisible();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_006", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_006")
   public void MercuryPortableInfoboxTest_006_VerifyListsMargin() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -112,7 +112,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareListsAndDataValuesMargin();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_007", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_007")
   public void MercuryPortableInfoboxTest_007_VideoInDataFields() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_1);
@@ -125,7 +125,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = {"MercuryPortableInfoboxTest_008", "MercuryPortableInfoboxTests"})
+  @Test(groups = "MercuryPortableInfoboxTest_008")
   public void MercuryPortableInfoboxTest_008_SmallImages() {
     new ArticlePageObject(driver)
         .openMercuryArticleByName(wikiURL, MercurySubpages.INFOBOX_2);
@@ -134,5 +134,4 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isTitleAboveImageVisible()
         .isHeroImageCentered();
   }
-
 }
