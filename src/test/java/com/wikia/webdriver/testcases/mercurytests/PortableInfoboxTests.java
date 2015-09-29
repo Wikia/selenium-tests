@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
 
@@ -93,6 +94,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
+  @RelatedIssue(issueID = "DAT-3085")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -106,7 +108,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Check video
     infobox
-        .clickExpandButton()
+        // TODO: uncomment after related issue is done
+        //.clickExpandButton()
         .clickVideo()
         .isLightboxOpened();
   }
