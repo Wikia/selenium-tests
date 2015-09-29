@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxComponentObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,10 +32,6 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement imageInTabber;
   @FindBy(css=".tabber figcaption")
   private WebElement captionInTabber;
-  @FindBy(css=".lightbox-media")
-  private WebElement lightbox;
-  @FindBy(css=".lightbox-close-button")
-  private WebElement lightboxCloseButton;
   @FindBy(css=".portable-infobox .article-video")
   private WebElement video;
   @FindBy(css=".portable-infobox .article-video figcaption")
@@ -51,10 +48,6 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> dataLabels;
   @FindBy(css =".pi-item .pi-data-value")
   private List<WebElement> dataValues;
-  @FindBy(css = "b")
-  private List<WebElement> boldElements;
-  @FindBy(css = "i")
-  private List<WebElement> italicElements;
   @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
   @FindBy(css = ".portable-infobox ul li")
@@ -101,8 +94,7 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject closeLightbox() {
-    wait.forElementVisible(lightboxCloseButton);
-    lightboxCloseButton.click();
+    new LightboxComponentObject(driver).clickCloseButton();
     return this;
   }
 
@@ -125,7 +117,7 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject isLightboxOpened() {
-    Assertion.assertEquals(isElementVisible(lightbox), true);
+    Assertion.assertTrue(new LightboxComponentObject(driver).isLightboxOpened());
     return this;
   }
 
@@ -181,16 +173,6 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject areBoldElementsPresented() {
-    Assertion.assertFalse(boldElements.isEmpty());
-    return this;
-  }
-
-  public PortableInfoboxObject areItalicElementsPresented() {
-    Assertion.assertFalse(italicElements.isEmpty());
-    return this;
-  }
-
   public PortableInfoboxObject areUnorderedListsVisible() {
     Assertion.assertFalse(unorderedLists.isEmpty());
     return this;
@@ -222,8 +204,8 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String URL) {
-    Assertion.assertStringContains(URL, name);
+  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String url) {
+    Assertion.assertStringContains(url, name);
     return this;
   }
 
