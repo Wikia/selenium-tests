@@ -74,6 +74,7 @@ public class PortableInfoboxObject extends BasePageObject {
     return driver.getCurrentUrl();
   }
 
+  // TODO: This is not real tap, replace with PerformTouchActions class methods
   public PortableInfoboxObject tapInfoboxContent() {
     Assertion.assertFalse(dataLabels.isEmpty());
     dataLabels.get(0).click();
@@ -202,6 +203,13 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject isExternalLinkLabelInURL(String name, String url) {
+    Assertion.assertStringContains(url, name);
+    PageObjectLogging.log("External links", MercuryMessages.VISIBLE_MSG, true);
+
+    return this;
+  }
+
   public PortableInfoboxObject areUnorderedListsVisible() {
     Assertion.assertFalse(unorderedLists.isEmpty());
     PageObjectLogging.log("Unordered list", MercuryMessages.VISIBLE_MSG, true);
@@ -223,43 +231,45 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
-  public PortableInfoboxObject verifyDataItemsVisibility() {
-    Assertion.assertFalse(dataLabels.isEmpty());
-    PageObjectLogging.log("Data label", MercuryMessages.VISIBLE_MSG, true);
-    Assertion.assertFalse(dataValues.isEmpty());
-    PageObjectLogging.log("Data values", MercuryMessages.VISIBLE_MSG, true);
-
-    return this;
-  }
-
-  public PortableInfoboxObject verifyLinksVisibility() {
+  public PortableInfoboxObject areLinksVisible() {
     Assertion.assertFalse(externalLinks.isEmpty());
     PageObjectLogging.log("Links", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
-  public PortableInfoboxObject verifyReferencesVisibility() {
+  public PortableInfoboxObject areReferencesVisible() {
     Assertion.assertFalse(references.isEmpty());
     PageObjectLogging.log("References", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
-  public PortableInfoboxObject verifyExternalLinkNameAndURL(String name, String url) {
-    Assertion.assertStringContains(url, name);
-    PageObjectLogging.log("External links", MercuryMessages.VISIBLE_MSG, true);
+  public PortableInfoboxObject areDataLabelsVisible() {
+    Assertion.assertFalse(dataLabels.isEmpty());
+    PageObjectLogging.log("Data labels", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
-  public PortableInfoboxObject compareListsAndDataValuesMargin() {
+  public PortableInfoboxObject areDataValuesVisible() {
+    Assertion.assertFalse(dataValues.isEmpty());
+    PageObjectLogging.log("Data values", MercuryMessages.VISIBLE_MSG, true);
+
+    return this;
+  }
+
+  public PortableInfoboxObject areUnorderedListAndDataValuesMarginEqual() {
     Assertion.assertEquals(
         unorderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
     PageObjectLogging.log("Unordered list labes and value", "have the same margin", true);
 
+    return this;
+  }
+
+  public PortableInfoboxObject areOrderedListAndDataValuesMarginEqual() {
     Assertion.assertEquals(
         orderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")

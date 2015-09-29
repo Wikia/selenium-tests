@@ -27,15 +27,28 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
+    // Before infobox expanding
     infobox
         .isMainImageVisible()
         .isTitleOverImageVisible()
         .isImageInTitleNotVisible()
+        .isImageInTabberVisible()
+        .isImageCaptionInTabberVisible();
+
+    // After infobox expanding
+    infobox
         .clickExpandButton()
-        .verifyDataItemsVisibility()
-        .verifyLinksVisibility()
-        .verifyReferencesVisibility()
-        .areHeadersVisible();
+        .isVideoVisible()
+        .isVideoCaptionVisible()
+        .areDataLabelsVisible()
+        .areDataValuesVisible()
+        .areLinksVisible()
+        .areReferencesVisible()
+        .areHeadersVisible()
+        .areUnorderedListsVisible()
+        .areOrderedListsVisible()
+        .areUnorderedListAndDataValuesMarginEqual()
+        .areOrderedListAndDataValuesMarginEqual();
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_002")
@@ -44,7 +57,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
-    //expand by clicking button
+    // expand by clicking button
     infobox
         .isInfoboxCollapsed()
         .clickExpandButton()
@@ -52,7 +65,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickExpandButton()
         .isInfoboxCollapsed();
 
-    //expand by tapping Infobox's content
+    // expand by tapping Infobox's content
     infobox
         .tapInfoboxContent()
         .isInfoboxExpanded()
@@ -68,70 +81,39 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalLinkName = infobox
         .clickExpandButton()
-        .verifyLinksVisibility()
+        .areLinksVisible()
         .getExternalLinkName(0);
 
     String externalURL = infobox
         .clickExternalLink(0)
         .getUrlFromExternalLinkaAfterPageIsLoaded();
 
-    infobox.verifyExternalLinkNameAndURL(externalLinkName, externalURL);
+    infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_004_TabberVisibility() {
+  public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
-    infobox
-        .isImageInTabberVisible()
-        .isImageCaptionInTabberVisible();
-  }
-
-  @Test(groups = "MercuryPortableInfoboxTest_005")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_005_ImageOpensInLightbox() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
-
+    // Check image
     infobox
         .clickMainImage()
         .isLightboxOpened()
         .closeLightbox()
         .isTitleOverImageVisible();
-  }
 
-  @Test(groups = "MercuryPortableInfoboxTest_006")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_006_ListsMargin() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
-
+    // Check video
     infobox
         .clickExpandButton()
-        .areUnorderedListsVisible()
-        .areOrderedListsVisible()
-        .compareListsAndDataValuesMargin();
-  }
-
-  @Test(groups = "MercuryPortableInfoboxTest_007")
-  @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_007_VideoInDataFields() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
-
-    infobox
-        .clickExpandButton()
-        .isVideoVisible()
-        .isVideoCaptionVisible()
         .clickVideo()
         .isLightboxOpened();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_008")
+  @Test(groups = "MercuryPortableInfoboxTest_005")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void MercuryPortableInfoboxTest_008_SmallImages() {
+  public void MercuryPortableInfoboxTest_005_SmallImages() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
 
