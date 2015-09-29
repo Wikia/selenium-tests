@@ -266,8 +266,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       User user = method.getAnnotation(Execute.class).asUser();
       if (user == User.ANONYMOUS) {
       } else {
+        // log in user and make sure user is logged in
         new WikiBasePageObject(driver).loginAs(user);
-        // make sure the original navigation destination doesn't change
+        // get the flow back to teh original destination url
         driver.get(url);
       }
     }
