@@ -557,19 +557,6 @@ public class WikiBasePageObject extends BasePageObject {
       }
       wait.forElementVisible(By.cssSelector(
           LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
-//      waitFor.until(new ExpectedCondition<Boolean>() {
-//        @Override
-//        public Boolean apply(WebDriver driver) {
-//          try {
-//            return driver.findElements(
-//                By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
-//                                                               userName.replace(" ", "_")))).size()
-//                   > 0;// only for verification
-//          } catch (StaleElementReferenceException e) {
-//            return false;
-//          }
-//        }
-//      });
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
