@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,8 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
-import org.testng.annotations.Test;
 
 
 /**
@@ -37,8 +37,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.remindPassword(userName, credentials.apiToken);
 
     dropdown.verifyMessageAboutNewPassword(userName);
-    String
-        newPassword =
+    String newPassword =
         dropdown.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     dropdown.openDropDown();
     dropdown.logIn(userName, newPassword);
@@ -62,8 +61,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.remindPassword(userName, credentials.apiToken);
     login.verifyMessageAboutNewPassword(userName);
-    String
-        newPassword =
+    String newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     login.login(userName, newPassword);
     newPassword = login.setNewPassword();
@@ -88,10 +86,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     cnwLogin.typeInUserName(userName);
     cnwLogin.clickForgotPassword(userName, credentials.apiToken);
     cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
-    String
-        newPassword =
-        cnwLogin
-            .receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+    String newPassword =
+        cnwLogin.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
     cnwLogin.typeInPassword(newPassword);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
     new SpecialUserLoginPageObject(driver).setNewPassword();

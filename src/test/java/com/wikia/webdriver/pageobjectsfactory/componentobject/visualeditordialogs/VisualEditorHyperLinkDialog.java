@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -18,24 +18,22 @@ import java.util.List;
  */
 public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
+  private static final int NEW_PAGE_INDEX = 0;
+  private static final int MATCHING_PAGE_INDEX = 1;
+  private static final int EXTERNAL_LINK_INDEX = 2;
+  private static final int REDIRECT_PAGE_INDEX = 3;
   @FindBy(css = ".ve-ui-mwLinkTargetInputWidget input")
   private WebElement linkInput;
   @FindBy(css = ".oo-ui-pendingElement-pending")
   private WebElement inputPending;
   @FindBy(css = ".oo-ui-optionWidget-selected")
   private WebElement selectedResult;
-
   private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
   private By selectedResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
   private By linkCategoryBy = By
       .cssSelector(".oo-ui-menuSectionOptionWidget .oo-ui-labelElement-label");
   private By doneButtonBy = By.cssSelector(".oo-ui-window-foot .oo-ui-buttonElement-button");
-
   private int[] pageCategoryIndex = new int[4];
-  private static final int NEW_PAGE_INDEX = 0;
-  private static final int MATCHING_PAGE_INDEX = 1;
-  private static final int EXTERNAL_LINK_INDEX = 2;
-  private static final int REDIRECT_PAGE_INDEX = 3;
 
   public VisualEditorHyperLinkDialog(WebDriver driver) {
     super(driver);

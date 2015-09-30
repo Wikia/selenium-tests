@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.LOG;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,9 +12,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -47,26 +47,21 @@ public class AdsComparison {
   }
 
   private void changeOpacity(String selector, int value, WebDriver driver) {
-    ((JavascriptExecutor) driver).executeScript(
-        "$(arguments[0]).css('opacity', arguments[1]);",
-        selector, Integer.toString(value)
-    );
+    ((JavascriptExecutor) driver).executeScript("$(arguments[0]).css('opacity', arguments[1]);",
+        selector, Integer.toString(value));
   }
 
-  public boolean compareImageWithScreenshot(final String pathToImage,
-                                            final WebElement element,
-                                            final WebDriver driver) {
+  public boolean compareImageWithScreenshot(final String pathToImage, final WebElement element,
+      final WebDriver driver) {
     BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
-    BufferedImage actualImage = imageEditor.fileToImage(
-        shooter.captureWebElement(element, driver));
+    BufferedImage actualImage = imageEditor.fileToImage(shooter.captureWebElement(element, driver));
     return imageComparison.areImagesTheSame(actualImage, expectedImage);
   }
 
-  public boolean isAdVisible(final WebElement element, final String selector,
-                             final WebDriver driver) {
+  public boolean isAdVisible(final WebElement element, final String selector, final WebDriver driver) {
     hideSlot(selector, driver);
     final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
-    LOG.logResult("ScreenshotsComparison", "Background image in " + selector, true, driver);
+    LOG.success("ScreenshotsComparison", "Background image in " + selector, true);
     showSlot(selector, driver);
     try {
       WebDriverWait wait = new WebDriverWait(driver, AD_TIMEOUT_SEC);
@@ -112,16 +107,11 @@ public class AdsComparison {
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
-      LOG.logResult(
-          "verifyColorAd",
-          "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
-          true,
-          driver
-      );
+      LOG.success("verifyColorAd", "At least " + IMAGES_THRESHOLD_PERCENT
+          + " percents of Ad has " + color,true);
     } else {
-      throw new NoSuchElementException(
-          "At least " + (100 - IMAGES_THRESHOLD_PERCENT) + " percents of Ad does not have " + color
-      );
+      throw new NoSuchElementException("At least " + (100 - IMAGES_THRESHOLD_PERCENT)
+          + " percents of Ad does not have " + color);
     }
   }
 }

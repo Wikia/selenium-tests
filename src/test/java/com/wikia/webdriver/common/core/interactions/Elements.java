@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Created by Ludwik on 2015-08-03.
@@ -27,9 +27,8 @@ public class Elements {
       }
       if (value.equals(retAttribute)) {
         foundElement = element;
-        LOG.log("getElementByValue", "Element with attribute: " + attribute
-                                     + " with the value: " + value + " is found from the list",
-                LOG.Type.SUCCESS);
+        LOG.log("getElementByValue", "Element with attribute: " + attribute + " with the value: "
+            + value + " is found from the list", LOG.Type.SUCCESS);
         break;
       }
     }
@@ -45,8 +44,7 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        LOG.success("getElementByText", "Element with text: " + value
-                                    + " is found from the list");
+        LOG.success("getElementByText", "Element with text: " + value + " is found from the list");
         break;
       }
     }
@@ -64,7 +62,7 @@ public class Elements {
       if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
         foundElement = element;
         LOG.success("getElementByChildText", "Element's child with text: " + value
-                                         + " is found from the list");
+            + " is found from the list");
         break;
       }
     }

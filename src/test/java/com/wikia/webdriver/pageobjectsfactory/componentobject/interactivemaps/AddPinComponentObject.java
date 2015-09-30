@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -56,15 +56,13 @@ public class AddPinComponentObject extends BasePageObject {
   public void clearAssociatedArticleField() {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.clear();
-    LOG.result("clearAssociatedArticleField",
-               "Associated article field was cleared",
-               true);
+    LOG.result("clearAssociatedArticleField", "Associated article field was cleared", true);
   }
 
   public InteractiveMapPageObject clickCancelButton() {
     wait.forElementVisible(cancelButton);
     cancelButton.click();
-    LOG.logResult("clickCancelButton", "cancel button clicked", true, driver);
+    LOG.success("clickCancelButton", "cancel button clicked", true);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -78,7 +76,7 @@ public class AddPinComponentObject extends BasePageObject {
   public InteractiveMapPageObject clickSaveButton() {
     wait.forElementVisible(saveButton);
     saveButton.click();
-    LOG.logResult("clickSaveButton", "Save button clicked", true, driver);
+    LOG.success("clickSaveButton", "Save button clicked", true);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -105,7 +103,7 @@ public class AddPinComponentObject extends BasePageObject {
     wait.forElementVisible(pinCategorySelector);
     Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
     pinCategorySelectorDropDown.selectByIndex(1);
-    LOG.logResult("selectPinType", "Pin type was choosed", true, driver);
+    LOG.success("selectPinType", "Pin type was choosed", true);
   }
 
   public void typePinName(String pinName) {
@@ -117,17 +115,13 @@ public class AddPinComponentObject extends BasePageObject {
   public void typePinDescription(String pinDescription) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(pinDescription);
-    LOG.result("typePinDescription",
-               pinDescription + "Pin description was typed in",
-               true);
+    LOG.result("typePinDescription", pinDescription + "Pin description was typed in", true);
   }
 
   public void typeAssociatedArticle(String associatedArticleName) {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.sendKeys(associatedArticleName);
-    LOG.result("typePinName",
-               associatedArticleName + " Associated article is typed in",
-               true);
+    LOG.result("typePinName", associatedArticleName + " Associated article is typed in", true);
   }
 
   public void verifyPinTitleFieldIsDisplayed() {
@@ -137,32 +131,30 @@ public class AddPinComponentObject extends BasePageObject {
 
   public void verifyAssociatedArticleFieldIsDisplayed() {
     wait.forElementVisible(associatedArticleField);
-    LOG.logResult("verifyAssociatedArticleFieldIsDisplayed",
-                  "Associated article field is visible", true, driver);
+    LOG.success("verifyAssociatedArticleFieldIsDisplayed", "Associated article field is visible",
+                true);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
     wait.forElementVisible(pinCategorySelector);
-    LOG.logResult("verifyPinCategorySelector", "Pin category selector is visible", true,
-                  driver);
+    LOG.success("verifyPinCategorySelector", "Pin category selector is visible",true);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
     wait.forElementVisible(descriptionField);
-    LOG.logResult("verifyDescriptionFieldIsDisplayed", "Description field is visible",
-                  true, driver);
+    LOG.success("verifyDescriptionFieldIsDisplayed", "Description field is visible",true);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
     wait.forElementVisible(associatedArticleImage);
-    LOG.logResult("verifyAssociatedArticleImageIsDisplayed",
-                  "Associated article image placeholder is visible", true, driver);
+    LOG.success("verifyAssociatedArticleImageIsDisplayed",
+                "Associated article image placeholder is visible", true);
   }
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
     Assertion.assertEquals(isElementOnPage(errorField), true);
-    LOG.logResult("verifyErrorIsPresented", "Error message is visible", true, driver);
+    LOG.success("verifyErrorIsPresented", "Error message is visible", true);
   }
 
   public void verifyErrorContent(String errorMessage) {
@@ -178,7 +170,7 @@ public class AddPinComponentObject extends BasePageObject {
   public void verifyAssociatedArticlePlaceholder() {
     wait.forElementVisible(associatedArticleField);
     Assertion.assertEquals(InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
-                           associatedArticleField.getAttribute("placeholder"),
-                           "Associated article place holder is not correct");
+        associatedArticleField.getAttribute("placeholder"),
+        "Associated article place holder is not correct");
   }
 }

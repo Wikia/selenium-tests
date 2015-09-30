@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała

@@ -1,5 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.LOG;
@@ -7,13 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.Avatar
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class UserProfilePageObject extends WikiBasePageObject {
 
@@ -48,9 +48,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   public BlogPageObject openBlogPage(int blogNumber) {
     String blogURL = blogPostList.get(blogNumber).getAttribute("href");
     getUrl(blogURL);
-    LOG.result("openBlogPage",
-               "blog post " + blogURL + " opened",
-               true);
+    LOG.result("openBlogPage", "blog post " + blogURL + " opened", true);
     return new BlogPageObject(driver);
   }
 
@@ -62,8 +60,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
         LOG.success("openFirstPost", "valid post found on " + i + " position");
         break;
       }
-      LOG.result("openFirstPost", "deleted post found on " + i
-                                  + " position, trying next one", true);
+      LOG.result("openFirstPost", "deleted post found on " + i + " position, trying next one", true);
       driver.navigate().back();
     }
     return new BlogPageObject(driver);
@@ -73,8 +70,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    LOG.logResult("clickOnCreateBlogPost", "Click on create blog post button",
-                  true, driver);
+    LOG.success("clickOnCreateBlogPost", "Click on create blog post button",true);
     return new SpecialCreatePagePageObject(driver);
   }
 
@@ -109,13 +105,12 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
   public void verifyAvatar(String fileName) {
     wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
-	  LOG.log("verifyAvatar", "Desired avatar is visible on user profile page",
-                  LOG.Type.SUCCESS);
+    LOG.log("verifyAvatar", "Desired avatar is visible on user profile page", LOG.Type.SUCCESS);
   }
 
-public void verifyProfilePage(String userName) {
-	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
-	LOG.success("verifyProfilePage", userName + " user profile page verified");
-}
+  public void verifyProfilePage(String userName) {
+    verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
+    LOG.success("verifyProfilePage", userName + " user profile page verified");
+  }
 
 }

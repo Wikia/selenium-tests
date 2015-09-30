@@ -8,16 +8,15 @@ import java.util.Map;
  */
 public class AdsContent {
 
-  //HashMap with slots selector
+  // HashMap with slots selector
   public static final Map<String, String> SLOTS_SELECTORS;
 
-  //SCRIPTS
-  public static final String ADS_PUSHSLOT_SCRIPT =
-      "window.adslots2.push([\"%slot%\"]);";
+  // SCRIPTS
+  public static final String ADS_PUSHSLOT_SCRIPT = "window.adslots2.push([\"%slot%\"]);";
   public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
       "top.window.adDriver2ForcedStatus['%s']='success';";
 
-  //SLOTS NAMES
+  // SLOTS NAMES
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
   public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
   public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
@@ -44,7 +43,7 @@ public class AdsContent {
   public static final String INVISIBLE_HIGH_IMPACT = "INVISIBLE_HIGH_IMPACT";
 
 
-  //CONTAINERS
+  // CONTAINERS
   public static final String PREFOOTERS_CONTAINER = "Prefooters";
   public static final String ADS_IN_CONTENT_CONTAINER = "AdsInContent";
 
@@ -87,4 +86,3 @@ public class AdsContent {
 
   }
 }
-

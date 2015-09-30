@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -8,9 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała

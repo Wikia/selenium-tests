@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol Kujawiak
@@ -33,8 +33,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   @FindBy(css = ".domain-country")
   private WebElement languageSelectedIndicator;
   @FindBy(css = ".wiki-domain-error.error-msg")
-  private WebElement wikiDomainErrorMessage;
-  ;
+  private WebElement wikiDomainErrorMessage;;
 
   private String wikiNameString;
 
@@ -80,7 +79,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   public void verifySuccessIcon() {
     wait.forElementVisible(successIcon);
     wait.forElementVisible(submitButton);
-    LOG.logResult("waitForSuccessIcon", "Success icon found", true, driver);
+    LOG.success("waitForSuccessIcon", "Success icon found", true);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
@@ -89,21 +88,19 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   }
 
   public void verifyIncorrectWikiName() {
-    wait.forTextInElement(wikiDomainErrorMessage,
-                                             CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
-    LOG.success("verifyIncorrectWikiName",
-                "Verified wiki name violates naming policy");
+    wait.forTextInElement(wikiDomainErrorMessage, CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
+    LOG.success("verifyIncorrectWikiName", "Verified wiki name violates naming policy");
   }
 
   public CreateNewWikiPageObjectStep2 submit() {
     scrollAndClick(submitButton);
-    LOG.logResult("submit", "Submit button clicked", true, driver);
+    LOG.success("submit", "Submit button clicked", true);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
     scrollAndClick(submitButton);
-    LOG.logResult("submit", "Submit button clicked", true, driver);
+    LOG.success("submit", "Submit button clicked", true);
     return new CreateNewWikiLogInSignUpPageObject(driver);
   }
 

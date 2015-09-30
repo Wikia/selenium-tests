@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -22,7 +22,8 @@ public class TableOfContentPageObject extends BasePageObject {
   private WebElement TOCMenu;
   @FindBy(css = "nav.table-of-contents div")
   private WebElement tocButton;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
+  @FindBy(
+      xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
   private WebElement tocUnderH1;
 
   public TableOfContentPageObject(WebDriver driver) {
@@ -60,8 +61,7 @@ public class TableOfContentPageObject extends BasePageObject {
             "return Math.floor($('section.article-body h2').eq(" + index + ").offset().top)")
             .toString();
     int h2Pos = Integer.parseInt(h2PosString);
-    int windowYPos =
-        Integer.parseInt(js.executeScript("return $(window).scrollTop()").toString());
+    int windowYPos = Integer.parseInt(js.executeScript("return $(window).scrollTop()").toString());
     return h2Pos == windowYPos;
   }
 

@@ -1,19 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.Assertion;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
 
 /**
  * @author Robert 'rochan' Chan
  */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
+  private static final String DIFF_LINE_STRING = ".diffchange-inline";
+  private static final int DELETE = 0;
+  private static final int INSERT = 1;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement returnToSaveFormButton;
   @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
@@ -22,11 +25,6 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   private List<WebElement> addedLines;
   @FindBy(css = ".diff-deletedline")
   private List<WebElement> deletedLines;
-
-  private static final String DIFF_LINE_STRING = ".diffchange-inline";
-
-  private static final int DELETE = 0;
-  private static final int INSERT = 1;
 
   public VisualEditorReviewChangesDialog(WebDriver driver) {
     super(driver);
@@ -64,10 +62,10 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
     }
     for (WebElement currentDiff : diffLines) {
       String currentText;
-      //Check to see if the current diff line has inline diff
+      // Check to see if the current diff line has inline diff
       if (isElementInContext(DIFF_LINE_STRING, currentDiff)) {
         List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
-        //iterate through multiple inline diffs
+        // iterate through multiple inline diffs
         for (WebElement currentInlineDiff : inlineDiffs) {
           String currentInlineText = currentInlineDiff.getText();
           if (isDiffFound(targets, currentInlineText)) {

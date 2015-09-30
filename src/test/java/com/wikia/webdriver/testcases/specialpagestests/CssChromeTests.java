@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -8,9 +11,6 @@ import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 public class CssChromeTests extends NewTestTemplate {
 

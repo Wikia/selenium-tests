@@ -1,14 +1,14 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
 /**
  * @ownership AdEngineering

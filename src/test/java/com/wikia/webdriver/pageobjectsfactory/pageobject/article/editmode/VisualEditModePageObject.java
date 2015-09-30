@@ -1,5 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,18 +27,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -174,7 +174,7 @@ public class VisualEditModePageObject extends EditMode {
   public void verifyContentLoaded() {
     driver.switchTo().frame(iframe);
     wait.forElementVisible(contentInput);
-    LOG.logResult("verifyContentLoaded", "RTE editor loaded", true, driver);
+    LOG.success("verifyContentLoaded", "RTE editor loaded", true);
     driver.switchTo().defaultContent();
   }
 
@@ -248,7 +248,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     wait.forElementVisible(modifyComponentButton);
     modifyComponentButton.click();
-    LOG.logResult("modifyGallery", "Click on 'modify button' on gallery", true, driver);
+    LOG.success("modifyGallery", "Click on 'modify button' on gallery", true);
     switch (component) {
       case GALLERY:
         return new GalleryBuilderComponentObject(driver);
@@ -293,8 +293,7 @@ public class VisualEditModePageObject extends EditMode {
         wait.forElementNotPresent(videoBy);
         break;
       default:
-        LOG.error("verifyComponentRemoved", "Invalid component: " + component.name()
-                                            + " selected");
+        LOG.error("verifyComponentRemoved", "Invalid component: " + component.name() + " selected");
         break;
     }
     driver.switchTo().defaultContent();
@@ -338,8 +337,7 @@ public class VisualEditModePageObject extends EditMode {
     }
     CommonUtils.setClipboardContents(builder);
     messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    LOG.logResult("deleteUnwantedVideoFromMessage",
-                  "Delete all source code on the article", true, driver);
+    LOG.success("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true);
   }
 
   public void typeCategoryName(String categoryName) {
@@ -359,8 +357,7 @@ public class VisualEditModePageObject extends EditMode {
         Thread.sleep(500);
         timeout += 500;
       } catch (InterruptedException e) {
-        LOG
-            .result("triggerCategorySuggestions", "Interrupted Exception occurred", false);
+        LOG.result("triggerCategorySuggestions", "Interrupted Exception occurred", false);
       }
       pressDownArrow(categoryInput);
       returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
@@ -401,8 +398,7 @@ public class VisualEditModePageObject extends EditMode {
     String categoryName = categoryItem.getText();
     categoryItem.click();
     waitForElementNotVisibleByElement(categorySuggestionsContainer);
-    LOG.success("selectCategorySuggestions", categoryNumber
-                                             + " category selected from suggestions");
+    LOG.success("selectCategorySuggestions", categoryNumber + " category selected from suggestions");
     return categoryName;
   }
 
@@ -411,8 +407,7 @@ public class VisualEditModePageObject extends EditMode {
         driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
             categoryName)));
     jsActions.click(category);
-    LOG.success("editCategory", "edit category button clicked on category "
-                                + categoryName);
+    LOG.success("editCategory", "edit category button clicked on category " + categoryName);
     return new EditCategoryComponentObject(driver);
   }
 
@@ -421,15 +416,14 @@ public class VisualEditModePageObject extends EditMode {
         driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
             categoryName)));
     jsActions.click(category);
-    LOG.success("removeCategory", "remove category button clicked on category "
-                                  + categoryName);
+    LOG.success("removeCategory", "remove category button clicked on category " + categoryName);
   }
 
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
     LOG.success("verifyBlockedUserMessage",
-                "blocked user message when attempting to create article verified");
+        "blocked user message when attempting to create article verified");
   }
 
   private void selectFromContextMenu(WebElement option) {

@@ -1,5 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -20,15 +29,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Robert 'rochan' Chan
@@ -38,15 +38,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private static final int STYLE_LIST = 1;
   private static final int INSERT_LIST = 2;
   private static final int HAMBURGER_LIST = 0;
-
+  @FindBy(css = ".oo-ui-frame")
+  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
   @FindBy(css = ".oo-ui-icon-italic-i")
   private WebElement italicButton;
   @FindBy(css = ".oo-ui-icon-link")
   private WebElement linkButton;
-  @FindBy(css = ".oo-ui-frame")
-  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-code")
   private WebElement codeButton;
   @FindBy(css = ".oo-ui-icon-clear")

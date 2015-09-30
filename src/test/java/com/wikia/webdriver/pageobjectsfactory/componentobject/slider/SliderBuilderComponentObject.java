@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slider;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class SliderBuilderComponentObject extends BasePageObject {
 
@@ -25,10 +25,6 @@ public class SliderBuilderComponentObject extends BasePageObject {
     // TODO Auto-generated constructor stub
   }
 
-  public enum MenuPositions {
-    HORIZONTAL, VERTICAL
-  }
-
   public void selectMenuPosition(MenuPositions pos) {
     wait.forElementVisible(hPosition);
     wait.forElementVisible(vPosition);
@@ -42,8 +38,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    LOG
-        .logResult("selectMenuPosition", pos.toString() + " position selected", true, driver);
+    LOG.success("selectMenuPosition", pos.toString() + " position selected",true);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
@@ -57,6 +52,10 @@ public class SliderBuilderComponentObject extends BasePageObject {
     wait.forElementVisible(finishButton);
     finishButton.click();
     LOG.success("clickFinish", "finish button clicked");
+  }
+
+  public enum MenuPositions {
+    HORIZONTAL, VERTICAL
   }
 
 }

@@ -23,28 +23,28 @@ public class AuthModal {
 
   private WebDriver webDriver;
 
-  public AuthModal(WebDriver webDriver){
+  public AuthModal(WebDriver webDriver) {
     this.webDriver = webDriver;
 
     PageFactory.initElements(webDriver, this);
   }
 
-  private void switchToFrame(){
+  private void switchToFrame() {
     webDriver.switchTo().frame(iFrame);
   }
 
-  private void switchBack(){
+  private void switchBack() {
     webDriver.switchTo().defaultContent();
   }
 
-  public boolean isOpened(){
+  public boolean isOpened() {
     switchToFrame();
     boolean isOpenedResult = newAuthModal.isDisplayed();
     switchBack();
     return isOpenedResult;
   }
 
-  public void login(String username, String password){
+  public void login(String username, String password) {
     switchToFrame();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);

@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
+import java.awt.*;
 
 import org.testng.annotations.Test;
 
-import java.awt.*;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 
 /**
  * @author Dmytro Rets
@@ -19,11 +19,8 @@ public class TestOoyalaAds extends TemplateNoFirstLoad {
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"TestOoyalaAds_GeoEdgeFree"},
-      dataProvider = "ooyalaAds"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, groups = {"TestOoyalaAds_GeoEdgeFree"},
+      dataProvider = "ooyalaAds")
   public void TestOoyalaAds_GeoEdgeFree(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);

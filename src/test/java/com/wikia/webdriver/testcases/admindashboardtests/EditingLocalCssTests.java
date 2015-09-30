@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.admindashboardtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -9,8 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook.WikiArticleMonoBookPageObject;
-
-import org.testng.annotations.Test;
 
 
 /**

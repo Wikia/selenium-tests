@@ -1,5 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
@@ -14,13 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
 
@@ -97,107 +97,106 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
-    );
+    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48),
+        desiredContent.substring(1, 38) + desiredContent.substring(48));
   }
 
   public void clickBold() {
     focusTextArea();
     bold.click();
-    LOG.logResult("clickBold", "bold button was clicked", true, driver);
+    LOG.success("clickBold", "bold button was clicked", true);
   }
 
   public void clickItalic() {
     focusTextArea();
     italic.click();
-    LOG.logResult("clickItalic", "italic button was clicked", true, driver);
+    LOG.success("clickItalic", "italic button was clicked", true);
   }
 
   public void clickInternalLink() {
     focusTextArea();
     internalLink.click();
-    LOG.logResult("clickInternalLink", "internal link button was clicked", true, driver);
+    LOG.success("clickInternalLink", "internal link button was clicked", true);
   }
 
   public void clickExternalLink() {
     focusTextArea();
     externalLink.click();
-    LOG.logResult("clickExternalLink", "external link button was clicked", true, driver);
+    LOG.success("clickExternalLink", "external link button was clicked", true);
   }
 
   public void clickLvl2Headline() {
     focusTextArea();
     lvl2headLine.click();
-    LOG.logResult("clickExternalLink", "external link button was clicked", true, driver);
+    LOG.success("clickExternalLink", "external link button was clicked", true);
   }
 
   public void clickEmbedFile() {
     focusTextArea();
     embedFile.click();
-    LOG.logResult("clickEmbedFile", "embed file button was clicked", true, driver);
+    LOG.success("clickEmbedFile", "embed file button was clicked", true);
   }
 
   public void clickEmbedMedia() {
     focusTextArea();
     embedMedia.click();
-    LOG.logResult("clickEmbedMedia", "embed media button was clicked", true, driver);
+    LOG.success("clickEmbedMedia", "embed media button was clicked", true);
   }
 
   public void clickMath() {
     focusTextArea();
     math.click();
-    LOG.logResult("clickMath", "math button was clicked", true, driver);
+    LOG.success("clickMath", "math button was clicked", true);
   }
 
   public void clickNowiki() {
     focusTextArea();
     nowiki.click();
-    LOG.logResult("clickNoWiki", "nowwiki button was clicked", true, driver);
+    LOG.success("clickNoWiki", "nowwiki button was clicked", true);
   }
 
   public void clickSignature() {
     focusTextArea();
     signature.click();
-    LOG.logResult("clickSignature", "signature button was clicked", true, driver);
+    LOG.success("clickSignature", "signature button was clicked", true);
   }
 
   public void clickHorizontalLine() {
     focusTextArea();
     hline.click();
-    LOG
-        .logResult("clickHorizontalLine", "horizontal line button was clicked", true, driver);
+    LOG.success("clickHorizontalLine", "horizontal line button was clicked",true);
   }
 
   public PhotoAddComponentObject clickAddPhoto() {
     focusTextArea();
     photo.click();
-    LOG.logResult("clickAddPhot", "add photo button was clicked", true, driver);
+    LOG.success("clickAddPhot", "add photo button was clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public void clickAddGallery() {
     focusTextArea();
     gallery.click();
-    LOG.logResult("clickAddGallery", "add gallery button was clicked", true, driver);
+    LOG.success("clickAddGallery", "add gallery button was clicked", true);
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
     focusTextArea();
     video.click();
-    LOG.logResult("clickAddVideo", "add video button was clicked", true, driver);
+    LOG.success("clickAddVideo", "add video button was clicked", true);
     return new VetAddVideoComponentObject(driver);
   }
 
   public WikiTextShortCutsComponentObject clickMore() {
     focusTextArea();
     more.click();
-    LOG.logResult("clickMore", "more button was clicked", true, driver);
+    LOG.success("clickMore", "more button was clicked", true);
     return new WikiTextShortCutsComponentObject(driver);
   }
 
   public void clearSource() {
     sourceModeTextArea.clear();
-    LOG.logResult("clearSource", "source area erased", true, driver);
+    LOG.success("clearSource", "source area erased", true);
   }
 
   public void closeMore() {
@@ -222,22 +221,20 @@ public class SourceEditModePageObject extends EditMode {
     return textArea.getText();
   }
 
-  public String buildTablePropertiesContent(
-      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
-  ) {
-    String tablePropertiesContent = SourceModeContent.TABLE
-        .replace("%border%", Integer.toString(border))
-        .replace("%cellpadding%", Integer.toString(cellpadding))
-        .replace("%cellspacing%", Integer.toString(cellspacing))
-        .replace("%float%", alignment.toString())
-        .replace("%height%", Integer.toString(height))
-        .replace("%width%", Integer.toString(width));
+  public String buildTablePropertiesContent(int border, int width, int height, int cellspacing,
+      int cellpadding, Alignment alignment) {
+    String tablePropertiesContent =
+        SourceModeContent.TABLE.replace("%border%", Integer.toString(border))
+            .replace("%cellpadding%", Integer.toString(cellpadding))
+            .replace("%cellspacing%", Integer.toString(cellspacing))
+            .replace("%float%", alignment.toString()).replace("%height%", Integer.toString(height))
+            .replace("%width%", Integer.toString(width));
     return tablePropertiesContent;
   }
 
   public void verifyComponentSelector() {
     wait.forElementVisible(componentSelector);
-    LOG.logResult("verifyComponentSelector", "component selector is visible", true, driver);
+    LOG.success("verifyComponentSelector", "component selector is visible", true);
   }
 
   public Object addComponent(String componentName) {
@@ -257,8 +254,7 @@ public class SourceEditModePageObject extends EditMode {
       LOG.success("addComponent", "selected " + componentName + " component");
       return new SliderBuilderComponentObject(driver);
     } else {
-      LOG
-          .result("addComponent", "not supported component name: " + componentName, false);
+      LOG.result("addComponent", "not supported component name: " + componentName, false);
       return null;
     }
   }
@@ -267,11 +263,11 @@ public class SourceEditModePageObject extends EditMode {
     for (int i = 1; i < 17; i++) {
       clearSource();
       clickMore();
-      String
-          content =
-          driver.findElement(
-              By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
-              .getText();
+      String content =
+          driver
+              .findElement(
+                  By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i
+                           + "]")).getText();
       driver.findElement(
           By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
           .click();
@@ -286,11 +282,11 @@ public class SourceEditModePageObject extends EditMode {
       clearSource();
       clickMore();
       String content =
-          (String) jsActions.execute(
-              "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
-      driver.findElement(By.xpath(
-          "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
-          .click();
+          (String) jsActions.execute("$('.modalContent #edittools_wikimarkup a:nth-child("
+              + (i + 1) + ")').text()");
+      driver.findElement(
+          By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i
+              + "]")).click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
       checkSourceContent(content);
@@ -301,11 +297,10 @@ public class SourceEditModePageObject extends EditMode {
     for (int i = 1; i < 65; i++) {
       clearSource();
       clickMore();
-      String
-          content =
-          driver.findElement(By.xpath(
-              "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
-              .getText();
+      String content =
+          driver.findElement(
+              By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i
+                  + "]")).getText();
       driver.findElement(
           By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
           .click();
@@ -321,19 +316,14 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void verifyVideoAlignment(PositionsVideo position) {
-    Assertion.assertStringContains(getContent(), position.toString().toLowerCase()
-    );
+    Assertion.assertStringContains(getContent(), position.toString().toLowerCase());
   }
 
   public void verifyVideoWidth(int widthDesired) {
     String content = getContent();
-    int width = Integer.parseInt(
-        content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
-    );
-    Assertion.assertNumber(
-            widthDesired, width,
-            "width is " + width + " should be " + widthDesired
-    );
+    int width =
+        Integer.parseInt(content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1));
+    Assertion.assertNumber(widthDesired, width, "width is " + width + " should be " + widthDesired);
   }
 
   public void verifyVideoCaption(String desiredCaption) {
@@ -351,17 +341,14 @@ public class SourceEditModePageObject extends EditMode {
   private void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    LOG
-            .result("appendContent", "text: '" + content + "', added to the source mode", true);
+    LOG.result("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(Keys.ENTER);
     sourceModeTextArea.sendKeys(content);
-    LOG
-            .result("appendNewLine", "text " + content + " added to the source mode in new line",
-                    true);
+    LOG.result("appendNewLine", "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {
@@ -380,7 +367,7 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceOnlyModeTextArea);
     if (!(Boolean) jsActions.execute(WikiaGlobalVariables.WG_IS_ARTICLE)) {
       wait.forElementVisible(srcOnlyMode);
-      LOG.logResult("verifySourceOnlyMode", "source only mode enabled", true, driver);
+      LOG.success("verifySourceOnlyMode", "source only mode enabled", true);
     } else {
       throw new NoSuchElementException("Can not detect the page to be in Edit mode");
     }

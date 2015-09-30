@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.signuptests;
 
+import java.util.Calendar;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -22,10 +26,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
-import org.testng.annotations.Test;
-
-import java.util.Calendar;
 
 /*
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
@@ -61,10 +61,10 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typePassword(signUp.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     signUp.enterBirthDate(
-            // +1 because months are numerated from 0
-            Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-            Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-            Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+        // +1 because months are numerated from 0
+        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
@@ -76,7 +76,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-    @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
+  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -138,6 +138,7 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
+
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -206,14 +207,14 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
-            almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
+        almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
     UserProfilePageObject userProfile =
-            confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
+        confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
     userProfile.verifyUserLoggedIn(userName);
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
     toolbar.verifyUserToolBar();

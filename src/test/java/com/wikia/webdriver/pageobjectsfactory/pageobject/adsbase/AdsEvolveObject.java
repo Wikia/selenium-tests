@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Dmytro Rets
@@ -24,13 +24,13 @@ public class AdsEvolveObject extends AdsBaseObject {
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    LOG.logResult("Evolve", slotSelector + " slot has Evolve.", true, driver);
+    LOG.success("Evolve", slotSelector + " slot has Evolve.", true);
   }
 
   public void verifyNoEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementNotPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    LOG.logResult("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
+    LOG.success("Evolve", slotSelector + " slot doesn't have Evolve.", true);
   }
 
   public void verifyEvolveCall() {

@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
@@ -34,9 +34,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
   public void selectSettings(Setting setting) {
     waitForDialogVisible();
-    WebElement
-        generalSetting =
-        outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
+    WebElement generalSetting = outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(generalSetting);
     generalSetting.click();
     LOG.success("selectSettings", setting.toString() + " setting is selected");
@@ -64,7 +62,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement customSizeInput = customSizeInput = customSizeInputs.get(side.ordinal());
     customSizeInput.clear();
     customSizeInput.sendKeys(Integer.toString(size));
-    LOG.logResult("typeCustomSize", "Typed " + size + " in the field", true, driver);
+    LOG.success("typeCustomSize", "Typed " + size + " in the field", true);
     driver.switchTo().defaultContent();
   }
 

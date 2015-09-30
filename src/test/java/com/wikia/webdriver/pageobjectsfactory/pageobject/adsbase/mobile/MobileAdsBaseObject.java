@@ -1,11 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,6 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+
 /**
  * Bogna 'bognix' Knychala
  */
@@ -22,8 +22,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String SMART_BANNER_SELECTOR = ".android.smartbanner";
   private static final String FLITE_MASK_SELECTOR = ".flite-mask";
-  private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]" +
-                                                     "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
+  private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]"
+      + "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
   private AdsComparison adsComparison;
@@ -36,7 +36,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       verifyMercury();
     }
 
-    LOG.logResult("", "Page screenshot", true, driver);
+    LOG.success("", "Page screenshot", true);
   }
 
   @Override
@@ -44,11 +44,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       driver.manage().window().setSize(new Dimension(360, 640));
     } catch (WebDriverException ex) {
-      LOG.result(
-          "ResizeWindowForMobile",
-          "Resize window method not available - possibly running on real device",
-          true
-      );
+      LOG.result("ResizeWindowForMobile",
+          "Resize window method not available - possibly running on real device", true);
     }
   }
 
@@ -71,10 +68,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         return;
       }
 
-      throw new NoSuchElementException(
-          "No ad detected in selector: "
-          + presentLeaderboardSelector
-      );
+      throw new NoSuchElementException("No ad detected in selector: " + presentLeaderboardSelector);
     }
 
     extractGptInfo(presentLeaderboardSelector);
@@ -113,7 +107,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
-    LOG.logResult("AdInSlot", "Ad found in slot", true, driver);
+    LOG.success("AdInSlot", "Ad found in slot", true);
   }
 
   /**
@@ -126,24 +120,15 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      LOG.logResult(
-          "mercuryNavigateToAnArticle()",
-          String.format(
-              "Clicking: %s (%s)",
-              link.getText(),
-              link.getAttribute("href")
-          ),
-          true,
-          driver
-      );
+      LOG.logResult("mercuryNavigateToAnArticle()",
+          String.format("Clicking: %s (%s)", link.getText(), link.getAttribute("href")), true,
+          driver);
 
       scrollToElement(link);
       link.click();
     } else {
-      LOG.warning(
-          "mercuryNavigateToAnArticle()",
-          "Could not find the link to: /wiki/" + articleLinkName
-      );
+      LOG.warning("mercuryNavigateToAnArticle()", "Could not find the link to: /wiki/"
+          + articleLinkName);
     }
   }
 
@@ -159,11 +144,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void scrollToSlotOnMobile(String slotName) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript(
-        "var elementY = document.getElementById(arguments[0]).offsetTop;" +
-        "window.scrollTo(0, elementY);",
-        slotName
-    );
+    js.executeScript("var elementY = document.getElementById(arguments[0]).offsetTop;"
+        + "window.scrollTo(0, elementY);", slotName);
   }
 
   private void verifyMercury() {
@@ -175,7 +157,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     }
   }
 
-  public void waitForSlot(String slotName){
+  public void waitForSlot(String slotName) {
     wait.forElementVisible(By.cssSelector("#" + slotName));
   }
 }

@@ -1,10 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
  * @ownership: Content X-Wing

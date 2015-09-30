@@ -3,12 +3,12 @@
  */
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -25,8 +25,7 @@ public class WatchPageObject extends BasePageObject {
 
   public void confirmWatchUnwatch() {
     followUnfollowConfirmation.click();
-    LOG
-        .result("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
+    LOG.result("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
   }
 
 

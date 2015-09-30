@@ -1,8 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +11,9 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class NotificationsComponentObject extends WikiBasePageObject {
 
@@ -40,8 +40,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
       .cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
 
   private By emptyNotificationDropdownForCurrentWiki =
-      By.cssSelector(
-          "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
+      By.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
 
   private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
 
@@ -89,7 +88,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    * click notifications bubble
    *
    * @todo: is this needed? the notifications expand on mouse hover so we should use the
-   * showNotifications method
+   *        showNotifications method
    */
   public void clickNotifications() {
     wait.forElementVisible(notificationsBubbles);
@@ -113,12 +112,11 @@ public class NotificationsComponentObject extends WikiBasePageObject {
       if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
           .contains(text)) {
         LOG.success("getNotificationLink", "get addres that of " + i + 1
-                                       + " notification points to");
+            + " notification points to");
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
-    LOG.error("getNotificationLink",
-            "No notification that contains the following text: " + text);
+    LOG.error("getNotificationLink", "No notification that contains the following text: " + text);
     return null;
   }
 

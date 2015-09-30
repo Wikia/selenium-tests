@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -16,18 +22,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1413 Verify search suggestion on templates VE-1413 Verify
- * suggested templates appear by default VE-1412 Verify adding template with params and template
- * with no param VE-1412 Verify adding template to a middle of paragraph or to a block node would
- * insert template as block node VE-1414 Verify deleting template from an article
+ * @ownership Contribution
+ *            <p/>
+ *            VE-1413 Verify search suggestion on templates VE-1413 Verify suggested templates
+ *            appear by default VE-1412 Verify adding template with params and template with no
+ *            param VE-1412 Verify adding template to a middle of paragraph or to a block node would
+ *            insert template as block node VE-1414 Verify deleting template from an article
  */
 
 public class VETemplateTests extends NewTestTemplate {
@@ -43,10 +45,8 @@ public class VETemplateTests extends NewTestTemplate {
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
   }
 
-  //AT01
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"}
-  )
+  // AT01
+  @Test(groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"})
   public void VETemplateTests_001_SearchTemplate() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -54,28 +54,26 @@ public class VETemplateTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertTemplateDialog templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-    //1 character search 'a', not matching article name, no result
+    // 1 character search 'a', not matching article name, no result
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_1CHAR_NOMATCH);
     templateDialog.verifyNoResultTemplate();
-    //2 characters search 'ab', not matching article name, no result
+    // 2 characters search 'ab', not matching article name, no result
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_2CHARS_NOMATCH);
     templateDialog.verifyNoResultTemplate();
-    //3 characters search 'per', not matching article name, 2 results on template name
+    // 3 characters search 'per', not matching article name, 2 results on template name
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_3CHARS_PARTIALMATCH);
     templateDialog.verifyIsResultTemplate();
-    //2 characters search 'ar', matching article name, 3 results on the article
+    // 2 characters search 'ar', matching article name, 3 results on the article
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
     templateDialog.verifyIsResultTemplate();
     templateDialog.logOut(wikiURL);
   }
 
-  //AT02
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"}
-  )
+  // AT02
+  @Test(groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"})
   public void VETemplateTests_002_SuggestedTemplate() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -88,10 +86,8 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog.logOut(wikiURL);
   }
 
-  //AT03
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"}
-  )
+  // AT03
+  @Test(groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"})
   public void VETemplateTests_003_AddTemplates() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -118,11 +114,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //AT04
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
-                "VETemplateTests_006"}
-  )
+  // AT04
+  @Test(groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
+      "VETemplateTests_006"})
   public void VETemplateTests_004_CheckBlockedTransclusion() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -153,11 +147,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //ES05
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
-      dependsOnGroups = "VETemplateTests_004"
-  )
+  // ES05
+  @Test(groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
+      dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_005_DeleteTemplates() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
@@ -173,11 +165,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //ET01
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
-      dependsOnGroups = "VETemplateTests_004"
-  )
+  // ET01
+  @Test(groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
+      dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_006_EditTemplate() {
     List<String> templateWikiTexts = new ArrayList<>();
     templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);

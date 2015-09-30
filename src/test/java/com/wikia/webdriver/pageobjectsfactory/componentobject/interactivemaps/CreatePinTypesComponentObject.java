@@ -57,7 +57,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     wait.forElementVisible(addMorePinTypesLink);
     addMorePinTypesLink.click();
     LOG.success("clickAddAnotherPinType",
-                "clicked add more pin types link in create pin types modal");
+        "clicked add more pin types link in create pin types modal");
   }
 
   public void savePinTypesListState() {
@@ -71,7 +71,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     unhideElementByClassChange("wpUploadFile", "poi-category-marker-image-upload");
     uploadInputsCollection.get(0).sendKeys(
         CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
-    LOG.logResult("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
+    LOG.success("selectFileToUpload", "Tried to upload " + typeOfFile, true);
 
   }
 
@@ -80,8 +80,8 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     wait.forElementVisible(firstPin);
     firstPin.clear();
     firstPin.sendKeys(pinTypeName);
-    LOG.logResult("typePinTypeTitle", pinTypeName + " title for pin type was typed in",
-                  true, driver);
+    LOG.logResult("typePinTypeTitle", pinTypeName + " title for pin type was typed in", true,
+        driver);
   }
 
   public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
@@ -90,8 +90,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
       wait.forElementVisible(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
       pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);
     }
-    LOG.logResult("typeManyPinTypeTitle", "Added " + amountFields + " pin types", true,
-                  driver);
+    LOG.success("typeManyPinTypeTitle", "Added " + amountFields + " pin types",true);
   }
 
   public void verifyPinTypesDialog() {

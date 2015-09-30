@@ -1,5 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.LOG;
 
@@ -7,12 +14,6 @@ import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * @authors: Tomasz Napieralski
@@ -22,43 +23,35 @@ import java.util.List;
  */
 public class PerformTouchAction {
 
+  public static final String DIRECTION_LEFT = "left";
+  public static final String DIRECTION_RIGHT = "right";
+  public static final String DIRECTION_UP = "up";
+  public static final String DIRECTION_DOWN = "down";
+  public static final String ZOOM_WAY_IN = "in";
+  public static final String ZOOM_WAY_OUT = "out";
+  private static final String CONTEXT_NATIVE_APP = "NATIVE_APP";
+  private static final String CONTEXT_WEBVIEW_1 = "WEBVIEW_1";
   private WebDriver driver;
   private AndroidDriver mobileDriver;
-
   private int nativeHeight = 0;
   private int nativeWidth = 0;
   private int webviewHeight = 0;
   private int webviewWidth = 0;
   private int ratio = 0;
-
   private int taskbarNativeHeight = 0;
   private int taskbarNativeWidth = 0;
   private int taskbarWebviewHeight = 0;
   private int taskbarWebviewWidth = 0;
-
   private int addressbarNativeHeight = 0;
   private int addressbarNativeWidth = 0;
   private int addressbarWebviewHeight = 0;
   private int addressbarWebviewWidth = 0;
-
   private int appNativeHeight = 0;
   private int appNativeWidth = 0;
   private int appWebviewHeight = 0;
   private int appWebviewWidth = 0;
-
   private int loadedPageHeight = 0;
   private int loadedPageWidth = 0;
-
-  public static final String DIRECTION_LEFT = "left";
-  public static final String DIRECTION_RIGHT = "right";
-  public static final String DIRECTION_UP = "up";
-  public static final String DIRECTION_DOWN = "down";
-
-  public static final String ZOOM_WAY_IN = "in";
-  public static final String ZOOM_WAY_OUT = "out";
-
-  private static final String CONTEXT_NATIVE_APP = "NATIVE_APP";
-  private static final String CONTEXT_WEBVIEW_1 = "WEBVIEW_1";
 
   public PerformTouchAction(WebDriver webDriver) {
     String methodName = "PerformTouchAction";
@@ -101,7 +94,7 @@ public class PerformTouchAction {
   }
 
   /**
-   * @param time       In milliseconds
+   * @param time In milliseconds
    * @param methodName Used in log if fail
    */
   private void waitForFinish(int time, String methodName) {
@@ -116,7 +109,7 @@ public class PerformTouchAction {
    * Use that method if you want to switch between using app and using touch
    *
    * @param contextName Use NATIVE_APP for touch or WEBVIEW_1 for app
-   * @param methodName  Used in log if fail
+   * @param methodName Used in log if fail
    */
   private void switchToContext(String contextName, String methodName) {
     try {
@@ -129,12 +122,12 @@ public class PerformTouchAction {
   /**
    * @param direction Use public const DIRECTION from that class
    * @param pixelPath From 0 to half of screen X or Y, if path will be too high it will be set to
-   *                  edge of app
-   * @param duration  In milliseconds
+   *        edge of app
+   * @param duration In milliseconds
    * @param waitAfter In milliseconds, Recommend 2*duration
    */
   public void swipeFromCenterToDirection(String direction, int pixelPath, int duration,
-                                         int waitAfter) {
+      int waitAfter) {
     String methodName = "swipeFromCenterToDirection";
     int centerX = appNativeWidth / 2;
     int centerY = (appNativeHeight / 2) + taskbarNativeHeight;
@@ -181,15 +174,15 @@ public class PerformTouchAction {
   }
 
   /**
-   * @param startX    Use value 0-100, it is percent of app width, Recommend 10-90
-   * @param startY    Use value 0-100, it is percent of app height, Recommend 10-90
-   * @param endX      Use value 0-100, it is percent of app width, Recommend 10-90
-   * @param endY      Use value 0-100, it is percent of app height, Recommend 10-90
-   * @param duration  In milliseconds
+   * @param startX Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param startY Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param endX Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param endY Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param duration In milliseconds
    * @param waitAfter In milliseconds, Recommend 2*duration
    */
   public void swipeFromPointToPoint(int startX, int startY, int endX, int endY, int duration,
-                                    int waitAfter) {
+      int waitAfter) {
     String methodName = "swipeFromPointToPoint";
     int appStartX = (int) ((startX / 100f) * appNativeWidth);
     int appStartY = (int) (((startY / 100f) * appNativeHeight) + taskbarNativeHeight);
@@ -204,17 +197,17 @@ public class PerformTouchAction {
   /**
    * It uses two fingers to zoom in or out.
    *
-   * @param pointX       Use value 0-100, it is percent of app width, Recommend 50
-   * @param pointY       Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param pointX Use value 0-100, it is percent of app width, Recommend 50
+   * @param pointY Use value 0-100, it is percent of app height, Recommend 10-90
    * @param fingersSpace Space between two fingers, In pixel, It must be less than pixelPath,
-   *                     Recommend 20-100
-   * @param pixelPath    From 0 to half of screen X, if path will be too high it will be set to edge
-   *                     of app
-   * @param zoomWay      Use public const ZOOM_WAY from that class
-   * @param waitAfter    In milliseconds
+   *        Recommend 20-100
+   * @param pixelPath From 0 to half of screen X, if path will be too high it will be set to edge of
+   *        app
+   * @param zoomWay Use public const ZOOM_WAY from that class
+   * @param waitAfter In milliseconds
    */
   public void zoomInOutPointXY(int pointX, int pointY, int fingersSpace, int pixelPath,
-                               String zoomWay, int waitAfter) {
+      String zoomWay, int waitAfter) {
     String methodName = "zoomInOutPointXY";
     int appPointX = (int) ((pointX / 100f) * appNativeWidth);
     int appPointY = (int) (((pointY / 100f) * appNativeHeight) + taskbarNativeHeight);
@@ -281,9 +274,9 @@ public class PerformTouchAction {
   }
 
   /**
-   * @param pointX    Use value 0-100, it is percent of app width, Recommend 10-90
-   * @param pointY    Use value 0-100, it is percent of app height, Recommend 10-90
-   * @param duration  In milliseconds, Recommend 500
+   * @param pointX Use value 0-100, it is percent of app width, Recommend 10-90
+   * @param pointY Use value 0-100, it is percent of app height, Recommend 10-90
+   * @param duration In milliseconds, Recommend 500
    * @param waitAfter In milliseconds
    */
   public void tapOnPointXY(int pointX, int pointY, int duration, int waitAfter) {
@@ -300,9 +293,9 @@ public class PerformTouchAction {
    * It scroll to element then tap on his center. It scroll only vertically so if element need to be
    * scrolled horizontally it won't work
    *
-   * @param locator   Use By selector, Example By.cssSelector('img.loaded')
-   * @param index     If locator find more than one element use index to access element you want
-   * @param duration  In milliseconds, Recommend 500
+   * @param locator Use By selector, Example By.cssSelector('img.loaded')
+   * @param index If locator find more than one element use index to access element you want
+   * @param duration In milliseconds, Recommend 500
    * @param waitAfter In milliseconds
    */
   public void tapOnWebElement(By locator, int index, int duration, int waitAfter) {
@@ -340,9 +333,8 @@ public class PerformTouchAction {
    */
   public boolean isAddressbarPresent() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    if ((appWebviewHeight - Integer
-        .parseInt(js.executeScript("return $(window).height()").toString()))
-        == addressbarWebviewHeight) {
+    if ((appWebviewHeight - Integer.parseInt(js.executeScript("return $(window).height()")
+                                                 .toString())) == addressbarWebviewHeight) {
       return true;
     }
     return false;

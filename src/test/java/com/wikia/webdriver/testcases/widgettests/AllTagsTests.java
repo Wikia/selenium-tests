@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,12 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership: Content X-Wing

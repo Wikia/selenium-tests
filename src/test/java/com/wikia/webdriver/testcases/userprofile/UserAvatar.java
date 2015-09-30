@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.userprofile;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -34,12 +34,11 @@ public class UserAvatar extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
+      + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_001"})
   @Execute(asUser = User.STAFF)
   public void uploadAvatar() {
-    UserProfilePageObject
-        profile =
+    UserProfilePageObject profile =
         new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
     AvatarComponentObject avatar = profile.clickEditAvatar();
     avatar.uploadAvatar(PageContent.FILE);
@@ -49,8 +48,9 @@ public class UserAvatar extends NewTestTemplate {
     String avatarURL = profile.getAvatarUrl();
     profile.verifyURLStatus(200, avatarURL);
   }
+
   @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
+      + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
@@ -61,12 +61,12 @@ public class UserAvatar extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
+      + "see comments in defect if test fails. Not possible to test manually")
   @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
-    UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
-        credentials.userNameStaff, wikiURL);
+    UserProfilePageObject profile =
+        new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
     profile.clickRemoveAvatar();
     profile.verifyAvatar(URLsContent.AVATAR_GENERIC);
     profile.verifyAvatarPlaceholder();

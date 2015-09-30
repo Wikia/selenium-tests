@@ -1,5 +1,12 @@
 package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
@@ -17,13 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership: Content X-Wing
@@ -72,8 +72,8 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    new ArticlePageObject(driver)
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+    new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL,
+                                                                         MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
@@ -86,8 +86,7 @@ public class AllTagsTests extends NewTestTemplate {
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
-    new NavigationSideComponentObject(driver)
-        .navigateToArticle(MAPS_ARTICLE_NAME)
+    new NavigationSideComponentObject(driver).navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {

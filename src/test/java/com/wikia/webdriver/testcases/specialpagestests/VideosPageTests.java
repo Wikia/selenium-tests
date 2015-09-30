@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership Content X-Wing
@@ -48,7 +48,9 @@ public class VideosPageTests extends NewTestTemplate {
    * test checks if, after the video has been deleted, it is no longer present in the list of most
    * recent videos on Special:Videos. (Note: in order to accomplish this the test also adds a video
    * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
-   * video is). <p/> * @author James Sutterfield
+   * video is).
+   * <p/>
+   * * @author James Sutterfield
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
   public void VideosPageTest_003() {

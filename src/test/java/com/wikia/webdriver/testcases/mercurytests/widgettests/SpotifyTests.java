@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
@@ -9,11 +14,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership: Content X-Wing
@@ -28,9 +28,9 @@ public class SpotifyTests extends NewTestTemplate {
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
-    //@TODO XW-314 - Login is necessary to bypass cache
+    // @TODO XW-314 - Login is necessary to bypass cache
     new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
-                                                Configuration.getCredentials().passwordStaff2);
+        Configuration.getCredentials().passwordStaff2);
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_001")
@@ -47,9 +47,7 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget
-        .create()
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+    widget.create().openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(SPOTIFY_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -62,8 +60,7 @@ public class SpotifyTests extends NewTestTemplate {
 
     widget.create().navigate(wikiURL);
 
-    new NavigationSideComponentObject(driver)
-        .navigateToArticle(MAPS_ARTICLE_NAME)
+    new NavigationSideComponentObject(driver).navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(SPOTIFY_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

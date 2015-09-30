@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialUnblockPageObject extends WikiBasePageObject {
 
@@ -40,12 +40,11 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
 
   public void verifyUnblockMessage(String userName) {
     wait.forElementVisible(unblockedUserHead);
-    wait.forElementVisible(By.xpath(
-        "//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName + "' and contains(text(), '"
-        + userName + "')]"));
-    wait.forElementVisible(By.xpath(
-        "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
-    LOG.logResult("verifyUnblockMessage", "unblock user messages verified", true, driver);
+    wait.forElementVisible(By.xpath("//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName
+        + "' and contains(text(), '" + userName + "')]"));
+    wait.forElementVisible(By
+        .xpath("//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
+    LOG.success("verifyUnblockMessage", "unblock user messages verified", true);
   }
 
 }

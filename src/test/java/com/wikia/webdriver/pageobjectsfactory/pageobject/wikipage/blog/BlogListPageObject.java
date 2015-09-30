@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class BlogListPageObject extends BasePageObject {
 

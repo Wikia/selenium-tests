@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.forumtests;
 
+import java.util.List;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -9,15 +13,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumHi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
 
-import org.testng.annotations.Test;
-
-import java.util.List;
-
 public class ForumThreadTests extends NewTestTemplate {
 
+  Credentials credentials = Configuration.getCredentials();
   private String title;
   private String message;
-  Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
   public void ForumThreadTests_001_replyToThread() {

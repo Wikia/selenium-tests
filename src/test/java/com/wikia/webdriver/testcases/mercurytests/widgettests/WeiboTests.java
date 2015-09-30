@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
@@ -7,11 +12,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership: Content X-Wing
@@ -41,9 +41,7 @@ public class WeiboTests extends NewTestTemplate {
   public void MercuryWeiboWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    widget
-        .create()
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+    widget.create().openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(WEIBO_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -56,8 +54,7 @@ public class WeiboTests extends NewTestTemplate {
 
     widget.create().navigate(wikiURL);
 
-    new NavigationSideComponentObject(driver)
-        .navigateToArticle(MAPS_ARTICLE_NAME)
+    new NavigationSideComponentObject(driver).navigateToArticle(MAPS_ARTICLE_NAME)
         .navigateToArticle(WEIBO_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

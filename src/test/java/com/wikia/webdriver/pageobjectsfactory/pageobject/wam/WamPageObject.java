@@ -1,9 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -16,11 +17,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class WamPageObject extends BasePageObject {
 
@@ -93,9 +93,8 @@ public class WamPageObject extends BasePageObject {
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
-      LOG.log("verifyWamIndexIsNotEmpty",
-              "there are more rows in the table than just a head row (" + rows + ")",
-              LOG.Type.SUCCESS);
+      LOG.log("verifyWamIndexIsNotEmpty", "there are more rows in the table than just a head row ("
+          + rows + ")", LOG.Type.SUCCESS);
     } else {
       LOG.error("verifyTabIsSelected", "there is only the head row");
     }
@@ -129,10 +128,10 @@ public class WamPageObject extends BasePageObject {
 
     if (result.equals(true)) {
       LOG.success("verifyWamVerticalFilterOptions",
-              "There are correct options in the vertical select box");
+          "There are correct options in the vertical select box");
     } else {
       LOG.error("verifyWamVerticalFilterOptions",
-              "There is invalid option in the vertical select box");
+          "There is invalid option in the vertical select box");
     }
   }
 

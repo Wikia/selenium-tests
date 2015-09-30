@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -49,15 +49,13 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   public void verifyRecaptchaIsVisible() {
     wait.forElementVisible(recaptchaContainer);
     driver.switchTo().defaultContent();
-    LOG
-        .logResult("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
+    LOG.success("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog",true);
   }
 
   public String getRecaptchaImageSrc() {
     wait.forElementVisible(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
-    LOG
-        .logResult("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
+    LOG.success("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc,true);
     driver.switchTo().defaultContent();
     return imageSrc;
   }
@@ -85,8 +83,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void verifyRecaptchaImageSrc() {
-    Assertion
-        .assertNotEquals("", getRecaptchaImageSrc(), "Verify RECAPTCHA image source is not empty");
+    Assertion.assertNotEquals("", getRecaptchaImageSrc(),
+                              "Verify RECAPTCHA image source is not empty");
   }
 
   public void typeEditSummary(String text) {

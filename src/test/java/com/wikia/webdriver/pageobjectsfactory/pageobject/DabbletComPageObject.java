@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.EmbedMapComponentObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.EmbedMapComponentObject;
 
 
 /**
@@ -38,7 +38,7 @@ public class DabbletComPageObject extends BasePageObject {
     wait.forElementVisible(htmlBox);
     htmlBox.clear();
     htmlBox.sendKeys(htmlCode);
-    LOG.logResult("verifyMapEmbed", "map was embeded", true, driver);
+    LOG.success("verifyMapEmbed", "map was embeded", true);
   }
 
   public void verifyMapEmbed() {

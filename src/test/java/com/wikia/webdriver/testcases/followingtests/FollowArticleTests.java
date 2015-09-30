@@ -3,14 +3,14 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -33,8 +33,7 @@ public class FollowArticleTests extends NewTestTemplate {
   @Test(groups = "FollowArticle", dependsOnMethods = {"FollowArticle_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowArticle_002_follow() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.follow();
   }
 

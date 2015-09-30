@@ -1,9 +1,5 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriverException;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Bogna 'bognix' Knychala
@@ -32,7 +32,7 @@ public class ImageEditor {
   }
 
   public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size,
-                        BufferedImage image) {
+      BufferedImage image) {
     int width = size.width;
     int height = size.height;
     File subImg;
@@ -47,9 +47,7 @@ public class ImageEditor {
     if (height < 1) {
       height = 1;
     }
-    BufferedImage dest = image.getSubimage(
-        start.getX(), start.getY(), width, height
-    );
+    BufferedImage dest = image.getSubimage(start.getX(), start.getY(), width, height);
     try {
       ImageIO.write(dest, "png", subImg);
     } catch (IOException e) {

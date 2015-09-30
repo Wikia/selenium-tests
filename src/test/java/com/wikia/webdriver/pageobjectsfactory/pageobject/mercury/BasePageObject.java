@@ -1,12 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
@@ -16,7 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
 /**
  * @ownership: Content X-Wing
@@ -31,37 +31,30 @@ public class BasePageObject extends WikiBasePageObject {
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
-    LOG
-        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    LOG.result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
-  public ArticlePageObject openMercuryArticleByNameWithCbAndNoAds(String wikiURL,
-                                                                  String articleName) {
-    getUrl(
-        wikiURL + URLsContent.WIKI_DIR + articleName +
-        "?cb=" + DateTime.now().getMillis() +
-        "&noads=1"
-    );
-    LOG
-        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+  public ArticlePageObject openMercuryArticleByNameWithCbAndNoAds(String wikiURL, String articleName) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis()
+        + "&noads=1");
+    LOG.result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
   public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
-                                                                     String articleName) {
+      String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    LOG
-        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+    LOG.result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName,
-                                                    String hashId) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName +
-           "?cb=" + DateTime.now().getMillis() + "#" + hashId);
-    LOG.success("openMercuryArticleByName", "Article" + articleName + " with #" + hashId +
-                                            " was opened");
+      String hashId) {
+    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis() + "#"
+        + hashId);
+    LOG.success("openMercuryArticleByName", "Article" + articleName + " with #" + hashId
+        + " was opened");
     return new ArticlePageObject(driver);
   }
 
@@ -73,7 +66,7 @@ public class BasePageObject extends WikiBasePageObject {
   /**
    * It will wait and log reason
    *
-   * @param time   - in milliseconds
+   * @param time - in milliseconds
    * @param reason - i.e. Wait for message to disappear
    */
   public void waitMilliseconds(int time, String reason) {
@@ -103,8 +96,8 @@ public class BasePageObject extends WikiBasePageObject {
   }
 
 
-  //TODO: Remove this and use combination from logUrl
-  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
+  // TODO: Remove this and use combination from logUrl
+  // Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
   public boolean isUrlPathEqualTo(String path) {
     String currentPath = new UrlBuilder().getUrlPath(driver);
     return currentPath.equals(path);
@@ -112,8 +105,7 @@ public class BasePageObject extends WikiBasePageObject {
 
   public CuratedMainPagePageObject openCuratedMainPage(String wikiURL, String mainPage) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + mainPage + "?cb=" + DateTime.now().getMillis());
-    LOG
-        .result("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
+    LOG.result("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
     return new CuratedMainPagePageObject(driver);
   }
 
@@ -127,8 +119,7 @@ public class BasePageObject extends WikiBasePageObject {
     url = builder.appendQueryStringToURL(url, "cb=" + currentTime);
     getUrl(url);
 
-    LOG
-        .result("openCuratedContentPage", "Curated content page" + path + " was opened", true);
+    LOG.result("openCuratedContentPage", "Curated content page" + path + " was opened", true);
     return new CuratedContentPageObject(driver);
   }
 
@@ -136,21 +127,10 @@ public class BasePageObject extends WikiBasePageObject {
     getUrl(wikiURL + path);
   }
 
-  private enum Settings {
-    TIME_OUT_IN_SEC(5),
-    CHECK_OUT_IN_MILLI_SEC(1000);
-
-    private int value;
-
-    Settings(int value) {
-      this.value = value;
-    }
-  }
-
   public boolean isElementVisible(WebElement element) {
     try {
       wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
+          Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
@@ -187,9 +167,9 @@ public class BasePageObject extends WikiBasePageObject {
    * element is not the final target of verification This method assumes list element is the parent
    * of target element
    *
-   * @param list           List that contains the parent element
+   * @param list List that contains the parent element
    * @param elementLocator Locator of target element, that is child of its parent element
-   * @param text           Text to be compared
+   * @param text Text to be compared
    */
   protected void verifyTextInListElements(List<WebElement> list, By elementLocator, String text) {
     WebElement innerElem;
@@ -235,9 +215,19 @@ public class BasePageObject extends WikiBasePageObject {
     }
     throw new WebDriverException(getNoTextInListErrorMessage(text));
   }
-  
+
   private String getNoTextInListErrorMessage(String text) {
     return "element with text " + text + "not found in the list";
+  }
+
+  private enum Settings {
+    TIME_OUT_IN_SEC(5), CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    Settings(int value) {
+      this.value = value;
+    }
   }
 
 }

@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core;
 
-import org.openqa.selenium.By;
-
 import java.util.Stack;
+
+import org.openqa.selenium.By;
 
 /**
  * Created by Ludwik on 2015-07-28.
@@ -14,14 +14,14 @@ public class SelectorStack {
 
 
   public static void contextWrite() {
-    contextStack=true;
+    contextStack = true;
   }
 
   public static void contextRead() {
-    contextStack=false;
+    contextStack = false;
   }
 
-  public static boolean isContextSet(){
+  public static boolean isContextSet() {
     return contextStack;
   }
 

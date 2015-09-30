@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 /**
  * @ownership Social
@@ -115,7 +115,7 @@ public class SignupPageObject extends BasePageObject {
   public void verifyBirthdateError() {
     wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(),
-                           "We cannot complete your registration at this time");
+        "We cannot complete your registration at this time");
   }
 
   public String getRegisterHeaderText() {
@@ -137,13 +137,12 @@ public class SignupPageObject extends BasePageObject {
   }
 
   public SignupPageObject signUp(String user, String password, String email, DateTime birthday) {
-    typeEmailAddress(email).
-        typeUsername(user).
-        typePassword(password).
-        typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
-                      String.valueOf(birthday.getDayOfMonth()),
-                      String.valueOf(birthday.getYear())).
-        register();
+    typeEmailAddress(email)
+        .typeUsername(user)
+        .typePassword(password)
+        .typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
+                       String.valueOf(birthday.getDayOfMonth()), String.valueOf(birthday.getYear()))
+        .register();
 
     return this;
   }

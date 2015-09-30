@@ -1,25 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
 public class PreviewEditModePageObject extends EditMode {
 
-  @FindBy(css = ".modalWrapper.preview")
-  private WebElement previewModal;
   @FindBy(css = ".preview .video-thumbnail")
   protected WebElement videoArticle;
   @FindBy(css = "#mw-content-text object")
   protected WebElement video;
-
   By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
   By videoWidthSelector = By.cssSelector(".image > img");
   By videoCaptionSelector = By.cssSelector("figcaption");
@@ -27,8 +24,9 @@ public class PreviewEditModePageObject extends EditMode {
   By publishButton = By.cssSelector("#publish");
   By tableOfContents = By.cssSelector("#toc");
   By tableOfContentsOrderedList = By.cssSelector("#toc ol");
-
   String videoPostionSelector = "figure.t%position%";
+  @FindBy(css = ".modalWrapper.preview")
+  private WebElement previewModal;
 
   public PreviewEditModePageObject(WebDriver driver) {
     super(driver);
@@ -52,24 +50,16 @@ public class PreviewEditModePageObject extends EditMode {
         position = "position not provided";
         break;
     }
-    previewModal.findElement(
-        By.cssSelector(
-            videoPostionSelector.replace("%position%", position)
-        )
-    );
-    LOG.result(
-        "verifyVideoAlignment",
-        "video alignment is as exepected " + positions.toString(),
-        true
-    );
+    previewModal.findElement(By.cssSelector(videoPostionSelector.replace("%position%", position)));
+    LOG.result("verifyVideoAlignment", "video alignment is as exepected " + positions.toString(),
+        true);
   }
 
   public void verifyVideoWidth(int desiredWidth) {
-    int width = Integer.parseInt(previewModal.findElement(
-        videoWidthSelector
-    ).getAttribute("width"));
-    Assertion
-        .assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is " + width);
+    int width =
+        Integer.parseInt(previewModal.findElement(videoWidthSelector).getAttribute("width"));
+    Assertion.assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is "
+                                                + width);
   }
 
   public void verifyVideoCaption(String desiredCaption) {

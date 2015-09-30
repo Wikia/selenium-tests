@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.clicktracking.events;
 
-import com.wikia.webdriver.common.clicktracking.EventParameter;
-
 import javax.json.Json;
 import javax.json.JsonObject;
+
+import com.wikia.webdriver.common.clicktracking.EventParameter;
 
 public class EventsGlobalNavigation {
 
@@ -48,7 +48,7 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-                                         "search-after-suggest-button")).build();
+              "search-after-suggest-button")).build();
   public static JsonObject searchAfterSuggestionEnter = Json
       .createObjectBuilder()
       .add(
@@ -59,7 +59,7 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-                                         "search-after-suggest-enter")).build();
+              "search-after-suggest-enter")).build();
   public static JsonObject searchSuggestionEnter = Json
       .createObjectBuilder()
       .add(
@@ -70,7 +70,7 @@ public class EventsGlobalNavigation {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-                                         "search-suggest-enter")).build();
+              "search-suggest-enter")).build();
 
   private EventsGlobalNavigation() {
 

@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -39,16 +39,17 @@ public class AlmostTherePageObject extends WikiBasePageObject {
     } else {
       mailSubject = "Confirm your email and get started on Wikia!";
     }
-    String www = MailFunctions.getActivationLinkFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password, mailSubject));
-    LOG.success("getActivationLinkFromMail",
-                "activation link is visible in email content: " + www);
+    String www =
+        MailFunctions.getActivationLinkFromEmailContent(MailFunctions.getFirstEmailContent(email,
+            password, mailSubject));
+    LOG.success("getActivationLinkFromMail", "activation link is visible in email content: " + www);
     return www;
   }
 
-  public ConfirmationPageObject enterActivationLink(String email, String password, String wikiURL, String language) {
+  public ConfirmationPageObject enterActivationLink(String email, String password, String wikiURL,
+      String language) {
     getUrl(getActivationLinkFromMail(email, password, language));
-    LOG.logResult("enterActivationLink", "activation page is displayed", true, driver);
+    LOG.success("enterActivationLink", "activation page is displayed", true);
     return new ConfirmationPageObject(driver);
   }
 
@@ -56,7 +57,8 @@ public class AlmostTherePageObject extends WikiBasePageObject {
     return enterActivationLink(email, password, wikiURL, default_lang);
   }
 
-  public void confirmAccountAndLogin(String email, String emailPassword, String userName, String password, String wikiURL) {
+  public void confirmAccountAndLogin(String email, String emailPassword, String userName,
+      String password, String wikiURL) {
     verifyAlmostTherePage();
     ConfirmationPageObject confirmation = enterActivationLink(email, emailPassword, wikiURL);
     confirmation.typeInUserName(userName);

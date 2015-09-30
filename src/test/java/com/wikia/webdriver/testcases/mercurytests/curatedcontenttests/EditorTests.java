@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
@@ -21,9 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.SearchForImagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
  * @ownership: Content X-Wing
  */
@@ -43,7 +43,7 @@ public class EditorTests extends NewTestTemplate {
 
     // This login is temporary solution, use @Execute after QAART-669 is done
     new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
-                                          Configuration.getCredentials().passwordStaff2);
+        Configuration.getCredentials().passwordStaff2);
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001", enabled = false)
@@ -53,12 +53,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
-    LOG.log(
-        "Featured Content",
-        MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG,
-        result
-    );
+    LOG.log("Featured Content", MercuryMessages.INVISIBLE_MSG, MercuryMessages.VISIBLE_MSG, result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
@@ -77,12 +72,7 @@ public class EditorTests extends NewTestTemplate {
     editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isFeaturedContentVisible();
-    LOG.log(
-        "Featured Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    LOG.log("Featured Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, result);
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002", enabled = false)
@@ -93,12 +83,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject home = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    LOG.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    LOG.log("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
@@ -128,21 +113,13 @@ public class EditorTests extends NewTestTemplate {
     home.publish();
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
-    LOG.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    LOG.log("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, result);
 
     curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
     curatedContentPageObject.waitForLoadingSpinnerToFinish();
 
-    Assertion.assertNumber(
-        curatedContentPageObject.getCuratedContentItemsNumber(),
-        1,
-        "New section items")
-    ;
+    Assertion.assertNumber(curatedContentPageObject.getCuratedContentItemsNumber(), 1,
+        "New section items");
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003", enabled = false)
@@ -152,12 +129,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    LOG.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    LOG.log("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
@@ -176,11 +148,6 @@ public class EditorTests extends NewTestTemplate {
     editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
-    LOG.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    LOG.log("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG, result);
   }
 }

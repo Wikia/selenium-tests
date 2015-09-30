@@ -1,17 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.openqa.selenium.WebDriverException;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +8,13 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import javax.imageio.ImageIO;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @ownership: Quality Team
@@ -32,9 +28,7 @@ public class ImageGenerator {
   private int imageHeight = 200;
 
   public ImageGenerator() {
-    imageBuffer =
-        new BufferedImage(imageWidth, imageHeight,
-                          BufferedImage.TYPE_INT_ARGB);
+    imageBuffer = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
   }
 
   /**

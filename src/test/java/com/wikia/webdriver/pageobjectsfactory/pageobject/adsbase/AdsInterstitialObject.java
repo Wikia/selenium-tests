@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.Assertion;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.wikia.webdriver.common.core.Assertion;
 
 /**
  * @ownership AdEng
@@ -18,11 +18,11 @@ public class AdsInterstitialObject extends AdsBaseObject {
   /**
    * Checks if the actual size (width or height) is within the "range of correctness" ;)
    *
-   * We don't want to be pixel perfect in terms of checking the size of element because
-   * it depends on many things such as in example components of a browser's window.
+   * We don't want to be pixel perfect in terms of checking the size of element because it depends
+   * on many things such as in example components of a browser's window.
    *
-   * We also don't want to just check if the content of scalable interstitial is bigger
-   * than the original image. So, we came up with a reasonable size difference margin.
+   * We also don't want to just check if the content of scalable interstitial is bigger than the
+   * original image. So, we came up with a reasonable size difference margin.
    *
    * The size defined here is doubled at the end.
    *
@@ -36,8 +36,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
   @FindBy(css = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div")
   private WebElement interstitialAdWrapper;
 
-  public AdsInterstitialObject(WebDriver driver, String testedPage,
-                               Dimension resolution) {
+  public AdsInterstitialObject(WebDriver driver, String testedPage, Dimension resolution) {
     super(driver, testedPage, resolution);
   }
 
@@ -56,30 +55,19 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
     Assertion.assertTrue(
         isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
-        String.format(
-            "The width of ad unit is not within tolerance range " +
-            "[actual: %d, expected: %d, tolerance: +-%d]",
-            actualSize.getWidth(),
-            expectedSize.getWidth(),
-            SIZE_DIFFERENCE_TOLERANCE
-        )
-    );
+        String.format("The width of ad unit is not within tolerance range "
+            + "[actual: %d, expected: %d, tolerance: +-%d]", actualSize.getWidth(),
+            expectedSize.getWidth(), SIZE_DIFFERENCE_TOLERANCE));
 
     Assertion.assertTrue(
         isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
-        String.format(
-            "The height of ad unit is not within tolerance range " +
-            "[actual: %d, expected: %d, tolerance: +-%d]",
-            actualSize.getHeight(),
-            expectedSize.getHeight(),
-            SIZE_DIFFERENCE_TOLERANCE
-        )
-    );
+        String.format("The height of ad unit is not within tolerance range "
+            + "[actual: %d, expected: %d, tolerance: +-%d]", actualSize.getHeight(),
+            expectedSize.getHeight(), SIZE_DIFFERENCE_TOLERANCE));
   }
 
   private boolean isSizeCorrect(int actualSize, int expectedSize) {
-    return
-        actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE &&
-        actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
+    return actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE
+        && actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
   }
 }

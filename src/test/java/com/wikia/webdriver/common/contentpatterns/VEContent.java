@@ -17,12 +17,11 @@ public class VEContent {
   public static final String TEMPLATE_ASSIGNMENT = " = ";
   public static final String PARAM_SEPARATOR = "|";
 
-  public static final String TEMPLATE_WIKITEXT =
-      PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL1 + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE1 +
-      PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL2 + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE2;
+  public static final String TEMPLATE_WIKITEXT = PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL1
+      + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE1 + PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL2
+      + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE2;
 
-  public static final String
-      BOUNDING_SCRIPT =
+  public static final String BOUNDING_SCRIPT =
       "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
 
   private VEContent() {

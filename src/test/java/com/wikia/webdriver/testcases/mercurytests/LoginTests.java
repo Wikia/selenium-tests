@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.JoinPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership Social
@@ -32,8 +32,7 @@ public class LoginTests extends NewTestTemplate {
     String url = driver.getCurrentUrl();
     new TopBarComponentObject(driver).clickLogInIcon();
     new LoginPageObject(driver).clickOnSignInButton().logUserIn(
-        Configuration.getCredentials().userName10,
-        Configuration.getCredentials().password10);
+        Configuration.getCredentials().userName10, Configuration.getCredentials().password10);
 
     new ArticlePageObject(driver).waitForFooterToBeVisible();
     boolean result = url.equals(driver.getCurrentUrl());
@@ -149,7 +148,7 @@ public class LoginTests extends NewTestTemplate {
   public void MercuryLoginTest_011_japaneseUserLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userNameJapanese2,
-                        Configuration.getCredentials().passwordJapanese2);
+        Configuration.getCredentials().passwordJapanese2);
     Assertion.assertTrue(loginPageObject.getNav().isUserLoggedIn(
         Configuration.getCredentials().userNameJapanese2));
   }

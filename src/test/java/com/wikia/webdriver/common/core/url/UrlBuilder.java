@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class UrlBuilder {
 

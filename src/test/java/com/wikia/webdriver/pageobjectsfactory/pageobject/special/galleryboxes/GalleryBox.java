@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
-import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

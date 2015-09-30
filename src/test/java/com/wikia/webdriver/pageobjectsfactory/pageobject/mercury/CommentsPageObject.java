@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -8,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * @ownership: Content X-Wing
@@ -75,8 +75,8 @@ public class CommentsPageObject extends BasePageObject {
   public int getNumberOfRepliesFromHeader(int index) {
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
-    return Integer
-        .parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
+    return Integer.parseInt(showRepliesButtons.get(index).getText()
+                                .substring(stringStart, stringEnd));
   }
 
   public int getNumberOfRepliesFromList(int index) {
@@ -90,7 +90,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public String getUsernameFromUrl() {
     return driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11,
-                                            driver.getCurrentUrl().length());
+        driver.getCurrentUrl().length());
   }
 
   public int getNumberOfAllCommentsOnPage() {
@@ -103,8 +103,7 @@ public class CommentsPageObject extends BasePageObject {
 
   public int getNumberOfCommentsFromHeader() {
     return Integer.parseInt(commentsHeader.getText().substring(0,
-                                                               commentsHeader.getText()
-                                                                   .indexOf(" ")));
+        commentsHeader.getText().indexOf(" ")));
   }
 
   public int getNumberOfRepliesOnThatPage() {

@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class PhotoOptionsComponentObject extends BasePageObject {
 
@@ -59,11 +59,11 @@ public class PhotoOptionsComponentObject extends BasePageObject {
   }
 
   public void adjustLayout() {
-    //TODO
+    // TODO
   }
 
   public void replaceCaption() {
-    //TODO
+    // TODO
   }
 
   public PhotoAddComponentObject clickSelectAnotherPhoto() {

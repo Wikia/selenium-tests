@@ -1,12 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
 
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.interactions.Typing;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -15,7 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.interactions.Typing;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 public class NavigationBar extends WikiBasePageObject {
 
@@ -76,8 +76,8 @@ public class NavigationBar extends WikiBasePageObject {
         searchInput.sendKeys(Keys.ARROW_DOWN);
       }
       searchInput.sendKeys(Keys.ENTER);
-      LOG.success("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-                                           + suggestionText + "and clicked enter");
+      LOG.success("ArrowDownToSuggestion", "arrowed down to desired suggestion" + suggestionText
+          + "and clicked enter");
       return new ArticlePageObject(driver);
     } else {
       return null;
@@ -93,8 +93,7 @@ public class NavigationBar extends WikiBasePageObject {
       WebElement currentSuggestion = suggestionsList.get(i);
       if (currentSuggestion.getText().contains(suggestion)) {
         currentSuggestion.click();
-        LOG
-            .result("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
+        LOG.result("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
         return new ArticlePageObject(driver);
       }
     }
@@ -110,7 +109,7 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public IntraWikiSearchPageObject searchFor(String query) {
-    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
+    LOG.success("searchFor", "searching for query: " + query, true);
     typeQuery(query);
     return clickSearchButton();
   }
@@ -135,7 +134,7 @@ public class NavigationBar extends WikiBasePageObject {
   public ArticlePageObject goSearchFor(String query) {
     searchInput.sendKeys(query);
     searchSubmit.click();
-    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
+    LOG.success("searchFor", "searching for query: " + query, true);
     return new ArticlePageObject(driver);
   }
 

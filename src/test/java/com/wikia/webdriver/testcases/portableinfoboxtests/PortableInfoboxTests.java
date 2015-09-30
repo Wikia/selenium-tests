@@ -265,16 +265,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void infoboxImageOnCategoryPage() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
 
-    String imageName = info
-        .open(PageContent.PORTABLE_INFOBOX02)
-        .getDataImageName();
+    String imageName = info.open(PageContent.PORTABLE_INFOBOX02).getDataImageName();
 
     String articleName = info.getHeaderText();
     CategoryPageObject categoryPage = info.clickCategory(0);
 
-    String categoryImageURL = categoryPage.getPageImageURL(
-            categoryPage.getArticleIndexInGalleryByName(articleName)
-        );
+    String categoryImageURL =
+        categoryPage.getPageImageURL(categoryPage.getArticleIndexInGalleryByName(articleName));
 
     info.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
   }

@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.commentstests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -9,9 +12,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -42,7 +42,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleComments_002_replyComment() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    String comment = PageContent.COMMENT_TEXT +  DateTime.now().getMillis();
+    String comment = PageContent.COMMENT_TEXT + DateTime.now().getMillis();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
     article.submitComment();

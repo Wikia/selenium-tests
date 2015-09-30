@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * Created by Liz Lee on 6/18/14.

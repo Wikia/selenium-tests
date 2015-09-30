@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
@@ -9,8 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

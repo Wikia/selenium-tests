@@ -1,15 +1,17 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.dataprovider.ads.AdTypeDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
 
-import org.openqa.selenium.By;
-import org.testng.annotations.Test;
-
 /**
  * @author Bogna 'bognix' Knychala
- * @author Sergey Naumov <p/> These are synthetic tests, the related order in DFP is:
+ * @author Sergey Naumov
+ *         <p/>
+ *         These are synthetic tests, the related order in DFP is:
  *         https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
  * @ownership AdEngineering
  */
@@ -17,13 +19,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 
   private static final String SRC = "mobile";
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_001", "TestAdType", "MobileAds"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncSuccessWithAd"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_001", "TestAdType", "MobileAds"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncSuccessWithAd")
   public void TestAdTypeAsync_001_imageAd(String wikiName, String article, String adUnit,
-                                          String slotName, String imgUrl) {
+      String slotName, String imgUrl) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.waitForSlot(slotName);
@@ -31,13 +30,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_002", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopNoAd"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_002", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncHopNoAd")
   public void TestAdTypeAsync_002_noAd(String wikiName, String article, String adUnit,
-                                       String slotName, String slotName2) {
+      String slotName, String slotName2) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
@@ -48,13 +44,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifyNoAdInSlot(slotName2);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_003", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncSuccessNoAd"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_003", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncSuccessNoAd")
   public void TestAdTypeAsync_003_noAdSuccess(String wikiName, String article, String adUnit,
-                                              String slotName) {
+      String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
@@ -62,13 +55,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifySlotExpanded(slotName);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_004", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopWithAd"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_004", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncHopWithAd")
   public void TestAdTypeAsync_004_imgAdHop(String wikiName, String article, String adUnit,
-                                           String slotName) {
+      String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
@@ -76,13 +66,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifyNoAdInSlot(slotName);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_005", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopWithSpecialProvider"
-  )
-  public void TestAdTypeAsync_005_hopSpecialProvider(String wikiName, String article, String adUnit,
-                                                     String slotName) {
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_005", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncHopWithSpecialProvider")
+  public void TestAdTypeAsync_005_hopSpecialProvider(String wikiName, String article,
+      String adUnit, String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
@@ -90,15 +77,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifyNoAdInSlot(slotName);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeAsync_006", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopAndAsyncSuccess"
-  )
-  public void TestAdTypeAsync_006_asyncHopAndAsyncSuccess(
-      String wikiName, String article, String adUnit, String slotNameWithAd, String imgUrl,
-      String slotNameWithoutAd
-  ) {
+  @Test(groups = {"MobileAds", "TestAdTypeAsync_006", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "asyncHopAndAsyncSuccess")
+  public void TestAdTypeAsync_006_asyncHopAndAsyncSuccess(String wikiName, String article,
+      String adUnit, String slotNameWithAd, String imgUrl, String slotNameWithoutAd) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotNameWithAd));
@@ -109,13 +91,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifyNoAdInSlot(slotNameWithoutAd);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeForcedSuccess_001", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "forcedSuccessNoAd"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeForcedSuccess_001", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "forcedSuccessNoAd")
   public void TestAdTypeForcedSuccess_001_noAd(String wikiName, String article, String adUnit,
-                                               String slotName) {
+      String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.waitForSlot(slotName);
@@ -123,13 +102,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.verifySlotExpanded(slotName);
   }
 
-  @Test(
-      groups = {"MobileAds", "TestAdTypeInspectIframe_001", "TestAdType"},
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "inspectIframeImg"
-  )
+  @Test(groups = {"MobileAds", "TestAdTypeInspectIframe_001", "TestAdType"},
+      dataProviderClass = AdTypeDataProvider.class, dataProvider = "inspectIframeImg")
   public void TestAdTypeInspectIframe_001_withAd(String wikiName, String article, String adUnit,
-                                                 String slotName, String imgUrl) {
+      String slotName, String imgUrl) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));

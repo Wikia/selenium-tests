@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.gallery;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,7 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -109,8 +109,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   public void verifyPhotosCount(int photos) {
     for (int i = 0; i < photos; i++) {
       wait.forElementVisible(galleryPreviewPhotos.get(i));
-      LOG
-          .result("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
+      LOG.result("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
 
@@ -152,4 +151,3 @@ public class GalleryBuilderComponentObject extends BasePageObject {
     NONE, SQUARE, LANDSCAPE, PORTRAIT
   }
 }
-

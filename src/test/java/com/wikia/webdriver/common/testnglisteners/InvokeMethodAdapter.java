@@ -1,14 +1,14 @@
 package com.wikia.webdriver.common.testnglisteners;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.exceptions.TestFailedException;
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.List;
 
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.exceptions.TestFailedException;
+import com.wikia.webdriver.common.logging.LOG;
 
 
 public class InvokeMethodAdapter implements IInvokedMethodListener {

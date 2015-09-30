@@ -1,31 +1,28 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
+import java.util.List;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 /**
  * @ownership: Content X-Wing
  */
 public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = ".PDS_Poll")
-  private List<WebElement> polldaddyDivList;
-  By polldaddyBody = By.cssSelector("*");
-
   private static final String TAG_NAME = "pollydaddy";
   private static final String ARTICLE_NAME = "PolldaddyWidget";
-  private static final String[] TAGS = {
-      "<polldaddy id=\"8956579\"/>",
-      "<polldaddy id=\"9022741\"/>"
-  };
+  private static final String[] TAGS = {"<polldaddy id=\"8956579\"/>",
+      "<polldaddy id=\"9022741\"/>"};
   private static final String INCORRECT_TAG = "<polldaddy />";
   private static final String ERROR_MESSAGE =
       "Failed to render the Polldaddy widget. Please check if all required parameters are in place.";
+  By polldaddyBody = By.cssSelector("*");
+  @FindBy(css = ".PDS_Poll")
+  private List<WebElement> polldaddyDivList;
 
   public PolldaddyWidgetPageObject(WebDriver driver) {
     super(driver);
@@ -61,8 +58,7 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected List<WebElement> getWidgetIFrameList() {
-    throw new NotImplementedException(
-        "Polldaddy widget is not kept inside any IFrame");
+    throw new NotImplementedException("Polldaddy widget is not kept inside any IFrame");
   }
 
   protected WebElement getWidgetBody() {

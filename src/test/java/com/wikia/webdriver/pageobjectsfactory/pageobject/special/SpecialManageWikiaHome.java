@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -31,11 +31,11 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
   public Map<String, Integer> getSlotSetup() {
     Map<String, Integer> slotSetup = new HashMap<String, Integer>();
     slotSetup.put(HubName.VIDEO_GAMES.toString(),
-                  Integer.parseInt(videoGamesAmount.getAttribute("value")));
+        Integer.parseInt(videoGamesAmount.getAttribute("value")));
     slotSetup.put(HubName.ENTERTAINMENT.toString(),
-                  Integer.parseInt(entertainmentAmount.getAttribute("value")));
-    slotSetup
-        .put(HubName.LIFESTYLE.toString(), Integer.parseInt(lifestyleAmount.getAttribute("value")));
+        Integer.parseInt(entertainmentAmount.getAttribute("value")));
+    slotSetup.put(HubName.LIFESTYLE.toString(),
+                  Integer.parseInt(lifestyleAmount.getAttribute("value")));
     return slotSetup;
   }
 }

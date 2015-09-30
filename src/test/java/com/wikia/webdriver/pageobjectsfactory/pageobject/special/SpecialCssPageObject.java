@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class SpecialCssPageObject extends SpecialPageObject {
 
@@ -71,9 +71,9 @@ public class SpecialCssPageObject extends SpecialPageObject {
     return this;
   }
 
-  public SpecialCssPageObject  openEditor() {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + URLsContent.MEDIAWIKI_CSS, "action=edit"));
+  public SpecialCssPageObject openEditor() {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+        + URLsContent.WIKI_DIR + URLsContent.MEDIAWIKI_CSS, "action=edit"));
     return this;
   }
 
@@ -85,9 +85,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
   public void verifyHighlighting() {
     Assertion.assertNotEquals(aceElementsList.size(), 0);
-    LOG.result("verifyHighlighting",
-               "There are elements highlighted by ace library",
-               true);
+    LOG.result("verifyHighlighting", "There are elements highlighted by ace library", true);
   }
 
   public void saveCssContent(String randomText) {
@@ -102,30 +100,26 @@ public class SpecialCssPageObject extends SpecialPageObject {
   public void clearCssText() {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('cssEditorContainer').setValue('');");
-    LOG.logResult("clearCssText", "ace editor was cleared", true, driver);
+    LOG.success("clearCssText", "ace editor was cleared", true);
   }
 
   public void insertCssText(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('cssEditorContainer').navigateFileEnd();");
     sendCssText(cssText);
-    LOG.success("sendAceCssText",
-                "the following text was send to ace editor: " + cssText);
+    LOG.success("sendAceCssText", "the following text was send to ace editor: " + cssText);
   }
 
   public void sendEditSummaryText(String summaryText) {
     wait.forElementVisible(editSummaryField);
     editSummaryField.sendKeys(summaryText);
-    LOG.success("editSummaryField", "the following text was send to ace editor: "
-                                    + summaryText);
+    LOG.success("editSummaryField", "the following text was send to ace editor: " + summaryText);
   }
 
   public void sendCssText(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
     aceInputTextArea.sendKeys(cssText);
-    LOG.result("sendCssText",
-               "the following text was send to ace editor: " + cssText,
-               true);
+    LOG.result("sendCssText", "the following text was send to ace editor: " + cssText, true);
   }
 
   public void verifyAceError() {
@@ -210,8 +204,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
   public void verifyArticleIsNotRemoved(String page) {
     if (isElementOnPage(removedWarning)) {
       undeleteArticle(page);
-      LOG.result("articleIsRemoved", "Article is removed, needs to be restored",
-                 true);
+      LOG.result("articleIsRemoved", "Article is removed, needs to be restored", true);
     } else {
       LOG.success("verifyArticleIsNotRemoved", "Article is not removed.");
     }

@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.common.logging.LOG;
 
 public class EditingPreferencesPageObject extends PreferencesPageObject {
 

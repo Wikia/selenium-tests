@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

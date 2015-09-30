@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import junit.framework.Assert;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -14,9 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
-import junit.framework.Assert;
-import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala

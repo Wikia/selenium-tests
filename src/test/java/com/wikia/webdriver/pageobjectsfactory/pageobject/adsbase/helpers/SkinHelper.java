@@ -1,10 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.LOG;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -12,9 +10,11 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Class represents helper functionality for working with Ad Skin (such as checking whether ad skin

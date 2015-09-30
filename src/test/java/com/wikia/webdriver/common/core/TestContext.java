@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.core;
 
+import java.lang.reflect.Method;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by Ludwik on 2015-08-05.
@@ -27,23 +26,23 @@ public class TestContext {
     return methodName;
   }
 
-  public static Method getCurrentTestMethod(){
+  public static Method getCurrentTestMethod() {
     return testMethod;
   }
 
-  public static void setFirstLoad(boolean value){
+  public static void setFirstLoad(boolean value) {
     isFirstLoad = value;
   }
 
-  public static boolean isIsFirstLoad(){
+  public static boolean isIsFirstLoad() {
     return isFirstLoad;
   }
 
-  public static void setDriver(WebDriver driver){
+  public static void setDriver(WebDriver driver) {
     webdriver = driver;
   }
 
-  public static WebDriver getWebDriver(){
+  public static WebDriver getWebDriver() {
     return webdriver;
   }
 }

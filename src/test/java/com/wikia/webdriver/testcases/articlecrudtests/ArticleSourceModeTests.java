@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
@@ -25,11 +30,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.List;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -163,8 +163,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
-    PhotoOptionsComponentObject
-        photoOptions =
+    PhotoOptionsComponentObject photoOptions =
         photoAddPhoto.addPhotoFromWiki(PageContent.ARTICLESOURCEMODEFILE);
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
@@ -181,8 +180,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SlideshowBuilderComponentObject
-        slideshowBuilder =
+    SlideshowBuilderComponentObject slideshowBuilder =
         (SlideshowBuilderComponentObject) source.addComponent("slideshow");
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
@@ -190,10 +188,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     slideshowAddPhoto.clickSelect();
     slideshowBuilder.adjustPosition(Positions.CENTER);
     slideshowBuilder.clickFinish();
-    source.checkSourceContent(
-        "<gallery type=\"slideshow\" position=\"center\">\n" + photoNames.get(0) + "\n" + photoNames
-            .get(
-                1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
@@ -204,8 +201,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    GalleryBuilderComponentObject
-        galleryBuiler =
+    GalleryBuilderComponentObject galleryBuiler =
         (GalleryBuilderComponentObject) source.addComponent("gallery");
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
@@ -216,9 +212,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
-    source.checkSourceContent(
-        "<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n" + photoNames.get(0) + "\n"
-        + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
@@ -229,8 +225,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SliderBuilderComponentObject
-        sliderBuilder =
+    SliderBuilderComponentObject sliderBuilder =
         (SliderBuilderComponentObject) source.addComponent("slider");
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
     AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -238,10 +233,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     List<String> photoNames = sliderAddPhoto.choosePhotos(4);
     sliderAddPhoto.clickSelect();
     sliderBuilder.clickFinish();
-    source.checkSourceContent(
-        "<gallery type=\"slider\" orientation=\"right\">\n" + photoNames.get(0) + "\n" + photoNames
-            .get(
-                1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
@@ -251,13 +245,12 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
-    VetOptionsComponentObject
-        vetOptions =
+    VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
-    source.checkSourceVideoContent(
-        "[[" + VideoContent.YOUTUBE_VIDEO_WIKITEXT + PageContent.CAPTION + "]]");
+    source.checkSourceVideoContent("[[" + VideoContent.YOUTUBE_VIDEO_WIKITEXT + PageContent.CAPTION
+        + "]]");
     source.submitArticle();
   }
 

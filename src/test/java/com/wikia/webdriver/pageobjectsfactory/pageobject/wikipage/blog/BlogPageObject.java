@@ -1,23 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BlogPageObject extends ArticlePageObject {
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
-  @FindBy(css = ".WikiaBlogPostHeader h1")
-  private WebElement blogHeader;
+public class BlogPageObject extends ArticlePageObject {
 
   By image = By.cssSelector("img");
   By firstSpan = By.cssSelector("span:nth-child(2) a");
   By secondSpan = By.cssSelector("span:nth-child(3)");
   By thirdSpan = By.cssSelector("span:nth-child(4) a");
+  @FindBy(css = ".WikiaBlogPostHeader h1")
+  private WebElement blogHeader;
 
   public BlogPageObject(WebDriver driver) {
     super(driver);

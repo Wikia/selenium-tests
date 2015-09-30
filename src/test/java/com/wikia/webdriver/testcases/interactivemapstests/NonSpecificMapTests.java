@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -12,8 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Te
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -33,8 +33,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     String mapUrl = specialMap.getMapLink(InteractiveMapsContent.SELECTED_MAP_INDEX);
     String mapTitle = specialMap.getMapTitle(InteractiveMapsContent.SELECTED_MAP_INDEX);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.verifyURL(mapUrl);
@@ -70,8 +69,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickZoomOutButton();
@@ -104,8 +102,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMap = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
-    TemplateComponentObject
-        templateMap =
+    TemplateComponentObject templateMap =
         customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
     templateMap.clickNext();
     templateMap.verifyErrorExists();
@@ -115,8 +112,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
   }
@@ -134,8 +130,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   public void NonSpecificMapTests_010_VerifyFragmentContentTagVisibility() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.ESCAPED_FRAGMENT_MAP_ID);
     selectedMap.verifyEscapedFragmentMetaTag();
   }
@@ -144,8 +139,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.ESCAPED_FRAGMENT_MAP_ID);
     selectedMap.verifyPoiCategoryTitle();
     selectedMap.verifyPoiPointTitle();

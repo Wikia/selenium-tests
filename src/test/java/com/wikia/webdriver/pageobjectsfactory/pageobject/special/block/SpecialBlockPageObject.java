@@ -1,10 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +9,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialBlockPageObject extends WikiBasePageObject {
 
@@ -35,11 +35,11 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public SpecialBlockPageObject open(){
+  public SpecialBlockPageObject open() {
     return open(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
   }
 
-  public SpecialBlockPageObject open(String wikiUrl){
+  public SpecialBlockPageObject open(String wikiUrl) {
     getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
     LOG.success("openSpecialBlockPage", "history page opened");
     wait.forElementVisible(blockButton);

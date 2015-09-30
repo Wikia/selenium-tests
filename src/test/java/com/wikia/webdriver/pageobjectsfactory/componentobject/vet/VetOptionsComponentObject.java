@@ -1,10 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,6 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -64,20 +64,20 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(widthInputField);
     widthInputField.clear();
     widthInputField.sendKeys(widthString);
-    LOG.logResult("adjustWith", "width set to: " + width, true, driver);
+    LOG.success("adjustWith", "width set to: " + width, true);
   }
 
   private void clickAddaVideo() {
     wait.forElementVisible(addAvideo);
     wait.forElementClickable(addAvideo);
     scrollAndClick(addAvideo);
-    LOG.logResult("clickAddaVideo", "add video button clicked", true, driver);
+    LOG.success("clickAddaVideo", "add video button clicked", true);
   }
 
   private void clickRetunToEditing() {
     wait.forElementVisible(returnToEditing);
     scrollAndClick(returnToEditing);
-    LOG.logResult("clickReturnToEditing", "return to editing button clicked", true, driver);
+    LOG.success("clickReturnToEditing", "return to editing button clicked", true);
   }
 
   private void verifyVideoThumbnail() {
@@ -125,9 +125,8 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void verifyVideoAlignmentSelected(PositionsVideo positions) {
     wait.forElementVisible(videoEmbedLayotRow);
-    String selectedPositionId = videoEmbedLayotRow
-        .findElement(By.cssSelector(".selected"))
-        .getAttribute("id");
+    String selectedPositionId =
+        videoEmbedLayotRow.findElement(By.cssSelector(".selected")).getAttribute("id");
     String desiredPositionId;
     switch (positions) {
       case LEFT:
@@ -148,16 +147,14 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   public void clickUpdateVideo() {
     wait.forElementVisible(updateVideoButton);
     scrollAndClick(updateVideoButton);
-    LOG.logResult("updateVideoButton", "update video button clicked", true, driver);
+    LOG.success("updateVideoButton", "update video button clicked", true);
   }
 
 
   public void verifyVideoWidth(int widthDesired) {
     wait.forElementVisible(widthInputField);
     int width = Integer.parseInt(widthInputField.getAttribute("value"));
-    Assertion.assertEquals(
-        widthDesired,
-        width);
+    Assertion.assertEquals(widthDesired, width);
     LOG.success("verifyVideoWidth", "video width verified");
   }
 

@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership AdEng

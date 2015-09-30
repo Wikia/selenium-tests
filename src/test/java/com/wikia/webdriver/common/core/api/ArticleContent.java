@@ -1,16 +1,16 @@
 package com.wikia.webdriver.common.core.api;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by Ludwik on 2015-08-05.
@@ -23,8 +23,9 @@ public class ArticleContent extends ApiCall {
   private static ArrayList<BasicNameValuePair> PARAMS;
 
   public ArticleContent() {
-    baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-              + "wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
+    baseURL =
+        new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+            + "wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
 
     File configFile = new File(Configuration.getCredentialsFilePath());
     if (StringUtils.isBlank(secret)) {
@@ -35,11 +36,13 @@ public class ArticleContent extends ApiCall {
     PARAMS.add(new BasicNameValuePair("secret", secret));
   }
 
-  @Override protected String getURL() {
+  @Override
+  protected String getURL() {
     return URL_STRING;
   }
 
-  @Override protected User getUser() {
+  @Override
+  protected User getUser() {
     return User.STAFF;
   }
 
@@ -55,15 +58,15 @@ public class ArticleContent extends ApiCall {
     call();
   }
 
-  public  void push(String content) {
+  public void push(String content) {
     push(content, TestContext.getCurrentMethodName());
   }
 
-  public  void clear(String articleTitle) {
+  public void clear(String articleTitle) {
     push("", articleTitle);
   }
 
-  public  void clear() {
+  public void clear() {
     push("", TestContext.getCurrentMethodName());
   }
 }

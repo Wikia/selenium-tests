@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
  * @ownership: Content X-Wing
@@ -97,8 +97,7 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean areAllValidSwappedForIFrames() {
     boolean result = getWidgetWrapperList().size() == getWidgetIFrameList().size();
-    LOG.result(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG,
-               result);
+    LOG.result(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG, result);
     return result;
   }
 
@@ -116,8 +115,7 @@ public abstract class WidgetPageObject extends BasePageObject {
       }
       LOG.result(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
-    LOG.result("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG,
-               result);
+    LOG.result("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 
@@ -128,10 +126,8 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   protected void logVisibility(boolean result) {
-    LOG
-        .result(getTagName(),
-                result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
-                result);
+    LOG.result(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+               result);
   }
 
   /**

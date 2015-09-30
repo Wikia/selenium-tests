@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class SpecialUploadPageObject extends WikiBasePageObject {
 
@@ -29,31 +29,23 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   /**
    * Selects given file in upload browser.
    *
-   * @author Michal Nowierski ** @param file file to Be uploaded <p> Look at folder
-   * acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
+   * @author Michal Nowierski ** @param file file to Be uploaded
+   *         <p>
+   *         Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where
+   *         those files are stored
    */
 
   public void selectFileToUpload(String file) {
-    browseForFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
-    );
-    LOG.result(
-        "typeInFileToUploadPath",
-        "file " + file + " added to upload",
-        true
-    );
+    browseForFileInput.sendKeys(CommonUtils
+        .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    LOG.result("typeInFileToUploadPath", "file " + file + " added to upload", true);
 
   }
 
   public void checkIgnoreAnyWarnings() {
     wait.forElementClickable(ignoreAnyWarnings);
     scrollAndClick(ignoreAnyWarnings);
-    LOG.logResult(
-        "checkIgnoreAnyWarnings",
-        "ignore warnings checkbox selected",
-        true,
-        driver
-    );
+    LOG.success("checkIgnoreAnyWarnings", "ignore warnings checkbox selected",true);
 
   }
 

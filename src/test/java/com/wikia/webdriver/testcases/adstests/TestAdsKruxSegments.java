@@ -3,13 +3,13 @@ package com.wikia.webdriver.testcases.adstests;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership AdEngineering
@@ -27,17 +27,10 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
   private static final String NO_ADS_URL_PARAM =
       "InstantGlobals.wgSitewideDisableGpt=1&InstantGlobals.wgSitewideDisableLiftium=1";
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxSegments",
-      groups = {"AdsKruxSegments", "Ads"}
-  )
-  public void adsKruxSegments(String kruxKuid,
-                              String segment,
-                              Page page1,
-                              String expectedSegmentsOnPage1,
-                              Page page2,
-                              String expectedSegmentsOnPage2) {
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "kruxSegments", groups = {
+      "AdsKruxSegments", "Ads"})
+  public void adsKruxSegments(String kruxKuid, String segment, Page page1,
+      String expectedSegmentsOnPage1, Page page2, String expectedSegmentsOnPage2) {
 
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
 
@@ -87,8 +80,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
   }
 
   private void assertPageParams(AdsKruxObject adsKruxObject) {
-    assertStringContains(
-        adsKruxObject.getGptParams(AdsContent.TOP_LB, "data-gpt-page-params"),
+    assertStringContains(adsKruxObject.getGptParams(AdsContent.TOP_LB, "data-gpt-page-params"),
         "\"ksgmnt\":" + adsKruxObject.getKxsegs());
   }
 

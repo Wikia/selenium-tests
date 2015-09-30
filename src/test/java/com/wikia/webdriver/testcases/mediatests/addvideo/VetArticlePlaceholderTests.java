@@ -3,6 +3,9 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -14,9 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

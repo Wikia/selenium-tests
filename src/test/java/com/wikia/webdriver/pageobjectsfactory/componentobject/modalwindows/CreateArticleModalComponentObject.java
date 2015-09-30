@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -44,24 +44,13 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
-    LOG.result(
-        "PageCreated",
-        "Page with given title created",
-        true
-    );
+    LOG.result("PageCreated", "Page with given title created", true);
   }
 
   public void verifyMessageAboutBlockPresent() {
     wait.forElementVisible(phalanxBlockMessageContainer);
-    wait.forTextInElement(
-        phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
-    );
-    LOG.logResult(
-        "MessageAboutBlockPresent",
-        "Message about block present",
-        true,
-        driver
-    );
+    wait.forTextInElement(phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE);
+    LOG.success("MessageAboutBlockPresent", "Message about block present",true);
   }
 
   /**

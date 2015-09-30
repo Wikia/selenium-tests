@@ -1,14 +1,14 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 /**
  * @ownership: Content X-Wing
@@ -28,15 +28,10 @@ public class SectionItemsTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
 
-    category
-        .isCurrentNumberOfItemsExpected(24)
-        .isLoadMoreButtonVisible()
-        .clickOnLoadMoreButton()
+    category.isCurrentNumberOfItemsExpected(24).isLoadMoreButtonVisible().clickOnLoadMoreButton()
         .waitForLoadingSpinnerToFinish();
 
-    category
-        .isCurrentNumberOfItemsExpected(28)
-        .areItemsInCuratedContentUnique()
+    category.isCurrentNumberOfItemsExpected(28).areItemsInCuratedContentUnique()
         .isLoadMoreButtonHidden();
   }
 
@@ -46,8 +41,6 @@ public class SectionItemsTests extends NewTestTemplate {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
-    category
-        .isCurrentNumberOfItemsExpected(10)
-        .isLoadMoreButtonHidden();
+    category.isCurrentNumberOfItemsExpected(10).isLoadMoreButtonHidden();
   }
 }

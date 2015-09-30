@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 
 /**
@@ -21,6 +21,8 @@ import java.util.List;
 
 public class InteractiveMapsPageObject extends ArticlePageObject {
 
+  @FindBy(css = ".wikia-maps-create-map")
+  protected WebElement createMapUnderContribute;
   @FindBy(css = "#createMap")
   private WebElement createAMapButton;
   @FindBy(css = ".map-list>li>a")
@@ -35,8 +37,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   private WebElement paginationNext;
   @FindBy(css = "#intMapCreateMapModal")
   private WebElement createMapModal;
-  @FindBy(css = ".wikia-maps-create-map")
-  protected WebElement createMapUnderContribute;
   @FindBy(css = ".no-maps")
   private WebElement emptyStateSection;
 
@@ -48,7 +48,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public CreateAMapComponentObject clickCreateAMap() {
     wait.forElementVisible(createAMapButton);
     scrollAndClick(createAMapButton);
-    LOG.logResult("clickCreateAMap", "create a map button clicked", true, driver);
+    LOG.success("clickCreateAMap", "create a map button clicked", true);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -57,8 +57,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
-    LOG.logResult("clickCreateAMapUnderContributeButton",
-                  "create a map button under contribute button clicked", true, driver);
+    LOG.success("clickCreateAMapUnderContributeButton",
+                "create a map button under contribute button clicked", true);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -96,9 +96,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public void verifyAmountMapOnTheList() {
     wait.forElementVisible(mapCollection.get(0));
     Assert.assertEquals(mapCollection.size(), 10);
-    LOG.result("verifyAmountMapOnTheList",
-               "There are " + mapCollection.size() + " maps on the list",
-               true);
+    LOG.result("verifyAmountMapOnTheList", "There are " + mapCollection.size()
+        + " maps on the list", true);
   }
 
   public void verifyCorrectPagination() {
@@ -111,11 +110,11 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public void verifyCreateMapModalNotExists() {
     Assertion.assertEquals(isElementOnPage(createMapModal), false,
-                           "Create map modal was not closed");
+        "Create map modal was not closed");
   }
 
   public void verifyEmptyState() {
     Assertion.assertTrue(isElementOnPage(emptyStateSection), "Expecting a empty state");
-    LOG.logResult("verifyCorrectPagination", "Paggination was showed", true, driver);
+    LOG.success("verifyCorrectPagination", "Paggination was showed", true);
   }
 }

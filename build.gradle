@@ -355,15 +355,14 @@ task runFailed {
     }
 }
 
-
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
     ignoreFailures = true;
     def groups = ''
 
-    if(!project.hasProperty('failedMatrix')) {
+    if (!project.hasProperty('failedMatrix')) {
         groups = project.hasProperty('groups') ? groups : System.getProperty('groups', '')
-    }else{
+    } else {
         groups = "NOT EXISITNG"
     }
 

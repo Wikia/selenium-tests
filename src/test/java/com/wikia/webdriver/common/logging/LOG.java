@@ -27,18 +27,16 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 public class LOG {
-  private static String reportPath = "." + File.separator + "logs" + File.separator;
-  private static String logFileName = "log.html";
-
   private static final String JIRA_PATH = "https://wikia-inc.atlassian.net/browse/";
-  private static final String LOG_PATH = reportPath + logFileName;
+  private static final int MAX_CONTENT_LENGTH = 160;
+  private static String reportPath = "." + File.separator + "logs" + File.separator;
   private static final String SCREEN_DIR_PATH = reportPath + "screenshots" + File.separator;
   private static final String SCREEN_PATH = SCREEN_DIR_PATH + "screenshot";
+  private static String logFileName = "log.html";
+  private static final String LOG_PATH = reportPath + logFileName;
   private static long logCounter = 0;
   private static long imageIndex = 0;
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
-  private static final int MAX_CONTENT_LENGTH = 160;
-
   private static boolean testStarted = false;
 
   private static void appendToReport(String command, String description, boolean success,
@@ -189,14 +187,13 @@ public class LOG {
     }
   }
 
-  public static void logResult(String command, String description, boolean success,
-                               WebDriver driver) {
+  public static void logResult(String command, String description, boolean success, WebDriver driver) {
     appendToReport(command, description, success, true);
     logJSError();
   }
 
   public static void logResult(String command, String description, boolean success,
-                               boolean makeScreenshot) {
+      boolean makeScreenshot) {
     appendToReport(command, description, success, true);
     logJSError();
   }

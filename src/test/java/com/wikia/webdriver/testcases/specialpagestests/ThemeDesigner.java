@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject.Tab;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @ownership Content X-Wing
@@ -83,8 +83,8 @@ public class ThemeDesigner extends NewTestTemplate {
   }
 
   /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1194 check that color choice dialog closes on
-   * click outside of the dialog
+   * https://wikia-inc.atlassian.net/browse/DAR-1194 check that color choice dialog closes on click
+   * outside of the dialog
    */
   @Test(groups = {"ThemeDesigner007", "ThemeDesigner"})
   @Execute(asUser = User.STAFF)

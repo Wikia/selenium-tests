@@ -1,10 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,7 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.interactions.Elements;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
@@ -37,33 +37,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
   private By mediaTitlesBy = By
       .cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
-
-  public enum ImageLicense {
-    NONESELECTED("None selected", ""), FAIRUSE("Fairuse", ""), SELF("Self",
-        "This file was uploaded by the photographer or author."), FROMWIKIMEDIA("From Wikimedia",
-        "This file was originally uploaded on Wikipedia or another Wikimedia project."), CCBYSA(
-        "CC-BY-SA",
-        "This file is licensed under the Creative Commons Attribution-Share Alike License"), OTHERFREE(
-        "Other free", "This file is licensed under a free license."), PD("PD",
-        "This file is in the public domain"), PERMISSION("Permission",
-        "This file is copyrighted. The copyright holder has given permission for its use.");
-
-    private String displayName;
-    private String displayText;
-
-    ImageLicense(String displayName, String displayText) {
-      this.displayName = displayName;
-      this.displayText = displayText;
-    }
-
-    public String toString() {
-      return displayName;
-    }
-
-    public String getText() {
-      return displayText;
-    }
-  }
 
   public VisualEditorAddMediaDialog(WebDriver driver) {
     super(driver);
@@ -132,8 +105,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
-    LOG.success("selectImageLicense",
-            "License: " + imageLicense.toString() + " selected");
+    LOG.success("selectImageLicense", "License: " + imageLicense.toString() + " selected");
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName,
@@ -170,9 +142,9 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   private void selectFileToUpload(String fileName) {
-    fileUploadInput
-        .sendKeys(CommonUtils.getAbsolutePathForFile(
-            PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
+    fileUploadInput.sendKeys(CommonUtils
+                                 .getAbsolutePathForFile(
+                                     PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
     LOG.success("selectFileToUpload", "file " + fileName + " added to upload");
   }
 
@@ -189,5 +161,32 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(mediaResultsWidget);
     return Elements.getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title",
         title);
+  }
+
+  public enum ImageLicense {
+    NONESELECTED("None selected", ""), FAIRUSE("Fairuse", ""), SELF("Self",
+        "This file was uploaded by the photographer or author."), FROMWIKIMEDIA("From Wikimedia",
+        "This file was originally uploaded on Wikipedia or another Wikimedia project."), CCBYSA(
+        "CC-BY-SA",
+        "This file is licensed under the Creative Commons Attribution-Share Alike License"), OTHERFREE(
+        "Other free", "This file is licensed under a free license."), PD("PD",
+        "This file is in the public domain"), PERMISSION("Permission",
+        "This file is copyrighted. The copyright holder has given permission for its use.");
+
+    private String displayName;
+    private String displayText;
+
+    ImageLicense(String displayName, String displayText) {
+      this.displayName = displayName;
+      this.displayText = displayText;
+    }
+
+    public String toString() {
+      return displayName;
+    }
+
+    public String getText() {
+      return displayText;
+    }
   }
 }

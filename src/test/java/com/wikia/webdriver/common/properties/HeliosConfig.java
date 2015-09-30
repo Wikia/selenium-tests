@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.properties;
 
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import java.io.File;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 /**
  * Created by Ludwik on 2015-04-24.

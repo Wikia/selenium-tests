@@ -1,10 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Created by RodriGomez on 02/04/15.
@@ -62,15 +62,14 @@ public class ModularMainPageObject extends WikiBasePageObject {
   }
 
   public void selectFileToUpload(String file) {
-    updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
-        "ImagesForUploadTests/" + file).getPath()));
+    updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader
+        .getSystemResource("ImagesForUploadTests/" + file).getPath()));
     LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it");
   }
 
   public void verifyDragToRepositionText() {
     wait.forElementVisible(dragToRepositionText);
-    LOG.success("verifyDragToRepositionText",
-                "Drag to reposition text message is visible");
+    LOG.success("verifyDragToRepositionText", "Drag to reposition text message is visible");
   }
 
   public void clickPublishButton() {
@@ -87,9 +86,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
     wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
-    LOG.result("typeMoMDescription",
-               momDescription + "MoM description was typed in",
-               true);
+    LOG.result("typeMoMDescription", momDescription + "MoM description was typed in", true);
   }
 
   public void clickDescriptionPublishButton() {

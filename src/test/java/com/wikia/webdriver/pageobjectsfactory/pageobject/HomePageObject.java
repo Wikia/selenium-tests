@@ -1,10 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,10 +13,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 
 public class HomePageObject extends WikiBasePageObject {
 
@@ -30,7 +30,7 @@ public class HomePageObject extends WikiBasePageObject {
   @FindBy(css = "section.grid-1 nav")
   private WebElement languageButton;
 
-  //These Bys are being used to prevent stale browser exception
+  // These Bys are being used to prevent stale browser exception
   private By languageSelectorBy = By.cssSelector(".wikia-menu-button li > a");
   private By languageButtonSelectorBy = By.cssSelector("section.grid-1 nav");
 
@@ -50,8 +50,8 @@ public class HomePageObject extends WikiBasePageObject {
 
   public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
     startWikiButton.click();
-    waitFor.until(ExpectedConditions.presenceOfElementLocated(
-        By.cssSelector("form[name='label-wiki-form']")));
+    waitFor.until(ExpectedConditions.presenceOfElementLocated(By
+        .cssSelector("form[name='label-wiki-form']")));
     return new CreateNewWikiPageObjectStep1(driver);
   }
 
@@ -70,7 +70,7 @@ public class HomePageObject extends WikiBasePageObject {
     for (String url : wikiList) {
       getUrl(url);
       String hubName = hubIndicator.getText().toLowerCase();
-      //example: [ Video Games ] to Video_Games
+      // example: [ Video Games ] to Video_Games
       hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_");
       switch (hubName) {
         case "video_games":
@@ -85,9 +85,9 @@ public class HomePageObject extends WikiBasePageObject {
         default:
           throw new NoSuchElementException("Non-existing hub selected");
       }
-      hubName =
-          hubName.substring(2, hubName.length() - 2)
-              .replace(" ", "_"); //example: [ Video Games ] to Video_Games
+      hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); // example: [ Video
+                                                                              // Games ] to
+                                                                              // Video_Games
       if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {
         video += 1;
       }
@@ -108,13 +108,13 @@ public class HomePageObject extends WikiBasePageObject {
    * comparing desired slot setup with current visualization setup
    */
   public void verifyVisualizationURLs(Map<String, Integer> slotDesiredSetup,
-                                      Map<String, Integer> slotCurrentSetup) {
+      Map<String, Integer> slotCurrentSetup) {
     Assertion.assertEquals(slotCurrentSetup.get(HubName.VIDEO_GAMES.toString()),
-                           slotDesiredSetup.get(HubName.VIDEO_GAMES.toString()));
+        slotDesiredSetup.get(HubName.VIDEO_GAMES.toString()));
     Assertion.assertEquals(slotCurrentSetup.get(HubName.ENTERTAINMENT.toString()),
-                           slotDesiredSetup.get(HubName.ENTERTAINMENT.toString()));
+        slotDesiredSetup.get(HubName.ENTERTAINMENT.toString()));
     Assertion.assertEquals(slotCurrentSetup.get(HubName.LIFESTYLE.toString()),
-                           slotDesiredSetup.get(HubName.LIFESTYLE.toString()));
+        slotDesiredSetup.get(HubName.LIFESTYLE.toString()));
   }
 
   public HomePageObject selectLanguage(int index) {
@@ -125,15 +125,11 @@ public class HomePageObject extends WikiBasePageObject {
     waitForStringInURL(languageClass);
     if (!checkIfPageIsHub()) {
       waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class",
-                                                      languageClass);
+          languageClass);
     } else {
-      LOG.result("selectLanguage",
-                 "page is a Hub and language dropdown is not present",
-                 true);
+      LOG.result("selectLanguage", "page is a Hub and language dropdown is not present", true);
     }
-    LOG.result("selectLanguage",
-               "language number " + Integer.toString(index) + " selected",
-               true);
+    LOG.result("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
     return new HomePageObject(driver);
   }
 
@@ -165,7 +161,8 @@ public class HomePageObject extends WikiBasePageObject {
 
       newHome = selectLanguage(i);
 
-      // Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
+      // Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have
+      // corporate footer
       // (and language dropDown)
       if (!checkIfPageIsHub()) {
         languageURL += URLsContent.WIKIA_DIR;
@@ -176,11 +173,8 @@ public class HomePageObject extends WikiBasePageObject {
         languageURL += URLsContent.WIKI_DIR;
         newHome.verifyURLcontains(languageURL);
 
-        LOG.result(
-            "selectLanguage",
-            "page is a Hub and language dropdown is not present and main url is different",
-            true
-        );
+        LOG.result("selectLanguage",
+            "page is a Hub and language dropdown is not present and main url is different", true);
       }
       driver.navigate().back();
     }

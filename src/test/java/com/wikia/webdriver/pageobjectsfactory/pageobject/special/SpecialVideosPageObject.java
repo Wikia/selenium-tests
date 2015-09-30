@@ -25,6 +25,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
  */
 public class SpecialVideosPageObject extends SpecialPageObject {
 
+  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
   @FindBy(css = ".WikiaPageHeader h1")
   private WebElement h1Header;
   @FindBy(css = "a.button.addVideo")
@@ -43,8 +44,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   private WebElement deleteConfirmButton;
   @FindBy(css = "#sorting-dropdown")
   private WebElement sortDropdown;
-
-  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
 
   public SpecialVideosPageObject(WebDriver driver) {
     super(driver);
@@ -91,9 +90,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void verifyVideoAdded(String videoTitle) {
     waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", videoTitle);
-    LOG.log("verifyVideoAdded",
-            "verify that video with following description was added: " + videoTitle,
-            LOG.Type.SUCCESS);
+    LOG.log("verifyVideoAdded", "verify that video with following description was added: "
+        + videoTitle, LOG.Type.SUCCESS);
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
@@ -123,7 +121,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
     Assertion.assertEquals(getFlashMessageText(), deletedVideo);
     LOG.success("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-                                                    + " was deleted");
+        + " was deleted");
   }
 
   public void verifyDeleteViaVideoNotPresent() {
@@ -133,8 +131,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     verifyNotificationMessage();
     Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    LOG.success("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
-                                           + " was deleted");
+    LOG.success("verifyDeleteVideoNotPresent", "verify video " + video.getTitle() + " was deleted");
   }
 
   public void verifyElementsOnPage() {
@@ -145,7 +142,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     verifySortDropdown();
     LOG.success("verifyElementsOnPage", "verify that sort dropdown is present");
     verifyNewestVideo();
-    LOG.success("verifyElementsOnPage",
-            "verify that there is at least one video present");
+    LOG.success("verifyElementsOnPage", "verify that there is at least one video present");
   }
 }

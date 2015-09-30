@@ -1,19 +1,19 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -24,7 +24,7 @@ public class ArticleRTETest extends NewTestTemplate {
   private static final int WIKI_TEXTS_PER_CYCLE = 300;
 
   static public String[] createWikitexts() {
-    return new String[]{
+    return new String[] {
         // new lines
         "\n1a",
         "\n\n1b",
@@ -244,7 +244,7 @@ public class ArticleRTETest extends NewTestTemplate {
         "<div><div><span>foo</span></div>\n<!-- bar -->\n</div>",
         "<div><div><span>foo</span></div>\n\n<!-- bar -->\n</div>",
         // BugId:96210
-        //"<div style='clear:both;'></div>",
+        // "<div style='clear:both;'></div>",
         // aligned paragraphs
         "<p style=\"text-align:right\">123</p>\n\n\n\n456",
         "<p style=\"text-align:right;\">123</p>\n\n\n\n456",
@@ -253,7 +253,7 @@ public class ArticleRTETest extends NewTestTemplate {
         "<p style=\"text-indent:4em\">foo</p>",
         "<p style=\"text-align: center; height: 3em;\">&#160;</p>",
         "<p style=\"text-align: center; height: 3em;\">123&#160;456</p>",
-        "<p class=\"mainpage-button\">Habitats</p>",  //BugId: 47994
+        "<p class=\"mainpage-button\">Habitats</p>", // BugId: 47994
         "foo<p>bar</p>",
         "foo\n<p>bar</p>",
         "foo\n\n<p>bar</p>",
@@ -294,14 +294,10 @@ public class ArticleRTETest extends NewTestTemplate {
         "{{{text}}}hgjhgjgh{{{text|test}}}\nasas",
         "asdasdasdasd\n\n{{{text|Hmmm... This is a test}}}\nasdasd",
         // task BugID 24543, test for BugID: 22872
-        "==heading==\n*item 1\n*item 2",
-        "==heading==\n\n*item 1\n*item 2",
-        "==heading==\n\n\n*item 1\n*item 2",
-        "==heading==\n\n\n\n*item 1\n*item 2",
+        "==heading==\n*item 1\n*item 2", "==heading==\n\n*item 1\n*item 2",
+        "==heading==\n\n\n*item 1\n*item 2", "==heading==\n\n\n\n*item 1\n*item 2",
         // BugID: 11537
-        "<div>\n<h2>Test</h2>\n* Test\n</div>",
-        "<div>\n<h2>Test</h2>\n: Test\n</div>",
-    };
+        "<div>\n<h2>Test</h2>\n* Test\n</div>", "<div>\n<h2>Test</h2>\n: Test\n</div>",};
   }
 
   @DataProvider(parallel = false, name = "wikiTextsProvider")
@@ -311,12 +307,12 @@ public class ArticleRTETest extends NewTestTemplate {
     int startPos = 0;
     int endPos = WIKI_TEXTS_PER_CYCLE;
     while (endPos <= wikiTexts.length) {
-      al.add(new Object[]{Arrays.copyOfRange(wikiTexts, startPos, endPos)});
+      al.add(new Object[] {Arrays.copyOfRange(wikiTexts, startPos, endPos)});
       startPos = endPos;
       endPos += WIKI_TEXTS_PER_CYCLE;
     }
     if (startPos < wikiTexts.length) {
-      al.add(new Object[]{Arrays.copyOfRange(wikiTexts, startPos, wikiTexts.length)});
+      al.add(new Object[] {Arrays.copyOfRange(wikiTexts, startPos, wikiTexts.length)});
     }
 
     return al.iterator();
@@ -338,13 +334,11 @@ public class ArticleRTETest extends NewTestTemplate {
       edit.clickOnVisualButton();
       edit.clickOnSourceButton();
 
-      e = driver.findElement(By.cssSelector(".cke_source"));
-      ;
+      e = driver.findElement(By.cssSelector(".cke_source"));;
       if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)) {
         tmp1 = e.getAttribute("value").replace("<", "&lt");
         tmp1.replace(">", "&gt");
-        LOG
-            .result("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
+        LOG.result("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
       } else {
         tmp1 = e.getAttribute("value").replace("<", "&lt;");
         tmp1 = tmp1.replace(">", "&gt;");
@@ -354,8 +348,7 @@ public class ArticleRTETest extends NewTestTemplate {
         tmp2 = tmp2.replace(" ", "&nbsp;");
 
         LOG.error("checking value failed", "should be: <pre>" + tmp2 + "</pre>");
-        LOG
-            .logResult("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
+        LOG.error("checking value failed", "result is: <pre>" + tmp1 + "</pre>");
       }
     }
 

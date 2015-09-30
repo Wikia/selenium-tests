@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
@@ -37,31 +37,25 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
    * Selects given files in upload browser.
    *
    * @author Michal Nowierski
-   * @author Karol 'kkarolk' Kujawiak ** @param FilesNamesList List of files to be uploaded <p> Look
-   * at folder PageContent.resourcesPath
+   * @author Karol 'kkarolk' Kujawiak ** @param FilesNamesList List of files to be uploaded
+   *         <p>
+   *         Look at folder PageContent.resourcesPath
    */
   public void selectFilesToUpload(String[] filesNamesList) {
     wait.forElementVisible(multipleUploadForm);
     for (int i = 0; i < filesNamesList.length; i++) {
       scrollToElement(fileInputs.get(i));
-      fileInputs.get(i)
-          .sendKeys(
-              CommonUtils.getAbsolutePathForFile(
-                  PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
+      fileInputs.get(i).sendKeys(
+          CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH
+                                             + filesNamesList[i]));
     }
-    LOG.result(
-        "typeInFilesToUpload",
-        filesNamesList.length + " files added to upload list",
-        true
-    );
+    LOG.result("typeInFilesToUpload", filesNamesList.length + " files added to upload list", true);
   }
 
 
   public void typeInMultiUploadSummary(String summary) {
     multipleUploadSummaryField.sendKeys(summary);
-    LOG
-        .result("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload",
-                true);
+    LOG.result("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload", true);
   }
 
   public void checkIgnoreAnyWarnings() {
@@ -77,8 +71,10 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
   }
 
   /**
-   * Checks if the upload have been succesful. <p> The method checks if the uploaded files
-   * correspond to those in FilesNamesList. FFilesNamesList is a parameter of the method
+   * Checks if the upload have been succesful.
+   * <p>
+   * The method checks if the uploaded files correspond to those in FilesNamesList. FFilesNamesList
+   * is a parameter of the method
    *
    * @author Michal Nowierski
    * @author Karol 'kkarolk' Kujawiak * @param filesNamesList list of expected names of files

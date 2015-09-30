@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -97,10 +97,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void clickPinButton() {
-    builder.moveToElement(lightBoxModal).
-        click(pinButton).
-        build().
-        perform();
+    builder.moveToElement(lightBoxModal).click(pinButton).build().perform();
     LOG.success("clickPinButton", "pin button was clicked");
   }
 
@@ -114,8 +111,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public void clickCloseShareScreenButton() {
     wait.forElementVisible(closeShareScreenButton);
     closeShareScreenButton.click();
-    LOG
-        .result("clickCloseShareScreenButton", "close share screen button was clicked", true);
+    LOG.result("clickCloseShareScreenButton", "close share screen button was clicked", true);
   }
 
   public void verifyShareScreenClosed() {
@@ -149,8 +145,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void clickStumbleUponShareButton() {
     stumbleUponShareLink.click();
-    LOG
-        .result("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
+    LOG.result("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
   }
 
   public void clickRedditShareButton() {

@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing

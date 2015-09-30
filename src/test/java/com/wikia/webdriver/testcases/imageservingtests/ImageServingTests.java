@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -12,8 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultiple
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
-import org.testng.annotations.Test;
 
 // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 
@@ -43,9 +43,9 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
- @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
+  @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
       dataProvider = "getFileNames")
- @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void ImageServing_002_SpecialUploadTest(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
@@ -59,8 +59,8 @@ public class ImageServingTests extends NewTestTemplate {
     String imageURL = filePage.getImageUrl();
     String imageThumbnailURL = filePage.getImageThumbnailUrl();
 
-   filePage.verifyURLStatus(200, imageURL);
-   filePage.verifyURLStatus(200, imageThumbnailURL);
+    filePage.verifyURLStatus(200, imageURL);
+    filePage.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageServing_003", "ImageServing"})

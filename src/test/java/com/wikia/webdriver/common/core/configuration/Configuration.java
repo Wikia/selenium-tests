@@ -1,16 +1,16 @@
 package com.wikia.webdriver.common.core.configuration;
 
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.properties.Credentials;
-
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
+
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
@@ -24,8 +24,7 @@ public class Configuration {
   private static Map<String, String> config;
   private static Map<String, String> testConfig = new HashMap<>();
 
-  private Configuration() {
-  }
+  private Configuration() {}
 
   private static Map<String, String> readConfiguration() {
     if (config == null) {
@@ -53,7 +52,7 @@ public class Configuration {
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-                                                      : getPropertyFromFile(propertyName);
+          : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }

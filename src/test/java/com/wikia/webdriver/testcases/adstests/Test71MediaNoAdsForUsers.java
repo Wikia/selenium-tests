@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
@@ -7,9 +10,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
-
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -20,10 +20,7 @@ public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
   private String testedPage;
   private String testedWiki;
 
-  @Factory(
-      dataProviderClass = GermanAdsDataProvider.class,
-      dataProvider = "germanArticles"
-  )
+  @Factory(dataProviderClass = GermanAdsDataProvider.class, dataProvider = "germanArticles")
   public Test71MediaNoAdsForUsers(String wikiName, String path) {
     super();
     urlBuilder = new UrlBuilder(Configuration.getEnv());

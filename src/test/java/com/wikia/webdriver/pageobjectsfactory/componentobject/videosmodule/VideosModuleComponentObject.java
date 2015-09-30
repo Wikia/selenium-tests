@@ -1,26 +1,26 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author James Sutterfield
  */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
+  private static final int VIDEO_COUNT_MIN = 3;
+  private static final int VIDEO_COUNT_MAX = 5;
   @FindBy(css = "#videosModule")
   private WebElement videosModuleContainer;
   @FindBy(css = "#videosModule img")
   private List<WebElement> videos;
-  private static final int VIDEO_COUNT_MIN = 3;
-  private static final int VIDEO_COUNT_MAX = 5;
 
   public VideosModuleComponentObject(WebDriver driver) {
     super(driver);
@@ -33,14 +33,12 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 
   public void verifyVideosModuleNotShowing() {
     Assertion.assertTrue(!isElementOnPage(videosModuleContainer));
-    LOG.success("verifyVideosModuleNotShowing",
-            "Videos Module not showing (test passed)");
+    LOG.success("verifyVideosModuleNotShowing", "Videos Module not showing (test passed)");
   }
 
   public void verifyDisplayCount() {
     Assertion.assertTrue(videos.size() >= VIDEO_COUNT_MIN && videos.size() <= VIDEO_COUNT_MAX);
-    LOG.success("verifyDisplayCount",
-            "Videos Module showing correct number of videos");
+    LOG.success("verifyDisplayCount", "Videos Module showing correct number of videos");
   }
 
   public void verifyNoDuplicates() {

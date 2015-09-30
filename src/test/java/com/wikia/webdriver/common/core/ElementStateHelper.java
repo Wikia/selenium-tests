@@ -1,13 +1,11 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.concurrent.TimeUnit;
 
 public class ElementStateHelper {
 

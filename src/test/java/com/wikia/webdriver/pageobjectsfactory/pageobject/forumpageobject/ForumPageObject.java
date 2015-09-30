@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
 public class ForumPageObject extends WikiArticlePageObject {
 
@@ -47,8 +47,7 @@ public class ForumPageObject extends WikiArticlePageObject {
 
   private void checkFaqLightBoxOpened() {
     wait.forElementVisible(faqLightBox);
-    LOG.success("checkFaqLightBoxOpened",
-                "faq lightbox verified");
+    LOG.success("checkFaqLightBoxOpened", "faq lightbox verified");
   }
 
   public void verifyFaqLightBox() {
@@ -59,8 +58,7 @@ public class ForumPageObject extends WikiArticlePageObject {
 
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
-    LOG.success("clickManageBoardsButton",
-                "manage boards button clicked");
+    LOG.success("clickManageBoardsButton", "manage boards button clicked");
     return new ForumManageBoardsPageObject(driver);
   }
 
@@ -78,9 +76,7 @@ public class ForumPageObject extends WikiArticlePageObject {
     wait.forElementVisible(forumBoardLink);
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
-    LOG.logResult("openForumBoard",
-                  "click on the forum Board", true,
-                  driver);
+    LOG.success("openForumBoard", "click on the forum Board",true);
     return new ForumBoardPageObject(driver);
   }
 
@@ -94,14 +90,12 @@ public class ForumPageObject extends WikiArticlePageObject {
       }
     }
     if (forumNumber == 0) {
-      LOG.logResult("openForumBoard",
-                    "didn't find forum Board with title " + formattedForumBoardTitle,
-                    true, driver);
+      LOG.success("openForumBoard", "didn't find forum Board with title "
+          + formattedForumBoardTitle,true);
       return null;
     } else {
-      LOG.logResult("openForumBoard",
-                    "click on the forum Board with title " + formattedForumBoardTitle,
-                    true, driver);
+      LOG.success("openForumBoard", "click on the forum Board with title "
+          + formattedForumBoardTitle,true);
       return openForumBoard();
     }
   }

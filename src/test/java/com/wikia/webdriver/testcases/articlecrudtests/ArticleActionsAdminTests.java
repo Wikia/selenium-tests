@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała

@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -7,11 +12,6 @@ import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership Content X-Wing
@@ -33,66 +33,30 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
 
-    Assertion.assertTrue(
-        toc.isTOCDisplayed(),
-        "TOC isn't displayed"
-    );
+    Assertion.assertTrue(toc.isTOCDisplayed(), "TOC isn't displayed");
 
-    LOG.result(
-        "TOC",
-        "is displayed",
-        true
-    );
+    LOG.result("TOC", "is displayed", true);
 
     boolean result = toc.isTOCUnderArticleName();
-    LOG.log(
-        "TOC position",
-        "is under article name",
-        "is not under article name",
-        result
-    );
+    LOG.log("TOC position", "is under article name", "is not under article name", result);
 
-    Assertion.assertFalse(
-        toc.isTOCMenuVisible(),
-        "TOC menu is expanded"
-    );
+    Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
 
-    LOG.result(
-        "TOC menu",
-        "is collapsed",
-        true
-    );
+    LOG.result("TOC menu", "is collapsed", true);
 
     toc.clickOnTOC();
 
-    Assertion.assertTrue(
-        toc.isTOCMenuVisible(),
-        "TOC menu is collapsed"
-    );
+    Assertion.assertTrue(toc.isTOCMenuVisible(), "TOC menu is collapsed");
 
-    LOG.result(
-        "TOC menu",
-        "is expanded",
-        true
-    );
+    LOG.result("TOC menu", "is expanded", true);
 
     toc.clickOnTOCListElement(1);
 
     result = toc.isUserMovedToRightSection(1);
-    LOG.log(
-        "TOC redirection",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("TOC redirection", "works", "does not work", result);
 
     result = toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP);
-    LOG.log(
-        "Header padding",
-        "is correct",
-        "is wrong",
-        result
-    );
+    LOG.log("Header padding", "is correct", "is wrong", result);
   }
 
   // TOCT02
@@ -102,12 +66,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
-    LOG.log(
-        "TOC",
-        "is hidden",
-        "is displayed",
-        result
-    );
+    LOG.log("TOC", "is hidden", "is displayed", result);
   }
 
   // TOCT03
@@ -117,12 +76,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log(
-        "Redirection to header directly from link",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Redirection to header directly from link", "works", "does not work", result);
   }
 
   // TOCT04
@@ -133,12 +87,7 @@ public class TOCTests extends NewTestTemplate {
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log(
-        "Redirection to header from current page",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Redirection to header from current page", "works", "does not work", result);
   }
 
   // TOCT05
@@ -150,11 +99,6 @@ public class TOCTests extends NewTestTemplate {
     toc.waitForLoadingSpinnerToFinish();
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log(
-        "Redirection to header from other page",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Redirection to header from other page", "works", "does not work", result);
   }
 }

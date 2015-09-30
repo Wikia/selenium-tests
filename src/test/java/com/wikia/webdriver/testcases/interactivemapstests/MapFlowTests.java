@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,8 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Te
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -41,7 +41,7 @@ public class MapFlowTests extends NewTestTemplate {
     template.typeTemplateName(InteractiveMapsContent.TEMPLATE_NAME);
     CreatePinTypesComponentObject pinDialog = template.clickNext();
     pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME,
-                               InteractiveMapsContent.PIN_TYPE_INDEX);
+        InteractiveMapsContent.PIN_TYPE_INDEX);
     InteractiveMapPageObject createdMap = pinDialog.clickSave();
     createdMap.verifyCreatedMapTitle(InteractiveMapsContent.MAP_NAME);
     createdMap.verifyMapOpened();
@@ -56,17 +56,15 @@ public class MapFlowTests extends NewTestTemplate {
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
-    String
-        selectedImageName =
+    String selectedImageName =
         customMap.getSelectedTemplateImageName(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
-    TemplateComponentObject
-        template =
+    TemplateComponentObject template =
         customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
     template.verifyTemplateImage(selectedImageName);
     template.typeMapName(InteractiveMapsContent.MAP_NAME);
     CreatePinTypesComponentObject pinDialog = template.clickNext();
     pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME,
-                               InteractiveMapsContent.PIN_TYPE_INDEX);
+        InteractiveMapsContent.PIN_TYPE_INDEX);
     InteractiveMapPageObject createdMap = pinDialog.clickSave();
     createdMap.verifyCreatedMapTitle(InteractiveMapsContent.MAP_NAME);
     createdMap.verifyMapOpened();
@@ -85,7 +83,7 @@ public class MapFlowTests extends NewTestTemplate {
     realMap.typeMapName(InteractiveMapsContent.MAP_NAME);
     CreatePinTypesComponentObject pinDialog = realMap.clickNext();
     pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME,
-                               InteractiveMapsContent.PIN_TYPE_INDEX);
+        InteractiveMapsContent.PIN_TYPE_INDEX);
     InteractiveMapPageObject createdMap = pinDialog.clickSave();
     createdMap.verifyMapOpened();
     createdMap.verifyControlButtonsAreVisible();
@@ -98,8 +96,7 @@ public class MapFlowTests extends NewTestTemplate {
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
-    TemplateComponentObject
-        template =
+    TemplateComponentObject template =
         customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
     template.verifyTemplateImagePreview();
     customMap = template.clickBack();

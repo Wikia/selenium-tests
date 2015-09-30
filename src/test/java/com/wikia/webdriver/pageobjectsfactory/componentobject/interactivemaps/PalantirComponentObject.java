@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import com.wikia.webdriver.common.contentpatterns.PalantirContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.PalantirContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 /**
  * @author Łukasz Nowak
@@ -30,12 +30,11 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 
   private PalantirContent getResponse(Object response, String methodName) {
     Map<String, String> map = (Map) response;
-    PalantirContent handle = new PalantirContent(
-        String.valueOf(map.get(PalantirContent.PONTO_MSG_SUCCESS)),
-        String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
-        map.get(PalantirContent.PONTO_MSG_MESSAGE)
-    );
-    LOG.logResult(methodName, handle.getMessage(), true, driver);
+    PalantirContent handle =
+        new PalantirContent(String.valueOf(map.get(PalantirContent.PONTO_MSG_SUCCESS)),
+            String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
+            map.get(PalantirContent.PONTO_MSG_MESSAGE));
+    LOG.success(methodName, handle.getMessage(), true);
     return handle;
   }
 
@@ -48,17 +47,12 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   }
 
   public PalantirContent setAndVerifyPlayerPosition(double lat, double lng, double zoom,
-                                                    boolean centerMap) {
+      boolean centerMap) {
     wait.forElementVisible(mapFrame);
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
-    Object res = jsexec.executeAsyncScript(
-        PalantirContent.PONTO_SETPLAYER,
-        lat,
-        lng,
-        zoom,
-        centerMap
-    );
+    Object res =
+        jsexec.executeAsyncScript(PalantirContent.PONTO_SETPLAYER, lat, lng, zoom, centerMap);
     return getResponse(res, "setAndVerifyPlayerPosition");
   }
 
@@ -66,12 +60,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
     wait.forElementVisible(mapFrame);
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
-    Object res = jsexec.executeAsyncScript(
-        PalantirContent.PONTO_UPDATEPOSITION,
-        lat,
-        lng,
-        zoom
-    );
+    Object res = jsexec.executeAsyncScript(PalantirContent.PONTO_UPDATEPOSITION, lat, lng, zoom);
     return getResponse(res, "updateMapPosition");
   }
 

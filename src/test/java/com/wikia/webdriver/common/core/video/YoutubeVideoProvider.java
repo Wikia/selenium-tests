@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.core.video;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -18,9 +17,10 @@ import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Created by Ludwik Kaźmierczak on 2015-02-12.

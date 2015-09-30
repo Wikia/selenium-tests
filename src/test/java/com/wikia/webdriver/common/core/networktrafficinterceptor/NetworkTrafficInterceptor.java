@@ -1,25 +1,26 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.ProxyServer;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriverException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
+import net.lightbody.bmp.proxy.ProxyServer;
+
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class NetworkTrafficInterceptor extends ProxyServer {
 
-  private Har har;
   private static final int MAX = 8080;
   private static final int MIN = 7070;
   private final int portNumber;
+  private Har har;
 
   public NetworkTrafficInterceptor() {
     super();
@@ -54,9 +55,11 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        com.wikia.webdriver.common.logging.LOG
-            .result("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
-                .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+        com.wikia.webdriver.common.logging.LOG.result("RESPONSE STATUS: "
+                                                      + entry.getResponse().getStatus(),
+                                                      entry.getRequest().getUrl(),
+                                                      entry.getResponse()
+                                                          .getStatus() < 400);
       }
     }
   }
@@ -81,9 +84,9 @@ public class NetworkTrafficInterceptor extends ProxyServer {
             expectedCorrelator = correlatorID;
           }
 
-          com.wikia.webdriver.common.logging.LOG
-              .result("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
-                      correlatorID.equals(expectedCorrelator));
+          com.wikia.webdriver.common.logging.LOG.result("CORRELATOR CHECK", "CORRELATOR ID: "
+                                                                            + correlatorID,
+                                                        correlatorID.equals(expectedCorrelator));
         } else {
           throw new WebDriverException("Missing correlator param in query string");
         }

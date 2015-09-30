@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core.purge;
 
-import org.apache.http.client.methods.HttpRequestBase;
-
 import java.net.URI;
+
+import org.apache.http.client.methods.HttpRequestBase;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

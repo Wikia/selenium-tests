@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
@@ -9,8 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership Content
@@ -48,7 +48,7 @@ public class CuratedContentTests extends NewTestTemplate {
     cc.verifyImageInLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();
-    //clean the added element
+    // clean the added element
     cc.removeLastElement();
     cc.clickSave();
     cc.verifySuccesfulSave();

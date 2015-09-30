@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class SearchPageObject extends WikiBasePageObject {
 
@@ -80,7 +80,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
   public void clickSearchButton() {
     searchButton.click();
-    LOG.logResult("clickSearchButton", "Search button was clicked", true, driver);
+    LOG.success("clickSearchButton", "Search button was clicked", true);
   }
 
   public void setSearchTab(SearchTab tab) {

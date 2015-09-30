@@ -1,19 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.ItemFormPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.curatededitorform.SectionFormPageObject;
 
 /**
- * This class represents the main editor view on mercury.
- * The editor home is responsible for adding top level curated content items
+ * This class represents the main editor view on mercury. The editor home is responsible for adding
+ * top level curated content items
  *
  * @ownership: Content X-Wing
  */

@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.clicktracking.events;
 
-import com.wikia.webdriver.common.clicktracking.EventParameter;
-
 import javax.json.Json;
 import javax.json.JsonObject;
+
+import com.wikia.webdriver.common.clicktracking.EventParameter;
 
 public class EventsArticleEditMode {
 
@@ -17,8 +17,7 @@ public class EventsArticleEditMode {
       .add(
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
-                                         "preview-desktop")).build();
+              "preview-desktop")).build();
 
-  private EventsArticleEditMode() {
-  }
+  private EventsArticleEditMode() {}
 }

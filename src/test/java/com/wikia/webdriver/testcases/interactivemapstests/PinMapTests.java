@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -9,8 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Ad
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -30,8 +30,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject pinDialog = selectedMap.placePinInMap();
@@ -50,8 +49,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject pinDialog = selectedMap.placePinInMap();
@@ -73,8 +71,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject addPinModal = selectedMap.placePinInMap();
@@ -96,8 +93,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickOnPin(0);
@@ -112,8 +108,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickOnFilterBoxTitle();
@@ -132,8 +127,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickOnFilterBoxTitle();
@@ -156,14 +150,13 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = " ",
-          comment = "Functionality is being depracated NO need to test manually")
+      comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject addPinModal = selectedMap.placePinInMap();
@@ -181,8 +174,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject addPinModal = selectedMap.placePinInMap();
@@ -191,9 +183,7 @@ public class PinMapTests extends NewTestTemplate {
     addPinModal.selectPinType();
     addPinModal.clickSaveButton();
     addPinModal.verifyErrorContent(InteractiveMapsContent.ARTICLE_NOT_EXIST_ERROR.replace(
-        "%articlename%",
-        InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST
-    ));
+        "%articlename%", InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST));
   }
 
   @Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
@@ -201,8 +191,7 @@ public class PinMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     AddPinComponentObject addPinModal = selectedMap.placePinInMap();

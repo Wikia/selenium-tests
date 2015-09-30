@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
+import java.util.List;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
@@ -9,10 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject.sortOptions;
-
-import org.testng.annotations.Test;
-
-import java.util.List;
 
 /*
  * anonSearch: As anon basic search action and verify you are on search result page. This also
@@ -56,8 +56,7 @@ public class BasicActions extends IntraWiki {
 
   @Test(groups = {"IntraWikiSearch_002", "Search", "Search3"})
   @RelatedIssue(issueID = "MAIN-5044", comment = "make sure there is a pagination, "
-                                                 + "built of 6 or 11 elements depending or what "
-                                                 + "pagination link you enter")
+      + "built of 6 or 11 elements depending or what " + "pagination link you enter")
   public void pagination() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);

@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.dataprovider.SearchDataProvider;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.dataprovider.SearchDataProvider;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author łukasz
@@ -19,8 +19,7 @@ import java.util.List;
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   private static final String LIST_OF_LINKS_SELECTOR = ".special > li > a";
-  private static final String
-      LINKS_LIMIT =
+  private static final String LINKS_LIMIT =
       "a[href*='/wiki/Special:Multiwikifinder?limit=%limit%']";
 
   @FindBy(css = "#mw-content-text input[type=submit]")
@@ -47,21 +46,13 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   public void verifyEmptyPagename() {
     wait.forElementNotPresent(By.cssSelector(".mw-spcontent > p"));
-    LOG.logResult(
-        "verifyEmptyPageName",
-        "Empty pagename is not founded",
-        true, driver
-    );
+    LOG.success("verifyEmptyPageName", "Empty pagename is not founded",true);
   }
 
   public void compareResultsCount(int limit) {
     if (limit == 0) {
       wait.forElementNotPresent(By.cssSelector(LIST_OF_LINKS_SELECTOR));
-      LOG.logResult(
-          "verifyNoPagenameFounded",
-          "Not existing pagename is not founded",
-          true, driver
-      );
+      LOG.success("verifyNoPagenameFounded", "Not existing pagename is not founded",true);
     } else {
       wait.forElementVisible(listOfLinks.get(0));
       Assertion.assertTrue(listOfLinks.size() <= limit);

@@ -1,11 +1,11 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * Created by Ludwik on 2015-08-24.

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -9,8 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Cr
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -28,8 +28,7 @@ public class PinTypeMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickEditPinTypesButton();
@@ -46,8 +45,7 @@ public class PinTypeMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickEditPinTypesButton();

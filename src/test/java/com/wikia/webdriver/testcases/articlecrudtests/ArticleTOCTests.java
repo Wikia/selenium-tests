@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Previe
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Michal 'justnpT' Nowierski

@@ -1,9 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.concurrent.TimeUnit;
 
-import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import java.util.concurrent.TimeUnit;
+import com.google.common.collect.ImmutableMap;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -29,14 +30,11 @@ public class AdsAmazonObject extends AdsBaseObject {
   private static final ImmutableMap<String, String> amazonLinkCssSelectors =
       new ImmutableMap.Builder<String, String>()
           .put("AmazonFirstArticle", "a[href='/wiki/Amazon']")
-          .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
-          .build();
+          .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']").build();
 
   private static final ImmutableMap<String, String> amazonLinkTitles =
-      new ImmutableMap.Builder<String, String>()
-          .put("AmazonFirstArticle", "Amazon")
-          .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2")
-          .build();
+      new ImmutableMap.Builder<String, String>().put("AmazonFirstArticle", "Amazon")
+          .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2").build();
 
   @FindBy(css = AMAZON_SLOTS_CSS_SELECTOR)
   private WebElement slotWithAmazon;
@@ -47,9 +45,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   private WebElement getAmazonIframe(WebElement slotWithAmazon) {
     wait.forElementVisible(slotWithAmazon);
-    return slotWithAmazon.findElement(By.cssSelector(
-        "div[id*=__container__] > iframe"
-    ));
+    return slotWithAmazon.findElement(By.cssSelector("div[id*=__container__] > iframe"));
   }
 
   private void waitForAmazonResponse() {
@@ -60,12 +56,9 @@ public class AdsAmazonObject extends AdsBaseObject {
       waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
           return (Boolean) ((JavascriptExecutor) driver)
-              .executeAsyncScript(
-                  "var callback = arguments[0];" +
-                  "require(['ext.wikia.adEngine.lookup.amazonMatch'], function (amazon) {\n" +
-                  "   callback(amazon.hasResponse());\n" +
-                  "});"
-              );
+              .executeAsyncScript("var callback = arguments[0];"
+                  + "require(['ext.wikia.adEngine.lookup.amazonMatch'], function (amazon) {\n"
+                  + "   callback(amazon.hasResponse());\n" + "});");
         }
       });
     } finally {
@@ -105,9 +98,8 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public AdsAmazonObject clickAmazonArticleLink(String linkName) {
     waitForAmazonResponse();
-    WebElement amazonArticleLink = driver.findElement(
-        By.cssSelector(amazonLinkCssSelectors.get(linkName))
-    );
+    WebElement amazonArticleLink =
+        driver.findElement(By.cssSelector(amazonLinkCssSelectors.get(linkName)));
     wait.forElementVisible(amazonArticleLink);
     amazonArticleLink.click();
     waitTitleChangesTo(amazonLinkTitles.get(linkName));

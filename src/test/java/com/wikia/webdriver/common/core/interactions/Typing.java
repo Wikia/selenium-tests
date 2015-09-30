@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.WebElement;
+
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Created by Ludwik on 2015-07-22.

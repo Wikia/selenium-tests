@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Piotr 'Rychu' Gabryjeluk

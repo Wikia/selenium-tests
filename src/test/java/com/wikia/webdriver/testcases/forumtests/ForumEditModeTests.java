@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.forumtests;
 
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -9,18 +12,21 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumMa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 public class ForumEditModeTests extends NewTestTemplate {
 
-	/*
-         * StoryQA0128 - Create test cases for forum
-	 * https://wikia.fogbugz.com/default.asp?95449
-	 */
+  /*
+   * StoryQA0128 - Create test cases for forum https://wikia.fogbugz.com/default.asp?95449
+   */
 
-  private String title, description, first, second;
   Credentials credentials = Configuration.getCredentials();
+  private String title, description, first, second;
+
+  @DataProvider
+  private static final Object[][] getForumName() {
+    return new Object[][] { {PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
+        {PageContent.FORUM_TITLE_PREFIX}, {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
+        {PageContent.FORUM_TITLE_SLASH_PREFIX}, {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}};
+  }
 
   @Test(groups = {"ForumEditModeTests_001", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_001_faq() {
@@ -30,20 +36,8 @@ public class ForumEditModeTests extends NewTestTemplate {
     forumMainPage.verifyFaqLightBox();
   }
 
-  @DataProvider
-  private static final Object[][] getForumName() {
-    return new Object[][]
-        {
-            {PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
-            {PageContent.FORUM_TITLE_PREFIX},
-            {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
-            {PageContent.FORUM_TITLE_SLASH_PREFIX},
-            {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}
-        };
-  }
-
-  @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002", "Forum",
-                                                 "ForumEditMode"})
+  @Test(dataProvider = "getForumName",
+      groups = {"ForumEditModeTests_002", "Forum", "ForumEditMode"})
   public void ForumEditModeTests_002_createNewBoard(String name) {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

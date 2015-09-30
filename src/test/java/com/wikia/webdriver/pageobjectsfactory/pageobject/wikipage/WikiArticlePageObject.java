@@ -1,5 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -7,27 +13,19 @@ import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 public class WikiArticlePageObject extends WikiBasePageObject {
 
   protected String articlename;
-
+  protected By rvFirstVideo = By
+      .cssSelector(".RVBody .item:nth-child(1) .lightbox[data-video-name]");
   @FindBy(css = "div.WikiaPageHeaderDiffHistory")
   private WebElement historyHeadLine;
   @FindBy(css = "a[data-canonical='random']")
   private WebElement randomPageButton;
   @FindBy(css = ".sprite.search")
   private WebElement searchButton;
-
   private By imageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
   private By articleContentBy = By.cssSelector("#mw-content-text");
-  protected By rvFirstVideo = By
-      .cssSelector(".RVBody .item:nth-child(1) .lightbox[data-video-name]");
   private String pageName;
 
   public WikiArticlePageObject(WebDriver driver) {
@@ -84,7 +82,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   public WikiArticlePageObject openRandomArticle() {
     scrollAndClick(randomPageButton);
     wait.forElementVisible(searchButton);
-    LOG.logResult("openRandomArticle", "random page button clicked", true, driver);
+    LOG.success("openRandomArticle", "random page button clicked", true);
     return new WikiArticlePageObject(driver);
   }
 
@@ -112,8 +110,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);
-    LOG.logResult("VerifyTheImageOnThePage", "Verify that the image appears on the page",
-                  true, driver);
+    LOG.logResult("VerifyTheImageOnThePage", "Verify that the image appears on the page", true,
+        driver);
   }
 
   public WikiHistoryPageObject openHistoryPage() {

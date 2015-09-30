@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.actions;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała

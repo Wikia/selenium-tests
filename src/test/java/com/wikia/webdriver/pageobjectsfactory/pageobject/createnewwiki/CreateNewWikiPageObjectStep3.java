@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author Karol
@@ -35,7 +35,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     wait.forElementVisible(By.cssSelector(DATA_THEME_LIST));
     String themeName = themeLocator.replace("%name%", name);
     scrollAndClick(driver.findElement(By.cssSelector(themeName)));
-    LOG.logResult("selectTheme", "skin " + name + " selected", true, driver);
+    LOG.success("selectTheme", "skin " + name + " selected", true);
   }
 
   public ArticlePageObject submit() {
@@ -49,7 +49,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     }
 
     scrollAndClick(submitButton);
-    LOG.logResult("submit", "Submit button clicked", true, driver);
+    LOG.success("submit", "Submit button clicked", true);
     return new ArticlePageObject(driver);
   }
 }

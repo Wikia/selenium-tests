@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,9 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-import org.testng.annotations.Test;
-
-/* 
+/*
  * Check for facebook button on the page
  */
 public class FacebookButtonTests extends NewTestTemplate {
@@ -61,4 +61,3 @@ public class FacebookButtonTests extends NewTestTemplate {
   }
 
 }
-

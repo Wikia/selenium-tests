@@ -1,5 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -12,17 +23,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WikiArticleEditMode extends WikiEditMode {
 
@@ -79,9 +79,8 @@ public class WikiArticleEditMode extends WikiEditMode {
   @FindBy(css = "a[data-map-title]")
   private WebElement embededMap;
 
-  private By
-      captionInPreview =
-      By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
+  private By captionInPreview = By
+      .cssSelector("section.modalWrapper.preview section.modalContent figcaption");
   private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
   private String imageArticleIFrame = "img";
   private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
@@ -99,27 +98,26 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void verifyThatThePhotoAppears(String caption) {
     wait.forElementVisible(visualModeIFrame);
     driver.switchTo().frame(visualModeIFrame);
-    waitFor.until(ExpectedConditions.visibilityOfElementLocated(
-        By.cssSelector("img[data-rte-meta*='" + caption + "']")));
+    waitFor.until(ExpectedConditions.visibilityOfElementLocated(By
+        .cssSelector("img[data-rte-meta*='" + caption + "']")));
     driver.switchTo().defaultContent();
-    LOG.logResult("VerifyThatThePhotoAppears",
-                  "Verify that the photo appears in the visual mode", true,
-                  driver);
+    LOG.logResult("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode",
+        true, driver);
   }
 
 
   public void verifyTheCaptionOnThePreview(String caption) {
     waitFor.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
-    LOG.logResult("VerifyTheCaptionOnThePreview",
-                  "Verify that the caption of image appears in the preview", true, driver);
+    LOG.success("VerifyTheCaptionOnThePreview",
+                "Verify that the caption of image appears in the preview", true);
   }
 
   public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
     wait.forElementVisible(publishButtonPreview);
     wait.forElementClickable(publishButtonPreview);
     jsActions.click(publishButtonSelector);
-    LOG.logResult("LeftClickOnPublishButtonInPreviewMode",
-                  "Click on 'Publish' button in preview mode", true, driver);
+    LOG.success("LeftClickOnPublishButtonInPreviewMode",
+                "Click on 'Publish' button in preview mode", true);
     return new WikiArticlePageObject(driver);
   }
 
@@ -128,7 +126,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementClickable(sourceModeButton);
     scrollAndClick(sourceModeButton);
     wait.forElementVisible(sourceModeTextArea);
-    LOG.logResult("ClickOnSourceButton", "Click on 'Source' button", true, driver);
+    LOG.success("ClickOnSourceButton", "Click on 'Source' button", true);
     return new SourceEditModePageObject(driver);
   }
 
@@ -143,7 +141,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void clickOnPublish() {
     wait.forElementClickable(publishButton);
     publishButton.click();
-    LOG.logResult("clickOnPublish", "publish button clicked", true, driver);
+    LOG.success("clickOnPublish", "publish button clicked", true);
   }
 
   public void deleteArticleContent() {
@@ -157,8 +155,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void verifySourceEditorContentIsEmpty() {
     wait.forElementVisible(sourceModeTextArea);
     Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
-    LOG.success("verifySourceEditorContentIsEmpty",
-                "Source editor content was cleaned");
+    LOG.success("verifySourceEditorContentIsEmpty", "Source editor content was cleaned");
   }
 
   public void clearSource() {
@@ -177,8 +174,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(publishButtonPreview);
     wait.forElementClickable(publishButtonPreview);
     scrollAndClick(publishButtonPreview);
-    LOG.logResult("ClickOnPublishButtonPreview",
-                  "Click on 'Publish' button in preview", true, driver);
+    LOG.success("ClickOnPublishButtonPreview", "Click on 'Publish' button in preview", true);
     return new WikiArticlePageObject(driver);
   }
 
@@ -187,8 +183,8 @@ public class WikiArticleEditMode extends WikiEditMode {
     driver.switchTo().frame(iFrame);
     wait.forElementVisible(bodyContent);
     bodyContent.sendKeys(content);
-    LOG.logResult("typeInContent", "content " + bodyContent.getText()
-                                   + " - type into article body", true, driver);
+    LOG.success("typeInContent", "content " + bodyContent.getText() + " - type into article body",
+                true);
     driver.switchTo().defaultContent();
   }
 
@@ -196,28 +192,25 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(sourceButton);
     sourceButton.click();
     driver.switchTo().defaultContent();
-    LOG.logResult("clickSourceButton", "Source button was clicked", true, driver);
+    LOG.success("clickSourceButton", "Source button was clicked", true);
   }
 
   public void clickReturnToEditingButton() {
     wait.forElementVisible(returnToEditingButton);
     returnToEditingButton.click();
-    LOG.logResult("clickReturnToEditingButton",
-                  "Return to editing button is clicked", true, driver);
+    LOG.success("clickReturnToEditingButton", "Return to editing button is clicked", true);
   }
 
   public void clickImageLeftAlignment() {
     wait.forElementVisible(imageLeftAlignmentOption);
     imageLeftAlignmentOption.click();
-    LOG.logResult("clickImageLeftAlignment",
-                  "Left allignment option is selected", true, driver);
+    LOG.success("clickImageLeftAlignment", "Left allignment option is selected", true);
   }
 
   public void clickImageRightAlignment() {
     wait.forElementVisible(imageRightAlignmentOption);
     imageRightAlignmentOption.click();
-    LOG.logResult("clickImageRightAlignment",
-                  "Right allignment option is selected", true, driver);
+    LOG.success("clickImageRightAlignment", "Right allignment option is selected", true);
   }
 
   public void verifyCaptionInEditMode() {
@@ -225,8 +218,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     driver.switchTo().frame(iFrame);
     wait.forElementVisible(captionInEditor);
     driver.switchTo().defaultContent();
-    LOG.success("verifyCaptionInEditMode",
-                "Verified existence of caption in editor");
+    LOG.success("verifyCaptionInEditMode", "Verified existence of caption in editor");
   }
 
   public void verifyWikiTextInSourceMode(String text) {
@@ -237,7 +229,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void clickOnModifyImageLink() {
     wait.forElementVisible(modifyButton);
     modifyButton.click();
-    LOG.logResult("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
+    LOG.success("clickOnModifyImageLink", "Modify image link is clicked", true);
   }
 
   public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
@@ -252,12 +244,10 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(imageLeftAlignmentOption);
 
     if (imageLeftAlignmentOption.isSelected()) {
-      LOG.success("verifyLeftAlignmentIsSelected",
-                  "Left allignment option is selected in modal");
+      LOG.success("verifyLeftAlignmentIsSelected", "Left allignment option is selected in modal");
     } else {
       LOG.result("verifyLeftAlignmentIsSelected",
-                 "Left allignment option is NOT selected in modal",
-                 false);
+          "Left allignment option is NOT selected in modal", false);
     }
 
     wait.forElementVisible(imageUploadCloseButton);
@@ -318,8 +308,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
   public String getMessageSourceText() {
     wait.forElementVisible(messageSourceModeTextArea);
-    LOG.success("getMessageSourceText",
-                "Get text of source mode text of message article page.");
+    LOG.success("getMessageSourceText", "Get text of source mode text of message article page.");
     return messageSourceModeTextArea.getText();
   }
 
@@ -352,31 +341,20 @@ public class WikiArticleEditMode extends WikiEditMode {
     CommonUtils.setClipboardContents(builder);
     messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 
-    LOG.logResult("deleteUnwantedVideoFromMessage",
-                  "Delete all source code on the article", true, driver);
+    LOG.success("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true);
   }
 
   public void typeContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    LOG.logResult(
-        "typeInContent",
-        "content type into source mode textarea",
-        true,
-        driver
-    );
+    LOG.success("typeInContent", "content type into source mode textarea",true);
   }
 
   public void typeInTemplateContent(String content) {
     driver.switchTo().defaultContent();
     wait.forElementVisible(messageSourceModeTextArea);
     messageSourceModeTextArea.sendKeys(content);
-    LOG.logResult(
-        "typeInContent",
-        "content type into source mode textarea",
-        true,
-        driver
-    );
+    LOG.success("typeInContent", "content type into source mode textarea",true);
   }
 
   public void verifyEmbededMap(String mapID) {

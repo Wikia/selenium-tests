@@ -1,6 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
@@ -9,12 +15,6 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.Test;
 
 /**
  * @ownership AdEngineering
@@ -33,11 +33,8 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
     }
   }
 
-  @Test(
-      groups = {"AdsMonitoringOasis"},
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "popularSites"
-  )
+  @Test(groups = {"AdsMonitoringOasis"}, dataProviderClass = AdsDataProvider.class,
+      dataProvider = "popularSites")
   public void AdsMonitoringOasis(String wikiName, String path) {
     UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
 

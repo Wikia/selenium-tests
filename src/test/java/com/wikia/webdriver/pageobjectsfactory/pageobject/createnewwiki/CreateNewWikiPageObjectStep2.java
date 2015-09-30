@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol
@@ -36,15 +36,14 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   public void describeYourTopic(String description) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(description);
-    LOG
-        .result("describeYourTopic", "describe your topic populated with: " + description, true);
+    LOG.result("describeYourTopic", "describe your topic populated with: " + description, true);
   }
 
   public void selectCategory(String category) {
     wait.forElementVisible(wikiCategory);
     Select dropList = new Select(wikiCategory);
     dropList.selectByVisibleText(category);
-    LOG.logResult("selectCategory", "selected " + category + " category", true, driver);
+    LOG.success("selectCategory", "selected " + category + " category", true);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {

@@ -8,8 +8,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
  * @desc Wikia wam tabs (hubs)
  */
 public enum WamTab {
-  ALL(0, ""), TV(1, "TV"), VIDEO_GAMES(2, "GAMES"), BOOKS(3, "BOOKS"),
-  COMICS(4, "COMICS"), MUSIC(6, "MUSIC"), LIFESTYLE(5, "LIFESTYLE"), MOVIES(7, "MOVIES");
+  ALL(0, ""), TV(1, "TV"), VIDEO_GAMES(2, "GAMES"), BOOKS(3, "BOOKS"), COMICS(4, "COMICS"), MUSIC(
+      6, "MUSIC"), LIFESTYLE(5, "LIFESTYLE"), MOVIES(7, "MOVIES");
 
   private final int verticalId;
 
@@ -18,18 +18,6 @@ public enum WamTab {
   private WamTab(int id, String expectedHeader) {
     verticalId = id;
     this.expectedHeader = expectedHeader;
-  }
-
-  public int getId() {
-    return verticalId;
-  }
-
-  public String getExpectedHeaderName() {
-    return verticalId > 0 ? String.format("TOP GAINERS: %s", expectedHeader) : "TOP GAINERS";
-  }
-
-  private String getIdAsString() {
-    return Integer.toString(verticalId);
   }
 
   /**
@@ -46,5 +34,16 @@ public enum WamTab {
 
     return false;
   }
-}
 
+  public int getId() {
+    return verticalId;
+  }
+
+  public String getExpectedHeaderName() {
+    return verticalId > 0 ? String.format("TOP GAINERS: %s", expectedHeader) : "TOP GAINERS";
+  }
+
+  private String getIdAsString() {
+    return Integer.toString(verticalId);
+  }
+}

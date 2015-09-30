@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -10,8 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create wiki as logged out user 2. Try to create wiki with
@@ -25,7 +25,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
- public void CreateNewWiki_001_loggedOutUser() {
+  public void CreateNewWiki_001_loggedOutUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -46,7 +46,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_002"})
- public void CreateNewWiki_002_wrongPassword() {
+  public void CreateNewWiki_002_wrongPassword() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
@@ -82,7 +82,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_005"})
- public void CreateNewWiki_005_invalidUserName() {
+  public void CreateNewWiki_005_invalidUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());

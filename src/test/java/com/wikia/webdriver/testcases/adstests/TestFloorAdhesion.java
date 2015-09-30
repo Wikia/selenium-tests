@@ -1,37 +1,30 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
-
-import org.testng.annotations.Test;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   private static final String WIKI_NAME = "adtest";
   private static final String ARTICLE_TITLE = "FLOOR_ADHESION";
 
-  @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
-  )
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
   public void testFloorAdhesionPresence() {
     String browser = Configuration.getBrowser();
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
     AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
 
-    wikiPage.verifyFloorAdhesionPresent(
-        skinContext.getSlotName(),
-        skinContext.getLineItemId(),
-        skinContext.getCreativeId()
-    );
+    wikiPage.verifyFloorAdhesionPresent(skinContext.getSlotName(), skinContext.getLineItemId(),
+        skinContext.getCreativeId());
     wikiPage.verifyThereIsNoWikiaBar(browser);
   }
 
-  @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
-  )
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
   public void testFloorAdhesionModal() {
     String browser = Configuration.getBrowser();
 
@@ -43,13 +36,11 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
     wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
 
-    wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
-        .verifyThereIsNoModal(floorAdhesionModalSelector);
+    wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector).verifyThereIsNoModal(
+        floorAdhesionModalSelector);
   }
 
-  @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
-  )
+  @Test(groups = {"TestFloorAdhesion", "MercuryAds"})
   public void testFloorAdhesionCloseButton() {
     AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());
     wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();

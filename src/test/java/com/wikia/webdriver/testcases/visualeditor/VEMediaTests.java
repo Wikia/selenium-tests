@@ -1,5 +1,13 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.joda.time.DateTime;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -21,14 +29,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.joda.time.DateTime;
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Robert 'Rochan' Chan

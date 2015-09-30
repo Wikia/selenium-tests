@@ -1,11 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog.ImageLicense;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog.ImageLicense;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 
 /**
  * @author liz_lux
@@ -56,7 +56,6 @@ public class FilePagePageObject extends WikiBasePageObject {
   @FindBy(css = ".boilerplate b")
   private WebElement imgLicensePlate;
   @FindBy(css = ".tabBody.selected")
-
   private WebElement tabBody;
 
   public FilePagePageObject(WebDriver driver) {
@@ -71,11 +70,7 @@ public class FilePagePageObject extends WikiBasePageObject {
     WebElement currentTab = tabList.get(tab);
     wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
-    LOG.result(
-        "clickTab",
-        tab + " selected",
-        true
-    );
+    LOG.result("clickTab", tab + " selected", true);
   }
 
   public void selectAboutTab() {
@@ -93,11 +88,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifySelectedTab(String tabName) {
     wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
-    LOG.result(
-        "verified selected tab",
-        tabName + " selected",
-        true
-    );
+    LOG.result("verified selected tab", tabName + " selected", true);
   }
 
   public void refreshAndVerifyTabs(int tab) {
@@ -121,15 +112,13 @@ public class FilePagePageObject extends WikiBasePageObject {
   // Page forward in the local "appears on" section
   public void clickLocalAppearsPageNext() {
     localPageNext.click();
-    LOG
-        .result("clickLocalAppearsPageNext", "local appears page next button clicked", true);
+    LOG.result("clickLocalAppearsPageNext", "local appears page next button clicked", true);
   }
 
   // Page backward in the local "appears on" section
   public void clickLocalAppearsPagePrev() {
     localPagePrev.click();
-    LOG
-        .result("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
+    LOG.result("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
   }
 
   // Verify that a specific video title is in the "Appears on these pages" list
@@ -139,14 +128,12 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
-    LOG
-        .result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+    LOG.result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyEmptyFilePage() {
     wait.forElementVisible(noFileText);
-    LOG
-        .result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+    LOG.result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyThumbnailIsPresent() {
@@ -196,7 +183,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
     wait.forElementVisible(addButton);
     scrollAndClick(addButton);
-    LOG.logResult("replaceVideo", "add url button clicked", true, driver);
+    LOG.success("replaceVideo", "add url button clicked", true);
   }
 
   public void verifyVersionCountAtLeast(int count) {
@@ -212,8 +199,6 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public void verifyImageLicense(ImageLicense imageLicense) {
-    Assertion.assertStringContains(
-        imgLicensePlate.getText(), imageLicense.getText()
-    );
+    Assertion.assertStringContains(imgLicensePlate.getText(), imageLicense.getText());
   }
 }

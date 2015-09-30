@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -12,11 +14,11 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
-import org.testng.annotations.Test;
-
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is posting message on user 6 message wall 2. User
- *         6 is notified about user 6 message
+ * @author Karol 'kkarolk' Kujawiak
+ *         <p/>
+ *         1. User 5 is posting message on user 6 message wall 2. User 6 is notified about user 6
+ *         message
  */
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
@@ -24,12 +26,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
   String title;
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsOwnerTests_001",
-          "MessageWallNotificationsOwnerTests"
-      }
-  )
+  @Test(groups = {"MessageWallNotificationsOwnerTests_001", "MessageWallNotificationsOwnerTests"})
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName9, credentials.password9, wikiURL);
@@ -43,13 +40,8 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, credentials.userName9);
   }
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsOwnerTests_002",
-          "MessageWallNotificationsOwnerTests"
-      },
-      dependsOnMethods = "wallOwnerReceivesNotification_setup"
-  )
+  @Test(groups = {"MessageWallNotificationsOwnerTests_002", "MessageWallNotificationsOwnerTests"},
+      dependsOnMethods = "wallOwnerReceivesNotification_setup")
   public void wallOwnerReceivesNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName10, credentials.password10, wikiURL);

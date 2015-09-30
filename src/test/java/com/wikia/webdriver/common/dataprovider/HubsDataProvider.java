@@ -13,10 +13,6 @@ public class HubsDataProvider {
 
   @DataProvider
   public static final Object[][] provideHubDBName() {
-    return new Object[][]{
-        {"gameshub"},
-        {"movieshub"},
-        {"lifestylehub"}
-    };
+    return new Object[][] { {"gameshub"}, {"movieshub"}, {"lifestylehub"}};
   }
 }

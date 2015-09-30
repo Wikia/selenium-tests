@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class WikiHistoryPageObject extends WikiBasePageObject {
 
@@ -35,11 +35,11 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
   }
 
   public WikiArticleRevisionEditMode clickUndoRevision(int revision) {
-    WebElement
-        undo =
-        driver.findElement(By.xpath(
-            "//ul[@id='pagehistory']/li[" + revision + "]//span[@class='mw-history-undo']/a"));
-//		WebElement undo = driver.findElement(By.cssSelector("ul#pagehistory li:nth-child("+revision+") .mw-history-undo"));
+    WebElement undo =
+        driver.findElement(By.xpath("//ul[@id='pagehistory']/li[" + revision
+            + "]//span[@class='mw-history-undo']/a"));
+    // WebElement undo =
+    // driver.findElement(By.cssSelector("ul#pagehistory li:nth-child("+revision+") .mw-history-undo"));
     scrollAndClick(undo);
     return new WikiArticleRevisionEditMode(driver);
   }
@@ -56,17 +56,15 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     return new WikiArticlePageObject(driver);
   }
 
-  /*Author: Michal Nowierski
-   *
-   * */
+  /*
+   * Author: Michal Nowierski
+   */
   public void verifyImportandPageElements() {
     wait.forElementVisible(fromYearField);
     wait.forElementVisible(backToPageLink);
     wait.forElementVisible(goButton);
-    LOG
-        .logResult("verifyImportandPageElements",
-                   "several importand history page elements are present",
-                   true, driver);
+    LOG.success("verifyImportandPageElements",
+                  "several importand history page elements are present",true);
   }
 
   public void verifyLatestEditSummary(String text) {

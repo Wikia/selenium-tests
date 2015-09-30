@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -8,11 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
  * Created by kenkouot on 3/20/14.
+ * 
  * @ownership Content X-Wing
  */
 public class LicensedVideoSwap extends NewTestTemplate {
@@ -42,9 +43,9 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
-  @RelatedIssue(issueID = "CONCF-438", comment = "Feature will be deprecated. No need to test manually")
-  @Test(
-      enabled = false, //CONCF-438
+  @RelatedIssue(issueID = "CONCF-438",
+      comment = "Feature will be deprecated. No need to test manually")
+  @Test(enabled = false, // CONCF-438
       groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();

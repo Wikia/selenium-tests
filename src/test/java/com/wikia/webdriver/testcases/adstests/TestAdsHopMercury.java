@@ -1,22 +1,19 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsHopObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership AdEng
  */
 public class TestAdsHopMercury extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "testAdsHopPostMessage",
-      groups = "AdsHopPostMessageMercury"
-  )
+  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "testAdsHopPostMessage",
+      groups = "AdsHopPostMessageMercury")
   public void adsHopPostMessageMercury(String wikiName, String article, String src) {
     String testPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsHopObject adsHopObject = new AdsHopObject(driver, testPage);

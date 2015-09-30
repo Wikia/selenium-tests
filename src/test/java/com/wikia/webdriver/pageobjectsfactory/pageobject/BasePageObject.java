@@ -75,14 +75,14 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
-  }
-
   public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
+  }
+
+  public void waitForPageLoad() {
+    wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
   }
 
   protected void setWindowSizeAndroid() {
@@ -93,7 +93,7 @@ public class BasePageObject {
 
   public void mouseOverInArticleIframe(String cssSelecotr) {
     jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                      + cssSelecotr + "')).mouseenter()");
+        + cssSelecotr + "')).mouseenter()");
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -216,8 +216,7 @@ public class BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
       js.executeScript("var x = $(arguments[0]);"
-                       + "window.scroll(0,parseInt(x.offset().top - 60));",
-                       driver.findElement(elementBy));
+          + "window.scroll(0,parseInt(x.offset().top - 60));", driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         LOG.error("JSError", "JQuery is not defined");
@@ -268,8 +267,8 @@ public class BasePageObject {
   public void getUrl(String url, boolean makeScreenshot) {
     driver.get(url);
     if (makeScreenshot) {
-      LOG.logResult("Take screenshot",
-                    String.format("Screenshot After Navigation to: %s", url), true, driver);
+      LOG.logResult("Take screenshot", String.format("Screenshot After Navigation to: %s", url),
+          true, driver);
     }
   }
 
@@ -286,8 +285,7 @@ public class BasePageObject {
       driver.navigate().refresh();
       LOG.success("refreshPage", "page refreshed");
     } catch (TimeoutException e) {
-      LOG
-          .result("refreshPage", "page loaded for more than 30 seconds after click", true);
+      LOG.result("refreshPage", "page loaded for more than 30 seconds after click", true);
     }
   }
 
@@ -324,8 +322,7 @@ public class BasePageObject {
       }
       return true;
     } else {
-      LOG
-          .result("SelectorNotFound", "Selector " + selector + " not found on page", true);
+      LOG.result("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
     }
   }
@@ -336,7 +333,7 @@ public class BasePageObject {
     int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem
-                      + "].setAttribute('class', '" + classWithoutHidden + "');");
+        + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
@@ -377,7 +374,7 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
       String attribute, String value) {
     waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-                                                                               value));
+        value));
   }
 
   public void waitForStringInURL(String givenString) {
@@ -390,8 +387,7 @@ public class BasePageObject {
     Alert alert = driver.switchTo().alert();
     String alertText = alert.getText();
     alert.accept();
-    LOG.success("waitForAlertAndAccept", "detected and closed alert with text "
-                                         + alertText);
+    LOG.success("waitForAlertAndAccept", "detected and closed alert with text " + alertText);
   }
 
   public String getRandomDigits(int length) {
@@ -429,24 +425,23 @@ public class BasePageObject {
     notifications_clickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
-    LOG.logResult("notifications_verifyNotificationTitle",
-                  "Verify that the latest notification has the following title: " + title, true,
-                  driver);
+    LOG.success("notifications_verifyNotificationTitle",
+        "Verify that the latest notification has the following title: " + title,true);
   }
 
   public void notifications_clickOnNotificationsLogo() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     wait.forElementClickable(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
-    LOG.logResult("notifications_clickOnNotificationsLogo",
-                  "click on notifications logo on the upper right corner", true, driver);
+    LOG.success("notifications_clickOnNotificationsLogo",
+                "click on notifications logo on the upper right corner", true);
   }
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
-    LOG.logResult("norifications_showNotifications",
-                  "show notifications by adding 'show' class to element", true, driver);
+    LOG.success("norifications_showNotifications",
+                "show notifications by adding 'show' class to element", true);
   }
 
   /**
@@ -569,10 +564,8 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
           + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    LOG.logResult("verifyElementMoved", "Element did move. From (" + source.x + ","
-                                        + source.y + ") to (" + target.x + "," + target.y + ")",
-                  true,
-                  driver);
+    LOG.logResult("verifyElementMoved", "Element did move. From (" + source.x + "," + source.y
+        + ") to (" + target.x + "," + target.y + ")", true, driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -587,8 +580,7 @@ public class BasePageObject {
           + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
     LOG.logResult("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-                                        + sourceHeight + ") to (" + targetWidth + "," + targetHeight
-                                        + ")", true, driver);
+        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
   }
 
   public void switchToNewBrowserTab() {

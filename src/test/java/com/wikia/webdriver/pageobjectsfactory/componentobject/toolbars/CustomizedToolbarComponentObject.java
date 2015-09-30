@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 
 /**
@@ -129,34 +129,29 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void clickSearchSuggestion(String toolName) {
-    scrollAndClick(
-        driver.findElement(
-            By.cssSelector(String.format(searchSuggestionToolCss, toolName))
-        )
-    );
-    LOG.success("clickSearchSuggestion",
-                toolName + " selected from search suggestions");
+    scrollAndClick(driver.findElement(By.cssSelector(String.format(searchSuggestionToolCss,
+        toolName))));
+    LOG.success("clickSearchSuggestion", toolName + " selected from search suggestions");
   }
 
   /**
    * Click on a toolbar tool.
    *
-   * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool
-   *                  you want to click.
+   * @param data-name data-name of the toolbar tool. <br>
+   *        You should check the data-name of the tool you want to click.
    * @author Michal Nowierski
    */
   public void clickOnTool(String toolName) {
-    jsActions.click(
-        wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
-    );
+    jsActions
+        .click(wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName))));
     LOG.success("clickOnTool", toolName + " clicked on customized toolbar");
   }
 
   /**
    * Click on a toolbar tool.
    *
-   * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool
-   *                  you want to click.
+   * @param data-name data-name of the toolbar tool. <br>
+   *        You should check the data-name of the tool you want to click.
    * @author Michal Nowierski
    */
   public void verifyFollowMessage() {
@@ -172,8 +167,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @author Michal Nowierski
    */
   public void verifyFollowedToolbar() {
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
-            "title", "Unfollow");
+    waitForValueToBePresentInElementsAttributeByCss(
+        String.format(toolbarToolCss, PageContent.FOLLOW), "title", "Unfollow");
     LOG.success("verifyFollowedToolbar", "follow button verified");
 
   }
@@ -187,8 +182,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void verifyUnfollowed() {
     wait.forElementClickable(pageWatchlistStatusMessage);
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
-                                                    "title", "Follow");
+    waitForValueToBePresentInElementsAttributeByCss(
+        String.format(toolbarToolCss, PageContent.FOLLOW), "title", "Follow");
     LOG.success("verifyUnfollowed", "unfollow button verified");
 
   }
@@ -227,7 +222,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Rename the wanted Tool
    *
    * @param toolName ID of tool to be removed. {PageAction:Follow, PageAction:Edit,
-   *                 PageAction:History, (...)}
+   *        PageAction:History, (...)}
    * @author Michal Nowierski
    */
   public void clickRename(String toolName) {
@@ -254,9 +249,10 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * <p> Verify that wanted Tool appears in Toolbar. <br> The method finds all of Tools appearing in
-   * Toolbar (by their name), and checks if there is at least one name which fits the given param
-   * (ToolName)
+   * <p>
+   * Verify that wanted Tool appears in Toolbar. <br>
+   * The method finds all of Tools appearing in Toolbar (by their name), and checks if there is at
+   * least one name which fits the given param (ToolName)
    *
    * @param ToolName Tool to be verified (name that should appear on toolbar)
    * @author Michal Nowierski
@@ -268,19 +264,15 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         wait.forTextInElement(toolsList, "Follow");
-        LOG.result("unfollowIfFollowed",
-                   "page was followed, unfollow button clicked", true);
+        LOG.result("unfollowIfFollowed", "page was followed, unfollow button clicked", true);
         break;
       }
     }
-    LOG.success("unfollowIfFollowed",
-                "page was unfollowed");
+    LOG.success("unfollowIfFollowed", "page was unfollowed");
   }
 
   public void verifyToolRemoved(String toolName) {
-    wait.forElementNotPresent(
-        By.xpath(String.format(addedToolsPath, toolName))
-    );
+    wait.forElementNotPresent(By.xpath(String.format(addedToolsPath, toolName)));
     LOG.success("verifyToolRemoved", toolName + " removed from toolbar");
   }
 
@@ -293,7 +285,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void openMoreMenu() {
-   jsActions.execute("$('.overflow-menu').mouseover();");
+    jsActions.execute("$('.overflow-menu').mouseover();");
     wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
     LOG.success("openMoreMenu", "more menu opened");
   }

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
-import org.testng.annotations.Test;
-
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create wiki in different languages
  */
@@ -23,7 +23,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
       "CreateNewWiki_lang_001", "CNW_lang_first"})
- public void CreateNewWiki_lang_TC001(String lang) {
+  public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -44,7 +44,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
-   public void langSecondHalf(String lang) {
+  public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }
 }

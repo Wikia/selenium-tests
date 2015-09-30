@@ -1,5 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -9,19 +17,30 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
 public class MessageWall extends WikiBasePageObject {
 
+  By messageTitleBy = By.cssSelector(".msg-title");
+  By messageBodyBy = By.cssSelector(".msg-body");
+  By imageBy = By.cssSelector(".thumbimage");
+  By messageTextBoldBy = By.cssSelector("b");
+  By messageTextItalicBy = By.cssSelector("i");
+  By messageLinkBy = By.cssSelector("a");
+  By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  By editButtonBy = By.cssSelector(".edit-message");
+  By removeButtonBy = By.cssSelector(".remove-message");
+  By reopenButtonBy = By.cssSelector(".reopen-thread");
+  By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  By quoteMessageBy = By.cssSelector(".replies p");
+  By saveChangesButtonBy = By.cssSelector(".save-edit");
+  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  By firstMessageWrapperBy = By
+      .cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  By replyButtonBy = By.cssSelector(".replyButton");
+  By replyBodyBy = By.cssSelector(".replyBody");
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
@@ -50,32 +69,11 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
-
   private String newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
   private String closeButtonString = ".close-thread";
-
-  By messageTitleBy = By.cssSelector(".msg-title");
-  By messageBodyBy = By.cssSelector(".msg-body");
-  By imageBy = By.cssSelector(".thumbimage");
-  By messageTextBoldBy = By.cssSelector("b");
-  By messageTextItalicBy = By.cssSelector("i");
-  By messageLinkBy = By.cssSelector("a");
-  By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  By editButtonBy = By.cssSelector(".edit-message");
-  By removeButtonBy = By.cssSelector(".remove-message");
   By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
-  By reopenButtonBy = By.cssSelector(".reopen-thread");
-  By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  By quoteMessageBy = By.cssSelector(".replies p");
-  By saveChangesButtonBy = By.cssSelector(".save-edit");
-  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  By firstMessageWrapperBy = By
-      .cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  By replyButtonBy = By.cssSelector(".replyButton");
-  By replyBodyBy = By.cssSelector(".replyBody");
 
   public MessageWall(WebDriver driver) {
     super(driver);
@@ -257,8 +255,7 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageTitle(String title) {
     wait.forTextInElement(messageTitleBy, title);
-    LOG
-        .result("verifyMessageTitle", "message with title: " + title + ", verified", true);
+    LOG.result("verifyMessageTitle", "message with title: " + title + ", verified", true);
   }
 
   public void verifyMessageText(String title, String message, String userName) {
@@ -322,7 +319,7 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyQuote(String quoteText) {
     Assertion.assertEquals(driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy)
-                               .getText(), quoteText);
+        .getText(), quoteText);
   }
 
   public void verifyImageAdded(String title) {
@@ -340,7 +337,7 @@ public class MessageWall extends WikiBasePageObject {
         }
       }
       return new MessageWallThreadPageObject(driver);
-    }finally {
+    } finally {
       waitForPageLoad();
     }
   }
@@ -348,7 +345,7 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyReplyAreaAvatarNotVisible() {
     waitForElementNotVisibleByElement(replyAreaAvatars);
     LOG.result("verifyReplyAreaAvatarNotVisible",
-               "as expected, avatar next to reply area is not visible", true);
+        "as expected, avatar next to reply area is not visible", true);
   }
 
   public void verifyPostedMessageVideo(String title) {

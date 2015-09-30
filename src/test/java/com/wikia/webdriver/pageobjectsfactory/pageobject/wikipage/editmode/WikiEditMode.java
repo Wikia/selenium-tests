@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -23,7 +23,7 @@ public class WikiEditMode extends WikiBasePageObject {
   }
 
   /**
-   * Click  on Publish button
+   * Click on Publish button
    *
    * @author Michal Nowierski
    */

@@ -35,14 +35,14 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.success("clickCustomMap", "custom map link clicked", true);
     return new CreateAMapComponentObject(driver);
   }
 
   public CreatePinTypesComponentObject clickNext() {
     wait.forElementVisible(nextButton);
     nextButton.click();
-    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.success("clickCustomMap", "custom map link clicked", true);
     return new CreatePinTypesComponentObject(driver);
   }
 

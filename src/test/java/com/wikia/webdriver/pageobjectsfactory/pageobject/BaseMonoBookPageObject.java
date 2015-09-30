@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -28,7 +28,7 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     LOG.success("OpenWikiPage", "Wiki Page opened with success");
     changeToMonoBook();
-    LOG.logResult("logOut", "skin is changing for more than 30 seconds", true, driver);
+    LOG.success("logOut", "skin is changing for more than 30 seconds", true);
   }
 
   public void changeToMonoBook() {

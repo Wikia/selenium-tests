@@ -1,22 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,6 +9,23 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -128,8 +128,7 @@ public class SignUpPageObject extends WikiBasePageObject {
       new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
       new Select(birthMonthField).selectByVisibleText(month);
-      LOG.success("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
-                                 + " selected");
+      LOG.success("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year + " selected");
     } catch (InterruptedException e) {
       LOG.error("enterBirthDate", e);
     }
@@ -178,7 +177,7 @@ public class SignUpPageObject extends WikiBasePageObject {
       String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
-          + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
+              + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
       URL url = new URL(urlAd);
 
       String md5 = md5(url.openStream());

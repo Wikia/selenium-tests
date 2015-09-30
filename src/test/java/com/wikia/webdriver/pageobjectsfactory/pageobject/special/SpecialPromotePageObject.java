@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -14,12 +13,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class SpecialPromotePageObject extends BasePageObject {
 
@@ -62,56 +62,40 @@ public class SpecialPromotePageObject extends BasePageObject {
     wait.forElementVisible(modifyThumbnailButton);
     modifyThumbnailButton.click();
     wait.forElementVisible(uploadFileInput);
-    uploadFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
-    );
-    LOG.result(
-        "modifyThumnailImage",
-        "file " + file + " added to upload",
-        true);
+    uploadFileInput.sendKeys(CommonUtils
+        .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    LOG.result("modifyThumnailImage", "file " + file + " added to upload", true);
   }
 
   public void typeIntoHeadline(String text) {
     wait.forElementVisible(wikiaHeadline);
     wikiaHeadline.clear();
     wikiaHeadline.sendKeys(text);
-    LOG.result(
-        "typeIntoHeadline",
-        "text " + text + " typed into headline",
-        true);
+    LOG.result("typeIntoHeadline", "text " + text + " typed into headline", true);
   }
 
   public void typeIntoDescription(String text) {
     wait.forElementVisible(wikiaDescription);
     wikiaDescription.clear();
     wikiaDescription.sendKeys(text);
-    LOG.result(
-        "typeIntoDescription",
-        "text " + text + " typed into description",
-        true);
+    LOG.result("typeIntoDescription", "text " + text + " typed into description", true);
   }
 
   public void uploadThumbnailImage(String file) {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     wait.forElementVisible(uploadFileInput);
-    uploadFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
-    );
-    LOG.result(
-        "uploadThumbnailImage",
-        "file " + file + " added to upload",
-        true);
+    uploadFileInput.sendKeys(CommonUtils
+        .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    LOG.result("uploadThumbnailImage", "file " + file + " added to upload", true);
     wait.forElementVisible(submitButton);
     submitButton.click();
   }
 
   public void verifyCrossWikiSearchDescription(String firstDescription) {
     wait.forElementVisible(wikiaDescription);
-    Assertion.assertStringContains(
-            wikiaDescription.getText(), firstDescription.substring(0,
-                                   firstDescription.length() - 3)
-    );
+    Assertion.assertStringContains(wikiaDescription.getText(),
+        firstDescription.substring(0, firstDescription.length() - 3));
   }
 
   public void verifyCrossWikiSearchImage(String firstImage) {
@@ -137,8 +121,7 @@ public class SpecialPromotePageObject extends BasePageObject {
    */
   public File getUploadedImage() {
     wait.forElementVisible(thumbnailImage);
-    File
-        uploadedImageFile =
+    File uploadedImageFile =
         new File(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + "shouldBeDeleted.png");
     try {
       URL url = new URL(thumbnailImage.getAttribute("src"));

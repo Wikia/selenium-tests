@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile;
 
-import com.wikia.webdriver.common.logging.LOG;
+import java.io.File;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.File;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -23,16 +23,14 @@ public class AvatarComponentObject extends EditProfileComponentObject {
   }
 
   public void uploadAvatar(String file) {
-    File fileCheck = new File("." + File.separator + "src" + File.separator
-                              + "test" + File.separator + "resources" + File.separator
-                              + "ImagesForUploadTests"
-                              + File.separator + file);
+    File fileCheck =
+        new File("." + File.separator + "src" + File.separator + "test" + File.separator
+            + "resources" + File.separator + "ImagesForUploadTests" + File.separator + file);
     if (!fileCheck.isFile()) {
       LOG.error("uploadAvatar", "the file doesn't exist");
     }
     uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());
-    LOG
-        .logResult("typeInFileToUploadPath", "type file " + file + " to upload it", true, driver);
+    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it",true);
   }
 
   public void saveProfile() {

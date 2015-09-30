@@ -4,14 +4,14 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideos
  * Created by kenkouot on 3/19/14.
  */
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
@@ -33,11 +33,11 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
     wait.forElementVisible(lvsHistoryBtn);
     lvsHistoryBtn.click();
 
-    // Make sure the click above has happened and the browser has responded by looking for an element
+    // Make sure the click above has happened and the browser has responded by looking for an
+    // element
     // on the history page
     wait.forElementVisible(backLink);
-    LOG.success("navigateToHistoryPage",
-            "lvs history button navigates to right page");
+    LOG.success("navigateToHistoryPage", "lvs history button navigates to right page");
 
     return new LicensedVideoSwapHistoryPageObject(driver);
   }
@@ -62,4 +62,3 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
     LOG.success("verifyClickSwap", "Swap button has been clicked");
   }
 }
-

@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -7,28 +10,20 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
-
 /**
  * @author Bogna 'bognix' Knychala
  * @author Piotr Gackowski
  * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
-@Test(
-    groups = {"Ads_Corporate_Page"}
-)
+@Test(groups = {"Ads_Corporate_Page"})
 public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
   private String testedPage;
   private String adUnit;
   private String slotName;
 
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "corporatePages"
-  )
+  @Factory(dataProviderClass = AdsDataProvider.class, dataProvider = "corporatePages")
   public TestAdsOnCorporatePages(String wikiName, String path, String adUnit, String slotName) {
     super();
     this.adUnit = adUnit;
@@ -41,9 +36,7 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
   }
 
   @GeoEdgeBrowserMobProxy(country = "VE")
-  @Test(
-      groups = {"TestCorporatePage_VE"}
-  )
+  @Test(groups = {"TestCorporatePage_VE"})
   public void TestCorporatePage_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
@@ -51,9 +44,7 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
     // Not verifying GPT iframes in low value countries
   }
 
-  @Test(
-      groups = {"TestCorporatePageHVC_GEF"}
-  )
+  @Test(groups = {"TestCorporatePageHVC_GEF"})
   public void TestCorporatePage_GEF() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();

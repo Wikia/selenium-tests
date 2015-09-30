@@ -1,14 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,7 +15,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.ElementStateHelper;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 public class VenusGlobalNavPageObject {
 
@@ -69,13 +69,11 @@ public class VenusGlobalNavPageObject {
     new Actions(driver).moveToElement(getDestinationHub(hub)).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-        .valueToBePresentInElementsAttribute(
-            getDestinationHub(hub), "class", "active"));
+        .valueToBePresentInElementsAttribute(getDestinationHub(hub), "class", "active"));
     String expectedHref = getHubLink(getDestinationHub(hub));
     getDestinationHub(hub).click();
 
-    new WebDriverWait(driver, 30)
-        .until(ExpectedConditions.urlToBe(expectedHref));
+    new WebDriverWait(driver, 30).until(ExpectedConditions.urlToBe(expectedHref));
 
     return new HubBasePageObject(driver);
   }

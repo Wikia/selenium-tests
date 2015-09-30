@@ -1,7 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialBlockListPageObject extends WikiBasePageObject {
 
@@ -33,8 +33,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    LOG
-        .result("Special:BlockList typeInUserName", userName + " typed in username field", true);
+    LOG.result("Special:BlockList typeInUserName", userName + " typed in username field", true);
   }
 
   private void clickSearchButton() {
@@ -50,17 +49,15 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
 
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
-    LOG.logResult("Special:BlockList verifyUSerUnblocked",
-                  "verified that user is not on blocked users list", true, driver);
+    LOG.success("Special:BlockList verifyUSerUnblocked",
+                "verified that user is not on blocked users list", true);
   }
 
   public void verifyUserBlocked(String userName) {
-    wait.forElementVisible(
-        By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
-    LOG
-        .logResult("Special:BlockList verifyUSerUnblocked",
-                   "verified that user is on blocked users list",
-                   true, driver);
+    wait.forElementVisible(By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:"
+        + userName + "']"));
+    LOG.success("Special:BlockList verifyUSerUnblocked",
+                  "verified that user is on blocked users list",true);
   }
 
   /**
@@ -84,8 +81,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
     } catch (ParseException ex) {
       throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
-    LOG
-        .result("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+    LOG.result("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
     return isBlocked;
   }
 }

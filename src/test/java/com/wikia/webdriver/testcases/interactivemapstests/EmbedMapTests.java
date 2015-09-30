@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -13,8 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -32,8 +32,7 @@ public class EmbedMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
@@ -64,8 +63,7 @@ public class EmbedMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickEmbedMapCodeButton();
@@ -83,8 +81,7 @@ public class EmbedMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     selectedMap.verifyMapOpened();
     selectedMap.clickEmbedMapCodeButton();

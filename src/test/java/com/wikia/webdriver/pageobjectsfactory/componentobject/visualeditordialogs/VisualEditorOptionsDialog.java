@@ -1,9 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,8 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.interactions.Elements;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
@@ -87,14 +87,14 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     typeCategory(cat);
     clickLinkResult();
     wait.forElementVisible(categoryItem);
-    LOG.logResult("addCategory", "Category: " + cat + " is added", true, driver);
+    LOG.success("addCategory", "Category: " + cat + " is added", true);
   }
 
   private void typeCategory(String cat) {
     wait.forElementVisible(categoriesInput);
     categoriesInput.clear();
     categoriesInput.sendKeys(cat);
-    LOG.logResult("typeCategory", "Typed " + cat + " in the field", true, driver);
+    LOG.success("typeCategory", "Typed " + cat + " in the field", true);
   }
 
   public void clickLinkResult() {
@@ -109,7 +109,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     clickCategory(categoryStr);
     categoryRemoveButton.click();
     waitForElementNotVisibleByElement(categoryPopUp);
-    LOG.logResult("removeCategory", "Category: " + categoryStr + " is removed", true, driver);
+    LOG.success("removeCategory", "Category: " + categoryStr + " is removed", true);
   }
 
   public void addSortKeyToCategory(String categoryStr, String key) {
@@ -164,16 +164,12 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     }
 
     if (foundResults.isEmpty()) {
-      throw new NoSuchElementException(
-          "No '" + matchCategoryStr + "' found with the search word: " + searchStr
-      );
+      throw new NoSuchElementException("No '" + matchCategoryStr + "' found with the search word: "
+          + searchStr);
     }
 
-    LOG.result(
-        "getLinkResults",
-        "Found " + foundResults.size() + " result(s) under '" + matchCategoryStr + "'",
-        true
-    );
+    LOG.result("getLinkResults", "Found " + foundResults.size() + " result(s) under '"
+        + matchCategoryStr + "'", true);
     return foundResults;
   }
 
@@ -190,8 +186,8 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     if (categoryStr.toLowerCase().contains(searchStr.toLowerCase())) {
       LOG.success("getLinkResults", "Found type ahead suggestion: " + categoryStr);
     } else {
-      throw new NoSuchElementException(
-          searchStr + " is NOT found in type ahead suggestion: " + categoryStr);
+      throw new NoSuchElementException(searchStr + " is NOT found in type ahead suggestion: "
+          + categoryStr);
     }
   }
 }

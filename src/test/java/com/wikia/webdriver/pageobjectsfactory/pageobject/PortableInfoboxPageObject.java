@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 
 /**
  * @ownership Content West Wing
@@ -161,13 +161,13 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) +
-           URLsContent.WIKI_DIR + articleTitle);
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+        + articleTitle);
     return this;
   }
 
   public PortableInfoboxPageObject compareURLAndExternalLink(String externalLinkName,
-                                                             String externalNavigatedURL) {
+      String externalNavigatedURL) {
     Assertion.assertEquals(externalLinkName, externalNavigatedURL);
     return this;
   }
@@ -177,11 +177,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject compareFontSizes(WebElement firstElement,
-                                                    WebElement secondElement) {
-    Assertion.assertEquals(
-        firstElement.getCssValue("font-size"),
-        secondElement.getCssValue("font-size")
-    );
+      WebElement secondElement) {
+    Assertion.assertEquals(firstElement.getCssValue("font-size"),
+        secondElement.getCssValue("font-size"));
     return this;
   }
 
@@ -205,7 +203,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
+  public PortableInfoboxPageObject compareInfoboxAndCategoryPageImages(String imageName,
+      String categoryImageURL) {
     Assertion.assertStringContains(imageName, categoryImageURL);
     return this;
   }
@@ -271,10 +270,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject verifyPadding(WebElement element) {
-    Assertion.assertEquals(
-        element.getCssValue("padding-left"),
-        element.getCssValue("padding-right")
-    );
+    Assertion.assertEquals(element.getCssValue("padding-left"),
+        element.getCssValue("padding-right"));
     return this;
   }
 

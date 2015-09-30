@@ -1,15 +1,15 @@
 package com.wikia.webdriver.testcases.wampagetests;
 
+import java.util.EnumSet;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.EnumSet;
 
 /**
  * @author Qaga
@@ -26,7 +26,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.openWamPage(wikiCorporateURL);
   }
 
- @Test(groups = {"WamPage001", "WamPageTests"})
+  @Test(groups = {"WamPage001", "WamPageTests"})
   public void wam_001_verifyDefaultPage() {
     wam.verifyTabIsSelected(WamTab.ALL);
     wam.verifyWamIndexIsNotEmpty();
@@ -46,8 +46,8 @@ public class WamPageTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "CONCF-6", comment = "Test manually."
-            + " Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores.")
-          @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
+      + " Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores.")
+  @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumn(1, 20);
     wam.clickNextPaginator();

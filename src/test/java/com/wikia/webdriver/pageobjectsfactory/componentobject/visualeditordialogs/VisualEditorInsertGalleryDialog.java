@@ -1,19 +1,27 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 
 public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
+  private static final By MEDIA_RESULTS_WIDGET_BY = By
+      .cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-selectWidget-depressed");
+  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-mwMediaResultWidget-done");
+  private static final By MEDIA_ADD_ICON_BY = By.cssSelector(".oo-ui-icon-unchecked");
+  private static final By MEDIA_TITLES_BY = By
+      .cssSelector(".ve-ui-mwMediaResultWidget-done>.oo-ui-labelElement-label");
+  private static final By MEDIA_CHECKED_ICON_BY = By.cssSelector(".oo-ui-icon-checked");
+  private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
   @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget input")
   private WebElement searchInput;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
@@ -24,21 +32,9 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement dialogBody;
   @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget .oo-ui-pendingElement-pending")
   private WebElement queryPending;
-
-  //Cart
+  // Cart
   @FindBy(css = ".ve-ui-wikiaSingleMediaCartOptionWidget")
   private List<WebElement> cartItems;
-
-  private static final By
-      MEDIA_RESULTS_WIDGET_BY =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-selectWidget-depressed");
-  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-mwMediaResultWidget-done");
-  private static final By MEDIA_ADD_ICON_BY = By.cssSelector(".oo-ui-icon-unchecked");
-  private static final By
-      MEDIA_TITLES_BY =
-      By.cssSelector(".ve-ui-mwMediaResultWidget-done>.oo-ui-labelElement-label");
-  private static final By MEDIA_CHECKED_ICON_BY = By.cssSelector(".oo-ui-icon-checked");
-  private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
 
   public VisualEditorInsertGalleryDialog(WebDriver driver) {
     super(driver);
@@ -77,7 +73,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
     wait.forElementVisible(mediaResultsWidget);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
-    //only selects available number of media
+    // only selects available number of media
     for (int i = 0; i < Math.min(number, mediaResults.size()); i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(MEDIA_ADD_ICON_BY);
       mediaAddIcon.click();

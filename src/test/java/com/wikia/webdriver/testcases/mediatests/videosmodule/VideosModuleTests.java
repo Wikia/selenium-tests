@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import org.testng.annotations.Test;
 
 public class VideosModuleTests extends NewTestTemplate {
 

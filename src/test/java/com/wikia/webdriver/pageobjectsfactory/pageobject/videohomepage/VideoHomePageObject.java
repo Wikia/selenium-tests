@@ -1,10 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 
 /**
@@ -34,7 +34,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public VideoHomePageObject open(){
+  public VideoHomePageObject open() {
     getUrl(new UrlBuilder().getUrlForWiki(Configuration.getWikiName()));
 
     return this;
@@ -42,23 +42,20 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
   public void verifyFeaturedSliderInitialized() {
     wait.forElementVisible(featuredModuleControls);
-    LOG
-        .result("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
+    LOG.result("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
   }
 
   public void verifyFeaturedSliderSlides(int count) {
     wait.forElementVisible(featuredSlides.get(0));
     Assertion.assertTrue(featuredSlides.size() >= count);
-    LOG.success("verifyFeaturedSliderSlides",
-                "At least " + count + "latest Videos modules have rendered");
+    LOG.success("verifyFeaturedSliderSlides", "At least " + count
+        + "latest Videos modules have rendered");
   }
 
   public void verifyLatestVideosRows(int count) {
     wait.forElementVisible(latestVideoRows.get(0));
     Assertion.assertTrue(latestVideoRows.size() >= count);
-    LOG
-        .result("verifyLatestVideosRows",
-                "At least " + count + "latest Videos modules have rendered",
-                true);
+    LOG.result("verifyLatestVideosRows", "At least " + count
+                                         + "latest Videos modules have rendered", true);
   }
 }

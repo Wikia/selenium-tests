@@ -3,14 +3,14 @@
  */
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

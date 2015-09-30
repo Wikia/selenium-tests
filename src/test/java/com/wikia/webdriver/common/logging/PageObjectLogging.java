@@ -99,12 +99,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestFailure(ITestResult result) {
-      String exception =
-          escapeHtml(result.getThrowable().toString() + "\n"
-              + ExceptionUtils.getStackTrace(result.getThrowable()));
-      LOG.error("ERROR", exception);
-      LOG.logJSError();
-      LOG.stopLogging();
+    String exception =
+        escapeHtml(result.getThrowable().toString() + "\n"
+            + ExceptionUtils.getStackTrace(result.getThrowable()));
+    LOG.error("ERROR", exception);
+    LOG.logJSError();
+    LOG.stopLogging();
   }
 
   @Override

@@ -59,7 +59,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
     Assertion.assertEquals(isElementOnPage(zoomInButton), true);
     wait.forElementVisible(zoomOutButton);
     Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
-    LOG.logResult("verifyMapElementsPresented", "Map elements was presented", true, driver);
+    LOG.success("verifyMapElementsPresented", "Map elements was presented", true);
     driver.switchTo().defaultContent();
   }
 

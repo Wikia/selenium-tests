@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 
 public class ConfirmationPageObject extends BasePageObject {
 
@@ -32,7 +32,7 @@ public class ConfirmationPageObject extends BasePageObject {
    */
   public void typeInUserName(String userName) {
     userNameField.sendKeys(userName);
-    LOG.logResult("typeInUserName ", "user name field populated", true, driver);
+    LOG.success("typeInUserName ", "user name field populated", true);
   }
 
   /**
@@ -40,7 +40,7 @@ public class ConfirmationPageObject extends BasePageObject {
    */
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
-    LOG.logResult("typeInUserPassword ", "password field populated", true, driver);
+    LOG.success("typeInUserPassword ", "password field populated", true);
   }
 
   /**
@@ -49,14 +49,14 @@ public class ConfirmationPageObject extends BasePageObject {
   public UserProfilePageObject clickSubmitButton(String email, String password) {
     MailFunctions.deleteAllEmails(email, password);
     scrollAndClick(confirmationButton);
-    LOG.logResult("submit button clicked ", "submit button clicked", true, driver);
+    LOG.success("submit button clicked ", "submit button clicked", true);
     return new UserProfilePageObject(driver);
   }
 
   public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password) {
     MailFunctions.deleteAllEmails(email, password);
     scrollAndClick(confirmationButton);
-    LOG.logResult("submit button clicked ", "submit button clicked", true, driver);
+    LOG.success("submit button clicked ", "submit button clicked", true);
     return new CreateNewWikiPageObjectStep1(driver);
   }
 }

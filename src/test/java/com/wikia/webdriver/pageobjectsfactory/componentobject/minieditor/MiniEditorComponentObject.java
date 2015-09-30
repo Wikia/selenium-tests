@@ -1,18 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor;
 
-import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class MiniEditorComponentObject extends WikiBasePageObject {
 
@@ -97,8 +97,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     wait.forElementVisible(addVideoButton);
     scrollAndClick(addVideoButton);
     VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
-    VetOptionsComponentObject
-        vetOptions =
+    VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.submit();
     verifyVideoMiniEditor();

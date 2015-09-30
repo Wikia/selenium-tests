@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @ownership Social
@@ -57,7 +57,7 @@ public class LoginPageObject extends WikiBasePageObject {
       LOG.error("encoding", "problem occured during URL encoding");
     }
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
-               + redirectParameter);
+        + redirectParameter);
     return this;
   }
 

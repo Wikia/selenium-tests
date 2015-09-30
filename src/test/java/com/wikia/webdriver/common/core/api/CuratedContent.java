@@ -1,25 +1,26 @@
 package com.wikia.webdriver.common.core.api;
 
+import java.util.ArrayList;
+
+import org.apache.http.message.BasicNameValuePair;
+
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
-import org.apache.http.message.BasicNameValuePair;
-
-import java.util.ArrayList;
-
 public class CuratedContent extends ApiCall {
 
-  public CuratedContent() {
-  }
+  public CuratedContent() {}
 
-  @Override protected String getURL() {
+  @Override
+  protected String getURL() {
     return new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-           + "wikia.php?controller=CuratedContent&method=setData";
+        + "wikia.php?controller=CuratedContent&method=setData";
   }
 
-  @Override protected User getUser() {
-     return User.STAFF;
+  @Override
+  protected User getUser() {
+    return User.STAFF;
   }
 
   @Override

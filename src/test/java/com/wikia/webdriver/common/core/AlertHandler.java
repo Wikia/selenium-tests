@@ -1,17 +1,16 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
-
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
+
 public class AlertHandler {
 
-  private AlertHandler() {
-  }
+  private AlertHandler() {}
 
   public static boolean isAlertPresent(WebDriver driver) {
     try {

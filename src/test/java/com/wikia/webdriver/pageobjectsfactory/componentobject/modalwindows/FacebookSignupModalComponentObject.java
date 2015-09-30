@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import javax.annotation.Nullable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.annotation.Nullable;
+import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Michal 'justnpT' Nowierski
@@ -124,14 +124,10 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void loginExistingAccount(String userName, String password) {
     wait.forElementVisible(existingUsernameField);
     existingUsernameField.sendKeys(userName);
-    LOG.result("loginExistingAccount",
-               "username " + userName + " typed into the field",
-               true);
+    LOG.result("loginExistingAccount", "username " + userName + " typed into the field", true);
     wait.forElementVisible(existingPasswordField);
     existingPasswordField.sendKeys(password);
-    LOG.result("loginExistingAccount",
-               "password " + password + " typed into the field",
-               true);
+    LOG.result("loginExistingAccount", "password " + password + " typed into the field", true);
     loginExistingButton.click();
   }
 }

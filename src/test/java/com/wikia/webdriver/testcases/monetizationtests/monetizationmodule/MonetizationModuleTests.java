@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.monetizationtests.monetizationmodule;
 
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule.MonetizationModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 /**
  * @ownership Monetization
@@ -44,87 +44,84 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   @DataProvider(name = "DataMonetizationModule_005")
   public static Object[][] DataMonetizationModule_005() {
-    return new Object[][]{{800, 600, 360, 700}, {850, 600, 360, 700}, {1024, 600, 360, 700},
-                          {1575, 600, 360, 700}, {1576, 600, 510, 728}, {1700, 600, 510, 728},};
+    return new Object[][] { {800, 600, 360, 700}, {850, 600, 360, 700}, {1024, 600, 360, 700},
+        {1575, 600, 360, 700}, {1576, 600, 510, 728}, {1700, 600, 510, 728},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_008")
   public static Object[][] DataMonetizationModuleTest_008() {
-    return new Object[][]{{"JP", true, TEST_WIKI, TEST_ARTICLE},
-                          {"JP", false, TEST_WIKI, TEST_ARTICLE},
-                          {"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
-                          {"JP", false, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
-                          {"JP", true, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
-                          {"JP", false, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
+    return new Object[][] { {"JP", true, TEST_WIKI, TEST_ARTICLE},
+        {"JP", false, TEST_WIKI, TEST_ARTICLE},
+        {"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+        {"JP", false, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+        {"JP", true, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
+        {"JP", false, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
   }
 
   @DataProvider(name = "DataMonetizationModuleGeoTestWikis")
   public static Object[][] DataMonetizationModuleGeoTestWikis() {
-    return new Object[][]{{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
-                          {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
+    return new Object[][] { {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+        {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_011")
   public static Object[][] DataMonetizationModuleTest_011() {
-    return new Object[][]{{"JP", true}, {"JP", false}, {"US", true}, {"US", false}, {"GB", true},
-                          {"GB", false}, {"CA", true}, {"CA", false}, {"AU", true}, {"AU", false},
-                          {"DE", true},
-                          {"DE", false},};
+    return new Object[][] { {"JP", true}, {"JP", false}, {"US", true}, {"US", false}, {"GB", true},
+        {"GB", false}, {"CA", true}, {"CA", false}, {"AU", true}, {"AU", false}, {"DE", true},
+        {"DE", false},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_012")
   public static Object[][] DataMonetizationModuleTest_012() {
-    return new Object[][]{{TEST_WIKI, TEST_ARTICLE}, {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
-                          {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
+    return new Object[][] { {TEST_WIKI, TEST_ARTICLE}, {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+        {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_013")
   public static Object[][] DataMonetizationModuleTest_013() {
-    return new Object[][]{{"JP"}, {"GB"}, {"US"},};
+    return new Object[][] { {"JP"}, {"GB"}, {"US"},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_014")
   public static Object[][] DataMonetizationModuleTest_014() {
-    return new Object[][]{{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
-                          {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
-                          {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"},
-                          {TEST_WIKI, TEST_ARTICLE, "CA"},
-                          {TEST_WIKI, TEST_ARTICLE, "AU"}, {TEST_WIKI, TEST_ARTICLE, "DE"},};
+    return new Object[][] { {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
+        {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
+        {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"}, {TEST_WIKI, TEST_ARTICLE, "CA"},
+        {TEST_WIKI, TEST_ARTICLE, "AU"}, {TEST_WIKI, TEST_ARTICLE, "DE"},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_015")
   public static Object[][] DataMonetizationModuleTest_015() {
-    return new Object[][]{{"GB"}, {"US"},};
+    return new Object[][] { {"GB"}, {"US"},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_017")
   public static Object[][] DataMonetizationModuleTest_017() {
-    return new Object[][]{{"US", true, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
-                          {"US", false, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
-                          {"US", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
-                          {"US", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},};
+    return new Object[][] { {"US", true, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
+        {"US", false, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
+        {"US", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+        {"US", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_018")
   public static Object[][] DataMonetizationModuleTest_018() {
-    return new Object[][]{{"JP", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
-                          {"JP", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},};
+    return new Object[][] { {"JP", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
+        {"JP", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_020")
   public static Object[][] DataMonetizationModuleTest_020() {
-    return new Object[][]{{"US", true, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},
-                          {"US", false, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},};
+    return new Object[][] { {"US", true, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},
+        {"US", false, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_021")
   public static Object[][] DataMonetizationModuleTest_021() {
-    return new Object[][]{
+    return new Object[][] {
         {"US", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"US", false, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"US", true, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
-        {"US", false, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE,
-         SINGLE},
+        {"US", false, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
         {"US", true, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
         {"US", false, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
         {"US", true, TEST_ECOMMERCE_MULTI_LIGHT_WIKI, TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE, MULTI},
@@ -133,12 +130,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   @DataProvider(name = "MonetizationModuleTest_022")
   public static Object[][] DataMonetizationModuleTest_022() {
-    return new Object[][]{
+    return new Object[][] {
         {"JP", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"DE", false, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"CA", true, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
-        {"GB", false, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE,
-         SINGLE},
+        {"GB", false, TEST_ECOMMERCE_SINGLE_LIGHT_WIKI, TEST_ECOMMERCE_SINGLE_LIGHT_ARTICLE, SINGLE},
         {"GB", true, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
         {"CA", false, TEST_ECOMMERCE_MULTI_DARK_WIKI, TEST_ECOMMERCE_MULTI_DARK_ARTICLE, MULTI},
         {"DE", true, TEST_ECOMMERCE_MULTI_LIGHT_WIKI, TEST_ECOMMERCE_MULTI_LIGHT_ARTICLE, MULTI},
@@ -201,8 +197,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   /**
-   * The monetization module is not shown on article page for logged in user (not via search
-   * engine)
+   * The monetization module is not shown on article page for logged in user (not via search engine)
    *
    * @author Saipetch Kongkatong
    */
@@ -226,10 +221,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
-                                                               "MonetizationModuleTest_005",
-                                                               "Monetization"})
+      "MonetizationModuleTest_005", "Monetization"})
   public void MonetizationModuleTest_005(int width, int height, int expectedInContent,
-                                         int expectedOthers) {
+      int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
@@ -306,10 +300,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_008", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_008",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_008", "Monetization"})
   public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle) {
+      String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -341,8 +334,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
-                                                                       "MonetizationModuleTest_009",
-                                                                       "Monetization"})
+      "MonetizationModuleTest_009", "Monetization"})
   public void MonetizationModuleTest_009(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -371,8 +363,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
-                                                                       "MonetizationModuleTest_010",
-                                                                       "Monetization"})
+      "MonetizationModuleTest_010", "Monetization"})
   public void MonetizationModuleTest_010(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -401,8 +392,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_011", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_011",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_011", "Monetization"})
   public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_100_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE);
@@ -435,8 +425,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_012", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_012",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_012", "Monetization"})
   public void MonetizationModuleTest_012(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -465,8 +454,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_013", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_013",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_013", "Monetization"})
   public void MonetizationModuleTest_013(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
@@ -492,8 +480,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_014", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_014",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_014", "Monetization"})
   public void MonetizationModuleTest_014(String testWiki, String testArticle, String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -523,8 +510,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_015", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_015",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_015", "Monetization"})
   public void MonetizationModuleTest_015(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_DE_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_DE_WIKI, TEST_DE_ARTICLE);
@@ -573,10 +559,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_017", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_017",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_017", "Monetization"})
   public void MonetizationModuleTest_017(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle) {
+      String testArticle) {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -610,10 +595,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_018", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_018",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_018", "Monetization"})
   public void MonetizationModuleTest_018(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle) {
+      String testArticle) {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -642,10 +626,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Rochan
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
-                                                               "MonetizationModuleTest_019",
-                                                               "Monetization"})
+      "MonetizationModuleTest_019", "Monetization"})
   public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
-                                         int expectedOthers) {
+      int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
@@ -667,10 +650,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_020", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_020",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_020", "Monetization"})
   public void MonetizationModuleTest_020(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle) {
+      String testArticle) {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -704,10 +686,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_021", groups = {"MonetizationModule",
-                                                                   "MonetizationModuleTest_021",
-                                                                   "Monetization"})
+      "MonetizationModuleTest_021", "Monetization"})
   public void MonetizationModuleTest_021(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle, int isMulti) {
+      String testArticle, int isMulti) {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
@@ -741,10 +722,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
    * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_022", groups = {"MonetizationModule",
-                                                                   "DataMonetizationModuleTest_022",
-                                                                   "Monetization"})
+      "DataMonetizationModuleTest_022", "Monetization"})
   public void MonetizationModuleTest_022(String countryCode, Boolean isFromsearch, String testWiki,
-                                         String testArticle, int isMulti) {
+      String testArticle, int isMulti) {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);

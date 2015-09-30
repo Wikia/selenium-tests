@@ -1,15 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 /**
  * @author Dmytro Rets
@@ -26,16 +26,14 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
     verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
-    LOG.success("LightboxAd",
-                "Lightbox had " + lightboxAdColor + " during " + adDurationSec
-                + " seconds");
+    LOG.success("LightboxAd", "Lightbox had " + lightboxAdColor + " during " + adDurationSec
+        + " seconds");
   }
 
   public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
     verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
-    LOG.success("LightboxVideo",
-                "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
-                + " seconds");
+    LOG.success("LightboxVideo", "Lightbox had " + lightboxVideoColor + " during "
+        + videoDurationSec + " seconds");
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
@@ -47,17 +45,17 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private void waitForColorAds(WebElement element, Color color) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     try {
-      waitFor.until(CommonExpectedConditions
-                        .elementToHaveColor(element, color,
-                                            AdsComparison.IMAGES_THRESHOLD_PERCENT));
+      waitFor.until(CommonExpectedConditions.elementToHaveColor(element, color,
+                                                                AdsComparison.IMAGES_THRESHOLD_PERCENT));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
   public void verifyFlash() {
-    Boolean hasFlash = (Boolean) jsActions.execute(
-        "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
+    Boolean hasFlash =
+        (Boolean) jsActions
+            .execute("'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
     LOG.result("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

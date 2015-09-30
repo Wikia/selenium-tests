@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -12,11 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
-import org.testng.annotations.Test;
-
 /**
  * Documentation: https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
  * AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
+ * 
  * @ownership Content X-Wing
  */
 

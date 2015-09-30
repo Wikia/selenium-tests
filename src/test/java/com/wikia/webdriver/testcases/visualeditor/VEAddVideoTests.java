@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,9 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
@@ -44,7 +44,7 @@ public class VEAddVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  //AM02
+  // AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_002_AddPremiumVid() {

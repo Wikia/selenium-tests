@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
  * @ownership: Content X-Wing
@@ -32,25 +32,14 @@ public class CuratedMainPagePageObject extends BasePageObject {
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
 
-  private enum Settings {
-    TIME_OUT_IN_SEC(5),
-    CHECK_OUT_IN_MILLI_SEC(1000);
-
-    private int value;
-
-    Settings(int value) {
-      this.value = value;
-    }
-  }
-
   public CuratedMainPagePageObject(WebDriver driver) {
     super(driver);
   }
 
   public int getElementOffsetTop(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer
-        .parseInt(js.executeScript("return $(arguments[0]).offset().top", element).toString());
+    return Integer.parseInt(js.executeScript("return $(arguments[0]).offset().top", element)
+                                .toString());
   }
 
   public boolean isMobileTopLeaderboardVisible() {
@@ -92,10 +81,20 @@ public class CuratedMainPagePageObject extends BasePageObject {
   private boolean isCuratedElementVisible(WebElement element) {
     try {
       wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
+          Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
     return true;
+  }
+
+  private enum Settings {
+    TIME_OUT_IN_SEC(5), CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    Settings(int value) {
+      this.value = value;
+    }
   }
 }

@@ -1,13 +1,13 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.WebDriverException;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Class containing methods responsible for comparing images using different algorithms.
@@ -21,7 +21,7 @@ public class ImageComparison {
    *
    * @param file1 - file containing first image
    * @param file2 - file containing second image
-   * @return boolean   - if images are the same
+   * @return boolean - if images are the same
    */
   public boolean areFilesTheSame(File file1, File file2) {
     byte[] fileInBytes1;
@@ -43,8 +43,8 @@ public class ImageComparison {
    */
   public boolean areFilesTheSame(File file1, File file2, double accuracy) {
     double difference = (double) file1.length() / file2.length();
-    return (difference >= accuracy && difference <= 1.0) || (difference >= 1.0
-                                                             && difference <= 2.0 - accuracy);
+    return (difference >= accuracy && difference <= 1.0)
+        || (difference >= 1.0 && difference <= 2.0 - accuracy);
   }
 
   /**
@@ -82,7 +82,7 @@ public class ImageComparison {
 
   /**
    * @param threshold in percentage between 0 and 100. If images have less than threshold percent of
-   *                  different pixels return false
+   *        different pixels return false
    */
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;

@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.addtable;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,7 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author llukaszj
@@ -37,21 +37,13 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   public void typeAmountOfRows(int rows) {
     tablePropertiesInputs.get(0).clear();
     tablePropertiesInputs.get(0).sendKeys(Integer.toString(rows));
-    LOG.result(
-        "typeAmountOfRows",
-        "amount of rows was typed: " + rows,
-        true
-    );
+    LOG.result("typeAmountOfRows", "amount of rows was typed: " + rows, true);
   }
 
   public void typeAmountOfColumns(int columns) {
     tablePropertiesInputs.get(1).clear();
     tablePropertiesInputs.get(1).sendKeys(Integer.toString(columns));
-    LOG.result(
-        "typeAmountOfColumns",
-        "amount of columns was typed: " + columns,
-        true
-    );
+    LOG.result("typeAmountOfColumns", "amount of columns was typed: " + columns, true);
   }
 
   public void typeBorderSize(int border) {
@@ -75,25 +67,13 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   public void typeCellSpacing(int cellSpacing) {
     tablePropertiesInputs.get(5).clear();
     tablePropertiesInputs.get(5).sendKeys(Integer.toString(cellSpacing));
-    LOG.result(
-        "typeCellSpacing",
-        "cell spacing was typed: " + cellSpacing,
-        true
-    );
+    LOG.result("typeCellSpacing", "cell spacing was typed: " + cellSpacing, true);
   }
 
   public void typeCellPadding(int cellPadding) {
     tablePropertiesInputs.get(6).clear();
     tablePropertiesInputs.get(6).sendKeys(Integer.toString(cellPadding));
-    LOG.logResult(
-        "typeCellPadding",
-        "cell padding was typed: " + cellPadding,
-        true, driver
-    );
-  }
-
-  public enum Headers {
-    NONE, FIRSTROW, FIRSTCOLUMN, BOTH
+    LOG.success("typeCellPadding", "cell padding was typed: " + cellPadding,true);
   }
 
   public void selectHeader(Headers header) {
@@ -115,21 +95,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing header selected");
     }
-    LOG.logResult("selectHeader", header.toString() + " header selected", true, driver);
-  }
-
-  public enum Alignment {
-    LEFT, CENTER, RIGHT;
-
-    private final String label;
-
-    Alignment() {
-      this.label = StringUtils.capitalize(this.toString().toLowerCase());
-    }
-
-    public String getAlignment() {
-      return this.label;
-    }
+    LOG.success("selectHeader", header.toString() + " header selected", true);
   }
 
   public void selectAlignment(Alignment position) {
@@ -148,14 +114,31 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing alignment selected");
     }
-    LOG
-        .logResult("selectPosition", position.getAlignment() + " position selected", true, driver);
+    LOG.success("selectPosition", position.getAlignment() + " position selected",true);
   }
 
   public void submitTable() {
     wait.forElementVisible(submitLightboxButton);
     submitLightboxButton.click();
     LOG.success("submitButton", "Table submited");
+  }
+
+  public enum Headers {
+    NONE, FIRSTROW, FIRSTCOLUMN, BOTH
+  }
+
+  public enum Alignment {
+    LEFT, CENTER, RIGHT;
+
+    private final String label;
+
+    Alignment() {
+      this.label = StringUtils.capitalize(this.toString().toLowerCase());
+    }
+
+    public String getAlignment() {
+      return this.label;
+    }
   }
 
 }

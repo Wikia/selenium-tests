@@ -1,14 +1,14 @@
 package com.wikia.webdriver.testcases.adstests.mobileadstests;
 
-import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import java.util.Map;
 
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-import java.util.Map;
+import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 
 /**
@@ -16,15 +16,10 @@ import java.util.Map;
  */
 public class TestAdsSynthetic extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsSynthetic",
-      groups = "AdsSynthetic"
-  )
-  public void adsSynthetic(Page page,
-                           Map<String, Object> slotInfo,
-                           Dimension pageSize,
-                           String pathToImage) {
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsSynthetic",
+      groups = "AdsSynthetic")
+  public void adsSynthetic(Page page, Map<String, Object> slotInfo, Dimension pageSize,
+      String pathToImage) {
     String slotName = (String) slotInfo.get("slotName");
     String src = (String) slotInfo.get("src");
     Integer lineItemId = (Integer) slotInfo.get("lineItemId");
@@ -33,8 +28,7 @@ public class TestAdsSynthetic extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, pageSize);
     adsBaseObject.getUrl(page);
 
-    adsBaseObject
-        .verifyLineItemId(slotName, lineItemId)
+    adsBaseObject.verifyLineItemId(slotName, lineItemId)
         .verifySize(slotName, src, slotSize.getWidth(), slotSize.getHeight())
         .verifyAdImage(slotName, src, pathToImage);
   }

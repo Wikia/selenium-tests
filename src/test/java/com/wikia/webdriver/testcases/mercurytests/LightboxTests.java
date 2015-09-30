@@ -1,5 +1,12 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.remote.DriverCommand;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -13,12 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxCo
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.remote.DriverCommand;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership Content X-Wing
@@ -45,34 +46,17 @@ public class LightboxTests extends NewTestTemplate {
 
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isLightboxOpened(),
-        "Lightbox is closed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
 
-    LOG.result(
-        "Lightbox",
-        "is opened",
-        true
-    );
+    LOG.result("Lightbox", "is opened", true);
 
     boolean result = lightbox.isCurrentImageVisible();
-    LOG.log(
-        "Current image",
-        "is visible",
-        "is not visible",
-        result
-    );
+    LOG.log("Current image", "is visible", "is not visible", result);
 
     lightbox.clickCloseButton();
 
     result = !lightbox.isLightboxOpened();
-    LOG.log(
-        "Lightbox",
-        "is closed",
-        "is opened",
-        result
-    );
+    LOG.log("Lightbox", "is closed", "is opened", result);
   }
 
   // MT02
@@ -84,54 +68,30 @@ public class LightboxTests extends NewTestTemplate {
 
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     String currentImageSrc = lightbox.getCurrentImagePath();
     touchAction.tapOnPointXY(25, 50, 500, 5000);
     String nextImageSrc = lightbox.getCurrentImagePath();
 
     boolean result = !currentImageSrc.equals(nextImageSrc);
-    LOG.log(
-        "Change image by tap left edge",
-        "works",
-        "doesn't work",
-        result
-    );
+    LOG.log("Change image by tap left edge", "works", "doesn't work", result);
 
     currentImageSrc = lightbox.getCurrentImagePath();
     touchAction.tapOnPointXY(75, 50, 500, 5000);
     nextImageSrc = lightbox.getCurrentImagePath();
 
     result = !currentImageSrc.equals(nextImageSrc);
-    LOG.log(
-        "Change image by tap right edge",
-        "works",
-        "doesn't work",
-        result
-    );
+    LOG.log("Change image by tap right edge", "works", "doesn't work", result);
 
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     currentImageSrc = lightbox.getCurrentImagePath();
     boolean imageChanged = false;
@@ -146,12 +106,7 @@ public class LightboxTests extends NewTestTemplate {
     }
 
     result = imageChanged;
-    LOG.log(
-        "Change image by swipe left",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Change image by swipe left", "works", "does not work", result);
 
     currentImageSrc = lightbox.getCurrentImagePath();
     imageChanged = false;
@@ -166,12 +121,7 @@ public class LightboxTests extends NewTestTemplate {
     }
 
     result = imageChanged;
-    LOG.log(
-        "Change image by swipe right",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Change image by swipe right", "works", "does not work", result);
   }
 
   // MT03
@@ -183,53 +133,29 @@ public class LightboxTests extends NewTestTemplate {
 
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     File beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 3000);
     File afterZooming = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    LOG.log(
-        "Zooming in by gesture",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in by gesture", "works", "does not work", result);
 
     touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
     afterZooming = new Shooter().capturePage(driver);
 
     result = new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    LOG.log(
-        "Zooming out by gesture",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming out by gesture", "works", "does not work", result);
 
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.tapOnPointXY(50, 50, 140, 0);
@@ -237,24 +163,14 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    LOG.log(
-        "Zooming in by double tap",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in by double tap", "works", "does not work", result);
 
     touchAction.tapOnPointXY(50, 50, 140, 0);
     touchAction.tapOnPointXY(50, 50, 140, 3000);
     afterZooming = new Shooter().capturePage(driver);
 
     result = new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    LOG.log(
-        "Zooming out by double tap",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming out by double tap", "works", "does not work", result);
   }
 
   // MT04
@@ -266,39 +182,21 @@ public class LightboxTests extends NewTestTemplate {
 
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header isn't displayed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
 
-    Assertion.assertTrue(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer isn't displayed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
 
     touchAction.tapOnPointXY(50, 50, 500, 5000);
 
-    Assertion.assertFalse(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header is displayed"
-    );
+    Assertion.assertFalse(lightbox.isLightboxHeaderDisplayed(), "Lightbox header is displayed");
 
-    Assertion.assertFalse(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer is displayed"
-    );
+    Assertion.assertFalse(lightbox.isLightboxFooterDisplayed(), "Lightbox footer is displayed");
 
     touchAction.tapOnPointXY(50, 50, 500, 5000);
 
-    Assertion.assertTrue(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header isn't displayed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
 
-    Assertion.assertTrue(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer isn't displayed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
   }
 
   // MT05
@@ -312,28 +210,15 @@ public class LightboxTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     lightbox.clickGalleryImage(0);
 
-    Assertion.assertTrue(
-        lightbox.isLightboxOpened(),
-        "Lightbox is closed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
 
     mobileDriver.execute(DriverCommand.GO_BACK, null);
 
     boolean result = !lightbox.isLightboxOpened();
-    LOG.log(
-        "Lightbox",
-        "is closed",
-        "is opened",
-        result
-    );
+    LOG.log("Lightbox", "is closed", "is opened", result);
 
     result = oldUrl.equals(driver.getCurrentUrl());
-    LOG.log(
-        "URL",
-        "is the same",
-        "is different",
-        result
-    );
+    LOG.log("URL", "is the same", "is different", result);
   }
 
   // MT06
@@ -346,16 +231,9 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickGalleryImage(0);
     String direction = DIRECTION_LEFT;
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     touchAction.tapOnPointXY(50, 50, 500, 2000);
     File beforeZooming = new Shooter().capturePage(driver);
@@ -364,38 +242,21 @@ public class LightboxTests extends NewTestTemplate {
     File afterZooming = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    LOG.log(
-        "Zooming in",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in", "works", "does not work", result);
 
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     File afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    LOG.log(
-        "Moving " + direction,
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Moving " + direction, "works", "does not work", result);
 
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_RIGHT;
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
@@ -404,38 +265,21 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    LOG.log(
-        "Zooming in",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in", "works", "does not work", result);
 
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    LOG.log(
-        "Moving " + direction,
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Moving " + direction, "works", "does not work", result);
 
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_UP;
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
@@ -444,38 +288,21 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    LOG.log(
-        "Zooming in",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in", "works", "does not work", result);
 
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    LOG.log(
-        "Moving " + direction,
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Moving " + direction, "works", "does not work", result);
 
     lightbox.clickCloseButton();
     lightbox.clickGalleryImage(0);
     direction = DIRECTION_DOWN;
 
-    Assertion.assertTrue(
-        lightbox.isCurrentImageVisible(),
-        "Image is not visible"
-    );
+    Assertion.assertTrue(lightbox.isCurrentImageVisible(), "Image is not visible");
 
-    LOG.result(
-        "Current image",
-        "is visible",
-        true
-    );
+    LOG.result("Current image", "is visible", true);
 
     touchAction.tapOnPointXY(50, 50, 500, 2000);
     beforeZooming = new Shooter().capturePage(driver);
@@ -484,22 +311,12 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    LOG.log(
-        "Zooming in",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Zooming in", "works", "does not work", result);
 
     touchAction.swipeFromCenterToDirection(direction, 200, 200, 2000);
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    LOG.log(
-        "Moving " + direction,
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Moving " + direction, "works", "does not work", result);
   }
 }

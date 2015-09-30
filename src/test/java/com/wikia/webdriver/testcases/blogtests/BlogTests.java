@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.blogtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
@@ -14,16 +16,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-import org.testng.annotations.Test;
-
 public class BlogTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   /**
-   * @author Karol 'kkarolk' Kujawiak <p/> Test cases: 1. Create blog post using "Create blog post
-   * button" (one case) 2. Create blog post using "Special:CreateBlogPage" (data provider) 3. Edit
-   * existing blog post 4. Delete/Undelete existing blog post 5. Move existing blog post
+   * @author Karol 'kkarolk' Kujawiak
+   *         <p/>
+   *         Test cases: 1. Create blog post using "Create blog post
+   *         button" (one case) 2. Create blog post using "Special:CreateBlogPage" (data provider)
+   *         3. Edit existing blog post 4. Delete/Undelete existing blog post 5. Move existing blog
+   *         post
    */
 
   @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
@@ -42,10 +45,8 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(
-      dataProviderClass = ArticleDataProvider.class,
-      dataProvider = "articleTitles",
-      groups = {"BlogTests_002", "BlogTests"})
+  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles", groups = {
+      "BlogTests_002", "BlogTests"})
   public void BlogTests_002_addByUrl(String blogTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);

@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -10,9 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
@@ -32,10 +32,8 @@ public class VEGalleryTests extends NewTestTemplate {
     article.loginAs(credentials.userName10, credentials.password10, wikiURL);
   }
 
-  //AG01
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"}
-  )
+  // AG01
+  @Test(groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"})
   public void VEGalleryTests_001_AddGallery() {
     int numOfMedias = 9;
     int numOfGalleries = 1;
@@ -58,10 +56,8 @@ public class VEGalleryTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //AG02
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
-  )
+  // AG02
+  @Test(groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"})
   public void VEGalleryTests_002_GalleryCart() {
     int numOfMediaToRemoveFirst = 1;
     int numOfMediaToRemoveSecond = 2;
@@ -77,19 +73,19 @@ public class VEGalleryTests extends NewTestTemplate {
         (VisualEditorInsertGalleryDialog) ve
             .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
     galleryDialog = galleryDialog.searchMedia("he");
-    //verify # of cart items  = 9
+    // verify # of cart items = 9
     galleryDialog.addMediaToCart(initialNumOfMedia);
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    //verify # of cart items  = 8
+    // verify # of cart items = 8
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveFirst);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveFirst;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    //verify # of cart item = 11
+    // verify # of cart item = 11
     galleryDialog = galleryDialog.searchMedia("a");
     galleryDialog.addMediaToCart(numOfMediaToAdd);
     expectedNumOfMedia = expectedNumOfMedia + numOfMediaToAdd;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    //verify # of cart item = 9
+    // verify # of cart item = 9
     galleryDialog = galleryDialog.searchMedia("he");
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
@@ -97,10 +93,8 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog.logOut(wikiURL);
   }
 
-  //AG03
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
-  )
+  // AG03
+  @Test(groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"})
   public void VEGalleryTests_003_PreviewOnTitle() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
@@ -116,10 +110,8 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.logOut(wikiURL);
   }
 
-  //AG04
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
-  )
+  // AG04
+  @Test(groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"})
   public void VEGalleryTests_004_PreviewOnMetadata() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
@@ -135,10 +127,8 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.logOut(wikiURL);
   }
 
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
-      dependsOnGroups = "VEGalleryTests_001"
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
+      dependsOnGroups = "VEGalleryTests_001")
   public void VEGalleryTests_005_Remove() {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();

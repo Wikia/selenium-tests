@@ -1,5 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
@@ -28,24 +41,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.List;
-
 /**
  * @author Bogna 'bognix' Knychała
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
+  private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
+  private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
+  private static final String COMMENT_AUTHOR_LINK = ".edited-by";
+  private static final String REPLY_COMMENT_SELECTOR = ".article-comm-reply";
+  final Integer minInlineVideoSize = 400;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
@@ -114,6 +119,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement videoThumbnailWrapper;
   @FindBy(css = "#mw-content-text .inline-video")
   protected WebElement videoInline;
+  String editCategorySelector = "li[data-name='%categoryName%'] .toolbar .editCategory";
+  String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
+  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
   @FindBy(css = ".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
   private WebElement videoAddPlaceholder;
   @FindBy(css = ".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -158,28 +166,37 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
-
   private PortableInfoboxPageObject portableInfobox;
-
-  private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
-  private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
-  private static final String COMMENT_AUTHOR_LINK = ".edited-by";
-  private static final String REPLY_COMMENT_SELECTOR = ".article-comm-reply";
-
-  final Integer minInlineVideoSize = 400;
-
-  String editCategorySelector = "li[data-name='%categoryName%'] .toolbar .editCategory";
-  String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
-  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
   public ArticlePageObject(WebDriver driver) {
     super(driver);
   }
 
   /**
-  * Open article with name that is the following combination:
-  * TEST CLASS NAME + TEST METHOD NAME
-  */
+   * @param rgba String representing function rgba(int, int, int, int)
+   * @return int[], where 0='red', 1='green', 2='blue'
+   * @author Tomasz Napieralski
+   */
+  public static int[] convertRGBAFunctiontoIntTable(String rgba) {
+    int[] extract = new int[3];
+    int start = rgba.indexOf("(", 0) + 1;
+    int end = rgba.indexOf(",", 0);
+    int red = Integer.parseInt(rgba.substring(start, end));
+    start = rgba.indexOf(" ", end + 1) + 1;
+    end = rgba.indexOf(",", end + 1);
+    int green = Integer.parseInt(rgba.substring(start, end));
+    start = rgba.indexOf(" ", end + 1) + 1;
+    end = rgba.indexOf(",", end + 1);
+    int blue = Integer.parseInt(rgba.substring(start, end));
+    extract[0] = red;
+    extract[1] = green;
+    extract[2] = blue;
+    return extract;
+  }
+
+  /**
+   * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
+   */
   public ArticlePageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
         + TestContext.getCurrentMethodName());
@@ -212,7 +229,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(articleContent);
     Assertion.assertStringContains(articleContent.getText(), content);
   }
-
 
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);
@@ -456,9 +472,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private void verifyTableProperty(String propertyName, int propertyValue) {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
-    LOG.result("verifyTableProperty",
-               "table has correct " + propertyName + " property",
-               true);
+    LOG.result("verifyTableProperty", "table has correct " + propertyName + " property", true);
   }
 
   public void verifyTableBorder(int propertyValue) {
@@ -600,9 +614,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         driver.findElement(By.cssSelector(removeCategorySelector
             .replace("%categoryName%", category)));
     scrollAndClick(editCategory);
-    LOG.result("removeCategory",
-               "remove button on category " + category + " clicked",
-               true);
+    LOG.result("removeCategory", "remove button on category " + category + " clicked", true);
   }
 
   public String addCategorySuggestions(String category, int categoryNumber) {
@@ -613,8 +625,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     String desiredCategoryText = desiredCategory.getText();
     scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
     waitForElementNotVisibleByElement(categorySuggestionsList);
-    LOG.success("addCategorySuggestions", "category " + category
-                                          + " added from suggestions");
+    LOG.success("addCategorySuggestions", "category " + category + " added from suggestions");
     return desiredCategoryText;
   }
 
@@ -656,9 +667,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void clickTOCshowHideButton() {
     wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
-    LOG.result("clickTOCshowHideButton",
-               "table of contents 'show/hide' button clicked",
-               true);
+    LOG.result("clickTOCshowHideButton", "table of contents 'show/hide' button clicked", true);
   }
 
   /**
@@ -678,8 +687,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertNotEquals(sectionYbefore, sectionYafter);
     // assume that if section is less than 5px from top, it is scrolled up properly
     Assertion.assertTrue(sectionYafter < 5);
-    LOG.success("verifyTOCsectionLinkWorks", "choosen section " + sectionID
-                                             + " was scrolled up");
+    LOG.success("verifyTOCsectionLinkWorks", "choosen section " + sectionID + " was scrolled up");
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -689,8 +697,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void closeNewWikiCongratulationsLightBox() {
     wait.forElementVisible(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
-    LOG.success("closeNewWikiCongratulationsLightBox ",
-                "congratulations lightbox closed");
+    LOG.success("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed");
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
@@ -777,28 +784,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     viewEmbedMapButton.click();
     driver.switchTo().activeElement();
     return new EmbedMapComponentObject(driver);
-  }
-
-  /**
-   * @param rgba String representing function rgba(int, int, int, int)
-   * @return int[], where 0='red', 1='green', 2='blue'
-   * @author Tomasz Napieralski
-   */
-  public static int[] convertRGBAFunctiontoIntTable(String rgba) {
-    int[] extract = new int[3];
-    int start = rgba.indexOf("(", 0) + 1;
-    int end = rgba.indexOf(",", 0);
-    int red = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int green = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int blue = Integer.parseInt(rgba.substring(start, end));
-    extract[0] = red;
-    extract[1] = green;
-    extract[2] = blue;
-    return extract;
   }
 
   public void verifyMainEditEditor(Editor expectedEditor) {

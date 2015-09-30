@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @ownership AdEngineering
@@ -21,8 +21,8 @@ public class AdsKruxObject extends AdsBaseObject {
   private static final int MAX_SEGS_NUMBER_GPT = 27;
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
   private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
-  private static final String ADD_USER_URL =
-      String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN, PUB);
+  private static final String ADD_USER_URL = String.format("%suserdata/add?pub=%s&seg=", KRUX_CDN,
+      PUB);
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
 
@@ -62,7 +62,8 @@ public class AdsKruxObject extends AdsBaseObject {
     String gptPageParams = getGptPageParams(slotName);
     LOG.success("gpt page params", gptPageParams);
     LOG.result("krux users", user1 + ", " + user2, true);
-    // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
+    // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV
+    // OR from previous PV
     if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
       throw new AssertionError("Gpt page params don't have the krux users from localStorage");
     }
@@ -83,7 +84,7 @@ public class AdsKruxObject extends AdsBaseObject {
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String segments = (String) js.executeScript("return localStorage.kxsegs;");
-    LOG.logResult("krux segments: ", segments, true, driver);
+    LOG.success("krux segments: ", segments, true);
     return wrapSegs(segments);
   }
 

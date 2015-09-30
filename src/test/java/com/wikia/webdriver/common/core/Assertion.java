@@ -1,17 +1,17 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.url.UrlChecker;
-import com.wikia.webdriver.common.logging.LOG;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.core.url.UrlChecker;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class Assertion extends Assert {
 
@@ -29,12 +29,8 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.result(
-        "assertStringContains",
-        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
-        + patternEncoded + "\"",
-        assertion
-    );
+    LOG.result("assertStringContains", "assertion " + assertion + "! Current \"" + currentEncoded
+        + "\" Pattern: \"" + patternEncoded + "\"", assertion);
     return assertion;
   }
 
@@ -50,12 +46,8 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.result(
-        "assertStringNotContains",
-        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
-        + patternEncoded + "\"",
-        assertion
-    );
+    LOG.result("assertStringNotContains", "assertion " + assertion + "! Current \""
+        + currentEncoded + "\" Pattern: \"" + patternEncoded + "\"", assertion);
     return assertion;
   }
 
@@ -69,12 +61,8 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.result(
-        "assertEquals",
-        "assertion " + assertion + "! Pattern: \"" + patternEncoded
-        + "\" Current: \"" + currentEncoded + "\"",
-        assertion
-    );
+    LOG.result("assertEquals", "assertion " + assertion + "! Pattern: \"" + patternEncoded
+        + "\" Current: \"" + currentEncoded + "\"", assertion);
   }
 
   public static void assertNotEquals(String current, String pattern) {
@@ -87,12 +75,8 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.result(
-        "assertNotEquals",
-        "assertion " + assertion + "! Pattern: \"" + patternEncoded
-        + "\" Current: \"" + currentEncoded + "\"",
-        assertion
-    );
+    LOG.result("assertNotEquals", "assertion " + assertion + "! Pattern: \"" + patternEncoded
+        + "\" Current: \"" + currentEncoded + "\"", assertion);
   }
 
   public static void assertNumber(Number actual, Number expected, String message) {
@@ -103,8 +87,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.result("assertNumber", message + ", expected: "
-                               + expected + ", got: " + actual, assertion);
+    LOG.result("assertNumber", message + ", expected: " + expected + ", got: " + actual, assertion);
   }
 
   private static void addVerificationFailure(Throwable e) {
@@ -124,12 +107,12 @@ public class Assertion extends Assert {
   }
 
   /*
-   * Method responsive for encoding special characters
-   * like ">" and "<" inside provided string.
+   * Method responsive for encoding special characters like ">" and "<" inside provided string.
    * Special characters are changed to characters entities
-   *
-   * @param   String pattern
-   * @return  String pattern - with characters entities
+   * 
+   * @param String pattern
+   * 
+   * @return String pattern - with characters entities
    */
   private static String encodeSpecialChars(String pattern) {
     String encodedPattern = pattern;
@@ -149,11 +132,8 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.result(
-        "assertStringNotEmpty",
-        "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
-        assertion
-    );
+    LOG.result("assertStringNotEmpty", "assertion " + assertion + "! Current: \"" + currentEncoded
+        + "\"", assertion);
   }
 
   /**
@@ -161,11 +141,8 @@ public class Assertion extends Assert {
    */
   public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
     String currentUrl = driver.getCurrentUrl();
-    LOG.log(
-        "Log Url",
-        "Url " + url + " is equal to current Url " + currentUrl,
-        "Url " + url + " isn't equal to current Url " + currentUrl,
-        UrlChecker.isUrlEqualToCurrentUrl(driver, url)
-    );
+    LOG.log("Log Url", "Url " + url + " is equal to current Url " + currentUrl, "Url " + url
+        + " isn't equal to current Url " + currentUrl,
+        UrlChecker.isUrlEqualToCurrentUrl(driver, url));
   }
 }

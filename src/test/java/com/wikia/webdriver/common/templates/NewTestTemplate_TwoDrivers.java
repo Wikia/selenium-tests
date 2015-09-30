@@ -1,16 +1,16 @@
 package com.wikia.webdriver.common.templates;
 
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.LOG;
+import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.lang.reflect.Method;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.LOG;
 
 
 public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
@@ -23,7 +23,7 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
     if (method.isAnnotationPresent(Execute.class)) {
-      if(!"".equals(method.getAnnotation(Execute.class).onWikia())){
+      if (!"".equals(method.getAnnotation(Execute.class).onWikia())) {
         Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
       }
     }
@@ -58,8 +58,7 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
     maximized.manage().window().maximize();
 
     String driverName = maximized.equals(driverOne) ? "primary window" : "secondary window";
-    LOG
-        .result("switchToWindow", "================ " + driverName + " ================", true);
+    LOG.result("switchToWindow", "================ " + driverName + " ================", true);
   }
 
 }

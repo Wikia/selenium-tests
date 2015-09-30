@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
-
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.Test;
 
 /**
  * Bartosz 'V.' Bentkowski
@@ -19,8 +19,7 @@ public class GameStarLogo extends NewTestTemplate {
   private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1400, 720);
   private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
 
-  @Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"},
-        enabled = false)
+  @Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"}, enabled = false)
   public void TestGameStarLogo_001_gameStarLogoPresentOnBigResolution() {
     HomePageObject homePage = new HomePageObject(driver);
     VenusGlobalNavPageObject globalNav = new VenusGlobalNavPageObject(driver);
@@ -37,7 +36,7 @@ public class GameStarLogo extends NewTestTemplate {
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
 
-    Assertion.assertFalse(globalNav.isGameStarLogoDisplayed(),
-                          "GameStar Logo shouldn't be visible");
+    Assertion
+        .assertFalse(globalNav.isGameStarLogoDisplayed(), "GameStar Logo shouldn't be visible");
   }
 }

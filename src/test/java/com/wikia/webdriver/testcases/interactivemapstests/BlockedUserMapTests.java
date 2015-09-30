@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -17,8 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
-import org.testng.annotations.Test;
-
 /**
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
@@ -33,11 +33,9 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_001", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_001_VerifyBlockedUserCannotEditPinTypes() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     CreatePinTypesComponentObject editPinTypes = selectedMap.clickEditPinTypesButton();
     editPinTypes.typeManyPinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME, 3);
@@ -50,11 +48,9 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
     AddPinComponentObject addPinModal = selectedMap.placePinInMap();
     addPinModal.typePinName(InteractiveMapsContent.PIN_NAME);
@@ -67,8 +63,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_003", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_003_VerifyUserCannotCreateRealMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMap = specialMaps.clickCreateAMap();
     CreateRealMapComponentObject realMap = createMap.clickRealMap();
@@ -82,16 +77,13 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_004", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_004_VerifyUserCannotCreateCustomMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMap = specialMaps.clickCreateAMap();
     CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
-    String
-        selectedImageName =
+    String selectedImageName =
         customMap.getSelectedTemplateImageName(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
-    TemplateComponentObject
-        template =
+    TemplateComponentObject template =
         customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
     template.verifyTemplateImage(selectedImageName);
     template.typeMapName(InteractiveMapsContent.MAP_NAME);
@@ -102,8 +94,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_005", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_005_VerifyUserCannotEditPinTypesOnEmbeddedMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
@@ -117,8 +108,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_006", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_006_VerifyUserCannotAddPinOnEmbeddedMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
+    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();

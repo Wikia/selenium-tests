@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -11,17 +17,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1407 Adding category to an article VE-1408 Deleting category from
- * an article VE-1411 New category suggestion when adding category to an article VE-1411 Matching
- * categories suggestion when adding category to an article
+ * @ownership Contribution
+ *            <p/>
+ *            VE-1407 Adding category to an article VE-1408 Deleting category from an article
+ *            VE-1411 New category suggestion when adding category to an article VE-1411 Matching
+ *            categories suggestion when adding category to an article
  */
 
 public class VECategoryTests extends NewTestTemplate {
@@ -39,10 +41,8 @@ public class VECategoryTests extends NewTestTemplate {
     base = new WikiBasePageObject(driver);
   }
 
-  //CA01
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
-  )
+  // CA01
+  @Test(groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"})
   public void VECategoryTests_001_AddNewCategory() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -61,11 +61,9 @@ public class VECategoryTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  //CA02
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_002", "VERemoveCategory"},
-      dependsOnGroups = "VECategoryTests_001"
-  )
+  // CA02
+  @Test(groups = {"VECategoryTests", "VECategoryTests_002", "VERemoveCategory"},
+      dependsOnGroups = "VECategoryTests_001")
   public void VECategoryTests_002_RemoveCategory() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
@@ -83,10 +81,8 @@ public class VECategoryTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  //CA03
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"}
-  )
+  // CA03
+  @Test(groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"})
   public void VECategoryTests_003_NewCategorySuggestions() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
@@ -97,10 +93,8 @@ public class VECategoryTests extends NewTestTemplate {
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.NEW);
   }
 
-  //CA04
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"}
-  )
+  // CA04
+  @Test(groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"})
   public void VECategoryTests_004_MatchingCategorySuggestions() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
@@ -111,10 +105,8 @@ public class VECategoryTests extends NewTestTemplate {
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
   }
 
-  //CA05
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
-  )
+  // CA05
+  @Test(groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"})
   public void VECategoryTests_005_AddNewCategoryWithSortKey() {
     String testCategory2 = "Newstuff";
     String sortKey = "testkey";

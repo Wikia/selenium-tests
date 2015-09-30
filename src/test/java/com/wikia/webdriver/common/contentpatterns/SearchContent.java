@@ -11,7 +11,7 @@ public class SearchContent {
   public static final String SEARCH_PHRASE_ROMAN_NUMBER = "GTA V";
   public static final String WIKI_NAME = "GTA V";
   public static final String SEARCH_PHRASE_NEW_SUGGESTIONS = "Council";
-  
+
   public static final int RESULTS_PER_PAGE_HIGH = 25;
   public static final String SEARCH_PHRASE_RESULTS = "a";
   public static final String SEARCH_PAGINATION_RESULTS = "what";

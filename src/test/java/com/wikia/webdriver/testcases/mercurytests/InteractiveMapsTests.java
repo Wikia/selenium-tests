@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -9,12 +15,6 @@ import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership Content X-Wing
@@ -35,54 +35,27 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
     maps.clickViewMapButton();
 
-    Assertion.assertTrue(
-        maps.isMapModalVisible(),
-        "Map modal is hidden"
-    );
+    Assertion.assertTrue(maps.isMapModalVisible(), "Map modal is hidden");
 
-    LOG.result(
-        "Map modal",
-        "is visible",
-        true
-    );
+    LOG.result("Map modal", "is visible", true);
 
     boolean result = maps.isMapIdInUrl();
-    LOG.log(
-        "Url",
-        "match pattern ?map=",
-        "does not match pattern ?map=",
-        result
-    );
+    LOG.log("Url", "match pattern ?map=", "does not match pattern ?map=", result);
 
     result = maps.isTextInMapTitleHeader();
-    LOG.log(
-        "Map title in header",
-        "is displayed",
-        "is not displayed",
-        result
-    );
+    LOG.log("Map title in header", "is displayed", "is not displayed", result);
 
     maps.switchToMapFrame();
     maps.clickPin();
 
     result = maps.isPinPopUp();
-    LOG.log(
-        "Pin popup",
-        "appears",
-        "does not appear",
-        result
-    );
+    LOG.log("Pin popup", "appears", "does not appear", result);
 
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
 
     result = !maps.isMapModalVisible();
-    LOG.log(
-        "Map modal",
-        "is closed",
-        "is opened",
-        result
-    );
+    LOG.log("Map modal", "is closed", "is opened", result);
   }
 
   // IMAPT02
@@ -95,122 +68,63 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickViewMapButton();
     maps.switchToMapFrame();
 
-    Assertion.assertFalse(
-        maps.isZoomInButtonEnabled(),
-        "Zoom in button is enabled"
-    );
+    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
 
-    LOG.result(
-        "Zoom in button",
-        "is disabled",
-        true
-    );
+    LOG.result("Zoom in button", "is disabled", true);
 
     File beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomOut();
     maps.waitMilliseconds(5000, "Wait after zoom out");
     File afterZooming = new Shooter().capturePage(driver);
 
-    Assertion.assertFalse(
-        new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
-        "Zoom out doesn't work"
-    );
+    Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
+        "Zoom out doesn't work");
 
-    LOG.result(
-        "Zoom out by click",
-        "works",
-        true
-    );
+    LOG.result("Zoom out by click", "works", true);
 
-    Assertion.assertTrue(
-        maps.isZoomInButtonEnabled(),
-        "Zoom in button is disabled"
-    );
+    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
 
-    LOG.result(
-        "Zoom in button",
-        "is enabled",
-        true
-    );
+    LOG.result("Zoom in button", "is enabled", true);
 
     beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomIn();
     maps.waitMilliseconds(5000, "Wait after zoom in");
     afterZooming = new Shooter().capturePage(driver);
 
-    Assertion.assertFalse(
-        new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
-        "Zoom in doesn't work"
-    );
+    Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
+        "Zoom in doesn't work");
 
-    LOG.result(
-        "Zoom in by click",
-        "works",
-        true
-    );
+    LOG.result("Zoom in by click", "works", true);
 
-    Assertion.assertFalse(
-        maps.isZoomInButtonEnabled(),
-        "Zoom in button is enabled"
-    );
+    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
 
-    LOG.result(
-        "Zoom in button",
-        "is disabled",
-        true
-    );
+    LOG.result("Zoom in button", "is disabled", true);
 
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
     afterZooming = new Shooter().capturePage(driver);
 
-    Assertion.assertFalse(
-        new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
-        "Zoom out doesn't work"
-    );
+    Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
+        "Zoom out doesn't work");
 
-    LOG.result(
-        "Zoom out by gesture",
-        "works",
-        true
-    );
+    LOG.result("Zoom out by gesture", "works", true);
 
-    Assertion.assertTrue(
-        maps.isZoomInButtonEnabled(),
-        "Zoom in button is disabled"
-    );
+    Assertion.assertTrue(maps.isZoomInButtonEnabled(), "Zoom in button is disabled");
 
-    LOG.result(
-        "Zoom in button",
-        "is enabled",
-        true
-    );
+    LOG.result("Zoom in button", "is enabled", true);
 
     beforeZooming = new Shooter().capturePage(driver);
     touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
     afterZooming = new Shooter().capturePage(driver);
 
-    Assertion.assertFalse(
-        new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
-        "Zoom in doesn't work"
-    );
+    Assertion.assertFalse(new ImageComparison().areFilesTheSame(beforeZooming, afterZooming),
+        "Zoom in doesn't work");
 
-    LOG.result(
-        "Zoom in by gesture",
-        "works",
-        true
-    );
+    LOG.result("Zoom in by gesture", "works", true);
 
-    Assertion.assertFalse(
-        maps.isZoomInButtonEnabled(),
-        "Zoom in button is enabled"
-    );
+    Assertion.assertFalse(maps.isZoomInButtonEnabled(), "Zoom in button is enabled");
 
-    LOG.result(
-        "Zoom in button",
-        "is disabled",
-        true
-    );
+    LOG.result("Zoom in button", "is disabled", true);
   }
 
   // IMAPT03
@@ -224,40 +138,21 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.switchToMapFrame();
     File beforeScrolling = new Shooter().capturePage(driver);
 
-    Assertion.assertFalse(
-        maps.isFilterBoxWasExpanded(),
-        "Filter box is expanded"
-    );
+    Assertion.assertFalse(maps.isFilterBoxWasExpanded(), "Filter box is expanded");
 
-    LOG.result(
-        "Filter box",
-        "is collapsed",
-        true
-    );
+    LOG.result("Filter box", "is collapsed", true);
 
     maps.clickFilterBox();
 
-    Assertion.assertTrue(
-        maps.isFilterBoxWasExpanded(),
-        "Filter box is collapsed"
-    );
+    Assertion.assertTrue(maps.isFilterBoxWasExpanded(), "Filter box is collapsed");
 
-    LOG.result(
-        "Filter box",
-        "is expanded",
-        true
-    );
+    LOG.result("Filter box", "is expanded", true);
 
     maps.waitMilliseconds(5000, "Wait for filterbox to be scrollable");
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling);
-    LOG.log(
-        "Scrolling in filter box",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Scrolling in filter box", "works", "does not work", result);
   }
 }

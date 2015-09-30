@@ -54,7 +54,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.success("clickCustomMap", "custom map link clicked", true);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -83,8 +83,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public void typeSearchTile(String templateName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(templateName);
-    LOG.success("typeTilesetName", "title (" + templateName
-                                   + ") for template is typed in");
+    LOG.success("typeTilesetName", "title (" + templateName + ") for template is typed in");
   }
 
   public void verifyErrorExists() {

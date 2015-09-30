@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.clicktracking;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-
 import java.util.List;
 
 import javax.json.JsonObject;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class ClickTrackingSupport {
 
@@ -15,10 +15,8 @@ public class ClickTrackingSupport {
       for (JsonObject trackedEvent : trackedEventList) {
         equals = trackedEvent.equals(expectedEvent);
         if (equals) {
-          LOG.success("compare",
-                  "match for expected event found: \n"
-                  + "expected event: " + expectedEvent.toString() + "\n"
-                  + "compared event: " + trackedEvent.toString());
+          LOG.success("compare", "match for expected event found: \n" + "expected event: "
+              + expectedEvent.toString() + "\n" + "compared event: " + trackedEvent.toString());
           trackedEventList.remove(trackedEvent);
           break;
         }

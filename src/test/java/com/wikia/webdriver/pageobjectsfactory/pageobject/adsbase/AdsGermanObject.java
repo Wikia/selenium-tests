@@ -1,8 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -11,11 +13,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -106,22 +106,13 @@ public class AdsGermanObject extends AdsBaseObject {
       throw new NoSuchElementException("No known combination from 71 media present");
     }
 
-    LOG.logResult(
-        "Combination present",
-        "Combination present: " + testedCombination.get("name"),
-        true,
-        driver
-    );
+    LOG.logResult("Combination present", "Combination present: " + testedCombination.get("name"),
+        true, driver);
 
     for (String slotSelector : (List<String>) testedCombination.get("slots")) {
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-      if (hasSkin(slot, slotSelector) ||
-          adsComparison.isAdVisible(slot, slotSelector, driver)) {
-        LOG.result(
-            "Ad in slot found",
-            "Ad in slot found; CSS: " + slotSelector,
-            true
-        );
+      if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
+        LOG.result("Ad in slot found", "Ad in slot found; CSS: " + slotSelector, true);
       } else {
         throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
       }
@@ -131,11 +122,7 @@ public class AdsGermanObject extends AdsBaseObject {
   public void verifyNo71MediaAds() {
     for (Map<String, Object> combination : combinations) {
       if (checkIfCombinationOnPage((List<String>) combination.get("slots"))) {
-        LOG.result(
-            "Combination present",
-            "Combination present: " + combination.get("name"),
-            false
-        );
+        LOG.result("Combination present", "Combination present: " + combination.get("name"), false);
       }
     }
   }
@@ -173,12 +160,10 @@ public class AdsGermanObject extends AdsBaseObject {
   }
 
   private ArrayList<String> get71MediaParams() {
-    return (ArrayList<String>) ((JavascriptExecutor) driver).executeScript(
-        "return ['SOI_SITE: ' + SOI_SITE, 'SOI_SUBSITE: ' + SOI_SUBSITE, 'SOI_SUB2SITE: ' + SOI_SUB2SITE, "
-        +
-        "'SOI_SUB3SITE: ' + SOI_SUB3SITE, 'SOI_CONTENT: ' + SOI_CONTENT, 'SOI_WERBUNG: ' + SOI_WERBUNG, "
-        +
-        "'SOI_KEYWORDS: ' + SOI_KEYWORDS];"
-    );
+    return (ArrayList<String>) ((JavascriptExecutor) driver)
+        .executeScript(
+            "return ['SOI_SITE: ' + SOI_SITE, 'SOI_SUBSITE: ' + SOI_SUBSITE, 'SOI_SUB2SITE: ' + SOI_SUB2SITE, "
+            + "'SOI_SUB3SITE: ' + SOI_SUB3SITE, 'SOI_CONTENT: ' + SOI_CONTENT, 'SOI_WERBUNG: ' + SOI_WERBUNG, "
+            + "'SOI_KEYWORDS: ' + SOI_KEYWORDS];");
   }
 }

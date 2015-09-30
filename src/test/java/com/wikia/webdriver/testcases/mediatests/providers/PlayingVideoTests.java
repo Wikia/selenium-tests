@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -7,8 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxC
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author Saipetch Kongkatong, Liz Lee

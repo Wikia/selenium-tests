@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -15,8 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
-import org.testng.annotations.Test;
 
 public class FilePageTests extends NewTestTemplate {
 

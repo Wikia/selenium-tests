@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -19,9 +19,8 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
   private By targetBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(2) input");
   private By textBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(3) input");
   private By okButtonBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(1) a");
-  private By
-      externalRadioButtonBy =
-      By.cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
+  private By externalRadioButtonBy = By
+      .cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
 
   public MessageWallAddLinkComponentObject(WebDriver driver) {
     super(driver);
@@ -36,17 +35,13 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
   public void addInternalLink(String target, String text) {
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    LOG
-        .result("addInternalLink", "internal link " + target + " and text " + text + " added",
-                true);
+    LOG.result("addInternalLink", "internal link " + target + " and text " + text + " added", true);
   }
 
   public void addExternalLink(String target, String text) {
     addLinkModal.findElement(externalRadioButtonBy).click();
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    LOG
-        .result("addExternalLink", "external link " + target + " and text " + text + " added",
-                true);
+    LOG.result("addExternalLink", "external link " + target + " and text " + text + " added", true);
   }
 }

@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,23 +16,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Edi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
  * @author Robert 'rochan' Chan
- * @ownership Contribution <p/> VE-1202 Select VE from editor preference page then clicking on main
- * article edit would launch VE VE-1202 Select CK from editor preference page then clicking on main
- * article edit would launch CK VE-1202 Select Source from editor preference page then clicking on
- * main article edit would launch source
+ * @ownership Contribution
+ *            <p/>
+ *            VE-1202 Select VE from editor preference page then clicking on main article edit would
+ *            launch VE VE-1202 Select CK from editor preference page then clicking on main article
+ *            edit would launch CK VE-1202 Select Source from editor preference page then clicking
+ *            on main article edit would launch source
  */
 public class EditingPreferencesTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-  WikiBasePageObject base;
   private static final String SOURCE = "1";
   private static final String VE = "2";
   private static final String CK = "3";
+  Credentials credentials = Configuration.getCredentials();
+  WikiBasePageObject base;
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
@@ -76,4 +78,3 @@ public class EditingPreferencesTests extends NewTestTemplate {
     src.verifySourceOnlyMode();
   }
 }
-

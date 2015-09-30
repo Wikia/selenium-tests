@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.testng.annotations.Test;
 
 public class TestTopWamWikis extends TemplateNoFirstLoad {
 
@@ -22,8 +22,9 @@ public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   @Test(groups = {"TopWamWikisWhereIsMyExtension"})
   public void TopWamWikisWhereIsMyExtension_GeoEdgeFree() {
-    String whereIsExtensionUrl = urlBuilder.getUrlForPath(URLsContent.COMMUNITY_WIKI,
-                                                          URLsContent.SPECIAL_WHERE_IS_EXTENSION);
+    String whereIsExtensionUrl =
+        urlBuilder
+            .getUrlForPath(URLsContent.COMMUNITY_WIKI, URLsContent.SPECIAL_WHERE_IS_EXTENSION);
     whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);
     WikiBasePageObject wikiPage = new WikiBasePageObject(driver);
     wikiPage.getUrl(whereIsExtensionUrl);

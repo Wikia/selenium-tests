@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import java.awt.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
  * @ownership: Content X-Wing
@@ -55,18 +55,19 @@ public class SmartBannerComponentObject extends BasePageObject {
     Color properColor = Color.decode(color);
     int[] smartBannerColor =
         ArticlePageObject.convertRGBAFunctiontoIntTable(smartBanner
-                                                            .getCssValue("border-bottom-color"));
-    return (smartBannerColor[0] == properColor.getRed()) && (smartBannerColor[1] == properColor
-        .getGreen()) && (smartBannerColor[2] == properColor.getBlue());
+            .getCssValue("border-bottom-color"));
+    return (smartBannerColor[0] == properColor.getRed())
+        && (smartBannerColor[1] == properColor.getGreen())
+        && (smartBannerColor[2] == properColor.getBlue());
   }
 
   public boolean isSmartBannerButtonColorCorrect(String color) {
     Color properColor = Color.decode(color);
     int[] smartBannerButtonColor =
         ArticlePageObject.convertRGBAFunctiontoIntTable(bannerButton
-                                                            .getCssValue("background-color"));
-    return (smartBannerButtonColor[0] == properColor.getRed()) && (smartBannerButtonColor[1]
-                                                                   == properColor.getGreen()) && (
-               smartBannerButtonColor[2] == properColor.getBlue());
+            .getCssValue("background-color"));
+    return (smartBannerButtonColor[0] == properColor.getRed())
+        && (smartBannerButtonColor[1] == properColor.getGreen())
+        && (smartBannerButtonColor[2] == properColor.getBlue());
   }
 }

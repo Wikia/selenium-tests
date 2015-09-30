@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -12,8 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallThreadPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * 1. User 5 is writing message on his message wall, 2. User 6 is replying on user 5 message wall,
@@ -26,12 +26,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 
   String title;
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_001",
-          "MessageWallNotificationsThreadParticipantTests"
-      }
-  )
+  @Test(groups = {"MessageWallNotificationsThreadParticipantTests_001",
+      "MessageWallNotificationsThreadParticipantTests"})
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
@@ -45,32 +41,23 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
     wall.verifyMessageText(title, message, credentials.userName3);
   }
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_002",
-          "MessageWallNotificationsThreadParticipantTests"
-      },
-      dependsOnMethods = "threadCreatorNotification_setup_1"
-  )
+  @Test(groups = {"MessageWallNotificationsThreadParticipantTests_002",
+      "MessageWallNotificationsThreadParticipantTests"},
+      dependsOnMethods = "threadCreatorNotification_setup_1")
   public void threadCreatorNotification_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName3);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
-    miniReply.switchAndQuoteMessageWall(reply);
-    ;
+    miniReply.switchAndQuoteMessageWall(reply);;
     wall.submitQuote();
     wall.verifyQuote(reply);
   }
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_003",
-          "MessageWallNotificationsThreadParticipantTests"
-      },
-      dependsOnMethods = "threadCreatorNotification_setup_2"
-  )
+  @Test(groups = {"MessageWallNotificationsThreadParticipantTests_003",
+      "MessageWallNotificationsThreadParticipantTests"},
+      dependsOnMethods = "threadCreatorNotification_setup_2")
   public void threadCreatorNotification_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
@@ -83,19 +70,15 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
     thread.verifyLastReply(credentials.userName3, reply);
   }
 
-  @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_004",
-          "MessageWallNotificationsThreadParticipantTests"
-      },
-      dependsOnMethods = "threadCreatorNotification_setup_3"
-  )
+  @Test(groups = {"MessageWallNotificationsThreadParticipantTests_004",
+      "MessageWallNotificationsThreadParticipantTests"},
+      dependsOnMethods = "threadCreatorNotification_setup_3")
   public void threadCreatorNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
-    notifications
-        .verifyNotification(title, credentials.userName3, "replied to " + credentials.userName3);
+    notifications.verifyNotification(title, credentials.userName3, "replied to "
+                                                                   + credentials.userName3);
   }
 }

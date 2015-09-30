@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import java.util.concurrent.TimeUnit;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -7,11 +12,6 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownership Content X-Wing
@@ -33,108 +33,48 @@ public class NavigationSideTests extends NewTestTemplate {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
-    Assertion.assertFalse(
-        nav.isNavMenuVisible(),
-        "Navigation menu is visible"
-    );
+    Assertion.assertFalse(nav.isNavMenuVisible(), "Navigation menu is visible");
 
-    LOG.result(
-        "Navigation menu",
-        "is hidden",
-        true
-    );
+    LOG.result("Navigation menu", "is hidden", true);
 
     nav.clickSearchButton();
 
-    Assertion.assertTrue(
-        nav.isNavMenuVisible(),
-        "Navigation menu isn't visible"
-    );
+    Assertion.assertTrue(nav.isNavMenuVisible(), "Navigation menu isn't visible");
 
-    LOG.result(
-        "Navigation menu",
-        "is visible",
-        true
-    );
+    LOG.result("Navigation menu", "is visible", true);
 
     boolean result = nav.isNavListElementEllipsized(0);
-    LOG.log(
-        "Link without chevron",
-        "is ellipsized",
-        "is not ellipsized",
-        result
-    );
+    LOG.log("Link without chevron", "is ellipsized", "is not ellipsized", result);
 
     result = nav.isNavListElementEllipsized(1);
-    LOG.log(
-        "Link with chevron",
-        "is ellipsized",
-        "is not ellipsized",
-        result
-    );
+    LOG.log("Link with chevron", "is ellipsized", "is not ellipsized", result);
 
-    Assertion.assertFalse(
-        nav.isBackLinkDisplayed(),
-        "Back link is displayed"
-    );
+    Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
 
-    LOG.result(
-        "Back link",
-        "is hidden",
-        true
-    );
+    LOG.result("Back link", "is hidden", true);
 
     result = nav.isRandomPageButtonDisplayed();
-    LOG.log(
-        "Random page button",
-        "is displayed",
-        "is hidden",
-        result
-    );
+    LOG.log("Random page button", "is displayed", "is hidden", result);
 
     nav.clickNavListElement(2);
 
-    Assertion.assertTrue(
-        nav.isBackLinkDisplayed(),
-        "Back link isn't displayed"
-    );
+    Assertion.assertTrue(nav.isBackLinkDisplayed(), "Back link isn't displayed");
 
-    LOG.result(
-        "Back link",
-        "is displayed",
-        true
-    );
+    LOG.result("Back link", "is displayed", true);
 
     result = !nav.isRandomPageButtonDisplayed();
-    LOG.log(
-        "Random page button",
-        "is hidden",
-        "is displayed",
-        result
-    );
+    LOG.log("Random page button", "is hidden", "is displayed", result);
 
     nav.clickBackChevron();
 
-    Assertion.assertFalse(
-        nav.isBackLinkDisplayed(),
-        "Back link doesn't work"
-    );
+    Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link doesn't work");
 
-    LOG.result(
-        "Back link",
-        "works",
-        true
-    );
+    LOG.result("Back link", "works", true);
 
     nav.clickOverlay();
 
     result = !nav.isNavMenuVisible();
-    LOG.log(
-        "Navigation menu",
-        "is hidden",
-        "is visible",
-        result
-    );
+    LOG.log("Navigation menu", "is hidden", "is visible", result);
   }
 
   // NST02
@@ -146,75 +86,36 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
 
-    Assertion.assertFalse(
-        searchObject.isMenuFieldVisible(),
-        "Menu field is visible"
-    );
+    Assertion.assertFalse(searchObject.isMenuFieldVisible(), "Menu field is visible");
 
-    LOG.result(
-        "Menu field",
-        "is hidden",
-        true
-    );
+    LOG.result("Menu field", "is hidden", true);
 
-    Assertion.assertTrue(
-        searchObject.isResultFieldVisible(),
-        "Result field is hidden"
-    );
+    Assertion.assertTrue(searchObject.isResultFieldVisible(), "Result field is hidden");
 
-    LOG.result(
-        "Result field",
-        "is visible",
-        true
-    );
+    LOG.result("Result field", "is visible", true);
 
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     boolean result = !searchObject.isSuggestionListDisplayed();
-    LOG.log(
-        "Search suggestions",
-        "are hidden",
-        "are displayed",
-        result
-    );
+    LOG.log("Search suggestions", "are hidden", "are displayed", result);
 
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     result = searchObject.isSorryInfoDisplayed();
-    LOG.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
-        result
-    );
+    LOG.log("Sorry message", "is displayed", "is hidden", result);
 
     searchObject.waitMilliseconds(5000, "Wait for message to disappear");
 
     result = searchObject.isSorryInfoDisplayed();
-    LOG.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
-        result
-    );
+    LOG.log("Sorry message", "is displayed", "is hidden", result);
 
     searchObject.clickCancelButton();
 
     result = searchObject.isMenuFieldVisible();
-    LOG.log(
-        "Menu field",
-        "is visible",
-        "is hidden",
-        result
-    );
+    LOG.log("Menu field", "is visible", "is hidden", result);
 
     result = !searchObject.isResultFieldVisible();
-    LOG.log(
-        "Result field",
-        "is hidden",
-        "is visible",
-        result
-    );
+    LOG.log("Result field", "is hidden", "is visible", result);
   }
 
   // NST03
@@ -227,35 +128,24 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.clickSearchField();
     searchObject.typeInSearchField(SEARCH_PASS);
 
-    Assertion.assertTrue(
-        searchObject.isSuggestionListDisplayed(),
-        "Search suggestions are hidden"
-    );
+    Assertion.assertTrue(searchObject.isSuggestionListDisplayed(), "Search suggestions are hidden");
 
-    LOG.result(
-        "Search suggestions",
-        "are displayed",
-        true
-    );
+    LOG.result("Search suggestions", "are displayed", true);
 
     String oldUrl = driver.getCurrentUrl();
     searchObject.clickSuggestion(0);
     searchObject.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    LOG.log(
-        "Redirection",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Redirection", "works", "does not work", result);
   }
 
   // NST04
-  // TODO: check article titles instead of url, check that receive at least 3 different articles in 10 attempts
+  // TODO: check article titles instead of url, check that receive at least 3 different articles in
+  // 10 attempts
   @RelatedIssue(issueID = "HG-686")
-  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests",
-                  "Mercury"}, enabled = false)
+  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests", "Mercury"},
+      enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -266,11 +156,6 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    LOG.log(
-        "Redirection",
-        "works",
-        "does not work",
-        result
-    );
+    LOG.log("Redirection", "works", "does not work", result);
   }
 }

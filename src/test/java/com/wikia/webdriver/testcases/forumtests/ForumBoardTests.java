@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.forumtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -8,8 +10,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
-
-import org.testng.annotations.Test;
 
 public class ForumBoardTests extends NewTestTemplate {
 
@@ -97,9 +97,8 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.verifyTextOnFollowButton(1, "Follow");
   }
 
-    @Test(
-        enabled = false, //CONCF-476
-        groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
+  @Test(enabled = false, // CONCF-476
+      groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
   public void ForumBoardTests_007_highlightDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

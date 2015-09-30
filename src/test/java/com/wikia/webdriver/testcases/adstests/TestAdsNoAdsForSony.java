@@ -1,14 +1,14 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.SonySideViewObject;
-
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
 
 /**
  * @author Piotr 'Rychu' Gabryjeluk
@@ -18,10 +18,7 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
 
   private String testedPage;
 
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "noAdsForSony"
-  )
+  @Factory(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForSony")
   public TestAdsNoAdsForSony(String wikiName, String path) {
     super();
     UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
@@ -31,9 +28,7 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
     }
   }
 
-  @Test(
-      groups = {"AdsNoAdsForSonyOasis"}
-  )
+  @Test(groups = {"AdsNoAdsForSonyOasis"})
   public void adsNoAdsForSonyOasis() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
     AdsBaseObject wikiPage = sonyPage.goToDestinationPage(testedPage);
@@ -41,9 +36,7 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @Test(
-      groups = {"AdsNoAdsForSonyMobile"}
-  )
+  @Test(groups = {"AdsNoAdsForSonyMobile"})
   public void adsNoAdsForSonyMobile() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
     AdsBaseObject wikiPage = sonyPage.goToDestinationPage(testedPage);

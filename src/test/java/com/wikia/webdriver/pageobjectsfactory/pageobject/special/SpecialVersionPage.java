@@ -1,10 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import org.openqa.selenium.WebDriver;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Ludwik on 08.08.2015.

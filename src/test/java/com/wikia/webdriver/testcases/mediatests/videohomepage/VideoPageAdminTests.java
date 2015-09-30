@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.videohomepage;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -8,8 +10,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.LatestVideoAdminPageObject;
-
-import org.testng.annotations.Test;
 
 
 /**

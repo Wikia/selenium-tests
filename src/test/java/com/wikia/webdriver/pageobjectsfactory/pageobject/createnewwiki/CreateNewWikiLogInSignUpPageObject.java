@@ -1,5 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -7,11 +12,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -59,14 +59,14 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public CreateNewWikiPageObjectStep2 submitLogin() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    LOG.logResult("submitLogin", "submit button was clicked", true, driver);
+    LOG.success("submitLogin", "submit button was clicked", true);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public SignUpPageObject submitSignup() {
     wait.forElementVisible(signUpSubmitButton);
     signUpSubmitButton.click();
-    LOG.logResult("submitSignUp", "signup submit button was clicked", true, driver);
+    LOG.success("submitSignUp", "signup submit button was clicked", true);
     return new SignUpPageObject(driver);
   }
 
@@ -96,9 +96,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(usernameValidationText, newPasswordMsg);
-    LOG.result("MessageAboutPasswordSent",
-               "Message about new password sent present",
-               true);
+    LOG.result("MessageAboutPasswordSent", "Message about new password sent present", true);
   }
 
 

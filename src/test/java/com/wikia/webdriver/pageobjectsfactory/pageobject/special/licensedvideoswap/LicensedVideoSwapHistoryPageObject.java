@@ -4,13 +4,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideos
  * Created by kenkouot on 3/19/14.
  */
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 
 public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
@@ -36,8 +36,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
   public void verifyOnHistoryPage() {
     String url = driver.getCurrentUrl();
     Assertion.assertTrue(url.contains("/History"));
-    LOG
-        .result("verifyOnHistoryPage", "the url is the correct one for history page", true);
+    LOG.result("verifyOnHistoryPage", "the url is the correct one for history page", true);
   }
 
   public void clickUndoSwapLink() {
@@ -52,4 +51,3 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
     LOG.success("verifyUndoSucceeded", "able to undo a swapped video");
   }
 }
-

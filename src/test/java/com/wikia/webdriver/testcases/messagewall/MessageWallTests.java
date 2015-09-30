@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -14,10 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
-
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

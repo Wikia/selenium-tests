@@ -1,20 +1,19 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
-import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -84,8 +83,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open("Article to edit by URL");
+    ArticlePageObject article = new ArticlePageObject(driver).open("Article to edit by URL");
     VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -96,8 +94,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open("Article to edit by Dropdown");
+    ArticlePageObject article = new ArticlePageObject(driver).open("Article to edit by Dropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();

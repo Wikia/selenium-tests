@@ -1,21 +1,22 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Arrays;
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
  * @ownership: Content X-Wing
  *
- * This class serves to perform search engine optimization tests The class methods can be used to
- * verify meta tags attributes
+ *             This class serves to perform search engine optimization tests The class methods can
+ *             be used to verify meta tags attributes
  */
 public class SEOUtils extends BasePageObject {
 
@@ -105,21 +106,14 @@ public class SEOUtils extends BasePageObject {
   public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
     List<String> currentAttributes = Arrays.asList(robots.getAttribute("content").split("[, ]+"));
 
-    LOG.result(
-        "Robots Meta Tag passed: " + expectedAttributes,
-        "Robots Meta Tag found on page: " + currentAttributes,
-        true
-    );
+    LOG.result("Robots Meta Tag passed: " + expectedAttributes, "Robots Meta Tag found on page: "
+        + currentAttributes, true);
 
     return currentAttributes.equals(expectedAttributes);
   }
 
   public boolean isRobotsMetaTagSet() {
-    LOG.result(
-        "Robots Meta Tag",
-        "Checking if robots meta tag is present on page",
-        true
-    );
+    LOG.result("Robots Meta Tag", "Checking if robots meta tag is present on page", true);
     return isElementOnPage(robots);
   }
 }

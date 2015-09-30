@@ -1,5 +1,11 @@
 package com.wikia.webdriver.testcases.visualeditor.text;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,19 +19,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Robert 'rochan' Chan
- * @ownership Contribution <p/> 1. VE-1228 Adding all style text, heading text and list to a new
- * article 2. VE-1228 Removing a piece of text from the article 3. VE-1228 Adding all style text,
- * heading text and list to an existing article 4. VE-1271 Adding blue link, red link and external
- * link to a new article 5. VE-1332 Editing in VE's source mode, review change, then edit once more
- * in source more then publish
+ * @ownership Contribution
+ *            <p/>
+ *            1. VE-1228 Adding all style text, heading text and list to a new article 2. VE-1228
+ *            Removing a piece of text from the article 3. VE-1228 Adding all style text, heading
+ *            text and list to an existing article 4. VE-1271 Adding blue link, red link and
+ *            external link to a new article 5. VE-1332 Editing in VE's source mode, review change,
+ *            then edit once more in source more then publish
  */
 
 public class VisualEditorEditingTests extends NewTestTemplate {
@@ -64,12 +66,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
 
   }
 
-  @Test(
-      groups = {
-          "VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
-          "VisualEditorEditing_003", "VisualEditorDelete"
-      }
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
+      "VisualEditorEditing_003", "VisualEditorDelete"})
   public void VisualEditorEditing_001_insertToNewArticle() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -86,10 +84,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(
-      groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
-      dependsOnGroups = "VisualEditorEditing_001"
-  )
+  @Test(groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
+      dependsOnGroups = "VisualEditorEditing_001")
   public void VisualEditorEditing_002_delete() {
 
     String removeText = "Lorem";
@@ -109,10 +105,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
-      dependsOnGroups = "VisualEditorEditing_001"
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
+      dependsOnGroups = "VisualEditorEditing_001")
   public void VisualEditorEditing_003_insertToExistingArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
@@ -128,9 +122,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(
-      groups = {"VisualEditorLinks", "VisualEditorEditing_004"}
-  )
+  @Test(groups = {"VisualEditorLinks", "VisualEditorEditing_004"})
   public void VisualEditorEditing_004_insertLinks() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArrayList<String> linkWikiTexts = new ArrayList<>();
@@ -169,9 +161,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_005"})
   public void VisualEditorEditing_005_switchToSourceMode() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
@@ -194,9 +184,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_006"}
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_006"})
   public void VisualEditorEditing_006_editSummary() {
     String summaryText =
         "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
@@ -214,9 +202,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     historyPage.verifyLatestEditSummary(summaryText);
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_007"})
   public void VisualEditorEditing_007_minorEdit() {
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

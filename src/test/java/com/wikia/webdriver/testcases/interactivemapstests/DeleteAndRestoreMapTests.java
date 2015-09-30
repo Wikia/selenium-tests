@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -11,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
-import org.testng.annotations.Test;
-
 /**
  * @author: Lukasz Nowak and RodriGomez
  * @ownership: Mobile Web
@@ -22,8 +22,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
- @Test(
-      enabled = false, //MAIN-4538
+  @Test(enabled = false, // MAIN-4538
       groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
   public void DeleteAndRestoreMapTests_001_DeleteAndRestoreMapAsAMapOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -32,7 +31,8 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-    selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
+    selectedMap =
+        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
     selectedMap.verifyMapOpenedForDeleteMapTests();
@@ -46,12 +46,13 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[1]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     deleteMapModal.clickDeleteMap();
-    Assertion.assertEquals(deleteMapModal.getDeleteMapError(), InteractiveMapsContent.MAP_DELETE_ERROR);
+    Assertion.assertEquals(deleteMapModal.getDeleteMapError(),
+        InteractiveMapsContent.MAP_DELETE_ERROR);
   }
 
   @RelatedIssue(issueID = "QAART-557")
   @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"},
-        enabled=false)
+      enabled = false)
   public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -60,7 +61,8 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     selectedMap.verifyMapOpenedForDeleteMapTests();
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
     InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-    selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
+    selectedMap =
+        base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
     selectedMap.restoreMap();
     selectedMap.verifyMapOpenedForDeleteMapTests();

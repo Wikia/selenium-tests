@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -28,11 +28,29 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   }
 
   public void adjustWidth(int width) {
-    //TODO
+    // TODO
   }
 
   public void useSmartCropping() {
-    //TODO
+    // TODO
+  }
+
+  public void adjustPosition(Positions position) {
+    Select pos = new Select(slideshowPosition);
+    pos.selectByVisibleText(position.getPosition());
+    LOG.result("adjustPosition", "slideshow position set to " + position.getPosition(), true);
+  }
+
+  public AddPhotoComponentObject clickAddPhoto() {
+    wait.forElementVisible(addPhotoButton);
+    addPhotoButton.click();
+    return new AddPhotoComponentObject(driver);
+  }
+
+  public void clickFinish() {
+    wait.forElementVisible(finishButton);
+    finishButton.click();
+    LOG.success("clickFinish", "finish button clicked");
   }
 
   public enum Positions {
@@ -47,25 +65,6 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
     public String getPosition() {
       return this.label;
     }
-  }
-
-  public void adjustPosition(Positions position) {
-    Select pos = new Select(slideshowPosition);
-    pos.selectByVisibleText(position.getPosition());
-    LOG
-        .result("adjustPosition", "slideshow position set to " + position.getPosition(), true);
-  }
-
-  public AddPhotoComponentObject clickAddPhoto() {
-    wait.forElementVisible(addPhotoButton);
-    addPhotoButton.click();
-    return new AddPhotoComponentObject(driver);
-  }
-
-  public void clickFinish() {
-    wait.forElementVisible(finishButton);
-    finishButton.click();
-    LOG.success("clickFinish", "finish button clicked");
   }
 
 }

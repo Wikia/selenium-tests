@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.media;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class VideoComponentObject extends WikiBasePageObject {
 
@@ -35,13 +35,13 @@ public class VideoComponentObject extends WikiBasePageObject {
 
   public void verifyVideoEmbedWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"),
-                           videoWidth + "px");
+        videoWidth + "px");
     LOG.success("verifyVideoEmbedWidth", "Width: " + videoWidth);
   }
 
   public void verifyVideoIframeWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"),
-                           videoWidth.toString());
+        videoWidth.toString());
     LOG.success("verifyVideoIframeWidth", "Width: " + videoWidth);
   }
 
@@ -82,8 +82,8 @@ public class VideoComponentObject extends WikiBasePageObject {
 
     WebElement object = container.findElement(By.tagName("object"));
     wait.forElementVisible(object);
-    Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id")
-    );
+    Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"),
+        object.getAttribute("id"));
     LOG.success("verifyVideoAnyclipEmbed", "Anyclip video is embedded");
   }
 

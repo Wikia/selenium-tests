@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.geoedge;
 
+import java.io.File;
+
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-
-import java.io.File;
 
 public class GeoEdgeProxy {
 

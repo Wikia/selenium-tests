@@ -3,13 +3,13 @@
  */
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory;
 
-import com.wikia.webdriver.common.logging.LOG;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

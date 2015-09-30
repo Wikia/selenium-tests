@@ -18,11 +18,7 @@ public class MercurySubpages {
   public static final String COLON = "Colon:colon:colon";
 
   /**
-   * Legend:
-   * FC - Featured Content
-   * CC - Curated Content
-   * TA - Trending Articles
-   * TV - Trending Videos
+   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
    */
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
@@ -52,6 +48,5 @@ public class MercurySubpages {
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "Mercury_empty_CC_Wikia";
 
-  private MercurySubpages() {
-  }
+  private MercurySubpages() {}
 }

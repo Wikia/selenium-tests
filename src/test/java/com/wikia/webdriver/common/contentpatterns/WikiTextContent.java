@@ -46,9 +46,8 @@ public class WikiTextContent {
   public static final String PREFORMATTED_TEXT = PREFORMATTED + TEXT;
   public static final String BOLD_TEXT = BOLD + TEXT + BOLD;
   public static final String ITALIC_TEXT = ITALIC + TEXT + ITALIC;
-  public static final String
-      STRIKETROUGH_TEXT =
-      STRIKETHROUGH_PREFIX + TEXT + STRIKETHROUGH_POSTFIX;
+  public static final String STRIKETROUGH_TEXT = STRIKETHROUGH_PREFIX + TEXT
+      + STRIKETHROUGH_POSTFIX;
   public static final String UNDERLINE_TEXT = UNDERLINE_PREFIX + TEXT + UNDERLINE_POSTFIX;
   public static final String SUBSCRIPT_TEXT = SUBSCRIPT_PREFIX + TEXT + SUBSCRIPT_POSTFIX;
   public static final String SUPERSCRIPT_TEXT = SUPERSCRIPT_PREFIX + TEXT + SUPERSCRIPT_POSTFIX;
@@ -56,13 +55,11 @@ public class WikiTextContent {
   public static final String NUMBERED_LIST_TEXT = NUMMBERED_LIST + TEXT;
 
   public static final String BLUELINK_TEXT = LINK_PREFIX + PageContent.INTERNAL_LINK + LINK_POSTFIX;
-  public static final String
-      EXTERNAL_LINK_TEXT =
-      EXT_LINK_PREFIX + PageContent.EXTERNAL_LINK + EXT_LINK_POSTFIX;
+  public static final String EXTERNAL_LINK_TEXT = EXT_LINK_PREFIX + PageContent.EXTERNAL_LINK
+      + EXT_LINK_POSTFIX;
   public static final String REDLINK_TEXT = LINK_PREFIX + PageContent.REDLINK + LINK_POSTFIX;
-  public static final String
-      REDIRECT_LINK_TEXT =
-      LINK_PREFIX + PageContent.REDIRECT_LINK + LINK_POSTFIX;
+  public static final String REDIRECT_LINK_TEXT = LINK_PREFIX + PageContent.REDIRECT_LINK
+      + LINK_POSTFIX;
 
   private WikiTextContent() {
 

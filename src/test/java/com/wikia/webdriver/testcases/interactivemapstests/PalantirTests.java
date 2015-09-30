@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PalantirContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.PalantirComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -20,8 +20,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTests_001", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_001_PalantirSetPlayerCorrectPosition() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);
@@ -33,8 +32,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTest_002", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_002_SetPlayerPositionOutOfMap() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);
@@ -46,8 +44,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTest_003", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_003_PalantirSetAndRemovePlayerPosition() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);
@@ -62,8 +59,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTest_004", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_004_PalantirSetHugeZoomVerifyError() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);
@@ -75,8 +71,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTest_005", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_005_PalantirUpdateMapPosition() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);
@@ -89,8 +84,7 @@ public class PalantirTests extends NewTestTemplate {
   @Test(groups = {"PalantirTest_006", "PalantirTests", "InteractiveMaps"})
   public void PalantirTest_006_PalantirSetDecimalZoom() {
     InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
-    InteractiveMapPageObject
-        selectedMap =
+    InteractiveMapPageObject selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
     PalantirComponentObject poi = new PalantirComponentObject(driver);

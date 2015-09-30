@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.login;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -57,13 +57,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private void typeInNewPassword(String pass) {
     wait.forElementVisible(newPassword);
     newPassword.sendKeys(pass);
-    LOG.logResult("typeInNewPassword", "new password retyped", true, driver);
+    LOG.success("typeInNewPassword", "new password retyped", true);
   }
 
   private void retypeInNewPassword(String pass) {
     wait.forElementVisible(retypeNewPassword);
     retypeNewPassword.sendKeys(pass);
-    LOG.logResult("typeInNewPassword", "new password retyped", true, driver);
+    LOG.success("typeInNewPassword", "new password retyped", true);
   }
 
   private void clickLoginButton() {
@@ -91,7 +91,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
   public void remindPassword(String name, String apiToken) {
     Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
-                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickForgotPasswordLink();
   }
@@ -101,7 +101,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     typeInNewPassword(randomPassword);
     retypeInNewPassword(randomPassword);
     clickLoginButton();
-    LOG.logResult("setNewPassword", "new password is set", true, driver);
+    LOG.success("setNewPassword", "new password is set", true);
     return randomPassword;
   }
 
@@ -109,8 +109,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, message);
-    LOG.logResult("newPasswordSentMessage", "Message about new password sent present",
-                  true, driver);
+    LOG.success("newPasswordSentMessage", "Message about new password sent present",true);
   }
 
   public void verifyClosedAccountMessage() {

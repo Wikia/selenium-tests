@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.LOG;
+import java.io.File;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 
-import java.io.File;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class XMLReader {
 

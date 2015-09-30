@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -7,20 +10,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 /**
- * @author Robert 'Rochan' Chan <p/> Editor Entry Point Test on wiki that has wgEnabledRTEExt =
- *         false, wgVisualEditorUI = true, wgForceVisualEditor = true User Editor Preference is set
- *         to Default for Anon VE-983 verify VE Editor is loaded when clicking Add Page from the
- *         contribution drop down VE-983 verify VE Editor is loaded when clicking the main edit
- *         button on the top of the article VE-983 verify VE Editor is loaded when clicking the red
- *         link in the article VE-983 verify VE Editor is loaded when clicking the section edit link
- *         in the article VE-983 verify VE Editor is loaded when using ?veaction=edit in the URL
- *         VE-983 verify VE Editor is loaded on List namespace VE-983 verify CK Editor is loaded on
- *         Category namespace VE-983 verify Src Editor is loaded on Template namespace VE-983 verify
- *         CK Editor is loaded when using ?action=edit in the URL
+ * @author Robert 'Rochan' Chan
+ *         <p/>
+ *         Editor Entry Point Test on wiki that has wgEnabledRTEExt = false, wgVisualEditorUI =
+ *         true, wgForceVisualEditor = true User Editor Preference is set to Default for Anon VE-983
+ *         verify VE Editor is loaded when clicking Add Page from the contribution drop down VE-983
+ *         verify VE Editor is loaded when clicking the main edit button on the top of the article
+ *         VE-983 verify VE Editor is loaded when clicking the red link in the article VE-983 verify
+ *         VE Editor is loaded when clicking the section edit link in the article VE-983 verify VE
+ *         Editor is loaded when using ?veaction=edit in the URL VE-983 verify VE Editor is loaded
+ *         on List namespace VE-983 verify CK Editor is loaded on Category namespace VE-983 verify
+ *         Src Editor is loaded on Template namespace VE-983 verify CK Editor is loaded when using
+ *         ?action=edit in the URL
  */
 
 public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
@@ -34,10 +36,8 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
     base = new WikiBasePageObject(driver);
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001",
-                "createPageEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001",
+      "createPageEntry"})
   public void RTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -46,91 +46,69 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002",
-                "articleEditEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002",
+      "articleEditEntry"})
   public void RTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003",
-                "redlinkEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003",
+      "redlinkEntry"})
   public void RTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004",
-                "sectionEditEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004",
+      "sectionEditEntry"})
   public void RTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005",
-                "veactionURLEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005",
+      "veactionURLEntry"})
   public void RTEDisabledEditorEntryAnonTests_005_URLEntry() {
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_006",
-                "listEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_006",
+      "listEntry"})
   public void RTEDisabledEditorEntryAnonTests_006_ListNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.LIST_PAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.LIST_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_007",
-                "categoryEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_007",
+      "categoryEntry"})
   public void RTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.CATEGORY_PAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.CATEGORY_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_008",
-                "templateEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_008",
+      "templateEntry"})
   public void RTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TEMPLATE_PAGE);
+    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TEMPLATE_PAGE);
     SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009",
-                "actionURLEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009",
+      "actionURLEntry"})
   public void RTEDisabledEditorEntryAnonTests_009_actionEdit() {
     SourceEditModePageObject src =
         base.navigateToArticleEditPageSrc(wikiURL, base.getNameForArticle());

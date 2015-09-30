@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership: Content X-Wing
@@ -36,7 +36,7 @@ public class SpotifyTests extends NewTestTemplate {
   @Test(groups = "SpotifyWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_003_isErrorPresent() {
-  SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
+    SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
     widget.createIncorrect().navigate(wikiURL);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
