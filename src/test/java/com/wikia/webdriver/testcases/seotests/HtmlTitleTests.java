@@ -16,8 +16,8 @@ public class HtmlTitleTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @DataProvider(name = "DataHtmlTitleTest_001")
-  private Object[][] DataHtmlTitleTest_001() {
+  @DataProvider
+  private Object[][] dataHtmlTitleTest001() {
     return new Object[][]{
         // original title
         {
@@ -65,7 +65,7 @@ public class HtmlTitleTests extends NewTestTemplate {
         {
             "sktest123",
             "Special:NewFiles",
-            "New photos on this wiki - Sktest123 Wiki - Wikia",
+            "New files on this wiki - Sktest123 Wiki - Wikia",
             false
         },
         {
@@ -184,8 +184,8 @@ public class HtmlTitleTests extends NewTestTemplate {
    * Check html title (the contents of <title>)
    */
   @Test(
-      dataProvider = "DataHtmlTitleTest_001",
-      groups = {"Seo", "HtmlTitle", "HtmlTitleTest_001"}
+      dataProvider = "dataHtmlTitleTest001",
+      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleTest_001"}
   )
   public void HtmlTitleTest_001(String wiki, String path, String exp, boolean loggedInUser) {
     if (loggedInUser) {
@@ -201,6 +201,6 @@ public class HtmlTitleTests extends NewTestTemplate {
 
     driver.get(wikiURL);
     String title = driver.getTitle();
-    Assertion.assertEquals(exp, title);
+    Assertion.assertEquals(title, exp);
   }
 }

@@ -163,8 +163,8 @@
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.GoSearchFeature"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.Suggestions"/>
-            <class name="com.wikia.webdriver.testcases.seotests.Our404HandlerTest"/>
             <class name="com.wikia.webdriver.testcases.seotests.HtmlTitleTests"/>
+            <class name="com.wikia.webdriver.testcases.seotests.Our404HandlerTest"/>
             <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck"/>

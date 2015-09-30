@@ -136,6 +136,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * CrossWikiSearch
 * IntraWikiSearch
 * IntraWikiSearchExactMatch
+* Seo
 * SignUp
 * SpecialVideo
 * ThemeDesigner
