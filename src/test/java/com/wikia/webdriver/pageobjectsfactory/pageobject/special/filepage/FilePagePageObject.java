@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog.ImageLicense;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -71,7 +71,7 @@ public class FilePagePageObject extends WikiBasePageObject {
     WebElement currentTab = tabList.get(tab);
     wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
-    PageObjectLogging.log(
+    LOG.logResult(
         "clickTab",
         tab + " selected",
         true
@@ -93,7 +93,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifySelectedTab(String tabName) {
     wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
-    PageObjectLogging.log(
+    LOG.logResult(
         "verified selected tab",
         tabName + " selected",
         true
@@ -121,15 +121,15 @@ public class FilePagePageObject extends WikiBasePageObject {
   // Page forward in the local "appears on" section
   public void clickLocalAppearsPageNext() {
     localPageNext.click();
-    PageObjectLogging
-        .log("clickLocalAppearsPageNext", "local appears page next button clicked", true);
+    LOG
+        .logResult("clickLocalAppearsPageNext", "local appears page next button clicked", true);
   }
 
   // Page backward in the local "appears on" section
   public void clickLocalAppearsPagePrev() {
     localPagePrev.click();
-    PageObjectLogging
-        .log("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
+    LOG
+        .logResult("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
   }
 
   // Verify that a specific video title is in the "Appears on these pages" list
@@ -139,19 +139,19 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
-    PageObjectLogging
-        .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+    LOG
+        .logResult("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyEmptyFilePage() {
     wait.forElementVisible(noFileText);
-    PageObjectLogging
-        .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+    LOG
+        .logResult("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyThumbnailIsPresent() {
     wait.forElementVisible(videoThumbnail);
-    PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
+    LOG.log("verifythumbnailIsPresent", "Verified thumbnail is visible", LOG.Type.SUCCESS);
   }
 
   public String getImageUrl() {
@@ -192,11 +192,11 @@ public class FilePagePageObject extends WikiBasePageObject {
     scrollAndClick(reuploadLink);
 
     uploadFileURL.sendKeys(url);
-    PageObjectLogging.log("replaceVideo", url + " typed into url field", true);
+    LOG.log("replaceVideo", url + " typed into url field", LOG.Type.SUCCESS);
 
     wait.forElementVisible(addButton);
     scrollAndClick(addButton);
-    PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
+    LOG.log("replaceVideo", "add url button clicked", true, driver);
   }
 
   public void verifyVersionCountAtLeast(int count) {
@@ -206,7 +206,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public DeletePageObject deleteVersion(int num) {
     scrollAndClick(historyDeleteLinks.get(num - 1));
 
-    PageObjectLogging.log("deletePage", "delete page opened", true);
+    LOG.log("deletePage", "delete page opened", LOG.Type.SUCCESS);
 
     return new DeletePageObject(driver);
   }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
@@ -36,7 +36,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       verifyMercury();
     }
 
-    PageObjectLogging.log("", "Page screenshot", true, driver);
+    LOG.log("", "Page screenshot", true, driver);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       driver.manage().window().setSize(new Dimension(360, 640));
     } catch (WebDriverException ex) {
-      PageObjectLogging.log(
+      LOG.logResult(
           "ResizeWindowForMobile",
           "Resize window method not available - possibly running on real device",
           true
@@ -62,12 +62,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       extractGptInfo(presentLeaderboardSelector);
 
       if (isElementOnPage(By.cssSelector(CELTRA_MASK_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Celtra");
+        LOG.logWarning("Special ad", "Celtra");
         return;
       }
 
       if (isElementOnPage(By.cssSelector(FLITE_MASK_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Flite");
+        LOG.logWarning("Special ad", "Flite");
         return;
       }
 
@@ -84,21 +84,21 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     waitForSlotCollapsed(slot);
-    PageObjectLogging.log("AdInSlot", "Ad is not found in slot as expected.", true);
+    LOG.log("AdInSlot", "Ad is not found in slot as expected.", LOG.Type.SUCCESS);
   }
 
   public void verifyNoSlotPresent(String slotName) {
     if (isElementOnPage(By.cssSelector("#" + slotName))) {
       throw new NoSuchElementException("Slot is added to the page");
     }
-    PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
+    LOG.log("AdInSlot", "No slot found as expected", LOG.Type.SUCCESS);
   }
 
   public void verifySlotExpanded(String slotName) {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     if (checkIfSlotExpanded(slot)) {
-      PageObjectLogging.log("AdInSlot", "Slot expanded as expecting", true);
+      LOG.log("AdInSlot", "Slot expanded as expecting", LOG.Type.SUCCESS);
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
@@ -113,7 +113,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
-    PageObjectLogging.log("AdInSlot", "Ad found in slot", true, driver);
+    LOG.log("AdInSlot", "Ad found in slot", true, driver);
   }
 
   /**
@@ -126,7 +126,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      PageObjectLogging.log(
+      LOG.log(
           "mercuryNavigateToAnArticle()",
           String.format(
               "Clicking: %s (%s)",
@@ -140,7 +140,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       scrollToElement(link);
       link.click();
     } else {
-      PageObjectLogging.logWarning(
+      LOG.logWarning(
           "mercuryNavigateToAnArticle()",
           "Could not find the link to: /wiki/" + articleLinkName
       );
@@ -149,7 +149,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void removeElementIfPresent(String cssSelector) {
     if (isElementOnPage(By.cssSelector(cssSelector))) {
-      PageObjectLogging.log("Removing element", cssSelector, true);
+      LOG.log("Removing element", cssSelector, LOG.Type.SUCCESS);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
       JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript("$(arguments[0]).css('display', 'none')", element);
@@ -170,7 +170,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
-      PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
+      LOG.logWarning("", "MERCURY FAILED TO LOAD");
       throw e;
     }
   }

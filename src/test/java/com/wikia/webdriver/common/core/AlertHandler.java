@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class AlertHandler {
       driver.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
-      PageObjectLogging.log("NO ALERT PRESENT", "", true);
+      LOG.info("NO ALERT PRESENT", "");
       return false;
     }
   }

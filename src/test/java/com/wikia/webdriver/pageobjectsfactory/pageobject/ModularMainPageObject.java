@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
@@ -53,7 +53,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
   public void verifyMoMImage() {
     wait.forElementVisible(heroImageModule);
-    PageObjectLogging.log("verifyMoMImage", "Hero module image is visible", true);
+    LOG.log("verifyMoMImage", "Hero module image is visible", LOG.Type.SUCCESS);
   }
 
   public void clickUpdateCoverImageLink() {
@@ -64,13 +64,13 @@ public class ModularMainPageObject extends WikiBasePageObject {
   public void selectFileToUpload(String file) {
     updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
         "ImagesForUploadTests/" + file).getPath()));
-    PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
+    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
   }
 
   public void verifyDragToRepositionText() {
     wait.forElementVisible(dragToRepositionText);
-    PageObjectLogging.log("verifyDragToRepositionText",
-        "Drag to reposition text message is visible", true);
+    LOG.log("verifyDragToRepositionText",
+            "Drag to reposition text message is visible", LOG.Type.SUCCESS);
   }
 
   public void clickPublishButton() {
@@ -87,8 +87,9 @@ public class ModularMainPageObject extends WikiBasePageObject {
     wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
-    PageObjectLogging.log("typeMoMDescription", momDescription + "MoM description was typed in",
-        true);
+    LOG.logResult("typeMoMDescription",
+                  momDescription + "MoM description was typed in",
+                  true);
   }
 
   public void clickDescriptionPublishButton() {

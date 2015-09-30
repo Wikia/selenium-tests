@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -45,7 +45,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public PreferencesPageObject open(){
     getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_PREFERENCES);
-    PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+    LOG.log("openSpecialPreferencesPage", "Special:Prefereces page opened", LOG.Type.SUCCESS);
 
     return this;
   }
@@ -76,13 +76,13 @@ public class PreferencesPageObject extends WikiBasePageObject {
         throw new NoSuchElementException("Non-existing tab selected");
     }
     waitForValueToBePresentInElementsAttributeByElement(tabs.get(tabNum), "class", "selected");
-    PageObjectLogging.log("selectTab", "tab " + tab.toString() + " selected", true);
+    LOG.log("selectTab", "tab " + tab.toString() + " selected", LOG.Type.SUCCESS);
     return this;
   }
 
   public void verifyEmailMeSection() {
     for (WebElement elem : emailMeSectionRows) {
-      PageObjectLogging.log("verifyEmailSection", "verifying " + elem.getText(), true);
+      LOG.log("verifyEmailSection", "verifying " + elem.getText(), LOG.Type.SUCCESS);
       Assertion.assertEquals(elem.findElement(By.cssSelector("input")).getAttribute("checked"), "true"
       );
     }
@@ -92,30 +92,31 @@ public class PreferencesPageObject extends WikiBasePageObject {
     wait.forElementVisible(facebookDisconnect);
     scrollAndClick(facebookDisconnect);
     wait.forElementVisible(fbConnect);
-    PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook",
-                          true);
+    LOG.logResult("disconnectFromFacebook",
+                  "account has been disconnected from Facebook",
+                  true);
   }
 
   public PreferencesPageObject clickSaveButton() {
     wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
-    PageObjectLogging.log("clickSaveButton", "Save button clicked", true);
+    LOG.log("clickSaveButton", "Save button clicked", LOG.Type.SUCCESS);
     return new PreferencesPageObject(driver);
   }
 
   public void clickRestoreLink() {
     wait.forElementClickable(restoreDefaultLink);
     restoreDefaultLink.click();
-    PageObjectLogging.log("clickRestoreLink", "Restore Deault Link clicked", true);
+    LOG.log("clickRestoreLink", "Restore Deault Link clicked", LOG.Type.SUCCESS);
   }
 
   public void verifySaveNotification() {
     wait.forElementVisible(saveNotfication);
-    PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
+    LOG.log("verifySaveNotification", "Restore Deault Link clicked", LOG.Type.SUCCESS);
   }
 
   public void connectFacebook(String email, String password) {
-    PageObjectLogging.log("connectFacebook", "Connecting FB via FB login dialog", true);
+    LOG.log("connectFacebook", "Connecting FB via FB login dialog", LOG.Type.SUCCESS);
 
     wait.forElementVisible(fbConnect);
     scrollAndClick(fbConnect);
@@ -145,7 +146,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     wait.forElementClickable(useAdvancedRecentChangesCheckbox);
   useAdvancedRecentChangesCheckbox.click();
-    PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+    LOG.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked",
+            LOG.Type.SUCCESS);
 
   return this;
   }
@@ -162,7 +164,9 @@ public class PreferencesPageObject extends WikiBasePageObject {
       useAdvancedRecentChangesCheckbox.click();
     }
     clickSaveButton();
-    PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
+    LOG.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked",
+            "GSet_advanced_recent_changes_checkbox_value set to default unchecked",
+            LOG.Type.SUCCESS);
 
     return this;
   }

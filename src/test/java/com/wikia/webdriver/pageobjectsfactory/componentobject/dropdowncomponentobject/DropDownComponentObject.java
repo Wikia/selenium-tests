@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponent
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
@@ -76,7 +76,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
       restoreDeaultImplicitWait();
     }
 
-    PageObjectLogging.log("DropdownVisible", "Login dropdown is visible", true, driver);
+    LOG.log("DropdownVisible", "Login dropdown is visible", true, driver);
 
     return this;
   }
@@ -93,7 +93,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     fillUserNameInput(userName);
     fillPasswordInput(password);
     scrollAndClick(formSubmitButton);
-    PageObjectLogging.log("LoginFormSubmitted", "Login form is submitted", true);
+    LOG.log("LoginFormSubmitted", "Login form is submitted", LOG.Type.SUCCESS);
   }
 
   public DropDownComponentObject clickLogOut() {
@@ -106,14 +106,14 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(formUsernameInput);
     formUsernameInput.clear();
     formUsernameInput.sendKeys(userName);
-    PageObjectLogging.log("UsernameTyped", "UserName input is filled", true);
+    LOG.log("UsernameTyped", "UserName input is filled", LOG.Type.SUCCESS);
   }
 
   public void fillPasswordInput(String password) {
     wait.forElementVisible(formPassowrdInput);
     formPassowrdInput.clear();
     formPassowrdInput.sendKeys(password);
-    PageObjectLogging.log("PasswordTyped", "Password input is filled", true);
+    LOG.log("PasswordTyped", "Password input is filled", LOG.Type.SUCCESS);
   }
 
   public void logInViaFacebook(String email, String password) {
@@ -121,28 +121,28 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(formConnectWithFbButton);
     // When clicking via selenium dropdown disappears
     js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
-    PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
+    LOG.log("logInDropDownFB", "facebook button clicked", LOG.Type.SUCCESS);
     waitForNewWindow();
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
-    PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
+    LOG.log("logInDropDownFB", "facebook popup window detected", LOG.Type.SUCCESS);
+    LOG.log("logInDropDownFB", "switching to facebook pop-up window", LOG.Type.SUCCESS);
 
     wait.forElementVisible(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
-    PageObjectLogging.log("fillLogin", "Login field on facebook form filled", true);
+    LOG.log("fillLogin", "Login field on facebook form filled", LOG.Type.SUCCESS);
 
     wait.forElementVisible(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
-    PageObjectLogging.log("fillPassword", "Password field on facebook form filled", true);
+    LOG.log("fillPassword", "Password field on facebook form filled", LOG.Type.SUCCESS);
 
     facebookSubmitButton.click();
-    PageObjectLogging.log("logInDropDownFB", "facebook log in submit button clicked", true);
+    LOG.log("logInDropDownFB", "facebook log in submit button clicked", LOG.Type.SUCCESS);
 
     driver.switchTo().window(windows[0].toString());
-    PageObjectLogging.log("logInDropDownFB", "switching to main window", true);
+    LOG.log("logInDropDownFB", "switching to main window", LOG.Type.SUCCESS);
   }
 
   public SignUpPageObject clickSignUpLink() {
@@ -155,7 +155,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messagePlaceholder);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, newPasswordMsg);
-    PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
-                          true);
+    LOG.logResult("MessageAboutPasswordSent",
+                  "Message about new password sent present",
+                  true);
   }
 }

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
@@ -41,12 +41,12 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
   public void typeInUserName(String userName) {
     userNameField.sendKeys(userName);
-    PageObjectLogging.log("typeInUserName", "user name was typed", true);
+    LOG.log("typeInUserName", "user name was typed", LOG.Type.SUCCESS);
   }
 
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
-    PageObjectLogging.log("typeInPassword", "password name was typed", true);
+    LOG.log("typeInPassword", "password name was typed", LOG.Type.SUCCESS);
   }
 
   public void clickForgotPassword(String userName, String apiToken) {
@@ -59,14 +59,14 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public CreateNewWikiPageObjectStep2 submitLogin() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
+    LOG.log("submitLogin", "submit button was clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public SignUpPageObject submitSignup() {
     wait.forElementVisible(signUpSubmitButton);
     signUpSubmitButton.click();
-    PageObjectLogging.log("submitSignUp", "signup submit button was clicked", true, driver);
+    LOG.log("submitSignUp", "signup submit button was clicked", true, driver);
     return new SignUpPageObject(driver);
   }
 
@@ -96,8 +96,9 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(usernameValidationText, newPasswordMsg);
-    PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
-        true);
+    LOG.logResult("MessageAboutPasswordSent",
+                  "Message about new password sent present",
+                  true);
   }
 
 

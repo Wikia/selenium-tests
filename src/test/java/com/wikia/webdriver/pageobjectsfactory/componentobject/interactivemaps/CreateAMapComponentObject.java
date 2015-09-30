@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
@@ -33,14 +33,14 @@ public class CreateAMapComponentObject extends BasePageObject {
   public CreateACustomMapComponentObject clickCustomMap() {
     wait.forElementVisible(customMapLink);
     customMapLink.click();
-    PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateACustomMapComponentObject(driver);
   }
 
   public CreateRealMapComponentObject clickRealMap() {
     wait.forElementVisible(realMapLink);
     realMapLink.click();
-    PageObjectLogging.log("clickRealMap", "Real Map link clicked", true, driver);
+    LOG.log("clickRealMap", "Real Map link clicked", true, driver);
     return new CreateRealMapComponentObject(driver);
   }
 
@@ -57,13 +57,13 @@ public class CreateAMapComponentObject extends BasePageObject {
 
   public void verifyLoginModal() {
     wait.forElementVisible(loginModal);
-    PageObjectLogging.log("verifyLoginModal", "Login modal is displayed", true);
+    LOG.log("verifyLoginModal", "Login modal is displayed", LOG.Type.SUCCESS);
   }
 
   public void verifyRealMapAndCustomMapButtons() {
     wait.forElementVisible(realMapLink);
     wait.forElementVisible(customMapLink);
-    PageObjectLogging.log("verifyRealMapAndCustomMapButtons",
-        "Real Map and Custom Map links are visible", true);
+    LOG.log("verifyRealMapAndCustomMapButtons",
+            "Real Map and Custom Map links are visible", LOG.Type.SUCCESS);
   }
 }

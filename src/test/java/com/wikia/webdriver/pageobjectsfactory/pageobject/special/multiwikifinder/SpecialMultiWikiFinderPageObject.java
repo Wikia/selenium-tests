@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinde
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.SearchDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -47,7 +47,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   public void verifyEmptyPagename() {
     wait.forElementNotPresent(By.cssSelector(".mw-spcontent > p"));
-    PageObjectLogging.log(
+    LOG.log(
         "verifyEmptyPageName",
         "Empty pagename is not founded",
         true, driver
@@ -57,7 +57,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
   public void compareResultsCount(int limit) {
     if (limit == 0) {
       wait.forElementNotPresent(By.cssSelector(LIST_OF_LINKS_SELECTOR));
-      PageObjectLogging.log(
+      LOG.log(
           "verifyNoPagenameFounded",
           "Not existing pagename is not founded",
           true, driver

@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.testnglisteners;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.exceptions.TestFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -18,7 +18,7 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
     if (method.isTestMethod()) {
       List verificationFailures = Assertion.getVerificationFailures(result);
       // if there are verification failures...
-      if (PageObjectLogging.getVerificationStack().contains(false)) {
+      if (LOG.getVerificationStack().contains(false)) {
         result.setStatus(ITestResult.FAILURE);
         result.setThrowable(new TestFailedException());
       }

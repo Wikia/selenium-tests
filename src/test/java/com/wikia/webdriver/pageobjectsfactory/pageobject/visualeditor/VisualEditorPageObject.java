@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
@@ -113,7 +113,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     mediaNode.click();
     deleteMediaNode();
-    PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+    LOG.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
   }
 
   private void deleteMediaNode() {
@@ -123,12 +123,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void typeTextArea(String text) {
     wait.forElementVisible(editArea);
     editArea.sendKeys(text);
-    PageObjectLogging.log("write", "text " + text + "written", true);
+    LOG.log("write", "text " + text + "written", LOG.Type.SUCCESS);
   }
 
   public void press(Keys key) {
     editArea.sendKeys(key);
-    PageObjectLogging.log("press", "key " + key.toString() + "pressed", true);
+    LOG.log("press", "key " + key.toString() + "pressed", LOG.Type.SUCCESS);
   }
 
   public void selectText(int from, int to) {
@@ -191,7 +191,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void verifyEditorSurfacePresent() {
     wait.forElementVisible(veMode);
     wait.forElementVisible(veSurface);
-    PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
+    LOG.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
   }
 
   public ArticlePageObject clickVEEditAndPublish(String content) {
@@ -203,14 +203,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyMapPresent() {
     wait.forElementVisible(mapNode);
-    PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
+    LOG.log("verifyMapPresent", "VE map is displayed", LOG.Type.SUCCESS);
   }
 
   public void verifyNoVideo() {
     if (isElementOnPage(mediaNode)) {
       throw new AssertionError("Media Node is still on the page");
     } else {
-      PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
+      LOG.log("verifyNoVideo", "Verified no video is on page", true, driver);
     }
   }
 
@@ -218,7 +218,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(editArea);
     Assertion.assertNumber(videoNodes.size(), expected,
             "Checking the correct number of video nodes added");
-    PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
+    LOG.log("verifyVideos", videoNodes.size() + " videos displayed", LOG.Type.SUCCESS);
   }
 
   public void verifyGalleries(int expected) {
@@ -237,8 +237,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
     Assertion.assertNumber(numOfMediasInGallery, expected,
                            "Checking the correct number of media in gallery");
-    PageObjectLogging
-        .log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
+    LOG
+        .logResult("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
 
   public void verifyMedias(int expected) {
@@ -246,7 +246,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     Assertion.assertNumber(mediaNodes.size(), expected,
                            "Checking the correct number of media nodes added");
-    PageObjectLogging.log("verifyMedias", mediaNodes.size() + " media displayed", true);
+    LOG.log("verifyMedias", mediaNodes.size() + " media displayed", LOG.Type.SUCCESS);
   }
 
   public VisualEditorMediaSettingsDialog openMediaSettings() {
@@ -276,7 +276,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextInAllFormat(String text) {
     for (Formatting format : Formatting.values()) {
-      PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
+      LOG.log("Formatting selection", format.toString() + " selected", LOG.Type.SUCCESS);
       selectFormatting(format);
       typeTextArea(text);
       typeReturn();
@@ -288,7 +288,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextInAllStyle(String text) {
     for (Style style : Style.values()) {
-      PageObjectLogging.log("Style selection", style.toString() + " selected", true);
+      LOG.log("Style selection", style.toString() + " selected", LOG.Type.SUCCESS);
       selectStyle(style);
       typeTextArea(text);
       typeReturn();
@@ -313,7 +313,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
+    LOG.log("copyAndPaste", editArea.getText(), true, driver);
   }
 
   public VisualEditorPageObject typeInSourceEditor(String text) {
@@ -328,20 +328,20 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(previewVideoWrapper);
     VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
     video.verifyVideoAutoplay(providerName, true);
-    PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+    LOG.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
   }
 
   public void verifyPreviewImage() {
     wait.forElementVisible(previewOverlay);
     wait.forElementVisible(previewImage);
-    PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+    LOG.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
   }
 
   public void verifyVideoCaption(String caption) {
     wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
-    PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
+    LOG.log("verifyVideoCaption", "Video caption matches", true, driver);
   }
 
   public void selectMedia() {
@@ -362,7 +362,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   private void resizeMedia(int xOffSet, int yOffset) {
-    PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
+    LOG.log("resizeMedia", "Before resizing", true, driver);
     selectMedia();
     wait.forElementVisible(swResizeHandle);
     Actions actions = new Actions(driver);
@@ -370,7 +370,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
         .dragAndDropBy(swResizeHandle, xOffSet, yOffset)
         .build()
         .perform();
-    PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
+    LOG.log("resizeMedia", "After resizing", true, driver);
   }
 
   public void verifyVideoSWHandleMoved(Point source) {
@@ -446,7 +446,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
         .perform();
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     wait.forElementVisible(contextEdit);
-    PageObjectLogging
+    LOG
         .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
              driver);
   }

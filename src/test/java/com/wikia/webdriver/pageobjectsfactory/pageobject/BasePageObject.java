@@ -40,7 +40,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * @author Karol
@@ -97,7 +97,7 @@ public class BasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOverInArticleIframe", e, false);
+      LOG.log("mouseOverInArticleIframe", e, LOG.Type.ERROR);
     }
   }
 
@@ -191,7 +191,7 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
       }
     }
   }
@@ -203,7 +203,7 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element, offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
       }
     }
   }
@@ -220,7 +220,7 @@ public class BasePageObject {
                        driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
       }
     }
   }
@@ -236,7 +236,7 @@ public class BasePageObject {
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
     Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
-    PageObjectLogging.log("verifyURLcontains", "current url is the same as expetced url", true);
+    LOG.log("verifyURLcontains", "current url is the same as expetced url", LOG.Type.SUCCESS);
   }
 
   public void verifyURLcontains(final String givenString, int timeOut) {
@@ -268,8 +268,8 @@ public class BasePageObject {
   public void getUrl(String url, boolean makeScreenshot) {
     driver.get(url);
     if (makeScreenshot) {
-      PageObjectLogging.log("Take screenshot",
-          String.format("Screenshot After Navigation to: %s", url), true, driver);
+      LOG.log("Take screenshot",
+              String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
 
@@ -284,10 +284,10 @@ public class BasePageObject {
   public void refreshPage() {
     try {
       driver.navigate().refresh();
-      PageObjectLogging.log("refreshPage", "page refreshed", true);
+      LOG.log("refreshPage", "page refreshed", LOG.Type.SUCCESS);
     } catch (TimeoutException e) {
-      PageObjectLogging
-          .log("refreshPage", "page loaded for more than 30 seconds after click", true);
+      LOG
+          .logResult("refreshPage", "page loaded for more than 30 seconds after click", true);
     }
   }
 
@@ -301,10 +301,10 @@ public class BasePageObject {
         windows = driver.getWindowHandles().toArray();
         sumDelay += 500;
       } catch (InterruptedException e) {
-        PageObjectLogging.log(windowName, e, false);
+        LOG.log(windowName, e, LOG.Type.ERROR);
       }
       if (sumDelay > 5000) {
-        PageObjectLogging.log(windowName, comment, false);
+        LOG.log(windowName, comment, LOG.Type.ERROR);
         break;
       }
     }
@@ -319,13 +319,13 @@ public class BasePageObject {
             + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-          PageObjectLogging.log("JSError", "JQuery is not defined", false);
+          LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
         }
       }
       return true;
     } else {
-      PageObjectLogging
-          .log("SelectorNotFound", "Selector " + selector + " not found on page", true);
+      LOG
+          .logResult("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
     }
   }
@@ -382,7 +382,7 @@ public class BasePageObject {
 
   public void waitForStringInURL(String givenString) {
     waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
-    PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
+    LOG.log("waitForStringInURL", "verify that url contains " + givenString, LOG.Type.SUCCESS);
   }
 
   public void waitForAlertAndAccept() {
@@ -390,8 +390,8 @@ public class BasePageObject {
     Alert alert = driver.switchTo().alert();
     String alertText = alert.getText();
     alert.accept();
-    PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
-        + alertText, true);
+    LOG.log("waitForAlertAndAccept", "detected and closed alert with text "
+                                     + alertText, LOG.Type.SUCCESS);
   }
 
   public String getRandomDigits(int length) {
@@ -416,7 +416,7 @@ public class BasePageObject {
 
   public void openWikiPage() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
-    PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+    LOG.log("WikiPageOpened", "Wiki page is opened", LOG.Type.SUCCESS);
   }
 
   /*
@@ -429,23 +429,23 @@ public class BasePageObject {
     notifications_clickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
-    PageObjectLogging.log("notifications_verifyNotificationTitle",
-        "Verify that the latest notification has the following title: " + title, true, driver);
+    LOG.log("notifications_verifyNotificationTitle",
+            "Verify that the latest notification has the following title: " + title, true, driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     wait.forElementClickable(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
-    PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-        "click on notifications logo on the upper right corner", true, driver);
+    LOG.log("notifications_clickOnNotificationsLogo",
+            "click on notifications logo on the upper right corner", true, driver);
   }
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
-    PageObjectLogging.log("norifications_showNotifications",
-                          "show notifications by adding 'show' class to element", true, driver);
+    LOG.log("norifications_showNotifications",
+            "show notifications by adding 'show' class to element", true, driver);
   }
 
   /**
@@ -457,7 +457,7 @@ public class BasePageObject {
 
   public void appendToUrl(String additionToUrl) {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
-    PageObjectLogging.log("appendToUrl", additionToUrl + " has been appended to url", true);
+    LOG.log("appendToUrl", additionToUrl + " has been appended to url", LOG.Type.SUCCESS);
   }
 
   public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
@@ -466,7 +466,7 @@ public class BasePageObject {
       currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
     }
     driver.get(currentUrl);
-    PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
+    LOG.log("appendToUrl", queryStrings + " have been appended to url", LOG.Type.SUCCESS);
   }
 
   public void pressDownArrow(WebElement element) {
@@ -489,7 +489,7 @@ public class BasePageObject {
       if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
         throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
       }
-      PageObjectLogging.log("purge", url, true);
+      LOG.log("purge", url, LOG.Type.SUCCESS);
       return;
     } finally {
       client.close();
@@ -541,7 +541,7 @@ public class BasePageObject {
       }
     }
     Assertion.assertEquals(statusCode, desiredStatus);
-    PageObjectLogging.log("verifyURLStatus", url + " has status " + statusCode, true);
+    LOG.log("verifyURLStatus", url + " has status " + statusCode, LOG.Type.SUCCESS);
   }
 
   protected void changeImplicitWait(int value, TimeUnit timeUnit) {
@@ -559,7 +559,7 @@ public class BasePageObject {
     waitForStringInURL(url);
     driver.close();
     driver.switchTo().window(windows[0].toString());
-    PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
+    LOG.log("verifyUrlInNewWindow", "url in new window verified", LOG.Type.SUCCESS);
   }
 
   public void verifyElementMoved(Point source, WebElement element) {
@@ -568,8 +568,9 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
           + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    PageObjectLogging.log("verifyElementMoved", "Element did move. From (" + source.x + ","
-        + source.y + ") to (" + target.x + "," + target.y + ")", true, driver);
+    LOG.log("verifyElementMoved", "Element did move. From (" + source.x + ","
+                                  + source.y + ") to (" + target.x + "," + target.y + ")", true,
+            driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -583,8 +584,9 @@ public class BasePageObject {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
           + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    PageObjectLogging.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
+    LOG.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
+                                  + sourceHeight + ") to (" + targetWidth + "," + targetHeight
+                                  + ")", true, driver);
   }
 
   public void switchToNewBrowserTab() {

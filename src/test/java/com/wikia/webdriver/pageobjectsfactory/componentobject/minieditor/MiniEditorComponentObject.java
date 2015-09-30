@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
@@ -61,7 +61,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("writeMiniEditor", e, false);
+      LOG.log("writeMiniEditor", e, LOG.Type.ERROR);
     }
     messageBodyField.clear();
     messageBodyField.sendKeys(text);
@@ -149,7 +149,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(comment);
-    PageObjectLogging.log("CommentEdited", "Comment edited", true);
+    LOG.log("CommentEdited", "Comment edited", LOG.Type.SUCCESS);
   }
 
   public void switchAndReplyComment(String reply) {
@@ -158,7 +158,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);
-    PageObjectLogging.log("CommentReplied", "Comment replied", true);
+    LOG.log("CommentReplied", "Comment replied", LOG.Type.SUCCESS);
   }
 
   public void switchAndEditMessageWall(String reply) {
@@ -166,7 +166,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     driver.switchTo().frame(editMessageWallFrame);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);
-    PageObjectLogging.log("switchAndEditMessageWall", "message edited", true);
+    LOG.log("switchAndEditMessageWall", "message edited", LOG.Type.SUCCESS);
   }
 
   public void switchAndQuoteMessageWall(String reply) {
@@ -176,6 +176,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     WebElement quoteMessageTextArea = driver.findElement(By.cssSelector("body#bodyContent"));
     quoteMessageTextArea.clear();
     quoteMessageTextArea.sendKeys(reply);
-    PageObjectLogging.log("switchAndQuoteMessageWall", "quote typed", true);
+    LOG.log("switchAndQuoteMessageWall", "quote typed", LOG.Type.SUCCESS);
   }
 }

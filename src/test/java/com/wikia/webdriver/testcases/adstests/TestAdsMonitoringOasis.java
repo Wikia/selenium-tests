@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -49,7 +49,7 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, BROWSER_DIMENSION);
 
     if (countryCode == null) {
-      PageObjectLogging.log("Geo (no proxy)", wikiPage.getCountry(), true);
+      LOG.log("Geo (no proxy)", wikiPage.getCountry(), LOG.Type.SUCCESS);
     } else {
       Assertion.assertEquals(wikiPage.getCountry(), countryCode);
     }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -65,13 +65,13 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public void typeInWikiName(String name) {
     wikiName.sendKeys(name);
-    PageObjectLogging.log("typeInWikiName ", "Typed wiki name" + name, true);
+    LOG.log("typeInWikiName ", "Typed wiki name" + name, LOG.Type.SUCCESS);
   }
 
   public void typeInWikiDomain(String domain) {
     wikiDomain.clear();
     wikiDomain.sendKeys(domain);
-    PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
+    LOG.log("typeInWikiDomain ", "Typed wiki domain " + domain, LOG.Type.SUCCESS);
   }
 
   /**
@@ -80,36 +80,36 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   public void verifySuccessIcon() {
     wait.forElementVisible(successIcon);
     wait.forElementVisible(submitButton);
-    PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
+    LOG.log("waitForSuccessIcon", "Success icon found", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
     wait.forTextInElement(wikiDomainErrorMessage, wikiName.toLowerCase());
-    PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
+    LOG.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", LOG.Type.SUCCESS);
   }
 
   public void verifyIncorrectWikiName() {
     wait.forTextInElement(wikiDomainErrorMessage,
                                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
-    PageObjectLogging.log("verifyIncorrectWikiName",
-                          "Verified wiki name violates naming policy", true);
+    LOG.log("verifyIncorrectWikiName",
+            "Verified wiki name violates naming policy", LOG.Type.SUCCESS);
   }
 
   public CreateNewWikiPageObjectStep2 submit() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
+    LOG.log("submit", "Submit button clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
+    LOG.log("submit", "Submit button clicked", true, driver);
     return new CreateNewWikiLogInSignUpPageObject(driver);
   }
 
   public void verifyWikiName(String expectedWikiName) {
     Assertion.assertEquals(wikiName.getAttribute("value"), expectedWikiName);
-    PageObjectLogging.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, true);
+    LOG.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, LOG.Type.SUCCESS);
   }
 
 }

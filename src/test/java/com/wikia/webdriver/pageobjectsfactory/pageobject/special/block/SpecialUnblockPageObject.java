@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -24,13 +24,13 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    PageObjectLogging.log("typeInUserName", userName + "typed into username field", true);
+    LOG.log("typeInUserName", userName + "typed into username field", LOG.Type.SUCCESS);
   }
 
   private void clickSubmitButton() {
     wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
-    PageObjectLogging.log("clickSubmitButton", "submit button clicked", true);
+    LOG.log("clickSubmitButton", "submit button clicked", LOG.Type.SUCCESS);
   }
 
   public void unblockUser(String userName) {
@@ -45,7 +45,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
         + userName + "')]"));
     wait.forElementVisible(By.xpath(
         "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
-    PageObjectLogging.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
+    LOG.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
   }
 
 }

@@ -1,15 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.logging.LOG;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * class for adding photo to gallery, slider and slideshow
@@ -35,13 +36,13 @@ public class AddPhotoComponentObject extends BasePageObject {
   private void typeSearchQuery(String query) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(query);
-    PageObjectLogging.log("typeSearchQuery", query + " search query typed in", true);
+    LOG.log("typeSearchQuery", query + " search query typed in", LOG.Type.SUCCESS);
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     searchButton.click();
-    PageObjectLogging.log("clickSearchButton", "search button clicked", true);
+    LOG.log("clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
   }
 
   public void search(String query) {
@@ -57,8 +58,8 @@ public class AddPhotoComponentObject extends BasePageObject {
       scrollAndClick(list.get(i).findElement(By.cssSelector("[type=checkbox]")));
       photoNames.add(list.get(i).getAttribute("title"));
     }
-    PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + photoNum
-                                                     + " image inputs", true, driver);
+    LOG.success("CheckGalleryImageInputs", "Check first " + photoNum + " image inputs", true);
+
     return photoNames;
   }
 
@@ -66,6 +67,6 @@ public class AddPhotoComponentObject extends BasePageObject {
   public void clickSelect() {
     wait.forElementVisible(selectButton);
     selectButton.click();
-    PageObjectLogging.log("clickSelect", "select button clicked", true);
+    LOG.log("clickSelect", "select button clicked", LOG.Type.SUCCESS);
   }
 }

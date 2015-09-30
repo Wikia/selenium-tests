@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.driverprovider;
 
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
@@ -117,7 +117,7 @@ public class NewDriverProvider {
       url =
           new URL("http://" + Configuration.getAppiumIp().toString() + "/wd/hub");
     } catch (MalformedURLException e) {
-      PageObjectLogging.log("getAndroindInstance", e, false);
+      LOG.log("getAndroindInstance", e, LOG.Type.ERROR);
     }
     mobileDriver = new AndroidDriver(url, destCaps);
 
@@ -142,7 +142,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, mozillaPath);
         } catch (IOException ex) {
-          PageObjectLogging.log("Can't create file", ex , false);
+          LOG.log("Can't create file", ex, LOG.Type.ERROR);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                mozillaPath
                                                                                    .getAbsolutePath()));
@@ -151,7 +151,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, homePath);
         } catch (IOException ex) {
-          PageObjectLogging.log("Can't create file", ex , false);
+          LOG.log("Can't create file", ex, LOG.Type.ERROR);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                homePath
                                                                                    .getAbsolutePath()));
@@ -173,9 +173,9 @@ public class NewDriverProvider {
                      + "JSErrorCollector.xpi");
         firefoxProfile.addExtension(jsErr);
       } catch (FileNotFoundException e) {
-        PageObjectLogging.log("JS extension file doesn't exist in provided location", e, false);
+        LOG.log("JS extension file doesn't exist in provided location", e, LOG.Type.ERROR);
       } catch (IOException e) {
-        PageObjectLogging.log("Error with adding firefox extension", e, false);
+        LOG.log("Error with adding firefox extension", e, LOG.Type.ERROR);
       }
     }
 

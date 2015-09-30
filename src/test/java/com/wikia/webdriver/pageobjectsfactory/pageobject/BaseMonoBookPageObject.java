@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,9 +26,9 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
 
   public void openWikiPageWithMonobook() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
-    PageObjectLogging.log("OpenWikiPage", "Wiki Page opened with success", true);
+    LOG.log("OpenWikiPage", "Wiki Page opened with success", LOG.Type.SUCCESS);
     changeToMonoBook();
-    PageObjectLogging.log("logOut", "skin is changing for more than 30 seconds", true, driver);
+    LOG.log("logOut", "skin is changing for more than 30 seconds", true, driver);
   }
 
   public void changeToMonoBook() {
@@ -43,6 +43,6 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
 
   public void verifySkinChanged() {
     wait.forElementVisible(monobookSkinClass);
-    PageObjectLogging.log("skinChangedToMonoBook", "skin is changed to monobook", true);
+    LOG.log("skinChangedToMonoBook", "skin is changed to monobook", LOG.Type.SUCCESS);
   }
 }

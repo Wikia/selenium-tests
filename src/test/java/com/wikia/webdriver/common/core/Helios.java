@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -63,17 +63,17 @@ public class Helios {
 
       EntityUtils.consume(entity);
 
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+      LOG.info("LOGIN HEADERS: ", response.toString());
+      LOG.info("LOGIN RESPONSE: ", responseValue.toString());
 
       token = responseValue.getString("access_token");
     } catch (JSONException e) {
-      PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      LOG.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      LOG.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
-                                            ExceptionUtils.getStackTrace(e), false);
+      LOG.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
+                              ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
     }
 
     return token;

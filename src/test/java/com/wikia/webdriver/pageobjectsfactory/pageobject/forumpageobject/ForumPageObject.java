@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
 import org.openqa.selenium.By;
@@ -35,20 +35,20 @@ public class ForumPageObject extends WikiArticlePageObject {
   private void openFaqLightBox() {
     wait.forElementVisible(faqButton);
     scrollAndClick(faqButton);
-    PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
+    LOG.log("openFaqLightBox", "faq lightbox opened", LOG.Type.SUCCESS);
   }
 
   private void closeFaqLightBox() {
     waitForElementNotVisibleByElement(faqModalLoadingState);
     wait.forElementVisible(closeFaqLightBoxButton);
     closeFaqLightBoxButton.click();
-    PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
+    LOG.log("closeFaqLightBox", "faq lightbox closed", LOG.Type.SUCCESS);
   }
 
   private void checkFaqLightBoxOpened() {
     wait.forElementVisible(faqLightBox);
-    PageObjectLogging.log("checkFaqLightBoxOpened",
-                          "faq lightbox verified", true);
+    LOG.log("checkFaqLightBoxOpened",
+            "faq lightbox verified", LOG.Type.SUCCESS);
   }
 
   public void verifyFaqLightBox() {
@@ -59,8 +59,8 @@ public class ForumPageObject extends WikiArticlePageObject {
 
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
-    PageObjectLogging.log("clickManageBoardsButton",
-                          "manage boards button clicked", true);
+    LOG.log("clickManageBoardsButton",
+            "manage boards button clicked", LOG.Type.SUCCESS);
     return new ForumManageBoardsPageObject(driver);
   }
 
@@ -78,9 +78,9 @@ public class ForumPageObject extends WikiArticlePageObject {
     wait.forElementVisible(forumBoardLink);
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
-    PageObjectLogging.log("openForumBoard",
-                          "click on the forum Board", true,
-                          driver);
+    LOG.log("openForumBoard",
+            "click on the forum Board", true,
+            driver);
     return new ForumBoardPageObject(driver);
   }
 
@@ -94,14 +94,14 @@ public class ForumPageObject extends WikiArticlePageObject {
       }
     }
     if (forumNumber == 0) {
-      PageObjectLogging.log("openForumBoard",
-                            "didn't find forum Board with title " + formattedForumBoardTitle,
-                            true, driver);
+      LOG.log("openForumBoard",
+              "didn't find forum Board with title " + formattedForumBoardTitle,
+              true, driver);
       return null;
     } else {
-      PageObjectLogging.log("openForumBoard",
-                            "click on the forum Board with title " + formattedForumBoardTitle,
-                            true, driver);
+      LOG.log("openForumBoard",
+              "click on the forum Board with title " + formattedForumBoardTitle,
+              true, driver);
       return openForumBoard();
     }
   }

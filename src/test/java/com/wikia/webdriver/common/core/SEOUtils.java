@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -105,20 +105,20 @@ public class SEOUtils extends BasePageObject {
   public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
     List<String> currentAttributes = Arrays.asList(robots.getAttribute("content").split("[, ]+"));
 
-    PageObjectLogging.log(
-      "Robots Meta Tag passed: " + expectedAttributes,
-      "Robots Meta Tag found on page: " + currentAttributes,
-      true
+    LOG.logResult(
+        "Robots Meta Tag passed: " + expectedAttributes,
+        "Robots Meta Tag found on page: " + currentAttributes,
+        true
     );
 
     return currentAttributes.equals(expectedAttributes);
   }
 
   public boolean isRobotsMetaTagSet() {
-    PageObjectLogging.log(
-      "Robots Meta Tag",
-      "Checking if robots meta tag is present on page",
-      true
+    LOG.logResult(
+        "Robots Meta Tag",
+        "Checking if robots meta tag is present on page",
+        true
     );
     return isElementOnPage(robots);
   }

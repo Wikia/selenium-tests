@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slider;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -42,21 +42,21 @@ public class SliderBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    PageObjectLogging
+    LOG
         .log("selectMenuPosition", pos.toString() + " position selected", true, driver);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     addPhotoButton.click();
-    PageObjectLogging.log("addPhoto", "add photo button clicked", true);
+    LOG.log("addPhoto", "add photo button clicked", LOG.Type.SUCCESS);
     return new AddPhotoComponentObject(driver);
   }
 
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    PageObjectLogging.log("clickFinish", "finish button clicked", true);
+    LOG.log("clickFinish", "finish button clicked", LOG.Type.SUCCESS);
   }
 
 }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -29,7 +29,7 @@ public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
 
   public void publish() {
     previewModal.findElement(publishButton).click();
-    PageObjectLogging.log("publish", "publish button clicked", true);
+    LOG.log("publish", "publish button clicked", LOG.Type.SUCCESS);
   }
 
 }

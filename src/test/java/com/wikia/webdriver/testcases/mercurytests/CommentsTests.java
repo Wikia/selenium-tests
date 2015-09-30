@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CommentsPageObject;
 
@@ -40,7 +40,7 @@ public class CommentsTests extends NewTestTemplate {
         "Comments are expanded"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Comments list",
         "is collapsed",
         true
@@ -54,14 +54,14 @@ public class CommentsTests extends NewTestTemplate {
         "Comments are collapsed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Comments list",
         "is expanded",
         true
     );
 
     boolean result = comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE;
-    PageObjectLogging.log(
+    LOG.log(
         "Number of comments per page",
         "is correct",
         "is incorrect",
@@ -69,7 +69,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isUserAvatarInComment(0);
-    PageObjectLogging.log(
+    LOG.log(
         "User avatar",
         "is displayed",
         "is not displayed",
@@ -77,7 +77,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isUserUsernameInComment(0);
-    PageObjectLogging.log(
+    LOG.log(
         "User username",
         "is displayed",
         "is not displayed",
@@ -85,7 +85,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isTimeStampInComment(0);
-    PageObjectLogging.log(
+    LOG.log(
         "Time stamp",
         "is displayed",
         "is not displayed",
@@ -93,7 +93,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isContentInComment(0);
-    PageObjectLogging.log(
+    LOG.log(
         "Comment content",
         "is displayed",
         "is not displayed",
@@ -121,7 +121,7 @@ public class CommentsTests extends NewTestTemplate {
         "Next page button isn't displayed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Next page button",
         "is displayed",
         true
@@ -136,7 +136,7 @@ public class CommentsTests extends NewTestTemplate {
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
 
     boolean result = numberOfComments == 0;
-    PageObjectLogging.log(
+    LOG.log(
         "Comments counter",
         "is correct",
         "There are " + numberOfComments + " untracked comments",
@@ -148,7 +148,7 @@ public class CommentsTests extends NewTestTemplate {
         "Previous page button isn't displayed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Previous page button",
         "is displayed",
         true
@@ -158,7 +158,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
 
     result = !comments.isPreviousCommentPageButtonDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Previous page button",
         "is not displayed",
         "is displayed",
@@ -180,7 +180,7 @@ public class CommentsTests extends NewTestTemplate {
         "Replies list is expanded"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Replies list",
         "is collapsed",
         true
@@ -193,7 +193,7 @@ public class CommentsTests extends NewTestTemplate {
         "Replies list is collapsed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Replies list",
         "is expanded",
         true
@@ -201,7 +201,7 @@ public class CommentsTests extends NewTestTemplate {
 
     boolean result =
         comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0);
-    PageObjectLogging.log(
+    LOG.log(
         "Replies counter",
         "is correct",
         "is incorrect",
@@ -221,7 +221,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickOnUsername(0);
 
     boolean result = username.equals(comments.getUsernameFromUrl());
-    PageObjectLogging.log(
+    LOG.log(
         "Url",
         "match pattern /wiki/User:",
         "does not match pattern /wiki/User:",
@@ -240,7 +240,7 @@ public class CommentsTests extends NewTestTemplate {
 
     boolean result =
         comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    PageObjectLogging.log(
+    LOG.log(
         "Video thumbnail",
         "is displayed",
         "is not displayed",
@@ -248,7 +248,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    PageObjectLogging.log(
+    LOG.log(
         "Video link",
         "is present",
         "is not present",
@@ -256,7 +256,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    PageObjectLogging.log(
+    LOG.log(
         "Image thumbnail",
         "is displayed",
         "is not displayed",
@@ -264,7 +264,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    PageObjectLogging.log(
+    LOG.log(
         "Image link",
         "is present",
         "is not present",

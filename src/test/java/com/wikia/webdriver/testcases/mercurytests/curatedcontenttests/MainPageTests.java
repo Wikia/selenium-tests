@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
@@ -67,7 +67,7 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
-    PageObjectLogging.log(
+    LOG.log(
         "Current URL",
         "is set on " + ROOT_PATH,
         "is not set on " + ROOT_PATH,
@@ -75,7 +75,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileTopLeaderboardVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -83,7 +83,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isArticleTitleVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -91,7 +91,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isWikiaStatsContainerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -99,7 +99,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -107,7 +107,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -115,7 +115,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileInContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -126,7 +126,7 @@ public class MainPageTests extends NewTestTemplate {
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = cc.isTrendingVideosVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -134,7 +134,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -154,7 +154,7 @@ public class MainPageTests extends NewTestTemplate {
       int newPosition = cc.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
-      PageObjectLogging.log(
+      LOG.log(
           element.name,
           "is after " + lastElement,
           "is not after " + lastElement,
@@ -174,7 +174,7 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
     boolean result = cc.isArticleTitleVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -182,7 +182,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isWikiaStatsContainerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -190,7 +190,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -198,7 +198,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -206,7 +206,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -214,7 +214,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isTrendingVideosVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -230,7 +230,7 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTACC_MAIN_PAGE);
 
     boolean result = !cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -238,7 +238,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileTopLeaderboardVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -246,7 +246,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isArticleTitleVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -254,7 +254,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isWikiaStatsContainerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -262,7 +262,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -270,7 +270,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -278,7 +278,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileInContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -286,7 +286,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isTrendingVideosVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -294,7 +294,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -310,7 +310,7 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -318,7 +318,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isArticleTitleVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -326,7 +326,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isWikiaStatsContainerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -334,7 +334,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -342,7 +342,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -350,7 +350,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileInContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -361,7 +361,7 @@ public class MainPageTests extends NewTestTemplate {
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = !cc.isTrendingVideosVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -377,7 +377,7 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTAVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -385,7 +385,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isArticleTitleVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -393,7 +393,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isWikiaStatsContainerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -401,7 +401,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -409,7 +409,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -417,7 +417,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = cc.isMobileInContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -425,7 +425,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isTrendingArticlesVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -433,7 +433,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isTrendingVideosVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -441,7 +441,7 @@ public class MainPageTests extends NewTestTemplate {
     );
 
     result = !cc.isMobilePrefooterVisible();
-    PageObjectLogging.log(
+    LOG.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 
 import org.openqa.selenium.WebDriver;
@@ -52,7 +52,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public void verifySuccesfulSave() {
     wait.forElementVisible(successfulSaveMark);
-    PageObjectLogging.log("verifySuccesfulSave", "Curated Content saved with success", true);
+    LOG.log("verifySuccesfulSave", "Curated Content saved with success", LOG.Type.SUCCESS);
   }
 
   public void removeLastElement() {
@@ -68,16 +68,16 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public void verifyImageInLastElement() {
     wait.forElementVisible(lastElementImageFilled);
-    PageObjectLogging.log("verifyImageInLastElement", "Image is present in the last element", true);
+    LOG.log("verifyImageInLastElement", "Image is present in the last element", LOG.Type.SUCCESS);
   }
 
   public void verifyImageErrorInLastElement() {
     wait.forElementVisible(lastElementImageWithError);
-    PageObjectLogging.log("verifyImageErrorInLastElement", "Image shows error", true);
+    LOG.log("verifyImageErrorInLastElement", "Image shows error", LOG.Type.SUCCESS);
   }
 
   public void verifySaveNotClickable() {
     waitForElementNotClickableByElement(saveButton);
-    PageObjectLogging.log("verifySaveNotClickable", "Save button is not clickable", true);
+    LOG.log("verifySaveNotClickable", "Save button is not clickable", LOG.Type.SUCCESS);
   }
 }

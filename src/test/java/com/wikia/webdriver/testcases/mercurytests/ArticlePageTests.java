@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
@@ -39,7 +39,7 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
 
     boolean result = articlePage.isWikiaLogoVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Wikia logo",
         "is visible",
         "is not visible",
@@ -47,7 +47,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = articlePage.isSearchButtonVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Search button",
         "is visible",
         "is not visible",
@@ -55,7 +55,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = articlePage.isTopContributorsSectionVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Top contributors section",
         "is visible",
         "is not visible",
@@ -63,7 +63,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = articlePage.isTopContributorsThumbVisible(0);
-    PageObjectLogging.log(
+    LOG.log(
         "Top contributors thumb",
         "is visible",
         "is not visible",
@@ -71,7 +71,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = articlePage.isFooterLogoVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Footer Wikia logo",
         "is visible",
         "is not visible",
@@ -80,7 +80,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
       result = articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i);
-      PageObjectLogging.log(
+      LOG.log(
           "Footer link " + FOOTER_ELEMENTS[i],
           "is visible",
           "is not visible",
@@ -98,7 +98,7 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.clickTopContributor(0);
 
     boolean result = articlePage.isUrlContainingUserPage();
-    PageObjectLogging.log(
+    LOG.log(
         "Url",
         "match pattern /wiki/User:",
         "does not match pattern /wiki/User:",
@@ -117,7 +117,7 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.waitForLoadingSpinnerToFinish();
 
     boolean result = !driver.getCurrentUrl().equals(oldUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection",
         "works",
         "does not work",
@@ -136,7 +136,7 @@ public class ArticlePageTests extends NewTestTemplate {
         "Chevron isn't collapsed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Category list",
         "is collapsed",
         true
@@ -145,7 +145,7 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.clickCategoryButton();
 
     boolean result = !articlePage.isChevronCollapsed();
-    PageObjectLogging.log(
+    LOG.log(
         "Category list",
         "is expanded",
         "is collapsed",
@@ -155,7 +155,7 @@ public class ArticlePageTests extends NewTestTemplate {
     articlePage.clickOnCategoryListElement(0);
 
     result = articlePage.isUrlContainingCategoryPage();
-    PageObjectLogging.log(
+    LOG.log(
         "Url",
         "match pattern /wiki/Category:",
         "does not match pattern /wiki/Category:",
@@ -178,7 +178,7 @@ public class ArticlePageTests extends NewTestTemplate {
       throw new WebDriverException("Wrong URL encoding");
     }
 
-    PageObjectLogging.logWarning(
+    LOG.logWarning(
         "Info",
         "Accessing article directly through URL"
     );
@@ -186,7 +186,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.openMercuryArticleByName(wikiURL, encodedColonUrl);
 
     boolean result = driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for colon",
         "is encoded",
         "is not encoded",
@@ -194,7 +194,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for colon",
         "is correct",
         "is not correct",
@@ -204,7 +204,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.openMercuryArticleByName(wikiURL, encodedQuestionMarkUrl);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for question mark",
         "is encoded",
         "is not encoded",
@@ -213,14 +213,14 @@ public class ArticlePageTests extends NewTestTemplate {
 
     result =
         article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for question mark",
         "is correct",
         "is not correct",
         result
     );
 
-    PageObjectLogging.logWarning(
+    LOG.logWarning(
         "Info",
         "Accessing article through link in content"
     );
@@ -229,7 +229,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for colon",
         "is not encoded",
         "is encoded",
@@ -237,7 +237,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for colon",
         "is correct",
         "is not correct",
@@ -248,7 +248,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for question mark",
         "is encoded",
         "is not encoded",
@@ -257,14 +257,14 @@ public class ArticlePageTests extends NewTestTemplate {
 
     result =
         article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for question mark",
         "is correct",
         "is not correct",
         result
     );
 
-    PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
+    LOG.logWarning("Info", "Accessing article through link in navigation side");
 
     nav.clickSearchButton();
     nav.clickNavListElement(4);
@@ -272,7 +272,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for colon",
         "is not encoded",
         "is encoded",
@@ -280,7 +280,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for colon",
         "is correct",
         "is not correct",
@@ -293,7 +293,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for question mark",
         "is encoded",
         "is not encoded",
@@ -302,14 +302,14 @@ public class ArticlePageTests extends NewTestTemplate {
 
     result =
         article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for question mark",
         "is correct",
         "is not correct",
         result
     );
 
-    PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
+    LOG.logWarning("Info", "Accessing article through link in search result");
 
     nav.clickSearchButton();
     nav.clickSearchField();
@@ -318,7 +318,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for colon",
         "is encoded",
         "is not encoded",
@@ -326,7 +326,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for colon",
         "is correct",
         "is not correct",
@@ -340,7 +340,7 @@ public class ArticlePageTests extends NewTestTemplate {
     article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
+    LOG.log(
         "URL for question mark",
         "is encoded",
         "is not encoded",
@@ -349,7 +349,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     result =
         article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
-    PageObjectLogging.log(
+    LOG.log(
         "Article title for question mark",
         "is correct",
         "is not correct",

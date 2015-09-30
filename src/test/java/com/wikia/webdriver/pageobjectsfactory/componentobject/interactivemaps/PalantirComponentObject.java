@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
 import com.wikia.webdriver.common.contentpatterns.PalantirContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -35,7 +35,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
         String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
         map.get(PalantirContent.PONTO_MSG_MESSAGE)
     );
-    PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
+    LOG.log(methodName, handle.getMessage(), true, driver);
     return handle;
   }
 

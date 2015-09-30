@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -71,7 +71,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     edit.clickOnPublish();
     wait.forElementVisible(By.cssSelector("#WikiaArticle"));
 
-    PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
+    LOG.log("createNewTemplate", "new template created: " + templateName, LOG.Type.SUCCESS);
 
     return edit;
   }
@@ -84,13 +84,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   public WikiArticlePageObject openRandomArticle() {
     scrollAndClick(randomPageButton);
     wait.forElementVisible(searchButton);
-    PageObjectLogging.log("openRandomArticle", "random page button clicked", true, driver);
+    LOG.log("openRandomArticle", "random page button clicked", true, driver);
     return new WikiArticlePageObject(driver);
   }
 
   public void verifyArticleText(String content) {
     wait.forTextInElement(articleContentBy, content);
-    PageObjectLogging.log("verifyArticleText", "article text is verified", true);
+    LOG.log("verifyArticleText", "article text is verified", LOG.Type.SUCCESS);
   }
 
   /**
@@ -101,7 +101,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   public WikiArticleEditMode edit() {
     wait.forElementVisible(editButton);
     scrollAndClick(editButton);
-    PageObjectLogging.log("edit", "Edit article", true);
+    LOG.log("edit", "Edit article", LOG.Type.SUCCESS);
     return new WikiArticleEditMode(driver);
   }
 
@@ -112,8 +112,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);
-    PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page",
-        true, driver);
+    LOG.log("VerifyTheImageOnThePage", "Verify that the image appears on the page",
+            true, driver);
   }
 
   public WikiHistoryPageObject openHistoryPage() {

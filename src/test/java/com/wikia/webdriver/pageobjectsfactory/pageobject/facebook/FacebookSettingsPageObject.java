@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -41,7 +41,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
 
   public void verifyPageLogo() {
     wait.forElementVisible(pageLogo);
-    PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
+    LOG.log("verifyPageLogo", "Page logo is present", LOG.Type.SUCCESS);
   }
 
   /**
@@ -65,13 +65,13 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             try {
               Thread.sleep(3000);
             } catch (InterruptedException e) {
-              PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
+              LOG.log("SLEEP INTERRUPTED", e, LOG.Type.ERROR);
             }
 
-            PageObjectLogging.log("removeApp", "Wikia App removed", true);
+            LOG.log("removeApp", "Wikia App removed", LOG.Type.SUCCESS);
           }
         } else {
-          PageObjectLogging.log("removeApp", "Wikia App not found", true);
+          LOG.log("removeApp", "Wikia App not found", LOG.Type.SUCCESS);
         }
       }
     }
@@ -85,7 +85,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("isAppPresent", e, false);
+      LOG.log("isAppPresent", e, LOG.Type.ERROR);
     }
     boolean isPresent = false;
     for (WebElement element : pageElementList) {

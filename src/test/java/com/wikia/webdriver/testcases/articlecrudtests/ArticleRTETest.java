@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -343,8 +343,8 @@ public class ArticleRTETest extends NewTestTemplate {
       if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)) {
         tmp1 = e.getAttribute("value").replace("<", "&lt");
         tmp1.replace(">", "&gt");
-        PageObjectLogging
-            .log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
+        LOG
+            .logResult("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
       } else {
         tmp1 = e.getAttribute("value").replace("<", "&lt;");
         tmp1 = tmp1.replace(">", "&gt;");
@@ -353,8 +353,8 @@ public class ArticleRTETest extends NewTestTemplate {
         tmp2 = tmp2.replace(">", "&gt;");
         tmp2 = tmp2.replace(" ", "&nbsp;");
 
-        PageObjectLogging.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", false);
-        PageObjectLogging
+        LOG.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", LOG.Type.ERROR);
+        LOG
             .log("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
       }
     }

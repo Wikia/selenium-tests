@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -79,10 +79,10 @@ public class SignUpPageObject extends WikiBasePageObject {
       }
       return output;
     } catch (NoSuchAlgorithmException e) {
-      PageObjectLogging.log("md5", e.toString(), false);
+      LOG.log("md5", e.toString(), LOG.Type.ERROR);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log("md5", e.toString(), false);
+      LOG.log("md5", e.toString(), LOG.Type.ERROR);
       throw new WebDriverException(e);
     }
   }
@@ -101,13 +101,13 @@ public class SignUpPageObject extends WikiBasePageObject {
   public void typeEmail(String email) {
     emailField.sendKeys(email);
     emailField.sendKeys(Keys.TAB);
-    PageObjectLogging.log("typeEmail", email + " typed into email field", true);
+    LOG.log("typeEmail", email + " typed into email field", LOG.Type.SUCCESS);
   }
 
   public void typePassword(String password) {
     passwordField.sendKeys(password);
     passwordField.sendKeys(Keys.TAB);
-    PageObjectLogging.log("typePassword", "password typed into password field", true);
+    LOG.log("typePassword", "password typed into password field", LOG.Type.SUCCESS);
   }
 
   public void verifyTooYoungMessage() {
@@ -128,10 +128,10 @@ public class SignUpPageObject extends WikiBasePageObject {
       new Select(birthYearField).selectByVisibleText(year);
       Thread.sleep(150);
       new Select(birthMonthField).selectByVisibleText(month);
-      PageObjectLogging.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
-                                               + " selected", true);
+      LOG.log("enterBirthDate ", "Birth date: " + day + "/" + month + "/" + year
+                                 + " selected", LOG.Type.SUCCESS);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("enterBirthDate", e, false);
+      LOG.log("enterBirthDate", e, LOG.Type.ERROR);
     }
   }
 
@@ -141,13 +141,13 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public void typeCaptcha(String captchaWord) {
     captchaField.sendKeys(captchaWord);
-    PageObjectLogging.log("typeCaptcha ", "captcha typed into captcha field", true);
+    LOG.log("typeCaptcha ", "captcha typed into captcha field", LOG.Type.SUCCESS);
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementVisible(facebookSignUpButton);
     facebookSignUpButton.click();
-    PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
+    LOG.log("clickFacebookSignUp", "clicked on sign up with facebok button", LOG.Type.SUCCESS);
     return new FacebookSignupModalComponentObject(driver);
   }
 
@@ -158,7 +158,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 
   public AlmostTherePageObject submit() {
     scrollAndClick(signupButton);
-    PageObjectLogging.log("submit ", "sign up button clicked", true);
+    LOG.log("submit ", "sign up button clicked", LOG.Type.SUCCESS);
     return new AlmostTherePageObject(driver);
   }
 
@@ -192,12 +192,12 @@ public class SignUpPageObject extends WikiBasePageObject {
         String[] field = strLine.split(" ");
         if (field[1].equals(md5)) {
           in.close();
-          PageObjectLogging.log("getWordFromCaptcha", "Captcha word decoded", true);
+          LOG.log("getWordFromCaptcha", "Captcha word decoded", LOG.Type.SUCCESS);
           return field[0];
         }
       }
       in.close();
-      PageObjectLogging.log("getWordFromCaptcha", "Captcha word not decoded", false);
+      LOG.log("getWordFromCaptcha", "Captcha word not decoded", LOG.Type.ERROR);
       return null;
     } catch (IOException e) {
       throw new WebDriverException(e);

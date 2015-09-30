@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -41,7 +41,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
 
   public SpecialBlockPageObject open(String wikiUrl){
     getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
-    PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
+    LOG.log("openSpecialBlockPage", "history page opened", LOG.Type.SUCCESS);
     wait.forElementVisible(blockButton);
 
     return this;
@@ -85,7 +85,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
     for (WebElement checkBox : checkBoxes) {
       Assertion.assertFalse(checkBox.isSelected());
     }
-    PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
+    LOG.log("deselectAllSelections", "all selections deselected", LOG.Type.SUCCESS);
   }
 
   public void verifyBlockedUserSubmitPage(String userName, String password) {

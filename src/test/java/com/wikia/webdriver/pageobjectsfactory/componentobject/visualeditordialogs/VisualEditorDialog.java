@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -57,7 +57,7 @@ public class VisualEditorDialog extends WikiBasePageObject {
     wait.forElementClickable(closeButton);
     closeButton.click();
     waitForDialogNotVisible();
-    PageObjectLogging.log("closeDialog", "Dialog is closed", true);
+    LOG.log("closeDialog", "Dialog is closed", LOG.Type.SUCCESS);
     return new VisualEditorPageObject(driver);
   }
 }

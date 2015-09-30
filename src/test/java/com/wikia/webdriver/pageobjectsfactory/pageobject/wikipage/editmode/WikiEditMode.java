@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
@@ -33,7 +33,7 @@ public class WikiEditMode extends WikiBasePageObject {
     publishButtonGeneral.click();
     wait.forElementPresent(editButtonBy);
 
-    PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
+    LOG.log("ClickOnPublishButton", "Click on 'Publish' button", LOG.Type.SUCCESS);
     return new WikiArticlePageObject(driver);
   }
 

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -35,7 +35,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     wait.forElementVisible(By.cssSelector(DATA_THEME_LIST));
     String themeName = themeLocator.replace("%name%", name);
     scrollAndClick(driver.findElement(By.cssSelector(themeName)));
-    PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
+    LOG.log("selectTheme", "skin " + name + " selected", true, driver);
   }
 
   public ArticlePageObject submit() {
@@ -49,7 +49,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     }
 
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
+    LOG.log("submit", "Submit button clicked", true, driver);
     return new ArticlePageObject(driver);
   }
 }

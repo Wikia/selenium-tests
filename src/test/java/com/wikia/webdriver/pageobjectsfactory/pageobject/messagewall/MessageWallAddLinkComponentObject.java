@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -36,15 +36,17 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
   public void addInternalLink(String target, String text) {
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    PageObjectLogging
-        .log("addInternalLink", "internal link " + target + " and text " + text + " added", true);
+    LOG
+        .logResult("addInternalLink", "internal link " + target + " and text " + text + " added",
+                   true);
   }
 
   public void addExternalLink(String target, String text) {
     addLinkModal.findElement(externalRadioButtonBy).click();
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    PageObjectLogging
-        .log("addExternalLink", "external link " + target + " and text " + text + " added", true);
+    LOG
+        .logResult("addExternalLink", "external link " + target + " and text " + text + " added",
+                   true);
   }
 }

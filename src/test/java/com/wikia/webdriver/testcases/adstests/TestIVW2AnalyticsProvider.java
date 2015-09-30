@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
 import org.jsoup.Jsoup;
@@ -26,7 +26,7 @@ public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
       String testedPage = urlBuilder.getUrlForPath(wikiName, article);
       String htmlSource = Jsoup.connect(testedPage).timeout(TIMEOUT_SEC * 1000).get().html();
       Assertion.assertTrue(htmlSource.contains(ivw2Param));
-      PageObjectLogging.log("IVW2", ivw2Param + " param is on the " + testedPage, true);
+      LOG.log("IVW2", ivw2Param + " param is on the " + testedPage, LOG.Type.SUCCESS);
     }
   }
 }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.video;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
@@ -72,8 +72,8 @@ public class YoutubeVideoProvider {
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
     } catch (IOException e) {
-      PageObjectLogging.log("A problem occurred while receiving a YouTube video", e,
-          false);
+      LOG.log("A problem occurred while receiving a YouTube video", e,
+              LOG.Type.ERROR);
     }
 
     return new YoutubeVideo(videoTitle, videoUrl, videoId);

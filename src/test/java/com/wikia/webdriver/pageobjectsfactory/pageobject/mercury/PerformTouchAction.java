@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NoSuchContextException;
@@ -108,7 +108,7 @@ public class PerformTouchAction {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      PageObjectLogging.log(methodName, e, false);
+      LOG.log(methodName, e, LOG.Type.ERROR);
     }
   }
 
@@ -122,7 +122,7 @@ public class PerformTouchAction {
     try {
       mobileDriver.context(contextName);
     } catch (NoSuchContextException e) {
-      PageObjectLogging.log(methodName, e, false);
+      LOG.log(methodName, e, LOG.Type.ERROR);
     }
   }
 

@@ -12,7 +12,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -205,85 +205,85 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyModalLoginAppeared() {
     wait.forElementVisible(logInModal);
-    PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
+    LOG.log("verifyModalLogin", "verify modal login form is displayed", LOG.Type.SUCCESS);
   }
 
   public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_FILES);
-    PageObjectLogging.log("openSpecialUnusedFilesPage", URLsContent.SPECIAL_UNUSED_FILES
-        + " opened", true);
+    LOG.log("openSpecialUnusedFilesPage", URLsContent.SPECIAL_UNUSED_FILES
+                                          + " opened", LOG.Type.SUCCESS);
     return new SpecialUnusedFilesPageObject(driver);
   }
 
   public FeaturedVideoAdminPageObject openVideoPageAdminObject(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_VIDEO_PAGE_ADMIN);
-    PageObjectLogging.log("openVideoPageAdminObject", wikiURL + " opened", true);
+    LOG.log("openVideoPageAdminObject", wikiURL + " opened", LOG.Type.SUCCESS);
     return new FeaturedVideoAdminPageObject(driver);
   }
 
   public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_VIDEOS);
-    PageObjectLogging.log("openSpecialUnusedVideosPage", URLsContent.SPECIAL_UNUSED_VIDEOS
-        + " opened", true);
+    LOG.log("openSpecialUnusedVideosPage", URLsContent.SPECIAL_UNUSED_VIDEOS
+                                           + " opened", LOG.Type.SUCCESS);
     return new SpecialUnusedVideosPageObject(driver);
   }
 
   public SpecialUncategorizedFilesPageObject openSpecialUncategorizedFilesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNCATEGORIZED_FILES);
-    PageObjectLogging.log("openSpecialUncategorizedFilesPage",
-        URLsContent.SPECIAL_UNCATEGORIZED_FILES + " opened", true);
+    LOG.log("openSpecialUncategorizedFilesPage",
+            URLsContent.SPECIAL_UNCATEGORIZED_FILES + " opened", LOG.Type.SUCCESS);
     return new SpecialUncategorizedFilesPageObject(driver);
   }
 
   public SpecialMostLinkedFilesPageObject openSpecialMostLinkedFilesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MOST_LINKED_FILES);
-    PageObjectLogging.log("openSpecialMostLinkedFilesPage", URLsContent.SPECIAL_MOST_LINKED_FILES
-        + " opened", true);
+    LOG.log("openSpecialMostLinkedFilesPage", URLsContent.SPECIAL_MOST_LINKED_FILES
+                                              + " opened", LOG.Type.SUCCESS);
     return new SpecialMostLinkedFilesPageObject(driver);
   }
 
   public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
     getUrl(wikiCorpSetupURL + URLsContent.SPECIAL_MANAGE_WIKIA_HOME);
-    PageObjectLogging.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", true);
+    LOG.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", LOG.Type.SUCCESS);
     return new SpecialManageWikiaHome(driver);
   }
 
   public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL);
-    PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
+    LOG.log("openCorporateHomePage", "corporate home page opened", LOG.Type.SUCCESS);
     return new HomePageObject(driver);
   }
 
   public SpecialContributionsPageObject openContributionsPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CONTRIBUTIONS);
-    PageObjectLogging.log("openContributionsPage", "contributions page is opened", true);
+    LOG.log("openContributionsPage", "contributions page is opened", LOG.Type.SUCCESS);
     return new SpecialContributionsPageObject(driver);
   }
 
   public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_BLOCKLIST);
-    PageObjectLogging.log("Special:BlockList openSpecialBlockListPage",
-        "blocked users list page opened", true);
+    LOG.log("Special:BlockList openSpecialBlockListPage",
+            "blocked users list page opened", LOG.Type.SUCCESS);
     return new SpecialBlockListPageObject(driver);
   }
 
   public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNBLOCK);
-    PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
+    LOG.log("openSpecialUnblockPage", "special unblock page opened", LOG.Type.SUCCESS);
     return new SpecialUnblockPageObject(driver);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
         + URLsContent.FILE_NAMESPACE + articlePage, URLsContent.ACTION_HISTORY));
-    PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
+    LOG.log("openFileHistoryPage", "history page opened", LOG.Type.SUCCESS);
     return new HistoryPagePageObject(driver);
   }
 
   public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
     getUrl(wikiURL);
     getVenusGlobalNav().signUp();
-    PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
+    LOG.log("openSpecialSignUpPage", "Special:UserSignUp page opened", LOG.Type.SUCCESS);
     return new SignUpPageObject(driver);
   }
 
@@ -294,26 +294,26 @@ public class WikiBasePageObject extends BasePageObject {
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
-    PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+    LOG.log("openSpecialPreferencesPage", "Special:Prefereces page opened", LOG.Type.SUCCESS);
     return new PreferencesPageObject(driver);
   }
 
   public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES);
-    PageObjectLogging.log("EditingPreferencesPageObject",
-        "Special:Prefereces#mw-prefsection-editing page opened", true);
+    LOG.log("EditingPreferencesPageObject",
+            "Special:Prefereces#mw-prefsection-editing page opened", LOG.Type.SUCCESS);
     return new EditingPreferencesPageObject(driver);
   }
 
   public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
+    LOG.log("openSpecialPromotePage", "Special:Promote page opened", LOG.Type.SUCCESS);
     return new SpecialPromotePageObject(driver);
   }
 
   public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
+    LOG.log("openSpecialUserLogin", "Special:UserLogin page opened", LOG.Type.SUCCESS);
     return new SpecialUserLoginPageObject(driver);
   }
 
@@ -377,14 +377,14 @@ public class WikiBasePageObject extends BasePageObject {
 
   public ForumPageObject openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
-    PageObjectLogging.log("openForumPage", "forum page opened", true);
+    LOG.log("openForumPage", "forum page opened", LOG.Type.SUCCESS);
     return new ForumPageObject(driver);
   }
 
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
-    PageObjectLogging.log("openSpecialMultiWikiFinderPage",
-        "Special MultiWikiFinder page was opened", true);
+    LOG.log("openSpecialMultiWikiFinderPage",
+            "Special MultiWikiFinder page was opened", LOG.Type.SUCCESS);
     return new SpecialMultiWikiFinderPageObject(driver);
   }
 
@@ -452,24 +452,24 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
-        driver);
+    LOG.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
+            driver);
     return new SourceEditModePageObject(driver);
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
-        driver);
+    LOG.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
+            driver);
     return new VisualEditModePageObject(driver);
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
     wait.forElementVisible(veEditButton);
     veEditButton.click();
-    PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
-        driver);
+    LOG.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
+            driver);
     return new VisualEditorPageObject(driver);
   }
 
@@ -477,8 +477,8 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openVEModeWithSectionEditButton", "VE edit button clicked at section: "
-        + section, true, driver);
+    LOG.log("openVEModeWithSectionEditButton", "VE edit button clicked at section: "
+                                               + section, true, driver);
     return new VisualEditorPageObject(driver);
   }
 
@@ -486,8 +486,8 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openCKModeWithSectionEditButton", "RTE edit button clicked at section: "
-        + section, true, driver);
+    LOG.log("openCKModeWithSectionEditButton", "RTE edit button clicked at section: "
+                                               + section, true, driver);
     return new VisualEditModePageObject(driver);
   }
 
@@ -495,8 +495,8 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openSrcModeWithSectionEditButton",
-        "Src edit button clicked at section: " + section, true, driver);
+    LOG.log("openSrcModeWithSectionEditButton",
+            "Src edit button clicked at section: " + section, true, driver);
     return new SourceEditModePageObject(driver);
   }
 
@@ -534,15 +534,15 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging
-        .log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
+    LOG
+        .logResult("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
     return new SpecialUserLoginPageObject(driver);
   }
 
   public LicensedVideoSwapPageObject openLicensedVideoSwap(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_LICENSED_VIDEO_SWAP);
-    PageObjectLogging.log("LicensedVideoSwapPageObject", "Special:LicensedVideoSwap opened on: "
-        + wikiURL, true);
+    LOG.log("LicensedVideoSwapPageObject", "Special:LicensedVideoSwap opened on: "
+                                           + wikiURL, LOG.Type.SUCCESS);
     return new LicensedVideoSwapPageObject(driver);
   }
 
@@ -577,7 +577,7 @@ public class WikiBasePageObject extends BasePageObject {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
     }
-    PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
+    LOG.log("verifyUserLoggedIn", "user " + userName + " logged in", LOG.Type.SUCCESS);
   }
 
   protected void clickArticleDeleteConfirmationButton() {
@@ -592,20 +592,20 @@ public class WikiBasePageObject extends BasePageObject {
     String url =
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_DELETE);
     getUrl(url);
-    PageObjectLogging.log("deletePage", "delete page opened", true);
+    LOG.log("deletePage", "delete page opened", LOG.Type.SUCCESS);
     return new DeletePageObject(driver);
   }
 
   public void verifyEditButtonNotPresent() {
     waitForElementNotVisibleByElement(editButton);
-    PageObjectLogging.log("verifyEditButtonNotPresent", "edit button is not present", true);
+    LOG.log("verifyEditButtonNotPresent", "edit button is not present", LOG.Type.SUCCESS);
   }
 
   protected void clickRestoreArticleButton() {
     wait.forElementVisible(restoreButton);
     scrollAndClick(restoreButton);
     wait.forElementVisible(userMessage);
-    PageObjectLogging.log("clickUndeleteArticle", "undelete article button clicked", true, driver);
+    LOG.log("clickUndeleteArticle", "undelete article button clicked", true, driver);
   }
 
   public SpecialRestorePageObject undeleteByFlashMessage() {
@@ -644,8 +644,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyPermissionsErrorsPresent() {
     wait.forElementVisible(premissionErrorMessage);
-    PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected", true,
-        driver);
+    LOG.log("verifyPermissionsErrors", "premission error found, as expected", true,
+            driver);
   }
 
   public void verifyUrl(String url) {
@@ -659,22 +659,22 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyLoginReguiredMessage() {
     wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
-    PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
-        true, driver);
+    LOG.log("LoginRequiredMessage", "Login required message in first header present",
+            true, driver);
   }
 
   public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkPresent", "Link to login special page present", true, driver);
+    LOG.log("LoginLinkPresent", "Link to login special page present", true, driver);
     scrollAndClick(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
+    LOG.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
 
     return new SpecialUserLoginPageObject(driver);
   }
 
   public void verifyNotLoggedInMessage() {
     wait.forTextInElement(wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE);
-    PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
+    LOG.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
   public void logInViaModal(String userName, String password) {
@@ -682,21 +682,22 @@ public class WikiBasePageObject extends BasePageObject {
     modalUserNameInput.sendKeys(userName);
     wait.forElementVisible(modalPasswordInput);
     modalPasswordInput.sendKeys(password);
-    PageObjectLogging.log("FillLoginForm", "Login form in modal is filled", true, driver);
+    LOG.log("FillLoginForm", "Login form in modal is filled", true, driver);
 
     scrollAndClick(modalLoginSubmit);
-    PageObjectLogging.log("LoginFormSubmitted", "Login form is submitted", true);
+    LOG.log("LoginFormSubmitted", "Login form is submitted", LOG.Type.SUCCESS);
 
     waitForElementNotVisibleByElement(logInModal);
-    PageObjectLogging.log("LoginModalDissapears", "Login modal is no longer visible", true);
+    LOG.log("LoginModalDissapears", "Login modal is no longer visible", LOG.Type.SUCCESS);
   }
 
   public String receiveMailWithNewPassword(String email, String password) {
     String newPassword =
         MailFunctions.getPasswordFromEmailContent((MailFunctions.getFirstEmailContent(email,
             password, "Reset your Wikia password")));
-    PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
-        true);
+    LOG.logResult("NewPasswordRecived",
+                  "New password recived from mail: " + newPassword,
+                  true);
 
     return newPassword;
   }
@@ -704,22 +705,22 @@ public class WikiBasePageObject extends BasePageObject {
   public String getWikiaCssContent() {
     wait.forElementVisible(cssSource);
     String source = cssSource.getText();
-    PageObjectLogging
-        .log("cssSource", "the following text was get from Wikia.css: " + source, true);
+    LOG
+        .logResult("cssSource", "the following text was get from Wikia.css: " + source, true);
     return source;
   }
 
   public String getFirstCssRevision() {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
-    PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "
-        + summary, true);
+    LOG.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "
+                              + summary, LOG.Type.SUCCESS);
     return summary;
   }
 
   public void verifyRevisionMarkedAsMinor() {
     if (isElementOnPage(cssMinorEdit)) {
-      PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+      LOG.log("cssEditSummary", "minor edit is marked in first revision", LOG.Type.SUCCESS);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
     }
@@ -736,7 +737,7 @@ public class WikiBasePageObject extends BasePageObject {
         throw new WebDriverException("No logout link provided");
       }
     } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
+      LOG.log("logOut", "page loads for more than 30 seconds", LOG.Type.SUCCESS);
     }
   }
 
@@ -745,20 +746,20 @@ public class WikiBasePageObject extends BasePageObject {
       driver.manage().deleteAllCookies();
       driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
+      LOG.log("logOut", "page loads for more than 30 seconds", LOG.Type.SUCCESS);
     }
     wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
+    LOG.log("logOut", "user is logged out", true, driver);
   }
 
   public void logOut(String wikiURL) {
     try {
       getUrl(wikiURL + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
+      LOG.log("logOut", "page loads for more than 30 seconds", LOG.Type.SUCCESS);
     }
     wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
+    LOG.log("logOut", "user is logged out", true, driver);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
@@ -776,8 +777,8 @@ public class WikiBasePageObject extends BasePageObject {
     }
 
     verifyUserLoggedIn(userName);
-    PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-        + token, true);
+    LOG.log("loginCookie", "user was logged in by by helios using acces token: "
+                           + token, LOG.Type.SUCCESS);
     return token;
   }
 
@@ -788,19 +789,19 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void openWikiPage(String wikiURL) {
     getUrl(wikiURL);
-    PageObjectLogging.log("openWikiPage", "Wiki page is opened", true);
+    LOG.log("openWikiPage", "Wiki page is opened", LOG.Type.SUCCESS);
   }
 
   public void verifyPageUnfollowed() {
     wait.forTextInElement(followButton, "Follow");
-    PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);
+    LOG.log("verifyPageUnfollowed", "page is not followed", LOG.Type.SUCCESS);
   }
 
   public void follow() {
     wait.forElementVisible(followButton);
     jsActions.click(followButton);
     wait.forTextInElement(followButton, "Following");
-    PageObjectLogging.log("followArticle", "page is followed", true, driver);
+    LOG.log("followArticle", "page is followed", true, driver);
   }
 
   public WatchPageObject unfollowCurrentUrl() {
@@ -857,7 +858,7 @@ public class WikiBasePageObject extends BasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String url = (String) js.executeScript("return wgServer");
     getUrl(url + "/" + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+    LOG.log("openSpecialPromote", "special promote page opened", LOG.Type.SUCCESS);
   }
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
@@ -903,7 +904,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementNotVisibleByElement(veMode);
     waitForElementNotVisibleByElement(focusMode);
     waitForElementNotVisibleByElement(veToolMenu);
-    PageObjectLogging.log("verifyVEPublishComplete", "Publish is done", true, driver);
+    LOG.log("verifyVEPublishComplete", "Publish is done", true, driver);
   }
 
   public WikiHistoryPageObject openArticleHistoryPage() {
@@ -917,13 +918,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyArticleName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
-    PageObjectLogging.log("verifyArticleName", "The article shows " + targetText, true);
+    LOG.log("verifyArticleName", "The article shows " + targetText, LOG.Type.SUCCESS);
   }
 
   public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {
     String pattern = "List of wikis with matched criteria (" + numberOfWikis + ")";
     wait.forElementVisible(headerWhereIsMyExtensionPage);
-    PageObjectLogging.log("verifyNumberOfTop1kWikis", "Verification of top 1k wikis", true, driver);
+    LOG.log("verifyNumberOfTop1kWikis", "Verification of top 1k wikis", true, driver);
     Assertion.assertStringContains(headerWhereIsMyExtensionPage.getText(), pattern);
   }
 
@@ -934,12 +935,12 @@ public class WikiBasePageObject extends BasePageObject {
   public void setCookie(String name, String value) {
     Cookie newCookie = new Cookie(name, value);
     driver.manage().addCookie(newCookie);
-    PageObjectLogging.log("setCookie", "Set cookie: '" + name + "' to " + value, true);
+    LOG.log("setCookie", "Set cookie: '" + name + "' to " + value, LOG.Type.SUCCESS);
   }
 
   public void deleteCookie(String name) {
     driver.manage().deleteCookieNamed(name);
-    PageObjectLogging.log("deleteCookie", "Remove '" + name + "' from cookie", true);
+    LOG.log("deleteCookie", "Remove '" + name + "' from cookie", LOG.Type.SUCCESS);
   }
 
   public void setCookieGeo(String countryCode) {
@@ -949,7 +950,7 @@ public class WikiBasePageObject extends BasePageObject {
       geo.put("country", countryCode);
       setCookie(cookieName, geo.toString());
     } catch (JSONException ex) {
-      PageObjectLogging.log("setCookieGeo", "Cannot set cookie ('" + cookieName + "')", true);
+      LOG.log("setCookieGeo", "Cannot set cookie ('" + cookieName + "')", LOG.Type.SUCCESS);
     }
   }
 
@@ -960,11 +961,13 @@ public class WikiBasePageObject extends BasePageObject {
   public void resizeWindow(int width, int height) {
     try {
       driver.manage().window().setSize(new Dimension(width, height));
-      PageObjectLogging.log("ResizeWindow", "Resize window (width=" + width + ", height=" + height
-          + ")", true);
+      LOG.logResult("ResizeWindow",
+                    "Resize window (width=" + width + ", height=" + height
+                    + ")", true);
     } catch (WebDriverException ex) {
-      PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height="
-          + height + ")", true);
+      LOG.logResult("ResizeWindow",
+                    "Cannot resize window (width=" + width + ", height="
+                    + height + ")", true);
     }
   }
 
@@ -975,12 +978,12 @@ public class WikiBasePageObject extends BasePageObject {
   public void scrollToFooter() {
     wait.forElementVisible(footer);
     scrollToElement(footer);
-    PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+    LOG.log("scrollToFooter", "Scroll to the footer of the page", LOG.Type.SUCCESS);
   }
 
   public void verifyGlobalNavigation() {
     wait.forElementVisible(globalNavigationBar);
-    PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
+    LOG.log("verifyGlobalNavigation", "Verified global navigation", LOG.Type.SUCCESS);
   }
 
   public VenusGlobalNavPageObject getVenusGlobalNav() {
@@ -1007,23 +1010,23 @@ public class WikiBasePageObject extends BasePageObject {
     // prevent http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp
     WebElement placeholder = driver.findElement(By.cssSelector(globalNavigationAvatarPlaceholder));
     wait.forElementVisible(placeholder);
-    PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
+    LOG.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", LOG.Type.SUCCESS);
   }
 
   public void verifyAvatarNotPresent() {
     wait.forElementNotPresent(By.cssSelector("a[data-id='userpage']"));
-    PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
+    LOG.log("verifyAvatarNotPresent", "Avatar is not visible", LOG.Type.SUCCESS);
   }
 
   public void verifyAvatarVisible() {
     wait.forElementVisible(globalNavigationAvatar);
-    PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
+    LOG.log("verifyAvatarVisible", "desired avatar is visible on navbar", LOG.Type.SUCCESS);
   }
 
   public UserProfilePageObject clickOnAvatar() {
     getVenusGlobalNav().openAccountNAvigation();
     globalNavigationAvatar.click();
-    PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
+    LOG.log("clickOnAvatar", "clicked on avatar", LOG.Type.SUCCESS);
     return new UserProfilePageObject(driver);
   }
 

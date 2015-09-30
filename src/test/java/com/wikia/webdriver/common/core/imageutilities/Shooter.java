@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -54,7 +54,7 @@ public class Shooter {
     }
 
     File image = imageEditor.cropImage(start, size, capturePage(driver));
-    PageObjectLogging.logImage("Shooter", image, true);
+    LOG.logImage("Shooter", image, true);
     return image;
   }
 

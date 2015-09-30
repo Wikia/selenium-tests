@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
@@ -35,14 +35,14 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
   public CreatePinTypesComponentObject clickNext() {
     wait.forElementVisible(nextButton);
     nextButton.click();
-    PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
@@ -55,13 +55,13 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public void typeMapName(String mapName) {
     wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
-    PageObjectLogging.log("typeMapName", mapName + " title for map is typed in", true);
+    LOG.log("typeMapName", mapName + " title for map is typed in", LOG.Type.SUCCESS);
   }
 
   public void verifyRealMapPreviewImage() {
     wait.forElementVisible(realMapImagePreview);
     Assertion.assertFalse(realMapImagePreview.getAttribute("src").isEmpty());
-    PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
+    LOG.log("verifyRealMapPreviewImage", "Real map preview image is visible", LOG.Type.SUCCESS);
   }
 
   public void verifyErrorExists() {

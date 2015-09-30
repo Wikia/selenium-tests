@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -50,26 +50,26 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private void typeInUrl(String url) {
     wait.forElementVisible(urlField);
     urlField.sendKeys(url);
-    PageObjectLogging.log("typeInUrl", url + " typed into url field", true);
+    LOG.log("typeInUrl", url + " typed into url field", LOG.Type.SUCCESS);
   }
 
   private void clickAddButtonProvider() {
     wait.forElementVisible(addUrlButton);
     scrollAndClick(addUrlButton);
-    PageObjectLogging.log("clickAddButton", "add url button clicked", true, driver);
+    LOG.log("clickAddButton", "add url button clicked", true, driver);
   }
 
   private void typeInSearchQuery(String query) {
     wait.forElementVisible(findField);
     findField.sendKeys(query);
-    PageObjectLogging.log("typeInSearchQuery",
-                          query + " query typed into search video field", true);
+    LOG.log("typeInSearchQuery",
+            query + " query typed into search video field", LOG.Type.SUCCESS);
   }
 
   private void clickFindButton() {
     wait.forElementVisible(findButton);
     scrollAndClick(findButton);
-    PageObjectLogging.log("clickFindButton", "find button clicked", true, driver);
+    LOG.log("clickFindButton", "find button clicked", true, driver);
   }
 
   private void clickAddVideoLibrary(int videoListItem) {
@@ -78,19 +78,19 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
     this.videoName = addVideoLink.getAttribute("title");
     scrollAndClick(addFromPreviewButton);
-    PageObjectLogging.log("clickAddVideoLibrary",
-                          "add video button clicked: " + this.videoName, true, driver);
+    LOG.log("clickAddVideoLibrary",
+            "add video button clicked: " + this.videoName, true, driver);
   }
 
   private void checkIfLibraryIsPresent() {
     wait.forElementVisible(libraryLIs);
-    PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
+    LOG.log("checkIfLibraryIsPresent", "library carousel present", LOG.Type.SUCCESS);
   }
 
   public void verifyAddVideoModal() {
     wait.forElementVisible(urlField);
     wait.forElementVisible(addUrlButton);
-    PageObjectLogging.log("verifyAddVideoModal", "add video modal is displayed", true);
+    LOG.log("verifyAddVideoModal", "add video modal is displayed", LOG.Type.SUCCESS);
   }
 
   public VetOptionsComponentObject addVideoByUrl(String url) {
@@ -111,13 +111,13 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   private void clickVideoThumbnail(int i) {
     scrollAndClick(videoThumbnailsList.get(i));
-    PageObjectLogging.log("clickVideoThumbnail", "video thumbnails clicked", true);
+    LOG.log("clickVideoThumbnail", "video thumbnails clicked", LOG.Type.SUCCESS);
   }
 
   private void checkVideoPreviewAppearing() {
     wait.forElementVisible(videoPlayer);
     waitForValueToBePresentInElementsCssByCss("#VET-preview", "display", "block");
-    PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
+    LOG.log("checkVideoPreviewAppearing", "video preview appeared", LOG.Type.SUCCESS);
   }
 
   public String getVideoName() {
@@ -126,14 +126,14 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   public void verifySuggestionsIsDisplayed() {
     wait.forElementVisible(suggestedVideo);
-    PageObjectLogging.log("verifySuggestionsIsDisplayed",
-                          "Verified suggested module appeared", true, driver);
+    LOG.log("verifySuggestionsIsDisplayed",
+            "Verified suggested module appeared", true, driver);
   }
 
   public WikiArticleEditMode clickCloseButton() {
     wait.forElementVisible(closeButton);
     scrollAndClick(closeButton);
-    PageObjectLogging.log("clickCloseButton", "close button clicked", true);
+    LOG.log("clickCloseButton", "close button clicked", LOG.Type.SUCCESS);
     return new WikiArticleEditMode(driver);
   }
 }

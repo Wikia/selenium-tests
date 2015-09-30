@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
 import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -41,14 +41,14 @@ public class AlmostTherePageObject extends WikiBasePageObject {
     }
     String www = MailFunctions.getActivationLinkFromEmailContent(
         MailFunctions.getFirstEmailContent(email, password, mailSubject));
-    PageObjectLogging.log("getActivationLinkFromMail",
-                          "activation link is visible in email content: " + www, true);
+    LOG.log("getActivationLinkFromMail",
+            "activation link is visible in email content: " + www, LOG.Type.SUCCESS);
     return www;
   }
 
   public ConfirmationPageObject enterActivationLink(String email, String password, String wikiURL, String language) {
     getUrl(getActivationLinkFromMail(email, password, language));
-    PageObjectLogging.log("enterActivationLink", "activation page is displayed", true, driver);
+    LOG.log("enterActivationLink", "activation page is displayed", true, driver);
     return new ConfirmationPageObject(driver);
   }
 

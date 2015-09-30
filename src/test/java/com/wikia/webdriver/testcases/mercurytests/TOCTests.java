@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
@@ -38,14 +38,14 @@ public class TOCTests extends NewTestTemplate {
         "TOC isn't displayed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "TOC",
         "is displayed",
         true
     );
 
     boolean result = toc.isTOCUnderArticleName();
-    PageObjectLogging.log(
+    LOG.log(
         "TOC position",
         "is under article name",
         "is not under article name",
@@ -57,7 +57,7 @@ public class TOCTests extends NewTestTemplate {
         "TOC menu is expanded"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "TOC menu",
         "is collapsed",
         true
@@ -70,7 +70,7 @@ public class TOCTests extends NewTestTemplate {
         "TOC menu is collapsed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "TOC menu",
         "is expanded",
         true
@@ -79,7 +79,7 @@ public class TOCTests extends NewTestTemplate {
     toc.clickOnTOCListElement(1);
 
     result = toc.isUserMovedToRightSection(1);
-    PageObjectLogging.log(
+    LOG.log(
         "TOC redirection",
         "works",
         "does not work",
@@ -87,7 +87,7 @@ public class TOCTests extends NewTestTemplate {
     );
 
     result = toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP);
-    PageObjectLogging.log(
+    LOG.log(
         "Header padding",
         "is correct",
         "is wrong",
@@ -102,7 +102,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "TOC",
         "is hidden",
         "is displayed",
@@ -117,7 +117,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToRightSection(1);
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection to header directly from link",
         "works",
         "does not work",
@@ -133,7 +133,7 @@ public class TOCTests extends NewTestTemplate {
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
     boolean result = toc.isUserMovedToRightSection(1);
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection to header from current page",
         "works",
         "does not work",
@@ -150,7 +150,7 @@ public class TOCTests extends NewTestTemplate {
     toc.waitForLoadingSpinnerToFinish();
 
     boolean result = toc.isUserMovedToRightSection(1);
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection to header from other page",
         "works",
         "does not work",

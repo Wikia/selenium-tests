@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -27,8 +27,9 @@ public class Elements {
       }
       if (value.equals(retAttribute)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByValue", "Element with attribute: " + attribute
-            + " with the value: " + value + " is found from the list", true);
+        LOG.log("getElementByValue", "Element with attribute: " + attribute
+                                     + " with the value: " + value + " is found from the list",
+                LOG.Type.SUCCESS);
         break;
       }
     }
@@ -44,8 +45,8 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByText", "Element with text: " + value
-            + " is found from the list", true);
+        LOG.log("getElementByText", "Element with text: " + value
+                                    + " is found from the list", LOG.Type.SUCCESS);
         break;
       }
     }
@@ -62,8 +63,8 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value
-            + " is found from the list", true);
+        LOG.log("getElementByChildText", "Element's child with text: " + value
+                                         + " is found from the list", LOG.Type.SUCCESS);
         break;
       }
     }

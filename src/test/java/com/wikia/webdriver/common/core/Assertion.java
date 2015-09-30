@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.url.UrlChecker;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -29,7 +29,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    LOG.logResult(
         "assertStringContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -50,7 +50,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    LOG.logResult(
         "assertStringNotContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -69,7 +69,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    PageObjectLogging.log(
+    LOG.logResult(
         "assertEquals",
         "assertion " + assertion + "! Pattern: \"" + patternEncoded
         + "\" Current: \"" + currentEncoded + "\"",
@@ -87,7 +87,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    PageObjectLogging.log(
+    LOG.logResult(
         "assertNotEquals",
         "assertion " + assertion + "! Pattern: \"" + patternEncoded
         + "\" Current: \"" + currentEncoded + "\"",
@@ -103,8 +103,8 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log("assertNumber", message + ", expected: "
-                                          + expected + ", got: " + actual, assertion);
+    LOG.logResult("assertNumber", message + ", expected: "
+                                  + expected + ", got: " + actual, assertion);
   }
 
   private static void addVerificationFailure(Throwable e) {
@@ -149,7 +149,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    PageObjectLogging.log(
+    LOG.logResult(
         "assertStringNotEmpty",
         "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
         assertion
@@ -161,7 +161,7 @@ public class Assertion extends Assert {
    */
   public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
     String currentUrl = driver.getCurrentUrl();
-    PageObjectLogging.log(
+    LOG.log(
         "Log Url",
         "Url " + url + " is equal to current Url " + currentUrl,
         "Url " + url + " isn't equal to current Url " + currentUrl,

@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -26,7 +26,7 @@ public class TestATF extends TemplateNoFirstLoad {
   )
   public void TestATFDelayBTF(String wikiName, String article, int delaySec, boolean isWgVarOn)
       throws InterruptedException {
-    PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
@@ -56,7 +56,7 @@ public class TestATF extends TemplateNoFirstLoad {
       groups = {"TestATF", "Ads"}
   )
   public void TestATFDisableBTF(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
@@ -86,7 +86,7 @@ public class TestATF extends TemplateNoFirstLoad {
       groups = {"TestATF", "Ads"}
   )
   public void TestATFonTablet(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);

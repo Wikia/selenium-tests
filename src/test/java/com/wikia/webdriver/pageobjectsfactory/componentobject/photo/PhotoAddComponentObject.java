@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -44,14 +44,14 @@ public class PhotoAddComponentObject extends BasePageObject {
   public void typeSearchQuery(String photoName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(photoName);
-    PageObjectLogging.log("typeSearchQuery", photoName + " searching", true);
+    LOG.log("typeSearchQuery", photoName + " searching", LOG.Type.SUCCESS);
   }
 
   public void clickFind() {
     wait.forElementVisible(findButton);
     scrollAndClick(findButton);
     wait.forElementNotVisible(By.cssSelector("#ImageUploadProgress2"));
-    PageObjectLogging.log("clickSearch", "search button clicked", true);
+    LOG.log("clickSearch", "search button clicked", LOG.Type.SUCCESS);
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
@@ -60,7 +60,7 @@ public class PhotoAddComponentObject extends BasePageObject {
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
     scrollAndClick(photo);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
     return new PhotoOptionsComponentObject(driver);
   }
 
@@ -68,7 +68,7 @@ public class PhotoAddComponentObject extends BasePageObject {
     WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
     return new PhotoOptionsComponentObject(driver);
   }
 
@@ -95,23 +95,23 @@ public class PhotoAddComponentObject extends BasePageObject {
 
   public void clickThisWiki() {
     thisWikiButton.click();
-    PageObjectLogging.log("clickThisWiki", "this wiki button clicked", true);
+    LOG.log("clickThisWiki", "this wiki button clicked", LOG.Type.SUCCESS);
   }
 
   public void clickFlickr() {
     flickButton.click();
-    PageObjectLogging.log("clickFlickr", "flickr button clicked", true);
+    LOG.log("clickFlickr", "flickr button clicked", LOG.Type.SUCCESS);
   }
 
   public void chooseFileToUpload(String file) {
     chooseFileInput
         .sendKeys(
             CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
-    PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
+    LOG.log("selectFileToUpload", "select file " + file + " to upload it", LOG.Type.SUCCESS);
   }
 
   public void clickUpload() {
     uploadButton.click();
-    PageObjectLogging.log("clickUpload", "click on upload button", true);
+    LOG.log("clickUpload", "click on upload button", LOG.Type.SUCCESS);
   }
 }

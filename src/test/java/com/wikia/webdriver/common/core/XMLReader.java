@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
@@ -24,7 +24,7 @@ public class XMLReader {
       XMLConfiguration xml = new XMLConfiguration(file);
       return xml.getString(key);
     } catch (ConfigurationException e) {
-      PageObjectLogging.log("Error while reading XML config", e, false);
+      LOG.log("Error while reading XML config", e, LOG.Type.ERROR);
 
       return e.getMessage();
     }

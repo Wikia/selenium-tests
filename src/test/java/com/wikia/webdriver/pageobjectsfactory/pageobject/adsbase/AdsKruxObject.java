@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -60,8 +60,8 @@ public class AdsKruxObject extends AdsBaseObject {
     waitForKrux();
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
     String gptPageParams = getGptPageParams(slotName);
-    PageObjectLogging.log("gpt page params", gptPageParams, true);
-    PageObjectLogging.log("krux users", user1 + ", " + user2, true);
+    LOG.log("gpt page params", gptPageParams, LOG.Type.SUCCESS);
+    LOG.logResult("krux users", user1 + ", " + user2, true);
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
     if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
       throw new AssertionError("Gpt page params don't have the krux users from localStorage");
@@ -69,7 +69,7 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   public void waitForKrux() {
-    PageObjectLogging.log("waitForKrux", "Waiting for Krux", true);
+    LOG.log("waitForKrux", "Waiting for Krux", LOG.Type.SUCCESS);
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
@@ -83,7 +83,7 @@ public class AdsKruxObject extends AdsBaseObject {
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String segments = (String) js.executeScript("return localStorage.kxsegs;");
-    PageObjectLogging.log("krux segments: ", segments, true, driver);
+    LOG.log("krux segments: ", segments, true, driver);
     return wrapSegs(segments);
   }
 

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
@@ -65,23 +65,23 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void verifyLightboxPopup() {
     wait.forElementVisible(lightBoxModal);
-    PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
+    LOG.log("verifyLightboxPopup", "Lightbox appeared", LOG.Type.SUCCESS);
   }
 
   public void verifyLightboxVideo() {
     wait.forElementVisible(videoContainer);
-    PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
+    LOG.log("verifyLightboxVideo", "Lightbox video appeared", LOG.Type.SUCCESS);
   }
 
   public void verifyLightboxImage() {
     wait.forElementVisible(imageContainer);
-    PageObjectLogging.log("verifyLightboxImage", "Lightbox image appeared", true);
+    LOG.log("verifyLightboxImage", "Lightbox image appeared", LOG.Type.SUCCESS);
   }
 
   public LightboxComponentObject openLightbox() {
     wait.forElementVisible(imageThumbnail);
     scrollAndClick(imageThumbnail);
-    PageObjectLogging.log("openLightbox", "opened ligthbox", true);
+    LOG.log("openLightbox", "opened ligthbox", LOG.Type.SUCCESS);
     return new LightboxComponentObject(driver);
   }
 
@@ -93,7 +93,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public void clickCloseButton() {
     wait.forElementVisible(closeModalButton);
     scrollAndClick(closeModalButton);
-    PageObjectLogging.log("clickCloseButton ", "lightbox closed", true);
+    LOG.log("clickCloseButton ", "lightbox closed", LOG.Type.SUCCESS);
   }
 
   public void clickPinButton() {
@@ -101,31 +101,31 @@ public class LightboxComponentObject extends WikiBasePageObject {
         click(pinButton).
         build().
         perform();
-    PageObjectLogging.log("clickPinButton", "pin button was clicked", true);
+    LOG.log("clickPinButton", "pin button was clicked", LOG.Type.SUCCESS);
   }
 
   public void clickShareButton() {
     wait.forElementVisible(shareButton);
     shareButton.click();
     wait.forElementVisible(moreInfoThumbnail);
-    PageObjectLogging.log("clickShareButton", "share button is clicked", true);
+    LOG.log("clickShareButton", "share button is clicked", LOG.Type.SUCCESS);
   }
 
   public void clickCloseShareScreenButton() {
     wait.forElementVisible(closeShareScreenButton);
     closeShareScreenButton.click();
-    PageObjectLogging
-        .log("clickCloseShareScreenButton", "close share screen button was clicked", true);
+    LOG
+        .logResult("clickCloseShareScreenButton", "close share screen button was clicked", true);
   }
 
   public void verifyShareScreenClosed() {
     waitForElementNotVisibleByElement(shareScreen);
-    PageObjectLogging.log("verifyShareScreenClosed", "share screen is closed", true);
+    LOG.log("verifyShareScreenClosed", "share screen is closed", LOG.Type.SUCCESS);
   }
 
   public void verifyLightboxClosed() {
     waitForElementNotVisibleByElement(lightBoxModal);
-    PageObjectLogging.log("verifyShareScreenClosed", "share lightbox is closed", true);
+    LOG.log("verifyShareScreenClosed", "share lightbox is closed", LOG.Type.SUCCESS);
   }
 
   public void verifyShareButtons() {
@@ -134,69 +134,69 @@ public class LightboxComponentObject extends WikiBasePageObject {
     wait.forElementVisible(stumbleUponShareLink);
     wait.forElementVisible(twitterShareLink);
     wait.forElementVisible(facebookShareLink);
-    PageObjectLogging.log("verifyShareButtons", "all share buttons are visible", true);
+    LOG.log("verifyShareButtons", "all share buttons are visible", LOG.Type.SUCCESS);
   }
 
   public void clickFacebookShareButton() {
     facebookShareLink.click();
-    PageObjectLogging.log("clickFacebookShareButton", "fb share button is clicked", true);
+    LOG.log("clickFacebookShareButton", "fb share button is clicked", LOG.Type.SUCCESS);
   }
 
   public void clickTwitterShareButton() {
     twitterShareLink.click();
-    PageObjectLogging.log("clickTwitterShareButton", "twitter share button is clicked", true);
+    LOG.log("clickTwitterShareButton", "twitter share button is clicked", LOG.Type.SUCCESS);
   }
 
   public void clickStumbleUponShareButton() {
     stumbleUponShareLink.click();
-    PageObjectLogging
-        .log("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
+    LOG
+        .logResult("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
   }
 
   public void clickRedditShareButton() {
     redditShareLink.click();
-    PageObjectLogging.log("clickRedditShareButton", "reddit share button is clicked", true);
+    LOG.log("clickRedditShareButton", "reddit share button is clicked", LOG.Type.SUCCESS);
   }
 
   public void clickPlusOneShareButton() {
     plusoneShareLink.click();
-    PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
+    LOG.log("clickPlusOneShareButton", "plus one share button is clicked", LOG.Type.SUCCESS);
   }
 
   public void verifyTitleUrl(String expectedUrl) {
     String titleUrl = titleLink.getAttribute("href");
     Assertion.assertEquals(titleUrl, expectedUrl);
-    PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
+    LOG.log("verifyTitleUrl", "Title URL is correct", LOG.Type.SUCCESS);
   }
 
   public FilePagePageObject clickTitle() {
     wait.forElementVisible(titleLink);
     titleLink.click();
-    PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
+    LOG.log("clickTitleUrl", "Title url is clicked", LOG.Type.SUCCESS);
     return new FilePagePageObject(driver);
   }
 
   public void verifyMoreInfoUrl(String expectedUrl) {
     String moreInfoUrl = moreInfoLink.getAttribute("href");
     Assertion.assertEquals(moreInfoUrl, expectedUrl);
-    PageObjectLogging.log("verifyMoreInfoUrl", "More Info URL is correct", true);
+    LOG.log("verifyMoreInfoUrl", "More Info URL is correct", LOG.Type.SUCCESS);
   }
 
   public void clickCarouselRight() {
     wait.forElementVisible(carouselRight);
     carouselRight.click();
-    PageObjectLogging.log("clickCarouselRight", "carousel right button is clicked", true);
+    LOG.log("clickCarouselRight", "carousel right button is clicked", LOG.Type.SUCCESS);
   }
 
   public void clickCarouselLeft() {
     wait.forElementVisible(carouselLeft);
     carouselLeft.click();
-    PageObjectLogging.log("clickCarouselLeft", "carousel left button is clicked", true);
+    LOG.log("clickCarouselLeft", "carousel left button is clicked", LOG.Type.SUCCESS);
   }
 
   public void verifyCarouselLeftDisabled() {
     wait.forElementVisible(carouselLeftDisabled);
-    PageObjectLogging.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
+    LOG.log("verifyCarouselLeftDisabled", "carousel left button is disabled", LOG.Type.SUCCESS);
   }
 
   public void verifyVideoAutoplay(String providerName) {

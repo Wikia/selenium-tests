@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
@@ -50,14 +50,14 @@ public class LightboxTests extends NewTestTemplate {
         "Lightbox is closed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Lightbox",
         "is opened",
         true
     );
 
     boolean result = lightbox.isCurrentImageVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Current image",
         "is visible",
         "is not visible",
@@ -67,7 +67,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickCloseButton();
 
     result = !lightbox.isLightboxOpened();
-    PageObjectLogging.log(
+    LOG.log(
         "Lightbox",
         "is closed",
         "is opened",
@@ -89,7 +89,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -100,7 +100,7 @@ public class LightboxTests extends NewTestTemplate {
     String nextImageSrc = lightbox.getCurrentImagePath();
 
     boolean result = !currentImageSrc.equals(nextImageSrc);
-    PageObjectLogging.log(
+    LOG.log(
         "Change image by tap left edge",
         "works",
         "doesn't work",
@@ -112,7 +112,7 @@ public class LightboxTests extends NewTestTemplate {
     nextImageSrc = lightbox.getCurrentImagePath();
 
     result = !currentImageSrc.equals(nextImageSrc);
-    PageObjectLogging.log(
+    LOG.log(
         "Change image by tap right edge",
         "works",
         "doesn't work",
@@ -127,7 +127,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -146,7 +146,7 @@ public class LightboxTests extends NewTestTemplate {
     }
 
     result = imageChanged;
-    PageObjectLogging.log(
+    LOG.log(
         "Change image by swipe left",
         "works",
         "does not work",
@@ -166,7 +166,7 @@ public class LightboxTests extends NewTestTemplate {
     }
 
     result = imageChanged;
-    PageObjectLogging.log(
+    LOG.log(
         "Change image by swipe right",
         "works",
         "does not work",
@@ -188,7 +188,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -199,7 +199,7 @@ public class LightboxTests extends NewTestTemplate {
     File afterZooming = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in by gesture",
         "works",
         "does not work",
@@ -210,7 +210,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming out by gesture",
         "works",
         "does not work",
@@ -225,7 +225,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -237,7 +237,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in by double tap",
         "works",
         "does not work",
@@ -249,7 +249,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming out by double tap",
         "works",
         "does not work",
@@ -320,7 +320,7 @@ public class LightboxTests extends NewTestTemplate {
     mobileDriver.execute(DriverCommand.GO_BACK, null);
 
     boolean result = !lightbox.isLightboxOpened();
-    PageObjectLogging.log(
+    LOG.log(
         "Lightbox",
         "is closed",
         "is opened",
@@ -328,7 +328,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     result = oldUrl.equals(driver.getCurrentUrl());
-    PageObjectLogging.log(
+    LOG.log(
         "URL",
         "is the same",
         "is different",
@@ -351,7 +351,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -364,7 +364,7 @@ public class LightboxTests extends NewTestTemplate {
     File afterZooming = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in",
         "works",
         "does not work",
@@ -375,7 +375,7 @@ public class LightboxTests extends NewTestTemplate {
     File afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    PageObjectLogging.log(
+    LOG.log(
         "Moving " + direction,
         "works",
         "does not work",
@@ -391,7 +391,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -404,7 +404,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in",
         "works",
         "does not work",
@@ -415,7 +415,7 @@ public class LightboxTests extends NewTestTemplate {
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    PageObjectLogging.log(
+    LOG.log(
         "Moving " + direction,
         "works",
         "does not work",
@@ -431,7 +431,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -444,7 +444,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in",
         "works",
         "does not work",
@@ -455,7 +455,7 @@ public class LightboxTests extends NewTestTemplate {
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    PageObjectLogging.log(
+    LOG.log(
         "Moving " + direction,
         "works",
         "does not work",
@@ -471,7 +471,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Current image",
         "is visible",
         true
@@ -484,7 +484,7 @@ public class LightboxTests extends NewTestTemplate {
     afterZooming = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming);
-    PageObjectLogging.log(
+    LOG.log(
         "Zooming in",
         "works",
         "does not work",
@@ -495,7 +495,7 @@ public class LightboxTests extends NewTestTemplate {
     afterMoving = new Shooter().capturePage(driver);
 
     result = !new ImageComparison().areFilesTheSame(afterZooming, afterMoving);
-    PageObjectLogging.log(
+    LOG.log(
         "Moving " + direction,
         "works",
         "does not work",

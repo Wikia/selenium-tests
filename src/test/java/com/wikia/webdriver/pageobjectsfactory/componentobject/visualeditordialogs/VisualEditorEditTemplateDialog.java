@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -69,8 +69,8 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
     } else {
       throw new NoSuchElementException("This template has no param.");
     }
-    PageObjectLogging.log("typeInParam", "Type " + text + " in the " + paramName + " field.", true,
-        driver);
+    LOG.log("typeInParam", "Type " + text + " in the " + paramName + " field.", true,
+            driver);
   }
 
   public VisualEditorPageObject clickDone() {

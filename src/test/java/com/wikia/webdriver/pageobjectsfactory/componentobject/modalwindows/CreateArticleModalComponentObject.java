@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -44,7 +44,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
-    PageObjectLogging.log(
+    LOG.logResult(
         "PageCreated",
         "Page with given title created",
         true
@@ -56,7 +56,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     wait.forTextInElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );
-    PageObjectLogging.log(
+    LOG.log(
         "MessageAboutBlockPresent",
         "Message about block present",
         true,

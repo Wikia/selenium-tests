@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.TopBarComponentObject;
@@ -37,7 +37,7 @@ public class LoginTests extends NewTestTemplate {
 
     new ArticlePageObject(driver).waitForFooterToBeVisible();
     boolean result = url.equals(driver.getCurrentUrl());
-    PageObjectLogging.log("url", "was redirected correctly", result);
+    LOG.logResult("url", "was redirected correctly", result);
 
     Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
   }

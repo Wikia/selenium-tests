@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
@@ -40,14 +40,14 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Map modal is hidden"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Map modal",
         "is visible",
         true
     );
 
     boolean result = maps.isMapIdInUrl();
-    PageObjectLogging.log(
+    LOG.log(
         "Url",
         "match pattern ?map=",
         "does not match pattern ?map=",
@@ -55,7 +55,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     );
 
     result = maps.isTextInMapTitleHeader();
-    PageObjectLogging.log(
+    LOG.log(
         "Map title in header",
         "is displayed",
         "is not displayed",
@@ -66,7 +66,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickPin();
 
     result = maps.isPinPopUp();
-    PageObjectLogging.log(
+    LOG.log(
         "Pin popup",
         "appears",
         "does not appear",
@@ -77,7 +77,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.clickCloseButton();
 
     result = !maps.isMapModalVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Map modal",
         "is closed",
         "is opened",
@@ -100,7 +100,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in button",
         "is disabled",
         true
@@ -116,7 +116,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom out doesn't work"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom out by click",
         "works",
         true
@@ -127,7 +127,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is disabled"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in button",
         "is enabled",
         true
@@ -143,7 +143,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in doesn't work"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in by click",
         "works",
         true
@@ -154,7 +154,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in button",
         "is disabled",
         true
@@ -169,7 +169,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom out doesn't work"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom out by gesture",
         "works",
         true
@@ -180,7 +180,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is disabled"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in button",
         "is enabled",
         true
@@ -195,7 +195,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in doesn't work"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in by gesture",
         "works",
         true
@@ -206,7 +206,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Zoom in button",
         "is disabled",
         true
@@ -229,7 +229,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Filter box is expanded"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Filter box",
         "is collapsed",
         true
@@ -242,7 +242,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Filter box is collapsed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Filter box",
         "is expanded",
         true
@@ -253,7 +253,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     File afterScrolling = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling);
-    PageObjectLogging.log(
+    LOG.log(
         "Scrolling in filter box",
         "works",
         "does not work",

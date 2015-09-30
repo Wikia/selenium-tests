@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
 /**
@@ -59,7 +59,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
     Assertion.assertEquals(isElementOnPage(zoomInButton), true);
     wait.forElementVisible(zoomOutButton);
     Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
-    PageObjectLogging.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
+    LOG.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
     driver.switchTo().defaultContent();
   }
 

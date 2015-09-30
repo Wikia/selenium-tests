@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -23,11 +23,11 @@ public class EditProfileComponentObject extends WikiBasePageObject {
 
   protected void clickAvatarTab() {
     avatarTab.click();
-    PageObjectLogging.log("clickAvatarTab", "avatar tab clicked", true);
+    LOG.log("clickAvatarTab", "avatar tab clicked", LOG.Type.SUCCESS);
   }
 
   protected void clickAboutTab() {
     aboutTab.click();
-    PageObjectLogging.log("clickAboutTab", "about tab clicked", true);
+    LOG.log("clickAboutTab", "about tab clicked", LOG.Type.SUCCESS);
   }
 }

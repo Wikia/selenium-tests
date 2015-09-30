@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -42,22 +42,23 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
   public void verifyFeaturedSliderInitialized() {
     wait.forElementVisible(featuredModuleControls);
-    PageObjectLogging
-        .log("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
+    LOG
+        .logResult("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
   }
 
   public void verifyFeaturedSliderSlides(int count) {
     wait.forElementVisible(featuredSlides.get(0));
     Assertion.assertTrue(featuredSlides.size() >= count);
-    PageObjectLogging.log("verifyFeaturedSliderSlides",
-                          "At least " + count + "latest Videos modules have rendered", true);
+    LOG.log("verifyFeaturedSliderSlides",
+            "At least " + count + "latest Videos modules have rendered", LOG.Type.SUCCESS);
   }
 
   public void verifyLatestVideosRows(int count) {
     wait.forElementVisible(latestVideoRows.get(0));
     Assertion.assertTrue(latestVideoRows.size() >= count);
-    PageObjectLogging
-        .log("verifyLatestVideosRows", "At least " + count + "latest Videos modules have rendered",
-             true);
+    LOG
+        .logResult("verifyLatestVideosRows",
+                   "At least " + count + "latest Videos modules have rendered",
+                   true);
   }
 }

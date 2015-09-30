@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.social_buttons;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -32,7 +32,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
       WebElement image = shareButtonImages.get(i);
       wait.forElementVisible(image);
     }
-    PageObjectLogging.log("verifyShareButtonsPresent", "social buttons present", true, driver);
+    LOG.log("verifyShareButtonsPresent", "social buttons present", true, driver);
   }
 
   /**

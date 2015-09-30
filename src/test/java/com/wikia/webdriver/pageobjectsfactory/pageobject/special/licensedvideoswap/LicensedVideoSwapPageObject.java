@@ -6,7 +6,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideos
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -36,8 +36,8 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
     // Make sure the click above has happened and the browser has responded by looking for an element
     // on the history page
     wait.forElementVisible(backLink);
-    PageObjectLogging.log("navigateToHistoryPage",
-                          "lvs history button navigates to right page", true);
+    LOG.log("navigateToHistoryPage",
+            "lvs history button navigates to right page", LOG.Type.SUCCESS);
 
     return new LicensedVideoSwapHistoryPageObject(driver);
   }
@@ -45,7 +45,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
   public void verifyOnLvsPage() {
     String url = driver.getCurrentUrl();
     Assertion.assertTrue(url.contains(URLsContent.SPECIAL_LICENSED_VIDEO_SWAP));
-    PageObjectLogging.log("verifyOnLvsPage", "url is the correct one for LVS page", true);
+    LOG.log("verifyOnLvsPage", "url is the correct one for LVS page", LOG.Type.SUCCESS);
   }
 
   public void verifySwapVideo() {
@@ -59,7 +59,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
     wait.forTextInElement(swapCount, String.valueOf(initialCount - 1));
 
-    PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
+    LOG.log("verifyClickSwap", "Swap button has been clicked", LOG.Type.SUCCESS);
   }
 }
 

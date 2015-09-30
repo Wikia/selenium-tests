@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -91,8 +91,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void verifyVideoAdded(String videoTitle) {
     waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", videoTitle);
-    PageObjectLogging.log("verifyVideoAdded",
-        "verify that video with following description was added: " + videoTitle, true);
+    LOG.log("verifyVideoAdded",
+            "verify that video with following description was added: " + videoTitle,
+            LOG.Type.SUCCESS);
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
@@ -121,8 +122,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
     Assertion.assertEquals(getFlashMessageText(), deletedVideo);
-    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-        + " was deleted", true);
+    LOG.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
+                                                    + " was deleted", LOG.Type.SUCCESS);
   }
 
   public void verifyDeleteViaVideoNotPresent() {
@@ -132,19 +133,19 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     verifyNotificationMessage();
     Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
-        + " was deleted", true);
+    LOG.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
+                                           + " was deleted", LOG.Type.SUCCESS);
   }
 
   public void verifyElementsOnPage() {
     verifyH1();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
+    LOG.log("verifyElementsOnPage", "verify that H1 is present", LOG.Type.SUCCESS);
     verifyAddVideoButton();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
+    LOG.log("verifyElementsOnPage", "verify that Add Video button is present", LOG.Type.SUCCESS);
     verifySortDropdown();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
+    LOG.log("verifyElementsOnPage", "verify that sort dropdown is present", LOG.Type.SUCCESS);
     verifyNewestVideo();
-    PageObjectLogging.log("verifyElementsOnPage",
-        "verify that there is at least one video present", true);
+    LOG.log("verifyElementsOnPage",
+            "verify that there is at least one video present", LOG.Type.SUCCESS);
   }
 }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -24,13 +24,13 @@ public class AdsEvolveObject extends AdsBaseObject {
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    PageObjectLogging.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
+    LOG.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
   }
 
   public void verifyNoEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementNotPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
+    LOG.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 
   public void verifyEvolveCall() {
@@ -46,6 +46,6 @@ public class AdsEvolveObject extends AdsBaseObject {
   public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
     String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
     Assertion.assertTrue(isElementOnPage(By.cssSelector(nextProviderSlotCss)));
-    PageObjectLogging.log("Evolve", "Evolve hopped to " + nextProviderSrc, true);
+    LOG.log("Evolve", "Evolve hopped to " + nextProviderSrc, LOG.Type.SUCCESS);
   }
 }

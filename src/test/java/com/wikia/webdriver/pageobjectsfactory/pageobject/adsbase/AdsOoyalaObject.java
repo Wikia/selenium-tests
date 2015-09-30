@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 import org.openqa.selenium.WebDriver;
@@ -26,16 +26,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
     verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
-    PageObjectLogging.log("LightboxAd",
-                          "Lightbox had " + lightboxAdColor + " during " + adDurationSec
-                          + " seconds", true);
+    LOG.log("LightboxAd",
+            "Lightbox had " + lightboxAdColor + " during " + adDurationSec
+            + " seconds", LOG.Type.SUCCESS);
   }
 
   public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
     verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
-    PageObjectLogging.log("LightboxVideo",
-                          "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
-                          + " seconds", true);
+    LOG.log("LightboxVideo",
+            "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
+            + " seconds", LOG.Type.SUCCESS);
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
@@ -58,6 +58,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void verifyFlash() {
     Boolean hasFlash = (Boolean) jsActions.execute(
         "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
-    PageObjectLogging.log("Verify flash", "Flash should be turned on", hasFlash);
+    LOG.logResult("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

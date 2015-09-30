@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 import org.openqa.selenium.By;
@@ -106,7 +106,7 @@ public class AdsGermanObject extends AdsBaseObject {
       throw new NoSuchElementException("No known combination from 71 media present");
     }
 
-    PageObjectLogging.log(
+    LOG.log(
         "Combination present",
         "Combination present: " + testedCombination.get("name"),
         true,
@@ -117,7 +117,7 @@ public class AdsGermanObject extends AdsBaseObject {
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
       if (hasSkin(slot, slotSelector) ||
           adsComparison.isAdVisible(slot, slotSelector, driver)) {
-        PageObjectLogging.log(
+        LOG.logResult(
             "Ad in slot found",
             "Ad in slot found; CSS: " + slotSelector,
             true
@@ -131,7 +131,7 @@ public class AdsGermanObject extends AdsBaseObject {
   public void verifyNo71MediaAds() {
     for (Map<String, Object> combination : combinations) {
       if (checkIfCombinationOnPage((List<String>) combination.get("slots"))) {
-        PageObjectLogging.log(
+        LOG.logResult(
             "Combination present",
             "Combination present: " + combination.get("name"),
             false
@@ -158,7 +158,7 @@ public class AdsGermanObject extends AdsBaseObject {
 
   private boolean hasSkin(WebElement element, String elementSelector) {
     if (checkScriptPresentInElement(element, JS_SKIN_CALL)) {
-      PageObjectLogging.log("Found skin call", "skin call found in " + elementSelector, true);
+      LOG.log("Found skin call", "skin call found in " + elementSelector, LOG.Type.SUCCESS);
       return true;
     }
     return false;

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
@@ -35,28 +35,28 @@ public class TemplateComponentObject extends BasePageObject {
   public CreatePinTypesComponentObject clickNext() {
     wait.forElementClickable(nextButton);
     nextButton.click();
-    PageObjectLogging.log("clickNext", "clicked next button in naming map modal", true, driver);
+    LOG.log("clickNext", "clicked next button in naming map modal", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
   public CreateACustomMapComponentObject clickBack() {
     wait.forElementClickable(backButton);
     backButton.click();
-    PageObjectLogging.log("clickBack", "clicked back button in naming map modal", true, driver);
+    LOG.log("clickBack", "clicked back button in naming map modal", true, driver);
     return new CreateACustomMapComponentObject(driver);
   }
 
   public void typeMapName(String mapName) {
     wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
-    PageObjectLogging.log("typeMapName", mapName + " title for map typed in", true, driver);
+    LOG.log("typeMapName", mapName + " title for map typed in", true, driver);
   }
 
   public void typeTemplateName(String templateName) {
     wait.forElementVisible(nameTemplateField);
     nameTemplateField.sendKeys(templateName);
-    PageObjectLogging.log("typeTemplateName", templateName + " title for template typed in", true,
-        driver);
+    LOG.log("typeTemplateName", templateName + " title for template typed in", true,
+            driver);
   }
 
   public void verifyTemplateImagePreview() {

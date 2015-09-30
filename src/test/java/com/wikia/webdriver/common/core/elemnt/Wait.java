@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 /**
  * Created by Ludwik on 2015-07-22.
@@ -46,7 +46,7 @@ public class Wait {
     try {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     } catch(TimeoutException e) {
-      PageObjectLogging.log(
+      LOG.logResult(
           ELEMENT_PRESENT_MESSAGE,
           String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()),
           false
@@ -67,7 +67,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.info(INIT_MESSAGE, e);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -86,7 +86,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.info(INIT_MESSAGE, e);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -104,7 +104,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, LOG.Type.SUCCESS);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -154,7 +154,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.info(INIT_MESSAGE, e);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -268,7 +268,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.info(INIT_MESSAGE, e);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -287,7 +287,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      LOG.info(INIT_MESSAGE, e);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {

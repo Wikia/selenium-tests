@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
@@ -58,8 +58,8 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
     maximized.manage().window().maximize();
 
     String driverName = maximized.equals(driverOne) ? "primary window" : "secondary window";
-    PageObjectLogging
-        .log("switchToWindow", "================ " + driverName + " ================", true);
+    LOG
+        .logResult("switchToWindow", "================ " + driverName + " ================", true);
   }
 
 }

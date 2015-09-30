@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.geoedge.GeoEdgeUtils;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import net.lightbody.bmp.proxy.ProxyServer;
@@ -47,7 +48,7 @@ public class NewTestTemplateCore {
   @BeforeMethod(alwaysRun = true)
   public void initTestContext(Method method) {
     TestContext.writeMethodName(method);
-    PageObjectLogging.start(method);
+    LOG.start(method);
   }
 
   protected void prepareDirectories() {
@@ -67,10 +68,12 @@ public class NewTestTemplateCore {
         registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(Configuration
             .getBrowser()));
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+    TestContext.setDriver(driver);
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
     driver = registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(browserName));
+    TestContext.setDriver(driver);
     return driver;
   }
 

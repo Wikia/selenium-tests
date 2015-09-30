@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -63,7 +63,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     wait.forElementVisible(fromYearField);
     wait.forElementVisible(backToPageLink);
     wait.forElementVisible(goButton);
-    PageObjectLogging
+    LOG
         .log("verifyImportandPageElements", "several importand history page elements are present",
              true, driver);
   }

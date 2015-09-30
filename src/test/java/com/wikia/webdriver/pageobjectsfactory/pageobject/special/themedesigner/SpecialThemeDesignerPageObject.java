@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -75,7 +75,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
   public SpecialThemeDesignerPageObject openSpecialDesignerPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_THEME_DESIGNER);
-    PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
+    LOG.log("openSpecialDesignerPage", "special designer page opened", true, driver);
     return this;
   }
 
@@ -101,21 +101,21 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     }
     String themeName =
         themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();
-    PageObjectLogging.log("selectTheme", "theme " + themeName + " selected", true);
+    LOG.log("selectTheme", "theme " + themeName + " selected", LOG.Type.SUCCESS);
     return themeName;
   }
 
   public void verifyThemeSelected(String themeName) {
     wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
     Assertion.assertEquals((String) jsActions.execute("ThemeDesigner.settings.theme"), themeName);
-    PageObjectLogging
-        .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
+    LOG
+        .logResult("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
   public void submitTheme() {
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
-    PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+    LOG.log("submitSelection", "selection of new skin saved", LOG.Type.SUCCESS);
   }
 
   public void uploadLargeImage() {
@@ -134,7 +134,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     scrollAndClick(tab);
     wait.forElementVisible(By.cssSelector(selectedTabSelector.replace("%tabName%",
         tabName.toString())));
-    PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
+    LOG.log("selectTab", tabName.toString() + " tab has been selected", LOG.Type.SUCCESS);
   }
 
   /**
@@ -164,18 +164,18 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
     wait.forElementVisible(bgImage);
     bgImage.click();
     wait.forElementVisible(bgImagePicker);
-    PageObjectLogging.log("openImagePicker", "image picker opened", true, driver);
+    LOG.log("openImagePicker", "image picker opened", true, driver);
   }
 
   public void clickOutsideImagePicker() {
     wait.forElementVisible(pgSectionTitle);
     pgSectionTitle.click();
-    PageObjectLogging.log("clickOutsideImageSelectionDialog", "clicked outside Image Picker", true);
+    LOG.log("clickOutsideImageSelectionDialog", "clicked outside Image Picker", LOG.Type.SUCCESS);
   }
 
   public void verifyImagePickerDisappeared() {
     waitForElementNotVisibleByElement(bgImagePicker);
-    PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
+    LOG.log("verifyImagePickerDisappeared", "Image Picker is invisible", LOG.Type.SUCCESS);
   }
 
 }

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +27,7 @@ public class Typing {
       try {
         Thread.sleep(interval);
       } catch (InterruptedException e) {
-        PageObjectLogging.log("ERROR WHILE TYPING", e, false);
+        LOG.log("ERROR WHILE TYPING", e, LOG.Type.ERROR);
       }
     }
   }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -44,7 +44,7 @@ public class EditAccount extends BasePageObject {
   public EditAccount goToAccountManagement(String userName) {
     userNameField.sendKeys(userName);
     userNameField.submit();
-    PageObjectLogging.log("editAccount", URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened", true);
+    LOG.log("editAccount", URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened", LOG.Type.SUCCESS);
 
     return this;
   }
@@ -54,12 +54,12 @@ public class EditAccount extends BasePageObject {
     wait.forElementVisible(closeResonField);
     closeResonField.sendKeys(reason);
     closeResonField.submit();
-    PageObjectLogging.log("closeAccount", "account closed", true);
+    LOG.log("closeAccount", "account closed", LOG.Type.SUCCESS);
   }
 
   public void verifyAccountClosedMessage() {
     wait.forTextInElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
-    PageObjectLogging.log("verifyAccountClosedMessage", "verified account closed", true);
+    LOG.log("verifyAccountClosedMessage", "verified account closed", LOG.Type.SUCCESS);
   }
 
   public void reopenAccount(String newPassword) {
@@ -67,12 +67,12 @@ public class EditAccount extends BasePageObject {
     newPasswordField.sendKeys(newPassword);
     newPasswordField.submit();
     scrollAndClick(clearDisableFlagButton);
-    PageObjectLogging.log("reopenAccount", "account reopened", true);
+    LOG.log("reopenAccount", "account reopened", LOG.Type.SUCCESS);
   }
 
   public void verifyAccountReopenedMessage() {
     wait.forElementVisible(statusMessage);
     wait.forTextInElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
-    PageObjectLogging.log("verifyAccountReopenedMessage", "verified account reopened", true);
+    LOG.log("verifyAccountReopenedMessage", "verified account reopened", LOG.Type.SUCCESS);
   }
 }

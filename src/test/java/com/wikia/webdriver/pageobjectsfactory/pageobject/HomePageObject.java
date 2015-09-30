@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 
 import org.openqa.selenium.By;
@@ -127,13 +127,13 @@ public class HomePageObject extends WikiBasePageObject {
       waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class",
                                                       languageClass);
     } else {
-      PageObjectLogging.log("selectLanguage",
-                            "page is a Hub and language dropdown is not present",
-                            true);
+      LOG.logResult("selectLanguage",
+                    "page is a Hub and language dropdown is not present",
+                    true);
     }
-    PageObjectLogging.log("selectLanguage",
-                          "language number " + Integer.toString(index) + " selected",
-                          true);
+    LOG.logResult("selectLanguage",
+                  "language number " + Integer.toString(index) + " selected",
+                  true);
     return new HomePageObject(driver);
   }
 
@@ -176,7 +176,7 @@ public class HomePageObject extends WikiBasePageObject {
         languageURL += URLsContent.WIKI_DIR;
         newHome.verifyURLcontains(languageURL);
 
-        PageObjectLogging.log(
+        LOG.logResult(
             "selectLanguage",
             "page is a Hub and language dropdown is not present and main url is different",
             true

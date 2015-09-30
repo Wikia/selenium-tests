@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriverException;
 
@@ -46,7 +46,7 @@ public class MailFunctions {
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
 
-        PageObjectLogging.log("Mail", "Waiting for the message", true);
+        LOG.log("Mail", "Waiting for the message", LOG.Type.SUCCESS);
         Thread.sleep(2000);
         for (Message message : messages) {
           if (message.getSubject().contains(subject)) {
@@ -59,7 +59,7 @@ public class MailFunctions {
         }
       }
 
-      PageObjectLogging.log("Mail", "Mail arrived", true);
+      LOG.log("Mail", "Mail arrived", LOG.Type.SUCCESS);
 
       Message m = magicMessage;
       String line;
@@ -73,10 +73,10 @@ public class MailFunctions {
 
       return builder.toString();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("getFirstEmailContent", e, false);
+      LOG.log("getFirstEmailContent", e, LOG.Type.ERROR);
       throw new WebDriverException();
     } catch (MessagingException | IOException | InterruptedException e) {
-      PageObjectLogging.log("getFirstEmailContent", e, false);
+      LOG.log("getFirstEmailContent", e, LOG.Type.ERROR);
       throw new WebDriverException();
     }
   }
@@ -99,13 +99,13 @@ public class MailFunctions {
           messages[i].setFlag(Flags.Flag.DELETED, true);
         }
       } else {
-        PageObjectLogging.log("Mail", "There are no messages in inbox", true);
+        LOG.log("Mail", "There are no messages in inbox", LOG.Type.SUCCESS);
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("Mail", e, false);
+      LOG.log("Mail", e, LOG.Type.ERROR);
     } catch (MessagingException e) {
-      PageObjectLogging.log("Mail", e, false);
+      LOG.log("Mail", e, LOG.Type.ERROR);
     }
   }
 

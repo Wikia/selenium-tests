@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemap
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -48,7 +48,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public CreateAMapComponentObject clickCreateAMap() {
     wait.forElementVisible(createAMapButton);
     scrollAndClick(createAMapButton);
-    PageObjectLogging.log("clickCreateAMap", "create a map button clicked", true, driver);
+    LOG.log("clickCreateAMap", "create a map button clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -57,8 +57,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
-    PageObjectLogging.log("clickCreateAMapUnderContributeButton",
-                          "create a map button under contribute button clicked", true, driver);
+    LOG.log("clickCreateAMapUnderContributeButton",
+            "create a map button under contribute button clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -66,7 +66,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     WebElement selectedMap = mapList.get(mapIndex);
     wait.forElementVisible(selectedMap);
     selectedMap.click();
-    PageObjectLogging.log("clickMap", "Selected map clicked", true);
+    LOG.log("clickMap", "Selected map clicked", LOG.Type.SUCCESS);
     return new InteractiveMapPageObject(driver);
   }
 
@@ -96,9 +96,9 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public void verifyAmountMapOnTheList() {
     wait.forElementVisible(mapCollection.get(0));
     Assert.assertEquals(mapCollection.size(), 10);
-    PageObjectLogging.log("verifyAmountMapOnTheList",
-                          "There are " + mapCollection.size() + " maps on the list",
-                          true);
+    LOG.logResult("verifyAmountMapOnTheList",
+                  "There are " + mapCollection.size() + " maps on the list",
+                  true);
   }
 
   public void verifyCorrectPagination() {
@@ -106,7 +106,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     Assert.assertEquals(isElementOnPage(paginationList), true);
     wait.forElementVisible(paginationNext);
     Assert.assertEquals(isElementOnPage(paginationNext), true);
-    PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
+    LOG.log("verifyCorrectPagination", "Paggination was showed", LOG.Type.SUCCESS);
   }
 
   public void verifyCreateMapModalNotExists() {
@@ -116,6 +116,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public void verifyEmptyState() {
     Assertion.assertTrue(isElementOnPage(emptyStateSection), "Expecting a empty state");
-    PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true, driver);
+    LOG.log("verifyCorrectPagination", "Paggination was showed", true, driver);
   }
 }

@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -66,7 +66,7 @@ public class AdsComparison {
                              final WebDriver driver) {
     hideSlot(selector, driver);
     final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
-    PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
+    LOG.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
     showSlot(selector, driver);
     try {
       WebDriverWait wait = new WebDriverWait(driver, AD_TIMEOUT_SEC);
@@ -74,7 +74,7 @@ public class AdsComparison {
         @Override
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
-          PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
+          LOG.log("ScreenshotsComparison", "Ad image in " + selector, LOG.Type.SUCCESS);
           if (adImg.getHeight() == 1 || imageComparison.isMonocolorImage(adImg)) {
             return false;
           }
@@ -82,7 +82,7 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
-      PageObjectLogging.logWarning("ScreenshotsComparison", e);
+      LOG.warning("ScreenshotsComparison", e);
       return false;
     }
     return true;
@@ -102,17 +102,17 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
+        LOG.log("verifyColorAd", "Current time: " + currentTime + " seconds", LOG.Type.SUCCESS);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e, false, driver);
+      LOG.log("verifyColorAd", e, false, true);
     }
   }
 
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
-      PageObjectLogging.log(
+      LOG.log(
           "verifyColorAd",
           "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,

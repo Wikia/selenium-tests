@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 
@@ -38,7 +38,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Navigation menu is visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Navigation menu",
         "is hidden",
         true
@@ -51,14 +51,14 @@ public class NavigationSideTests extends NewTestTemplate {
         "Navigation menu isn't visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Navigation menu",
         "is visible",
         true
     );
 
     boolean result = nav.isNavListElementEllipsized(0);
-    PageObjectLogging.log(
+    LOG.log(
         "Link without chevron",
         "is ellipsized",
         "is not ellipsized",
@@ -66,7 +66,7 @@ public class NavigationSideTests extends NewTestTemplate {
     );
 
     result = nav.isNavListElementEllipsized(1);
-    PageObjectLogging.log(
+    LOG.log(
         "Link with chevron",
         "is ellipsized",
         "is not ellipsized",
@@ -78,14 +78,14 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link is displayed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Back link",
         "is hidden",
         true
     );
 
     result = nav.isRandomPageButtonDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Random page button",
         "is displayed",
         "is hidden",
@@ -99,14 +99,14 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link isn't displayed"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Back link",
         "is displayed",
         true
     );
 
     result = !nav.isRandomPageButtonDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Random page button",
         "is hidden",
         "is displayed",
@@ -120,7 +120,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link doesn't work"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Back link",
         "works",
         true
@@ -129,7 +129,7 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickOverlay();
 
     result = !nav.isNavMenuVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Navigation menu",
         "is hidden",
         "is visible",
@@ -151,7 +151,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Menu field is visible"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Menu field",
         "is hidden",
         true
@@ -162,7 +162,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Result field is hidden"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Result field",
         "is visible",
         true
@@ -171,7 +171,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     boolean result = !searchObject.isSuggestionListDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Search suggestions",
         "are hidden",
         "are displayed",
@@ -181,7 +181,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     result = searchObject.isSorryInfoDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Sorry message",
         "is displayed",
         "is hidden",
@@ -191,7 +191,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.waitMilliseconds(5000, "Wait for message to disappear");
 
     result = searchObject.isSorryInfoDisplayed();
-    PageObjectLogging.log(
+    LOG.log(
         "Sorry message",
         "is displayed",
         "is hidden",
@@ -201,7 +201,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.clickCancelButton();
 
     result = searchObject.isMenuFieldVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Menu field",
         "is visible",
         "is hidden",
@@ -209,7 +209,7 @@ public class NavigationSideTests extends NewTestTemplate {
     );
 
     result = !searchObject.isResultFieldVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Result field",
         "is hidden",
         "is visible",
@@ -232,7 +232,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Search suggestions are hidden"
     );
 
-    PageObjectLogging.log(
+    LOG.logResult(
         "Search suggestions",
         "are displayed",
         true
@@ -243,7 +243,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection",
         "works",
         "does not work",
@@ -266,7 +266,7 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    PageObjectLogging.log(
+    LOG.log(
         "Redirection",
         "works",
         "does not work",

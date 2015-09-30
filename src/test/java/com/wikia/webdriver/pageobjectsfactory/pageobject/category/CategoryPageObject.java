@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -29,7 +29,7 @@ public class CategoryPageObject extends WikiBasePageObject {
     public void verifyCategoryPageTitle(String categoryLinkName) {
         wait.forElementVisible(categoryHeader);
         String title = categoryHeader.getText();
-        PageObjectLogging.log(
+        LOG.logResult(
             "getCategoryname",
             "the name of the category is: " + title,
             true

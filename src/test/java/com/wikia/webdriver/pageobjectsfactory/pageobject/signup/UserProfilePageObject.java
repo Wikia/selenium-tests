@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
@@ -42,15 +42,15 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(blogTab);
     wait.forElementClickable(blogTab);
     blogTab.click();
-    PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
+    LOG.log("clickOnBlogTab", "Click on blog tab", LOG.Type.SUCCESS);
   }
 
   public BlogPageObject openBlogPage(int blogNumber) {
     String blogURL = blogPostList.get(blogNumber).getAttribute("href");
     getUrl(blogURL);
-    PageObjectLogging.log("openBlogPage",
-                          "blog post " + blogURL + " opened",
-                          true);
+    LOG.logResult("openBlogPage",
+                  "blog post " + blogURL + " opened",
+                  true);
     return new BlogPageObject(driver);
   }
 
@@ -59,11 +59,11 @@ public class UserProfilePageObject extends WikiBasePageObject {
       BlogPageObject blogPage = openBlogPage(i);
       String pageContent = blogPage.getAtricleTextRaw().toLowerCase();
       if (!(pageContent.contains("deleted") || pageContent.contains("redirected"))) {
-        PageObjectLogging.log("openFirstPost", "valid post found on " + i + " position", true);
+        LOG.log("openFirstPost", "valid post found on " + i + " position", LOG.Type.SUCCESS);
         break;
       }
-      PageObjectLogging.log("openFirstPost", "deleted post found on " + i
-                                             + " position, trying next one", true);
+      LOG.logResult("openFirstPost", "deleted post found on " + i
+                                     + " position, trying next one", true);
       driver.navigate().back();
     }
     return new BlogPageObject(driver);
@@ -73,8 +73,8 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
-                          true, driver);
+    LOG.log("clickOnCreateBlogPost", "Click on create blog post button",
+            true, driver);
     return new SpecialCreatePagePageObject(driver);
   }
 
@@ -90,7 +90,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     showAvatarControls();
     avatarEditButton.click();
     hideAvatarControls();
-    PageObjectLogging.log("clickEditAvatar", "avatar edit button clicked", true);
+    LOG.log("clickEditAvatar", "avatar edit button clicked", LOG.Type.SUCCESS);
     return new AvatarComponentObject(driver);
   }
 
@@ -104,17 +104,18 @@ public class UserProfilePageObject extends WikiBasePageObject {
     AlertHandler.acceptPopupWindow(driver, 20);
     hideAvatarControls();
     wait.forElementVisible(avatarWrapper);
-    PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
+    LOG.log("clickRemoveAvatar", "avatar remove button clicked", LOG.Type.SUCCESS);
   }
 
   public void verifyAvatar(String fileName) {
     wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
-	  PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+	  LOG.log("verifyAvatar", "Desired avatar is visible on user profile page",
+                  LOG.Type.SUCCESS);
   }
 
 public void verifyProfilePage(String userName) {
 	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
-	PageObjectLogging.log("verifyProfilePage", userName +" user profile page verified", true);
+	LOG.log("verifyProfilePage", userName + " user profile page verified", LOG.Type.SUCCESS);
 }
 
 }

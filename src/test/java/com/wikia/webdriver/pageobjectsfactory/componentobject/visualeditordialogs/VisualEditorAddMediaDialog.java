@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialo
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -132,8 +132,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
-    PageObjectLogging.log("selectImageLicense",
-        "License: " + imageLicense.toString() + " selected", true);
+    LOG.log("selectImageLicense",
+            "License: " + imageLicense.toString() + " selected", LOG.Type.SUCCESS);
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName,
@@ -173,14 +173,14 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     fileUploadInput
         .sendKeys(CommonUtils.getAbsolutePathForFile(
             PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
-    PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
+    LOG.log("selectFileToUpload", "file " + fileName + " added to upload", LOG.Type.SUCCESS);
   }
 
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.click();
-    PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
+    LOG.log("previewExistingMediaByTitle", "Media clicked", LOG.Type.SUCCESS);
     return new VisualEditorPageObject(driver);
   }
 

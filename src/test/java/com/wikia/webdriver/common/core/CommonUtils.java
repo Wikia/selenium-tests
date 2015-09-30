@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
@@ -59,7 +59,7 @@ public class CommonUtils {
     try {
       FileUtils.deleteDirectory(new File(dirName));
     } catch (IOException e) {
-      PageObjectLogging.log("deleteDirectory", e, false);
+      LOG.log("deleteDirectory", e, LOG.Type.ERROR);
     }
   }
 
@@ -100,13 +100,13 @@ public class CommonUtils {
       HttpEntity entity = response.getEntity();
       return EntityUtils.toString(entity);
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      LOG.log("sendPost", e, LOG.Type.ERROR);
       return null;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      LOG.log("sendPost", e, LOG.Type.ERROR);
       return null;
     } catch (IOException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      LOG.log("sendPost", e, LOG.Type.ERROR);
       return null;
     }
   }

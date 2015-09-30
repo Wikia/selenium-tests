@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -56,7 +56,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
-    PageObjectLogging.log("setCaption", "caption was set to: " + caption, true);
+    LOG.log("setCaption", "caption was set to: " + caption, LOG.Type.SUCCESS);
   }
 
   public void adjustWith(int width) {
@@ -64,20 +64,20 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(widthInputField);
     widthInputField.clear();
     widthInputField.sendKeys(widthString);
-    PageObjectLogging.log("adjustWith", "width set to: " + width, true, driver);
+    LOG.log("adjustWith", "width set to: " + width, true, driver);
   }
 
   private void clickAddaVideo() {
     wait.forElementVisible(addAvideo);
     wait.forElementClickable(addAvideo);
     scrollAndClick(addAvideo);
-    PageObjectLogging.log("clickAddaVideo", "add video button clicked", true, driver);
+    LOG.log("clickAddaVideo", "add video button clicked", true, driver);
   }
 
   private void clickRetunToEditing() {
     wait.forElementVisible(returnToEditing);
     scrollAndClick(returnToEditing);
-    PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked", true, driver);
+    LOG.log("clickReturnToEditing", "return to editing button clicked", true, driver);
   }
 
   private void verifyVideoThumbnail() {
@@ -85,7 +85,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Dimension dim = videoThumbnail.getSize();
     int w = dim.getWidth();
     Assertion.assertEquals(w, 350);
-    PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible", true);
+    LOG.log("verifyVideoThumbnail", "video thumbnail is visible", LOG.Type.SUCCESS);
   }
 
   private void verifyVideoModalNotVisible() {
@@ -120,7 +120,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    PageObjectLogging.log("adjustPosition", "position " + position.toString() + " selected", true);
+    LOG.log("adjustPosition", "position " + position.toString() + " selected", LOG.Type.SUCCESS);
   }
 
   public void verifyVideoAlignmentSelected(PositionsVideo positions) {
@@ -148,7 +148,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   public void clickUpdateVideo() {
     wait.forElementVisible(updateVideoButton);
     scrollAndClick(updateVideoButton);
-    PageObjectLogging.log("updateVideoButton", "update video button clicked", true, driver);
+    LOG.log("updateVideoButton", "update video button clicked", true, driver);
   }
 
 
@@ -158,7 +158,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Assertion.assertEquals(
         widthDesired,
         width);
-    PageObjectLogging.log("verifyVideoWidth", "video width verified", true);
+    LOG.log("verifyVideoWidth", "video width verified", LOG.Type.SUCCESS);
   }
 
   public void verifyCaption(String captionDesired) {
@@ -168,6 +168,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void verifyNameNotEditable() {
     Assertion.assertTrue(!uneditableVideoNameField.isDisplayed());
-    PageObjectLogging.log("verifyNameNotEditable", "video name field not editable", true);
+    LOG.log("verifyNameNotEditable", "video name field not editable", LOG.Type.SUCCESS);
   }
 }

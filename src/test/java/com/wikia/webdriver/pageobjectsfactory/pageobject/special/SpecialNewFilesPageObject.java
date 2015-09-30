@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -50,7 +50,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void addPhoto() {
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log(
+    LOG.logResult(
         "ClickAddPhotoButton",
         "Add photo button clicked",
         true
@@ -59,7 +59,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void clickUploadButton() {
     scrollAndClick(uploadFileInput);
-    PageObjectLogging.log(
+    LOG.logResult(
         "ClickOnUploadaPhoto",
         "Click on upload a photo button",
         true
@@ -74,7 +74,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   public void clickOnMoreOrFewerOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
-    PageObjectLogging.log(
+    LOG.logResult(
         "ClickOnMoreOrFewerOptions",
         "Click on More or Fewer options (depends on which of those two is currently visible)",
         true
@@ -84,7 +84,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   public void checkIgnoreAnyWarnings() {
     wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
-    PageObjectLogging.log(
+    LOG.logResult(
         "CheckIgnoreAnyWarnings",
         "Check 'Ignore Any Warnings' option",
         true
@@ -98,21 +98,21 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
 
-    PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
+    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
   }
 
   public void verifyFileUploaded(String fileName) {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
+      LOG.log("SLEEP INTERRUPTED", e, LOG.Type.ERROR);
     }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(
         latestWikiaPreviewImg,
         "src",
         fileName);
-    PageObjectLogging.log(
+    LOG.logResult(
         "waitForFile",
         "Verify if " + fileName + " has been succesfully uploaded",
         true
@@ -141,7 +141,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     }
     Random r = new Random();
     String href = hrefs.get((r.nextInt(hrefs.size() - 1)) + 1);
-    PageObjectLogging.log("getRandomImageUrl", href + " image is selected", true);
+    LOG.log("getRandomImageUrl", href + " image is selected", LOG.Type.SUCCESS);
     return href;
   }
 
@@ -204,13 +204,13 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     String
         fileUrl =
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getImageKey(itemNumber);
-    PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
+    LOG.log("getFileUrl", "File url: " + fileUrl, LOG.Type.SUCCESS);
     return fileUrl;
   }
 
   public String getImageKey(int itemNumber) {
     String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
-    PageObjectLogging.log("getImageKey", "Image key: " + imageKey, true);
+    LOG.log("getImageKey", "Image key: " + imageKey, LOG.Type.SUCCESS);
     return imageKey;
   }
 

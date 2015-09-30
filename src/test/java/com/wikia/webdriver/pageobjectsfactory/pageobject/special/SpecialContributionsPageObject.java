@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,19 +23,19 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
   private void selectContributorUserName() {
     wait.forElementVisible(userNameRadio);
     userNameRadio.click();
-    PageObjectLogging.log("selectContributorUserName", "by username selected", true);
+    LOG.log("selectContributorUserName", "by username selected", LOG.Type.SUCCESS);
   }
 
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    PageObjectLogging.log("typeInUserName", userName + " username typed in", true);
+    LOG.log("typeInUserName", userName + " username typed in", LOG.Type.SUCCESS);
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
-    PageObjectLogging.log("clickSearchButton", "search button clicked", true);
+    LOG.log("clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
   }
 
   public void searchContributions(String userName) {
@@ -50,7 +50,8 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
     wait.forElementVisible(By.xpath(
         "//span[@class='comment' and contains(text(), '(Created page with \"" + pageContent
         + "\")')]"));
-    PageObjectLogging
-        .log("verifyNewPageOnList", pageName + " page verified on the contribution list", true);
+    LOG
+        .logResult("verifyNewPageOnList", pageName + " page verified on the contribution list",
+                   true);
   }
 }

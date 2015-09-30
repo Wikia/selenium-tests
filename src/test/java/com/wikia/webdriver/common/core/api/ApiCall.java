@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
@@ -66,15 +66,15 @@ public abstract class ApiCall {
 
       httpClient.execute(httpPost);
 
-      PageObjectLogging.log("CONTENT PUSH", "Content posted to: " + URL_STRING, true);
+      LOG.log("CONTENT PUSH", "Content posted to: " + URL_STRING, LOG.Type.INFO);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      LOG.log("EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      LOG.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (URISyntaxException e) {
-      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      LOG.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
       throw new WebDriverException(ERROR_MESSAGE);
     }
   }

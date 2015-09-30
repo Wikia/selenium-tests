@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -18,6 +18,6 @@ public class SpecialEditHubPageObject extends BasePageObject {
 
   public void verifyCalendarAppears() {
     wait.forElementVisible(edithubDashboardCalendar);
-    PageObjectLogging.log("verifyCalendarAppears", "Curators calendar visible", true);
+    LOG.log("verifyCalendarAppears", "Curators calendar visible", LOG.Type.SUCCESS);
   }
 }

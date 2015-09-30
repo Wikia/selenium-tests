@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.actions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,7 @@ public class DeletePageObject extends WikiBasePageObject {
   public WikiBasePageObject submitDeletion() {
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submitDeletion", "page deleted", true);
+    LOG.log("submitDeletion", "page deleted", LOG.Type.SUCCESS);
     return new WikiBasePageObject(driver);
   }
 }

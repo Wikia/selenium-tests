@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.gallery;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -95,29 +95,29 @@ public class GalleryBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing orientation selected");
     }
-    PageObjectLogging.log("adjustOrientation", "dropdown selected", true);
+    LOG.log("adjustOrientation", "dropdown selected", LOG.Type.SUCCESS);
 
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
     return new AddPhotoComponentObject(driver);
   }
 
   public void verifyPhotosCount(int photos) {
     for (int i = 0; i < photos; i++) {
       wait.forElementVisible(galleryPreviewPhotos.get(i));
-      PageObjectLogging
-          .log("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
+      LOG
+          .logResult("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
 
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    PageObjectLogging.log("clickFinish", "finish button clicked", true);
+    LOG.log("clickFinish", "finish button clicked", LOG.Type.SUCCESS);
   }
 
   public enum PositionsGallery {

@@ -410,6 +410,8 @@ dependencies {
     testCompile 'joda-time:joda-time:2.7'
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
     testCompile 'net.lightbody.bmp:browsermob-core:2.1.0-beta-2'
+    testCompile 'commons-validator:commons-validator:1.4.1'
+
 }
 
 

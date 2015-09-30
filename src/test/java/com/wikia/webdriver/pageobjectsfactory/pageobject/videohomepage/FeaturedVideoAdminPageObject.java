@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -39,14 +39,14 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     wait.forElementVisible(featuredVideoForm);
     WebElement addVideoButton = featuredVideoForm.findElement(By.cssSelector(".add-video-button"));
     addVideoButton.click();
-    PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true);
+    LOG.log("VetAddVideoComponentObject", "Add video button clicked", LOG.Type.SUCCESS);
     return new VetAddVideoComponentObject(driver);
   }
 
   public void verifyVideoAdded(String name) {
     verifyVideoTitleUpdated(name);
     verifyVideoDisplayTitleUpdated(name);
-    PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
+    LOG.log("verifyVideoAdded", "Video" + name + " was successfully added.", LOG.Type.SUCCESS);
   }
 
   public void verifyVideoTitleUpdated(String name) {
@@ -54,7 +54,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
     String title = videoTitle.getText();
     Assertion.assertEquals(name, title);
-    PageObjectLogging.log("verifyVideoTitleUpdated", "Video title was updated", true);
+    LOG.log("verifyVideoTitleUpdated", "Video title was updated", LOG.Type.SUCCESS);
   }
 
   public void verifyVideoDisplayTitleUpdated(String name) {
@@ -62,13 +62,13 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     WebElement displayTitle = featuredVideoForm.findElement(By.cssSelector(".display-title"));
     String title = displayTitle.getAttribute("value");
     Assertion.assertEquals(name, title);
-    PageObjectLogging.log("verifyVideoDisplayTitleUpdated",
-        "Video display title input was populated", true);
+    LOG.log("verifyVideoDisplayTitleUpdated",
+            "Video display title input was populated", LOG.Type.SUCCESS);
   }
 
   public LatestVideoAdminPageObject clickSaveFeaturedVideoForm(WebDriver driver) {
     scrollAndClick(saveButton);
-    PageObjectLogging.log("clickSaveFeaturedVideoForm", "Featured video form has been saved", true);
+    LOG.log("clickSaveFeaturedVideoForm", "Featured video form has been saved", LOG.Type.SUCCESS);
     return new LatestVideoAdminPageObject(driver);
   }
 }

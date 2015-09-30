@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
@@ -76,8 +76,8 @@ public class NavigationBar extends WikiBasePageObject {
         searchInput.sendKeys(Keys.ARROW_DOWN);
       }
       searchInput.sendKeys(Keys.ENTER);
-      PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-                                                     + suggestionText + "and clicked enter", true);
+      LOG.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
+                                       + suggestionText + "and clicked enter", LOG.Type.SUCCESS);
       return new ArticlePageObject(driver);
     } else {
       return null;
@@ -93,12 +93,12 @@ public class NavigationBar extends WikiBasePageObject {
       WebElement currentSuggestion = suggestionsList.get(i);
       if (currentSuggestion.getText().contains(suggestion)) {
         currentSuggestion.click();
-        PageObjectLogging
-            .log("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
+        LOG
+            .logResult("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
         return new ArticlePageObject(driver);
       }
     }
-    PageObjectLogging.log("clickSuggestion", "didn't find suggestion: " + suggestion, false);
+    LOG.log("clickSuggestion", "didn't find suggestion: " + suggestion, LOG.Type.ERROR);
     return null;
   }
 
@@ -106,11 +106,11 @@ public class NavigationBar extends WikiBasePageObject {
     wait.forElementVisible(searchInput);
     searchInput.clear();
     searchInput.sendKeys(query);
-    PageObjectLogging.log("typeQuery", "typed query: " + query, true);
+    LOG.log("typeQuery", "typed query: " + query, LOG.Type.SUCCESS);
   }
 
   public IntraWikiSearchPageObject searchFor(String query) {
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.log("searchFor", "searching for query: " + query, true, driver);
     typeQuery(query);
     return clickSearchButton();
   }
@@ -118,14 +118,14 @@ public class NavigationBar extends WikiBasePageObject {
   public IntraWikiSearchPageObject clickEnterToSearch() {
     wait.forElementClickable(searchInput);
     searchInput.sendKeys(Keys.ENTER);
-    PageObjectLogging.log("clickEnterInSearch", "clicked enter in search", true);
+    LOG.log("clickEnterInSearch", "clicked enter in search", LOG.Type.SUCCESS);
     return new IntraWikiSearchPageObject(driver);
   }
 
   public IntraWikiSearchPageObject clickSearchButton() {
     wait.forElementClickable(searchSubmit);
     searchSubmit.click();
-    PageObjectLogging.log("clickSearchButton", "clicked on search button", true);
+    LOG.log("clickSearchButton", "clicked on search button", LOG.Type.SUCCESS);
     return new IntraWikiSearchPageObject(driver);
   }
 
@@ -135,7 +135,7 @@ public class NavigationBar extends WikiBasePageObject {
   public ArticlePageObject goSearchFor(String query) {
     searchInput.sendKeys(query);
     searchSubmit.click();
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject(driver);
   }
 

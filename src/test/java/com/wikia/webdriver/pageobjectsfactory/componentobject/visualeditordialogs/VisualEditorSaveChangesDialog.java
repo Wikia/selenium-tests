@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.openqa.selenium.By;
@@ -49,14 +49,14 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   public void verifyRecaptchaIsVisible() {
     wait.forElementVisible(recaptchaContainer);
     driver.switchTo().defaultContent();
-    PageObjectLogging
+    LOG
         .log("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
   }
 
   public String getRecaptchaImageSrc() {
     wait.forElementVisible(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
-    PageObjectLogging
+    LOG
         .log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
     driver.switchTo().defaultContent();
     return imageSrc;
@@ -74,7 +74,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public void verifyIsNewRecaptcha(String target) {
     Assertion.assertNotEquals(getRecaptchaImageSrc(), target);
-    PageObjectLogging.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", true);
+    LOG.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", LOG.Type.SUCCESS);
   }
 
   public VisualEditorReviewChangesDialog clickReviewYourChanges() {

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -77,7 +77,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(filterBox, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
-      PageObjectLogging.log("Filter box not expanded", e, true);
+      LOG.log("Filter box not expanded", e, LOG.Type.SUCCESS);
       return false;
     }
     return true;
@@ -87,7 +87,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(lightbox, 5, 1000);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Map modal not visible", e, true);
+      LOG.log("Map modal not visible", e, LOG.Type.SUCCESS);
       return false;
     }
     return true;

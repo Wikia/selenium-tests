@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +20,6 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
     wait.forElementClickable(preferredEditorDropdown);
     Select select = new Select(preferredEditorDropdown);
     select.selectByValue(value);
-    PageObjectLogging.log("selectPreferredEditor", "Selected " + value + " from preference", true);
+    LOG.log("selectPreferredEditor", "Selected " + value + " from preference", LOG.Type.SUCCESS);
   }
 }

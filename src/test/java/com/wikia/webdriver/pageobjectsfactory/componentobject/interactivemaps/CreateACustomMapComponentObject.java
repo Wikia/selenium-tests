@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
@@ -54,7 +54,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -70,7 +70,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public TemplateComponentObject selectFileToUpload(String file) {
     browseForFileInput.sendKeys(CommonUtils
         .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
-    PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
+    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
     return new TemplateComponentObject(driver);
   }
 
@@ -83,8 +83,8 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public void typeSearchTile(String templateName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(templateName);
-    PageObjectLogging.log("typeTilesetName", "title (" + templateName
-        + ") for template is typed in", true);
+    LOG.log("typeTilesetName", "title (" + templateName
+                               + ") for template is typed in", LOG.Type.SUCCESS);
   }
 
   public void verifyErrorExists() {
@@ -94,6 +94,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 
   public void verifyTemplateListElementVisible(int element) {
     wait.forElementVisible(templateList.get(element));
-    PageObjectLogging.log("verifyTemplateListElementVisible", "Template element is visible ", true);
+    LOG.log("verifyTemplateListElementVisible", "Template element is visible ", LOG.Type.SUCCESS);
   }
 }

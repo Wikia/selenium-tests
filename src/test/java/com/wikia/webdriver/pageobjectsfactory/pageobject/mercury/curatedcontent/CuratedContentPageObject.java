@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -102,7 +102,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isAlertNotificationVisible() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.ALERT_NOTIFICATION.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -132,7 +132,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isTitleVisible() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.SECTION_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -142,7 +142,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isLinkToMainPageVisible() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.LINK_TO_MAIN_PAGE.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -152,7 +152,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isSectionVisible() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.SECTION.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -162,7 +162,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.SECTION_ITEM.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -172,7 +172,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isLoadMoreButtonVisible() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.LOAD_MORE_BUTTON.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -182,7 +182,7 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isLoadMoreButtonHidden() {
-    PageObjectLogging.log(
+    LOG.log(
         Labels.LOAD_MORE_BUTTON.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -195,7 +195,7 @@ public class CuratedContentPageObject extends BasePageObject {
     int currentNumber = getCuratedContentItemsNumber();
     String message = "Expected: " + expectedNumber + ", get: " + currentNumber;
 
-    PageObjectLogging.log(
+    LOG.logResult(
         Labels.NUMBER_OF_ITEMS.name,
         message,
         expectedNumber == currentNumber
@@ -219,7 +219,7 @@ public class CuratedContentPageObject extends BasePageObject {
       itemsLabels.add(label);
     }
 
-    PageObjectLogging.log(
+    LOG.log(
         Labels.ITEM_LABELS.name,
         MercuryMessages.LIST_ITEMS_ARE_UNIQUE_MSG,
         MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG,

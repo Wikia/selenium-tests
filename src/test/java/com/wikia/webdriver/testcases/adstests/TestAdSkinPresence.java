@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -34,7 +34,7 @@ public class TestAdSkinPresence extends TemplateNoFirstLoad {
                                String backgroundColor,
                                String middleColor) throws IOException {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    PageObjectLogging.log("Window resolution: ", String.valueOf(windowResolution.width), true);
+    LOG.log("Window resolution: ", String.valueOf(windowResolution.width), LOG.Type.SUCCESS);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, windowResolution);
     adsBaseObject.verifySkin(expectedAdSkinLeftPath,
                              expectedAdSkinRightPath,

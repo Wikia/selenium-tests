@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SkinHelper;
@@ -109,7 +109,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slot
       );
       if (checkScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
-        PageObjectLogging.log(
+        LOG.logResult(
             "AdDriver2ForceStatus script",
             "adDriverForcedSuccess script found in slot " + slot,
             true
@@ -130,8 +130,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyTopLeaderboard() {
     if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
         By.cssSelector("#jpsuperheader"))) {
-      PageObjectLogging.log("verifyTopLeaderboard",
-                            "Page has Gotham campaign.", true);
+      LOG.log("verifyTopLeaderboard",
+              "Page has Gotham campaign.", LOG.Type.SUCCESS);
       return;
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
@@ -157,19 +157,19 @@ public class AdsBaseObject extends WikiBasePageObject {
         hubLB =
         driver.findElement(By.cssSelector(AdsContent.getSlotSelector(hubLBName)));
     verifyScriptPresentInSlotScripts(hubLBName, hubLB);
-    PageObjectLogging.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", true);
+    LOG.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", LOG.Type.SUCCESS);
 
     WebElement
         hubGPTLB =
         hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.HUB_LB_GPT)));
-    PageObjectLogging
-        .log("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
+    LOG
+        .logResult("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
 
     if (hubGPTLB.findElements(By.cssSelector("iframe")).size() > 1) {
-      PageObjectLogging
-          .log("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
+      LOG
+          .logResult("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
     } else {
-      PageObjectLogging.log(
+      LOG.log(
           "IFrames not found",
           "2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less",
           false, driver
@@ -184,13 +184,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (isElementOnPage(By.cssSelector(LIFTIUM_IFRAME_SELECTOR))) {
       String iframeSrc = liftiumIframes.get(0).getAttribute("src");
       if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
-        PageObjectLogging
-            .log("LiftiumAdsNotFound", "Liftium ads not found except WikiaBar", true);
+        LOG
+            .logResult("LiftiumAdsNotFound", "Liftium ads not found except WikiaBar", true);
       } else {
         throw new WebDriverException("Liftium ads found!");
       }
     } else {
-      PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
+      LOG.log("LiftiumAdsNotFound", "Liftium ads not found", LOG.Type.SUCCESS);
     }
   }
 
@@ -198,7 +198,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
     verifyNoAds();
-    PageObjectLogging.log(
+    LOG.log(
         "verifyNoAdsOnPage",
         "No ads detected",
         true,
@@ -210,7 +210,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_AD_IN_CONTENT));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER));
     verifyNoAds();
-    PageObjectLogging.log(
+    LOG.log(
         "verifyNoAdsOnMobilePage",
         "No ads detected",
         true,
@@ -224,7 +224,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
         throw new NoSuchElementException("Liftium found in slot " + slot);
       } else {
-        PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
+        LOG.log("LiftiumNotFound", "Liftium not found in slot " + slot, LOG.Type.SUCCESS);
       }
     }
   }
@@ -249,7 +249,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       Assertion.assertStringContains(dataGptSlotParams, param);
     }
 
-    PageObjectLogging.log(
+    LOG.log(
         "verifyGptParams",
         "All page-level and slot-level params present as expected " + dataGptPageParams + ", "
         + dataGptSlotParams,
@@ -273,7 +273,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       Assertion.assertEquals(getGptParams(slotName, "data-gpt-creative-id"), creativeId);
     }
 
-    PageObjectLogging.log(
+    LOG.log(
         "verifyGptAdInSlot",
         "Line item id loaded: " + lineItemId + ", creativeId:" + creativeId,
         true,
@@ -302,18 +302,19 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
 
-    PageObjectLogging.log("verifySize",
-                          slotName + " has width: " + slotWidth + ";height: " + slotHeight,
-                          true,
-                          driver);
+    LOG.log("verifySize",
+            slotName + " has width: " + slotWidth + ";height: " + slotHeight,
+            true,
+            driver);
     return this;
   }
 
   public AdsBaseObject verifyLineItemId(String slotName, int lineItemId) {
     String lineItemParam = getGptParams(slotName, GPT_DATA_ATTRIBUTES[0]);
     Assertion.assertStringContains(lineItemParam, String.valueOf(lineItemId));
-    PageObjectLogging
-        .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
+    LOG
+        .logResult("verifyLineItemId", slotName + " has following line item: " + lineItemParam,
+                   true);
     return this;
   }
 
@@ -321,13 +322,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     WebElement element = getIframe(slotName, src);
     Assertion
         .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
-    PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+    LOG.log("verifyAdImage", "Ad looks good", true, driver);
 
     return this;
   }
 
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
-    PageObjectLogging.log("SlotName", slotName, true);
+    LOG.log("SlotName", slotName, LOG.Type.SUCCESS);
     waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
     return this;
   }
@@ -344,12 +345,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     wait.forElementPresent(cssSelector);
 
     String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
-    PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+    LOG.log("verifyGptIframe", msg, true, driver);
 
     waitForIframeLoaded(driver.findElement(cssSelector));
 
     msg = "Received \"load\" event from GPT iframe #" + iframeId + "  in slot " + slotName;
-    PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+    LOG.log("verifyGptIframe", msg, true, driver);
   }
 
   public AdsBaseObject refresh(int times) {
@@ -435,17 +436,17 @@ public class AdsBaseObject extends WikiBasePageObject {
                          String middleColor) {
     SkinHelper skinHelper = new SkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
-    PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
+    LOG.log("SKIN", "SKIN presents on the page", LOG.Type.SUCCESS);
 
     if (!Strings.isNullOrEmpty(backgroundColor)) {
       Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor);
-      PageObjectLogging.log("SKIN", "SKIN has correct background color", true);
+      LOG.log("SKIN", "SKIN has correct background color", LOG.Type.SUCCESS);
     }
 
     if (!Strings.isNullOrEmpty(middleColor) &&
         getWindowSize().getWidth() > MIN_MIDDLE_COLOR_PAGE_WIDTH) {
       Assertion.assertEquals(skinHelper.getMiddleColor(), middleColor);
-      PageObjectLogging.log("SKIN", "SKIN has correct middle color", true);
+      LOG.log("SKIN", "SKIN has correct middle color", LOG.Type.SUCCESS);
     }
   }
 
@@ -504,10 +505,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void waitForIframeLoaded(WebElement iframe) {
-    PageObjectLogging.log("waitForIframeLoaded", "Switching to adslot iframe", true);
+    LOG.log("waitForIframeLoaded", "Switching to adslot iframe", LOG.Type.SUCCESS);
     driver.switchTo().frame(iframe);
     waitForPageLoaded();
-    PageObjectLogging.log("waitForIframeLoaded", "Switching back to the page", true);
+    LOG.log("waitForIframeLoaded", "Switching back to the page", LOG.Type.SUCCESS);
     driver.switchTo().defaultContent();
   }
 
@@ -566,7 +567,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             return (boolean) ((JavascriptExecutor) driver)
                 .executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
-            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
+            LOG.error("waitForJavaScriptTruthy", e);
             return false;
           }
         }
@@ -587,7 +588,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Floating Medrec", e);
+      LOG.error("Floating Medrec", e);
     }
   }
 
@@ -598,7 +599,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       Optional<WebElement> lastGptDiv = getLastGptDiv(slotSelector);
       if (lastGptDiv.isPresent() &&
           checkIfGptSlotHasCreativeContent(lastGptDiv.get(), HOP_AD_TYPE)) {
-        PageObjectLogging.log("verifyAdVisibleInSlot", "Slot has " + HOP_AD_TYPE, true);
+        LOG.log("verifyAdVisibleInSlot", "Slot has " + HOP_AD_TYPE, LOG.Type.SUCCESS);
         return;
       }
 
@@ -614,7 +615,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       throw new WebDriverException("Ad is not present in " + slotSelector);
     }
 
-    PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
+    LOG.log("ScreenshotsComparison", "Ad is present in " + slotSelector, LOG.Type.SUCCESS);
   }
 
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
@@ -639,13 +640,13 @@ public class AdsBaseObject extends WikiBasePageObject {
         "%slot%", slotName
     );
     if (checkScriptPresentInElement(slotElement, scriptExpectedResult)) {
-      PageObjectLogging.log(
+      LOG.logResult(
           "PushSlotsScriptFound",
           "Script " + scriptExpectedResult + " found",
           true
       );
     } else {
-      PageObjectLogging.log(
+      LOG.log(
           "PushSlotsScriptNotFound",
           "Script " + scriptExpectedResult + " not found",
           false,
@@ -667,7 +668,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             ) {
           throw new WebDriverException("Ads found on page in selector: " + selector);
         } else {
-          PageObjectLogging.log(
+          LOG.logResult(
               "AdsFoundButNotVisible",
               "Ads found on page with selector: "
               + selector
@@ -676,7 +677,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           );
         }
       } else {
-        PageObjectLogging.log(
+        LOG.logResult(
             "AdNotFound",
             "Ad with selector: "
             + selector
@@ -706,14 +707,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     if (liftiumTagId != null) {
-      PageObjectLogging.log(
+      LOG.logResult(
           "LiftiumTagId",
           "Present liftium tag id is: "
           + liftiumTagId + "; in slot: " + slotSelector,
           true
       );
     } else {
-      PageObjectLogging.log(
+      LOG.logResult(
           "LiftiumTagId",
           "Liftium not present in slot: " + slotSelector,
           true
@@ -733,7 +734,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       }
     }
 
-    PageObjectLogging.log("extractGptInfo", log, true, driver);
+    LOG.log("extractGptInfo", log, true, driver);
   }
 
   protected boolean checkScriptPresentInElement(WebElement element, String scriptText) {

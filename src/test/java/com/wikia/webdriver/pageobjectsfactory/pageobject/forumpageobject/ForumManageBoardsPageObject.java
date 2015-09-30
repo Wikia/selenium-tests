@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -43,26 +43,27 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private void openCreateNewBoardForm() {
     wait.forElementVisible(createBoardButton);
     createBoardButton.click();
-    PageObjectLogging.log("openCreateNewBoardForm", "create new board form opened", true);
+    LOG.log("openCreateNewBoardForm", "create new board form opened", LOG.Type.SUCCESS);
   }
 
   private void typeBoardTitle(String title) {
     wait.forElementVisible(boardTitleField);
     boardTitleField.sendKeys(title);
-    PageObjectLogging.log("typeBoardTitle", "board title: '" + title + "' typed in", true);
+    LOG.log("typeBoardTitle", "board title: '" + title + "' typed in", LOG.Type.SUCCESS);
   }
 
   private void typeBoradDescription(String description) {
     wait.forElementVisible(boardDescriptionField);
     boardDescriptionField.sendKeys(description);
-    PageObjectLogging
-        .log("typeBoardDescription", "board description: '" + description + "' typed in", true);
+    LOG
+        .logResult("typeBoardDescription", "board description: '" + description + "' typed in",
+                   true);
   }
 
   private void submitNewBoard() {
     wait.forElementVisible(boardSubmitButton);
     scrollAndClick(boardSubmitButton);
-    PageObjectLogging.log("submitNewBoard", "new board submitted", true);
+    LOG.log("submitNewBoard", "new board submitted", LOG.Type.SUCCESS);
   }
 
   public void createNewBoard(String title, String description) {
@@ -75,7 +76,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   public void verifyBoardCreated(String title, String description) {
     wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
                                     + "')]/../../../p[contains(text(), '" + description + "')]"));
-    PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);
+    LOG.log("verifyBoardCreated", "recently created board verified", LOG.Type.SUCCESS);
   }
 
   private void clickDeleteForum(String name) {
@@ -84,7 +85,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
     scrollAndClick(deleteButton);
-    PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);
+    LOG.log("clickDeleteForum", "delete forum button clicked", LOG.Type.SUCCESS);
   }
 
   private void confirmDeleteForum(String deletedName, String mergerdName) {
@@ -92,20 +93,20 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     deleteBoardConfirmationField.sendKeys(deletedName);
     Select select = new Select(mergeToBoard);
     select.selectByVisibleText(mergerdName);
-    PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
+    LOG.log("confirmDeleteForum", "delete forum form populated", LOG.Type.SUCCESS);
   }
 
   private void clickDeleteAndMergeForum() {
     wait.forElementVisible(deleteAndMergeButton);
     scrollAndClick(deleteAndMergeButton);
-    PageObjectLogging.log("clickDeleteAndMergeForum", "delete and merge button clicked", true);
+    LOG.log("clickDeleteAndMergeForum", "delete and merge button clicked", LOG.Type.SUCCESS);
   }
 
   private void verifyForumDeletedText(String deletedName) {
     wait.forElementVisible(By.xpath("//div[@class='banner-notification confirm']" +
                                     "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
                                     + "\" has been deleted.')]"));
-    PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
+    LOG.log("verifyForumDeletedText", "forum deleted text verified", LOG.Type.SUCCESS);
   }
 
   public void deleteForum(String sourceForumName, String destinationForumName) {
@@ -131,23 +132,23 @@ public class ForumManageBoardsPageObject extends BasePageObject {
 
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumExists", e, false);
+      LOG.log("verifyForumExists", e, LOG.Type.ERROR);
     }
     wait.forElementVisible(
         By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
-    PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
+    LOG.log("verifyForumExists", "verified forum exists", LOG.Type.SUCCESS);
   }
 
   public void verifyForumNotExists(String forumName, String wikiURL) {
     try {
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumNotExists", e, false);
+      LOG.log("verifyForumNotExists", e, LOG.Type.ERROR);
     }
     wait.forElementVisible(By.xpath(
         "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
-    PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
+    LOG.log("verifyForumNotExists", "verified forum not exists", LOG.Type.SUCCESS);
   }
 
   private void clickModifyForum(String forumName) {
@@ -156,7 +157,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
     scrollAndClick(editPecil);
-    PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
+    LOG.log("clickModifyForum", "modify forum button clicked", LOG.Type.SUCCESS);
   }
 
   private void clearEditBoardFields() {
@@ -164,7 +165,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     wait.forElementVisible(boardDescriptionField);
     boardTitleField.clear();
     boardDescriptionField.clear();
-    PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true);
+    LOG.log("clickEditBoardFields", "edit boards fields cleared", LOG.Type.SUCCESS);
   }
 
   public void editForum(String forumName, String newTitle, String newDescription) {
@@ -183,7 +184,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
     down.click();
     Assertion.assertEquals(getSecondForumName(), temp);
-    PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
+    LOG.log("clickMoveDown", "move down button clicked", LOG.Type.SUCCESS);
   }
 
   public void clickMoveUp(String forumName) {
@@ -194,6 +195,6 @@ public class ForumManageBoardsPageObject extends BasePageObject {
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
     up.click();
     Assertion.assertEquals(getFirstForumName(), temp);
-    PageObjectLogging.log("clickMoveDown", "move up button clicked", true);
+    LOG.log("clickMoveDown", "move up button clicked", LOG.Type.SUCCESS);
   }
 }

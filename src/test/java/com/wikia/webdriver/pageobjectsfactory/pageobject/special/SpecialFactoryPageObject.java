@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -35,36 +35,36 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
 
   private void clickCloseWikiButton() {
     scrollAndClick(closeWikiButton);
-    PageObjectLogging.log("clickCloseWikiButton ", "Close wiki button clicked", true, driver);
+    LOG.log("clickCloseWikiButton ", "Close wiki button clicked", true, driver);
   }
 
   private void deselectCreateDumpCheckBox() {
     scrollAndClick(dumpCheckBox);
-    PageObjectLogging
+    LOG
         .log("deselectCreateDumpCheckBox ", "Create dump checkbox deselected", true, driver);
   }
 
   private void deselectImageArchiveCheckBox() {
     scrollAndClick(imageArchiveCheckBox);
-    PageObjectLogging
+    LOG
         .log("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected", true,
              driver);
   }
 
   private void confirmClose() {
     scrollAndClick(confirmCloseButton);
-    PageObjectLogging.log("confirmClose ", "Close confirmation button clicked", true, driver);
+    LOG.log("confirmClose ", "Close confirmation button clicked", true, driver);
   }
 
   private void clickClosedWikiaLink() {
     scrollAndClick(closedWikiaLink);
-    PageObjectLogging.log("clickClosedWikiaLink ", "Closed wikia link clicked", true, driver);
+    LOG.log("clickClosedWikiaLink ", "Closed wikia link clicked", true, driver);
   }
 
   private void verifyWikiaClosed() {
     wait.forElementVisible(By.cssSelector("#close-title"));
     wait.forElementVisible(By.cssSelector("#close-info"));
-    PageObjectLogging.log("verifyWikiaClosed ", "Closed wikia verified", true, driver);
+    LOG.log("verifyWikiaClosed ", "Closed wikia verified", true, driver);
   }
 
   public void deleteWiki() {

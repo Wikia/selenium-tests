@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -97,7 +97,8 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean areAllValidSwappedForIFrames() {
     boolean result = getWidgetWrapperList().size() == getWidgetIFrameList().size();
-    PageObjectLogging.log(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG, result);
+    LOG.logResult(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG,
+                  result);
     return result;
   }
 
@@ -110,12 +111,13 @@ public abstract class WidgetPageObject extends BasePageObject {
     for (int i = 0; i < tags.length; i++) {
       if (!isWidgetVisible(i)) {
         result = false;
-        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
+        LOG.logResult(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
         return result;
       }
-      PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+      LOG.logResult(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
-    PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
+    LOG.logResult("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG,
+                  result);
     return result;
   }
 
@@ -126,9 +128,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   protected void logVisibility(boolean result) {
-    PageObjectLogging
-        .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
-             result);
+    LOG
+        .logResult(getTagName(),
+                   result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+                   result);
   }
 
   /**

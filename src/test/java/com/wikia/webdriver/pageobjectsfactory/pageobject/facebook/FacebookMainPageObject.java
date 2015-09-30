@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -33,7 +33,7 @@ public class FacebookMainPageObject extends WikiBasePageObject {
   public void clickLoginButton() {
     wait.forElementVisible(loginButton);
     loginButton.click();
-    PageObjectLogging.log("clickLoginButton", "facebook login button clicked", true);
+    LOG.log("clickLoginButton", "facebook login button clicked", LOG.Type.SUCCESS);
   }
 
   private void typePassword(String password) {

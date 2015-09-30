@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -33,14 +33,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    PageObjectLogging
-        .log("Special:BlockList typeInUserName", userName + " typed in username field", true);
+    LOG
+        .logResult("Special:BlockList typeInUserName", userName + " typed in username field", true);
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
-    PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
+    LOG.log("Special:BlockList clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
   }
 
   public void searchForUser(String userName) {
@@ -50,14 +50,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
 
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
-    PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
-                          "verified that user is not on blocked users list", true, driver);
+    LOG.log("Special:BlockList verifyUSerUnblocked",
+            "verified that user is not on blocked users list", true, driver);
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(
         By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
-    PageObjectLogging
+    LOG
         .log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list",
              true, driver);
   }
@@ -83,8 +83,8 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
     } catch (ParseException ex) {
       throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
-    PageObjectLogging
-        .log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+    LOG
+        .logResult("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
     return isBlocked;
   }
 }

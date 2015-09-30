@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -28,19 +28,19 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 
   public void verifyVideosModuleShowing() {
     Assertion.assertTrue(isElementOnPage(videosModuleContainer));
-    PageObjectLogging.log("verifyVideosModuleShowing", "Videos Module showing", true);
+    LOG.log("verifyVideosModuleShowing", "Videos Module showing", LOG.Type.SUCCESS);
   }
 
   public void verifyVideosModuleNotShowing() {
     Assertion.assertTrue(!isElementOnPage(videosModuleContainer));
-    PageObjectLogging.log("verifyVideosModuleNotShowing",
-                          "Videos Module not showing (test passed)", true);
+    LOG.log("verifyVideosModuleNotShowing",
+            "Videos Module not showing (test passed)", LOG.Type.SUCCESS);
   }
 
   public void verifyDisplayCount() {
     Assertion.assertTrue(videos.size() >= VIDEO_COUNT_MIN && videos.size() <= VIDEO_COUNT_MAX);
-    PageObjectLogging.log("verifyDisplayCount",
-                          "Videos Module showing correct number of videos", true);
+    LOG.log("verifyDisplayCount",
+            "Videos Module showing correct number of videos", LOG.Type.SUCCESS);
   }
 
   public void verifyNoDuplicates() {
@@ -52,6 +52,6 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
         Assertion.assertNotEquals(videoTitle2, videoTitle1);
       }
     }
-    PageObjectLogging.log("verifyNoDuplicates", "Videos Module not showing duplicates", true);
+    LOG.log("verifyNoDuplicates", "Videos Module not showing duplicates", LOG.Type.SUCCESS);
   }
 }

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -19,7 +19,7 @@ public class DiffPagePageObject extends BasePageObject {
 
   public void verifyDiffTablePresent() {
     wait.forElementVisible(diffTable);
-    PageObjectLogging.log("Verify diff table", "diff table is visible", true);
+    LOG.log("Verify diff table", "diff table is visible", LOG.Type.SUCCESS);
   }
 
 }

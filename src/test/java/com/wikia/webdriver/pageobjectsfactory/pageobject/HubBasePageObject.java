@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -64,8 +64,9 @@ public class HubBasePageObject extends WikiBasePageObject {
     for (WebElement thumbnail : mosaicSliderThumbRegionImages) {
       wait.forElementVisible(thumbnail);
     }
-    PageObjectLogging.log("verifyMosaicSliderImages", "Verify that WikiaMosaicSlider has images",
-                          true);
+    LOG.logResult("verifyMosaicSliderImages",
+                  "Verify that WikiaMosaicSlider has images",
+                  true);
   }
 
   /**
@@ -78,7 +79,7 @@ public class HubBasePageObject extends WikiBasePageObject {
       throw new WebDriverException("please select image index between 0 and 4");
     }
     jsActions.mouseOver(mosaicSliderThumbRegionImages.get(n));
-    PageObjectLogging.log("mosaicSliderHoverOverImage", "hover over image number " + n, true);
+    LOG.log("mosaicSliderHoverOverImage", "hover over image number " + n, LOG.Type.SUCCESS);
   }
 
   /**
@@ -108,7 +109,7 @@ public class HubBasePageObject extends WikiBasePageObject {
     scrollToElement(getPromotedButton);
     wait.forElementClickable(getPromotedButton);
     scrollAndClick(getPromotedButton);
-    PageObjectLogging.log("clickGetPromoted", "Click on suggest an article button", true);
+    LOG.log("clickGetPromoted", "Click on suggest an article button", LOG.Type.SUCCESS);
   }
 
   /**
@@ -116,8 +117,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifySuggestAVideoOrArticleModalAppeared() {
     wait.forElementVisible(suggestVideoOrArticleModal);
-    PageObjectLogging.log("verifySuggestAVideoOrArticleModalAppeared",
-                          "Verify that suggest a video modal appeared", true);
+    LOG.log("verifySuggestAVideoOrArticleModalAppeared",
+            "Verify that suggest a video modal appeared", LOG.Type.SUCCESS);
   }
 
   /**
@@ -125,8 +126,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifySuggestAVideoOrArticleModalTopic() {
     wait.forElementVisible(suggestVideoOrArticleModalTopic);
-    PageObjectLogging.log("verifySuggestAVideoOrArticleModalTopic",
-                          "Verify that suggest a video or an article", true);
+    LOG.log("verifySuggestAVideoOrArticleModalTopic",
+            "Verify that suggest a video or an article", LOG.Type.SUCCESS);
   }
 
   /**
@@ -134,8 +135,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void closeSuggestAVideoOrArticleByXButton() {
     closeModalWrapper();
-    PageObjectLogging.log("closeSuggestAVideoOrArticleByXButton",
-                          "Click on [x] to close suggest a video or article modal", true);
+    LOG.log("closeSuggestAVideoOrArticleByXButton",
+            "Click on [x] to close suggest a video or article modal", LOG.Type.SUCCESS);
   }
 
   /**
@@ -143,8 +144,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void closeSuggestAVideoOrArticleCancelButton() {
     scrollAndClick(modalWrapperCancelCloseButton);
-    PageObjectLogging.log("closeSuggestAVideoOrArticleCancelButton",
-                          "Click on Cancel to close suggest a video or article modal", true);
+    LOG.log("closeSuggestAVideoOrArticleCancelButton",
+            "Click on Cancel to close suggest a video or article modal", LOG.Type.SUCCESS);
   }
 
   /**
@@ -160,9 +161,9 @@ public class HubBasePageObject extends WikiBasePageObject {
   public void verifySuggestVideoOrArticleButtonNotClickable() {
     wait.forElementVisible(submitButton);
     waitForElementNotClickableByElement(submitButton);
-    PageObjectLogging.log("verifySuggestVideoOrArticleButtonNotClickable",
-                          "Verify that 'Suggest Video' or 'Article' submit button button is disabled",
-                          true);
+    LOG.logResult("verifySuggestVideoOrArticleButtonNotClickable",
+                  "Verify that 'Suggest Video' or 'Article' submit button button is disabled",
+                  true);
   }
 
   /**
@@ -170,8 +171,8 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifySuggestVideoOrArticleButtonClickable() {
     wait.forElementClickable(submitButton);
-    PageObjectLogging.log("verifySuggestVideoOrArticleButtonClickable",
-                          "Verify that Suggest Video or Article submit button is enabled", true);
+    LOG.log("verifySuggestVideoOrArticleButtonClickable",
+            "Verify that Suggest Video or Article submit button is enabled", LOG.Type.SUCCESS);
   }
 
   /**
@@ -179,9 +180,9 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void suggestArticleTypeIntoWhatVideoField(String text) {
     suggestArticleWhatInput.sendKeys(text);
-    PageObjectLogging.log("suggestArticleTypeIntoWhatVideoField", "Type '" + text
-                                                                  + "' into 'What Video' field on 'Suggest Article Modal'",
-                          true);
+    LOG.logResult("suggestArticleTypeIntoWhatVideoField", "Type '" + text
+                                                          + "' into 'What Video' field on 'Suggest Article Modal'",
+                  true);
   }
 
   /**
@@ -189,9 +190,9 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void suggestArticleTypeIntoWhyCoolField(String text) {
     suggestArticleWhyCooliInput.sendKeys(text);
-    PageObjectLogging.log("suggestArticleTypeIntoWhyCoolField", "Type '" + text
-                                                                + "' into 'Why cool' field on 'Suggest Video Modal'",
-                          true);
+    LOG.logResult("suggestArticleTypeIntoWhyCoolField", "Type '" + text
+                                                        + "' into 'Why cool' field on 'Suggest Video Modal'",
+                  true);
   }
 
   /**
@@ -202,8 +203,8 @@ public class HubBasePageObject extends WikiBasePageObject {
       scrollToElement(element);
       wait.forElementVisible(element);
     }
-    PageObjectLogging.log("verifyFromModuleHasImages",
-                          "Verify that from the community module has images", true);
+    LOG.log("verifyFromModuleHasImages",
+            "Verify that from the community module has images", LOG.Type.SUCCESS);
   }
 
   /**
@@ -214,8 +215,8 @@ public class HubBasePageObject extends WikiBasePageObject {
       scrollToElement(element);
       wait.forElementVisible(element);
     }
-    PageObjectLogging.log("verifyFromModuleHasHeadline",
-                          "Verify that from the community module has headline", true);
+    LOG.log("verifyFromModuleHasHeadline",
+            "Verify that from the community module has headline", LOG.Type.SUCCESS);
   }
 
   /**
@@ -226,8 +227,8 @@ public class HubBasePageObject extends WikiBasePageObject {
       scrollToElement(element);
       wait.forElementVisible(element);
     }
-    PageObjectLogging.log("verifyFromModuleHasUserAndWikiField",
-                          "Verify that from the community module has username field", true);
+    LOG.log("verifyFromModuleHasUserAndWikiField",
+            "Verify that from the community module has username field", LOG.Type.SUCCESS);
   }
 
   /**
@@ -238,14 +239,14 @@ public class HubBasePageObject extends WikiBasePageObject {
       scrollToElement(element);
       wait.forElementVisible(element);
     }
-    PageObjectLogging.log("verifyFromModuleHasQuatation",
-                          "Verify that from the community module has a quatation", true);
+    LOG.log("verifyFromModuleHasQuatation",
+            "Verify that from the community module has a quatation", LOG.Type.SUCCESS);
   }
 
   public void verifySuggestAVideoOrArticleModalDisappeared() {
     waitForElementNotVisibleByElement(suggestVideoOrArticleModal);
-    PageObjectLogging.log("verifySuggestAVideoOrArticleModalDisappeared",
-                          "Verify that video 'suggest video or article' modal disppeared", true);
+    LOG.log("verifySuggestAVideoOrArticleModalDisappeared",
+            "Verify that video 'suggest video or article' modal disppeared", LOG.Type.SUCCESS);
   }
 
   public void clickWikiaBarLink(HubName hubName) {
@@ -265,7 +266,7 @@ public class HubBasePageObject extends WikiBasePageObject {
     wait.forElementClickable(element);
     element.click();
 
-    PageObjectLogging.log("clickWikiaBarLink", "Click hub link in WikiaBar", true);
+    LOG.log("clickWikiaBarLink", "Click hub link in WikiaBar", LOG.Type.SUCCESS);
   }
 
   public void verifyHubTitle(HubName hubName) {
@@ -285,6 +286,6 @@ public class HubBasePageObject extends WikiBasePageObject {
     }
     Assert.assertEquals(header, wordmarkImage.getAttribute("alt"));
 
-    PageObjectLogging.log("verifyHubTitle", "Verify title", true);
+    LOG.log("verifyHubTitle", "Verify title", LOG.Type.SUCCESS);
   }
 }

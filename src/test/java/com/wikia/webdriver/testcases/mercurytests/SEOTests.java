@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.SEOUtils;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
@@ -53,7 +53,7 @@ public class SEOTests extends NewTestTemplate {
     );*/
 
     boolean result = seo.isOgFbApp();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='fb:app_id']",
         "is filled",
         "is empty",
@@ -61,7 +61,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = seo.isOgImage();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:image']",
         "is filled",
         "is empty",
@@ -69,7 +69,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = seo.isOgUrlTag();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:url']",
         "contains current url",
         "contains wrong url",
@@ -77,7 +77,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = seo.isOgDescription();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:description']",
         "is filled",
         "is empty",
@@ -85,7 +85,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = !seo.isOgSiteName();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:site_name']",
         "is empty",
         "is filled",
@@ -93,7 +93,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = seo.isOgTitleWithWiki();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:title']",
         "contains Wiki",
         "is wrong",
@@ -101,7 +101,7 @@ public class SEOTests extends NewTestTemplate {
     );
 
     result = seo.isOgTypeWebsite();
-    PageObjectLogging.log(
+    LOG.log(
         "meta[property='og:type']",
         "contains website",
         "is wrong",
@@ -114,7 +114,7 @@ public class SEOTests extends NewTestTemplate {
     leftNav.clickNavListElement(0);
     seo.waitForLoadingSpinnerToFinish();
 
-    PageObjectLogging.logWarning(
+    PageObjectLogging.warning(
         "Site status",
         "Page was reloaded asynchronously"
     );

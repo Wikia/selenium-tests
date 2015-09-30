@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -51,13 +51,13 @@ public class SearchPageObject extends WikiBasePageObject {
 
   public void clickNextPaginator() {
     scrollAndClick(paginatorNext);
-    PageObjectLogging.log("clickNextPaginator", "next paginator clicked", true);
+    LOG.log("clickNextPaginator", "next paginator clicked", LOG.Type.SUCCESS);
   }
 
   public void clickPrevPaginator() {
     wait.forElementVisible(By.cssSelector(".paginator-prev"));
     scrollAndClick(paginatorPrev);
-    PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
+    LOG.log("clickPrevPaginator", "prev paginator clicked", LOG.Type.SUCCESS);
   }
 
   public void verifyNoResults() {
@@ -80,7 +80,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
   public void clickSearchButton() {
     searchButton.click();
-    PageObjectLogging.log("clickSearchButton", "Search button was clicked", true, driver);
+    LOG.log("clickSearchButton", "Search button was clicked", true, driver);
   }
 
   public void setSearchTab(SearchTab tab) {

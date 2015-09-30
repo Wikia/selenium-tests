@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
@@ -30,8 +30,11 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getVenusGlobalNav().clickWikiaLogo();
 
-    PageObjectLogging.log("CHECK URL", "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(urlBuilder
-            .getUrlForWiki(expectedCentralUrl))));
+    LOG.logResult("CHECK URL",
+                  "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
+                  new WebDriverWait(driver, 10)
+                      .until(ExpectedConditions.urlContains(urlBuilder
+                                                                .getUrlForWiki(
+                                                                    expectedCentralUrl))));
   }
 }

@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentat
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorDialog;
@@ -182,43 +182,43 @@ public class VisualEditorMenu extends WikiBasePageObject {
     switch (insert) {
       case MAP:
         clickInsertItemFromDropDown(mapBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorAddMapDialog(driver);
       case MEDIA:
         clickInsertItemFromDropDown(mediaBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorAddMediaDialog(driver);
       case REFERENCE:
         clickInsertItemFromDropDown(referenceBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorReferenceDialog(driver);
       case REFERENCE_LIST:
         clickInsertItemFromDropDown(referenceListBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorReferenceListDialog(driver);
       case TEMPLATE:
         clickInsertItemFromDropDown(templateBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorInsertTemplateDialog(driver);
       case PAGE_SETTINGS:
         clickHamburgerItemFromDropDown(pageSettingsBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorOptionsDialog(driver);
       case CATEGORIES:
         clickHamburgerItemFromDropDown(categoriesBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorOptionsDialog(driver);
       case KEYBOARD_SHORTCUTS:
         clickHamburgerItemFromDropDown(keyboardShortcutsBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorKeyboardShortcutsDialog(driver);
       case SOURCE_EDITOR:
         clickHamburgerItemFromDropDown(sourceEditorBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorSourceEditorDialog(driver);
       case GALLERY:
         clickInsertItemFromDropDown(galleryBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
         return new VisualEditorInsertGalleryDialog(driver);
       default:
         throw new NoSuchElementException("Non-existing dialog selected");
@@ -234,7 +234,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
         clickInsertItemFromDropDown(numberbedListBy);
         break;
     }
-    PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
+    LOG.log("selectInsertToInsertList", insert.toString() + " selected", LOG.Type.SUCCESS);
   }
 
   private void clickInsertItemFromDropDown(By insertBy) {
@@ -279,12 +279,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
   public void verifyVEToolBarPresent() {
     wait.forElementVisible(veMode);
     wait.forElementVisible(veToolMenu);
-    PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
+    LOG.log("verifyVEToolBar", "VE toolbar is displayed", LOG.Type.SUCCESS);
   }
 
   public void verifyVEToolBarNotPresent() {
     waitForElementNotVisibleByElement(veMode);
     waitForElementNotVisibleByElement(veToolMenu);
-    PageObjectLogging.log("verifyVEToolBarNotPresent", "VE toolbar is not visible", true);
+    LOG.log("verifyVEToolBarNotPresent", "VE toolbar is not visible", LOG.Type.SUCCESS);
   }
 }

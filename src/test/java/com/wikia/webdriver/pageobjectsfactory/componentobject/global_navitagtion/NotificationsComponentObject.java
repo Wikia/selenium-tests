@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -82,7 +82,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   public void showNotifications() {
     waitForNotificationsLoaded();
     openNotifications();
-    PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true);
+    LOG.log("#WallNotifications li ul.subnav", "show notifications", LOG.Type.SUCCESS);
   }
 
   /**
@@ -94,7 +94,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   public void clickNotifications() {
     wait.forElementVisible(notificationsBubbles);
     scrollAndClick(notificationsBubbles);
-    PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true);
+    LOG.log("clickshowNotifications", "click on notifications bubbles", LOG.Type.SUCCESS);
   }
 
   /**
@@ -112,13 +112,13 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     for (int i = 0; i < notificationsList.size(); i++) {
       if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
           .contains(text)) {
-        PageObjectLogging.log("getNotificationLink", "get addres that of " + i + 1
-                                                     + " notification points to", true);
+        LOG.log("getNotificationLink", "get addres that of " + i + 1
+                                       + " notification points to", LOG.Type.SUCCESS);
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
-    PageObjectLogging.log("getNotificationLink",
-                          "No notification that contains the following text: " + text, false);
+    LOG.log("getNotificationLink",
+            "No notification that contains the following text: " + text, LOG.Type.ERROR);
     return null;
   }
 

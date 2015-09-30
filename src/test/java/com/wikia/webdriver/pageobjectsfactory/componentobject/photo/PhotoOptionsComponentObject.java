@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -31,14 +31,14 @@ public class PhotoOptionsComponentObject extends BasePageObject {
     wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
-    PageObjectLogging.log("setCaption", caption + " set", true);
+    LOG.log("setCaption", caption + " set", LOG.Type.SUCCESS);
   }
 
   public void clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     waitForElementNotVisibleByElement(addPhotoButton);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
   }
 
   public void adjustAlignment(int i) {
@@ -46,14 +46,14 @@ public class PhotoOptionsComponentObject extends BasePageObject {
     switch (i) {
       case 1:
         alignmentLeft.click();
-        PageObjectLogging.log("adjustAlignment", "left alignment selected", true);
+        LOG.log("adjustAlignment", "left alignment selected", LOG.Type.SUCCESS);
         break;
       case 2:
         alignmentRight.click();
-        PageObjectLogging.log("adjustAlignment", "right alignment selected", true);
+        LOG.log("adjustAlignment", "right alignment selected", LOG.Type.SUCCESS);
         break;
       default:
-        PageObjectLogging.log("adjustAlignment", "invalid alignment selected", false);
+        LOG.log("adjustAlignment", "invalid alignment selected", LOG.Type.ERROR);
 
     }
   }
@@ -68,7 +68,7 @@ public class PhotoOptionsComponentObject extends BasePageObject {
 
   public PhotoAddComponentObject clickSelectAnotherPhoto() {
     selectAnotherPhotoButton.click();
-    PageObjectLogging.log("selectAnotherPhoto", "select Another Photo button clicked", true);
+    LOG.log("selectAnotherPhoto", "select Another Photo button clicked", LOG.Type.SUCCESS);
     return new PhotoAddComponentObject(driver);
   }
 }

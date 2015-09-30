@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
@@ -50,20 +50,21 @@ public class AddPinComponentObject extends BasePageObject {
   public void clearPinName() {
     wait.forElementVisible(pinNameField);
     pinNameField.clear();
-    PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
+    LOG.log("clearPinName", "Pin name input was cleared", LOG.Type.SUCCESS);
   }
 
   public void clearAssociatedArticleField() {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.clear();
-    PageObjectLogging.log("clearAssociatedArticleField", "Associated article field was cleared",
-                          true);
+    LOG.logResult("clearAssociatedArticleField",
+                  "Associated article field was cleared",
+                  true);
   }
 
   public InteractiveMapPageObject clickCancelButton() {
     wait.forElementVisible(cancelButton);
     cancelButton.click();
-    PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
+    LOG.log("clickCancelButton", "cancel button clicked", true, driver);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -71,13 +72,13 @@ public class AddPinComponentObject extends BasePageObject {
   public void clearPinDescription() {
     wait.forElementVisible(descriptionField);
     descriptionField.clear();
-    PageObjectLogging.log("clearPinName", "Description input was cleared", true);
+    LOG.log("clearPinName", "Description input was cleared", LOG.Type.SUCCESS);
   }
 
   public InteractiveMapPageObject clickSaveButton() {
     wait.forElementVisible(saveButton);
     saveButton.click();
-    PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
+    LOG.log("clickSaveButton", "Save button clicked", true, driver);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -104,62 +105,64 @@ public class AddPinComponentObject extends BasePageObject {
     wait.forElementVisible(pinCategorySelector);
     Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
     pinCategorySelectorDropDown.selectByIndex(1);
-    PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
+    LOG.log("selectPinType", "Pin type was choosed", true, driver);
   }
 
   public void typePinName(String pinName) {
     wait.forElementVisible(pinNameField);
     pinNameField.sendKeys(pinName);
-    PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
+    LOG.log("typePinName", pinName + " title for Pin was typed in", LOG.Type.SUCCESS);
   }
 
   public void typePinDescription(String pinDescription) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(pinDescription);
-    PageObjectLogging.log("typePinDescription", pinDescription + "Pin description was typed in",
-                          true);
+    LOG.logResult("typePinDescription",
+                  pinDescription + "Pin description was typed in",
+                  true);
   }
 
   public void typeAssociatedArticle(String associatedArticleName) {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.sendKeys(associatedArticleName);
-    PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in",
-                          true);
+    LOG.logResult("typePinName",
+                  associatedArticleName + " Associated article is typed in",
+                  true);
   }
 
   public void verifyPinTitleFieldIsDisplayed() {
     wait.forElementVisible(pinNameField);
-    PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
+    LOG.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", LOG.Type.SUCCESS);
   }
 
   public void verifyAssociatedArticleFieldIsDisplayed() {
     wait.forElementVisible(associatedArticleField);
-    PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed",
-                          "Associated article field is visible", true, driver);
+    LOG.log("verifyAssociatedArticleFieldIsDisplayed",
+            "Associated article field is visible", true, driver);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
     wait.forElementVisible(pinCategorySelector);
-    PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible", true,
-                          driver);
+    LOG.log("verifyPinCategorySelector", "Pin category selector is visible", true,
+            driver);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
     wait.forElementVisible(descriptionField);
-    PageObjectLogging.log("verifyDescriptionFieldIsDisplayed", "Description field is visible",
-                          true, driver);
+    LOG.log("verifyDescriptionFieldIsDisplayed", "Description field is visible",
+            true, driver);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
     wait.forElementVisible(associatedArticleImage);
-    PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed",
-                          "Associated article image placeholder is visible", true, driver);
+    LOG.log("verifyAssociatedArticleImageIsDisplayed",
+            "Associated article image placeholder is visible", true, driver);
   }
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
     Assertion.assertEquals(isElementOnPage(errorField), true);
-    PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
+    LOG.log("verifyErrorIsPresented", "Error message is visible", true, driver);
   }
 
   public void verifyErrorContent(String errorMessage) {

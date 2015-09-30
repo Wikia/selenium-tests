@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
@@ -53,7 +53,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Featured Content",
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
@@ -77,7 +77,7 @@ public class EditorTests extends NewTestTemplate {
     editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isFeaturedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Featured Content",
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -93,7 +93,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject home = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -128,7 +128,7 @@ public class EditorTests extends NewTestTemplate {
     home.publish();
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -152,7 +152,7 @@ public class EditorTests extends NewTestTemplate {
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
@@ -176,7 +176,7 @@ public class EditorTests extends NewTestTemplate {
     editorHomePageObject.publish();
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,

@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
@@ -59,7 +59,7 @@ public class SmartBannerTests extends NewTestTemplate {
     }
 
     boolean result = banner.getButtonName().equals(buttonName);
-    PageObjectLogging.log(
+    LOG.log(
         "Button name",
         "is correct",
         "is incorrect",
@@ -70,7 +70,7 @@ public class SmartBannerTests extends NewTestTemplate {
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
 
     result = lastSmartBannerPosition == banner.getSmartBannerPosition();
-    PageObjectLogging.log(
+    LOG.log(
         "Position",
         "is fixed",
         "is floated",
@@ -81,7 +81,7 @@ public class SmartBannerTests extends NewTestTemplate {
     banner.clickCloseButton();
 
     result = !banner.isSmartBannerVisible();
-    PageObjectLogging.log(
+    LOG.log(
         "Smart banner",
         "is closed",
         "is visible",
@@ -101,7 +101,7 @@ public class SmartBannerTests extends NewTestTemplate {
       banner.openMercuryArticleByName(wikiURL, WIKI[1]);
 
       result = banner.isSmartBannerColorCorrect(WIKI[2]);
-      PageObjectLogging.log(
+      LOG.log(
           "Smart banner color",
           "is correct",
           "is wrong",
@@ -109,7 +109,7 @@ public class SmartBannerTests extends NewTestTemplate {
       );
 
       result = banner.isSmartBannerButtonColorCorrect(WIKI[2]);
-      PageObjectLogging.log(
+      LOG.log(
           "Smart banner button color",
           "is correct",
           "is wrong",

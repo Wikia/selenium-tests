@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -36,27 +36,27 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   public void describeYourTopic(String description) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(description);
-    PageObjectLogging
-        .log("describeYourTopic", "describe your topic populated with: " + description, true);
+    LOG
+        .logResult("describeYourTopic", "describe your topic populated with: " + description, true);
   }
 
   public void selectCategory(String category) {
     wait.forElementVisible(wikiCategory);
     Select dropList = new Select(wikiCategory);
     dropList.selectByVisibleText(category);
-    PageObjectLogging.log("selectCategory", "selected " + category + " category", true, driver);
+    LOG.log("selectCategory", "selected " + category + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
     wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true);
+    LOG.log("submit", "Submit button clicked", LOG.Type.SUCCESS);
     return new CreateNewWikiPageObjectStep3(driver);
   }
 
   public void selectAllAgesCheckbox() {
     scrollAndClick(allAgesCheckBox);
-    PageObjectLogging.log("selectAllAgesCheckbox", "all ages checkbox selected", true);
+    LOG.log("selectAllAgesCheckbox", "all ages checkbox selected", LOG.Type.SUCCESS);
   }
 
   public void verifyCategoryError() {

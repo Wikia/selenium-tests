@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.core;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Method;
 
@@ -11,6 +13,7 @@ public class TestContext {
   private static String methodName;
   private static Method testMethod;
   private static boolean isFirstLoad = false;
+  private static WebDriver webdriver;
 
   public static void writeMethodName(Method method) {
     methodName =
@@ -34,5 +37,13 @@ public class TestContext {
 
   public static boolean isIsFirstLoad(){
     return isFirstLoad;
+  }
+
+  public static void setDriver(WebDriver driver){
+    webdriver = driver;
+  }
+
+  public static WebDriver getWebDriver(){
+    return webdriver;
   }
 }

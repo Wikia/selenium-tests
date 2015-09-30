@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +18,7 @@ public class SpecialAdminDashboardPageObject extends SpecialPageObject {
   public SpecialCssPageObject clickCssTool() {
     wait.forElementVisible(cssToolButton);
     scrollAndClick(cssToolButton);
-    PageObjectLogging.log("clickCssTool", "click on special CSS tool", true);
+    LOG.log("clickCssTool", "click on special CSS tool", LOG.Type.SUCCESS);
     return new SpecialCssPageObject(driver);
   }
 }

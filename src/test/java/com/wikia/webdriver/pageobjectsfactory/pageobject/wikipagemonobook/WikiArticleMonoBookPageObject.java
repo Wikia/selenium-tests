@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -34,16 +34,16 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
   public void clickEdit() {
     scrollAndClick(editLink);
-    PageObjectLogging.log("clickEdit", "click on Edit link", true);
+    LOG.log("clickEdit", "click on Edit link", LOG.Type.SUCCESS);
   }
 
   public void verifyEditionArea() {
     wait.forElementVisible(editionArea);
-    PageObjectLogging.log("verifyEditArea", "verify that edition area is present", true);
+    LOG.log("verifyEditArea", "verify that edition area is present", LOG.Type.SUCCESS);
   }
 
   public void verifyOasisOnly() {
     wait.forElementVisible(oasisOnly);
-    PageObjectLogging.log("verifyOasisOnly", "Oasis only warning is present", true);
+    LOG.log("verifyOasisOnly", "Oasis only warning is present", LOG.Type.SUCCESS);
   }
 }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -43,12 +43,12 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
     if (isElementOnPage(emptyStateCreateAMapButton)) {
       wait.forElementClickable(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
-      PageObjectLogging
-          .log("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
+      LOG
+          .logResult("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
     } else {
       wait.forElementClickable(createAMapButton);
       createAMapButton.click();
-      PageObjectLogging.log("clickCreateAMapButton", "Create A Map button is clicked", true);
+      LOG.log("clickCreateAMapButton", "Create A Map button is clicked", LOG.Type.SUCCESS);
     }
     switchToNewBrowserTab();
     return new CreateAMapComponentObject(driver);
@@ -76,7 +76,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
       wait.forElementVisible(emptyStateDialogHeadline);
       wait.forElementVisible(emptyStateDialogText);
       wait.forElementVisible(emptyStateCreateAMapButton);
-      PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
+      LOG.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
     } else {
       throw new NoSuchElementException(
           "The wiki is not in an empty state, the wiki contains maps.");

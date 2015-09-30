@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.LOG;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,7 +40,7 @@ public class JavascriptActions {
       Thread.sleep(1000);
       return value;
     } catch (InterruptedException e) {
-      PageObjectLogging.log("execute", e, false);
+      LOG.log("execute", e, LOG.Type.ERROR);
       return null;
     }
   }
