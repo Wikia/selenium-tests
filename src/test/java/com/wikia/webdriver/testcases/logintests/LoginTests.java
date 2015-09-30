@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 /**
  * @ownership Social
  */
-
 @Test(groups = "Login")
 public class LoginTests extends NewTestTemplate {
 
