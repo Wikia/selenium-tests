@@ -19,7 +19,6 @@ import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 /**
- *
  * @ownership Social
  */
 @Test(groups = "ForcedLogin")
