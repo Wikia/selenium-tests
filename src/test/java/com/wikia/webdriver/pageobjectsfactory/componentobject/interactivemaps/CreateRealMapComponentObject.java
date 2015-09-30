@@ -35,14 +35,14 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
   public CreatePinTypesComponentObject clickNext() {
     wait.forElementVisible(nextButton);
     nextButton.click();
-    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
@@ -55,13 +55,13 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public void typeMapName(String mapName) {
     wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
-    LOG.log("typeMapName", mapName + " title for map is typed in", LOG.Type.SUCCESS);
+    LOG.success("typeMapName", mapName + " title for map is typed in");
   }
 
   public void verifyRealMapPreviewImage() {
     wait.forElementVisible(realMapImagePreview);
     Assertion.assertFalse(realMapImagePreview.getAttribute("src").isEmpty());
-    LOG.log("verifyRealMapPreviewImage", "Real map preview image is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyRealMapPreviewImage", "Real map preview image is visible");
   }
 
   public void verifyErrorExists() {

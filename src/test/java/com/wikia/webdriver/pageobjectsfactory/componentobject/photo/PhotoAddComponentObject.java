@@ -44,14 +44,14 @@ public class PhotoAddComponentObject extends BasePageObject {
   public void typeSearchQuery(String photoName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(photoName);
-    LOG.log("typeSearchQuery", photoName + " searching", LOG.Type.SUCCESS);
+    LOG.success("typeSearchQuery", photoName + " searching");
   }
 
   public void clickFind() {
     wait.forElementVisible(findButton);
     scrollAndClick(findButton);
     wait.forElementNotVisible(By.cssSelector("#ImageUploadProgress2"));
-    LOG.log("clickSearch", "search button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSearch", "search button clicked");
   }
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
@@ -60,7 +60,7 @@ public class PhotoAddComponentObject extends BasePageObject {
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
     scrollAndClick(photo);
-    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAddPhoto", "add photo button clicked");
     return new PhotoOptionsComponentObject(driver);
   }
 
@@ -68,7 +68,7 @@ public class PhotoAddComponentObject extends BasePageObject {
     WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
-    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAddPhoto", "add photo button clicked");
     return new PhotoOptionsComponentObject(driver);
   }
 
@@ -95,23 +95,23 @@ public class PhotoAddComponentObject extends BasePageObject {
 
   public void clickThisWiki() {
     thisWikiButton.click();
-    LOG.log("clickThisWiki", "this wiki button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickThisWiki", "this wiki button clicked");
   }
 
   public void clickFlickr() {
     flickButton.click();
-    LOG.log("clickFlickr", "flickr button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickFlickr", "flickr button clicked");
   }
 
   public void chooseFileToUpload(String file) {
     chooseFileInput
         .sendKeys(
             CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
-    LOG.log("selectFileToUpload", "select file " + file + " to upload it", LOG.Type.SUCCESS);
+    LOG.success("selectFileToUpload", "select file " + file + " to upload it");
   }
 
   public void clickUpload() {
     uploadButton.click();
-    LOG.log("clickUpload", "click on upload button", LOG.Type.SUCCESS);
+    LOG.success("clickUpload", "click on upload button");
   }
 }

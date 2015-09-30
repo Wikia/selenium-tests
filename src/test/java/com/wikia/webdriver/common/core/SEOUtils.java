@@ -105,7 +105,7 @@ public class SEOUtils extends BasePageObject {
   public boolean isAttributesListPresentInRobotsMetaTag(List<String> expectedAttributes) {
     List<String> currentAttributes = Arrays.asList(robots.getAttribute("content").split("[, ]+"));
 
-    LOG.logResult(
+    LOG.result(
         "Robots Meta Tag passed: " + expectedAttributes,
         "Robots Meta Tag found on page: " + currentAttributes,
         true
@@ -115,7 +115,7 @@ public class SEOUtils extends BasePageObject {
   }
 
   public boolean isRobotsMetaTagSet() {
-    LOG.logResult(
+    LOG.result(
         "Robots Meta Tag",
         "Checking if robots meta tag is present on page",
         true

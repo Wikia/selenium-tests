@@ -81,42 +81,43 @@ public class ChatPageObject extends WikiBasePageObject {
     wait.forElementVisible(sideBar);
     wait.forElementVisible(userName);
     wait.forElementVisible(userAvatar);
-    LOG.log("verifyChatPage", "Chat page verified", true, driver);
+    LOG.logResult("verifyChatPage", "Chat page verified", true, driver);
   }
 
   public void verifyMessageOnChat(String message) {
     wait.forElementVisible(By.xpath(String.format(MESSAGE_ON_CHAT, message)));
-    LOG.log("VerifyMessageOnChatPresent", "Message: " + message
-                                          + " is present on chat board", true, driver);
+    LOG.logResult("VerifyMessageOnChatPresent", "Message: " + message
+                                                + " is present on chat board", true, driver);
   }
 
   public void verifyUserJoinToChatMessage(String userName) {
     wait.forElementVisible(chatInlineAlertContinued);
     if (!isElementOnPage(By.cssSelector(String.format(USER_SELECTOR, userName)))) {
-      LOG.log("VerifyUserJoinsChat", "User: " + userName
-                                     + " not visible on chat's guests list", LOG.Type.ERROR);
+      LOG.error("VerifyUserJoinsChat", "User: " + userName
+                                       + " not visible on chat's guests list");
       throw new NoSuchElementException("User: " + userName + " not visible on chat's guests list");
     }
-    LOG.log("verifyUserJoinToChatMessage", userName + " has joined the chat.", true,
-            driver);
+    LOG.logResult("verifyUserJoinToChatMessage", userName + " has joined the chat.", true,
+                  driver);
   }
 
   public void verifyUserIsVisibleOnContactsList(String userName) {
     wait.forElementVisible(By.cssSelector(String.format(USER_SELECTOR, userName)));
-    LOG.log("verifyUserIsVisibleOnContactsList", userName
-                                                 + " is visible on contacts list", true, driver);
+    LOG.logResult("verifyUserIsVisibleOnContactsList", userName
+                                                       + " is visible on contacts list", true,
+                  driver);
   }
 
   public void verifyPrivateMessageHeader() {
     wait.forElementVisible(privateMessagesHeader);
-    LOG.log("verifyPrivateMessageHeader", "private message header is visible", true,
-            driver);
+    LOG.logResult("verifyPrivateMessageHeader", "private message header is visible", true,
+                  driver);
   }
 
   public void verifyPrivateMessageNotification() {
     wait.forElementVisible(privateMessageNotification);
-    LOG.log("verifyPrivateMessageNotification",
-            "private message notification is visible", true, driver);
+    LOG.logResult("verifyPrivateMessageNotification",
+                  "private message notification is visible", true, driver);
   }
 
   public void verifyPrivateMessageNotification(int notificationCount) {
@@ -128,19 +129,19 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyPrivateMessageIsHighlighted(String user) {
     getElementForUser(user, PRIVATE_MESSAGE_SELECTED_USER_SELECTOR);
-    LOG.log("verifyPrivateMessageIsHighlighted",
-            "private message section is highlighted", true, driver);
+    LOG.logResult("verifyPrivateMessageIsHighlighted",
+                  "private message section is highlighted", true, driver);
   }
 
   public void verifyPrivateChatTitle() {
     wait.forElementVisible(privateChatHeader);
-    LOG.log("verifyPrivateChatTitle", "private chat title is correct", true, driver);
+    LOG.logResult("verifyPrivateChatTitle", "private chat title is correct", true, driver);
   }
 
   public void verifyMainChatIsHighlighted() {
     wait.forElementVisible(mainChatSelection);
-    LOG.log("verifyPrivateMessageIsHighlighted",
-            "private message section is highlighted", LOG.Type.SUCCESS);
+    LOG.success("verifyPrivateMessageIsHighlighted",
+                "private message section is highlighted");
   }
 
   public void verifyNormalUserDropdown(String userName) {
@@ -197,7 +198,7 @@ public class ChatPageObject extends WikiBasePageObject {
     wait.forElementVisible(chatLoadedIndicator);
     messageWritingArea.sendKeys(message);
     new Actions(driver).sendKeys(messageWritingArea, Keys.ENTER).perform();
-    LOG.log("writeOnChat", "Message: " + message + " written", true, driver);
+    LOG.logResult("writeOnChat", "Message: " + message + " written", true, driver);
     verifyMessageOnChat(message);
   }
 
@@ -213,28 +214,28 @@ public class ChatPageObject extends WikiBasePageObject {
     WebElement userInPrivateMessageSection =
         getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
     wait.forElementVisible(userInPrivateMessageSection);
-    LOG.logResult("selectPrivateMessageToUser",
-                  "private message selected from dropdown",
-                  true);
+    LOG.result("selectPrivateMessageToUser",
+               "private message selected from dropdown",
+               true);
   }
 
   public void clickOnMainChat() {
     chatWordmarkImage.click();
-    LOG.log("clickOnMainChat", "main chat is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnMainChat", "main chat is clicked");
   }
 
   public void clickOnUserInPrivateMessageSection(String userName) {
     WebElement privateMessagesUserElement =
         getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
     privateMessagesUserElement.click();
-    LOG.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
-                                                  + " is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnUserInPrivateMessageSection", "private messages user " + userName
+                                                      + " is clicked");
   }
 
   private void clickBanUser(String userName) {
     banUserButton.click();
     wait.forElementVisible(chatBanModal);
-    LOG.log("clickBanUser", "ban user " + userName + " is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickBanUser", "ban user " + userName + " is clicked");
   }
 
   public void banUser(String userName) {
@@ -242,7 +243,7 @@ public class ChatPageObject extends WikiBasePageObject {
     clickBanUser(userName);
     chatBanModalButton.click();
     waitForElementNotVisibleByElement(chatBanModal);
-    LOG.log("clickBanUser", userName + " ban modal is closed", LOG.Type.SUCCESS);
+    LOG.success("clickBanUser", userName + " ban modal is closed");
   }
 
   private void verifyChatUnbanMessage(String userName) {
@@ -254,7 +255,7 @@ public class ChatPageObject extends WikiBasePageObject {
     wait.forElementVisible(unbanLink);
     unbanLink.click();
     verifyChatUnbanMessage(userName);
-    LOG.log("unBanUser", userName + " is no longer banned", LOG.Type.SUCCESS);
+    LOG.success("unBanUser", userName + " is no longer banned");
   }
 
   public void clickOnDifferentUser(String userName) {
@@ -270,7 +271,7 @@ public class ChatPageObject extends WikiBasePageObject {
       }
       i++;
     }
-    LOG.log("clickOnDifferentUser", userName + " button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnDifferentUser", userName + " button clicked");
   }
 
   private void waitForProperNumberOfElementsInUserDropdown(String userName) {
@@ -299,9 +300,9 @@ public class ChatPageObject extends WikiBasePageObject {
       }
       i++;
     }
-    LOG.logResult("openUserDropDownInPrivateMessageSection",
-                  userName + " button clicked",
-                  true);
+    LOG.result("openUserDropDownInPrivateMessageSection",
+               userName + " button clicked",
+               true);
   }
 
   public void blockPrivateMessageFromUser(String userName) {
@@ -329,8 +330,8 @@ public class ChatPageObject extends WikiBasePageObject {
       }
       i++;
     }
-    LOG.log("allowPrivateMessageFromUser", "private messages from " + userName
-                                           + " are allowed now", LOG.Type.SUCCESS);
+    LOG.success("allowPrivateMessageFromUser", "private messages from " + userName
+                                               + " are allowed now");
   }
 
   private boolean checkIfPrivateMessagesNotAllowed(String userName) {

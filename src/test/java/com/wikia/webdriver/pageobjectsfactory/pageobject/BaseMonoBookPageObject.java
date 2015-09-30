@@ -26,9 +26,9 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
 
   public void openWikiPageWithMonobook() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
-    LOG.log("OpenWikiPage", "Wiki Page opened with success", LOG.Type.SUCCESS);
+    LOG.success("OpenWikiPage", "Wiki Page opened with success");
     changeToMonoBook();
-    LOG.log("logOut", "skin is changing for more than 30 seconds", true, driver);
+    LOG.logResult("logOut", "skin is changing for more than 30 seconds", true, driver);
   }
 
   public void changeToMonoBook() {
@@ -43,6 +43,6 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
 
   public void verifySkinChanged() {
     wait.forElementVisible(monobookSkinClass);
-    LOG.log("skinChangedToMonoBook", "skin is changed to monobook", LOG.Type.SUCCESS);
+    LOG.success("skinChangedToMonoBook", "skin is changed to monobook");
   }
 }

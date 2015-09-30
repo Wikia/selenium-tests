@@ -46,7 +46,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
-    LOG.logResult(
+    LOG.result(
         "typeInSearchInput",
         "Typed '" + searchString + "' into the template search textfield",
         true
@@ -55,7 +55,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
   public void clearSearchInput() {
     searchInput.clear();
-    LOG.log("clearSearchInput", "Cleared the template search input field", LOG.Type.SUCCESS);
+    LOG.success("clearSearchInput", "Cleared the template search input field");
   }
 
   public VisualEditorEditTemplateDialog selectSuggestedTemplate(int index) {
@@ -63,7 +63,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(suggestedWidget);
     WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
     selected.click();
-    LOG.logResult(
+    LOG.result(
         "selectSuggestedTemplate",
         "Suggested template selected: " + selected.getText(),
         true
@@ -77,7 +77,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(resultWidget);
     WebElement selected = resultTemplates.get(index).findElement(labelBy);
     selected.click();
-    LOG.logResult(
+    LOG.result(
         "selectResultTemplate",
         "Search result template selected: " + selected.getText(),
         true
@@ -93,18 +93,18 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(resultWidget);
     waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() > 0, "No result template shown.");
-    LOG.log("verifyIsResultTemplate", "Result templates found", LOG.Type.SUCCESS);
+    LOG.success("verifyIsResultTemplate", "Result templates found");
   }
 
   public void verifyNoResultTemplate() {
     waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() == 0, "There is result template shown.");
-    LOG.log("verifyNoResultTemplate", "No result templates found", LOG.Type.SUCCESS);
+    LOG.success("verifyNoResultTemplate", "No result templates found");
   }
 
   public void verifyIsSuggestedTemplate() {
     Assertion
         .assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
-    LOG.log("verifyIsSuggestedTemplate", "Suggested templates found", LOG.Type.SUCCESS);
+    LOG.success("verifyIsSuggestedTemplate", "Suggested templates found");
   }
 }

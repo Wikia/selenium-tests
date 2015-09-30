@@ -195,7 +195,7 @@ public class CuratedContentPageObject extends BasePageObject {
     int currentNumber = getCuratedContentItemsNumber();
     String message = "Expected: " + expectedNumber + ", get: " + currentNumber;
 
-    LOG.logResult(
+    LOG.result(
         Labels.NUMBER_OF_ITEMS.name,
         message,
         expectedNumber == currentNumber

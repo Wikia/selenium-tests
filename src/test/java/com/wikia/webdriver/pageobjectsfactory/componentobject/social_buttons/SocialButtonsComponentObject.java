@@ -32,7 +32,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
       WebElement image = shareButtonImages.get(i);
       wait.forElementVisible(image);
     }
-    LOG.log("verifyShareButtonsPresent", "social buttons present", true, driver);
+    LOG.logResult("verifyShareButtonsPresent", "social buttons present", true, driver);
   }
 
   /**

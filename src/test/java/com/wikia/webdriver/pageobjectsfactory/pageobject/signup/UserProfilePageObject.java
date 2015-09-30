@@ -42,15 +42,15 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(blogTab);
     wait.forElementClickable(blogTab);
     blogTab.click();
-    LOG.log("clickOnBlogTab", "Click on blog tab", LOG.Type.SUCCESS);
+    LOG.success("clickOnBlogTab", "Click on blog tab");
   }
 
   public BlogPageObject openBlogPage(int blogNumber) {
     String blogURL = blogPostList.get(blogNumber).getAttribute("href");
     getUrl(blogURL);
-    LOG.logResult("openBlogPage",
-                  "blog post " + blogURL + " opened",
-                  true);
+    LOG.result("openBlogPage",
+               "blog post " + blogURL + " opened",
+               true);
     return new BlogPageObject(driver);
   }
 
@@ -59,11 +59,11 @@ public class UserProfilePageObject extends WikiBasePageObject {
       BlogPageObject blogPage = openBlogPage(i);
       String pageContent = blogPage.getAtricleTextRaw().toLowerCase();
       if (!(pageContent.contains("deleted") || pageContent.contains("redirected"))) {
-        LOG.log("openFirstPost", "valid post found on " + i + " position", LOG.Type.SUCCESS);
+        LOG.success("openFirstPost", "valid post found on " + i + " position");
         break;
       }
-      LOG.logResult("openFirstPost", "deleted post found on " + i
-                                     + " position, trying next one", true);
+      LOG.result("openFirstPost", "deleted post found on " + i
+                                  + " position, trying next one", true);
       driver.navigate().back();
     }
     return new BlogPageObject(driver);
@@ -73,8 +73,8 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    LOG.log("clickOnCreateBlogPost", "Click on create blog post button",
-            true, driver);
+    LOG.logResult("clickOnCreateBlogPost", "Click on create blog post button",
+                  true, driver);
     return new SpecialCreatePagePageObject(driver);
   }
 
@@ -90,7 +90,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     showAvatarControls();
     avatarEditButton.click();
     hideAvatarControls();
-    LOG.log("clickEditAvatar", "avatar edit button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickEditAvatar", "avatar edit button clicked");
     return new AvatarComponentObject(driver);
   }
 
@@ -104,7 +104,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     AlertHandler.acceptPopupWindow(driver, 20);
     hideAvatarControls();
     wait.forElementVisible(avatarWrapper);
-    LOG.log("clickRemoveAvatar", "avatar remove button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickRemoveAvatar", "avatar remove button clicked");
   }
 
   public void verifyAvatar(String fileName) {
@@ -115,7 +115,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
 public void verifyProfilePage(String userName) {
 	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
-	LOG.log("verifyProfilePage", userName + " user profile page verified", LOG.Type.SUCCESS);
+	LOG.success("verifyProfilePage", userName + " user profile page verified");
 }
 
 }

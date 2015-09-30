@@ -30,11 +30,11 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getVenusGlobalNav().clickWikiaLogo();
 
-    LOG.logResult("CHECK URL",
-                  "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
-                  new WebDriverWait(driver, 10)
-                      .until(ExpectedConditions.urlContains(urlBuilder
-                                                                .getUrlForWiki(
-                                                                    expectedCentralUrl))));
+    LOG.result("CHECK URL",
+               "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
+               new WebDriverWait(driver, 10)
+                   .until(ExpectedConditions.urlContains(urlBuilder
+                                                             .getUrlForWiki(
+                                                                 expectedCentralUrl))));
   }
 }

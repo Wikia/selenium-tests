@@ -26,16 +26,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
     verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
-    LOG.log("LightboxAd",
-            "Lightbox had " + lightboxAdColor + " during " + adDurationSec
-            + " seconds", LOG.Type.SUCCESS);
+    LOG.success("LightboxAd",
+                "Lightbox had " + lightboxAdColor + " during " + adDurationSec
+                + " seconds");
   }
 
   public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
     verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
-    LOG.log("LightboxVideo",
-            "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
-            + " seconds", LOG.Type.SUCCESS);
+    LOG.success("LightboxVideo",
+                "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
+                + " seconds");
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
@@ -58,6 +58,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void verifyFlash() {
     Boolean hasFlash = (Boolean) jsActions.execute(
         "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
-    LOG.logResult("Verify flash", "Flash should be turned on", hasFlash);
+    LOG.result("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

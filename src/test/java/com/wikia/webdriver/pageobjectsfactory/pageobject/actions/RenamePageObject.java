@@ -34,7 +34,7 @@ public class RenamePageObject extends ArticlePageObject {
       leaveRedirectCheckbox.click();
     }
     scrollAndClick(submitRename);
-    LOG.log("ArticleRenamed", "Article renamed", LOG.Type.SUCCESS);
+    LOG.success("ArticleRenamed", "Article renamed");
     return new ArticlePageObject(driver);
   }
 }

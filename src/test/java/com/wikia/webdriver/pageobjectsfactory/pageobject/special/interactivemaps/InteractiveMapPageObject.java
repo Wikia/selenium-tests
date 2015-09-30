@@ -116,7 +116,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(embedMapCodeButton);
     embedMapCodeButton.click();
-    LOG.log("clickEmbedMapCodeButton", "Embed map code button clicked", true, driver);
+    LOG.logResult("clickEmbedMapCodeButton", "Embed map code button clicked", true, driver);
     driver.switchTo().defaultContent();
   }
 
@@ -142,8 +142,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(filterBox);
     wait.forElementVisible(editPinTypesButton);
     editPinTypesButton.click();
-    LOG.log("clickEditPinTypesButton",
-            "Edit Pin Types button were clicked", true, driver);
+    LOG.logResult("clickEditPinTypesButton",
+                  "Edit Pin Types button were clicked", true, driver);
     driver.switchTo().defaultContent();
     return new CreatePinTypesComponentObject(driver);
   }
@@ -154,7 +154,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementClickable(zoomInButton);
     zoomInButton.click();
     driver.switchTo().defaultContent();
-    LOG.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
+    LOG.logResult("clickZoomInButton", "Map zoom in was clicked", true, driver);
   }
 
   public void clickZoomOutButton() {
@@ -163,7 +163,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementClickable(zoomOutButton);
     zoomOutButton.click();
     driver.switchTo().defaultContent();
-    LOG.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
+    LOG.logResult("clickZoomOutButton", "Map zoom out was clicked", true, driver);
   }
 
   public void clickOnPin(Integer pinListPosition, boolean ...noFrame) {
@@ -176,7 +176,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     Actions actions = new Actions(driver);
     actions.moveToElement(pinCollection.get(pinListPosition));
     actions.click().perform();
-    LOG.log("clickOnPin", "Pin was clicked", true, driver);
+    LOG.logResult("clickOnPin", "Pin was clicked", true, driver);
   }
 
   public void clickOnSingleEnabledCategory() {
@@ -185,8 +185,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(
         enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX).click();
-    LOG.log("clickOnSingleEnabledCategory",
-            "Single enabled category was clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnSingleEnabledCategory",
+                "Single enabled category was clicked");
     driver.switchTo().defaultContent();
   }
 
@@ -196,8 +196,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(disabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     disabledPinTypesCollection.get(0).click();
-    LOG.log("clickOnSingleDisabledCategory",
-            "Single disabled category was clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnSingleDisabledCategory",
+                "Single disabled category was clicked");
     driver.switchTo().defaultContent();
   }
 
@@ -207,7 +207,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(allPinTypes);
     allPinTypes.click();
-    LOG.log("clickOnAllCategories", "All categories were clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnAllCategories", "All categories were clicked");
     driver.switchTo().defaultContent();
   }
 
@@ -217,7 +217,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(pinEditLink);
     pinEditLink.click();
     driver.switchTo().defaultContent();
-    LOG.log("clickOnEditPin", "Pin edit link was clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnEditPin", "Pin edit link was clicked");
     return new AddPinComponentObject(driver);
   }
 
@@ -229,7 +229,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     Actions actions = new Actions(driver);
     actions.moveToElement(filterBoxTitle).click().perform();
     driver.switchTo().defaultContent();
-    LOG.log("clickOnFilterBoxTitle", "Filter box title was clicked", LOG.Type.SUCCESS);
+    LOG.success("clickOnFilterBoxTitle", "Filter box title was clicked");
   }
 
   public void clickOpenPinTitle(boolean ...noFrame) {
@@ -268,7 +268,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     actions.moveToElement(mapImagesCollection.get(0));
     actions.click().perform();
     driver.switchTo().defaultContent();
-    LOG.log("placePinInMap", "Pin was placed in map", LOG.Type.SUCCESS);
+    LOG.success("placePinInMap", "Pin was placed in map");
     return new AddPinComponentObject(driver);
   }
 
@@ -277,12 +277,12 @@ public class InteractiveMapPageObject extends BasePageObject {
     scrollToElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     driver.switchTo().defaultContent();
-    LOG.log("verifyMapOpened", "Map was opened", LOG.Type.SUCCESS);
+    LOG.success("verifyMapOpened", "Map was opened");
   }
 
   public void verifyMapOpenedForDeleteMapTests() {
     wait.forElementVisible(mapFrame);
-    LOG.log("verifyMapOpenedForDeleteMapTests", "Map was opened", LOG.Type.SUCCESS);
+    LOG.success("verifyMapOpenedForDeleteMapTests", "Map was opened");
   }
 
   public void verifyCreatedMapTitle(String mapTitle) {
@@ -317,8 +317,8 @@ public class InteractiveMapPageObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing dialog button selected");
     }
-    LOG.log("verifyEmbedMapCode",
-            button + "embed map code was correctly displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyEmbedMapCode",
+                button + "embed map code was correctly displayed");
   }
 
   public void verifyPopUpVisible() {
@@ -329,7 +329,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyZoomMap() {
     wait.forElementVisible(zoomAnim);
-    LOG.log("verifyZoomMap", "Map was zoomed", true, driver);
+    LOG.logResult("verifyZoomMap", "Map was zoomed", true, driver);
   }
 
   public void verifyAllPinTypesIsCheck() {
@@ -338,9 +338,9 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(allPinTypes);
     wait.forElementVisible(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     if (allPinTypes.getAttribute("class").contains("enabled")) {
-      LOG.log("verifyAllPointTypesIsCheck", "All pin types were checked", LOG.Type.SUCCESS);
+      LOG.success("verifyAllPointTypesIsCheck", "All pin types were checked");
     } else {
-      LOG.log("verifyAllPointTypesIsCheck", "All pin types were not checked", LOG.Type.ERROR);
+      LOG.error("verifyAllPointTypesIsCheck", "All pin types were not checked");
     }
     driver.switchTo().defaultContent();
   }
@@ -350,9 +350,9 @@ public class InteractiveMapPageObject extends BasePageObject {
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(allPinTypes);
     if (!allPinTypes.getAttribute("class").contains("enabled")) {
-      LOG.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", LOG.Type.SUCCESS);
+      LOG.success("verifyAllPointTypesIsUnCheck", "All pin types were unchecked");
     } else {
-      LOG.log("verifyAllPointTypesIsUnCheck", "All pin types were checked", LOG.Type.ERROR);
+      LOG.error("verifyAllPointTypesIsUnCheck", "All pin types were checked");
     }
     driver.switchTo().defaultContent();
   }
@@ -399,8 +399,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     Assertion.assertEquals(isElementOnPage(embedMapCodeButton), true);
     Assertion.assertEquals(isElementOnPage(zoomInButton), true);
     Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
-    LOG.logResult("verifyControlButtonsAreVisible",
-                  "embedMap, zoom in/out buttons were visible", true);
+    LOG.result("verifyControlButtonsAreVisible",
+               "embedMap, zoom in/out buttons were visible", true);
     driver.switchTo().defaultContent();
   }
 
@@ -438,7 +438,7 @@ public class InteractiveMapPageObject extends BasePageObject {
                 createdPinNames.get(createdPinNames.size() - 1).getText(), pinTypeName
         );
       } else {
-        LOG.logResult(
+        LOG.result(
             "verifyPinTypeExist",
             "Pin type with name " + pinTypeName + " does not exist",
             true
@@ -479,29 +479,29 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyEscapedFragmentMetaTag() {
     wait.forElementVisible(createdMapTitle);
     wait.forElementPresent(escapedFragmentMetaDataTag);
-    LOG.log("verifyEscapedFragmentMetaTag",
-            "Escaped fragment meta tag is in DOM", LOG.Type.SUCCESS);
+    LOG.success("verifyEscapedFragmentMetaTag",
+                "Escaped fragment meta tag is in DOM");
   }
 
   public void verifyPoiCategoryTitle() {
     wait.forElementVisible(poiCategorySection);
-    LOG.log("verifyPoiCategoryTitle", "Poi category section is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyPoiCategoryTitle", "Poi category section is displayed");
   }
 
   public void verifyPoiPointTitle() {
     wait.forElementVisible(poiNameSection);
-    LOG.log("verifyPoiPointTitle", "Poi name section is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyPoiPointTitle", "Poi name section is displayed");
   }
 
   public void verifyPoiPointDescription() {
     wait.forElementVisible(poiDescriptionSection);
-    LOG.log("verifyPoiPointDescription",
-            "Poi description section is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyPoiPointDescription",
+                "Poi description section is displayed");
   }
 
   public void verifyPontoGetRequest(NetworkTrafficInterceptor networkTab) {
     if(networkTab.searchRequestUrlInHar("maps.wikia-services.com")) {
-        LOG.log("verifyPontoGetRequest", "Ponto request came", LOG.Type.SUCCESS);
+        LOG.success("verifyPontoGetRequest", "Ponto request came");
     } else {
         throw new NoSuchElementException("Request from ponto did not come");
     }

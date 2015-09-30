@@ -29,7 +29,7 @@ public class CategoryPageObject extends WikiBasePageObject {
     public void verifyCategoryPageTitle(String categoryLinkName) {
         wait.forElementVisible(categoryHeader);
         String title = categoryHeader.getText();
-        LOG.logResult(
+        LOG.result(
             "getCategoryname",
             "the name of the category is: " + title,
             true

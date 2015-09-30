@@ -36,7 +36,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       verifyMercury();
     }
 
-    LOG.log("", "Page screenshot", true, driver);
+    LOG.logResult("", "Page screenshot", true, driver);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       driver.manage().window().setSize(new Dimension(360, 640));
     } catch (WebDriverException ex) {
-      LOG.logResult(
+      LOG.result(
           "ResizeWindowForMobile",
           "Resize window method not available - possibly running on real device",
           true
@@ -62,12 +62,12 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       extractGptInfo(presentLeaderboardSelector);
 
       if (isElementOnPage(By.cssSelector(CELTRA_MASK_SELECTOR))) {
-        LOG.logWarning("Special ad", "Celtra");
+        LOG.warning("Special ad", "Celtra");
         return;
       }
 
       if (isElementOnPage(By.cssSelector(FLITE_MASK_SELECTOR))) {
-        LOG.logWarning("Special ad", "Flite");
+        LOG.warning("Special ad", "Flite");
         return;
       }
 
@@ -84,21 +84,21 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     waitForSlotCollapsed(slot);
-    LOG.log("AdInSlot", "Ad is not found in slot as expected.", LOG.Type.SUCCESS);
+    LOG.success("AdInSlot", "Ad is not found in slot as expected.");
   }
 
   public void verifyNoSlotPresent(String slotName) {
     if (isElementOnPage(By.cssSelector("#" + slotName))) {
       throw new NoSuchElementException("Slot is added to the page");
     }
-    LOG.log("AdInSlot", "No slot found as expected", LOG.Type.SUCCESS);
+    LOG.success("AdInSlot", "No slot found as expected");
   }
 
   public void verifySlotExpanded(String slotName) {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     if (checkIfSlotExpanded(slot)) {
-      LOG.log("AdInSlot", "Slot expanded as expecting", LOG.Type.SUCCESS);
+      LOG.success("AdInSlot", "Slot expanded as expecting");
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
@@ -113,7 +113,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
-    LOG.log("AdInSlot", "Ad found in slot", true, driver);
+    LOG.logResult("AdInSlot", "Ad found in slot", true, driver);
   }
 
   /**
@@ -126,7 +126,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      LOG.log(
+      LOG.logResult(
           "mercuryNavigateToAnArticle()",
           String.format(
               "Clicking: %s (%s)",
@@ -140,7 +140,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       scrollToElement(link);
       link.click();
     } else {
-      LOG.logWarning(
+      LOG.warning(
           "mercuryNavigateToAnArticle()",
           "Could not find the link to: /wiki/" + articleLinkName
       );
@@ -149,7 +149,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void removeElementIfPresent(String cssSelector) {
     if (isElementOnPage(By.cssSelector(cssSelector))) {
-      LOG.log("Removing element", cssSelector, LOG.Type.SUCCESS);
+      LOG.success("Removing element", cssSelector);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
       JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript("$(arguments[0]).css('display', 'none')", element);
@@ -170,7 +170,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
-      LOG.logWarning("", "MERCURY FAILED TO LOAD");
+      LOG.warning("", "MERCURY FAILED TO LOAD");
       throw e;
     }
   }

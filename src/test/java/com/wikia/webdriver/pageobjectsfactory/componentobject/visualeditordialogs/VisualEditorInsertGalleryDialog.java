@@ -47,7 +47,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private void typeInSearchTextField(String input) {
     wait.forElementClickable(searchInput);
     searchInput.sendKeys(input);
-    LOG.log("typeInSearchTextField", "Typed " + input + " in the search field", LOG.Type.SUCCESS);
+    LOG.success("typeInSearchTextField", "Typed " + input + " in the search field");
   }
 
   private void clickClearInputButton() {

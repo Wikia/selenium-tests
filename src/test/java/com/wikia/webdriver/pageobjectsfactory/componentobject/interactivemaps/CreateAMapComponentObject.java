@@ -33,14 +33,14 @@ public class CreateAMapComponentObject extends BasePageObject {
   public CreateACustomMapComponentObject clickCustomMap() {
     wait.forElementVisible(customMapLink);
     customMapLink.click();
-    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateACustomMapComponentObject(driver);
   }
 
   public CreateRealMapComponentObject clickRealMap() {
     wait.forElementVisible(realMapLink);
     realMapLink.click();
-    LOG.log("clickRealMap", "Real Map link clicked", true, driver);
+    LOG.logResult("clickRealMap", "Real Map link clicked", true, driver);
     return new CreateRealMapComponentObject(driver);
   }
 
@@ -57,13 +57,13 @@ public class CreateAMapComponentObject extends BasePageObject {
 
   public void verifyLoginModal() {
     wait.forElementVisible(loginModal);
-    LOG.log("verifyLoginModal", "Login modal is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyLoginModal", "Login modal is displayed");
   }
 
   public void verifyRealMapAndCustomMapButtons() {
     wait.forElementVisible(realMapLink);
     wait.forElementVisible(customMapLink);
-    LOG.log("verifyRealMapAndCustomMapButtons",
-            "Real Map and Custom Map links are visible", LOG.Type.SUCCESS);
+    LOG.success("verifyRealMapAndCustomMapButtons",
+                "Real Map and Custom Map links are visible");
   }
 }

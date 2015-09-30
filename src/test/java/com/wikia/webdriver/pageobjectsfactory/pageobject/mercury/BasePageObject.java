@@ -32,7 +32,7 @@ public class BasePageObject extends WikiBasePageObject {
   public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
     LOG
-        .logResult("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
@@ -44,7 +44,7 @@ public class BasePageObject extends WikiBasePageObject {
         "&noads=1"
     );
     LOG
-        .logResult("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
@@ -52,7 +52,7 @@ public class BasePageObject extends WikiBasePageObject {
                                                                      String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
     LOG
-        .logResult("openMercuryArticleByName", "Article" + articleName + " was opened", true);
+        .result("openMercuryArticleByName", "Article" + articleName + " was opened", true);
     return new ArticlePageObject(driver);
   }
 
@@ -60,8 +60,8 @@ public class BasePageObject extends WikiBasePageObject {
                                                     String hashId) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName +
            "?cb=" + DateTime.now().getMillis() + "#" + hashId);
-    LOG.log("openMercuryArticleByName", "Article" + articleName + " with #" + hashId +
-                                        " was opened", LOG.Type.SUCCESS);
+    LOG.success("openMercuryArticleByName", "Article" + articleName + " with #" + hashId +
+                                            " was opened");
     return new ArticlePageObject(driver);
   }
 
@@ -77,11 +77,11 @@ public class BasePageObject extends WikiBasePageObject {
    * @param reason - i.e. Wait for message to disappear
    */
   public void waitMilliseconds(int time, String reason) {
-    LOG.logWarning("Wait for " + time + " ms", reason);
+    LOG.warning("Wait for " + time + " ms", reason);
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      LOG.log(reason, e, LOG.Type.ERROR);
+      LOG.error(reason, e);
     }
   }
 
@@ -95,7 +95,7 @@ public class BasePageObject extends WikiBasePageObject {
       wait.forElementVisible(LOADING_SPINNER_BY, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {
-      LOG.log("Loading spinner", "is not present", LOG.Type.SUCCESS);
+      LOG.success("Loading spinner", "is not present");
     }
     if (spinnerPresent) {
       wait.forElementNotVisible(LOADING_SPINNER_BY, 4, 3000);
@@ -113,7 +113,7 @@ public class BasePageObject extends WikiBasePageObject {
   public CuratedMainPagePageObject openCuratedMainPage(String wikiURL, String mainPage) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + mainPage + "?cb=" + DateTime.now().getMillis());
     LOG
-        .logResult("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
+        .result("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
     return new CuratedMainPagePageObject(driver);
   }
 
@@ -128,7 +128,7 @@ public class BasePageObject extends WikiBasePageObject {
     getUrl(url);
 
     LOG
-        .logResult("openCuratedContentPage", "Curated content page" + path + " was opened", true);
+        .result("openCuratedContentPage", "Curated content page" + path + " was opened", true);
     return new CuratedContentPageObject(driver);
   }
 

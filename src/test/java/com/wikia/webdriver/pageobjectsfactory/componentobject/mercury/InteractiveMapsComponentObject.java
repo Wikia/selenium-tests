@@ -77,7 +77,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(filterBox, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
-      LOG.log("Filter box not expanded", e, LOG.Type.SUCCESS);
+      LOG.success("Filter box not expanded", e);
       return false;
     }
     return true;
@@ -87,7 +87,7 @@ public class InteractiveMapsComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(lightbox, 5, 1000);
     } catch (TimeoutException e) {
-      LOG.log("Map modal not visible", e, LOG.Type.SUCCESS);
+      LOG.success("Map modal not visible", e);
       return false;
     }
     return true;

@@ -122,8 +122,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
     Assertion.assertEquals(getFlashMessageText(), deletedVideo);
-    LOG.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-                                                    + " was deleted", LOG.Type.SUCCESS);
+    LOG.success("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
+                                                    + " was deleted");
   }
 
   public void verifyDeleteViaVideoNotPresent() {
@@ -133,19 +133,19 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     verifyNotificationMessage();
     Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    LOG.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
-                                           + " was deleted", LOG.Type.SUCCESS);
+    LOG.success("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
+                                           + " was deleted");
   }
 
   public void verifyElementsOnPage() {
     verifyH1();
-    LOG.log("verifyElementsOnPage", "verify that H1 is present", LOG.Type.SUCCESS);
+    LOG.success("verifyElementsOnPage", "verify that H1 is present");
     verifyAddVideoButton();
-    LOG.log("verifyElementsOnPage", "verify that Add Video button is present", LOG.Type.SUCCESS);
+    LOG.success("verifyElementsOnPage", "verify that Add Video button is present");
     verifySortDropdown();
-    LOG.log("verifyElementsOnPage", "verify that sort dropdown is present", LOG.Type.SUCCESS);
+    LOG.success("verifyElementsOnPage", "verify that sort dropdown is present");
     verifyNewestVideo();
-    LOG.log("verifyElementsOnPage",
-            "verify that there is at least one video present", LOG.Type.SUCCESS);
+    LOG.success("verifyElementsOnPage",
+            "verify that there is at least one video present");
   }
 }

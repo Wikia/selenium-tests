@@ -47,7 +47,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   public void verifyEmptyPagename() {
     wait.forElementNotPresent(By.cssSelector(".mw-spcontent > p"));
-    LOG.log(
+    LOG.logResult(
         "verifyEmptyPageName",
         "Empty pagename is not founded",
         true, driver
@@ -57,7 +57,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
   public void compareResultsCount(int limit) {
     if (limit == 0) {
       wait.forElementNotPresent(By.cssSelector(LIST_OF_LINKS_SELECTOR));
-      LOG.log(
+      LOG.logResult(
           "verifyNoPagenameFounded",
           "Not existing pagename is not founded",
           true, driver

@@ -37,26 +37,26 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(description);
     LOG
-        .logResult("describeYourTopic", "describe your topic populated with: " + description, true);
+        .result("describeYourTopic", "describe your topic populated with: " + description, true);
   }
 
   public void selectCategory(String category) {
     wait.forElementVisible(wikiCategory);
     Select dropList = new Select(wikiCategory);
     dropList.selectByVisibleText(category);
-    LOG.log("selectCategory", "selected " + category + " category", true, driver);
+    LOG.logResult("selectCategory", "selected " + category + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
     wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
-    LOG.log("submit", "Submit button clicked", LOG.Type.SUCCESS);
+    LOG.success("submit", "Submit button clicked");
     return new CreateNewWikiPageObjectStep3(driver);
   }
 
   public void selectAllAgesCheckbox() {
     scrollAndClick(allAgesCheckBox);
-    LOG.log("selectAllAgesCheckbox", "all ages checkbox selected", LOG.Type.SUCCESS);
+    LOG.success("selectAllAgesCheckbox", "all ages checkbox selected");
   }
 
   public void verifyCategoryError() {

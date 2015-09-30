@@ -95,14 +95,14 @@ public class GalleryBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing orientation selected");
     }
-    LOG.log("adjustOrientation", "dropdown selected", LOG.Type.SUCCESS);
+    LOG.success("adjustOrientation", "dropdown selected");
 
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
-    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAddPhoto", "add photo button clicked");
     return new AddPhotoComponentObject(driver);
   }
 
@@ -110,14 +110,14 @@ public class GalleryBuilderComponentObject extends BasePageObject {
     for (int i = 0; i < photos; i++) {
       wait.forElementVisible(galleryPreviewPhotos.get(i));
       LOG
-          .logResult("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
+          .result("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
 
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    LOG.log("clickFinish", "finish button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickFinish", "finish button clicked");
   }
 
   public enum PositionsGallery {

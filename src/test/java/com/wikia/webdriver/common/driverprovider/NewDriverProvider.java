@@ -117,7 +117,7 @@ public class NewDriverProvider {
       url =
           new URL("http://" + Configuration.getAppiumIp().toString() + "/wd/hub");
     } catch (MalformedURLException e) {
-      LOG.log("getAndroindInstance", e, LOG.Type.ERROR);
+      LOG.error("getAndroindInstance", e);
     }
     mobileDriver = new AndroidDriver(url, destCaps);
 
@@ -142,7 +142,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, mozillaPath);
         } catch (IOException ex) {
-          LOG.log("Can't create file", ex, LOG.Type.ERROR);
+          LOG.error("Can't create file", ex);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                mozillaPath
                                                                                    .getAbsolutePath()));
@@ -151,7 +151,7 @@ public class NewDriverProvider {
         try {
           tmpFile = File.createTempFile("webdriver", null, homePath);
         } catch (IOException ex) {
-          LOG.log("Can't create file", ex, LOG.Type.ERROR);
+          LOG.error("Can't create file", ex);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
                                                                                homePath
                                                                                    .getAbsolutePath()));
@@ -173,9 +173,9 @@ public class NewDriverProvider {
                      + "JSErrorCollector.xpi");
         firefoxProfile.addExtension(jsErr);
       } catch (FileNotFoundException e) {
-        LOG.log("JS extension file doesn't exist in provided location", e, LOG.Type.ERROR);
+        LOG.error("JS extension file doesn't exist in provided location", e);
       } catch (IOException e) {
-        LOG.log("Error with adding firefox extension", e, LOG.Type.ERROR);
+        LOG.error("Error with adding firefox extension", e);
       }
     }
 

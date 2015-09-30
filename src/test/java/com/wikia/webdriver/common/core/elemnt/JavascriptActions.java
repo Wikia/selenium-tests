@@ -40,7 +40,7 @@ public class JavascriptActions {
       Thread.sleep(1000);
       return value;
     } catch (InterruptedException e) {
-      LOG.log("execute", e, LOG.Type.ERROR);
+      LOG.error("execute", e);
       return null;
     }
   }

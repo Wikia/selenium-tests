@@ -44,7 +44,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
-    LOG.logResult(
+    LOG.result(
         "PageCreated",
         "Page with given title created",
         true
@@ -56,7 +56,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     wait.forTextInElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );
-    LOG.log(
+    LOG.logResult(
         "MessageAboutBlockPresent",
         "Message about block present",
         true,

@@ -27,7 +27,7 @@ public class Typing {
       try {
         Thread.sleep(interval);
       } catch (InterruptedException e) {
-        LOG.log("ERROR WHILE TYPING", e, LOG.Type.ERROR);
+        LOG.error("ERROR WHILE TYPING", e);
       }
     }
   }

@@ -69,8 +69,8 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
     } else {
       throw new NoSuchElementException("This template has no param.");
     }
-    LOG.log("typeInParam", "Type " + text + " in the " + paramName + " field.", true,
-            driver);
+    LOG.logResult("typeInParam", "Type " + text + " in the " + paramName + " field.", true,
+                  driver);
   }
 
   public VisualEditorPageObject clickDone() {

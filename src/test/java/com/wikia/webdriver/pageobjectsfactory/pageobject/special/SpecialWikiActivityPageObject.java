@@ -32,17 +32,17 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName,
                                   userName);
       if (ifPassed) {
-        LOG.log("verifyRecentEdition",
-                "WikiActivity module found recent edition that affected '"
-                + articleName
-                + "' and was done by user: " + userName, LOG.Type.SUCCESS);
+        LOG.success("verifyRecentEdition",
+                    "WikiActivity module found recent edition that affected '"
+                    + articleName
+                    + "' and was done by user: " + userName);
         break;
       }
     }
     if (!ifPassed) {
-      LOG.log("verifyRecentEdition",
-              "edition on article  '" + articleName + "' by user: '"
-              + userName + "', not found", false, driver);
+      LOG.logResult("verifyRecentEdition",
+                    "edition on article  '" + articleName + "' by user: '"
+                    + userName + "', not found", false, driver);
     }
   }
 
@@ -55,16 +55,16 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       ifPassed = ifDetailsPresent(newPageActivitiesList.get(i), articleName,
                                   userName);
       if (ifPassed) {
-        LOG.log("verifyRecentNewPage",
-                "WikiActivity module found recent new page: '" + articleName
-                + "' that was created by user: " + userName, LOG.Type.SUCCESS);
+        LOG.success("verifyRecentNewPage",
+                    "WikiActivity module found recent new page: '" + articleName
+                    + "' that was created by user: " + userName);
         break;
       }
     }
     if (!ifPassed) {
-      LOG.log("verifyRecentNewPage",
-              "new page:  '" + articleName + "' by user: '"
-              + userName + "', not found", false, driver);
+      LOG.logResult("verifyRecentNewPage",
+                    "new page:  '" + articleName + "' by user: '"
+                    + userName + "', not found", false, driver);
     }
 
   }
@@ -78,19 +78,19 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       ifPassed = ifNewBlogDetailsPresent(newPageActivitiesList.get(i), blogContent, blogTitle,
                                          userName);
       if (ifPassed) {
-        LOG.log("verifyRecentNewBlogPage",
-                "WikiActivity module found recent new blog titled as: '" + blogTitle
-                + "' that was created by user: " + userName
-                + " and contains content: " + blogContent, LOG.Type.SUCCESS);
+        LOG.success("verifyRecentNewBlogPage",
+                    "WikiActivity module found recent new blog titled as: '" + blogTitle
+                    + "' that was created by user: " + userName
+                    + " and contains content: " + blogContent);
         break;
       }
     }
     if (!ifPassed) {
-      LOG.log("verifyRecentNewBlogPage",
-              "WikiActivity module didn't find recent new blog titled as: '"
-              + blogTitle
-              + "' that was created by user: " + userName
-              + " and containted content: " + blogContent, false, driver);
+      LOG.logResult("verifyRecentNewBlogPage",
+                    "WikiActivity module didn't find recent new blog titled as: '"
+                    + blogTitle
+                    + "' that was created by user: " + userName
+                    + " and containted content: " + blogContent, false, driver);
     }
 
   }
@@ -106,18 +106,18 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       ifPassed = ifDetailsPresent(categorizationActivitiesList.get(i), articleName,
                                   userName);
       if (ifPassed) {
-        LOG.log("verifyRecentNewCategorization",
-                "WikiActivity module found recent new Categorization on artile: '"
-                + articleName
-                + "' that was done by user: " + userName, LOG.Type.SUCCESS);
+        LOG.success("verifyRecentNewCategorization",
+                    "WikiActivity module found recent new Categorization on artile: '"
+                    + articleName
+                    + "' that was done by user: " + userName);
         break;
       }
     }
     if (!ifPassed) {
-      LOG.log("verifyRecentNewCategorization",
-              "WikiActivity didn't find recent new Categorization on artile: '"
-              + articleName
-              + "' that was done by user: " + userName, false, driver);
+      LOG.logResult("verifyRecentNewCategorization",
+                    "WikiActivity didn't find recent new Categorization on artile: '"
+                    + articleName
+                    + "' that was done by user: " + userName, false, driver);
     }
 
   }

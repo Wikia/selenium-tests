@@ -35,7 +35,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     wait.forElementVisible(By.cssSelector(DATA_THEME_LIST));
     String themeName = themeLocator.replace("%name%", name);
     scrollAndClick(driver.findElement(By.cssSelector(themeName)));
-    LOG.log("selectTheme", "skin " + name + " selected", true, driver);
+    LOG.logResult("selectTheme", "skin " + name + " selected", true, driver);
   }
 
   public ArticlePageObject submit() {
@@ -49,7 +49,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     }
 
     scrollAndClick(submitButton);
-    LOG.log("submit", "Submit button clicked", true, driver);
+    LOG.logResult("submit", "Submit button clicked", true, driver);
     return new ArticlePageObject(driver);
   }
 }

@@ -24,7 +24,7 @@ public class XMLReader {
       XMLConfiguration xml = new XMLConfiguration(file);
       return xml.getString(key);
     } catch (ConfigurationException e) {
-      LOG.log("Error while reading XML config", e, LOG.Type.ERROR);
+      LOG.error("Error while reading XML config", e);
 
       return e.getMessage();
     }

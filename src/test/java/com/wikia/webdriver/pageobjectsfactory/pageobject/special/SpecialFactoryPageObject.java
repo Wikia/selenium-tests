@@ -35,36 +35,37 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
 
   private void clickCloseWikiButton() {
     scrollAndClick(closeWikiButton);
-    LOG.log("clickCloseWikiButton ", "Close wiki button clicked", true, driver);
+    LOG.logResult("clickCloseWikiButton ", "Close wiki button clicked", true, driver);
   }
 
   private void deselectCreateDumpCheckBox() {
     scrollAndClick(dumpCheckBox);
     LOG
-        .log("deselectCreateDumpCheckBox ", "Create dump checkbox deselected", true, driver);
+        .logResult("deselectCreateDumpCheckBox ", "Create dump checkbox deselected", true, driver);
   }
 
   private void deselectImageArchiveCheckBox() {
     scrollAndClick(imageArchiveCheckBox);
     LOG
-        .log("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected", true,
-             driver);
+        .logResult("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected",
+                   true,
+                   driver);
   }
 
   private void confirmClose() {
     scrollAndClick(confirmCloseButton);
-    LOG.log("confirmClose ", "Close confirmation button clicked", true, driver);
+    LOG.logResult("confirmClose ", "Close confirmation button clicked", true, driver);
   }
 
   private void clickClosedWikiaLink() {
     scrollAndClick(closedWikiaLink);
-    LOG.log("clickClosedWikiaLink ", "Closed wikia link clicked", true, driver);
+    LOG.logResult("clickClosedWikiaLink ", "Closed wikia link clicked", true, driver);
   }
 
   private void verifyWikiaClosed() {
     wait.forElementVisible(By.cssSelector("#close-title"));
     wait.forElementVisible(By.cssSelector("#close-info"));
-    LOG.log("verifyWikiaClosed ", "Closed wikia verified", true, driver);
+    LOG.logResult("verifyWikiaClosed ", "Closed wikia verified", true, driver);
   }
 
   public void deleteWiki() {

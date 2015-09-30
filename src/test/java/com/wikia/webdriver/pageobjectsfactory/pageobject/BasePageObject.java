@@ -97,7 +97,7 @@ public class BasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      LOG.log("mouseOverInArticleIframe", e, LOG.Type.ERROR);
+      LOG.error("mouseOverInArticleIframe", e);
     }
   }
 
@@ -191,7 +191,7 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
+        LOG.error("JSError", "JQuery is not defined");
       }
     }
   }
@@ -203,7 +203,7 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element, offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
+        LOG.error("JSError", "JQuery is not defined");
       }
     }
   }
@@ -220,7 +220,7 @@ public class BasePageObject {
                        driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
+        LOG.error("JSError", "JQuery is not defined");
       }
     }
   }
@@ -236,7 +236,7 @@ public class BasePageObject {
   public void verifyURLcontains(String givenString) {
     String currentURL = driver.getCurrentUrl();
     Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
-    LOG.log("verifyURLcontains", "current url is the same as expetced url", LOG.Type.SUCCESS);
+    LOG.success("verifyURLcontains", "current url is the same as expetced url");
   }
 
   public void verifyURLcontains(final String givenString, int timeOut) {
@@ -268,8 +268,8 @@ public class BasePageObject {
   public void getUrl(String url, boolean makeScreenshot) {
     driver.get(url);
     if (makeScreenshot) {
-      LOG.log("Take screenshot",
-              String.format("Screenshot After Navigation to: %s", url), true, driver);
+      LOG.logResult("Take screenshot",
+                    String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
 
@@ -284,10 +284,10 @@ public class BasePageObject {
   public void refreshPage() {
     try {
       driver.navigate().refresh();
-      LOG.log("refreshPage", "page refreshed", LOG.Type.SUCCESS);
+      LOG.success("refreshPage", "page refreshed");
     } catch (TimeoutException e) {
       LOG
-          .logResult("refreshPage", "page loaded for more than 30 seconds after click", true);
+          .result("refreshPage", "page loaded for more than 30 seconds after click", true);
     }
   }
 
@@ -301,10 +301,10 @@ public class BasePageObject {
         windows = driver.getWindowHandles().toArray();
         sumDelay += 500;
       } catch (InterruptedException e) {
-        LOG.log(windowName, e, LOG.Type.ERROR);
+        LOG.error(windowName, e);
       }
       if (sumDelay > 5000) {
-        LOG.log(windowName, comment, LOG.Type.ERROR);
+        LOG.error(windowName, comment);
         break;
       }
     }
@@ -319,13 +319,13 @@ public class BasePageObject {
             + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-          LOG.log("JSError", "JQuery is not defined", LOG.Type.ERROR);
+          LOG.error("JSError", "JQuery is not defined");
         }
       }
       return true;
     } else {
       LOG
-          .logResult("SelectorNotFound", "Selector " + selector + " not found on page", true);
+          .result("SelectorNotFound", "Selector " + selector + " not found on page", true);
       return false;
     }
   }
@@ -382,7 +382,7 @@ public class BasePageObject {
 
   public void waitForStringInURL(String givenString) {
     waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
-    LOG.log("waitForStringInURL", "verify that url contains " + givenString, LOG.Type.SUCCESS);
+    LOG.success("waitForStringInURL", "verify that url contains " + givenString);
   }
 
   public void waitForAlertAndAccept() {
@@ -390,8 +390,8 @@ public class BasePageObject {
     Alert alert = driver.switchTo().alert();
     String alertText = alert.getText();
     alert.accept();
-    LOG.log("waitForAlertAndAccept", "detected and closed alert with text "
-                                     + alertText, LOG.Type.SUCCESS);
+    LOG.success("waitForAlertAndAccept", "detected and closed alert with text "
+                                         + alertText);
   }
 
   public String getRandomDigits(int length) {
@@ -416,7 +416,7 @@ public class BasePageObject {
 
   public void openWikiPage() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
-    LOG.log("WikiPageOpened", "Wiki page is opened", LOG.Type.SUCCESS);
+    LOG.success("WikiPageOpened", "Wiki page is opened");
   }
 
   /*
@@ -429,23 +429,24 @@ public class BasePageObject {
     notifications_clickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
-    LOG.log("notifications_verifyNotificationTitle",
-            "Verify that the latest notification has the following title: " + title, true, driver);
+    LOG.logResult("notifications_verifyNotificationTitle",
+                  "Verify that the latest notification has the following title: " + title, true,
+                  driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     wait.forElementClickable(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
-    LOG.log("notifications_clickOnNotificationsLogo",
-            "click on notifications logo on the upper right corner", true, driver);
+    LOG.logResult("notifications_clickOnNotificationsLogo",
+                  "click on notifications logo on the upper right corner", true, driver);
   }
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
-    LOG.log("norifications_showNotifications",
-            "show notifications by adding 'show' class to element", true, driver);
+    LOG.logResult("norifications_showNotifications",
+                  "show notifications by adding 'show' class to element", true, driver);
   }
 
   /**
@@ -457,7 +458,7 @@ public class BasePageObject {
 
   public void appendToUrl(String additionToUrl) {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
-    LOG.log("appendToUrl", additionToUrl + " has been appended to url", LOG.Type.SUCCESS);
+    LOG.success("appendToUrl", additionToUrl + " has been appended to url");
   }
 
   public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
@@ -466,7 +467,7 @@ public class BasePageObject {
       currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
     }
     driver.get(currentUrl);
-    LOG.log("appendToUrl", queryStrings + " have been appended to url", LOG.Type.SUCCESS);
+    LOG.success("appendToUrl", queryStrings + " have been appended to url");
   }
 
   public void pressDownArrow(WebElement element) {
@@ -489,7 +490,7 @@ public class BasePageObject {
       if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
         throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
       }
-      LOG.log("purge", url, LOG.Type.SUCCESS);
+      LOG.success("purge", url);
       return;
     } finally {
       client.close();
@@ -541,7 +542,7 @@ public class BasePageObject {
       }
     }
     Assertion.assertEquals(statusCode, desiredStatus);
-    LOG.log("verifyURLStatus", url + " has status " + statusCode, LOG.Type.SUCCESS);
+    LOG.success("verifyURLStatus", url + " has status " + statusCode);
   }
 
   protected void changeImplicitWait(int value, TimeUnit timeUnit) {
@@ -559,7 +560,7 @@ public class BasePageObject {
     waitForStringInURL(url);
     driver.close();
     driver.switchTo().window(windows[0].toString());
-    LOG.log("verifyUrlInNewWindow", "url in new window verified", LOG.Type.SUCCESS);
+    LOG.success("verifyUrlInNewWindow", "url in new window verified");
   }
 
   public void verifyElementMoved(Point source, WebElement element) {
@@ -568,9 +569,10 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
           + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    LOG.log("verifyElementMoved", "Element did move. From (" + source.x + ","
-                                  + source.y + ") to (" + target.x + "," + target.y + ")", true,
-            driver);
+    LOG.logResult("verifyElementMoved", "Element did move. From (" + source.x + ","
+                                        + source.y + ") to (" + target.x + "," + target.y + ")",
+                  true,
+                  driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -584,9 +586,9 @@ public class BasePageObject {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
           + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    LOG.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-                                  + sourceHeight + ") to (" + targetWidth + "," + targetHeight
-                                  + ")", true, driver);
+    LOG.logResult("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
+                                        + sourceHeight + ") to (" + targetWidth + "," + targetHeight
+                                        + ")", true, driver);
   }
 
   public void switchToNewBrowserTab() {

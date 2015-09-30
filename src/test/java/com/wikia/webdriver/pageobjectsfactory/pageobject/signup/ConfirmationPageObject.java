@@ -32,7 +32,7 @@ public class ConfirmationPageObject extends BasePageObject {
    */
   public void typeInUserName(String userName) {
     userNameField.sendKeys(userName);
-    LOG.log("typeInUserName ", "user name field populated", true, driver);
+    LOG.logResult("typeInUserName ", "user name field populated", true, driver);
   }
 
   /**
@@ -40,7 +40,7 @@ public class ConfirmationPageObject extends BasePageObject {
    */
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
-    LOG.log("typeInUserPassword ", "password field populated", true, driver);
+    LOG.logResult("typeInUserPassword ", "password field populated", true, driver);
   }
 
   /**
@@ -49,14 +49,14 @@ public class ConfirmationPageObject extends BasePageObject {
   public UserProfilePageObject clickSubmitButton(String email, String password) {
     MailFunctions.deleteAllEmails(email, password);
     scrollAndClick(confirmationButton);
-    LOG.log("submit button clicked ", "submit button clicked", true, driver);
+    LOG.logResult("submit button clicked ", "submit button clicked", true, driver);
     return new UserProfilePageObject(driver);
   }
 
   public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password) {
     MailFunctions.deleteAllEmails(email, password);
     scrollAndClick(confirmationButton);
-    LOG.log("submit button clicked ", "submit button clicked", true, driver);
+    LOG.logResult("submit button clicked ", "submit button clicked", true, driver);
     return new CreateNewWikiPageObjectStep1(driver);
   }
 }

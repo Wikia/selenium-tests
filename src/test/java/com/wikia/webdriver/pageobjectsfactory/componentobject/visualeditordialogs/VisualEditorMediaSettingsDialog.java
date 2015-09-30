@@ -39,7 +39,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
         outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(generalSetting);
     generalSetting.click();
-    LOG.log("selectSettings", setting.toString() + " setting is selected", LOG.Type.SUCCESS);
+    LOG.success("selectSettings", setting.toString() + " setting is selected");
     driver.switchTo().defaultContent();
   }
 
@@ -47,7 +47,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     waitForDialogVisible();
     wait.forElementVisible(captionEditArea);
     captionEditArea.sendKeys(text);
-    LOG.log("typeCaption", "Typed " + text + " in caption area", LOG.Type.SUCCESS);
+    LOG.success("typeCaption", "Typed " + text + " in caption area");
     driver.switchTo().defaultContent();
   }
 
@@ -64,7 +64,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement customSizeInput = customSizeInput = customSizeInputs.get(side.ordinal());
     customSizeInput.clear();
     customSizeInput.sendKeys(Integer.toString(size));
-    LOG.log("typeCustomSize", "Typed " + size + " in the field", true, driver);
+    LOG.logResult("typeCustomSize", "Typed " + size + " in the field", true, driver);
     driver.switchTo().defaultContent();
   }
 
@@ -79,7 +79,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement button = positionButtons.get(align.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(button);
     button.click();
-    LOG.log("clickAlignment", align.toString() + " align is selected", LOG.Type.SUCCESS);
+    LOG.success("clickAlignment", align.toString() + " align is selected");
     driver.switchTo().defaultContent();
   }
 }

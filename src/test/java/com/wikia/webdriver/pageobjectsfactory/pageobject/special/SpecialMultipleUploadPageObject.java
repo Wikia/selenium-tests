@@ -49,7 +49,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
               CommonUtils.getAbsolutePathForFile(
                   PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
     }
-    LOG.logResult(
+    LOG.result(
         "typeInFilesToUpload",
         filesNamesList.length + " files added to upload list",
         true
@@ -60,19 +60,19 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
   public void typeInMultiUploadSummary(String summary) {
     multipleUploadSummaryField.sendKeys(summary);
     LOG
-        .logResult("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload",
-                   true);
+        .result("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload",
+                true);
   }
 
   public void checkIgnoreAnyWarnings() {
     scrollAndClick(ignoreAnyWarnings);
-    LOG.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", LOG.Type.SUCCESS);
+    LOG.success("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option");
 
   }
 
   public void clickUploadButton() {
     scrollAndClick(uploadFileButton);
-    LOG.log("ClickOnUploadFile", "Click on Upload File button", LOG.Type.SUCCESS);
+    LOG.success("ClickOnUploadFile", "Click on Upload File button");
 
   }
 

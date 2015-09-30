@@ -22,7 +22,7 @@ public class CuratedContentToolModal extends WikiBasePageObject {
       WebElement modal = wait.forElementVisible(curatedContentToolModal);
       return modal.isDisplayed();
     } catch (TimeoutException e) {
-      LOG.log("isModalVisible", e, LOG.Type.ERROR);
+      LOG.error("isModalVisible", e);
       return false;
     }
   }

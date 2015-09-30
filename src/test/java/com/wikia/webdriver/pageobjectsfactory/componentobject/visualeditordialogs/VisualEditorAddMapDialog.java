@@ -44,11 +44,11 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
       wait.forElementClickable(emptyStateCreateAMapButton);
       emptyStateCreateAMapButton.click();
       LOG
-          .logResult("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
+          .result("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
     } else {
       wait.forElementClickable(createAMapButton);
       createAMapButton.click();
-      LOG.log("clickCreateAMapButton", "Create A Map button is clicked", LOG.Type.SUCCESS);
+      LOG.success("clickCreateAMapButton", "Create A Map button is clicked");
     }
     switchToNewBrowserTab();
     return new CreateAMapComponentObject(driver);
@@ -76,7 +76,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
       wait.forElementVisible(emptyStateDialogHeadline);
       wait.forElementVisible(emptyStateDialogText);
       wait.forElementVisible(emptyStateCreateAMapButton);
-      LOG.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
+      LOG.logResult("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
     } else {
       throw new NoSuchElementException(
           "The wiki is not in an empty state, the wiki contains maps.");

@@ -65,14 +65,14 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     try {
       getUrl(searchUrl + "index.php?title=Special:Search");
     } catch (TimeoutException e) {
-      LOG.log("goToSearchPage", "timeouted when opening search page", LOG.Type.ERROR);
+      LOG.error("goToSearchPage", "timeouted when opening search page");
     }
   }
 
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
     searchInput.sendKeys(term + Keys.ENTER);
-    LOG.log("searchFor", "Search button clicked", true, driver);
+    LOG.logResult("searchFor", "Search button clicked", true, driver);
     return this;
   }
 
@@ -152,15 +152,15 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject prevPage() {
     scrollAndClick(paginatorPrev);
-    LOG.log("prevPage", "Moving to prev page of search results.",
-            true, driver);
+    LOG.logResult("prevPage", "Moving to prev page of search results.",
+                  true, driver);
     return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
-    LOG.log("nextPage", "Moving to next page of search results.",
-            true, driver);
+    LOG.logResult("nextPage", "Moving to next page of search results.",
+                  true, driver);
     return this;
   }
 
@@ -171,15 +171,15 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void verifyNoPagination() {
     wait.forElementNotPresent(paginationContainerBy);
-    LOG.logResult("verifyNoPagination", "pagination is not visible on the page",
-                  true);
+    LOG.result("verifyNoPagination", "pagination is not visible on the page",
+               true);
   }
 
   public void verifyNoResultsCaption() {
     wait.forElementVisible(noResultsCaption);
     Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
-    LOG.logResult("verifyNoResultsCaption", "verified no results caption",
-                  true);
+    LOG.result("verifyNoResultsCaption", "verified no results caption",
+               true);
   }
 
   public void verifyThumbnails(int number) {
@@ -187,8 +187,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     for (WebElement elem : thumbnails) {
       Assertion.assertStringContains(elem.getAttribute("src"), ".png");
     }
-    LOG.logResult("verifyThumbnails", "thumbnails verified",
-                  true);
+    LOG.result("verifyThumbnails", "thumbnails verified",
+               true);
   }
 
   public void verifyDescription(int number) {
@@ -196,8 +196,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     for (WebElement elem : descriptions) {
       Assertion.assertTrue(!elem.getText().isEmpty(), "checking if description is not empty");
     }
-    LOG.logResult("verifyDescriptions", "descriptions verified",
-                  true);
+    LOG.result("verifyDescriptions", "descriptions verified",
+               true);
   }
 
   public void verifyStatistics(int number) {

@@ -58,7 +58,7 @@ public class LightboxComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
-      LOG.log("Lightbox not opened", e, LOG.Type.SUCCESS);
+      LOG.success("Lightbox not opened", e);
       return false;
     }
     return true;

@@ -127,13 +127,13 @@ public class HomePageObject extends WikiBasePageObject {
       waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class",
                                                       languageClass);
     } else {
-      LOG.logResult("selectLanguage",
-                    "page is a Hub and language dropdown is not present",
-                    true);
+      LOG.result("selectLanguage",
+                 "page is a Hub and language dropdown is not present",
+                 true);
     }
-    LOG.logResult("selectLanguage",
-                  "language number " + Integer.toString(index) + " selected",
-                  true);
+    LOG.result("selectLanguage",
+               "language number " + Integer.toString(index) + " selected",
+               true);
     return new HomePageObject(driver);
   }
 
@@ -176,7 +176,7 @@ public class HomePageObject extends WikiBasePageObject {
         languageURL += URLsContent.WIKI_DIR;
         newHome.verifyURLcontains(languageURL);
 
-        LOG.logResult(
+        LOG.result(
             "selectLanguage",
             "page is a Hub and language dropdown is not present and main url is different",
             true

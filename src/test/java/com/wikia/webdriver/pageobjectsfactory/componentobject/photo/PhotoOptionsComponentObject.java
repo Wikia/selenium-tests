@@ -31,14 +31,14 @@ public class PhotoOptionsComponentObject extends BasePageObject {
     wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
-    LOG.log("setCaption", caption + " set", LOG.Type.SUCCESS);
+    LOG.success("setCaption", caption + " set");
   }
 
   public void clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     waitForElementNotVisibleByElement(addPhotoButton);
-    LOG.log("clickAddPhoto", "add photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAddPhoto", "add photo button clicked");
   }
 
   public void adjustAlignment(int i) {
@@ -46,14 +46,14 @@ public class PhotoOptionsComponentObject extends BasePageObject {
     switch (i) {
       case 1:
         alignmentLeft.click();
-        LOG.log("adjustAlignment", "left alignment selected", LOG.Type.SUCCESS);
+        LOG.success("adjustAlignment", "left alignment selected");
         break;
       case 2:
         alignmentRight.click();
-        LOG.log("adjustAlignment", "right alignment selected", LOG.Type.SUCCESS);
+        LOG.success("adjustAlignment", "right alignment selected");
         break;
       default:
-        LOG.log("adjustAlignment", "invalid alignment selected", LOG.Type.ERROR);
+        LOG.error("adjustAlignment", "invalid alignment selected");
 
     }
   }
@@ -68,7 +68,7 @@ public class PhotoOptionsComponentObject extends BasePageObject {
 
   public PhotoAddComponentObject clickSelectAnotherPhoto() {
     selectAnotherPhotoButton.click();
-    LOG.log("selectAnotherPhoto", "select Another Photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("selectAnotherPhoto", "select Another Photo button clicked");
     return new PhotoAddComponentObject(driver);
   }
 }

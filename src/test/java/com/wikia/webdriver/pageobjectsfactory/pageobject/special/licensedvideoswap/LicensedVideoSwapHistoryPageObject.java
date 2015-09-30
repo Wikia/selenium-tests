@@ -29,7 +29,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
   public LicensedVideoSwapPageObject navigateToLvsPage() {
     wait.forElementVisible(backToLvsBtn);
     backToLvsBtn.click();
-    LOG.log("navigateToLvsPage", "lvs back button navigates to lvs page", LOG.Type.SUCCESS);
+    LOG.success("navigateToLvsPage", "lvs back button navigates to lvs page");
     return new LicensedVideoSwapPageObject(driver);
   }
 
@@ -37,19 +37,19 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
     String url = driver.getCurrentUrl();
     Assertion.assertTrue(url.contains("/History"));
     LOG
-        .logResult("verifyOnHistoryPage", "the url is the correct one for history page", true);
+        .result("verifyOnHistoryPage", "the url is the correct one for history page", true);
   }
 
   public void clickUndoSwapLink() {
     firstUndoLink.click();
-    LOG.log("clickUndoSwapLink", "undo link clicked", LOG.Type.SUCCESS);
+    LOG.success("clickUndoSwapLink", "undo link clicked");
   }
 
   public void verifyUndoSucceeded() {
     wait.forElementVisible(notification);
     String notificationMsg = notification.getText();
     Assertion.assertEquals(notificationMsg, "You have restored the video to this list.");
-    LOG.log("verifyUndoSucceeded", "able to undo a swapped video", LOG.Type.SUCCESS);
+    LOG.success("verifyUndoSucceeded", "able to undo a swapped video");
   }
 }
 

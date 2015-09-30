@@ -24,7 +24,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
                                          String expectedCreativeId) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
     wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
-    LOG.logResult(
+    LOG.result(
         "Check visibility of Floor Adhesion",
         "Floor Adhesion should be displayed",
         true
@@ -33,7 +33,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
 
   public void verifyThereIsNoFloorAdhesion() {
     waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(FLOOR_ADHESION_CSS)));
-    LOG.logResult(
+    LOG.result(
         "Check visibility",
         "Clicking Floor Adhesion close button hides ad unit",
         true
@@ -62,7 +62,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
 
   public void verifyModalOpened(String floorAdhesionModalSelector) {
     wait.forElementVisible(By.cssSelector(floorAdhesionModalSelector));
-    LOG.logResult(
+    LOG.result(
         "Check visibility",
         "Clicking Floor Adhesion opens light-box",
         true
@@ -71,7 +71,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
 
   public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
     wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
-    LOG.logResult(
+    LOG.result(
         "Check visibility",
         "Clicking light-box close button hides light-box",
         true
@@ -82,7 +82,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
     if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
       // Mercury does not have WikiaBar
       // There should be better way to verify skin - remove it after QAART-608 is done
-      LOG.logResult(
+      LOG.result(
           "Check visibility of Wikia Bar",
           "It is Mercury skin with no Wikia Bar",
           true
@@ -91,7 +91,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
     }
 
     waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(WIKIA_BAR_CSS)));
-    LOG.logResult(
+    LOG.result(
         "Check visibility of Wikia Bar",
         "There should be no Wikia Bar when Floor Adhesion is visible",
         true

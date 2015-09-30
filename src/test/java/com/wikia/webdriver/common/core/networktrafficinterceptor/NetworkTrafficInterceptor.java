@@ -55,7 +55,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
         com.wikia.webdriver.common.logging.LOG
-            .logResult("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
+            .result("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
                 .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
@@ -82,8 +82,8 @@ public class NetworkTrafficInterceptor extends ProxyServer {
           }
 
           com.wikia.webdriver.common.logging.LOG
-              .logResult("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
-                         correlatorID.equals(expectedCorrelator));
+              .result("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
+                      correlatorID.equals(expectedCorrelator));
         } else {
           throw new WebDriverException("Missing correlator param in query string");
         }

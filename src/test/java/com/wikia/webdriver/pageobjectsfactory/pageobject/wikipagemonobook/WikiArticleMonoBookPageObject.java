@@ -34,16 +34,16 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
   public void clickEdit() {
     scrollAndClick(editLink);
-    LOG.log("clickEdit", "click on Edit link", LOG.Type.SUCCESS);
+    LOG.success("clickEdit", "click on Edit link");
   }
 
   public void verifyEditionArea() {
     wait.forElementVisible(editionArea);
-    LOG.log("verifyEditArea", "verify that edition area is present", LOG.Type.SUCCESS);
+    LOG.success("verifyEditArea", "verify that edition area is present");
   }
 
   public void verifyOasisOnly() {
     wait.forElementVisible(oasisOnly);
-    LOG.log("verifyOasisOnly", "Oasis only warning is present", LOG.Type.SUCCESS);
+    LOG.success("verifyOasisOnly", "Oasis only warning is present");
   }
 }

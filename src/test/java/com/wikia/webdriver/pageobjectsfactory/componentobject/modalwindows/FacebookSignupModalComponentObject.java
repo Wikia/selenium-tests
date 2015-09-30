@@ -57,7 +57,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     driver.switchTo().window(handles[1].toString());
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
-    LOG.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", LOG.Type.SUCCESS);
+    LOG.success("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy");
     driver.switchTo().window(handles[0].toString());
   }
 
@@ -76,10 +76,10 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     driver.switchTo().window(handles[1].toString());
     wait.forElementVisible(editInfoProvided);
     editInfoProvided.click();
-    LOG.log("acceptWikiaAppPolicyNoEmail", "editing info provided", LOG.Type.SUCCESS);
+    LOG.success("acceptWikiaAppPolicyNoEmail", "editing info provided");
     wait.forElementVisible(emailCheckbox);
     emailCheckbox.click();
-    LOG.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", LOG.Type.SUCCESS);
+    LOG.success("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox");
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
     driver.switchTo().window(handles[0].toString());
@@ -89,25 +89,25 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void typeUserName(String userName) {
     wait.forElementVisible(usernameField);
     usernameField.sendKeys(userName);
-    LOG.log("typeUserName", "username " + userName + " typed into the field", LOG.Type.SUCCESS);
+    LOG.success("typeUserName", "username " + userName + " typed into the field");
   }
 
   public void typePassword(String password) {
     wait.forElementVisible(passwordField);
     passwordField.sendKeys(password);
-    LOG.log("typePassword", "password typed into the field", LOG.Type.SUCCESS);
+    LOG.success("typePassword", "password typed into the field");
   }
 
   public void typeEmail(String email) {
     wait.forElementVisible(emailField);
     emailField.sendKeys(email);
-    LOG.log("typeEmail", "email typed into the field", LOG.Type.SUCCESS);
+    LOG.success("typeEmail", "email typed into the field");
   }
 
   public void createAccount() {
     wait.forElementVisible(createAccountButton);
     createAccountButton.click();
-    LOG.log("createAccount", "Create account button clicked", LOG.Type.SUCCESS);
+    LOG.success("createAccount", "Create account button clicked");
     waitForElementNotVisibleByElement(createAccountButton);
   }
 
@@ -124,14 +124,14 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void loginExistingAccount(String userName, String password) {
     wait.forElementVisible(existingUsernameField);
     existingUsernameField.sendKeys(userName);
-    LOG.logResult("loginExistingAccount",
-                  "username " + userName + " typed into the field",
-                  true);
+    LOG.result("loginExistingAccount",
+               "username " + userName + " typed into the field",
+               true);
     wait.forElementVisible(existingPasswordField);
     existingPasswordField.sendKeys(password);
-    LOG.logResult("loginExistingAccount",
-                  "password " + password + " typed into the field",
-                  true);
+    LOG.result("loginExistingAccount",
+               "password " + password + " typed into the field",
+               true);
     loginExistingButton.click();
   }
 }

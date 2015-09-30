@@ -126,7 +126,7 @@ public class VisualEditModePageObject extends EditMode {
     contentInput.clear();
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
-    LOG.log("addContent", "content " + content + " added to the article", LOG.Type.SUCCESS);
+    LOG.success("addContent", "content " + content + " added to the article");
   }
 
   /**
@@ -136,7 +136,7 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(iframe);
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
-    LOG.log("appendContent", "content " + content + " added to the article", LOG.Type.SUCCESS);
+    LOG.success("appendContent", "content " + content + " added to the article");
   }
 
   private void verifyComponent(WebElement component) {
@@ -174,7 +174,7 @@ public class VisualEditModePageObject extends EditMode {
   public void verifyContentLoaded() {
     driver.switchTo().frame(iframe);
     wait.forElementVisible(contentInput);
-    LOG.log("verifyContentLoaded", "RTE editor loaded", true, driver);
+    LOG.logResult("verifyContentLoaded", "RTE editor loaded", true, driver);
     driver.switchTo().defaultContent();
   }
 
@@ -248,7 +248,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     wait.forElementVisible(modifyComponentButton);
     modifyComponentButton.click();
-    LOG.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
+    LOG.logResult("modifyGallery", "Click on 'modify button' on gallery", true, driver);
     switch (component) {
       case GALLERY:
         return new GalleryBuilderComponentObject(driver);
@@ -271,7 +271,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     removeComponentButton.click();
     removeConfirmationButton.click();
-    LOG.log("removeGallery", "Click on 'remove button' on gallery", LOG.Type.SUCCESS);
+    LOG.success("removeGallery", "Click on 'remove button' on gallery");
   }
 
   public void verifyComponentRemoved(Components component) {
@@ -293,12 +293,12 @@ public class VisualEditModePageObject extends EditMode {
         wait.forElementNotPresent(videoBy);
         break;
       default:
-        LOG.log("verifyComponentRemoved", "Invalid component: " + component.name()
-                                          + " selected", LOG.Type.ERROR);
+        LOG.error("verifyComponentRemoved", "Invalid component: " + component.name()
+                                            + " selected");
         break;
     }
     driver.switchTo().defaultContent();
-    LOG.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", LOG.Type.SUCCESS);
+    LOG.success("verifyGalleryRemoved", "Click on 'remove button' on gallery");
   }
 
   /**
@@ -338,15 +338,15 @@ public class VisualEditModePageObject extends EditMode {
     }
     CommonUtils.setClipboardContents(builder);
     messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    LOG.log("deleteUnwantedVideoFromMessage",
-            "Delete all source code on the article", true, driver);
+    LOG.logResult("deleteUnwantedVideoFromMessage",
+                  "Delete all source code on the article", true, driver);
   }
 
   public void typeCategoryName(String categoryName) {
     wait.forElementVisible(categoryInput);
     CommonUtils.setClipboardContents(categoryName);
     categoryInput.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    LOG.log("typeCategoryName", categoryName + " typed", LOG.Type.SUCCESS);
+    LOG.success("typeCategoryName", categoryName + " typed");
   }
 
   public void triggerCategorySuggestions() {
@@ -360,7 +360,7 @@ public class VisualEditModePageObject extends EditMode {
         timeout += 500;
       } catch (InterruptedException e) {
         LOG
-            .logResult("triggerCategorySuggestions", "Interrupted Exception occurred", false);
+            .result("triggerCategorySuggestions", "Interrupted Exception occurred", false);
       }
       pressDownArrow(categoryInput);
       returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
@@ -369,7 +369,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void submitCategory() {
     new Actions(driver).sendKeys(categoryInput, Keys.ENTER).perform();
-    LOG.log("submitCategory", "category submitted", LOG.Type.SUCCESS);
+    LOG.success("submitCategory", "category submitted");
   }
 
   public void verifyCategoryPresent(String category) {
@@ -401,8 +401,8 @@ public class VisualEditModePageObject extends EditMode {
     String categoryName = categoryItem.getText();
     categoryItem.click();
     waitForElementNotVisibleByElement(categorySuggestionsContainer);
-    LOG.log("selectCategorySuggestions", categoryNumber
-                                         + " category selected from suggestions", LOG.Type.SUCCESS);
+    LOG.success("selectCategorySuggestions", categoryNumber
+                                             + " category selected from suggestions");
     return categoryName;
   }
 
@@ -411,8 +411,8 @@ public class VisualEditModePageObject extends EditMode {
         driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
             categoryName)));
     jsActions.click(category);
-    LOG.log("editCategory", "edit category button clicked on category "
-                            + categoryName, LOG.Type.SUCCESS);
+    LOG.success("editCategory", "edit category button clicked on category "
+                                + categoryName);
     return new EditCategoryComponentObject(driver);
   }
 
@@ -421,15 +421,15 @@ public class VisualEditModePageObject extends EditMode {
         driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
             categoryName)));
     jsActions.click(category);
-    LOG.log("removeCategory", "remove category button clicked on category "
-                              + categoryName, LOG.Type.SUCCESS);
+    LOG.success("removeCategory", "remove category button clicked on category "
+                                  + categoryName);
   }
 
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
-    LOG.log("verifyBlockedUserMessage",
-            "blocked user message when attempting to create article verified", LOG.Type.SUCCESS);
+    LOG.success("verifyBlockedUserMessage",
+                "blocked user message when attempting to create article verified");
   }
 
   private void selectFromContextMenu(WebElement option) {

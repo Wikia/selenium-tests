@@ -344,7 +344,7 @@ public class ArticleRTETest extends NewTestTemplate {
         tmp1 = e.getAttribute("value").replace("<", "&lt");
         tmp1.replace(">", "&gt");
         LOG
-            .logResult("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
+            .result("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
       } else {
         tmp1 = e.getAttribute("value").replace("<", "&lt;");
         tmp1 = tmp1.replace(">", "&gt;");
@@ -353,9 +353,9 @@ public class ArticleRTETest extends NewTestTemplate {
         tmp2 = tmp2.replace(">", "&gt;");
         tmp2 = tmp2.replace(" ", "&nbsp;");
 
-        LOG.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", LOG.Type.ERROR);
+        LOG.error("checking value failed", "should be: <pre>" + tmp2 + "</pre>");
         LOG
-            .log("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
+            .logResult("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
       }
     }
 

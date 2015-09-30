@@ -33,7 +33,7 @@ public class WikiEditMode extends WikiBasePageObject {
     publishButtonGeneral.click();
     wait.forElementPresent(editButtonBy);
 
-    LOG.log("ClickOnPublishButton", "Click on 'Publish' button", LOG.Type.SUCCESS);
+    LOG.success("ClickOnPublishButton", "Click on 'Publish' button");
     return new WikiArticlePageObject(driver);
   }
 

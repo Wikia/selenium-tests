@@ -44,7 +44,7 @@ public class EditAccount extends BasePageObject {
   public EditAccount goToAccountManagement(String userName) {
     userNameField.sendKeys(userName);
     userNameField.submit();
-    LOG.log("editAccount", URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened", LOG.Type.SUCCESS);
+    LOG.success("editAccount", URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened");
 
     return this;
   }
@@ -54,12 +54,12 @@ public class EditAccount extends BasePageObject {
     wait.forElementVisible(closeResonField);
     closeResonField.sendKeys(reason);
     closeResonField.submit();
-    LOG.log("closeAccount", "account closed", LOG.Type.SUCCESS);
+    LOG.success("closeAccount", "account closed");
   }
 
   public void verifyAccountClosedMessage() {
     wait.forTextInElement(statusMessage, USER_ACCOUNT_CLOSED_MESSAGE);
-    LOG.log("verifyAccountClosedMessage", "verified account closed", LOG.Type.SUCCESS);
+    LOG.success("verifyAccountClosedMessage", "verified account closed");
   }
 
   public void reopenAccount(String newPassword) {
@@ -67,12 +67,12 @@ public class EditAccount extends BasePageObject {
     newPasswordField.sendKeys(newPassword);
     newPasswordField.submit();
     scrollAndClick(clearDisableFlagButton);
-    LOG.log("reopenAccount", "account reopened", LOG.Type.SUCCESS);
+    LOG.success("reopenAccount", "account reopened");
   }
 
   public void verifyAccountReopenedMessage() {
     wait.forElementVisible(statusMessage);
     wait.forTextInElement(statusMessage, USER_ACCOUNT_REOPEN_MESSAGE);
-    LOG.log("verifyAccountReopenedMessage", "verified account reopened", LOG.Type.SUCCESS);
+    LOG.success("verifyAccountReopenedMessage", "verified account reopened");
   }
 }

@@ -18,7 +18,7 @@ public class SpecialAdminDashboardPageObject extends SpecialPageObject {
   public SpecialCssPageObject clickCssTool() {
     wait.forElementVisible(cssToolButton);
     scrollAndClick(cssToolButton);
-    LOG.log("clickCssTool", "click on special CSS tool", LOG.Type.SUCCESS);
+    LOG.success("clickCssTool", "click on special CSS tool");
     return new SpecialCssPageObject(driver);
   }
 }

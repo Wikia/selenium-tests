@@ -24,13 +24,13 @@ public class AdsEvolveObject extends AdsBaseObject {
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    LOG.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
+    LOG.logResult("Evolve", slotSelector + " slot has Evolve.", true, driver);
   }
 
   public void verifyNoEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementNotPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
-    LOG.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
+    LOG.logResult("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 
   public void verifyEvolveCall() {
@@ -46,6 +46,6 @@ public class AdsEvolveObject extends AdsBaseObject {
   public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
     String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
     Assertion.assertTrue(isElementOnPage(By.cssSelector(nextProviderSlotCss)));
-    LOG.log("Evolve", "Evolve hopped to " + nextProviderSrc, LOG.Type.SUCCESS);
+    LOG.success("Evolve", "Evolve hopped to " + nextProviderSrc);
   }
 }

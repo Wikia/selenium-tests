@@ -44,32 +44,32 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     wait.forElementVisible(userName);
     userName.clear();
     userName.sendKeys(name);
-    LOG.log("typeInUserName", name + " user name typed", LOG.Type.SUCCESS);
+    LOG.success("typeInUserName", name + " user name typed");
   }
 
   private void typeInPassword(String pass) {
     wait.forElementVisible(password);
     password.clear();
     password.sendKeys(pass);
-    LOG.log("typeInUserPassword", "password typed", LOG.Type.SUCCESS);
+    LOG.success("typeInUserPassword", "password typed");
   }
 
   private void typeInNewPassword(String pass) {
     wait.forElementVisible(newPassword);
     newPassword.sendKeys(pass);
-    LOG.log("typeInNewPassword", "new password retyped", true, driver);
+    LOG.logResult("typeInNewPassword", "new password retyped", true, driver);
   }
 
   private void retypeInNewPassword(String pass) {
     wait.forElementVisible(retypeNewPassword);
     retypeNewPassword.sendKeys(pass);
-    LOG.log("typeInNewPassword", "new password retyped", true, driver);
+    LOG.logResult("typeInNewPassword", "new password retyped", true, driver);
   }
 
   private void clickLoginButton() {
     wait.forElementVisible(loginButton);
     loginButton.click();
-    LOG.log("clickLoginButton", "login button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickLoginButton", "login button clicked");
   }
 
   private void clickForgotPasswordLink() {
@@ -101,7 +101,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     typeInNewPassword(randomPassword);
     retypeInNewPassword(randomPassword);
     clickLoginButton();
-    LOG.log("setNewPassword", "new password is set", true, driver);
+    LOG.logResult("setNewPassword", "new password is set", true, driver);
     return randomPassword;
   }
 
@@ -109,8 +109,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, message);
-    LOG.log("newPasswordSentMessage", "Message about new password sent present",
-            true, driver);
+    LOG.logResult("newPasswordSentMessage", "Message about new password sent present",
+                  true, driver);
   }
 
   public void verifyClosedAccountMessage() {

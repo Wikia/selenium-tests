@@ -23,11 +23,11 @@ public class EditProfileComponentObject extends WikiBasePageObject {
 
   protected void clickAvatarTab() {
     avatarTab.click();
-    LOG.log("clickAvatarTab", "avatar tab clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAvatarTab", "avatar tab clicked");
   }
 
   protected void clickAboutTab() {
     aboutTab.click();
-    LOG.log("clickAboutTab", "about tab clicked", LOG.Type.SUCCESS);
+    LOG.success("clickAboutTab", "about tab clicked");
   }
 }

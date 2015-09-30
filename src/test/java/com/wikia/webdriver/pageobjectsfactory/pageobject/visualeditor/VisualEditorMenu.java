@@ -182,43 +182,43 @@ public class VisualEditorMenu extends WikiBasePageObject {
     switch (insert) {
       case MAP:
         clickInsertItemFromDropDown(mapBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorAddMapDialog(driver);
       case MEDIA:
         clickInsertItemFromDropDown(mediaBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorAddMediaDialog(driver);
       case REFERENCE:
         clickInsertItemFromDropDown(referenceBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorReferenceDialog(driver);
       case REFERENCE_LIST:
         clickInsertItemFromDropDown(referenceListBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorReferenceListDialog(driver);
       case TEMPLATE:
         clickInsertItemFromDropDown(templateBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorInsertTemplateDialog(driver);
       case PAGE_SETTINGS:
         clickHamburgerItemFromDropDown(pageSettingsBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorOptionsDialog(driver);
       case CATEGORIES:
         clickHamburgerItemFromDropDown(categoriesBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorOptionsDialog(driver);
       case KEYBOARD_SHORTCUTS:
         clickHamburgerItemFromDropDown(keyboardShortcutsBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorKeyboardShortcutsDialog(driver);
       case SOURCE_EDITOR:
         clickHamburgerItemFromDropDown(sourceEditorBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorSourceEditorDialog(driver);
       case GALLERY:
         clickInsertItemFromDropDown(galleryBy);
-        LOG.log("selectInsertToOpenDialog", insert.toString() + " selected", LOG.Type.SUCCESS);
+        LOG.success("selectInsertToOpenDialog", insert.toString() + " selected");
         return new VisualEditorInsertGalleryDialog(driver);
       default:
         throw new NoSuchElementException("Non-existing dialog selected");
@@ -234,7 +234,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
         clickInsertItemFromDropDown(numberbedListBy);
         break;
     }
-    LOG.log("selectInsertToInsertList", insert.toString() + " selected", LOG.Type.SUCCESS);
+    LOG.success("selectInsertToInsertList", insert.toString() + " selected");
   }
 
   private void clickInsertItemFromDropDown(By insertBy) {
@@ -279,12 +279,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
   public void verifyVEToolBarPresent() {
     wait.forElementVisible(veMode);
     wait.forElementVisible(veToolMenu);
-    LOG.log("verifyVEToolBar", "VE toolbar is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyVEToolBar", "VE toolbar is displayed");
   }
 
   public void verifyVEToolBarNotPresent() {
     waitForElementNotVisibleByElement(veMode);
     waitForElementNotVisibleByElement(veToolMenu);
-    LOG.log("verifyVEToolBarNotPresent", "VE toolbar is not visible", LOG.Type.SUCCESS);
+    LOG.success("verifyVEToolBarNotPresent", "VE toolbar is not visible");
   }
 }

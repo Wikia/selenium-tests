@@ -41,7 +41,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
 
   public void verifyPageLogo() {
     wait.forElementVisible(pageLogo);
-    LOG.log("verifyPageLogo", "Page logo is present", LOG.Type.SUCCESS);
+    LOG.success("verifyPageLogo", "Page logo is present");
   }
 
   /**
@@ -65,13 +65,13 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
             try {
               Thread.sleep(3000);
             } catch (InterruptedException e) {
-              LOG.log("SLEEP INTERRUPTED", e, LOG.Type.ERROR);
+              LOG.error("SLEEP INTERRUPTED", e);
             }
 
-            LOG.log("removeApp", "Wikia App removed", LOG.Type.SUCCESS);
+            LOG.success("removeApp", "Wikia App removed");
           }
         } else {
-          LOG.log("removeApp", "Wikia App not found", LOG.Type.SUCCESS);
+          LOG.success("removeApp", "Wikia App not found");
         }
       }
     }
@@ -85,7 +85,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
-      LOG.log("isAppPresent", e, LOG.Type.ERROR);
+      LOG.error("isAppPresent", e);
     }
     boolean isPresent = false;
     for (WebElement element : pageElementList) {

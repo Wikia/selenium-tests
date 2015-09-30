@@ -31,16 +31,16 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
     wait.forElementVisible(modal);
     wait.forElementClickable(addAPageButton);
     addAPageButton.click();
-    LOG.log("createPage", "Add A Page button is clicked", LOG.Type.SUCCESS);
+    LOG.success("createPage", "Add A Page button is clicked");
   }
 
   public void closeModal() {
     closeButton.click();
-    LOG.log("closeModal", "The 'X' button is clicked", LOG.Type.SUCCESS);
+    LOG.success("closeModal", "The 'X' button is clicked");
   }
 
   public void cancel() {
     cancelButton.click();
-    LOG.log("cancel", "The cancel button is clicked", LOG.Type.SUCCESS);
+    LOG.success("cancel", "The cancel button is clicked");
   }
 }

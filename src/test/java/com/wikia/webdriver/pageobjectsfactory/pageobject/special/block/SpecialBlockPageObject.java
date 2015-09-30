@@ -41,7 +41,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
 
   public SpecialBlockPageObject open(String wikiUrl){
     getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
-    LOG.log("openSpecialBlockPage", "history page opened", LOG.Type.SUCCESS);
+    LOG.success("openSpecialBlockPage", "history page opened");
     wait.forElementVisible(blockButton);
 
     return this;
@@ -85,7 +85,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
     for (WebElement checkBox : checkBoxes) {
       Assertion.assertFalse(checkBox.isSelected());
     }
-    LOG.log("deselectAllSelections", "all selections deselected", LOG.Type.SUCCESS);
+    LOG.success("deselectAllSelections", "all selections deselected");
   }
 
   public void verifyBlockedUserSubmitPage(String userName, String password) {

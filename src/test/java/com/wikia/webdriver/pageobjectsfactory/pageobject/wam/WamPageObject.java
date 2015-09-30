@@ -60,7 +60,7 @@ public class WamPageObject extends BasePageObject {
   public void openWamPage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
     waitForPageLoad();
-    LOG.log("openWamPage", "WAM page opened", LOG.Type.SUCCESS);
+    LOG.success("openWamPage", "WAM page opened");
   }
 
   /**
@@ -70,12 +70,12 @@ public class WamPageObject extends BasePageObject {
   public void verifyTabIsSelected(WamTab tab) {
     WebElement wamTab =
         driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
-    LOG.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", LOG.Type.SUCCESS);
+    LOG.success("verifyTabIsSelected", "tab with index " + tab.getId() + " exist");
 
     if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
-      LOG.log("verifyTabIsSelected", "the tab's anchor's selected", LOG.Type.SUCCESS);
+      LOG.success("verifyTabIsSelected", "the tab's anchor's selected");
     } else {
-      LOG.log("verifyTabIsSelected", "the tab's anchor's NOT selected", LOG.Type.ERROR);
+      LOG.error("verifyTabIsSelected", "the tab's anchor's NOT selected");
     }
   }
 
@@ -97,7 +97,7 @@ public class WamPageObject extends BasePageObject {
               "there are more rows in the table than just a head row (" + rows + ")",
               LOG.Type.SUCCESS);
     } else {
-      LOG.log("verifyTabIsSelected", "there is only the head row", LOG.Type.ERROR);
+      LOG.error("verifyTabIsSelected", "there is only the head row");
     }
   }
 
@@ -128,11 +128,11 @@ public class WamPageObject extends BasePageObject {
     }
 
     if (result.equals(true)) {
-      LOG.log("verifyWamVerticalFilterOptions",
-              "There are correct options in the vertical select box", LOG.Type.SUCCESS);
+      LOG.success("verifyWamVerticalFilterOptions",
+              "There are correct options in the vertical select box");
     } else {
-      LOG.log("verifyWamVerticalFilterOptions",
-              "There is invalid option in the vertical select box", LOG.Type.ERROR);
+      LOG.error("verifyWamVerticalFilterOptions",
+              "There is invalid option in the vertical select box");
     }
   }
 
@@ -170,7 +170,7 @@ public class WamPageObject extends BasePageObject {
   public void clickNextPaginator() {
     wait.forElementVisible(paginationNext);
     scrollAndClick(paginationNext);
-    LOG.log("clickNextPaginator", "next button in pagination was clicked", LOG.Type.SUCCESS);
+    LOG.success("clickNextPaginator", "next button in pagination was clicked");
   }
 
   public void selectTab(WamTab tab) {

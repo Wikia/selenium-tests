@@ -20,6 +20,6 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
     wait.forElementClickable(preferredEditorDropdown);
     Select select = new Select(preferredEditorDropdown);
     select.selectByValue(value);
-    LOG.log("selectPreferredEditor", "Selected " + value + " from preference", LOG.Type.SUCCESS);
+    LOG.success("selectPreferredEditor", "Selected " + value + " from preference");
   }
 }

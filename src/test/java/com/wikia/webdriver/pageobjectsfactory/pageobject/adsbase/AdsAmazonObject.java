@@ -75,7 +75,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public void verifyAmazonScriptIncluded() {
     if (isElementOnPage(By.cssSelector(AMAZON_SCRIPT))) {
-      LOG.log("AmazonScriptFound", "Script from Amazon found", LOG.Type.SUCCESS);
+      LOG.success("AmazonScriptFound", "Script from Amazon found");
     } else {
       throw new NoSuchElementException("Amazon script not found on page");
     }
@@ -84,20 +84,20 @@ public class AdsAmazonObject extends AdsBaseObject {
   public AdsAmazonObject verifyAdsFromAmazonPresent() {
     driver.switchTo().frame(getAmazonIframe(slotWithAmazon));
     Assertion.assertTrue(isElementOnPage(By.cssSelector(AMAZON_IFRAME)));
-    LOG.log("AmazonAd", "Script returned by Amazon present", LOG.Type.SUCCESS);
+    LOG.success("AmazonAd", "Script returned by Amazon present");
     driver.switchTo().defaultContent();
     return this;
   }
 
   public AdsAmazonObject verifyNoAdsFromAmazonPresent() {
     Assertion.assertFalse(isElementOnPage(By.cssSelector(AMAZON_SLOTS_CSS_SELECTOR)));
-    LOG.log("AmazonAd", "No Amazon ad present", LOG.Type.SUCCESS);
+    LOG.success("AmazonAd", "No Amazon ad present");
     return this;
   }
 
   public void verifyGPTParams() {
     if (slotWithAmazon.getAttribute("data-gpt-slot-params").contains(AMAZON_GPT_PATTERN)) {
-      LOG.log("AmazonGptParams", "Slot with Amazon params found", LOG.Type.SUCCESS);
+      LOG.success("AmazonGptParams", "Slot with Amazon params found");
     } else {
       throw new NoSuchElementException("Amazon params not found on page");
     }

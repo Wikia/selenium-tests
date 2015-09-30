@@ -294,7 +294,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     scrollAndClick(commentSubmitButton);
     waitForElementNotVisibleByElement(commentSubmitButton);
-    LOG.log("submitComment", "comment has been submitted", LOG.Type.SUCCESS);
+    LOG.success("submitComment", "comment has been submitted");
   }
 
   public void submitEditComment() {
@@ -311,7 +311,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyCommentVideo(String videoName) {
     driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
-    LOG.log("verifyCommentVideo", "video is visible in comments section", LOG.Type.SUCCESS);
+    LOG.success("verifyCommentVideo", "video is visible in comments section");
   }
 
   public MiniEditorComponentObject triggerEditCommentArea() {
@@ -338,7 +338,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         Assertion.assertTrue(!comment.equals(elem.getText()));
       }
     }
-    LOG.log("verifyCommentDeleted", "comment " + comment + " was deleted", LOG.Type.SUCCESS);
+    LOG.success("verifyCommentDeleted", "comment " + comment + " was deleted");
   }
 
   public String getFirstCommentText() {
@@ -382,7 +382,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public String getArticleName() {
     String articleName = articleHeader.getText();
-    LOG.log("getArticleName", "the name of the article is: " + articleName, LOG.Type.SUCCESS);
+    LOG.success("getArticleName", "the name of the article is: " + articleName);
     return articleName;
   }
 
@@ -394,7 +394,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(protectDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 5);
-    LOG.log("DropdownVerified", "Edit dropdown verified for admin", LOG.Type.SUCCESS);
+    LOG.success("DropdownVerified", "Edit dropdown verified for admin");
   }
 
   public void verifyDropdownForUser() {
@@ -403,7 +403,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 3);
-    LOG.log("DropdownVerified", "Edit dropdown verified for user", LOG.Type.SUCCESS);
+    LOG.success("DropdownVerified", "Edit dropdown verified for user");
   }
 
   public void verifyDropdownForAnon() {
@@ -411,37 +411,37 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 2);
-    LOG.log("DropdownVerified", "Edit dropdown verified for anon", LOG.Type.SUCCESS);
+    LOG.success("DropdownVerified", "Edit dropdown verified for anon");
   }
 
   public void verifyPhoto() {
     wait.forElementVisible(imageArticle);
-    LOG.log("verifyPhoto", "photo is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyPhoto", "photo is visible");
   }
 
   public void verifyGallery() {
     wait.forElementVisible(galleryArticle);
-    LOG.log("verifyGallery", "gallery is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyGallery", "gallery is visible");
   }
 
   public void verifySlideshow() {
     wait.forElementVisible(slideshowArticle);
-    LOG.log("verifySlideshow", "slideshow is visible", LOG.Type.SUCCESS);
+    LOG.success("verifySlideshow", "slideshow is visible");
   }
 
   public void verifySlider() {
     wait.forElementVisible(sliderArticle);
-    LOG.log("verifySlider", "slider is visible", LOG.Type.SUCCESS);
+    LOG.success("verifySlider", "slider is visible");
   }
 
   public void verifyVideo() {
     driver.findElement(By.cssSelector("#mw-content-text .video-thumbnail"));
-    LOG.log("verifyVideo", "video is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyVideo", "video is visible");
   }
 
   public void verifyVideoInline() {
     wait.forElementVisible(videoInline);
-    LOG.log("verifyVideoInline", "Video is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoInline", "Video is visible");
   }
 
   public void verifyVideoAutoplay(String providerName) {
@@ -456,9 +456,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   private void verifyTableProperty(String propertyName, int propertyValue) {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
-    LOG.logResult("verifyTableProperty",
-                  "table has correct " + propertyName + " property",
-                  true);
+    LOG.result("verifyTableProperty",
+               "table has correct " + propertyName + " property",
+               true);
   }
 
   public void verifyTableBorder(int propertyValue) {
@@ -477,7 +477,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getCssValue("float").toLowerCase(), alignment.toString()
         .toLowerCase());
-    LOG.log("verifyTableAlignment", "table has correct alignment", LOG.Type.SUCCESS);
+    LOG.success("verifyTableAlignment", "table has correct alignment");
   }
 
   public void verifyTableSize(int width, int height) {
@@ -485,7 +485,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     Dimension size = table.getSize();
     Assertion.assertEquals(size.getHeight(), height);
     Assertion.assertEquals(size.getWidth(), width);
-    LOG.log("verifyTableSize", "table has correct size", LOG.Type.SUCCESS);
+    LOG.success("verifyTableSize", "table has correct size");
   }
 
   public void verifyVideoAlignment(PositionsVideo positions) {
@@ -511,7 +511,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public Integer getVideoWidth(WebElement thumbnail) {
     int videoWidth =
         Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
-    LOG.log("getVideoWidth", "Video width is " + videoWidth, LOG.Type.SUCCESS);
+    LOG.success("getVideoWidth", "Video width is " + videoWidth);
     return videoWidth;
   }
 
@@ -524,13 +524,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyVideoCaption(String captionDesired) {
     String caption = videoThumbnailWrapper.findElement(By.className("caption")).getText();
     Assertion.assertStringContains(caption, captionDesired);
-    LOG.log("verifyVideoCaption", "video has expected caption", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoCaption", "video has expected caption");
   }
 
   public void verifyVideoName(String nameDesired) {
     String name = videoThumbnailWrapper.findElement(By.className("title")).getText();
     Assertion.assertStringContains(name, nameDesired);
-    LOG.log("verifyVideoName", "video has expected name", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoName", "video has expected name");
   }
 
   public VetAddVideoComponentObject clickAddVideoPlaceholder() {
@@ -550,7 +550,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
     wait.forElementVisible(videoDetailsButton);
     videoDetailsButton.click();
-    LOG.log("clickVideoDetailsButton", "Video Details link is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickVideoDetailsButton", "Video Details link is clicked");
     return new FilePagePageObject(driver);
   }
 
@@ -575,7 +575,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementClickable(saveCategory);
     saveCategory.click();
     waitForElementNotVisibleByElement(addCategoryInput);
-    LOG.log("submitCategory", "submit category clicked", LOG.Type.SUCCESS);
+    LOG.success("submitCategory", "submit category clicked");
   }
 
   public void addCategory(String category) {
@@ -583,7 +583,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     typeCategoryName(category);
     new Actions(driver).sendKeys(addCategoryInput, Keys.ENTER).perform();
     wait.forElementVisible(categoryNew);
-    LOG.log("addCategory", category + " category added", LOG.Type.SUCCESS);
+    LOG.success("addCategory", category + " category added");
   }
 
   public EditCategoryComponentObject editCategory(String category) {
@@ -591,7 +591,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         driver
             .findElement(By.cssSelector(editCategorySelector.replace("%categoryName%", category)));
     scrollAndClick(editCategory);
-    LOG.log("editCategory", "edit button on category " + category + " clicked", LOG.Type.SUCCESS);
+    LOG.success("editCategory", "edit button on category " + category + " clicked");
     return new EditCategoryComponentObject(driver);
   }
 
@@ -600,9 +600,9 @@ public class ArticlePageObject extends WikiBasePageObject {
         driver.findElement(By.cssSelector(removeCategorySelector
             .replace("%categoryName%", category)));
     scrollAndClick(editCategory);
-    LOG.logResult("removeCategory",
-                  "remove button on category " + category + " clicked",
-                  true);
+    LOG.result("removeCategory",
+               "remove button on category " + category + " clicked",
+               true);
   }
 
   public String addCategorySuggestions(String category, int categoryNumber) {
@@ -613,8 +613,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     String desiredCategoryText = desiredCategory.getText();
     scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
     waitForElementNotVisibleByElement(categorySuggestionsList);
-    LOG.log("addCategorySuggestions", "category " + category
-                                      + " added from suggestions", LOG.Type.SUCCESS);
+    LOG.success("addCategorySuggestions", "category " + category
+                                          + " added from suggestions");
     return desiredCategoryText;
   }
 
@@ -637,17 +637,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyTOCpresent() {
     wait.forElementVisible(tableOfContents);
-    LOG.log("verifyTOCpresent", "toc is present", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCpresent", "toc is present");
   }
 
   public void verifyTOCexpanded() {
     wait.forElementVisible(tableOfContentsOrderedList);
-    LOG.log("verifyTOCexpanded", "toc is expanded", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCexpanded", "toc is expanded");
   }
 
   public void verifyTOCcollapsed() {
     waitForElementNotVisibleByElement(tableOfContentsOrderedList);
-    LOG.log("verifyTOCcollapsed", "toc is collapsed", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCcollapsed", "toc is collapsed");
   }
 
   /**
@@ -656,9 +656,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void clickTOCshowHideButton() {
     wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
-    LOG.logResult("clickTOCshowHideButton",
-                  "table of contents 'show/hide' button clicked",
-                  true);
+    LOG.result("clickTOCshowHideButton",
+               "table of contents 'show/hide' button clicked",
+               true);
   }
 
   /**
@@ -678,8 +678,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertNotEquals(sectionYbefore, sectionYafter);
     // assume that if section is less than 5px from top, it is scrolled up properly
     Assertion.assertTrue(sectionYafter < 5);
-    LOG.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID
-                                         + " was scrolled up", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCsectionLinkWorks", "choosen section " + sectionID
+                                             + " was scrolled up");
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -689,8 +689,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void closeNewWikiCongratulationsLightBox() {
     wait.forElementVisible(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
-    LOG.log("closeNewWikiCongratulationsLightBox ",
-            "congratulations lightbox closed", LOG.Type.SUCCESS);
+    LOG.success("closeNewWikiCongratulationsLightBox ",
+                "congratulations lightbox closed");
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
@@ -699,20 +699,20 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyTableRemoved() {
     Assertion.assertTrue(!isElementOnPage(table));
-    LOG.log("verifyTableRemoved", "table was removed", LOG.Type.SUCCESS);
+    LOG.success("verifyTableRemoved", "table was removed");
   }
 
   public LightboxComponentObject clickThumbnailImage() {
     wait.forElementClickable(thumbnailImageArticle);
     thumbnailImageArticle.click();
-    LOG.log("clickThumbnailImage", "Thumbnail image is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickThumbnailImage", "Thumbnail image is clicked");
     return new LightboxComponentObject(driver);
   }
 
   public LightboxComponentObject clickThumbnailVideoLightbox() {
     wait.forElementClickable(videoThumbnail);
     videoThumbnail.click();
-    LOG.log("clickThumbnailVideoLightbox", "Video thumbnail is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickThumbnailVideoLightbox", "Video thumbnail is clicked");
     return new LightboxComponentObject(driver);
   }
 
@@ -720,7 +720,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement thumbnail = getThumbnailVideoInline();
     wait.forElementClickable(thumbnail);
     thumbnail.click();
-    LOG.log("clickThumbnailVideoInline", "Video thumbnail is clicked", LOG.Type.SUCCESS);
+    LOG.success("clickThumbnailVideoInline", "Video thumbnail is clicked");
     verifyVideoInline();
     Integer videoWidth = getVideoWidth(thumbnail);
     return new VideoComponentObject(driver, videoInline, videoWidth);
@@ -730,11 +730,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     for (WebElement thumbnail : videoThumbnailList) {
       Integer width = getVideoWidth(thumbnail);
       if (width > minInlineVideoSize) {
-        LOG.log("getThumbnailVideoInline", "Video thumbnail found", LOG.Type.SUCCESS);
+        LOG.success("getThumbnailVideoInline", "Video thumbnail found");
         return thumbnail;
       }
     }
-    LOG.log("getThumbnailVideoInline", "Video thumbnail not found", LOG.Type.SUCCESS);
+    LOG.success("getThumbnailVideoInline", "Video thumbnail not found");
     return null;
   }
 

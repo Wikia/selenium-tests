@@ -68,13 +68,13 @@ public abstract class ApiCall {
 
       LOG.log("CONTENT PUSH", "Content posted to: " + URL_STRING, LOG.Type.INFO);
     } catch (ClientProtocolException e) {
-      LOG.log("EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("EXCEPTION", ExceptionUtils.getStackTrace(e));
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (IOException e) {
-      LOG.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("IO EXCEPTION", ExceptionUtils.getStackTrace(e));
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (URISyntaxException e) {
-      LOG.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e));
       throw new WebDriverException(ERROR_MESSAGE);
     }
   }

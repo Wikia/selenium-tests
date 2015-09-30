@@ -65,13 +65,13 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public void typeInWikiName(String name) {
     wikiName.sendKeys(name);
-    LOG.log("typeInWikiName ", "Typed wiki name" + name, LOG.Type.SUCCESS);
+    LOG.success("typeInWikiName ", "Typed wiki name" + name);
   }
 
   public void typeInWikiDomain(String domain) {
     wikiDomain.clear();
     wikiDomain.sendKeys(domain);
-    LOG.log("typeInWikiDomain ", "Typed wiki domain " + domain, LOG.Type.SUCCESS);
+    LOG.success("typeInWikiDomain ", "Typed wiki domain " + domain);
   }
 
   /**
@@ -80,36 +80,36 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   public void verifySuccessIcon() {
     wait.forElementVisible(successIcon);
     wait.forElementVisible(submitButton);
-    LOG.log("waitForSuccessIcon", "Success icon found", true, driver);
+    LOG.logResult("waitForSuccessIcon", "Success icon found", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
     wait.forTextInElement(wikiDomainErrorMessage, wikiName.toLowerCase());
-    LOG.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", LOG.Type.SUCCESS);
+    LOG.success("verifyOccupiedWikiAddress", "Verified occupied wiki address");
   }
 
   public void verifyIncorrectWikiName() {
     wait.forTextInElement(wikiDomainErrorMessage,
                                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
-    LOG.log("verifyIncorrectWikiName",
-            "Verified wiki name violates naming policy", LOG.Type.SUCCESS);
+    LOG.success("verifyIncorrectWikiName",
+                "Verified wiki name violates naming policy");
   }
 
   public CreateNewWikiPageObjectStep2 submit() {
     scrollAndClick(submitButton);
-    LOG.log("submit", "Submit button clicked", true, driver);
+    LOG.logResult("submit", "Submit button clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
     scrollAndClick(submitButton);
-    LOG.log("submit", "Submit button clicked", true, driver);
+    LOG.logResult("submit", "Submit button clicked", true, driver);
     return new CreateNewWikiLogInSignUpPageObject(driver);
   }
 
   public void verifyWikiName(String expectedWikiName) {
     Assertion.assertEquals(wikiName.getAttribute("value"), expectedWikiName);
-    LOG.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, LOG.Type.SUCCESS);
+    LOG.success("verifyWikiName", "verified wiki name equals: " + expectedWikiName);
   }
 
 }

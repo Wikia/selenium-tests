@@ -45,8 +45,8 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        LOG.log("getElementByText", "Element with text: " + value
-                                    + " is found from the list", LOG.Type.SUCCESS);
+        LOG.success("getElementByText", "Element with text: " + value
+                                    + " is found from the list");
         break;
       }
     }
@@ -63,8 +63,8 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        LOG.log("getElementByChildText", "Element's child with text: " + value
-                                         + " is found from the list", LOG.Type.SUCCESS);
+        LOG.success("getElementByChildText", "Element's child with text: " + value
+                                         + " is found from the list");
         break;
       }
     }

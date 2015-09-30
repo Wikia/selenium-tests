@@ -24,13 +24,13 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    LOG.log("typeInUserName", userName + "typed into username field", LOG.Type.SUCCESS);
+    LOG.success("typeInUserName", userName + "typed into username field");
   }
 
   private void clickSubmitButton() {
     wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
-    LOG.log("clickSubmitButton", "submit button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSubmitButton", "submit button clicked");
   }
 
   public void unblockUser(String userName) {
@@ -45,7 +45,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
         + userName + "')]"));
     wait.forElementVisible(By.xpath(
         "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
-    LOG.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
+    LOG.logResult("verifyUnblockMessage", "unblock user messages verified", true, driver);
   }
 
 }

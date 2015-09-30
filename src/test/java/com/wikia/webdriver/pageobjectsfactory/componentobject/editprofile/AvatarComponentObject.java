@@ -28,17 +28,17 @@ public class AvatarComponentObject extends EditProfileComponentObject {
                               + "ImagesForUploadTests"
                               + File.separator + file);
     if (!fileCheck.isFile()) {
-      LOG.log("uploadAvatar", "the file doesn't exist", LOG.Type.ERROR);
+      LOG.error("uploadAvatar", "the file doesn't exist");
     }
     uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());
     LOG
-        .log("typeInFileToUploadPath", "type file " + file + " to upload it", true, driver);
+        .logResult("typeInFileToUploadPath", "type file " + file + " to upload it", true, driver);
   }
 
   public void saveProfile() {
     wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
-    LOG.log("save", "save profile button clicked", LOG.Type.SUCCESS);
+    LOG.success("save", "save profile button clicked");
   }
 
 }

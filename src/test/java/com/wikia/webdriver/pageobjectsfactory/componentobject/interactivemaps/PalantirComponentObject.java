@@ -35,7 +35,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
         String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
         map.get(PalantirContent.PONTO_MSG_MESSAGE)
     );
-    LOG.log(methodName, handle.getMessage(), true, driver);
+    LOG.logResult(methodName, handle.getMessage(), true, driver);
     return handle;
   }
 

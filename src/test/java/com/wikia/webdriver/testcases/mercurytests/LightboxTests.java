@@ -50,7 +50,7 @@ public class LightboxTests extends NewTestTemplate {
         "Lightbox is closed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Lightbox",
         "is opened",
         true
@@ -89,7 +89,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -127,7 +127,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -188,7 +188,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -225,7 +225,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -351,7 +351,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -391,7 +391,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -431,7 +431,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true
@@ -471,7 +471,7 @@ public class LightboxTests extends NewTestTemplate {
         "Image is not visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Current image",
         "is visible",
         true

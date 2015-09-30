@@ -66,7 +66,7 @@ public class AdsComparison {
                              final WebDriver driver) {
     hideSlot(selector, driver);
     final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
-    LOG.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
+    LOG.logResult("ScreenshotsComparison", "Background image in " + selector, true, driver);
     showSlot(selector, driver);
     try {
       WebDriverWait wait = new WebDriverWait(driver, AD_TIMEOUT_SEC);
@@ -74,7 +74,7 @@ public class AdsComparison {
         @Override
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
-          LOG.log("ScreenshotsComparison", "Ad image in " + selector, LOG.Type.SUCCESS);
+          LOG.success("ScreenshotsComparison", "Ad image in " + selector);
           if (adImg.getHeight() == 1 || imageComparison.isMonocolorImage(adImg)) {
             return false;
           }
@@ -102,7 +102,7 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        LOG.log("verifyColorAd", "Current time: " + currentTime + " seconds", LOG.Type.SUCCESS);
+        LOG.success("verifyColorAd", "Current time: " + currentTime + " seconds");
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
       LOG.log("verifyColorAd", e, false, true);
@@ -112,7 +112,7 @@ public class AdsComparison {
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
-      LOG.log(
+      LOG.logResult(
           "verifyColorAd",
           "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,

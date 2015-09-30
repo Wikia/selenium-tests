@@ -59,7 +59,7 @@ public class CommonUtils {
     try {
       FileUtils.deleteDirectory(new File(dirName));
     } catch (IOException e) {
-      LOG.log("deleteDirectory", e, LOG.Type.ERROR);
+      LOG.error("deleteDirectory", e);
     }
   }
 
@@ -100,13 +100,13 @@ public class CommonUtils {
       HttpEntity entity = response.getEntity();
       return EntityUtils.toString(entity);
     } catch (UnsupportedEncodingException e) {
-      LOG.log("sendPost", e, LOG.Type.ERROR);
+      LOG.error("sendPost", e);
       return null;
     } catch (ClientProtocolException e) {
-      LOG.log("sendPost", e, LOG.Type.ERROR);
+      LOG.error("sendPost", e);
       return null;
     } catch (IOException e) {
-      LOG.log("sendPost", e, LOG.Type.ERROR);
+      LOG.error("sendPost", e);
       return null;
     }
   }

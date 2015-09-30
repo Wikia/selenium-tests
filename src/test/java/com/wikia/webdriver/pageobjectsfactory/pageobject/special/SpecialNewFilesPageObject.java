@@ -50,7 +50,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void addPhoto() {
     scrollAndClick(addPhotoButton);
-    LOG.logResult(
+    LOG.result(
         "ClickAddPhotoButton",
         "Add photo button clicked",
         true
@@ -59,7 +59,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void clickUploadButton() {
     scrollAndClick(uploadFileInput);
-    LOG.logResult(
+    LOG.result(
         "ClickOnUploadaPhoto",
         "Click on upload a photo button",
         true
@@ -74,7 +74,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   public void clickOnMoreOrFewerOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
-    LOG.logResult(
+    LOG.result(
         "ClickOnMoreOrFewerOptions",
         "Click on More or Fewer options (depends on which of those two is currently visible)",
         true
@@ -84,7 +84,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   public void checkIgnoreAnyWarnings() {
     wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
-    LOG.logResult(
+    LOG.result(
         "CheckIgnoreAnyWarnings",
         "Check 'Ignore Any Warnings' option",
         true
@@ -98,21 +98,21 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
 
-    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
+    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it");
   }
 
   public void verifyFileUploaded(String fileName) {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      LOG.log("SLEEP INTERRUPTED", e, LOG.Type.ERROR);
+      LOG.error("SLEEP INTERRUPTED", e);
     }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(
         latestWikiaPreviewImg,
         "src",
         fileName);
-    LOG.logResult(
+    LOG.result(
         "waitForFile",
         "Verify if " + fileName + " has been succesfully uploaded",
         true
@@ -141,7 +141,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     }
     Random r = new Random();
     String href = hrefs.get((r.nextInt(hrefs.size() - 1)) + 1);
-    LOG.log("getRandomImageUrl", href + " image is selected", LOG.Type.SUCCESS);
+    LOG.success("getRandomImageUrl", href + " image is selected");
     return href;
   }
 
@@ -204,13 +204,13 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     String
         fileUrl =
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getImageKey(itemNumber);
-    LOG.log("getFileUrl", "File url: " + fileUrl, LOG.Type.SUCCESS);
+    LOG.success("getFileUrl", "File url: " + fileUrl);
     return fileUrl;
   }
 
   public String getImageKey(int itemNumber) {
     String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
-    LOG.log("getImageKey", "Image key: " + imageKey, LOG.Type.SUCCESS);
+    LOG.success("getImageKey", "Image key: " + imageKey);
     return imageKey;
   }
 

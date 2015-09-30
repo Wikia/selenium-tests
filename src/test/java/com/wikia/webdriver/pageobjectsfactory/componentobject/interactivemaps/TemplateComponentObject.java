@@ -35,28 +35,28 @@ public class TemplateComponentObject extends BasePageObject {
   public CreatePinTypesComponentObject clickNext() {
     wait.forElementClickable(nextButton);
     nextButton.click();
-    LOG.log("clickNext", "clicked next button in naming map modal", true, driver);
+    LOG.logResult("clickNext", "clicked next button in naming map modal", true, driver);
     return new CreatePinTypesComponentObject(driver);
   }
 
   public CreateACustomMapComponentObject clickBack() {
     wait.forElementClickable(backButton);
     backButton.click();
-    LOG.log("clickBack", "clicked back button in naming map modal", true, driver);
+    LOG.logResult("clickBack", "clicked back button in naming map modal", true, driver);
     return new CreateACustomMapComponentObject(driver);
   }
 
   public void typeMapName(String mapName) {
     wait.forElementVisible(mapTitleField);
     mapTitleField.sendKeys(mapName);
-    LOG.log("typeMapName", mapName + " title for map typed in", true, driver);
+    LOG.logResult("typeMapName", mapName + " title for map typed in", true, driver);
   }
 
   public void typeTemplateName(String templateName) {
     wait.forElementVisible(nameTemplateField);
     nameTemplateField.sendKeys(templateName);
-    LOG.log("typeTemplateName", templateName + " title for template typed in", true,
-            driver);
+    LOG.logResult("typeTemplateName", templateName + " title for template typed in", true,
+                  driver);
   }
 
   public void verifyTemplateImagePreview() {

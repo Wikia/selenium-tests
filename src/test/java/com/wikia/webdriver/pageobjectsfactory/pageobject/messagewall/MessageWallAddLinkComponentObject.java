@@ -37,8 +37,8 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
     LOG
-        .logResult("addInternalLink", "internal link " + target + " and text " + text + " added",
-                   true);
+        .result("addInternalLink", "internal link " + target + " and text " + text + " added",
+                true);
   }
 
   public void addExternalLink(String target, String text) {
@@ -46,7 +46,7 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
     LOG
-        .logResult("addExternalLink", "external link " + target + " and text " + text + " added",
-                   true);
+        .result("addExternalLink", "external link " + target + " and text " + text + " added",
+                true);
   }
 }

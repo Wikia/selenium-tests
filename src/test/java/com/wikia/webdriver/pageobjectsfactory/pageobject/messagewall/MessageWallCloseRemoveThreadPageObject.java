@@ -26,7 +26,7 @@ public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
     removeReasonField.sendKeys(reason);
     removeConfirmButton.click();
     wait.forElementNotPresent(By.cssSelector(modalWrapper));
-    LOG.log("closeRemoveThread", "thread removed with reason " + reason, LOG.Type.SUCCESS);
+    LOG.success("closeRemoveThread", "thread removed with reason " + reason);
     return new MessageWall(driver);
   }
 }

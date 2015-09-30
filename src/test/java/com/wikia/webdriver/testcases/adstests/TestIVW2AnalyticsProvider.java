@@ -26,7 +26,7 @@ public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
       String testedPage = urlBuilder.getUrlForPath(wikiName, article);
       String htmlSource = Jsoup.connect(testedPage).timeout(TIMEOUT_SEC * 1000).get().html();
       Assertion.assertTrue(htmlSource.contains(ivw2Param));
-      LOG.log("IVW2", ivw2Param + " param is on the " + testedPage, LOG.Type.SUCCESS);
+      LOG.success("IVW2", ivw2Param + " param is on the " + testedPage);
     }
   }
 }

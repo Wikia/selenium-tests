@@ -54,7 +54,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public CreateAMapComponentObject clickBack() {
     wait.forElementVisible(backButton);
     backButton.click();
-    LOG.log("clickCustomMap", "custom map link clicked", true, driver);
+    LOG.logResult("clickCustomMap", "custom map link clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -70,7 +70,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public TemplateComponentObject selectFileToUpload(String file) {
     browseForFileInput.sendKeys(CommonUtils
         .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
-    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
+    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it");
     return new TemplateComponentObject(driver);
   }
 
@@ -83,8 +83,8 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public void typeSearchTile(String templateName) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(templateName);
-    LOG.log("typeTilesetName", "title (" + templateName
-                               + ") for template is typed in", LOG.Type.SUCCESS);
+    LOG.success("typeTilesetName", "title (" + templateName
+                                   + ") for template is typed in");
   }
 
   public void verifyErrorExists() {
@@ -94,6 +94,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 
   public void verifyTemplateListElementVisible(int element) {
     wait.forElementVisible(templateList.get(element));
-    LOG.log("verifyTemplateListElementVisible", "Template element is visible ", LOG.Type.SUCCESS);
+    LOG.success("verifyTemplateListElementVisible", "Template element is visible ");
   }
 }

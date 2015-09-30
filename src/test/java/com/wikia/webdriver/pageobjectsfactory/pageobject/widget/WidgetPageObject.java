@@ -97,8 +97,8 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   public boolean areAllValidSwappedForIFrames() {
     boolean result = getWidgetWrapperList().size() == getWidgetIFrameList().size();
-    LOG.logResult(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG,
-                  result);
+    LOG.result(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG,
+               result);
     return result;
   }
 
@@ -111,13 +111,13 @@ public abstract class WidgetPageObject extends BasePageObject {
     for (int i = 0; i < tags.length; i++) {
       if (!isWidgetVisible(i)) {
         result = false;
-        LOG.logResult(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
+        LOG.result(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
         return result;
       }
-      LOG.logResult(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+      LOG.result(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
-    LOG.logResult("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG,
-                  result);
+    LOG.result("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG,
+               result);
     return result;
   }
 
@@ -129,9 +129,9 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected void logVisibility(boolean result) {
     LOG
-        .logResult(getTagName(),
-                   result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
-                   result);
+        .result(getTagName(),
+                result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+                result);
   }
 
   /**

@@ -53,19 +53,19 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   public void selectPageSettings() {
     waitForDialogVisible();
     selectFromOutlineMenu(PAGESETTINGS);
-    LOG.log("selectPageSettings", "Page settings is selected", LOG.Type.SUCCESS);
+    LOG.success("selectPageSettings", "Page settings is selected");
   }
 
   public void selectCategories() {
     waitForDialogVisible();
     selectFromOutlineMenu(CATEGORIES);
-    LOG.log("selectCategories", "Categories is selected", LOG.Type.SUCCESS);
+    LOG.success("selectCategories", "Categories is selected");
   }
 
   public void selectLanguages() {
     waitForDialogVisible();
     selectFromOutlineMenu(LANGUAGES);
-    LOG.log("selectLanguages", "Languages is selected", LOG.Type.SUCCESS);
+    LOG.success("selectLanguages", "Languages is selected");
   }
 
   private void selectFromOutlineMenu(int index) {
@@ -87,14 +87,14 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     typeCategory(cat);
     clickLinkResult();
     wait.forElementVisible(categoryItem);
-    LOG.log("addCategory", "Category: " + cat + " is added", true, driver);
+    LOG.logResult("addCategory", "Category: " + cat + " is added", true, driver);
   }
 
   private void typeCategory(String cat) {
     wait.forElementVisible(categoriesInput);
     categoriesInput.clear();
     categoriesInput.sendKeys(cat);
-    LOG.log("typeCategory", "Typed " + cat + " in the field", true, driver);
+    LOG.logResult("typeCategory", "Typed " + cat + " in the field", true, driver);
   }
 
   public void clickLinkResult() {
@@ -109,7 +109,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     clickCategory(categoryStr);
     categoryRemoveButton.click();
     waitForElementNotVisibleByElement(categoryPopUp);
-    LOG.log("removeCategory", "Category: " + categoryStr + " is removed", true, driver);
+    LOG.logResult("removeCategory", "Category: " + categoryStr + " is removed", true, driver);
   }
 
   public void addSortKeyToCategory(String categoryStr, String key) {
@@ -169,7 +169,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
       );
     }
 
-    LOG.logResult(
+    LOG.result(
         "getLinkResults",
         "Found " + foundResults.size() + " result(s) under '" + matchCategoryStr + "'",
         true
@@ -188,7 +188,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   private void verifyLinkSuggestion(WebElement linkResult, String searchStr) {
     String categoryStr = linkResult.findElement(labelElementBy).getAttribute("title");
     if (categoryStr.toLowerCase().contains(searchStr.toLowerCase())) {
-      LOG.log("getLinkResults", "Found type ahead suggestion: " + categoryStr, LOG.Type.SUCCESS);
+      LOG.success("getLinkResults", "Found type ahead suggestion: " + categoryStr);
     } else {
       throw new NoSuchElementException(
           searchStr + " is NOT found in type ahead suggestion: " + categoryStr);

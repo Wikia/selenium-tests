@@ -68,12 +68,12 @@ public class Helios {
 
       token = responseValue.getString("access_token");
     } catch (JSONException e) {
-      LOG.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("JSON EXCEPTION", ExceptionUtils.getStackTrace(e));
     } catch (ClientProtocolException e) {
-      LOG.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e));
     } catch (IOException e) {
-      LOG.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
-                              ExceptionUtils.getStackTrace(e), LOG.Type.ERROR);
+      LOG.error("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
+                              ExceptionUtils.getStackTrace(e));
     }
 
     return token;

@@ -107,7 +107,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void searchFor(String query) {
     searchField.sendKeys(query + Keys.ENTER);
-    LOG.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
   }
 
   public void verifySuggestions(String suggestion) {
@@ -182,21 +182,21 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void clickAdvancedButton() {
     advancedButton.click();
-    LOG.log("clickAdvancedButton", "Advance button was clicked", true, driver);
+    LOG.logResult("clickAdvancedButton", "Advance button was clicked", true, driver);
   }
 
   public void chooseAdvancedOption(int i) {
     wait.forElementVisible(advancedField);
     advancedOptionInputs.get(i).click();
     LOG
-        .log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
+        .logResult("chooseAdvancedOption", "chosen advance option is selected", true, driver);
   }
 
   public void selectAllAdvancedOptions() {
     clickAdvancedButton();
     chooseAdvancedOption(0);
-    LOG.log("selectAllAdvancedOptions", "All advance options are selected", true,
-            driver);
+    LOG.logResult("selectAllAdvancedOptions", "All advance options are selected", true,
+                  driver);
   }
 
   /*
@@ -221,8 +221,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementVisible(photosVideos);
     scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
-    LOG.log("selectPhotosVideos", "Photos and videos option is selected", true,
-            driver);
+    LOG.logResult("selectPhotosVideos", "Photos and videos option is selected", true,
+                  driver);
   }
 
   public void verifyPhotosOnly() {
@@ -281,7 +281,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void selectPhotosOnly() {
     scrollAndClick(filterPhotos);
-    LOG.log("selectPhotosOnly", "Photos option is selected", true, driver);
+    LOG.logResult("selectPhotosOnly", "Photos option is selected", true, driver);
   }
 
   public void verifyAllResultsImages(int numberOfResults) {
@@ -294,7 +294,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void selectVideosOnly() {
     scrollAndClick(filterVideos);
-    LOG.log("selectVideosOnly", "Videos option is selected", true, driver);
+    LOG.logResult("selectVideosOnly", "Videos option is selected", true, driver);
   }
 
   public void verifyTitlesNotEmpty() {
@@ -342,8 +342,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
-    LOG.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
-            true, driver);
+    LOG.logResult("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
+                  true, driver);
   }
 
   public void verifyNewSuggestionsTextAndImages(String query) {
@@ -355,8 +355,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
     }
-    LOG.log("verifyNewSuggestionsTextAndImages",
-            "Image and text next to every suggestion is verified", LOG.Type.SUCCESS);
+    LOG.success("verifyNewSuggestionsTextAndImages",
+                "Image and text next to every suggestion is verified");
   }
 
   public void searchForInGlobalNavIfPresent(String query) {
@@ -368,7 +368,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       searchField.sendKeys(query);
       searchButton.click();
     }
-    LOG.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
   }
 
 

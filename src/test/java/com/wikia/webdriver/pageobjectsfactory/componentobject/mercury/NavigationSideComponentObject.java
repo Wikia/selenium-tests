@@ -93,7 +93,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(searchSuggestion, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
-      LOG.log("Suggestion list not displayed", e, LOG.Type.SUCCESS);
+      LOG.success("Suggestion list not displayed", e);
       return false;
     }
     return true;
@@ -103,7 +103,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(sorrySpan, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
-      LOG.log("Sorry info not displayed", e, LOG.Type.SUCCESS);
+      LOG.success("Sorry info not displayed", e);
       return false;
     }
     return true;
@@ -120,7 +120,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(backChevron, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
-      LOG.log("Black link not displayed", e, LOG.Type.SUCCESS);
+      LOG.success("Black link not displayed", e);
       return false;
     }
     return true;
@@ -130,7 +130,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     try {
       wait.forElementVisible(randomPageButton, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
-      LOG.log("Random page button not displayed", e, LOG.Type.SUCCESS);
+      LOG.success("Random page button not displayed", e);
       return false;
     }
     return true;

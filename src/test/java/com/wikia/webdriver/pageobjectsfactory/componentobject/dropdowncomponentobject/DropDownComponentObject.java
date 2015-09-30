@@ -76,7 +76,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
       restoreDeaultImplicitWait();
     }
 
-    LOG.log("DropdownVisible", "Login dropdown is visible", true, driver);
+    LOG.logResult("DropdownVisible", "Login dropdown is visible", true, driver);
 
     return this;
   }
@@ -93,7 +93,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     fillUserNameInput(userName);
     fillPasswordInput(password);
     scrollAndClick(formSubmitButton);
-    LOG.log("LoginFormSubmitted", "Login form is submitted", LOG.Type.SUCCESS);
+    LOG.success("LoginFormSubmitted", "Login form is submitted");
   }
 
   public DropDownComponentObject clickLogOut() {
@@ -106,14 +106,14 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(formUsernameInput);
     formUsernameInput.clear();
     formUsernameInput.sendKeys(userName);
-    LOG.log("UsernameTyped", "UserName input is filled", LOG.Type.SUCCESS);
+    LOG.success("UsernameTyped", "UserName input is filled");
   }
 
   public void fillPasswordInput(String password) {
     wait.forElementVisible(formPassowrdInput);
     formPassowrdInput.clear();
     formPassowrdInput.sendKeys(password);
-    LOG.log("PasswordTyped", "Password input is filled", LOG.Type.SUCCESS);
+    LOG.success("PasswordTyped", "Password input is filled");
   }
 
   public void logInViaFacebook(String email, String password) {
@@ -121,28 +121,28 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(formConnectWithFbButton);
     // When clicking via selenium dropdown disappears
     js.executeScript("$('.wikia-button-facebook.sso-login-facebook').trigger('click')");
-    LOG.log("logInDropDownFB", "facebook button clicked", LOG.Type.SUCCESS);
+    LOG.success("logInDropDownFB", "facebook button clicked");
     waitForNewWindow();
     Object[] windows = driver.getWindowHandles().toArray();
     driver.switchTo().window(windows[1].toString());
-    LOG.log("logInDropDownFB", "facebook popup window detected", LOG.Type.SUCCESS);
-    LOG.log("logInDropDownFB", "switching to facebook pop-up window", LOG.Type.SUCCESS);
+    LOG.success("logInDropDownFB", "facebook popup window detected");
+    LOG.success("logInDropDownFB", "switching to facebook pop-up window");
 
     wait.forElementVisible(facebookEmailInput);
     facebookEmailInput.clear();
     facebookEmailInput.sendKeys(email);
-    LOG.log("fillLogin", "Login field on facebook form filled", LOG.Type.SUCCESS);
+    LOG.success("fillLogin", "Login field on facebook form filled");
 
     wait.forElementVisible(facebookPasswordInput);
     facebookPasswordInput.clear();
     facebookPasswordInput.sendKeys(password);
-    LOG.log("fillPassword", "Password field on facebook form filled", LOG.Type.SUCCESS);
+    LOG.success("fillPassword", "Password field on facebook form filled");
 
     facebookSubmitButton.click();
-    LOG.log("logInDropDownFB", "facebook log in submit button clicked", LOG.Type.SUCCESS);
+    LOG.success("logInDropDownFB", "facebook log in submit button clicked");
 
     driver.switchTo().window(windows[0].toString());
-    LOG.log("logInDropDownFB", "switching to main window", LOG.Type.SUCCESS);
+    LOG.success("logInDropDownFB", "switching to main window");
   }
 
   public SignUpPageObject clickSignUpLink() {
@@ -155,8 +155,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messagePlaceholder);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, newPasswordMsg);
-    LOG.logResult("MessageAboutPasswordSent",
-                  "Message about new password sent present",
-                  true);
+    LOG.result("MessageAboutPasswordSent",
+               "Message about new password sent present",
+               true);
   }
 }

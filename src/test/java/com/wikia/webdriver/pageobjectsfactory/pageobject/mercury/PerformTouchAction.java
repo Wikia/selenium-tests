@@ -108,7 +108,7 @@ public class PerformTouchAction {
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      LOG.log(methodName, e, LOG.Type.ERROR);
+      LOG.error(methodName, e);
     }
   }
 
@@ -122,7 +122,7 @@ public class PerformTouchAction {
     try {
       mobileDriver.context(contextName);
     } catch (NoSuchContextException e) {
-      LOG.log(methodName, e, LOG.Type.ERROR);
+      LOG.error(methodName, e);
     }
   }
 

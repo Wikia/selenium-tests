@@ -50,21 +50,21 @@ public class AddPinComponentObject extends BasePageObject {
   public void clearPinName() {
     wait.forElementVisible(pinNameField);
     pinNameField.clear();
-    LOG.log("clearPinName", "Pin name input was cleared", LOG.Type.SUCCESS);
+    LOG.success("clearPinName", "Pin name input was cleared");
   }
 
   public void clearAssociatedArticleField() {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.clear();
-    LOG.logResult("clearAssociatedArticleField",
-                  "Associated article field was cleared",
-                  true);
+    LOG.result("clearAssociatedArticleField",
+               "Associated article field was cleared",
+               true);
   }
 
   public InteractiveMapPageObject clickCancelButton() {
     wait.forElementVisible(cancelButton);
     cancelButton.click();
-    LOG.log("clickCancelButton", "cancel button clicked", true, driver);
+    LOG.logResult("clickCancelButton", "cancel button clicked", true, driver);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -72,13 +72,13 @@ public class AddPinComponentObject extends BasePageObject {
   public void clearPinDescription() {
     wait.forElementVisible(descriptionField);
     descriptionField.clear();
-    LOG.log("clearPinName", "Description input was cleared", LOG.Type.SUCCESS);
+    LOG.success("clearPinName", "Description input was cleared");
   }
 
   public InteractiveMapPageObject clickSaveButton() {
     wait.forElementVisible(saveButton);
     saveButton.click();
-    LOG.log("clickSaveButton", "Save button clicked", true, driver);
+    LOG.logResult("clickSaveButton", "Save button clicked", true, driver);
     driver.switchTo().defaultContent();
     return new InteractiveMapPageObject(driver);
   }
@@ -105,64 +105,64 @@ public class AddPinComponentObject extends BasePageObject {
     wait.forElementVisible(pinCategorySelector);
     Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
     pinCategorySelectorDropDown.selectByIndex(1);
-    LOG.log("selectPinType", "Pin type was choosed", true, driver);
+    LOG.logResult("selectPinType", "Pin type was choosed", true, driver);
   }
 
   public void typePinName(String pinName) {
     wait.forElementVisible(pinNameField);
     pinNameField.sendKeys(pinName);
-    LOG.log("typePinName", pinName + " title for Pin was typed in", LOG.Type.SUCCESS);
+    LOG.success("typePinName", pinName + " title for Pin was typed in");
   }
 
   public void typePinDescription(String pinDescription) {
     wait.forElementVisible(descriptionField);
     descriptionField.sendKeys(pinDescription);
-    LOG.logResult("typePinDescription",
-                  pinDescription + "Pin description was typed in",
-                  true);
+    LOG.result("typePinDescription",
+               pinDescription + "Pin description was typed in",
+               true);
   }
 
   public void typeAssociatedArticle(String associatedArticleName) {
     wait.forElementVisible(associatedArticleField);
     associatedArticleField.sendKeys(associatedArticleName);
-    LOG.logResult("typePinName",
-                  associatedArticleName + " Associated article is typed in",
-                  true);
+    LOG.result("typePinName",
+               associatedArticleName + " Associated article is typed in",
+               true);
   }
 
   public void verifyPinTitleFieldIsDisplayed() {
     wait.forElementVisible(pinNameField);
-    LOG.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyPinTitleFieldIsDisplayed", "Pin name field is visible");
   }
 
   public void verifyAssociatedArticleFieldIsDisplayed() {
     wait.forElementVisible(associatedArticleField);
-    LOG.log("verifyAssociatedArticleFieldIsDisplayed",
-            "Associated article field is visible", true, driver);
+    LOG.logResult("verifyAssociatedArticleFieldIsDisplayed",
+                  "Associated article field is visible", true, driver);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
     wait.forElementVisible(pinCategorySelector);
-    LOG.log("verifyPinCategorySelector", "Pin category selector is visible", true,
-            driver);
+    LOG.logResult("verifyPinCategorySelector", "Pin category selector is visible", true,
+                  driver);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
     wait.forElementVisible(descriptionField);
-    LOG.log("verifyDescriptionFieldIsDisplayed", "Description field is visible",
-            true, driver);
+    LOG.logResult("verifyDescriptionFieldIsDisplayed", "Description field is visible",
+                  true, driver);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
     wait.forElementVisible(associatedArticleImage);
-    LOG.log("verifyAssociatedArticleImageIsDisplayed",
-            "Associated article image placeholder is visible", true, driver);
+    LOG.logResult("verifyAssociatedArticleImageIsDisplayed",
+                  "Associated article image placeholder is visible", true, driver);
   }
 
   public void verifyErrorExists() {
     wait.forElementVisible(errorField);
     Assertion.assertEquals(isElementOnPage(errorField), true);
-    LOG.log("verifyErrorIsPresented", "Error message is visible", true, driver);
+    LOG.logResult("verifyErrorIsPresented", "Error message is visible", true, driver);
   }
 
   public void verifyErrorContent(String errorMessage) {

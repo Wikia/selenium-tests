@@ -23,19 +23,19 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
   private void selectContributorUserName() {
     wait.forElementVisible(userNameRadio);
     userNameRadio.click();
-    LOG.log("selectContributorUserName", "by username selected", LOG.Type.SUCCESS);
+    LOG.success("selectContributorUserName", "by username selected");
   }
 
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    LOG.log("typeInUserName", userName + " username typed in", LOG.Type.SUCCESS);
+    LOG.success("typeInUserName", userName + " username typed in");
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
-    LOG.log("clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSearchButton", "search button clicked");
   }
 
   public void searchContributions(String userName) {
@@ -51,7 +51,7 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
         "//span[@class='comment' and contains(text(), '(Created page with \"" + pageContent
         + "\")')]"));
     LOG
-        .logResult("verifyNewPageOnList", pageName + " page verified on the contribution list",
-                   true);
+        .result("verifyNewPageOnList", pageName + " page verified on the contribution list",
+                true);
   }
 }

@@ -20,7 +20,6 @@ import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
@@ -41,10 +40,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
         }
-        LOG.logWarning("Url after navigation", driver.getCurrentUrl());
+        LOG.warning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
-      LOG.logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
+      LOG.warning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
 
     Method method = TestContext.getCurrentTestMethod();
@@ -114,7 +113,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       LOG.start(result.getMethod().getConstructorOrMethod().getMethod());
     }
     if (result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(DontRun.class)) {
-      LOG.logResult("Test SKIPPED", "this test is not supported in this environment", true);
+      LOG.result("Test SKIPPED", "this test is not supported in this environment", true);
       result.setStatus(ITestResult.SUCCESS);
       onTestSuccess(result);
     } else {

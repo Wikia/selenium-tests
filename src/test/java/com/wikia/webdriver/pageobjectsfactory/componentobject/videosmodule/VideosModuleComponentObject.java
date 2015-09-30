@@ -28,19 +28,19 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 
   public void verifyVideosModuleShowing() {
     Assertion.assertTrue(isElementOnPage(videosModuleContainer));
-    LOG.log("verifyVideosModuleShowing", "Videos Module showing", LOG.Type.SUCCESS);
+    LOG.success("verifyVideosModuleShowing", "Videos Module showing");
   }
 
   public void verifyVideosModuleNotShowing() {
     Assertion.assertTrue(!isElementOnPage(videosModuleContainer));
-    LOG.log("verifyVideosModuleNotShowing",
-            "Videos Module not showing (test passed)", LOG.Type.SUCCESS);
+    LOG.success("verifyVideosModuleNotShowing",
+            "Videos Module not showing (test passed)");
   }
 
   public void verifyDisplayCount() {
     Assertion.assertTrue(videos.size() >= VIDEO_COUNT_MIN && videos.size() <= VIDEO_COUNT_MAX);
-    LOG.log("verifyDisplayCount",
-            "Videos Module showing correct number of videos", LOG.Type.SUCCESS);
+    LOG.success("verifyDisplayCount",
+            "Videos Module showing correct number of videos");
   }
 
   public void verifyNoDuplicates() {
@@ -52,6 +52,6 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
         Assertion.assertNotEquals(videoTitle2, videoTitle1);
       }
     }
-    LOG.log("verifyNoDuplicates", "Videos Module not showing duplicates", LOG.Type.SUCCESS);
+    LOG.success("verifyNoDuplicates", "Videos Module not showing duplicates");
   }
 }

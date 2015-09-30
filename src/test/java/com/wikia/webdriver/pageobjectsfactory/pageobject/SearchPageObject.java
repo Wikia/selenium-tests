@@ -51,13 +51,13 @@ public class SearchPageObject extends WikiBasePageObject {
 
   public void clickNextPaginator() {
     scrollAndClick(paginatorNext);
-    LOG.log("clickNextPaginator", "next paginator clicked", LOG.Type.SUCCESS);
+    LOG.success("clickNextPaginator", "next paginator clicked");
   }
 
   public void clickPrevPaginator() {
     wait.forElementVisible(By.cssSelector(".paginator-prev"));
     scrollAndClick(paginatorPrev);
-    LOG.log("clickPrevPaginator", "prev paginator clicked", LOG.Type.SUCCESS);
+    LOG.success("clickPrevPaginator", "prev paginator clicked");
   }
 
   public void verifyNoResults() {
@@ -80,7 +80,7 @@ public class SearchPageObject extends WikiBasePageObject {
 
   public void clickSearchButton() {
     searchButton.click();
-    LOG.log("clickSearchButton", "Search button was clicked", true, driver);
+    LOG.logResult("clickSearchButton", "Search button was clicked", true, driver);
   }
 
   public void setSearchTab(SearchTab tab) {

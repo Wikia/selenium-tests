@@ -53,7 +53,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
   public void verifyMoMImage() {
     wait.forElementVisible(heroImageModule);
-    LOG.log("verifyMoMImage", "Hero module image is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyMoMImage", "Hero module image is visible");
   }
 
   public void clickUpdateCoverImageLink() {
@@ -64,13 +64,13 @@ public class ModularMainPageObject extends WikiBasePageObject {
   public void selectFileToUpload(String file) {
     updateCoverImageInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
         "ImagesForUploadTests/" + file).getPath()));
-    LOG.log("typeInFileToUploadPath", "type file " + file + " to upload it", LOG.Type.SUCCESS);
+    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it");
   }
 
   public void verifyDragToRepositionText() {
     wait.forElementVisible(dragToRepositionText);
-    LOG.log("verifyDragToRepositionText",
-            "Drag to reposition text message is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyDragToRepositionText",
+                "Drag to reposition text message is visible");
   }
 
   public void clickPublishButton() {
@@ -87,9 +87,9 @@ public class ModularMainPageObject extends WikiBasePageObject {
     wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
-    LOG.logResult("typeMoMDescription",
-                  momDescription + "MoM description was typed in",
-                  true);
+    LOG.result("typeMoMDescription",
+               momDescription + "MoM description was typed in",
+               true);
   }
 
   public void clickDescriptionPublishButton() {

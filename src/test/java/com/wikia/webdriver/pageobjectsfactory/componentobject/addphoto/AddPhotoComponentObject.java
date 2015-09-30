@@ -36,13 +36,13 @@ public class AddPhotoComponentObject extends BasePageObject {
   private void typeSearchQuery(String query) {
     wait.forElementVisible(searchField);
     searchField.sendKeys(query);
-    LOG.log("typeSearchQuery", query + " search query typed in", LOG.Type.SUCCESS);
+    LOG.success("typeSearchQuery", query + " search query typed in");
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     searchButton.click();
-    LOG.log("clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSearchButton", "search button clicked");
   }
 
   public void search(String query) {
@@ -67,6 +67,6 @@ public class AddPhotoComponentObject extends BasePageObject {
   public void clickSelect() {
     wait.forElementVisible(selectButton);
     selectButton.click();
-    LOG.log("clickSelect", "select button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSelect", "select button clicked");
   }
 }

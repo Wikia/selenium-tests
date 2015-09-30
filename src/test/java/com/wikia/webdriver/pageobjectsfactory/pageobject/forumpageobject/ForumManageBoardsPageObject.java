@@ -43,27 +43,27 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private void openCreateNewBoardForm() {
     wait.forElementVisible(createBoardButton);
     createBoardButton.click();
-    LOG.log("openCreateNewBoardForm", "create new board form opened", LOG.Type.SUCCESS);
+    LOG.success("openCreateNewBoardForm", "create new board form opened");
   }
 
   private void typeBoardTitle(String title) {
     wait.forElementVisible(boardTitleField);
     boardTitleField.sendKeys(title);
-    LOG.log("typeBoardTitle", "board title: '" + title + "' typed in", LOG.Type.SUCCESS);
+    LOG.success("typeBoardTitle", "board title: '" + title + "' typed in");
   }
 
   private void typeBoradDescription(String description) {
     wait.forElementVisible(boardDescriptionField);
     boardDescriptionField.sendKeys(description);
     LOG
-        .logResult("typeBoardDescription", "board description: '" + description + "' typed in",
-                   true);
+        .result("typeBoardDescription", "board description: '" + description + "' typed in",
+                true);
   }
 
   private void submitNewBoard() {
     wait.forElementVisible(boardSubmitButton);
     scrollAndClick(boardSubmitButton);
-    LOG.log("submitNewBoard", "new board submitted", LOG.Type.SUCCESS);
+    LOG.success("submitNewBoard", "new board submitted");
   }
 
   public void createNewBoard(String title, String description) {
@@ -76,7 +76,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   public void verifyBoardCreated(String title, String description) {
     wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
                                     + "')]/../../../p[contains(text(), '" + description + "')]"));
-    LOG.log("verifyBoardCreated", "recently created board verified", LOG.Type.SUCCESS);
+    LOG.success("verifyBoardCreated", "recently created board verified");
   }
 
   private void clickDeleteForum(String name) {
@@ -85,7 +85,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
     scrollAndClick(deleteButton);
-    LOG.log("clickDeleteForum", "delete forum button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickDeleteForum", "delete forum button clicked");
   }
 
   private void confirmDeleteForum(String deletedName, String mergerdName) {
@@ -93,20 +93,20 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     deleteBoardConfirmationField.sendKeys(deletedName);
     Select select = new Select(mergeToBoard);
     select.selectByVisibleText(mergerdName);
-    LOG.log("confirmDeleteForum", "delete forum form populated", LOG.Type.SUCCESS);
+    LOG.success("confirmDeleteForum", "delete forum form populated");
   }
 
   private void clickDeleteAndMergeForum() {
     wait.forElementVisible(deleteAndMergeButton);
     scrollAndClick(deleteAndMergeButton);
-    LOG.log("clickDeleteAndMergeForum", "delete and merge button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickDeleteAndMergeForum", "delete and merge button clicked");
   }
 
   private void verifyForumDeletedText(String deletedName) {
     wait.forElementVisible(By.xpath("//div[@class='banner-notification confirm']" +
                                     "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
                                     + "\" has been deleted.')]"));
-    LOG.log("verifyForumDeletedText", "forum deleted text verified", LOG.Type.SUCCESS);
+    LOG.success("verifyForumDeletedText", "forum deleted text verified");
   }
 
   public void deleteForum(String sourceForumName, String destinationForumName) {
@@ -132,23 +132,23 @@ public class ForumManageBoardsPageObject extends BasePageObject {
 
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
-      LOG.log("verifyForumExists", e, LOG.Type.ERROR);
+      LOG.error("verifyForumExists", e);
     }
     wait.forElementVisible(
         By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
-    LOG.log("verifyForumExists", "verified forum exists", LOG.Type.SUCCESS);
+    LOG.success("verifyForumExists", "verified forum exists");
   }
 
   public void verifyForumNotExists(String forumName, String wikiURL) {
     try {
       getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      LOG.log("verifyForumNotExists", e, LOG.Type.ERROR);
+      LOG.error("verifyForumNotExists", e);
     }
     wait.forElementVisible(By.xpath(
         "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
-    LOG.log("verifyForumNotExists", "verified forum not exists", LOG.Type.SUCCESS);
+    LOG.success("verifyForumNotExists", "verified forum not exists");
   }
 
   private void clickModifyForum(String forumName) {
@@ -157,7 +157,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
     scrollAndClick(editPecil);
-    LOG.log("clickModifyForum", "modify forum button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickModifyForum", "modify forum button clicked");
   }
 
   private void clearEditBoardFields() {
@@ -165,7 +165,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     wait.forElementVisible(boardDescriptionField);
     boardTitleField.clear();
     boardDescriptionField.clear();
-    LOG.log("clickEditBoardFields", "edit boards fields cleared", LOG.Type.SUCCESS);
+    LOG.success("clickEditBoardFields", "edit boards fields cleared");
   }
 
   public void editForum(String forumName, String newTitle, String newDescription) {
@@ -184,7 +184,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
     down.click();
     Assertion.assertEquals(getSecondForumName(), temp);
-    LOG.log("clickMoveDown", "move down button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickMoveDown", "move down button clicked");
   }
 
   public void clickMoveUp(String forumName) {
@@ -195,6 +195,6 @@ public class ForumManageBoardsPageObject extends BasePageObject {
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
     up.click();
     Assertion.assertEquals(getFirstForumName(), temp);
-    LOG.log("clickMoveDown", "move up button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickMoveDown", "move up button clicked");
   }
 }

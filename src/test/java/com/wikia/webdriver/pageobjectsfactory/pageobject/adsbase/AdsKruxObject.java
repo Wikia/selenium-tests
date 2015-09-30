@@ -60,8 +60,8 @@ public class AdsKruxObject extends AdsBaseObject {
     waitForKrux();
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
     String gptPageParams = getGptPageParams(slotName);
-    LOG.log("gpt page params", gptPageParams, LOG.Type.SUCCESS);
-    LOG.logResult("krux users", user1 + ", " + user2, true);
+    LOG.success("gpt page params", gptPageParams);
+    LOG.result("krux users", user1 + ", " + user2, true);
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
     if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
       throw new AssertionError("Gpt page params don't have the krux users from localStorage");
@@ -69,7 +69,7 @@ public class AdsKruxObject extends AdsBaseObject {
   }
 
   public void waitForKrux() {
-    LOG.log("waitForKrux", "Waiting for Krux", LOG.Type.SUCCESS);
+    LOG.success("waitForKrux", "Waiting for Krux");
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
@@ -83,7 +83,7 @@ public class AdsKruxObject extends AdsBaseObject {
   public String getKxsegs() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String segments = (String) js.executeScript("return localStorage.kxsegs;");
-    LOG.log("krux segments: ", segments, true, driver);
+    LOG.logResult("krux segments: ", segments, true, driver);
     return wrapSegs(segments);
   }
 

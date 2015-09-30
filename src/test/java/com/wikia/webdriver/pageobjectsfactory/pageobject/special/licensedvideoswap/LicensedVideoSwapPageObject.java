@@ -36,8 +36,8 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
     // Make sure the click above has happened and the browser has responded by looking for an element
     // on the history page
     wait.forElementVisible(backLink);
-    LOG.log("navigateToHistoryPage",
-            "lvs history button navigates to right page", LOG.Type.SUCCESS);
+    LOG.success("navigateToHistoryPage",
+            "lvs history button navigates to right page");
 
     return new LicensedVideoSwapHistoryPageObject(driver);
   }
@@ -45,7 +45,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
   public void verifyOnLvsPage() {
     String url = driver.getCurrentUrl();
     Assertion.assertTrue(url.contains(URLsContent.SPECIAL_LICENSED_VIDEO_SWAP));
-    LOG.log("verifyOnLvsPage", "url is the correct one for LVS page", LOG.Type.SUCCESS);
+    LOG.success("verifyOnLvsPage", "url is the correct one for LVS page");
   }
 
   public void verifySwapVideo() {
@@ -59,7 +59,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
     wait.forTextInElement(swapCount, String.valueOf(initialCount - 1));
 
-    LOG.log("verifyClickSwap", "Swap button has been clicked", LOG.Type.SUCCESS);
+    LOG.success("verifyClickSwap", "Swap button has been clicked");
   }
 }
 

@@ -27,7 +27,7 @@ public class SpecialPageObject extends WikiBasePageObject {
         specialPageHeader,
         "Special page"
     );
-    LOG.log(
+    LOG.logResult(
         "SpecialPageLoaded",
         "Special Page is loaded",
         true,
@@ -37,7 +37,7 @@ public class SpecialPageObject extends WikiBasePageObject {
 
   public void verifyPageHeader(String expectedHeader) {
     wait.forElementVisible(By.xpath(String.format(HEADER_TEXT_SELECTOR, expectedHeader)));
-    LOG.log(
+    LOG.logResult(
         "SpecialPageHeader",
         "Special Page Header is the same as expected",
         true,

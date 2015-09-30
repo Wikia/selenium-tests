@@ -46,7 +46,7 @@ public class MailFunctions {
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
 
-        LOG.log("Mail", "Waiting for the message", LOG.Type.SUCCESS);
+        LOG.success("Mail", "Waiting for the message");
         Thread.sleep(2000);
         for (Message message : messages) {
           if (message.getSubject().contains(subject)) {
@@ -59,7 +59,7 @@ public class MailFunctions {
         }
       }
 
-      LOG.log("Mail", "Mail arrived", LOG.Type.SUCCESS);
+      LOG.success("Mail", "Mail arrived");
 
       Message m = magicMessage;
       String line;
@@ -73,10 +73,10 @@ public class MailFunctions {
 
       return builder.toString();
     } catch (NoSuchProviderException e) {
-      LOG.log("getFirstEmailContent", e, LOG.Type.ERROR);
+      LOG.error("getFirstEmailContent", e);
       throw new WebDriverException();
     } catch (MessagingException | IOException | InterruptedException e) {
-      LOG.log("getFirstEmailContent", e, LOG.Type.ERROR);
+      LOG.error("getFirstEmailContent", e);
       throw new WebDriverException();
     }
   }
@@ -99,13 +99,13 @@ public class MailFunctions {
           messages[i].setFlag(Flags.Flag.DELETED, true);
         }
       } else {
-        LOG.log("Mail", "There are no messages in inbox", LOG.Type.SUCCESS);
+        LOG.success("Mail", "There are no messages in inbox");
       }
       store.close();
     } catch (NoSuchProviderException e) {
-      LOG.log("Mail", e, LOG.Type.ERROR);
+      LOG.error("Mail", e);
     } catch (MessagingException e) {
-      LOG.log("Mail", e, LOG.Type.ERROR);
+      LOG.error("Mail", e);
     }
   }
 

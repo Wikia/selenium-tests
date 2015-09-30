@@ -52,7 +52,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public void verifySuccesfulSave() {
     wait.forElementVisible(successfulSaveMark);
-    LOG.log("verifySuccesfulSave", "Curated Content saved with success", LOG.Type.SUCCESS);
+    LOG.success("verifySuccesfulSave", "Curated Content saved with success");
   }
 
   public void removeLastElement() {
@@ -68,16 +68,16 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   public void verifyImageInLastElement() {
     wait.forElementVisible(lastElementImageFilled);
-    LOG.log("verifyImageInLastElement", "Image is present in the last element", LOG.Type.SUCCESS);
+    LOG.success("verifyImageInLastElement", "Image is present in the last element");
   }
 
   public void verifyImageErrorInLastElement() {
     wait.forElementVisible(lastElementImageWithError);
-    LOG.log("verifyImageErrorInLastElement", "Image shows error", LOG.Type.SUCCESS);
+    LOG.success("verifyImageErrorInLastElement", "Image shows error");
   }
 
   public void verifySaveNotClickable() {
     waitForElementNotClickableByElement(saveButton);
-    LOG.log("verifySaveNotClickable", "Save button is not clickable", LOG.Type.SUCCESS);
+    LOG.success("verifySaveNotClickable", "Save button is not clickable");
   }
 }

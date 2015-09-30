@@ -49,7 +49,7 @@ public class SpecialPromotePageObject extends BasePageObject {
   public void clickPublishButton() {
     wait.forElementVisible(publishButton);
     scrollAndClick(publishButton);
-    LOG.log("clickPublishButton", "publish button click", LOG.Type.SUCCESS);
+    LOG.success("clickPublishButton", "publish button click");
   }
 
   public String getUniqueThumbnailTextSpecialPromotePage() {
@@ -65,7 +65,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     uploadFileInput.sendKeys(
         CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
-    LOG.logResult(
+    LOG.result(
         "modifyThumnailImage",
         "file " + file + " added to upload",
         true);
@@ -75,7 +75,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     wait.forElementVisible(wikiaHeadline);
     wikiaHeadline.clear();
     wikiaHeadline.sendKeys(text);
-    LOG.logResult(
+    LOG.result(
         "typeIntoHeadline",
         "text " + text + " typed into headline",
         true);
@@ -85,7 +85,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     wait.forElementVisible(wikiaDescription);
     wikiaDescription.clear();
     wikiaDescription.sendKeys(text);
-    LOG.logResult(
+    LOG.result(
         "typeIntoDescription",
         "text " + text + " typed into description",
         true);
@@ -98,7 +98,7 @@ public class SpecialPromotePageObject extends BasePageObject {
     uploadFileInput.sendKeys(
         CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
-    LOG.logResult(
+    LOG.result(
         "uploadThumbnailImage",
         "file " + file + " added to upload",
         true);

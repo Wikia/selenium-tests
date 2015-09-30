@@ -50,26 +50,26 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private void typeInUrl(String url) {
     wait.forElementVisible(urlField);
     urlField.sendKeys(url);
-    LOG.log("typeInUrl", url + " typed into url field", LOG.Type.SUCCESS);
+    LOG.success("typeInUrl", url + " typed into url field");
   }
 
   private void clickAddButtonProvider() {
     wait.forElementVisible(addUrlButton);
     scrollAndClick(addUrlButton);
-    LOG.log("clickAddButton", "add url button clicked", true, driver);
+    LOG.logResult("clickAddButton", "add url button clicked", true, driver);
   }
 
   private void typeInSearchQuery(String query) {
     wait.forElementVisible(findField);
     findField.sendKeys(query);
-    LOG.log("typeInSearchQuery",
-            query + " query typed into search video field", LOG.Type.SUCCESS);
+    LOG.success("typeInSearchQuery",
+                query + " query typed into search video field");
   }
 
   private void clickFindButton() {
     wait.forElementVisible(findButton);
     scrollAndClick(findButton);
-    LOG.log("clickFindButton", "find button clicked", true, driver);
+    LOG.logResult("clickFindButton", "find button clicked", true, driver);
   }
 
   private void clickAddVideoLibrary(int videoListItem) {
@@ -78,19 +78,19 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
     this.videoName = addVideoLink.getAttribute("title");
     scrollAndClick(addFromPreviewButton);
-    LOG.log("clickAddVideoLibrary",
-            "add video button clicked: " + this.videoName, true, driver);
+    LOG.logResult("clickAddVideoLibrary",
+                  "add video button clicked: " + this.videoName, true, driver);
   }
 
   private void checkIfLibraryIsPresent() {
     wait.forElementVisible(libraryLIs);
-    LOG.log("checkIfLibraryIsPresent", "library carousel present", LOG.Type.SUCCESS);
+    LOG.success("checkIfLibraryIsPresent", "library carousel present");
   }
 
   public void verifyAddVideoModal() {
     wait.forElementVisible(urlField);
     wait.forElementVisible(addUrlButton);
-    LOG.log("verifyAddVideoModal", "add video modal is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyAddVideoModal", "add video modal is displayed");
   }
 
   public VetOptionsComponentObject addVideoByUrl(String url) {
@@ -111,13 +111,13 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   private void clickVideoThumbnail(int i) {
     scrollAndClick(videoThumbnailsList.get(i));
-    LOG.log("clickVideoThumbnail", "video thumbnails clicked", LOG.Type.SUCCESS);
+    LOG.success("clickVideoThumbnail", "video thumbnails clicked");
   }
 
   private void checkVideoPreviewAppearing() {
     wait.forElementVisible(videoPlayer);
     waitForValueToBePresentInElementsCssByCss("#VET-preview", "display", "block");
-    LOG.log("checkVideoPreviewAppearing", "video preview appeared", LOG.Type.SUCCESS);
+    LOG.success("checkVideoPreviewAppearing", "video preview appeared");
   }
 
   public String getVideoName() {
@@ -126,14 +126,14 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
   public void verifySuggestionsIsDisplayed() {
     wait.forElementVisible(suggestedVideo);
-    LOG.log("verifySuggestionsIsDisplayed",
-            "Verified suggested module appeared", true, driver);
+    LOG.logResult("verifySuggestionsIsDisplayed",
+                  "Verified suggested module appeared", true, driver);
   }
 
   public WikiArticleEditMode clickCloseButton() {
     wait.forElementVisible(closeButton);
     scrollAndClick(closeButton);
-    LOG.log("clickCloseButton", "close button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickCloseButton", "close button clicked");
     return new WikiArticleEditMode(driver);
   }
 }

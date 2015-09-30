@@ -38,7 +38,7 @@ public class DabbletComPageObject extends BasePageObject {
     wait.forElementVisible(htmlBox);
     htmlBox.clear();
     htmlBox.sendKeys(htmlCode);
-    LOG.log("verifyMapEmbed", "map was embeded", true, driver);
+    LOG.logResult("verifyMapEmbed", "map was embeded", true, driver);
   }
 
   public void verifyMapEmbed() {

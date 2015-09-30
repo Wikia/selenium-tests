@@ -24,7 +24,7 @@ public class LatestPhotosComponentObject extends WikiBasePageObject {
 
   public LightboxComponentObject openLightboxForImage(int imageNumber) {
     scrollAndClick(latestPhotosList.get(imageNumber));
-    LOG.log("openLightboxForImage", "lightbox for image opened", LOG.Type.SUCCESS);
+    LOG.success("openLightboxForImage", "lightbox for image opened");
     return new LightboxComponentObject(driver);
   }
 }

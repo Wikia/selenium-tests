@@ -34,7 +34,7 @@ public class TestAdSkinPresence extends TemplateNoFirstLoad {
                                String backgroundColor,
                                String middleColor) throws IOException {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    LOG.log("Window resolution: ", String.valueOf(windowResolution.width), LOG.Type.SUCCESS);
+    LOG.success("Window resolution: ", String.valueOf(windowResolution.width));
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, windowResolution);
     adsBaseObject.verifySkin(expectedAdSkinLeftPath,
                              expectedAdSkinRightPath,

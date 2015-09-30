@@ -45,7 +45,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public PreferencesPageObject open(){
     getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_PREFERENCES);
-    LOG.log("openSpecialPreferencesPage", "Special:Prefereces page opened", LOG.Type.SUCCESS);
+    LOG.success("openSpecialPreferencesPage", "Special:Prefereces page opened");
 
     return this;
   }
@@ -76,13 +76,13 @@ public class PreferencesPageObject extends WikiBasePageObject {
         throw new NoSuchElementException("Non-existing tab selected");
     }
     waitForValueToBePresentInElementsAttributeByElement(tabs.get(tabNum), "class", "selected");
-    LOG.log("selectTab", "tab " + tab.toString() + " selected", LOG.Type.SUCCESS);
+    LOG.success("selectTab", "tab " + tab.toString() + " selected");
     return this;
   }
 
   public void verifyEmailMeSection() {
     for (WebElement elem : emailMeSectionRows) {
-      LOG.log("verifyEmailSection", "verifying " + elem.getText(), LOG.Type.SUCCESS);
+      LOG.success("verifyEmailSection", "verifying " + elem.getText());
       Assertion.assertEquals(elem.findElement(By.cssSelector("input")).getAttribute("checked"), "true"
       );
     }
@@ -92,31 +92,31 @@ public class PreferencesPageObject extends WikiBasePageObject {
     wait.forElementVisible(facebookDisconnect);
     scrollAndClick(facebookDisconnect);
     wait.forElementVisible(fbConnect);
-    LOG.logResult("disconnectFromFacebook",
-                  "account has been disconnected from Facebook",
-                  true);
+    LOG.result("disconnectFromFacebook",
+               "account has been disconnected from Facebook",
+               true);
   }
 
   public PreferencesPageObject clickSaveButton() {
     wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
-    LOG.log("clickSaveButton", "Save button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSaveButton", "Save button clicked");
     return new PreferencesPageObject(driver);
   }
 
   public void clickRestoreLink() {
     wait.forElementClickable(restoreDefaultLink);
     restoreDefaultLink.click();
-    LOG.log("clickRestoreLink", "Restore Deault Link clicked", LOG.Type.SUCCESS);
+    LOG.success("clickRestoreLink", "Restore Deault Link clicked");
   }
 
   public void verifySaveNotification() {
     wait.forElementVisible(saveNotfication);
-    LOG.log("verifySaveNotification", "Restore Deault Link clicked", LOG.Type.SUCCESS);
+    LOG.success("verifySaveNotification", "Restore Deault Link clicked");
   }
 
   public void connectFacebook(String email, String password) {
-    LOG.log("connectFacebook", "Connecting FB via FB login dialog", LOG.Type.SUCCESS);
+    LOG.success("connectFacebook", "Connecting FB via FB login dialog");
 
     wait.forElementVisible(fbConnect);
     scrollAndClick(fbConnect);

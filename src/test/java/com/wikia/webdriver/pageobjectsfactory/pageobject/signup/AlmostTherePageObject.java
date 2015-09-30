@@ -41,14 +41,14 @@ public class AlmostTherePageObject extends WikiBasePageObject {
     }
     String www = MailFunctions.getActivationLinkFromEmailContent(
         MailFunctions.getFirstEmailContent(email, password, mailSubject));
-    LOG.log("getActivationLinkFromMail",
-            "activation link is visible in email content: " + www, LOG.Type.SUCCESS);
+    LOG.success("getActivationLinkFromMail",
+                "activation link is visible in email content: " + www);
     return www;
   }
 
   public ConfirmationPageObject enterActivationLink(String email, String password, String wikiURL, String language) {
     getUrl(getActivationLinkFromMail(email, password, language));
-    LOG.log("enterActivationLink", "activation page is displayed", true, driver);
+    LOG.logResult("enterActivationLink", "activation page is displayed", true, driver);
     return new ConfirmationPageObject(driver);
   }
 

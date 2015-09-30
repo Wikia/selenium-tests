@@ -71,13 +71,13 @@ public class AdsHopObject extends AdsBaseObject {
     }
     Set<String> lineItemsSet = new HashSet<>(lineItems);
     if (lineItemsSet.size() < lineItems.size()) {
-      LOG.logResult("Line item ids",
-                    slotName + " slot has the divs with the same line item ids",
-                    false);
+      LOG.result("Line item ids",
+                 slotName + " slot has the divs with the same line item ids",
+                 false);
     } else {
-      LOG.logResult("Line item ids",
-                    slotName + " slot has the divs with the different line item ids",
-                    true);
+      LOG.result("Line item ids",
+                 slotName + " slot has the divs with the different line item ids",
+                 true);
     }
   }
 

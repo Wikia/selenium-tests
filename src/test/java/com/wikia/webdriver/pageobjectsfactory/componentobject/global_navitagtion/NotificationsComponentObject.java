@@ -82,7 +82,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   public void showNotifications() {
     waitForNotificationsLoaded();
     openNotifications();
-    LOG.log("#WallNotifications li ul.subnav", "show notifications", LOG.Type.SUCCESS);
+    LOG.success("#WallNotifications li ul.subnav", "show notifications");
   }
 
   /**
@@ -94,7 +94,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   public void clickNotifications() {
     wait.forElementVisible(notificationsBubbles);
     scrollAndClick(notificationsBubbles);
-    LOG.log("clickshowNotifications", "click on notifications bubbles", LOG.Type.SUCCESS);
+    LOG.success("clickshowNotifications", "click on notifications bubbles");
   }
 
   /**
@@ -112,13 +112,13 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     for (int i = 0; i < notificationsList.size(); i++) {
       if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
           .contains(text)) {
-        LOG.log("getNotificationLink", "get addres that of " + i + 1
-                                       + " notification points to", LOG.Type.SUCCESS);
+        LOG.success("getNotificationLink", "get addres that of " + i + 1
+                                       + " notification points to");
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
-    LOG.log("getNotificationLink",
-            "No notification that contains the following text: " + text, LOG.Type.ERROR);
+    LOG.error("getNotificationLink",
+            "No notification that contains the following text: " + text);
     return null;
   }
 

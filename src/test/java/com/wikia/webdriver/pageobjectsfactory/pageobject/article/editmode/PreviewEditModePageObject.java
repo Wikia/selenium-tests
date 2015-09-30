@@ -57,7 +57,7 @@ public class PreviewEditModePageObject extends EditMode {
             videoPostionSelector.replace("%position%", position)
         )
     );
-    LOG.logResult(
+    LOG.result(
         "verifyVideoAlignment",
         "video alignment is as exepected " + positions.toString(),
         true
@@ -80,7 +80,7 @@ public class PreviewEditModePageObject extends EditMode {
   public void closePreviewModal() {
     previewModal.findElement(closeButton).click();
     wait.forElementNotPresent(closeButton);
-    LOG.log("closePreviewModal", "preview modal closed", LOG.Type.SUCCESS);
+    LOG.success("closePreviewModal", "preview modal closed");
   }
 
   public void verifyTextContent(String desiredText) {
@@ -93,17 +93,17 @@ public class PreviewEditModePageObject extends EditMode {
 
   public void verifyTOCpresentOnPreview() {
     wait.forElementVisible(previewModal.findElement(tableOfContents));
-    LOG.log("verifyTOCpresentOnPreview", "TOC is present on preview", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCpresentOnPreview", "TOC is present on preview");
   }
 
   public void verifyTOCexpandedOnPreview() {
     wait.forElementVisible(previewModal.findElement(tableOfContentsOrderedList));
-    LOG.log("verifyTOCexpandedOnPreview", "TOC is expanded on preview", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCexpandedOnPreview", "TOC is expanded on preview");
   }
 
   public void verifyTOCcollapsedOnPreview() {
     waitForElementNotVisibleByElement(previewModal.findElement(tableOfContentsOrderedList));
-    LOG.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", LOG.Type.SUCCESS);
+    LOG.success("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview");
   }
 
   public void verifyVideoOnPreview(String videoID) {

@@ -48,7 +48,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public CreateAMapComponentObject clickCreateAMap() {
     wait.forElementVisible(createAMapButton);
     scrollAndClick(createAMapButton);
-    LOG.log("clickCreateAMap", "create a map button clicked", true, driver);
+    LOG.logResult("clickCreateAMap", "create a map button clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -57,8 +57,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
-    LOG.log("clickCreateAMapUnderContributeButton",
-            "create a map button under contribute button clicked", true, driver);
+    LOG.logResult("clickCreateAMapUnderContributeButton",
+                  "create a map button under contribute button clicked", true, driver);
     return new CreateAMapComponentObject(driver);
   }
 
@@ -66,7 +66,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     WebElement selectedMap = mapList.get(mapIndex);
     wait.forElementVisible(selectedMap);
     selectedMap.click();
-    LOG.log("clickMap", "Selected map clicked", LOG.Type.SUCCESS);
+    LOG.success("clickMap", "Selected map clicked");
     return new InteractiveMapPageObject(driver);
   }
 
@@ -96,9 +96,9 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   public void verifyAmountMapOnTheList() {
     wait.forElementVisible(mapCollection.get(0));
     Assert.assertEquals(mapCollection.size(), 10);
-    LOG.logResult("verifyAmountMapOnTheList",
-                  "There are " + mapCollection.size() + " maps on the list",
-                  true);
+    LOG.result("verifyAmountMapOnTheList",
+               "There are " + mapCollection.size() + " maps on the list",
+               true);
   }
 
   public void verifyCorrectPagination() {
@@ -106,7 +106,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     Assert.assertEquals(isElementOnPage(paginationList), true);
     wait.forElementVisible(paginationNext);
     Assert.assertEquals(isElementOnPage(paginationNext), true);
-    LOG.log("verifyCorrectPagination", "Paggination was showed", LOG.Type.SUCCESS);
+    LOG.success("verifyCorrectPagination", "Paggination was showed");
   }
 
   public void verifyCreateMapModalNotExists() {
@@ -116,6 +116,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
   public void verifyEmptyState() {
     Assertion.assertTrue(isElementOnPage(emptyStateSection), "Expecting a empty state");
-    LOG.log("verifyCorrectPagination", "Paggination was showed", true, driver);
+    LOG.logResult("verifyCorrectPagination", "Paggination was showed", true, driver);
   }
 }

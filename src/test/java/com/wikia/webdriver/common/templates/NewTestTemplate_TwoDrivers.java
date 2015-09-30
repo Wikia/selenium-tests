@@ -59,7 +59,7 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
 
     String driverName = maximized.equals(driverOne) ? "primary window" : "secondary window";
     LOG
-        .logResult("switchToWindow", "================ " + driverName + " ================", true);
+        .result("switchToWindow", "================ " + driverName + " ================", true);
   }
 
 }

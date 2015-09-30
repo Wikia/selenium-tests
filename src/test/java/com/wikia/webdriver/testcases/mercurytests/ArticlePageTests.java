@@ -136,7 +136,7 @@ public class ArticlePageTests extends NewTestTemplate {
         "Chevron isn't collapsed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Category list",
         "is collapsed",
         true
@@ -178,7 +178,7 @@ public class ArticlePageTests extends NewTestTemplate {
       throw new WebDriverException("Wrong URL encoding");
     }
 
-    LOG.logWarning(
+    LOG.warning(
         "Info",
         "Accessing article directly through URL"
     );
@@ -220,7 +220,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    LOG.logWarning(
+    LOG.warning(
         "Info",
         "Accessing article through link in content"
     );
@@ -264,7 +264,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    LOG.logWarning("Info", "Accessing article through link in navigation side");
+    LOG.warning("Info", "Accessing article through link in navigation side");
 
     nav.clickSearchButton();
     nav.clickNavListElement(4);
@@ -309,7 +309,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    LOG.logWarning("Info", "Accessing article through link in search result");
+    LOG.warning("Info", "Accessing article through link in search result");
 
     nav.clickSearchButton();
     nav.clickSearchField();

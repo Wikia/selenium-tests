@@ -18,6 +18,6 @@ public class SpecialEditHubPageObject extends BasePageObject {
 
   public void verifyCalendarAppears() {
     wait.forElementVisible(edithubDashboardCalendar);
-    LOG.log("verifyCalendarAppears", "Curators calendar visible", LOG.Type.SUCCESS);
+    LOG.success("verifyCalendarAppears", "Curators calendar visible");
   }
 }

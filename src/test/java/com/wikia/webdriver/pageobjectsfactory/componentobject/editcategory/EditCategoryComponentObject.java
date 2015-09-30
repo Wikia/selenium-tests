@@ -30,7 +30,7 @@ public class EditCategoryComponentObject extends BasePageObject {
     categoryNameField.clear();
     categoryNameField.sendKeys(newCategoryName);
     saveButton.click();
-    LOG.log("editCategoryName", "category name changed to " + newCategoryName, LOG.Type.SUCCESS);
+    LOG.success("editCategoryName", "category name changed to " + newCategoryName);
     return new ArticlePageObject(driver);
   }
 }

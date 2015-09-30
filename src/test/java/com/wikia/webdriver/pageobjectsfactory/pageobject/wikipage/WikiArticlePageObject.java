@@ -71,7 +71,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     edit.clickOnPublish();
     wait.forElementVisible(By.cssSelector("#WikiaArticle"));
 
-    LOG.log("createNewTemplate", "new template created: " + templateName, LOG.Type.SUCCESS);
+    LOG.success("createNewTemplate", "new template created: " + templateName);
 
     return edit;
   }
@@ -84,13 +84,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   public WikiArticlePageObject openRandomArticle() {
     scrollAndClick(randomPageButton);
     wait.forElementVisible(searchButton);
-    LOG.log("openRandomArticle", "random page button clicked", true, driver);
+    LOG.logResult("openRandomArticle", "random page button clicked", true, driver);
     return new WikiArticlePageObject(driver);
   }
 
   public void verifyArticleText(String content) {
     wait.forTextInElement(articleContentBy, content);
-    LOG.log("verifyArticleText", "article text is verified", LOG.Type.SUCCESS);
+    LOG.success("verifyArticleText", "article text is verified");
   }
 
   /**
@@ -101,7 +101,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   public WikiArticleEditMode edit() {
     wait.forElementVisible(editButton);
     scrollAndClick(editButton);
-    LOG.log("edit", "Edit article", LOG.Type.SUCCESS);
+    LOG.success("edit", "Edit article");
     return new WikiArticleEditMode(driver);
   }
 
@@ -112,8 +112,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);
-    LOG.log("VerifyTheImageOnThePage", "Verify that the image appears on the page",
-            true, driver);
+    LOG.logResult("VerifyTheImageOnThePage", "Verify that the image appears on the page",
+                  true, driver);
   }
 
   public WikiHistoryPageObject openHistoryPage() {

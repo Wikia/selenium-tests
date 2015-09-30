@@ -113,7 +113,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     mediaNode.click();
     deleteMediaNode();
-    LOG.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+    LOG.logResult("selectMediaAndDelete", "Selected media and click delete", true, driver);
   }
 
   private void deleteMediaNode() {
@@ -123,12 +123,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void typeTextArea(String text) {
     wait.forElementVisible(editArea);
     editArea.sendKeys(text);
-    LOG.log("write", "text " + text + "written", LOG.Type.SUCCESS);
+    LOG.success("write", "text " + text + "written");
   }
 
   public void press(Keys key) {
     editArea.sendKeys(key);
-    LOG.log("press", "key " + key.toString() + "pressed", LOG.Type.SUCCESS);
+    LOG.success("press", "key " + key.toString() + "pressed");
   }
 
   public void selectText(int from, int to) {
@@ -191,7 +191,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public void verifyEditorSurfacePresent() {
     wait.forElementVisible(veMode);
     wait.forElementVisible(veSurface);
-    LOG.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
+    LOG.logResult("verifyEditorSurface", "VE editor surface is displayed", true, driver);
   }
 
   public ArticlePageObject clickVEEditAndPublish(String content) {
@@ -203,14 +203,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyMapPresent() {
     wait.forElementVisible(mapNode);
-    LOG.log("verifyMapPresent", "VE map is displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyMapPresent", "VE map is displayed");
   }
 
   public void verifyNoVideo() {
     if (isElementOnPage(mediaNode)) {
       throw new AssertionError("Media Node is still on the page");
     } else {
-      LOG.log("verifyNoVideo", "Verified no video is on page", true, driver);
+      LOG.logResult("verifyNoVideo", "Verified no video is on page", true, driver);
     }
   }
 
@@ -218,7 +218,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(editArea);
     Assertion.assertNumber(videoNodes.size(), expected,
             "Checking the correct number of video nodes added");
-    LOG.log("verifyVideos", videoNodes.size() + " videos displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyVideos", videoNodes.size() + " videos displayed");
   }
 
   public void verifyGalleries(int expected) {
@@ -238,7 +238,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     Assertion.assertNumber(numOfMediasInGallery, expected,
                            "Checking the correct number of media in gallery");
     LOG
-        .logResult("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
+        .result("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
 
   public void verifyMedias(int expected) {
@@ -246,7 +246,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     Assertion.assertNumber(mediaNodes.size(), expected,
                            "Checking the correct number of media nodes added");
-    LOG.log("verifyMedias", mediaNodes.size() + " media displayed", LOG.Type.SUCCESS);
+    LOG.success("verifyMedias", mediaNodes.size() + " media displayed");
   }
 
   public VisualEditorMediaSettingsDialog openMediaSettings() {
@@ -276,7 +276,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextInAllFormat(String text) {
     for (Formatting format : Formatting.values()) {
-      LOG.log("Formatting selection", format.toString() + " selected", LOG.Type.SUCCESS);
+      LOG.success("Formatting selection", format.toString() + " selected");
       selectFormatting(format);
       typeTextArea(text);
       typeReturn();
@@ -288,7 +288,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextInAllStyle(String text) {
     for (Style style : Style.values()) {
-      LOG.log("Style selection", style.toString() + " selected", LOG.Type.SUCCESS);
+      LOG.success("Style selection", style.toString() + " selected");
       selectStyle(style);
       typeTextArea(text);
       typeReturn();
@@ -313,7 +313,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
     editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    LOG.log("copyAndPaste", editArea.getText(), true, driver);
+    LOG.logResult("copyAndPaste", editArea.getText(), true, driver);
   }
 
   public VisualEditorPageObject typeInSourceEditor(String text) {
@@ -328,20 +328,20 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(previewVideoWrapper);
     VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
     video.verifyVideoAutoplay(providerName, true);
-    LOG.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+    LOG.logResult("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
   }
 
   public void verifyPreviewImage() {
     wait.forElementVisible(previewOverlay);
     wait.forElementVisible(previewImage);
-    LOG.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+    LOG.logResult("verifyPreviewImage", "Preview for Image loaded", true, driver);
   }
 
   public void verifyVideoCaption(String caption) {
     wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
-    LOG.log("verifyVideoCaption", "Video caption matches", true, driver);
+    LOG.logResult("verifyVideoCaption", "Video caption matches", true, driver);
   }
 
   public void selectMedia() {
@@ -362,7 +362,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   private void resizeMedia(int xOffSet, int yOffset) {
-    LOG.log("resizeMedia", "Before resizing", true, driver);
+    LOG.logResult("resizeMedia", "Before resizing", true, driver);
     selectMedia();
     wait.forElementVisible(swResizeHandle);
     Actions actions = new Actions(driver);
@@ -370,7 +370,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
         .dragAndDropBy(swResizeHandle, xOffSet, yOffset)
         .build()
         .perform();
-    LOG.log("resizeMedia", "After resizing", true, driver);
+    LOG.logResult("resizeMedia", "After resizing", true, driver);
   }
 
   public void verifyVideoSWHandleMoved(Point source) {
@@ -447,8 +447,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     wait.forElementVisible(contextEdit);
     LOG
-        .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
-             driver);
+        .logResult("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
+                   driver);
   }
 
   private Point getTransclusionLocation(int index, Transclusion transclusion) {

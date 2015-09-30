@@ -87,7 +87,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
           throw new NoSuchElementException("Non-existing link category selected");
       }
     }
-    LOG.log("viewResults", "Category indexes sorted", LOG.Type.SUCCESS);
+    LOG.success("viewResults", "Category indexes sorted");
   }
 
   private boolean isCategoryResult(int category) {

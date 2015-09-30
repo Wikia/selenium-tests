@@ -35,6 +35,6 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
 
   public void restorePage() {
     scrollAndClick(submitRestore);
-    LOG.log("ArticleRestored", "Article restored", LOG.Type.SUCCESS);
+    LOG.success("ArticleRestored", "Article restored");
   }
 }

@@ -50,14 +50,14 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     wait.forElementVisible(recaptchaContainer);
     driver.switchTo().defaultContent();
     LOG
-        .log("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
+        .logResult("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
   }
 
   public String getRecaptchaImageSrc() {
     wait.forElementVisible(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
     LOG
-        .log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
+        .logResult("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
     driver.switchTo().defaultContent();
     return imageSrc;
   }
@@ -74,7 +74,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public void verifyIsNewRecaptcha(String target) {
     Assertion.assertNotEquals(getRecaptchaImageSrc(), target);
-    LOG.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", LOG.Type.SUCCESS);
+    LOG.success("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared");
   }
 
   public VisualEditorReviewChangesDialog clickReviewYourChanges() {

@@ -56,7 +56,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
-    LOG.log("setCaption", "caption was set to: " + caption, LOG.Type.SUCCESS);
+    LOG.success("setCaption", "caption was set to: " + caption);
   }
 
   public void adjustWith(int width) {
@@ -64,20 +64,20 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(widthInputField);
     widthInputField.clear();
     widthInputField.sendKeys(widthString);
-    LOG.log("adjustWith", "width set to: " + width, true, driver);
+    LOG.logResult("adjustWith", "width set to: " + width, true, driver);
   }
 
   private void clickAddaVideo() {
     wait.forElementVisible(addAvideo);
     wait.forElementClickable(addAvideo);
     scrollAndClick(addAvideo);
-    LOG.log("clickAddaVideo", "add video button clicked", true, driver);
+    LOG.logResult("clickAddaVideo", "add video button clicked", true, driver);
   }
 
   private void clickRetunToEditing() {
     wait.forElementVisible(returnToEditing);
     scrollAndClick(returnToEditing);
-    LOG.log("clickReturnToEditing", "return to editing button clicked", true, driver);
+    LOG.logResult("clickReturnToEditing", "return to editing button clicked", true, driver);
   }
 
   private void verifyVideoThumbnail() {
@@ -85,7 +85,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Dimension dim = videoThumbnail.getSize();
     int w = dim.getWidth();
     Assertion.assertEquals(w, 350);
-    LOG.log("verifyVideoThumbnail", "video thumbnail is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoThumbnail", "video thumbnail is visible");
   }
 
   private void verifyVideoModalNotVisible() {
@@ -120,7 +120,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    LOG.log("adjustPosition", "position " + position.toString() + " selected", LOG.Type.SUCCESS);
+    LOG.success("adjustPosition", "position " + position.toString() + " selected");
   }
 
   public void verifyVideoAlignmentSelected(PositionsVideo positions) {
@@ -148,7 +148,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   public void clickUpdateVideo() {
     wait.forElementVisible(updateVideoButton);
     scrollAndClick(updateVideoButton);
-    LOG.log("updateVideoButton", "update video button clicked", true, driver);
+    LOG.logResult("updateVideoButton", "update video button clicked", true, driver);
   }
 
 
@@ -158,7 +158,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Assertion.assertEquals(
         widthDesired,
         width);
-    LOG.log("verifyVideoWidth", "video width verified", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoWidth", "video width verified");
   }
 
   public void verifyCaption(String captionDesired) {
@@ -168,6 +168,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void verifyNameNotEditable() {
     Assertion.assertTrue(!uneditableVideoNameField.isDisplayed());
-    LOG.log("verifyNameNotEditable", "video name field not editable", LOG.Type.SUCCESS);
+    LOG.success("verifyNameNotEditable", "video name field not editable");
   }
 }

@@ -40,7 +40,7 @@ public class CommentsTests extends NewTestTemplate {
         "Comments are expanded"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Comments list",
         "is collapsed",
         true
@@ -54,7 +54,7 @@ public class CommentsTests extends NewTestTemplate {
         "Comments are collapsed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Comments list",
         "is expanded",
         true
@@ -121,7 +121,7 @@ public class CommentsTests extends NewTestTemplate {
         "Next page button isn't displayed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Next page button",
         "is displayed",
         true
@@ -148,7 +148,7 @@ public class CommentsTests extends NewTestTemplate {
         "Previous page button isn't displayed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Previous page button",
         "is displayed",
         true
@@ -180,7 +180,7 @@ public class CommentsTests extends NewTestTemplate {
         "Replies list is expanded"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Replies list",
         "is collapsed",
         true
@@ -193,7 +193,7 @@ public class CommentsTests extends NewTestTemplate {
         "Replies list is collapsed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Replies list",
         "is expanded",
         true

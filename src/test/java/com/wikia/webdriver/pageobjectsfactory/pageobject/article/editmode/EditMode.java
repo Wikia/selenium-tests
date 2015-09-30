@@ -53,7 +53,7 @@ public class EditMode extends WikiBasePageObject {
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
     wait.forElementNotPresent(submitButtonBy);
-    LOG.log("submit", "Page submitted", LOG.Type.SUCCESS);
+    LOG.success("submit", "Page submitted");
   }
 
   public ArticlePageObject submitArticle() {
@@ -64,7 +64,7 @@ public class EditMode extends WikiBasePageObject {
   public PreviewEditModePageObject previewArticle() {
     driver.switchTo().defaultContent();
     previewButton.click();
-    LOG.log("preview", "Page preview displayed", LOG.Type.SUCCESS);
+    LOG.success("preview", "Page preview displayed");
     return new PreviewEditModePageObject(driver);
   }
 
@@ -76,53 +76,53 @@ public class EditMode extends WikiBasePageObject {
   public PhotoAddComponentObject clickPhotoButton() {
     wait.forElementVisible(photoButton);
     scrollAndClick(photoButton);
-    LOG.log("clickPhotoButton", "photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickPhotoButton", "photo button clicked");
     return new PhotoAddComponentObject(driver);
   }
 
   public VetAddVideoComponentObject clickVideoButton() {
     wait.forElementVisible(videoButton);
     scrollAndClick(videoButton);
-    LOG.log("clickVideoButton", "video button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickVideoButton", "video button clicked");
     return new VetAddVideoComponentObject(driver);
   }
 
   public TableBuilderComponentObject clickAddTableButton() {
     addTableButton.click();
-    LOG.log("addTable", "add table button clicked", LOG.Type.SUCCESS);
+    LOG.success("addTable", "add table button clicked");
     return new TableBuilderComponentObject(driver);
   }
 
   public SliderBuilderComponentObject clickSliderButton() {
     wait.forElementVisible(sliderButton);
     scrollAndClick(sliderButton);
-    LOG.log("clickSliderButton", "slider button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSliderButton", "slider button clicked");
     return new SliderBuilderComponentObject(driver);
   }
 
   public SlideshowBuilderComponentObject clickSlideshowButton() {
     wait.forElementVisible(slideshowButton);
     scrollAndClick(slideshowButton);
-    LOG.log("clickSlideshowButton", "slideshow button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSlideshowButton", "slideshow button clicked");
     return new SlideshowBuilderComponentObject(driver);
   }
 
   public GalleryBuilderComponentObject clickGalleryButton() {
     wait.forElementVisible(galleryButton);
     scrollAndClick(galleryButton);
-    LOG.log("clickGalleryButton", "gallery button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickGalleryButton", "gallery button clicked");
     return new GalleryBuilderComponentObject(driver);
   }
 
   public SourceEditModePageObject clickSourceButton() {
     sourceButton.click();
-    LOG.log("clickSourceButton", "source button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickSourceButton", "source button clicked");
     return new SourceEditModePageObject(driver);
   }
 
   public VisualEditModePageObject clickVisualButton() {
     visualButton.click();
-    LOG.log("clickVisualButton", "visual button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickVisualButton", "visual button clicked");
     return new VisualEditModePageObject(driver);
   }
 }

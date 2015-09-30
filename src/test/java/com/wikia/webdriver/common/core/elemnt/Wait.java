@@ -46,7 +46,7 @@ public class Wait {
     try {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     } catch(TimeoutException e) {
-      LOG.logResult(
+      LOG.result(
           ELEMENT_PRESENT_MESSAGE,
           String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()),
           false
@@ -104,7 +104,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      LOG.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, LOG.Type.SUCCESS);
+      LOG.success(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {

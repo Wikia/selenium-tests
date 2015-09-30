@@ -25,11 +25,11 @@ public class AdsPadObject extends AdsBaseObject {
 
   public void verifyPadHeight(int height) {
     Assertion.assertEquals(padImg.getSize().height, height);
-    LOG.log("PAD", "PAD is on the page", true, driver);
+    LOG.logResult("PAD", "PAD is on the page", true, driver);
   }
 
   public void verifyNoPadOnPage() {
     Assertion.assertFalse(isElementOnPage(By.cssSelector(PAD_IMG_CSS)));
-    LOG.log("PAD", "PAD is not on the page", true, driver);
+    LOG.logResult("PAD", "PAD is not on the page", true, driver);
   }
 }

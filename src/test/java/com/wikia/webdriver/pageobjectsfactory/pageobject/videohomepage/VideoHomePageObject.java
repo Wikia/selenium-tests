@@ -43,22 +43,22 @@ public class VideoHomePageObject extends WikiBasePageObject {
   public void verifyFeaturedSliderInitialized() {
     wait.forElementVisible(featuredModuleControls);
     LOG
-        .logResult("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
+        .result("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
   }
 
   public void verifyFeaturedSliderSlides(int count) {
     wait.forElementVisible(featuredSlides.get(0));
     Assertion.assertTrue(featuredSlides.size() >= count);
-    LOG.log("verifyFeaturedSliderSlides",
-            "At least " + count + "latest Videos modules have rendered", LOG.Type.SUCCESS);
+    LOG.success("verifyFeaturedSliderSlides",
+                "At least " + count + "latest Videos modules have rendered");
   }
 
   public void verifyLatestVideosRows(int count) {
     wait.forElementVisible(latestVideoRows.get(0));
     Assertion.assertTrue(latestVideoRows.size() >= count);
     LOG
-        .logResult("verifyLatestVideosRows",
-                   "At least " + count + "latest Videos modules have rendered",
-                   true);
+        .result("verifyLatestVideosRows",
+                "At least " + count + "latest Videos modules have rendered",
+                true);
   }
 }

@@ -38,7 +38,7 @@ public class TOCTests extends NewTestTemplate {
         "TOC isn't displayed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "TOC",
         "is displayed",
         true
@@ -57,7 +57,7 @@ public class TOCTests extends NewTestTemplate {
         "TOC menu is expanded"
     );
 
-    LOG.logResult(
+    LOG.result(
         "TOC menu",
         "is collapsed",
         true
@@ -70,7 +70,7 @@ public class TOCTests extends NewTestTemplate {
         "TOC menu is collapsed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "TOC menu",
         "is expanded",
         true

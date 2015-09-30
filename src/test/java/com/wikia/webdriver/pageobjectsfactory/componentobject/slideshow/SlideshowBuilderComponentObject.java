@@ -53,7 +53,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
     Select pos = new Select(slideshowPosition);
     pos.selectByVisibleText(position.getPosition());
     LOG
-        .logResult("adjustPosition", "slideshow position set to " + position.getPosition(), true);
+        .result("adjustPosition", "slideshow position set to " + position.getPosition(), true);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
@@ -65,7 +65,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    LOG.log("clickFinish", "finish button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickFinish", "finish button clicked");
   }
 
 }

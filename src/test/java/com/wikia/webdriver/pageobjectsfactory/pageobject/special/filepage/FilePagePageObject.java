@@ -71,7 +71,7 @@ public class FilePagePageObject extends WikiBasePageObject {
     WebElement currentTab = tabList.get(tab);
     wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
-    LOG.logResult(
+    LOG.result(
         "clickTab",
         tab + " selected",
         true
@@ -93,7 +93,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifySelectedTab(String tabName) {
     wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
-    LOG.logResult(
+    LOG.result(
         "verified selected tab",
         tabName + " selected",
         true
@@ -122,14 +122,14 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void clickLocalAppearsPageNext() {
     localPageNext.click();
     LOG
-        .logResult("clickLocalAppearsPageNext", "local appears page next button clicked", true);
+        .result("clickLocalAppearsPageNext", "local appears page next button clicked", true);
   }
 
   // Page backward in the local "appears on" section
   public void clickLocalAppearsPagePrev() {
     localPagePrev.click();
     LOG
-        .logResult("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
+        .result("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
   }
 
   // Verify that a specific video title is in the "Appears on these pages" list
@@ -140,18 +140,18 @@ public class FilePagePageObject extends WikiBasePageObject {
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
     LOG
-        .logResult("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+        .result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyEmptyFilePage() {
     wait.forElementVisible(noFileText);
     LOG
-        .logResult("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+        .result("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public void verifyThumbnailIsPresent() {
     wait.forElementVisible(videoThumbnail);
-    LOG.log("verifythumbnailIsPresent", "Verified thumbnail is visible", LOG.Type.SUCCESS);
+    LOG.success("verifythumbnailIsPresent", "Verified thumbnail is visible");
   }
 
   public String getImageUrl() {
@@ -192,11 +192,11 @@ public class FilePagePageObject extends WikiBasePageObject {
     scrollAndClick(reuploadLink);
 
     uploadFileURL.sendKeys(url);
-    LOG.log("replaceVideo", url + " typed into url field", LOG.Type.SUCCESS);
+    LOG.success("replaceVideo", url + " typed into url field");
 
     wait.forElementVisible(addButton);
     scrollAndClick(addButton);
-    LOG.log("replaceVideo", "add url button clicked", true, driver);
+    LOG.logResult("replaceVideo", "add url button clicked", true, driver);
   }
 
   public void verifyVersionCountAtLeast(int count) {
@@ -206,7 +206,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   public DeletePageObject deleteVersion(int num) {
     scrollAndClick(historyDeleteLinks.get(num - 1));
 
-    LOG.log("deletePage", "delete page opened", LOG.Type.SUCCESS);
+    LOG.success("deletePage", "delete page opened");
 
     return new DeletePageObject(driver);
   }

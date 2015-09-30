@@ -61,7 +61,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     try {
       Thread.sleep(500);
     } catch (InterruptedException e) {
-      LOG.log("writeMiniEditor", e, LOG.Type.ERROR);
+      LOG.error("writeMiniEditor", e);
     }
     messageBodyField.clear();
     messageBodyField.sendKeys(text);
@@ -149,7 +149,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(comment);
-    LOG.log("CommentEdited", "Comment edited", LOG.Type.SUCCESS);
+    LOG.success("CommentEdited", "Comment edited");
   }
 
   public void switchAndReplyComment(String reply) {
@@ -158,7 +158,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     wait.forElementVisible(messageBodyField);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);
-    LOG.log("CommentReplied", "Comment replied", LOG.Type.SUCCESS);
+    LOG.success("CommentReplied", "Comment replied");
   }
 
   public void switchAndEditMessageWall(String reply) {
@@ -166,7 +166,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     driver.switchTo().frame(editMessageWallFrame);
     messageBodyField.clear();
     messageBodyField.sendKeys(reply);
-    LOG.log("switchAndEditMessageWall", "message edited", LOG.Type.SUCCESS);
+    LOG.success("switchAndEditMessageWall", "message edited");
   }
 
   public void switchAndQuoteMessageWall(String reply) {
@@ -176,6 +176,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     WebElement quoteMessageTextArea = driver.findElement(By.cssSelector("body#bodyContent"));
     quoteMessageTextArea.clear();
     quoteMessageTextArea.sendKeys(reply);
-    LOG.log("switchAndQuoteMessageWall", "quote typed", LOG.Type.SUCCESS);
+    LOG.success("switchAndQuoteMessageWall", "quote typed");
   }
 }

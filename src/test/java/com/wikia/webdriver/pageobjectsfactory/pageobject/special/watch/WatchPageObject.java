@@ -26,7 +26,7 @@ public class WatchPageObject extends BasePageObject {
   public void confirmWatchUnwatch() {
     followUnfollowConfirmation.click();
     LOG
-        .logResult("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
+        .result("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
   }
 
 

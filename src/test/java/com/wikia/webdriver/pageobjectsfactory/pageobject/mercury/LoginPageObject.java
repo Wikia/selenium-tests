@@ -54,7 +54,7 @@ public class LoginPageObject extends WikiBasePageObject {
           URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
 
     } catch (UnsupportedEncodingException e) {
-      LOG.log("encoding", "problem occured during URL encoding", LOG.Type.ERROR);
+      LOG.error("encoding", "problem occured during URL encoding");
     }
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
                + redirectParameter);

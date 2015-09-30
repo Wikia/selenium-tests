@@ -38,7 +38,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Navigation menu is visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Navigation menu",
         "is hidden",
         true
@@ -51,7 +51,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Navigation menu isn't visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Navigation menu",
         "is visible",
         true
@@ -78,7 +78,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link is displayed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Back link",
         "is hidden",
         true
@@ -99,7 +99,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link isn't displayed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Back link",
         "is displayed",
         true
@@ -120,7 +120,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Back link doesn't work"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Back link",
         "works",
         true
@@ -151,7 +151,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Menu field is visible"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Menu field",
         "is hidden",
         true
@@ -162,7 +162,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Result field is hidden"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Result field",
         "is visible",
         true
@@ -232,7 +232,7 @@ public class NavigationSideTests extends NewTestTemplate {
         "Search suggestions are hidden"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Search suggestions",
         "are displayed",
         true

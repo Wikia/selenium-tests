@@ -37,7 +37,7 @@ public class LoginTests extends NewTestTemplate {
 
     new ArticlePageObject(driver).waitForFooterToBeVisible();
     boolean result = url.equals(driver.getCurrentUrl());
-    LOG.logResult("url", "was redirected correctly", result);
+    LOG.result("url", "was redirected correctly", result);
 
     Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
   }

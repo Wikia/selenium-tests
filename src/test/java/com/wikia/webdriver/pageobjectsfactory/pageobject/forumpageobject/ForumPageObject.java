@@ -35,20 +35,20 @@ public class ForumPageObject extends WikiArticlePageObject {
   private void openFaqLightBox() {
     wait.forElementVisible(faqButton);
     scrollAndClick(faqButton);
-    LOG.log("openFaqLightBox", "faq lightbox opened", LOG.Type.SUCCESS);
+    LOG.success("openFaqLightBox", "faq lightbox opened");
   }
 
   private void closeFaqLightBox() {
     waitForElementNotVisibleByElement(faqModalLoadingState);
     wait.forElementVisible(closeFaqLightBoxButton);
     closeFaqLightBoxButton.click();
-    LOG.log("closeFaqLightBox", "faq lightbox closed", LOG.Type.SUCCESS);
+    LOG.success("closeFaqLightBox", "faq lightbox closed");
   }
 
   private void checkFaqLightBoxOpened() {
     wait.forElementVisible(faqLightBox);
-    LOG.log("checkFaqLightBoxOpened",
-            "faq lightbox verified", LOG.Type.SUCCESS);
+    LOG.success("checkFaqLightBoxOpened",
+                "faq lightbox verified");
   }
 
   public void verifyFaqLightBox() {
@@ -59,8 +59,8 @@ public class ForumPageObject extends WikiArticlePageObject {
 
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
-    LOG.log("clickManageBoardsButton",
-            "manage boards button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickManageBoardsButton",
+                "manage boards button clicked");
     return new ForumManageBoardsPageObject(driver);
   }
 
@@ -78,9 +78,9 @@ public class ForumPageObject extends WikiArticlePageObject {
     wait.forElementVisible(forumBoardLink);
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
-    LOG.log("openForumBoard",
-            "click on the forum Board", true,
-            driver);
+    LOG.logResult("openForumBoard",
+                  "click on the forum Board", true,
+                  driver);
     return new ForumBoardPageObject(driver);
   }
 
@@ -94,14 +94,14 @@ public class ForumPageObject extends WikiArticlePageObject {
       }
     }
     if (forumNumber == 0) {
-      LOG.log("openForumBoard",
-              "didn't find forum Board with title " + formattedForumBoardTitle,
-              true, driver);
+      LOG.logResult("openForumBoard",
+                    "didn't find forum Board with title " + formattedForumBoardTitle,
+                    true, driver);
       return null;
     } else {
-      LOG.log("openForumBoard",
-              "click on the forum Board with title " + formattedForumBoardTitle,
-              true, driver);
+      LOG.logResult("openForumBoard",
+                    "click on the forum Board with title " + formattedForumBoardTitle,
+                    true, driver);
       return openForumBoard();
     }
   }

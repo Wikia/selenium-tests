@@ -29,7 +29,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.logResult(
+    LOG.result(
         "assertStringContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -50,7 +50,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.logResult(
+    LOG.result(
         "assertStringNotContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -69,7 +69,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.logResult(
+    LOG.result(
         "assertEquals",
         "assertion " + assertion + "! Pattern: \"" + patternEncoded
         + "\" Current: \"" + currentEncoded + "\"",
@@ -87,7 +87,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.logResult(
+    LOG.result(
         "assertNotEquals",
         "assertion " + assertion + "! Pattern: \"" + patternEncoded
         + "\" Current: \"" + currentEncoded + "\"",
@@ -103,8 +103,8 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    LOG.logResult("assertNumber", message + ", expected: "
-                                  + expected + ", got: " + actual, assertion);
+    LOG.result("assertNumber", message + ", expected: "
+                               + expected + ", got: " + actual, assertion);
   }
 
   private static void addVerificationFailure(Throwable e) {
@@ -149,7 +149,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    LOG.logResult(
+    LOG.result(
         "assertStringNotEmpty",
         "assertion " + assertion + "! Current: \"" + currentEncoded + "\"",
         assertion

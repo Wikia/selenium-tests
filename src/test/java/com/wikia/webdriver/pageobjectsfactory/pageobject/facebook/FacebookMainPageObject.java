@@ -33,7 +33,7 @@ public class FacebookMainPageObject extends WikiBasePageObject {
   public void clickLoginButton() {
     wait.forElementVisible(loginButton);
     loginButton.click();
-    LOG.log("clickLoginButton", "facebook login button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickLoginButton", "facebook login button clicked");
   }
 
   private void typePassword(String password) {

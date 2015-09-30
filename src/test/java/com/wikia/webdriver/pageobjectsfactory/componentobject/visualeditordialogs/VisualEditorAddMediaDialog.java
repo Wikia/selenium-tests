@@ -132,8 +132,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
-    LOG.log("selectImageLicense",
-            "License: " + imageLicense.toString() + " selected", LOG.Type.SUCCESS);
+    LOG.success("selectImageLicense",
+            "License: " + imageLicense.toString() + " selected");
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName,
@@ -173,14 +173,14 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     fileUploadInput
         .sendKeys(CommonUtils.getAbsolutePathForFile(
             PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
-    LOG.log("selectFileToUpload", "file " + fileName + " added to upload", LOG.Type.SUCCESS);
+    LOG.success("selectFileToUpload", "file " + fileName + " added to upload");
   }
 
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.click();
-    LOG.log("previewExistingMediaByTitle", "Media clicked", LOG.Type.SUCCESS);
+    LOG.success("previewExistingMediaByTitle", "Media clicked");
     return new VisualEditorPageObject(driver);
   }
 

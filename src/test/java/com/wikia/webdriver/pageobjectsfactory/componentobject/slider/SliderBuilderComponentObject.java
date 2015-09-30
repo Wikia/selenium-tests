@@ -43,20 +43,20 @@ public class SliderBuilderComponentObject extends BasePageObject {
         throw new NoSuchElementException("Non-existing position selected");
     }
     LOG
-        .log("selectMenuPosition", pos.toString() + " position selected", true, driver);
+        .logResult("selectMenuPosition", pos.toString() + " position selected", true, driver);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     addPhotoButton.click();
-    LOG.log("addPhoto", "add photo button clicked", LOG.Type.SUCCESS);
+    LOG.success("addPhoto", "add photo button clicked");
     return new AddPhotoComponentObject(driver);
   }
 
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    LOG.log("clickFinish", "finish button clicked", LOG.Type.SUCCESS);
+    LOG.success("clickFinish", "finish button clicked");
   }
 
 }

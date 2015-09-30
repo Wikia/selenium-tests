@@ -41,12 +41,12 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
   public void typeInUserName(String userName) {
     userNameField.sendKeys(userName);
-    LOG.log("typeInUserName", "user name was typed", LOG.Type.SUCCESS);
+    LOG.success("typeInUserName", "user name was typed");
   }
 
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
-    LOG.log("typeInPassword", "password name was typed", LOG.Type.SUCCESS);
+    LOG.success("typeInPassword", "password name was typed");
   }
 
   public void clickForgotPassword(String userName, String apiToken) {
@@ -59,14 +59,14 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public CreateNewWikiPageObjectStep2 submitLogin() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    LOG.log("submitLogin", "submit button was clicked", true, driver);
+    LOG.logResult("submitLogin", "submit button was clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public SignUpPageObject submitSignup() {
     wait.forElementVisible(signUpSubmitButton);
     signUpSubmitButton.click();
-    LOG.log("submitSignUp", "signup submit button was clicked", true, driver);
+    LOG.logResult("submitSignUp", "signup submit button was clicked", true, driver);
     return new SignUpPageObject(driver);
   }
 
@@ -96,9 +96,9 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
     wait.forElementVisible(usernameValidationText);
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(usernameValidationText, newPasswordMsg);
-    LOG.logResult("MessageAboutPasswordSent",
-                  "Message about new password sent present",
-                  true);
+    LOG.result("MessageAboutPasswordSent",
+               "Message about new password sent present",
+               true);
   }
 
 

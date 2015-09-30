@@ -40,7 +40,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Map modal is hidden"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Map modal",
         "is visible",
         true
@@ -100,7 +100,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in button",
         "is disabled",
         true
@@ -116,7 +116,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom out doesn't work"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom out by click",
         "works",
         true
@@ -127,7 +127,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is disabled"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in button",
         "is enabled",
         true
@@ -143,7 +143,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in doesn't work"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in by click",
         "works",
         true
@@ -154,7 +154,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in button",
         "is disabled",
         true
@@ -169,7 +169,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom out doesn't work"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom out by gesture",
         "works",
         true
@@ -180,7 +180,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is disabled"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in button",
         "is enabled",
         true
@@ -195,7 +195,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in doesn't work"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in by gesture",
         "works",
         true
@@ -206,7 +206,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Zoom in button is enabled"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Zoom in button",
         "is disabled",
         true
@@ -229,7 +229,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Filter box is expanded"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Filter box",
         "is collapsed",
         true
@@ -242,7 +242,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         "Filter box is collapsed"
     );
 
-    LOG.logResult(
+    LOG.result(
         "Filter box",
         "is expanded",
         true

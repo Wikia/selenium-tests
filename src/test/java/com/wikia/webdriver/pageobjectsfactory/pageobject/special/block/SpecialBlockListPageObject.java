@@ -34,13 +34,13 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
     LOG
-        .logResult("Special:BlockList typeInUserName", userName + " typed in username field", true);
+        .result("Special:BlockList typeInUserName", userName + " typed in username field", true);
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
-    LOG.log("Special:BlockList clickSearchButton", "search button clicked", LOG.Type.SUCCESS);
+    LOG.success("Special:BlockList clickSearchButton", "search button clicked");
   }
 
   public void searchForUser(String userName) {
@@ -50,16 +50,17 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
 
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
-    LOG.log("Special:BlockList verifyUSerUnblocked",
-            "verified that user is not on blocked users list", true, driver);
+    LOG.logResult("Special:BlockList verifyUSerUnblocked",
+                  "verified that user is not on blocked users list", true, driver);
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(
         By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
     LOG
-        .log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list",
-             true, driver);
+        .logResult("Special:BlockList verifyUSerUnblocked",
+                   "verified that user is on blocked users list",
+                   true, driver);
   }
 
   /**
@@ -84,7 +85,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
       throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
     LOG
-        .logResult("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+        .result("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
     return isBlocked;
   }
 }

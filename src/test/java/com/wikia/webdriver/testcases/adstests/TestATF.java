@@ -26,7 +26,7 @@ public class TestATF extends TemplateNoFirstLoad {
   )
   public void TestATFDelayBTF(String wikiName, String article, int delaySec, boolean isWgVarOn)
       throws InterruptedException {
-    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
+    LOG.success("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn));
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
@@ -56,7 +56,7 @@ public class TestATF extends TemplateNoFirstLoad {
       groups = {"TestATF", "Ads"}
   )
   public void TestATFDisableBTF(String wikiName, String article, boolean isWgVarOn) {
-    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
+    LOG.success("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn));
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
@@ -86,7 +86,7 @@ public class TestATF extends TemplateNoFirstLoad {
       groups = {"TestATF", "Ads"}
   )
   public void TestATFonTablet(String wikiName, String article, boolean isWgVarOn) {
-    LOG.log("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), LOG.Type.SUCCESS);
+    LOG.success("wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn));
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);

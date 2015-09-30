@@ -37,6 +37,6 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
     wait.forElementClickable(editArea);
     editArea.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
-    LOG.log("typeInEditArea", "Typed " + text, true, driver);
+    LOG.logResult("typeInEditArea", "Typed " + text, true, driver);
   }
 }

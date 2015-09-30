@@ -39,14 +39,14 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     wait.forElementVisible(featuredVideoForm);
     WebElement addVideoButton = featuredVideoForm.findElement(By.cssSelector(".add-video-button"));
     addVideoButton.click();
-    LOG.log("VetAddVideoComponentObject", "Add video button clicked", LOG.Type.SUCCESS);
+    LOG.success("VetAddVideoComponentObject", "Add video button clicked");
     return new VetAddVideoComponentObject(driver);
   }
 
   public void verifyVideoAdded(String name) {
     verifyVideoTitleUpdated(name);
     verifyVideoDisplayTitleUpdated(name);
-    LOG.log("verifyVideoAdded", "Video" + name + " was successfully added.", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoAdded", "Video" + name + " was successfully added.");
   }
 
   public void verifyVideoTitleUpdated(String name) {
@@ -54,7 +54,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
     String title = videoTitle.getText();
     Assertion.assertEquals(name, title);
-    LOG.log("verifyVideoTitleUpdated", "Video title was updated", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoTitleUpdated", "Video title was updated");
   }
 
   public void verifyVideoDisplayTitleUpdated(String name) {
@@ -62,13 +62,13 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     WebElement displayTitle = featuredVideoForm.findElement(By.cssSelector(".display-title"));
     String title = displayTitle.getAttribute("value");
     Assertion.assertEquals(name, title);
-    LOG.log("verifyVideoDisplayTitleUpdated",
-            "Video display title input was populated", LOG.Type.SUCCESS);
+    LOG.success("verifyVideoDisplayTitleUpdated",
+            "Video display title input was populated");
   }
 
   public LatestVideoAdminPageObject clickSaveFeaturedVideoForm(WebDriver driver) {
     scrollAndClick(saveButton);
-    LOG.log("clickSaveFeaturedVideoForm", "Featured video form has been saved", LOG.Type.SUCCESS);
+    LOG.success("clickSaveFeaturedVideoForm", "Featured video form has been saved");
     return new LatestVideoAdminPageObject(driver);
   }
 }

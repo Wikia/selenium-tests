@@ -146,7 +146,7 @@ public class LOG {
   }
 
   public static void info(String command, Exception exception) {
-    log(command, exception, Type.INFO);
+    log(command, exception.getMessage(), Type.INFO);
   }
 
   public static void success(String command, String description) {
@@ -157,11 +157,8 @@ public class LOG {
     appendToReport(command, description, Type.SUCCESS, makeScreenshot);
   }
 
-  /**
-   * This method will log warning to log file (line in yellow color)
-   */
-  public static void logWarning(String command, String description) {
-    log(command, description, Type.WARNING);
+  public static void success(String command, Exception exception) {
+    appendToReport(command, exception.getMessage(), Type.SUCCESS, false);
   }
 
   public static void log(String command, Throwable e, Type logType) {
@@ -192,7 +189,14 @@ public class LOG {
     }
   }
 
-  public static void log(String command, String description, boolean success, WebDriver driver) {
+  public static void logResult(String command, String description, boolean success,
+                               WebDriver driver) {
+    appendToReport(command, description, success, true);
+    logJSError();
+  }
+
+  public static void logResult(String command, String description, boolean success,
+                               boolean makeScreenshot) {
     appendToReport(command, description, success, true);
     logJSError();
   }
@@ -207,12 +211,12 @@ public class LOG {
     logJSError();
   }
 
-  public static void logResult(String command, String description, boolean success) {
+  public static void result(String command, String description, boolean success) {
     appendToReport(command, description, success, false);
   }
 
   public static void log(String command, Throwable e, boolean success) {
-    logResult(command, e.getMessage(), success);
+    result(command, e.getMessage(), success);
   }
 
   public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
@@ -221,7 +225,7 @@ public class LOG {
     if (success) {
       description = descriptionOnSuccess;
     }
-    logResult(command, description, success);
+    result(command, description, success);
   }
 
   public static boolean isTestStarted() {
@@ -237,7 +241,7 @@ public class LOG {
     try {
       bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
     } catch (IOException e) {
-      logResult("logImage", e.getMessage(), false);
+      result("logImage", e.getMessage(), false);
     }
     logImage(command, new String(bytes, StandardCharsets.UTF_8), success);
   }
@@ -249,36 +253,36 @@ public class LOG {
         + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
-  public static void startReport(){
+  public static void startReport() {
     CommonUtils.createDirectory(SCREEN_DIR_PATH);
 
     StringBuilder builder = new StringBuilder();
     builder
         .append("<html><style>"
-                + ".hiddenRow {padding: 0;"
-                + "} td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
-                + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
-                + "tr.warning{color:black;background-color:#FEE01E;}"
-                + "tr.error{color:black;background-color:#FFCCCC;}"
-                + "tr.step{color:white;background:grey}"
-                + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-                + "<style>td { border-top: 1px solid grey; } </style></head><body>"
-                + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>"
-                + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css\">\n"
-                + "<script src=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js\"></script>"
-                + "<p>Date: "
-                + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
-            DateTime.now(DateTimeZone.UTC))
-                + "</p>"
-                + "<p>Polish Time: "
-                + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
-            DateTime.now().withZone(
-                DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
-                + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
-                + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
-                + new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "</p>"
-                + "<p>Testing environment: " + Configuration.getEnv() + "</p>" + "<p>Tested version: "
-                + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
+            + ".hiddenRow {padding: 0;"
+            + "} td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
+            + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
+            + "tr.warning{color:black;background-color:#FEE01E;}"
+            + "tr.error{color:black;background-color:#FFCCCC;}"
+            + "tr.step{color:white;background:grey}"
+            + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
+            + "<style>td { border-top: 1px solid grey; } </style></head><body>"
+            + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>"
+            + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css\">\n"
+            + "<script src=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js\"></script>"
+            + "<p>Date: "
+            + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
+                DateTime.now(DateTimeZone.UTC))
+            + "</p>"
+            + "<p>Polish Time: "
+            + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ").print(
+                DateTime.now().withZone(
+                    DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw")))) + "</p>"
+            + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
+            + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
+            + new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "</p>"
+            + "<p>Testing environment: " + Configuration.getEnv() + "</p>" + "<p>Tested version: "
+            + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     appendShowHideButtons();
     try {
@@ -290,7 +294,7 @@ public class LOG {
     }
   }
 
-  public static void finishReport(){
+  public static void finishReport() {
     CommonUtils.appendTextToFile(LOG_PATH, "</body></html>");
   }
 

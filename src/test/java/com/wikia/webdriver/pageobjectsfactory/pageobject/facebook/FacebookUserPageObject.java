@@ -22,7 +22,7 @@ public class FacebookUserPageObject extends WikiBasePageObject {
 
   public void verifyPageLogo() {
     wait.forElementVisible(pageLogo);
-    LOG.log("verifyPageLogo", "Page logo is present", LOG.Type.SUCCESS);
+    LOG.success("verifyPageLogo", "Page logo is present");
   }
 
   public FacebookSettingsPageObject fbOpenSettings() {

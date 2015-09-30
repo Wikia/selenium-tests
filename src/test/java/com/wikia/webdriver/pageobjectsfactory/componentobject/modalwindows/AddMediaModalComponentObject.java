@@ -27,14 +27,14 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   public void closeAddPhotoModal() {
     wait.forElementVisible(addPhotoModal);
-    LOG.log(
+    LOG.logResult(
         "UploadPhotoModalIsPresent",
         "Upload photo modal is present",
         true, driver
     );
     scrollAndClick(modalAddPhotoClose);
     waitForElementNotVisibleByElement(addPhotoModal);
-    LOG.log(
+    LOG.logResult(
         "UploadPhotoModalClosed",
         "Upload photo modal is closed",
         true, driver
@@ -43,14 +43,14 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   public void closeAddVideoModal() {
     wait.forElementVisible(addVideoModal);
-    LOG.log(
+    LOG.logResult(
         "UploadVideoModalIsPresent",
         "Upload video modal is present",
         true, driver
     );
     scrollAndClick(modalAddVideoClose);
     waitForElementNotVisibleByElement(addVideoModal);
-    LOG.log(
+    LOG.logResult(
         "UploadVideoModalClosed",
         "Upload video modal is closed",
         true, driver

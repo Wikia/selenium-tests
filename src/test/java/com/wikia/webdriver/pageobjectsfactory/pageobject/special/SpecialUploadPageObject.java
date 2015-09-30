@@ -37,7 +37,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
     browseForFileInput.sendKeys(
         CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
     );
-    LOG.logResult(
+    LOG.result(
         "typeInFileToUploadPath",
         "file " + file + " added to upload",
         true
@@ -48,7 +48,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   public void checkIgnoreAnyWarnings() {
     wait.forElementClickable(ignoreAnyWarnings);
     scrollAndClick(ignoreAnyWarnings);
-    LOG.log(
+    LOG.logResult(
         "checkIgnoreAnyWarnings",
         "ignore warnings checkbox selected",
         true,
@@ -59,13 +59,13 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
   public FilePagePageObject clickUploadButton() {
     scrollAndClick(uploadFileInput);
-    LOG.log("clickOnUploadFile", "upload file button clicked.", LOG.Type.SUCCESS);
+    LOG.success("clickOnUploadFile", "upload file button clicked.");
     return new FilePagePageObject(driver);
   }
 
   public void typeFileName(String fileName) {
     uploadFileName.clear();
     uploadFileName.sendKeys(fileName);
-    LOG.log("typeFileName", fileName + " typed into file name field", LOG.Type.SUCCESS);
+    LOG.success("typeFileName", fileName + " typed into file name field");
   }
 }

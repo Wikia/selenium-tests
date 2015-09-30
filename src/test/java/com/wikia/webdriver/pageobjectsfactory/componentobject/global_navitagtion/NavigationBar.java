@@ -76,8 +76,8 @@ public class NavigationBar extends WikiBasePageObject {
         searchInput.sendKeys(Keys.ARROW_DOWN);
       }
       searchInput.sendKeys(Keys.ENTER);
-      LOG.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-                                       + suggestionText + "and clicked enter", LOG.Type.SUCCESS);
+      LOG.success("ArrowDownToSuggestion", "arrowed down to desired suggestion"
+                                           + suggestionText + "and clicked enter");
       return new ArticlePageObject(driver);
     } else {
       return null;
@@ -94,11 +94,11 @@ public class NavigationBar extends WikiBasePageObject {
       if (currentSuggestion.getText().contains(suggestion)) {
         currentSuggestion.click();
         LOG
-            .logResult("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
+            .result("clickSuggestion", "clicked on desired suggestion" + suggestion, true);
         return new ArticlePageObject(driver);
       }
     }
-    LOG.log("clickSuggestion", "didn't find suggestion: " + suggestion, LOG.Type.ERROR);
+    LOG.error("clickSuggestion", "didn't find suggestion: " + suggestion);
     return null;
   }
 
@@ -106,11 +106,11 @@ public class NavigationBar extends WikiBasePageObject {
     wait.forElementVisible(searchInput);
     searchInput.clear();
     searchInput.sendKeys(query);
-    LOG.log("typeQuery", "typed query: " + query, LOG.Type.SUCCESS);
+    LOG.success("typeQuery", "typed query: " + query);
   }
 
   public IntraWikiSearchPageObject searchFor(String query) {
-    LOG.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
     typeQuery(query);
     return clickSearchButton();
   }
@@ -118,14 +118,14 @@ public class NavigationBar extends WikiBasePageObject {
   public IntraWikiSearchPageObject clickEnterToSearch() {
     wait.forElementClickable(searchInput);
     searchInput.sendKeys(Keys.ENTER);
-    LOG.log("clickEnterInSearch", "clicked enter in search", LOG.Type.SUCCESS);
+    LOG.success("clickEnterInSearch", "clicked enter in search");
     return new IntraWikiSearchPageObject(driver);
   }
 
   public IntraWikiSearchPageObject clickSearchButton() {
     wait.forElementClickable(searchSubmit);
     searchSubmit.click();
-    LOG.log("clickSearchButton", "clicked on search button", LOG.Type.SUCCESS);
+    LOG.success("clickSearchButton", "clicked on search button");
     return new IntraWikiSearchPageObject(driver);
   }
 
@@ -135,7 +135,7 @@ public class NavigationBar extends WikiBasePageObject {
   public ArticlePageObject goSearchFor(String query) {
     searchInput.sendKeys(query);
     searchSubmit.click();
-    LOG.log("searchFor", "searching for query: " + query, true, driver);
+    LOG.logResult("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject(driver);
   }
 
