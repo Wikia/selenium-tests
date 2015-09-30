@@ -14,9 +14,6 @@ import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 /**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. Login user using Special:UserLogin page, 2. Login user
- *         using drop-down 3. Login staff user using Special:UserLogin page, 4. Login staff user
- *         using drop-down 5. Login japanese user
  * @ownership Social
  */
 
@@ -44,15 +41,15 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
-  public void Login_003_newAuthInGlobalNav() {
+  public void Login_003_authModalInGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
-    AuthModal newAuthModal = signInLink.getNewAuthModal();
-    Assert.assertTrue(newAuthModal.isOpened());
+    AuthModal authModal = signInLink.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
 
-    newAuthModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName, credentials.password);
     base.verifyUserLoggedIn(credentials.userName);
   }
 

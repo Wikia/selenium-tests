@@ -19,8 +19,8 @@ import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
- * @author Karol 'kkarolk' Kujawiak
+ *
+ * @ownership Social
  */
 @Test(groups = "ForcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
@@ -44,15 +44,15 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = "ForcedLogin_001_newFile")
   @Execute(onWikia = "agas")
-  public void ForcedLogin_001_newFile_newAuthModal() {
+  public void ForcedLogin_001_newFile_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifySpecialPage();
     specialPage.addPhoto();
-    AuthModal newAuthModal = specialPage.getNewAuthModal();
-    Assert.assertTrue(newAuthModal.isOpened());
+    AuthModal authModal = specialPage.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
 
-    newAuthModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName, credentials.password);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
 
@@ -75,14 +75,14 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = {"ForcedLogin_002_video", "Media"})
   @Execute(onWikia = "agas")
-  public void ForcedLogin_002_video_newAuthModal() {
+  public void ForcedLogin_002_video_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
-    AuthModal newAuthModal = specialPage.getNewAuthModal();
-    Assert.assertTrue(newAuthModal.isOpened());
+    AuthModal authModal = specialPage.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
 
-    newAuthModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName, credentials.password);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddVideoModal();
@@ -130,15 +130,15 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = "ForcedLogin_005_addMedia")
   @Execute(onWikia = "agas")
-  public void ForcedLogin_005_addMedia_newAuthModal() {
+  public void ForcedLogin_005_addMedia_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
     edit.clickPhotoButton();
-    AuthModal newAuthModal = edit.getNewAuthModal();
-    Assert.assertTrue(newAuthModal.isOpened());
+    AuthModal authModal = edit.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
 
-    newAuthModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
     edit.verifyURLcontains(articleName);
     edit.verifyURLcontains(URLsContent.ACTION_EDIT);
