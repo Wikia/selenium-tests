@@ -19,7 +19,7 @@ public class MercuryErrorComponentObject extends BasePageObject {
   }
 
   /**
-   * The Mercury error is present for 5 seconds after it appears
+   * The Mercury error is present for 10 seconds.
    */
   public void verifyErrorMessage(String errorMessage) {
     wait.forElementVisible(errorBox);
