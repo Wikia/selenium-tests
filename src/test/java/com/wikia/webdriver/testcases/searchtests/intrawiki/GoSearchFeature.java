@@ -30,7 +30,7 @@ public class GoSearchFeature extends IntraWiki {
         navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
         navigation.verifySuggestions(SEARCH_ARTICLE);
         ArticlePageObject article = navigation.ArrowDownAndEnterSuggestion(SEARCH_ARTICLE);
-        article.verifyArticleName(SEARCH_ARTICLE);
+      article.verifyArticleNameInWgPageName(SEARCH_ARTICLE);
     }
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "UserFromSuggestion"})
@@ -43,7 +43,7 @@ public class GoSearchFeature extends IntraWiki {
         navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
         navigation.verifySuggestions(SEARCH_ARTICLE);
         ArticlePageObject article = navigation.ArrowDownAndEnterSuggestion(SEARCH_ARTICLE);
-        article.verifyArticleName(SEARCH_ARTICLE);
+      article.verifyArticleNameInWgPageName(SEARCH_ARTICLE);
     }
 
     @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"})
@@ -52,6 +52,6 @@ public class GoSearchFeature extends IntraWiki {
         new WikiBasePageObject(driver).openWikiPage(wikiURL);
         NavigationBar navigation = new NavigationBar(driver);
         ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
-        article.verifyArticleName(SearchContent.SEARCH_ARTICLE);
+      article.verifyArticleNameInWgPageName(SearchContent.SEARCH_ARTICLE);
     }
 }

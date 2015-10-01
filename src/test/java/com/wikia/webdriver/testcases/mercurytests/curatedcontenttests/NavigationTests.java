@@ -1,13 +1,18 @@
 package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryErrorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -140,5 +145,34 @@ public class NavigationTests extends NewTestTemplate {
     section.waitForLoadingSpinnerToFinish();
     section.isAlertNotificationVisible();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
+  }
+
+  @Test(groups = "MercuryCuratedNavigationTest_005")
+  @Execute(onWikia = MercuryWikis.MERCURY_CC)
+  public void MercuryCuratedNavigationTest_005_redirectToExistingArticle() {
+    ArticleContent content = new ArticleContent();
+    String redirect = WikiTextContent.REDIRECT + WikiTextContent.LINK_PREFIX +
+                      MercurySubpages.CC_REDIRECT_DESTINATION_1 + WikiTextContent.LINK_POSTFIX;
+    content.push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
+
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_1);
+    Assertion.assertEqualsIgnoreCase(article.getArticleTitle(),
+                                     MercurySubpages.CC_REDIRECT_DESTINATION_1);
+  }
+
+  @Test(groups = "MercuryCuratedNavigationTest_006")
+  @Execute(onWikia = MercuryWikis.MERCURY_CC)
+  public void MercuryCuratedNavigationTest_006_redirectToNotExistingArticle() {
+    ArticleContent content = new ArticleContent();
+    String redirect = WikiTextContent.REDIRECT + WikiTextContent.LINK_PREFIX +
+                      MercurySubpages.CC_REDIRECT_DESTINATION_2 + WikiTextContent.LINK_POSTFIX;
+    content.push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_2);
+
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_2);
+    article.verifyURLcontains(MercurySubpages.CC_REDIRECT_SOURCE_2);
+    MercuryErrorComponentObject mercuryError = new MercuryErrorComponentObject(driver);
+    mercuryError.verifyErrorMessage(MercuryMessages.NOT_EXISTING_REDIRECT);
   }
 }

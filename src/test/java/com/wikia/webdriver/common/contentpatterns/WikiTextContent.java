@@ -35,6 +35,8 @@ public class WikiTextContent {
   public static final String EXT_LINK_PREFIX = "[";
   public static final String EXT_LINK_POSTFIX = "]";
 
+  public static final String REDIRECT = "#redirect";
+
   public static final String TEXT = PageContent.ARTICLE_TEXT;
 
   public static final String PARAGRAPH_TEXT = TEXT;

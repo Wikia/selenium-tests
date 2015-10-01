@@ -32,7 +32,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
-    restore.verifyArticleName(articleTitle);
+    restore.verifyArticleNameInWgPageName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     article.verifyNotificationMessage();

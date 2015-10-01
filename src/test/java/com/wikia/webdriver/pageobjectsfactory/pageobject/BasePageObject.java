@@ -1,12 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -30,17 +34,13 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Karol
@@ -233,10 +233,14 @@ public class BasePageObject {
     return true;
   }
 
-  public void verifyURLcontains(String givenString) {
+  public void verifyURLcontains(String exptectedString) {
     String currentURL = driver.getCurrentUrl();
-    Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
-    PageObjectLogging.log("verifyURLcontains", "current url is the same as expetced url", true);
+    if (Assertion.assertStringContains(currentURL.toLowerCase(), exptectedString.toLowerCase())) {
+      PageObjectLogging.log("verifyURLcontains", "current url contains " + exptectedString, true);
+    } else {
+      PageObjectLogging
+          .log("verifyURLcontains", "current url doesn't contain " + exptectedString, true);
+    }
   }
 
   public void verifyURLcontains(final String givenString, int timeOut) {

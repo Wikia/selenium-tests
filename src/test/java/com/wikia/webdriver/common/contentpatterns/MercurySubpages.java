@@ -29,6 +29,11 @@ public class MercurySubpages {
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
+  public static final String CC_REDIRECT_SOURCE_1 = "RedirectSource1";
+  public static final String CC_REDIRECT_SOURCE_2 = "RedirectSource2";
+  public static final String CC_REDIRECT_DESTINATION_1 = "RedirectDestination1";
+  // the redirect destination 2 article doesn't exist
+  public static final String CC_REDIRECT_DESTINATION_2 = "RedirectDestination2";
 
   // Categories in mercurycc.wikia.com
   public static final String CC_CATEGORY_ARTICLES = "main/category/Articles";
