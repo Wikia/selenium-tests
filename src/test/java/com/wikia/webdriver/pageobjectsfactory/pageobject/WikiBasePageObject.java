@@ -634,7 +634,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyPermissionsErrorsPresent() {
     wait.forElementVisible(premissionErrorMessage);
-    LOG.logResult("verifyPermissionsErrors", "premission error found, as expected", true, driver);
+    LOG.success("verifyPermissionsErrors", "premission error found, as expected", true);
   }
 
   public void verifyUrl(String url) {
@@ -648,8 +648,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyLoginReguiredMessage() {
     wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
-    LOG.logResult("LoginRequiredMessage", "Login required message in first header present", true,
-        driver);
+    LOG.success("LoginRequiredMessage", "Login required message in first header present", true);
   }
 
   public SpecialUserLoginPageObject clickLoginOnSpecialPage() {

@@ -54,25 +54,25 @@ public class SEOTests extends NewTestTemplate {
      */
 
     boolean result = seo.isOgFbApp();
-    LOG.log("meta[property='fb:app_id']", "is filled", "is empty", result);
+    LOG.result("meta[property='fb:app_id']", "is filled", "is empty", result);
 
     result = seo.isOgImage();
-    LOG.log("meta[property='og:image']", "is filled", "is empty", result);
+    LOG.result("meta[property='og:image']", "is filled", "is empty", result);
 
     result = seo.isOgUrlTag();
-    LOG.log("meta[property='og:url']", "contains current url", "contains wrong url", result);
+    LOG.result("meta[property='og:url']", "contains current url", "contains wrong url", result);
 
     result = seo.isOgDescription();
-    LOG.log("meta[property='og:description']", "is filled", "is empty", result);
+    LOG.result("meta[property='og:description']", "is filled", "is empty", result);
 
     result = !seo.isOgSiteName();
-    LOG.log("meta[property='og:site_name']", "is empty", "is filled", result);
+    LOG.result("meta[property='og:site_name']", "is empty", "is filled", result);
 
     result = seo.isOgTitleWithWiki();
-    LOG.log("meta[property='og:title']", "contains Wiki", "is wrong", result);
+    LOG.result("meta[property='og:title']", "contains Wiki", "is wrong", result);
 
     result = seo.isOgTypeWebsite();
-    LOG.log("meta[property='og:type']", "contains website", "is wrong", result);
+    LOG.result("meta[property='og:type']", "contains website", "is wrong", result);
 
     // Uncomment after issue is fixed - related to HG-605
     /*

@@ -106,8 +106,8 @@ public class AdsGermanObject extends AdsBaseObject {
       throw new NoSuchElementException("No known combination from 71 media present");
     }
 
-    LOG.logResult("Combination present", "Combination present: " + testedCombination.get("name"),
-        true, driver);
+    LOG.success("Combination present", "Combination present: " + testedCombination.get("name"),
+        true);
 
     for (String slotSelector : (List<String>) testedCombination.get("slots")) {
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));

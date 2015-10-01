@@ -105,7 +105,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
   public void verifyAvatar(String fileName) {
     wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
-    LOG.log("verifyAvatar", "Desired avatar is visible on user profile page", LOG.Type.SUCCESS);
+    LOG.success("verifyAvatar", "Desired avatar is visible on user profile page");
   }
 
   public void verifyProfilePage(String userName) {

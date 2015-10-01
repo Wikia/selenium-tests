@@ -38,8 +38,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       }
     }
     if (!ifPassed) {
-      LOG.logResult("verifyRecentEdition", "edition on article  '" + articleName + "' by user: '"
-          + userName + "', not found", false, driver);
+      LOG.error("verifyRecentEdition", "edition on article  '" + articleName + "' by user: '"
+          + userName + "', not found");
     }
   }
 
@@ -57,8 +57,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       }
     }
     if (!ifPassed) {
-      LOG.logResult("verifyRecentNewPage", "new page:  '" + articleName + "' by user: '" + userName
-          + "', not found", false, driver);
+      LOG.error("verifyRecentNewPage", "new page:  '" + articleName + "' by user: '" + userName
+          + "', not found");
     }
 
   }

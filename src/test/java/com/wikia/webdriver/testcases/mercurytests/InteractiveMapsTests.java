@@ -40,22 +40,22 @@ public class InteractiveMapsTests extends NewTestTemplate {
     LOG.result("Map modal", "is visible", true);
 
     boolean result = maps.isMapIdInUrl();
-    LOG.log("Url", "match pattern ?map=", "does not match pattern ?map=", result);
+    LOG.result("Url", "match pattern ?map=", "does not match pattern ?map=", result);
 
     result = maps.isTextInMapTitleHeader();
-    LOG.log("Map title in header", "is displayed", "is not displayed", result);
+    LOG.result("Map title in header", "is displayed", "is not displayed", result);
 
     maps.switchToMapFrame();
     maps.clickPin();
 
     result = maps.isPinPopUp();
-    LOG.log("Pin popup", "appears", "does not appear", result);
+    LOG.result("Pin popup", "appears", "does not appear", result);
 
     maps.switchToDefaultFrame();
     maps.clickCloseButton();
 
     result = !maps.isMapModalVisible();
-    LOG.log("Map modal", "is closed", "is opened", result);
+    LOG.result("Map modal", "is closed", "is opened", result);
   }
 
   // IMAPT02
@@ -153,6 +153,6 @@ public class InteractiveMapsTests extends NewTestTemplate {
     File afterScrolling = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeScrolling, afterScrolling);
-    LOG.log("Scrolling in filter box", "works", "does not work", result);
+    LOG.result("Scrolling in filter box", "works", "does not work", result);
   }
 }

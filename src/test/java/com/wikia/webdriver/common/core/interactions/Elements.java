@@ -27,8 +27,8 @@ public class Elements {
       }
       if (value.equals(retAttribute)) {
         foundElement = element;
-        LOG.log("getElementByValue", "Element with attribute: " + attribute + " with the value: "
-            + value + " is found from the list", LOG.Type.SUCCESS);
+        LOG.success("getElementByValue", "Element with attribute: " + attribute
+            + " with the value: " + value + " is found from the list");
         break;
       }
     }
@@ -70,6 +70,6 @@ public class Elements {
       throw new NoSuchElementException("Element's child with text: " + value
           + " is not found from the list");
     }
-    return foundElement;
+ return foundElement;
   }
 }

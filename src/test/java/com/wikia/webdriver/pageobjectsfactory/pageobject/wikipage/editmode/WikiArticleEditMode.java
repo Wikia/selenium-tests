@@ -101,15 +101,15 @@ public class WikiArticleEditMode extends WikiEditMode {
     waitFor.until(ExpectedConditions.visibilityOfElementLocated(By
         .cssSelector("img[data-rte-meta*='" + caption + "']")));
     driver.switchTo().defaultContent();
-    LOG.logResult("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode",
-        true, driver);
+    LOG.success("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode",
+        true);
   }
 
 
   public void verifyTheCaptionOnThePreview(String caption) {
     waitFor.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
     LOG.success("VerifyTheCaptionOnThePreview",
-                "Verify that the caption of image appears in the preview", true);
+        "Verify that the caption of image appears in the preview", true);
   }
 
   public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
@@ -117,7 +117,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementClickable(publishButtonPreview);
     jsActions.click(publishButtonSelector);
     LOG.success("LeftClickOnPublishButtonInPreviewMode",
-                "Click on 'Publish' button in preview mode", true);
+        "Click on 'Publish' button in preview mode", true);
     return new WikiArticlePageObject(driver);
   }
 
@@ -184,7 +184,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(bodyContent);
     bodyContent.sendKeys(content);
     LOG.success("typeInContent", "content " + bodyContent.getText() + " - type into article body",
-                true);
+        true);
     driver.switchTo().defaultContent();
   }
 
@@ -347,14 +347,14 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void typeContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    LOG.success("typeInContent", "content type into source mode textarea",true);
+    LOG.success("typeInContent", "content type into source mode textarea", true);
   }
 
   public void typeInTemplateContent(String content) {
     driver.switchTo().defaultContent();
     wait.forElementVisible(messageSourceModeTextArea);
     messageSourceModeTextArea.sendKeys(content);
-    LOG.success("typeInContent", "content type into source mode textarea",true);
+    LOG.success("typeInContent", "content type into source mode textarea", true);
   }
 
   public void verifyEmbededMap(String mapID) {

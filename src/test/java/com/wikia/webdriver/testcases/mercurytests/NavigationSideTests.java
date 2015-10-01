@@ -44,17 +44,17 @@ public class NavigationSideTests extends NewTestTemplate {
     LOG.result("Navigation menu", "is visible", true);
 
     boolean result = nav.isNavListElementEllipsized(0);
-    LOG.log("Link without chevron", "is ellipsized", "is not ellipsized", result);
+    LOG.result("Link without chevron", "is ellipsized", "is not ellipsized", result);
 
     result = nav.isNavListElementEllipsized(1);
-    LOG.log("Link with chevron", "is ellipsized", "is not ellipsized", result);
+    LOG.result("Link with chevron", "is ellipsized", "is not ellipsized", result);
 
     Assertion.assertFalse(nav.isBackLinkDisplayed(), "Back link is displayed");
 
     LOG.result("Back link", "is hidden", true);
 
     result = nav.isRandomPageButtonDisplayed();
-    LOG.log("Random page button", "is displayed", "is hidden", result);
+    LOG.result("Random page button", "is displayed", "is hidden", result);
 
     nav.clickNavListElement(2);
 
@@ -63,7 +63,7 @@ public class NavigationSideTests extends NewTestTemplate {
     LOG.result("Back link", "is displayed", true);
 
     result = !nav.isRandomPageButtonDisplayed();
-    LOG.log("Random page button", "is hidden", "is displayed", result);
+    LOG.result("Random page button", "is hidden", "is displayed", result);
 
     nav.clickBackChevron();
 
@@ -74,7 +74,7 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.clickOverlay();
 
     result = !nav.isNavMenuVisible();
-    LOG.log("Navigation menu", "is hidden", "is visible", result);
+    LOG.result("Navigation menu", "is hidden", "is visible", result);
   }
 
   // NST02
@@ -97,25 +97,25 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     boolean result = !searchObject.isSuggestionListDisplayed();
-    LOG.log("Search suggestions", "are hidden", "are displayed", result);
+    LOG.result("Search suggestions", "are hidden", "are displayed", result);
 
     searchObject.typeInSearchField(SEARCH_FAIL);
 
     result = searchObject.isSorryInfoDisplayed();
-    LOG.log("Sorry message", "is displayed", "is hidden", result);
+    LOG.result("Sorry message", "is displayed", "is hidden", result);
 
     searchObject.waitMilliseconds(5000, "Wait for message to disappear");
 
     result = searchObject.isSorryInfoDisplayed();
-    LOG.log("Sorry message", "is displayed", "is hidden", result);
+    LOG.result("Sorry message", "is displayed", "is hidden", result);
 
     searchObject.clickCancelButton();
 
     result = searchObject.isMenuFieldVisible();
-    LOG.log("Menu field", "is visible", "is hidden", result);
+    LOG.result("Menu field", "is visible", "is hidden", result);
 
     result = !searchObject.isResultFieldVisible();
-    LOG.log("Result field", "is hidden", "is visible", result);
+    LOG.result("Result field", "is hidden", "is visible", result);
   }
 
   // NST03
@@ -137,7 +137,7 @@ public class NavigationSideTests extends NewTestTemplate {
     searchObject.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    LOG.log("Redirection", "works", "does not work", result);
+    LOG.result("Redirection", "works", "does not work", result);
   }
 
   // NST04
@@ -156,6 +156,6 @@ public class NavigationSideTests extends NewTestTemplate {
     nav.waitForLoadingSpinnerToFinish();
 
     boolean result = !oldUrl.equals(driver.getCurrentUrl());
-    LOG.log("Redirection", "works", "does not work", result);
+    LOG.result("Redirection", "works", "does not work", result);
   }
 }

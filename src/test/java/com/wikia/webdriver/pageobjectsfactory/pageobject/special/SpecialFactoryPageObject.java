@@ -40,13 +40,12 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
 
   private void deselectCreateDumpCheckBox() {
     scrollAndClick(dumpCheckBox);
-    LOG.success("deselectCreateDumpCheckBox ", "Create dump checkbox deselected",true);
+    LOG.success("deselectCreateDumpCheckBox ", "Create dump checkbox deselected", true);
   }
 
   private void deselectImageArchiveCheckBox() {
     scrollAndClick(imageArchiveCheckBox);
-    LOG.logResult("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected",
-                  true, driver);
+    LOG.success("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected", true);
   }
 
   private void confirmClose() {

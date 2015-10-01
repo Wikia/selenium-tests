@@ -61,8 +61,8 @@ public class ForumBoardPageObject extends BasePageObject {
     driver.switchTo().defaultContent();
     checkHighlightCheckbox(highlight);
     clickPostButton();
-    LOG.logResult("startDiscussion", "discussion with message: " + message + ", with title "
-        + title + " posted", true, driver);
+    LOG.success("startDiscussion", "discussion with message: " + message + ", with title "
+        + title + " posted", true);
     return new ForumThreadPageObject(driver);
   }
 
@@ -70,13 +70,11 @@ public class ForumBoardPageObject extends BasePageObject {
     for (WebElement elem : threadTitlesList) {
       if (elem.getText().contains(title)) {
         scrollAndClick(elem);
-        LOG.logResult("openDiscussion", "discussion with title: " + title + ", opened", true,
-            driver);
+        LOG.success("openDiscussion", "discussion with title: " + title + ", opened", true);
         return new ForumThreadPageObject(driver);
       }
     }
-    LOG.logResult("openDiscussion", "discussion with title: " + title + ", not found", false,
-        driver);
+    LOG.error("openDiscussion", "discussion with title: " + title + ", not found");
     return null;
   }
 
@@ -87,8 +85,8 @@ public class ForumBoardPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
-    LOG.logResult("startDiscussionWithoutTitle", "discussion with message: " + message
-        + " without title, posted", true, driver);
+    LOG.success("startDiscussionWithoutTitle", "discussion with message: " + message
+        + " without title, posted", true);
     return new ForumThreadPageObject(driver);
   }
 
@@ -150,8 +148,8 @@ public class ForumBoardPageObject extends BasePageObject {
   public void verifyStartedDiscussionWithLinks(String internalLink, String externalLink) {
     wait.forTextInElement(discussionBody, 0, internalLink);
     wait.forTextInElement(discussionBody, 1, externalLink);
-    LOG.log("verifyStartedDiscussionWithLinks", "internal and external links: " + internalLink
-        + " and" + externalLink + "verified", LOG.Type.SUCCESS);
+    LOG.success("verifyStartedDiscussionWithLinks", "internal and external links: " + internalLink
+        + " and" + externalLink + "verified");
   }
 
   public void startDiscussionWithVideo(String url, String title) {

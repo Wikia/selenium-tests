@@ -38,7 +38,7 @@ public class TOCTests extends NewTestTemplate {
     LOG.result("TOC", "is displayed", true);
 
     boolean result = toc.isTOCUnderArticleName();
-    LOG.log("TOC position", "is under article name", "is not under article name", result);
+    LOG.result("TOC position", "is under article name", "is not under article name", result);
 
     Assertion.assertFalse(toc.isTOCMenuVisible(), "TOC menu is expanded");
 
@@ -53,10 +53,10 @@ public class TOCTests extends NewTestTemplate {
     toc.clickOnTOCListElement(1);
 
     result = toc.isUserMovedToRightSection(1);
-    LOG.log("TOC redirection", "works", "does not work", result);
+    LOG.result("TOC redirection", "works", "does not work", result);
 
     result = toc.isH2PaddingTopMoreThan(1, H2_PADDING_TOP);
-    LOG.log("Header padding", "is correct", "is wrong", result);
+    LOG.result("Header padding", "is correct", "is wrong", result);
   }
 
   // TOCT02
@@ -66,7 +66,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
-    LOG.log("TOC", "is hidden", "is displayed", result);
+    LOG.result("TOC", "is hidden", "is displayed", result);
   }
 
   // TOCT03
@@ -76,7 +76,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log("Redirection to header directly from link", "works", "does not work", result);
+    LOG.result("Redirection to header directly from link", "works", "does not work", result);
   }
 
   // TOCT04
@@ -87,7 +87,7 @@ public class TOCTests extends NewTestTemplate {
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log("Redirection to header from current page", "works", "does not work", result);
+    LOG.result("Redirection to header from current page", "works", "does not work", result);
   }
 
   // TOCT05
@@ -99,6 +99,6 @@ public class TOCTests extends NewTestTemplate {
     toc.waitForLoadingSpinnerToFinish();
 
     boolean result = toc.isUserMovedToRightSection(1);
-    LOG.log("Redirection to header from other page", "works", "does not work", result);
+    LOG.result("Redirection to header from other page", "works", "does not work", result);
   }
 }

@@ -120,9 +120,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      LOG.logResult("mercuryNavigateToAnArticle()",
-          String.format("Clicking: %s (%s)", link.getText(), link.getAttribute("href")), true,
-          driver);
+      LOG.success("mercuryNavigateToAnArticle()",
+          String.format("Clicking: %s (%s)", link.getText(), link.getAttribute("href")), true);
 
       scrollToElement(link);
       link.click();

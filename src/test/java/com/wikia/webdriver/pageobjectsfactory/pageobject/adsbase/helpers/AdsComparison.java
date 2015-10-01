@@ -100,7 +100,7 @@ public class AdsComparison {
         LOG.success("verifyColorAd", "Current time: " + currentTime + " seconds");
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      LOG.log("verifyColorAd", e, false, true);
+      LOG.error("verifyColorAd", e);
     }
   }
 

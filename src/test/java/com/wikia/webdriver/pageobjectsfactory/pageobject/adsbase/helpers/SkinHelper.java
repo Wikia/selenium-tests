@@ -74,10 +74,10 @@ public class SkinHelper {
       patternImage = imageEditor.fileToImage(patternFile);
     }
     Dimension size = new Dimension(patternImage.getWidth(), patternImage.getHeight());
-    LOG.logImage("EXPECTED", patternFile, true);
+    LOG.result("EXPECTED", patternFile, true);
     Point startPoint = getStartPoint(patternImage, isLeft);
     File actualFile = shooter.capturePageAndCrop(startPoint, size, driver);
-    LOG.logImage("ACTUAL", actualFile, true);
+    LOG.result("ACTUAL", actualFile, true);
     BufferedImage actualImg = imageEditor.fileToImage(actualFile);
     return !imageComparison.areImagesDifferent(patternImage, actualImg, IMAGES_THRESHOLD_PERCENT);
   }

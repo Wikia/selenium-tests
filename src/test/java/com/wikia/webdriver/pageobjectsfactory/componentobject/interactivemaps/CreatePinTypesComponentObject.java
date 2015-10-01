@@ -80,8 +80,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     wait.forElementVisible(firstPin);
     firstPin.clear();
     firstPin.sendKeys(pinTypeName);
-    LOG.logResult("typePinTypeTitle", pinTypeName + " title for pin type was typed in", true,
-        driver);
+    LOG.success("typePinTypeTitle", pinTypeName + " title for pin type was typed in", true);
   }
 
   public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
@@ -90,7 +89,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
       wait.forElementVisible(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
       pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);
     }
-    LOG.success("typeManyPinTypeTitle", "Added " + amountFields + " pin types",true);
+    LOG.success("typeManyPinTypeTitle", "Added " + amountFields + " pin types", true);
   }
 
   public void verifyPinTypesDialog() {

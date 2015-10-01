@@ -267,8 +267,7 @@ public class BasePageObject {
   public void getUrl(String url, boolean makeScreenshot) {
     driver.get(url);
     if (makeScreenshot) {
-      LOG.logResult("Take screenshot", String.format("Screenshot After Navigation to: %s", url),
-          true, driver);
+      LOG.success("Take screenshot", String.format("Screenshot After Navigation to: %s", url), true);
     }
   }
 
@@ -426,7 +425,7 @@ public class BasePageObject {
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
     LOG.success("notifications_verifyNotificationTitle",
-        "Verify that the latest notification has the following title: " + title,true);
+        "Verify that the latest notification has the following title: " + title, true);
   }
 
   public void notifications_clickOnNotificationsLogo() {
@@ -434,14 +433,14 @@ public class BasePageObject {
     wait.forElementClickable(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
     LOG.success("notifications_clickOnNotificationsLogo",
-                "click on notifications logo on the upper right corner", true);
+        "click on notifications logo on the upper right corner", true);
   }
 
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
     LOG.success("norifications_showNotifications",
-                "show notifications by adding 'show' class to element", true);
+        "show notifications by adding 'show' class to element", true);
   }
 
   /**
@@ -564,8 +563,8 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
           + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    LOG.logResult("verifyElementMoved", "Element did move. From (" + source.x + "," + source.y
-        + ") to (" + target.x + "," + target.y + ")", true, driver);
+    LOG.success("verifyElementMoved", "Element did move. From (" + source.x + "," + source.y
+        + ") to (" + target.x + "," + target.y + ")", true);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -579,8 +578,8 @@ public class BasePageObject {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
           + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    LOG.logResult("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
+    LOG.success("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
+        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true);
   }
 
   public void switchToNewBrowserTab() {
@@ -598,7 +597,7 @@ public class BasePageObject {
       if (filter.isEmpty() || logEntry.getMessage().contains(filter)) {
         result.add(logEntry.getMessage());
       }
-    }
+   }
     return result;
   }
 }

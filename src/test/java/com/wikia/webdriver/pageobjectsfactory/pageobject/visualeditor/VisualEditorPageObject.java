@@ -438,8 +438,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
         .perform();
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     wait.forElementVisible(contextEdit);
-    LOG.logResult("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
-                  driver);
+    LOG.success("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true);
   }
 
   private Point getTransclusionLocation(int index, Transclusion transclusion) {

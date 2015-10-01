@@ -147,8 +147,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (hubGPTLB.findElements(By.cssSelector("iframe")).size() > 1) {
       LOG.result("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
     } else {
-      LOG.logResult("IFrames not found",
-          "2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less", false, driver);
+      LOG.error("IFrames not found",
+          "2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less");
       throw new NoSuchElementException("IFrames inside GPT div not found!");
     }
   }
@@ -172,14 +172,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
     verifyNoAds();
-    LOG.success("verifyNoAdsOnPage", "No ads detected",true);
+    LOG.success("verifyNoAdsOnPage", "No ads detected", true);
   }
 
   public void verifyNoAdsOnMobilePage() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_AD_IN_CONTENT));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER));
     verifyNoAds();
-    LOG.success("verifyNoAdsOnMobilePage", "No ads detected",true);
+    LOG.success("verifyNoAdsOnMobilePage", "No ads detected", true);
   }
 
   public void verifyNoLiftiumAdsInSlots(List<String> slots) {
@@ -212,8 +212,8 @@ public class AdsBaseObject extends WikiBasePageObject {
       Assertion.assertStringContains(dataGptSlotParams, param);
     }
 
-    LOG.logResult("verifyGptParams", "All page-level and slot-level params present as expected "
-        + dataGptPageParams + ", " + dataGptSlotParams, true, driver);
+    LOG.success("verifyGptParams", "All page-level and slot-level params present as expected "
+        + dataGptPageParams + ", " + dataGptSlotParams, true);
   }
 
   /**
@@ -231,8 +231,8 @@ public class AdsBaseObject extends WikiBasePageObject {
       Assertion.assertEquals(getGptParams(slotName, "data-gpt-creative-id"), creativeId);
     }
 
-    LOG.logResult("verifyGptAdInSlot", "Line item id loaded: " + lineItemId + ", creativeId:"
-        + creativeId, true, driver);
+    LOG.success("verifyGptAdInSlot", "Line item id loaded: " + lineItemId + ", creativeId:"
+        + creativeId, true);
   }
 
   public void verifySpotlights() {
@@ -256,8 +256,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
 
-    LOG.logResult("verifySize", slotName + " has width: " + slotWidth + ";height: " + slotHeight,
-        true, driver);
+    LOG.success("verifySize", slotName + " has width: " + slotWidth + ";height: " + slotHeight,
+        true);
     return this;
   }
 
@@ -499,7 +499,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         public Boolean apply(WebDriver driver) {
           try {
             return (boolean) ((JavascriptExecutor) driver).executeScript("return !!(" + script
-                                                                         + ");");
+                + ");");
           } catch (WebDriverException e) {
             LOG.error("waitForJavaScriptTruthy", e);
             return false;
@@ -517,8 +517,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions
-              .execute(
-                  " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
+              .execute(" (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
           return slot.getAttribute("style").contains("visibility: visible;");
         }
       });
@@ -574,8 +573,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (checkScriptPresentInElement(slotElement, scriptExpectedResult)) {
       LOG.result("PushSlotsScriptFound", "Script " + scriptExpectedResult + " found", true);
     } else {
-      LOG.logResult("PushSlotsScriptNotFound", "Script " + scriptExpectedResult + " not found",
-          false, driver);
+      LOG.error("PushSlotsScriptNotFound", "Script " + scriptExpectedResult + " not found");
       throw new NoSuchElementException("Script for pushing ads not found in element");
     }
   }

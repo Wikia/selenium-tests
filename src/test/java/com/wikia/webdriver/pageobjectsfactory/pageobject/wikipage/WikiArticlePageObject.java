@@ -110,8 +110,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);
-    LOG.logResult("VerifyTheImageOnThePage", "Verify that the image appears on the page", true,
-        driver);
+    LOG.success("VerifyTheImageOnThePage", "Verify that the image appears on the page", true);
   }
 
   public WikiHistoryPageObject openHistoryPage() {

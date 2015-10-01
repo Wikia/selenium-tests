@@ -33,5 +33,4 @@ public class TestAdSkinPresence extends TemplateNoFirstLoad {
     adsBaseObject.verifySkin(expectedAdSkinLeftPath, expectedAdSkinRightPath, backgroundColor,
         middleColor);
   }
-
 }

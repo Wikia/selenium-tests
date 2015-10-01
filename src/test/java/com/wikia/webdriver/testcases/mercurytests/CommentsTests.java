@@ -47,19 +47,19 @@ public class CommentsTests extends NewTestTemplate {
     LOG.result("Comments list", "is expanded", true);
 
     boolean result = comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE;
-    LOG.log("Number of comments per page", "is correct", "is incorrect", result);
+    LOG.result("Number of comments per page", "is correct", "is incorrect", result);
 
     result = comments.isUserAvatarInComment(0);
-    LOG.log("User avatar", "is displayed", "is not displayed", result);
+    LOG.result("User avatar", "is displayed", "is not displayed", result);
 
     result = comments.isUserUsernameInComment(0);
-    LOG.log("User username", "is displayed", "is not displayed", result);
+    LOG.result("User username", "is displayed", "is not displayed", result);
 
     result = comments.isTimeStampInComment(0);
-    LOG.log("Time stamp", "is displayed", "is not displayed", result);
+    LOG.result("Time stamp", "is displayed", "is not displayed", result);
 
     result = comments.isContentInComment(0);
-    LOG.log("Comment content", "is displayed", "is not displayed", result);
+    LOG.result("Comment content", "is displayed", "is not displayed", result);
   }
 
   // CT02
@@ -89,8 +89,8 @@ public class CommentsTests extends NewTestTemplate {
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
 
     boolean result = numberOfComments == 0;
-    LOG.log("Comments counter", "is correct", "There are " + numberOfComments
-        + " untracked comments", result);
+    LOG.result("Comments counter", "is correct", "There are " + numberOfComments
+                                                 + " untracked comments", result);
 
     Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
         "Previous page button isn't displayed");
@@ -101,7 +101,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
 
     result = !comments.isPreviousCommentPageButtonDisplayed();
-    LOG.log("Previous page button", "is not displayed", "is displayed", result);
+    LOG.result("Previous page button", "is not displayed", "is displayed", result);
   }
 
   // CT03
@@ -125,7 +125,7 @@ public class CommentsTests extends NewTestTemplate {
 
     boolean result =
         comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0);
-    LOG.log("Replies counter", "is correct", "is incorrect", result);
+    LOG.result("Replies counter", "is correct", "is incorrect", result);
   }
 
   // CT04
@@ -140,7 +140,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickOnUsername(0);
 
     boolean result = username.equals(comments.getUsernameFromUrl());
-    LOG.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:", result);
+    LOG.result("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:", result);
   }
 
   // CT05
@@ -154,15 +154,15 @@ public class CommentsTests extends NewTestTemplate {
 
     boolean result =
         comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    LOG.log("Video thumbnail", "is displayed", "is not displayed", result);
+    LOG.result("Video thumbnail", "is displayed", "is not displayed", result);
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    LOG.log("Video link", "is present", "is not present", result);
+    LOG.result("Video link", "is present", "is not present", result);
 
     result = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    LOG.log("Image thumbnail", "is displayed", "is not displayed", result);
+    LOG.result("Image thumbnail", "is displayed", "is not displayed", result);
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    LOG.log("Image link", "is present", "is not present", result);
+    LOG.result("Image link", "is present", "is not present", result);
   }
 }

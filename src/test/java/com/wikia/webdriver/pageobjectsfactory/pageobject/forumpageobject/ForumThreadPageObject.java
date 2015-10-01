@@ -107,8 +107,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    LOG.logResult("removeThread", "removed thread with the following reason: " + reason, true,
-                  driver);
+    LOG.success("removeThread", "removed thread with the following reason: " + reason, true);
   }
 
   public void clickOnRemoveButton() {
@@ -175,8 +174,7 @@ public class ForumThreadPageObject extends BasePageObject {
     dropList.selectByVisibleText(forumBoardName);
     wait.forElementClickable(moveThreadModalMoveThreadButton);
     scrollAndClick(moveThreadModalMoveThreadButton);
-    LOG.logResult("moveThread", "thread moved to the following board: " + forumBoardName, true,
-                  driver);
+    LOG.success("moveThread", "thread moved to the following board: " + forumBoardName, true);
   }
 
   public void closeThread(String reason) {

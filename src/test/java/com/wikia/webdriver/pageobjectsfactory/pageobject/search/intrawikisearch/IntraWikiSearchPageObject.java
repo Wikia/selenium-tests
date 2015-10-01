@@ -333,8 +333,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
-    LOG.logResult("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true,
-        driver);
+    LOG.success("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true);
   }
 
   public void verifyNewSuggestionsTextAndImages(String query) {

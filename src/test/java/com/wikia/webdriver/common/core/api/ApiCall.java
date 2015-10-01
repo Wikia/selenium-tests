@@ -69,7 +69,7 @@ public abstract class ApiCall {
 
       httpClient.execute(httpPost);
 
-      LOG.log("CONTENT PUSH", "Content posted to: " + URL_STRING, LOG.Type.INFO);
+      LOG.info("CONTENT PUSH", "Content posted to: " + URL_STRING);
     } catch (ClientProtocolException e) {
       LOG.error("EXCEPTION", ExceptionUtils.getStackTrace(e));
       throw new WebDriverException(ERROR_MESSAGE);

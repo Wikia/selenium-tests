@@ -145,8 +145,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     wait.forElementClickable(useAdvancedRecentChangesCheckbox);
     useAdvancedRecentChangesCheckbox.click();
-    LOG.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked",
-        LOG.Type.SUCCESS);
+    LOG.success("Use_advanced_recent_changes_checkbox",
+        "Use_advanced_recent_changes_checkbox clicked");
 
     return this;
   }
@@ -163,8 +163,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
       useAdvancedRecentChangesCheckbox.click();
     }
     clickSaveButton();
-    LOG.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked",
-        "GSet_advanced_recent_changes_checkbox_value set to default unchecked", LOG.Type.SUCCESS);
+    LOG.success("Set_advanced_recent_changes_checkbox_value_to_default_unchecked",
+        "GSet_advanced_recent_changes_checkbox_value set to default unchecked");
 
     return this;
   }
@@ -172,5 +172,4 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public enum tabNames {
     INFO, EMAIL, EDITING, UNDER, FACEBOOK
   }
-
 }

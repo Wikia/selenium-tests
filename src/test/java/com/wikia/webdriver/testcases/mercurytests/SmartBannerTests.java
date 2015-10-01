@@ -53,19 +53,19 @@ public class SmartBannerTests extends NewTestTemplate {
     }
 
     boolean result = banner.getButtonName().equals(buttonName);
-    LOG.log("Button name", "is correct", "is incorrect", result);
+    LOG.result("Button name", "is correct", "is incorrect", result);
 
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
     touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
 
     result = lastSmartBannerPosition == banner.getSmartBannerPosition();
-    LOG.log("Position", "is fixed", "is floated", result);
+    LOG.result("Position", "is fixed", "is floated", result);
 
     banner.scrollToTopAndWaitForShareBarToBeHidden();
     banner.clickCloseButton();
 
     result = !banner.isSmartBannerVisible();
-    LOG.log("Smart banner", "is closed", "is visible", result);
+    LOG.result("Smart banner", "is closed", "is visible", result);
   }
 
   // SBT02
@@ -79,10 +79,10 @@ public class SmartBannerTests extends NewTestTemplate {
       banner.openMercuryArticleByName(wikiURL, WIKI[1]);
 
       result = banner.isSmartBannerColorCorrect(WIKI[2]);
-      LOG.log("Smart banner color", "is correct", "is wrong", result);
+      LOG.result("Smart banner color", "is correct", "is wrong", result);
 
       result = banner.isSmartBannerButtonColorCorrect(WIKI[2]);
-      LOG.log("Smart banner button color", "is correct", "is wrong", result);
+      LOG.result("Smart banner button color", "is correct", "is wrong", result);
     }
   }
 

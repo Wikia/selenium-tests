@@ -56,7 +56,7 @@ public class Shooter {
     }
 
     File image = imageEditor.cropImage(start, size, capturePage(driver));
-    LOG.logImage("Shooter", image, true);
+    LOG.result("Shooter", image, true);
     return image;
   }
 

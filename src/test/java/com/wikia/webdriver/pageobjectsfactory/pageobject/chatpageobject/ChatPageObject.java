@@ -86,7 +86,7 @@ public class ChatPageObject extends WikiBasePageObject {
   public void verifyMessageOnChat(String message) {
     wait.forElementVisible(By.xpath(String.format(MESSAGE_ON_CHAT, message)));
     LOG.success("VerifyMessageOnChatPresent", "Message: " + message + " is present on chat board",
-                true);
+        true);
   }
 
   public void verifyUserJoinToChatMessage(String userName) {
@@ -95,18 +95,18 @@ public class ChatPageObject extends WikiBasePageObject {
       LOG.error("VerifyUserJoinsChat", "User: " + userName + " not visible on chat's guests list");
       throw new NoSuchElementException("User: " + userName + " not visible on chat's guests list");
     }
-    LOG.success("verifyUserJoinToChatMessage", userName + " has joined the chat.",true);
+    LOG.success("verifyUserJoinToChatMessage", userName + " has joined the chat.", true);
   }
 
   public void verifyUserIsVisibleOnContactsList(String userName) {
     wait.forElementVisible(By.cssSelector(String.format(USER_SELECTOR, userName)));
-    LOG.logResult("verifyUserIsVisibleOnContactsList", userName + " is visible on contacts list",
-        true, driver);
+    LOG.success("verifyUserIsVisibleOnContactsList", userName + " is visible on contacts list",
+        true);
   }
 
   public void verifyPrivateMessageHeader() {
     wait.forElementVisible(privateMessagesHeader);
-    LOG.success("verifyPrivateMessageHeader", "private message header is visible",true);
+    LOG.success("verifyPrivateMessageHeader", "private message header is visible", true);
   }
 
   public void verifyPrivateMessageNotification() {
@@ -116,8 +116,8 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyPrivateMessageNotification(int notificationCount) {
     wait.forElementVisible(By.xpath(String.format(NOTIFICATION_COUNTER, notificationCount)));
-    LOG.log("verifyPrivateMessageNotification", "private message notification number "
-        + notificationCount + " is visible", LOG.Type.SUCCESS);
+    LOG.success("verifyPrivateMessageNotification", "private message notification number "
+        + notificationCount + " is visible");
   }
 
   public void verifyPrivateMessageIsHighlighted(String user) {
@@ -355,7 +355,7 @@ public class ChatPageObject extends WikiBasePageObject {
     verifyPrivateMessageNotification(messagesReceived.size());
     clickOnUserInPrivateMessageSection(senderUser);
     for (String message : messagesReceived) {
-      verifyMessageOnChat(message);
+  verifyMessageOnChat(message);
     }
   }
 }

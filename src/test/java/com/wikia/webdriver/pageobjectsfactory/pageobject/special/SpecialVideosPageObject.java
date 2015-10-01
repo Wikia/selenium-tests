@@ -90,8 +90,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void verifyVideoAdded(String videoTitle) {
     waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", videoTitle);
-    LOG.log("verifyVideoAdded", "verify that video with following description was added: "
-        + videoTitle, LOG.Type.SUCCESS);
+    LOG.success("verifyVideoAdded", "verify that video with following description was added: "
+        + videoTitle);
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {

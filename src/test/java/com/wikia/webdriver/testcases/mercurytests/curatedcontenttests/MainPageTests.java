@@ -44,42 +44,42 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
-    LOG.log("Current URL", "is set on " + ROOT_PATH, "is not set on " + ROOT_PATH, result);
+    LOG.result("Current URL", "is set on " + ROOT_PATH, "is not set on " + ROOT_PATH, result);
 
     result = cc.isMobileTopLeaderboardVisible();
-    LOG.log(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
-    LOG.log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
-    LOG.log(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
-    LOG.log(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
-    LOG.log(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
-    LOG.log(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = cc.isTrendingVideosVisible();
-    LOG.log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobilePrefooterVisible();
-    LOG.log(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     int lastPosition = 0;
     String lastElement = "top";
@@ -94,7 +94,7 @@ public class MainPageTests extends NewTestTemplate {
       int newPosition = cc.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
-      LOG.log(element.name, "is after " + lastElement, "is not after " + lastElement, result);
+      LOG.result(element.name, "is after " + lastElement, "is not after " + lastElement, result);
 
       lastPosition = newPosition;
       lastElement = element.name;
@@ -109,28 +109,28 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
     boolean result = cc.isArticleTitleVisible();
-    LOG.log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = !cc.isWikiaStatsContainerVisible();
-    LOG.log(PageElements.WIKIA_STATS.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isFeaturedContentVisible();
-    LOG.log(PageElements.FEATURED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isCuratedContentVisible();
-    LOG.log(PageElements.CURATED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingArticlesVisible();
-    LOG.log(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingVideosVisible();
-    LOG.log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT03
@@ -141,40 +141,40 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTACC_MAIN_PAGE);
 
     boolean result = !cc.isTrendingArticlesVisible();
-    LOG.log(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = cc.isMobileTopLeaderboardVisible();
-    LOG.log(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
-    LOG.log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
-    LOG.log(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
-    LOG.log(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
-    LOG.log(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
-    LOG.log(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isTrendingVideosVisible();
-    LOG.log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobilePrefooterVisible();
-    LOG.log(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
   }
 
   // CCT04
@@ -185,35 +185,35 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
-    LOG.log(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
-    LOG.log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
-    LOG.log(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
-    LOG.log(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
-    LOG.log(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
-    LOG.log(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = !cc.isTrendingVideosVisible();
-    LOG.log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT05
@@ -224,40 +224,40 @@ public class MainPageTests extends NewTestTemplate {
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTAVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
-    LOG.log(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
-    LOG.log(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
-    LOG.log(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
-    LOG.log(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
-    LOG.log(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
-    LOG.log(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, result);
+    LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
+               MercuryMessages.INVISIBLE_MSG, result);
 
     result = !cc.isTrendingArticlesVisible();
-    LOG.log(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingVideosVisible();
-    LOG.log(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isMobilePrefooterVisible();
-    LOG.log(PageElements.PREFOOTER.name, MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG, result);
+    LOG.result(PageElements.PREFOOTER.name, MercuryMessages.INVISIBLE_MSG,
+               MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT12

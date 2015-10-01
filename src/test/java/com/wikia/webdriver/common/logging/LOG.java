@@ -17,7 +17,6 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
@@ -38,6 +37,7 @@ public class LOG {
   private static long imageIndex = 0;
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
   private static boolean testStarted = false;
+  private static boolean allowLongDesc = false;
 
   private static void appendToReport(String command, String description, boolean success,
       boolean makeScreenshot) {
@@ -57,9 +57,9 @@ public class LOG {
     if (new UrlValidator().isValid(description)) {
       transformDesc = "<a href='" + description + "'>" + description;
     }
-    System.out.println("STRING LENGHTH: " + transformDesc.length());
+    boolean isDescriptionTooLong = (transformDesc.length() > MAX_CONTENT_LENGTH) && !allowLongDesc;
 
-    if (transformDesc.length() > MAX_CONTENT_LENGTH) {
+    if (isDescriptionTooLong) {
       builder.append("<tr class=\"accordion-toggle " + className
           + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
           + "\" class=\"accordion-toggle\"><td>" + command + "</td><td> CLICK TO SEE MORE </td>");
@@ -77,13 +77,14 @@ public class LOG {
     } else {
       builder.append("<td></td></tr>");
     }
-    if (transformDesc.length() > MAX_CONTENT_LENGTH) {
+    if (!isDescriptionTooLong) {
       builder
           .append("<tr class=\""
               + className
               + "\"><td colspan=\"3\" class=\"hiddenRow\"><div class=\"accordian-body collapse\" id=\"log"
               + logCounter + "\">" + description + "</div></td><tr>");
     }
+    allowLongDesc = false;
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
   }
 
@@ -119,10 +120,6 @@ public class LOG {
     testStarted = true;
   }
 
-  public static void log(String command, String description, Type logType) {
-    appendToReport(command, description, logType, false);
-  }
-
   public static void error(String command, String description) {
     appendToReport(command, description, Type.ERROR, true);
   }
@@ -132,7 +129,7 @@ public class LOG {
   }
 
   public static void warning(String command, String description) {
-    log(command, description, Type.WARNING);
+    appendToReport(command, description, Type.WARNING, false);
   }
 
   public static void warning(String command, Exception exception) {
@@ -140,27 +137,66 @@ public class LOG {
   }
 
   public static void info(String command, String description) {
-    log(command, description, Type.INFO);
+    appendToReport(command, description, Type.INFO, false);
   }
 
   public static void info(String command, Exception exception) {
-    log(command, exception.getMessage(), Type.INFO);
-  }
-
-  public static void success(String command, String description) {
-    appendToReport(command, description, Type.SUCCESS, false);
+    info(command, exception.getMessage());
   }
 
   public static void success(String command, String description, boolean makeScreenshot) {
     appendToReport(command, description, Type.SUCCESS, makeScreenshot);
   }
 
-  public static void success(String command, Exception exception) {
-    appendToReport(command, exception.getMessage(), Type.SUCCESS, false);
+  public static void success(String command, String description) {
+    success(command, description, false);
   }
 
-  public static void log(String command, Throwable e, Type logType) {
-    log(command, e.getMessage(), logType);
+  public static void success(String command, Exception exception, boolean makeScreenshot) {
+    success(command, exception.getMessage(), makeScreenshot);
+  }
+
+  public static void success(String command, Exception exception) {
+    success(command, exception.getMessage(), false);
+  }
+
+  public static void result(String command, String description, boolean success,
+      boolean makeScreenshot) {
+    appendToReport(command, description, success, makeScreenshot);
+  }
+
+  public static void result(String command, String description, boolean success) {
+    result(command, description, success, false);
+  }
+
+  public static void result(String command, Exception exception, boolean success,
+      boolean makeScreenshot) {
+    result(command, exception.getMessage(), success, makeScreenshot);
+  }
+
+  public static void result(String command, Exception exception, boolean success) {
+    result(command, exception.getMessage(), success, false);
+  }
+
+  public static void result(String command, String descriptionOnSuccess, String descriptionOnFail,
+      boolean success) {
+    String description = descriptionOnFail;
+    if (success) {
+      description = descriptionOnSuccess;
+    }
+    result(command, description, success);
+  }
+
+  public static void result(String command, File image, boolean success) {
+    byte[] bytes = new byte[0];
+    try {
+      bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
+    } catch (IOException e) {
+      error("logImage", e.getMessage());
+    }
+    allowLongDesc = true;
+    appendToReport(command, "<img src=\"data:image/png;base64,"
+        + new String(bytes, StandardCharsets.UTF_8) + "\">", success, false);
   }
 
   private static String getPageSource() {
@@ -187,67 +223,12 @@ public class LOG {
     }
   }
 
-  public static void logResult(String command, String description, boolean success, WebDriver driver) {
-    appendToReport(command, description, success, true);
-    logJSError();
-  }
-
-  public static void logResult(String command, String description, boolean success,
-      boolean makeScreenshot) {
-    appendToReport(command, description, success, true);
-    logJSError();
-  }
-
-  public static void log(String command, Throwable e, boolean success, WebDriver driver) {
-    appendToReport(command, e.getMessage(), success, true);
-    logJSError();
-  }
-
-  public static void log(String command, Throwable e, boolean success, boolean makeScreenshot) {
-    appendToReport(command, e.getMessage(), success, true);
-    logJSError();
-  }
-
-  public static void result(String command, String description, boolean success) {
-    appendToReport(command, description, success, false);
-  }
-
-  public static void log(String command, Throwable e, boolean success) {
-    result(command, e.getMessage(), success);
-  }
-
-  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success) {
-    String description = descriptionOnFail;
-    if (success) {
-      description = descriptionOnSuccess;
-    }
-    result(command, description, success);
-  }
-
   public static boolean isTestStarted() {
     return testStarted;
   }
 
   public static List<Boolean> getVerificationStack() {
     return logsResults;
-  }
-
-  public static void logImage(String command, File image, boolean success) {
-    byte[] bytes = new byte[0];
-    try {
-      bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
-    } catch (IOException e) {
-      result("logImage", e.getMessage(), false);
-    }
-    logImage(command, new String(bytes, StandardCharsets.UTF_8), success);
-  }
-
-  public static void logImage(String command, String imageAsBase64, boolean success) {
-    imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
-    String className = success ? "success" : "error";
-    CommonUtils.appendTextToFile(LOG_PATH, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   public static void startReport() {
