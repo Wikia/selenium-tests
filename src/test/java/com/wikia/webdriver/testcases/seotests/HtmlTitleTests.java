@@ -143,6 +143,24 @@ public class HtmlTitleTests extends NewTestTemplate {
             "MediaWiki:Edit - Sktest123 Wiki - Wikia",
             "MediaWiki:Edit - Sktest123 Wiki - Wikia"
         },
+        {
+            TEST_WIKI_ORIGINAL_TITLE,
+            "User:Sktest",
+            "User:Sktest - Sktest123 Wiki - Wikia",
+            "User:Sktest - Sktest123 Wiki - Wikia"
+        },
+        {
+            TEST_WIKI_ORIGINAL_TITLE,
+            "File:THE_HOBBIT_Trailer_-_2012_Movie_-_Official_HD",
+            "Video - THE HOBBIT Trailer - 2012 Movie - Official HD - Sktest123 Wiki - Wikia",
+            "Video - THE HOBBIT Trailer - 2012 Movie - Official HD - Sktest123 Wiki - Wikia"
+        },
+        {
+            TEST_WIKI_ORIGINAL_TITLE,
+            "File:Giant_prominence_on_the_sun_erupted.jpg",
+            "Image - Giant prominence on the sun erupted.jpg - Sktest123 Wiki - Wikia",
+            "Image - Giant prominence on the sun erupted.jpg - Sktest123 Wiki - Wikia"
+        },
         // custom title
         {
             TEST_WIKI_CUSTOM_TITLE,
@@ -173,6 +191,12 @@ public class HtmlTitleTests extends NewTestTemplate {
             "About",
             "About - Wikis from Wikia - Join the best wiki communities - Wikia",
             "About - Wikis from Wikia - Join the best wiki communities - Wikia"
+        },
+        {
+            "wikia",
+            "WAM",
+            "Wikia Activity Monitor (WAM) - Wikia.com/WAM - Wikia",
+            "Wikia Activity Monitor (WAM) - Wikia.com/WAM - Wikia"
         },
     };
   }
