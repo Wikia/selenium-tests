@@ -53,7 +53,7 @@ public class JavascriptActions {
     return (Boolean) js
         .executeScript(
             "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
-            + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
+                + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
             element);
   }
 }

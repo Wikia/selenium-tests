@@ -88,7 +88,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
     wait.forElementVisible(mediaResultsWidget);
     List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
     Assertion.assertEquals(maps.size(), num,
-                           "Expecting " + num + " of maps. Actual is " + maps.size());
+        "Expecting " + num + " of maps. Actual is " + maps.size());
     waitForDialogNotVisible();
   }
 }

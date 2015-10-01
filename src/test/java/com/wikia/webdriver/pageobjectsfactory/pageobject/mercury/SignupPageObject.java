@@ -141,7 +141,7 @@ public class SignupPageObject extends BasePageObject {
         .typeUsername(user)
         .typePassword(password)
         .typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
-                       String.valueOf(birthday.getDayOfMonth()), String.valueOf(birthday.getYear()))
+            String.valueOf(birthday.getDayOfMonth()), String.valueOf(birthday.getYear()))
         .register();
 
     return this;

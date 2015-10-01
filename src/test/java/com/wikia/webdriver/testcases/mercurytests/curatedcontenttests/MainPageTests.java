@@ -48,38 +48,38 @@ public class MainPageTests extends NewTestTemplate {
 
     result = cc.isMobileTopLeaderboardVisible();
     LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
     LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
     LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
     LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
     LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
     LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = cc.isTrendingVideosVisible();
     LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobilePrefooterVisible();
     LOG.result(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     int lastPosition = 0;
     String lastElement = "top";
@@ -110,27 +110,27 @@ public class MainPageTests extends NewTestTemplate {
 
     boolean result = cc.isArticleTitleVisible();
     LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = !cc.isWikiaStatsContainerVisible();
     LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isFeaturedContentVisible();
     LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isCuratedContentVisible();
     LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingArticlesVisible();
     LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingVideosVisible();
     LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT03
@@ -142,39 +142,39 @@ public class MainPageTests extends NewTestTemplate {
 
     boolean result = !cc.isTrendingArticlesVisible();
     LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = cc.isMobileTopLeaderboardVisible();
     LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
     LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
     LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
     LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
     LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
     LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isTrendingVideosVisible();
     LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobilePrefooterVisible();
     LOG.result(PageElements.PREFOOTER.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
   }
 
   // CCT04
@@ -186,34 +186,34 @@ public class MainPageTests extends NewTestTemplate {
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
     LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
     LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
     LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
     LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
     LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     // @TODO: find way to show trending articles on mercuryntvcc.wikia.com
     // TICKET: https://wikia-inc.atlassian.net/browse/CONCF-894
 
     result = !cc.isTrendingVideosVisible();
     LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT05
@@ -225,39 +225,39 @@ public class MainPageTests extends NewTestTemplate {
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     LOG.result(PageElements.TOP_LEADERBOARD.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isArticleTitleVisible();
     LOG.result(PageElements.ARTICLE_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isWikiaStatsContainerVisible();
     LOG.result(PageElements.WIKIA_STATS.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isFeaturedContentVisible();
     LOG.result(PageElements.FEATURED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isCuratedContentVisible();
     LOG.result(PageElements.CURATED_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = cc.isMobileInContentVisible();
     LOG.result(PageElements.IN_CONTENT.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, result);
+        MercuryMessages.INVISIBLE_MSG, result);
 
     result = !cc.isTrendingArticlesVisible();
     LOG.result(PageElements.TRENDING_ARTICLES.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isTrendingVideosVisible();
     LOG.result(PageElements.TRENDING_VIDEOS.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
 
     result = !cc.isMobilePrefooterVisible();
     LOG.result(PageElements.PREFOOTER.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, result);
+        MercuryMessages.VISIBLE_MSG, result);
   }
 
   // CCT12

@@ -56,6 +56,6 @@ public class VideoHomePageObject extends WikiBasePageObject {
     wait.forElementVisible(latestVideoRows.get(0));
     Assertion.assertTrue(latestVideoRows.size() >= count);
     LOG.result("verifyLatestVideosRows", "At least " + count
-                                         + "latest Videos modules have rendered", true);
+        + "latest Videos modules have rendered", true);
   }
 }

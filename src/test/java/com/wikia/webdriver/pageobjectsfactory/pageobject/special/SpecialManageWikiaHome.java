@@ -35,7 +35,7 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
     slotSetup.put(HubName.ENTERTAINMENT.toString(),
         Integer.parseInt(entertainmentAmount.getAttribute("value")));
     slotSetup.put(HubName.LIFESTYLE.toString(),
-                  Integer.parseInt(lifestyleAmount.getAttribute("value")));
+        Integer.parseInt(lifestyleAmount.getAttribute("value")));
     return slotSetup;
   }
 }

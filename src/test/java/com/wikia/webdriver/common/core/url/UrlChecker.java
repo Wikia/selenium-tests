@@ -14,9 +14,7 @@ public class UrlChecker {
     String currentUrl = driver.getCurrentUrl().toLowerCase();
     path = path.toLowerCase();
     LOG.result("Log Url", "Path " + path + " is contained in " + currentUrl, "Path " + path
-                                                                             + " isn't contained in "
-                                                                             + currentUrl,
-               currentUrl.contains(path));
+        + " isn't contained in " + currentUrl, currentUrl.contains(path));
   }
 
   public static boolean isUrlEqualToCurrentUrl(WebDriver driver, String url) {

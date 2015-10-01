@@ -143,8 +143,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private void selectFileToUpload(String fileName) {
     fileUploadInput.sendKeys(CommonUtils
-                                 .getAbsolutePathForFile(
-                                     PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
+        .getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
     LOG.success("selectFileToUpload", "file " + fileName + " added to upload");
   }
 

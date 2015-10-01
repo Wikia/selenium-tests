@@ -64,7 +64,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     wait.forElementVisible(backToPageLink);
     wait.forElementVisible(goButton);
     LOG.success("verifyImportandPageElements",
-                  "several importand history page elements are present",true);
+        "several importand history page elements are present", true);
   }
 
   public void verifyLatestEditSummary(String text) {

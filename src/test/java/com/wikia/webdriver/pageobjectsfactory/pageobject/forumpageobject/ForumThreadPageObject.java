@@ -80,7 +80,7 @@ public class ForumThreadPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickReplyButton();
-    LOG.success("reply", "write a reply with the following text: " + message,true);
+    LOG.success("reply", "write a reply with the following text: " + message, true);
   }
 
   public void verifyReplyMessage(int replyNumber, String message) {
@@ -185,7 +185,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    LOG.success("closeThread", "closed thread with the following reason: " + reason,true);
+    LOG.success("closeThread", "closed thread with the following reason: " + reason, true);
   }
 
   public void reopenThread() {

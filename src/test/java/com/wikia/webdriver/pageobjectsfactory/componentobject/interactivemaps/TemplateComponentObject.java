@@ -55,7 +55,7 @@ public class TemplateComponentObject extends BasePageObject {
   public void typeTemplateName(String templateName) {
     wait.forElementVisible(nameTemplateField);
     nameTemplateField.sendKeys(templateName);
-    LOG.success("typeTemplateName", templateName + " title for template typed in",true);
+    LOG.success("typeTemplateName", templateName + " title for template typed in", true);
   }
 
   public void verifyTemplateImagePreview() {

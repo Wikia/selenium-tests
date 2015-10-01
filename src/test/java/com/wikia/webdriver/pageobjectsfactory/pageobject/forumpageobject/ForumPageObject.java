@@ -76,7 +76,7 @@ public class ForumPageObject extends WikiArticlePageObject {
     wait.forElementVisible(forumBoardLink);
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
-    LOG.success("openForumBoard", "click on the forum Board",true);
+    LOG.success("openForumBoard", "click on the forum Board", true);
     return new ForumBoardPageObject(driver);
   }
 
@@ -91,11 +91,11 @@ public class ForumPageObject extends WikiArticlePageObject {
     }
     if (forumNumber == 0) {
       LOG.success("openForumBoard", "didn't find forum Board with title "
-          + formattedForumBoardTitle,true);
+          + formattedForumBoardTitle, true);
       return null;
     } else {
       LOG.success("openForumBoard", "click on the forum Board with title "
-          + formattedForumBoardTitle,true);
+          + formattedForumBoardTitle, true);
       return openForumBoard();
     }
   }

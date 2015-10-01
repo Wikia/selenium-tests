@@ -93,8 +93,8 @@ public class WamPageObject extends BasePageObject {
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
-      LOG.success("verifyWamIndexIsNotEmpty", "there are more rows in the table than just a head row ("
-          + rows + ")");
+      LOG.success("verifyWamIndexIsNotEmpty",
+          "there are more rows in the table than just a head row (" + rows + ")");
     } else {
       LOG.error("verifyTabIsSelected", "there is only the head row");
     }

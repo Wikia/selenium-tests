@@ -73,7 +73,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL,
-                                                                         MercurySubpages.MAIN_PAGE);
+        MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {

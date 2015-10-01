@@ -102,7 +102,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     result = articlePage.isUrlContainingCategoryPage();
     LOG.result("Url", "match pattern /wiki/Category:", "does not match pattern /wiki/Category:",
-               result);
+        result);
   }
 
   // APT05

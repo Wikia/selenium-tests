@@ -58,7 +58,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     wait.forElementVisible(createMapUnderContribute);
     scrollAndClick(createMapUnderContribute);
     LOG.success("clickCreateAMapUnderContributeButton",
-                "create a map button under contribute button clicked", true);
+        "create a map button under contribute button clicked", true);
     return new CreateAMapComponentObject(driver);
   }
 

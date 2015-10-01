@@ -107,8 +107,8 @@ public class AdsComparison {
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
-      LOG.success("verifyColorAd", "At least " + IMAGES_THRESHOLD_PERCENT
-          + " percents of Ad has " + color,true);
+      LOG.success("verifyColorAd", "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has "
+          + color, true);
     } else {
       throw new NoSuchElementException("At least " + (100 - IMAGES_THRESHOLD_PERCENT)
           + " percents of Ad does not have " + color);

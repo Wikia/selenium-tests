@@ -70,7 +70,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    LOG.success("clickOnCreateBlogPost", "Click on create blog post button",true);
+    LOG.success("clickOnCreateBlogPost", "Click on create blog post button", true);
     return new SpecialCreatePagePageObject(driver);
   }
 

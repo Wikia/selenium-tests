@@ -109,7 +109,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, message);
-    LOG.success("newPasswordSentMessage", "Message about new password sent present",true);
+    LOG.success("newPasswordSentMessage", "Message about new password sent present", true);
   }
 
   public void verifyClosedAccountMessage() {

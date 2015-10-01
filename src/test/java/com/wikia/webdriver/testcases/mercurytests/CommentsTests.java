@@ -90,7 +90,7 @@ public class CommentsTests extends NewTestTemplate {
 
     boolean result = numberOfComments == 0;
     LOG.result("Comments counter", "is correct", "There are " + numberOfComments
-                                                 + " untracked comments", result);
+        + " untracked comments", result);
 
     Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
         "Previous page button isn't displayed");

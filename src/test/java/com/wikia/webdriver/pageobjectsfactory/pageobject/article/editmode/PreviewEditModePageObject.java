@@ -59,7 +59,7 @@ public class PreviewEditModePageObject extends EditMode {
     int width =
         Integer.parseInt(previewModal.findElement(videoWidthSelector).getAttribute("width"));
     Assertion.assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is "
-                                                + width);
+        + width);
   }
 
   public void verifyVideoCaption(String desiredCaption) {

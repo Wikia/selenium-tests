@@ -143,8 +143,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
       LOG.error("verifyForumNotExists", e);
     }
     wait.forElementVisible(By
-        .xpath(
-            "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
+        .xpath("//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
     LOG.success("verifyForumNotExists", "verified forum not exists");
   }
 

@@ -39,7 +39,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public int getElementOffsetTop(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     return Integer.parseInt(js.executeScript("return $(arguments[0]).offset().top", element)
-                                .toString());
+        .toString());
   }
 
   public boolean isMobileTopLeaderboardVisible() {

@@ -127,7 +127,7 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected void logVisibility(boolean result) {
     LOG.result(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
   }
 
   /**

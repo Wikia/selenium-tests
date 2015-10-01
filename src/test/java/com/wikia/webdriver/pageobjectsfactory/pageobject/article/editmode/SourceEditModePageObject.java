@@ -164,7 +164,7 @@ public class SourceEditModePageObject extends EditMode {
   public void clickHorizontalLine() {
     focusTextArea();
     hline.click();
-    LOG.success("clickHorizontalLine", "horizontal line button was clicked",true);
+    LOG.success("clickHorizontalLine", "horizontal line button was clicked", true);
   }
 
   public PhotoAddComponentObject clickAddPhoto() {
@@ -267,7 +267,7 @@ public class SourceEditModePageObject extends EditMode {
           driver
               .findElement(
                   By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i
-                           + "]")).getText();
+                      + "]")).getText();
       driver.findElement(
           By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
           .click();

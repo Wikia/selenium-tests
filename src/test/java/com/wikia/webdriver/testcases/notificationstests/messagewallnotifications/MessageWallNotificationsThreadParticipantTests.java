@@ -79,6 +79,6 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName3, "replied to "
-                                                                   + credentials.userName3);
+        + credentials.userName3);
   }
 }

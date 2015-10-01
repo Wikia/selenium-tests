@@ -32,7 +32,6 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
     LOG.result("CHECK URL", "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
         new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(urlBuilder
-                                                                               .getUrlForWiki(
-                                                                                   expectedCentralUrl))));
+            .getUrlForWiki(expectedCentralUrl))));
   }
 }

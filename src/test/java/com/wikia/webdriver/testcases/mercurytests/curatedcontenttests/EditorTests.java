@@ -54,7 +54,7 @@ public class EditorTests extends NewTestTemplate {
 
     Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
     LOG.result("Featured Content", MercuryMessages.INVISIBLE_MSG, MercuryMessages.VISIBLE_MSG,
-               result);
+        result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
@@ -74,7 +74,7 @@ public class EditorTests extends NewTestTemplate {
 
     result = curatedMainPagePageObject.isFeaturedContentVisible();
     LOG.result("Featured Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002", enabled = false)
@@ -86,7 +86,7 @@ public class EditorTests extends NewTestTemplate {
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     LOG.result("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
@@ -117,7 +117,7 @@ public class EditorTests extends NewTestTemplate {
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
     LOG.result("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
 
     curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
     curatedContentPageObject.waitForLoadingSpinnerToFinish();
@@ -134,7 +134,7 @@ public class EditorTests extends NewTestTemplate {
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     LOG.result("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
@@ -154,6 +154,6 @@ public class EditorTests extends NewTestTemplate {
 
     result = curatedMainPagePageObject.isCuratedContentVisible();
     LOG.result("Curated Content", MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               result);
+        result);
   }
 }

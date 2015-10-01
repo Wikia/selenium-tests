@@ -132,23 +132,23 @@ public class AddPinComponentObject extends BasePageObject {
   public void verifyAssociatedArticleFieldIsDisplayed() {
     wait.forElementVisible(associatedArticleField);
     LOG.success("verifyAssociatedArticleFieldIsDisplayed", "Associated article field is visible",
-                true);
+        true);
   }
 
   public void verifyPinCategorySelectorIsDisplayed() {
     wait.forElementVisible(pinCategorySelector);
-    LOG.success("verifyPinCategorySelector", "Pin category selector is visible",true);
+    LOG.success("verifyPinCategorySelector", "Pin category selector is visible", true);
   }
 
   public void verifyDescriptionFieldIsDisplayed() {
     wait.forElementVisible(descriptionField);
-    LOG.success("verifyDescriptionFieldIsDisplayed", "Description field is visible",true);
+    LOG.success("verifyDescriptionFieldIsDisplayed", "Description field is visible", true);
   }
 
   public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
     wait.forElementVisible(associatedArticleImage);
     LOG.success("verifyAssociatedArticleImageIsDisplayed",
-                "Associated article image placeholder is visible", true);
+        "Associated article image placeholder is visible", true);
   }
 
   public void verifyErrorExists() {

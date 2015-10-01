@@ -49,13 +49,13 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   public void verifyRecaptchaIsVisible() {
     wait.forElementVisible(recaptchaContainer);
     driver.switchTo().defaultContent();
-    LOG.success("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog",true);
+    LOG.success("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true);
   }
 
   public String getRecaptchaImageSrc() {
     wait.forElementVisible(recaptchaContainer);
     String imageSrc = recaptchaContainer.getAttribute("src");
-    LOG.success("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc,true);
+    LOG.success("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true);
     driver.switchTo().defaultContent();
     return imageSrc;
   }
@@ -84,7 +84,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   public void verifyRecaptchaImageSrc() {
     Assertion.assertNotEquals("", getRecaptchaImageSrc(),
-                              "Verify RECAPTCHA image source is not empty");
+        "Verify RECAPTCHA image source is not empty");
   }
 
   public void typeEditSummary(String text) {

@@ -68,7 +68,7 @@ public class NavigationTests extends NewTestTemplate {
         .isCuratedContentItemVisibleByIndex(1);
 
     UrlChecker.isPathContainedInCurrentUrl(driver,
-                                           MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
+        MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
   }
 
   // CCT11

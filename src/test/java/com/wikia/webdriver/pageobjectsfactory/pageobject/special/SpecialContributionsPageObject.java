@@ -49,7 +49,7 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
         + pageName + "')]"));
     wait.forElementVisible(By
         .xpath("//span[@class='comment' and contains(text(), '(Created page with \"" + pageContent
-               + "\")')]"));
+            + "\")')]"));
     LOG.result("verifyNewPageOnList", pageName + " page verified on the contribution list", true);
   }
 }

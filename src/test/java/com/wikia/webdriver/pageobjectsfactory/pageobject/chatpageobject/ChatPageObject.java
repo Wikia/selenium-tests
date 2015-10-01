@@ -355,7 +355,7 @@ public class ChatPageObject extends WikiBasePageObject {
     verifyPrivateMessageNotification(messagesReceived.size());
     clickOnUserInPrivateMessageSection(senderUser);
     for (String message : messagesReceived) {
-  verifyMessageOnChat(message);
+      verifyMessageOnChat(message);
     }
   }
 }

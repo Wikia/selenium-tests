@@ -50,14 +50,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
     LOG.success("Special:BlockList verifyUSerUnblocked",
-                "verified that user is not on blocked users list", true);
+        "verified that user is not on blocked users list", true);
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:"
         + userName + "']"));
     LOG.success("Special:BlockList verifyUSerUnblocked",
-                  "verified that user is on blocked users list",true);
+        "verified that user is on blocked users list", true);
   }
 
   /**

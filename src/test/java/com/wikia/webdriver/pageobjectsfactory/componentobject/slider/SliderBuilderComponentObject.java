@@ -38,7 +38,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    LOG.success("selectMenuPosition", pos.toString() + " position selected",true);
+    LOG.success("selectMenuPosition", pos.toString() + " position selected", true);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {

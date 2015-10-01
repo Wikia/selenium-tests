@@ -597,7 +597,7 @@ public class BasePageObject {
       if (filter.isEmpty() || logEntry.getMessage().contains(filter)) {
         result.add(logEntry.getMessage());
       }
-   }
+    }
     return result;
   }
 }

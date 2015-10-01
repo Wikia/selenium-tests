@@ -23,11 +23,11 @@ public class SpecialPageObject extends WikiBasePageObject {
 
   public void verifySpecialPage() {
     wait.forTextInElement(specialPageHeader, "Special page");
-    LOG.success("SpecialPageLoaded", "Special Page is loaded",true);
+    LOG.success("SpecialPageLoaded", "Special Page is loaded", true);
   }
 
   public void verifyPageHeader(String expectedHeader) {
     wait.forElementVisible(By.xpath(String.format(HEADER_TEXT_SELECTOR, expectedHeader)));
-    LOG.success("SpecialPageHeader", "Special Page Header is the same as expected",true);
+    LOG.success("SpecialPageHeader", "Special Page Header is the same as expected", true);
   }
 }

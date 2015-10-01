@@ -73,7 +73,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   public void typeCellPadding(int cellPadding) {
     tablePropertiesInputs.get(6).clear();
     tablePropertiesInputs.get(6).sendKeys(Integer.toString(cellPadding));
-    LOG.success("typeCellPadding", "cell padding was typed: " + cellPadding,true);
+    LOG.success("typeCellPadding", "cell padding was typed: " + cellPadding, true);
   }
 
   public void selectHeader(Headers header) {
@@ -114,7 +114,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing alignment selected");
     }
-    LOG.success("selectPosition", position.getAlignment() + " position selected",true);
+    LOG.success("selectPosition", position.getAlignment() + " position selected", true);
   }
 
   public void submitTable() {

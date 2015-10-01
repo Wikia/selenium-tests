@@ -27,17 +27,17 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   public void closeAddPhotoModal() {
     wait.forElementVisible(addPhotoModal);
-    LOG.success("UploadPhotoModalIsPresent", "Upload photo modal is present",true);
+    LOG.success("UploadPhotoModalIsPresent", "Upload photo modal is present", true);
     scrollAndClick(modalAddPhotoClose);
     waitForElementNotVisibleByElement(addPhotoModal);
-    LOG.success("UploadPhotoModalClosed", "Upload photo modal is closed",true);
+    LOG.success("UploadPhotoModalClosed", "Upload photo modal is closed", true);
   }
 
   public void closeAddVideoModal() {
     wait.forElementVisible(addVideoModal);
-    LOG.success("UploadVideoModalIsPresent", "Upload video modal is present",true);
+    LOG.success("UploadVideoModalIsPresent", "Upload video modal is present", true);
     scrollAndClick(modalAddVideoClose);
     waitForElementNotVisibleByElement(addVideoModal);
-    LOG.success("UploadVideoModalClosed", "Upload video modal is closed",true);
+    LOG.success("UploadVideoModalClosed", "Upload video modal is closed", true);
   }
 }

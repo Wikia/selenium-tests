@@ -26,7 +26,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   public void verifyFollowedArticle(String articleName) {
     wait.forElementVisible(By
         .xpath("//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '"
-               + articleName + "')]"));
+            + articleName + "')]"));
     LOG.success("verifyFollowedArticle", articleName + "is visible on followed list");
   }
 
@@ -58,7 +58,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   public void verifyFollowedBlogPost(String blogPostName) {
     wait.forElementVisible(By
         .xpath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '"
-               + blogPostName + "')]"));
+            + blogPostName + "')]"));
     LOG.success("verifyFollowedBlogPost", blogPostName + " blog post is visible on followed list");
   }
 }

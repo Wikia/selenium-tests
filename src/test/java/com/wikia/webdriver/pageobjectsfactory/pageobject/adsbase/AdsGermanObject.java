@@ -161,8 +161,7 @@ public class AdsGermanObject extends AdsBaseObject {
 
   private ArrayList<String> get71MediaParams() {
     return (ArrayList<String>) ((JavascriptExecutor) driver)
-        .executeScript(
-            "return ['SOI_SITE: ' + SOI_SITE, 'SOI_SUBSITE: ' + SOI_SUBSITE, 'SOI_SUB2SITE: ' + SOI_SUB2SITE, "
+        .executeScript("return ['SOI_SITE: ' + SOI_SITE, 'SOI_SUBSITE: ' + SOI_SUBSITE, 'SOI_SUB2SITE: ' + SOI_SUB2SITE, "
             + "'SOI_SUB3SITE: ' + SOI_SUB3SITE, 'SOI_CONTENT: ' + SOI_CONTENT, 'SOI_WERBUNG: ' + SOI_WERBUNG, "
             + "'SOI_KEYWORDS: ' + SOI_KEYWORDS];");
   }

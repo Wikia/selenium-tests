@@ -83,7 +83,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   public void verifyFirstResultVertical(String vertical) {
     wait.forTextInElement(firstResultVertical, vertical);
     Assertion.assertFalse(firstResultVertical.getText().isEmpty(),
-                          "Vertical (Hub) string is empty.");
+        "Vertical (Hub) string is empty.");
   }
 
   public void verifyFirstResultDescription() {
@@ -100,7 +100,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   public void verifyFirstResultPageImages() {
     wait.forElementVisible(firstResultStatisticsPageImages);
     Assertion.assertFalse(firstResultStatisticsPageImages.getText().isEmpty(),
-                          "Images count is empty.");
+        "Images count is empty.");
   }
 
   public void verifyFirstResultPageVideos() {
@@ -152,13 +152,13 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject prevPage() {
     scrollAndClick(paginatorPrev);
-    LOG.success("prevPage", "Moving to prev page of search results.",true);
+    LOG.success("prevPage", "Moving to prev page of search results.", true);
     return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
-    LOG.success("nextPage", "Moving to next page of search results.",true);
+    LOG.success("nextPage", "Moving to next page of search results.", true);
     return this;
   }
 

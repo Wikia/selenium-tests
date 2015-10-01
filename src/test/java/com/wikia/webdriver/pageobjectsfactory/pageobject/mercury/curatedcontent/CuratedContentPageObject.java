@@ -85,7 +85,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isAlertNotificationVisible() {
     LOG.result(Labels.ALERT_NOTIFICATION.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, isElementVisible(alertNotification));
+        MercuryMessages.INVISIBLE_MSG, isElementVisible(alertNotification));
     return this;
   }
 
@@ -111,38 +111,37 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isTitleVisible() {
     LOG.result(Labels.SECTION_TITLE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG,
-               isElementVisible(sectionTitle));
+        MercuryMessages.INVISIBLE_MSG, isElementVisible(sectionTitle));
     return this;
   }
 
   public CuratedContentPageObject isLinkToMainPageVisible() {
     LOG.result(Labels.LINK_TO_MAIN_PAGE.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, isElementVisible(linkToMainPage));
+        MercuryMessages.INVISIBLE_MSG, isElementVisible(linkToMainPage));
     return this;
   }
 
   public CuratedContentPageObject isSectionVisible() {
     LOG.result(Labels.SECTION.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               isElementVisible(sectionContainer));
+        isElementVisible(sectionContainer));
     return this;
   }
 
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
-    LOG.result(Labels.SECTION_ITEM.name, MercuryMessages.VISIBLE_MSG, MercuryMessages.INVISIBLE_MSG,
-               isElementVisible(curatedContentItems.get(elementNumber)));
+    LOG.result(Labels.SECTION_ITEM.name, MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG, isElementVisible(curatedContentItems.get(elementNumber)));
     return this;
   }
 
   public CuratedContentPageObject isLoadMoreButtonVisible() {
     LOG.result(Labels.LOAD_MORE_BUTTON.name, MercuryMessages.VISIBLE_MSG,
-               MercuryMessages.INVISIBLE_MSG, isElementVisible(loadMoreButton));
+        MercuryMessages.INVISIBLE_MSG, isElementVisible(loadMoreButton));
     return this;
   }
 
   public CuratedContentPageObject isLoadMoreButtonHidden() {
     LOG.result(Labels.LOAD_MORE_BUTTON.name, MercuryMessages.INVISIBLE_MSG,
-               MercuryMessages.VISIBLE_MSG, !isElementVisible(loadMoreButton));
+        MercuryMessages.VISIBLE_MSG, !isElementVisible(loadMoreButton));
     return this;
   }
 
@@ -171,7 +170,7 @@ public class CuratedContentPageObject extends BasePageObject {
     }
 
     LOG.result(Labels.ITEM_LABELS.name, MercuryMessages.LIST_ITEMS_ARE_UNIQUE_MSG,
-               MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG, !conflict);
+        MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG, !conflict);
 
     return this;
   }

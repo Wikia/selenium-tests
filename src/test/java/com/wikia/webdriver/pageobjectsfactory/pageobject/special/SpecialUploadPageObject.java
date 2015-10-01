@@ -45,7 +45,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   public void checkIgnoreAnyWarnings() {
     wait.forElementClickable(ignoreAnyWarnings);
     scrollAndClick(ignoreAnyWarnings);
-    LOG.success("checkIgnoreAnyWarnings", "ignore warnings checkbox selected",true);
+    LOG.success("checkIgnoreAnyWarnings", "ignore warnings checkbox selected", true);
 
   }
 

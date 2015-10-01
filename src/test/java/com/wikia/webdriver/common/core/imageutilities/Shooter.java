@@ -66,7 +66,7 @@ public class Shooter {
         (ArrayList<String>) js
             .executeScript(
                 "var rect =  arguments[0].getBoundingClientRect();"
-                + "return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+                    + "return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
                 element);
     Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
     Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));

@@ -61,8 +61,8 @@ public class ForumBoardPageObject extends BasePageObject {
     driver.switchTo().defaultContent();
     checkHighlightCheckbox(highlight);
     clickPostButton();
-    LOG.success("startDiscussion", "discussion with message: " + message + ", with title "
-        + title + " posted", true);
+    LOG.success("startDiscussion", "discussion with message: " + message + ", with title " + title
+                                   + " posted", true);
     return new ForumThreadPageObject(driver);
   }
 
@@ -86,7 +86,7 @@ public class ForumBoardPageObject extends BasePageObject {
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
     LOG.success("startDiscussionWithoutTitle", "discussion with message: " + message
-        + " without title, posted", true);
+                                               + " without title, posted", true);
     return new ForumThreadPageObject(driver);
   }
 
@@ -120,7 +120,7 @@ public class ForumBoardPageObject extends BasePageObject {
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
     photoOptions.clickAddPhoto();
-    LOG.success("startDiscussionWithImgae", "discussion with image started" + title,true);
+    LOG.success("startDiscussionWithImgae", "discussion with image started" + title, true);
   }
 
   public void verifyDiscussionWithImage() {
@@ -141,7 +141,7 @@ public class ForumBoardPageObject extends BasePageObject {
     driver.switchTo().defaultContent();
     miniEditor.addExternalLink(externalLink);
     LOG.success("startDiscussionWithLink", "internal and external links: " + internalLink + " and"
-                                           + externalLink + "added", true);
+        + externalLink + "added", true);
 
   }
 
@@ -149,7 +149,7 @@ public class ForumBoardPageObject extends BasePageObject {
     wait.forTextInElement(discussionBody, 0, internalLink);
     wait.forTextInElement(discussionBody, 1, externalLink);
     LOG.success("verifyStartedDiscussionWithLinks", "internal and external links: " + internalLink
-        + " and" + externalLink + "verified");
+                                                    + " and" + externalLink + "verified");
   }
 
   public void startDiscussionWithVideo(String url, String title) {
@@ -157,7 +157,7 @@ public class ForumBoardPageObject extends BasePageObject {
     discussionTitleArea.sendKeys(title);
     jsActions.focus(wikiaEditorTextarea);
     miniEditor.addVideoMiniEditor(url);
-    LOG.success("startDiscussionWithVideo", "discussion with video started" + title,true);
+    LOG.success("startDiscussionWithVideo", "discussion with video started" + title, true);
   }
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
@@ -169,7 +169,7 @@ public class ForumBoardPageObject extends BasePageObject {
           "discussion is followed. Preparing to click \"unfollowed\"");
       wait.forElementClickable(followButton);
       scrollAndClick(followButton);
-      LOG.success("unfollowIfDiscussionIsFollowed", "discussion unfollowed",true);
+      LOG.success("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true);
     } else {
       LOG.result("unfollowIfDiscussionIsFollowed", "discussion was unfollowed already", true);
     }
@@ -190,7 +190,7 @@ public class ForumBoardPageObject extends BasePageObject {
     wait.forElementClickable(followButton);
     scrollAndClick(followButton);
     LOG.success("clickOnFollowButton", "click on follow button of thread number " + threadNumber,
-                true);
+        true);
   }
 
   public String getTitle() {

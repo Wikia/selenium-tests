@@ -33,7 +33,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
       .cssSelector(".ve-ui-wikiaTemplateSearchWidget-suggestions div");
   private By resulteTemplateBy = By
       .cssSelector(".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)"
-                   + " .ve-ui-wikiaTemplateOptionWidget");
+          + " .ve-ui-wikiaTemplateOptionWidget");
 
   public VisualEditorInsertTemplateDialog(WebDriver driver) {
     super(driver);

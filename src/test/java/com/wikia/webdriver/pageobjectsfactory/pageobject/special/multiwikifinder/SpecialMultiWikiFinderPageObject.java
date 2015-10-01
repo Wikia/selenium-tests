@@ -46,13 +46,13 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   public void verifyEmptyPagename() {
     wait.forElementNotPresent(By.cssSelector(".mw-spcontent > p"));
-    LOG.success("verifyEmptyPageName", "Empty pagename is not founded",true);
+    LOG.success("verifyEmptyPageName", "Empty pagename is not founded", true);
   }
 
   public void compareResultsCount(int limit) {
     if (limit == 0) {
       wait.forElementNotPresent(By.cssSelector(LIST_OF_LINKS_SELECTOR));
-      LOG.success("verifyNoPagenameFounded", "Not existing pagename is not founded",true);
+      LOG.success("verifyNoPagenameFounded", "Not existing pagename is not founded", true);
     } else {
       wait.forElementVisible(listOfLinks.get(0));
       Assertion.assertTrue(listOfLinks.size() <= limit);

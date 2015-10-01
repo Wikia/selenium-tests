@@ -186,13 +186,13 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void chooseAdvancedOption(int i) {
     wait.forElementVisible(advancedField);
     advancedOptionInputs.get(i).click();
-    LOG.success("chooseAdvancedOption", "chosen advance option is selected",true);
+    LOG.success("chooseAdvancedOption", "chosen advance option is selected", true);
   }
 
   public void selectAllAdvancedOptions() {
     clickAdvancedButton();
     chooseAdvancedOption(0);
-    LOG.success("selectAllAdvancedOptions", "All advance options are selected",true);
+    LOG.success("selectAllAdvancedOptions", "All advance options are selected", true);
   }
 
   /*
@@ -217,7 +217,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementVisible(photosVideos);
     scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
-    LOG.success("selectPhotosVideos", "Photos and videos option is selected",true);
+    LOG.success("selectPhotosVideos", "Photos and videos option is selected", true);
   }
 
   public void verifyPhotosOnly() {

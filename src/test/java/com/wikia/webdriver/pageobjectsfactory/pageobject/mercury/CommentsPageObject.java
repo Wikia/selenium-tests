@@ -76,7 +76,7 @@ public class CommentsPageObject extends BasePageObject {
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
     return Integer.parseInt(showRepliesButtons.get(index).getText()
-                                .substring(stringStart, stringEnd));
+        .substring(stringStart, stringEnd));
   }
 
   public int getNumberOfRepliesFromList(int index) {

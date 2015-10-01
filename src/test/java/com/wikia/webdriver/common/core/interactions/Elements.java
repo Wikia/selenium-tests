@@ -70,6 +70,6 @@ public class Elements {
       throw new NoSuchElementException("Element's child with text: " + value
           + " is not found from the list");
     }
- return foundElement;
+    return foundElement;
   }
 }

@@ -28,9 +28,9 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 public class LOG {
   private static final String JIRA_PATH = "https://wikia-inc.atlassian.net/browse/";
   private static final int MAX_CONTENT_LENGTH = 160;
+  private static final String SCREEN_PATH = SCREEN_DIR_PATH + "screenshot";
   private static String reportPath = "." + File.separator + "logs" + File.separator;
   private static final String SCREEN_DIR_PATH = reportPath + "screenshots" + File.separator;
-  private static final String SCREEN_PATH = SCREEN_DIR_PATH + "screenshot";
   private static String logFileName = "log.html";
   private static final String LOG_PATH = reportPath + logFileName;
   private static long logCounter = 0;

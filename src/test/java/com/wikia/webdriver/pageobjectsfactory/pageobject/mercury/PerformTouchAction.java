@@ -334,7 +334,7 @@ public class PerformTouchAction {
   public boolean isAddressbarPresent() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     if ((appWebviewHeight - Integer.parseInt(js.executeScript("return $(window).height()")
-                                                 .toString())) == addressbarWebviewHeight) {
+        .toString())) == addressbarWebviewHeight) {
       return true;
     }
     return false;

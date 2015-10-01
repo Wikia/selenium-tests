@@ -447,21 +447,21 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    LOG.success("openSrcModeWithMainEditButton", "Src main edit button clicked",true);
+    LOG.success("openSrcModeWithMainEditButton", "Src main edit button clicked", true);
     return new SourceEditModePageObject(driver);
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
-    LOG.success("openCKModeWithMainEditButton", "CK main edit button clicked",true);
+    LOG.success("openCKModeWithMainEditButton", "CK main edit button clicked", true);
     return new VisualEditModePageObject(driver);
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
     wait.forElementVisible(veEditButton);
     veEditButton.click();
-    LOG.success("openVEModeWithMainEditButton", "VE main edit button clicked",true);
+    LOG.success("openVEModeWithMainEditButton", "VE main edit button clicked", true);
     return new VisualEditorPageObject(driver);
   }
 
@@ -470,7 +470,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
     LOG.success("openVEModeWithSectionEditButton", "VE edit button clicked at section: " + section,
-                true);
+        true);
     return new VisualEditorPageObject(driver);
   }
 
@@ -479,7 +479,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     LOG.success("openCKModeWithSectionEditButton",
-                "RTE edit button clicked at section: " + section, true);
+        "RTE edit button clicked at section: " + section, true);
     return new VisualEditModePageObject(driver);
   }
 
@@ -488,7 +488,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     LOG.success("openSrcModeWithSectionEditButton", "Src edit button clicked at section: "
-                                                    + section, true);
+        + section, true);
     return new SourceEditModePageObject(driver);
   }
 

@@ -142,8 +142,7 @@ public class Assertion extends Assert {
   public static void assertUrlEqualToCurrentUrl(WebDriver driver, String url) {
     String currentUrl = driver.getCurrentUrl();
     LOG.result("Log Url", "Url " + url + " is equal to current Url " + currentUrl, "Url " + url
-                                                                                   + " isn't equal to current Url "
-                                                                                   + currentUrl,
-               UrlChecker.isUrlEqualToCurrentUrl(driver, url));
+        + " isn't equal to current Url " + currentUrl,
+        UrlChecker.isUrlEqualToCurrentUrl(driver, url));
   }
 }

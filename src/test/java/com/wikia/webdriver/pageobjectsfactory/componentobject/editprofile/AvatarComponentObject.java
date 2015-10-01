@@ -30,7 +30,7 @@ public class AvatarComponentObject extends EditProfileComponentObject {
       LOG.error("uploadAvatar", "the file doesn't exist");
     }
     uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());
-    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it",true);
+    LOG.success("typeInFileToUploadPath", "type file " + file + " to upload it", true);
   }
 
   public void saveProfile() {
