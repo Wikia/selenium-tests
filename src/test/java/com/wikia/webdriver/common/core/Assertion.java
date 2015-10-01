@@ -78,9 +78,9 @@ public class Assertion extends Assert {
   }
 
   public static void assertEqualsIgnoreCase(String current, String pattern) {
-    current = current.toLowerCase();
-    pattern = pattern.toLowerCase();
-    assertEquals(current, pattern);
+    String lowerCurrent = current.toLowerCase();
+    String lowerPattern = pattern.toLowerCase();
+    assertEquals(lowerCurrent, lowerPattern);
   }
 
   public static void assertNotEquals(String current, String pattern) {
