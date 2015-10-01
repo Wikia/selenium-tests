@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -96,6 +97,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
+  @RelatedIssue(issueID = "MAIN-1234")
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
     ArticlePageObject article = new ArticlePageObject(driver).open("addModifySlideshow");

@@ -1,12 +1,13 @@
 <script>
 function createToc()
 {
-	var h1 = $('td h1');
+	infoHidden = true;
+	var h1 = $('td h4');
 	var l = h1.length;
 	var toc = "<ul>";
 	for (var i=0; i<l; i++){
 		var ident = "toc"+i;
-		var tr = h1[i].parentNode.parentNode;
+		var tr = h1[i].parentNode.parentNode.parentNode;
 		h1[i].setAttribute('id', ident);
 		if (tr.style.backgroundColor == "red")
 		{
@@ -22,7 +23,7 @@ function createToc()
 	var tocWrapper = document.getElementById('toc');
 	console.log(toc);
 	tocWrapper.innerHTML += toc;
-	manageActions('hide');
+	manageActions(infoHidden);
 }
 function markMethodAsFailed() {
 	var a = $('table tr.error').parent();
@@ -53,40 +54,24 @@ $(document).ready(function () {
         // get all elements with class lowLevelAction
         var elements = document.getElementsByClassName("info");
         for (var i = 0; i < elements.length; i++) {
-            if (direction === 'hide') {
+            if (direction == false) {
                 //hide lowLevelActions
                 elements[i].style.display = "none";
-            } else if (direction === 'show') {
+            } else if (direction == true) {
                 //show lowLevelActions
                 elements[i].style.display = "";
             }
         }
+		infoHidden = !infoHidden;
     }
 
 (function (ctx) {
     var hideButton, showButton, document;
     document = ctx.document;
     hideButton = document.getElementById('hideLowLevel');
-    showButton = document.getElementById('showLowLevel');
 
-    function manageActions(direction) {
-        // get all elements with class lowLevelAction
-        var elements = document.getElementsByClassName("info");
-        for (var i = 0; i < elements.length; i++) {
-            if (direction === 'hide') {
-                //hide lowLevelActions
-                elements[i].style.display = "none";
-            } else if (direction === 'show') {
-                //show lowLevelActions
-                elements[i].style.display = "";
-            }
-        }
-    }
     hideButton.addEventListener('click', function () {
-        manageActions('hide');
-    }, false);
-    showButton.addEventListener('click', function () {
-        manageActions('show');
+        manageActions(infoHidden);
     }, false);
 }(this));
 </script>

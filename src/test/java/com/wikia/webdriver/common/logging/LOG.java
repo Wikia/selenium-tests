@@ -28,13 +28,12 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 public class LOG {
   private static final String JIRA_PATH = "https://wikia-inc.atlassian.net/browse/";
   private static final int MAX_CONTENT_LENGTH = 160;
-  private static final String SCREEN_PATH = SCREEN_DIR_PATH + "screenshot";
   private static String reportPath = "." + File.separator + "logs" + File.separator;
   private static final String SCREEN_DIR_PATH = reportPath + "screenshots" + File.separator;
+  private static final String SCREEN_PATH = SCREEN_DIR_PATH + "screenshot";
   private static String logFileName = "log.html";
   private static final String LOG_PATH = reportPath + logFileName;
   private static long logCounter = 0;
-  private static long imageIndex = 0;
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
   private static boolean testStarted = false;
   private static boolean allowLongDesc = false;
@@ -48,7 +47,6 @@ public class LOG {
   private static void appendToReport(String command, String description, Type type,
       boolean makeScreenshot) {
     logCounter++;
-    imageIndex++;
     logsResults.add(type.isError());
     String className = type.getType();
     StringBuilder builder = new StringBuilder();
@@ -62,26 +60,30 @@ public class LOG {
     if (isDescriptionTooLong) {
       builder.append("<tr class=\"accordion-toggle " + className
           + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
-          + "\" class=\"accordion-toggle\"><td>" + command + "</td><td> CLICK TO SEE MORE </td>");
+          + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
+          + "\" style=\"padding: 0 10px 0 0\"></div>" + command
+          + "</td><td> CLICK TO SEE MORE </td>");
     } else {
       builder.append("<tr class=\"accordion-toggle " + className
           + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
-          + "\" class=\"accordion-toggle\"><td>" + command + "</td><td>" + transformDesc + "</td>");
+          + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
+          + "\" style=\"padding: 0 10px 0 0\"></div>" + command + "</td><td>" + transformDesc
+          + "</td>");
     }
     if (makeScreenshot) {
-      new Shooter().savePageScreenshot(SCREEN_PATH + imageIndex, TestContext.getWebDriver());
-      CommonUtils.appendTextToFile(SCREEN_PATH + imageIndex + ".html", getPageSource());
-      builder.append("<td> <br/><a href='screenshots/screenshot" + imageIndex
-          + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageIndex
-          + ".html'>HTML Source</a></td></tr>)");
+      new Shooter().savePageScreenshot(SCREEN_PATH + logCounter, TestContext.getWebDriver());
+      CommonUtils.appendTextToFile(SCREEN_PATH + logCounter + ".html", getPageSource());
+      builder.append("<td><a href='screenshots/screenshot" + logCounter
+          + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + logCounter
+          + ".html'>HTML Source</a></td></tr>");
     } else {
       builder.append("<td></td></tr>");
     }
-    if (!isDescriptionTooLong) {
+    if (isDescriptionTooLong) {
       builder
           .append("<tr class=\""
               + className
-              + "\"><td colspan=\"3\" class=\"hiddenRow\"><div class=\"accordian-body collapse\" id=\"log"
+              + "\"><td colspan=\"3\" class=\"hiddenRow\" style=\"padding: 0 20px;\"><div class=\"accordian-body collapse\" id=\"log"
               + logCounter + "\">" + description + "</div></td><tr>");
     }
     allowLongDesc = false;
@@ -90,7 +92,7 @@ public class LOG {
 
   public static void stopLogging() {
     StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>STOP LOGGING METHOD  "
+    builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>"
         + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
         + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</tbody></table>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
@@ -102,19 +104,22 @@ public class LOG {
     String testName = testMethod.getName();
     String className = testMethod.getDeclaringClass().getCanonicalName();
 
-    builder.append("<table class=\"table table-condensed\" style=\"border-collapse:collapse;"
-        + " margin: 0 auto; table-layout:fixed; width: 960px; word-wrap: break-word;\"><tbody>"
-        + "<h3>Class: <em>" + className + "." + testName + " </em></h3>");
+    builder
+        .append("<table class=\"table table-condensed\" style=\"border-collapse:collapse;"
+            + " margin: 20px auto; table-layout:fixed; width: 960px; word-wrap: break-word;\"><tbody>"
+            + "<tr class=\"step\"><td>"
+            + "<button id=\"hideLowLevel\" class=\"btn-mini btn-primary\" style=\"margin: auto\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>"
+            + "</td><td>" + "<em><h4>" + className + "</h4></em></td><td> <br/> &nbsp;</td></tr>");
     if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
       String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
       String jiraUrl = JIRA_PATH + issueID;
-      builder.append("<tr class=\"step\"><td>Known failure</td><td><h2><em>" + testName + " - "
+      builder.append("<tr class=\"step\"><td>Known failure</td><td><h3><em>" + testName + " - "
           + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
           + testMethod.getAnnotation(RelatedIssue.class).comment()
-          + "</em></h2></td><td> <br/> &nbsp;</td></tr>");
+          + "</em></h3></td><td> <br/> &nbsp;</td></tr>");
     } else {
-      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
-          + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h3><em>" + testName
+          + "</em></h3></td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     testStarted = true;
@@ -246,7 +251,7 @@ public class LOG {
             + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
             + "<style>td { border-top: 1px solid grey; } </style></head><body>"
             + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>"
-            + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css\">\n"
+            + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.css\">\n"
             + "<script src=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js\"></script>"
             + "<p>Date: "
             + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
@@ -277,23 +282,25 @@ public class LOG {
   }
 
   private static void appendShowHideButtons() {
-    String hideButton = "<button id=\"hideLowLevel\">hide low level actions</button>";
-    String showButton = "<button id=\"showLowLevel\">show low level actions</button>";
+    String hideButton =
+        "<button id=\"hideLowLevel\" class=\"btn btn-primary\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>";
     StringBuilder builder = new StringBuilder();
     builder.append(hideButton);
-    builder.append(showButton);
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
   }
 
   public enum Type {
-    SUCCESS("success", true), WARNING("warning", true), INFO("info", true), ERROR("error", false);
+    SUCCESS("success", true, ""), WARNING("warning", true, "icon-warning-sign"), INFO("info", true,
+        ""), ERROR("error", false, "icon-fire");
 
     private String logType;
     private boolean isError;
+    private String iconClass;
 
-    Type(String logType, boolean isError) {
+    Type(String logType, boolean isError, String iconClass) {
       this.logType = logType;
       this.isError = isError;
+      this.iconClass = iconClass;
     }
 
     public String getType() {
@@ -302,6 +309,10 @@ public class LOG {
 
     public boolean isError() {
       return isError;
+    }
+
+    public String getIconClass() {
+      return iconClass;
     }
   }
 }
