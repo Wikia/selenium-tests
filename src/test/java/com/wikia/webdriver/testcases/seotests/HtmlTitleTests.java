@@ -43,9 +43,9 @@ public class HtmlTitleTests extends NewTestTemplate {
         },
         {
             TEST_WIKI_ORIGINAL_TITLE,
-            "Style-5H2?vaction=edit",
-            "Style-5H2 - Sktest123 Wiki - Wikia",
-            "Style-5H2 - Sktest123 Wiki - Wikia"
+            "Style-5H3?vaction=edit",
+            "Style-5H3 - Sktest123 Wiki - Wikia",
+            "Style-5H3 - Sktest123 Wiki - Wikia"
         },
         {
             TEST_WIKI_ORIGINAL_TITLE,
@@ -195,9 +195,12 @@ public class HtmlTitleTests extends NewTestTemplate {
       dataProvider = "dataHtmlTitleTest001",
       groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleTest_001"}
   )
-  public void HtmlTitleTest_001(String wiki, String path, String exp, String expMercury) {
+  public void HtmlTitleTest_001(String wiki, String path, String expDesktop, String expMercury) {
+    String exp;
     if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(Configuration.getBrowser())) {
       exp = expMercury;
+    } else {
+      exp = expDesktop;
     }
 
     wikiURL = urlBuilder.getUrlForPath(wiki, path);
