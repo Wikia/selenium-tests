@@ -24,7 +24,7 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public void verifyArticleNameInWgPageName(String articleName) {
+  public void verifyRestoredArticleName(String articleName) {
     wait.forElementVisible(articleToRestore);
     Assertion.assertStringContains(articleToRestore.getText(), articleName);
   }

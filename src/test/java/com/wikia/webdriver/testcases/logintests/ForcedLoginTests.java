@@ -97,7 +97,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
     special.login(credentials.userName, credentials.password);
     special.verifyUserLoggedIn(credentials.userName);
-    special.verifyURLcontains(URLsContent.SPECIAL_UPLOAD);
+    special.isStringInURL(URLsContent.SPECIAL_UPLOAD);
   }
 
   @Test(groups = "ForcedLogin_004_notLoggedIn")
@@ -110,7 +110,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
     special.login(credentials.userName, credentials.password);
     special.verifyUserLoggedIn(credentials.userName);
-    special.verifyURLcontains(URLsContent.SPECIAL_WATCHLIST);
+    special.isStringInURL(URLsContent.SPECIAL_WATCHLIST);
   }
 
   @Test(groups = "ForcedLogin_005_addMedia")
@@ -121,8 +121,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     edit.clickPhotoButton();
     edit.logInViaModal(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
-    edit.verifyURLcontains(articleName);
-    edit.verifyURLcontains(URLsContent.ACTION_EDIT);
+    edit.isStringInURL(articleName);
+    edit.isStringInURL(URLsContent.ACTION_EDIT);
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }
@@ -139,8 +139,8 @@ public class ForcedLoginTests extends NewTestTemplate {
 
     authModal.login(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
-    edit.verifyURLcontains(articleName);
-    edit.verifyURLcontains(URLsContent.ACTION_EDIT);
+    edit.isStringInURL(articleName);
+    edit.isStringInURL(URLsContent.ACTION_EDIT);
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }

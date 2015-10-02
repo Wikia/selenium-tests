@@ -27,7 +27,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
- public void CreateNewWiki_001_createDeleteWiki() {
+  public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -51,7 +51,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
- public void CreateNewWiki_00_createWikiForChildren() {
+  public void CreateNewWiki_00_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -72,11 +72,11 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.loginAs(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
     SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
     factory.verifyVariableValue(WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-        "true");
+                                "true");
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
- public void CreateNewWiki_003_createWikiChangedDomain() {
+  public void CreateNewWiki_003_createWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -92,7 +92,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
     article.verifyUserLoggedIn(credentials.userName);
-    article.verifyURLcontains(wikiDomain);
+    article.isStringInURL(wikiDomain);
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})

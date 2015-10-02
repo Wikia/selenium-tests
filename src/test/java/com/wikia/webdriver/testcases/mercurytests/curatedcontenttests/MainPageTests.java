@@ -5,8 +5,10 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.enums.Mercury;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAlertComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
@@ -450,17 +452,21 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
+  @Test(groups = "MercuryCuratedMainPageTest_006")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
+    MercuryAlertComponentObject mercuryAlert = new MercuryAlertComponentObject(
+        driver, Mercury.AlertType.Warning, Mercury.AlertMessage.NOT_EXISTING_CATEGORY);
+
+
     String oldUrl = driver.getCurrentUrl();
-    ccp
-        .clickOnCuratedContentElementByIndex(2)
-        .isAlertNotificationVisible()
-        .waitForLoadingSpinnerToFinish();
+    ccp.clickOnCuratedContentElementByIndex(2);
+    mercuryAlert.verify();
+
+    ccp.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }
 }
