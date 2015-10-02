@@ -44,7 +44,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "WeiboWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void WeiboKWidgetTest_003_isErrorPresent() {
+  public void WeiboWidgetTest_003_isErrorPresent() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
     widget
