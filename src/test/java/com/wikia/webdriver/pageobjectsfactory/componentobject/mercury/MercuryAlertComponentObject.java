@@ -19,8 +19,7 @@ public class MercuryAlertComponentObject extends BasePageObject {
 
   private String alertMessage;
 
-  public MercuryAlertComponentObject(WebDriver driver, Mercury.AlertType type,
-                                     Mercury.AlertMessage message) {
+  public MercuryAlertComponentObject(WebDriver driver, Mercury.AlertMessage message) {
     super(driver);
     alertMessage = message.getMessage();
   }

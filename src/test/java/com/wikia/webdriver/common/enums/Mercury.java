@@ -5,11 +5,7 @@ package com.wikia.webdriver.common.enums;
  */
 public class Mercury {
 
-  /**
-   * Warning - yellow
-   */
-  public static enum AlertType {
-    Warning
+  private Mercury() {
   }
 
   public static enum AlertMessage {

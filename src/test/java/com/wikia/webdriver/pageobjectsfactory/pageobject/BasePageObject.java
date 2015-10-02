@@ -187,9 +187,8 @@ public class BasePageObject {
 
   protected void scrollToElement(WebElement element) {
     try {
-      ((JavascriptExecutor) driver).executeScript("var x = $(arguments[0]);"
-                                                  + "window.scroll(0,parseInt(x.offset().top - 100));",
-                                                  element);
+      ((JavascriptExecutor) driver).executeScript(
+          "var x = $(arguments[0]); window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -241,7 +240,7 @@ public class BasePageObject {
       PageObjectLogging.log("isStringInURL", "Current url contains " + exptectedString, true);
     } else {
       PageObjectLogging
-          .log("isStringInURL", "Current url doesn't contain " + exptectedString, false);
+          .log("isStringInURL", "current url doesn't contain " + exptectedString, false);
     }
   }
 
@@ -447,7 +446,7 @@ public class BasePageObject {
     PageObjectLogging.log("notifications_clickOnNotificationsLogo",
                           "click on notifications logo on the upper right corner", true, driver);
   }
-
+  
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");

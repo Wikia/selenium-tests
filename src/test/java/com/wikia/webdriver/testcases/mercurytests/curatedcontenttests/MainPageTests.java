@@ -459,7 +459,7 @@ public class MainPageTests extends NewTestTemplate {
     ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     MercuryAlertComponentObject mercuryAlert = new MercuryAlertComponentObject(
-        driver, Mercury.AlertType.Warning, Mercury.AlertMessage.NOT_EXISTING_CATEGORY);
+        driver, Mercury.AlertMessage.NOT_EXISTING_CATEGORY);
 
 
     String oldUrl = driver.getCurrentUrl();

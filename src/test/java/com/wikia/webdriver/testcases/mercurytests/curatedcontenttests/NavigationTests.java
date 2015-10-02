@@ -155,7 +155,7 @@ public class NavigationTests extends NewTestTemplate {
     section.openWikiPage(testUrl);
     section.waitForLoadingSpinnerToFinish();
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver, Mercury.AlertType.Warning, Mercury.AlertMessage.NOT_EXISTING_SECTION);
+        driver, Mercury.AlertMessage.NOT_EXISTING_SECTION);
 
     mercuryError.verify();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
@@ -188,7 +188,7 @@ public class NavigationTests extends NewTestTemplate {
     article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_2);
     article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2);
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver, Mercury.AlertType.Warning, Mercury.AlertMessage.NOT_EXISTING_REDIRECT);
+        driver, Mercury.AlertMessage.NOT_EXISTING_REDIRECT);
 
     mercuryError.verify();
   }
