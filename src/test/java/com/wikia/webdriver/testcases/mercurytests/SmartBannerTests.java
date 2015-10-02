@@ -93,7 +93,6 @@ public class SmartBannerTests extends NewTestTemplate {
   @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-    ;
     boolean result;
 
     for (String[] WIKI : WIKIS) {

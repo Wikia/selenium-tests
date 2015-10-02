@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -23,7 +22,7 @@ import java.util.List;
  */
 public class BasePageObject extends WikiBasePageObject {
 
-  private final static By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
+  private static final By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
 
   public BasePageObject(WebDriver driver) {
     super(driver);
