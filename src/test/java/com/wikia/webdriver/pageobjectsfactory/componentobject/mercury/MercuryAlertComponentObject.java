@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.enums.Mercury;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -24,12 +22,7 @@ public class MercuryAlertComponentObject extends BasePageObject {
     alertMessage = message.getMessage();
   }
 
-  /**
-   * The Mercury alert is present for 10 seconds.
-   */
-  public void verify() {
-    wait.forElementVisible(alertBox);
-    wait.forTextInElement(alertBox, alertMessage);
-    PageObjectLogging.log("verify", MercuryMessages.VISIBLE_MSG, true);
+  public boolean isAlertMessageVisible() {
+    return wait.forTextInElement(alertBox, alertMessage);
   }
 }

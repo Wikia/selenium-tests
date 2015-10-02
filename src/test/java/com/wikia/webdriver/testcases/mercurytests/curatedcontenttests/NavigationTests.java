@@ -157,7 +157,7 @@ public class NavigationTests extends NewTestTemplate {
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
         driver, Mercury.AlertMessage.NOT_EXISTING_SECTION);
 
-    mercuryError.verify();
+    Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 
@@ -189,7 +189,6 @@ public class NavigationTests extends NewTestTemplate {
     article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2);
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
         driver, Mercury.AlertMessage.NOT_EXISTING_REDIRECT);
-
-    mercuryError.verify();
+    Assertion.assertTrue(mercuryError.isAlertMessageVisible());
   }
 }

@@ -464,8 +464,7 @@ public class MainPageTests extends NewTestTemplate {
 
     String oldUrl = driver.getCurrentUrl();
     ccp.clickOnCuratedContentElementByIndex(2);
-    mercuryAlert.verify();
-
+    Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
     ccp.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }
