@@ -16,6 +16,10 @@ public class ContentReviewModule extends WikiBasePageObject {
     private WebElement contentReviewModule;
     @FindBy(css = "#content-review-module-submit")
     private WebElement submitForReviewLink;
+    @FindBy(css = ".content-review-module-test-mode-enable")
+    private WebElement enableTestModeButton;
+    @FindBy(css = "button.content-review-module-test-mode-disable")
+    private WebElement disableTestModeButton;
 
     public ContentReviewModule(WebDriver driver) {
         super(driver);
@@ -39,5 +43,28 @@ public class ContentReviewModule extends WikiBasePageObject {
             isLinkVisible = false;
         }
         return isModuleVisible() && isLinkVisible;
+    }
+
+    public boolean isEnableTestModeButtonVisible() {
+        boolean isButtonVisible = false;
+        try {
+            wait.forElementVisible(enableTestModeButton, 5, 1);
+            isButtonVisible = true;
+        } catch (TimeoutException e) {
+            isButtonVisible = false;
+        }
+        return isModuleVisible() && isButtonVisible;
+    }
+
+    public ContentReviewModule clickEnableTestModeButton() {
+        wait.forElementVisible(enableTestModeButton, 5, 1);
+        enableTestModeButton.click();
+        return this;
+    }
+
+    public ContentReviewModule clickDisableTestModeButton() {
+        wait.forElementVisible(disableTestModeButton, 5, 1);
+        disableTestModeButton.click();
+        return this;
     }
 }

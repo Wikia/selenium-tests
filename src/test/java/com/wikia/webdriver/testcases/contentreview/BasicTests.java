@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
@@ -47,7 +46,7 @@ public class BasicTests extends NewTestTemplate {
         editPage.clickAutoApproveCheckbox().clickPublishButton();
 
         SpecialJsPage specialJsPage = new SpecialJsPage(driver);
-        Assertion.assertEquals(specialJsPage.getScriptCoentent(), expectedContent);
+        Assertion.assertEquals(specialJsPage.getScriptContent(), expectedContent);
         Assertion.assertFalse(specialJsPage.getReviewModule().isSubmitLinkVisible());
 
         editPage.open("mediawiki:wikia.js")
@@ -56,7 +55,7 @@ public class BasicTests extends NewTestTemplate {
                 .insertContent("Adamk is awesome");
 
         editPage.clickPublishButton();
-        Assertion.assertEquals(specialJsPage.getScriptCoentent(), "Adamk is awesome");
+        Assertion.assertEquals(specialJsPage.getScriptContent(), "Adamk is awesome");
         Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkVisible());
     }
 }
