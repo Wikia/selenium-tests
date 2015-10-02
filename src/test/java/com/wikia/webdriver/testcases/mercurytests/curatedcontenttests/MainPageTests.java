@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing
  */
-@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
+@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "MercuryCuratedMainPageTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 
   private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
@@ -450,7 +450,7 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
+  @Test(groups = "MercuryCuratedMainPageTest_006")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
