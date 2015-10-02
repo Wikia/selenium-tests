@@ -1,8 +1,8 @@
 <script>
 function createToc()
 {
-	infoHidden = true;
-	var h1 = $('td h4');
+	infoHidden = false;
+	var h1 = $('td h3');
 	var l = h1.length;
 	var toc = "<ul>";
 	for (var i=0; i<l; i++){
@@ -23,15 +23,23 @@ function createToc()
 	var tocWrapper = document.getElementById('toc');
 	console.log(toc);
 	tocWrapper.innerHTML += toc;
-	manageActions(infoHidden);
+	
+	var buttons = document.getElementsByClassName("hideLowLevel");
+        for (var i = 0; i < buttons.length; i++) {
+			buttons[i].addEventListener('click', function () {
+				manageActions(infoHidden);
+			}, false);
+    }
+	
+	manageActions(infoHidden)	
 }
 function markMethodAsFailed() {
 	var a = $('table tr.error').parent();
 	var l = a.length;
 	for (var i=0; i<l; i++)
 	{
-		var b = a[i].children[0];
-		b.style.backgroundColor = "red";
+		a[i].children[0].style.backgroundColor = "red";
+		a[i].children[1].style.backgroundColor = "red";
 	}
 }
 function addLinkBackToTheJob() {
@@ -62,16 +70,17 @@ $(document).ready(function () {
                 elements[i].style.display = "";
             }
         }
+		
+		var buttons = document.getElementsByClassName("hideLowLevel");
+        for (var i = 0; i < buttons.length; i++) {
+		if(direction == false){
+			buttons[i].firstElementChild.classList.remove("icon-eye-open")
+			buttons[i].firstElementChild.classList.add("icon-eye-close")
+			} else{
+			buttons[i].firstElementChild.classList.remove("icon-eye-close")
+			buttons[i].firstElementChild.classList.add("icon-eye-open")
+			}
+		}
 		infoHidden = !infoHidden;
     }
-
-(function (ctx) {
-    var hideButton, showButton, document;
-    document = ctx.document;
-    hideButton = document.getElementById('hideLowLevel');
-
-    hideButton.addEventListener('click', function () {
-        manageActions(infoHidden);
-    }, false);
-}(this));
 </script>

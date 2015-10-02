@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import java.io.IOException;
 
-import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,8 +14,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
  */
 public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
-  private static final int TIMEOUT_SEC = 60;
-
   @Test(groups = "TestIVW2AnalyticsProvider")
   public void testIVW2AnalyticsProvider() throws IOException {
     for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
@@ -24,7 +21,8 @@ public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
       String article = (String) data[1];
       String ivw2Param = (String) data[2];
       String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-      String htmlSource = Jsoup.connect(testedPage).timeout(TIMEOUT_SEC * 1000).get().html();
+      driver.get(testedPage);
+      String htmlSource = driver.getPageSource();
       Assertion.assertTrue(htmlSource.contains(ivw2Param));
       LOG.success("IVW2", ivw2Param + " param is on the " + testedPage);
     }

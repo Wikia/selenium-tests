@@ -92,9 +92,13 @@ public class LOG {
 
   public static void stopLogging() {
     StringBuilder builder = new StringBuilder();
-    builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>"
-        + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
-        + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</tbody></table>");
+    builder
+        .append("<tr class=\"step\">"
+                + "<td>&nbsp</td><td>"
+                + "<div style=\"text-align:center\">"
+                + "<a href=\"#toc\" style=\"color:blue\">"
+                + "<button class=\"btn btn-info\" style=\"margin: auto\"><div class=\"icon-arrow-up icon-white\" style=\"margin: 0 20px 0 0\"></div>BACK TO MENU</button></a></div> </td><td> <br/> &nbsp;</td></tr>"
+                + "</tbody></table>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     testStarted = false;
   }
@@ -108,18 +112,21 @@ public class LOG {
         .append("<table class=\"table table-condensed\" style=\"border-collapse:collapse;"
             + " margin: 20px auto; table-layout:fixed; width: 960px; word-wrap: break-word;\"><tbody>"
             + "<tr class=\"step\"><td>"
-            + "<button id=\"hideLowLevel\" class=\"btn-mini btn-primary\" style=\"margin: auto\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>"
+            + "<button class=\"btn btn-info hideLowLevel\" style=\"margin: auto\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>"
             + "</td><td>" + "<em><h4>" + className + "</h4></em></td><td> <br/> &nbsp;</td></tr>");
     if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
       String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
       String jiraUrl = JIRA_PATH + issueID;
-      builder.append("<tr class=\"step\"><td>Known failure</td><td><h3><em>" + testName + " - "
-          + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
-          + testMethod.getAnnotation(RelatedIssue.class).comment()
-          + "</em></h3></td><td> <br/> &nbsp;</td></tr>");
+      builder
+          .append("<tr class=\"step\"><td>"
+              + "<a href=\""
+              + jiraUrl
+              + "\"><button class=\"btn btn-danger\" style=\"margin: auto\"><div class=\"icon-fire icon-white\" style=\"margin: 0 20px 0 0\"></div>"
+              + issueID + "</button></a>" + "</td><td colspan=\"2\"><h3><em>" + testName
+              + testMethod.getAnnotation(RelatedIssue.class).comment() + "</em></h3></td></tr>");
     } else {
-      builder.append("<tr class=\"step\"><td>&nbsp</td><td><h3><em>" + testName
-          + "</em></h3></td><td> <br/> &nbsp;</td></tr>");
+      builder.append("<tr class=\"step\"><td colspan=\"3\"><h3><em>" + testName
+          + "</em></h3></td></tr>");
     }
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     testStarted = true;
@@ -242,12 +249,12 @@ public class LOG {
     StringBuilder builder = new StringBuilder();
     builder
         .append("<html><style>"
-            + ".hiddenRow {padding: 0;"
+            + "table td {vertical-align: middle;}.hiddenRow {padding: 0;"
             + "} td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
             + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
             + "tr.warning{color:black;background-color:#FEE01E;}"
             + "tr.error{color:black;background-color:#FFCCCC;}"
-            + "tr.step{color:white;background:grey}"
+            + "tr.step{color:white;background:#606078}"
             + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
             + "<style>td { border-top: 1px solid grey; } </style></head><body>"
             + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>"
@@ -267,7 +274,6 @@ public class LOG {
             + "<p>Testing environment: " + Configuration.getEnv() + "</p>" + "<p>Tested version: "
             + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
-    appendShowHideButtons();
     try {
       FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
       String content = IOUtils.toString(input);
@@ -279,14 +285,6 @@ public class LOG {
 
   public static void finishReport() {
     CommonUtils.appendTextToFile(LOG_PATH, "</body></html>");
-  }
-
-  private static void appendShowHideButtons() {
-    String hideButton =
-        "<button id=\"hideLowLevel\" class=\"btn btn-primary\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>";
-    StringBuilder builder = new StringBuilder();
-    builder.append(hideButton);
-    CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
   }
 
   public enum Type {
