@@ -58,7 +58,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "AllTagsWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void AllTagsWidgetTest_001_isLoaded() {
-    new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

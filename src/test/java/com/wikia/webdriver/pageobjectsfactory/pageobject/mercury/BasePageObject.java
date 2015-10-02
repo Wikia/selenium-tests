@@ -36,8 +36,8 @@ public class BasePageObject extends WikiBasePageObject {
     return new ArticlePageObject(driver);
   }
 
-  public ArticlePageObject openMercuryArticleByNameWithCbAndNoAds(String wikiURL,
-                                                                  String articleName) {
+  public ArticlePageObject openArticleOnWikiByNameWithCbAndNoAds(String wikiURL,
+                                                                 String articleName) {
     getUrl(
         wikiURL + URLsContent.WIKI_DIR + articleName +
         "?cb=" + DateTime.now().getMillis() +
@@ -177,11 +177,6 @@ public class BasePageObject extends WikiBasePageObject {
     element.sendKeys(keys);
   }
 
-  protected void verifyTextInElement(WebElement element, String text) {
-    wait.forElementVisible(element);
-    Assertion.assertEquals(element.getText(), text);
-  }
-
   /**
    * Verify if element inside element of the provided list has given text. This method assumes list
    * element is not the final target of verification This method assumes list element is the parent
@@ -197,39 +192,6 @@ public class BasePageObject extends WikiBasePageObject {
       wait.forElementVisible(elem);
       innerElem = elem.findElement(elementLocator);
       if (innerElem.getText().equals(text)) {
-        return;
-      }
-    }
-    throw new WebDriverException(getNoTextInListErrorMessage(text));
-  }
-
-  /**
-   * Verify if element of the provided list has given text.
-   *
-   * @param list List that contains the element
-   * @param text Text to be compared
-   */
-  protected void verifyTextInListElements(List<WebElement> list, String text) {
-    for (WebElement elem : list) {
-      wait.forElementVisible(elem);
-      if (elem.getText().equals(text)) {
-        return;
-      }
-    }
-    throw new WebDriverException(getNoTextInListErrorMessage(text));
-  }
-
-  /**
-   * Verify if element of the provided list has given text.
-   *
-   * @param list List that contains the element
-   * @param text Text to be compared
-   */
-  protected void clickByListElementText(List<WebElement> list, String text) {
-    for (WebElement elem : list) {
-      wait.forElementVisible(elem);
-      if (elem.getText().equals(text)) {
-        waitAndClick(elem);
         return;
       }
     }

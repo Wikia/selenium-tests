@@ -42,7 +42,7 @@ public class SmartBannerTests extends NewTestTemplate {
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
-    banner.openMercuryArticleByNameWithCbAndNoAds(wikiURL, WIKIS[0][1]);
+    banner.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WIKIS[0][1]);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
     String buttonName;

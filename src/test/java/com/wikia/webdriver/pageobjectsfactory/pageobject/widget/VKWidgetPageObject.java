@@ -19,7 +19,6 @@ public class VKWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "vk";
-  private static final String ARTICLE_NAME = "VKWidget";
   private static final String[] TAGS = {
       "<vk group-id=\"59925174\" />",
       "<vk group-id=\"53477573\" />",
@@ -30,10 +29,6 @@ public class VKWidgetPageObject extends WidgetPageObject {
 
   public VKWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {
