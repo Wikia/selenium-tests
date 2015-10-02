@@ -187,7 +187,7 @@ public class WikiBasePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public AuthModal getNewAuthModal() {
+  public AuthModal getAuthModal(){
     return new AuthModal(driver);
   }
 

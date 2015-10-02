@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class AuthModal {
 
   @FindBy(css = ".auth.desktop.signin-page")
-  private WebElement newAuthModal;
+  private WebElement authModal;
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
   @FindBy(css = "#loginPassword")
@@ -39,7 +39,7 @@ public class AuthModal {
 
   public boolean isOpened() {
     switchToFrame();
-    boolean isOpenedResult = newAuthModal.isDisplayed();
+    boolean isOpenedResult = authModal.isDisplayed();
     switchBack();
     return isOpenedResult;
   }

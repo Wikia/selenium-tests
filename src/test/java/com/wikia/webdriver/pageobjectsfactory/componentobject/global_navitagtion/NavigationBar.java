@@ -27,6 +27,8 @@ public class NavigationBar extends WikiBasePageObject {
   private WebElement searchSubmit;
   @FindBys(@FindBy(css = suggestionCss))
   private List<WebElement> suggestionsList;
+  @FindBy(css = ".auth-label a.auth-link.sign-in")
+  private WebElement signInLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -141,5 +143,9 @@ public class NavigationBar extends WikiBasePageObject {
   public void setUpTracking() {
     jsActions.execute(ClickTrackingScriptsProvider.REDIRECT_BLOCK);
     jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
+  }
+
+  public void clickOnSignIn(){
+    signInLink.click();
   }
 }
