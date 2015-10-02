@@ -46,7 +46,7 @@ public class EditorTests extends NewTestTemplate {
                                           Configuration.getCredentials().passwordStaff2);
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_001", enabled = false)
+  @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
@@ -85,7 +85,7 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_002", enabled = false)
+  @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
@@ -145,7 +145,7 @@ public class EditorTests extends NewTestTemplate {
     ;
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_003", enabled = false)
+  @Test(groups = "MercuryCuratedEditorTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
