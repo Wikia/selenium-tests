@@ -208,7 +208,7 @@ public class LOG {
     try {
       bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
     } catch (IOException e) {
-      error("logImage", e.getMessage());
+      error("logImage", e);
     }
     allowLongDesc = true;
     appendToReport(command, "<img src=\"data:image/png;base64,"
@@ -283,7 +283,7 @@ public class LOG {
       String content = IOUtils.toString(input);
       CommonUtils.appendTextToFile(LOG_PATH, content);
     } catch (IOException e) {
-      System.out.println("no script.txt file available");
+      LOG.error("no script.txt file available", e);
     }
   }
 

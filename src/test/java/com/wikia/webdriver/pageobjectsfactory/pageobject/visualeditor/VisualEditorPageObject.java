@@ -259,6 +259,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
       contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
       contextEdit.click();
     } catch (StaleElementReferenceException e) {
+      LOG.info("Stale Element Reference", e);
       contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
       contextEdit.click();
     }
