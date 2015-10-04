@@ -27,19 +27,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-/*
+/**
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
+@Test(groups = "SignUp")
 public class SignUpTests extends NewTestTemplate {
 
-  private static String userName;
-  private static String password;
-  private static String jaTestWiki = "ja.ja-test";
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"SignUp_001", "SignUp"})
+  @Test(groups = {"SignUp_001"})
   public void SignUp_001_captchaNotChecked() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -52,7 +50,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyCaptchaInvalidMessage();
   }
 
-  @Test(groups = {"SignUp_002", "SignUp"})
+  @Test(groups = {"SignUp_002"})
   public void SignUp_002_tooYoungUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -68,7 +66,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyTooYoungMessage();
   }
 
-  @Test(groups = {"SignUp_003", "SignUp"})
+  @Test(groups = {"SignUp_003"})
   public void SignUp_003_existingUserName() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -76,7 +74,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
+  @Test(groups = {"SignUp_004", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -108,7 +106,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "QAART-678", comment = "Test manually")
-  @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
+  @Test(groups = {"SignUp_005_Forced_Signup_CNW"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);
     home.openWikiPage(wikiCorporateURL);
@@ -139,7 +137,7 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1.verifyWikiName(wikiName);
   }
 
-  @Test(groups = {"SignUp_006", "SignUp"})
+  @Test(groups = {"SignUp_006"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -169,7 +167,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"SignUp_007", "SignUp", "Modals"})
+  @Test(groups = {"SignUp_007", "Modals"})
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB).logOutFB();
@@ -182,8 +180,8 @@ public class SignUpTests extends NewTestTemplate {
     SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
     fbModal.acceptWikiaAppPolicy();
-    userName = "QA" + signUp.getTimeStamp();
-    password = "Pass" + signUp.getTimeStamp();
+    String userName = "QA" + signUp.getTimeStamp();
+    String password = "Pass" + signUp.getTimeStamp();
     fbModal.typeUserName(userName);
     fbModal.typePassword(password);
     fbModal.createAccount();
@@ -193,7 +191,7 @@ public class SignUpTests extends NewTestTemplate {
     base.logOut(wikiURL);
   }
 
-  @Test(groups = {"SignUp_008", "SignUp"})
+  @Test(groups = {"SignUp_008"})
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);

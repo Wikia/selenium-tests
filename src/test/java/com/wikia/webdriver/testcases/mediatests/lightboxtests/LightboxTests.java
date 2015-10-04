@@ -174,8 +174,6 @@ public class LightboxTests extends NewTestTemplate {
     LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxImage();
-    // lightbox.verifyTitleUrl(fileUrl);
-    // lightbox.verifyMoreInfoUrl(fileUrl);
     FilePagePageObject filePage = lightbox.clickTitle();
     filePage.verifyTabsExistImage();
   }

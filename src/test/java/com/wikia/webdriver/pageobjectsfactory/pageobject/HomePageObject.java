@@ -88,13 +88,13 @@ public class HomePageObject extends WikiBasePageObject {
       hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); // example: [ Video
                                                                               // Games ] to
                                                                               // Video_Games
-      if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {
+      if (hubName.equalsIgnoreCase(HubName.VIDEO_GAMES.toString())) {
         video += 1;
       }
-      if (hubName.equals(HubName.ENTERTAINMENT.toString().toLowerCase())) {
+      if (hubName.equalsIgnoreCase(HubName.ENTERTAINMENT.toString())) {
         entertainment += 1;
       }
-      if (hubName.equals(HubName.LIFESTYLE.toString().toLowerCase())) {
+      if (hubName.equalsIgnoreCase(HubName.LIFESTYLE.toString())) {
         lifestyle += 1;
       }
     }

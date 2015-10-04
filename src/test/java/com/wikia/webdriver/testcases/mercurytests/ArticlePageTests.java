@@ -128,7 +128,7 @@ public class ArticlePageTests extends NewTestTemplate {
     boolean result = driver.getCurrentUrl().contains(encodedColonUrl);
     LOG.result("URL for colon", "is encoded", "is not encoded", result);
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = article.getArticleTitle().equalsIgnoreCase(MercurySubpages.COLON.toLowerCase());
     LOG.result("Article title for colon", "is correct", "is not correct", result);
 
     article.openMercuryArticleByName(wikiURL, encodedQuestionMarkUrl);
@@ -137,7 +137,7 @@ public class ArticlePageTests extends NewTestTemplate {
     LOG.result("URL for question mark", "is encoded", "is not encoded", result);
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().equalsIgnoreCase(MercurySubpages.QUESTION_MARK.toLowerCase());
     LOG.result("Article title for question mark", "is correct", "is not correct", result);
 
     LOG.warning("Info", "Accessing article through link in content");
@@ -148,7 +148,7 @@ public class ArticlePageTests extends NewTestTemplate {
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     LOG.result("URL for colon", "is not encoded", "is encoded", result);
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = article.getArticleTitle().equalsIgnoreCase(MercurySubpages.COLON.toLowerCase());
     LOG.result("Article title for colon", "is correct", "is not correct", result);
 
     article.clickOnAnchorInContent(0);
@@ -158,7 +158,7 @@ public class ArticlePageTests extends NewTestTemplate {
     LOG.result("URL for question mark", "is encoded", "is not encoded", result);
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().equalsIgnoreCase(MercurySubpages.QUESTION_MARK.toLowerCase());
     LOG.result("Article title for question mark", "is correct", "is not correct", result);
 
     LOG.warning("Info", "Accessing article through link in navigation side");
@@ -171,7 +171,7 @@ public class ArticlePageTests extends NewTestTemplate {
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     LOG.result("URL for colon", "is not encoded", "is encoded", result);
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = article.getArticleTitle().equalsIgnoreCase(MercurySubpages.COLON.toLowerCase());
     LOG.result("Article title for colon", "is correct", "is not correct", result);
 
     nav.clickSearchButton();
@@ -183,7 +183,7 @@ public class ArticlePageTests extends NewTestTemplate {
     LOG.result("URL for question mark", "is encoded", "is not encoded", result);
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().equalsIgnoreCase(MercurySubpages.QUESTION_MARK.toLowerCase());
     LOG.result("Article title for question mark", "is correct", "is not correct", result);
 
     LOG.warning("Info", "Accessing article through link in search result");
@@ -197,7 +197,7 @@ public class ArticlePageTests extends NewTestTemplate {
     result = driver.getCurrentUrl().contains(encodedColonUrl);
     LOG.result("URL for colon", "is encoded", "is not encoded", result);
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = article.getArticleTitle().equalsIgnoreCase(MercurySubpages.COLON.toLowerCase());
     LOG.result("Article title for colon", "is correct", "is not correct", result);
 
     nav.clickSearchButton();
@@ -210,7 +210,7 @@ public class ArticlePageTests extends NewTestTemplate {
     LOG.result("URL for question mark", "is encoded", "is not encoded", result);
 
     result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+        article.getArticleTitle().equalsIgnoreCase(MercurySubpages.QUESTION_MARK.toLowerCase());
     LOG.result("Article title for question mark", "is correct", "is not correct", result);
   }
 }
