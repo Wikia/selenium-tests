@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.logging.LOG;
 
 public class CommonExpectedConditions {
 
@@ -48,6 +49,7 @@ public class CommonExpectedConditions {
             return elementsAttributeValue.contains(value);
           }
         } catch (StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return false;
         }
       }
@@ -73,6 +75,7 @@ public class CommonExpectedConditions {
           String elementsAttributeValue = element.getAttribute(attribute);
           return elementsAttributeValue.contains(value);
         } catch (StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return null;
         }
       }
@@ -123,6 +126,7 @@ public class CommonExpectedConditions {
             return null;
           }
         } catch (StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return null;
         }
       }
@@ -183,6 +187,7 @@ public class CommonExpectedConditions {
           String elementText = driver.findElement(elmentLocator).getText();
           return elementText.contains(text);
         } catch (StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return false;
         }
       }
@@ -207,6 +212,7 @@ public class CommonExpectedConditions {
           String elementText = driver.findElements(elmentLocator).get(index).getText();
           return elementText.contains(text);
         } catch (StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return false;
         }
       }
@@ -273,6 +279,7 @@ public class CommonExpectedConditions {
         try {
           return !driver.findElement(by).getText().contains(text);
         } catch (NoSuchElementException | StaleElementReferenceException e) {
+          LOG.info("STALE REFERENCE", e);
           return false;
         }
       }
@@ -313,8 +320,10 @@ public class CommonExpectedConditions {
         } catch (StaleElementReferenceException e) {
           // Returns true because stale element reference implies that element
           // is no longer visible.
+          LOG.info("STALE REFERENCE", e);
           return true;
         } catch (NoSuchElementException e) {
+          LOG.info("NO SUCH ELEMENT", e);
           driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
           return true;
         }
@@ -355,8 +364,10 @@ public class CommonExpectedConditions {
         } catch (StaleElementReferenceException e) {
           // Returns false because stale element implies that element
           // is still not visible.
+          LOG.info("STALE REFERENCE", e);
           return false;
         } catch (NoSuchElementException e) {
+          LOG.info("NO SUCH ELEMENT", e);
           return false;
         }
       }

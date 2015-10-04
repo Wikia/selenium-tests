@@ -357,7 +357,7 @@ public class VisualEditModePageObject extends EditMode {
         Thread.sleep(500);
         timeout += 500;
       } catch (InterruptedException e) {
-        LOG.result("triggerCategorySuggestions", "Interrupted Exception occurred", false);
+        LOG.error("triggerCategorySuggestions", e);
       }
       pressDownArrow(categoryInput);
       returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");

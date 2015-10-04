@@ -20,7 +20,7 @@ public class AlertHandler {
       driver.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
-      LOG.info("NO ALERT PRESENT", "");
+      LOG.info("NO ALERT PRESENT", e);
       return false;
     }
   }

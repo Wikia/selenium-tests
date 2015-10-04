@@ -125,6 +125,7 @@ public class BasePageObject {
       // Get location on WebElement is rising exception when element is not present
       element.getLocation();
     } catch (WebDriverException ex) {
+      LOG.info("WEBDRIVER EXCEPTION", ex);
       isElementOnPage = false;
     } finally {
       restoreDeaultImplicitWait();
@@ -142,6 +143,7 @@ public class BasePageObject {
     try {
       numElementOnPage = driver.findElements(cssSelectorBy).size();
     } catch (WebDriverException ex) {
+      LOG.info("WEBDRIVER EXCEPTION", ex);
       numElementOnPage = 0;
     } finally {
       restoreDeaultImplicitWait();
@@ -157,6 +159,7 @@ public class BasePageObject {
         isElementInElement = false;
       }
     } catch (WebDriverException ex) {
+      LOG.info("WEBDRIVER EXCEPTION", ex);
       isElementInElement = false;
     } finally {
       restoreDeaultImplicitWait();
@@ -191,7 +194,9 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - 100));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.error("JSError", "JQuery is not defined");
+        LOG.error("JSError", e);
+      }else{
+        LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
   }
@@ -203,7 +208,9 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element, offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.error("JSError", "JQuery is not defined");
+        LOG.error("JSError", e);
+      }else {
+        LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
   }
@@ -219,7 +226,9 @@ public class BasePageObject {
           + "window.scroll(0,parseInt(x.offset().top - 60));", driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        LOG.error("JSError", "JQuery is not defined");
+        LOG.error("JSError", e);
+      }else{
+        LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
   }
@@ -284,7 +293,7 @@ public class BasePageObject {
       driver.navigate().refresh();
       LOG.success("refreshPage", "page refreshed");
     } catch (TimeoutException e) {
-      LOG.result("refreshPage", "page loaded for more than 30 seconds after click", true);
+      LOG.error("refreshPage", e);
     }
   }
 
@@ -316,7 +325,7 @@ public class BasePageObject {
             + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-          LOG.error("JSError", "JQuery is not defined");
+          LOG.error("JSError", e);
         }
       }
       return true;

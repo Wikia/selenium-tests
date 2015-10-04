@@ -101,7 +101,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      LOG.success(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      LOG.info(INIT_MESSAGE, e);
     }
     try {
       if (SelectorStack.isContextSet()) {

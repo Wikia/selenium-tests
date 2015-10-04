@@ -54,7 +54,7 @@ public class LoginPageObject extends WikiBasePageObject {
           URLEncoder.encode(urlBuilder.getUrlForWiki(Configuration.getWikiName()), "UTF-8");
 
     } catch (UnsupportedEncodingException e) {
-      LOG.error("encoding", "problem occured during URL encoding");
+      LOG.error("encoding", e);
     }
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
         + redirectParameter);
@@ -117,6 +117,7 @@ public class LoginPageObject extends WikiBasePageObject {
           });
       return false;
     } catch (TimeoutException e) {
+      LOG.info("Timeout exception", e);
       return true;
     } finally {
       restoreDeaultImplicitWait();

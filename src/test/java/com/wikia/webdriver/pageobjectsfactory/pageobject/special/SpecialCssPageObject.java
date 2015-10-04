@@ -216,7 +216,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
       verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.MEDIAWIKI_CSS, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       // this should never happen
-      LOG.success("undeleteButton", "dont work");
+      LOG.success("undeleteButton", e);
     }
     LOG.success("undeleteButton", "click on undelete button");
   }

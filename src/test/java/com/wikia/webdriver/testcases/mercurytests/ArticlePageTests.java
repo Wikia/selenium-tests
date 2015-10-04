@@ -117,6 +117,7 @@ public class ArticlePageTests extends NewTestTemplate {
       encodedColonUrl = URLEncoder.encode(MercurySubpages.COLON, "UTF-8");
       encodedQuestionMarkUrl = URLEncoder.encode(MercurySubpages.QUESTION_MARK, "UTF-8");
     } catch (UnsupportedEncodingException e) {
+      LOG.error("Wrong URL encoding", e);
       throw new WebDriverException("Wrong URL encoding");
     }
 

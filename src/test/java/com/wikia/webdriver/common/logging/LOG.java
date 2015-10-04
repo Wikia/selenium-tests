@@ -156,6 +156,10 @@ public class LOG {
     info(command, exception.getMessage());
   }
 
+  public static void info(String command, Error error) {
+    info(command, error.getMessage());
+  }
+
   public static void success(String command, String description, boolean makeScreenshot) {
     appendToReport(command, description, Type.SUCCESS, makeScreenshot);
   }

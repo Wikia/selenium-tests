@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.logging.LOG;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -137,6 +139,7 @@ public class CommentsPageObject extends BasePageObject {
     try {
       wait.forElementVisible(repliesContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
+      LOG.info("Replies not expanded", e);
       return false;
     }
     return true;

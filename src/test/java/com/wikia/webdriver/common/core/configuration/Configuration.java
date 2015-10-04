@@ -10,6 +10,7 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.common.properties.Credentials;
 
 /**
@@ -34,6 +35,7 @@ public class Configuration {
         input = new FileInputStream(new File("config.yml"));
       } catch (FileNotFoundException ex) {
         try {
+          LOG.info("CANNOT FIND FILE CONFIG.YML", ex);
           input = new FileInputStream(new File("config_sample.yml"));
         } catch (FileNotFoundException ex2) {
           throw new TestEnvInitFailedException("CAN'T LOCATE CONFIG FILE");

@@ -19,6 +19,7 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.ElementStateHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
@@ -100,6 +101,7 @@ public class VenusGlobalNavPageObject {
             }
             return true;
           } catch (StaleElementReferenceException e) {
+            LOG.info("Stale element Reference", e);
             return false;
           }
         }

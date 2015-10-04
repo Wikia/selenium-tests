@@ -52,6 +52,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
       wait.forElementVisible(finishButton);
       return true;
     } catch (TimeoutException e) {
+      LOG.info("TIMEOUT EXCEPTION", e);
       return false;
     }
   }

@@ -44,8 +44,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       driver.manage().window().setSize(new Dimension(360, 640));
     } catch (WebDriverException ex) {
-      LOG.result("ResizeWindowForMobile",
-          "Resize window method not available - possibly running on real device", true);
+      LOG.success("ResizeWindowForMobile", ex);
     }
   }
 
@@ -151,7 +150,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
-      LOG.warning("", "MERCURY FAILED TO LOAD");
+      LOG.warning("MERCURY FAILED TO LOAD", e);
       throw e;
     }
   }

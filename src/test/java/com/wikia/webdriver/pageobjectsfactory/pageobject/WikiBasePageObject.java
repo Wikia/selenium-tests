@@ -559,6 +559,7 @@ public class WikiBasePageObject extends BasePageObject {
                   .size() > 0;// only for verification
             }
           } catch (StaleElementReferenceException e) {
+            LOG.info("STALE ELEMENT EXCEPTION", e);
             return false;
           }
         }
@@ -721,7 +722,7 @@ public class WikiBasePageObject extends BasePageObject {
         throw new WebDriverException("No logout link provided");
       }
     } catch (TimeoutException e) {
-      LOG.success("logOut", "page loads for more than 30 seconds");
+      LOG.error("logOut", e);
     }
   }
 
@@ -730,7 +731,7 @@ public class WikiBasePageObject extends BasePageObject {
       driver.manage().deleteAllCookies();
       driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
-      LOG.success("logOut", "page loads for more than 30 seconds");
+      LOG.error("logOut", e);
     }
     wait.forElementPresent(LOGIN_BUTTON_CSS);
     LOG.success("logOut", "user is logged out", true);
@@ -740,7 +741,7 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       getUrl(wikiURL + URLsContent.LOGOUT);
     } catch (TimeoutException e) {
-      LOG.success("logOut", "page loads for more than 30 seconds");
+      LOG.error("logOut", e);
     }
     wait.forElementPresent(LOGIN_BUTTON_CSS);
     LOG.success("logOut", "user is logged out", true);
@@ -933,7 +934,7 @@ public class WikiBasePageObject extends BasePageObject {
       geo.put("country", countryCode);
       setCookie(cookieName, geo.toString());
     } catch (JSONException ex) {
-      LOG.success("setCookieGeo", "Cannot set cookie ('" + cookieName + "')");
+      LOG.error("setCookieGeo", ex);
     }
   }
 
@@ -946,8 +947,7 @@ public class WikiBasePageObject extends BasePageObject {
       driver.manage().window().setSize(new Dimension(width, height));
       LOG.result("ResizeWindow", "Resize window (width=" + width + ", height=" + height + ")", true);
     } catch (WebDriverException ex) {
-      LOG.result("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height
-          + ")", true);
+      LOG.error("ResizeWindow", ex);
     }
   }
 

@@ -48,6 +48,7 @@ public class CommonUtils {
       out.flush();
       out.close();
     } catch (IOException e) {
+      LOG.info("IO EXCEPTION", e);
       throw new TestEnvInitFailedException();
     }
   }
@@ -71,6 +72,7 @@ public class CommonUtils {
       new File(fileName).mkdir();
       System.out.println("directory " + fileName + " created");
     } catch (SecurityException e) {
+      LOG.info("SECURITY EXCEPTION", e);
       throw new TestEnvInitFailedException();
     }
   }

@@ -128,6 +128,7 @@ public class SpecialPromotePageObject extends BasePageObject {
       BufferedImage bufImgOne = ImageIO.read(url);
       ImageIO.write(bufImgOne, "png", uploadedImageFile);
     } catch (IOException e) {
+      LOG.error("IO Exception", e);
       throw new WebDriverException();
     }
     return uploadedImageFile;

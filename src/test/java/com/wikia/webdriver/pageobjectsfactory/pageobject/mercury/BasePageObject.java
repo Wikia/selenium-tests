@@ -88,7 +88,7 @@ public class BasePageObject extends WikiBasePageObject {
       wait.forElementVisible(LOADING_SPINNER_BY, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {
-      LOG.success("Loading spinner", "is not present");
+      LOG.success("Loading spinner", e);
     }
     if (spinnerPresent) {
       wait.forElementNotVisible(LOADING_SPINNER_BY, 4, 3000);
@@ -132,6 +132,7 @@ public class BasePageObject extends WikiBasePageObject {
       wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
           Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
+      LOG.info("Timeout exception", e);
       return false;
     }
     return true;

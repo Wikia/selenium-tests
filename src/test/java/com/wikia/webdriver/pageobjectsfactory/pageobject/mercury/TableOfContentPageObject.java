@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.logging.LOG;
+
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -34,6 +36,7 @@ public class TableOfContentPageObject extends BasePageObject {
     try {
       wait.forElementVisible(tocAll, 5, 1000);
     } catch (TimeoutException e) {
+      LOG.info("Timeout", e);
       return false;
     }
     return true;

@@ -71,6 +71,7 @@ public class SEOUtils extends BasePageObject {
       }
       return !ogSiteName.getAttribute("content").isEmpty();
     } catch (NoSuchElementException e) {
+      LOG.info("NO SUCH ELEMENT", e);
       return false;
     }
   }

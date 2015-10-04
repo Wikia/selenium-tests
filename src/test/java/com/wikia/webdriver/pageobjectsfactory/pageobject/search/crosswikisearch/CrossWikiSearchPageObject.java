@@ -65,7 +65,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     try {
       getUrl(searchUrl + "index.php?title=Special:Search");
     } catch (TimeoutException e) {
-      LOG.error("goToSearchPage", "timeouted when opening search page");
+      LOG.error("goToSearchPage", e);
     }
   }
 

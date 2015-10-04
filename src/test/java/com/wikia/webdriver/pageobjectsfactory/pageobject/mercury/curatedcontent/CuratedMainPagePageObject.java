@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.common.logging.LOG;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 /**
@@ -83,6 +84,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
       wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
           Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
+      LOG.info("Timeout", e);
       return false;
     }
     return true;

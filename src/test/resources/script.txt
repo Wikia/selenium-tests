@@ -7,9 +7,9 @@ function createToc()
 	var toc = "<ul>";
 	for (var i=0; i<l; i++){
 		var ident = "toc"+i;
-		var tr = h1[i].parentNode.parentNode.parentNode;
+		var tr = h1[i].parentNode.parentNode;
 		h1[i].setAttribute('id', ident);
-		if (tr.style.backgroundColor == "red")
+		if (tr.classList.contains("error"))
 		{
 			var temp = "<li><a style=\"color:red;\" href='#" + ident + "' >" + h1[i].textContent + "</a></li>";
 		}
@@ -38,8 +38,8 @@ function markMethodAsFailed() {
 	var l = a.length;
 	for (var i=0; i<l; i++)
 	{
-		a[i].children[0].style.backgroundColor = "red";
-		a[i].children[1].style.backgroundColor = "red";
+		a[i].children[0].classList.add("error")
+		a[i].children[1].classList.add("error")
 	}
 }
 function addLinkBackToTheJob() {

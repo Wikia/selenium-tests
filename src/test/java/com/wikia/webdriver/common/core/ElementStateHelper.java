@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.LOG;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -21,6 +23,7 @@ public class ElementStateHelper {
     try {
       return element.isDisplayed();
     } catch (NoSuchElementException | StaleElementReferenceException e) {
+      LOG.info("NO SUCH ELEMENT", e);
       return false;
     } finally {
       webDriver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
