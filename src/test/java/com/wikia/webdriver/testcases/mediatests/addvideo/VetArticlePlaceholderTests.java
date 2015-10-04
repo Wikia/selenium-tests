@@ -85,7 +85,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   public void Placeholders_004_EditModeLibrary() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
-    WikiBasePageObject base = new WikiBasePageObject(driver);
     new ArticlePageObject(driver).openRandomArticle(wikiURL);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =

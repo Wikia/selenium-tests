@@ -40,7 +40,6 @@ public class EditingLocalCssTests extends NewTestTemplate {
    */
   @Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"})
   public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
     article.goToCurrentArticleEditPage();

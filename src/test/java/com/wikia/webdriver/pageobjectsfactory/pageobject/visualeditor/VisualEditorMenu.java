@@ -232,6 +232,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
       case NUMBERED_LIST:
         clickInsertItemFromDropDown(numberbedListBy);
         break;
+      default: {}
     }
     LOG.success("selectInsertToInsertList", insert.toString() + " selected");
   }

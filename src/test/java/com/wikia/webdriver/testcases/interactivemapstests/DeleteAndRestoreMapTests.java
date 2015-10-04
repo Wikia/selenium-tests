@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
 /**
  * @author: Lukasz Nowak and RodriGomez
@@ -30,7 +29,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
-    InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
+    deleteMapModal.deleteMap();
     selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[0]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
@@ -60,7 +59,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
-    InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
+    deleteMapModal.deleteMap();
     selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[2]);
     selectedMap.verifyMapOpenedForDeleteMapTests();

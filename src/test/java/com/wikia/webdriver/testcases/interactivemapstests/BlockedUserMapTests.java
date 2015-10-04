@@ -87,7 +87,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
         customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
     template.verifyTemplateImage(selectedImageName);
     template.typeMapName(InteractiveMapsContent.MAP_NAME);
-    CreatePinTypesComponentObject pinDialog = template.clickNext();
+    template.clickNext();
     template.verifyErrorExists();
   }
 

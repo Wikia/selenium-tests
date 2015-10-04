@@ -104,10 +104,8 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
   @DontRun(env = {"prod", "sandbox"})
   @Test(groups = {"ChatTestsStaff_004", "ChatStaff"})
   public void ChatTestsStaff_004_basicUserChatFails() {
-
     switchToWindow(driverOne);
-    ChatPageObject chatUserOne =
-        openChatForUser(driverOne, credentials.userName, credentials.password);
+    openChatForUser(driverOne, credentials.userName, credentials.password);
     SpecialPageObject special = new SpecialPageObject(driver);
     special.verifyPageHeader("Permissions error");
   }
