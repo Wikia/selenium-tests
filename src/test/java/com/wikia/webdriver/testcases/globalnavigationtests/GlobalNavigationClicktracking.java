@@ -55,10 +55,10 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
     AlertHandler.dismissPopupWindow(driver);
 
     List<JsonObject> expectedEvents =
-        Arrays.asList(EventsGlobalNavigation.searchSuggestShow,
-            EventsGlobalNavigation.searchSuggestionEnter,
-            EventsGlobalNavigation.searchAfterSuggestionEnter,
-            EventsGlobalNavigation.searchAfterSuggestionButtonClick);
+        Arrays.asList(EventsGlobalNavigation.SEARCH_SUGGEST_SHOW,
+            EventsGlobalNavigation.SEARCH_SUGGESTION_ENTER,
+            EventsGlobalNavigation.SEARCH_AFTER_SUGGESTION_ENTER,
+            EventsGlobalNavigation.SEARCH_AFTER_SUGGESTION_BUTTON_CLICK);
 
     navbar.compareTrackedEventsTo(expectedEvents);
   }

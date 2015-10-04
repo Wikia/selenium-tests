@@ -16,7 +16,7 @@ public class EventsGlobalNavigation {
    * search-enter
    */
 
-  public static JsonObject searchSuggestionClick = Json
+  public static final JsonObject SEARCH_SUGGESTION_CLICK = Json
       .createObjectBuilder()
       .add(
           "0",
@@ -27,7 +27,7 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder()
               .add(EventParameter.LABEL.getEventParameter(), "search-suggest")).build();
-  public static JsonObject searchSuggestShow = Json
+  public static final JsonObject SEARCH_SUGGEST_SHOW = Json
       .createObjectBuilder()
       .add(
           "0",
@@ -38,7 +38,7 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder().add(EventParameter.ACTION.getEventParameter(), "view")
               .add(EventParameter.LABEL.getEventParameter(), "search-suggest-show")).build();
-  public static JsonObject searchAfterSuggestionButtonClick = Json
+  public static final JsonObject SEARCH_AFTER_SUGGESTION_BUTTON_CLICK = Json
       .createObjectBuilder()
       .add(
           "0",
@@ -49,7 +49,7 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
               "search-after-suggest-button")).build();
-  public static JsonObject searchAfterSuggestionEnter = Json
+  public static final JsonObject SEARCH_AFTER_SUGGESTION_ENTER = Json
       .createObjectBuilder()
       .add(
           "0",
@@ -60,7 +60,7 @@ public class EventsGlobalNavigation {
           "1",
           Json.createObjectBuilder().add(EventParameter.LABEL.getEventParameter(),
               "search-after-suggest-enter")).build();
-  public static JsonObject searchSuggestionEnter = Json
+  public static final JsonObject SEARCH_SUGGESTION_ENTER = Json
       .createObjectBuilder()
       .add(
           "0",
