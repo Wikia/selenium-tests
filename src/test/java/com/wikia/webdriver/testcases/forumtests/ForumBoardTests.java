@@ -108,6 +108,6 @@ public class ForumBoardTests extends NewTestTemplate {
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
-    forumThread.notifications_verifyLatestNotificationTitle(title);
+    forumThread.notificationsVerifyLatestNotificationTitle(title);
   }
 }

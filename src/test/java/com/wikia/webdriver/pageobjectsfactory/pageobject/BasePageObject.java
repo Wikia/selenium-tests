@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -48,9 +50,9 @@ import com.wikia.webdriver.common.logging.LOG;
 public class BasePageObject {
 
   public final Wait wait;
-  public WebDriver driver;
-  public WebDriverWait waitFor;
-  public Actions builder;
+  protected WebDriver driver;
+  protected WebDriverWait waitFor;
+  protected Actions builder;
   protected int timeOut = 30;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
@@ -195,7 +197,7 @@ public class BasePageObject {
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         LOG.error("JSError", e);
-      }else{
+      } else {
         LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
@@ -209,7 +211,7 @@ public class BasePageObject {
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         LOG.error("JSError", e);
-      }else {
+      } else {
         LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
@@ -227,7 +229,7 @@ public class BasePageObject {
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         LOG.error("JSError", e);
-      }else{
+      } else {
         LOG.info("WEBDRIVER EXCEPTION", e);
       }
     }
@@ -426,18 +428,18 @@ public class BasePageObject {
   /*
    * notifications methods - will be moved to other class
    */
-  public void notifications_verifyLatestNotificationTitle(String title) {
-    notifications_showNotifications();
+  public void notificationsVerifyLatestNotificationTitle(String title) {
+    notificationsShowNotifications();
     // the below method is native click which is the only way to load
     // notification
-    notifications_clickOnNotificationsLogo();
+    notificationsClickOnNotificationsLogo();
     wait.forElementVisible(notificationsLatestNotificationOnWiki);
     wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
     LOG.success("notifications_verifyNotificationTitle",
         "Verify that the latest notification has the following title: " + title, true);
   }
 
-  public void notifications_clickOnNotificationsLogo() {
+  public void notificationsClickOnNotificationsLogo() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     wait.forElementClickable(notificationsShowNotificationsLogo);
     notificationsShowNotificationsLogo.click();
@@ -445,7 +447,7 @@ public class BasePageObject {
         "click on notifications logo on the upper right corner", true);
   }
 
-  public void notifications_showNotifications() {
+  public void notificationsShowNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
     LOG.success("norifications_showNotifications",
@@ -485,16 +487,20 @@ public class BasePageObject {
         style);
   }
 
-  private void purge(String url) throws Exception {
+  private void purge(String url) throws IOException {
     CloseableHttpClient client = HttpClients.createDefault();
     HttpUriRequest method = new PurgeMethod(url);
     try {
       int status = client.execute(method).getStatusLine().getStatusCode();
       if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
-        throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
+        LOG.error("HTTP PURGE FAILED", "HTTP PURGE failed for: " + url + "(" + status + ")");
       }
       LOG.success("purge", url);
       return;
+    } catch (ClientProtocolException e) {
+      LOG.error("CLIENT PROTOCOL EXCEPTION", e);
+    } catch (IOException e) {
+      LOG.error("IO EXCEPTION", e);
     } finally {
       client.close();
     }
@@ -516,7 +522,8 @@ public class BasePageObject {
       int status = connection.getResponseCode();
       connection.disconnect();
       return status;
-    } catch (Exception e) {
+    } catch (IOException e) {
+      LOG.error("FAILED TO PURGE", e);
       throw new WebDriverException(e);
     }
   }

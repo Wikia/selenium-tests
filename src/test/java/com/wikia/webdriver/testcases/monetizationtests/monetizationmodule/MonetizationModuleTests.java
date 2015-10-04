@@ -43,13 +43,13 @@ public class MonetizationModuleTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @DataProvider(name = "DataMonetizationModule_005")
-  public static Object[][] DataMonetizationModule_005() {
+  public static Object[][] dataMonetizationModule_005() {
     return new Object[][] { {800, 600, 360, 700}, {850, 600, 360, 700}, {1024, 600, 360, 700},
         {1575, 600, 360, 700}, {1576, 600, 510, 728}, {1700, 600, 510, 728},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_008")
-  public static Object[][] DataMonetizationModuleTest_008() {
+  public static Object[][] dataMonetizationModuleTest_008() {
     return new Object[][] { {"JP", true, TEST_WIKI, TEST_ARTICLE},
         {"JP", false, TEST_WIKI, TEST_ARTICLE},
         {"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
@@ -59,31 +59,31 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   @DataProvider(name = "DataMonetizationModuleGeoTestWikis")
-  public static Object[][] DataMonetizationModuleGeoTestWikis() {
+  public static Object[][] dataMonetizationModuleGeoTestWikis() {
     return new Object[][] { {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
         {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_011")
-  public static Object[][] DataMonetizationModuleTest_011() {
+  public static Object[][] dataMonetizationModuleTest_011() {
     return new Object[][] { {"JP", true}, {"JP", false}, {"US", true}, {"US", false}, {"GB", true},
         {"GB", false}, {"CA", true}, {"CA", false}, {"AU", true}, {"AU", false}, {"DE", true},
         {"DE", false},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_012")
-  public static Object[][] DataMonetizationModuleTest_012() {
+  public static Object[][] dataMonetizationModuleTest_012() {
     return new Object[][] { {TEST_WIKI, TEST_ARTICLE}, {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
         {TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_013")
-  public static Object[][] DataMonetizationModuleTest_013() {
+  public static Object[][] dataMonetizationModuleTest_013() {
     return new Object[][] { {"JP"}, {"GB"}, {"US"},};
   }
 
   @DataProvider(name = "DataMonetizationModuleTest_014")
-  public static Object[][] DataMonetizationModuleTest_014() {
+  public static Object[][] dataMonetizationModuleTest_014() {
     return new Object[][] { {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
         {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
         {TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"}, {TEST_WIKI, TEST_ARTICLE, "CA"},
@@ -96,7 +96,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   @DataProvider(name = "MonetizationModuleTest_017")
-  public static Object[][] DataMonetizationModuleTest_017() {
+  public static Object[][] dataMonetizationModuleTest_017() {
     return new Object[][] { {"US", true, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
         {"US", false, TEST_AMAZON_BIGIMG_WIKI, TEST_AMAZON_BIGIMG_ARTICLE},
         {"US", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
@@ -104,19 +104,19 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   @DataProvider(name = "MonetizationModuleTest_018")
-  public static Object[][] DataMonetizationModuleTest_018() {
+  public static Object[][] dataMonetizationModuleTest_018() {
     return new Object[][] { {"JP", true, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},
         {"JP", false, TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_020")
-  public static Object[][] DataMonetizationModuleTest_020() {
+  public static Object[][] dataMonetizationModuleTest_020() {
     return new Object[][] { {"US", true, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},
         {"US", false, TEST_AMAZON_PRIME_WIKI, TEST_AMAZON_PRIME_ARTICLE},};
   }
 
   @DataProvider(name = "MonetizationModuleTest_021")
-  public static Object[][] DataMonetizationModuleTest_021() {
+  public static Object[][] dataMonetizationModuleTest_021() {
     return new Object[][] {
         {"US", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"US", false, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
@@ -129,7 +129,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   }
 
   @DataProvider(name = "MonetizationModuleTest_022")
-  public static Object[][] DataMonetizationModuleTest_022() {
+  public static Object[][] dataMonetizationModuleTest_022() {
     return new Object[][] {
         {"JP", true, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
         {"DE", false, TEST_ECOMMERCE_SINGLE_DARK_WIKI, TEST_ECOMMERCE_SINGLE_DARK_ARTICLE, SINGLE},
