@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * @description 1. Test no ads on corporate pages
  */
 public class TestAdsOnGermanCorpPages extends TemplateNoFirstLoad {
-  
+
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "germanCorpPages",
