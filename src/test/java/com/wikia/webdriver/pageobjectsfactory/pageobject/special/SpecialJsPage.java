@@ -58,28 +58,40 @@ public class SpecialJsPage extends WikiBasePageObject {
         return contentReviewModule;
     }
 
+    /**
+     * Checks if the element prepended to an article by the test-supplied JS is visible.
+     * @return boolean
+     */
     public boolean isTestElementVisible() {
         boolean isVisible = false;
         try {
             wait.forElementVisible(testElement, 3, 1);
             isVisible = true;
-        } catch (TimeoutException exception) {
+        } catch (TimeoutException e) {
             isVisible = false;
         }
         return isVisible;
     }
 
+    /**
+     * Fetches a content of the element prepended by the test-supplied JS.
+     * @return String
+     */
     public String getTestElementContent() {
         wait.forElementVisible(testElement, 3, 1);
         return testElement.getText();
     }
 
+    /**
+     * Checks if a BannerNotification informing a user about the Test Mode being enabled is visible.
+     * @return boolean
+     */
     public boolean isBannerNotificationLinkVisible() {
         boolean isVisible = false;
         try {
             wait.forElementVisible(bannerNotificationLink, 3, 1);
             isVisible = true;
-        } catch (TimeoutException exception) {
+        } catch (TimeoutException e) {
             isVisible = false;
         }
         return isVisible;

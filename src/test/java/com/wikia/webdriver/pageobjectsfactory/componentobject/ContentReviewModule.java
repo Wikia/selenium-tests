@@ -29,7 +29,7 @@ public class ContentReviewModule extends WikiBasePageObject {
         try {
             wait.forElementVisible(contentReviewModule, 5, 1);
             return true;
-        }catch (TimeoutException exception){
+        }catch (TimeoutException e){
             return false;
         }
     }
@@ -39,7 +39,7 @@ public class ContentReviewModule extends WikiBasePageObject {
         try {
             wait.forElementVisible(submitForReviewLink, 3, 1);
             isLinkVisible = true;
-        } catch(TimeoutException exception) {
+        } catch(TimeoutException e) {
             isLinkVisible = false;
         }
         return isModuleVisible() && isLinkVisible;
@@ -50,7 +50,7 @@ public class ContentReviewModule extends WikiBasePageObject {
         try {
             wait.forElementVisible(enableTestModeButton, 5, 1);
             isButtonVisible = true;
-        } catch (TimeoutException exception) {
+        } catch (TimeoutException e) {
             isButtonVisible = false;
         }
         return isModuleVisible() && isButtonVisible;
