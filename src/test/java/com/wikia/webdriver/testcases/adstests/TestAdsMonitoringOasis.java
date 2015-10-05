@@ -4,7 +4,6 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -39,13 +38,7 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
       dataProvider = "popularSites"
   )
   public void AdsMonitoringOasis(String wikiName, String path) {
-    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
-
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
-
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, BROWSER_DIMENSION);
 
     if (countryCode == null) {
