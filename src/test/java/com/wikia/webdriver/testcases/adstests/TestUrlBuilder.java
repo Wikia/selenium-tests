@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
@@ -196,5 +197,13 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                                  .getUrlForPath((String) data[0], (String) data[1]),
                              (String) data[6]);
     }
+  }
+
+  @Test(groups = "TestUrlBuilder")
+  public void appendQueryString() {
+    Configuration.setTestValue("qs", "cb=1111");
+
+    Assertion.assertEquals(new UrlBuilder("prod").getUrlForPath("wowwiki", "Portal:Main"),
+                           "http://wowwiki.wikia.com/Portal:Main?cb=1111");
   }
 }
