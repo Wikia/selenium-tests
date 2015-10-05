@@ -206,5 +206,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
 
     Assertion.assertEquals(new UrlBuilder("prod").getUrlForPath("wowwiki", "Portal:Main"),
                            "http://wowwiki.wikia.com/Portal:Main?" + cb);
+
+    Configuration.clearCustomTestProperties();
   }
 }
