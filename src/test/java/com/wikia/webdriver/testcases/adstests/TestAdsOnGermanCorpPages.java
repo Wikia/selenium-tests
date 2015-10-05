@@ -26,7 +26,7 @@ public class TestAdsOnGermanCorpPages extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestAdsOnGermanCorpPages_GeoEdgeFree"}
+      groups = "TestAdsOnGermanCorpPages_GeoEdgeFree"
   )
   public void TestAdsOnGermanCorpPages_GeoEdgeFree() {
     AdsGermanObject wikiCorpPage = new AdsGermanObject(driver, testedPage);
