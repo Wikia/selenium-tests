@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -180,6 +181,8 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
 
   @Test(groups = "TestUrlBuilder")
   public void urlBuilder() {
+    Configuration.setTestValue("qs", "");
+
     for (Object[] data : TEST_DATA) {
       Assertion.assertEquals(new UrlBuilder("prod")
                                  .getUrlForPath((String) data[0], (String) data[1]),
@@ -206,7 +209,10 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
 
     Assertion.assertEquals(new UrlBuilder("prod").getUrlForPath("wowwiki", "Portal:Main"),
                            "http://wowwiki.wikia.com/Portal:Main?" + cb);
+  }
 
+  @AfterMethod(alwaysRun = true)
+  public void AfterMethod() {
     Configuration.clearCustomTestProperties();
   }
 }
