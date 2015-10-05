@@ -201,9 +201,10 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
 
   @Test(groups = "TestUrlBuilder")
   public void appendQueryString() {
-    Configuration.setTestValue("qs", "cb=1111");
+    String cb = "cb=1111";
+    Configuration.setTestValue("qs", cb);
 
     Assertion.assertEquals(new UrlBuilder("prod").getUrlForPath("wowwiki", "Portal:Main"),
-                           "http://wowwiki.wikia.com/Portal:Main?cb=1111");
+                           "http://wowwiki.wikia.com/Portal:Main?" + cb);
   }
 }
