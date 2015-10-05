@@ -212,7 +212,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
   }
 
   @AfterMethod(alwaysRun = true)
-  public void AfterMethod() {
+  public void clearCustomTestProperties() {
     Configuration.clearCustomTestProperties();
   }
 }
