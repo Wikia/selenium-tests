@@ -7,7 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject
 import org.testng.annotations.Test;
 
 /**
- * @author Dmytro Rets
  * @ownership AdEngineering
  */
 public class Test71MediaParams extends TemplateNoFirstLoad {
