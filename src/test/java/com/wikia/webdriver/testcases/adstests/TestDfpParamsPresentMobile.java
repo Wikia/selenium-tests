@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * @author Sergey Naumov
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/LINE_ITEM_ID=115974612
  * @ownership AdEng
  */
