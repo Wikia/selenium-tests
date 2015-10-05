@@ -25,7 +25,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "noAdsForUsers",
-      groups = {"TestNoAdsForUsers_AU"}
+      groups = "TestNoAdsForUsers_AU"
   )
   public void TestNoAdsForUsers_AU(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
@@ -39,7 +39,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "noAdsForUsers",
-      groups = {"TestNoAdsForUsers_VE"}
+      groups = "TestNoAdsForUsers_VE"
   )
   public void TestNoAdsForUsers_VE(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
@@ -52,7 +52,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "noAdsForUsers",
-      groups = {"TestNoAdsForUsers_GeoEdgeFree"}
+      groups = "TestNoAdsForUsers_GeoEdgeFree"
   )
   public void TestNoAdsForUsers_GeoEdgeFree(String wikiName, String path) throws Exception {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
