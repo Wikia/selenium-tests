@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  */
 @Test(
-    groups = {"Ads_Corporate_Page"}
+    groups = "Ads_Corporate_Page"
 )
 public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
@@ -33,7 +33,7 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
   @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
-      groups = {"TestCorporatePage_VE"}
+      groups = "TestCorporatePage_VE"
   )
   public void TestCorporatePage_VE() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
@@ -43,7 +43,7 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestCorporatePageHVC_GEF"}
+      groups = "TestCorporatePageHVC_GEF"
   )
   public void TestCorporatePage_GEF() {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
