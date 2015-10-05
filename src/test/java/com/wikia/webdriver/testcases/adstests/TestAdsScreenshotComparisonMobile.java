@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
@@ -20,7 +18,6 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
 
   @Factory(dataProviderClass = AdsDataProvider.class, dataProvider = "popularSites")
   public TestAdsScreenshotComparisonMobile(String wikiName, String article) {
-    urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getBrowser());
     testedPage = urlBuilder.getUrlForPath(wikiName, article);
   }
 
