@@ -12,6 +12,7 @@ import java.util.TimeZone;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -70,13 +71,12 @@ public class LOG {
           + "\" style=\"padding: 0 10px 0 0\"></div>" + command + "</td><td>" + transformDesc
           + "</td>");
     }
-    if (makeScreenshot) {
-      new Shooter().savePageScreenshot(SCREEN_PATH + logCounter, TestContext.getWebDriver());
-      CommonUtils.appendTextToFile(SCREEN_PATH + logCounter + ".html", getPageSource());
-      builder.append("<td><a href='screenshots/screenshot" + logCounter
-          + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + logCounter
-          + ".html'>HTML Source</a></td></tr>");
-    } else {
+    if (makeScreenshot && TestContext.getWebDriver() != null) {
+        new Shooter().savePageScreenshot(SCREEN_PATH + logCounter, TestContext.getWebDriver());
+        CommonUtils.appendTextToFile(SCREEN_PATH + logCounter + ".html", getPageSource());
+        builder.append("<td><a href='screenshots/screenshot" + logCounter
+                       + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + logCounter
+                       + ".html'>HTML Source</a></td></tr>");    } else {
       builder.append("<td></td></tr>");
     }
     if (isDescriptionTooLong) {
