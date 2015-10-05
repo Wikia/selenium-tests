@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -97,7 +98,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
     special.login(credentials.userName, credentials.password);
     special.verifyUserLoggedIn(credentials.userName);
-    special.isStringInURL(URLsContent.SPECIAL_UPLOAD);
+    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   @Test(groups = "ForcedLogin_004_notLoggedIn")
@@ -110,7 +111,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
     special.login(credentials.userName, credentials.password);
     special.verifyUserLoggedIn(credentials.userName);
-    special.isStringInURL(URLsContent.SPECIAL_WATCHLIST);
+    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
   @Test(groups = "ForcedLogin_005_addMedia")
@@ -121,15 +122,15 @@ public class ForcedLoginTests extends NewTestTemplate {
     edit.clickPhotoButton();
     edit.logInViaModal(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
-    edit.isStringInURL(articleName);
-    edit.isStringInURL(URLsContent.ACTION_EDIT);
+    Assertion.assertTrue(edit.isStringInURL(articleName));
+    Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }
 
-  @Test(groups = "ForcedLogin_005_addMedia")
+  @Test(groups = "ForcedLogin_006_authModal")
   @Execute(onWikia = "agas")
-  public void ForcedLogin_005_addMedia_authModal() {
+  public void ForcedLogin_006_addMedia_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
@@ -139,8 +140,8 @@ public class ForcedLoginTests extends NewTestTemplate {
 
     authModal.login(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
-    edit.isStringInURL(articleName);
-    edit.isStringInURL(URLsContent.ACTION_EDIT);
+    Assertion.assertTrue(edit.isStringInURL(articleName));
+    Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }

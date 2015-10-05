@@ -186,7 +186,7 @@ public class NavigationTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver);
     article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_2);
-    article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2);
+    Assertion.assertTrue(article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2));
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
         driver, Mercury.AlertMessage.NOT_EXISTING_REDIRECT);
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());

@@ -234,13 +234,15 @@ public class BasePageObject {
     return true;
   }
 
-  public void isStringInURL(String exptectedString) {
+  public boolean isStringInURL(String exptectedString) {
     String currentURL = driver.getCurrentUrl();
-    if (Assertion.assertStringContains(currentURL.toLowerCase(), exptectedString.toLowerCase())) {
+    if (currentURL.toLowerCase().contains(exptectedString.toLowerCase())) {
       PageObjectLogging.log("isStringInURL", "Current url contains " + exptectedString, true);
+      return true;
     } else {
       PageObjectLogging
           .log("isStringInURL", "current url doesn't contain " + exptectedString, false);
+      return false;
     }
   }
 
