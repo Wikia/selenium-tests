@@ -14,7 +14,7 @@ public class TestTopWamWikis extends TemplateNoFirstLoad {
   Integer numberOfTop1kWikis = 998;
   String extensionURL = "var=1429&searchType=bool&val=2&likeValue=true";
 
-  @Test(groups = {"TopWamWikisWhereIsMyExtension"})
+  @Test(groups = "TopWamWikisWhereIsMyExtension")
   public void TopWamWikisWhereIsMyExtension_GeoEdgeFree() {
     String whereIsExtensionUrl = urlBuilder.getUrlForPath(URLsContent.COMMUNITY_WIKI,
                                                           URLsContent.SPECIAL_WHERE_IS_EXTENSION);
