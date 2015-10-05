@@ -9,8 +9,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * Bogna 'bognix' Knychala
- *
  * @ownership AdEngineering
  */
 public class TestAdDriverForcedStatus extends TemplateNoFirstLoad {
