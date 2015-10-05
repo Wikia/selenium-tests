@@ -1,11 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
@@ -16,22 +14,12 @@ import org.testng.annotations.Test;
 )
 public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
 
-  private String testedPage;
-
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adFreeWikis"
-  )
-  public TestNoAdsOnAdFreeWikis(String wikiName, String path) {
-    super();
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-  }
-
   @GeoEdgeBrowserMobProxy(country = "AU")
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikis_AU"}
   )
-  public void TestNoAdsOnAdsFreeWikis_AU() {
+  public void TestNoAdsOnAdsFreeWikis_AU(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
@@ -39,7 +27,8 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikis_GeoEdgeFree"}
   )
-  public void TestNoAdsOnAdsFreeWikis_GeoEdgeFree() {
+  public void TestNoAdsOnAdsFreeWikis_GeoEdgeFree(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
@@ -47,7 +36,8 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
   @Test(
       groups = {"TestNoAdsOnAdsFreeWikisMobile_GeoEdgeFree"}
   )
-  public void TestNoAdsOnAdsFreeWikisMobile_GeoEdgeFree() {
+  public void TestNoAdsOnAdsFreeWikisMobile_GeoEdgeFree(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnMobilePage();
   }
