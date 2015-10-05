@@ -28,9 +28,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "allSlots"
   )
-  public void TestAllSlotsOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+  public void TestAllSlotsOnPage(String wikiName,
+                                 String article,
+                                 String adUnit,
+                                 String topleaderboardImgUrl,
+                                 String medrecImgUrl) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -47,9 +49,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndPrefooterSlots"
   )
-  public void TestLeaderboardAndPrefooterOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+  public void TestLeaderboardAndPrefooterOnPage(String wikiName,
+                                                String article,
+                                                String adUnit,
+                                                String topleaderboardImgUrl,
+                                                String medrecImgUrl) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -65,9 +69,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndInContentSlots"
   )
-  public void TestLeaderboardAndInContentOnPage(
-      String wikiName, String article,
-      String adUnit, String topleaderboardImgUrl, String medrecImgUrl) {
+  public void TestLeaderboardAndInContentOnPage(String wikiName,
+                                                String article,
+                                                String adUnit,
+                                                String topleaderboardImgUrl,
+                                                String medrecImgUrl) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -83,13 +89,12 @@ public class TestSlotsMobile extends MobileTestTemplate {
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "mercuryConsecutivePageViews"
   )
-  public void TestLeaderboardAndPrefooterOnConsecutivePageViews(
-      String wikiName,
-      String firstArticle,
-      String secondArticle,
-      String thirdArticle,
-      String adUnit
-  ) {
+  public void TestLeaderboardAndPrefooterOnConsecutivePageViews(String wikiName,
+                                                                String firstArticle,
+                                                                String secondArticle,
+                                                                String thirdArticle,
+                                                                String adUnit) {
+
     String testedPage = urlBuilder.getUrlForPath(wikiName, firstArticle);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
