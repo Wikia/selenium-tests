@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -39,7 +40,7 @@ public class UrlBuilder {
     url = url + separator + wikiPath;
 
     String qs = Configuration.getQS();
-    if (qs != null) {
+    if (StringUtils.isNotBlank(qs)) {
       url = appendQueryStringToURL(url, qs);
     }
 
