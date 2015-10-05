@@ -13,8 +13,8 @@ public class UrlBuilder {
   private String env;
 
   public UrlBuilder() {
-    env = Configuration.getEnv();
-    browser = Configuration.getBrowser();
+    this.env = Configuration.getEnv();
+    this.browser = Configuration.getBrowser();
   }
 
   public UrlBuilder(String env) {
