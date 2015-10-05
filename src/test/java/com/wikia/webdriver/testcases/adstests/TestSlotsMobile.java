@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
  * @param adUnit               - DFP link with ad skin image
  * @param topleaderboardImgUrl - part of path to file with default wikia topleaderboard ad
  * @param medrecImgUrl         - part of path to file with default wikia medrec ad
- * @author Sergey Naumov, Piotr PMG Gackowski
  * @ownership AdEngineering <p/> URL to DFP: https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=111889452
  * Test all slots on mobile skin with different combinations of slots
  */
