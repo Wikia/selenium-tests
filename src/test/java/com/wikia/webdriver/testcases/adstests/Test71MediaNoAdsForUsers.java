@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
@@ -15,29 +14,21 @@ import org.testng.annotations.Test;
  */
 public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
 
-  private String testedPage;
-  private String testedWiki;
-
-  @Factory(
-      dataProviderClass = GermanAdsDataProvider.class,
-      dataProvider = "germanArticles"
-  )
-  public Test71MediaNoAdsForUsers(String wikiName, String path) {
-    super();
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    testedWiki = urlBuilder.getUrlForWiki(wikiName);
-  }
-
-  private void login() {
+  private void login(String testedWiki) {
     Credentials credentials = Configuration.getCredentials();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, testedWiki);
   }
 
-  @Test(groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
-  public void NoAds71Media_GeoEdgeFree() throws Exception {
+  @Test(
+      dataProviderClass = GermanAdsDataProvider.class,
+      dataProvider = "germanArticles",
+      groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"}
+  )
+  public void NoAds71Media_GeoEdgeFree(String wikiName, String path) throws Exception {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-    login();
+    login(urlBuilder.getUrlForWiki(wikiName));
     ads71Media.verifyNo71MediaAds();
   }
 }
