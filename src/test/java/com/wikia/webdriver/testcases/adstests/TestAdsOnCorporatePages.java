@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
@@ -16,26 +15,14 @@ import org.testng.annotations.Test;
 )
 public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
-  private String testedPage;
-  private String adUnit;
-  private String slotName;
-
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "corporatePages"
-  )
-  public TestAdsOnCorporatePages(String wikiName, String path, String adUnit, String slotName) {
-    super();
-    this.adUnit = adUnit;
-    this.slotName = slotName;
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-  }
-
   @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "corporatePages",
       groups = "TestCorporatePage_VE"
   )
-  public void TestCorporatePage_VE() {
+  public void TestCorporatePage_VE(String wikiName, String path, String adUnit, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
@@ -43,9 +30,12 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
   }
 
   @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "corporatePages",
       groups = "TestCorporatePageHVC_GEF"
   )
-  public void TestCorporatePage_GEF() {
+  public void TestCorporatePage_GEF(String wikiName, String path, String adUnit, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
