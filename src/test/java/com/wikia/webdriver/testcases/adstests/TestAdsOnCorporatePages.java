@@ -9,9 +9,6 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
- * @author Piotr Gackowski
- * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
 @Test(
