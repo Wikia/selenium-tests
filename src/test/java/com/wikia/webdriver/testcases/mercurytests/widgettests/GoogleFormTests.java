@@ -19,7 +19,9 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"MercuryGoogleFormWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class GoogleFormTests extends NewTestTemplate {
 
-  private static final String GOOGLE_FORM_ARTICLE_NAME = "GoogleFormWidget";
+  private static String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
+  private static String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
+  private static String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)
@@ -32,7 +34,9 @@ public class GoogleFormTests extends NewTestTemplate {
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -42,9 +46,10 @@ public class GoogleFormTests extends NewTestTemplate {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
     widget
-        .create()
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    new NavigationSideComponentObject(driver).navigateToArticle(GOOGLE_FORM_ARTICLE_NAME);
+      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+
+    new NavigationSideComponentObject(driver).navigateToArticle(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -54,31 +59,37 @@ public class GoogleFormTests extends NewTestTemplate {
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     new NavigationSideComponentObject(driver)
-        .navigateToArticle(MAPS_ARTICLE_NAME)
-        .navigateToArticle(GOOGLE_FORM_ARTICLE_NAME);
+      .navigateToArticle(MAPS_ARTICLE_NAME)
+      .navigateToArticle(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryGoogleFormWidgetTest_004", enabled = false)
+  @Test(groups = "MercuryGoogleFormWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryGoogleFormWidgetTest_005", enabled = false)
+  @Test(groups = "MercuryGoogleFormWidgetTest_005")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

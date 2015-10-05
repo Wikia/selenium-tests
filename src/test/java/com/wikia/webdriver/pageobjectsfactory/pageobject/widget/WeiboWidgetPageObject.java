@@ -18,7 +18,6 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "weibo";
-  private static final String ARTICLE_NAME = "WeiboWidget";
   private static final String[] TAGS = {
       "<weibo uids=\"1642909335,1782515283\" />",
       "<weibo uids=\"1642909335,1782515283\" />",
@@ -29,10 +28,6 @@ public class WeiboWidgetPageObject extends WidgetPageObject {
 
   public WeiboWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

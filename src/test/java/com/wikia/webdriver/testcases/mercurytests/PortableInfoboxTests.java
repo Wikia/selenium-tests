@@ -26,7 +26,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
     // Before infobox expanding
     infobox
@@ -56,7 +56,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
     // expand by clicking button
     infobox
@@ -78,7 +78,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
     String externalLinkName = infobox
         .clickExpandButton()
@@ -97,7 +97,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @RelatedIssue(issueID = "DAT-3085")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
@@ -118,7 +118,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPortableInfoboxTest_005_SmallImages() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
 
     infobox
         .isTitleAboveImageVisible()
