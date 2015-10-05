@@ -1,24 +1,5 @@
 package com.wikia.webdriver.common.logging;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.validator.routines.UrlValidator;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.JavascriptExecutor;
-
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -26,7 +7,25 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
+import com.google.common.io.Files;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.validator.routines.UrlValidator;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.openqa.selenium.JavascriptExecutor;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimeZone;
+
 public class LOG {
+
   private static final String JIRA_PATH = "https://wikia-inc.atlassian.net/browse/";
   private static final int MAX_CONTENT_LENGTH = 160;
   private static String reportPath = "." + File.separator + "logs" + File.separator;
@@ -40,13 +39,13 @@ public class LOG {
   private static boolean allowLongDesc = false;
 
   private static void appendToReport(String command, String description, boolean success,
-      boolean makeScreenshot) {
+                                     boolean makeScreenshot) {
     Type classType = success ? Type.SUCCESS : Type.ERROR;
     appendToReport(command, description, classType, makeScreenshot);
   }
 
   private static void appendToReport(String command, String description, Type type,
-      boolean makeScreenshot) {
+                                     boolean makeScreenshot) {
     logCounter++;
     logsResults.add(type.isError());
     String className = type.getType();
@@ -60,31 +59,34 @@ public class LOG {
 
     if (isDescriptionTooLong) {
       builder.append("<tr class=\"accordion-toggle " + className
-          + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
-          + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
-          + "\" style=\"padding: 0 10px 0 0\"></div>" + command
-          + "</td><td> CLICK TO SEE MORE </td>");
+                     + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
+                     + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
+                     + "\"></div>" + command
+                     + "</td><td> CLICK TO SEE MORE </td>");
     } else {
       builder.append("<tr class=\"accordion-toggle " + className
-          + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
-          + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
-          + "\" style=\"padding: 0 10px 0 0\"></div>" + command + "</td><td>" + transformDesc
-          + "</td>");
+                     + "\" data-toggle=\"collapse\" data-target=\"#log" + logCounter
+                     + "\" class=\"accordion-toggle\"><td><div class=\"" + type.getIconClass()
+                     + "\"></div>" + command + "</td><td>"
+                     + transformDesc
+                     + "</td>");
     }
     if (makeScreenshot && TestContext.getWebDriver() != null) {
-        new Shooter().savePageScreenshot(SCREEN_PATH + logCounter, TestContext.getWebDriver());
-        CommonUtils.appendTextToFile(SCREEN_PATH + logCounter + ".html", getPageSource());
-        builder.append("<td><a href='screenshots/screenshot" + logCounter
-                       + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + logCounter
-                       + ".html'>HTML Source</a></td></tr>");    } else {
+      new Shooter().savePageScreenshot(SCREEN_PATH + logCounter, TestContext.getWebDriver());
+      CommonUtils.appendTextToFile(SCREEN_PATH + logCounter + ".html", getPageSource());
+      builder.append("<td><a href='screenshots/screenshot" + logCounter
+                     + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + logCounter
+                     + ".html'>HTML Source</a></td></tr>");
+    } else {
       builder.append("<td></td></tr>");
     }
     if (isDescriptionTooLong) {
       builder
           .append("<tr class=\""
-              + className
-              + "\"><td colspan=\"3\" class=\"hiddenRow\" style=\"padding: 0 20px;\"><div class=\"accordian-body collapse\" id=\"log"
-              + logCounter + "\">" + description + "</div></td><tr>");
+                  + className
+                  + "\"><td colspan=\"3\" class=\"hiddenRow\">"
+                  + "<div class=\"accordian-body collapse\" id=\"log"
+                  + logCounter + "\">" + description + "</div></td><tr>");
     }
     allowLongDesc = false;
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
@@ -93,11 +95,9 @@ public class LOG {
   public static void stopLogging() {
     StringBuilder builder = new StringBuilder();
     builder
-        .append("<tr class=\"step\">"
-                + "<td>&nbsp</td><td>"
-                + "<div style=\"text-align:center\">"
-                + "<a href=\"#toc\" style=\"color:blue\">"
-                + "<button class=\"btn btn-info\" style=\"margin: auto\"><div class=\"icon-arrow-up icon-white\" style=\"margin: 0 20px 0 0\"></div>BACK TO MENU</button></a></div> </td><td> <br/> &nbsp;</td></tr>"
+        .append("<tr class=\"step\"><td><div><a href=\"#toc\">"
+                + "<button class=\"btn btn-info\"><div class=\"icon-arrow-up icon-white\">"
+                + "</div>BACK TO MENU</button></a></div> </td><td></td><td></td></tr>"
                 + "</tbody></table>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     testStarted = false;
@@ -109,24 +109,25 @@ public class LOG {
     String className = testMethod.getDeclaringClass().getCanonicalName();
 
     builder
-        .append("<table class=\"table table-condensed\" style=\"border-collapse:collapse;"
-            + " margin: 20px auto; table-layout:fixed; width: 960px; word-wrap: break-word;\"><tbody>"
-            + "<tr class=\"step\"><td>"
-            + "<button class=\"btn btn-info hideLowLevel\" style=\"margin: auto\"><div class=\"icon-eye-open icon-white\" style=\"margin: 0 20px 0 0\"></div>HIDE / SHOW INFO</button>"
-            + "</td><td>" + "<em><h4>" + className + "</h4></em></td><td> <br/> &nbsp;</td></tr>");
+        .append("<table class=\"table table-condensed\"><tbody>"
+                + "<tr class=\"step success\"><td>"
+                + "<button class=\"btn btn-info hideLowLevel\"><div class=\"icon-eye-open icon-white\"></div>HIDE / SHOW INFO</button>"
+                + "</td><td><em><h5>" + className
+                + "</h5></em></td><td> <br/> &nbsp;</td></tr>");
+
+    builder.append("<tr class=\"step success\"><td></td><td colspan=\"2\"><h4><em>" + testName
+                   + "</em></h4></td></tr>");
     if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
       String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
       String jiraUrl = JIRA_PATH + issueID;
       builder
           .append("<tr class=\"step\"><td>"
-              + "<a href=\""
-              + jiraUrl
-              + "\"><button class=\"btn btn-danger\" style=\"margin: auto\"><div class=\"icon-fire icon-white\" style=\"margin: 0 20px 0 0\"></div>"
-              + issueID + "</button></a>" + "</td><td colspan=\"2\"><h3><em>" + testName
-              + testMethod.getAnnotation(RelatedIssue.class).comment() + "</em></h3></td></tr>");
-    } else {
-      builder.append("<tr class=\"step\"><td colspan=\"3\"><h3><em>" + testName
-          + "</em></h3></td></tr>");
+                  + "<a href=\""
+                  + jiraUrl
+                  + "\"><button class=\"btn btn-danger\"><div class=\"icon-fire icon-white\"></div>"
+                  + issueID + "</button></a>" + "</td><td colspan=\"2\"><h5><em>"
+                  + testMethod.getAnnotation(RelatedIssue.class).comment()
+                  + "</em></h5></td></tr>");
     }
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     testStarted = true;
@@ -177,7 +178,7 @@ public class LOG {
   }
 
   public static void result(String command, String description, boolean success,
-      boolean makeScreenshot) {
+                            boolean makeScreenshot) {
     appendToReport(command, description, success, makeScreenshot);
   }
 
@@ -186,7 +187,7 @@ public class LOG {
   }
 
   public static void result(String command, Exception exception, boolean success,
-      boolean makeScreenshot) {
+                            boolean makeScreenshot) {
     result(command, exception.getMessage(), success, makeScreenshot);
   }
 
@@ -195,7 +196,7 @@ public class LOG {
   }
 
   public static void result(String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success) {
+                            boolean success) {
     String description = descriptionOnFail;
     if (success) {
       description = descriptionOnSuccess;
@@ -212,7 +213,7 @@ public class LOG {
     }
     allowLongDesc = true;
     appendToReport(command, "<img src=\"data:image/png;base64,"
-        + new String(bytes, StandardCharsets.UTF_8) + "\">", success, false);
+                            + new String(bytes, StandardCharsets.UTF_8) + "\">", success, false);
   }
 
   private static String getPageSource() {
@@ -233,7 +234,7 @@ public class LOG {
       if (!error.isEmpty()) {
         StringBuilder builder = new StringBuilder();
         builder.append("<tr class=\"error\"><td>click</td><td>" + error
-            + "</td><td> <br/> &nbsp;</td></tr>");
+                       + "</td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
       }
     }
@@ -252,18 +253,13 @@ public class LOG {
 
     StringBuilder builder = new StringBuilder();
     builder
-        .append("<html><style>"
-            + "table td {vertical-align: middle;}.hiddenRow {padding: 0;"
-            + "} td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
-            + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
-            + "tr.warning{color:black;background-color:#FEE01E;}"
-            + "tr.error{color:black;background-color:#FFCCCC;}"
-            + "tr.step{color:white;background:#606078}"
-            + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-            + "<style>td { border-top: 1px solid grey; } </style></head><body>"
+        .append(
+            "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"></head><body>"
             + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>"
-            + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.css\">\n"
+            + "<link rel=\"stylesheet\" href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.css\">"
+            + "<link rel=\"stylesheet\" href=\"style.css\">"
             + "<script src=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js\"></script>"
+            + "<script src=\"script.js\"></script>"
             + "<p>Date: "
             + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(
                 DateTime.now(DateTimeZone.UTC))
@@ -279,9 +275,10 @@ public class LOG {
             + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
     try {
-      FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
-      String content = IOUtils.toString(input);
-      CommonUtils.appendTextToFile(LOG_PATH, content);
+      Files.copy(new File(ClassLoader.getSystemResource("Report/script.js").getPath()),
+                 new File(reportPath + "script.js"));
+      Files.copy(new File(ClassLoader.getSystemResource("Report/style.css").getPath()),
+                 new File(reportPath + "style.css"));
     } catch (IOException e) {
       LOG.error("no script.txt file available", e);
     }
@@ -293,7 +290,8 @@ public class LOG {
 
   public enum Type {
     SUCCESS("success", true, ""), WARNING("warning", true, "icon-warning-sign"), INFO("info", true,
-        ""), ERROR("error", false, "icon-fire");
+                                                                                      ""), ERROR(
+        "error", false, "icon-fire");
 
     private String logType;
     private boolean isError;

@@ -1,8 +1,7 @@
-<script>
 function createToc()
 {
 	infoHidden = false;
-	var h1 = $('td h3');
+	var h1 = $('td h4');
 	var l = h1.length;
 	var toc = "<ul>";
 	for (var i=0; i<l; i++){
@@ -38,7 +37,9 @@ function markMethodAsFailed() {
 	var l = a.length;
 	for (var i=0; i<l; i++)
 	{
+		a[i].children[0].classList.remove("success")
 		a[i].children[0].classList.add("error")
+		a[i].children[1].classList.remove("success")
 		a[i].children[1].classList.add("error")
 	}
 }
@@ -83,4 +84,3 @@ $(document).ready(function () {
 		}
 		infoHidden = !infoHidden;
     }
-</script>
