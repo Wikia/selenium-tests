@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.adstests.mobileadstests;
+package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
