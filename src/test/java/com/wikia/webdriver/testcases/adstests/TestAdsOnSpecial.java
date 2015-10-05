@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @author Sergey Naumov
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 @Test(
     groups = {"Ads_Special_Pages", "Ads"}

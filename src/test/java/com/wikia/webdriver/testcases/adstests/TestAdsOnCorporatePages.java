@@ -1,50 +1,28 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
- * @author Piotr Gackowski
- * @author Piotr Gabryjeluk
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 @Test(
-    groups = {"Ads_Corporate_Page"}
+    groups = "Ads_Corporate_Page"
 )
 public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
-  private String testedPage;
-  private String adUnit;
-  private String slotName;
-
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "corporatePages"
-  )
-  public TestAdsOnCorporatePages(String wikiName, String path, String adUnit, String slotName) {
-    super();
-    this.adUnit = adUnit;
-    this.slotName = slotName;
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
-  }
-
   @GeoEdgeBrowserMobProxy(country = "VE")
   @Test(
-      groups = {"TestCorporatePage_VE"}
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "corporatePages",
+      groups = "TestCorporatePage_VE"
   )
-  public void TestCorporatePage_VE() {
+  public void TestCorporatePage_VE(String wikiName, String path, String adUnit, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 
@@ -52,9 +30,12 @@ public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestCorporatePageHVC_GEF"}
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "corporatePages",
+      groups = "TestCorporatePageHVC_GEF"
   )
-  public void TestCorporatePage_GEF() {
+  public void TestCorporatePage_GEF(String wikiName, String path, String adUnit, String slotName) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoLiftiumAdsOnPageExceptWikiaBar();
 

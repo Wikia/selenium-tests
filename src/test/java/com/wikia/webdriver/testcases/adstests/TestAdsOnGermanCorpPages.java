@@ -1,41 +1,26 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
  * Class contains tests checking ad provider on German corporate pages
  *
- * @author Bogna 'bognix' Knychala
- * @ownership AdEngineering
+ * @ownership AdEng
  * @description 1. Test no ads on corporate pages
  */
 public class TestAdsOnGermanCorpPages extends TemplateNoFirstLoad {
 
-  private String testedPage;
-
-  @Factory(
-      dataProviderClass = GermanAdsDataProvider.class,
-      dataProvider = "germanCorpPages"
-  )
-  public TestAdsOnGermanCorpPages(String wikiName, String path) {
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
-  }
-
   @Test(
-      groups = {"TestAdsOnGermanCorpPages_GeoEdgeFree"}
+      dataProviderClass = GermanAdsDataProvider.class,
+      dataProvider = "germanCorpPages",
+      groups = "TestAdsOnGermanCorpPages_GeoEdgeFree"
   )
-  public void TestAdsOnGermanCorpPages_GeoEdgeFree() {
+  public void TestAdsOnGermanCorpPages_GeoEdgeFree(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsGermanObject wikiCorpPage = new AdsGermanObject(driver, testedPage);
     wikiCorpPage.verifyNoAdsOnPage();
     wikiCorpPage.verifyNo71MediaAds();

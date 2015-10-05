@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.adstests.mobileadstests;
+package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdsSynthetic extends TemplateNoFirstLoad {
 

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.adstests.mobileadstests;
+package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -9,9 +9,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * @author Sergey Naumov
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/LINE_ITEM_ID=115974612
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestDfpParamsPresentMobile extends TemplateNoFirstLoad {
 
