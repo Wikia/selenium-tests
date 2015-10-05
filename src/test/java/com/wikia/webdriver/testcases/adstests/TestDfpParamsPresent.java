@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Sergey Naumov
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestDfpParamsPresent extends TemplateNoFirstLoad {
 

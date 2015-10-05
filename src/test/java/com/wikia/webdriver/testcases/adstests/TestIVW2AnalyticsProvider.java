@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 

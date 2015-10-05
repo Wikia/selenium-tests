@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdSkinPresence extends TemplateNoFirstLoad {
 

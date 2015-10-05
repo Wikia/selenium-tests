@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 /**
  * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
  *
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdTypeMobile extends MobileTestTemplate {
 

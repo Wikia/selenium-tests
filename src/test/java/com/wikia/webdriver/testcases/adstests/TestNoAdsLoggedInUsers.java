@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
 

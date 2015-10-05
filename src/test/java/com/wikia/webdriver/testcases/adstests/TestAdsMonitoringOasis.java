@@ -16,7 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 

@@ -8,7 +8,7 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
 

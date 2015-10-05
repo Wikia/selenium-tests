@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 /**
  * Class contains tests checking ad provider on German corporate pages
  *
- * @ownership AdEngineering
+ * @ownership AdEng
  * @description 1. Test no ads on corporate pages
  */
 public class TestAdsOnGermanCorpPages extends TemplateNoFirstLoad {

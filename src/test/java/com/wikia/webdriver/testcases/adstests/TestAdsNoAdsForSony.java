@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.SonySideViewObj
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
 

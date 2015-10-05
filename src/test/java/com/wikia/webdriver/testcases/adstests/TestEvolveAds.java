@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestEvolveAds extends TemplateNoFirstLoad {
 

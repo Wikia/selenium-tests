@@ -11,7 +11,7 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
 
