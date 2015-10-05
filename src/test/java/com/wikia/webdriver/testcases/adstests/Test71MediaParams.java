@@ -13,7 +13,7 @@ public class Test71MediaParams extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
-      groups = {"Test71MediaParams"},
+      groups = "Test71MediaParams",
       dataProvider = "popularDEArticlesWithParams"
   )
   public void test71MediaParams(String wikiName, String article, String params) {
