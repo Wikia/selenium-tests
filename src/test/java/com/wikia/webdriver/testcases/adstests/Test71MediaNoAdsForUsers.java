@@ -11,7 +11,6 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
 public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
