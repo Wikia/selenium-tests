@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 /**
  * Class contains tests checking ad provider on German corporate pages
  *
- * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  * @description 1. Test no ads on corporate pages
  */
