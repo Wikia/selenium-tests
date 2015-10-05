@@ -38,6 +38,11 @@ public class UrlBuilder {
     String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
+    String qs = Configuration.getQS();
+    if (qs != null) {
+      url = appendQueryStringToURL(url, qs);
+    }
+
     return url;
   }
 
