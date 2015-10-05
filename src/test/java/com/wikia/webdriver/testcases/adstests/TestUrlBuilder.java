@@ -178,7 +178,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
   };
 
   @Test(groups = "TestUrlBuilder")
-  public void testUrlBuilder() {
+  public void urlBuilder() {
     for (Object[] data : TEST_DATA) {
       Assertion.assertEquals(new UrlBuilder("prod")
                                  .getUrlForPath((String) data[0], (String) data[1]),
