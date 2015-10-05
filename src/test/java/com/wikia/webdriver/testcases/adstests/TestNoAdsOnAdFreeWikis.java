@@ -1,8 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -27,11 +25,7 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
   )
   public TestNoAdsOnAdFreeWikis(String wikiName, String path) {
     super();
-    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
   }
 
   @GeoEdgeBrowserMobProxy(country = "AU")
