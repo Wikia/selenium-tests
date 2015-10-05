@@ -9,7 +9,6 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @author Piotr 'Rychu' Gabryjeluk
  * @ownership AdEngineering
  */
 public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
