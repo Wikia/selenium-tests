@@ -26,7 +26,7 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"AdsNoAdsForSonyOasis"}
+      groups = "AdsNoAdsForSonyOasis"
   )
   public void adsNoAdsForSonyOasis() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
@@ -36,7 +36,7 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"AdsNoAdsForSonyMobile"}
+      groups = "AdsNoAdsForSonyMobile"
   )
   public void adsNoAdsForSonyMobile() {
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
