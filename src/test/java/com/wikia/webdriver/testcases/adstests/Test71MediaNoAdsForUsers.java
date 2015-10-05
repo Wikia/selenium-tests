@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -26,12 +25,8 @@ public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
   )
   public Test71MediaNoAdsForUsers(String wikiName, String path) {
     super();
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
     testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedWiki = urlBuilder.getUrlForWiki(wikiName);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
   }
 
   private void login() {
