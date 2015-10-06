@@ -40,7 +40,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
-  public void Login_003_authModalInGlobalNav() {
+  public void Login_003_authModalInGlobalNav_user() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
@@ -69,8 +69,23 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "Login_006")
+  @Execute(onWikia = "agas")
+  public void Login_006_authModalInGlobalNav_staff() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    NavigationBar signInLink = new NavigationBar(driver);
+    base.openWikiPage(wikiURL);
+    
+    signInLink.clickOnSignIn();
+    AuthModal authModal = signInLink.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
+
+    authModal.login(credentials.userNameStaff, credentials.passwordStaff);
+    base.verifyUserLoggedIn(credentials.userNameStaff);
+  }
+
+  @Test(groups = "Login_007")
   @Execute(onWikia = "ja.ja-test")
-  public void Login_006_japaneseUserLogin() {
+  public void Login_007_japaneseUserLogin() {
     SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
     specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiURL);
   }
