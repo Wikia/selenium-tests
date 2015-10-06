@@ -16,8 +16,7 @@ public class MercuryMessages {
       "all valid widget placeholders are swapped for widget inline frames";
   public static final String SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG =
       "some valid widget placeholders are not swapped for widget inline frames";
-
-
+  
   private MercuryMessages() {
   }
 }
