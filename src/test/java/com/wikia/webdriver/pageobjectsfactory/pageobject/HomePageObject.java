@@ -174,7 +174,7 @@ public class HomePageObject extends WikiBasePageObject {
         newHome.verifyURL(languageURL);
       } else {
         languageURL += URLsContent.WIKI_DIR;
-        newHome.verifyURLcontains(languageURL);
+        newHome.isStringInURL(languageURL);
 
         PageObjectLogging.log(
             "selectLanguage",
