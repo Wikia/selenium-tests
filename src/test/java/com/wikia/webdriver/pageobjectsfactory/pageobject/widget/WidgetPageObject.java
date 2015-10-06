@@ -23,8 +23,6 @@ public abstract class WidgetPageObject extends BasePageObject {
     super(driver);
   }
 
-  protected abstract String getArticleName();
-
   protected abstract String getTagName();
 
   public abstract String getTag();
@@ -44,26 +42,26 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract WebElement getWidgetBody();
 
-  public WidgetPageObject create() {
+  public WidgetPageObject create(String articleName) {
     ArticleContent articleContent = new ArticleContent();
-    articleContent.push(getTag(), getArticleName());
+    articleContent.push(getTag(), articleName);
     return this;
   }
 
   /**
    * Create all tags as defined in widget page object tags field on the tested article
    */
-  public WidgetPageObject createMultiple() {
+  public WidgetPageObject createMultiple(String articleName) {
     String text = "";
     ArticleContent articleContent = new ArticleContent();
 
-    articleContent.clear(getArticleName());
+    articleContent.clear(articleName);
 
     for (String tag : getTags()) {
       text += tag + "\n";
     }
 
-    articleContent.push(text, getArticleName());
+    articleContent.push(text, articleName);
 
     return this;
   }
@@ -71,18 +69,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   /**
    * Create incorrect widget tag on the tested article
    */
-  public WidgetPageObject createIncorrect() {
+  public WidgetPageObject createIncorrect(String articleName) {
     ArticleContent articleContent = new ArticleContent();
-    articleContent.clear(getArticleName());
-    articleContent.push(getIncorrectTag(), getArticleName());
-    return this;
-  }
-
-  /**
-   * Navigate to the tested article
-   */
-  public WidgetPageObject navigate(String wikiUrl) {
-    openMercuryArticleByNameWithCbAndNoAds(wikiUrl, getArticleName());
+    articleContent.clear(articleName);
+    articleContent.push(getIncorrectTag(), articleName);
     return this;
   }
 
@@ -136,14 +126,14 @@ public abstract class WidgetPageObject extends BasePageObject {
    * method assumes there may be more than one widgets of certain type on the article.
    */
   protected boolean isWidgetVisible(int widgetIndex) {
-    boolean result = true;
+    boolean result;
     List<WebElement> widgetIFrameList = getWidgetIFrameList();
     if (widgetIFrameList.isEmpty()) {
       result = false;
     } else {
       WebElement widgetIFrame = widgetIFrameList.get(widgetIndex);
       if (!isElementVisible(widgetIFrame)) {
-        return false;
+        result = false;
       } else {
         driver.switchTo().frame(widgetIFrame);
         result = isElementVisible(getWidgetBody());

@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -13,8 +14,8 @@ public class UrlBuilder {
   private String env;
 
   public UrlBuilder() {
-    env = Configuration.getEnv();
-    browser = Configuration.getBrowser();
+    this.env = Configuration.getEnv();
+    this.browser = Configuration.getBrowser();
   }
 
   public UrlBuilder(String env) {
@@ -37,6 +38,11 @@ public class UrlBuilder {
     String url = getUrlForWiki(wikiName);
     String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
+
+    String qs = Configuration.getQS();
+    if (StringUtils.isNotBlank(qs)) {
+      url = appendQueryStringToURL(url, qs);
+    }
 
     return url;
   }

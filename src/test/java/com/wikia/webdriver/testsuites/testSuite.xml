@@ -8,11 +8,11 @@
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
             <class name="com.wikia.webdriver.testcases.admindashboardtests.EditingLocalCssTests"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdsScreenshotComparisonMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdTypeMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestDfpParamsPresentMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestSlotsMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.mobileadstests.TestAdsSynthetic"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparisonMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresentMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestSlotsMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsSynthetic"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
@@ -164,6 +164,7 @@
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.GoSearchFeature"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.Suggestions"/>
+            <class name="com.wikia.webdriver.testcases.seotests.HtmlTitleTests"/>
             <class name="com.wikia.webdriver.testcases.seotests.Our404HandlerTest"/>
             <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>

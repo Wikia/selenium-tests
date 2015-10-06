@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership: Content X-Wing
  */
-@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests", "Mercury"})
+@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests",
+                "MercuryCuratedMainPageTests", "Mercury"})
 public class NavigationTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -186,23 +187,5 @@ public class NavigationTests extends NewTestTemplate {
     article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_1);
     Assertion.assertEqualsIgnoreCase(article.getArticleTitle(),
                                      MercurySubpages.CC_REDIRECT_DESTINATION);
-  }
-
-  @Test(groups = "MercuryCuratedNavigationTest_006")
-  @Execute(onWikia = MercuryWikis.MERCURY_CC)
-  public void MercuryCuratedNavigationTest_006_redirectToNotExistingArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_REDIRECT);
-    String redirect = WikiTextContent.REDIRECT +
-                      WikiTextContent.INTERNAL_LINK_OPENING +
-                      MercurySubpages.CC_NOT_EXISTING_REDIRECT_DESTINATION +
-                      WikiTextContent.INTERNAL_LINK_CLOSING;
-
-    new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
-
-    article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_2);
-    Assertion.assertTrue(article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2));
-    Assertion.assertTrue(mercuryError.isAlertMessageVisible());
   }
 }

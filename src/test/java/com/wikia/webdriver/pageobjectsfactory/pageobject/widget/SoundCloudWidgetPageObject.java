@@ -18,7 +18,6 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "soundcloud";
-  private static final String ARTICLE_NAME = "SoundCloudWidget";
   private static final String[] TAGS = {
       "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
       "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
@@ -28,10 +27,6 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
 
   public SoundCloudWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

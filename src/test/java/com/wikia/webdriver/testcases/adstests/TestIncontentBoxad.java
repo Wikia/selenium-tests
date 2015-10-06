@@ -8,8 +8,7 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- * @author Dmytro Rets
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestIncontentBoxad extends TemplateNoFirstLoad {
 

@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 import java.awt.*;
 
 /**
- * @author Dmytro Rets
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestOoyalaAds extends TemplateNoFirstLoad {
 

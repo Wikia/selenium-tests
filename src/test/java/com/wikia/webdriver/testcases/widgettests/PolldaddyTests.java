@@ -14,12 +14,18 @@ import org.testng.annotations.Test;
 @Test(groups = {"PolldaddyWidgetTests", "WidgetTests"})
 public class PolldaddyTests extends NewTestTemplate {
 
+  private static String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyOasis/OneWidget";
+  private static String POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyOasis/MultipleWidgets";
+  private static String POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddyOasis/IncorrectWidget";
+
   @Test(groups = "PolldaddyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PolldaddyWidgetTest_001_isLoaded() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -28,7 +34,9 @@ public class PolldaddyTests extends NewTestTemplate {
   public void PollsnackWidgetTest_002_areLoaded() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -38,7 +46,9 @@ public class PolldaddyTests extends NewTestTemplate {
   public void PolldaddyKWidgetTest_003_isErrorPresent() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

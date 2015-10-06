@@ -14,12 +14,18 @@ import org.testng.annotations.Test;
 @Test(groups = {"WeiboWidgetTests", "WidgetTests"})
 public class WeiboTests extends NewTestTemplate {
 
+  private static String WEIBO_ONE_WIDGET_ARTICLE_NAME = "WeiboOasis/OneWidget";
+  private static String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "WeiboOasis/MultipleWidgets";
+  private static String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "WeiboOasis/IncorrectWidget";
+
   @Test(groups = "WeiboWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void WeiboWidgetTest_001_isLoaded() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(WEIBO_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WEIBO_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -28,7 +34,9 @@ public class WeiboTests extends NewTestTemplate {
   public void WeiboWidgetTest_002_areLoaded() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG
     );
@@ -36,10 +44,12 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "WeiboWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void WeiboKWidgetTest_003_isErrorPresent() {
+  public void WeiboWidgetTest_003_isErrorPresent() {
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

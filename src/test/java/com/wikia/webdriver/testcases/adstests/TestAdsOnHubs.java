@@ -1,42 +1,26 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 @Test(
     groups = {"Ads_Hubs_Pages", "Ads"}
 )
 public class TestAdsOnHubs extends TemplateNoFirstLoad {
 
-  private String testedPage;
-
-  @Factory(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "hubsPages"
-  )
-  public TestAdsOnHubs(String wikiName, String path) {
-    super();
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
-    testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (Configuration.getQS() != null) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, Configuration.getQS());
-    }
-  }
-
   @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "hubsPages",
       groups = {"TestAdsOnHubs_GeoEdgeFree"}
   )
-  public void TestAdsOnHubs_GeoEdgeFree() throws Exception {
+  public void TestAdsOnHubs_GeoEdgeFree(String wikiName, String path) throws Exception {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyHubTopLeaderboard();
   }

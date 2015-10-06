@@ -14,12 +14,18 @@ import org.testng.annotations.Test;
 @Test(groups = {"TwitterWidgetTests", "WidgetTests"})
 public class TwitterTests extends NewTestTemplate {
 
+  private static String TWITTER_ONE_WIDGET_ARTICLE_NAME = "TwitterOasis/OneWidget";
+  private static String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "TwitterOasis/MultipleWidgets";
+  private static String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "TwitterOasis/IncorrectWidget";
+
   @Test(groups = "TwitterWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void TwitterWidgetTest_001_isLoaded() {
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(TWITTER_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, TWITTER_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -28,7 +34,9 @@ public class TwitterTests extends NewTestTemplate {
   public void TwitterWidgetTest_002_areLoaded() {
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -43,7 +51,9 @@ public class TwitterTests extends NewTestTemplate {
   public void TwitterWidgetTest_003_isErrorPresent() {
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(TWITTER_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }
