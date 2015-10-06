@@ -72,8 +72,9 @@ public class LoginTests extends NewTestTemplate {
   @Execute(onWikia = "agas")
   public void Login_006_authModalInGlobalNav_staff() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
+    base.openWikiPage(wikiURL);
+    
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
