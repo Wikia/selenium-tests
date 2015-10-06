@@ -32,7 +32,6 @@ public class MercurySubpages {
   public static final String CC_REDIRECT_SOURCE_1 = "RedirectSource1";
   public static final String CC_REDIRECT_SOURCE_2 = "RedirectSource2";
   public static final String CC_REDIRECT_DESTINATION = "RedirectDestination1";
-  // it is expected that redirect destination 2 article doesn't exist
   public static final String CC_NOT_EXISTING_REDIRECT_DESTINATION = "RedirectDestination2";
 
   // Categories in mercurycc.wikia.com

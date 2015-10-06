@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.enums.Mercury;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAlertComponentObject;
@@ -459,12 +458,12 @@ public class MainPageTests extends NewTestTemplate {
     ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     MercuryAlertComponentObject mercuryAlert = new MercuryAlertComponentObject(
-        driver, Mercury.AlertMessage.NOT_EXISTING_CATEGORY);
-
+        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
 
     String oldUrl = driver.getCurrentUrl();
     ccp.clickOnCuratedContentElementByIndex(2);
     Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
+    
     ccp.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }

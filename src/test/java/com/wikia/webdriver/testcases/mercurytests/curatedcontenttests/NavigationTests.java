@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlChecker;
-import com.wikia.webdriver.common.enums.Mercury;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAlertComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
@@ -121,41 +120,53 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
 
-    String
-        expectedUrl =
-        urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(),
-                                            MercurySubpages.CC_CATEGORY_TEMPLATES);
+    String expectedUrl = urlBuilder.getUrlForPathWithoutWiki(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_CATEGORY_TEMPLATES
+    );
     String testUrl = expectedUrl;
     section.openWikiPage(testUrl);
     section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl =
-        urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(),
-                                            MercurySubpages.CC_SECTION_CATEGORIES);
+    expectedUrl = urlBuilder.getUrlForPathWithoutWiki(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_SECTION_CATEGORIES
+    );
+
     testUrl = expectedUrl;
     section.openWikiPage(testUrl);
     section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl =
-        urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
-    testUrl =
-        urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(),
-                                            MercurySubpages.CC_EMPTY_CATEGORY);
+    expectedUrl = urlBuilder.getUrlForPath(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_MAIN_PAGE
+    );
+    testUrl = urlBuilder.getUrlForPathWithoutWiki(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_EMPTY_CATEGORY
+    );
+
     section.openWikiPage(testUrl);
     section.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
-    expectedUrl =
-        urlBuilder.getUrlForPath(Configuration.getWikiName(), MercurySubpages.CC_MAIN_PAGE);
-    testUrl =
-        urlBuilder.getUrlForPathWithoutWiki(Configuration.getWikiName(),
-                                            MercurySubpages.CC_NOT_EXISTING_SECTION);
+    expectedUrl = urlBuilder.getUrlForPath(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_MAIN_PAGE
+    );
+    testUrl = urlBuilder.getUrlForPathWithoutWiki(
+        Configuration.getWikiName(),
+        MercurySubpages.CC_NOT_EXISTING_SECTION
+    );
+
     section.openWikiPage(testUrl);
     section.waitForLoadingSpinnerToFinish();
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver, Mercury.AlertMessage.NOT_EXISTING_SECTION);
+        driver,
+        MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION
+    );
 
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
@@ -164,12 +175,14 @@ public class NavigationTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedNavigationTest_005")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_005_redirectToExistingArticle() {
-    ArticleContent content = new ArticleContent();
-    String redirect = WikiTextContent.REDIRECT + WikiTextContent.LINK_PREFIX +
-                      MercurySubpages.CC_REDIRECT_DESTINATION + WikiTextContent.LINK_POSTFIX;
-    content.push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
-
     ArticlePageObject article = new ArticlePageObject(driver);
+    String redirect = WikiTextContent.REDIRECT +
+                      WikiTextContent.INTERNAL_LINK_OPENING +
+                      MercurySubpages.CC_REDIRECT_DESTINATION +
+                      WikiTextContent.INTERNAL_LINK_CLOSING;
+
+    new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
+
     article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_1);
     Assertion.assertEqualsIgnoreCase(article.getArticleTitle(),
                                      MercurySubpages.CC_REDIRECT_DESTINATION);
@@ -178,17 +191,18 @@ public class NavigationTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedNavigationTest_006")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_006_redirectToNotExistingArticle() {
-    ArticleContent content = new ArticleContent();
-    String redirect = WikiTextContent.REDIRECT + WikiTextContent.LINK_PREFIX +
-                      MercurySubpages.CC_NOT_EXISTING_REDIRECT_DESTINATION
-                      + WikiTextContent.LINK_POSTFIX;
-    content.push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_2);
-
     ArticlePageObject article = new ArticlePageObject(driver);
+    MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
+        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_REDIRECT);
+    String redirect = WikiTextContent.REDIRECT +
+                      WikiTextContent.INTERNAL_LINK_OPENING +
+                      MercurySubpages.CC_NOT_EXISTING_REDIRECT_DESTINATION +
+                      WikiTextContent.INTERNAL_LINK_CLOSING;
+
+    new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
+
     article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_2);
     Assertion.assertTrue(article.isStringInURL(MercurySubpages.CC_REDIRECT_SOURCE_2));
-    MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver, Mercury.AlertMessage.NOT_EXISTING_REDIRECT);
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
   }
 }

@@ -188,7 +188,10 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element) {
     try {
       ((JavascriptExecutor) driver).executeScript(
-          "var x = $(arguments[0]); window.scroll(0,parseInt(x.offset().top - 100));", element);
+          "var x = $(arguments[0]); " +
+          "window.scroll(0,parseInt(x.offset().top - 100));",
+          element
+      );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -199,9 +202,12 @@ public class BasePageObject {
   protected void scrollToElement(WebElement element, int offset) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
-      js.executeScript("var x = $(arguments[0]);"
-                       + "window.scroll(0,parseInt(x.offset().top - arguments[1]));", element,
-                       offset);
+      js.executeScript(
+          "var x = $(arguments[0]);" +
+          "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
+          element,
+          offset
+      );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -212,7 +218,6 @@ public class BasePageObject {
   /*
    * Url helpers
    */
-
   protected void scrollToElement(By elementBy) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     try {
@@ -234,14 +239,14 @@ public class BasePageObject {
     return true;
   }
 
-  public boolean isStringInURL(String exptectedString) {
+  public boolean isStringInURL(String givenString) {
     String currentURL = driver.getCurrentUrl();
-    if (currentURL.toLowerCase().contains(exptectedString.toLowerCase())) {
-      PageObjectLogging.log("isStringInURL", "Current url contains " + exptectedString, true);
+    if (currentURL.toLowerCase().contains(givenString.toLowerCase())) {
+      PageObjectLogging.log("isStringInURL", "Current url contains " + givenString, true);
       return true;
     } else {
       PageObjectLogging
-          .log("isStringInURL", "current url doesn't contain " + exptectedString, false);
+          .log("isStringInURL", "current url doesn't contain " + givenString, false);
       return false;
     }
   }

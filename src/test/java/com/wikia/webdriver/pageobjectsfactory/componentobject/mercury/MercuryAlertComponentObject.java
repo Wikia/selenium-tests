@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
-import com.wikia.webdriver.common.enums.Mercury;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -17,7 +16,24 @@ public class MercuryAlertComponentObject extends BasePageObject {
 
   private String alertMessage;
 
-  public MercuryAlertComponentObject(WebDriver driver, Mercury.AlertMessage message) {
+  public static enum AlertMessage {
+    NOT_EXISTING_REDIRECT(
+        "The link you followed is a redirect, but the page it directs to does not exist."),
+    NOT_EXISTING_CATEGORY("Category not found"),
+    NOT_EXISTING_SECTION("Section not found");
+
+    private String message;
+
+    AlertMessage(String message) {
+      this.message = message;
+    }
+
+    public String getMessage() {
+      return message;
+    }
+  }
+
+  public MercuryAlertComponentObject(WebDriver driver, AlertMessage message) {
     super(driver);
     alertMessage = message.getMessage();
   }
