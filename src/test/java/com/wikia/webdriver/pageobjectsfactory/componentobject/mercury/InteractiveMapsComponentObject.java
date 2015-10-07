@@ -36,16 +36,16 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   private WebElement poiPopUp;
   @FindBy(css = ".lightbox-content")
   private WebElement lightbox;
-  @FindBy(css = ".view-map")
-  private WebElement viewMapButton;
+  @FindBy(css = ".wikia-map > img")
+  private WebElement mapThumbnail;
 
   public InteractiveMapsComponentObject(WebDriver driver) {
     super(driver);
   }
 
-  public void clickViewMapButton() {
-    wait.forElementVisible(viewMapButton);
-    viewMapButton.click();
+  public void clickMapThumbnail() {
+    wait.forElementVisible(mapThumbnail);
+    mapThumbnail.click();
   }
 
   public void clickCloseButton() {
