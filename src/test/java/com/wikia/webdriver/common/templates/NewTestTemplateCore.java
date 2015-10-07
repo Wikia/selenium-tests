@@ -99,6 +99,7 @@ public class NewTestTemplateCore {
   protected void stopBrowser() {
     if (driver != null) {
       try {
+        driver.close();
         driver.quit();
       } catch (Error e) {
         LOG.info("CANNOT QUIT DRIVER", e);
