@@ -16,6 +16,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
+/*
+ * @ownership Content X-Wing Wikia
+ */
 public class ArticlePageTests extends NewTestTemplate {
 
   private static final String[]

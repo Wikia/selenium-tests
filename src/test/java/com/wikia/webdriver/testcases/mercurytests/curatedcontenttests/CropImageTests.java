@@ -30,7 +30,7 @@ public class CropImageTests extends NewTestTemplate {
                 Configuration.getCredentials().passwordStaff2);
     }
 
-    @Test(groups = "CropImageTest_001")
+  @Test(groups = "CropImageTest_001")
     @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
     public void CropImageTest_001_cropOptionInModal() {
         CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
