@@ -20,8 +20,6 @@ import org.testng.annotations.Test;
  * TC10: delete description field and then verify a promotional message and Publish button disability
  * TC11: delete text from desc field and click discard to view previous state
  * TC12: delete text from desc field and populate the field with a character to check Publish button is enabled
- *
- * @ownership Content X-Wing
  */
 public class HeroModuleTests extends NewTestTemplate {
 
