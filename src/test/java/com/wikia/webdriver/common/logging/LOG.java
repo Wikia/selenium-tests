@@ -94,7 +94,7 @@ public class LOG {
 
   public static void stopLogging() {
 
-    while (TestContext.getWebDriver() != null){
+    if (TestContext.getWebDriver() != null){
       try {
         TestContext.getWebDriver().quit();
       } catch (Error e) {
