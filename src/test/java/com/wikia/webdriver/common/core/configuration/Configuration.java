@@ -35,7 +35,7 @@ public class Configuration {
         input = new FileInputStream(new File("config.yml"));
       } catch (FileNotFoundException ex) {
         try {
-          LOG.error("CANNOT FIND FILE CONFIG.YML", ex);
+//          LOG.info("CANNOT FIND FILE CONFIG.YML", ex);
           input = new FileInputStream(new File("config_sample.yml"));
         } catch (FileNotFoundException ex2) {
           LOG.error("CANNOT FIND FILE CONFIG_SAMPLE.YML", ex);

@@ -89,7 +89,7 @@ public class LOG {
                   + logCounter + "\">" + description + "</div></td><tr>");
     }
     allowLongDesc = false;
-    CommonUtils.appendTextToFile(LOG_PATH, builder.toString());
+    CommonUtils.  appendTextToFile(LOG_PATH, builder.toString());
   }
 
   public static void stopLogging() {
