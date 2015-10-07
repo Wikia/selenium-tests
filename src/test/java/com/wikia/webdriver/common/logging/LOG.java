@@ -93,13 +93,15 @@ public class LOG {
   }
 
   public static void stopLogging() {
-    if (TestContext.getWebDriver() != null) {
+
+    while (TestContext.getWebDriver() != null){
       try {
         TestContext.getWebDriver().quit();
       } catch (Error e) {
         LOG.info("CANNOT QUIT DRIVER", e);
       }
     }
+
     StringBuilder builder = new StringBuilder();
     builder
         .append("<tr class=\"step\"><td><div><a href=\"#toc\">"
