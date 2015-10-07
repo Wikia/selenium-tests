@@ -9,8 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.ModularMainPageObject;
 import org.testng.annotations.Test;
 
 /**
- * Created by RodriGomez on 02/04/15.
- * Set of Test Cases found on https://wikia-inc.atlassian.net/browse/DAT-2563
+ * Set of Test Cases: https://wikia-inc.atlassian.net/browse/DAT-2563
  *
  * TC18: Add a new MoM image, refresh the page and verify it is still visible
  * TC04: upload a new image and verify it is displayed immediately

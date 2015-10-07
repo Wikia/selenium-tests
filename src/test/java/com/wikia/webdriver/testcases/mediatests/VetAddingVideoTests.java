@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 /**
  * Documentation: https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
  * AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
- * @ownership Content X-Wing
  */
 
 public class VetAddingVideoTests extends NewTestTemplate {

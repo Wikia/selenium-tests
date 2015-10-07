@@ -16,10 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

@@ -11,10 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideosw
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * Created by kenkouot on 3/20/14.
- * @ownership Content X-Wing
- */
 public class LicensedVideoSwap extends NewTestTemplate {
 
   LicensedVideoSwapPageObject licensedVideoSwap;
@@ -28,12 +24,18 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
   }
 
+  /*
+   * @ownership Content X-Wing
+   */
   @Test(groups = {"LicensedVideoSwap_001", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_001_navigateToHistory() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();
   }
 
+  /*
+  * @ownership Content X-Wing
+  */
   @Test(groups = {"LicensedVideoSwap_002", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_002_navigateToHistoryAndBackToLvs() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
@@ -42,9 +44,9 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap.verifyOnLvsPage();
   }
 
-  @RelatedIssue(issueID = "CONCF-438", comment = "Feature will be deprecated. No need to test manually")
+  @RelatedIssue(issueID = "CONCF-438")
   @Test(
-      enabled = false, //CONCF-438
+      enabled = false,
       groups = {"LicensedVideoSwap_003", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_003_swap() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();

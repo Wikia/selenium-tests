@@ -12,10 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- * @ownership Content X-Wing
- */
 @Test(groups = "ArticleCRUDAnon")
 public class ArticleCRUDAnonTests extends NewTestTemplate {
 

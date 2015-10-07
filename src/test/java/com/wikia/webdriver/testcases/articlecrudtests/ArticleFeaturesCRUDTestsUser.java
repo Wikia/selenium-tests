@@ -32,10 +32,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"ArticleFeaturesCRUDUser"})
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 

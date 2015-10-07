@@ -10,11 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 
 import org.testng.annotations.Test;
 
-/**
- * @author Saipetch Kongkatong, Liz Lee
- * @ownership Content X-Wing
- */
-
 public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})

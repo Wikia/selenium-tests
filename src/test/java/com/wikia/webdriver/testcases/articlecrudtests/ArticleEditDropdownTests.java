@@ -7,10 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- * @ownership Content X-Wing
- */
 @Test(groups = {"ArticleEditDropdown"})
 public class ArticleEditDropdownTests extends NewTestTemplate {
 

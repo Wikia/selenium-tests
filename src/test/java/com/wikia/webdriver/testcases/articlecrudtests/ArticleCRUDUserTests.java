@@ -15,10 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- * @ownership Content X-Wing
- */
 @Test(groups = {"ArticleCRUDUser"})
 public class ArticleCRUDUserTests extends NewTestTemplate {
 

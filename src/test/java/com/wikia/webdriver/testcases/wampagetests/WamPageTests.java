@@ -11,11 +11,6 @@ import org.testng.annotations.Test;
 
 import java.util.EnumSet;
 
-/**
- * @author Qaga
- * @ownership Content X-Wing
- */
-
 public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;

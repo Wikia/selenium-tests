@@ -17,10 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"VetArticleComments", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
