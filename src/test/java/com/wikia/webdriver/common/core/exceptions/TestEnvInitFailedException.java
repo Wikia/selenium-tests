@@ -6,6 +6,10 @@ public class TestEnvInitFailedException extends RuntimeException {
     super("Failed to initialize test env");
   }
 
+  public TestEnvInitFailedException() {
+    super();
+  }
+
   public TestEnvInitFailedException(String message) {
     super(message);
   }
