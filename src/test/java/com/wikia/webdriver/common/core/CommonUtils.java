@@ -48,7 +48,7 @@ public class CommonUtils {
       out.flush();
       out.close();
     } catch (IOException e) {
-      throw new TestEnvInitFailedException();
+      throw new TestEnvInitFailedException(e);
     }
   }
 
