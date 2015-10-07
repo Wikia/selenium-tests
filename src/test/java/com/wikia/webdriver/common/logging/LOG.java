@@ -100,6 +100,16 @@ public class LOG {
       } catch (Error e) {
         LOG.info("CANNOT QUIT DRIVER", e);
       }
+      try {
+        TestContext.getWebDriver().quit();
+      } catch (Error e) {
+        LOG.info("CANNOT QUIT DRIVER", e);
+      }
+      try {
+        TestContext.getWebDriver().quit();
+      } catch (Error e) {
+        LOG.info("CANNOT QUIT DRIVER", e);
+      }
     }
 
     StringBuilder builder = new StringBuilder();
