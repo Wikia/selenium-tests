@@ -50,8 +50,6 @@ public class HubsTests extends NewTestTemplate {
 
   /**
    * verify that from community module has its elements
-   *
-   * @ownership Content X-Wing
    */
   @Test(groups = {"HubsTest_002", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
@@ -67,8 +65,6 @@ public class HubsTests extends NewTestTemplate {
   /**
    * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
    * properly
-   *
-   * @ownership Content X-Wing
    */
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
