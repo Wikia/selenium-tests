@@ -180,21 +180,11 @@ public class NavigationSideTests extends NewTestTemplate {
 
     searchObject.typeInSearchField(SEARCH_FAIL);
 
-    result = searchObject.isSorryInfoDisplayed();
+    result = !searchObject.isSuggestionListDisplayed();
     PageObjectLogging.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
-        result
-    );
-
-    searchObject.waitMilliseconds(5000, "Wait for message to disappear");
-
-    result = searchObject.isSorryInfoDisplayed();
-    PageObjectLogging.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
+        "Search suggestions",
+        "are hidden",
+        "are loaded",
         result
     );
 
