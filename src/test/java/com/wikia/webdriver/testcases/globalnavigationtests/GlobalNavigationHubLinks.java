@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychała
  * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"HubLinksInGlobalNav"})

@@ -10,7 +10,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychała
  * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"WikiaLogo"})

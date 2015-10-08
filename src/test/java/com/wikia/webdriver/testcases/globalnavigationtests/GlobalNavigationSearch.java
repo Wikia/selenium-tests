@@ -12,7 +12,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
  * @ownership Content X-Wing Wikia
  */
 public class GlobalNavigationSearch extends NewTestTemplate {

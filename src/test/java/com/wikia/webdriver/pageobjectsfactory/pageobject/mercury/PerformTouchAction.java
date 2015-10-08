@@ -15,9 +15,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * @authors: Tomasz Napieralski
- * @created: 9 Jan 2015
- * @updated: 9 Feb 2015
  * @ownership Content X-Wing Wikia
  */
 public class PerformTouchAction {

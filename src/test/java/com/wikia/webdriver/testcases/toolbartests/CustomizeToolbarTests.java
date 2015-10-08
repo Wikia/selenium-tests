@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @author Karol 'kkarolk' Kujawiak
  * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"Toolbar", "CustomizeToolbar"})
@@ -116,7 +115,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar006"})
   @Execute(asUser = User.USER_2)
- // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
+  // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
   public void CustomizeToolbar006_ButtonsActions() {
     toolbar.unfollowIfFollowed();
     toolbar.verifyToolOnToolbar(toolFollow);
