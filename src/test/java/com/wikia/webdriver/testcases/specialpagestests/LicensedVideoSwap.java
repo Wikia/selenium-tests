@@ -24,18 +24,12 @@ public class LicensedVideoSwap extends NewTestTemplate {
     licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
   }
 
-  /*
-   * @ownership Content X-Wing
-   */
   @Test(groups = {"LicensedVideoSwap_001", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_001_navigateToHistory() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
     historyPage.verifyOnHistoryPage();
   }
 
-  /*
-  * @ownership Content X-Wing
-  */
   @Test(groups = {"LicensedVideoSwap_002", "LicensedVideoSwap", "Media"})
   public void LicensedVideoSwap_002_navigateToHistoryAndBackToLvs() {
     LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();

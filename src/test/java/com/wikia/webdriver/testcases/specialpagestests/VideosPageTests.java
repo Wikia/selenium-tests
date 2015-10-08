@@ -14,8 +14,6 @@ public class VideosPageTests extends NewTestTemplate {
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
-   *
-   * @ownership Content X-Wing
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
   public void VideosPageTest_001() {

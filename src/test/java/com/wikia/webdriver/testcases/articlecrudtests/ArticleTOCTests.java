@@ -14,6 +14,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Content X-Wing
+ */
 public class ArticleTOCTests extends NewTestTemplate {
 
   /**
