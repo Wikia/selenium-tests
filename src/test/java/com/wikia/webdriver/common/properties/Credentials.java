@@ -51,20 +51,6 @@ public class Credentials {
   public final String userName13;
   public final String password13;
 
-  public final String userNameNonLatin;
-  public final String userNameNonLatinEncoded;
-  public final String passwordNonLatin;
-
-  public final String userNameWithUnderScore;
-  public final String passwordWithUnderScore;
-
-  public final String userNameWithBackwardSlash;
-  public final String userNameWithBackwardSlashEncoded;
-  public final String passwordWithBackwardSlash;
-
-  public final String userNameLong;
-  public final String passwordLong;
-
   public final String userNameClosedAccount;
   public final String passwordClosedAccount;
 
@@ -77,10 +63,6 @@ public class Credentials {
   public final String emailPasswordQaart1;
   public final String emailQaart2;
   public final String emailPasswordQaart2;
-  public final String emailQaart3;
-  public final String emailPasswordQaart3;
-  public final String emailQaart4;
-  public final String emailPasswordQaart4;
   public final String userNameStaff;
   public final String userNameStaffId;
   public final String passwordStaff;
@@ -102,9 +84,6 @@ public class Credentials {
   public final String userNameForgottenPassword2;
   public final String userNameForgottenPassword3;
 
-  public final String geoEdgeUserName;
-  public final String geoEdgeUserPass;
-
   public final String userNameVEPreferred;
   public final String passwordVEPreferred;
 
@@ -119,9 +98,6 @@ public class Credentials {
 
   public final String userNameGoSearchPreferred;
   public final String passwordGoSearchPreferred;
-
-  public final String userNameSysop;
-  public final String passwordSysop;
 
   public final String userNameEnglish;
   public final String passwordEnglish;
@@ -210,21 +186,6 @@ public class Credentials {
     userNameJapanese2 = XMLReader.getValue(file, "ci.user.language11.username");
     passwordJapanese2 = XMLReader.getValue(file, "ci.user.language11.password");
 
-    userNameNonLatin = XMLReader.getValue(file, "ci.user.nonLatin.username");
-    userNameNonLatinEncoded = XMLReader.getValue(file, "ci.user.nonLatin.usernameenc");
-    passwordNonLatin = XMLReader.getValue(file, "ci.user.nonLatin.password");
-
-    userNameWithUnderScore = XMLReader.getValue(file, "ci.user.underscore.username");
-    passwordWithUnderScore = XMLReader.getValue(file, "ci.user.underscore.password");
-
-    userNameWithBackwardSlash = XMLReader.getValue(file, "ci.user.backwardslash.username");
-    userNameWithBackwardSlashEncoded =
-        XMLReader.getValue(file, "ci.user.backwardslash.usernameenc");
-    passwordWithBackwardSlash = XMLReader.getValue(file, "ci.user.backwardslash.password");
-
-    userNameLong = XMLReader.getValue(file, "ci.user.long.username");
-    passwordLong = XMLReader.getValue(file, "ci.user.long.password");
-
     userNameClosedAccount = XMLReader.getValue(file, "ci.user.closeAccountUser.username");
     passwordClosedAccount = XMLReader.getValue(file, "ci.user.closeAccountUser.password");
 
@@ -252,19 +213,12 @@ public class Credentials {
     emailPasswordQaart1 = XMLReader.getValue(file, "ci.email.qawikia1.password");
     emailQaart2 = XMLReader.getValue(file, "ci.email.qawikia2.username");
     emailPasswordQaart2 = XMLReader.getValue(file, "ci.email.qawikia2.password");
-    emailQaart3 = XMLReader.getValue(file, "ci.email.qawikia3.username");
-    emailPasswordQaart3 = XMLReader.getValue(file, "ci.email.qawikia3.password");
-    emailQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.username");
-    emailPasswordQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.password");
     userNameBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.username");
     passwordBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.password");
 
     userNameForgottenPassword = XMLReader.getValue(file, "ci.user.forgottenPassword.username1");
     userNameForgottenPassword2 = XMLReader.getValue(file, "ci.user.forgottenPassword.username2");
     userNameForgottenPassword3 = XMLReader.getValue(file, "ci.user.forgottenPassword.username3");
-
-    geoEdgeUserName = XMLReader.getValue(file, "ci.AdsConfig.GeoEdgeCredentials.userName");
-    geoEdgeUserPass = XMLReader.getValue(file, "ci.AdsConfig.GeoEdgeCredentials.password");
 
     userNameVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.username");
     passwordVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.password");
@@ -280,9 +234,6 @@ public class Credentials {
 
     userNameGoSearchPreferred = XMLReader.getValue(file, "ci.user.goSearchPreferredUser.username");
     passwordGoSearchPreferred = XMLReader.getValue(file, "ci.user.goSearchPreferredUser.password");
-
-    userNameSysop = XMLReader.getValue(file, "ci.user.wikiasysop.username");
-    passwordSysop = XMLReader.getValue(file, "ci.user.wikiasysop.password");
 
     apiToken = XMLReader.getValue(file, "ci.api.token");
 
