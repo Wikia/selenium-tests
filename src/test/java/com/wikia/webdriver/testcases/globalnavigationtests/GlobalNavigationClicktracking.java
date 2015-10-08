@@ -17,7 +17,7 @@ import javax.json.JsonObject;
 
 /**
  * @author Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class GlobalNavigationClicktracking extends NewTestTemplate {
 

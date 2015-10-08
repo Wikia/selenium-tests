@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"RedirectionTests", "Mercury"})
 public class RedirectionTests extends NewTestTemplate {

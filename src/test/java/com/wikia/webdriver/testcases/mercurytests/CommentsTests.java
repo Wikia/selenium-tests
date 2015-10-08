@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-wing
+ * @ownership Content X-Wing Wikia
  */
 public class CommentsTests extends NewTestTemplate {
 

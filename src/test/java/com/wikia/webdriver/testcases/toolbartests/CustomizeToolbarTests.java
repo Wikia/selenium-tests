@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"Toolbar", "CustomizeToolbar"})
 public class CustomizeToolbarTests extends NewTestTemplate {

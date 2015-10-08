@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"AllTagsWidgetTests", "WidgetTests"})
 public class AllTagsTests extends NewTestTemplate {

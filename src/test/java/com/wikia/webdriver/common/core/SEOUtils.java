@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  *
  * This class serves to perform search engine optimization tests The class methods can be used to
  * verify meta tags attributes

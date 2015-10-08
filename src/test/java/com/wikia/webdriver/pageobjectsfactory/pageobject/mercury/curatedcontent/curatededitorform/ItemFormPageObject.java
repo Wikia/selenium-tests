@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
  * That object differs from Category Form:
  * It allows more namespaces than category
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class ItemFormPageObject extends CuratedEditorFormPageObject {
 

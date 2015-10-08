@@ -18,7 +18,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class BasePageObject extends WikiBasePageObject {
 

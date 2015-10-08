@@ -12,7 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class SocialButtonsTests extends NewTestTemplate {
 

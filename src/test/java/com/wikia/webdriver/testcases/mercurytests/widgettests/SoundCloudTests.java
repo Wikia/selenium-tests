@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"MercurySoundCloudWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class SoundCloudTests extends NewTestTemplate {

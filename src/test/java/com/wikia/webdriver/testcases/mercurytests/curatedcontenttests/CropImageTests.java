@@ -18,7 +18,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class CropImageTests extends NewTestTemplate {
 

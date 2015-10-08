@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * This class represents all the levels below Curated Main Page
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class CuratedContentPageObject extends BasePageObject {
 
