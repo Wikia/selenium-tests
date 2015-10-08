@@ -102,9 +102,6 @@ public class Credentials {
   public final String userNameForgottenPassword2;
   public final String userNameForgottenPassword3;
 
-  public final String geoEdgeUserName;
-  public final String geoEdgeUserPass;
-
   public final String userNameVEPreferred;
   public final String passwordVEPreferred;
 
@@ -262,9 +259,6 @@ public class Credentials {
     userNameForgottenPassword = XMLReader.getValue(file, "ci.user.forgottenPassword.username1");
     userNameForgottenPassword2 = XMLReader.getValue(file, "ci.user.forgottenPassword.username2");
     userNameForgottenPassword3 = XMLReader.getValue(file, "ci.user.forgottenPassword.username3");
-
-    geoEdgeUserName = XMLReader.getValue(file, "ci.AdsConfig.GeoEdgeCredentials.userName");
-    geoEdgeUserPass = XMLReader.getValue(file, "ci.AdsConfig.GeoEdgeCredentials.password");
 
     userNameVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.username");
     passwordVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.password");
