@@ -68,6 +68,11 @@ public class NewTestTemplateCore {
     driver =
         registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(Configuration
             .getBrowser()));
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
     TestContext.setDriver(driver);
   }
