@@ -16,24 +16,23 @@ import java.util.List;
 import javax.json.JsonObject;
 
 /**
- * @author Michal 'justnpT' Nowierski
  * @ownership Content X-Wing Wikia
  */
 public class GlobalNavigationClicktracking extends NewTestTemplate {
 
   /**
    * search test flow: action - expected event navigate to main page
-   * 
+   *
    * trigger suggestion - search-suggest-show click enter on suggestion - search-suggest-enter click
    * enter after suggestion - search-after-suggest-enter clear suggestion
-   * 
+   *
    * trigger suggestion mouse click on suggestion - search-suggest click search after suggestion -
    * search-after-suggest-button clear suggestion
    */
   @RelatedIssue(issueID = "QAART-555",
       comment = "Automation test is broken. NB Not possible to test manually")
   @Test(groups = {"ClicktrackingGlobalSearch", "ClickTracking", "GlobalNav",
-      "TestGlobalNavClickTracking_001"}, enabled = false)
+                  "TestGlobalNavClickTracking_001"}, enabled = false)
   public void TestGlobalNavClickTracking_001() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openMainPage(wikiURL);
@@ -56,9 +55,9 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
 
     List<JsonObject> expectedEvents =
         Arrays.asList(EventsGlobalNavigation.searchSuggestShow,
-            EventsGlobalNavigation.searchSuggestionEnter,
-            EventsGlobalNavigation.searchAfterSuggestionEnter,
-            EventsGlobalNavigation.searchAfterSuggestionButtonClick);
+                      EventsGlobalNavigation.searchSuggestionEnter,
+                      EventsGlobalNavigation.searchAfterSuggestionEnter,
+                      EventsGlobalNavigation.searchAfterSuggestionButtonClick);
 
     navbar.compareTrackedEventsTo(expectedEvents);
   }

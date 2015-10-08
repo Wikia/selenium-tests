@@ -11,9 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class SocialButtonsTests extends NewTestTemplate {
 
   private Credentials credentials = Configuration.getCredentials();
