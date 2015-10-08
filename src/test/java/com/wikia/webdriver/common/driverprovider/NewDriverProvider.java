@@ -232,6 +232,7 @@ public class NewDriverProvider {
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
       chromeOptions.addArguments("process-per-site");
+      chromeOptions.addArguments("enable-block-external-urls");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
