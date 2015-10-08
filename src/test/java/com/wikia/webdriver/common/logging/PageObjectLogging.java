@@ -33,6 +33,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     if (!AlertHandler.isAlertPresent(driver)) {
       if (url.equals(driver.getCurrentUrl())) {
         LOG.info("Url after navigation", driver.getCurrentUrl());
