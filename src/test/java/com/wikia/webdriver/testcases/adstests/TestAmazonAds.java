@@ -50,7 +50,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
           "MercuryAmazonAds"
       })
   public void AmazonAds_debugMode() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon");
+    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
@@ -65,7 +65,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
           "MercuryAmazonAds"
       })
   public void AmazonAds_debugModeOnConsecutivePageViews() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon");
+    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
