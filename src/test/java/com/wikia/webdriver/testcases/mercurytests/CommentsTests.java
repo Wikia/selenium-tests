@@ -12,6 +12,9 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @ownership: Content X-wing
+ */
 public class CommentsTests extends NewTestTemplate {
 
   private static final String MEDIA_TYPE_VIDEO = "Video";
