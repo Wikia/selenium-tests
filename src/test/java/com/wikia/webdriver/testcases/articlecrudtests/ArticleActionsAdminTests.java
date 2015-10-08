@@ -14,10 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestoreP
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
