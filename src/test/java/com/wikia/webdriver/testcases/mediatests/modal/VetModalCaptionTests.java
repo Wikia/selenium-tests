@@ -16,10 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VetModalCaptionTests extends NewTestTemplate {
 
   /**

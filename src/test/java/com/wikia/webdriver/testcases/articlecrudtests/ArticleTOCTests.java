@@ -15,8 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import org.testng.annotations.Test;
 
 /**
- * @author: Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class ArticleTOCTests extends NewTestTemplate {
 

@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {

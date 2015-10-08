@@ -10,10 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiA
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VideoSuggestionsTests extends NewTestTemplate {
 
   @Test(groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"})

@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.hubstests;
 
-import java.util.Map;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -15,12 +10,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Michal 'justptT' Nowierski
- * @author Robert 'rochan' Chan
- * @ownership Content X-Wing
- */
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.Map;
+
 public class HubsTests extends NewTestTemplate {
 
   @DataProvider
@@ -54,12 +48,11 @@ public class HubsTests extends NewTestTemplate {
     hub.mosaicSliderVerifyLargeImageDescriptionDifferent(currentLargeImageDescription);
   }
 
-
+  /**
+   * verify that from community module has its elements
+   */
   @Test(groups = {"HubsTest_002", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
-  /**
-   *  verify that from community module has its elements
-   */
   public void HubsTest_002_verifyFromCommunityModuleHasItsElements(String hubDBName) {
     HomePageObject home = new HomePageObject(driver);
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
@@ -69,11 +62,12 @@ public class HubsTests extends NewTestTemplate {
     hub.verifyFromModuleHasQuatation();
   }
 
+  /**
+   * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
+   * properly
+   */
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
-  /**
-   * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
-   */
   @Execute(asUser = User.USER_2)
   public void HubsTest_003_VerifyArticleSuggestionWorksProperly(String hubDBName) {
     HubBasePageObject hub =

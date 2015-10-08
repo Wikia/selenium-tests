@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActi
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class GlobalNavigationScrollAction extends NewTestTemplate{
 	

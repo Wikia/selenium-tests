@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class InteractiveMapsComponentObject extends BasePageObject {
 

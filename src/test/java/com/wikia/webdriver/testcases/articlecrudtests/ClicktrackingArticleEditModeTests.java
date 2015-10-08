@@ -13,9 +13,6 @@ import java.util.List;
 
 import javax.json.JsonObject;
 
-/**
- * @ownership Content X-Wing
- */
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "QAART-555")

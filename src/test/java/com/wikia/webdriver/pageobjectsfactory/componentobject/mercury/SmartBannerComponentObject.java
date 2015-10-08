@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import java.awt.*;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class SmartBannerComponentObject extends BasePageObject {
 

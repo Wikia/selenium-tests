@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  * It has one text field to fill instead of two
  * It doesn't allow adding namespace item, it creates a section
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class SectionFormPageObject extends CuratedEditorFormPageObject {
 

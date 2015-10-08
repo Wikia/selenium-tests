@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidget
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"SoundCloudWidgetTests", "WidgetTests"})
 public class SoundCloudTests extends NewTestTemplate {

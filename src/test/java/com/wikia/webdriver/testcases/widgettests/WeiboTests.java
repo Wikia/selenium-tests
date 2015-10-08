@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageO
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"WeiboWidgetTests", "WidgetTests"})
 public class WeiboTests extends NewTestTemplate {

@@ -15,10 +15,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class ArticleRTETest extends NewTestTemplate {
 
   private static final int WIKI_TEXTS_PER_CYCLE = 300;

@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPag
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"TwitterWidgetTests", "WidgetTests"})
 public class TwitterTests extends NewTestTemplate {

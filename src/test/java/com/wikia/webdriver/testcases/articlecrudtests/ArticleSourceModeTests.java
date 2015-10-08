@@ -31,10 +31,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"RTE_extended"})
 public class ArticleSourceModeTests extends NewTestTemplate {
 

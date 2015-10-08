@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPag
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"SpotifyWidgetTests", "WidgetTests"})
 public class SpotifyTests extends NewTestTemplate {
