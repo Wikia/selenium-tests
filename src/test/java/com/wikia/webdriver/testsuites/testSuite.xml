@@ -157,7 +157,7 @@
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsOwnerTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadCreatorTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
-            <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentTool"/>
+            <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentModal"/>
             <class name="com.wikia.webdriver.testcases.portableinfoboxtests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
