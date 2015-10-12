@@ -70,7 +70,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void ArticleCRUDAnon_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditByURL");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);

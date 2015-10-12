@@ -21,7 +21,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
   public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
 
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
     visualEditMode.verifyContentLoaded();
     visualEditMode.startTracking();
     visualEditMode.previewArticle();

@@ -63,7 +63,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
     visualEditMode.verifyContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();

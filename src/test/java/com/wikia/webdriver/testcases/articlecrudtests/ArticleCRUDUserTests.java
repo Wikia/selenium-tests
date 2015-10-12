@@ -81,7 +81,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
         new ArticlePageObject(driver).open("Article to edit by URL");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);

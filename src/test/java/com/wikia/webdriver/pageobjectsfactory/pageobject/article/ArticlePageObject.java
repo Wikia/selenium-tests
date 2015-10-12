@@ -282,13 +282,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new VisualEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject editArticleInRTE() {
-    scrollAndClick(openEditDropdown);
-    wait.forElementVisible(editUsingClassicEditor);
-    scrollAndClick(editUsingClassicEditor);
-    return new VisualEditModePageObject(driver);
-  }
-
   public MiniEditorComponentObject triggerCommentArea() {
     scrollToElement(allCommentsArea);
     wait.forElementVisible(commentArea);

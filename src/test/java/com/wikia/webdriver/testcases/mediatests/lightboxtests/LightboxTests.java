@@ -76,7 +76,7 @@ public class LightboxTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
