@@ -223,10 +223,11 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_008", "Smoke5", "Media"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    new ArticleContent().clear();
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
@@ -234,7 +235,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();
-    visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyVideo();
     article.editArticleInRTEUsingDropdown();
     visualEditMode.removeComponent(Components.VIDEO);

@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.blogtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -90,9 +92,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogFeatures_004", "BlogFeaturesTests", "Media"})
+  @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void BlogFeatures_004_AddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
