@@ -23,7 +23,7 @@ public class ModalTests extends NewTestTemplate {
     String errorMessage = "can not scroll window";
 
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
+    VisualEditModePageObject visualEditMode = article.editArticleWithQueryParam();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
     // resize window
     driver.manage().window().setSize(dimension);

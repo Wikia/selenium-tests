@@ -881,7 +881,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyURLActionEditEditor(Editor expectedEditor, String articleName, String wikiURL) {
     switch (expectedEditor) {
       case CK:
-        VisualEditModePageObject ck = navigateToArticleEditPageCK(wikiURL, articleName);
+        VisualEditModePageObject ck = editArticleWithQueryParam(wikiURL, articleName);
         ck.verifyContentLoaded();
         ck.clickPublishButton();
         break;

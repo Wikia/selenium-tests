@@ -36,7 +36,7 @@ public class VetModalWidthTests extends NewTestTemplate {
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.editArticleWithQueryParam(wikiURL, articleTitle);
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject
         vetOptions =
@@ -61,7 +61,7 @@ public class VetModalWidthTests extends NewTestTemplate {
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.editArticleWithQueryParam(wikiURL, articleTitle);
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyVideoWidth(WIDTH);

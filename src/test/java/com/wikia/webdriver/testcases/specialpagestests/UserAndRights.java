@@ -71,8 +71,8 @@ public class UserAndRights extends NewTestTemplate {
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         edit =
-        base.navigateToArticleEditPageCK(wikiURL,
-                                         PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
+        base.editArticleWithQueryParam(wikiURL,
+                                       PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
     edit.clearContent();
     edit.addContent(String.valueOf(DateTime.now().getMillis()));
     edit.submitArticle().verifyArticleTitle(title);

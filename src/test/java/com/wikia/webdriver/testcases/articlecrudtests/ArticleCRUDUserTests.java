@@ -41,7 +41,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.editArticleWithQueryParam(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -68,7 +68,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new WikiBasePageObject(driver).navigateToArticleEditPageCK(wikiURL, randomArticleTitle);
+        new WikiBasePageObject(driver).editArticleWithQueryParam(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -81,7 +81,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article =
         new ArticlePageObject(driver).open("Article to edit by URL");
-    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
+    VisualEditModePageObject visualEditMode = article.editArticleWithQueryParam();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);

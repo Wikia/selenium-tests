@@ -500,12 +500,12 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject editArticleInRTE() {
+  public VisualEditModePageObject editArticleWithQueryParam() {
     getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
     return new VisualEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject navigateToArticleEditPageCK(String wikiURL, String article) {
+  public VisualEditModePageObject editArticleWithQueryParam(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
     return new VisualEditModePageObject(driver);

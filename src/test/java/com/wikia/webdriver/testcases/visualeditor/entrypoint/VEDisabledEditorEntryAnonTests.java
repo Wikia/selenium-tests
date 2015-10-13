@@ -112,7 +112,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
       "actionURLEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
     VisualEditModePageObject ck =
-        base.navigateToArticleEditPageCK(wikiURL, base.getNameForArticle());
+        base.editArticleWithQueryParam(wikiURL, base.getNameForArticle());
     ck.verifyContentLoaded();
     ck.clickPublishButton();
   }

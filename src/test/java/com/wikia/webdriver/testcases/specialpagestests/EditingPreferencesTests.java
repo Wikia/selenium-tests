@@ -59,7 +59,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     prefPage.verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject aritclePage = new ArticlePageObject(driver).open(articleName);
-    VisualEditModePageObject ck = aritclePage.editArticleInRTE();
+    VisualEditModePageObject ck = aritclePage.editArticleWithQueryParam();
     ck.verifyContentLoaded();
     ck.clickPublishButton();
   }

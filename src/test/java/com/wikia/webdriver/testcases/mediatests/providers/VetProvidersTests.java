@@ -20,7 +20,7 @@ public class VetProvidersTests extends NewTestTemplate {
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     PageObjectLogging.log("", videoUrl, true);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
+    VisualEditModePageObject visualEditMode = article.editArticleWithQueryParam();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);

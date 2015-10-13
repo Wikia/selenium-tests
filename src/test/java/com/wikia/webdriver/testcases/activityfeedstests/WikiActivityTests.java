@@ -35,7 +35,7 @@ public class WikiActivityTests extends NewTestTemplate {
     ArticlePageObject article =
         new ArticlePageObject(driver).open("NewEditionIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTE();
+    VisualEditModePageObject visualEditMode = article.editArticleWithQueryParam();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
