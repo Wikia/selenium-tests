@@ -1,9 +1,8 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,6 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * Created by Rodriuki on 12/06/15. Set of Test Cases found on
@@ -55,6 +56,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests_002", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
+  @RelatedIssue(issueID = "MAIN-5575", comment = "verify internal and external link in infobox redirects to proper place")
   public void verifyElementsRedirects() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
 
@@ -87,6 +89,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests_004", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
+  @RelatedIssue(issueID = "MAIN-5573", comment =
+      "The test expects edition panel in infobox editor. "
+      + "Check ticket status and if that's the expected "
+      + "behaviour behaviour to PO. "
+      + "The test might require an update")
   public void verifyCategoriesInTemplateInvocation() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
