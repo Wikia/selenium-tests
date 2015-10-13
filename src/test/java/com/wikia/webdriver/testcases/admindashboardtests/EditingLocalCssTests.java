@@ -30,7 +30,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
-    VisualEditModePageObject edit = article.editArticleWithQueryParam();
+    VisualEditModePageObject edit = article.navigateToArticleEditPage();
     edit.verifyUrl(URLsContent.SPECIAL_CSS);
   }
 
@@ -43,12 +43,12 @@ public class EditingLocalCssTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
-    article.editArticleWithQueryParam();
+    article.navigateToArticleEditPage();
     article.verifyPermissionsErrorsPresent();
     article.loginAs(credentials.userName, credentials.password, wikiURL);
     article.open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
-    article.editArticleWithQueryParam();
+    article.navigateToArticleEditPage();
     article.verifyPermissionsErrorsPresent();
   }
 

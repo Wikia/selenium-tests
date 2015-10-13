@@ -23,7 +23,7 @@ public class ModalTests extends NewTestTemplate {
     String errorMessage = "can not scroll window";
 
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.editArticleWithQueryParam();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
     // resize window
     driver.manage().window().setSize(dimension);
@@ -34,7 +34,7 @@ public class ModalTests extends NewTestTemplate {
 
   @DataProvider(name = "DimensionDataProvider")
   public final Dimension[][] DimensionProvider() {
-    return new Dimension[][] { {new Dimension(1100, 570)}, {new Dimension(800, 570)}};
+    return new Dimension[][]{{new Dimension(1100, 570)}, {new Dimension(800, 570)}};
   }
 
 }
