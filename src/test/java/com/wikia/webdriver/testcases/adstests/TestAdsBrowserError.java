@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
  */
 public class TestAdsBrowserError extends TemplateNoFirstLoad {
 
-  @Test(groups = "AdsScrollHandlerBrowserErrorMercury")
-  public void adsScrollHandlerBrowserErrorMercury() throws InterruptedException {
+  @Test(groups = "AdsScrollHandlerBrowserError")
+  public void adsScrollHandlerBrowserError() {
     String testPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
     testPage = urlBuilder.appendQueryStringToURL(testPage, "scrollhandler=1");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver);
