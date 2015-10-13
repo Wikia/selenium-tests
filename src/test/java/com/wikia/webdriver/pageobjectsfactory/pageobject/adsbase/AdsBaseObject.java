@@ -557,7 +557,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  private void waitForJavaScriptTruthy(final String script) {
+  public void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(new ExpectedCondition<Boolean>() {
