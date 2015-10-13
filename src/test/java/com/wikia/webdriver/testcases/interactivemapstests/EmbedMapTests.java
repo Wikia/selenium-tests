@@ -30,7 +30,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
   public void EmbedMapTests_001_EmbedMapInWikiaPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    //base.loginAs(credentials.userName, credentials.password, wikiURL);
+    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =

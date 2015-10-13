@@ -177,19 +177,18 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   /**
-  * Open article with name that is the following combination:
-  * TEST CLASS NAME + TEST METHOD NAME
-  */
+   * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
+   */
   public ArticlePageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + TestContext.getCurrentMethodName());
+           + TestContext.getCurrentMethodName());
 
     return this;
   }
 
   public ArticlePageObject open(String articleTitle) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + articleTitle);
+           + articleTitle);
     return this;
   }
 
@@ -319,7 +318,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
-        EDIT_BUTTON_SELECTOR);
+                     EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
 
@@ -328,7 +327,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
-        DELETE_BUTTON_SELECTOR);
+                     DELETE_BUTTON_SELECTOR);
     return new DeletePageObject(driver);
   }
 
@@ -457,7 +456,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
     PageObjectLogging.log("verifyTableProperty", "table has correct " + propertyName + " property",
-        true);
+                          true);
   }
 
   public void verifyTableBorder(int propertyValue) {
@@ -517,7 +516,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyVideoWidth(int widthDesired) {
     int videoWidth = getVideoWidth(videoThumbnail);
     Assertion.assertNumber(videoWidth, widthDesired, "width should be " + widthDesired + " but is "
-        + videoWidth);
+                                                     + videoWidth);
   }
 
   public void verifyVideoCaption(String captionDesired) {
@@ -597,10 +596,10 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void removeCategory(String category) {
     WebElement editCategory =
         driver.findElement(By.cssSelector(removeCategorySelector
-            .replace("%categoryName%", category)));
+                                              .replace("%categoryName%", category)));
     scrollAndClick(editCategory);
     PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked",
-        true);
+                          true);
   }
 
   public String addCategorySuggestions(String category, int categoryNumber) {
@@ -612,7 +611,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
     waitForElementNotVisibleByElement(categorySuggestionsList);
     PageObjectLogging.log("addCategorySuggestions", "category " + category
-        + " added from suggestions", true);
+                                                    + " added from suggestions", true);
     return desiredCategoryText;
   }
 
@@ -655,7 +654,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
     PageObjectLogging.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked",
-        true);
+                          true);
   }
 
   /**
@@ -676,7 +675,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     // assume that if section is less than 5px from top, it is scrolled up properly
     Assertion.assertTrue(sectionYafter < 5);
     PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID
-        + " was scrolled up", true);
+                                                       + " was scrolled up", true);
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -687,7 +686,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
     PageObjectLogging.log("closeNewWikiCongratulationsLightBox ",
-        "congratulations lightbox closed", true);
+                          "congratulations lightbox closed", true);
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
@@ -891,7 +890,8 @@ public class ArticlePageObject extends WikiBasePageObject {
         src.clickPublishButton();
         break;
       default:
-        throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
+        throw new NoSuchElementException(
+            "Invalid expected editor chosen: " + expectedEditor.name());
     }
   }
 
@@ -903,7 +903,8 @@ public class ArticlePageObject extends WikiBasePageObject {
         ve.verifyEditorSurfacePresent();
         break;
       default:
-        throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
+        throw new NoSuchElementException(
+            "Invalid expected editor chosen: " + expectedEditor.name());
     }
   }
 
