@@ -55,7 +55,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
@@ -296,13 +295,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
     return new PreferencesPageObject(driver);
-  }
-
-  public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES);
-    PageObjectLogging.log("EditingPreferencesPageObject",
-        "Special:Prefereces#mw-prefsection-editing page opened", true);
-    return new EditingPreferencesPageObject(driver);
   }
 
   public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {

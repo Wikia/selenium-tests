@@ -20,6 +20,8 @@ public class URLsContent {
   public static final String SPECIAL_PREFERENCES = "wiki/Special:Preferences";
   public static final String SPECIAL_EDITING_PREFERENCES =
       "wiki/Special:Preferences#mw-prefsection-editing";
+  public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
+      "wiki/Special:Preferences#mw-prefsection-emailv2";
   public static final String SPECIAL_PROMOTE = "wiki/Special:Promote";
   public static final String SPECIAL_CREATE_PAGE = "wiki/Special:CreatePage";
   public static final String SPECIAL_CREATE_BLOGPAGE = "wiki/Special:CreateBlogPage";

@@ -170,5 +170,4 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public enum tabNames {
     INFO, EMAIL, EDITING, UNDER, FACEBOOK
   }
-
 }
