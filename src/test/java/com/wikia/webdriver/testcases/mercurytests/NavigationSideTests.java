@@ -28,7 +28,8 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST01
-  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
+  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"},
+      enabled = false)
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
