@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -22,9 +24,9 @@ public class ForumBoardTests extends NewTestTemplate {
   private String message;
 
   @Test(groups = {"ForumBoardTests_001", "ForumBoardTests", "Forum", "Smoke3"})
+  @Execute(asUser = User.STAFF)
   public void ForumBoardTests_001_startDiscussionWithTitleAndMessage() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
