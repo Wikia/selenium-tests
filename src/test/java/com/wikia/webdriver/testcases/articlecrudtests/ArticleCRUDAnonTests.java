@@ -33,7 +33,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new ArticlePageObject(driver).editArticleWithQueryParam(wikiURL, articleTitle);
+        new ArticlePageObject(driver).navigateToArticleEditPage(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -59,7 +59,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new ArticlePageObject(driver).editArticleWithQueryParam(wikiURL, randomArticleTitle);
+        new ArticlePageObject(driver).navigateToArticleEditPage(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);

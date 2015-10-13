@@ -71,7 +71,7 @@ public class UserAndRights extends NewTestTemplate {
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         edit =
-        base.editArticleWithQueryParam(wikiURL,
+        base.navigateToArticleEditPage(wikiURL,
                                        PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
     edit.clearContent();
     edit.addContent(String.valueOf(DateTime.now().getMillis()));
