@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Ad
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 import org.openqa.selenium.By;
@@ -458,7 +459,8 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-    getUrl(wikiURL + URLsContent.EMBEDED_MAP_EDITPAGE);
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.editArticleWithQueryParam(wikiURL, URLsContent.EMBEDED_MAP_ARTICLE);
     return new WikiArticleEditMode(driver);
   }
 
