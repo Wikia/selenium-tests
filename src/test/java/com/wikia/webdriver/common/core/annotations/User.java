@@ -16,7 +16,8 @@ public enum User {
       "ci.user.regular12.username", "ci.user.regular12.password"), STAFF(
       "ci.user.wikiastaff.username", "ci.user.wikiastaff.password"), ANONYMOUS("anonymous",
       "anonymous"), REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password"), USER_GO_SEARCH_PREFERRED(
-      "ci.user.goSearchPreferredUser.username", "ci.user.goSearchPreferredUser.password");
+      "ci.user.goSearchPreferredUser.username", "ci.user.goSearchPreferredUser.password"), BLOCKED_USER(
+      "ci.user.tooManyLoginAttempts.username", "ci.user.tooManyLoginAttempts.password");
 
   private final String userName;
 

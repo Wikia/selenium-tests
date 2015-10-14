@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -11,6 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -45,6 +48,28 @@ public class UserAndRights extends NewTestTemplate {
         base.goToArticleDefaultContentEditPage(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base
             .getTimeStamp());
     edit.verifyBlockedUserMessage();
+  }
+
+  @Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods = {
+      "staffCanBlockUser"})
+  @Execute(asUser = User.BLOCKED_USER)
+  public void blockedUserShouldBeAbleToChangeEmail() {
+      final String newEmailAddress = "myAwesomeEmail@email.co.uk";
+
+      EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
+
+      editPrefPage.changeEmail(newEmailAddress);
+      PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
+      prefPage.verifyNotificationMessage();
+
+      editPrefPage.openEmailSection();
+      Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress);
+      editPrefPage.changeEmail(Configuration.getCredentials().email);
+      editPrefPage.clickSaveButton();
+      prefPage.verifyNotificationMessage();
+
+      editPrefPage.openEmailSection();
+      Assertion.assertEquals(editPrefPage.getEmailAdress(), Configuration.getCredentials().email);
   }
 
 
