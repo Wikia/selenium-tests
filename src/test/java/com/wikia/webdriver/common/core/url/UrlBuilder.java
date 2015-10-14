@@ -1,15 +1,10 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class UrlBuilder {
 
@@ -95,9 +90,9 @@ public class UrlBuilder {
     String separator = url.contains("?") ? "&" : "?";
 
     String[] filteredUrl = url.split("#");
-    if(filteredUrl.length>1){
+    if (filteredUrl.length > 1) {
       return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
-    }else {
+    } else {
       return url + separator + qs;
     }
   }
