@@ -210,7 +210,7 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   // CT04
-  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"}, enabled = false)
   public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);

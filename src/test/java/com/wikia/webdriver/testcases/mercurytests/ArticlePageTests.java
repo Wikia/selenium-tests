@@ -126,7 +126,7 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT04
-  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
+  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"}, enabled = false)
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);

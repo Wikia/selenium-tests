@@ -118,7 +118,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   public void ForcedLogin_005_addMedia() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
+    VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
     edit.logInViaModal(credentials.userName, credentials.password);
     edit.verifyUserLoggedIn(credentials.userName);
@@ -133,7 +133,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   public void ForcedLogin_006_addMedia_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
+    VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
     AuthModal authModal = edit.getAuthModal();
     Assert.assertTrue(authModal.isOpened());

@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Ad
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 import org.openqa.selenium.By;
@@ -166,10 +167,10 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
   }
 
-  public void clickOnPin(Integer pinListPosition, boolean ...noFrame) {
-    if(noFrame.length == 0) {
-        wait.forElementVisible(mapFrame);
-        driver.switchTo().frame(mapFrame);
+  public void clickOnPin(Integer pinListPosition, boolean... noFrame) {
+    if (noFrame.length == 0) {
+      wait.forElementVisible(mapFrame);
+      driver.switchTo().frame(mapFrame);
     }
     wait.forElementVisible(pinCollection.get(pinListPosition));
     scrollToElement(pinCollection.get(pinListPosition));
@@ -232,10 +233,10 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("clickOnFilterBoxTitle", "Filter box title was clicked", true);
   }
 
-  public void clickOpenPinTitle(boolean ...noFrame) {
-    if(noFrame.length == 0) {
-        wait.forElementVisible(mapFrame);
-        driver.switchTo().frame(mapFrame);
+  public void clickOpenPinTitle(boolean... noFrame) {
+    if (noFrame.length == 0) {
+      wait.forElementVisible(mapFrame);
+      driver.switchTo().frame(mapFrame);
     }
     poiArticleLink.click();
     driver.switchTo().defaultContent();
@@ -435,7 +436,7 @@ public class InteractiveMapPageObject extends BasePageObject {
           .contains(pinTypeName)
           ) {
         Assertion.assertEquals(
-                createdPinNames.get(createdPinNames.size() - 1).getText(), pinTypeName
+            createdPinNames.get(createdPinNames.size() - 1).getText(), pinTypeName
         );
       } else {
         PageObjectLogging.log(
@@ -458,7 +459,8 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-    getUrl(wikiURL + URLsContent.EMBEDED_MAP_EDITPAGE);
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.navigateToArticleEditPage(wikiURL, URLsContent.EMBEDED_MAP_ARTICLE);
     return new WikiArticleEditMode(driver);
   }
 
@@ -500,10 +502,10 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPontoGetRequest(NetworkTrafficInterceptor networkTab) {
-    if(networkTab.searchRequestUrlInHar("maps.wikia-services.com")) {
-        PageObjectLogging.log("verifyPontoGetRequest", "Ponto request came", true);
+    if (networkTab.searchRequestUrlInHar("maps.wikia-services.com")) {
+      PageObjectLogging.log("verifyPontoGetRequest", "Ponto request came", true);
     } else {
-        throw new NoSuchElementException("Request from ponto did not come");
+      throw new NoSuchElementException("Request from ponto did not come");
     }
   }
 }

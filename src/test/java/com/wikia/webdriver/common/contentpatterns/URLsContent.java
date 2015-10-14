@@ -134,7 +134,7 @@ public class URLsContent {
   public static final String EXTERNAL_URL = "http://www.wikia.com";
 
   // Embed map URL for Interactive Maps
-  public static final String EMBEDED_MAP_EDITPAGE = "wiki/EmbedMap?action=edit";
+  public static final String EMBEDED_MAP_ARTICLE = "EmbedMap";
 
   // Escaped frament URL for Maps
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
