@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
  * Done button may redirect you to main editor home or section items form
  * It allows only category namespace
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class CategoryFormPageObject extends CuratedEditorFormPageObject {
 

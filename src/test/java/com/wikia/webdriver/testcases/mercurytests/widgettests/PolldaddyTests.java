@@ -14,12 +14,15 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"MercuryPolldaddyWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class PolldaddyTests extends NewTestTemplate {
 
-  private static final String POLLDADDY_ARTICLE_NAME = "PolldaddyWidget";
+  private static String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyMercury/OneWidget";
+  private static String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyMercury/MultipleWidgets";
+  private static String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddymercury/IncorrectWidget";
+
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)
@@ -32,7 +35,9 @@ public class PolldaddyTests extends NewTestTemplate {
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -42,9 +47,10 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-        .create()
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    new NavigationSideComponentObject(driver).navigateToArticle(POLLDADDY_ARTICLE_NAME);
+      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+
+    new NavigationSideComponentObject(driver).navigateToArticle(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -54,31 +60,37 @@ public class PolldaddyTests extends NewTestTemplate {
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     new NavigationSideComponentObject(driver)
-        .navigateToArticle(MAPS_ARTICLE_NAME)
-        .navigateToArticle(POLLDADDY_ARTICLE_NAME);
+      .navigateToArticle(MAPS_ARTICLE_NAME)
+      .navigateToArticle(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPolldaddyWidgetTest_004", enabled = false)
+  @Test(groups = "MercuryPolldaddyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPolldaddyWidgetTest_005", enabled = false)
+  @Test(groups = "MercuryPolldaddyWidgetTest_005")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

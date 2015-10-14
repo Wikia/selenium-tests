@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.adstests.mobileadstests;
+package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdTypeDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
@@ -8,10 +8,9 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 /**
- * @author Bogna 'bognix' Knychala
- * @author Sergey Naumov <p/> These are synthetic tests, the related order in DFP is:
- *         https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
- * @ownership AdEngineering
+ * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
+ *
+ * @ownership AdEng
  */
 public class TestAdTypeMobile extends MobileTestTemplate {
 

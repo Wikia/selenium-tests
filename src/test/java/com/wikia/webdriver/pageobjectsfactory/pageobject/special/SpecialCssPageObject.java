@@ -72,11 +72,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
   }
 
   public SpecialCssPageObject  openEditor() {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-        + URLsContent.MEDIAWIKI_CSS, "action=edit"));
+    String url = urlBuilder.getUrlForWiki(Configuration.getWikiName())
+                 + URLsContent.WIKI_DIR + URLsContent.MEDIAWIKI_CSS;
+    getUrl(urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_EDIT));
     return this;
   }
-
 
   public void verifyAceEditorPresence() {
     wait.forElementVisible(aceEditor);

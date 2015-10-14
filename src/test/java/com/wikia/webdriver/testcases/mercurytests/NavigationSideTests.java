@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class NavigationSideTests extends NewTestTemplate {
 
@@ -28,7 +28,8 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST01
-  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"})
+  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"},
+      enabled = false)
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -180,21 +181,11 @@ public class NavigationSideTests extends NewTestTemplate {
 
     searchObject.typeInSearchField(SEARCH_FAIL);
 
-    result = searchObject.isSorryInfoDisplayed();
+    result = !searchObject.isSuggestionListDisplayed();
     PageObjectLogging.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
-        result
-    );
-
-    searchObject.waitMilliseconds(5000, "Wait for message to disappear");
-
-    result = searchObject.isSorryInfoDisplayed();
-    PageObjectLogging.log(
-        "Sorry message",
-        "is displayed",
-        "is hidden",
+        "Search suggestions",
+        "are hidden",
+        "are loaded",
         result
     );
 

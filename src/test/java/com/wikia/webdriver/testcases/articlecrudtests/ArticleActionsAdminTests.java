@@ -14,10 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestoreP
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- * @ownership: Content X-Wing
- */
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
@@ -32,7 +28,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
-    restore.verifyArticleName(articleTitle);
+    restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     article.verifyNotificationMessage();

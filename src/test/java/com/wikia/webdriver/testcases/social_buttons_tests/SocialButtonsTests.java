@@ -11,10 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @author: Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
- */
 public class SocialButtonsTests extends NewTestTemplate {
 
   private Credentials credentials = Configuration.getCredentials();

@@ -14,10 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class FollowVideosTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

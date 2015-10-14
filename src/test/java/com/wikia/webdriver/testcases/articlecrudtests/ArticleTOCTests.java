@@ -15,8 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import org.testng.annotations.Test;
 
 /**
- * @author: Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class ArticleTOCTests extends NewTestTemplate {
 
@@ -64,7 +63,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
     article.verifyTOCpresent();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.verifyContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();

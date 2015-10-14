@@ -14,10 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class FollowBlogTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

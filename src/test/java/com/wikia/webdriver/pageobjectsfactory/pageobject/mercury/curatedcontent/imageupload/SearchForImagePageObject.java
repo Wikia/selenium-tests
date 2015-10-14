@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class SearchForImagePageObject extends BasePageObject {
 

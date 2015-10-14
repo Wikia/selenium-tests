@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Bartosz 'V.' Bentkowski
  *
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class GameStarLogo extends NewTestTemplate {
 

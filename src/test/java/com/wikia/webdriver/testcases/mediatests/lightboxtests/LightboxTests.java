@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -23,31 +21,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
 
+import org.testng.annotations.Test;
+
 /**
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from
- *         Special:UnusedVideos page 3. Open lightbox from Special:UncategorizedFiles page 4. Open
- *         lightbox from Special:MostLinkedFiles page 5. Open lightbox from article image and verify
- *         social buttons 6. Open lightbox from article image and verify carousel 7. Open lightbox
- *         from Special:Videos and verify video
- * 
- *         8. Open lightbox from Special:Videos, verify title url and verify file page (logged-in
- *         user)
- * 
- *         9. Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
- *         user)
- * @author Saipetch Kongkatong
- * 
- *         1. Open lightbox from latest photo, 3. Open lightbox from Special:UnusedFiles page 4.
- *         Open lightbox from Special:UnusedVideos page 5. Open lightbox from
- *         Special:UncategorizedFiles page 6. Open lightbox from Special:MostLinkedFiles page 7.
- *         Open lightbox from article image and verify social buttons 8. Open lightbox from article
- *         image and verify carousel 9. Open lightbox from Special:Videos and verify video 10. Open
- *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
- *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
- *         user)
- *
- * @ownership Content X-Wing
+ * 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from Special:UnusedVideos page 3.
+ * Open lightbox from Special:UncategorizedFiles page 4. Open lightbox from Special:MostLinkedFiles
+ * page 5. Open lightbox from article image and verify social buttons 6. Open lightbox from article
+ * image and verify carousel 7. Open lightbox from Special:Videos and verify video 8. Open lightbox
+ * from Special:Videos, verify title url and verify file page (logged-in user) 9. Open lightbox from
+ * Special:NewFiles, verify title url and verify file page (logged-in user)
  */
 public class LightboxTests extends NewTestTemplate {
 
@@ -91,7 +73,7 @@ public class LightboxTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);

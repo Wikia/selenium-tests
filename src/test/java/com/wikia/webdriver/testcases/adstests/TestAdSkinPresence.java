@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -13,14 +11,9 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAdSkinPresence extends TemplateNoFirstLoad {
-
-  public TestAdSkinPresence() {
-    super();
-    urlBuilder = new UrlBuilder(Configuration.getEnv());
-  }
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

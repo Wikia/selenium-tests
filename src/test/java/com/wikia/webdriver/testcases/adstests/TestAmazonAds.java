@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEng
  */
 public class TestAmazonAds extends TemplateNoFirstLoad {
 
@@ -37,7 +37,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
 
     amazonAds.verifyAmazonScriptIncluded();
-    // TODO Add verification that a call to Amazon is issued when bug with browsermob-proxy will be fixed
+
     if (debugMode) {
       amazonAds.verifyGPTParams();
       amazonAds.verifyAdsFromAmazonPresent();
@@ -50,12 +50,8 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
           "MercuryAmazonAds"
       })
   public void AmazonAds_debugMode() {
-    String
-        testedPage =
-        urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon_amzn_debug_mode=1");
-    // TODO: go back to Amazon article instead of SyntheticTests/Amazon_amzn_debug_mode=1
-    // and uncomment line below once Mercury Team fixed HG-793
-    //testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
         .clickAmazonArticleLink("AmazonFirstArticle")
@@ -69,12 +65,8 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
           "MercuryAmazonAds"
       })
   public void AmazonAds_debugModeOnConsecutivePageViews() {
-    String
-        testedPage =
-        urlBuilder.getUrlForPath("adtest", "SyntheticTests/Amazon_amzn_debug_mode=1");
-    // TODO: go back to Amazon article instead of SyntheticTests/Amazon_amzn_debug_mode=1
-    // and uncomment line below once Mercury Team fixed HG-793
-    // testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
         .clickAmazonArticleLink("AmazonFirstArticle")

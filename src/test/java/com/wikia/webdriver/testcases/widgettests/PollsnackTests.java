@@ -9,17 +9,23 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetP
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"PollsnackWidgetTests", "WidgetTests"})
 public class PollsnackTests extends NewTestTemplate {
+
+  private static String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "PollsnackOasis/OneWidget";
+  private static String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollsnackOasis/MultipleWidgets";
+  private static String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackOasis/IncorrectWidget";
 
   @Test(groups = "PollsnackWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_001_isLoaded() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL,POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -28,7 +34,9 @@ public class PollsnackTests extends NewTestTemplate {
   public void PollsnackWidgetTest_002_areLoaded() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL,POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -38,7 +46,9 @@ public class PollsnackTests extends NewTestTemplate {
   public void PollsnackWidgetTest_003_isErrorPresent() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

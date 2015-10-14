@@ -26,12 +26,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"MercuryAllTagsWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class AllTagsTests extends NewTestTemplate {
 
-  private static final String ARTICLE_NAME = "AllTagsWidget";
+  private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
   private static final String MAPS_ARTICLE_NAME = "Map";
   private static List<WidgetPageObject> widgets;
 
@@ -62,7 +62,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -73,7 +73,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     new ArticlePageObject(driver)
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
     new NavigationSideComponentObject(driver).navigateToArticle(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
@@ -84,7 +84,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    new ArticlePageObject(driver).openMercuryArticleByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)

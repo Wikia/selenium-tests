@@ -17,39 +17,41 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class CropImageTests extends NewTestTemplate {
 
-    public static final String SEARCH_IMAGE_QUERY = "U";
+  public static final String SEARCH_IMAGE_QUERY = "U";
 
-    @Test(groups = "CropImageTest_001")
-    @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-        asUser = User.STAFF)
-    public void CropImageTest_001_cropOptionInModal() {
-      CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-      curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+  @Test(groups = "CropImageTest_001")
+  @Execute(
+      onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+      asUser = User.STAFF)
+  public void CropImageTest_001_cropOptionInModal() {
+    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-      curatedMainPagePageObject.isArticleTitleVisible();
+    curatedMainPagePageObject.isArticleTitleVisible();
 
-      curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-      EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-      ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
-      UploadImageModalComponentObject imageModal = itemFormPageObject.clickOnImage();
+    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
+    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
+    UploadImageModalComponentObject imageModal = itemFormPageObject.clickOnImage();
 
-      Assertion.assertFalse(imageModal.isCropOptionEnabled(),
-                            "Crop option enabled - Should be disabled");
+    Assertion.assertFalse(imageModal.isCropOptionEnabled(),
+                          "Crop option enabled - Should be disabled");
 
-      SearchForImagePageObject search = imageModal.clickSearchForImageButton();
-      search.type(SEARCH_IMAGE_QUERY);
-      CroppingToolPageObject croppingTool = search.clickOnImage(0);
-      croppingTool.clickDoneButton();
-      itemFormPageObject.clickOnImage();
+    SearchForImagePageObject search = imageModal.clickSearchForImageButton();
+    search.type(SEARCH_IMAGE_QUERY);
+    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    croppingTool.clickDoneButton();
+    itemFormPageObject.clickOnImage();
 
-      Assertion
-          .assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
+    Assertion
+        .assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
 
-      imageModal.selectCrop();
-      Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");
-    }
+    imageModal.selectCrop();
+    Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");
+  }
+
 }

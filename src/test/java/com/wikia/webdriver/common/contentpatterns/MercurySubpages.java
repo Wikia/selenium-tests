@@ -16,6 +16,8 @@ public class MercurySubpages {
   public static final String POLL_DADDY = "PollDaddy";
   public static final String QUESTION_MARK = "Question?mark?question";
   public static final String COLON = "Colon:colon:colon";
+  public static final String INFOBOX_1 = "Infobox1";
+  public static final String INFOBOX_2 = "Infobox2";
 
   /**
    * Legend:
@@ -27,6 +29,10 @@ public class MercurySubpages {
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "Mercury_CC_Wikia";
+  public static final String CC_REDIRECT_SOURCE_1 = "RedirectSource1";
+  public static final String CC_REDIRECT_SOURCE_2 = "RedirectSource2";
+  public static final String CC_REDIRECT_DESTINATION = "RedirectDestination1";
+  public static final String CC_NOT_EXISTING_REDIRECT_DESTINATION = "RedirectDestination2";
 
   // Categories in mercurycc.wikia.com
   public static final String CC_CATEGORY_ARTICLES = "main/category/Articles";

@@ -32,10 +32,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"ArticleFeaturesCRUDUser"})
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
@@ -101,7 +97,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
     ArticlePageObject article = new ArticlePageObject(driver).open("addModifySlideshow");
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -114,7 +110,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle();
     article.verifySlideshow();
 
-    article.editArticleInRTEUsingDropdown();
+    article.navigateToArticleEditPage();
     visualEditMode.modifyComponent(Components.SLIDESHOW);
     slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
@@ -131,7 +127,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_004_addDeleteSlideshow() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -144,7 +140,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle();
     article.verifySlideshow();
 
-    article.editArticleInRTEUsingDropdown();
+    article.navigateToArticleEditPage();
     visualEditMode.removeComponent(Components.SLIDESHOW);
     visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
   }
@@ -153,7 +149,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_005_addModifySlider() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
@@ -166,7 +162,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle();
     article.verifySlider();
 
-    article.editArticleInRTEUsingDropdown();
+    article.navigateToArticleEditPage();
     visualEditMode.modifyComponent(Components.SLIDER);
     sliderBuilder.selectMenuPosition(MenuPositions.HORIZONTAL);
     sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -183,7 +179,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ArticleFeaturesCRUDUser_006_addDeleteSlider() {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
@@ -196,7 +192,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle();
     article.verifySlider();
 
-    article.editArticleInRTEUsingDropdown();
+    article.navigateToArticleEditPage();
     visualEditMode.removeComponent(Components.SLIDER);
     visualEditMode.verifyComponentRemoved(Components.SLIDER);
   }
@@ -207,7 +203,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject(driver).open();
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
@@ -217,7 +213,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyVideo();
     visualEditMode.submitArticle();
     article.verifyVideo();
-    article.editArticleInRTEUsingDropdown();
+    article.navigateToArticleEditPage();
     visualEditMode.modifyComponent(Components.VIDEO);
     vetOptions.setCaption(PageContent.CAPTION2);
     vetOptions.update();
@@ -227,10 +223,11 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_008", "Smoke5", "Media"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    new ArticleContent().clear();
+
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
@@ -238,7 +235,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();
-    visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyVideo();
     article.editArticleInRTEUsingDropdown();
     visualEditMode.removeComponent(Components.VIDEO);
@@ -290,7 +287,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                                                       int cellspacing, int cellpadding,
                                                       Alignment alignment) {
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
     addTable.verifyAddTableLightbox();
@@ -330,7 +327,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableBorder(border);
     article.verifyTableCellspacing(cellspacing);
     article.verifyTableCellpadding(cellpadding);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickPropertiesTableButton();
     TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
     addTable.typeBorderSize(border + additionalPropertyValue);
@@ -357,7 +354,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                                                    alignment);
     sourceEditMode.addContentInSourceMode(table);
     sourceEditMode.submitArticle();
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickDeleteTableButton();
     visualEditMode.submitArticle();
     article.verifyTableRemoved();

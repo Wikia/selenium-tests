@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class ThemeDesigner extends NewTestTemplate {
 
@@ -83,8 +83,8 @@ public class ThemeDesigner extends NewTestTemplate {
   }
 
   /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1194 check that color choice dialog closes on
-   * click outside of the dialog
+   * https://wikia-inc.atlassian.net/browse/DAR-1194
+   * color choice dialog closes on click outside of the dialog
    */
   @Test(groups = {"ThemeDesigner007", "ThemeDesigner"})
   @Execute(asUser = User.STAFF)

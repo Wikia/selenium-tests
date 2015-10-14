@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class PollsnackWidgetPageObject extends WidgetPageObject {
 
@@ -18,7 +18,6 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "pollsnack";
-  private static final String ARTICLE_NAME = "PollsnackWidget";
   private static final String[] TAGS = {
       "<pollsnack hash=\"q7kiw9kz\"/>",
       "<pollsnack hash=\"q7kiw9kz\"/>",
@@ -29,10 +28,6 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
 
   public PollsnackWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

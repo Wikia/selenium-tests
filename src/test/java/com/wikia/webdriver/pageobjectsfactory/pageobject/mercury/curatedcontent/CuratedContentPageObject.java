@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * This class represents all the levels below Curated Main Page
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class CuratedContentPageObject extends BasePageObject {
 
@@ -39,8 +39,6 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement imageItemIcon;
   @FindBy(css = "#namespace-video")
   private WebElement videoItemIcon;
-  @FindBy(css = ".alert-notification")
-  private WebElement alertNotification;
 
   private enum Labels {
     ARTICLE("Article wrapper"),
@@ -50,8 +48,7 @@ public class CuratedContentPageObject extends BasePageObject {
     SECTION_ITEM("Item in a section"),
     LOAD_MORE_BUTTON("Load more button"),
     NUMBER_OF_ITEMS("Number of items in curated content section"),
-    ITEM_LABELS("Curated Content items labels"),
-    ALERT_NOTIFICATION("Alert notification");
+    ITEM_LABELS("Curated Content items labels");
 
     private String name;
 
@@ -98,16 +95,6 @@ public class CuratedContentPageObject extends BasePageObject {
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
     waitForLoadingSpinnerToFinish();
-    return this;
-  }
-
-  public CuratedContentPageObject isAlertNotificationVisible() {
-    PageObjectLogging.log(
-        Labels.ALERT_NOTIFICATION.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        isElementVisible(alertNotification)
-    );
     return this;
   }
 

@@ -15,7 +15,7 @@ import java.util.List;
  * This class represents the main editor view on mercury.
  * The editor home is responsible for adding top level curated content items
  *
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class EditorHomePageObject extends BasePageObject {
 

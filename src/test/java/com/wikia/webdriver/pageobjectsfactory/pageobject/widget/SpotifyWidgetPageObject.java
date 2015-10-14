@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class SpotifyWidgetPageObject extends WidgetPageObject {
 
@@ -18,7 +18,6 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "spotify";
-  private static final String ARTICLE_NAME = "spotifyWidget";
   private static final String[] TAGS = {
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
       "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
@@ -29,10 +28,6 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   public SpotifyWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

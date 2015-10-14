@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class NavigationSideComponentObject extends BasePageObject {
 
@@ -40,8 +40,6 @@ public class NavigationSideComponentObject extends BasePageObject {
   private WebElement searchButton;
   @FindBy(css = "nav.side-nav")
   private WebElement menuView;
-  @FindBy(xpath = "//span[contains(.,'Sorry, we could')]")
-  private WebElement sorrySpan;
   @FindBy(css = "div.side-nav-toggle")
   private WebElement openListIcon;
 
@@ -94,16 +92,6 @@ public class NavigationSideComponentObject extends BasePageObject {
       wait.forElementVisible(searchSuggestion, 5, 1000);
     } catch (TimeoutException | NoSuchElementException e) {
       PageObjectLogging.log("Suggestion list not displayed", e, true);
-      return false;
-    }
-    return true;
-  }
-
-  public boolean isSorryInfoDisplayed() {
-    try {
-      wait.forElementVisible(sorrySpan, 5, 1000);
-    } catch (TimeoutException | NoSuchElementException e) {
-      PageObjectLogging.log("Sorry info not displayed", e, true);
       return false;
     }
     return true;

@@ -13,18 +13,15 @@ import java.util.List;
 
 import javax.json.JsonObject;
 
-/**
- * @ownership Content X-Wing
- */
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "QAART-555")
   @Test(groups = {"ClickTracking", "ClickTrackingArticleEditModeTests",
-      "ClickTrackingArticleEditMode_001"}, enabled = false)
+                  "ClickTrackingArticleEditMode_001"}, enabled = false)
   public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
 
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.verifyContentLoaded();
     visualEditMode.startTracking();
     visualEditMode.previewArticle();

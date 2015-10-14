@@ -8,17 +8,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing
- */
 public class VideosPageTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
-   *
-   * @author Armon Rabiyan
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
   public void VideosPageTest_001() {

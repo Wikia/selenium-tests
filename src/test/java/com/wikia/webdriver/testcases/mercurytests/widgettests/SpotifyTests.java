@@ -15,12 +15,14 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"MercurySpotifyWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class SpotifyTests extends NewTestTemplate {
 
-  private static final String SPOTIFY_ARTICLE_NAME = "SpotifyWidget";
+  private static String SPOTIFY_ONE_WIDGET_ARTICLE_NAME = "SpotifyMercury/OneWidget";
+  private static String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME = "SpotifyMercury/MultipleWidgets";
+  private static String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME = "SpotifyMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
   @BeforeMethod(alwaysRun = true)
@@ -35,7 +37,9 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+        .create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -45,9 +49,10 @@ public class SpotifyTests extends NewTestTemplate {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
     widget
-        .create()
-        .openMercuryArticleByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-    new NavigationSideComponentObject(driver).navigateToArticle(SPOTIFY_ARTICLE_NAME);
+        .create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+
+    new NavigationSideComponentObject(driver).navigateToArticle(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,31 +62,37 @@ public class SpotifyTests extends NewTestTemplate {
   public void MercurySpotifyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+        .create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
     new NavigationSideComponentObject(driver)
         .navigateToArticle(MAPS_ARTICLE_NAME)
-        .navigateToArticle(SPOTIFY_ARTICLE_NAME);
+        .navigateToArticle(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercurySpotifyWidgetTest_004", enabled = false)
+  @Test(groups = "MercurySpotifyWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void MercurySpotifyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+        .createMultiple(SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercurySpotifyWidgetTest_005", enabled = false)
+  @Test(groups = "MercurySpotifyWidgetTest_005")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void MercurySpotifyWidgetTest_005_isErrorPresent() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+        .createIncorrect(SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

@@ -380,7 +380,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.47.1'
+    def webdriverVersion = '2.48.2'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
@@ -410,6 +410,7 @@ dependencies {
     testCompile 'joda-time:joda-time:2.7'
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
     testCompile 'net.lightbody.bmp:browsermob-core:2.1.0-beta-2'
+    testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
 }
 
 

@@ -9,17 +9,23 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObje
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"VKWidgetTests", "WidgetTests"})
 public class VKTests extends NewTestTemplate {
+
+  private static String VK_ONE_WIDGET_ARTICLE_NAME = "VKOasis/OneWidget";
+  private static String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKOasis/MultipleWidgets";
+  private static String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKOasis/IncorrectWidget";
 
   @Test(groups = "VKWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void VKWidgetTest_001_isLoaded() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(VK_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -29,7 +35,9 @@ public class VKTests extends NewTestTemplate {
   public void VKWidgetTest_002_areLoaded() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(VK_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -44,7 +52,9 @@ public class VKTests extends NewTestTemplate {
   public void VKWidgetTest_003_isErrorPresent() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(VK_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

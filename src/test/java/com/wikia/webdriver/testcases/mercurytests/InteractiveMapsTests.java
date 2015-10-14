@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class InteractiveMapsTests extends NewTestTemplate {
 
@@ -33,7 +33,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
 
-    maps.clickViewMapButton();
+    maps.clickMapThumbnail();
 
     Assertion.assertTrue(
         maps.isMapModalVisible(),
@@ -92,7 +92,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
-    maps.clickViewMapButton();
+    maps.clickMapThumbnail();
     maps.switchToMapFrame();
 
     Assertion.assertFalse(
@@ -220,7 +220,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
-    maps.clickViewMapButton();
+    maps.clickMapThumbnail();
     maps.switchToMapFrame();
     File beforeScrolling = new Shooter().capturePage(driver);
 

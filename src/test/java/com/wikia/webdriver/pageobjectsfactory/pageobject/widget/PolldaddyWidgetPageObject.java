@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
@@ -18,7 +18,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   By polldaddyBody = By.cssSelector("*");
 
   private static final String TAG_NAME = "pollydaddy";
-  private static final String ARTICLE_NAME = "PolldaddyWidget";
   private static final String[] TAGS = {
       "<polldaddy id=\"8956579\"/>",
       "<polldaddy id=\"9022741\"/>"
@@ -29,10 +28,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
   public PolldaddyWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {
@@ -70,13 +65,13 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isWidgetVisible(int widgetIndex) {
-    boolean result = true;
+    boolean result;
     if (polldaddyDivList.isEmpty()) {
       result = false;
     } else {
       WebElement polldaddyWidget = polldaddyDivList.get(widgetIndex);
       if (!isElementVisible(polldaddyWidget)) {
-        return false;
+        result = false;
       } else {
         result = isElementVisible(polldaddyWidget.findElement(polldaddyBody));
       }

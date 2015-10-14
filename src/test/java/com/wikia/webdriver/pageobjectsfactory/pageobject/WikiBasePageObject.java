@@ -189,7 +189,7 @@ public class WikiBasePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public AuthModal getNewAuthModal(){
+  public AuthModal getAuthModal(){
     return new AuthModal(driver);
   }
 
@@ -502,12 +502,12 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject goToCurrentArticleEditPage() {
+  public VisualEditModePageObject navigateToArticleEditPage() {
     getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
     return new VisualEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject navigateToArticleEditPageCK(String wikiURL, String article) {
+  public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
     return new VisualEditModePageObject(driver);
@@ -898,9 +898,10 @@ public class WikiBasePageObject extends BasePageObject {
     return (String) jsActions.execute(WikiaGlobalVariables.WG_PAGE_NAME);
   }
 
-  public void verifyArticleName(String targetText) {
+  public void verifyArticleNameInWgPageName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
-    PageObjectLogging.log("verifyArticleName", "The article shows " + targetText, true);
+    PageObjectLogging.log("verifyArticleNameInWgPageName",
+                          "The wgPageName variable contains article name" + targetText, true);
   }
 
   public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {

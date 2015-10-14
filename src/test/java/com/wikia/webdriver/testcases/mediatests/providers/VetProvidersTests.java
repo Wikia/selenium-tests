@@ -12,10 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VetProvidersTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
@@ -24,7 +20,7 @@ public class VetProvidersTests extends NewTestTemplate {
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     PageObjectLogging.log("", videoUrl, true);
     ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);

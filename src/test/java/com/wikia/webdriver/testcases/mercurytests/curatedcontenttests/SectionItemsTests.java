@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "Mercury"})
+@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "MercuryCuratedMainPageTests", "Mercury"})
 public class SectionItemsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)

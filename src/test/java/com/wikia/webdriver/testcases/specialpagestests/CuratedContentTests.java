@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedC
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content
+ * @ownership X-Wing Wikia
  */
 public class CuratedContentTests extends NewTestTemplate {
 
@@ -22,7 +21,6 @@ public class CuratedContentTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @CreationTicket(ticketID = "CONCF-767")
   @Test(groups = {"CuratedContent001", "CuratedContent"})
   public void curatedContent001_saveWithoutImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -35,7 +33,6 @@ public class CuratedContentTests extends NewTestTemplate {
     cc.verifySaveNotClickable();
   }
 
-  @CreationTicket(ticketID = "CONCF-767")
   @Test(groups = {"CuratedContent002", "CuratedContent"})
   public void curatedContent002_saveWithImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

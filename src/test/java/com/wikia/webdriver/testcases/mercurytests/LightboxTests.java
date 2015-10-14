@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class LightboxTests extends NewTestTemplate {
 

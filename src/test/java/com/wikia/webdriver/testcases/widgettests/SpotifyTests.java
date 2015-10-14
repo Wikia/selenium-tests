@@ -9,17 +9,23 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPag
 import org.testng.annotations.Test;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 @Test(groups = {"SpotifyWidgetTests", "WidgetTests"})
 public class SpotifyTests extends NewTestTemplate {
+
+  private static String SPOTIFY_ONE_WIDGET_ARTICLE_NAME = "SpotifyOasis/OneWidget";
+  private static String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME = "SpotifyOasis/MultipleWidgets";
+  private static String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME = "SpotifyOasis/IncorrectWidget";
 
   @Test(groups = "SpotifyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void SpotifyWidgetTest_001_isLoaded() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.create().navigate(wikiURL);
+    widget
+      .create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -28,7 +34,9 @@ public class SpotifyTests extends NewTestTemplate {
   public void SpotifyWidgetTest_002_areLoaded() {
     SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.createMultiple().navigate(wikiURL);
+    widget
+      .createMultiple(SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -38,7 +46,9 @@ public class SpotifyTests extends NewTestTemplate {
   public void SpotifyWidgetTest_003_isErrorPresent() {
   SpotifyWidgetPageObject widget = new SpotifyWidgetPageObject(driver);
 
-    widget.createIncorrect().navigate(wikiURL);
+    widget
+      .createIncorrect(SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME)
+      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
 }

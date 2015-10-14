@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * @ownership: Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
@@ -19,7 +19,6 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "twitter";
-  private static final String ARTICLE_NAME = "TwitterWidget";
   private static final String[] TAGS = {
       //twitter.com/Wikia
       "<twitter widget-id=\"345311016592228352\" />",
@@ -36,10 +35,6 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
 
   public TwitterWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

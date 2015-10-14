@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAlertComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
@@ -16,9 +17,10 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership Content X-Wing
+ * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
+@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests",
+                "MercuryCuratedMainPageTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 
   private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
@@ -450,17 +452,20 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   // CCT12
-  @Test(groups = "MercuryCuratedMainPageTest_006", enabled = false)
+  @Test(groups = "MercuryCuratedMainPageTest_006")
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
+    MercuryAlertComponentObject mercuryAlert = new MercuryAlertComponentObject(
+        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
+
     String oldUrl = driver.getCurrentUrl();
-    ccp
-        .clickOnCuratedContentElementByIndex(2)
-        .isAlertNotificationVisible()
-        .waitForLoadingSpinnerToFinish();
+    ccp.clickOnCuratedContentElementByIndex(2);
+    Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
+
+    ccp.waitForLoadingSpinnerToFinish();
     Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }
 }
