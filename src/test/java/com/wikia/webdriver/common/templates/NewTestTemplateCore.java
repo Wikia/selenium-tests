@@ -102,6 +102,7 @@ public class NewTestTemplateCore {
       try {
         driver.quit();
       } catch (Error e) {
+        driver.quit();
       }
     }
   }

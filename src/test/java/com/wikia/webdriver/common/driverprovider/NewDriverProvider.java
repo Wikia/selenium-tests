@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -238,6 +240,7 @@ public class NewDriverProvider {
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
       chromeOptions.addArguments("process-per-site");
+      chromeOptions.addArguments("start-maximized");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

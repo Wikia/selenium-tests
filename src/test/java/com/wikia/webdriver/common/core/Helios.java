@@ -1,8 +1,9 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
@@ -12,24 +13,22 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 /**
  * Created by Ludwik on 2015-08-05.
  */
 public class Helios {
 
-  private Helios() {
-  }
+  private Helios() {}
 
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
@@ -41,7 +40,7 @@ public class Helios {
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    CloseableHttpClient httpClient = HttpClients.createDefault();
+    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
 
     HttpPost httpPost = new HttpPost(heliosBaseUrl);
     List<NameValuePair> nvps = new ArrayList<>();
@@ -72,8 +71,8 @@ public class Helios {
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", "PLEASE CHECK IF YOUR VPN IS ENABLED" +
-                                            ExceptionUtils.getStackTrace(e), false);
+      PageObjectLogging.log("IO EXCEPTION",
+          "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e), false);
     }
 
     return token;
