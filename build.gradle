@@ -380,7 +380,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.48.1'
+    def webdriverVersion = '2.48.2'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
