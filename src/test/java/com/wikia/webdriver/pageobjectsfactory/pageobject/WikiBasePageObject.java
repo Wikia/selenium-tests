@@ -94,9 +94,9 @@ public class WikiBasePageObject extends BasePageObject {
       ".AccountNavigation a[title*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY +
-                                                        "," + LOGGED_IN_USER_SELECTOR_OASIS +
-                                                        "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
+  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + "," +
+                                                        LOGGED_IN_USER_SELECTOR_OASIS + "," +
+                                                        LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -757,7 +757,6 @@ public class WikiBasePageObject extends BasePageObject {
       driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
           + DateTime.now().getMillis()));
     }
-
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
                                          + token, true);
