@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -56,6 +57,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
@@ -96,6 +98,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
@@ -155,6 +158,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
