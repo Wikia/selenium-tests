@@ -211,7 +211,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleTestLoggedOut"}
+      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedOut"}
   )
   public void HtmlTitleTestLoggedOut(String wiki, String path, String expectedTitle) {
     wikiURL = urlBuilder.getUrlForPath(wiki, path);
@@ -225,7 +225,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleTestLoggedIn"}
+      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedIn"}
   )
   public void HtmlTitleTestLoggedIn(String wiki, String path, String expectedTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
