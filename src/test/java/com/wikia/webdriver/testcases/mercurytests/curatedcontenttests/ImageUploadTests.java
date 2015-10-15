@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @ownership X-Wing
+ * @ownership Content X-Wing Wikia
  */
 public class ImageUploadTests extends NewTestTemplate {
 

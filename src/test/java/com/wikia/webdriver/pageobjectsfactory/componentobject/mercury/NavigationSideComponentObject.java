@@ -20,28 +20,37 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   @FindBy(css = ".ember-text-field")
   private WebElement searchInput;
+
   @FindBy(css = ".cancel")
   private WebElement cancelSearchCaption;
+
   @FindBy(css = ".local-wikia-search a")
   private WebElement searchSuggestion;
-  @FindBy(css = ".local-nav-menu > li")
+
+  @FindBy(xpath = "//ul[contains(@class, \"local-nav-menu\")]/li/*")
   private List<WebElement> navList;
-  @FindBy(css = ".back")
+
+  @FindBy(xpath = "//ul[contains(@class, \"local-nav-menu\")]/li/*[text()[contains(., \"Back\")]]")
   private WebElement backChevron;
-  @FindBy(css = ".random-article-link")
+
+  @FindBy(xpath =
+      "//ul[contains(@class, \"local-nav-menu\")]/li/*[text()[contains(., \"Random Page\")]]")
   private WebElement randomPageButton;
+
   @FindBy(css = ".overlay")
   private WebElement overlay;
+
   @FindBy(css = ".local-wikia-search")
   private WebElement resultField;
+
   @FindBy(css = ".local-nav-menu")
   private WebElement menuField;
+
   @FindBy(css = ".nav")
   private WebElement searchButton;
+
   @FindBy(css = "nav.side-nav")
   private WebElement menuView;
-  @FindBy(css = "div.side-nav-toggle")
-  private WebElement openListIcon;
 
   public NavigationSideComponentObject(WebDriver driver) {
     super(driver);

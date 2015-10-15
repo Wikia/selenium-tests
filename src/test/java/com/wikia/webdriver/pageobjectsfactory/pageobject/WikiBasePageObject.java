@@ -29,7 +29,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
@@ -190,7 +190,7 @@ public class WikiBasePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public AuthModal getAuthModal(){
+  public AuthModal getAuthModal() {
     return new AuthModal(driver);
   }
 
@@ -367,9 +367,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialUploadPageObject(driver);
   }
 
-  public SpecialCreatePagePageObject openSpecialCreateBlogPage(String wikiURL) {
+  public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_BLOGPAGE);
-    return new SpecialCreatePagePageObject(driver);
+    return new SpecialCreatePage(driver);
   }
 
   public SpecialWikiActivityPageObject openSpecialWikiActivity() {
@@ -551,7 +551,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 
   public void verifyUserLoggedIn(final String userName) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
@@ -630,16 +630,11 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyPermissionsErrorsPresent() {
     wait.forElementVisible(premissionErrorMessage);
     PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected", true,
-        driver);
+                          driver);
   }
 
   public void verifyUrl(String url) {
     waitForStringInURL(url);
-  }
-
-  public SpecialCreatePagePageObject openSpecialCreatePage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_PAGE);
-    return new SpecialCreatePagePageObject(driver);
   }
 
   public void verifyLoginReguiredMessage() {
@@ -750,6 +745,7 @@ public class WikiBasePageObject extends BasePageObject {
 
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
+    jsActions.execute("window.stop()");
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {

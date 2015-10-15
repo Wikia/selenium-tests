@@ -93,7 +93,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    articlePage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     articlePage.clickTopContributor(0);
 
@@ -126,10 +126,10 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   // APT04
-  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"}, enabled = false)
+  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    articlePage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     Assertion.assertTrue(
         articlePage.isChevronCollapsed(),
@@ -153,6 +153,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     articlePage.clickOnCategoryListElement(0);
+    articlePage.waitForWikiaMobileToBeLoaded();
 
     result = articlePage.isUrlContainingCategoryPage();
     PageObjectLogging.log(
@@ -267,8 +268,8 @@ public class ArticlePageTests extends NewTestTemplate {
     PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
 
     nav.clickSearchButton();
-    nav.clickNavListElement(4);
-    nav.clickNavListElement(7);
+    nav.clickNavListElement(3);
+    nav.clickNavListElement(6);
     article.waitForLoadingOverlayToDisappear();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
@@ -288,8 +289,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     nav.clickSearchButton();
-    nav.clickNavListElement(4);
-    nav.clickNavListElement(6);
+    nav.clickNavListElement(3);
+    nav.clickNavListElement(5);
     article.waitForLoadingOverlayToDisappear();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);

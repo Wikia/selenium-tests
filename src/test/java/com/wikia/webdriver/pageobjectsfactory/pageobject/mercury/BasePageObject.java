@@ -23,6 +23,7 @@ import java.util.List;
 public class BasePageObject extends WikiBasePageObject {
 
   private static final By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
+  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   public BasePageObject(WebDriver driver) {
     super(driver);
@@ -82,6 +83,10 @@ public class BasePageObject extends WikiBasePageObject {
     } catch (InterruptedException e) {
       PageObjectLogging.log(reason, e, false);
     }
+  }
+
+  public void waitForWikiaMobileToBeLoaded() {
+    wait.forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
   }
 
   /**

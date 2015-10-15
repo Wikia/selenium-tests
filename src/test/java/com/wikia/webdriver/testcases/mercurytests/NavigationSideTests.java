@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing Wikia
  */
+@Test(groups = {"MercuryNavigationSideTests", "Mercury"})
 public class NavigationSideTests extends NewTestTemplate {
 
   private final static String SEARCH_PASS = "Gallery";
@@ -28,11 +29,10 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST01
-  @Test(groups = {"MercuryNavigationSideTest_001", "MercuryNavigationSideTests", "Mercury"},
-      enabled = false)
+  @Test(groups = "MercuryNavigationSideTest_001")
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
-    nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    nav.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     Assertion.assertFalse(
         nav.isNavMenuVisible(),
@@ -139,10 +139,10 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST02
-  @Test(groups = {"MercuryNavigationSideTest_002", "MercuryNavigationSideTests", "Mercury"})
+  @Test(groups = "MercuryNavigationSideTest_002")
   public void MercuryNavigationSideTest_002_SearchInvalidSuggestion_Cancel() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
-    searchObject.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    searchObject.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -209,10 +209,10 @@ public class NavigationSideTests extends NewTestTemplate {
   }
 
   // NST03
-  @Test(groups = {"MercuryNavigationSideTest_003", "MercuryNavigationSideTests", "Mercury"})
+  @Test(groups = "MercuryNavigationSideTest_003")
   public void MercuryNavigationSideTest_003_ValidSuggestionRedirect() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
-    searchObject.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    searchObject.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     searchObject.clickSearchButton();
     searchObject.clickSearchField();
@@ -245,11 +245,10 @@ public class NavigationSideTests extends NewTestTemplate {
   // NST04
   // TODO: check article titles instead of url, check that receive at least 3 different articles in 10 attempts
   @RelatedIssue(issueID = "HG-686")
-  @Test(groups = {"MercuryNavigationSideTest_004", "MercuryNavigationSideTests",
-                  "Mercury"}, enabled = false)
+  @Test(groups = "MercuryNavigationSideTest_001", enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
-    nav.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    nav.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     nav.clickSearchButton();
     String oldUrl = driver.getCurrentUrl();

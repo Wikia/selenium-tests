@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -12,16 +14,26 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * @author Bogna 'bognix' Knychala
  */
-public class SpecialCreatePagePageObject extends SpecialPageObject {
+public class SpecialCreatePage extends SpecialPageObject {
 
   @FindBy(css = "#HiddenFieldsDialog input[name='wpTitle']")
   private WebElement titleInput;
   @FindBy(css = "#HiddenFieldsDialog #ok")
   private WebElement submitTitleInput;
 
-  public SpecialCreatePagePageObject(WebDriver driver) {
+  public SpecialCreatePage(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
+  }
+
+
+  public SpecialCreatePage open(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_PAGE);
+    return this;
+  }
+
+  public SpecialCreatePage open() {
+    return open(urlBuilder.getUrlForWiki());
   }
 
   public VisualEditModePageObject populateTitleField(String title) {
