@@ -1,5 +1,31 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -29,7 +55,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
@@ -62,32 +88,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedV
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -187,7 +187,7 @@ public class WikiBasePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public AuthModal getAuthModal(){
+  public AuthModal getAuthModal() {
     return new AuthModal(driver);
   }
 
@@ -364,9 +364,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialUploadPageObject(driver);
   }
 
-  public SpecialCreatePagePageObject openSpecialCreateBlogPage(String wikiURL) {
+  public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_BLOGPAGE);
-    return new SpecialCreatePagePageObject(driver);
+    return new SpecialCreatePage(driver);
   }
 
   public SpecialWikiActivityPageObject openSpecialWikiActivity() {
@@ -548,7 +548,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 
   public void verifyUserLoggedIn(final String userName) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
@@ -650,11 +650,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyUrl(String url) {
     waitForStringInURL(url);
-  }
-
-  public SpecialCreatePagePageObject openSpecialCreatePage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_PAGE);
-    return new SpecialCreatePagePageObject(driver);
   }
 
   public void verifyLoginReguiredMessage() {
@@ -766,6 +761,7 @@ public class WikiBasePageObject extends BasePageObject {
 
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
+    jsActions.execute("window.stop()");
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
@@ -918,7 +914,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyArticleNameInWgPageName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log("verifyArticleNameInWgPageName",
-                          "The wgPageName variable contains article name" + targetText, true);
+        "The wgPageName variable contains article name" + targetText, true);
   }
 
   public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {

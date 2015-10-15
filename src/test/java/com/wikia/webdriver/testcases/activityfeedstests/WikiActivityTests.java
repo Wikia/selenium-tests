@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.activityfeedstests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -11,12 +14,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 /**
  * @author Michał 'justnpT' Nowierski
@@ -49,8 +49,7 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
-    SpecialCreatePagePageObject specialCreatePage =
-        new WikiBasePageObject(driver).openSpecialCreatePage(wikiURL);
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
@@ -74,7 +73,7 @@ public class WikiActivityTests extends NewTestTemplate {
     UserProfilePageObject userProfile =
         new WikiBasePageObject(driver).openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
-    SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
+    SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
@@ -87,7 +86,8 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @RelatedIssue(issueID = "QAART-673", comment = "Test will fail if article does not exist therefore test manually.")
+  @RelatedIssue(issueID = "QAART-673",
+      comment = "Test will fail if article does not exist therefore test manually.")
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {

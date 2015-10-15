@@ -66,7 +66,7 @@ public class NewTestTemplateCore {
     driver =
         registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(Configuration
             .getBrowser()));
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+//    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
@@ -102,6 +102,7 @@ public class NewTestTemplateCore {
       try {
         driver.quit();
       } catch (Error e) {
+        driver.quit();
       }
     }
   }

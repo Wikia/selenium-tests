@@ -22,7 +22,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.testng.annotations.Test;
@@ -35,7 +35,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   public void BlogFeatures_001_AddingGallery() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
-    SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     GalleryBuilderComponentObject galleryBuiler = blogEdit.clickGalleryButton();
@@ -57,7 +57,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   public void BlogFeatures_002_AddingSlideshow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
-    SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     SlideshowBuilderComponentObject slideshowBuilder = blogEdit.clickSlideshowButton();
@@ -76,7 +76,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   public void BlogFeatures_003_AddingSlider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
-    SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     SliderBuilderComponentObject sliderBuilder = blogEdit.clickSliderButton();
@@ -95,7 +95,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void BlogFeatures_004_AddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     VetAddVideoComponentObject vetAddVideo = blogEdit.clickVideoButton();
@@ -113,7 +113,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
   public void addingImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
-    SpecialCreatePagePageObject createPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     PhotoAddComponentObject photoAddPhoto = blogEdit.clickPhotoButton();

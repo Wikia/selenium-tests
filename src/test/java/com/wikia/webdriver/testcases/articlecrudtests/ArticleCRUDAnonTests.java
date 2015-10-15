@@ -1,16 +1,16 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 @Test(groups = "ArticleCRUDAnon")
 public class ArticleCRUDAnonTests extends NewTestTemplate {
@@ -20,7 +20,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();

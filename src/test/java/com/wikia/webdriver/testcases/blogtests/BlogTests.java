@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
@@ -34,7 +34,7 @@ public class BlogTests extends NewTestTemplate {
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
     userProfile.clickOnBlogTab();
-    SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
+    SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
@@ -51,7 +51,7 @@ public class BlogTests extends NewTestTemplate {
     base.loginAs(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     String randomBlogTitle = blogTitle + base.getTimeStamp();
-    SpecialCreatePagePageObject createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
+    SpecialCreatePage createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(randomBlogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
