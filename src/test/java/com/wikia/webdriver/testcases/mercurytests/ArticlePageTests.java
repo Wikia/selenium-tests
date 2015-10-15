@@ -268,8 +268,8 @@ public class ArticlePageTests extends NewTestTemplate {
     PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
 
     nav.clickSearchButton();
-    nav.clickNavListElement(4);
-    nav.clickNavListElement(7);
+    nav.clickNavListElement(3);
+    nav.clickNavListElement(6);
     article.waitForLoadingSpinnerToFinish();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
@@ -289,8 +289,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     nav.clickSearchButton();
-    nav.clickNavListElement(4);
-    nav.clickNavListElement(6);
+    nav.clickNavListElement(3);
+    nav.clickNavListElement(5);
     article.waitForLoadingSpinnerToFinish();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
