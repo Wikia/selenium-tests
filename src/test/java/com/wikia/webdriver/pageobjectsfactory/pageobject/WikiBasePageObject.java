@@ -89,14 +89,6 @@ import javax.json.JsonReader;
 
 public class WikiBasePageObject extends BasePageObject {
 
-  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
-  private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".AccountNavigation a[title*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + "," +
-                                                        LOGGED_IN_USER_SELECTOR_OASIS + "," +
-                                                        LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -180,9 +172,18 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-  private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
 
+  private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private VenusGlobalNavPageObject venusGlobalNav;
+
+  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
+  private static final String LOGGED_IN_USER_SELECTOR_OASIS =
+      ".AccountNavigation a[title*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + "," +
+                                                        LOGGED_IN_USER_SELECTOR_OASIS + "," +
+                                                        LOGGED_IN_USER_SELECTOR_MONOBOOK;
 
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
@@ -677,7 +678,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String receiveMailWithNewPassword(String email, String password) {
     String newPassword = MailFunctions.getPasswordFromEmailContent(
-        (MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password")));
+        MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password"));
     PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
                           true);
 

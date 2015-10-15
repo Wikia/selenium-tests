@@ -36,7 +36,7 @@ public class ImageUploadTests extends NewTestTemplate {
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-    ;
+    
     editorHomePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.isCuratedContentVisible();
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);

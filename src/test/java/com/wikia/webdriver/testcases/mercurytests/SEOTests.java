@@ -44,7 +44,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seo = new SEOUtils(driver);
     leftNav.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
 
-    // Uncomment after issue is fixed - related to HG-668
+    //TODO: Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(
         "link[rel='canonical']",
         "contains current url",
