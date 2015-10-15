@@ -44,7 +44,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seo = new SEOUtils(driver);
     leftNav.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
 
-    // Uncomment after issue is fixed - related to HG-668
+    //TODO: Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(
         "link[rel='canonical']",
         "contains current url",
@@ -112,7 +112,7 @@ public class SEOTests extends NewTestTemplate {
     /*String lastDesc = seo.getDescription();
     leftNav.clickSearchButton();
     leftNav.clickNavListElement(0);
-    seo.waitForLoadingSpinnerToFinish();
+    seo.waitForLoadingOverlayToDisappear();
 
     PageObjectLogging.logWarning(
         "Site status",
@@ -192,7 +192,7 @@ public class SEOTests extends NewTestTemplate {
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingSpinnerToFinish();
+    mainPage.waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
@@ -207,12 +207,12 @@ public class SEOTests extends NewTestTemplate {
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingSpinnerToFinish();
+    mainPage.waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingSpinnerToFinish();
+    mainPage.waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);

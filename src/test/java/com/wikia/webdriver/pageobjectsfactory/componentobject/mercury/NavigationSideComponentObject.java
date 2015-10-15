@@ -162,7 +162,7 @@ public class NavigationSideComponentObject extends BasePageObject {
     clickSearchField();
     typeInSearchField(articleName);
     clickSuggestion(0);
-    waitForLoadingSpinnerToFinish();
+    waitForLoadingOverlayToDisappear();
     return this;
   }
 }

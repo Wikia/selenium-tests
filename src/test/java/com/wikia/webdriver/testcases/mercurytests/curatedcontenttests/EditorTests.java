@@ -2,14 +2,14 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
@@ -41,13 +41,10 @@ public class EditorTests extends NewTestTemplate {
 
     new CuratedContent().clear();
 
-    // This login is temporary solution, use @Execute after QAART-669 is done
-    new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
-                                          Configuration.getCredentials().passwordStaff2);
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_001", enabled = false)
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
+  @Test(groups = "MercuryCuratedEditorTest_001")
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -60,6 +57,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
@@ -86,7 +84,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002", enabled = false)
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
@@ -100,6 +98,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
@@ -136,7 +135,7 @@ public class EditorTests extends NewTestTemplate {
     );
 
     curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
-    curatedContentPageObject.waitForLoadingSpinnerToFinish();
+    curatedContentPageObject.waitForLoadingOverlayToDisappear();
 
     Assertion.assertNumber(
         curatedContentPageObject.getCuratedContentItemsNumber(),
@@ -146,7 +145,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003", enabled = false)
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR)
+  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -159,6 +158,7 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
+    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);

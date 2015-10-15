@@ -94,7 +94,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
-    waitForLoadingSpinnerToFinish();
+    waitForLoadingOverlayToDisappear();
     return this;
   }
 
