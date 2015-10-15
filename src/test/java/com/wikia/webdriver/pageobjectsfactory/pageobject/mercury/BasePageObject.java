@@ -85,22 +85,22 @@ public class BasePageObject extends WikiBasePageObject {
   }
 
   /**
-   * First waits for spinner to be visible and then waits for spinner to be hidden Spinner presence
+   * First waits for loading overlay (the overlay includes lodaing spinner) to be visible and then waits for spinner to be hidden Spinner presence
    * is optional, when it occurs it must be hidden later
    */
-  public void waitForLoadingSpinnerToFinish() {
+  public void waitForLoadingOverlayToDisappear() {
     boolean spinnerPresent = false;
     try {
       wait.forElementVisible(LOADING_SPINNER_BY, 4, 1000);
       spinnerPresent = true;
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Loading spinner", "is not present", true);
+      PageObjectLogging
+          .log("waitForLoadingOverlayToDisappear", "Lodaing overlay is not visible ", true);
     }
     if (spinnerPresent) {
       wait.forElementNotVisible(LOADING_SPINNER_BY, 4, 3000);
     }
   }
-
 
   //TODO: Remove this and use combination from logUrl
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894

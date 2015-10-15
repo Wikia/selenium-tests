@@ -39,7 +39,7 @@ public class NavigationTests extends NewTestTemplate {
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     category.clickOnCuratedContentElementByIndex(1);
-    category.waitForLoadingSpinnerToFinish();
+    category.waitForLoadingOverlayToDisappear();
 
     category
         .isTitleVisible()
@@ -70,7 +70,7 @@ public class NavigationTests extends NewTestTemplate {
     section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     section.clickOnCuratedContentElementByIndex(0);
-    section.waitForLoadingSpinnerToFinish();
+    section.waitForLoadingOverlayToDisappear();
 
     section
         .isTitleVisible()
@@ -90,28 +90,28 @@ public class NavigationTests extends NewTestTemplate {
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
         .isArticleIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinish();
+        .waitForLoadingOverlayToDisappear();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isBlogIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinish();
+        .waitForLoadingOverlayToDisappear();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isImageIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinish();
+        .waitForLoadingOverlayToDisappear();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
     category
         .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
         .isVideoIconVisible()
         .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingSpinnerToFinish();
+        .waitForLoadingOverlayToDisappear();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
@@ -127,7 +127,7 @@ public class NavigationTests extends NewTestTemplate {
     );
     String testUrl = expectedUrl;
     section.openWikiPage(testUrl);
-    section.waitForLoadingSpinnerToFinish();
+    section.waitForLoadingOverlayToDisappear();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPathWithoutWiki(
@@ -137,7 +137,7 @@ public class NavigationTests extends NewTestTemplate {
 
     testUrl = expectedUrl;
     section.openWikiPage(testUrl);
-    section.waitForLoadingSpinnerToFinish();
+    section.waitForLoadingOverlayToDisappear();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPath(
@@ -150,7 +150,7 @@ public class NavigationTests extends NewTestTemplate {
     );
 
     section.openWikiPage(testUrl);
-    section.waitForLoadingSpinnerToFinish();
+    section.waitForLoadingOverlayToDisappear();
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
 
     expectedUrl = urlBuilder.getUrlForPath(
@@ -163,7 +163,7 @@ public class NavigationTests extends NewTestTemplate {
     );
 
     section.openWikiPage(testUrl);
-    section.waitForLoadingSpinnerToFinish();
+    section.waitForLoadingOverlayToDisappear();
     MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
         driver,
         MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION

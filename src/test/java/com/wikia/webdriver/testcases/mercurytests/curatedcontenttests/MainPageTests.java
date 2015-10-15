@@ -465,7 +465,7 @@ public class MainPageTests extends NewTestTemplate {
     ccp.clickOnCuratedContentElementByIndex(2);
     Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
 
-    ccp.waitForLoadingSpinnerToFinish();
+    ccp.waitForLoadingOverlayToDisappear();
     Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
   }
 }

@@ -132,7 +132,7 @@ public class EditorTests extends NewTestTemplate {
     );
 
     curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
-    curatedContentPageObject.waitForLoadingSpinnerToFinish();
+    curatedContentPageObject.waitForLoadingOverlayToDisappear();
 
     Assertion.assertNumber(
         curatedContentPageObject.getCuratedContentItemsNumber(),
