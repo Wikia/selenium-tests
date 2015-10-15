@@ -169,8 +169,8 @@ public class HtmlTitleTests extends NewTestTemplate {
         },
         {
             TEST_WIKI_CUSTOM_TITLE,
-            "Special:Version",
-            "Versión - WikiDex, la enciclopedia Pokémon - Wikia",
+            "Special:UnusedVideos",
+            "Unused videos - WikiDex, la enciclopedia Pokémon - Wikia",
         },
         {
             TEST_WIKI_CUSTOM_TITLE,
@@ -213,7 +213,7 @@ public class HtmlTitleTests extends NewTestTemplate {
       dataProvider = "dataHtmlTitleTest",
       groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedOut"}
   )
-  public void HtmlTitleTestLoggedOut(String wiki, String path, String expectedTitle) {
+  public void HtmlTitleLoggedOutTest(String wiki, String path, String expectedTitle) {
     wikiURL = urlBuilder.getUrlForPath(wiki, path);
     driver.get(wikiURL);
     String actualTitle = driver.getTitle();
@@ -227,7 +227,7 @@ public class HtmlTitleTests extends NewTestTemplate {
       dataProvider = "dataHtmlTitleTest",
       groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedIn"}
   )
-  public void HtmlTitleTestLoggedIn(String wiki, String path, String expectedTitle) {
+  public void HtmlTitleLoggedInTest(String wiki, String path, String expectedTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName, credentials.password, wikiURL);
 
