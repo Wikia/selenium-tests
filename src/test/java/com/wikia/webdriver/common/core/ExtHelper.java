@@ -23,6 +23,10 @@ public class ExtHelper {
       .put("FF", "xpi")
       .build();
 
+  private ExtHelper() {
+
+  }
+
   public static void addExtension(String name) {
     String br = Configuration.getBrowser();
 
@@ -55,13 +59,13 @@ public class ExtHelper {
                                "test" + File.separator +
                                "resources" + File.separator +
                                "extensions" + File.separator);
-    name = name + "." + suffix;
+    String fullName = name + "." + suffix;
     Collection<File> exts = FileUtils.listFiles(extensions, new String[]{suffix}, true);
     for (File ext : exts) {
-      if (ext.getName().equals(name)) {
+      if (ext.getName().equals(fullName)) {
         return ext;
       }
     }
-    throw new WebDriverException(String.format("Can't find '%s' extension", name));
+    throw new WebDriverException(String.format("Can't find '%s' extension", fullName));
   }
 }
