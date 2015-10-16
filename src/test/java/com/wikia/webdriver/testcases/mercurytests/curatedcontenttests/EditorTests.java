@@ -37,10 +37,7 @@ public class EditorTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
-
     new CuratedContent().clear();
-
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
@@ -83,12 +80,15 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_002", enabled = false)
+  @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
     EditorHomePageObject home = new EditorHomePageObject(driver);
+
+    curatedMainPagePageObject
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     PageObjectLogging.log(
@@ -98,7 +98,6 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
@@ -144,11 +143,14 @@ public class EditorTests extends NewTestTemplate {
     ;
   }
 
-  @Test(groups = "MercuryCuratedEditorTest_003", enabled = false)
+  @Test(groups = "MercuryCuratedEditorTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+
+    curatedMainPagePageObject
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     PageObjectLogging.log(
@@ -158,7 +160,6 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);

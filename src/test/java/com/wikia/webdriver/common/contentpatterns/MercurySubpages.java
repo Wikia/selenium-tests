@@ -56,7 +56,7 @@ public class MercurySubpages {
   public static final String NTAVCC_MAIN_PAGE = "Mercuryntavcc_Wikia";
 
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
-  public static final String ECC_MAIN_PAGE = "Mercury_empty_CC_Wikia";
+  public static final String ECC_MAIN_PAGE = "Mercury_Empty_CC_Editor_Wikia";
 
   private MercurySubpages() {
   }
