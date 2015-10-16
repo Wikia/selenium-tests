@@ -12,6 +12,11 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
+
+#Add browser extensions.
+#Acceptable values:
+#for CHROME: adblock, adblock+, ublock
+#for FF: adblock+, JSErrorCollector
 extensions: null
 
 #Config related with mobile devices
