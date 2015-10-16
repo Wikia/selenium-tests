@@ -1,17 +1,18 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -19,16 +20,18 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ludwik on 2015-08-05.
  */
 public class Helios {
 
-  private Helios() {}
+  private Helios() {
+  }
 
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
@@ -40,11 +43,15 @@ public class Helios {
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
+    RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(2000).setSocketTimeout(
+        2000).build();
+
     CloseableHttpClient httpClient =
         HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
             .disableAutomaticRetries().build();
 
     HttpPost httpPost = new HttpPost(heliosBaseUrl);
+    httpPost.setConfig(requestConfig);
     List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
@@ -57,7 +64,12 @@ public class Helios {
     String token = "";
     httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
     try {
-      response = httpClient.execute(httpPost);
+      try {
+        response = httpClient.execute(httpPost);
+      } catch (ConnectTimeoutException e) {
+        PageObjectLogging.log("Timeout when connecting to helios", e, true);
+        response = httpClient.execute(httpPost);
+      }
 
       HttpEntity entity = response.getEntity();
       JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
@@ -74,9 +86,9 @@ public class Helios {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e), false);
+                            "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e),
+                            false);
     }
-
     return token;
   }
 }

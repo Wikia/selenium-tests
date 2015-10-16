@@ -765,26 +765,26 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String loginAs(User user) {
 
-    if(StringUtils.isNotBlank(user.getAccessToken())){
-      String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
-
-      jsActions.execute("window.stop()");
-      driver.manage().addCookie(new Cookie("access_token", user.getAccessToken(), domian, null, null));
-
-      if (driver.getCurrentUrl().contains("Logout")) {
-        driver.get(urlBuilder.getUrlForWiki());
-      } else {
-        driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
-                                                                             + DateTime.now().getMillis()));
-      }
-
-      verifyUserLoggedIn(user.getUserName());
-
-      return user.getAccessToken();
-    }else{
+//    if(StringUtils.isNotBlank(user.getAccessToken())){
+//      String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+//
+//      jsActions.execute("window.stop()");
+//      driver.manage().addCookie(new Cookie("access_token", user.getAccessToken(), domian, null, null));
+//
+//      if (driver.getCurrentUrl().contains("Logout")) {
+//        driver.get(urlBuilder.getUrlForWiki());
+//      } else {
+//        driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
+//                                                                             + DateTime.now().getMillis()));
+//      }
+//
+//      verifyUserLoggedIn(user.getUserName());
+//
+//      return user.getAccessToken();
+//    }else{
       return loginAs(user.getUserName(), user.getPassword(),
                      urlBuilder.getUrlForWiki(Configuration.getWikiName()));
-    }
+//    }
   }
 
   public void openWikiPage(String wikiURL) {
