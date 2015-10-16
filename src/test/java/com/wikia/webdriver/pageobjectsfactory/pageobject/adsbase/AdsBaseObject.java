@@ -333,6 +333,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           false,
           driver
       );
+      throw e;
     }
 
     return this;
