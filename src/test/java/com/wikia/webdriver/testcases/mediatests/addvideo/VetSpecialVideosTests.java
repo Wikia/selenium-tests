@@ -4,6 +4,8 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -21,12 +23,12 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
+  @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
@@ -44,9 +46,9 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   }
 
   @Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
+  @Execute(asUser = User.USER)
   public void SpecialVideos_002_Library() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);

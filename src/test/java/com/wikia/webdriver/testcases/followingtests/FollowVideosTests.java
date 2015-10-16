@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -16,13 +18,12 @@ import org.testng.annotations.Test;
 
 public class FollowVideosTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
   String videoName;
 
   @Test(groups = "FollowVideo")
+  @Execute(asUser = User.USER)
   public void FollowVideo_001_setup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialVideosPageObject special = base.openSpecialVideoPage(wikiURL);
     WatchPageObject watch = special.unfollowVideo(wikiURL, special.getRandomVideo());
     watch.confirmWatchUnwatch();
@@ -31,17 +32,17 @@ public class FollowVideosTests extends NewTestTemplate {
   }
 
   @Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
+  @Execute(asUser = User.USER)
   public void FollowVideo_002_follow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     FilePagePageObject file = base.openFilePage(wikiURL, videoName);
     file.follow();
   }
 
   @Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})
+  @Execute(asUser = User.USER)
   public void FollowVideo_003_verify() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
     follow.verifyFollowedImageVideo(videoName);
   }

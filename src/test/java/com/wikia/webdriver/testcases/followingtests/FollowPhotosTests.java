@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,15 +16,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
+import javax.jws.soap.SOAPBinding;
+
 public class FollowPhotosTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
   String imageName;
 
   @Test(groups = "FollowPhoto")
+  @Execute(asUser = User.USER)
   public void FollowPhoto_001_setup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialNewFilesPageObject special = base.openSpecialNewFiles(wikiURL);
     imageName = special.getRandomImageName();
     WatchPageObject watch = special.unfollowImage(wikiURL, imageName);
@@ -31,17 +34,17 @@ public class FollowPhotosTests extends NewTestTemplate {
   }
 
   @Test(groups = "FollowPhoto", dependsOnMethods = {"FollowPhoto_001_setup"})
+  @Execute(asUser = User.USER)
   public void FollowPhoto_002_follow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     FilePagePageObject file = base.openFilePage(wikiURL, imageName);
     file.follow();
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})
+  @Execute(asUser = User.USER)
   public void FollowPhoto_003_verify() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
     follow.verifyFollowedImageVideo(imageName);
   }

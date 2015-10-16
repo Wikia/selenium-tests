@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.admindashboardtests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -45,7 +46,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
     article.verifyEditButtonNotPresent();
     article.navigateToArticleEditPage();
     article.verifyPermissionsErrorsPresent();
-    article.loginAs(credentials.userName, credentials.password, wikiURL);
+    article.loginAs(User.USER);
     article.open(URLsContent.MEDIAWIKI_CSS);
     article.verifyEditButtonNotPresent();
     article.navigateToArticleEditPage();

@@ -32,9 +32,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlogFeatures_001", "BlogFeaturesTests"})
+  @Execute(asUser = User.USER)
   public void BlogFeatures_001_AddingGallery() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
@@ -54,9 +54,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogFeatures_002", "BlogFeaturesTests"})
+  @Execute(asUser = User.USER)
   public void BlogFeatures_002_AddingSlideshow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
@@ -73,9 +73,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogFeatures_003", "BlogFeaturesTests"})
+  @Execute(asUser = User.USER)
   public void BlogFeatures_003_AddingSlider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
@@ -110,9 +110,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogFeatures_005", "BlogFeaturesTests"})
+  @Execute(asUser = User.USER)
   public void addingImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);

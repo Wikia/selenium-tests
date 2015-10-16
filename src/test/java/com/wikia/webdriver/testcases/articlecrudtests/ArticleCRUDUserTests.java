@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 public class ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_2)
   public void ArticleCRUDUser_001_specialPage() {
     SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
     String articleContent = PageContent.ARTICLE_TEXT;
@@ -77,10 +77,9 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     new ArticleContent().clear();
 
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).open();
-    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
     visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
   }
 

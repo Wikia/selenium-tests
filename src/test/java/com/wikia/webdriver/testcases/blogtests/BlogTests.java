@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.blogtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -46,9 +48,9 @@ public class BlogTests extends NewTestTemplate {
       dataProviderClass = ArticleDataProvider.class,
       dataProvider = "articleTitles",
       groups = {"BlogTests_002", "BlogTests"})
+  @Execute(asUser = User.USER)
   public void BlogTests_002_addByUrl(String blogTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     String randomBlogTitle = blogTitle + base.getTimeStamp();
     SpecialCreatePage createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -60,9 +62,9 @@ public class BlogTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogTests_003", "BlogTests"})
+  @Execute(asUser = User.USER)
   public void BlogTests_003_editFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();

@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -30,9 +32,9 @@ public class VetModalWidthTests extends NewTestTemplate {
   final static int WIDTH = 250;
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_001", "Media"})
+  @Execute(asUser = User.USER)
   public void Vet_Modal_001_widthOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -56,9 +58,9 @@ public class VetModalWidthTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_002",
                   "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
+  @Execute(asUser = User.USER)
   public void Vet_Modal_002_widthInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitle);

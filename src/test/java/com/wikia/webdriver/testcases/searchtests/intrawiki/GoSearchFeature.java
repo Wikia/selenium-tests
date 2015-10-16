@@ -34,10 +34,10 @@ public class GoSearchFeature extends IntraWiki {
   }
 
   @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "UserFromSuggestion"})
+  @Execute(asUser = User.USER)
   public void UserFromSuggestion() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(testedWiki);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NavigationBar navigation = new NavigationBar(driver);
     navigation.openWikiPage(testedWiki);
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);

@@ -63,6 +63,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -741,11 +742,13 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-    String token = Helios.getAccessToken(userName, password);
+    String token =
+        Helios.getAccessToken(userName, password);
 
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
     jsActions.execute("window.stop()");
+
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
@@ -761,8 +764,27 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(User user) {
-    return loginAs(user.getUserName(), user.getPassword(),
-                   urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+
+    if(StringUtils.isNotBlank(user.getAccessToken())){
+      String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+
+      jsActions.execute("window.stop()");
+      driver.manage().addCookie(new Cookie("access_token", user.getAccessToken(), domian, null, null));
+
+      if (driver.getCurrentUrl().contains("Logout")) {
+        driver.get(urlBuilder.getUrlForWiki());
+      } else {
+        driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
+                                                                             + DateTime.now().getMillis()));
+      }
+
+      verifyUserLoggedIn(user.getUserName());
+
+      return user.getAccessToken();
+    }else{
+      return loginAs(user.getUserName(), user.getPassword(),
+                     urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    }
   }
 
   public void openWikiPage(String wikiURL) {

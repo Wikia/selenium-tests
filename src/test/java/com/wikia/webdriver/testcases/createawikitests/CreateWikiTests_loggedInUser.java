@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,6 +15,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 
 import org.testng.annotations.Test;
+
+import javax.jws.soap.SOAPBinding;
 
 
 /**
@@ -27,9 +31,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
@@ -51,9 +55,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_00_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
@@ -76,9 +80,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_003_createWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();
@@ -96,9 +100,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_004_creatWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "muppets";
     cnw1.typeInWikiName(wikiName);
@@ -106,9 +110,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_005_createWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "1234";
     cnw1.typeInWikiName(wikiName);
@@ -116,9 +120,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
+  @Execute(asUser = User.USER)
   public void CreateNewWiki_006_createWikiNoCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();

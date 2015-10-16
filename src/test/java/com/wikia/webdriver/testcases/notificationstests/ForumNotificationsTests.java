@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.notificationstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -25,9 +27,9 @@ public class ForumNotificationsTests extends NewTestTemplate {
    */
   @Test(groups = {"ForumNotificationsTests_001", "ForumNotificationsTests",
                   "NotificationsTests"})
+  @Execute(asUser = User.USER)
   public void forumNotificationsTests_001_userAStartsDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userName, credentials.password, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -67,9 +69,9 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Test(groups = {"ForumNotificationsTests_004", "ForumNotificationsTests",
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
+  @Execute(asUser = User.USER)
   public void forumNotificationsTests_004_userAVerifiesNotifications() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userName, credentials.password, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
     String anchoredLink = notifications.getNotificationLink(

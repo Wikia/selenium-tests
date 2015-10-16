@@ -62,7 +62,7 @@ public class FacebookTests extends NewTestTemplate {
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();
-    fbModal.loginExistingAccount(credentials.userName, credentials.password);
+    fbModal.loginExistingAccount(credentials.userName13, credentials.password13);
     dropDown.verifyUserLoggedIn(credentials.userName);
   }
 
