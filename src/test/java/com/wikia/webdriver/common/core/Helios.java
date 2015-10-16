@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 
+import junit.framework.Test;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -40,6 +41,9 @@ public class Helios {
 
   public static String getAccessToken(String userName, String password) {
 
+    if(TestContext.tokenCache.containsKey(userName)){
+      return TestContext.tokenCache.get(userName);
+    }
     String clientId = HeliosConfig.getClientId();
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
@@ -81,6 +85,7 @@ public class Helios {
       PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
 
       token = responseValue.getString("access_token");
+      TestContext.tokenCache.put(userName, token);
     } catch (JSONException e) {
       PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);

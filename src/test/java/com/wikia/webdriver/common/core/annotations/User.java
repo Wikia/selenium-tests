@@ -22,7 +22,7 @@ public enum User {
 
   private final String password;
 
-  private final String accessToken;
+  private String accessToken;
 
   private final String filePath = Configuration.getCredentialsFilePath();
 
@@ -50,4 +50,7 @@ public enum User {
     return accessToken;
   }
 
+  public void setAccessToken(String accessToken){
+    this.accessToken = accessToken;
+  }
 }
