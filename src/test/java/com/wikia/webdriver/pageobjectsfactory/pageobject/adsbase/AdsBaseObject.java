@@ -321,9 +321,19 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
     WebElement element = getIframe(slotName, src);
-    Assertion
-        .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
-    PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+
+    try {
+      Assertion
+          .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
+      PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
+    } catch (AssertionError e) {
+      PageObjectLogging.log(
+          "verifyAdImage",
+          "The image is different than the sample",
+          false,
+          driver
+      );
+    }
 
     return this;
   }
