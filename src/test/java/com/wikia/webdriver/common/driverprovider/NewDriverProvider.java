@@ -24,7 +24,6 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -162,17 +161,7 @@ public class NewDriverProvider {
 
     // If browserName contains CONSOLE activate JSErrorConsole
     if (browserName.contains("CONSOLE")) {
-      try {
-        File jsErr =
-            new File("." + File.separator + "src" + File.separator + "test" + File.separator
-                     + "resources" + File.separator + "Firebug" + File.separator
-                     + "JSErrorCollector.xpi");
-        firefoxProfile.addExtension(jsErr);
-      } catch (FileNotFoundException e) {
-        PageObjectLogging.log("JS extension file doesn't exist in provided location", e, false);
-      } catch (IOException e) {
-        PageObjectLogging.log("Error with adding firefox extension", e, false);
-      }
+      extHelper.addExtension("JSErrorCollector");
     }
 
     if (unstablePageLoadStrategy) {

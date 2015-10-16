@@ -31,7 +31,7 @@ public class ExtHelper {
     this.chromeOptions = chromeOptions;
   }
 
-  private void addExtension(String name) {
+  public void addExtension(String name) {
     if (ext.containsKey(Configuration.getBrowser())) {
       name = name + ext.get(Configuration.getBrowser());
     }
