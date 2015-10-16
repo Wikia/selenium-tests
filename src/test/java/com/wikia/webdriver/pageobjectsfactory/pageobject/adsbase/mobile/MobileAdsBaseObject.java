@@ -25,6 +25,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]" +
                                                      "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
+  private static final String INTERSTITIAL_AD_OPENED_SELECTOR = ".ember-view.lightbox-wrapper.open";
 
   private AdsComparison adsComparison;
 
@@ -56,18 +57,23 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
 
     wait.forElementVisible(presentLeaderboard);
+    if (isElementOnPage(By.cssSelector(INTERSTITIAL_AD_OPENED_SELECTOR))) {
+      PageObjectLogging.logWarning("Special ad", "Interstitial ad detected");
+      extractGptInfo(presentHighImpactSlotSelector);
+      return;
+    }
     waitForSlotExpanded(presentLeaderboard);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
       extractGptInfo(presentLeaderboardSelector);
 
       if (isElementOnPage(By.cssSelector(CELTRA_MASK_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Celtra");
+        PageObjectLogging.logWarning("Special ad", "Celtra ad detected");
         return;
       }
 
       if (isElementOnPage(By.cssSelector(FLITE_MASK_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Flite");
+        PageObjectLogging.logWarning("Special ad", "Flite ad detected");
         return;
       }
 
@@ -175,7 +181,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     }
   }
 
-  public void waitForSlot(String slotName){
+  public void waitForSlot(String slotName) {
     wait.forElementVisible(By.cssSelector("#" + slotName));
   }
 }
