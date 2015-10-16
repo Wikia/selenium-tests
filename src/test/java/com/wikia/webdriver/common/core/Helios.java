@@ -40,7 +40,9 @@ public class Helios {
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
+    CloseableHttpClient httpClient =
+        HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
+            .disableAutomaticRetries().build();
 
     HttpPost httpPost = new HttpPost(heliosBaseUrl);
     List<NameValuePair> nvps = new ArrayList<>();
