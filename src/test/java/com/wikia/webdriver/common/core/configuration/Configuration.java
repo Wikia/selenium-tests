@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.configuration;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.properties.Credentials;
 
+import org.apache.commons.lang.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -132,5 +133,16 @@ public class Configuration {
 
   public static String getCountryCode() {
     return getProp("countryCode");
+  }
+
+  public static String[] getAdBlock() {
+    return toArray(getProp("adblock"));
+  }
+
+  private static String[] toArray(String str) {
+    if (StringUtils.isEmpty(str)) {
+      return new String[]{};
+    }
+    return str.replace("[", "").replace("]", "").split(",");
   }
 }

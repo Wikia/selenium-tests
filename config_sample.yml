@@ -12,6 +12,10 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
+adblock:
+  - adblock+
+  - adblock
+  - ublock
 
 #Config related with mobile devices
 platform: ANDROID #acceptable values: IOS and ANDROID
