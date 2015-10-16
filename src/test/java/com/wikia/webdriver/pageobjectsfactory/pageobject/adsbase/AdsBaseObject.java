@@ -65,6 +65,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String FLITE_TAG_BROKEN_SELECTOR = "#mw-content-text .error";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
+
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
