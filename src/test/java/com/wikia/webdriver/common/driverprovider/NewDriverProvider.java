@@ -1,14 +1,11 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,10 +23,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import io.appium.java_client.android.AndroidDriver;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,6 +41,7 @@ public class NewDriverProvider {
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
   private static AndroidDriver mobileDriver;
+  private static ExtHelper extHelper = new ExtHelper(firefoxProfile, chromeOptions);
 
   private NewDriverProvider() {
 
@@ -106,7 +100,8 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getIEInstance() {
     File file =
         new File("." + File.separator + "src" + File.separator + "test" + File.separator
-            + "resources" + File.separator + "IEDriver" + File.separator + "IEDriverServer.exe");
+                 + "resources" + File.separator + "IEDriver" + File.separator
+                 + "IEDriverServer.exe");
     System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
     return new EventFiringWebDriver(new InternetExplorerDriver(caps));
   }
@@ -130,7 +125,8 @@ public class NewDriverProvider {
     // to path where executive file of FF is placed
     if ("WINDOWS 8".equals(System.getProperty("os.name").toUpperCase())) {
       System.setProperty("webdriver.firefox.bin", "c:" + File.separator + "Program Files (x86)"
-          + File.separator + "Mozilla Firefox" + File.separator + "Firefox.exe");
+                                                  + File.separator + "Mozilla Firefox"
+                                                  + File.separator + "Firefox.exe");
     }
 
     // Check if user who is running tests have write access in ~/.mozilla dir and home dir
@@ -144,7 +140,8 @@ public class NewDriverProvider {
         } catch (IOException ex) {
           PageObjectLogging.log("Can't create file", ex, false);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
-              mozillaPath.getAbsolutePath()));
+                                                                               mozillaPath
+                                                                                   .getAbsolutePath()));
         }
       } else {
         try {
@@ -152,7 +149,8 @@ public class NewDriverProvider {
         } catch (IOException ex) {
           PageObjectLogging.log("Can't create file", ex, false);
           throw new WebDriverException("Can't create file in path: %s".replace("%s",
-              homePath.getAbsolutePath()));
+                                                                               homePath
+                                                                                   .getAbsolutePath()));
         }
       }
       tmpFile.delete();
@@ -160,15 +158,15 @@ public class NewDriverProvider {
 
     firefoxProfile =
         new FirefoxProfile(new File(ClassLoader.getSystemResource("FirefoxProfiles/Deafult")
-            .getPath()));
+                                        .getPath()));
 
     // If browserName contains CONSOLE activate JSErrorConsole
     if (browserName.contains("CONSOLE")) {
       try {
         File jsErr =
             new File("." + File.separator + "src" + File.separator + "test" + File.separator
-                + "resources" + File.separator + "Firebug" + File.separator
-                + "JSErrorCollector.xpi");
+                     + "resources" + File.separator + "Firebug" + File.separator
+                     + "JSErrorCollector.xpi");
         firefoxProfile.addExtension(jsErr);
       } catch (FileNotFoundException e) {
         PageObjectLogging.log("JS extension file doesn't exist in provided location", e, false);
@@ -190,12 +188,14 @@ public class NewDriverProvider {
     // Adding console logging for FF browser
     setBrowserLogging(Level.SEVERE);
 
+    extHelper.addExtensions(Configuration.getExtensions());
+
     return new EventFiringWebDriver(new FirefoxDriver(caps));
   }
 
   private static void setFFUserAgent(String userAgent) {
     firefoxProfile.setPreference("general.useragent.override",
-        userAgentRegistry.getUserAgent(userAgent));
+                                 userAgentRegistry.getUserAgent(userAgent));
   }
 
   private static EventFiringWebDriver getChromeInstance() {
@@ -223,8 +223,9 @@ public class NewDriverProvider {
     }
 
     System.setProperty("webdriver.chrome.driver",
-        new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath).getPath())
-            .getPath());
+                       new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath)
+                                    .getPath())
+                           .getPath());
 
     // TODO change mobile tests to use @UserAgent annotation
     if ("CHROMEMOBILEMERCURY".equals(browserName)) {
@@ -245,6 +246,8 @@ public class NewDriverProvider {
 
     setBrowserLogging(Level.SEVERE);
 
+    extHelper.addExtensions(Configuration.getExtensions());
+
     return new EventFiringWebDriver(new ChromeDriver(caps));
   }
 
@@ -262,10 +265,11 @@ public class NewDriverProvider {
 
       File phantomJSBinary =
           new File("." + File.separator + "src" + File.separator + "test" + File.separator
-              + "resources" + File.separator + "PhantomJS" + File.separator + phantomJSBinaryName);
+                   + "resources" + File.separator + "PhantomJS" + File.separator
+                   + phantomJSBinaryName);
 
       caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-          phantomJSBinary.getAbsolutePath());
+                         phantomJSBinary.getAbsolutePath());
     }
 
     return new EventFiringWebDriver(new PhantomJSDriver(caps));
