@@ -19,6 +19,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.WebDriverException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -43,8 +44,8 @@ public class Helios {
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(2000).setSocketTimeout(
-        2000).build();
+    RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(
+        3000).build();
 
     CloseableHttpClient httpClient =
         HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
@@ -82,12 +83,15 @@ public class Helios {
       token = responseValue.getString("access_token");
     } catch (JSONException e) {
       PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
                             "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e),
                             false);
+      throw new WebDriverException(e);
     }
     return token;
   }
