@@ -155,8 +155,8 @@ public class NewDriverProvider {
     }
 
     firefoxProfile =
-        new FirefoxProfile(new File(ClassLoader.getSystemResource("FirefoxProfiles/Deafult")
-                                        .getPath()));
+        new FirefoxProfile(
+            new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
 
     if (unstablePageLoadStrategy) {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
