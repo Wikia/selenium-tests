@@ -10,27 +10,23 @@ import org.openqa.selenium.WebDriverException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.Collection;
 
 /*
  Browser extensions helper
  */
 public class ExtHelper {
 
-  private static ImmutableMap<Object, Object> ext = ImmutableMap.builder()
-      .put("CHROME", ".crx")
-      .put("CHROMEMOBILEMERCURY", ".crx")
-      .put("FF", ".xpi")
+  private static ImmutableMap<String, String> ext = new ImmutableMap.Builder<String, String>()
+      .put("CHROME", "crx")
+      .put("CHROMEMOBILEMERCURY", "crx")
+      .put("FF", "xpi")
       .build();
 
   public static void addExtension(String name) {
     String br = Configuration.getBrowser();
 
-    if (ext.containsKey(br)) {
-      name = name + ext.get(br);
-    }
-
-    File extension = findExtension(name);
+    File extension = findExtension(name, ext.get(br));
 
     try {
 
@@ -43,7 +39,7 @@ public class ExtHelper {
       }
 
     } catch (IOException e) {
-      PageObjectLogging.log("Error with adding extension", e, false);
+      PageObjectLogging.log("Error occurred during adding extension", e, false);
     }
   }
 
@@ -53,16 +49,19 @@ public class ExtHelper {
     }
   }
 
-  private static File findExtension(final String name) {
+  private static File findExtension(String name, String suffix) {
     File extensions = new File("." + File.separator +
                                "src" + File.separator +
                                "test" + File.separator +
                                "resources" + File.separator +
                                "extensions" + File.separator);
-    Iterator it = FileUtils.iterateFiles(extensions, null, true);
-    if (it.hasNext()) {
-      return (File) it.next();
+    name = name + "." + suffix;
+    Collection<File> files = FileUtils.listFiles(extensions, new String[]{suffix}, true);
+    for (File file : files) {
+      if (file.getName().equals(name)) {
+        return file;
+      }
     }
-    throw new WebDriverException(String.format("Can't find %s extension", name));
+    throw new WebDriverException(String.format("Can't find '%s' extension", name));
   }
 }

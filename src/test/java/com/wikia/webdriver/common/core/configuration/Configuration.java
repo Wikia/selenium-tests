@@ -143,6 +143,6 @@ public class Configuration {
     if (StringUtils.isEmpty(str)) {
       return new String[]{};
     }
-    return str.replace("[", "").replace("]", "").split(",");
+    return str.replace("[", "").replace("]", "").split(", ");
   }
 }
