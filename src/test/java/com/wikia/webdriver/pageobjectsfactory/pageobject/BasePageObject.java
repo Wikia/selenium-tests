@@ -51,7 +51,7 @@ public class BasePageObject {
   public WebDriver driver;
   public WebDriverWait waitFor;
   public Actions builder;
-  protected int timeOut = 30;
+  protected int timeOut = 10;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
