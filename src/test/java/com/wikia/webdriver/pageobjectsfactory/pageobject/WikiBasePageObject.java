@@ -747,7 +747,7 @@ public class WikiBasePageObject extends BasePageObject {
 
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
-    jsActions.execute("window.stop()");
+//    jsActions.execute("window.stop()");
 
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 

@@ -34,8 +34,8 @@ public class LoginTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openDropDown();
-    dropDown.logIn(credentials.userName2, credentials.password2);
-    base.verifyUserLoggedIn(credentials.userName2);
+    dropDown.logIn(credentials.userName10, credentials.password10);
+    base.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = {"Login_003", "Smoke5"})

@@ -41,9 +41,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"DeleteAndRestoreMapTests_002", "DeleteAndRestoreMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER_2)
   public void DeleteAndRestoreMapTests_002_DeleteMapByNotOwner() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName2, credentials.password2, wikiURL);
     InteractiveMapPageObject selectedMap =
         base.openInteractiveMapById(wikiURL, InteractiveMapsContent.MAP_TO_DELETE_AND_RESTORE[1]);
     DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();

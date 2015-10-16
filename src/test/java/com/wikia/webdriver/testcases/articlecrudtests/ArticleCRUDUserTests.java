@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 public class ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_001"})
-  @Execute(asUser = User.USER_2)
+  @Execute(asUser = User.USER)
   public void ArticleCRUDUser_001_specialPage() {
     SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
     String articleContent = PageContent.ARTICLE_TEXT;
