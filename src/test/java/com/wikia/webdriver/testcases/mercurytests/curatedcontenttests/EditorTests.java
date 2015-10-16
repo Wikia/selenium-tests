@@ -46,6 +46,9 @@ public class EditorTests extends NewTestTemplate {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
 
+    curatedMainPagePageObject
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+
     Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
     PageObjectLogging.log(
         "Featured Content",
@@ -54,7 +57,6 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
     itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
