@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
+import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -35,7 +36,7 @@ public class NewDriverProvider {
   private static String browserName;
   private static DesiredCapabilities caps = new DesiredCapabilities();
   private static FirefoxProfile firefoxProfile;
-  private static ChromeOptions chromeOptions;
+  private static ChromeOptions chromeOptions = new ChromeOptions();
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
   private static AndroidDriver mobileDriver;
@@ -159,7 +160,7 @@ public class NewDriverProvider {
 
     // If browserName contains CONSOLE activate JSErrorConsole
     if (browserName.contains("CONSOLE")) {
-      extHelper.addExtension("JSErrorCollector");
+      ExtHelper.addExtension("JSErrorCollector");
     }
 
     if (unstablePageLoadStrategy) {
@@ -175,7 +176,7 @@ public class NewDriverProvider {
     // Adding console logging for FF browser
     setBrowserLogging(Level.SEVERE);
 
-    extHelper.addExtensions(Configuration.getExtensions());
+    ExtHelper.addExtensions(Configuration.getExtensions());
 
     return new EventFiringWebDriver(new FirefoxDriver(caps));
   }
@@ -188,7 +189,6 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getChromeInstance() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
-    chromeOptions = new ChromeOptions();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
@@ -234,7 +234,7 @@ public class NewDriverProvider {
 
     setBrowserLogging(Level.SEVERE);
 
-    extHelper.addExtensions(Configuration.getExtensions());
+    ExtHelper.addExtensions(Configuration.getExtensions());
 
     return new EventFiringWebDriver(new ChromeDriver(caps));
   }
@@ -288,5 +288,13 @@ public class NewDriverProvider {
 
   public static AndroidDriver getMobileDriver() {
     return mobileDriver;
+  }
+
+  public static FirefoxProfile getFirefoxProfile() {
+    return firefoxProfile;
+  }
+
+  public static ChromeOptions getChromeOptions() {
+    return chromeOptions;
   }
 }

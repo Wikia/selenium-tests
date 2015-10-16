@@ -1,13 +1,12 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,29 +22,24 @@ public class ExtHelper {
       .put("CHROMEMOBILEMERCURY", ".crx")
       .put("FF", ".xpi")
       .build();
-  private final FirefoxProfile firefoxProfile;
-  private final ChromeOptions chromeOptions;
 
-  public ExtHelper(FirefoxProfile firefoxProfile, ChromeOptions chromeOptions) {
-    this.firefoxProfile = firefoxProfile;
-    this.chromeOptions = chromeOptions;
-  }
+  public static void addExtension(String name) {
+    String br = Configuration.getBrowser();
 
-  public void addExtension(String name) {
-    if (ext.containsKey(Configuration.getBrowser())) {
-      name = name + ext.get(Configuration.getBrowser());
+    if (ext.containsKey(br)) {
+      name = name + ext.get(br);
     }
 
     File extension = findExtension(name);
 
     try {
 
-      if ("FF".equalsIgnoreCase(Configuration.getBrowser())) {
-        firefoxProfile.addExtension(extension);
+      if ("FF".equalsIgnoreCase(br)) {
+        NewDriverProvider.getFirefoxProfile().addExtension(extension);
       }
 
-      if (Configuration.getBrowser().contains("CHROME")) {
-        chromeOptions.addExtensions(extension);
+      if (br.contains("CHROME")) {
+        NewDriverProvider.getChromeOptions().addExtensions(extension);
       }
 
     } catch (IOException e) {
@@ -53,13 +47,13 @@ public class ExtHelper {
     }
   }
 
-  public void addExtensions(String[] names) {
+  public static void addExtensions(String[] names) {
     for (String name : names) {
       addExtension(name);
     }
   }
 
-  private File findExtension(final String name) {
+  private static File findExtension(final String name) {
     File extensions = new File("." + File.separator +
                                "src" + File.separator +
                                "test" + File.separator +
