@@ -30,11 +30,14 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.android.AndroidDriver;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
-
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class NewDriverProvider {
 
   private static EventFiringWebDriver driver;
