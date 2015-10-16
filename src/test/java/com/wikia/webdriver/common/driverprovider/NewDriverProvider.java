@@ -219,7 +219,7 @@ public class NewDriverProvider {
     // TODO change mobile tests to use @UserAgent annotation
     if ("CHROMEMOBILEMERCURY".equals(browserName)) {
       chromeOptions
-          .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury"));
+          .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone"));
     }
 
 //    chromeOptions.addArguments("user-data-dir="
