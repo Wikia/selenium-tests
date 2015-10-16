@@ -135,8 +135,8 @@ public class Configuration {
     return getProp("countryCode");
   }
 
-  public static String[] getAdBlock() {
-    return toArray(getProp("adblock"));
+  public static String[] getExtensions() {
+    return toArray(getProp("extensions"));
   }
 
   private static String[] toArray(String str) {

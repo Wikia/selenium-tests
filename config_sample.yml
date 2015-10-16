@@ -12,7 +12,7 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
-adblock:
+extensions:
   - adblock+
   - adblock
   - ublock
