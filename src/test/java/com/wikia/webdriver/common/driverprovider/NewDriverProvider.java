@@ -158,11 +158,6 @@ public class NewDriverProvider {
         new FirefoxProfile(new File(ClassLoader.getSystemResource("FirefoxProfiles/Deafult")
                                         .getPath()));
 
-    // If browserName contains CONSOLE activate JSErrorConsole
-    if (browserName.contains("CONSOLE")) {
-      ExtHelper.addExtension("JSErrorCollector");
-    }
-
     if (unstablePageLoadStrategy) {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
