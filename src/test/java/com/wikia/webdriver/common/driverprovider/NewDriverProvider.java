@@ -228,7 +228,6 @@ public class NewDriverProvider {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
     setBrowserLogging(Level.SEVERE);
-    chromeOptions.addExtensions();
 
     ExtHelper.addExtensions(Configuration.getExtensions());
 
