@@ -113,10 +113,10 @@ public class NewDriverProvider {
 
   private static EventFiringWebDriver getAndroidInstance() {
     DesiredCapabilities destCaps = new DesiredCapabilities();
-    destCaps.setCapability("deviceName", Configuration.getDeviceName().toString());
+    destCaps.setCapability("deviceName", Configuration.getDeviceName());
     URL url = null;
     try {
-      url = new URL("http://" + Configuration.getAppiumIp().toString() + "/wd/hub");
+      url = new URL("http://" + Configuration.getAppiumIp() + "/wd/hub");
     } catch (MalformedURLException e) {
       PageObjectLogging.log("getAndroindInstance", e, false);
     }
