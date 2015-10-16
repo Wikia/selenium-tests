@@ -56,10 +56,10 @@ public class ExtHelper {
                                "resources" + File.separator +
                                "extensions" + File.separator);
     name = name + "." + suffix;
-    Collection<File> files = FileUtils.listFiles(extensions, new String[]{suffix}, true);
-    for (File file : files) {
-      if (file.getName().equals(name)) {
-        return file;
+    Collection<File> exts = FileUtils.listFiles(extensions, new String[]{suffix}, true);
+    for (File ext : exts) {
+      if (ext.getName().equals(name)) {
+        return ext;
       }
     }
     throw new WebDriverException(String.format("Can't find '%s' extension", name));
