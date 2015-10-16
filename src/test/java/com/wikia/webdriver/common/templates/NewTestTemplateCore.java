@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeUtils;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -164,8 +164,7 @@ public class NewTestTemplateCore {
   }
 
   public void setGeoEdge(String countryCode) {
-    GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils();
-    String ip = geoEdgeUtils.getIPForCountry(countryCode);
-    networkTrafficInterceptor.setProxyServer(ip);
+    String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
+    networkTrafficInterceptor.setProxyServer(proxyAddress);
   }
 }
