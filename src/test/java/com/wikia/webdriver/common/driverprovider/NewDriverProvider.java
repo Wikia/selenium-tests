@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.driverprovider;
 
 
-import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -36,11 +35,10 @@ public class NewDriverProvider {
   private static String browserName;
   private static DesiredCapabilities caps = new DesiredCapabilities();
   private static FirefoxProfile firefoxProfile;
-  private static ChromeOptions chromeOptions = new ChromeOptions();
+  private static ChromeOptions chromeOptions;
   private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
   private static boolean unstablePageLoadStrategy = false;
   private static AndroidDriver mobileDriver;
-  private static ExtHelper extHelper = new ExtHelper(firefoxProfile, chromeOptions);
 
   private NewDriverProvider() {
 
@@ -190,6 +188,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getChromeInstance() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
+    chromeOptions = new ChromeOptions();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
