@@ -232,7 +232,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void deleteVideo() {
     new ArticleContent()
         .push(
-            "[[File:WikiEvolution - Poznañska Wiki-1445078665|thumb|right|335 px|QAWebdriverCaption1]]");
+            "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px]]QAWebdriverCaption");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
 
