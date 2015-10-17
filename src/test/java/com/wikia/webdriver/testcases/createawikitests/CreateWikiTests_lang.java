@@ -46,6 +46,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
+  @Execute(asUser = User.USER)
    public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }

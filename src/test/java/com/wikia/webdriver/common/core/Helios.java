@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 
-import junit.framework.Test;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -12,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,12 +25,16 @@ import org.openqa.selenium.WebDriverException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Ludwik on 2015-08-05.
  */
 public class Helios {
+
+  public static HashMap<String, String> tokenCache = new HashMap<String, String>();
+
 
   private Helios() {
   }
@@ -41,12 +45,9 @@ public class Helios {
 
   public static String getAccessToken(String userName, String password) {
 
-    if(TestContext.tokenCache.containsKey(userName)){
-      return TestContext.tokenCache.get(userName);
-    }
     String clientId = HeliosConfig.getClientId();
     String clientSecret = HeliosConfig.getClientSecret();
-    String heliosBaseUrl = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
+    String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
     RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(
         3000).build();
@@ -55,7 +56,28 @@ public class Helios {
         HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
             .disableAutomaticRetries().build();
 
-    HttpPost httpPost = new HttpPost(heliosBaseUrl);
+    try {
+      if (tokenCache.containsKey(userName)) {
+
+        String
+            getTokenInfoURL =
+            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO) + String
+                .format("?code=%s", tokenCache.get(userName));
+        HttpGet getInfo = new HttpGet(getTokenInfoURL);
+        getInfo.setConfig(requestConfig);
+
+        if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
+          return tokenCache.get(userName);
+        }
+      }
+    } catch (IOException e) {
+      PageObjectLogging.log("IO EXCEPTION",
+                            "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e),
+                            false);
+      throw new WebDriverException(e);
+    }
+
+    HttpPost httpPost = new HttpPost(heliosGetTokenURL);
     httpPost.setConfig(requestConfig);
     List<NameValuePair> nvps = new ArrayList<>();
 
@@ -85,7 +107,7 @@ public class Helios {
       PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
 
       token = responseValue.getString("access_token");
-      TestContext.tokenCache.put(userName, token);
+      tokenCache.put(userName, token);
     } catch (JSONException e) {
       PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);

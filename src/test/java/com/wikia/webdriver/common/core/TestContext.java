@@ -13,7 +13,6 @@ public class TestContext {
   private static String methodName;
   private static Method testMethod;
   private static boolean isFirstLoad = false;
-  public static HashMap<String, String> tokenCache= new HashMap<String, String>();
 
   public static void writeMethodName(Method method) {
     methodName =
