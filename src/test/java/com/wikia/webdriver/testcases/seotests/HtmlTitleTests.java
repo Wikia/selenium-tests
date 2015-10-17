@@ -21,6 +21,7 @@ public class HtmlTitleTests extends NewTestTemplate {
   private static final String TEST_WIKI_CUSTOM_TITLE = "es.pokemon";
   private static final String TEST_WIKI_ORIGINAL_TITLE = "sktest123";
   private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH = "poznan";
+  private static final String TEST_WIKI_CURATED_CONTENT = "starwars";
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -28,7 +29,6 @@ public class HtmlTitleTests extends NewTestTemplate {
   private Object[][] dataHtmlTitleTest() {
     return new Object[][]{
         // Original title
-        // TODO: SEO-77 Fix the title of the main pages for Mercury
         {
             TEST_WIKI_ORIGINAL_TITLE,
             "Sktest123_Wiki",
@@ -161,7 +161,6 @@ public class HtmlTitleTests extends NewTestTemplate {
             "WikiDex",
             "WikiDex, la enciclopedia Pokémon - Wikia",
         },
-        // TODO: SEO-77 Fix the title of the main pages for Mercury
         {
             TEST_WIKI_CUSTOM_TITLE,
             "Lista_de_Pokémon",
@@ -206,6 +205,32 @@ public class HtmlTitleTests extends NewTestTemplate {
     };
   }
 
+    @DataProvider
+    private Object[][] dataHtmlTitleMercuryTest() {
+        return new Object[][]{
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "wiki/Main_Page",
+                "Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "wiki/Droid_starfighter",
+                "Droid starfighter - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "main/category/1983_computer_and_video_games",
+                "1983 computer and video games - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "main/section/Films",
+                "Films - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+        };
+    }
+
   /**
    * Check HTML title (the contents of <title>) for anon users
    */
@@ -235,6 +260,20 @@ public class HtmlTitleTests extends NewTestTemplate {
     driver.get(wikiURL);
     String actualTitle = driver.getTitle();
     Assertion.assertEquals(actualTitle, expectedTitle);
+  }
+
+  /**
+   * Check HTML title (the contents of <title>) for Mercury
+   */
+  @Test(
+      dataProvider = "dataHtmlTitleMercuryTest",
+      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleMercury"}
+  )
+  public void HtmlTitleMercuryTest(String wiki, String path, String expected) {
+    wikiURL = urlBuilder.getUrlForPathWithoutWiki(wiki, path);
+    driver.get(wikiURL);
+    String title = driver.getTitle();
+    Assertion.assertEquals(title, expected);
   }
 
 }
