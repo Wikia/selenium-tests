@@ -286,6 +286,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
+
     logJSError(driver);
   }
 
