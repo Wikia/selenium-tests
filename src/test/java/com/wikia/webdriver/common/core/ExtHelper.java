@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
 
@@ -17,12 +16,6 @@ import java.util.Collection;
  */
 public class ExtHelper {
 
-  private static ImmutableMap<String, String> ext = new ImmutableMap.Builder<String, String>()
-      .put("CHROME", "crx")
-      .put("CHROMEMOBILEMERCURY", "crx")
-      .put("FF", "xpi")
-      .build();
-
   private ExtHelper() {
 
   }
@@ -30,20 +23,19 @@ public class ExtHelper {
   public static void addExtension(String name) {
     String br = Configuration.getBrowser();
 
-    File extension = findExtension(name, ext.get(br));
-
     try {
 
       if ("FF".equalsIgnoreCase(br)) {
-        NewDriverProvider.getFirefoxProfile().addExtension(extension);
-      }
-
-      if (br.contains("CHROME")) {
-        NewDriverProvider.getChromeOptions().addExtensions(extension);
+        NewDriverProvider.getFirefoxProfile().addExtension(findExtension(name, "xpi"));
+      } else if (br.contains("CHROME")) {
+        NewDriverProvider.getChromeOptions().addExtensions(findExtension(name, "crx"));
+      } else {
+        throw new WebDriverException(
+            String.format("'%s' browser doesn't support adding of extensions", br));
       }
 
     } catch (IOException e) {
-      PageObjectLogging.log("Error occurred during adding extension", e, false);
+      PageObjectLogging.log("Error occurred during adding of extension", e, false);
     }
   }
 
@@ -58,14 +50,15 @@ public class ExtHelper {
                                "src" + File.separator +
                                "test" + File.separator +
                                "resources" + File.separator +
-                               "extensions" + File.separator);
+                               "extensions");
     String fullName = name + "." + suffix;
-    Collection<File> exts = FileUtils.listFiles(extensions, new String[]{suffix}, true);
-    for (File ext : exts) {
-      if (ext.getName().equals(fullName)) {
-        return ext;
+    Collection<File> extFiles = FileUtils.listFiles(extensions, new String[]{suffix}, true);
+    for (File extFile : extFiles) {
+      if (extFile.getName().equals(fullName)) {
+        return extFile;
       }
     }
-    throw new WebDriverException(String.format("Can't find '%s' extension", fullName));
+    throw new WebDriverException(
+        String.format("Can't find '%s' extension in '%s'", fullName, extensions.getPath()));
   }
 }
