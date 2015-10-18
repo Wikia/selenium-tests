@@ -35,7 +35,7 @@ public class ExtHelper {
       }
 
     } catch (IOException e) {
-      PageObjectLogging.log("Error occurred during adding of extension", e, false);
+      PageObjectLogging.log("Error occurred during adding '" + name + "' extension", e, false);
     }
   }
 
