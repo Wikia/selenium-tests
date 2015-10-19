@@ -34,21 +34,6 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     checkAds("US");
   }
 
-  @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_GB"})
-  public void Ads_Screenshot_Mobile_Rapid_GB() {
-    checkAds("GB");
-  }
-
-  @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_CA"})
-  public void Ads_Screenshot_Mobile_Rapid_CA() {
-    checkAds("CA");
-  }
-
-  @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_Rapid_DE"})
-  public void Ads_Screenshot_Mobile_Rapid_DE() {
-    checkAds("DE");
-  }
-
   @GeoEdgeBrowserMobProxy(country = "JP")
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"})
   public void Ads_Screenshot_Mobile_JP() {

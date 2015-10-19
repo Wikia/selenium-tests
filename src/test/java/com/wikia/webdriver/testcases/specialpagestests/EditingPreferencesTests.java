@@ -18,21 +18,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 /**
+ * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
+ * VE-1202 Select CK from editor preference page then clicking on main article edit would launch CK
+ * VE-1202 Select Source from editor preference page then clicking on main article edit would launch
+ * source
+ * 
  * @author Robert 'rochan' Chan
- * @ownership Contribution
- *            <p/>
- *            VE-1202 Select VE from editor preference page then clicking on main article edit would
- *            launch VE VE-1202 Select CK from editor preference page then clicking on main article
- *            edit would launch CK VE-1202 Select Source from editor preference page then clicking
- *            on main article edit would launch source
+ * @ownership Rubix Cube
  */
+@Test(groups = {"EditingPreferencesTest"})
 public class EditingPreferencesTests extends NewTestTemplate {
 
   private static final String SOURCE = "1";
   private static final String VE = "2";
   private static final String CK = "3";
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_001"})
+  @Test(groups = {"EditPreferences_001"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void EditPreferences_001_selectVE() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
@@ -46,7 +47,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_002"})
+  @Test(groups = {"EditPreferences_002"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void EditPreferences_002_selectCK() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
@@ -60,7 +61,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ck.clickPublishButton();
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_003"})
+  @Test(groups = {"EditPreferences_003"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void EditPreferences_003_selectSource() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
@@ -73,10 +74,11 @@ public class EditingPreferencesTests extends NewTestTemplate {
     src.verifySourceOnlyMode();
   }
 
-  @Test(groups = {"EditingPreferencesTest", "EditPreferences_003"})
+  @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
   public void changeEmailAddress() {
     final String newEmailAddress = "myAwesomeEmail@email.co.uk";
+    final String oldEmailAddress = Configuration.getCredentials().email;
 
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
 
@@ -86,11 +88,12 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress);
-    editPrefPage.changeEmail(Configuration.getCredentials().email);
+
+    editPrefPage.changeEmail(oldEmailAddress);
     editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
 
     editPrefPage.openEmailSection();
-    Assertion.assertEquals(editPrefPage.getEmailAdress(), Configuration.getCredentials().email);
+    Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
   }
 }

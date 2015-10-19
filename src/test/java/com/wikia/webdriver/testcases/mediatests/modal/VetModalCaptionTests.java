@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -32,9 +34,9 @@ public class VetModalCaptionTests extends NewTestTemplate {
   String caption;
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_001", "Media"})
+  @Execute(asUser = User.USER)
   public void VetModalCaption_001_captionOnPage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -58,9 +60,9 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_002",
                   "Media"}, dependsOnGroups = "VetModalCaption_001")
+  @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
@@ -70,9 +72,9 @@ public class VetModalCaptionTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_005", "Media"})
+  @Execute(asUser = User.USER)
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =

@@ -3,6 +3,8 @@ package com.wikia.webdriver.common.core;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ludwik on 2015-08-05.

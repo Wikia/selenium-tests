@@ -210,15 +210,16 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   // CT04
-  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"}, enabled = false)
+  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
   public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
     CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
+    comments.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.COMMENTS);
 
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
+    comments.waitForWikiaMobileToBeLoaded();
 
     boolean result = username.equals(comments.getUsernameFromUrl());
     PageObjectLogging.log(

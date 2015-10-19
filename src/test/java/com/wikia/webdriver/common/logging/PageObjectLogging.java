@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -232,6 +233,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
+    new JavascriptActions(driver).execute("window.stop()");
     StringBuilder builder = new StringBuilder();
     builder.append(
         "<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
@@ -264,8 +266,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
       TestContext.setFirstLoad(false);
       User user = method.getAnnotation(Execute.class).asUser();
-      if (user == User.ANONYMOUS) {
-      } else {
+      if (user != User.ANONYMOUS) {
+        // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject(driver).loginAs(user);
       }
     }
@@ -284,6 +286,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
+
     logJSError(driver);
   }
 

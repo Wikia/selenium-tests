@@ -51,7 +51,7 @@ public class BasePageObject {
   public WebDriver driver;
   public WebDriverWait waitFor;
   public Actions builder;
-  protected int timeOut = 30;
+  protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
@@ -355,6 +355,15 @@ public class BasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void waitForElementNotVisibleByElement(WebElement element, long timeout) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, timeout).until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDeaultImplicitWait();
     }

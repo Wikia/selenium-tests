@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.api;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -57,6 +58,9 @@ public class ArticleContent extends ApiCall {
 
   public  void push(String content) {
     push(content, TestContext.getCurrentMethodName());
+  }
+  public  void push() {
+    push(PageContent.ARTICLE_TEXT, TestContext.getCurrentMethodName());
   }
 
   public  void clear(String articleTitle) {

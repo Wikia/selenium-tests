@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -10,9 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
-
-import org.testng.annotations.Test;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 
 /**
  * @ownership Content X-Wing Wikia
@@ -26,7 +26,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_001_CreateArticleWithTOCasAnon() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
     SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
     sourceEditMode.verifySourceModeEnabled();

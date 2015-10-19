@@ -25,12 +25,12 @@ import java.util.List;
 public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = Configuration.getCredentials();
-  private String userOne = credentials.userName;
-  private String userOnePassword = credentials.password;
-  private String userTwo = credentials.userName2;
-  private String userTwoPassword = credentials.password2;
-  private String userThree = credentials.userName3;
-  private String userThreePassword = credentials.password3;
+  private String userOne = credentials.userName10;
+  private String userOnePassword = credentials.password10;
+  private String userTwo = credentials.userName12;
+  private String userTwoPassword = credentials.password12;
+  private String userThree = credentials.userName13;
+  private String userThreePassword = credentials.password13;
   private String userFour = credentials.userName4;
   private String userFourPassword = credentials.password4;
   private String userFive = credentials.userName5;

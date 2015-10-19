@@ -25,7 +25,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = {"Login_001", "Smoke5"})
   public void Login_001_specialPageUser() {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    login.loginAndVerify(credentials.userName, credentials.password, wikiURL);
+    login.loginAndVerify(credentials.userName10, credentials.password10, wikiURL);
   }
 
   @Test(groups = {"Login_002", "Smoke5"})
@@ -34,8 +34,8 @@ public class LoginTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openDropDown();
-    dropDown.logIn(credentials.userName2, credentials.password2);
-    base.verifyUserLoggedIn(credentials.userName2);
+    dropDown.logIn(credentials.userName10, credentials.password10);
+    base.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = {"Login_003", "Smoke5"})
@@ -48,8 +48,8 @@ public class LoginTests extends NewTestTemplate {
     AuthModal authModal = signInLink.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
-    authModal.login(credentials.userName, credentials.password);
-    base.verifyUserLoggedIn(credentials.userName);
+    authModal.login(credentials.userName10, credentials.password10);
+    base.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = "Login_004")

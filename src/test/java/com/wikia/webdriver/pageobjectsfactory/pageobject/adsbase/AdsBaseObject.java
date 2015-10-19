@@ -65,6 +65,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String FLITE_TAG_BROKEN_SELECTOR = "#mw-content-text .error";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
+
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
@@ -319,8 +321,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
     WebElement element = getIframe(slotName, src);
-    Assertion
-        .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
+    Assertion.assertTrue(
+        new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver),
+        "The image is different than the sample"
+    );
     PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
 
     return this;

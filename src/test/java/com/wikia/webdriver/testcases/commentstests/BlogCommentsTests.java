@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -43,9 +45,9 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogComments_002", "BlogCommentsTests"})
+  @Execute(asUser = User.USER)
   public void BlogComments_002_User_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -65,9 +67,9 @@ public class BlogCommentsTests extends NewTestTemplate {
 
 
   @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
+  @Execute(asUser = User.USER)
   public void BlogComments_003_User_editComment() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();

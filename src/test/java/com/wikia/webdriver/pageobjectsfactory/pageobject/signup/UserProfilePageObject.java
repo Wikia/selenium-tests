@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.openqa.selenium.By;
@@ -69,13 +69,13 @@ public class UserProfilePageObject extends WikiBasePageObject {
     return new BlogPageObject(driver);
   }
 
-  public SpecialCreatePagePageObject clickOnCreateBlogPost() {
+  public SpecialCreatePage clickOnCreateBlogPost() {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
                           true, driver);
-    return new SpecialCreatePagePageObject(driver);
+    return new SpecialCreatePage(driver);
   }
 
   private void showAvatarControls() {

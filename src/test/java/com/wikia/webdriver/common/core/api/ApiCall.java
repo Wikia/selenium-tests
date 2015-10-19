@@ -9,6 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriverException;
@@ -53,7 +54,7 @@ public abstract class ApiCall {
   public void call() {
     try {
       URL url = new URL(getURL());
-      CloseableHttpClient httpClient = HttpClients.createDefault();
+      CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
       HttpPost httpPost = getHtppPost(url);
       // set header
       if (getUser() != null) {

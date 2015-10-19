@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -58,13 +60,13 @@ public class GlobalNavigationSearch extends NewTestTemplate {
       groups = {"TestGlobalSearchInGlobalNav_002", "TestGlobalSearchInGlobalNav", "GlobalNav"},
       dataProvider = "getDataForGlobalSearchLoggedIn"
   )
+  @Execute(asUser = User.USER)
   public void TestGlobalSearchInGlobalNav_002_asLoggedIn(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
     HomePageObject homePage = new HomePageObject(driver);
     String wikiUrl = urlBuilder.getUrlForWiki(wikiName);
     homePage.getUrl(wikiUrl);
-    homePage.loginAs(credentials.userName, credentials.password, wikiUrl);
     SearchPageObject search = homePage.getVenusGlobalNav()
         .searchGlobally(query);
 

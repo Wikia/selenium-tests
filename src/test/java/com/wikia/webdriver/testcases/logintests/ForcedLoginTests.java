@@ -34,12 +34,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifySpecialPage();
     specialPage.addPhoto();
     specialPage.verifyModalLoginAppeared();
-    specialPage.logInViaModal(credentials.userName, credentials.password);
+    specialPage.logInViaModal(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName);
+    specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = "ForcedLogin_001_newFile")
@@ -52,11 +52,11 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
-    authModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName10, credentials.password10);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName);
+    specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = {"ForcedLogin_002_video", "Media"})
@@ -65,12 +65,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
     specialPage.verifyModalLoginAppeared();
-    specialPage.logInViaModal(credentials.userName, credentials.password);
+    specialPage.logInViaModal(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddVideoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName);
+    specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = {"ForcedLogin_002_video", "Media"})
@@ -82,12 +82,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
-    authModal.login(credentials.userName, credentials.password);
+    authModal.login(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddVideoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName);
+    specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
   @Test(groups = "ForcedLogin_003_loginRequired")
@@ -96,8 +96,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
-    special.login(credentials.userName, credentials.password);
-    special.verifyUserLoggedIn(credentials.userName);
+    special.login(credentials.userName10, credentials.password10);
+    special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
@@ -109,8 +109,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-    special.login(credentials.userName, credentials.password);
-    special.verifyUserLoggedIn(credentials.userName);
+    special.login(credentials.userName10, credentials.password10);
+    special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
@@ -120,8 +120,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
-    edit.logInViaModal(credentials.userName, credentials.password);
-    edit.verifyUserLoggedIn(credentials.userName);
+    edit.logInViaModal(credentials.userName10, credentials.password10);
+    edit.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(edit.isStringInURL(articleName));
     Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
@@ -138,8 +138,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = edit.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
-    authModal.login(credentials.userName, credentials.password);
-    edit.verifyUserLoggedIn(credentials.userName);
+    authModal.login(credentials.userName10, credentials.password10);
+    edit.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(edit.isStringInURL(articleName));
     Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();

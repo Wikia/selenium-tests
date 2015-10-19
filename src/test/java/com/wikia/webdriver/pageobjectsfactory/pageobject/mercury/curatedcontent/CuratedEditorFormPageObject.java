@@ -32,6 +32,7 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
   }
 
   public void clickDoneButton() {
+    waitForLoadingOverlayToDisappear();
     waitAndClick(doneButton);
   }
 

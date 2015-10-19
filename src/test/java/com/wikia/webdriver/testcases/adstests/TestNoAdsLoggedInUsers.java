@@ -1,64 +1,45 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import org.testng.annotations.Test;
 
 /**
  * @ownership AdEng
  */
 public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
 
-  private void login(String testedWiki) {
-    Credentials credentials = Configuration.getCredentials();
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, testedWiki);
-  }
-
   @GeoEdgeBrowserMobProxy(country = "AU")
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "noAdsForUsers",
-      groups = "TestNoAdsForUsers_AU"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForUsers",
+      groups = "TestNoAdsForUsers_AU")
+  @Execute(asUser = User.USER)
   public void TestNoAdsForUsers_AU(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    String testedWiki = urlBuilder.getUrlForWiki(wikiName);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    login(testedWiki);
     wikiPage.verifyNoAdsOnPage();
   }
 
   @GeoEdgeBrowserMobProxy(country = "VE")
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "noAdsForUsers",
-      groups = "TestNoAdsForUsers_VE"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForUsers",
+      groups = "TestNoAdsForUsers_VE")
+  @Execute(asUser = User.USER)
   public void TestNoAdsForUsers_VE(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    String testedWiki = urlBuilder.getUrlForWiki(wikiName);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    login(testedWiki);
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "noAdsForUsers",
-      groups = "TestNoAdsForUsers_GeoEdgeFree"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForUsers",
+      groups = "TestNoAdsForUsers_GeoEdgeFree")
+  @Execute(asUser = User.USER)
   public void TestNoAdsForUsers_GeoEdgeFree(String wikiName, String path) throws Exception {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    String testedWiki = urlBuilder.getUrlForWiki(wikiName);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    login(testedWiki);
     wikiPage.verifyNoAdsOnPage();
   }
 }

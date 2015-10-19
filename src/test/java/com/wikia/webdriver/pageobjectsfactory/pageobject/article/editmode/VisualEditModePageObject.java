@@ -407,20 +407,24 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public EditCategoryComponentObject editCategory(String categoryName) {
-    WebElement category =
+    WebElement editCategory =
         driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
             categoryName)));
-    jsActions.click(category);
+    WebElement category = driver.findElement(By.cssSelector(".category[data-name='"+categoryName+"']"));
+    new Actions(driver).moveToElement(category).perform();
+    scrollAndClick(editCategory);
     PageObjectLogging.log("editCategory", "edit category button clicked on category "
         + categoryName, true);
     return new EditCategoryComponentObject(driver);
   }
 
   public void removeCategory(String categoryName) {
-    WebElement category =
+    WebElement removeCategory =
         driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
             categoryName)));
-    jsActions.click(category);
+    WebElement category = driver.findElement(By.cssSelector(".category[data-name='"+categoryName+"']"));
+    new Actions(driver).moveToElement(category).perform();
+    scrollAndClick(removeCategory);
     PageObjectLogging.log("removeCategory", "remove category button clicked on category "
         + categoryName, true);
   }

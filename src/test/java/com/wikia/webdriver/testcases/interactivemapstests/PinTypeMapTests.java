@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -24,9 +26,9 @@ public class PinTypeMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void PinTypeMapTests_001_VerifyImageValidationInPinTypeModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -42,9 +44,9 @@ public class PinTypeMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void PinTypeMapTests_002_VerifyClickingAddAnotherPinType() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =

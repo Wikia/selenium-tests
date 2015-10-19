@@ -81,11 +81,11 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticleEdit_005", "CategoriesTestsArticleEditMode"})
+  @Execute(asUser = User.USER)
   public void CategoriesTestsArticleEdit_005_userSuggestions() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+    new ArticleContent().push();
+
+    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
     visual.typeCategoryName(PageContent.CATEGORY_NAME_PREFIX);
     visual.triggerCategorySuggestions();
     String categoryName = visual.selectCategorySuggestions(1);

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,7 +44,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   }
 
   public String getWikiName() {
-    wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + getRandomDigits(3) + getRandomString(5);
+    wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + DateTime.now().getMillis();
     return this.wikiNameString;
   }
 

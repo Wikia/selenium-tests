@@ -147,7 +147,7 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
-    toc.waitForLoadingSpinnerToFinish();
+    toc.waitForLoadingOverlayToDisappear();
 
     boolean result = toc.isUserMovedToRightSection(1);
     PageObjectLogging.log(

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,21 +16,15 @@ import org.testng.annotations.Test;
  */
 public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
 
-  private void login(String testedWiki) {
-    Credentials credentials = Configuration.getCredentials();
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, testedWiki);
-  }
-
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "germanArticles",
       groups = {"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"}
   )
+  @Execute(asUser = User.USER)
   public void NoAds71Media_GeoEdgeFree(String wikiName, String path) throws Exception {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-    login(urlBuilder.getUrlForWiki(wikiName));
     ads71Media.verifyNo71MediaAds();
   }
 }

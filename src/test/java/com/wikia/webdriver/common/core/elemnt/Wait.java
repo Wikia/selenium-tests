@@ -24,7 +24,7 @@ public class Wait {
    * Checks if the element is present in browser DOM
    */
 
-  private static final int DEFAULT_TIMEOUT = 30;
+  private static final int DEFAULT_TIMEOUT = 15;
   private static final String INIT_MESSAGE = "INIT ELEMENT";
   private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
   private static final String ELEMENT_PRESENT_MESSAGE = "ELEMENT PRESENT";

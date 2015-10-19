@@ -32,8 +32,8 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
     CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
-    cnwLogin.typeInUserName(credentials.userName);
-    cnwLogin.typeInPassword(credentials.password);
+    cnwLogin.typeInUserName(credentials.userName13);
+    cnwLogin.typeInPassword(credentials.password13);
     CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
@@ -42,7 +42,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userName);
+    article.verifyUserLoggedIn(credentials.userName13);
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_002"})

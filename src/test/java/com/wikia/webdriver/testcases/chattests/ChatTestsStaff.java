@@ -107,7 +107,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
 
     switchToWindow(driverOne);
     ChatPageObject chatUserOne =
-        openChatForUser(driverOne, credentials.userName, credentials.password);
+        openChatForUser(driverOne, credentials.userName10, credentials.password10);
     SpecialPageObject special = new SpecialPageObject(driver);
     special.verifyPageHeader("Permissions error");
   }

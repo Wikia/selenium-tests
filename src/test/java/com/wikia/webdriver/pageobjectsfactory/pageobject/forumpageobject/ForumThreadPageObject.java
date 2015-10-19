@@ -98,7 +98,6 @@ public class ForumThreadPageObject extends BasePageObject {
 
   public void clickReplyButton() {
     wait.forElementVisible(replyButton);
-    wait.forElementClickable(replyButton);
     scrollAndClick(replyButton);
     wait.forElementVisible(By.cssSelector(".speech-bubble-buttons"));
     PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);

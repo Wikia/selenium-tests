@@ -4,8 +4,10 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.LoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -27,6 +29,10 @@ public class VKTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
+    //@TODO XW-314 - Login is necessary to bypass cache
+    new LoginPageObject(driver).get().logUserIn(Configuration.getCredentials().userNameStaff2,
+                                                Configuration.getCredentials().passwordStaff2);
   }
 
   @Test(groups = "MercuryVKWidgetTest_001")
@@ -70,7 +76,7 @@ public class VKTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryVKWidgetTest_004", enabled = false)
+  @Test(groups = "MercuryVKWidgetTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);

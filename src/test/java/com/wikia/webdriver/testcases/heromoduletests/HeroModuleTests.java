@@ -70,7 +70,7 @@ public class HeroModuleTests extends NewTestTemplate {
     mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.verifyAdminStaffButtons();
     mom.logOut();
-    mom.loginAs(credentials.userName, credentials.password, wikiURL);
+    mom.loginAs(credentials.userName13, credentials.password13, wikiURL);
     mom.verifyNoAdminStaffButtons();
     mom.logOut();
     mom.verifyNoAdminStaffButtons();
