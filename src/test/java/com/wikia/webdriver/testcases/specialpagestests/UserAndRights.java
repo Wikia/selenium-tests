@@ -71,7 +71,6 @@ public class UserAndRights extends NewTestTemplate {
     Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
   }
 
-
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})
   @Execute(asUser = User.STAFF)
   public void staffCanUnblockUser() {
