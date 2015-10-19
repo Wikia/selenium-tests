@@ -1,10 +1,10 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class UrlBuilder {
 
@@ -88,7 +88,13 @@ public class UrlBuilder {
 
   public String appendQueryStringToURL(String url, String qs) {
     String separator = url.contains("?") ? "&" : "?";
-    return url + separator + qs;
+
+    String[] filteredUrl = url.split("#");
+    if (filteredUrl.length > 1) {
+      return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
+    } else {
+      return url + separator + qs;
+    }
   }
 
   private String getUrlPrefix(String wikiName) {
