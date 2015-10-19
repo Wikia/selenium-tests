@@ -20,17 +20,17 @@ public class ExtHelper {
   }
 
   public static void addExtension(String name) {
-    String br = Configuration.getBrowser();
+    String browser = Configuration.getBrowser();
 
     try {
 
-      if ("FF".equalsIgnoreCase(br)) {
+      if ("FF".equalsIgnoreCase(browser)) {
         NewDriverProvider.getFirefoxProfile().addExtension(findExtension(name, "xpi"));
-      } else if (br.contains("CHROME")) {
+      } else if (browser.contains("CHROME")) {
         NewDriverProvider.getChromeOptions().addExtensions(findExtension(name, "crx"));
       } else {
         throw new WebDriverException(
-            String.format("'%s' browser doesn't support adding of extensions", br));
+            String.format("'%s' browser doesn't support adding of extensions", browser));
       }
 
     } catch (IOException e) {
