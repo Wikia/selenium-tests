@@ -17,7 +17,6 @@ import java.util.Collection;
 public class ExtHelper {
 
   private ExtHelper() {
-
   }
 
   public static void addExtension(String name) {
