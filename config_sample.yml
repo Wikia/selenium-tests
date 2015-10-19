@@ -13,6 +13,12 @@ jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
 
+#Add browser extensions.
+#Acceptable values:
+#for CHROME: adblock, adblock+, ublock
+#for FF: adblock+, JSErrorCollector
+extensions: null
+
 #Config related with mobile devices
 platform: ANDROID #acceptable values: IOS and ANDROID
 appiumIp: 127.0.0.1:4723 #Appium IP address with port ex. 127.0.0.1:4723 Windows 0.0.0.0:4723 Unix

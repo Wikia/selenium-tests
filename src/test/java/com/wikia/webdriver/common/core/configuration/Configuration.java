@@ -3,12 +3,14 @@ package com.wikia.webdriver.common.core.configuration;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.properties.Credentials;
 
+import org.apache.commons.lang.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -132,5 +134,20 @@ public class Configuration {
 
   public static String getCountryCode() {
     return getProp("countryCode");
+  }
+
+  public static String[] getExtensions() {
+    String exts = getProp("extensions");
+
+    if (StringUtils.isEmpty(exts)) {
+      return new String[]{};
+    }
+
+    ArrayList<String> res = new ArrayList<>();
+    for (String ext : exts.replace("[", "").replace("]", "").split(",")) {
+      res.add(ext.trim());
+    }
+    
+    return res.toArray(new String[res.size()]);
   }
 }
