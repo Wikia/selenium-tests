@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -136,13 +137,17 @@ public class Configuration {
   }
 
   public static String[] getExtensions() {
-    return toArray(getProp("extensions"));
-  }
+    String exts = getProp("extensions");
 
-  private static String[] toArray(String str) {
-    if (StringUtils.isEmpty(str)) {
+    if (StringUtils.isEmpty(exts)) {
       return new String[]{};
     }
-    return str.replace("[", "").replace("]", "").split(", ");
+
+    ArrayList<String> res = new ArrayList<>();
+    for (String ext : exts.replace("[", "").replace("]", "").split(",")) {
+      res.add(ext.trim());
+    }
+    
+    return res.toArray(new String[res.size()]);
   }
 }
