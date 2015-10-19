@@ -121,7 +121,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getFFInstance() {
     // Windows 8 requires to set webdriver.firefox.bin system variable
     // to path where executive file of FF is placed
-    if ("WINDOWS 8".equals(System.getProperty("os.name").toUpperCase())) {
+    if ("WINDOWS 8".equalsIgnoreCase(System.getProperty("os.name"))) {
       System.setProperty("webdriver.firefox.bin", "c:" + File.separator + "Program Files (x86)"
                                                   + File.separator + "Mozilla Firefox"
                                                   + File.separator + "Firefox.exe");
