@@ -1,5 +1,29 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -10,7 +34,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
-import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -63,34 +86,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.tools.ant.taskdefs.Sleep;
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-
 public class WikiBasePageObject extends BasePageObject {
 
+  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
+  private static final String LOGGED_IN_USER_SELECTOR_OASIS =
+      ".AccountNavigation a[title*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
+      + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -174,18 +178,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private VenusGlobalNavPageObject venusGlobalNav;
-
-  protected final static By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
-  private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".AccountNavigation a[title*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + "," +
-                                                        LOGGED_IN_USER_SELECTOR_OASIS + "," +
-                                                        LOGGED_IN_USER_SELECTOR_MONOBOOK;
 
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
@@ -551,13 +545,17 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      wait.forElementVisible(By.cssSelector(
-          LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
+      wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
+          userName.replace(" ", "_"))));
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
     }
     PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
+  }
+
+  public void verifyUserLoggedIn(User user) {
+    verifyUserLoggedIn(user.getUserName());
   }
 
   protected void clickArticleDeleteConfirmationButton() {
@@ -625,7 +623,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyPermissionsErrorsPresent() {
     wait.forElementVisible(premissionErrorMessage);
     PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected", true,
-                          driver);
+        driver);
   }
 
   public void verifyUrl(String url) {
@@ -667,10 +665,11 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String receiveMailWithNewPassword(String email, String password) {
-    String newPassword = MailFunctions.getPasswordFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password"));
+    String newPassword =
+        MailFunctions.getPasswordFromEmailContent(MailFunctions.getFirstEmailContent(email,
+            password, "Reset your Wikia password"));
     PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
-                          true);
+        true);
 
     return newPassword;
   }
@@ -687,7 +686,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
     PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "
-                                            + summary, true);
+        + summary, true);
     return summary;
   }
 
@@ -736,12 +735,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-    String token =
-        Helios.getAccessToken(userName, password);
+    String token = Helios.getAccessToken(userName, password);
 
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
-
-//    jsActions.execute("window.stop()");
 
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
 
@@ -753,32 +749,13 @@ public class WikiBasePageObject extends BasePageObject {
     }
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-                                         + token, true);
+        + token, true);
     return token;
   }
 
   public String loginAs(User user) {
-
-//    if(StringUtils.isNotBlank(user.getAccessToken())){
-//      String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
-//
-//      jsActions.execute("window.stop()");
-//      driver.manage().addCookie(new Cookie("access_token", user.getAccessToken(), domian, null, null));
-//
-//      if (driver.getCurrentUrl().contains("Logout")) {
-//        driver.get(urlBuilder.getUrlForWiki());
-//      } else {
-//        driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
-//                                                                             + DateTime.now().getMillis()));
-//      }
-//
-//      verifyUserLoggedIn(user.getUserName());
-//
-//      return user.getAccessToken();
-//    }else{
-      return loginAs(user.getUserName(), user.getPassword(),
-                     urlBuilder.getUrlForWiki(Configuration.getWikiName()));
-//    }
+    return loginAs(user.getUserName(), user.getPassword(),
+        urlBuilder.getUrlForWiki());
   }
 
   public void openWikiPage(String wikiURL) {
@@ -800,7 +777,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public WatchPageObject unfollowCurrentUrl() {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
-                                                 URLsContent.ACTION_UNFOLLOW));
+        URLsContent.ACTION_UNFOLLOW));
     return new WatchPageObject(driver);
   }
 
@@ -857,15 +834,14 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
-                                             URLsContent.VEACTION_EDIT));
+        URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject(driver);
   }
 
   public void addVideoViaAjax(String videoURL) {
     jsActions.execute("$.ajax('" + getWikiUrl()
-                      + "wikia.php?controller=Videos&method=addVideo&format=json', {"
-                      + "data: {url: '"
-                      + videoURL + "'}," + "type: 'POST' } );");
+        + "wikia.php?controller=Videos&method=addVideo&format=json', {" + "data: {url: '"
+        + videoURL + "'}," + "type: 'POST' } );");
   }
 
   /**
@@ -914,7 +890,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyArticleNameInWgPageName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log("verifyArticleNameInWgPageName",
-                          "The wgPageName variable contains article name" + targetText, true);
+        "The wgPageName variable contains article name" + targetText, true);
   }
 
   public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {

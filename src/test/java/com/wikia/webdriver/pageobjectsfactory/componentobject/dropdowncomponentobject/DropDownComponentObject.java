@@ -1,11 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,7 +10,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -83,7 +84,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
   public void remindPassword(String userName, String apiToken) {
     Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
-                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     fillUserNameInput(userName);
     wait.forElementVisible(formForgotPasswordLink);
     scrollAndClick(formForgotPasswordLink);
@@ -94,6 +95,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
     fillPasswordInput(password);
     scrollAndClick(formSubmitButton);
     PageObjectLogging.log("LoginFormSubmitted", "Login form is submitted", true);
+  }
+
+  public void logIn(User user) {
+    logIn(user.getUserName(), user.getPassword());
   }
 
   public DropDownComponentObject clickLogOut() {
@@ -156,6 +161,6 @@ public class DropDownComponentObject extends WikiBasePageObject {
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
-                          true);
+        true);
   }
 }
