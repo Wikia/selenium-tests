@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -26,7 +27,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test
+  @Test()
+  @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
   public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
@@ -76,6 +78,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
+  @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
   public void remindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword3;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
