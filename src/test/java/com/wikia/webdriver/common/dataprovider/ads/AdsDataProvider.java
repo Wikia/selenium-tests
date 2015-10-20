@@ -597,21 +597,39 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteTagBroken() {
+  public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {"adtest", "SyntheticTests/FliteTagBrokenWidth",
-         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."},
+         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value.", "#mw-content-text .error"},
         {"adtest", "SyntheticTests/FliteTagBrokenHeight",
-         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."},
+         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value.", "#mw-content-text .error"},
         {"adtest", "SyntheticTests/FliteTagBrokenTag",
-         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."}};
+         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content.", "#mw-content-text .error"}};
   }
 
   @DataProvider
-  public static Object[][] fliteTag() {
+  public static Object[][] fliteTagBrokenMercury() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/FliteTag"},
-        {"adtest", "SyntheticTests/FliteTagModifiedTag"}};
+        {"adtest", "SyntheticTests/FliteTagBrokenWidth",
+         "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value.", ".ember-view.article-content.mw-content .error"},
+        {"adtest", "SyntheticTests/FliteTagBrokenHeight",
+         "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value.", ".ember-view.article-content.mw-content .error"},
+        {"adtest", "SyntheticTests/FliteTagBrokenTag",
+         "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content.", ".ember-view.article-content.mw-content .error"}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTagOasis() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTag", ".flite-tag-extension"},
+        {"adtest", "SyntheticTests/FliteTagModifiedTag", ".flite-tag-extension"}};
+  }
+
+  @DataProvider
+  public static Object[][] fliteTagMercury() {
+    return new Object[][]{
+        {"adtest", "SyntheticTests/FliteTag", ".widget-flite" },
+        {"adtest", "SyntheticTests/FliteTagModifiedTag", ".widget-flite"}};
   }
 
   @DataProvider

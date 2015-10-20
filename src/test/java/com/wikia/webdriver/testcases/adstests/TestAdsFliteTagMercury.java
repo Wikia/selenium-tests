@@ -1,23 +1,22 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
 /**
- * @ownership: AdEng
+ * @ownership: AdEngineering Wikia
  */
-public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
-
+public class TestAdsFliteTagMercury extends MobileTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagOasis",
-      groups = "AdsFliteTagOasis"
+      dataProvider = "fliteTagMercury",
+      groups = "AdsFliteTagMercury"
   )
-  public void adsFliteTagOasis(String wikiName, String article, String cssFliteSelector) {
+  public void adsFliteTagMercury(String wikiName, String article, String cssFliteSelector) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyFliteTag(cssFliteSelector);
@@ -25,13 +24,13 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagBrokenOasis",
-      groups = "AdsFliteTagOasis"
+      dataProvider = "fliteTagBrokenMercury",
+      groups = "AdsFliteTagMercury"
   )
-  public void adsFliteTagBrokenOasis(String wikiName, String article, String error,
-                                     String cssFliteBrokenSelector) {
+  public void adsFliteTagBrokenMercury(String wikiName, String article, String error, String cssFliteBrokenSelector) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyFliteTagBroken(error, cssFliteBrokenSelector);
   }
+
 }
