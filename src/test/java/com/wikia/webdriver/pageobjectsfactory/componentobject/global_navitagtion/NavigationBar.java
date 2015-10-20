@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
@@ -146,7 +147,9 @@ public class NavigationBar extends WikiBasePageObject {
     jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 
-  public void clickOnSignIn(){
+  public AuthModal clickOnSignIn(){
     signInLink.click();
+
+    return new AuthModal(driver);
   }
 }

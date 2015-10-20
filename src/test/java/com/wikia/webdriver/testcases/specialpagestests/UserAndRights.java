@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContactGeneralPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
@@ -40,21 +41,24 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights002"}, dependsOnMethods = {"staffCanBlockUser"})
   public void blockedUserShouldSeeMessageOnArticleEdit() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     VisualEditModePageObject edit =
-        base.goToArticleDefaultContentEditPage(wikiURL,
-            PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
+        new WikiBasePageObject(driver).goToArticleDefaultContentEditPage(wikiURL,
+            PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
+
+    edit.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    edit.verifyUserLoggedIn(User.BLOCKED_USER);
+
     edit.verifyBlockedUserMessage();
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
-  @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldBeAbleToChangeEmail() {
     final String newEmailAddress = "myAwesomeEmail@email.co.uk";
     final String oldEmailAddress = Configuration.getCredentials().email;
 
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
+    editPrefPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
@@ -69,6 +73,16 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
+  }
+
+  @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
+  public void blockedUserShouldBeAbleToAccessSpecialContactPage() {
+    SpecialContactGeneralPage contactPage = new SpecialContactGeneralPage(driver).open();
+
+    contactPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    contactPage.verifyUserLoggedIn(User.BLOCKED_USER);
+
+    Assertion.assertTrue(contactPage.isLoggedInUserMessageVisible(User.BLOCKED_USER));
   }
 
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})

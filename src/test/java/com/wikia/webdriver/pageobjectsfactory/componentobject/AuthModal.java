@@ -1,5 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,10 +48,15 @@ public class AuthModal {
   }
 
   public void login(String username, String password){
+    new Wait(webDriver).forElementVisible(iFrame);
     switchToFrame();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     signInButton.click();
     switchBack();
+  }
+
+  public void login(User user){
+    login(user.getUserName(), user.getPassword());
   }
 }
