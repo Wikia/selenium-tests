@@ -73,6 +73,8 @@ public class ForumNotificationsTests extends NewTestTemplate {
   public void forumNotificationsTests_004_userAVerifiesNotifications() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
+
+    forumMainPage.openForumMainPage(wikiURL);
     notifications.showNotifications();
     String anchoredLink = notifications.getNotificationLink(
         credentials.userNameStaff + " and " +
