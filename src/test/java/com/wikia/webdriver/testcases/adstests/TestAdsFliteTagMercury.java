@@ -8,8 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 /**
- * @ownership: AdEngineering Wikia
+ * @ownership AdEng
  */
+@Test(groups = "AdsFliteTagMercury")
 public class TestAdsFliteTagMercury extends MobileTestTemplate {
 
   private static final String FLITE_CSS_SELECTOR_MERCURY = ".widget-flite";
@@ -19,8 +20,7 @@ public class TestAdsFliteTagMercury extends MobileTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagMercury",
-      groups = "AdsFliteTagMercury"
+      dataProvider = "fliteTagMercury"
   )
   @Execute(onWikia = "adtest")
   public void adsFliteTagMercury(String article) {
@@ -31,12 +31,11 @@ public class TestAdsFliteTagMercury extends MobileTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagBrokenMercury",
-      groups = "AdsFliteTagMercury"
+      dataProvider = "fliteTagBrokenMercury"
   )
   @Execute(onWikia = "adtest")
-  public void adsFliteTagBrokenMercury(String wikiName, String article, String error) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+  public void adsFliteTagBrokenMercury(String article, String error) {
+    String testedPage = urlBuilder.getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyFliteTagBroken(error, FLITE_ERROR_CSS_SELECTOR_MERCURY);
   }

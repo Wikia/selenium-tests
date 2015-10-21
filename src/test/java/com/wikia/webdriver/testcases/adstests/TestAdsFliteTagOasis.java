@@ -8,8 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 /**
- * @ownership: AdEng
+ * @ownership AdEng
  */
+@Test(groups = "AdsFliteTagOasis")
 public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
 
   private static final String FLITE_CSS_SELECTOR_OASIS = ".flite-tag-extension";
@@ -17,8 +18,7 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagOasis",
-      groups = "AdsFliteTagOasis"
+      dataProvider = "fliteTagOasis"
   )
   @Execute(onWikia = "adtest")
   public void adsFliteTagOasis(String article) {
@@ -29,14 +29,11 @@ public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "fliteTagBrokenOasis",
-      groups = "AdsFliteTagOasis"
+      dataProvider = "fliteTagBrokenOasis"
   )
   @Execute(onWikia = "adtest")
-  public void adsFliteTagBrokenOasis(String wikiName,
-                                     String article,
-                                     String error) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+  public void adsFliteTagBrokenOasis(String article, String error) {
+    String testedPage = urlBuilder.getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyFliteTagBroken(error, FLITE_ERROR_CSS_SELECTOR_OASIS);
   }

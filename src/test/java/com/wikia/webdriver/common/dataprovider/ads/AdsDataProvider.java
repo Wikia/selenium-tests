@@ -600,17 +600,14 @@ public class AdsDataProvider {
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenWidth",
             "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
         },
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenHeight",
             "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
         },
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenTag",
             "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
         }
@@ -621,17 +618,14 @@ public class AdsDataProvider {
   public static Object[][] fliteTagBrokenMercury() {
     return new Object[][]{
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenWidth",
             "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
         },
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenHeight",
             "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
         },
         {
-            "adtest",
             "SyntheticTests/FliteTagBrokenTag",
             "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
         }
@@ -641,8 +635,8 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] fliteTagOasis() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/FliteTag"},
-        {"adtest", "SyntheticTests/FliteTagModifiedTag"}};
+        {"SyntheticTests/FliteTag"},
+        {"SyntheticTests/FliteTagModifiedTag"}};
   }
 
   @DataProvider
