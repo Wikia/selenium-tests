@@ -1,5 +1,6 @@
-#THIS IS SAMPLE FILE
-#Copy its content to config.yml file
+# THIS IS A DEFAULT CONFIGURATION
+# To localy override values, create config.yml file next to this one.
+# You can also override these values by specyfing a system property
 
 browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY
 wikiName: mediawiki119 #default testing wiki

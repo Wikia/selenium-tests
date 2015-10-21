@@ -24,9 +24,8 @@ import com.wikia.webdriver.common.properties.Credentials;
  * <li>If no System Property is found - value is provided from configuration files
  * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
  * config_default.yml</li>
- * NOTE: system property should override ANY property specified in config files
  * </ol>
- */
+ * */
 public class Configuration {
 
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
