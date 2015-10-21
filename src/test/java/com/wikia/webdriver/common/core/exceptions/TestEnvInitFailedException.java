@@ -9,4 +9,8 @@ public class TestEnvInitFailedException extends RuntimeException {
   public TestEnvInitFailedException(String message) {
     super(message);
   }
+
+  public TestEnvInitFailedException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

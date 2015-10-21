@@ -1,50 +1,66 @@
 package com.wikia.webdriver.common.core.configuration;
 
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.properties.Credentials;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
- * Configuration handling: 1. If there is a System Property specified - return value of this
- * property 2. If no System Property is found - value is provided from configuration files
- * (config_sample.yml if no config.yml provided) NOTE: system property should override ANY property
- * specified in config files
- */
+ * Configuration handling:
+ * <ol>
+ * <li>Look for the property key in testConfig map, if key is present, return the value</li>
+ * <li>Look for the property key in system properties - return value of this property if key present
+ * </li>
+ * <li>If no System Property is found - value is provided from configuration files
+ * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
+ * config_default.yml</li>
+ * </ol>
+ * */
 public class Configuration {
 
-  private static Map<String, String> config;
+  private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
+  private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
+  private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
+
+  private static Map<String, String> defaultConfig;
+  private static Map<String, String> localConfig = new HashMap<>();
   private static Map<String, String> testConfig = new HashMap<>();
 
-  private Configuration() {
-  }
+  private Configuration() {}
 
   private static Map<String, String> readConfiguration() {
-    if (config == null) {
+    if (defaultConfig == null) {
       Yaml yaml = new Yaml();
-      InputStream input = null;
+
       try {
-        input = new FileInputStream(new File("config.yml"));
-      } catch (FileNotFoundException ex) {
-        try {
-          input = new FileInputStream(new File("config_sample.yml"));
-        } catch (FileNotFoundException ex2) {
-          throw new TestEnvInitFailedException("CAN'T LOCATE CONFIG FILE");
-        }
+        defaultConfig =
+            (Map<String, String>) yaml
+                .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
+      } catch (FileNotFoundException e) {
+        throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
+            DEFAULT_CONFIG_FILE_NAME), e);
       }
-      config = (Map<String, String>) yaml.load(input);
+
+      try {
+        defaultConfig.putAll((Map<String, String>) yaml.load(new FileInputStream(new File(
+            LOCAL_CONFIG_FILE_NAME))));
+      } catch (FileNotFoundException e) {
+        LOGGER.log(Level.INFO, "local config file not found", e);
+      }
     }
-    return config;
+
+    return defaultConfig;
   }
 
   private static String getPropertyFromFile(String propertyName) {
@@ -55,7 +71,7 @@ public class Configuration {
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-                                                      : getPropertyFromFile(propertyName);
+          : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }
@@ -140,14 +156,14 @@ public class Configuration {
     String exts = getProp("extensions");
 
     if (StringUtils.isEmpty(exts)) {
-      return new String[]{};
+      return new String[] {};
     }
 
     ArrayList<String> res = new ArrayList<>();
     for (String ext : exts.replace("[", "").replace("]", "").split(",")) {
       res.add(ext.trim());
     }
-    
+
     return res.toArray(new String[res.size()]);
   }
 }

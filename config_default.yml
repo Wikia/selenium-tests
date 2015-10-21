@@ -1,8 +1,8 @@
-#THIS IS SAMPLE FILE
-#Copy its content to config.yml file
-#It is used only when you run tests using IDE
+# THIS IS A DEFAULT CONFIGURATION
+# To localy override values, create config.yml file next to this one.
+# You can also override these values by specyfing a system property
 
-browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY
+browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY, HTMLUNIT
 wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: /selenium-config/config.xml #Path to your config.xml file
