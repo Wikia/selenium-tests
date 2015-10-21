@@ -47,6 +47,10 @@ public class UrlBuilder {
     return url;
   }
 
+  public String getUrlForPath(String wikiPath) {
+    return getUrlForPath(Configuration.getWikiName(), wikiPath);
+  }
+
   public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
     return getUrlForWiki(wikiName) + wikiPath;
   }

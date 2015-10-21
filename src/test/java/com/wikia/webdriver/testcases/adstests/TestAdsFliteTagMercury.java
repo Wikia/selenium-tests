@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -11,15 +12,21 @@ import org.testng.annotations.Test;
  */
 public class TestAdsFliteTagMercury extends MobileTestTemplate {
 
+  private static final String FLITE_CSS_SELECTOR_MERCURY = ".widget-flite";
+  private static final String
+      FLITE_ERROR_CSS_SELECTOR_MERCURY =
+      ".ember-view.article-content.mw-content .error";
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteTagMercury",
       groups = "AdsFliteTagMercury"
   )
-  public void adsFliteTagMercury(String wikiName, String article, String cssFliteSelector) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+  @Execute(onWikia = "adtest")
+  public void adsFliteTagMercury(String article) {
+    String testedPage = urlBuilder.getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyFliteTag(cssFliteSelector);
+    wikiPage.verifyFliteTag(FLITE_CSS_SELECTOR_MERCURY);
   }
 
   @Test(
@@ -27,10 +34,10 @@ public class TestAdsFliteTagMercury extends MobileTestTemplate {
       dataProvider = "fliteTagBrokenMercury",
       groups = "AdsFliteTagMercury"
   )
-  public void adsFliteTagBrokenMercury(String wikiName, String article, String error, String cssFliteBrokenSelector) {
+  @Execute(onWikia = "adtest")
+  public void adsFliteTagBrokenMercury(String wikiName, String article, String error) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyFliteTagBroken(error, cssFliteBrokenSelector);
+    wikiPage.verifyFliteTagBroken(error, FLITE_ERROR_CSS_SELECTOR_MERCURY);
   }
-
 }
