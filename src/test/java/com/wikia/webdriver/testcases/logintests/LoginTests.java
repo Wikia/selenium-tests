@@ -1,6 +1,14 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import junit.framework.Assert;
+
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -8,10 +16,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
-import junit.framework.Assert;
-import org.testng.annotations.Test;
 
 /**
  * @ownership Social
@@ -74,7 +80,7 @@ public class LoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
-    
+
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
@@ -87,6 +93,19 @@ public class LoginTests extends NewTestTemplate {
   @Execute(onWikia = "ja.ja-test")
   public void Login_007_japaneseUserLogin() {
     SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
-    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2, wikiURL);
+    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2,
+        wikiURL);
+  }
+
+  @Test(groups = "Login_008")
+  @Execute(asUser = User.USER_12)
+  public void userWithoutAValidTokenIsForcedLogout() {
+    new ArticleContent().clear();
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
+    Helios.deleteAllTokens(User.USER_12);
+
+    driver.navigate().refresh();
+    Assertion.assertTrue(article.getVenusGlobalNav().isUserLoggedOut());
   }
 }
