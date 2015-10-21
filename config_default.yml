@@ -1,6 +1,5 @@
 #THIS IS SAMPLE FILE
 #Copy its content to config.yml file
-#It is used only when you run tests using IDE
 
 browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY
 wikiName: mediawiki119 #default testing wiki
