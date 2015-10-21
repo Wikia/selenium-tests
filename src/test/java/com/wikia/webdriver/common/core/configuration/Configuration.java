@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
@@ -48,14 +49,14 @@ public class Configuration {
                 .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
         throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
-            DEFAULT_CONFIG_FILE_NAME));
+            DEFAULT_CONFIG_FILE_NAME), e);
       }
 
       try {
         defaultConfig.putAll((Map<String, String>) yaml.load(new FileInputStream(new File(
             LOCAL_CONFIG_FILE_NAME))));
       } catch (FileNotFoundException e) {
-        LOGGER.info("local config file not found");
+        LOGGER.log(Level.INFO, "local config file not found", e);
       }
     }
 
