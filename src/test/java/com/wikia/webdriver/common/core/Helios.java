@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
@@ -35,12 +36,13 @@ import com.wikia.webdriver.common.properties.HeliosConfig;
  */
 public class Helios {
 
-  public static HashMap<String, String> tokenCache = new HashMap<String, String>();
+  private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
       .setSocketTimeout(3000).build();
+  private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
 
-
-  private Helios() {}
+  private Helios() {
+  }
 
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
@@ -74,7 +76,7 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
   }
@@ -104,7 +106,7 @@ public class Helios {
       }
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE+ ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
 
@@ -147,7 +149,7 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return token;
