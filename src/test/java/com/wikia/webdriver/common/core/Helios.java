@@ -37,12 +37,11 @@ import com.wikia.webdriver.common.properties.HeliosConfig;
 public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
+  private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
       .setSocketTimeout(3000).build();
-  private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
 
-  private Helios() {
-  }
+  private Helios() {}
 
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
@@ -62,12 +61,7 @@ public class Helios {
 
     CloseableHttpResponse response = null;
     try {
-      try {
-        response = httpClient.execute(httpDelete);
-      } catch (ConnectTimeoutException e) {
-        PageObjectLogging.log("Timeout when connecting to helios", e, true);
-        response = httpClient.execute(httpDelete);
-      }
+      response = httpClient.execute(httpDelete);
 
       PageObjectLogging.log("DELETE HEADERS: ", response.toString(), true);
 
@@ -106,7 +100,7 @@ public class Helios {
       }
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          IOEXCEPTION_ERROR_MESSAGE+ ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
 
