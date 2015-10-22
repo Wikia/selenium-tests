@@ -1,5 +1,0 @@
-browser:  CHROME #acceptable values  FF, CHROME, GHOST, ANDROID, CHROMEMOBILE, CHROMEMOBILEMERCURY
-wikiName: mediawiki119 #default testing wiki
-env: preview #acceptable values: prod, preview, sandbox-number dev-name
-credentialsPath: c:/selenium-config/config.xml #Path to your config.xml file
-captchaPath: /selenium-config/captcha.txt #Path to your captcha.txt file
