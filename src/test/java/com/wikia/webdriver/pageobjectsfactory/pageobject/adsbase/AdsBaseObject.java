@@ -61,8 +61,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
-  private static final String FLITE_TAG_SELECTOR = ".flite-tag-extension";
-  private static final String FLITE_TAG_BROKEN_SELECTOR = "#mw-content-text .error";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
@@ -74,10 +72,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentMedrec;
   @FindBy(css = INCONTENT_BOXAD_SELECTOR)
   private WebElement incontentBoxad;
-  @FindBy(css = FLITE_TAG_SELECTOR)
-  private WebElement fliteTag;
-  @FindBy(css = FLITE_TAG_BROKEN_SELECTOR)
-  private WebElement fliteTagBroken;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
 
@@ -143,13 +137,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
   }
 
-  public void verifyFliteTag() {
-    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_SELECTOR)));
+  public void verifyFliteTag(String cssFliteSelector) {
+    scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
+    WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
     verifySlotExpanded(fliteTag);
   }
 
-  public void verifyFliteTagBroken(String error) {
-    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_BROKEN_SELECTOR)));
+  public void verifyFliteTagBroken(String error, String cssFliteBrokenSelector) {
+    scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
+    WebElement fliteTagBroken = driver.findElement(By.cssSelector(cssFliteBrokenSelector));
     Assertion.assertEquals(fliteTagBroken.getText(), error);
   }
 
@@ -622,7 +618,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
-    String slotName = element.getAttribute("id").replace("wikia_gpt","google_ads_iframe_");
+    String slotName = element.getAttribute("id").replace("wikia_gpt", "google_ads_iframe_");
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
     String adTypeScriptXpath = String.format("//script[contains(text(), \"%s\")]", hopAdType);
     WebElement iframe = element.findElement(By.cssSelector(iframeSelector));
