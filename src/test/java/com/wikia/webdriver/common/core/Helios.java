@@ -41,7 +41,8 @@ public class Helios {
   private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
       .setSocketTimeout(3000).build();
 
-  private Helios() {}
+  private Helios() {
+  }
 
   public static String getAccessToken(User user) {
     return getAccessToken(user.getUserName(), user.getPassword());
