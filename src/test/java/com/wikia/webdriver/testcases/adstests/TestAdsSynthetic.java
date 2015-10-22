@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestAdsSynthetic extends TemplateNoFirstLoad {
 

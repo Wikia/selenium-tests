@@ -31,7 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEngineering Wikia
  */
 public class AdsBaseObject extends WikiBasePageObject {
 

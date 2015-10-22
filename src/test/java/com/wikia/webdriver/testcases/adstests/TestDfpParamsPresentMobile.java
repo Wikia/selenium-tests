@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/LINE_ITEM_ID=115974612
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestDfpParamsPresentMobile extends MobileTestTemplate {
 

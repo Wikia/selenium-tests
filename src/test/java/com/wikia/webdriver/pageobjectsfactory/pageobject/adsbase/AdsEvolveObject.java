@@ -9,8 +9,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
 /**
- * @author Dmytro Rets
- * @ownership AdEngineering
+ * @ownership AdEngineering Wikia
  */
 public class AdsEvolveObject extends AdsBaseObject {
 

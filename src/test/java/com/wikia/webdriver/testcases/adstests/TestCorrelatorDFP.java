@@ -7,6 +7,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership AdEngineering Wikia
+ */
 public class TestCorrelatorDFP extends TemplateNoFirstLoad {
 
   String correlatorDesktop = "_adtest,home,gpt";

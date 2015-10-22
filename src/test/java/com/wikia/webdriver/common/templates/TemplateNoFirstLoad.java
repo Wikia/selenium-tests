@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TemplateNoFirstLoad extends NewTestTemplate {
 

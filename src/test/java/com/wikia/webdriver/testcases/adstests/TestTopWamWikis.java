@@ -8,6 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership AdEngineering Wikia
+ */
 public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   Credentials credentials = Configuration.getCredentials();

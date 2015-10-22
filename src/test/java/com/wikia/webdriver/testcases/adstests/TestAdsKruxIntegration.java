@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
 

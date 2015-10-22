@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestAdsProvidersChainOasis extends TemplateNoFirstLoad {
 
