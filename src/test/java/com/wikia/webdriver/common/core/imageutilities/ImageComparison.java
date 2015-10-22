@@ -89,7 +89,7 @@ public class ImageComparison {
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      PageObjectLogging.logWarning("areImagesTheSame", "Images have different sizes");
+      PageObjectLogging.logWarning("areImagesDifferent", "Images have different sizes");
       return true;
     }
     int count = image1.getHeight() * image1.getWidth();
