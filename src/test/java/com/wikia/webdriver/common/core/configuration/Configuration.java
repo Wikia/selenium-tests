@@ -34,7 +34,6 @@ public class Configuration {
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
   private static Map<String, String> defaultConfig;
-  private static Map<String, String> localConfig = new HashMap<>();
   private static Map<String, String> testConfig = new HashMap<>();
 
   private Configuration() {}
