@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesio
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
+
 /**
  * @ownership AdEngineering Wikia
  */

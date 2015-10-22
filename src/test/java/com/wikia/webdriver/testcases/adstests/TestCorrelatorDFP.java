@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
 import org.testng.annotations.Test;
+
 /**
  * @ownership AdEngineering Wikia
  */
