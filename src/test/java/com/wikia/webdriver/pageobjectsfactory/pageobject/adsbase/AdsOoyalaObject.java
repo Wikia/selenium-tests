@@ -12,8 +12,7 @@ import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Dmytro Rets
- * @ownership AdEngineering
+ * @ownership AdEngineering Wikia
  */
 public class AdsOoyalaObject extends AdsBaseObject {
 

@@ -6,8 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 /**
- * @author Piotr 'Rychu' Gabryjeluk
- * @ownership AdEngineering
+ * @ownership AdEngineering Wikia
  */
 public class SonySideViewObject extends BasePageObject {
 

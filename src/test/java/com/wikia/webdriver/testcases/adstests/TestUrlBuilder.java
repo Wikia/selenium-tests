@@ -9,7 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestUrlBuilder extends TemplateNoFirstLoad {
 

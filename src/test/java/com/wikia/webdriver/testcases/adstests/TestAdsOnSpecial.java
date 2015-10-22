@@ -9,9 +9,8 @@ import org.testng.annotations.Test;
 
 
 /**
- * @author Sergey Naumov
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 @Test(
     groups = {"Ads_Special_Pages", "Ads"}

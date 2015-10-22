@@ -6,7 +6,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesio
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
-
+/**
+ * @ownership AdEngineering Wikia
+ */
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   private static final String WIKI_NAME = "adtest";

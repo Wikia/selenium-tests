@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @ownership AdEngineering
+ * @ownership AdEngineering Wikia
  */
 public class AdsKruxObject extends AdsBaseObject {
 

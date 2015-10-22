@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestDfpParamsPresent extends TemplateNoFirstLoad {
 

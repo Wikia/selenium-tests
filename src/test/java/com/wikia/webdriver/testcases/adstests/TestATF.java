@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 
 /**
- * @ownership AdEng
+ * @ownership AdEngineering Wikia
  */
 public class TestATF extends TemplateNoFirstLoad {
 
