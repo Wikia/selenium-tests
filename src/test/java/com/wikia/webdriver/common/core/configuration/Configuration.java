@@ -52,11 +52,17 @@ public class Configuration {
             DEFAULT_CONFIG_FILE_NAME), e);
       }
 
-      try {
-        defaultConfig.putAll((Map<String, String>) yaml.load(new FileInputStream(new File(
-            LOCAL_CONFIG_FILE_NAME))));
-      } catch (FileNotFoundException e) {
-        LOGGER.log(Level.INFO, "local config file not found", e);
+
+      File localConfigFile = new File(LOCAL_CONFIG_FILE_NAME);
+      if (localConfigFile.exists()) {
+        try {
+          defaultConfig.putAll((Map<String, String>) yaml
+              .load(new FileInputStream(localConfigFile)));
+        } catch (FileNotFoundException e) {
+          LOGGER.log(Level.INFO, "local config file not found", e);
+        }
+      } else {
+        LOGGER.log(Level.INFO, "local config file does not exist");
       }
     }
 
