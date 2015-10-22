@@ -22,6 +22,8 @@ public class HtmlTitleTests extends NewTestTemplate {
   private static final String TEST_WIKI_ORIGINAL_TITLE = "sktest123";
   private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH = "poznan";
   private static final String TEST_WIKI_CURATED_CONTENT = "starwars";
+  private static final String TEST_WIKI_DISCUSSION = "fallout";
+
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -220,13 +222,23 @@ public class HtmlTitleTests extends NewTestTemplate {
             },
             {
                 TEST_WIKI_CURATED_CONTENT,
-                "main/category/1983_computer_and_video_games",
-                "1983 computer and video games - Wookieepedia, the Star Wars Wiki - Wikia",
+                "main/category/Future_films",
+                "Future films - Wookieepedia, the Star Wars Wiki - Wikia",
             },
             {
                 TEST_WIKI_CURATED_CONTENT,
                 "main/section/Films",
                 "Films - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_DISCUSSION,
+                "d/f/3035/latest",
+                "The Fallout wiki - Fallout: New Vegas and more - Wikia",
+            },
+            {
+                TEST_WIKI_DISCUSSION,
+                "d/p/2594243417559008375",
+                "The Fallout wiki - Fallout: New Vegas and more - Wikia",
             },
         };
     }
