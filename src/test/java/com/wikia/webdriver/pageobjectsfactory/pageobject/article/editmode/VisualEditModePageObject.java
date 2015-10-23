@@ -411,7 +411,7 @@ public class VisualEditModePageObject extends EditMode {
         driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
             categoryName)));
     WebElement category = driver.findElement(By.cssSelector(".category[data-name='"+categoryName+"']"));
-    new Actions(driver).moveToElement(category).perform();
+    new Actions(driver).moveToElement(category).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).perform();
     scrollAndClick(editCategory);
     PageObjectLogging.log("editCategory", "edit category button clicked on category "
         + categoryName, true);
