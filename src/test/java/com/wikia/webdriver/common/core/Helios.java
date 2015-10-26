@@ -39,6 +39,7 @@ public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
+  private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
   private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
       .setSocketTimeout(3000).build();
 
@@ -67,7 +68,7 @@ public class Helios {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
                             IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
@@ -123,7 +124,7 @@ public class Helios {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
                             IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
@@ -146,7 +147,7 @@ public class Helios {
         }
       }
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
                             IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
