@@ -1,13 +1,12 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -26,10 +25,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ludwik on 2015-08-05.
@@ -51,10 +52,6 @@ public class Helios {
   public static void deleteAllTokens(User user) {
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS);
 
-    CloseableHttpClient httpClient =
-        HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-            .disableAutomaticRetries().build();
-
     HttpDelete httpDelete =
         new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
     httpDelete.setConfig(requestConfig);
@@ -62,7 +59,7 @@ public class Helios {
 
     CloseableHttpResponse response = null;
     try {
-      response = httpClient.execute(httpDelete);
+      response = getDefaultClient().execute(httpDelete);
 
       PageObjectLogging.log("DELETE HEADERS: ", response.toString(), true);
 
@@ -71,7 +68,7 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
   }
@@ -82,27 +79,10 @@ public class Helios {
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    CloseableHttpClient httpClient =
-        HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-            .disableAutomaticRetries().build();
+    CloseableHttpClient httpClient = getDefaultClient();
 
-    try {
-      if (tokenCache.containsKey(userName)) {
-
-        String getTokenInfoURL =
-            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
-                + String.format("?code=%s", tokenCache.get(userName));
-        HttpGet getInfo = new HttpGet(getTokenInfoURL);
-        getInfo.setConfig(requestConfig);
-
-        if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
-          return tokenCache.get(userName);
-        }
-      }
-    } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
-      throw new WebDriverException(e);
+    if (StringUtils.isNotBlank(getTokenFromCache(userName))) {
+      return tokenCache.get(userName);
     }
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
@@ -144,9 +124,37 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION",
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return token;
+  }
+
+  private static String getTokenFromCache(String userName) {
+    CloseableHttpClient httpClient = getDefaultClient();
+    try {
+      if (tokenCache.containsKey(userName)) {
+
+        String getTokenInfoURL =
+            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
+            + String.format("?code=%s", tokenCache.get(userName));
+        HttpGet getInfo = new HttpGet(getTokenInfoURL);
+        getInfo.setConfig(requestConfig);
+
+        if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
+          return tokenCache.get(userName);
+        }
+      }
+    } catch (IOException e) {
+      PageObjectLogging.log("IO EXCEPTION",
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    }
+    return "";
+  }
+
+  private static CloseableHttpClient getDefaultClient() {
+    return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
+        .disableAutomaticRetries().build();
   }
 }
