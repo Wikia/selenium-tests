@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
 
@@ -87,7 +89,8 @@ public class ImageComparison {
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      throw new WebDriverException("Images have different sizes");
+      PageObjectLogging.logWarning("areImagesDifferent", "Images have different sizes");
+      return true;
     }
     int count = image1.getHeight() * image1.getWidth();
     for (int x = 0; x < image1.getWidth(); x++) {
@@ -105,7 +108,8 @@ public class ImageComparison {
 
   public boolean areImagesTheSame(BufferedImage image1, BufferedImage image2) {
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      throw new WebDriverException("Images have different sizes");
+      PageObjectLogging.logWarning("areImagesTheSame", "Images have different sizes");
+      return false;
     }
     for (int x = 0; x < image1.getWidth(); x++) {
       for (int y = 0; y < image1.getHeight(); y++) {
