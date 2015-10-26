@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership Seo
  */
+@Test(groups = {"Seo", "SeoHtmlTitle"})
 public class HtmlTitleTests extends NewTestTemplate {
 
   // TODO: QAART-681 Sonar should not report duplicate strings warnings for data providers
@@ -23,7 +24,6 @@ public class HtmlTitleTests extends NewTestTemplate {
   private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH = "poznan";
   private static final String TEST_WIKI_CURATED_CONTENT = "starwars";
   private static final String TEST_WIKI_DISCUSSION = "fallout";
-
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -248,7 +248,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedOut"}
+      groups = "SeoHtmlTitleLoggedOut"
   )
   public void HtmlTitleLoggedOutTest(String wiki, String path, String expectedTitle) {
     wikiURL = urlBuilder.getUrlForPath(wiki, path);
@@ -262,7 +262,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedIn"}
+      groups = "SeoHtmlTitleLoggedIn"
   )
   public void HtmlTitleLoggedInTest(String wiki, String path, String expectedTitle) {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -279,7 +279,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleMercuryTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleMercury"}
+      groups = "SeoHtmlTitleMercury"
   )
   public void HtmlTitleMercuryTest(String wiki, String path, String expected) {
     wikiURL = urlBuilder.getUrlForPathWithoutWiki(wiki, path);
@@ -287,5 +287,4 @@ public class HtmlTitleTests extends NewTestTemplate {
     String title = driver.getTitle();
     Assertion.assertEquals(title, expected);
   }
-
 }
