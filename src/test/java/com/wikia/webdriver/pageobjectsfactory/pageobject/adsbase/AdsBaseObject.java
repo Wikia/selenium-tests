@@ -126,8 +126,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyTopLeaderboard() {
     if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
         By.cssSelector("#jpsuperheader"))) {
-      PageObjectLogging.log("verifyTopLeaderboard",
-                            "Page has Gotham campaign.", true);
+      PageObjectLogging.logWarning("Special ad", "Ad in #jpsuperheader detected");
       return;
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
