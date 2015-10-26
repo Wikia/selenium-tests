@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership Seo
  */
+@Test(groups = {"Seo", "SeoHtmlTitle"})
 public class HtmlTitleTests extends NewTestTemplate {
 
   // TODO: QAART-681 Sonar should not report duplicate strings warnings for data providers
@@ -23,6 +24,8 @@ public class HtmlTitleTests extends NewTestTemplate {
   private static final String TEST_WIKI_CUSTOM_TITLE = "es.pokemon";
   private static final String TEST_WIKI_ORIGINAL_TITLE = "sktest123";
   private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH = "poznan";
+  private static final String TEST_WIKI_CURATED_CONTENT = "starwars";
+  private static final String TEST_WIKI_DISCUSSION = "fallout";
 
   Credentials credentials = Configuration.getCredentials();
 
@@ -30,7 +33,6 @@ public class HtmlTitleTests extends NewTestTemplate {
   private Object[][] dataHtmlTitleTest() {
     return new Object[][]{
         // Original title
-        // TODO: SEO-77 Fix the title of the main pages for Mercury
         {
             TEST_WIKI_ORIGINAL_TITLE,
             "Sktest123_Wiki",
@@ -163,7 +165,6 @@ public class HtmlTitleTests extends NewTestTemplate {
             "WikiDex",
             "WikiDex, la enciclopedia Pokémon - Wikia",
         },
-        // TODO: SEO-77 Fix the title of the main pages for Mercury
         {
             TEST_WIKI_CUSTOM_TITLE,
             "Lista_de_Pokémon",
@@ -208,12 +209,48 @@ public class HtmlTitleTests extends NewTestTemplate {
     };
   }
 
+    @DataProvider
+    private Object[][] dataHtmlTitleMercuryTest() {
+        return new Object[][]{
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "wiki/Main_Page",
+                "Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "wiki/Droid_starfighter",
+                "Droid starfighter - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "main/category/Future_films",
+                "Future films - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_CURATED_CONTENT,
+                "main/section/Films",
+                "Films - Wookieepedia, the Star Wars Wiki - Wikia",
+            },
+            {
+                TEST_WIKI_DISCUSSION,
+                "d/f/3035/latest",
+                "The Fallout wiki - Fallout: New Vegas and more - Wikia",
+            },
+            {
+                TEST_WIKI_DISCUSSION,
+                "d/p/2594243417559008375",
+                "The Fallout wiki - Fallout: New Vegas and more - Wikia",
+            },
+        };
+    }
+
   /**
    * Check HTML title (the contents of <title>) for anon users
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedOut"}
+      groups = "SeoHtmlTitleLoggedOut"
   )
   public void HtmlTitleLoggedOutTest(String wiki, String path, String expectedTitle) {
     wikiURL = urlBuilder.getUrlForPath(wiki, path);
@@ -227,7 +264,7 @@ public class HtmlTitleTests extends NewTestTemplate {
    */
   @Test(
       dataProvider = "dataHtmlTitleTest",
-      groups = {"Seo", "SeoHtmlTitle", "SeoHtmlTitleLoggedIn"}
+      groups = "SeoHtmlTitleLoggedIn"
   )
   @Execute(asUser = User.USER)
   public void HtmlTitleLoggedInTest(String wiki, String path, String expectedTitle) {
@@ -237,4 +274,17 @@ public class HtmlTitleTests extends NewTestTemplate {
     Assertion.assertEquals(actualTitle, expectedTitle);
   }
 
+  /**
+   * Check HTML title (the contents of <title>) for Mercury
+   */
+  @Test(
+      dataProvider = "dataHtmlTitleMercuryTest",
+      groups = "SeoHtmlTitleMercury"
+  )
+  public void HtmlTitleMercuryTest(String wiki, String path, String expected) {
+    wikiURL = urlBuilder.getUrlForPathWithoutWiki(wiki, path);
+    driver.get(wikiURL);
+    String title = driver.getTitle();
+    Assertion.assertEquals(title, expected);
+  }
 }
