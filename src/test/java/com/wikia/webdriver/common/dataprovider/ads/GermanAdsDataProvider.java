@@ -35,7 +35,7 @@ public class GermanAdsDataProvider {
       {"de.elderscrolls", "Elder_Scrolls_Wiki", "RC_WIKIA_UGCGAMES"},
       {"de.swtor", "Star_Wars_-_The_Old_Republic_Wiki", "RC_WIKIA_UGCGAMES"},
       {"shaun", "Shaun", "RC_WIKIA_UGCENT"},
-      {"de.marvel-filme", "Marvel-Filme", "RC_WIKIA_UGCENT"},
+      {"de.marvel-filme", "Marvel-Filme", "RC_WIKIA_UGCLIFESTYLE"},
       {"de.gta", "Hauptseite", "RC_WIKIA_UGCGAMES"},
       {"de.green", "Hauptseite", "RC_WIKIA_UGCLIFESTYLE"},
       {"de.naruto", "Narutopedia", "RC_WIKIA_UGCANIME"}
