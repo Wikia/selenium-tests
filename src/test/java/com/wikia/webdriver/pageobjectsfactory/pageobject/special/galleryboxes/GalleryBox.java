@@ -24,7 +24,7 @@ public class GalleryBox extends WikiBasePageObject {
   }
 
   public LightboxComponentObject openLightboxForGridImage(int itemNumber) {
-    scrollAndClick(galleryImageBox.get(itemNumber));
+    scrollAndClick(galleryImageBox, itemNumber);
     return new LightboxComponentObject(driver);
   }
 
