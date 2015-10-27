@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
  *
  * @author wikia
  */
+@Test(enabled = false)
 public class EditingLocalCssTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
