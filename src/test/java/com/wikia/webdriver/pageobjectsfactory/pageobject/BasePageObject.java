@@ -70,7 +70,6 @@ public class BasePageObject {
     this.builder = new Actions(driver);
     this.wait = new Wait(driver);
     this.jsActions = new JavascriptActions(driver);
-    this.setWindowSizeAndroid();
 
     PageFactory.initElements(driver, this);
   }
@@ -83,12 +82,6 @@ public class BasePageObject {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
-  }
-
-  protected void setWindowSizeAndroid() {
-    if (!Configuration.getBrowser().contains("ANDROID")) {
-      driver.manage().window().maximize();
-    }
   }
 
   public void mouseOverInArticleIframe(String cssSelecotr) {

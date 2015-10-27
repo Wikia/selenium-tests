@@ -36,6 +36,7 @@ public class LightboxTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_001_unusedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
@@ -44,6 +45,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "LightboxTest_002", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_002_unusedVideos() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
@@ -52,6 +54,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "LightboxTest_003", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_003_uncategorizedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUncategorizedFilesPageObject unusedFiles =
@@ -61,6 +64,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "LightboxTest_004", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_004_mostLinkedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
@@ -69,6 +73,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "LightboxTest_005", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -104,6 +109,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "Lightbox_006", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -115,6 +121,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest", "LightboxTest_007", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_007_specialVideo() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -128,7 +135,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
-  @Execute(asUser = User.STAFF, disableFlash = "false")
+  @Execute(asUser = User.STAFF, disableFlash = "false", browser = "FF", browserSize = "1400x720")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
@@ -142,10 +149,11 @@ public class LightboxTests extends NewTestTemplate {
     filePage.verifyVideoAutoplay(true);
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
   /**
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
+  @Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -161,5 +169,4 @@ public class LightboxTests extends NewTestTemplate {
     FilePagePageObject filePage = lightbox.clickTitle();
     filePage.verifyTabsExistImage();
   }
-
 }

@@ -24,10 +24,9 @@ import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
-    com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
+            com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;
@@ -35,9 +34,9 @@ public class NewTestTemplateCore {
   protected String wikiURL;
   protected String wikiCorporateURL;
   protected String wikiCorpSetupURL;
-  private DesiredCapabilities capabilities;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected boolean isProxyServerRunning = false;
+  private DesiredCapabilities capabilities;
 
   @BeforeSuite(alwaysRun = true)
   public void beforeSuite() {
@@ -65,10 +64,17 @@ public class NewTestTemplateCore {
   protected void startBrowser() {
     driver =
         registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(Configuration
-            .getBrowser()));
+                                                                                 .getBrowser()));
+  }
 
-    driver.manage().deleteAllCookies();
-//    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+  protected void setWindowSize(){
+    if (!Configuration.getBrowser().contains("ANDROID")) {
+      if (Configuration.getBrowserSize() != null) {
+        driver.manage().window().setSize(Configuration.getBrowserSize());
+      } else {
+        driver.manage().window().maximize();
+      }
+    }
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
@@ -119,7 +125,7 @@ public class NewTestTemplateCore {
 
   protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
     capabilities = new DesiredCapabilities();
-      capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
+    capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
     return capabilities;
   }
 

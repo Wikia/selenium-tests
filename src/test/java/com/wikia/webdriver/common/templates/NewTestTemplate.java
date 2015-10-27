@@ -16,17 +16,21 @@ import java.lang.reflect.Method;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
+  private void setTestProperty(String key, String value){
+    if (!"".equals(value)) {
+      Configuration
+          .setTestValue(key, value);
+    }
+  }
+
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
     if (method.isAnnotationPresent(Execute.class)) {
-      if (!"".equals(method.getAnnotation(Execute.class).onWikia())) {
-        Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
-      }
-      if (!"".equals(method.getAnnotation(Execute.class).disableFlash())) {
-        Configuration
-            .setTestValue("disableFlash", method.getAnnotation(Execute.class).disableFlash());
-      }
+      setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("browser", method.getAnnotation(Execute.class).browser());
+      setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
     }
     prepareURLs();
 
@@ -59,6 +63,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     startBrowser();
+    setWindowSize();
 
     if (method.isAnnotationPresent(Execute.class)) {
       if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
