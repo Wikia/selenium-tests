@@ -176,7 +176,7 @@ public class BasePageObject {
     if (!jsActions.isElementInViewPort(elements.get(index))) {
       scrollToElement(elements.get(index));
     }
-    wait.forElementClickable(elements.get(index), 5);
+    wait.forElementClickable(elements, index, 5);
     elements.get(index).click();
   }
 
