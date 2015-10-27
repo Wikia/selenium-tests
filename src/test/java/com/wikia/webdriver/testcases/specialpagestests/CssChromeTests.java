@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageO
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
+@Test(enabled = false)
 public class CssChromeTests extends NewTestTemplate {
 
   /**

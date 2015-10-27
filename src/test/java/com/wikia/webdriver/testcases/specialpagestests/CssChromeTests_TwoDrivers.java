@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageO
 
 import org.testng.annotations.Test;
 
+@Test(enabled = false)
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 
   Credentials credentials = Configuration.getCredentials();

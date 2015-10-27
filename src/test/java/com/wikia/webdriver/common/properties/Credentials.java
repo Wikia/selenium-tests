@@ -192,12 +192,12 @@ public class Credentials {
     userNameBlockedAccount = XMLReader.getValue(file, "ci.user.blockedAccountUser.username");
     passwordBlockedAccount = XMLReader.getValue(file, "ci.user.blockedAccountUser.password");
 
-    userNameStaff = XMLReader.getValue(file, "ci.user.wikiastaff2.username");
+    userNameStaff = XMLReader.getValue(file, "ci.user.wikiastaff.username");
     userNameStaffId = XMLReader.getValue(file, "ci.user.wikiastaff.id");
-    passwordStaff = XMLReader.getValue(file, "ci.user.wikiastaff2.password");
+    passwordStaff = XMLReader.getValue(file, "ci.user.wikiastaff.password");
 
-    userNameStaff2 = XMLReader.getValue(file, "ci.user.wikiastaff.username");
-    passwordStaff2 = XMLReader.getValue(file, "ci.user.wikiastaff.password");
+    userNameStaff2 = XMLReader.getValue(file, "ci.user.wikiastaff2.username");
+    passwordStaff2 = XMLReader.getValue(file, "ci.user.wikiastaff2.password");
 
     userNameMonobook = XMLReader.getValue(file, "ci.user.wikiamonobook.username");
     passwordMonobook = XMLReader.getValue(file, "ci.user.wikiamonobook.password");
