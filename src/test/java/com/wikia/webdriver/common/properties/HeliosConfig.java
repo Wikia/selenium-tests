@@ -64,7 +64,7 @@ public class HeliosConfig {
   }
 
   public enum HeliosController {
-    TOKEN("token"), INFO("info");
+    TOKEN("token"), INFO("info"), USERS("users");
 
     private final String controller;
 

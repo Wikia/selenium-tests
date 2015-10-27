@@ -1,16 +1,19 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
@@ -27,14 +30,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ludwik on 2015-08-05.
  */
 public class Helios {
 
-  public static HashMap<String, String> tokenCache = new HashMap<String, String>();
-
+  private static final Map<String, String> tokenCache = new HashMap<String, String>();
+  private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
+  private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
+  private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
+      .setSocketTimeout(3000).build();
 
   private Helios() {
   }
@@ -43,38 +50,40 @@ public class Helios {
     return getAccessToken(user.getUserName(), user.getPassword());
   }
 
+  public static void deleteAllTokens(User user) {
+    String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS);
+
+    HttpDelete httpDelete =
+        new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
+    httpDelete.setConfig(requestConfig);
+    httpDelete.setHeader("THE-SCHWARTZ", Configuration.getCredentials().apiToken);
+
+    CloseableHttpResponse response = null;
+    try {
+      response = getDefaultClient().execute(httpDelete);
+
+      PageObjectLogging.log("DELETE HEADERS: ", response.toString(), true);
+
+    } catch (ClientProtocolException e) {
+      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    } catch (IOException e) {
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    }
+  }
+
   public static String getAccessToken(String userName, String password) {
 
     String clientId = HeliosConfig.getClientId();
     String clientSecret = HeliosConfig.getClientSecret();
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
-    RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(
-        3000).build();
+    CloseableHttpClient httpClient = getDefaultClient();
 
-    CloseableHttpClient httpClient =
-        HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-            .disableAutomaticRetries().build();
-
-    try {
-      if (tokenCache.containsKey(userName)) {
-
-        String
-            getTokenInfoURL =
-            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO) + String
-                .format("?code=%s", tokenCache.get(userName));
-        HttpGet getInfo = new HttpGet(getTokenInfoURL);
-        getInfo.setConfig(requestConfig);
-
-        if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
-          return tokenCache.get(userName);
-        }
-      }
-    } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
-                            "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e),
-                            false);
-      throw new WebDriverException(e);
+    if (StringUtils.isNotBlank(getTokenFromCache(userName))) {
+      return tokenCache.get(userName);
     }
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
@@ -115,11 +124,38 @@ public class Helios {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION",
-                            "PLEASE CHECK IF YOUR VPN IS ENABLED" + ExceptionUtils.getStackTrace(e),
-                            false);
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return token;
+  }
+
+  private static String getTokenFromCache(String userName) {
+    CloseableHttpClient httpClient = getDefaultClient();
+    try {
+      if (tokenCache.containsKey(userName)) {
+
+        String getTokenInfoURL =
+            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
+            + String.format("?code=%s", tokenCache.get(userName));
+        HttpGet getInfo = new HttpGet(getTokenInfoURL);
+        getInfo.setConfig(requestConfig);
+
+        if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
+          return tokenCache.get(userName);
+        }
+      }
+    } catch (IOException e) {
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    }
+    return "";
+  }
+
+  private static CloseableHttpClient getDefaultClient() {
+    return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
+        .disableAutomaticRetries().build();
   }
 }

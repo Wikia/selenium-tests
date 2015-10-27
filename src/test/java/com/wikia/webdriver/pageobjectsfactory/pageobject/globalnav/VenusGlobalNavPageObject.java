@@ -51,6 +51,9 @@ public class VenusGlobalNavPageObject {
   @FindBy(css = "#searchInput")
   private WebElement searchInput;
 
+  @FindBy(css = "a[data-id='login']")
+  private WebElement loginLink;
+
   private WebDriver driver;
   private Wait wait;
 
@@ -149,6 +152,10 @@ public class VenusGlobalNavPageObject {
 
   public boolean isLocalSearchDisabled() {
     return !ElementStateHelper.isElementVisible(searchSelect, driver);
+  }
+
+  public boolean isUserLoggedOut(){
+    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
   }
 
   private DropDownComponentObject getAccountNavigation() {
