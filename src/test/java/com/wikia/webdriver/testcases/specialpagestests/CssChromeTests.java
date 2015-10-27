@@ -17,7 +17,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-285
    */
-  @Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void showingErrorWhenWrongSyntax() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
@@ -30,7 +30,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
   public void verifyPublishButtonAppearsAndWorks() {
@@ -46,7 +46,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
   public void verifyEditSummaryAppearsAndWorks() {
@@ -64,7 +64,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void verifyChangesAppearsAndWorks() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
@@ -81,7 +81,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * http://wikia-inc.atlassian.net/browse/DAR-733
    */
-  @Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   @UseUnstablePageLoadStrategy
   public void verifyMinorEditAppearsAndWorks() {
@@ -96,7 +96,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.verifyRevisionMarkedAsMinor();
   }
 
-  @Test(groups = {"CssChrome_006", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_006", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void verifyHistoryButtonAppearsAndWorks() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
@@ -105,7 +105,7 @@ public class CssChromeTests extends NewTestTemplate {
     specialCss.verifyUrl("action=history");
   }
 
-  @Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void verifyDeleteButtonAppearsAndWorks() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
@@ -132,7 +132,7 @@ public class CssChromeTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-731 story description
    * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
    */
-  @Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void verifyOnLeaveMessageWorks() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
@@ -146,7 +146,7 @@ public class CssChromeTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-999
    */
-  @Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"})
+  @Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"}, enabled = false)
   @Execute(asUser = User.STAFF)
   public void verifyTalkButtonWorks() {
     SpecialCssPageObject specialCss = new SpecialCssPageObject(driver).openEditor();
