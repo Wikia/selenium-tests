@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -25,6 +26,7 @@ public class FacebookTests extends NewTestTemplate {
    * and login, 6. Verify user can login via facebook
    */
   @Test
+  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithNewAccountNoEmailPermission() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
@@ -49,6 +51,7 @@ public class FacebookTests extends NewTestTemplate {
    * facebook via prefs for cleanup
    */
   @Test
+  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithExistingWikiaAccount() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
@@ -67,6 +70,7 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   @Test
+  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void connectUsingUserPreferences() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,

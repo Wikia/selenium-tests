@@ -169,6 +169,7 @@ public class SignUpTests extends NewTestTemplate {
    */
 
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
+  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   public void SignUp_007_signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
         credentials.passwordFB).logOutFB();

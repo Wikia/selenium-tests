@@ -102,7 +102,7 @@ public class Wait {
   public WebElement forElementClickable(List<WebElement> elements, int index, int timeout) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
-      elements.get(0).getTagName();
+      elements.get(index).getTagName();
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }

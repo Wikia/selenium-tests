@@ -10,12 +10,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageO
 
 import org.testng.annotations.Test;
 
+@Test(enabled = false)
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 
   Credentials credentials = Configuration.getCredentials();
   @RelatedIssue(issueID = "QAART-461",
       comment = "Under investigation. Best way to test is in debug mode on intelliJ")
-  @Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
+  @Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"}, enabled = false)
   public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
     //first user opens the special:CSS
     switchToWindow(driverOne);

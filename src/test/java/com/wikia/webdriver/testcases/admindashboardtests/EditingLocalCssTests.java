@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
  *
  * @author wikia
  */
+@Test(enabled = false)
 public class EditingLocalCssTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -26,7 +27,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-293 https://wikia-inc.atlassian.net/browse/DAR-298
    */
-  @Test(groups = {"EditingLocalCss_001", "EditingLocalCss", "AdminDashboard"})
+  @Test(groups = {"EditingLocalCss_001", "EditingLocalCss", "AdminDashboard"}, enabled = false)
   public void EditingLocalCss_001_UserWithAdminRightsTriesToEditWikiaCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -39,7 +40,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
    * https://wikia-inc.atlassian.net/browse/DAR-294 https://wikia-inc.atlassian.net/browse/DAR-295
    * https://wikia-inc.atlassian.net/browse/DAR-296 https://wikia-inc.atlassian.net/browse/DAR-297
    */
-  @Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"})
+  @Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"}, enabled = false)
   public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.MEDIAWIKI_CSS);
@@ -56,7 +57,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-299
    */
-  @Test(groups = {"EditingLocalCss_003", "EditingLocalCss", "AdminDashboard"})
+  @Test(groups = {"EditingLocalCss_003", "EditingLocalCss", "AdminDashboard"}, enabled = false)
   public void EditingLocalCss_003_MonobookUserWithAdminRightsEditsWikiaCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
@@ -69,7 +70,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-300
    */
-  @Test(groups = {"EditingLocalCss_004", "EditingLocalCss", "AdminDashboard"})
+  @Test(groups = {"EditingLocalCss_004", "EditingLocalCss", "AdminDashboard"}, enabled = false)
   public void EditingLocalCss_004_MonobookUserWithAdminRightsOpensSpecialCss() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
@@ -81,7 +82,7 @@ public class EditingLocalCssTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-302
    */
-  @Test(groups = {"EditingLocalCss_005", "EditingLocalCss", "AdminDashboard"})
+  @Test(groups = {"EditingLocalCss_005", "EditingLocalCss", "AdminDashboard"}, enabled = false)
   public void EditingLocalCss_005_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
