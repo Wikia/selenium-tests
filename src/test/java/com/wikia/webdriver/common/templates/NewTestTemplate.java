@@ -1,5 +1,11 @@
 package com.wikia.webdriver.common.templates;
 
+import java.lang.reflect.Method;
+
+import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -8,18 +14,11 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
-import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.lang.reflect.Method;
-
 public class NewTestTemplate extends NewTestTemplateCore {
 
-  private void setTestProperty(String key, String value){
+  private void setTestProperty(String key, String value) {
     if (!"".equals(value)) {
-      Configuration
-          .setTestValue(key, value);
+      Configuration.setTestValue(key, value);
     }
   }
 
@@ -56,9 +55,8 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (method.isAnnotationPresent(Execute.class)) {
       String onDriver = method.getAnnotation(Execute.class).allowedDriver();
       if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
-        throw new SkipException(
-            "The test can not be run on driver " + Configuration
-                .getBrowser() + ". The test is restricted to driver " + onDriver);
+        throw new SkipException("The test can not be run on driver " + Configuration.getBrowser()
+            + ". The test is restricted to driver " + onDriver);
       }
     }
 
