@@ -80,7 +80,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   @Test
   @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
   public void remindPasswordWhileCreatingWiki() {
-    String userName = credentials.userNameForgottenPassword3;
+    String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -90,7 +90,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
     cnwLogin.typeInUserName(userName);
     cnwLogin.clickForgotPassword(userName, credentials.apiToken);
-    cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword3);
+    cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword2);
     String
         newPassword =
         cnwLogin
