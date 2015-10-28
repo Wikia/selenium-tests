@@ -22,4 +22,8 @@ public @interface Execute {
   String allowedDriver() default "";
 
   String disableFlash() default "";
+
+  String browserSize() default "";
+
+  String browser() default "";
 }

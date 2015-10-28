@@ -1,5 +1,11 @@
 package com.wikia.webdriver.common.templates;
 
+import java.lang.reflect.Method;
+
+import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -8,36 +14,45 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 
-import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.lang.reflect.Method;
-
 public class NewTestTemplate extends NewTestTemplateCore {
+
+  private void setTestProperty(String key, String value) {
+    if (!"".equals(value)) {
+      Configuration.setTestValue(key, value);
+    }
+  }
+
+  /**
+   * Return false if test is excluded from running on current test environment
+   * @param method
+   * @return
+   */
+  private boolean isTestExcludedFromEnv(Method method){
+    if (method.isAnnotationPresent(DontRun.class)) {
+      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
+      for (int i = 0; i < excludedEnv.length; i++) {
+        if (Configuration.getEnv().contains(excludedEnv[i])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
     if (method.isAnnotationPresent(Execute.class)) {
-      if (!"".equals(method.getAnnotation(Execute.class).onWikia())) {
-        Configuration.setTestValue("wikiName", method.getAnnotation(Execute.class).onWikia());
-      }
-      if (!"".equals(method.getAnnotation(Execute.class).disableFlash())) {
-        Configuration
-            .setTestValue("disableFlash", method.getAnnotation(Execute.class).disableFlash());
-      }
+      setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("browser", method.getAnnotation(Execute.class).browser());
+      setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
     }
     prepareURLs();
 
-    if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
-      for (int i = 0; i < excludedEnv.length; i++) {
-        if (Configuration.getEnv().contains(excludedEnv[i])) {
-          throw new SkipException(
-              "Test can't be run on " + Configuration.getEnv() + " environment");
-        }
-      }
+    if(isTestExcludedFromEnv(method)){
+      throw new SkipException(
+          "Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
     runProxyServerIfNeeded(method);
@@ -52,13 +67,13 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (method.isAnnotationPresent(Execute.class)) {
       String onDriver = method.getAnnotation(Execute.class).allowedDriver();
       if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
-        throw new SkipException(
-            "The test can not be run on driver " + Configuration
-                .getBrowser() + ". The test is restricted to driver " + onDriver);
+        throw new SkipException("The test can not be run on driver " + Configuration.getBrowser()
+            + ". The test is restricted to driver " + onDriver);
       }
     }
 
     startBrowser();
+    setWindowSize();
 
     if (method.isAnnotationPresent(Execute.class)) {
       if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {

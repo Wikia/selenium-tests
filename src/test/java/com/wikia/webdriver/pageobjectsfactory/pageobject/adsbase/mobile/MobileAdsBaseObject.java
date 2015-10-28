@@ -40,21 +40,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     PageObjectLogging.log("", "Page screenshot", true, driver);
   }
 
-  @Override
-  protected void setWindowSizeAndroid() {
-    try {
-      driver.manage().window().setSize(new Dimension(360, 640));
-    } catch (WebDriverException ex) {
-      PageObjectLogging.log(
-          "ResizeWindowForMobile",
-          "Resize window method not available - possibly running on real device",
-          true
-      );
-    }
-  }
-
   public void verifyMobileTopLeaderboard() {
-    removeElementIfPresent(SMART_BANNER_SELECTOR); // Only works for WikiaMobile
+    // Only works for WikiaMobile
+    removeElementIfPresent(SMART_BANNER_SELECTOR);
 
     wait.forElementVisible(presentLeaderboard);
     if (isElementOnPage(By.cssSelector(INTERSTITIAL_AD_OPENED_SELECTOR))) {
