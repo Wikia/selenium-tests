@@ -12,9 +12,10 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
+
 #Specify browser window size in format <width>x<height>, example: 800x600
-#use "max" value if you want browser to be maximised
-browserSize: max
+#use "maximised" value if you want browser to be maximised
+browserSize: maximised
 
 #Add browser extensions.
 #Acceptable values:

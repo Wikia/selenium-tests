@@ -1,5 +1,12 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.properties.Credentials;
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriverException;
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,25 +16,13 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriverException;
-import org.yaml.snakeyaml.Yaml;
-
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.properties.Credentials;
-
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
- * Configuration handling:
- * <ol>
- * <li>Look for the property key in testConfig map, if key is present, return the value</li>
- * <li>Look for the property key in system properties - return value of this property if key present
- * </li>
- * <li>If no System Property is found - value is provided from configuration files
- * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
- * config_default.yml</li>
- * </ol>
+ * Configuration handling: <ol> <li>Look for the property key in testConfig map, if key is present,
+ * return the value</li> <li>Look for the property key in system properties - return value of this
+ * property if key present </li> <li>If no System Property is found - value is provided from
+ * configuration files (config_default.yml and config.yml). Values provided in config.yml, are
+ * overriding values from config_default.yml</li> </ol>
  */
 public class Configuration {
 
@@ -38,7 +33,8 @@ public class Configuration {
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
 
-  private Configuration() {}
+  private Configuration() {
+  }
 
   private static Map<String, String> readConfiguration() {
     if (defaultConfig == null) {
@@ -69,14 +65,16 @@ public class Configuration {
   }
 
   private static String getPropertyFromFile(String propertyName) {
-    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null
-        : String.valueOf(readConfiguration().get(propertyName));
+    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ?
+        null :
+        String.valueOf(readConfiguration().get(propertyName));
   }
 
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
-      return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-          : getPropertyFromFile(propertyName);
+      return System.getProperty(propertyName) != null ?
+          System.getProperty(propertyName) :
+          getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }
@@ -162,8 +160,9 @@ public class Configuration {
    */
   public static Dimension getBrowserSize() {
     String size = getProp("browserSize");
-    if (StringUtils.isNotBlank(size) || "max".equals(size) || size.split("x").length == 2) {
-      if ("max".equals(size)) {
+    
+    if (StringUtils.isNotBlank(size) || "maximised".equals(size) || size.split("x").length == 2) {
+      if ("maximised".equals(size)) {
         return null;
       } else {
         return new Dimension(Integer.valueOf(size.split("x")[0]),

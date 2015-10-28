@@ -68,13 +68,11 @@ public class NewTestTemplateCore {
   }
 
   protected void setWindowSize() {
-    if (!Configuration.getBrowser().contains("ANDROID")) {
-      if (Configuration.getBrowserSize() != null) {
+      if (!Configuration.getBrowser().contains("ANDROID") && Configuration.getBrowserSize() != null) {
         driver.manage().window().setSize(Configuration.getBrowserSize());
       } else {
         driver.manage().window().maximize();
       }
-    }
   }
 
   protected WebDriver startCustomBrowser(String browserName) {
