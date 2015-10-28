@@ -57,43 +57,36 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickSearchField() {
-    wait.forElementVisible(searchInput);
-    searchInput.click();
+    waitAndClick(searchInput);
   }
 
   public void clickSearchButton() {
-    wait.forElementVisible(searchButton);
-    searchButton.click();
+    waitAndClick(searchButton);
   }
 
   public void clickBackChevron() {
-    wait.forElementVisible(backChevron);
-    backChevron.click();
+    waitAndClick(backChevron);
   }
 
   public void clickCancelButton() {
-    wait.forElementVisible(cancelSearchCaption);
-    cancelSearchCaption.click();
+    waitAndClick(cancelSearchCaption);
   }
 
   public void clickSuggestion(int index) {
-    wait.forElementVisible(searchSuggestion);
-    searchSuggestion.click();
+    waitAndClick(searchSuggestion);
   }
 
   public void clickNavListElement(int index) {
-    wait.forElementVisible(navList.get(index));
-    navList.get(index).click();
+    waitAndClick(navList.get(index));
   }
 
-  public void clickOverlay() {
+  public void tapOverlay() {
     wait.forElementVisible(overlay);
     tapOnElement(overlay);
   }
 
   public void clickRandomPageButton() {
-    wait.forElementVisible(randomPageButton);
-    randomPageButton.click();
+    waitAndClick(randomPageButton);
   }
 
   public boolean isSuggestionListDisplayed() {
