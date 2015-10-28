@@ -22,6 +22,23 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
   }
 
+  /**
+   * Return false if test is excluded from running on current test environment
+   * @param method
+   * @return
+   */
+  private boolean isTestExcludedFromEnv(Method method){
+    if (method.isAnnotationPresent(DontRun.class)) {
+      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
+      for (int i = 0; i < excludedEnv.length; i++) {
+        if (Configuration.getEnv().contains(excludedEnv[i])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
@@ -33,14 +50,9 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
     prepareURLs();
 
-    if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
-      for (int i = 0; i < excludedEnv.length; i++) {
-        if (Configuration.getEnv().contains(excludedEnv[i])) {
-          throw new SkipException(
-              "Test can't be run on " + Configuration.getEnv() + " environment");
-        }
-      }
+    if(isTestExcludedFromEnv(method)){
+      throw new SkipException(
+          "Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
     runProxyServerIfNeeded(method);
