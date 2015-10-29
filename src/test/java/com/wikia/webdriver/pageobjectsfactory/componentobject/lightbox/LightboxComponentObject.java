@@ -68,7 +68,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
   }
 
-  public void verifyLightboxVideo() {
+  public void   verifyLightboxVideo() {
     wait.forElementVisible(videoContainer);
     PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
   }
