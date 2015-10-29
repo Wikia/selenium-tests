@@ -58,7 +58,7 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
   }
 
-  @Test(groups = "RedirectionTest_002")
+  @Test(groups = "RedirectionTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void RedirectionTest_003_RedirectFromFullSiteToMobile() {
     ArticlePageObject article;
