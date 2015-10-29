@@ -45,12 +45,9 @@ public class Wait {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-    } catch(TimeoutException e) {
-      PageObjectLogging.log(
-          ELEMENT_PRESENT_MESSAGE,
-          String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()),
-          false
-      );
+    } catch (TimeoutException e) {
+      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
+          String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
       throw e;
     } finally {
       restoreDeaultImplicitWait();
@@ -76,7 +73,7 @@ public class Wait {
       } else {
         return forElementClickable(SelectorStack.read());
       }
-    }finally {
+    } finally {
       restoreDeaultImplicitWait();
     }
   }
@@ -94,7 +91,7 @@ public class Wait {
       }
       return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
           .elementToBeClickable(element));
-    }finally {
+    } finally {
       restoreDeaultImplicitWait();
     }
   }
@@ -107,14 +104,10 @@ public class Wait {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
     try {
-      if (SelectorStack.isContextSet()) {
-        SelectorStack.contextRead();
-        return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-            .elementToBeClickable(elements.get(index)));
-      } else {
-        return forElementClickable(SelectorStack.read(), timeout);
-      }
-    }finally {
+      SelectorStack.contextRead();
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+          .elementToBeClickable(elements.get(index)));
+    } finally {
       restoreDeaultImplicitWait();
     }
   }

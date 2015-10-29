@@ -95,7 +95,7 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.clickMoveUp(second);
   }
 
-  @Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
+  @Test(groups = {"Forum_006", "Forum", "ForumEditMode"}, enabled = false)
   public void forumEditModeTests_006_templatesInBoardDescription() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
 
