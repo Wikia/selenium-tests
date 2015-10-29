@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -78,6 +79,7 @@ public class MapFlowTests extends NewTestTemplate {
 
   @Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
   public void MapFlowTests_003_CreateRealMap() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
