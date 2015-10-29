@@ -60,10 +60,10 @@ public class Wait {
   public WebElement forElementPresent(By by, int timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions.presenceOfElementLocated(by));
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
+          .presenceOfElementLocated(by));
     } catch (TimeoutException e) {
-      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
-                            String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE, e, false);
       throw e;
     } finally {
       restoreDeaultImplicitWait();
