@@ -55,6 +55,22 @@ public class Wait {
   }
 
   /**
+   * Checks if the element is present in browser DOM
+   */
+  public WebElement forElementPresent(By by, int timeout) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions.presenceOfElementLocated(by));
+    } catch (TimeoutException e) {
+      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
+                            String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+      throw e;
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
    * Checks if the element is clickable in browser
    * 
    * @param element The element to be checked
