@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests",
+@Test(groups = {"MercuryMainPageTests", "MercuryCuratedContentTests",
                 "MercuryCuratedMainPageTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "MercuryCuratedMainPageTests", "Mercury"})
+@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "MercuryMainPageTests", "Mercury"})
 public class SectionItemsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
