@@ -167,6 +167,10 @@ public class Wait {
     }
   }
 
+  public WebElement forElementVisible(WebElement element, int timeout) {
+    return forElementVisible(element, timeout, 500);
+  }
+
   /**
    * Checks if the element is visible on the browser
    */
