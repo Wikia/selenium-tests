@@ -44,7 +44,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement plusoneShareLink;
   @FindBy(css = ".video-media")
   private WebElement videoContainer;
-  @FindBy(css = ".LightboxHeader h1 a")
+  @FindBy(css = ".WikiaLightbox")
   private WebElement titleLink;
   @FindBy(css = ".more-info-button")
   private WebElement moreInfoLink;
