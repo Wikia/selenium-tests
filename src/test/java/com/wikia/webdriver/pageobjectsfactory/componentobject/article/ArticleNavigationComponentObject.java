@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 /**
  * @ownership Content X-Wing Wikia
+ *
+ * Represents the wikia navigation present on an article page
  */
 public class ArticleNavigationComponentObject extends ArticlePageObject {
 
