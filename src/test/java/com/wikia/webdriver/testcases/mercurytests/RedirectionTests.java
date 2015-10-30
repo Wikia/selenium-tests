@@ -48,13 +48,12 @@ public class RedirectionTests extends NewTestTemplate {
      @Execute(onWikia = "mercuryautomationtesting")
      public void RedirectionTest_002_RedirectFromFullSiteToOasis() {
     MercuryFooterComponentObject footer = new MercuryFooterComponentObject(driver);
-    com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject article;
     ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
 
     new ArticlePageObject(driver).openWikiPage(url);
     footer.clickFullSiteLink();
-    article = navigation.clickRandomArticle();
+    navigation.clickRandomArticle();
 
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
   }
@@ -63,13 +62,12 @@ public class RedirectionTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void RedirectionTest_003_RedirectFromFullSiteToOasis() {
     MercuryFooterComponentObject footer = new MercuryFooterComponentObject(driver);
-    com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject article;
     ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
 
     new ArticlePageObject(driver).openWikiPage(url);
     footer.clickFullSiteLink();
-    article = navigation.clickRandomArticle();
+    navigation.clickRandomArticle();
 
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
   }
@@ -77,7 +75,6 @@ public class RedirectionTests extends NewTestTemplate {
   @Test(groups = "RedirectionTest_004")
   @Execute(onWikia = "mercuryautomationtesting")
   public void RedirectionTest_004_RedirectFromFullSiteToMobile() {
-    ArticlePageObject article;
     MercuryFooterComponentObject mercuryFooter = new MercuryFooterComponentObject(driver);
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
@@ -85,7 +82,7 @@ public class RedirectionTests extends NewTestTemplate {
 
     new ArticlePageObject(driver).openWikiPage(url);
     mercuryFooter.clickFullSiteLink();
-    article = oasisFooter.clickMobileSiteLink();
+    oasisFooter.clickMobileSiteLink();
     navigation.clickSearchButton();
     navigation.clickRandomPageButton();
 
