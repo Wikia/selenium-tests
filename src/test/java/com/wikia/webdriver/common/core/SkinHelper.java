@@ -13,7 +13,7 @@ public class SkinHelper extends BasePageObject{
 
   @FindBy(css = "body.skin-oasis")
   private WebElement oasisClassInBody;
-  @FindBy(css = "body.skin-oasis")
+  @FindBy(css = "body.ember-application")
   private WebElement mercuryClassInBody;
 
   public SkinHelper(WebDriver driver) {
