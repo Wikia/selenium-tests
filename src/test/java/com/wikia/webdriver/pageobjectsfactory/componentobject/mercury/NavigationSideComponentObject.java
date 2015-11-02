@@ -27,7 +27,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   @FindBy(css = ".local-wikia-search a")
   private WebElement searchSuggestion;
 
-  @FindBy(xpath = "//ul[contains(@class, \"local-nav-menu\")]/li/*")
+  @FindBy(css = "ul.local-nav-menu li")
   private List<WebElement> navList;
 
   @FindBy(xpath = "//ul[contains(@class, \"local-nav-menu\")]/li/*[text()[contains(., \"Back\")]]")
@@ -77,7 +77,8 @@ public class NavigationSideComponentObject extends BasePageObject {
   }
 
   public void clickNavListElement(int index) {
-    waitAndClick(navList.get(index));
+    wait.forElementClickable(navList.get(index));
+    navList.get(index).click();
   }
 
   public void tapOverlay() {
