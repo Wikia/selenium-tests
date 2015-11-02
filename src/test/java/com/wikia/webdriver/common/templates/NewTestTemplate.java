@@ -69,7 +69,8 @@ public class NewTestTemplate extends NewTestTemplateCore {
       String onDriver = method.getAnnotation(Execute.class).allowedDriver();
       if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
         String errorMessage = "The test can not be run on driver " + Configuration.getBrowser()
-                              + ". The test is restricted to driver " + onDriver;
+                              + ". The test is restricted to driver " + onDriver +
+                              " as instructed in the test annotation.";
         PageObjectLogging.log("allowedDriver annotation", errorMessage, false);
         throw new SkipException(errorMessage);
       }
