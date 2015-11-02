@@ -80,8 +80,9 @@ public class NavigationSideComponentObject extends BasePageObject {
     waitAndClick(navList.get(index));
   }
 
-  public void clickOverlay() {
-    waitAndClick(overlay);
+  public void tapOverlay() {
+    wait.forElementVisible(overlay);
+    tapOnElement(overlay);
   }
 
   public void clickRandomPageButton() {

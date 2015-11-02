@@ -44,9 +44,7 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 
-  @Test(groups = "RedirectionTest_002")
-     @Execute(onWikia = "mercuryautomationtesting")
-     public void RedirectionTest_002_RedirectFromFullSiteToOasis() {
+  private void redirectFromFullSiteToOasis() {
     MercuryFooterComponentObject footer = new MercuryFooterComponentObject(driver);
     ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
@@ -58,18 +56,16 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
   }
 
+  @Test(groups = "RedirectionTest_002")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void RedirectionTest_002_RedirectFromFullSiteToOasis() {
+    redirectFromFullSiteToOasis();
+  }
+
   @Test(groups = "RedirectionTest_003")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void RedirectionTest_003_RedirectFromFullSiteToOasis() {
-    MercuryFooterComponentObject footer = new MercuryFooterComponentObject(driver);
-    ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
-    SkinHelper helper = new SkinHelper(driver);
-
-    new ArticlePageObject(driver).openWikiPage(url);
-    footer.clickFullSiteLink();
-    navigation.clickRandomArticle();
-
-    Assertion.assertTrue(helper.isSkin(Skin.OASIS));
+    redirectFromFullSiteToOasis();
   }
 
   @Test(groups = "RedirectionTest_004")
