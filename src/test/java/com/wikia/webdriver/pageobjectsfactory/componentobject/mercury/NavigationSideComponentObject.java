@@ -62,7 +62,7 @@ public class NavigationSideComponentObject extends BasePageObject {
 
   public void clickSearchButton() {
     waitAndClick(searchButton);
-  }
+    }
 
   public void clickBackChevron() {
     waitAndClick(backChevron);
@@ -80,9 +80,8 @@ public class NavigationSideComponentObject extends BasePageObject {
     waitAndClick(navList.get(index));
   }
 
-  public void tapOverlay() {
-    wait.forElementVisible(overlay);
-    tapOnElement(overlay);
+  public void clickOverlay() {
+    waitAndClick(overlay);
   }
 
   public void clickRandomPageButton() {
