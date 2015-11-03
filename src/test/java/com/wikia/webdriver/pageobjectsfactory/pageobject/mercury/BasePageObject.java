@@ -165,17 +165,6 @@ public class BasePageObject extends WikiBasePageObject {
     getUrl(wikiURL);
   }
 
-  /**
-   * Make sure element is ready to be clicked and click on it The separation of this method has
-   * particular reason. It allows global modification of such click usages. This way it is very easy
-   * to control what criteria have to be met in order to click on element
-   *
-   * @param element to be clicked on
-   */
-  protected void waitAndClick(WebElement element) {
-    wait.forElementClickable(element).click();
-  }
-
   protected void waitAndSendKeys(WebElement element, String keys) {
     wait.forElementVisible(element);
     element.sendKeys(keys);

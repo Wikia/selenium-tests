@@ -914,4 +914,5 @@ public class ArticlePageObject extends WikiBasePageObject {
     editArticleInDropDown.click();
     return new VisualEditModePageObject(driver);
   }
+
 }

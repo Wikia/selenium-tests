@@ -22,7 +22,7 @@ import java.io.File;
  *
  * @ownership AdEngineering Wikia
  */
-public class SkinHelper {
+public class AdsSkinHelper {
 
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
   private static final int IMAGES_THRESHOLD_PERCENT = 12;
@@ -39,7 +39,7 @@ public class SkinHelper {
   private int startSkinY;
   private int articleBottomY;
 
-  public SkinHelper(String pathToLeftPart, String pathToRightPart, WebDriver driver) {
+  public AdsSkinHelper(String pathToLeftPart, String pathToRightPart, WebDriver driver) {
     this.pathToLeftPart = pathToLeftPart;
     this.pathToRightPart = pathToRightPart;
     this.driver = driver;
