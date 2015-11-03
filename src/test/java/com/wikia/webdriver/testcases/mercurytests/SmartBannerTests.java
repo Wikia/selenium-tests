@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -39,6 +40,7 @@ public class SmartBannerTests extends NewTestTemplate {
 
   // SBT01
   @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
+  @RelatedIssue(issueID = "XW-656")
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
