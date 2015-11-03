@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core;
+package com.wikia.webdriver.common.skin;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 

@@ -2,12 +2,12 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.Skin;
-import com.wikia.webdriver.common.core.SkinHelper;
 import com.wikia.webdriver.common.core.annotations.Driver;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.ArticleNavigationComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.OasisFooterComponentObject;
