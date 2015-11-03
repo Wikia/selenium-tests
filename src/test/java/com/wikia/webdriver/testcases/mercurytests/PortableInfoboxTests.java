@@ -24,6 +24,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
+  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -54,6 +55,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
+  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -76,6 +78,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
+  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
