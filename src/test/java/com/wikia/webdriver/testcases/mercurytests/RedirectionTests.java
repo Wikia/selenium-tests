@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"RedirectionTests", "Mercury"})
+@Test(groups = {"MercuryRedirectionTests", "Mercury"})
 public class RedirectionTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = MercurySubpages.MAIN_PAGE;
@@ -40,7 +40,7 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "RedirectionTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void RedirectionTest_001_RedirectFromWWW() {
+  public void MercuryRedirectionTest_001_RedirectFromWWW() {
     new ArticlePageObject(driver).openWikiPage(url);
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
@@ -58,19 +58,19 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "RedirectionTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void RedirectionTest_002_RedirectFromFullSiteToOasisAsAnon() {
+  public void MercuryRedirectionTest_002_RedirectFromFullSiteToOasisAsAnon() {
     redirectFromFullSiteToOasis();
   }
 
   @Test(groups = "RedirectionTest_003")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
-  public void RedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
+  public void MercuryRedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
     redirectFromFullSiteToOasis();
   }
 
   @Test(groups = "RedirectionTest_004")
   @Execute(onWikia = "mercuryautomationtesting", allowedDriver = Driver.Android)
-  public void RedirectionTest_004_RedirectFromFullSiteToMobile() {
+  public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
     NavigationSideComponentObject navigation = new NavigationSideComponentObject(driver);
