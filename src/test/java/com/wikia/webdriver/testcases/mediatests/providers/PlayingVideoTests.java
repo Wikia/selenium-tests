@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,10 +8,12 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoCompone
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 
+import org.testng.annotations.Test;
+
 public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(asUser = User.USER, onWikia = "sktest123", disableFlash = "false", browser = "FF",
+  @Execute(asUser = User.USER, onWikia = "sktest123", disableFlash = "false",
       browserSize = "1400x720")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
@@ -35,7 +35,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123", browser = "FF",
+  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123",
       browserSize = "1400x720")
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
@@ -73,7 +73,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @Execute(disableFlash = "false", onWikia = "sktest123", browser = "FF", browserSize = "1400x720")
+  @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
