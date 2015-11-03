@@ -46,12 +46,11 @@ public class RedirectionTests extends NewTestTemplate {
   }
 
   private void redirectFromFullSiteToOasis() {
-    MercuryFooterComponentObject footer = new MercuryFooterComponentObject(driver);
     ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
 
     new ArticlePageObject(driver).openWikiPage(url);
-    footer.clickFullSiteLink();
+    new MercuryFooterComponentObject(driver).clickFullSiteLink();
     navigation.clickRandomArticle();
 
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
@@ -72,13 +71,12 @@ public class RedirectionTests extends NewTestTemplate {
   @Test(groups = "RedirectionTest_004")
   @Execute(onWikia = "mercuryautomationtesting", allowedDriver = Driver.Android)
   public void RedirectionTest_004_RedirectFromFullSiteToMobile() {
-    MercuryFooterComponentObject mercuryFooter = new MercuryFooterComponentObject(driver);
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
     NavigationSideComponentObject navigation = new NavigationSideComponentObject(driver);
 
     new ArticlePageObject(driver).openWikiPage(url);
-    mercuryFooter.clickFullSiteLink();
+    new MercuryFooterComponentObject(driver).clickFullSiteLink();
     oasisFooter.clickMobileSiteLink();
     navigation.clickSearchButton();
     navigation.clickRandomPageButton();

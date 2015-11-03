@@ -21,6 +21,7 @@ public class MercuryFooterComponentObject extends BasePageObject {
 
   /**
    * Click on full site option that opens the namespace in the oasis skin
+   *
    * @return Oasis article page object
    */
   public ArticlePageObject clickFullSiteLink() {
