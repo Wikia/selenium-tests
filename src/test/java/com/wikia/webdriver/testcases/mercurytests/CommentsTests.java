@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CommentsPageObject;
@@ -31,6 +32,7 @@ public class CommentsTests extends NewTestTemplate {
 
   // CT01
   @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})
+  @RelatedIssue(issueID = "XW-654")
   public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
