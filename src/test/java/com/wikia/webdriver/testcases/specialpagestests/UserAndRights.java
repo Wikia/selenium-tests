@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -12,6 +13,8 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContactGeneralPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
@@ -53,23 +56,47 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
   public void blockedUserShouldBeAbleToChangeEmail() {
-    final String newEmailAddress = "myAwesomeEmail@email.co.uk";
+    final String newEmailAddress = Configuration.getCredentials().emailQaart2;
     final String oldEmailAddress = Configuration.getCredentials().email;
 
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
     editPrefPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
+    MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
+        Configuration.getCredentials().emailPasswordQaart1);
+
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
 
+    ConfirmationPageObject confirmPageAlmostThere =
+        new AlmostTherePageObject(driver).enterEmailChangeLink(
+            Configuration.getCredentials().emailQaart2,
+            Configuration.getCredentials().emailPasswordQaart2, wikiURL);
+    confirmPageAlmostThere.typeInUserName(User.BLOCKED_USER.getUserName());
+    confirmPageAlmostThere.typeInPassword(User.BLOCKED_USER.getPassword());
+    confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().emailQaart2,
+        Configuration.getCredentials().emailPasswordQaart2);
+
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress);
+
+    MailFunctions.deleteAllEmails(Configuration.getCredentials().email,
+        Configuration.getCredentials().emailPassword);
 
     editPrefPage.changeEmail(oldEmailAddress);
     editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
+
+    confirmPageAlmostThere =
+        new AlmostTherePageObject(driver).enterEmailChangeLink(
+            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword,
+            wikiURL);
+    confirmPageAlmostThere.typeInUserName(User.BLOCKED_USER.getUserName());
+    confirmPageAlmostThere.typeInPassword(User.BLOCKED_USER.getPassword());
+    confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
+        Configuration.getCredentials().emailPassword);
 
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
