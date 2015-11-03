@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(asUser = User.USER, onWikia = "sktest123", disableFlash = "false",
+  @Execute(asUser = User.USER, onWikia = "sktest123", disableFlash = "false", browser = "FF",
       browserSize = "1400x720")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
