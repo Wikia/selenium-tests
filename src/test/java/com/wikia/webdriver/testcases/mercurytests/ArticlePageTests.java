@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -166,6 +167,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
   // APT05
   @Test(groups = {"MercuryArticleTest_005", "MercuryArticleTests", "Mercury"})
+  @RelatedIssue(issueID = "XW-659")
   public void MercuryArticleTest_005_NavigateToArticleWithColonAndQuestionMark() {
     ArticlePageObject article = new ArticlePageObject(driver);
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);

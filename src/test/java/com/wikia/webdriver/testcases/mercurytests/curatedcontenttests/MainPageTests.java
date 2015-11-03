@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests",
-                "MercuryCuratedMainPageTests", "Mercury"})
+@Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 
   private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";

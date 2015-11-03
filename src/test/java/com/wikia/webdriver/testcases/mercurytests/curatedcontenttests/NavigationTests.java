@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlChecker;
@@ -22,8 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ownership Content X-Wing Wikia
  */
-@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests",
-                "MercuryCuratedMainPageTests", "Mercury"})
+@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests", "Mercury"})
 public class NavigationTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -84,6 +84,7 @@ public class NavigationTests extends NewTestTemplate {
 
   // CCT11
   @Test(groups = "MercuryCuratedNavigationTest_003")
+  @RelatedIssue(issueID = "XW-640")
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category

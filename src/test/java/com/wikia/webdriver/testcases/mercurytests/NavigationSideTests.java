@@ -127,7 +127,7 @@ public class NavigationSideTests extends NewTestTemplate {
         true
     );
 
-    nav.clickOverlay();
+    nav.tapOverlay();
 
     result = !nav.isNavMenuVisible();
     PageObjectLogging.log(

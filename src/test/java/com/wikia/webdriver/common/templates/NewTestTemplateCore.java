@@ -1,19 +1,5 @@
 package com.wikia.webdriver.common.templates;
 
-import java.io.File;
-import java.lang.reflect.Method;
-
-import net.lightbody.bmp.proxy.ProxyServer;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
@@ -26,8 +12,21 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import net.lightbody.bmp.proxy.ProxyServer;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
+import java.io.File;
+import java.lang.reflect.Method;
+
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
-    com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
+            com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WebDriver driver;
@@ -68,11 +67,16 @@ public class NewTestTemplateCore {
   }
 
   protected void setWindowSize() {
-      if (!Configuration.getBrowser().contains("ANDROID") && Configuration.getBrowserSize() != null) {
-        driver.manage().window().setSize(Configuration.getBrowserSize());
+    Dimension browserSize = Configuration.getBrowserSize();
+    String browser = Configuration.getBrowser();
+
+    if (!browser.contains("ANDROID")) {
+      if (browserSize != null) {
+        driver.manage().window().setSize(browserSize);
       } else {
         driver.manage().window().maximize();
       }
+    }
   }
 
   protected WebDriver startCustomBrowser(String browserName) {

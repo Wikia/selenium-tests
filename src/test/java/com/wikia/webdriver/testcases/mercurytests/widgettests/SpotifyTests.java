@@ -30,8 +30,6 @@ public class SpotifyTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
   }
 
-  //@TODO XW-314 - Login is necessary to bypass cache.
-
   @Test(groups = "MercurySpotifyWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void MercurySpotifyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {

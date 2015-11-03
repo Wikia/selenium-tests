@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SkinHelper;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
@@ -432,7 +432,7 @@ public class AdsBaseObject extends WikiBasePageObject {
                          String adSkinRightPath,
                          String backgroundColor,
                          String middleColor) {
-    SkinHelper skinHelper = new SkinHelper(adSkinLeftPath, adSkinRightPath, driver);
+    AdsSkinHelper skinHelper = new AdsSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
 

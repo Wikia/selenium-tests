@@ -1,12 +1,10 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -21,6 +19,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -55,6 +56,7 @@ public class UserAndRights extends NewTestTemplate {
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
+  @RelatedIssue(issueID = "MAIN-5753", comment = "not possible to test until the issue is fixed")
   public void blockedUserShouldBeAbleToChangeEmail() {
     final String newEmailAddress = Configuration.getCredentials().emailQaart2;
     final String oldEmailAddress = Configuration.getCredentials().email;
@@ -63,6 +65,7 @@ public class UserAndRights extends NewTestTemplate {
     editPrefPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
+    editPrefPage.openEmailSection();
     MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
         Configuration.getCredentials().emailPasswordQaart1);
 

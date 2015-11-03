@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -82,6 +83,7 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
+  @RelatedIssue(issueID = "XW-653", comment = "Test is unstable")
   @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
