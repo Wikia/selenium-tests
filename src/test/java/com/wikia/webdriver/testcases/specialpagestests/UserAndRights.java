@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -52,6 +53,7 @@ public class UserAndRights extends NewTestTemplate {
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
+  @RelatedIssue(issueID = "MAIN-5753", comment = "not possible to test until the issue is fixed")
   public void blockedUserShouldBeAbleToChangeEmail() {
     final String newEmailAddress = "myAwesomeEmail@email.co.uk";
     final String oldEmailAddress = Configuration.getCredentials().email;

@@ -1,12 +1,10 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -16,6 +14,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 /**
  * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
@@ -76,6 +77,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
+  @RelatedIssue(issueID = "MAIN-5753", comment = "not possible to test until the issue is fixed")
   public void changeEmailAddress() {
     final String newEmailAddress = "myAwesomeEmail@email.co.uk";
     final String oldEmailAddress = Configuration.getCredentials().email;
