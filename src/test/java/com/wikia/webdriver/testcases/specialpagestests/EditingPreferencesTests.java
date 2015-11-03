@@ -95,7 +95,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     ConfirmationPageObject confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(
             Configuration.getCredentials().emailQaart2,
-            Configuration.getCredentials().emailPasswordQaart2, wikiURL);
+            Configuration.getCredentials().emailPasswordQaart2);
     confirmPageAlmostThere.typeInUserName(User.USER_5.getUserName());
     confirmPageAlmostThere.typeInPassword(User.USER_5.getPassword());
     confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().emailQaart2,
@@ -113,8 +113,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(
-            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword,
-            wikiURL);
+            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword);
     confirmPageAlmostThere.typeInUserName(User.USER_5.getUserName());
     confirmPageAlmostThere.typeInPassword(User.USER_5.getPassword());
     confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
