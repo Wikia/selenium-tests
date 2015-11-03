@@ -27,7 +27,7 @@ public class NavigationSideComponentObject extends BasePageObject {
   @FindBy(css = ".local-wikia-search a")
   private WebElement searchSuggestion;
 
-  @FindBy(css = "ul.local-nav-menu li")
+  @FindBy(css = "ul.local-nav-menu li div")
   private List<WebElement> navList;
 
   @FindBy(xpath = "//ul[contains(@class, \"local-nav-menu\")]/li/*[text()[contains(., \"Back\")]]")

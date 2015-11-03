@@ -58,13 +58,13 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "RedirectionTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
-  public void RedirectionTest_002_RedirectFromFullSiteToOasis() {
+  public void RedirectionTest_002_RedirectFromFullSiteToOasisAsAnon() {
     redirectFromFullSiteToOasis();
   }
 
   @Test(groups = "RedirectionTest_003")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
-  public void RedirectionTest_003_RedirectFromFullSiteToOasis() {
+  public void RedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
     redirectFromFullSiteToOasis();
   }
 
