@@ -119,7 +119,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     confirmPageAlmostThere.typeInUserName(User.USER_5.getUserName());
     confirmPageAlmostThere.typeInPassword(User.USER_5.getPassword());
     confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
-        Configuration.getCredentials().emailPassword);
+                                             Configuration.getCredentials().emailPassword);
 
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
