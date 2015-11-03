@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
@@ -19,9 +22,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -76,7 +76,7 @@ public class UserAndRights extends NewTestTemplate {
     ConfirmationPageObject confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(
             Configuration.getCredentials().emailQaart2,
-            Configuration.getCredentials().emailPasswordQaart2, wikiURL);
+            Configuration.getCredentials().emailPasswordQaart2);
     confirmPageAlmostThere.typeInUserName(User.BLOCKED_USER.getUserName());
     confirmPageAlmostThere.typeInPassword(User.BLOCKED_USER.getPassword());
     confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().emailQaart2,
@@ -94,8 +94,7 @@ public class UserAndRights extends NewTestTemplate {
 
     confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(
-            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword,
-            wikiURL);
+            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword);
     confirmPageAlmostThere.typeInUserName(User.BLOCKED_USER.getUserName());
     confirmPageAlmostThere.typeInPassword(User.BLOCKED_USER.getPassword());
     confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
