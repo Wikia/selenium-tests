@@ -1,13 +1,14 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.users.CreateUser;
 import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 /**
  * @ownership Social
@@ -53,6 +54,7 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = "MercurySignupTest_006")
   @Execute(onWikia = "ja.ja-test")
+  @RelatedIssue(issueID = "XW-640")
   public void MercurySignupTest_006_japaneseUserSignup() {
     String japanName = "ユーザー" + DateTime.now().getMillis();
     String japanPAssword = "ユーザザー" + DateTime.now().getMillis();
