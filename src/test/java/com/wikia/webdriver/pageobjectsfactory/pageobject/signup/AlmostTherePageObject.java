@@ -67,6 +67,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 
   public ConfirmationPageObject enterEmailChangeLink(String email, String password) {
     getUrl(getEmailChangeConfirmationLink(email, password));
+    
     PageObjectLogging.log("confirmChangeEmail", "Email change confirmation page is displayed",
         true, driver);
     return new ConfirmationPageObject(driver);
