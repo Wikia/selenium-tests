@@ -67,7 +67,7 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.openEmailSection();
     MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
-        Configuration.getCredentials().emailPasswordQaart1);
+        Configuration.getCredentials().emailPasswordQaart2);
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
