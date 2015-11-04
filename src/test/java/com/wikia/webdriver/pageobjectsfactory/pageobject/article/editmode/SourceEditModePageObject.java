@@ -76,7 +76,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement focusedMode;
   @FindBy(css = "#editarea")
   private WebElement textArea;
-  @FindBy(css = "#.cke_source")
+  @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
   @FindBy(css = "#editarea .ace_scroller")
   private WebElement textAreaScroller;
@@ -106,8 +106,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48),
-                           desiredContent.substring(1, 38) + desiredContent.substring(48)
+    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
     );
   }
 

@@ -154,7 +154,7 @@ public class LightboxTests extends NewTestTemplate {
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
    */
   @Test(groups = {"LightboxTest_009"})
-  //@Execute(browser = "FF", browserSize = "1400x720")
+  @Execute(browser = "FF", browserSize = "1400x720")
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
