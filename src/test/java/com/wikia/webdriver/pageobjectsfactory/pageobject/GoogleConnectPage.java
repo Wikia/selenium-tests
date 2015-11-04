@@ -37,12 +37,6 @@ public class GoogleConnectPage extends WikiBasePageObject {
     return this;
   }
 
-  public GoogleConnectPage clickSignIn() {
-    signUpButton.click();
-
-    return this;
-  }
-
   public GoogleConnectPage signInWithGoogleAccount(String userName, String password) {
     signUpButton.click();
 
