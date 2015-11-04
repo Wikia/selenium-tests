@@ -5,9 +5,6 @@ import java.io.File;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
-/**
- * Created by Ludwik on 2015-02-19. Added LANGUAGE2 Japanese. By P. Archbold on 2015-07-23
- */
 public enum User {
   USER("ci.user.regular.username", "ci.user.regular.password"), USER_2("ci.user.regular2.username",
       "ci.user.regular2.password"), USER_3("ci.user.regular3.username", "ci.user.regular3.password"), USER_5(
