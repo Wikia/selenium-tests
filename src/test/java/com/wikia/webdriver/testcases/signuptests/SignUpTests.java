@@ -230,8 +230,6 @@ public class SignUpTests extends NewTestTemplate {
     String env = Configuration.getEnv();
     switch (env) {
       case "prod":
-        emailFB = credentials.emailFB;
-        break;
       case "sandbox":
         emailFB = credentials.emailFB;
         break;
