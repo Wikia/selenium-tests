@@ -63,6 +63,8 @@ public class Credentials {
   public final String emailPasswordQaart1;
   public final String emailQaart2;
   public final String emailPasswordQaart2;
+  public final String emailQaart4;
+  public final String emailPasswordQaart4;
   public final String userNameStaff;
   public final String userNameStaffId;
   public final String passwordStaff;
@@ -213,6 +215,8 @@ public class Credentials {
     emailPasswordQaart1 = XMLReader.getValue(file, "ci.email.qawikia1.password");
     emailQaart2 = XMLReader.getValue(file, "ci.email.qawikia2.username");
     emailPasswordQaart2 = XMLReader.getValue(file, "ci.email.qawikia2.password");
+    emailQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.username");
+    emailPasswordQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.password");
     userNameBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.username");
     passwordBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.password");
 
