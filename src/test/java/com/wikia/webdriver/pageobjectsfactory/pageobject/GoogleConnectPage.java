@@ -17,7 +17,7 @@ public class GoogleConnectPage extends WikiBasePageObject {
   private WebElement message;
 
   @FindBy(css = ".abcRioButtonContentWrapper")
-  private WebElement SignUpButton;
+  private WebElement signUpButton;
 
   public GoogleConnectPage(WebDriver driver) {
     super(driver);
