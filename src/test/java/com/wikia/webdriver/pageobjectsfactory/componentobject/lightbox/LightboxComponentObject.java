@@ -8,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -170,6 +171,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public FilePagePageObject clickTitle() {
+    new Actions(driver).moveToElement(lightBoxModal).perform();
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);

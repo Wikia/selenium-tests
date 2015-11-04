@@ -136,7 +136,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest_008"})
-  @Execute(asUser = User.STAFF, disableFlash = "false", browser = "FF", browserSize = "1400x720")
+  @Execute(asUser = User.USER, disableFlash = "false", browser = "FF", browserSize = "1400x720")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
