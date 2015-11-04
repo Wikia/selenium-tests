@@ -34,6 +34,7 @@ public class NavigationTests extends NewTestTemplate {
 
   // CCT06
   @Test(groups = "MercuryCuratedNavigationTest_001")
+  @RelatedIssue(issueID = "XW-687", comment = "java.lang.IndexOutOfBoundsException: Index: 1, Size: 0")
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
     category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
