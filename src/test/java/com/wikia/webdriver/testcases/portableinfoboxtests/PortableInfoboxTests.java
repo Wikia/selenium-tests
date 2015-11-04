@@ -6,13 +6,14 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.testng.annotations.Test;
 
@@ -89,27 +90,27 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests_004", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
-  @RelatedIssue(issueID = "MAIN-5573", comment =
-      "The test expects edition panel in infobox editor. "
-      + "Check ticket status and if that's the expected "
-      + "behaviour behaviour to PO. "
-      + "The test might require an update")
   public void verifyCategoriesInTemplateInvocation() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
-    ArticlePageObject article = new ArticlePageObject(driver).open(PageContent.PORTABLE_INFOBOX01);
-
     SourceEditModePageObject src =
-        info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE);
+        info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_NEWCATEGORY);
 
     String categoryName = src.focusTextArea().getRandomDigits(9);
 
-    WikiTextShortCutsComponentObject shortcuts = src.clickMore();
+    String content = src.copyContent();
+    src.deleteCharacter(content.length());
+    src.addContentToTextArea(
+        "<infobox> <data source=\"test\"> <label>Test</label> <default> "
+        + "[[Category:" + categoryName
+        + "]] </default> </data> </infobox>");
+    src.submitArticle();
 
-    shortcuts.clickCategory(1).addContent(categoryName);
+    (new ArticleContent()).clear();
 
-    src.clickPublishButtonInTemplateNamespace().verifyCategoryInTemplatePage(categoryName);
-
-    article.open(PageContent.PORTABLE_INFOBOX01).verifyCategoryPresent(categoryName);
+    VisualEditModePageObject editor = new VisualEditModePageObject(driver);
+    editor = new ArticlePageObject(driver).open().editArticleInCKUsingDropdown();
+    editor.addContent("{{AddingNewCategoryTest}}");
+    editor.submitArticle().verifyCategoryPresent(categoryName);
   }
 
   @Test(groups = {"PortableInfoboxTests_005", "PortableInfoboxTests_2"})

@@ -20,6 +20,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
@@ -73,17 +74,25 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-  @FindBy(css = "#editarea .ace_scroller")
+  @FindBy(css = "#editarea")
   private WebElement textArea;
-  @FindBy(css = ".cke_source")
+  @FindBy(css = "#.cke_source")
   private WebElement sourceModeTextArea;
+  @FindBy(css = "#editarea .ace_scroller")
+  private WebElement textAreaScroller;
 
   public SourceEditModePageObject(WebDriver driver) {
     super(driver);
   }
 
   public SourceEditModePageObject focusTextArea() {
-    jsActions.focus(".cke_source");
+    jsActions.focus("textArea");
+    return this;
+  }
+
+  public SourceEditModePageObject clickEditArea() {
+    wait.forElementVisible(textArea);
+    textArea.click();
     return this;
   }
 
@@ -97,7 +106,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48),
+                           desiredContent.substring(1, 38) + desiredContent.substring(48)
     );
   }
 
@@ -331,8 +341,8 @@ public class SourceEditModePageObject extends EditMode {
         content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
     );
     Assertion.assertNumber(
-            widthDesired, width,
-            "width is " + width + " should be " + widthDesired
+        widthDesired, width,
+        "width is " + width + " should be " + widthDesired
     );
   }
 
@@ -348,7 +358,7 @@ public class SourceEditModePageObject extends EditMode {
     appendContent(PageContent.ARTICLE_WITH_TOC_LINES);
   }
 
-  private void appendContent(String content) {
+  public void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
@@ -364,8 +374,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void clearContent() {
-    wait.forElementVisible(sourceModeTextArea);
-    sourceModeTextArea.clear();
+    wait.forElementVisible(textArea);
+    textArea.clear();
     PageObjectLogging.log("clearContent", "source mode cleared", true);
   }
 
@@ -391,13 +401,34 @@ public class SourceEditModePageObject extends EditMode {
     return new ArticlePageObject(driver);
   }
 
-  public void addCategoryToSourceCode(String catName) {
-    sourceModeTextArea.sendKeys(catName);
-  }
-
   public TemplatePageObject clickPublishButtonInTemplateNamespace() {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new TemplatePageObject(driver);
+  }
+
+  public SourceEditModePageObject addContentToTextArea(String text) {
+    wait.forElementVisible(textAreaScroller);
+    new Actions(driver)
+        .click()
+        .sendKeys(text)
+        .build().perform();
+    return this;
+  }
+
+  public SourceEditModePageObject deleteCharacter(Integer howMany) {
+    wait.forElementVisible(textAreaScroller);
+    Actions action = new Actions(driver);
+    action
+        .moveToElement(textAreaScroller)
+        .click();
+    for (int i = 0; i < howMany; i++)
+    {
+      action.sendKeys(Keys.BACK_SPACE);
+    }
+    action
+        .build()
+        .perform();
+    return this;
   }
 }
