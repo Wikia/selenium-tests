@@ -4,9 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Ludwik on 2015-11-04.
- */
 public class GoogleLoginPopup extends BasePageObject{
 
   @FindBy(css = "#Email")

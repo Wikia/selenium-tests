@@ -8,9 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
-/**
- * Created by Ludwik on 2015-11-04.
- */
 public class GoogleConnectPage extends WikiBasePageObject {
 
   @FindBy(css = "#message")

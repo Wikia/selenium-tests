@@ -9,11 +9,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.GoogleConnectPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-/**
- * Created by Ludwik on 2015-11-04.
- */
 public class GoogleConnect extends NewTestTemplate {
-
 
   @Test
   public void connectedUserCanLogInToWikiaByGoogle() {
@@ -21,6 +17,7 @@ public class GoogleConnect extends NewTestTemplate {
 
     googleConnectPage.signInWithGoogleAccount(Configuration.getCredentials().emailQaart4,
         Configuration.getCredentials().emailPasswordQaart4);
+
     Assertion.assertTrue(googleConnectPage.isUserLoggedIn());
 
     new ArticlePageObject(driver).open().verifyUserLoggedIn(User.GOOGLE_CONNECTED);
