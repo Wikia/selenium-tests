@@ -422,8 +422,7 @@ public class SourceEditModePageObject extends EditMode {
     action
         .moveToElement(textAreaScroller)
         .click();
-    for (int i = 0; i < howMany; i++)
-    {
+    for (int i = 0; i < howMany; i++) {
       action.sendKeys(Keys.BACK_SPACE);
     }
     action
