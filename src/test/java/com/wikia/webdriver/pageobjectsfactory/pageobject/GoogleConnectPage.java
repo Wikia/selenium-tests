@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 public class GoogleConnectPage extends WikiBasePageObject {
 
@@ -39,6 +40,7 @@ public class GoogleConnectPage extends WikiBasePageObject {
 
     new WebDriverWait(driver, 30).until(ExpectedConditions.numberOfWindowsToBe(2));
     driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+    new ArticlePageObject(driver).open();
 
     new GoogleLoginPopup(driver).SignInToGoogle(userName, password);
     driver.switchTo().window(driver.getWindowHandles().toArray()[0].toString());
