@@ -38,13 +38,13 @@ public class GoogleConnectPage extends WikiBasePageObject {
   }
 
   public GoogleConnectPage clickSignIn() {
-    SignUpButton.click();
+    signUpButton.click();
 
     return this;
   }
 
   public GoogleConnectPage signInWithGoogleAccount(String userName, String password) {
-    SignUpButton.click();
+    signUpButton.click();
 
     new WebDriverWait(driver, 30).until(ExpectedConditions.numberOfWindowsToBe(2));
     driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
