@@ -56,22 +56,28 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests_002", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
-  @RelatedIssue(issueID = "MAIN-5575", comment = "verify internal and external link in infobox redirects to proper place")
   public void verifyElementsRedirects() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
 
     info.open(PageContent.PORTABLE_INFOBOX01).clickRedLink(0).verifyCreateNewArticleModal();
 
-    String externalLinkName =
-        info.open(PageContent.PORTABLE_INFOBOX01).getExternalLinkRedirectTitle();
+    String externalLinkName = info
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getExternalLinkRedirectTitle(0);
 
-    String externalUrl = info.clickExternalLink().getUrlFromExternalLinkaAfterPageIsLoaded();
+    String externalUrl = info
+        .clickExternalLink(0)
+        .getUrlAfterPageIsLoaded();
 
-    String internalLinkName =
-        info.compareURLAndExternalLink(externalLinkName, externalUrl)
-            .open(PageContent.PORTABLE_INFOBOX01).getInternalLinkRedirectTitle(0);
+    info.compareURLAndExternalLink(externalLinkName, externalUrl);
 
-    String internalURL = info.clickInternalLink(0).getUrlFromInternalLinkaAfterPageIsLoaded();
+    String internalLinkName = info
+        .open(PageContent.PORTABLE_INFOBOX01)
+        .getInternalLinkRedirectTitle(1);
+
+    String internalURL = info
+        .clickInternalLink(1)
+        .getUrlAfterPageIsLoaded();
 
     info.compareURLAndInternalLink(internalLinkName, internalURL);
   }

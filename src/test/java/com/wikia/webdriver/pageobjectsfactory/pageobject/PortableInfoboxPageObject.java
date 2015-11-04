@@ -23,8 +23,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement pInfoTitle;
   @FindBy(css = ".pi-image img")
   private WebElement pInfoImageTag;
-  @FindBy(css = ".pi-item .external")
-  private WebElement pInfoExternalLink;
   @FindBy(css = ".WikiaLightbox")
   private WebElement lightbox;
   @FindBy(css = ".portable-infobox")
@@ -63,6 +61,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> categories;
   @FindBy(css = ".pi-navigation a[href*='redlink']")
   private List<WebElement> pInfoRedlLinkList;
+  @FindBy(css = ".pi-item .external")
+  private List<WebElement> pInfoExternalLinkList;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
   @FindBy(css = "i")
@@ -84,13 +84,15 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return pInfoLayout.getCssValue("background-color");
   }
 
-  public String getExternalLinkRedirectTitle() {
-    wait.forElementVisible(pInfoExternalLink);
-    return pInfoExternalLink.getAttribute("href");
+  public String getExternalLinkRedirectTitle(int index) {
+    wait.forElementVisible(pInfoExternalLinkList.get(index));
+    scrollToElement(pInfoExternalLinkList.get(index));
+    return pInfoExternalLinkList.get(index).getAttribute("href");
   }
 
   public String getInternalLinkRedirectTitle(int index) {
     wait.forElementVisible(pInfoInternalLinkList.get(index));
+    scrollToElement(pInfoInternalLinkList.get(index));
     return pInfoInternalLinkList.get(index).getAttribute("href");
   }
 
@@ -102,7 +104,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return groupHeadersWrappers.get(index);
   }
 
-  public String getUrlFromExternalLinkaAfterPageIsLoaded() {
+  public String getUrlAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);
     return driver.getCurrentUrl();
   }
@@ -112,19 +114,15 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return categoryLinkInInfobox.getText();
   }
 
-  public String getUrlFromInternalLinkaAfterPageIsLoaded() {
-    wait.forElementVisible(headerTitle);
-    return driver.getCurrentUrl();
-  }
-
   public String getDataImageName() {
     wait.forElementVisible(pInfoImageTag);
     return pInfoImageTag.getAttribute("data-image-name");
   }
 
-  public PortableInfoboxPageObject clickExternalLink() {
-    wait.forElementVisible(pInfoExternalLink);
-    pInfoExternalLink.click();
+  public PortableInfoboxPageObject clickExternalLink(int index) {
+    wait.forElementVisible(pInfoExternalLinkList.get(index));
+    scrollToElement(pInfoExternalLinkList.get(index));
+    pInfoExternalLinkList.get(index).click();
     return this;
   }
 
