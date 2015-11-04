@@ -28,7 +28,7 @@ public class GoogleConnectPage extends WikiBasePageObject {
   }
 
   public GoogleConnectPage open() {
-    if ("DEV".equals(Configuration.getEnvType())) {
+    if ("dev".equals(Configuration.getEnvType())) {
       getUrl("https://services.wikia-dev.com/external-auth/login/google");
     } else {
       getUrl("https://services.wikia.com/external-auth/login/google");
