@@ -96,7 +96,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_NEWCATEGORY);
 
     String categoryName = src.focusTextArea().getRandomDigits(9);
-
     String content = src.copyContent();
     src.deleteCharacter(content.length());
     src.addContentToTextArea(
