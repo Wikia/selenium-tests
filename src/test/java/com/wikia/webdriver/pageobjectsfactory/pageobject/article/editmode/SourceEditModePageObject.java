@@ -357,7 +357,7 @@ public class SourceEditModePageObject extends EditMode {
     appendContent(PageContent.ARTICLE_WITH_TOC_LINES);
   }
 
-  public void appendContent(String content) {
+  private void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
