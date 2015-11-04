@@ -26,7 +26,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private List<WebElement> pageElementList;
   @FindBy(css = "#userNavigationLabel")
   private WebElement fbDropDown;
-  @FindBy(xpath = "//span[text()='Log out']")
+  @FindBy(xpath = "//span[text()='Log Out']")
   private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {

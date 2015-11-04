@@ -23,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -37,6 +38,7 @@ public class SignUpTests extends NewTestTemplate {
   private static String userName;
   private static String password;
   private static String jaTestWiki = "ja.ja-test";
+  private static String emailFB;
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
@@ -47,7 +49,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
   }
@@ -61,10 +63,10 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typePassword(signUp.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     signUp.enterBirthDate(
-            // +1 because months are numerated from 0
-            Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-            Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-            Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+        // +1 because months are numerated from 0
+        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
@@ -76,7 +78,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-    @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
+  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -90,7 +92,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
@@ -128,7 +130,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
@@ -138,6 +140,7 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
+
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -152,7 +155,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
@@ -169,15 +172,14 @@ public class SignUpTests extends NewTestTemplate {
    */
 
   @Test(groups = {"SignUp_007", "SignUp", "Modals"})
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   public void SignUp_007_signUpWithFacebook() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
+    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB,
+                                                         credentials.passwordFB).logOutFB();
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB;
-    userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
+    userFB = fbLogin.login(emailFB, credentials.passwordFB);
     userFB.verifyPageLogo();
     SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
@@ -207,19 +209,38 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
-            almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
+        almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
     UserProfilePageObject userProfile =
-            confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
+        confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
     userProfile.verifyUserLoggedIn(userName);
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
     toolbar.verifyUserToolBar();
     PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
+  }
+
+  @BeforeMethod(alwaysRun = true)
+  public void setEnvironmentCredentials() {
+    String env = Configuration.getEnv();
+    switch (env) {
+      case "prod":
+        emailFB = credentials.emailFB;
+        break;
+      case "sandbox":
+        emailFB = credentials.emailFB;
+        break;
+      case "preview":
+        emailFB = credentials.emailFBPreview;
+        break;
+      default:
+        emailFB = credentials.emailFBDev;
+        break;
+    }
   }
 }

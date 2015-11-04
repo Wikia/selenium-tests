@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -13,12 +12,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = {"Facebook"})
 public class FacebookTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
+  String emailFB;
+  String passwordFB = credentials.passwordFB;
 
   /**
    * 1. Log in to facebook 2. Click facebook login on signup page 3. Deny permission to user's
@@ -26,11 +28,9 @@ public class FacebookTests extends NewTestTemplate {
    * and login, 6. Verify user can login via facebook
    */
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithNewAccountNoEmailPermission() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB);
+    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB, passwordFB);
 
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
@@ -51,17 +51,15 @@ public class FacebookTests extends NewTestTemplate {
    * facebook via prefs for cleanup
    */
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithExistingWikiaAccount() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
+    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB, passwordFB).logOutFB();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openWikiPage(wikiURL);
     dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
-    dropDown.logInViaFacebook(credentials.emailFB, credentials.passwordFB);
+    dropDown.logInViaFacebook(emailFB, passwordFB);
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();
@@ -70,20 +68,37 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void connectUsingUserPreferences() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
+    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB, passwordFB).logOutFB();
 
     PreferencesPageObject prefsPage = new PreferencesPageObject(driver).open();
     prefsPage.loginAs(User.USER);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-    prefsPage.connectFacebook(credentials.emailFB, credentials.passwordFB);
+    prefsPage.connectFacebook(emailFB, passwordFB);
     prefsPage.verifyFBButtonVisible();
     prefsPage.logOut(wikiURL);
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
     prefsPage.verifyUserLoggedIn(credentials.userName);
+  }
+
+  @BeforeMethod(alwaysRun = true)
+  public void setEnvironmentCredentials() {
+    String env = Configuration.getEnv();
+    switch (env) {
+      case "prod":
+        emailFB = credentials.emailFB;
+        break;
+      case "sandbox":
+        emailFB = credentials.emailFB;
+        break;
+      case "preview":
+        emailFB = credentials.emailFBPreview;
+        break;
+      default:
+        emailFB = credentials.emailFBDev;
+        break;
+    }
   }
 }

@@ -79,6 +79,14 @@ public class Credentials {
   public final String passwordFB;
   public final String emailFB;
 
+  public final String userNameFBPreview;
+  public final String passwordFBPreview;
+  public final String emailFBPreview;
+
+  public final String userNameFBDev;
+  public final String passwordFBDev;
+  public final String emailFBDev;
+
   public final String userNameBlocked;
   public final String passwordBlocked;
 
@@ -207,6 +215,14 @@ public class Credentials {
     emailFB = XMLReader.getValue(file, "ci.user.facebook.email");
     passwordFB = XMLReader.getValue(file, "ci.user.facebook.password");
     userNameFB = XMLReader.getValue(file, "ci.user.facebook.username");
+
+    emailFBPreview = XMLReader.getValue(file, "ci.user.facebookpreview.email");
+    passwordFBPreview = XMLReader.getValue(file, "ci.user.facebookpreview.password");
+    userNameFBPreview = XMLReader.getValue(file, "ci.user.facebookpreview.username");
+
+    emailFBDev = XMLReader.getValue(file, "ci.user.facebookdev.email");
+    passwordFBDev = XMLReader.getValue(file, "ci.user.facebookdev.password");
+    userNameFBDev = XMLReader.getValue(file, "ci.user.facebookdev.username");
 
     email = XMLReader.getValue(file, "ci.email.generic.username");
     emailPassword = XMLReader.getValue(file, "ci.email.generic.password");
