@@ -14,13 +14,11 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
@@ -78,8 +76,6 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
-  @FindBy(css = "#editarea .ace_scroller")
-  private WebElement textAreaScroller;
 
   public SourceEditModePageObject(WebDriver driver) {
     super(driver);
@@ -341,7 +337,7 @@ public class SourceEditModePageObject extends EditMode {
     );
     Assertion.assertNumber(
         widthDesired, width,
-        "width is " + width + " should be " + widthDesired
+        "Video width in source edit mode is " + width + " while desired width is " + widthDesired
     );
   }
 
@@ -406,27 +402,4 @@ public class SourceEditModePageObject extends EditMode {
     return new TemplatePageObject(driver);
   }
 
-  public SourceEditModePageObject addContentToTextArea(String text) {
-    wait.forElementVisible(textAreaScroller);
-    new Actions(driver)
-        .click()
-        .sendKeys(text)
-        .build().perform();
-    return this;
-  }
-
-  public SourceEditModePageObject deleteCharacter(Integer howMany) {
-    wait.forElementVisible(textAreaScroller);
-    Actions action = new Actions(driver);
-    action
-        .moveToElement(textAreaScroller)
-        .click();
-    for (int i = 0; i < howMany; i++) {
-      action.sendKeys(Keys.BACK_SPACE);
-    }
-    action
-        .build()
-        .perform();
-    return this;
-  }
 }

@@ -12,7 +12,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.template.editmode.PortableInfoboxSourceEditModeObject;
 
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 /**
@@ -62,20 +64,20 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalLinkName = info
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getExternalLinkRedirectTitle(0);
+        .getExternalLinkRedirectTitleWithIndex(0);
 
     String externalUrl = info
-        .clickExternalLink(0)
+        .clickExternalLinkWithIndex(0)
         .getUrlAfterPageIsLoaded();
 
     info.compareURLAndExternalLink(externalLinkName, externalUrl);
 
     String internalLinkName = info
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInternalLinkRedirectTitle(1);
+        .getInternalLinkRedirectTitleWithIndex(1);
 
     String internalURL = info
-        .clickInternalLink(1)
+        .clickInternalLinkWithIndex(1)
         .getUrlAfterPageIsLoaded();
 
     info.compareURLAndInternalLink(internalLinkName, internalURL);
@@ -96,13 +98,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(onWikia = "mediawiki119")
   public void verifyCategoriesInTemplateInvocation() {
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
-    SourceEditModePageObject src =
-        info.navigateToArticleEditPageSrc(wikiURL, PageContent.PI_TEMPLATE_NEWCATEGORY);
+    PortableInfoboxSourceEditModeObject src =
+        info.editInfoboxTemplateInSourceMode(wikiURL, PageContent.PI_TEMPLATE_NEWCATEGORY);
 
     String categoryName = src.focusTextArea().getRandomDigits(9);
     String content = src.copyContent();
-    src.deleteCharacter(content.length());
-    src.addContentToTextArea(
+    src.strokeKey(Keys.BACK_SPACE, content.length());
+    src.addContentToInfoboxTemplateInSourceMode(
         "<infobox> <data source=\"test\"> <label>Test</label> <default> "
         + "[[Category:" + categoryName
         + "]] </default> </data> </infobox>");
