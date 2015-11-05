@@ -11,47 +11,25 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 /**
  * @ownership Content X-Wing Wikia
  */
 public class LightboxComponentObject extends BasePageObject {
 
-  @FindBy(css = ".lightbox-close-wrapper")
-  private WebElement closeLightboxButton;
-  @FindBy(css = ".current")
-  private WebElement currentImage;
   @FindBy(css = ".lightbox-content")
   private WebElement lightboxContent;
-  @FindBy(css = ".lightbox-header")
-  private WebElement lightboxHeader;
+  @FindBy(css = ".current")
+  private WebElement currentImage;
   @FindBy(css = ".lightbox-footer")
   private WebElement lightboxFooter;
-  @FindBy(css = ".article-gallery img")
-  private List<WebElement> galleryImagesArray;
+  @FindBy(css = ".lightbox-header")
+  private WebElement lightboxHeader;
+  @FindBy(css = ".lightbox-close-wrapper")
+  private WebElement closeLightboxButton;
+
 
   public LightboxComponentObject(WebDriver driver) {
     super(driver);
-  }
-
-  public void clickCloseButton() {
-    wait.forElementVisible(closeLightboxButton);
-    closeLightboxButton.click();
-  }
-
-  public void clickGalleryImage(int index) {
-    wait.forElementVisible(galleryImagesArray.get(index));
-    scrollToElement(galleryImagesArray.get(index));
-    galleryImagesArray.get(index).click();
-  }
-
-  public String getCurrentImagePath() throws WebDriverException {
-    wait.forElementVisible(currentImage);
-    if (currentImage.getAttribute("src") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return currentImage.getAttribute("src");
   }
 
   public boolean isLightboxOpened() {
@@ -75,5 +53,23 @@ public class LightboxComponentObject extends BasePageObject {
 
   public boolean isLightboxFooterDisplayed() {
     return !lightboxFooter.getCssValue("display").contains("none");
+  }
+
+  public String getCurrentImagePath() throws WebDriverException {
+    wait.forElementVisible(currentImage);
+    if (currentImage.getAttribute("src") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
+    return currentImage.getAttribute("src");
+  }
+
+  public void clickCloseButton() {
+    wait.forElementVisible(closeLightboxButton);
+    closeLightboxButton.click();
+  }
+
+  public void clickOnImage() {
+    waitForLoadingOverlayToDisappear();
+    waitAndClick(currentImage);
   }
 }

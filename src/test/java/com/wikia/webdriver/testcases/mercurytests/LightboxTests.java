@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.GalleryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
@@ -40,10 +41,11 @@ public class LightboxTests extends NewTestTemplate {
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_001_Open_Close() {
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    LightboxComponentObject lightbox;
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
 
-    lightbox.clickGalleryImage(0);
+    lightbox = gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),
@@ -78,11 +80,12 @@ public class LightboxTests extends NewTestTemplate {
   // MT02
   @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    LightboxComponentObject lightbox;
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
-    lightbox.clickGalleryImage(0);
+    lightbox = gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
@@ -120,7 +123,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     lightbox.clickCloseButton();
-    lightbox.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
@@ -177,11 +180,12 @@ public class LightboxTests extends NewTestTemplate {
   // MT03
   @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    LightboxComponentObject lightbox;
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
-    lightbox.clickGalleryImage(0);
+    lightbox = gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
@@ -218,7 +222,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     lightbox.clickCloseButton();
-    lightbox.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
@@ -260,45 +264,23 @@ public class LightboxTests extends NewTestTemplate {
   // MT04
   @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_004_UIShow_UIHide() {
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    LightboxComponentObject lightbox;
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    lightbox = gallery.clickGalleryImage(0);
 
-    lightbox.clickGalleryImage(0);
+    Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
+    Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
 
-    Assertion.assertTrue(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header isn't displayed"
-    );
+    lightbox.clickOnImage();
 
-    Assertion.assertTrue(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer isn't displayed"
-    );
+    Assertion.assertFalse(lightbox.isLightboxHeaderDisplayed(), "Lightbox header is displayed");
+    Assertion.assertFalse(lightbox.isLightboxFooterDisplayed(), "Lightbox footer is displayed");
 
-    touchAction.tapOnPointXY(50, 50, 500, 5000);
+    lightbox.clickOnImage();
 
-    Assertion.assertFalse(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header is displayed"
-    );
-
-    Assertion.assertFalse(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer is displayed"
-    );
-
-    touchAction.tapOnPointXY(50, 50, 500, 5000);
-
-    Assertion.assertTrue(
-        lightbox.isLightboxHeaderDisplayed(),
-        "Lightbox header isn't displayed"
-    );
-
-    Assertion.assertTrue(
-        lightbox.isLightboxFooterDisplayed(),
-        "Lightbox footer isn't displayed"
-    );
+    Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
+    Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
   }
 
   // MT05
@@ -306,11 +288,12 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"}, enabled = false)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    LightboxComponentObject lightbox;
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
 
     String oldUrl = driver.getCurrentUrl();
-    lightbox.clickGalleryImage(0);
+    lightbox = gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),
@@ -339,11 +322,12 @@ public class LightboxTests extends NewTestTemplate {
   // MT06
   @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
-    LightboxComponentObject lightbox = new LightboxComponentObject(driver);
-    lightbox.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    GalleryComponentObject gallery = new GalleryComponentObject(driver);
+    LightboxComponentObject lightbox;
+    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
     PerformTouchAction touchAction = new PerformTouchAction(driver);
 
-    lightbox.clickGalleryImage(0);
+    lightbox = gallery.clickGalleryImage(0);
     String direction = DIRECTION_LEFT;
 
     Assertion.assertTrue(
@@ -383,7 +367,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     lightbox.clickCloseButton();
-    lightbox.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
     direction = DIRECTION_RIGHT;
 
     Assertion.assertTrue(
@@ -423,7 +407,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     lightbox.clickCloseButton();
-    lightbox.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
     direction = DIRECTION_UP;
 
     Assertion.assertTrue(
@@ -463,7 +447,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     lightbox.clickCloseButton();
-    lightbox.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
     direction = DIRECTION_DOWN;
 
     Assertion.assertTrue(
