@@ -6,15 +6,11 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -23,7 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -171,31 +166,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"SignUp_007", "SignUp", "Modals"})
-  public void SignUp_007_signUpWithFacebook() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB,
-                                                         credentials.passwordFB).logOutFB();
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openWikiPage(wikiURL);
-    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-    FacebookUserPageObject userFB;
-    userFB = fbLogin.login(emailFB, credentials.passwordFB);
-    userFB.verifyPageLogo();
-    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
-    FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
-    fbModal.acceptWikiaAppPolicy();
-    userName = "QA" + signUp.getTimeStamp();
-    password = "Pass" + signUp.getTimeStamp();
-    fbModal.typeUserName(userName);
-    fbModal.typePassword(password);
-    fbModal.createAccount();
-    base.openWikiPage(wikiURL);
-    base.appendToUrl("noads=1");
-    base.verifyUserLoggedIn(userName);
-    base.logOut(wikiURL);
-  }
-
-  @Test(groups = {"SignUp_008", "SignUp"})
+  @Test(groups = {"SignUp_007", "SignUp"})
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
@@ -225,20 +196,4 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @BeforeMethod(alwaysRun = true)
-  public void setEnvironmentCredentials() {
-    String env = Configuration.getEnv();
-    switch (env) {
-      case "prod":
-      case "sandbox":
-        emailFB = credentials.emailFB;
-        break;
-      case "preview":
-        emailFB = credentials.emailFBPreview;
-        break;
-      default:
-        emailFB = credentials.emailFBDev;
-        break;
-    }
-  }
 }

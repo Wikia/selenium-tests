@@ -7,6 +7,9 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -81,6 +84,31 @@ public class FacebookTests extends NewTestTemplate {
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
     prefsPage.verifyUserLoggedIn(credentials.userName);
+  }
+
+  @Test
+  @UseUnstablePageLoadStrategy
+  public void signUpWithFacebook() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(emailFB,
+                                                         credentials.passwordFB).logOutFB();
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
+    FacebookUserPageObject userFB;
+    userFB = fbLogin.login(emailFB, credentials.passwordFB);
+    userFB.verifyPageLogo();
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
+    FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
+    fbModal.acceptWikiaAppPolicy();
+    String userName = "QA" + signUp.getTimeStamp();
+    String password = "Pass" + signUp.getTimeStamp();
+    fbModal.typeUserName(userName);
+    fbModal.typePassword(password);
+    fbModal.createAccount();
+    base.openWikiPage(wikiURL);
+    base.appendToUrl("noads=1");
+    base.verifyUserLoggedIn(userName);
+    base.logOut(wikiURL);
   }
 
   @BeforeMethod(alwaysRun = true)
