@@ -287,7 +287,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    for (int i = 1, j = i + 1; i < 21; i++) {
+    for (int i = 1; i < 21; i++) {
       clearSource();
       clickMore();
       String content =
