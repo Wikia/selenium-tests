@@ -16,6 +16,14 @@ public class TestUser {
     this.birthdate = birthdate;
   }
 
+  public TestUser(String userName, String password, String email) {
+    this.userName = userName;
+    this.password = password;
+    this.email = email;
+    this.birthdate = DateTime.now();
+  }
+
+
   public String getUserName() {
     return userName;
   }

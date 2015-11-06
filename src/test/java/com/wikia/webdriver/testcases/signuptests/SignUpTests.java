@@ -1,20 +1,20 @@
 package com.wikia.webdriver.testcases.signuptests;
 
+import java.util.Calendar;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -23,20 +23,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-import org.testng.annotations.Test;
-
-import java.util.Calendar;
-
-/*
+/**
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
 public class SignUpTests extends NewTestTemplate {
-
-  private static String userName;
-  private static String password;
-  private static String jaTestWiki = "ja.ja-test";
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
@@ -61,10 +53,10 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typePassword(signUp.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     signUp.enterBirthDate(
-            // +1 because months are numerated from 0
-            Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-            Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-            Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+        // +1 because months are numerated from 0
+        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     signUp.verifyTooYoungMessage();
   }
 
@@ -76,7 +68,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-    @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
+  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -138,6 +130,7 @@ public class SignUpTests extends NewTestTemplate {
     createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
     createNewWiki1.verifyWikiName(wikiName);
   }
+
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -168,32 +161,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"SignUp_007", "SignUp", "Modals"})
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
-  public void SignUp_007_signUpWithFacebook() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.openWikiPage(wikiURL);
-    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-    FacebookUserPageObject userFB;
-    userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
-    userFB.verifyPageLogo();
-    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
-    FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
-    fbModal.acceptWikiaAppPolicy();
-    userName = "QA" + signUp.getTimeStamp();
-    password = "Pass" + signUp.getTimeStamp();
-    fbModal.typeUserName(userName);
-    fbModal.typePassword(password);
-    fbModal.createAccount();
-    base.openWikiPage(wikiURL);
-    base.appendToUrl("noads=1");
-    base.verifyUserLoggedIn(userName);
-    base.logOut(wikiURL);
-  }
-
-  @Test(groups = {"SignUp_008", "SignUp"})
+  @Test(groups = {"SignUp_007", "SignUp"})
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
@@ -207,14 +175,14 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
-            almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
+        almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
     confirmPageAlmostThere.typeInUserName(userName);
     confirmPageAlmostThere.typeInPassword(password);
     UserProfilePageObject userProfile =
-            confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
+        confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
     userProfile.verifyUserLoggedIn(userName);
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
     toolbar.verifyUserToolBar();
@@ -222,4 +190,5 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
+
 }

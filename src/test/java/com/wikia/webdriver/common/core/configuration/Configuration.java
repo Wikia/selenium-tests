@@ -45,18 +45,19 @@ public class Configuration {
       Yaml yaml = new Yaml();
 
       try {
-        defaultConfig = (Map<String, String>) yaml
-            .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
+        defaultConfig =
+            (Map<String, String>) yaml
+                .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
-        throw new TestEnvInitFailedException(
-            String.format("CANNOT FIND DEFAULT CONFIG FILE : %s", DEFAULT_CONFIG_FILE_NAME), e);
+        throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
+            DEFAULT_CONFIG_FILE_NAME), e);
       }
 
       File localConfigFile = new File(LOCAL_CONFIG_FILE_NAME);
       if (localConfigFile.exists()) {
         try {
-          defaultConfig
-              .putAll((Map<String, String>) yaml.load(new FileInputStream(localConfigFile)));
+          defaultConfig.putAll((Map<String, String>) yaml
+              .load(new FileInputStream(localConfigFile)));
         } catch (FileNotFoundException e) {
           LOGGER.log(Level.INFO, "local config file not found", e);
         }
@@ -69,8 +70,8 @@ public class Configuration {
   }
 
   private static String getPropertyFromFile(String propertyName) {
-    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null
-        : String.valueOf(readConfiguration().get(propertyName));
+    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null : String
+        .valueOf(readConfiguration().get(propertyName));
   }
 
   private static String getProp(String propertyName) {
@@ -133,12 +134,9 @@ public class Configuration {
   public static String getEnvType() {
     if (getEnv().contains("prod")) {
       return "prod";
-    } else if (getEnv().contains("verify")) {
-      return "verify";
-    } else if (getEnv().contains("preview")) {
-      return "preview";
-    } else if (getEnv().contains("sandbox")) {
-      return "sandbox";
+    } else if (getEnv().contains("verify") || getEnv().contains("preview")
+        || getEnv().contains("sandbox")) {
+      return "staging";
     } else if (getEnv().contains("dev")) {
       return "dev";
     }

@@ -1,36 +1,45 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.users.FacebookTestUser;
+import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebookPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
-import org.testng.annotations.Test;
-
 @Test(groups = {"Facebook"})
 public class FacebookTests extends NewTestTemplate {
-
   Credentials credentials = Configuration.getCredentials();
 
+  TestUser user = FacebookTestUser.getUser();
+
   /**
-   * 1. Log in to facebook 2. Click facebook login on signup page 3. Deny permission to user's
-   * facebook email address 4. manually enter email address and create account 5. confirm account
-   * and login, 6. Verify user can login via facebook
+   * <ol>
+   * <li>Log in to facebook</li>
+   * <li>Click facebook login on signup page</li>
+   * <li>Deny permission to user's facebook email address</li>
+   * <li>>manually enter email address and create account</li>
+   * <li>confirm account and login</li>
+   * <li>Verify user can login via facebook</li>
+   * </ol>
    */
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithNewAccountNoEmailPermission() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB);
+    new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword());
 
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
@@ -51,39 +60,62 @@ public class FacebookTests extends NewTestTemplate {
    * facebook via prefs for cleanup
    */
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void linkWithExistingWikiaAccount() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
+    new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
+        .logOutFB();
 
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openWikiPage(wikiURL);
     dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
-    dropDown.logInViaFacebook(credentials.emailFB, credentials.passwordFB);
+    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();
     fbModal.loginExistingAccount(credentials.userName13, credentials.password13);
-    dropDown.verifyUserLoggedIn(credentials.userName);
+    dropDown.verifyUserLoggedIn(credentials.userName13);
   }
 
   @Test
-  @RelatedIssue(issueID = "SOC-1492", comment = "No way to test manually")
   @UseUnstablePageLoadStrategy
   public void connectUsingUserPreferences() {
-    new RemoveFacebookPageObject(driver).removeWikiaApps(credentials.emailFB,
-        credentials.passwordFB).logOutFB();
+    new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
+        .logOutFB();
 
     PreferencesPageObject prefsPage = new PreferencesPageObject(driver).open();
     prefsPage.loginAs(User.USER);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-    prefsPage.connectFacebook(credentials.emailFB, credentials.passwordFB);
+    prefsPage.connectFacebook(user.getEmail(), user.getPassword());
     prefsPage.verifyFBButtonVisible();
     prefsPage.logOut(wikiURL);
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
     prefsPage.verifyUserLoggedIn(credentials.userName);
+  }
+
+  @Test
+  @UseUnstablePageLoadStrategy
+  public void signUpWithFacebook() {
+    new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
+        .logOutFB();
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    FacebookMainPageObject fbLogin = base.openFacebookMainPage();
+    FacebookUserPageObject userFB;
+    userFB = fbLogin.login(user.getEmail(), user.getPassword());
+    userFB.verifyPageLogo();
+    SignUpPageObject signUp = userFB.navigateToSpecialSignUpPage(wikiURL);
+    FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
+    fbModal.acceptWikiaAppPolicy();
+    String userName = "QA" + DateTime.now().getMillis();
+    String password = "Pass" + DateTime.now().getMillis();
+    fbModal.typeUserName(userName);
+    fbModal.typePassword(password);
+    fbModal.createAccount();
+    base.openWikiPage(wikiURL);
+    base.appendToUrl("noads=1");
+    base.verifyUserLoggedIn(userName);
+    base.logOut(wikiURL);
   }
 }

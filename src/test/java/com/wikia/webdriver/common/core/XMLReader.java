@@ -1,13 +1,16 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.File;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 
-import java.io.File;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class XMLReader {
+
+  private static final File defaultConfigFile = new File(Configuration.getCredentialsFilePath());
 
   private XMLReader() {
 
@@ -28,5 +31,9 @@ public class XMLReader {
 
       return e.getMessage();
     }
+  }
+
+  public static String getValue(String key) {
+    return getValue(defaultConfigFile, key);
   }
 }
