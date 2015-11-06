@@ -34,6 +34,9 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
   private static final double ACCURACY = 0.83;
 
+  private static final String IMAGE_NOT_VISIBLE_MESSAGE = "Image is not visible";
+  private static final String IMAGE_VISIBLE_MESSAGE = "Image is visible";
+
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
@@ -91,7 +94,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -129,7 +132,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -191,7 +194,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -228,7 +231,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -335,7 +338,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -375,7 +378,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -415,7 +418,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
@@ -455,7 +458,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        "Image is not visible"
+        IMAGE_NOT_VISIBLE_MESSAGE
     );
 
     PageObjectLogging.log(
