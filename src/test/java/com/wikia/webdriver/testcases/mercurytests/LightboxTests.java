@@ -43,7 +43,6 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
-  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_001_Open_Close() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
