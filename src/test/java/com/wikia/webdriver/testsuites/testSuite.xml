@@ -35,6 +35,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagMercury"/>

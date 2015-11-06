@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import net.lightbody.bmp.proxy.ProxyServer;
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
 
@@ -18,10 +19,10 @@ import java.util.regex.Pattern;
  */
 public class NetworkTrafficInterceptor extends ProxyServer {
 
-  private Har har;
   private static final int MAX = 8080;
   private static final int MIN = 7070;
   private final int portNumber;
+  private Har har;
 
   public NetworkTrafficInterceptor() {
     super();
@@ -42,6 +43,10 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     this.har = newHar(networkTrafficDumpName);
   }
 
+  public void startIntercepting() {
+    this.har = newHar(RandomStringUtils.random(5));
+  }
+
   public boolean searchRequestUrlInHar(String needle) {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
@@ -60,6 +65,15 @@ public class NetworkTrafficInterceptor extends ProxyServer {
             .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
+  }
+
+  public int getResponseHttpStatusCode(String requestedUrl) {
+    for (HarEntry entry : getHar().getLog().getEntries()) {
+      if (entry.getRequest().getUrl().contains(requestedUrl)) {
+        return entry.getResponse().getStatus();
+      }
+    }
+    throw new WebDriverException(requestedUrl + " request is not sent");
   }
 
   /**
@@ -83,7 +97,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
           }
 
           PageObjectLogging.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
-              correlatorID.equals(expectedCorrelator));
+                                correlatorID.equals(expectedCorrelator));
         } else {
           throw new WebDriverException("Missing correlator param in query string");
         }
