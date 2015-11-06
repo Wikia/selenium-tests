@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -34,9 +35,6 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
   private static final double ACCURACY = 0.83;
 
-  private static final String IMAGE_NOT_VISIBLE_MESSAGE = "Image is not visible";
-  private static final String IMAGE_VISIBLE_MESSAGE = "Image is visible";
-
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
@@ -45,6 +43,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT01
   @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
+  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_001_Open_Close() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -84,6 +83,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT02
   @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
+  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -94,7 +94,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -132,7 +132,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -184,6 +184,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT03
   @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
+  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -194,7 +195,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -231,7 +232,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -268,7 +269,6 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT04
   @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
-  @Execute(allowedDriver = Driver.ChromeMobileMercury)
   public void MercuryLightboxTest_004_UIShow_UIHide() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -292,6 +292,7 @@ public class LightboxTests extends NewTestTemplate {
   // MT05
   @RelatedIssue(issueID = "HG-730")
   @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"}, enabled = false)
+  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
     LightboxComponentObject lightbox;
@@ -327,6 +328,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT06
   @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
+  @Execute(allowedDriver = Driver.Android)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -338,7 +340,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -378,7 +380,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -418,7 +420,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(
@@ -458,7 +460,7 @@ public class LightboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
-        IMAGE_NOT_VISIBLE_MESSAGE
+        MercuryMessages.IMAGE_INVISIBLE_MSG
     );
 
     PageObjectLogging.log(

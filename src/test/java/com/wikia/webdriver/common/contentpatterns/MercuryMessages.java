@@ -5,6 +5,8 @@ public class MercuryMessages {
   public static final String VISIBLE_MSG = "element is visible";
   public static final String INVISIBLE_MSG = "element is not visible";
 
+  public static final String IMAGE_INVISIBLE_MSG = "Image is not visible";
+
   public static final String COLLAPSED_MSG = "element is collapsed";
   public static final String EXPANDED_MSG = "element is expanded";
 
