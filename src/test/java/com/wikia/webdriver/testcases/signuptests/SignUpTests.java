@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.signuptests;
 
+import java.util.Calendar;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -19,21 +23,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
-import org.testng.annotations.Test;
-
-import java.util.Calendar;
-
-/*
+/**
  * 1. Attempt to sign up wrong blurry word, 2. Attempt to sign up of too young user, 3. Attempt to
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
 public class SignUpTests extends NewTestTemplate {
-
-  private static String userName;
-  private static String password;
-  private static String jaTestWiki = "ja.ja-test";
-  private static String emailFB;
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"SignUp_001", "SignUp"})
@@ -44,7 +39,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
   }
@@ -87,7 +82,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
@@ -125,7 +120,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
@@ -150,7 +145,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
@@ -180,7 +175,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
         almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");
