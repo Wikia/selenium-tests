@@ -3,6 +3,8 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Driver;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -263,6 +265,7 @@ public class LightboxTests extends NewTestTemplate {
 
   // MT04
   @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
+  @Execute(allowedDriver = Driver.ChromeMobileMercury)
   public void MercuryLightboxTest_004_UIShow_UIHide() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;

@@ -26,8 +26,4 @@ public class GalleryComponentObject extends BasePageObject {
     galleryImagesArray.get(index).click();
     return new LightboxComponentObject(driver);
   }
-
-
-
-
 }
