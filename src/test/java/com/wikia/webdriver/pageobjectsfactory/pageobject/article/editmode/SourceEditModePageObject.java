@@ -267,7 +267,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkMainTools() {
-    int wikitextShortcutsInsertSection = 17;
+    int wikitextShortcutsInsertSection = 17; //edit tools 'Insert' section in MediaWiki:Edittools
     for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
@@ -286,7 +286,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    int wikitextShortcutsWikiMarkupSection = 21;
+    int wikitextShortcutsWikiMarkupSection = 21; //edit tools 'Wiki markup' section in MediaWiki:Edittools
     for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
@@ -303,7 +303,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    int wikitextShortcutsSymbolsSection = 65;
+    int wikitextShortcutsSymbolsSection = 65; //edit tools 'Symbols' section in MediaWiki:Edittools
     for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
