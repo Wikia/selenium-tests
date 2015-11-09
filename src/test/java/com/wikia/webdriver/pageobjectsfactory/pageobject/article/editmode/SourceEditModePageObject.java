@@ -97,7 +97,10 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    int fileNameLength = 38;
+    int fileParametersBeginIndex = 48;
+    Assertion.assertEquals(getSourceContent().substring(1, fileNameLength) + getSourceContent().substring(fileParametersBeginIndex),
+                           desiredContent.substring(1, fileNameLength) + desiredContent.substring(fileParametersBeginIndex)
     );
   }
 
@@ -264,7 +267,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkMainTools() {
-    for (int i = 1; i < 17; i++) {
+    //edit tools 'Insert' section in MediaWiki:Edittools
+    int wikitextShortcutsInsertSection = 17;
+    for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
       String
@@ -282,7 +287,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    for (int i = 1, j = i + 1; i < 21; i++) {
+    //edit tools 'Wiki markup' section in MediaWiki:Edittools
+    int wikitextShortcutsWikiMarkupSection = 21;
+    for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
       String content =
@@ -298,7 +305,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    for (int i = 1; i < 65; i++) {
+    //edit tools 'Symbols' section in MediaWiki:Edittools
+    int wikitextShortcutsSymbolsSection = 65;
+    for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
       String
@@ -331,8 +340,8 @@ public class SourceEditModePageObject extends EditMode {
         content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
     );
     Assertion.assertNumber(
-            widthDesired, width,
-            "width is " + width + " should be " + widthDesired
+        widthDesired, width,
+        "Video width in source edit mode is " + width + " while desired width is " + widthDesired
     );
   }
 
@@ -352,7 +361,7 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-            .log("appendContent", "text: '" + content + "', added to the source mode", true);
+        .log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
