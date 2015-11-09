@@ -59,21 +59,21 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = "#articleCategories .category a")
   private List<WebElement> categories;
   @FindBy(css = ".pi-navigation a[href*='redlink']")
-  private List<WebElement> redlLink;
+  private List<WebElement> redlLinks;
   @FindBy(css = ".pi-item .external")
-  private List<WebElement> externalLink;
+  private List<WebElement> externalLinks;
   @FindBy(css = "b")
   private List<WebElement> boldElements;
   @FindBy(css = "i")
   private List<WebElement> italicElements;
   @FindBy(css = ".portable-infobox a[href*='/wiki/']")
-  private List<WebElement> internalLink;
+  private List<WebElement> internalLinks;
   @FindBy(css = ".pi-data-value ul li")
-  private List<WebElement> unorderedElement;
+  private List<WebElement> unorderedElements;
   @FindBy(css = ".pi-data-value ol li")
-  private List<WebElement> orderedElement;
+  private List<WebElement> orderedElements;
   @FindBy(css = ".pi-header")
-  private List<WebElement> titleH3;
+  private List<WebElement> h3Titles;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -83,16 +83,18 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return layout.getCssValue("background-color");
   }
 
+  public String getLinkRedirectTitle(WebElement element) {
+    wait.forElementVisible(element);
+    scrollToElement(element);
+    return element.getAttribute("href");
+  }
+
   public String getExternalLinkRedirectTitleWithIndex(int index) {
-    wait.forElementVisible(externalLink.get(index));
-    scrollToElement(externalLink.get(index));
-    return externalLink.get(index).getAttribute("href");
+    return getLinkRedirectTitle(externalLinks.get(index));
   }
 
   public String getInternalLinkRedirectTitleWithIndex(int index) {
-    wait.forElementVisible(internalLink.get(index));
-    scrollToElement(internalLink.get(index));
-    return internalLink.get(index).getAttribute("href");
+    return getLinkRedirectTitle(internalLinks.get(index));
   }
 
   public WebElement getNavigationElements(int index) {
@@ -118,18 +120,19 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return imageTag.getAttribute("data-image-name");
   }
 
-  public PortableInfoboxPageObject clickExternalLinkWithIndex(int index) {
-    wait.forElementVisible(externalLink.get(index));
-    scrollToElement(externalLink.get(index));
-    externalLink.get(index).click();
+  public PortableInfoboxPageObject clickLink(WebElement element) {
+    wait.forElementVisible(element);
+    scrollToElement(element);
+    element.click();
     return this;
   }
 
+  public PortableInfoboxPageObject clickExternalLinkWithIndex(int index) {
+    return clickLink(externalLinks.get(index));
+  }
+
   public PortableInfoboxPageObject clickInternalLinkWithIndex(int index) {
-    wait.forElementVisible(internalLink.get(index));
-    scrollToElement(internalLink.get(index));
-    internalLink.get(index).click();
-    return this;
+    return clickLink(internalLinks.get(index));
   }
 
   public PortableInfoboxPageObject clickImage() {
@@ -151,9 +154,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public CreateArticleModalComponentObject clickRedLinkWithIndex(int index) {
-    wait.forElementVisible(redlLink.get(index));
-    scrollToElement(redlLink.get(index));
-    redlLink.get(index).click();
+    wait.forElementVisible(redlLinks.get(index));
+    scrollToElement(redlLinks.get(index));
+    redlLinks.get(index).click();
     return new CreateArticleModalComponentObject(driver);
   }
 
@@ -193,12 +196,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(int index) {
-    compareFontSizes(itemValue, orderedElement.get(index));
+    compareFontSizes(itemValue, orderedElements.get(index));
     return this;
   }
 
   public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(int index) {
-    compareFontSizes(itemValue, unorderedElement.get(index));
+    compareFontSizes(itemValue, unorderedElements.get(index));
     return this;
   }
 
@@ -254,7 +257,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject areHeadersMoreThanOne() {
-    Assertion.assertFalse(titleH3.isEmpty());
+    Assertion.assertFalse(h3Titles.isEmpty());
     return this;
   }
 

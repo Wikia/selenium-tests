@@ -267,8 +267,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkMainTools() {
-    int sectionInsertTools = 17;
-    for (int i = 1; i < sectionInsertTools; i++) {
+    int wikitextShortcutsInsertSection = 17;
+    for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
       String
@@ -286,8 +286,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    int sectionWikiMarkupTools = 21;
-    for (int i = 1; i < sectionWikiMarkupTools; i++) {
+    int wikitextShortcutsWikiMarkupSection = 21;
+    for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
       String content =
@@ -303,8 +303,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    int sectionSymbolsTools = 65;
-    for (int i = 1; i < sectionSymbolsTools; i++) {
+    int wikitextShortcutsSymbolsSection = 65;
+    for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
       String
