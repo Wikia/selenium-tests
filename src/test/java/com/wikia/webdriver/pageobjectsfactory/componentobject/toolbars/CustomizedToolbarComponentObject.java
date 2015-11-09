@@ -38,6 +38,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   @FindBy(css = ".tools-menu li > a[data-name='themedesigner]'")
   private WebElement themeDesignerButton;
   private By toolsList = By.cssSelector("ul.tools li");
+  private By customizeToolbar = By.cssSelector("#MyToolsConfigurationWrapper");
   private String searchSuggestionToolCss = "div.autocomplete div[title=\"%s\"]";
   private String toolbarToolCss = "li.overflow a[data-name=\"%s\"]";
   private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
@@ -245,7 +246,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
     PageObjectLogging.log("clickSave", "save button clicked", true);
-
   }
 
   public void verifyToolOnToolbar(String toolName) {
@@ -314,4 +314,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     return themeDesignerButton.getText();
   }
 
+  public void waitForCustomizeToolbarModalToDisappear() {
+    wait.forElementNotVisible(customizeToolbar);
+  }
 }

@@ -133,13 +133,13 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CustomizeToolbar007"})
-  @Execute(asUser = User.USER_2)
+  @Execute(asUser = User.USER_2, browserSize = "800x600")
   public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.addManyItems(toolPreferences, 8);
     toolbar.clickSave();
-    setWindowSize(800, 600, driver);
+    toolbar.waitForCustomizeToolbarModalToDisappear();
     toolbar.refreshPage();
     toolbar.verifyToolOnToolbar(toolMore);
     toolbar.openMoreMenu();
