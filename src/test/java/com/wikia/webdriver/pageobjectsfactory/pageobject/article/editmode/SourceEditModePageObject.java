@@ -97,7 +97,10 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    int fileNameLength = 38;
+    int fileParametersBeginIndex = 48;
+    Assertion.assertEquals(getSourceContent().substring(1, fileNameLength) + getSourceContent().substring(fileParametersBeginIndex),
+                           desiredContent.substring(1, fileNameLength) + desiredContent.substring(fileParametersBeginIndex)
     );
   }
 
@@ -355,7 +358,7 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-            .log("appendContent", "text: '" + content + "', added to the source mode", true);
+        .log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
