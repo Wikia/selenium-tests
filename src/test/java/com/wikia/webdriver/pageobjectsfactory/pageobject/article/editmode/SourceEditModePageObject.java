@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -72,7 +73,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement editorModal;
   @FindBy(css = ".blackout")
   private WebElement focusedMode;
-  @FindBy(css = "#editarea")
+  @FindBy(css = "#editarea .ace_scroller")
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
@@ -82,13 +83,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public SourceEditModePageObject focusTextArea() {
-    jsActions.focus("textArea");
-    return this;
-  }
-
-  public SourceEditModePageObject clickEditArea() {
-    wait.forElementVisible(textArea);
-    textArea.click();
+    jsActions.focus(".cke_source");
     return this;
   }
 
@@ -269,7 +264,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkMainTools() {
-    for (int i = 1; i < 17; i++) {
+    int sectionInsertTools = 17;
+    for (int i = 1; i < sectionInsertTools; i++) {
       clearSource();
       clickMore();
       String
@@ -287,7 +283,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    for (int i = 1; i < 21; i++) {
+    int sectionWikiMarkupTools = 21;
+    for (int i = 1; i < sectionWikiMarkupTools; i++) {
       clearSource();
       clickMore();
       String content =
@@ -303,7 +300,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    for (int i = 1; i < 65; i++) {
+    int sectionSymbolsTools = 65;
+    for (int i = 1; i < sectionSymbolsTools; i++) {
       clearSource();
       clickMore();
       String
@@ -369,8 +367,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void clearContent() {
-    wait.forElementVisible(textArea);
-    textArea.clear();
+    wait.forElementVisible(sourceModeTextArea);
+    sourceModeTextArea.clear();
     PageObjectLogging.log("clearContent", "source mode cleared", true);
   }
 
@@ -396,10 +394,13 @@ public class SourceEditModePageObject extends EditMode {
     return new ArticlePageObject(driver);
   }
 
+  public void addCategoryToSourceCode(String catName) {
+    sourceModeTextArea.sendKeys(catName);
+  }
+
   public TemplatePageObject clickPublishButtonInTemplateNamespace() {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new TemplatePageObject(driver);
   }
-
 }

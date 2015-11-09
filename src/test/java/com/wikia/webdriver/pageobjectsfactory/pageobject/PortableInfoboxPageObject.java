@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.editmode.PortableInfoboxSourceEditModeObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -145,13 +144,13 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return new CategoryPageObject(driver);
   }
 
-  public CategoryPageObject clickCategory(int index) {
+  public CategoryPageObject clickCategoryWithIndex(int index) {
     wait.forElementVisible(categories.get(index));
     scrollAndClick(categories.get(index));
     return new CategoryPageObject(driver);
   }
 
-  public CreateArticleModalComponentObject clickRedLink(int index) {
+  public CreateArticleModalComponentObject clickRedLinkWithIndex(int index) {
     wait.forElementVisible(redlLink.get(index));
     scrollToElement(redlLink.get(index));
     redlLink.get(index).click();
@@ -193,12 +192,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndOrderedListItem(int index) {
+  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(int index) {
     compareFontSizes(itemValue, orderedElement.get(index));
     return this;
   }
 
-  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItem(int index) {
+  public PortableInfoboxPageObject compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(int index) {
     compareFontSizes(itemValue, unorderedElement.get(index));
     return this;
   }
@@ -276,7 +275,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject verifyPaddingNavigationElement(int index) {
+  public PortableInfoboxPageObject verifyPaddingNavigationElementWithIndex(int index) {
     verifyPadding(getNavigationElements(index));
     return this;
   }
@@ -291,7 +290,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject verifyDivsNotAppearingInHeader(int index) {
+  public PortableInfoboxPageObject verifyDivsNotAppearingInHeaderWithIndex(int index) {
     Assertion.assertNotEquals(groupHeadersWrappers.get(index).getTagName(), "div");
     return this;
   }
@@ -301,14 +300,9 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfoboxPageObject verifyGroupHeaderPadding(int index) {
+  public PortableInfoboxPageObject verifyGroupHeaderPaddingWithIndex(int index) {
     verifyPadding(getGroupHeader(index));
     return this;
   }
 
-  public PortableInfoboxSourceEditModeObject editInfoboxTemplateInSourceMode(String wikiURL, String article) {
-    getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
-                                             URLsContent.ACTION_EDIT));
-    return new PortableInfoboxSourceEditModeObject(driver);
-  }
 }
