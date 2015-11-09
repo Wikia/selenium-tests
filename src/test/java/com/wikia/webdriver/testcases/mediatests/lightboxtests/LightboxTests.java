@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -22,6 +20,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
+
+import org.testng.annotations.Test;
 
 /**
  * 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from Special:UnusedVideos page 3.
@@ -110,7 +110,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Lightbox_006"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @Execute(browserSize = "1400x720")
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -136,7 +136,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest_008"})
-  @Execute(asUser = User.USER, disableFlash = "false", browser = "FF", browserSize = "1400x720")
+  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
