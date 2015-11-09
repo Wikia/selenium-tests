@@ -135,6 +135,11 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     return clickLink(internalLinks.get(index));
   }
 
+  public CreateArticleModalComponentObject clickRedLinkWithIndex(int index) {
+    clickLink(redlLinks.get(index));
+    return new CreateArticleModalComponentObject(driver);
+  }
+
   public PortableInfoboxPageObject clickImage() {
     wait.forElementVisible(image);
     image.click();
@@ -151,13 +156,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
     wait.forElementVisible(categories.get(index));
     scrollAndClick(categories.get(index));
     return new CategoryPageObject(driver);
-  }
-
-  public CreateArticleModalComponentObject clickRedLinkWithIndex(int index) {
-    wait.forElementVisible(redlLinks.get(index));
-    scrollToElement(redlLinks.get(index));
-    redlLinks.get(index).click();
-    return new CreateArticleModalComponentObject(driver);
   }
 
   public PortableInfoboxPageObject open(String articleTitle) {
