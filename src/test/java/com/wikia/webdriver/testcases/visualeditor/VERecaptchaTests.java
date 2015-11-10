@@ -27,7 +27,7 @@ public class VERecaptchaTests extends NewTestTemplate {
 
   // Verify that second click on "Save page" button changes recaptcha.
   @Test(groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"})
-  @RelatedIssue(issueID = "MAIN-5636", comment = "issue will fail until the issue is fixed")
+  @RelatedIssue(issueID = "MAIN-5809", comment = "issue will fail until the issue is fixed")
   public void VEAddRecaptchaTests_001_AddExternalURL() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
