@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
 public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(asUser = User.USER, onWikia = "sktest123", disableFlash = "false", browser = "FF",
+  @Execute(onWikia = "sktest123", disableFlash = "false",
       browserSize = "1400x720")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
@@ -35,7 +34,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123",
+  @Execute(disableFlash = "false", onWikia = "sktest123",
       browserSize = "1400x720")
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
