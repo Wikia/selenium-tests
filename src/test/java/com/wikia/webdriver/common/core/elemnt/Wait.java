@@ -1,23 +1,22 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Ludwik on 2015-07-22.
- */
 public class Wait {
 
   /**
@@ -31,10 +30,10 @@ public class Wait {
   private static final String ELEMENT_PRESENT_ERROR_FORMAT = "PROBLEM WITH FINDING ELEMENT %s";
 
   private WebDriverWait wait;
-  private WebDriver webDriver;
+  private WebDriver driver;
 
   public Wait(WebDriver webDriver) {
-    this.webDriver = webDriver;
+    this.driver = webDriver;
     this.wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
   }
 
@@ -47,7 +46,7 @@ public class Wait {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     } catch (TimeoutException e) {
       PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
-          String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+                            String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
       throw e;
     } finally {
       restoreDeaultImplicitWait();
@@ -60,8 +59,8 @@ public class Wait {
   public WebElement forElementPresent(By by, int timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .presenceOfElementLocated(by));
+      return new WebDriverWait(driver, timeout).until(ExpectedConditions
+                                                          .presenceOfElementLocated(by));
     } catch (TimeoutException e) {
       PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE, e, false);
       throw e;
@@ -72,7 +71,7 @@ public class Wait {
 
   /**
    * Checks if the element is clickable in browser
-   * 
+   *
    * @param element The element to be checked
    */
   public WebElement forElementClickable(WebElement element) {
@@ -105,8 +104,8 @@ public class Wait {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
       }
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .elementToBeClickable(element));
+      return new WebDriverWait(driver, timeout).until(ExpectedConditions
+                                                          .elementToBeClickable(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -121,8 +120,8 @@ public class Wait {
     }
     try {
       SelectorStack.contextRead();
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .elementToBeClickable(elements.get(index)));
+      return new WebDriverWait(driver, timeout).until(
+          ExpectedConditions.elementToBeClickable(elements.get(index)));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -146,8 +145,8 @@ public class Wait {
   public WebElement forElementClickable(By by, int timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout).until(ExpectedConditions
-          .elementToBeClickable(by));
+      return new WebDriverWait(driver, timeout).until(ExpectedConditions
+                                                          .elementToBeClickable(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -155,8 +154,8 @@ public class Wait {
 
   /**
    * Checks if the element is visible in browser
-   * <p/>
-   * * @param element The element to be checked
+   *
+   * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
@@ -176,8 +175,8 @@ public class Wait {
   public WebElement forElementVisible(WebElement element, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-          .visibilityOf(element));
+      return new WebDriverWait(driver, timeout, polling).until(ExpectedConditions
+                                                                   .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -202,8 +201,8 @@ public class Wait {
   public WebElement forElementVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-          .visibilityOfElementLocated(by));
+      return new WebDriverWait(driver, timeout, polling).until(
+          ExpectedConditions.visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -215,8 +214,8 @@ public class Wait {
   public boolean forElementNotVisible(By by) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, DEFAULT_TIMEOUT).until(ExpectedConditions
-          .invisibilityOfElementLocated(by));
+      return new WebDriverWait(driver, DEFAULT_TIMEOUT).until(
+          ExpectedConditions.invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -228,8 +227,8 @@ public class Wait {
   public boolean forElementNotVisible(By by, int timeout, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(webDriver, timeout, polling).until(ExpectedConditions
-          .invisibilityOfElementLocated(by));
+      return new WebDriverWait(driver, timeout, polling).until(
+          ExpectedConditions.invisibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -315,11 +314,43 @@ public class Wait {
     }
   }
 
+  /**
+   * Wait for successful (http response code less than 400) response from specific service
+   *
+   * @param url Url which was used for making request
+   */
+  public void forSuccessfulResponse(final NetworkTrafficInterceptor networkTrafficInterceptor,
+                                    final String url) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+
+    try {
+
+      wait.until(
+          new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+              return networkTrafficInterceptor.searchRequestUrlInHar(url) &&
+                     networkTrafficInterceptor.getResponseHttpStatusCode(url) < 400;
+            }
+
+            @Override
+            public String toString() {
+              int responseStatus = networkTrafficInterceptor.getResponseHttpStatusCode(url);
+              return url + " has unsuccessful response status: " + responseStatus;
+            }
+          }
+      );
+
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   private void restoreDeaultImplicitWait() {
     changeImplicitWait(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
   }
 
   private void changeImplicitWait(int value, TimeUnit timeUnit) {
-    webDriver.manage().timeouts().implicitlyWait(value, timeUnit);
+    driver.manage().timeouts().implicitlyWait(value, timeUnit);
   }
 }

@@ -747,4 +747,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return false;
   }
 
+  public void clickOnArticleLink(String linkName) {
+    WebElement link = driver.findElement(
+        By.cssSelector("a[title='" + linkName + "']"));
+    link.click();
+    waitTitleChangesTo(linkName);
+  }
 }
