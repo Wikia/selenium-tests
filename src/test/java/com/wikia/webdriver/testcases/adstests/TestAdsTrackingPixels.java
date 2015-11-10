@@ -12,12 +12,9 @@ import org.testng.annotations.Test;
  */
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
-  public static final ImmutableList<String> TRACKING_PIXELS_URL =
-      new ImmutableList.Builder<String>()
-          .add("http://beacon.krxd.net/pixel.gif")
-          .add("http://b.scorecardresearch.com/b")
-          .add("http://pixel.quantserve.com")
-          .build();
+  public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
+  public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
+  public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
 
   public static final ImmutableList<String> LINK_NAMES =
       new ImmutableList.Builder<String>()
@@ -27,7 +24,6 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
           .add("Article2")
           .add("Article1")
           .add("Wikia Ad Testing")
-          .add("Article1")
           .build();
 
   @NetworkTrafficDump
@@ -39,7 +35,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForWiki("adtest");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
-    assertTrackingPixels(adsBaseObject);
+    assertTrackingPixels(adsBaseObject, KRUX_PIXEL_URL, COMSCORE_PIXEL_URL, QUANTQAST_PIXEL_URL);
 
     // Check tracking pixels on consecutive page views
     for (String linkName : LINK_NAMES) {
@@ -47,13 +43,13 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
       adsBaseObject.clickOnArticleLink(linkName);
 
-      assertTrackingPixels(adsBaseObject);
+      assertTrackingPixels(adsBaseObject, COMSCORE_PIXEL_URL, QUANTQAST_PIXEL_URL);
     }
   }
 
-  private void assertTrackingPixels(AdsBaseObject adsBaseObject) {
-    for (String trackingUrl : TRACKING_PIXELS_URL) {
-      adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, trackingUrl);
+  private void assertTrackingPixels(AdsBaseObject adsBaseObject, String... pixelUrls) {
+    for (String pixelUrl : pixelUrls) {
+      adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
     }
   }
 }
