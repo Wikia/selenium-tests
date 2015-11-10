@@ -16,8 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryP
 
 import org.testng.annotations.Test;
 
-import javax.jws.soap.SOAPBinding;
-
 
 /**
  * @author Karol 'kkarolk' Kujawiak 1. Create a wiki and delete 2. Create a wiki for children 3.
@@ -47,16 +45,11 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
     article.verifyUserLoggedIn(credentials.userName);
-    String newWikiURL = article.getWikiUrl();
-    article.logOut(newWikiURL);
-    article.loginAs(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
-    SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
-    factory.deleteWiki();
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER)
-  public void CreateNewWiki_00_createWikiForChildren() {
+  public void CreateNewWiki_001_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
