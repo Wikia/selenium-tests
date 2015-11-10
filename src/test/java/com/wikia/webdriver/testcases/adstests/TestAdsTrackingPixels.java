@@ -42,7 +42,9 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
       networkTrafficInterceptor.startIntercepting();
 
       adsBaseObject.clickOnArticleLink(linkName);
-
+      
+      // Krux implementation on Mercury sends pixel request only on 1st PV
+      // Therefore we don't verify the pixel here we might want to change it in future (ADEN-2613)
       assertTrackingPixels(adsBaseObject, COMSCORE_PIXEL_URL, QUANTQAST_PIXEL_URL);
     }
   }
