@@ -31,6 +31,8 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "QAART-688", comment = "the deletion part can not be checked "
+                                                 + "until the issue is fixed")
   public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
