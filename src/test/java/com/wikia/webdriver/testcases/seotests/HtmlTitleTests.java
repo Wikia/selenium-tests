@@ -186,11 +186,11 @@ public class HtmlTitleTests extends NewTestTemplate {
             "",
             "Collaborative communities for everyone! - Wikia",
         },
-        {
+        /* MAIN-5823 {
             TEST_WIKI_CORPORATE,
             "WAM",
             "Wikia Activity Monitor (WAM) - Wikia",
-        },
+        },*/
         {
             TEST_WIKI_CORPORATE,
             "About",
