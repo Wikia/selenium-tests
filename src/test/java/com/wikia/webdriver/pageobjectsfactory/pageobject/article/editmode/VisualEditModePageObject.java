@@ -63,7 +63,7 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement categoryInput;
   @FindBy(css = "#CategorySelect .ui-autocomplete")
   private WebElement categorySuggestionsContainer;
-  @FindBy(css = "li.category")
+  @FindBy(css = "li.category>span")
   private List<WebElement> categoryList;
   @FindBy(css = ".RTEMediaCaption")
   private WebElement caption;
@@ -345,7 +345,7 @@ public class VisualEditModePageObject extends EditMode {
   public void typeCategoryName(String categoryName) {
     wait.forElementVisible(categoryInput);
     CommonUtils.setClipboardContents(categoryName);
-    categoryInput.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+    categoryInput.sendKeys(categoryName);
     PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
   }
 
