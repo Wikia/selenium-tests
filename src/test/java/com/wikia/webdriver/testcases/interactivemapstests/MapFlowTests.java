@@ -54,6 +54,7 @@ public class MapFlowTests extends NewTestTemplate {
 
   @Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
   public void MapFlowTests_002_CreateCustomMapWithExistingTemplate() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
