@@ -31,7 +31,6 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
       dataProvider = "kruxIntegration",
       groups = "AdsKruxIntegrationOasis"
   )
-  @UseUnstablePageLoadStrategy
   public void adsKruxIntegrationOasis(String wikiName, String article) {
     adsKruxIntegration(wikiName, article, KRUX_SITE_ID_DESKTOP, AdsContent.TOP_LB);
   }
