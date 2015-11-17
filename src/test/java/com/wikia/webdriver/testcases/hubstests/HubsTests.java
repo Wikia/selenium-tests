@@ -103,9 +103,10 @@ public class HubsTests extends NewTestTemplate {
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
-  @Test(groups = {"HubsTest_005", "Hubs", "new"})
-  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please manually verify that "
-      + "language button redirects to proper url i.e. ja.wikia/Wikia. This will fail until MAIN-5376 is fixed")
+  @Test(groups = {"HubsTest_005", "Hubs", "new"}, enabled = false)
+  @RelatedIssue(issueID = "XW-391",
+      comment = "Second issue: MAIN-5377. Product is not about to fix both of the issues. "
+                + "Test disabled")
   /**
    * Verify that each language drop down  goes to the correct page
    */
