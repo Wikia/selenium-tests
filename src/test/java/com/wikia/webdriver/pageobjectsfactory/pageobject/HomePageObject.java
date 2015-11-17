@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class HomePageObject extends WikiBasePageObject {
 
-  @FindBy(css = "header.wikiahomepage-header a.button")
+  @FindBy(css = ".start-wikia span")
   private WebElement startWikiButton;
   @FindBy(css = ".hub > a")
   private WebElement hubIndicator;
