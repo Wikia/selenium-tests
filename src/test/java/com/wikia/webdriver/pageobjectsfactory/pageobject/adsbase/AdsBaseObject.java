@@ -588,7 +588,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
+  protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
 
