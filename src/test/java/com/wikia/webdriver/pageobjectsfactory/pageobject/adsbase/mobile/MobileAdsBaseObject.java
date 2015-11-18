@@ -7,12 +7,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -21,7 +19,6 @@ import org.openqa.selenium.WebElement;
 public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String SMART_BANNER_SELECTOR = ".android.smartbanner";
-  private static final String FLITE_MASK_SELECTOR = ".flite-mask";
   private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]" +
                                                      "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
@@ -42,7 +39,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   public void verifyMobileTopLeaderboard() {
     // Only works for WikiaMobile
-    removeElementIfPresent(SMART_BANNER_SELECTOR);
+    hideElementIfPresent(SMART_BANNER_SELECTOR);
 
     wait.forElementVisible(presentLeaderboard);
     if (isElementOnPage(By.cssSelector(INTERSTITIAL_AD_OPENED_SELECTOR))) {
@@ -60,7 +57,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
         return;
       }
 
-      if (isElementOnPage(By.cssSelector(FLITE_MASK_SELECTOR))) {
+      if (isElementOnPage(By.cssSelector(FLITE_MASK_CSS_SELECTOR))) {
         PageObjectLogging.logWarning("Special ad", "Flite ad detected");
         return;
       }
@@ -138,16 +135,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
           "mercuryNavigateToAnArticle()",
           "Could not find the link to: /wiki/" + articleLinkName
       );
-    }
-  }
-
-  private void removeElementIfPresent(String cssSelector) {
-    if (isElementOnPage(By.cssSelector(cssSelector))) {
-      PageObjectLogging.log("Removing element", cssSelector, true);
-      WebElement element = driver.findElement(By.cssSelector(cssSelector));
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript("$(arguments[0]).css('display', 'none')", element);
-      waitForElementNotVisibleByElement(element);
     }
   }
 

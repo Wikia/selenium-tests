@@ -35,11 +35,11 @@ import java.util.regex.Pattern;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
+  protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
-
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
@@ -57,10 +57,10 @@ public class AdsBaseObject extends WikiBasePageObject {
       "RemnantGptMobile",
       "Liftium",
   };
-
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
+  private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
@@ -280,9 +280,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifySpotlights() {
     // Removing comments section as it expands content downwards
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                     wait.forElementVisible(By.cssSelector("#WikiaArticleFooter")));
+    hideElementIfPresent(ARTICLE_COMMENTS_CSS_SELECTOR);
 
     AdsComparison adsComparison = new AdsComparison();
 
@@ -590,7 +588,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
+  protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
 
@@ -748,9 +746,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void clickOnArticleLink(String linkName) {
+    hideElementIfPresent(FLITE_MASK_CSS_SELECTOR);
+
     WebElement link = driver.findElement(
         By.cssSelector("a[title='" + linkName + "']"));
     link.click();
+
     waitTitleChangesTo(linkName);
+  }
+
+  protected void hideElementIfPresent(String cssSelector) {
+    if (isElementOnPage(By.cssSelector(cssSelector))) {
+      PageObjectLogging.log("Hiding element", cssSelector, true);
+      WebElement element = driver.findElement(By.cssSelector(cssSelector));
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("$(arguments[0]).css('display', 'none')", element);
+      waitForElementNotVisibleByElement(element);
+    }
   }
 }

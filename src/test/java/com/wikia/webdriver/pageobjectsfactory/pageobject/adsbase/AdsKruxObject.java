@@ -54,14 +54,17 @@ public class AdsKruxObject extends AdsBaseObject {
    */
   public void verifyKruxUserParam(String slotName) {
     String script = "return localStorage.kxuser;";
-    waitForKrux();
     String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
+
+    // Fourth page view
     refreshPage();
-    waitForKrux();
+
     String user2 = (String) ((JavascriptExecutor) driver).executeScript(script);
     String gptPageParams = getGptPageParams(slotName);
+
     PageObjectLogging.log("gpt page params", gptPageParams, true);
     PageObjectLogging.log("krux users", user1 + ", " + user2, true);
+
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
     if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
       throw new AssertionError("Gpt page params don't have the krux users from localStorage");
