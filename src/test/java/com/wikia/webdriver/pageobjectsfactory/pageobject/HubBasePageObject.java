@@ -44,7 +44,7 @@ public class HubBasePageObject extends WikiBasePageObject {
   private WebElement suggestArticleWhyCooliInput;
   @FindBy(css = "#suggestArticleDialogModal button.primary")
   private WebElement submitButton;
-  @FindBy(css = "#WikiHeader h1 img")
+  @FindBy(css = "#WikiHeader h2 img")
   private WebElement wordmarkImage;
   @FindBy(css = ".wikiabar-button[href$='Video_Games']")
   private WebElement videoGamesWikiaBarLink;

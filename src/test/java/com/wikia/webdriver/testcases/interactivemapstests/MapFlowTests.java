@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -52,6 +53,7 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
@@ -70,7 +72,7 @@ public class MapFlowTests extends NewTestTemplate {
     template.typeMapName(InteractiveMapsContent.MAP_NAME);
     CreatePinTypesComponentObject pinDialog = template.clickNext();
     pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME,
-                               InteractiveMapsContent.PIN_TYPE_INDEX);
+        InteractiveMapsContent.PIN_TYPE_INDEX);
     InteractiveMapPageObject createdMap = pinDialog.clickSave();
     createdMap.verifyCreatedMapTitle(InteractiveMapsContent.MAP_NAME);
     createdMap.verifyMapOpened();
@@ -78,6 +80,7 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -31,6 +32,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlockedUserMapTests_001", "BlockedUserMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   public void BlockedUserMapTests_001_VerifyBlockedUserCannotEditPinTypes() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
@@ -47,6 +49,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "",
       comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
