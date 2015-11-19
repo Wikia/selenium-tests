@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -47,6 +48,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
@@ -92,6 +94,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"},
       dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
   @Execute(asUser = User.USER)
@@ -108,6 +111,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
       dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
   @Execute(asUser = User.USER)
@@ -129,6 +133,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_006_VerifyChangePinData() {
@@ -159,6 +164,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
           comment = "Functionality is being depracated NO need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
@@ -179,6 +185,7 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
