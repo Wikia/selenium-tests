@@ -2,10 +2,12 @@ package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.WikiaProperties;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -52,9 +54,6 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "QAART-689",
-                comment = "check if the screenshot shows permission errors. If yes, the "
-                          + "remaining steps can not be until the issue is fixed")
   public void CreateNewWiki_002_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -69,13 +68,8 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
     article.verifyUserLoggedIn(credentials.userName);
-    String newWikiURL = article.getWikiUrl();
-    article.logOut();
-    article.logOut(newWikiURL);
-    article.loginAs(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
-    SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
-    factory.verifyVariableValue(WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-                                "true");
+
+    Assertion.assertTrue(WikiaProperties.isWikiForChildren(driver), "Wiki is not for children");
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
