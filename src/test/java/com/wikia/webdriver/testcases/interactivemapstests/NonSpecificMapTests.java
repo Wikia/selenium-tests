@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -67,6 +68,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "", comment = "Functionaliy will be deprecated. No need to test manually")
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
