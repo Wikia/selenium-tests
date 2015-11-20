@@ -22,6 +22,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.SearchForImagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.imageupload.UploadImageModalComponentObject;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -38,6 +39,11 @@ public class EditorTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
+    new CuratedContent().clear();
+  }
+
+  @AfterClass(alwaysRun = true)
+  public void afterClass() {
     new CuratedContent().clear();
   }
 
