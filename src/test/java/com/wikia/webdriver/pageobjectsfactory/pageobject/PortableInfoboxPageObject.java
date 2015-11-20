@@ -85,7 +85,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public String getLinkRedirectTitle(WebElement element) {
     wait.forElementVisible(element);
-    scrollToElement(element);
+    jsActions.scrollToElement(element);
     return element.getAttribute("href");
   }
 
@@ -122,7 +122,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
 
   public PortableInfoboxPageObject clickLink(WebElement element) {
     wait.forElementVisible(element);
-    scrollToElement(element);
+    jsActions.scrollToElement(element);
     element.click();
     return this;
   }

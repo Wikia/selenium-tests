@@ -46,7 +46,7 @@ public class ArticlePageObject extends BasePageObject {
 
   public void clickTopContributor(int index) {
     wait.forElementVisible(topContributorsLinks.get(0), 5, 500);
-    scrollToElement(topContributorsLinks.get(index));
+    jsActions.scrollToElement(topContributorsLinks.get(index));
     topContributorsLinks.get(index).click();
   }
 
@@ -78,7 +78,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public boolean isTopContributorsSectionVisible() {
-    scrollToElement(topContributorsSection);
+    jsActions.scrollToElement(topContributorsSection);
     return isElementOnPage(topContributorsSection);
   }
 

@@ -105,7 +105,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void clickGetPromoted() {
     wait.forElementVisible(getPromotedButton);
-    scrollToElement(getPromotedButton);
+    jsActions.scrollToElement(getPromotedButton);
     wait.forElementClickable(getPromotedButton);
     scrollAndClick(getPromotedButton);
     PageObjectLogging.log("clickGetPromoted", "Click on suggest an article button", true);
@@ -199,7 +199,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifyFromModuleHasImages() {
     for (WebElement element : fromCommunityImage) {
-      scrollToElement(element);
+      jsActions.scrollToElement(element);
       wait.forElementVisible(element);
     }
     PageObjectLogging.log("verifyFromModuleHasImages",
@@ -211,7 +211,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifyFromModuleHasHeadline() {
     for (WebElement element : fromCommunityHeadlines) {
-      scrollToElement(element);
+      jsActions.scrollToElement(element);
       wait.forElementVisible(element);
     }
     PageObjectLogging.log("verifyFromModuleHasHeadline",
@@ -223,7 +223,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifyFromModuleHasUserAndWikiField() {
     for (WebElement element : fromCommunityWikinameAndUsernameFields) {
-      scrollToElement(element);
+      jsActions.scrollToElement(element);
       wait.forElementVisible(element);
     }
     PageObjectLogging.log("verifyFromModuleHasUserAndWikiField",
@@ -235,7 +235,7 @@ public class HubBasePageObject extends WikiBasePageObject {
    */
   public void verifyFromModuleHasQuatation() {
     for (WebElement element : fromCommunityQuatations) {
-      scrollToElement(element);
+      jsActions.scrollToElement(element);
       wait.forElementVisible(element);
     }
     PageObjectLogging.log("verifyFromModuleHasQuatation",

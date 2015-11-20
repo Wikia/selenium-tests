@@ -173,7 +173,7 @@ public class InteractiveMapPageObject extends BasePageObject {
       driver.switchTo().frame(mapFrame);
     }
     wait.forElementVisible(pinCollection.get(pinListPosition));
-    scrollToElement(pinCollection.get(pinListPosition));
+    jsActions.scrollToElement(pinCollection.get(pinListPosition));
     Actions actions = new Actions(driver);
     actions.moveToElement(pinCollection.get(pinListPosition));
     actions.click().perform();
@@ -224,7 +224,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void clickOnFilterBoxTitle() {
     wait.forElementVisible(mapFrame);
-    scrollToElement(mapFrame);
+    jsActions.scrollToElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(filterBoxTitle);
     Actions actions = new Actions(driver);
@@ -262,6 +262,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public AddPinComponentObject placePinInMap() {
     wait.forElementVisible(mapFrame);
+    jsActions.scrollElementIntoViewPort(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(addPinButton);
     addPinButton.click();
@@ -275,7 +276,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyMapOpened() {
     wait.forElementVisible(mapFrame);
-    scrollToElement(mapFrame);
+    jsActions.scrollToElement(mapFrame);
     driver.switchTo().frame(mapFrame);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
@@ -386,7 +387,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(popUpContent);
-    scrollToElement(popUpContent);
+    jsActions.scrollToElement(popUpContent);
     wait.forElementVisible(pinTitle);
     wait.forElementVisible(pinDescription);
     Assertion.assertNotEquals(pinTitle.getText(), pinName);

@@ -282,7 +282,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
-    scrollToElement(allCommentsArea);
+    jsActions.scrollToElement(allCommentsArea);
     wait.forElementVisible(commentArea);
     jsActions.focus(commentArea);
     waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
@@ -314,7 +314,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerEditCommentArea() {
-    scrollToElement(allCommentsArea);
+    jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
@@ -323,7 +323,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public DeletePageObject deleteFirstComment() {
-    scrollToElement(allCommentsArea);
+    jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
@@ -769,7 +769,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public EmbedMapComponentObject clickViewEmbedMap() {
     wait.forElementVisible(viewEmbedMapButton);
-    scrollToElement(viewEmbedMapButton);
+    jsActions.scrollToElement(viewEmbedMapButton);
     viewEmbedMapButton.click();
     driver.switchTo().activeElement();
     return new EmbedMapComponentObject(driver);

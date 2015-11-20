@@ -1,20 +1,22 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+
+import org.openqa.selenium.*;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
- * Created by Ludwik on 2015-07-27.
+ * Set of commonly used actions invoked by executing JavaScript on a web page
  */
 public class JavascriptActions {
 
   private JavascriptExecutor js;
+  private WebDriver webDriver;
 
   public JavascriptActions(WebDriver webDriver) {
     this.js = (JavascriptExecutor) webDriver;
+    this.webDriver = webDriver;
   }
 
   public void click(String cssSelector) {
@@ -58,5 +60,52 @@ public class JavascriptActions {
             "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
             + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
             element);
+  }
+
+  public void scrollToElement(By elementBy) {
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));",
+          webDriver.findElement(elementBy));
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+      }
+    }
+  }
+
+  public void scrollToElement(WebElement element) {
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]); " +
+          "window.scroll(0,parseInt(x.offset().top - 100));",
+          element
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+      }
+    }
+  }
+
+  public void scrollToElement(WebElement element, int offset) {
+    try {
+      js.executeScript(
+          "var x = $(arguments[0]);" +
+          "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
+          element,
+          offset
+      );
+    } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+      }
+    }
+  }
+
+  public void scrollElementIntoViewPort(WebElement element){
+    if (!isElementInViewPort(element)) {
+      scrollToElement(element);
+    }
   }
 }

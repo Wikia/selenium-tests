@@ -73,21 +73,21 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject clickOnCuratedContentElementByIndex(int elementNumber) {
     wait.forElementVisible(curatedContentItems.get(elementNumber));
-    scrollToElement(curatedContentItems.get(elementNumber));
+    jsActions.scrollToElement(curatedContentItems.get(elementNumber));
     curatedContentItems.get(elementNumber).click();
     return this;
   }
 
   public CuratedContentPageObject clickOnMainPageLink() {
     wait.forElementVisible(linkToMainPage);
-    scrollToElement(linkToMainPage);
+    jsActions.scrollToElement(linkToMainPage);
     linkToMainPage.click();
     return this;
   }
 
   public CuratedContentPageObject clickOnLoadMoreButton() {
     wait.forElementVisible(loadMoreButton);
-    scrollToElement(loadMoreButton);
+    jsActions.scrollToElement(loadMoreButton);
     loadMoreButton.click();
     return this;
   }

@@ -137,13 +137,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyFliteTag(String cssFliteSelector) {
-    scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
     WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
     verifySlotExpanded(fliteTag);
   }
 
   public void verifyFliteTagBroken(String error, String cssFliteBrokenSelector) {
-    scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
     WebElement fliteTagBroken = driver.findElement(By.cssSelector(cssFliteBrokenSelector));
     Assertion.assertEquals(fliteTagBroken.getText(), error);
   }
@@ -284,7 +284,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     AdsComparison adsComparison = new AdsComparison();
 
-    scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
       WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));

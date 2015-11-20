@@ -22,7 +22,7 @@ public class GalleryComponentObject extends BasePageObject {
 
   public LightboxComponentObject clickGalleryImage(int index) {
     wait.forElementVisible(galleryImagesArray.get(index));
-    scrollToElement(galleryImagesArray.get(index));
+    jsActions.scrollToElement(galleryImagesArray.get(index));
     galleryImagesArray.get(index).click();
     return new LightboxComponentObject(driver);
   }

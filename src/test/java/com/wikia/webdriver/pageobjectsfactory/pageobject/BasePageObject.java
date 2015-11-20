@@ -169,70 +169,20 @@ public class BasePageObject {
   }
 
   protected void scrollAndClick(WebElement element) {
-    if (!jsActions.isElementInViewPort(element)) {
-      scrollToElement(element);
-    }
+    jsActions.scrollElementIntoViewPort(element);
     wait.forElementClickable(element, 5);
     element.click();
   }
 
   protected void scrollAndClick(List<WebElement> elements, int index) {
-    if (!jsActions.isElementInViewPort(elements.get(index))) {
-      scrollToElement(elements.get(index));
-    }
+    jsActions.scrollElementIntoViewPort(elements.get(index));
     wait.forElementClickable(elements, index, 5);
     elements.get(index).click();
   }
 
   protected void scrollAndClick(WebElement element, int offset) {
-    scrollToElement(element, offset);
+    jsActions.scrollToElement(element, offset);
     element.click();
-  }
-
-  protected void scrollToElement(WebElement element) {
-    try {
-      ((JavascriptExecutor) driver).executeScript(
-          "var x = $(arguments[0]); " +
-          "window.scroll(0,parseInt(x.offset().top - 100));",
-          element
-      );
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
-  }
-
-  protected void scrollToElement(WebElement element, int offset) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    try {
-      js.executeScript(
-          "var x = $(arguments[0]);" +
-          "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
-          element,
-          offset
-      );
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
-  }
-
-  /*
-   * Url helpers
-   */
-  protected void scrollToElement(By elementBy) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    try {
-      js.executeScript("var x = $(arguments[0]);"
-                       + "window.scroll(0,parseInt(x.offset().top - 60));",
-                       driver.findElement(elementBy));
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
   }
 
   public boolean verifyTitle(String title) {

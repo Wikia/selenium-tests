@@ -46,7 +46,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
 
   public boolean isFinishButtonVisibleOnPage() {
     if (!finishButton.isDisplayed()) {
-      scrollToElement(finishButton);
+      jsActions.scrollToElement(finishButton);
     }
     try {
       wait.forElementVisible(finishButton);
