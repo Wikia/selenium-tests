@@ -16,6 +16,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
   @GeoEdgeBrowserMobProxy(country = "CA")
   @UseUnstablePageLoadStrategy
   @Test(
+      enabled = false,
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
       dataProvider = "evolveTestPage"
@@ -29,6 +30,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
   @GeoEdgeBrowserMobProxy(country = "AU")
   @UseUnstablePageLoadStrategy
   @Test(
+      enabled = false,
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
       dataProvider = "evolveTestPage"
@@ -42,6 +44,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
   @GeoEdgeBrowserMobProxy(country = "NZ")
   @UseUnstablePageLoadStrategy
   @Test(
+      enabled = false,
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
       dataProvider = "evolveTestPage"
@@ -55,11 +58,10 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
   @GeoEdgeBrowserMobProxy(country = "CA")
   @UseUnstablePageLoadStrategy
   @Test(
+      enabled = false,
       dataProviderClass = AdsDataProvider.class,
       groups = {"TestEvolveAds"},
-      dataProvider = "evolveHopTestPage",
-      // wf ADR-254
-      enabled = false
+      dataProvider = "evolveHopTestPage"
   )
   public void testEvolveHop_CA(
       String wikiName,
