@@ -43,7 +43,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
   public void selectFilesToUpload(String[] filesNamesList) {
     wait.forElementVisible(multipleUploadForm);
     for (int i = 0; i < filesNamesList.length; i++) {
-      scrollToElement(fileInputs.get(i));
+      jsActions.scrollToElement(fileInputs.get(i));
       fileInputs.get(i)
           .sendKeys(
               CommonUtils.getAbsolutePathForFile(

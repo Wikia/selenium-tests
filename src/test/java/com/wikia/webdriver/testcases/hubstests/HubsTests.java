@@ -119,7 +119,7 @@ public class HubsTests extends NewTestTemplate {
   /**
    * Verify that links in WikiaBar are working
    */
-  @Test(dataProvider = "provideHubName", groups = {"HubsTest_007", "Hubs"})
+  @Test(dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
   public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
     HomePageObject home = new HomePageObject(driver);
     home.logOut(wikiURL);

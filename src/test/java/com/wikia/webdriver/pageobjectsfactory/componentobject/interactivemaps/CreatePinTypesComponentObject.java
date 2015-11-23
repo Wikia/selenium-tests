@@ -109,7 +109,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
   public void verifyErrorExists() {
     wait.forElementVisible(pinTypesError);
-    scrollToElement(pinTypesError);
+    jsActions.scrollToElement(pinTypesError);
     Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
   }
 
