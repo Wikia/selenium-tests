@@ -10,14 +10,13 @@ import org.testng.annotations.Test;
  * @param wikiName             - name of the wiki
  * @param article              - name of the article
  * @param adUnit               - DFP link with ad skin image
- * @param topleaderboardImgUrl - part of path to file with default wikia topleaderboard ad
- * @param medrecImgUrl         - part of path to file with default wikia medrec ad
  * @ownership AdEngineering Wikia
  * URL to DFP: https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=111889452
  * Test all slots on mobile skin with different combinations of slots
  */
 public class TestSlotsMobile extends MobileTestTemplate {
 
+  private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
   private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
   private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
   private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
@@ -30,18 +29,16 @@ public class TestSlotsMobile extends MobileTestTemplate {
   )
   public void TestAllSlotsOnPage(String wikiName,
                                  String article,
-                                 String adUnit,
-                                 String topleaderboardImgUrl,
-                                 String medrecImgUrl) {
+                                 String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
+    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, CREATIVE_IMAGE_URL);
   }
 
   @Test(
@@ -51,16 +48,14 @@ public class TestSlotsMobile extends MobileTestTemplate {
   )
   public void TestLeaderboardAndPrefooterOnPage(String wikiName,
                                                 String article,
-                                                String adUnit,
-                                                String topleaderboardImgUrl,
-                                                String medrecImgUrl) {
+                                                String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
+    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, CREATIVE_IMAGE_URL);
     ads.verifyNoSlotPresent(MOBILE_IN_CONTENT);
   }
 
@@ -71,16 +66,14 @@ public class TestSlotsMobile extends MobileTestTemplate {
   )
   public void TestLeaderboardAndInContentOnPage(String wikiName,
                                                 String article,
-                                                String adUnit,
-                                                String topleaderboardImgUrl,
-                                                String medrecImgUrl) {
+                                                String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
+    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
   }
 
