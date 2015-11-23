@@ -18,9 +18,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
-            "wka.life/_adtest//article",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+            "wka.life/_adtest//article"
         }
     };
   }
@@ -30,9 +28,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in_content",
-            "wka.life/_adtest//article",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+            "wka.life/_adtest//article"
         }
     };
   }
@@ -42,9 +38,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
-            "wka.life/_adtest//article",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
-            "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+            "wka.life/_adtest//article"
         }
     };
   }
