@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -50,6 +51,9 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
       },
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )
+  @RelatedIssue(issueID = "MAIN-5924",
+                comment = "the issue is valid only if the veryfing user "
+                        + "has more than 50 notifications the veryfing user")
   public void wallOwnerReceivesNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName10, credentials.password10, wikiURL);
