@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -67,6 +68,9 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
       },
       dependsOnMethods = "followerNotificationNewMessage_setup_2"
   )
+  @RelatedIssue(issueID = "MAIN-5924",
+                comment = "the issue is valid only if the veryfing user "
+                        + "has more than 50 notifications the veryfing user")
   public void followerNotificationNewMessage_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);
