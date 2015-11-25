@@ -7,4 +7,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
  */
 public class PostsListAnon extends NewTestTemplate {
 
+  public void verifyPaageListL
+
 }
