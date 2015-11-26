@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.userprofile;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -41,12 +41,17 @@ public class UserAvatar extends NewTestTemplate {
         profile =
         new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
     AvatarComponentObject avatar = profile.clickEditAvatar();
+    profile.verifyAvatar();
+    String avatarUrl = profile.getAvatarImageSrc();
+    //profile.verifyAvatarVisible(avatarUrl);
     avatar.uploadAvatar(PageContent.FILE);
     avatar.saveProfile();
-    profile.verifyAvatar(credentials.userNameStaffId);
+    //profile.verifyAvatarChanged(avatarUrl);
+    profile.verifyAvatarChanged1(avatarUrl);
+    String changedAvatarUrl = profile.getAvatarImageSrc();
     profile.verifyAvatarVisible();
-    String avatarURL = profile.getAvatarUrl();
-    profile.verifyURLStatus(200, avatarURL);
+    Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
+    profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
   @RelatedIssue(issueID = "PLATFORM-1615", comment = "Please test manually")
@@ -66,7 +71,7 @@ public class UserAvatar extends NewTestTemplate {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
     profile.clickRemoveAvatar();
-    profile.verifyAvatar(URLsContent.AVATAR_GENERIC);
+    profile.verifyAvatar();
     profile.verifyAvatarPlaceholder();
     profile.logOut(driver);
     profile.verifyAvatarNotPresent();

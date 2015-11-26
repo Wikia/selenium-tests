@@ -1,11 +1,7 @@
 package com.wikia.webdriver.common.core;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -19,8 +15,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CommonExpectedConditions {
 
@@ -80,7 +80,33 @@ public class CommonExpectedConditions {
       @Override
       public String toString() {
         return String.format("value ('%s') to be present in element found by %s", value,
-            element.getTagName());
+                             element.getTagName());
+      }
+    };
+  }
+
+  /**
+   * An expectation for checking if the given text is present in the specified element.
+   *
+   * @author Michal Nowierski
+   */
+  public static ExpectedCondition<Boolean> valueToBeNotPresentInElementsAttribute(
+      final WebElement element, final String attribute, final String value) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver from) {
+        try {
+          String elementsAttributeValue = element.getAttribute(attribute);
+          return !elementsAttributeValue.contains(value);
+        } catch (StaleElementReferenceException e) {
+          return null;
+        }
+      }
+
+      @Override
+      public String toString() {
+        return String.format("value ('%s') to be present in element found by %s", value,
+                             element.getTagName());
       }
     };
   }

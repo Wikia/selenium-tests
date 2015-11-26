@@ -29,10 +29,13 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement avatarEditButton;
   @FindBy(css = "#UserAvatarRemove")
   private WebElement avatarRemoveButton;
+  @FindBy(css = ".masthead-avatar img.avatar")
+  private WebElement avatar;
 
-  private By image = By.cssSelector("img");
+  private String avatarChangedSelector = ".masthead-avatar img.avatar[src!='/%imageName%']";
+  private String avatarChangedSelector1 = ".masthead-avatar img.avatar[src*='/%imageName%']";
 
-  private String avatarSelector = ".masthead-avatar > img[src*='/%imageName%']";
+  private By avatarImage = By.cssSelector("img.avatar");
 
   public UserProfilePageObject(WebDriver driver) {
     super(driver);
@@ -94,10 +97,6 @@ public class UserProfilePageObject extends WikiBasePageObject {
     return new AvatarComponentObject(driver);
   }
 
-  public String getAvatarUrl() {
-    return avatarWrapper.findElement(image).getAttribute("src");
-  }
-
   public void clickRemoveAvatar() {
     showAvatarControls();
     avatarRemoveButton.click();
@@ -107,9 +106,29 @@ public class UserProfilePageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
   }
 
-  public void verifyAvatar(String fileName) {
-    wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
-	  PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  public void verifyAvatar() {
+    wait.forElementVisible(avatar);
+    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  }
+
+  public void verifyAvatarChanged(String oldUrl) {
+    wait.forElementVisible(By.cssSelector(avatarChangedSelector.replace("%imageName%", oldUrl)));
+    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  }
+
+  public void verifyAvatarChanged1(String oldUrl) {
+
+    wait.forElementNotPresent(By.cssSelector(avatarChangedSelector1.replace("%imageName%", oldUrl)));
+    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  }
+
+  public void verifyAvatarVisible(String oldUrl) {
+    wait.forElementVisible(By.cssSelector(avatarChangedSelector1.replace("%imageName%", oldUrl)));
+    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  }
+
+  public String getAvatarImageSrc() {
+    return avatarWrapper.findElement(avatarImage).getAttribute("src");
   }
 
 public void verifyProfilePage(String userName) {
