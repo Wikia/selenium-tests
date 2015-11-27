@@ -246,6 +246,17 @@ public class Wait {
     }
   }
 
+  public boolean forValueToBeNotPresentInElementsAttribute(
+      WebElement element, String attribute, String value) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.valueToBeNotPresentInElementsAttribute(
+          element, attribute, value));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   /**
    * Wait for element to not be present in DOM
    */

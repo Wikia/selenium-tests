@@ -99,6 +99,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
   public void clickRemoveAvatar() {
     showAvatarControls();
+    wait.forElementClickable(avatarRemoveButton);
     avatarRemoveButton.click();
     AlertHandler.acceptPopupWindow(driver, 20);
     hideAvatarControls();
@@ -112,14 +113,8 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public void verifyAvatarChanged(String oldUrl) {
-    wait.forElementVisible(By.cssSelector(avatarChangedSelector.replace("%imageName%", oldUrl)));
-    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
-  }
-
-  public void verifyAvatarChanged1(String oldUrl) {
-
-    wait.forElementNotPresent(By.cssSelector(avatarChangedSelector1.replace("%imageName%", oldUrl)));
-    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+    wait.forValueToBeNotPresentInElementsAttribute(avatar, "src", oldUrl);
+    PageObjectLogging.log("verifyAvatarChanged", "avatar src value has changed", true);
   }
 
   public void verifyAvatarVisible(String oldUrl) {

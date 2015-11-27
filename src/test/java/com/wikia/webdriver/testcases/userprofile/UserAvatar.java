@@ -33,7 +33,6 @@ public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = "PLATFORM-1615", comment = "Please test manually")
   @Test(groups = {"AvatarTest_001"})
   @Execute(asUser = User.STAFF)
   public void uploadAvatar() {
@@ -43,19 +42,16 @@ public class UserAvatar extends NewTestTemplate {
     AvatarComponentObject avatar = profile.clickEditAvatar();
     profile.verifyAvatar();
     String avatarUrl = profile.getAvatarImageSrc();
-    //profile.verifyAvatarVisible(avatarUrl);
     avatar.uploadAvatar(PageContent.FILE);
     avatar.saveProfile();
-    //profile.verifyAvatarChanged(avatarUrl);
-    profile.verifyAvatarChanged1(avatarUrl);
+    profile.verifyAvatarChanged(avatarUrl);
     String changedAvatarUrl = profile.getAvatarImageSrc();
     profile.verifyAvatarVisible();
     Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-  @RelatedIssue(issueID = "PLATFORM-1615", comment = "Please test manually")
-  @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
+  @Test(groups = {"AvatarTest_002"})
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
     new SpecialVersionPage(driver).open();
@@ -64,16 +60,20 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @RelatedIssue(issueID = "PLATFORM-1615", comment = "Please test manually")
+  @RelatedIssue(issueID = "MAIN-5960", comment = "Please test manually")
   @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
+    String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
-    profile.verifyAvatarPlaceholder();
-    profile.logOut(driver);
-    profile.verifyAvatarNotPresent();
+
+    profile.verifyAvatarChanged(avatarUrl);
+    String changedAvatarUrl = profile.getAvatarImageSrc();
+    profile.verifyAvatarVisible();
+    Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
+    profile.verifyURLStatus(200, changedAvatarUrl);
   }
 }

@@ -105,8 +105,8 @@ public class CommonExpectedConditions {
 
       @Override
       public String toString() {
-        return String.format("value ('%s') to be present in element found by %s", value,
-                             element.getTagName());
+        return String.format("value ('%s') to not be present in element stopped being set in %s",
+                             value, element.getTagName());
       }
     };
   }
