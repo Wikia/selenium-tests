@@ -32,8 +32,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   @FindBy(css = ".masthead-avatar img.avatar")
   private WebElement avatar;
 
-  private String avatarChangedSelector = ".masthead-avatar img.avatar[src!='/%imageName%']";
-  private String avatarChangedSelector1 = ".masthead-avatar img.avatar[src*='/%imageName%']";
+  private String avatarChangedSelector = ".masthead-avatar img.avatar[src*='/%imageName%']";
 
   private By avatarImage = By.cssSelector("img.avatar");
 
@@ -118,7 +117,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public void verifyAvatarVisible(String oldUrl) {
-    wait.forElementVisible(By.cssSelector(avatarChangedSelector1.replace("%imageName%", oldUrl)));
+    wait.forElementVisible(By.cssSelector(avatarChangedSelector.replace("%imageName%", oldUrl)));
     PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
   }
 

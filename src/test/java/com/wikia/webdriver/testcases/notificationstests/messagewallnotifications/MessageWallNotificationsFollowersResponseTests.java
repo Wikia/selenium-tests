@@ -54,7 +54,6 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName8);
-    for (int i=0; i<52; i++){
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -62,7 +61,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     wall.writeTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName8);
-  }}
+  }
 
   @Test(
       groups = {
