@@ -41,12 +41,22 @@ public class Wait {
    * Checks if the element is present in browser DOM
    */
   public WebElement forElementPresent(By by) {
+    return forElementPresent(by, true);
+  }
+
+  /**
+   * Checks if the element is present in browser DOM
+   */
+  public WebElement forElementPresent(By by, boolean failOnTimeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     } catch (TimeoutException e) {
-      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
-                            String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+      if (failOnTimeout) {
+        PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
+                              String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+      }
+
       throw e;
     } finally {
       restoreDeaultImplicitWait();
