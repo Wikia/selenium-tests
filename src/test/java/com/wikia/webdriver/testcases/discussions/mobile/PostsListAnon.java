@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.discussions.Pos
 import org.testng.annotations.Test;
 
 /**
- * Created by qaga on 2015-11-24.
+ * @ownership Social Wikia
  */
 @Test(groups = {"Discussions"})
 public class PostsListAnon extends NewTestTemplate {

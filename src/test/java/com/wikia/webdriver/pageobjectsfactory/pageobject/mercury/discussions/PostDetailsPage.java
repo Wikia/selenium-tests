@@ -20,5 +20,4 @@ class PostDetailsPage extends WikiBasePageObject{
     driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
     return this;
   }
-
 }
