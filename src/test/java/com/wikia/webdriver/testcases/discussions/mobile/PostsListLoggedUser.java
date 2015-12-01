@@ -20,5 +20,4 @@ public class PostsListLoggedUser extends NewTestTemplate{
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertFalse(postsList.isPostListEmpty());
   }
-
 }
