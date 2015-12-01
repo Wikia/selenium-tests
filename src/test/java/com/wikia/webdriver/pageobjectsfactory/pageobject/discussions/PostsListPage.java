@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * Created by qaga on 2015-11-25.
  */
-public class PostsListPage extends WikiBasePageObject{
+public class PostsListPage extends WikiBasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
@@ -35,7 +33,7 @@ public class PostsListPage extends WikiBasePageObject{
   }
 
   public boolean isPostListNotEmpty() {
-    return postList.size() > 0;
+    return postList.isEmpty();
   }
 
   public boolean isUserLoggedIn() {

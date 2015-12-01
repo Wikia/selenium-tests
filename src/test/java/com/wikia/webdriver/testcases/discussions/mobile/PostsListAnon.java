@@ -19,6 +19,6 @@ public class PostsListAnon extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.isPostListNotEmpty();
   }
-  
+
 
 }
