@@ -1,8 +1,22 @@
 package com.wikia.webdriver.testcases.discussions.mobile;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.discussions.PostsListPage;
+
+import org.testng.annotations.Test;
+
 /**
  * Created by qaga on 2015-11-24.
  */
-public class PostsListLoggedUser {
+public class PostsListLoggedUser extends NewTestTemplate{
+
+  @Test
+  @Execute(asUser = User.USER_3)
+  public void postsListLoads() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.isPostListNotEmpty();
+  }
 
 }

@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.discussions.mobile;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
