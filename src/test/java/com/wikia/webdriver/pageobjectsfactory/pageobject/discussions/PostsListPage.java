@@ -36,8 +36,4 @@ public class PostsListPage extends WikiBasePageObject {
     return postList.isEmpty();
   }
 
-  public boolean isUserLoggedIn() {
-    return true;
-  }
-
 }
