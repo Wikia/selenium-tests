@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,24 +13,33 @@ import java.util.List;
 /**
  * Created by qaga on 2015-11-25.
  */
-public class PostsListPage {
+public class PostsListPage extends WikiBasePageObject{
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  private WebDriver driver;
-  private UrlBuilder urlBuilder = new UrlBuilder();
+  private static final String PATH = "d/f/%s";
+  private static final String DEFAULT_ID = "203236";
 
-  private static final String PATH = "/d/f/3035";
+  public PostsListPage(WebDriver driver) {
+    super(driver);
+  }
 
-  public PostsListPage openURL() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + PATH);
+  public PostsListPage open(String wikiID) {
+    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
     return this;
   }
 
-  public boolean isPostListEmpty() {
-    if
+  public PostsListPage open() {
+    return open(DEFAULT_ID);
   }
 
+  public boolean isPostListNotEmpty() {
+    return postList.size() > 0;
+  }
+
+  public boolean isUserLoggedIn() {
+    return true;
+  }
 
 }
