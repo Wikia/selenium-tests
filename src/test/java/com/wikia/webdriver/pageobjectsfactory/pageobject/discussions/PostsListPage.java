@@ -35,5 +35,4 @@ public class PostsListPage extends WikiBasePageObject {
   public boolean isPostListNotEmpty() {
     return postList.isEmpty();
   }
-
 }
