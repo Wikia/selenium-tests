@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership Social Wikia
  */
-@Test(groups = {"Discussions"})
+@Test(groups = "Discussions")
 public class PostsListLoggedUser extends NewTestTemplate{
 
   @Test
