@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions.mobile;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,15 +11,14 @@ import org.testng.annotations.Test;
 /**
  * Created by qaga on 2015-11-24.
  */
-@Test(groups = {"Mercury", "Discussions"})
+@Test(groups = {"Discussions"})
 public class PostsListAnon extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.ANONYMOUS)
   public void postsListLoads() {
     PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.isPostListNotEmpty();
+    Assertion.assertFalse(postsList.isPostListEmpty());
   }
-
 
 }

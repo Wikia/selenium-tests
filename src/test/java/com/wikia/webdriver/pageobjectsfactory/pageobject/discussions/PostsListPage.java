@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * Created by qaga on 2015-11-25.
+ * @ownership Social Wikia
  */
 public class PostsListPage extends WikiBasePageObject {
 

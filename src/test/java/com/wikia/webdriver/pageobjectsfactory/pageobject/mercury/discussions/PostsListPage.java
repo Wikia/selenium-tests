@@ -9,9 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * Created by qaga on 2015-12-01.
+ * @ownership Social Wikia
  */
 public class PostsListPage extends WikiBasePageObject {
+
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
@@ -31,9 +32,8 @@ public class PostsListPage extends WikiBasePageObject {
     return open(DEFAULT_ID);
   }
 
-  public boolean isPostListNotEmpty() {
+  public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
-
 
 }

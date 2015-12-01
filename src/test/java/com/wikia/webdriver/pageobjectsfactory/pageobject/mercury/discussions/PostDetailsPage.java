@@ -5,7 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by qaga on 2015-12-01.
+ * @ownership Social Wikia.
  */
 class PostDetailsPage extends WikiBasePageObject{
 
