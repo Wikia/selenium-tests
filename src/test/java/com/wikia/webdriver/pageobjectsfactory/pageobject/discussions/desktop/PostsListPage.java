@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.desktop;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -32,7 +32,7 @@ public class PostsListPage extends WikiBasePageObject {
     return open(DEFAULT_ID);
   }
 
-  public boolean isPostListNotEmpty() {
+  public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
 }
