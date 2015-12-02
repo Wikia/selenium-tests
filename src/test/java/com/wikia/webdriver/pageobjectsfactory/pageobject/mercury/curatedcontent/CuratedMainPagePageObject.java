@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +32,8 @@ public class CuratedMainPagePageObject extends BasePageObject {
   private WebElement trendingVideos;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
+
+  private By mainPagePadSlot = By.cssSelector(".main-page-pad-slot");
 
   private enum Settings {
     TIME_OUT_IN_SEC(5),
@@ -63,6 +66,15 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isWikiaStatsContainerVisible() {
     return isCuratedElementVisible(wikiaStatsContainer);
+  }
+
+  public boolean isMainPagePadSlotInDOM() {
+    try {
+      wait.forElementPresent(mainPagePadSlot, false);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
   }
 
   public boolean isFeaturedContentVisible() {

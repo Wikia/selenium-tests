@@ -4,10 +4,10 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAlertComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 
@@ -58,14 +58,13 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   //TODO: Move logging methods to page object
-  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
   // CCT01
   @Test(groups = "MercuryCuratedMainPageTest_001")
-  @RelatedIssue(issueID = "XW-209")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     cc.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    new ArticlePageObject(driver).waitForFooterToBeVisible();
 
     boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
     PageObjectLogging.log(
@@ -98,6 +97,8 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
+
+    Assertion.assertTrue(cc.isMainPagePadSlotInDOM());
 
     result = cc.isFeaturedContentVisible();
     PageObjectLogging.log(
