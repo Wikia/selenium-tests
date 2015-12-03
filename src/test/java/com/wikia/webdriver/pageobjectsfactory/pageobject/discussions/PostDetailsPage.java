@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.mobile;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
