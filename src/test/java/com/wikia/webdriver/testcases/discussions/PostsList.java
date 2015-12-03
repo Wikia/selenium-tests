@@ -14,49 +14,54 @@ import org.testng.annotations.Test;
 @Test(groups = "Discussions")
 public class PostsList extends NewTestTemplate {
 
-  //anons on mobile section
+  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String MOBILE_RESOLUTION = "600x800";
 
-  @Test(groups = "anon")
-  @Execute(browserSize = "600x800", asUser = User.ANONYMOUS)
+  /** ANONS ON MOBILE SECTION */
+
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
   public void anonSeePostsListLoadedOnMobile() {
     postsListLoads();
   }
 
-  @Test(groups = "anon")
-  @Execute(browserSize = "600x800", asUser = User.ANONYMOUS)
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
   public void anonCanSortPostsListOnMobile() {
     userCanSortPostsList();
   }
 
-  //anons on desktop section
+  /** ANONS ON DESKTOP SECTION */
 
-  @Test(groups = "anon")
-  @Execute(browserSize = "1366x768", asUser = User.ANONYMOUS)
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
   public void anonSeePostsListLoadedOnDesktop() {
     postsListLoads();
   }
 
-  //logged in user on mobile section
+  /** LOGGED IN USER ON MOBILE SECTION */
 
-  @Test(groups = "loggedin")
-  @Execute(browserSize = "600x800", asUser = User.USER_3)
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
   public void loggedInUserCanSortPostsListOnMobile() {
     userCanSortPostsList();
   }
 
-  @Test(groups = "loggedin")
-  @Execute(browserSize = "600x800", asUser = User.USER_3)
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
   public void loggedInUserSeePostsListLoadedOnMobile() {
     postsListLoads();
   }
 
-  //logged in user on desktop section
+  /** LOGGED IN USER ON DESKTOP SECTION */
 
-  @Test(groups = "loggedin")
-  @Execute(browserSize = "1366x768", asUser = User.USER_3)
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
   public void loggedInUserSeePostsListLoadedOnDesktop() {
     postsListLoads();
   }
+
+  /** TESTING METHODS SECTION */
 
   public void postsListLoads() {
     PostsListPage postsList = new PostsListPage(driver).open();
