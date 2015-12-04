@@ -32,8 +32,6 @@ public class CommonExpectedConditions {
 
   /**
    * An expectation for checking if the given text is present in the specified element.
-   *
-   * @author Michal Nowierski
    */
   public static ExpectedCondition<Boolean> valueToBePresentInElementsAttribute(final By locator,
       final String attribute, final String value) {

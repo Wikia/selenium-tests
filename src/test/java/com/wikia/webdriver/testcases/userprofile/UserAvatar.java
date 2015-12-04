@@ -15,18 +15,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionP
 import org.testng.annotations.Test;
 
 /**
- * @author Karol 'kkarolk' Kujawiak
- * @author Michal 'justnpT' Nowierski
+ * Test uploadAvatar 1. Open user profile page User:Username and add avatar 2. Verify that avatar
+ * appeared on user page, and on global navigation
  *
- *         Test uploadAvatar 1. Open user profile page User:Username and add avatar 2. Verify that
- *         avatar appeared on user page, and on global navigation
+ * Test clickAvatar 1. Open wikia page and click user avatar on global navigation 2. Make sure you
+ * were redirected to User page
  *
- *         Test clickAvatar 1. Open wikia page and click user avatar on global navigation 2. Make
- *         sure you were redirected to User page
- *
- *         Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify
- *         that avatar was removed from user page, and placeholder appeared on global navigation 3.
- *         Log out and verify that avatar is not visible on global navigation
+ * Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify that avatar
+ * was removed from user page, and placeholder appeared on global navigation 3. Log out and verify
+ * that avatar is not visible on global navigation
  */
 @Test(groups = "AvatarTest")
 public class UserAvatar extends NewTestTemplate {
