@@ -281,7 +281,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     }
 
     logJSError(driver);
-
   }
 
   @Override
