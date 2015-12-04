@@ -263,7 +263,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
 
-    if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds())) {
+    if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds()) && driver
+        .getCurrentUrl().contains(Configuration.getWikiaDomain())) {
       driver.manage().addCookie(
           new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
                      Configuration.getWikiaDomain(), null, null));
