@@ -28,12 +28,12 @@ import org.testng.annotations.Test;
  *         that avatar was removed from user page, and placeholder appeared on global navigation 3.
  *         Log out and verify that avatar is not visible on global navigation
  */
-@Test(groups = {"AvatarTest"})
+@Test(groups = "AvatarTest")
 public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"AvatarTest_001"})
+  @Test(groups = "AvatarTest_001")
   @Execute(asUser = User.STAFF)
   public void uploadAvatar() {
     UserProfilePageObject
@@ -51,7 +51,7 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-  @Test(groups = {"AvatarTest_002"})
+  @Test(groups = "AvatarTest_002")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
     new SpecialVersionPage(driver).open();
@@ -61,7 +61,7 @@ public class UserAvatar extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "MAIN-5960", comment = "Please test manually")
-  @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
+  @Test(groups = "AvatarTest_003", dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(

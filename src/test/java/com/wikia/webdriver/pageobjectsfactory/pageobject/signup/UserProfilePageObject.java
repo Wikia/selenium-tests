@@ -111,23 +111,17 @@ public class UserProfilePageObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
   }
 
-  public void verifyAvatarChanged(String oldUrl) {
-    wait.forValueToBeNotPresentInElementsAttribute(avatar, "src", oldUrl);
+  public void verifyAvatarChanged(String url) {
+    wait.forValueToBeNotPresentInElementsAttribute(avatar, "src", url);
     PageObjectLogging.log("verifyAvatarChanged", "avatar src value has changed", true);
-  }
-
-  public void verifyAvatarVisible(String oldUrl) {
-    wait.forElementVisible(By.cssSelector(avatarChangedSelector.replace("%imageName%", oldUrl)));
-    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
   }
 
   public String getAvatarImageSrc() {
     return avatarWrapper.findElement(avatarImage).getAttribute("src");
   }
 
-public void verifyProfilePage(String userName) {
-	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
-	PageObjectLogging.log("verifyProfilePage", userName +" user profile page verified", true);
-}
-
+  public void verifyProfilePage(String userName) {
+    verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
+    PageObjectLogging.log("verifyProfilePage", userName + " user profile page verified", true);
+  }
 }
