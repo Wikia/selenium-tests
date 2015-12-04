@@ -204,7 +204,7 @@ public class MobileAdsDataProvider {
                 "\"hostpre\":",
                 "\"ab\":[",
                 "\"dmn\":\"",
-                "\"skin\":\"mercury\"",
+                "\"skin\":\"wikiamobile\"",
                 "\"ar\":\"3:4\"",
                 "\"artid\":\"12516\"",
                 "\"wpage\":\"avatar_wiki\"",
