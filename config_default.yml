@@ -2,7 +2,7 @@
 # To localy override values, create config.yml file next to this one.
 # You can also override these values by specyfing a system property
 
-browser: FF #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY, HTMLUNIT
+browser: Chrome #acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY, HTMLUNIT
 wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: /selenium-config/config.xml #Path to your config.xml file
@@ -12,6 +12,7 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
+mockAds: false
 
 #Specify browser window size in format <width>x<height>, example: 800x600
 #use "maximised" value if you want browser to be maximised
