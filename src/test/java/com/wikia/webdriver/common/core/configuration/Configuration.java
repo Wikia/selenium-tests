@@ -196,6 +196,4 @@ public class Configuration {
 
     return res.toArray(new String[res.size()]);
   }
-
-
 }
