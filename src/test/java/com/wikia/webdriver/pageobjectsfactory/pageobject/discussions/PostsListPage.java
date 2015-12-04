@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,12 @@ public class PostsListPage extends WikiBasePageObject {
 
   @FindBy(css = "li[data-type='trending']")
   private WebElement trendingLinkOnListMobile;
+
+  @FindBy(css = "li[data-type='latest']")
+  private WebElement latestTabDesktop;
+
+  @FindBy(css = "li[data-type='trending']")
+  private WebElement trendingTabDesktop;
 
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_ID = "203236";
@@ -74,4 +81,21 @@ public class PostsListPage extends WikiBasePageObject {
   public String getSortButtonLabel() {
     return labelInSortEntryPointMobile.getText();
   }
+
+  public PostsListPage clickOnLatestTabDesktop() {
+    latestTabDesktop.click();
+    return this;
+  }
+
+  public PostsListPage clickOnTrendingTabDesktop() {
+    trendingTabDesktop.click();
+    return this;
+  }
+
+  public JavascriptActions getJavascriptActions() {
+    return this.jsActions;
+  }
+
+
 }
+

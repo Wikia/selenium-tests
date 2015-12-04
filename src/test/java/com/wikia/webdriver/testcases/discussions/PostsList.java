@@ -39,6 +39,12 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  public void anonCanSwitchBetweenLatestAndTrendingTabOnDesktop() {
+    userCanSwitchBetweenLatestAndTrendingTab();
+  }
+
   /** LOGGED IN USER ON MOBILE SECTION */
 
   @Test
@@ -61,6 +67,12 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
+  public void loggedUserCanSwitchBetweenLatestAndTrendingTabOnDesktop() {
+    userCanSwitchBetweenLatestAndTrendingTab();
+  }
+
   /** TESTING METHODS SECTION */
 
   public void postsListLoads() {
@@ -74,5 +86,11 @@ public class PostsList extends NewTestTemplate {
     Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
     Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickOnTrendingLinkMobile().getSortButtonLabel(), "Trending");
+  }
+
+  public void userCanSwitchBetweenLatestAndTrendingTab () {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickOnLatestTabDesktop();
+    System.out.print(postsList.getJavascriptActions().execute("window.location.href;"));
   }
 }
