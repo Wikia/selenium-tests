@@ -60,7 +60,7 @@ public class ImageComparison {
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
         Color pixelColor = new Color(image.getRGB(x,y));
-        if ( !colorsAreSimilar(pixelColor, color) ) {
+        if ( !areColorsSimilar(pixelColor, color) ) {
           diffCount += 1;
         }
       }
@@ -124,7 +124,7 @@ public class ImageComparison {
     return true;
   }
 
-  private boolean colorsAreSimilar(Color c1, Color c2){
+  private boolean areColorsSimilar(Color c1, Color c2){
     double distance = Math.pow(c1.getRed() - c2.getRed(), 2) + Math.pow(c1.getGreen() - c2.getGreen(), 2) + Math.pow(c1.getBlue() - c2.getBlue(), 2);
     return Math.sqrt(distance) < ACCEPTABLE_COLOR_DISTANCE;
   }
