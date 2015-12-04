@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -25,6 +26,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -123,8 +125,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   /**
-   * Log an action that is not user facing.
-   * Log file reader can hide these actions to increase test readability
+   * Log an action that is not user facing. Log file reader can hide these actions to increase test
+   * readability
    */
   public static void logOnLowLevel(String command, String description, boolean success) {
     log(command, description, success, true);
@@ -261,8 +263,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
 
-    Method method = TestContext.getCurrentTestMethod();
+    if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds()) && driver
+        .getCurrentUrl().contains(Configuration.getWikiaDomain())) {
+      driver.manage().addCookie(
+          new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
+                     Configuration.getWikiaDomain(), null, null));
+    }
 
+    Method method = TestContext.getCurrentTestMethod();
     if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
       TestContext.setFirstLoad(false);
       User user = method.getAnnotation(Execute.class).asUser();
