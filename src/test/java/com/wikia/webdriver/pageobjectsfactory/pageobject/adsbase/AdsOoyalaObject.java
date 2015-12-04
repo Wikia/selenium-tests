@@ -53,10 +53,4 @@ public class AdsOoyalaObject extends AdsBaseObject {
       restoreDeaultImplicitWait();
     }
   }
-
-  public void verifyFlash() {
-    Boolean hasFlash = (Boolean) jsActions.execute(
-        "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
-    PageObjectLogging.log("Verify flash", "Flash should be turned on", hasFlash);
-  }
 }
