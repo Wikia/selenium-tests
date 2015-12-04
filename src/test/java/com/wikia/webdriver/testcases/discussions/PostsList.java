@@ -17,7 +17,9 @@ public class PostsList extends NewTestTemplate {
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
 
-  /** ANONS ON MOBILE SECTION */
+  /**
+   * ANONS ON MOBILE SECTION
+   */
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
@@ -31,7 +33,21 @@ public class PostsList extends NewTestTemplate {
     userCanSortPostsList();
   }
 
-  /** ANONS ON DESKTOP SECTION */
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  public void anonCanViewMorePosts() {
+    userCanViewMorePosts();
+  }
+
+  @Test
+  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  public void mobileClickUsername() {
+    clickUsernameLoadsUserPage();
+  }
+
+  /**
+   * ANONS ON DESKTOP SECTION
+   */
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
@@ -39,7 +55,33 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
-  /** LOGGED IN USER ON MOBILE SECTION */
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  public void anonDesktopCanViewMorePosts() {
+    userCanViewMorePosts();
+  }
+
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  public void clickBackToWiki() {
+    backToWiki();
+  }
+
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  public void desktopClickAvatar() {
+    clickAvatarLoadsUserPage();
+  }
+
+  @Test
+  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  public void desktopClickUsername() {
+    clickUsernameLoadsUserPage();
+  }
+
+  /**
+   * LOGGED IN USER ON MOBILE SECTION
+   */
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
@@ -53,7 +95,9 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
-  /** LOGGED IN USER ON DESKTOP SECTION */
+  /**
+   * LOGGED IN USER ON DESKTOP SECTION
+   */
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
@@ -61,7 +105,9 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
-  /** TESTING METHODS SECTION */
+  /**
+   * TESTING METHODS SECTION
+   */
 
   public void postsListLoads() {
     PostsListPage postsList = new PostsListPage(driver).open();
@@ -74,5 +120,28 @@ public class PostsList extends NewTestTemplate {
     Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
     Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickOnTrendingLinkMobile().getSortButtonLabel(), "Trending");
+  }
+
+  public void userCanViewMorePosts() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    int startingListLength = postsList.getPostsListLength();
+    postsList.scrollToBottom(driver);
+    Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
+  }
+
+  public void backToWiki() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickBackToWikiLink();
+    postsList.verifyUrl(wikiURL);
+  }
+
+  public void clickAvatarLoadsUserPage() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.verifyAvatarLoadsUserPage();
+  }
+
+  public void clickUsernameLoadsUserPage() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.verifyUsernameLoadsUserPage();
   }
 }
