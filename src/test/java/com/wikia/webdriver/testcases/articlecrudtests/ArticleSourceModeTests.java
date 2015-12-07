@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -286,6 +287,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @CreationTicket(ticketID = "CONCF-626")
   @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
+  @Execute(disableFlash = "false")
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
