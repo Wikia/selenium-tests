@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -98,7 +97,6 @@ FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "MAIN-6029", comment = "Test manually: Test will fail until the ticket is fixed")
   public void signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
