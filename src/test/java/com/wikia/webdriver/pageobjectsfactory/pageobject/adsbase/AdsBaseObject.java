@@ -294,6 +294,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
+  public AdsBaseObject verifySize(String slotName, String src, Dimension size) {
+    return verifySize(slotName, src, size.getWidth(), size.getHeight());
+  }
+
   public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
 
