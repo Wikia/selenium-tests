@@ -22,7 +22,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
 @Test(groups = {"Facebook"})
-public class FacebookTests extends NewTestTemplate {
+public class
+FacebookTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   TestUser user = FacebookTestUser.getUser();
