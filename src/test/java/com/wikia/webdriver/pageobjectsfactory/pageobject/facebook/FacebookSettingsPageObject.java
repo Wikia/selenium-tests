@@ -5,7 +5,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -30,6 +32,8 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement fbDropDown;
   @FindBy(xpath = "//span[text()='Log Out']")
   private WebElement fbLogOut;
+  @FindBy(css = "script + div")
+  private WebElement blockerLayer;
 
   public FacebookSettingsPageObject(WebDriver driver) {
     super(driver);
@@ -50,11 +54,18 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
    * This method removes Wikia App from facebook Apps.
    */
   public FacebookSettingsPageObject removeAppIfPresent() {
+    try {
+      wait.forElementPresent(By.cssSelector("script + div"));
+      new Actions(driver).moveByOffset(200, 200).click().perform();
+      wait.forElementNotPresent(By.cssSelector("script + div"));
+    } catch (Exception e){
+
+    }
+
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
           wait.forElementVisible(element);
-          new Actions(driver).moveByOffset(200, 200).click().perform();
           element.click();
           WebElement AppRemoveButton =
               element.findElement(By.xpath("//a[contains(text(), 'Remove')]"));
