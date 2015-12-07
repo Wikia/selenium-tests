@@ -24,25 +24,25 @@ public class PostsList extends NewTestTemplate {
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
-  public void anonSeePostsListLoadedOnMobile() {
+  public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
-  public void anonCanSortPostsListOnMobile() {
+  public void anonUserOnMobileCanSortPostsList() {
     userCanSortPostsList();
   }
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
-  public void anonCanViewMorePosts() {
+  public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
   }
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
-  public void mobileClickUsername() {
+  public void anonUserOnMobileCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
 
@@ -52,31 +52,31 @@ public class PostsList extends NewTestTemplate {
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void anonSeePostsListLoadedOnDesktop() {
+  public void anonUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void anonDesktopCanViewMorePosts() {
+  public void anonUserOnDesktopCanViewMorePosts() {
     userCanViewMorePosts();
   }
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void clickBackToWiki() {
+  public void userCanClickBackToWiki() {
     backToWiki();
   }
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void desktopClickAvatar() {
+  public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void desktopClickUsername() {
+  public void anonUserOnDesktopCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
 
@@ -86,13 +86,13 @@ public class PostsList extends NewTestTemplate {
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
-  public void loggedInUserCanSortPostsListOnMobile() {
+  public void loggedInUserOnMobileCanSortPostsList() {
     userCanSortPostsList();
   }
 
   @Test
   @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
-  public void loggedInUserSeePostsListLoadedOnMobile() {
+  public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
@@ -102,7 +102,7 @@ public class PostsList extends NewTestTemplate {
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
-  public void loggedInUserSeePostsListLoadedOnDesktop() {
+  public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
