@@ -110,7 +110,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Lightbox_006"})
-  @Execute(browserSize = "1400x720")
+  @Execute(browserSize = "1400x720", browser = "FF")
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
