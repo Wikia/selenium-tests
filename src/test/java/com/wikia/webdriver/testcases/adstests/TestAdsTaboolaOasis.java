@@ -19,12 +19,12 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
     AdsTaboolaObject adsTaboolaObject = new AdsTaboolaObject(driver);
     adsTaboolaObject.getUrl(testedPage);
 
-    adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.RIGHT_RAIL_CSS_SELECTOR);
     adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.BELOW_ARTICLE_CSS_SELECTOR);
-
-    adsTaboolaObject.verifyTaboolaAdsPresent(AdsTaboolaObject.RIGHT_RAIL_CSS_SELECTOR);
     adsTaboolaObject.verifyTaboolaAdsPresent(AdsTaboolaObject.BELOW_ARTICLE_CSS_SELECTOR);
 
+//    @TODO Assertions based on configuration: ADEN-2729
+//    adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.RIGHT_RAIL_CSS_SELECTOR);
+//    adsTaboolaObject.verifyTaboolaAdsPresent(AdsTaboolaObject.RIGHT_RAIL_CSS_SELECTOR);
   }
 
 }
