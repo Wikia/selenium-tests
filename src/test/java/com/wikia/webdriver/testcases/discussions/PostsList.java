@@ -64,7 +64,7 @@ public class PostsList extends NewTestTemplate {
 
   @Test
   @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
-  public void userCanClickBackToWiki() {
+  public void anonUserOnDesktopCanClickBackToWiki() {
     backToWiki();
   }
 
