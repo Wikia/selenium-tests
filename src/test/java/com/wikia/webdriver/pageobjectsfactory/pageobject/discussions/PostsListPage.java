@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,22 +16,31 @@ public class PostsListPage extends WikiBasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
+
   @FindBy(css = ".sort")
   private WebElement sortEntryPointMobile;
+
   @FindBy(css = ".sort span")
   private WebElement labelInSortEntryPointMobile;
+
   @FindBy(css = ".discussion-sort")
   private WebElement sortOptionsMobile;
+
   @FindBy(css = "li[data-type='latest']")
   private WebElement latestLinkOnListMobile;
+
   @FindBy(css = "li[data-type='trending']")
   private WebElement trendingLinkOnListMobile;
+
   @FindBy(css = ".back-button")
   private WebElement backToWiki;
+
   @FindBy(css = ".user-avatar")
   private WebElement avatarImage;
+
   @FindBy(css = ".avatar-username")
-  private WebElement avatarName;
+  private WebElement avatarUsername;
+
   @FindBy(css = "#WikiaUserPagesHeader")
   private WebElement userPageHeader;
 
@@ -80,28 +88,32 @@ public class PostsListPage extends WikiBasePageObject {
     return labelInSortEntryPointMobile.getText();
   }
 
-  public void scrollToBottom(WebDriver driver) {
+  public PostsListPage scrollToBottom(WebDriver driver) {
     ((JavascriptExecutor) driver)
         .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    return this;
   }
 
   public int getPostsListLength() {
-    wait.forElementNotVisible(By.className(".spinner"));
     return postList.size();
   }
 
-  public void clickBackToWikiLink() {
+  public PostsListPage clickBackToWikiLink() {
     backToWiki.click();
+    return this;
   }
 
-  public void verifyAvatarLoadsUserPage() {
+  public PostsListPage clickUserAvatar() {
     avatarImage.click();
-    wait.forElementVisible(userPageHeader);
+    return this;
   }
 
-  public void verifyUsernameLoadsUserPage() {
-    avatarName.click();
-    wait.forElementVisible(userPageHeader);
+  public PostsListPage clickUsernameLink() {
+    avatarUsername.click();
+    return this;
   }
 
+  public boolean isUserPageHeaderVisible() {
+    return userPageHeader.isDisplayed();
+  }
 }

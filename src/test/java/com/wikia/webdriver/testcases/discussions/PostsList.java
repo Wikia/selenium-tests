@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -126,6 +127,7 @@ public class PostsList extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     int startingListLength = postsList.getPostsListLength();
     postsList.scrollToBottom(driver);
+    new BasePageObject(driver).waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
   }
 
@@ -137,11 +139,13 @@ public class PostsList extends NewTestTemplate {
 
   public void clickAvatarLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.verifyAvatarLoadsUserPage();
+    postsList.clickUserAvatar();
+    Assertion.assertTrue(postsList.isUserPageHeaderVisible());
   }
 
   public void clickUsernameLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.verifyUsernameLoadsUserPage();
+    postsList.clickUsernameLink();
+    Assertion.assertTrue(postsList.isUserPageHeaderVisible());
   }
 }
