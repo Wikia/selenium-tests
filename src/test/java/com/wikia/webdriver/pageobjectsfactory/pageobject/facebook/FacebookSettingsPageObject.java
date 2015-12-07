@@ -49,14 +49,6 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
    * This method removes Wikia App from facebook Apps.
    */
   public FacebookSettingsPageObject removeAppIfPresent() {
-    try {
-      wait.forElementVisible(By.cssSelector("script + div"));
-      new Actions(driver).moveByOffset(200, 200).click().perform();
-      wait.forElementNotPresent(By.cssSelector("script + div"));
-    } catch (Exception e){
-
-    }
-
     if (isAppPresent()) {
       for (WebElement element : pageElementList) {
         if (element.getText().toString().matches("^Wikia.*\n?.*")) {
