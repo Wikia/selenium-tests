@@ -38,7 +38,7 @@ public class RedirectionTests extends NewTestTemplate {
     expectedUrl = urlBuilder.appendQueryStringToURL(expectedArticleUrl, QUERY_STRING);
   }
 
-  @Test(groups = "RedirectionTest_001")
+  @Test(groups = "MercuryRedirectionTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryRedirectionTest_001_RedirectFromWWW() {
     new ArticlePageObject(driver).openWikiPage(url);
@@ -56,19 +56,19 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(helper.isSkin(Skin.OASIS));
   }
 
-  @Test(groups = "RedirectionTest_002")
+  @Test(groups = "MercuryRedirectionTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryRedirectionTest_002_RedirectFromFullSiteToOasisAsAnon() {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "RedirectionTest_003")
+  @Test(groups = "MercuryRedirectionTest_003")
   @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
   public void MercuryRedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "RedirectionTest_004")
+  @Test(groups = "MercuryRedirectionTest_004")
   @Execute(onWikia = "mercuryautomationtesting", allowedDriver = Driver.Android)
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);

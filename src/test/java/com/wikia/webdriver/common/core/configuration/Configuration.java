@@ -1,5 +1,13 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.properties.Credentials;
+
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriverException;
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,36 +17,25 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriverException;
-import org.yaml.snakeyaml.Yaml;
-
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.properties.Credentials;
-
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
- * Configuration handling:
- * <ol>
- * <li>Look for the property key in testConfig map, if key is present, return the value</li>
- * <li>Look for the property key in system properties - return value of this property if key present
- * </li>
- * <li>If no System Property is found - value is provided from configuration files
- * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
- * config_default.yml</li>
- * </ol>
+ * Configuration handling: <ol> <li>Look for the property key in testConfig map, if key is present,
+ * return the value</li> <li>Look for the property key in system properties - return value of this
+ * property if key present </li> <li>If no System Property is found - value is provided from
+ * configuration files (config_default.yml and config.yml). Values provided in config.yml, are
+ * overriding values from config_default.yml</li> </ol>
  */
 public class Configuration {
 
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
   private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
-
+  private static String wikiaDomain;
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
 
-  private Configuration() {}
+  private Configuration() {
+  }
 
   private static Map<String, String> readConfiguration() {
     if (defaultConfig == null) {
@@ -50,7 +47,7 @@ public class Configuration {
                 .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
         throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
-            DEFAULT_CONFIG_FILE_NAME), e);
+                                                           DEFAULT_CONFIG_FILE_NAME), e);
       }
 
       File localConfigFile = new File(LOCAL_CONFIG_FILE_NAME);
@@ -77,7 +74,7 @@ public class Configuration {
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-          : getPropertyFromFile(propertyName);
+                                                      : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }
@@ -127,6 +124,10 @@ public class Configuration {
     return getProp("logEnabled");
   }
 
+  public static String getMockAds() {
+    return getProp("mockAds");
+  }
+
   public static Credentials getCredentials() {
     return new Credentials();
   }
@@ -135,12 +136,20 @@ public class Configuration {
     if (getEnv().contains("prod")) {
       return "prod";
     } else if (getEnv().contains("verify") || getEnv().contains("preview")
-        || getEnv().contains("sandbox")) {
+               || getEnv().contains("sandbox")) {
       return "staging";
     } else if (getEnv().contains("dev")) {
       return "dev";
     }
     return "";
+  }
+
+  public static String getWikiaDomain() {
+    if (StringUtils.isBlank(wikiaDomain)) {
+      wikiaDomain = "dev".equals(getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+    }
+
+    return wikiaDomain;
   }
 
   public static void setTestValue(String key, String value) {
@@ -166,7 +175,7 @@ public class Configuration {
         return null;
       } else {
         return new Dimension(Integer.valueOf(size.split("x")[0]),
-            Integer.valueOf(size.split("x")[1]));
+                             Integer.valueOf(size.split("x")[1]));
       }
     } else {
       throw new WebDriverException("browser size: " + size + " is not a proper value");
@@ -177,7 +186,7 @@ public class Configuration {
     String exts = getProp("extensions");
 
     if (StringUtils.isEmpty(exts)) {
-      return new String[] {};
+      return new String[]{};
     }
 
     ArrayList<String> res = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.discussions;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 

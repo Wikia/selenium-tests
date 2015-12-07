@@ -77,6 +77,31 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
+
+  @Test
+  public void remindPasswordLowercaseUsernameOnSpecialPage() {
+    String userNameUC = credentials.userNameForgottenPassword3;
+    String userName = userNameUC.toLowerCase();
+    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    base.openWikiPage(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    login.remindPassword(userName, credentials.apiToken);
+    login.verifyMessageAboutNewPassword(userName);
+    String
+        newPassword =
+        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+    login.login(userName, newPassword);
+    newPassword = login.setNewPassword();
+    String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
+    login.verifyUserLoggedIn(verifyString);
+
+    login.logOut(wikiURL);
+    login.openSpecialUserLogin(wikiURL);
+    login.login(userName, newPassword);
+    login.verifyUserLoggedIn(verifyString);
+  }
+
   @Test
   @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
   public void remindPasswordWhileCreatingWiki() {

@@ -78,8 +78,7 @@
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser"/>
-            <class name="com.wikia.webdriver.testcases.discussions.mobile.PostsListAnon"/>
-            <class name="com.wikia.webdriver.testcases.discussions.mobile.PostsListLoggedUser"/>
+            <class name="com.wikia.webdriver.testcases.discussions.PostsList"/>
             <class name="com.wikia.webdriver.testcases.edithubtests.EditHubTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
