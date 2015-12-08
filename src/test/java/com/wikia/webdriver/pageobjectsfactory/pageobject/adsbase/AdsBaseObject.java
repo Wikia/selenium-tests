@@ -61,6 +61,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
+  private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
@@ -74,6 +75,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement incontentBoxad;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
+  @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
+  private WebElement middlePrefooter;
+
 
   public AdsBaseObject(WebDriver driver) {
     super(driver);
@@ -763,5 +767,13 @@ public class AdsBaseObject extends WikiBasePageObject {
       js.executeScript("$(arguments[0]).css('display', 'none')", element);
       waitForElementNotVisibleByElement(element);
     }
+  }
+
+  public boolean isMiddlePrefooterOnPage() {
+    return isElementOnPage(middlePrefooter);
+  }
+
+  public void verifyMiddlePrefooterAdPresent() {
+    verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
   }
 }

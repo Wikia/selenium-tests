@@ -864,4 +864,16 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] adsMiddlePrefooter() {
+    return new Object[][]{
+        {
+            "adtest", "", true
+        },
+        {
+            "adtest", "SyntheticTests/Prefooters", false
+        }
+    };
+  }
+
 }
