@@ -51,7 +51,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate {
     Assertion.assertEquals(deleteMapModal.getDeleteMapError(), InteractiveMapsContent.MAP_DELETE_ERROR);
   }
 
-  @RelatedIssue(issueID = "QAART-557")
   @Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"},
         enabled=false)
   public void DeleteAndRestoreMapTests_003_StaffUserCanDeleteMap() {

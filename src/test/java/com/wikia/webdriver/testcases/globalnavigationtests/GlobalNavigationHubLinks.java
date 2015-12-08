@@ -14,8 +14,7 @@ import org.testng.annotations.Test;
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 
   @Test(groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"})
-  @RelatedIssue(issueID = "QAART-672", comment = "Please test this manually")
-  public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
+ public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
     VenusGlobalNavPageObject globalNav = new HomePageObject(driver).getVenusGlobalNav();
 
     for (VenusGlobalNavPageObject.Hub hubName : VenusGlobalNavPageObject.Hub.values()) {
