@@ -56,13 +56,18 @@ public class VideoComponentObject extends WikiBasePageObject {
     WebElement container = videoEmbed.findElement(By.tagName("div"));
     String containerId = "ooyalaplayer-";
     Assertion.assertStringContains(container.getAttribute("id"), containerId);
-    wait.forElementVisible(container.findElement(By.tagName("object")));
+    wait.forElementVisible(container.findElement(By.cssSelector("video.video")));
     PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
   }
 
+  public void verifyFlashVideoObjectVisible() {
+    wait.forElementVisible(videoEmbed.findElement(By.cssSelector("object")));
+    PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
+  }
+
   public void verifyVideoObjectVisible() {
-    wait.forElementVisible(videoEmbed.findElement(By.tagName("object")));
-    PageObjectLogging.log("verifyVideoObjectVisible", "Video object is visible", true);
+    wait.forElementVisible(videoEmbed.findElement(By.cssSelector("video.video")));
+    PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
   }
 
   public void verifyVideoIframeVisible() {
