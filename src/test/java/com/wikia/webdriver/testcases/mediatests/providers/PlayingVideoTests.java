@@ -13,7 +13,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   @Execute(onWikia = "sktest123", disableFlash = "false",
-      browserSize = "1400x720")
+      browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_001_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateLightbox";
@@ -35,7 +35,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   @Execute(disableFlash = "false", onWikia = "sktest123",
-      browserSize = "1400x720")
+      browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_002_ooyala() {
     String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateInline";
@@ -72,7 +72,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720")
+  @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";

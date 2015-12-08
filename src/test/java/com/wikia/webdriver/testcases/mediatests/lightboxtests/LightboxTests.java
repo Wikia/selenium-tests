@@ -110,7 +110,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Lightbox_006"})
-  @Execute(browserSize = "1400x720")
+  @Execute(browserSize = "1400x720", browser = "FF")
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -136,7 +136,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest_008"})
-  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720")
+  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720", browser="FF")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);

@@ -22,18 +22,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 
 @Test(groups = {"Facebook"})
 public class FacebookTests extends NewTestTemplate {
+
   Credentials credentials = Configuration.getCredentials();
 
   TestUser user = FacebookTestUser.getUser();
 
   /**
    * <ol>
-   * <li>Log in to facebook</li>
-   * <li>Click facebook login on signup page</li>
-   * <li>Deny permission to user's facebook email address</li>
-   * <li>>manually enter email address and create account</li>
-   * <li>confirm account and login</li>
-   * <li>Verify user can login via facebook</li>
+   *   <li>Log in to facebook</li>
+   *   <li>Click facebook login on signup page</li>
+   *   <li>Deny permission to user's facebook email address</li>
+   *   <li>>manually enter email address and create account</li>
+   *   <li>confirm account and login</li>
+   *   <li>Verify user can login via facebook</li>
    * </ol>
    */
   @Test

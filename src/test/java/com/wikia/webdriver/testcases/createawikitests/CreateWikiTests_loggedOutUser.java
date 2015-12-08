@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -25,6 +26,8 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
+  @RelatedIssue(issueID = "MAIN-6028", comment = "Test manually: Test may fail until the ticket is fixed as" +
+          " notification is obscuring the feature being tested")
  public void CreateNewWiki_001_loggedOutUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);

@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -26,6 +27,8 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
    */
 
   @Test(groups = {"CategoriesTestsArticleEdit_001", "CategoriesTestsArticleEditMode"})
+  @RelatedIssue(issueID = "MAIN-6028", comment = "Test manually: Test may fail until the ticket is fixed as" +
+          " notification is obscuring the feature being tested")
   public void CategoriesTestsArticleEdit_001_anonEdit() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -41,6 +44,8 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticleEdit_002", "CategoriesTestsArticleEditMode"})
+  @RelatedIssue(issueID = "MAIN-6028", comment = "Test manually: Test may fail until the ticket is fixed as" +
+          " notification is obscuring the feature being tested")
   public void CategoriesTestsArticleEdit_002_anonDelete() {
     new ArticleContent().clear();
 
