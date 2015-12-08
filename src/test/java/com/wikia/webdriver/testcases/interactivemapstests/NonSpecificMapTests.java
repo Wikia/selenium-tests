@@ -125,7 +125,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyMapOpened();
   }
 
-  @Test(groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test( enabled = false, groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
