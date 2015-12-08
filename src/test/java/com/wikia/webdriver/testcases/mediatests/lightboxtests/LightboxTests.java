@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -136,6 +137,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest_008"})
+  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720", browser="FF")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
