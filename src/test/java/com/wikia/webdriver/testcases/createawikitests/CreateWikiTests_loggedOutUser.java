@@ -26,7 +26,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
-  @RelatedIssue(issueID = "MAIN-6028", comment = "Test manually: Test may fail until the ticket is fixed as" +
+  @RelatedIssue(issueID = "CE-3160", comment = "Test manually: Test may fail until the ticket is fixed as" +
           " notification is obscuring the feature being tested")
  public void CreateNewWiki_001_loggedOutUser() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
