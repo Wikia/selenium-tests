@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,18 @@ public class PostsListPage extends WikiBasePageObject {
 
   @FindBy(css = "li[data-type='trending']")
   private WebElement trendingLinkOnListMobile;
+
+  @FindBy(css = ".back-button")
+  private WebElement backToWiki;
+
+  @FindBy(css = ".user-avatar")
+  private WebElement avatarImage;
+
+  @FindBy(css = ".avatar-username")
+  private WebElement avatarUsername;
+
+  @FindBy(css = "#WikiaUserPagesHeader")
+  private WebElement userPageHeader;
 
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_ID = "203236";
@@ -73,5 +86,34 @@ public class PostsListPage extends WikiBasePageObject {
 
   public String getSortButtonLabel() {
     return labelInSortEntryPointMobile.getText();
+  }
+
+  public PostsListPage scrollToBottom(WebDriver driver) {
+    ((JavascriptExecutor) driver)
+        .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    return this;
+  }
+
+  public int getPostsListLength() {
+    return postList.size();
+  }
+
+  public PostsListPage clickBackToWikiLink() {
+    backToWiki.click();
+    return this;
+  }
+
+  public PostsListPage clickUserAvatar() {
+    avatarImage.click();
+    return this;
+  }
+
+  public PostsListPage clickUsernameLink() {
+    avatarUsername.click();
+    return this;
+  }
+
+  public boolean isUserPageHeaderVisible() {
+    return userPageHeader.isDisplayed();
   }
 }

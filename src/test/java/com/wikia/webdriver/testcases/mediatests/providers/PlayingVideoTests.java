@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -12,7 +13,9 @@ import org.testng.annotations.Test;
 public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
+  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
+  @Execute(onWikia = "sktest123", disableFlash = "false",
+      browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
@@ -31,7 +34,9 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @Execute(onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
+  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
+  @Execute(disableFlash = "false", onWikia = "sktest123",
+      browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
@@ -67,6 +72,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
