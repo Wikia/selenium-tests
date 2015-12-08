@@ -162,6 +162,7 @@ public class SignUpTests extends NewTestTemplate {
    */
 
   @Test(groups = {"SignUp_007", "SignUp"})
+  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
