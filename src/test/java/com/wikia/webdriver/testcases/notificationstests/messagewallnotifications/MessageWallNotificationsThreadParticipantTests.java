@@ -91,9 +91,6 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
       },
       dependsOnMethods = "threadCreatorNotification_setup_3"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                          + "has more than 50 notifications the veryfing user")
   public void threadCreatorNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);

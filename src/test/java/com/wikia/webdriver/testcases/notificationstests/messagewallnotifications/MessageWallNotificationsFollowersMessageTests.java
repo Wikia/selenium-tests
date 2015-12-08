@@ -68,9 +68,6 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
       },
       dependsOnMethods = "followerNotificationNewMessage_setup_2"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                        + "has more than 50 notifications the veryfing user")
   public void followerNotificationNewMessage_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);

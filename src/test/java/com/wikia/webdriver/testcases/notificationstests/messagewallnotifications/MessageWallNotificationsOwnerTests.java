@@ -51,10 +51,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
       },
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                        + "has more than 50 notifications the veryfing user")
-  public void wallOwnerReceivesNotification_verification() {
+ public void wallOwnerReceivesNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName10, credentials.password10, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
