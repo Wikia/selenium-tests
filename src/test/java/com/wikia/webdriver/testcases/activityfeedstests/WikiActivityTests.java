@@ -86,8 +86,6 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @RelatedIssue(issueID = "QAART-673",
-      comment = "Test will fail if article does not exist therefore test manually.")
   @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
