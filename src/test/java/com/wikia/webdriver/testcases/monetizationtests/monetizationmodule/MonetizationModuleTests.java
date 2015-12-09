@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Monetization
- */
 public class MonetizationModuleTests extends NewTestTemplate {
 
   private static final String TEST_COUNTRY_CODE = "TH"; // country that the ads will be shown

@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -10,6 +7,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
 
 /**
  * @author Rebekah Cunningham (modified from ChatTests to test only Staff functionality)

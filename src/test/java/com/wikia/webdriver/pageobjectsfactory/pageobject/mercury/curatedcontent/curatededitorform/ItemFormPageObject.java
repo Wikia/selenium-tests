@@ -12,8 +12,6 @@ import org.openqa.selenium.WebDriver;
  * It has two text fields to fill instead of one
  * That object differs from Category Form:
  * It allows more namespaces than category
- *
- * @ownership Content X-Wing Wikia
  */
 public class ItemFormPageObject extends CuratedEditorFormPageObject {
 

@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestEvolveAds extends TemplateNoFirstLoad {
 
   @GeoEdgeBrowserMobProxy(country = "CA")

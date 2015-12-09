@@ -30,17 +30,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution
- *            <p/>
- *            VE-1335 Previewing Youtube video from VE's media dialog VE-1335 Previewing image from
- *            VE's media dialog VE-1336 1519 Uploading an image with a new file name VE-1334 Adding
- *            caption to a media VE-1333 Resizing a media with the highlight handle VE-1333 Resizing
- *            a media with the advance setting from the media dialog VE-1419 Adjusting media's
- *            horizontal alignment
- */
-
 public class VEMediaTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

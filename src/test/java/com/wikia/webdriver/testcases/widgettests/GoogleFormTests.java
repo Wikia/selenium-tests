@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidget
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"GoogleFormWidgetTests", "WidgetTests"})
 public class GoogleFormTests extends NewTestTemplate {
 

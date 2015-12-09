@@ -5,9 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class SonySideViewObject extends BasePageObject {
 
   private static final String SONY_SIDE_VIEW_URL =

@@ -6,9 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Social
- */
 public class TopBarComponentObject extends BasePageObject {
 
     @FindBy(css = ".icon.login")

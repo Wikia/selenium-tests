@@ -1,13 +1,13 @@
 package com.wikia.webdriver.testcases.googleconnect;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.GoogleConnectPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import org.testng.annotations.Test;
 
 public class GoogleConnect extends NewTestTemplate {
 

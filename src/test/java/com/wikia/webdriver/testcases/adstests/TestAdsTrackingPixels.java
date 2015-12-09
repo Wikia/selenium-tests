@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.google.common.collect.ImmutableList;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";

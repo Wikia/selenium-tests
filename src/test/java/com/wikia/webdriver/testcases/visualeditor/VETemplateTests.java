@@ -22,14 +22,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1413 Verify search suggestion on templates VE-1413 Verify
- * suggested templates appear by default VE-1412 Verify adding template with params and template
- * with no param VE-1412 Verify adding template to a middle of paragraph or to a block node would
- * insert template as block node VE-1414 Verify deleting template from an article
- */
-
 public class VETemplateTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

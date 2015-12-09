@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.searchtests;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;

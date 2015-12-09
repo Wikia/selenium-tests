@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsPadObject extends AdsBaseObject {
 
   private static final String PAD_IMG_CSS =

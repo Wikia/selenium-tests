@@ -16,9 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class CropImageTests extends NewTestTemplate {
 
   public static final String SEARCH_IMAGE_QUERY = "U";

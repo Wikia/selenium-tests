@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,11 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
 import org.testng.annotations.Test;
-
-/**
- * @author: Lukasz Nowak and RodriGomez
- * @ownership: Mobile Web
- */
 
 public class DeleteAndRestoreMapTests extends NewTestTemplate {
 

@@ -21,15 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
- * VE-1202 Select CK from editor preference page then clicking on main article edit would launch CK
- * VE-1202 Select Source from editor preference page then clicking on main article edit would launch
- * source
- * 
- * @author Robert 'rochan' Chan
- * @ownership Rubix Cube
- */
 @Test(groups = {"EditingPreferencesTest"})
 public class EditingPreferencesTests extends NewTestTemplate {
 

@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")

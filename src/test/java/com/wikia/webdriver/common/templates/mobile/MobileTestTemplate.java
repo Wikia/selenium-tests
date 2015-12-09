@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.templates.mobile;
 
-import org.openqa.selenium.Dimension;
-
 import com.wikia.webdriver.common.driverprovider.mobileprovider.MobileDriverProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+
+import org.openqa.selenium.Dimension;
 
 /**
  * Bogna 'bognix' Knychala

@@ -8,10 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsProvidersChainOasis extends TemplateNoFirstLoad {
 
   private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);

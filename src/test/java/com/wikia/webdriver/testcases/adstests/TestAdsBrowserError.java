@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsBrowserError extends TemplateNoFirstLoad {
 
   @Test(groups = "AdsScrollHandlerBrowserError")

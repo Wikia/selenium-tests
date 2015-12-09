@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -17,6 +15,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import org.testng.annotations.Test;
 
 @Test(groups = {"VetArticleComments", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
