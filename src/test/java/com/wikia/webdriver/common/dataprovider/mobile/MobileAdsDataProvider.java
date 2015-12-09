@@ -4,14 +4,9 @@ import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class MobileAdsDataProvider {
 
-  private MobileAdsDataProvider() {
-
-  }
+  private MobileAdsDataProvider() {}
 
   @DataProvider
   public static Object[][] leaderboardAndPrefooterSlots() {

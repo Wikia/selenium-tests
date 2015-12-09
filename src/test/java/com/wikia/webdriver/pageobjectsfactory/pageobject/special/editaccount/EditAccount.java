@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class EditAccount extends BasePageObject {
 
   private static final String USER_ACCOUNT_REOPEN_MESSAGE =

@@ -27,8 +27,6 @@ public class FilePageTests extends NewTestTemplate {
   /**
    * Verify functionality of tabs on file pages in Oasis. When a tab is clicked, the corresponding
    * content should be displayed.
-   *
-   * @author "Liz Lee"
    */
   @Test(groups = {"FilePage", "filePage001_tabs", "Media"})
   public void filePage001_tabs() {
@@ -50,8 +48,6 @@ public class FilePageTests extends NewTestTemplate {
   /**
    * Verify that file page tabs will save their state for logged in users when they navigate away
    * from the page and back to it.
-   *
-   * @author "Liz Lee"
    */
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
   @Execute(asUser = User.USER)
@@ -68,8 +64,6 @@ public class FilePageTests extends NewTestTemplate {
   /**
    * Verify if a diff table is present on a diff page. Note that not all diff pages have diff tables
    * but the one specified does.
-   *
-   * @author "Liz Lee"
    */
   @Test(groups = {"FilePage", "filePage003_diffPage", "Media"})
   public void filePage003_diffPage() {
@@ -83,8 +77,6 @@ public class FilePageTests extends NewTestTemplate {
 
   /**
    * Verify that a video can be deleted from the File page
-   *
-   * @author garth
    */
   @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
@@ -115,8 +107,6 @@ public class FilePageTests extends NewTestTemplate {
 
   /**
    * Verify that a video can be deleted from the File page
-   *
-   * @author garth
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
   public void filePage005_deleteFromHistory() {

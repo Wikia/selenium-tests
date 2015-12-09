@@ -17,9 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Michał 'justnpT' Nowierski
- */
 public class WikiActivityTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

@@ -5,9 +5,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 import org.openqa.selenium.Dimension;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class MobileTestTemplate extends NewTestTemplate {
 
   @Override

@@ -19,13 +19,9 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class MailFunctions {
 
   private MailFunctions() {
-
   }
 
   public static String getFirstEmailContent(String userName, String password, String subject) {

@@ -15,12 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.testng.annotations.Test;
 
-// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
-
-/**
- * @author Karol 'kkarolk' Kujawiak 1. Upload file using Special:NewFiles page 2. Upload file using
- *         Special:Upload page 3. Upload file using Special:MultipleUpload page
- */
 public class ImageServingTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

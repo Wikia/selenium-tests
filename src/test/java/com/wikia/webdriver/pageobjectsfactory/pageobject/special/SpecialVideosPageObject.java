@@ -19,10 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Garth Webb
- * @author Saipetch Kongkatong
- */
 public class SpecialVideosPageObject extends SpecialPageObject {
 
   @FindBy(css = ".WikiaPageHeader h1")

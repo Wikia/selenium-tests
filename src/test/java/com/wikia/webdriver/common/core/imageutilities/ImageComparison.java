@@ -13,8 +13,6 @@ import java.util.Arrays;
 
 /**
  * Class containing methods responsible for comparing images using different algorithms.
- *
- * @author Bogna 'bognix' Knychala
  */
 public class ImageComparison {
 

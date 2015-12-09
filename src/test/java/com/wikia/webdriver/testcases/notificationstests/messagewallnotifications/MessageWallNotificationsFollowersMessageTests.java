@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -15,10 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is following user 6 message wall 2. User 6 is
- *         writig a message on his own message wall, 3. User 5 is notified about the message
- */
 public class MessageWallNotificationsFollowersMessageTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -74,6 +67,4 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
     notifications.showNotifications();
     notifications.verifyNotification(title, credentials.userName6);
   }
-
-
 }

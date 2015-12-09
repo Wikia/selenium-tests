@@ -13,9 +13,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String SMART_BANNER_SELECTOR = ".android.smartbanner";

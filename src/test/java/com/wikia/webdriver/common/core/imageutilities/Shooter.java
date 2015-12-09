@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 /**
  * Class responsible for taking and saving screenshots
- *
- * @author Bogna 'bognix' Knychala
  */
 public class Shooter {
 

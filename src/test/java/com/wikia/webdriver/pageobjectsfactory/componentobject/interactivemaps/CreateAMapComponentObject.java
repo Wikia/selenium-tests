@@ -9,10 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- */
-
 public class CreateAMapComponentObject extends BasePageObject {
 
   @FindBy(css = ".int-map-icon-geo-tile-set-blue")

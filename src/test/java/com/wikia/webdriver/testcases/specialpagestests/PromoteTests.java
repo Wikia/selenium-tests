@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromoteP
 
 import org.testng.annotations.Test;
 
-/**
- * @author Michal 'justnpT' Nowierski 1. Upload image, put description and put deadline for a Wiki
- */
 public class PromoteTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -28,5 +25,4 @@ public class PromoteTests extends NewTestTemplate {
     promote.modifyThumnailImage(PageContent.FILE2PNG);
     promote.verifyUploadedImage(PageContent.FILE2PNG);
   }
-
 }

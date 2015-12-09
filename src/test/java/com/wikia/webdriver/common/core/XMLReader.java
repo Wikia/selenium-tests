@@ -18,8 +18,6 @@ public class XMLReader {
 
   /**
    * method used to get credentials from configuration xml
-   *
-   * @author Karol Kujawiak
    */
   public static String getValue(File file, String key) {
 

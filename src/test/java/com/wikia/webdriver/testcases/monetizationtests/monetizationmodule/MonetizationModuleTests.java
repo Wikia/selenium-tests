@@ -144,8 +144,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is shown on article page for anon user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
   public void MonetizationModuleTest_001() {
@@ -162,8 +160,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is not shown on article page for anon user (not via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
   public void MonetizationModuleTest_002() {
@@ -180,8 +176,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is not shown on article page for logged in user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
   public void MonetizationModuleTest_003() {
@@ -200,8 +194,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for logged in user (not via search
    * engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
   public void MonetizationModuleTest_004() {
@@ -219,8 +211,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Check the width of the adsense ad in the monetization module
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
                                                                "MonetizationModuleTest_005",
@@ -244,8 +234,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The monetization module is shown on article page for anon user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
   public void MonetizationModuleTest_006() {
@@ -271,8 +259,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The monetization module is not shown on article page (not via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
   public void MonetizationModuleTest_007() {
@@ -299,8 +285,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for blocked geos (use default blocked
    * countries)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_008", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_008",
@@ -334,8 +318,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is shown on article page for anon user with non-blocked geos (via
    * search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
                                                                        "MonetizationModuleTest_009",
@@ -364,8 +346,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for non-blocked geos (not via search
    * engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
                                                                        "MonetizationModuleTest_010",
@@ -394,8 +374,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page on top 100 wikias for blocked geos (set
    * blocked countries per wiki)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_011", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_011",
@@ -428,8 +406,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af
    * slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_012", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_012",
@@ -458,8 +434,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is not shown on article page on top 700 wikias for blocked
    * geos (set blocked countries per wiki)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_013", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_013",
@@ -485,8 +459,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page on top 700 wikias and the rest for
    * particular geos (ic/bc/af slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_014", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_014",
@@ -516,8 +488,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page on the rest of wikias for particular
    * geos (bc/af slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_015", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_015",
@@ -546,8 +516,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The header of monetization module is shown on article page
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
   public void MonetizationModuleTest_016() {
@@ -566,8 +534,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module is shown on article page on the rest for particular
    * geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_017", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_017",
@@ -603,8 +569,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module is NOT shown on article page on the rest for particular
    * geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_018", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_018",
@@ -635,8 +599,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * MON-344 Check the width of the Amazon ad in the monetization module
-   *
-   * @author Rochan
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
                                                                "MonetizationModuleTest_019",
@@ -660,8 +622,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module with prime video is shown on article page on the rest
    * for particular geos (ic slot)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_020", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_020",
@@ -697,8 +657,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-284 Ecommerce: The monetization module single or multiple product is shown on article page
    * on the rest for particular geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_021", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_021",
@@ -734,8 +692,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-284 Ecommerce: The monetization module single or multiple product is NOT shown on article
    * page on the rest for particular geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_022", groups = {"MonetizationModule",
                                                                    "DataMonetizationModuleTest_022",

@@ -13,12 +13,6 @@ import org.testng.Assert;
 
 import java.util.List;
 
-
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author: Lukasz Jedrzejczak
- */
-
 public class InteractiveMapsPageObject extends ArticlePageObject {
 
   @FindBy(css = "#createMap")

@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class AlmostTherePageObject extends WikiBasePageObject {
 
   @FindBy(xpath = "//h2[contains(text(), 'Almost there')]")

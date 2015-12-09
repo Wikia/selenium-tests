@@ -13,12 +13,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Lukasz Jedrzejczak
- * @author Lukasz Nowak (Dyktus)
- */
-
 public class CreateACustomMapComponentObject extends BasePageObject {
 
   @FindBy(css = "#intMapUpload")

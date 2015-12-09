@@ -2,14 +2,9 @@ package com.wikia.webdriver.common.dataprovider;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class SpecialPagesDataProvider {
 
-  private SpecialPagesDataProvider() {
-
-  }
+  private SpecialPagesDataProvider() {}
 
   @DataProvider
   public static final Object[][] getSpecialPagesForAnons() {

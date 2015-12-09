@@ -2,9 +2,6 @@ package com.wikia.webdriver.common.dataprovider.ads;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class GermanAdsDataProvider {
 
   public static final Object[][] IVW2_TEST_DATA = new Object[][]{

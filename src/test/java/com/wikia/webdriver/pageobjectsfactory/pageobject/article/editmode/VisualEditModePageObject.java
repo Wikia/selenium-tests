@@ -28,9 +28,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class VisualEditModePageObject extends EditMode {
 
   private static final String IMAGE_COMPONENT_CSS = "img.image";
@@ -307,7 +304,6 @@ public class VisualEditModePageObject extends EditMode {
    * exactly related videos message article
    *
    * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
-   * @author Michal Nowierski
    */
   public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
     List<String> videos = new ArrayList<String>();

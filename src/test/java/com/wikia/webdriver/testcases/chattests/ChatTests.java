@@ -12,15 +12,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-/**
- * @author Bogna 'bognix' Knychala
- * @description 1. Two users enter Chat 2. Verify dropdown menu is present when user clicks on
- * another user with right button 3. Verify blocked user dropdown 4. Verify admin user dropdown 5.
- * Verify switching between main and private message sections when one of the users has written
- * public message 6. Verify switching between main and private message sections when one of the
- * users has written private message 7. Verify notifications counter when sending multiple private
- * messages 8. Ban and unban user
- */
 public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = Configuration.getCredentials();

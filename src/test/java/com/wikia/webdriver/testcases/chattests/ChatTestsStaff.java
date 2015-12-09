@@ -11,13 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObje
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-/**
- * @author Rebekah Cunningham (modified from ChatTests to test only Staff functionality)
- * @description 1. Two staff users enter Chat 2. Verify switching between main and private message
- *              sections when one of the users has written public message 6. Verify switching
- *              between main and private message sections when one of the users has written private
- *              message 7. Verify non-staff users do not have permission to chat.
- */
 public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = Configuration.getCredentials();

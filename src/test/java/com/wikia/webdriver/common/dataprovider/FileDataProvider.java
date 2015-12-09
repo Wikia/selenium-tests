@@ -2,13 +2,9 @@ package com.wikia.webdriver.common.dataprovider;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class FileDataProvider {
 
   private FileDataProvider() {
-
   }
 
   @DataProvider

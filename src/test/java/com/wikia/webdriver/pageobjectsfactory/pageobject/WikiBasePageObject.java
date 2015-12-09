@@ -847,8 +847,6 @@ public class WikiBasePageObject extends BasePageObject {
   /**
    * this method should be called after clicktracking test, in order to verify if expected events
    * were tracked
-   *
-   * @author Michal 'justnpT' Nowierski
    */
   public void compareTrackedEventsTo(List<JsonObject> expectedEventsList) {
     jsActions.execute(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);

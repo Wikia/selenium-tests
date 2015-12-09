@@ -13,11 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Łukasz Nowak (Dyktus)
- */
-
 public class AddPinComponentObject extends BasePageObject {
 
   @FindBy(css = "input[name=name]")

@@ -13,12 +13,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Lukasz Jedrzejczak
- * @author Łukasz Nowak (Dyktus)
- */
-
 public class CreatePinTypesComponentObject extends BasePageObject {
 
   @FindBy(css = "input[name='poiCategories[][name]']")

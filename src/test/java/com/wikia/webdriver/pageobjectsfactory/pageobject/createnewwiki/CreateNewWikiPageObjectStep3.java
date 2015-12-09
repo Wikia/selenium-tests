@@ -14,9 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Karol
- */
 public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
   private static final String DATA_THEME_LIST = "li[data-theme]";

@@ -17,12 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 
 import org.testng.annotations.Test;
 
-
-/**
- * @author Karol 'kkarolk' Kujawiak 1. Create a wiki and delete 2. Create a wiki for children 3.
- *         Create a wiki with changed domain 4. Try to create a wiki which name exists 5. Try to
- *         create a wiki which name violates naming policy 6. Try to create a wiki without category
- */
 @Test(groups = {"CNW_User"})
 public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 

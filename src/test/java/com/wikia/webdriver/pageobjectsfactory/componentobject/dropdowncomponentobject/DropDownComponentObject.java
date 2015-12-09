@@ -18,9 +18,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class DropDownComponentObject extends WikiBasePageObject {
 
   private static final String LOGIN_DROPDOWN_TRIGGER_CSS = "#AccountNavigation";

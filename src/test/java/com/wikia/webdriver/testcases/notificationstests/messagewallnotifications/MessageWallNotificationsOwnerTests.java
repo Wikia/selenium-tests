@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -14,10 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is posting message on user 6 message wall 2. User
- *         6 is notified about user 6 message
- */
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
