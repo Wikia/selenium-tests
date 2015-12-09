@@ -66,7 +66,6 @@ public class UserAvatar extends NewTestTemplate {
         credentials.userNameStaff, wikiURL);
     String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
-   profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
     profile.verifyAvatarChanged(avatarUrl);
