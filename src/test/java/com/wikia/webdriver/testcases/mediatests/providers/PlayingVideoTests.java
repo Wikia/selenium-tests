@@ -17,7 +17,6 @@ public class PlayingVideoTests extends NewTestTemplate {
   @Execute(onWikia = "sktest123", disableFlash = "false",
       browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_001_ooyala() {
-    String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateLightbox";
 
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -25,7 +24,6 @@ public class PlayingVideoTests extends NewTestTemplate {
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
     lightbox.verifyLightboxVideo();
-    lightbox.verifyVideoAutoplay(providerName);
 
     VideoComponentObject video;
     video = lightbox.getVideoPlayer();
@@ -40,14 +38,13 @@ public class PlayingVideoTests extends NewTestTemplate {
   @Execute(disableFlash = "false", onWikia = "sktest123",
       browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_002_ooyala() {
-    String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateInline";
 
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();
-    article.verifyVideoAutoplay(providerName);
+
     video.verifyVideoEmbedWidth();
     video.verifyVideoOoyalaAgeGate();
     video.verifyVideoObjectVisible();
@@ -91,7 +88,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
     VideoComponentObject video = lightbox.getVideoPlayer();
     video.verifyVideoEmbedWidth();
-    video.verifyVideoObjectVisible();
+    video.verifyFlashVideoObjectVisible();
     video.verifyVideoAnyclipEmbed();
   }
 }

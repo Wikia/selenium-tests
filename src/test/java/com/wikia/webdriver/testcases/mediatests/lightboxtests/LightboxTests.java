@@ -149,7 +149,6 @@ public class LightboxTests extends NewTestTemplate {
     FilePagePageObject filePage = lightbox.clickTitle();
     filePage.verifyTabsExistVideo();
     filePage.verifyEmbeddedVideoIsPresent();
-    filePage.verifyVideoAutoplay(true);
   }
 
   /**
