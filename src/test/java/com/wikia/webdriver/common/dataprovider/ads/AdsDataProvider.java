@@ -771,6 +771,14 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] slotsSizes() {
+    return new Object[][]{
+        {"adtest", "SKY/300x600", "LEFT_SKYSCRAPER_2", new Dimension(300, 600)},
+        {"adtest", "SKY/300x600", "LEFT_SKYSCRAPER_3", new Dimension(300, 600)},
+    };
+  }
+
+  @DataProvider
   public static Object[][] testPad() {
     return new Object[][]{
         {"adtest-pad", "Adtest-pad_Wikia", 250},
