@@ -57,7 +57,8 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @RelatedIssue(issueID = "MAIN-5960", comment = "Please test manually")
+  @RelatedIssue(issueID = "MAIN-5960", comment = "The Delete avatar button (and windows confirmation popup) " +
+          "have to be clicked twice in order to delete an avata")
   @Test(groups = "AvatarTest_003", dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
   public void removeAvatar() {
@@ -65,6 +66,7 @@ public class UserAvatar extends NewTestTemplate {
         credentials.userNameStaff, wikiURL);
     String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
+   profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
     profile.verifyAvatarChanged(avatarUrl);
