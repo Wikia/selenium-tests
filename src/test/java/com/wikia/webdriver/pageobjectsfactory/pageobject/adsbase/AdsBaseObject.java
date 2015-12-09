@@ -66,7 +66,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
-
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
@@ -77,7 +76,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
-
 
   public AdsBaseObject(WebDriver driver) {
     super(driver);
