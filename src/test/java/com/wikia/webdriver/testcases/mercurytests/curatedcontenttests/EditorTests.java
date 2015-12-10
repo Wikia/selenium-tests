@@ -165,8 +165,8 @@ public class EditorTests extends NewTestTemplate {
     Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
     PageObjectLogging.log(
         "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
+        MercuryMessages.VISIBLE_MSG,
         result
     );
 
