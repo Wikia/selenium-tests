@@ -223,6 +223,7 @@ public class NewDriverProvider {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
       chromeOptions.addArguments("process-per-site");
       chromeOptions.addArguments("start-maximized");
+      chromeOptions.addArguments("disable-notifications");
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

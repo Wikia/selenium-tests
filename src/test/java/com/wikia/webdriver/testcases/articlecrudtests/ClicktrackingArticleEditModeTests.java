@@ -15,7 +15,7 @@ import javax.json.JsonObject;
 
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
 
-  @RelatedIssue(issueID = "QAART-555")
+  @RelatedIssue(issueID = "MAIN-5917")
   @Test(groups = {"ClickTracking", "ClickTrackingArticleEditModeTests",
                   "ClickTrackingArticleEditMode_001"}, enabled = false)
   public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {

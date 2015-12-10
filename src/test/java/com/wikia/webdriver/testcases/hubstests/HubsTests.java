@@ -104,7 +104,7 @@ public class HubsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"HubsTest_005", "Hubs", "new"}, enabled = false)
-  @RelatedIssue(issueID = "XW-391",
+  @RelatedIssue(issueID = "MAIN-5636",
       comment = "Second issue: MAIN-5377. Product is not about to fix both of the issues. "
                 + "Test disabled")
   /**

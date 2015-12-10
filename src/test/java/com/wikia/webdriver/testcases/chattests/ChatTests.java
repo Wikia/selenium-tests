@@ -202,7 +202,6 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_007", "Chat", "Modals"})
-  @RelatedIssue(issueID = "MAIN-5315", comment = "please test this manually")
   public void Chat_007_banUser() {
     switchToWindow(driverOne);
     openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);

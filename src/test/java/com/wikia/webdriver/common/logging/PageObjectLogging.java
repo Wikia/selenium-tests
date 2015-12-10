@@ -29,6 +29,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
@@ -263,11 +264,19 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
 
-    if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds()) && driver
-        .getCurrentUrl().contains(Configuration.getWikiaDomain())) {
-      driver.manage().addCookie(
-          new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-                     Configuration.getWikiaDomain(), null, null));
+    if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
+      //HACK FOR DISABLING NOTIFICATIONS
+      try {
+        new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
+      }catch (WebDriverException e){
+
+      }
+
+      if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds())) {
+        driver.manage().addCookie(
+            new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
+                       Configuration.getWikiaDomain(), null, null));
+      }
     }
 
     Method method = TestContext.getCurrentTestMethod();

@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.forumtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -85,6 +86,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
+  @RelatedIssue(issueID = "MAIN-6042", comment = "Test manually")
   public void ForumBoardTests_006_followDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
