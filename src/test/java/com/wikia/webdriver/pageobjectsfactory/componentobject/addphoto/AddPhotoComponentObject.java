@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * class for adding photo to gallery, slider and slideshow
- *
- * @author Karol 'kkarolk' Kujawiak
  */
 public class AddPhotoComponentObject extends BasePageObject {
 

@@ -12,10 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
   @FindBy(css = ".ve-ui-mwLinkTargetInputWidget input")

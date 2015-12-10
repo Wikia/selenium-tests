@@ -9,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class CreateArticleModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#wpCreatePageDialogTitle")

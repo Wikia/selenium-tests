@@ -12,8 +12,6 @@ import org.openqa.selenium.WebDriver;
  * That object differs from Item Form:
  * Done button may redirect you to main editor home or section items form
  * It allows only category namespace
- *
- * @ownership Content X-Wing Wikia
  */
 public class CategoryFormPageObject extends CuratedEditorFormPageObject {
 

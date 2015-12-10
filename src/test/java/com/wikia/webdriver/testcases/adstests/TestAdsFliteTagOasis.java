@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 @Test(groups = "AdsFliteTagOasis")
 public class TestAdsFliteTagOasis extends TemplateNoFirstLoad {
 

@@ -8,9 +8,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestUrlBuilder extends TemplateNoFirstLoad {
 
   private static Object[][] TEST_DATA = new Object[][]{

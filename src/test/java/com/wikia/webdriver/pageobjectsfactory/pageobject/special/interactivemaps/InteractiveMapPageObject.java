@@ -21,10 +21,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Łukasz Jędrzejczak
- * @author Łukasz Nowak (Dyktus)
- */
 public class InteractiveMapPageObject extends BasePageObject {
 
   @FindBy(css = "#map")

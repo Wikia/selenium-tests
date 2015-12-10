@@ -21,11 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution VE-1337 - Adding existing map onto article VE-1337 - Checking empty state
- *            dialog on wiki with no maps VE-1351 - Adding map in a empty state
- */
 @Test(groups = {"VEAddMap"})
 public class VEAddMapTests extends NewTestTemplate {
 

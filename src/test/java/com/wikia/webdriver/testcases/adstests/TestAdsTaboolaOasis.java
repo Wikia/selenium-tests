@@ -5,9 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsTaboolaObjec
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "AdsTaboolaOasis")

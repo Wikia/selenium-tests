@@ -17,13 +17,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1407 Adding category to an article VE-1408 Deleting category from
- * an article VE-1411 New category suggestion when adding category to an article VE-1411 Matching
- * categories suggestion when adding category to an article
- */
-
 public class VECategoryTests extends NewTestTemplate {
 
   WikiBasePageObject base;

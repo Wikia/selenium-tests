@@ -15,9 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak 1. Create wiki in different languages
- */
 @Test(groups = {"CNW_lang"})
 public class CreateWikiTests_lang extends NewTestTemplate {
 

@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Social Wikia
- */
 public class PostsListPage extends WikiBasePageObject {
 
   @FindBy(css = ".post-detail")

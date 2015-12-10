@@ -15,16 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class CategoriesTestsEditMode extends NewTestTemplate {
-
-  /**
-   * Add category to article edit mode as anon Add category to article edit mode from suggestion
-   * list as anon Add category to article edit mode as user Add category to article edit mode from
-   * suggestion list as user Add category to article edit mode as anon edit, delete
-   */
 
   @Test(groups = {"CategoriesTestsArticleEdit_001", "CategoriesTestsArticleEditMode"})
   @RelatedIssue(issueID = "CE-3160", comment = "Test manually: Test may fail until the ticket is fixed as" +

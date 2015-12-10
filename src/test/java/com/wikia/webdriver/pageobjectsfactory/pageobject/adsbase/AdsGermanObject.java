@@ -17,9 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdsGermanObject extends AdsBaseObject {
 
   private static final String JS_SKIN_CALL = "top.loadCustomAd({type:\"skin\",destUrl:\"";

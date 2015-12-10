@@ -9,8 +9,6 @@ import org.testng.annotations.Test;
 
 /**
  * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
- *
- * @ownership AdEngineering Wikia
  */
 public class TestAdTypeMobile extends MobileTestTemplate {
 

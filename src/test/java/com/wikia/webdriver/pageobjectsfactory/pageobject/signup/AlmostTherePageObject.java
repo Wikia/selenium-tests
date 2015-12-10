@@ -1,16 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.signup;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 public class AlmostTherePageObject extends WikiBasePageObject {
 
   @FindBy(xpath = "//h2[contains(text(), 'Almost there')]")

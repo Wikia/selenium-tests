@@ -13,11 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'rochan' Chan <p/> VE-888 Verify VE is able to perform multiple publish on the
- *         same article in one logged in session
- */
-
 public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

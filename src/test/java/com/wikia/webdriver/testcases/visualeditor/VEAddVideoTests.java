@@ -14,14 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution
- *            <p/>
- *            VE-1134 Adding non-premium (Youtube) video VE-1134 Adding Premium Video with full URL
- *            VE-1264 Adding Existing videos to an article VE-1265 Deleting a video from the article
- */
-
 public class VEAddVideoTests extends NewTestTemplate {
 
   // AM01

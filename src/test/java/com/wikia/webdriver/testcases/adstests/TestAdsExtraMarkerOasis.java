@@ -9,9 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsExtraMarkerOasis extends TemplateNoFirstLoad {
 
   private static final int TIMEOUT_SEC = 30;

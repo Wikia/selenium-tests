@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
@@ -14,9 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 
-/**
- * @ownership Content X-Wing Wikia
- */
+import org.testng.annotations.Test;
+
 public class ArticleTOCTests extends NewTestTemplate {
 
   /**

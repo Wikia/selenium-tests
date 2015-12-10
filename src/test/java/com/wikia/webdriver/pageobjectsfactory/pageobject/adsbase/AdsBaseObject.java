@@ -30,9 +30,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsBaseObject extends WikiBasePageObject {
 
   protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";

@@ -10,9 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObjec
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social
- */
 @Test(groups = {"MercurySignupTests", "Mercury"})
 public class SignupTests extends NewTestTemplate {
 

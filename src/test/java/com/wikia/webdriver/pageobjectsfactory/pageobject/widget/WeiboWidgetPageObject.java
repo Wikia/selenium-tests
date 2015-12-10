@@ -7,9 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class WeiboWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='weibo']")

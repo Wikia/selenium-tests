@@ -19,9 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social
- */
 @Test(groups = "ForcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
 

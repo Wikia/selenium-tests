@@ -17,9 +17,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class MessageWall extends WikiBasePageObject {
 
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")

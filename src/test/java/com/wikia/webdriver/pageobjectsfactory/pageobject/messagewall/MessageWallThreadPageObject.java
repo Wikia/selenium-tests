@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -12,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class MessageWallThreadPageObject extends MessageWall {
 
   @FindBy(css = ".replyBody")
@@ -40,5 +34,4 @@ public class MessageWallThreadPageObject extends MessageWall {
     Assertion.assertEquals(lastReplyEditor.get(lastReplyEditor.size() - 1).getText(), userName);
     Assertion.assertEquals(lastReplyText.get(lastReplyEditor.size() - 1).getText(), message);
   }
-
 }

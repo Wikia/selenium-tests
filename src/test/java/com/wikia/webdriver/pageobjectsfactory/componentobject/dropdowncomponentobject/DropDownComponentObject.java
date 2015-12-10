@@ -1,6 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,17 +16,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import java.util.concurrent.TimeUnit;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class DropDownComponentObject extends WikiBasePageObject {
 
   private static final String LOGIN_DROPDOWN_TRIGGER_CSS = "#AccountNavigation";

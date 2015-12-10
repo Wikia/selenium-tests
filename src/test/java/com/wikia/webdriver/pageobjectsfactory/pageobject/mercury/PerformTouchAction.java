@@ -14,9 +14,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class PerformTouchAction {
 
   private WebDriver driver;

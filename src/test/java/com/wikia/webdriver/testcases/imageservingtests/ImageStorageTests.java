@@ -14,12 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *         <p/>
- *         1. Delete image, verify 404 status, restore image, verify 200 status 2. Move image,
- *         verify status
- */
 public class ImageStorageTests extends NewTestTemplate {
 
   String imageURL;

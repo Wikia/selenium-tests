@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.S
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class ThemeDesigner extends NewTestTemplate {
 
   private String themeName;

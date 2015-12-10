@@ -9,9 +9,6 @@ import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdsDataProvider {
 
   public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
@@ -24,7 +21,6 @@ public class AdsDataProvider {
   };
 
   private AdsDataProvider() {
-
   }
 
   @DataProvider

@@ -2,14 +2,10 @@ package com.wikia.webdriver.common.dataprovider;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class VideoUrlProvider {
 
-  private VideoUrlProvider() {
-
-  }
+    private VideoUrlProvider() {
+    }
 
   @DataProvider
   private static final Object[][] videoUrl() {

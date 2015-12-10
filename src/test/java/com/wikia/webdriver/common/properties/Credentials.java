@@ -6,9 +6,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.EditorPr
 
 import java.io.File;
 
-/**
- * @author Bogna 'bognix' Knychała
- */
 public class Credentials {
 
   public final String youTubeApiKey;

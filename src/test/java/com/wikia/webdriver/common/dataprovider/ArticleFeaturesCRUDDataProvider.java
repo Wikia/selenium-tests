@@ -4,13 +4,9 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuil
 
 import org.testng.annotations.DataProvider;
 
-/**
- * @author llukaszj
- */
 public class ArticleFeaturesCRUDDataProvider {
 
   private ArticleFeaturesCRUDDataProvider() {
-
   }
 
   @DataProvider

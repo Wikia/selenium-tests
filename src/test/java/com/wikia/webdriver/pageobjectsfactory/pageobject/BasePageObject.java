@@ -42,9 +42,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Karol
- */
 public class BasePageObject {
 
   public final Wait wait;
