@@ -44,6 +44,7 @@ public class EditorTests extends NewTestTemplate {
     new CuratedContent().clear();
   }
 
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
@@ -81,7 +82,7 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @RelatedIssue(issueID = "XW-653", comment = "Test is unstable")
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
@@ -140,6 +141,7 @@ public class EditorTests extends NewTestTemplate {
     ;
   }
 
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
