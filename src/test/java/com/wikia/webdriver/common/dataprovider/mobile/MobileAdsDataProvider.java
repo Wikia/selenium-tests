@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 public class MobileAdsDataProvider {
 
-  private MobileAdsDataProvider() {}
+    private MobileAdsDataProvider() {
+    }
 
   @DataProvider
   public static Object[][] leaderboardAndPrefooterSlots() {

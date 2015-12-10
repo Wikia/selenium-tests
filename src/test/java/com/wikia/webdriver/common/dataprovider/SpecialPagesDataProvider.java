@@ -4,7 +4,8 @@ import org.testng.annotations.DataProvider;
 
 public class SpecialPagesDataProvider {
 
-  private SpecialPagesDataProvider() {}
+    private SpecialPagesDataProvider() {
+    }
 
   @DataProvider
   public static final Object[][] getSpecialPagesForAnons() {
