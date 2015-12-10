@@ -133,11 +133,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, true);
   }
 
-  private static void log(String command, String description, boolean success, boolean ifLowLevel) {
-    logsResults.add(success);
+  private static void log(String command, String description, boolean isSuccess, boolean ifLowLevel) {
+    logsResults.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
-    String className = success ? "success" : "error";
+    String className = isSuccess ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
       builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command

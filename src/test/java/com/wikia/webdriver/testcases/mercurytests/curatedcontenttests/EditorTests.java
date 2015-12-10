@@ -56,13 +56,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
-    PageObjectLogging.log(
-        "Featured Content",
-        MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isFeaturedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
@@ -100,13 +95,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
@@ -162,13 +152,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
-        "Curated Content",
-        MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
