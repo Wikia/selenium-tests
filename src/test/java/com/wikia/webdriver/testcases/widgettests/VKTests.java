@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObje
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"VKWidgetTests", "WidgetTests"})
 public class VKTests extends NewTestTemplate {
 

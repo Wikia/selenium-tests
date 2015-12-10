@@ -10,9 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder
 
 import org.testng.annotations.Test;
 
-/**
- * @author łukasz
- */
 public class MultiWikiFinderTests extends NewTestTemplate {
 
   private String pageName = "Wiki";

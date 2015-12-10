@@ -6,9 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAmazonAds extends TemplateNoFirstLoad {
 
   @Test(

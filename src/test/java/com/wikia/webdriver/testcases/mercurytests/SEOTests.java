@@ -17,9 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercurySEOTests", "Mercury"})
 public class SEOTests extends NewTestTemplate {
 

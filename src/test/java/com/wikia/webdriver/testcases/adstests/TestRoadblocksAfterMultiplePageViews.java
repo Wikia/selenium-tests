@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
 
   private static final int PAGE_VIEWS_COUNT = 5;

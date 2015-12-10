@@ -1,10 +1,5 @@
 package com.wikia.webdriver.common.clicktracking;
 
-/**
- * @author Jacek 'Mech' Wozniak
- * @author Michal 'justnpT' Nowierski
- * @author Rodrigo 'RodriGomez' Molinero
- */
 public class ClickTrackingScriptsProvider {
 
   private static String enableWikiaTracker = "document.cookie='log_level=3';"

@@ -2,13 +2,9 @@ package com.wikia.webdriver.common.dataprovider.ads;
 
 import org.testng.annotations.DataProvider;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdTypeDataProvider {
 
   private AdTypeDataProvider() {
-
   }
 
   @DataProvider

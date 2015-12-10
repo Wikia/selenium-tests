@@ -8,9 +8,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdDriverForcedStatus extends TemplateNoFirstLoad {
 
   @Test(

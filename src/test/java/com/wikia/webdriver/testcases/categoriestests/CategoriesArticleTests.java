@@ -11,16 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class CategoriesArticleTests extends NewTestTemplate {
-
-  /**
-   * Add category to article as anon Add category to article from suggestion list as anon Add
-   * category to article as user Add category to article from suggestion list as user Add category
-   * to article as anon edit, delete
-   */
 
   @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
   public void CategoriesTestsArticle_001_anon() {

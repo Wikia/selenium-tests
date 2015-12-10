@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Robert 'rochan' Chan
- */
 public class VECreateArticleModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".close")

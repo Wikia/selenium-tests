@@ -14,11 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution
- */
-
 public class VEGalleryTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

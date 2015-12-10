@@ -8,9 +8,6 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestIVW2AnalyticsProvider extends TemplateNoFirstLoad {
 
   @Test(groups = "TestIVW2AnalyticsProvider")

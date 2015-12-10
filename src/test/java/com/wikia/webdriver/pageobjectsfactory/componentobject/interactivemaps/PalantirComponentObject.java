@@ -13,10 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Łukasz Nowak
- */
-
 public class PalantirComponentObject extends InteractiveMapPageObject {
 
   @FindBy(css = "iframe[name=wikia-interactive-map]")

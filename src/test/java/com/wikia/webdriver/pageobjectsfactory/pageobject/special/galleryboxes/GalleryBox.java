@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class GalleryBox extends WikiBasePageObject {
 
   @FindBy(css = ".gallerybox a.image img:not([data-video-name=''])")
@@ -32,5 +29,4 @@ public class GalleryBox extends WikiBasePageObject {
     scrollAndClick(galleryVideoBox.get(itemNumber));
     return new LightboxComponentObject(driver);
   }
-
 }

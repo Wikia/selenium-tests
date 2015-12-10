@@ -7,10 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
 import org.testng.annotations.Test;
 
 /**
- * @param wikiName             - name of the wiki
- * @param article              - name of the article
- * @param adUnit               - DFP link with ad skin image
- * @ownership AdEngineering Wikia
  * URL to DFP: https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=111889452
  * Test all slots on mobile skin with different combinations of slots
  */

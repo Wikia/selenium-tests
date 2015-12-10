@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
 
   private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";

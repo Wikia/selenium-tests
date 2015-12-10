@@ -29,7 +29,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleFeaturesCRUDUser"})

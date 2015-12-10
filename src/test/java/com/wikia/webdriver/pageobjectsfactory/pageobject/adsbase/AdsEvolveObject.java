@@ -8,9 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsEvolveObject extends AdsBaseObject {
 
   private static final String EVOLVE_SELECTOR = " script[src*=\"4403ad\"]";

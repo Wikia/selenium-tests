@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.logintests;
 
-import junit.framework.Assert;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -19,9 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
-/**
- * @ownership Social
- */
+import junit.framework.Assert;
+import org.testng.annotations.Test;
+
 @Test(groups = "Login")
 public class LoginTests extends NewTestTemplate {
 

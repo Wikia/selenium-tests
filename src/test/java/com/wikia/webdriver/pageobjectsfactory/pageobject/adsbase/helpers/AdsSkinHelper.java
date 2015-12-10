@@ -19,8 +19,6 @@ import java.io.File;
 /**
  * Class represents helper functionality for working with Ad Skin (such as checking whether ad skin
  * present on the page or not)
- *
- * @ownership AdEngineering Wikia
  */
 public class AdsSkinHelper {
 

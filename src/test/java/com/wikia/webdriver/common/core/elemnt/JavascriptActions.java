@@ -1,10 +1,13 @@
 package com.wikia.webdriver.common.core.elemnt;
 
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
-
-import org.openqa.selenium.*;
-
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 
 /**
  * Set of commonly used actions invoked by executing JavaScript on a web page

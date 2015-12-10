@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class TableOfContentPageObject extends BasePageObject {
 
   @FindBy(css = "nav.table-of-contents")

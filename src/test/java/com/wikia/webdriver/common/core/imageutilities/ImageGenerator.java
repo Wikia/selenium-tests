@@ -7,10 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebDriverException;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +16,6 @@ import java.security.SecureRandom;
 
 import javax.imageio.ImageIO;
 
-/**
- * @ownership: Quality Team
- */
 public class ImageGenerator {
 
   private String imagePath;

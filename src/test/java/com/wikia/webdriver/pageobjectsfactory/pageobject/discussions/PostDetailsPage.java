@@ -4,9 +4,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 
-/**
- * @ownership Social Wikia.
- */
 class PostDetailsPage extends WikiBasePageObject{
 
   private static final String PATH = "d/p/%s";

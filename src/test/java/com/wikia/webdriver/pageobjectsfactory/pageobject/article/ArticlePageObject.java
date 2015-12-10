@@ -41,9 +41,6 @@ import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
-/**
- * @author Bogna 'bognix' Knychała
- */
 public class ArticlePageObject extends WikiBasePageObject {
 
   @FindBy(css = "#WikiaPageHeader h1")
@@ -778,7 +775,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   /**
    * @param rgba String representing function rgba(int, int, int, int)
    * @return int[], where 0='red', 1='green', 2='blue'
-   * @author Tomasz Napieralski
    */
   public static int[] convertRGBAFunctiontoIntTable(String rgba) {
     int[] extract = new int[3];

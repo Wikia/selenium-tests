@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class SpecialManageWikiaHome extends WikiBasePageObject {
 
   @FindBy(id = "video-games-amount")

@@ -11,33 +11,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+
 import org.testng.annotations.Test;
 
 /**
- * Created by Rodriuki on 12/06/15. Set of Test Cases found on
+ * Set of Test Cases found on:
  * https://one.wikia-inc.com/wiki/Portable_Infoboxes_Test_Plan
- *
- * TC01: Verify elements visibility: infobox title, image, headers, italic, bold, quotation marks,
- * references TC02: Verify correct redirects in mediawiki119.wikia.com/wiki/RodriInfobox01 for:
- * external links, internal links, red links TC03: Verify images used in infoboxes appear in
- * Special:WhatLinksHere page TC04: Verify adding a category to infobox markup and then invoking
- * that template in an article page will display category in categories section at the bottom of the
- * page automatically
- *
- * Created by nikodamn 20/07/15 TC05: Verify lightbox opens when clicking infobox image TC06: Verify
- * visibility of tabber and it's images TC07: Verify infobox color has changed after changing colors
- * in wiki Theme Designer TC08: Verify if ordered and unordered lists are parsed correctly after
- * adding them TC09: Verify category links inside infoboxes TC10: Verify if horizontal group font
- * size matches other elements font TC11: Copy syntax from template page to article and verify
- * presence of all new information provided TC12: Verify if navigation element has same left and
- * right padding TC13: Verify if group headers and titles has same left and right padding TC14:
- * Additional <div> wrappers from title, header and image HTML are removed TC15: Verify that any of
- * the tags which do not have a value won't appear TC16: Verify inserting portable infobox without
- * parameters in Visual Editor TC17: Verify inserting portable infobox with parameters in Visual
- * Editor TC18: Verify editing portable infobox in VE by clicking on 'Infobox' popup TC19: Verify
- * inserting portable infobox in VE in dark theme
- * 
- * @ownership Content West Wing
  */
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {

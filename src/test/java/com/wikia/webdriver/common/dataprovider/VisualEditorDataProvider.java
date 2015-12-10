@@ -5,9 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class VisualEditorDataProvider {
 
   public enum Formatting {
@@ -28,8 +25,6 @@ public class VisualEditorDataProvider {
     public By getTag() {
       return tag;
     }
-
-    ;
   }
 
   public enum Style {
@@ -49,8 +44,6 @@ public class VisualEditorDataProvider {
     public By getTag() {
       return tag;
     }
-
-    ;
   }
 
   public enum InsertDialog {

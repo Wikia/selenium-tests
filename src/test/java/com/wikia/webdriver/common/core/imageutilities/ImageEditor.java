@@ -12,9 +12,6 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class ImageEditor {
 
   public void saveImageFile(File imageFile, String path) {

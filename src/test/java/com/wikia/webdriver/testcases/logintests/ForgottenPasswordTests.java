@@ -17,11 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 
 import org.testng.annotations.Test;
 
-
-/**
- * @author Bogna 'bognix' Knychala
- * @author Karol 'kkarolk' Kujawiak
- */
 @Test(groups = "ForgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
 

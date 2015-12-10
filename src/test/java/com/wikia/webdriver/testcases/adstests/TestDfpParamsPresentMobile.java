@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/LINE_ITEM_ID=115974612
- * @ownership AdEngineering Wikia
+ * https://www.google.com/dfp/5441#delivery/LineItemDetail/LINE_ITEM_ID=115974612
  */
 public class TestDfpParamsPresentMobile extends MobileTestTemplate {
 

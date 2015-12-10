@@ -14,9 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SignupPageObjec
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social
- */
 @Test(groups = {"MercuryLoginTests", "Mercury"})
 public class LoginTests extends NewTestTemplate {
 

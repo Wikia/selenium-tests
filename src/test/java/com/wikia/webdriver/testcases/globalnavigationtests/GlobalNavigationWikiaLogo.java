@@ -9,9 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"WikiaLogo"})
 public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 

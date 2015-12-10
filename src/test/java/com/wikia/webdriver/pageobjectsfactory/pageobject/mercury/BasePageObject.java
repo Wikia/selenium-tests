@@ -17,9 +17,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class BasePageObject extends WikiBasePageObject {
 
   private static final By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");

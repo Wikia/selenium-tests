@@ -19,33 +19,21 @@ public class ConfirmationPageObject extends BasePageObject {
   @FindBy(css = "div.UserConfirm input[type='submit']")
   private WebElement confirmationButton;
 
-  /**
-   * @author Karol Kujawiak
-   */
   public ConfirmationPageObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
   }
 
-  /**
-   * @author Karol Kujawiak
-   */
   public void typeInUserName(String userName) {
     userNameField.sendKeys(userName);
     PageObjectLogging.log("typeInUserName ", "user name field populated", true, driver);
   }
 
-  /**
-   * @author Karol Kujawiak
-   */
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
     PageObjectLogging.log("typeInUserPassword ", "password field populated", true, driver);
   }
 
-  /**
-   * @author Karol Kujawiak
-   */
   public UserProfilePageObject clickSubmitButton(String email, String password) {
     MailFunctions.deleteAllEmails(email, password);
     scrollAndClick(confirmationButton);
