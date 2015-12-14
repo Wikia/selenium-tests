@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.blogtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -33,6 +34,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_001", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
   public void BlogFeatures_001_AddingGallery() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -55,6 +57,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_002", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
   public void BlogFeatures_002_AddingSlideshow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -74,6 +77,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_003", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
   public void BlogFeatures_003_AddingSlider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
