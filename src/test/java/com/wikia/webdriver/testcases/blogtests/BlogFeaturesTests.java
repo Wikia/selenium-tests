@@ -34,7 +34,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_001", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
+  @RelatedIssue(issueID = "MAIN-6072")
   public void BlogFeatures_001_AddingGallery() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -57,7 +57,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_002", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
+  @RelatedIssue(issueID = "MAIN-6072")
   public void BlogFeatures_002_AddingSlideshow() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
@@ -77,7 +77,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"BlogFeatures_003", "BlogFeaturesTests"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6072", comment = "Test manually")
+  @RelatedIssue(issueID = "MAIN-6072")
   public void BlogFeatures_003_AddingSlider() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialCreatePage createPage = base.openSpecialCreateBlogPage(wikiURL);
