@@ -18,9 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObje
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercuryRedirectionTests", "Mercury"})
 public class RedirectionTests extends NewTestTemplate {
 

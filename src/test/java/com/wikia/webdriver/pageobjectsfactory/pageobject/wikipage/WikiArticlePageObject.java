@@ -95,8 +95,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
   /**
    * Click Edit button on a wiki article
-   *
-   * @author Michal Nowierski
    */
   public WikiArticleEditMode edit() {
     wait.forElementVisible(editButton);
@@ -107,8 +105,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
   /**
    * Verify that the image appears on the page
-   *
-   * @author Michal Nowierski
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);

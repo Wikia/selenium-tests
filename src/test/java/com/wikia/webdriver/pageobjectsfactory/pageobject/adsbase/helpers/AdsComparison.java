@@ -17,9 +17,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdsComparison {
 
   public static final int IMAGES_THRESHOLD_PERCENT = 12;

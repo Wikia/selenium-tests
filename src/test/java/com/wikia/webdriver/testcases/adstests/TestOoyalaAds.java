@@ -8,9 +8,6 @@ import org.testng.annotations.Test;
 
 import java.awt.*;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestOoyalaAds extends TemplateNoFirstLoad {
 
   private static final Color GREEN = new Color(4, 253, 6);

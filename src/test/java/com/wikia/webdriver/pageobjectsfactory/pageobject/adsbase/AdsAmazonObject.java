@@ -14,9 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdsAmazonObject extends AdsBaseObject {
 
   private static final String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";

@@ -72,7 +72,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
+  @RelatedIssue(issueID = "MAIN-6047", comment = "Test manually")
   @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;

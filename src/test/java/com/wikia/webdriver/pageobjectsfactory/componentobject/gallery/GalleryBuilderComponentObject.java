@@ -15,9 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class GalleryBuilderComponentObject extends BasePageObject {
 
   @FindBy(css = "#WikiaPhotoGalleryAddImage")

@@ -12,9 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Saipetch Kongkatong
- */
 public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";

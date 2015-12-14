@@ -24,9 +24,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class LightboxTests extends NewTestTemplate {
 
   private static final String DIRECTION_LEFT = "left";

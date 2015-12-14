@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class SpecialRestorePageObject extends WikiBasePageObject {
 
   @FindBy(css = ".mw-undelete-pagetitle")

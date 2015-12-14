@@ -13,10 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author Karol Kujawiak
- */
-
 public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   @FindBy(name = "wiki-name")
@@ -35,7 +31,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement languageSelectedIndicator;
   @FindBy(css = ".wiki-domain-error.error-msg")
   private WebElement wikiDomainErrorMessage;
-  ;
 
   private String wikiNameString;
 
@@ -75,9 +70,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
   }
 
-  /**
-   * @author Karol Kujawiak
-   */
   public void verifySuccessIcon() {
     wait.forElementVisible(successIcon);
     wait.forElementVisible(submitButton);

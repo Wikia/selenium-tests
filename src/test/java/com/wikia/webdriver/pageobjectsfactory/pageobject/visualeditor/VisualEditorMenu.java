@@ -29,10 +29,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorMenu extends WikiBasePageObject {
 
   private static final int STYLE_LIST = 1;

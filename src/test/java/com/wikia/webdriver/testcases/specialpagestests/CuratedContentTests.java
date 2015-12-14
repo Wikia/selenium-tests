@@ -11,9 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedC
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership X-Wing Wikia
- */
 public class CuratedContentTests extends NewTestTemplate {
 
   private static final String CATEGORY = URLsContent.CATEGORY_HELP;

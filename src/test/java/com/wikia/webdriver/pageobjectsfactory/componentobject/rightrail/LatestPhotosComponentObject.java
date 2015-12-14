@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class LatestPhotosComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".carousel li.thumbs")

@@ -16,9 +16,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Social
- */
 public class LoginPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#loginUsername")

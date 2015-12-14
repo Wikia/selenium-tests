@@ -1,11 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -13,11 +7,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Lukasz Jedrzejczak
- * @author Łukasz Nowak (Dyktus)
- */
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class CreatePinTypesComponentObject extends BasePageObject {
 

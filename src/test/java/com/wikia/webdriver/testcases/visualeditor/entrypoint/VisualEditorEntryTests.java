@@ -12,12 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution
- */
-
 public class VisualEditorEntryTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

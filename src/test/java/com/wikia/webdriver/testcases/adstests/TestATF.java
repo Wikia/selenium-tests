@@ -10,10 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestATF extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);

@@ -6,9 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class CroppingToolPageObject extends CuratedEditorFormPageObject {
 
   @FindBy (css=".cropper-container")

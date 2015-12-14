@@ -17,13 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *         <p/>
- *         1. Write message in source mode, 2. Write message in bold font, 3. Write message in
- *         italic font, 4. Write message with internal link, 5. Write message with external link, 6.
- *         Write message with image,
- */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership X-Wing Wikia
- */
 public class CuratedContentModal extends NewTestTemplate {
 
   @Test(groups = {"CuratedContentModal_001", "CuratedContent"})

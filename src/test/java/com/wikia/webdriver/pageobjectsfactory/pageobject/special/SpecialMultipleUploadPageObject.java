@@ -35,10 +35,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
   /**
    * Selects given files in upload browser.
-   *
-   * @author Michal Nowierski
-   * @author Karol 'kkarolk' Kujawiak ** @param FilesNamesList List of files to be uploaded <p> Look
-   * at folder PageContent.resourcesPath
+   * @param FilesNamesList List of files to be uploaded. Look at folder PageContent.resourcesPath
    */
   public void selectFilesToUpload(String[] filesNamesList) {
     wait.forElementVisible(multipleUploadForm);
@@ -55,7 +52,6 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
         true
     );
   }
-
 
   public void typeInMultiUploadSummary(String summary) {
     multipleUploadSummaryField.sendKeys(summary);
@@ -79,8 +75,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
    * Checks if the upload have been succesful. <p> The method checks if the uploaded files
    * correspond to those in FilesNamesList. FFilesNamesList is a parameter of the method
    *
-   * @author Michal Nowierski
-   * @author Karol 'kkarolk' Kujawiak * @param filesNamesList list of expected names of files
+   * @param filesNamesList list of expected names of files
    */
   public void verifySuccessfulUpload(String[] filesNamesList) {
     wait.forElementVisible(uploadedFilesListContener);

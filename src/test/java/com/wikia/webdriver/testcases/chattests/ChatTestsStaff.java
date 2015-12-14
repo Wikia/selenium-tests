@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -11,13 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
-/**
- * @author Rebekah Cunningham (modified from ChatTests to test only Staff functionality)
- * @description 1. Two staff users enter Chat 2. Verify switching between main and private message
- *              sections when one of the users has written public message 6. Verify switching
- *              between main and private message sections when one of the users has written private
- *              message 7. Verify non-staff users do not have permission to chat.
- */
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+
 public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
 
   private Credentials credentials = Configuration.getCredentials();

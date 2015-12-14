@@ -7,9 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class OasisFooterComponentObject extends BasePageObject{
 
   @FindBy(css = ".global-footer a[href='#']")

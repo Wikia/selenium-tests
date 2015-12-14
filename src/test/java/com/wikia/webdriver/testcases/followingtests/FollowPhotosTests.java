@@ -5,8 +5,6 @@ package com.wikia.webdriver.testcases.followingtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
@@ -15,8 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
-
-import javax.jws.soap.SOAPBinding;
 
 public class FollowPhotosTests extends NewTestTemplate {
 

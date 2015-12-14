@@ -59,8 +59,6 @@ public class CommonExpectedConditions {
 
   /**
    * An expectation for checking if the given text is present in the specified element.
-   *
-   * @author Michal Nowierski
    */
   public static ExpectedCondition<Boolean> valueToBePresentInElementsAttribute(
       final WebElement element, final String attribute, final String value) {
@@ -85,8 +83,6 @@ public class CommonExpectedConditions {
 
   /**
    * An expectation for checking if the given text is present in the specified element.
-   *
-   * @author Michal Nowierski
    */
   public static ExpectedCondition<Boolean> valueToBeNotPresentInElementsAttribute(
       final WebElement element, final String attribute, final String value) {
@@ -111,8 +107,6 @@ public class CommonExpectedConditions {
 
   /**
    * An expectation for checking if the page URL contains givenString
-   *
-   * @author Michal Nowierski
    */
   public static ExpectedCondition<Boolean> givenStringtoBePresentInURL(final String givenString) {
 
@@ -130,7 +124,6 @@ public class CommonExpectedConditions {
    * it.
    *
    * @param givenElement element to be checked
-   * @author Michal Nowierski
    */
   public static ExpectedCondition<WebElement> elementNotToBeClickable(final WebElement givenElement) {
     return new ExpectedCondition<WebElement>() {

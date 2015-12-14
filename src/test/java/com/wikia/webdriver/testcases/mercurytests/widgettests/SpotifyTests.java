@@ -14,9 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercurySpotifyWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class SpotifyTests extends NewTestTemplate {
 

@@ -3,9 +3,6 @@ package com.wikia.webdriver.common.contentpatterns;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AdsContent {
 
   //HashMap with slots selector

@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsGptPageParamOasis extends TemplateNoFirstLoad {
 
   @Test(

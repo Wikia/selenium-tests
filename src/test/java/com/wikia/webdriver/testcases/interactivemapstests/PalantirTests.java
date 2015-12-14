@@ -8,13 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Rodrigo Molinero Gomez
- * @author: Lukasz Jedrzejczak
- * @author: Lukasz Nowak
- * @ownership: Mobile Web
- */
-
 public class PalantirTests extends NewTestTemplate {
 
   @Test(groups = {"PalantirTests_001", "PalantirTests", "InteractiveMaps"})

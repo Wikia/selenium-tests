@@ -7,9 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class ArticlePageObject extends BasePageObject {
 
   @FindBy(css = ".wikia-logo")

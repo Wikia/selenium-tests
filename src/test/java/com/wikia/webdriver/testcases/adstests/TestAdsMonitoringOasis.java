@@ -15,9 +15,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 
   private static final Dimension BROWSER_DIMENSION = new Dimension(1900, 900);

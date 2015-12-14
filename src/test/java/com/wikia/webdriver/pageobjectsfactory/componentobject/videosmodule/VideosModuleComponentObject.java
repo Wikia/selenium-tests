@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author James Sutterfield
- */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#videosModule")

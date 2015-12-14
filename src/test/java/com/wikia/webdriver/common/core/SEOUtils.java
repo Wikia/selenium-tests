@@ -15,8 +15,6 @@ import java.util.List;
 /**
  * This class serves to perform search engine optimization tests The class methods can be used to
  * verify meta tags attributes
- *
- * @ownership Content X-Wing Wikia
  */
 public class SEOUtils extends BasePageObject {
 

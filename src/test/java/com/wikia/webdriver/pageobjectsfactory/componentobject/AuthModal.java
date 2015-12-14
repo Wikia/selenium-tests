@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @ownership Social
- */
 public class AuthModal {
 
   @FindBy(css = ".auth.desktop.signin-page")

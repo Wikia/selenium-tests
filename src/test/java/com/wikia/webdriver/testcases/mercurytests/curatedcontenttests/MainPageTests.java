@@ -16,9 +16,6 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercuryCuratedMainPageTests", "MercuryCuratedContentTests", "Mercury"})
 public class MainPageTests extends NewTestTemplate {
 

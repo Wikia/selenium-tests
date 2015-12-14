@@ -13,11 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook.WikiAr
 
 import org.testng.annotations.Test;
 
-
 /**
  * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
- *
- * @author wikia
  */
 @Test(enabled = false)
 public class EditingLocalCssTests extends NewTestTemplate {

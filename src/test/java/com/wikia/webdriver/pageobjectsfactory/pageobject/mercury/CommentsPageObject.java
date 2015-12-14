@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class CommentsPageObject extends BasePageObject {
 
   @FindBy(css = ".article-comments > div")

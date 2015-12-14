@@ -18,13 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiA
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Rodrigo Molinero Gomez
- * @author: Lukasz Jedrzejczak
- * @author: Lukasz Nowak
- * @ownership: Mobile Web
- */
-
 public class EmbedMapTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

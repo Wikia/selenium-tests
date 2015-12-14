@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.annotations;
 
-import java.io.File;
-
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+
+import java.io.File;
 
 public enum User {
   USER("ci.user.regular.username", "ci.user.regular.password"),

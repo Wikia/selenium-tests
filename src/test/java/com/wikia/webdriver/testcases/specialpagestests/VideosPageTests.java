@@ -27,8 +27,6 @@ public class VideosPageTests extends NewTestTemplate {
    * test checks if, after the video has been deleted, its title shows up in the delete confirmation
    * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
    * running this test is sustainable).
-   *
-   * @author James Sutterfield
    */
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
   public void VideosPageTest_002() {
@@ -43,7 +41,7 @@ public class VideosPageTests extends NewTestTemplate {
    * test checks if, after the video has been deleted, it is no longer present in the list of most
    * recent videos on Special:Videos. (Note: in order to accomplish this the test also adds a video
    * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
-   * video is). <p/> * @author James Sutterfield
+   * video is).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
   public void VideosPageTest_003() {
@@ -52,5 +50,4 @@ public class VideosPageTests extends NewTestTemplate {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.verifyDeleteViaVideoNotPresent();
   }
-
 }

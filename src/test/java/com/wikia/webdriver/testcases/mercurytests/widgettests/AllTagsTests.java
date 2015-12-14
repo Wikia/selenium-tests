@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercuryAllTagsWidgetTests", "MercuryWidgetTests", "Mercury"})
 public class AllTagsTests extends NewTestTemplate {
 

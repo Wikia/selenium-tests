@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestIncontentBoxad extends TemplateNoFirstLoad {
 
   @Test(

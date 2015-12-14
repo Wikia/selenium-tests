@@ -11,12 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'rochan' Chan
- * @ownership Contribution <p/> VE-1210 Verify VE is able to perform Copy and Paste text on the edit
- * area
- */
-
 public class VECopyAndPasteTests extends NewTestTemplate {
 
   WikiBasePageObject base;

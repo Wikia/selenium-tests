@@ -12,9 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author llukaszj
- */
 public class TableBuilderComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".cke_dialog_ui_button.wikia-button")

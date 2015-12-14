@@ -13,12 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *         <p/>
- *         1. Close user account, 2. Verify user account closed, 3. Reopen user account, 4. Verify
- *         user account reopened
- */
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

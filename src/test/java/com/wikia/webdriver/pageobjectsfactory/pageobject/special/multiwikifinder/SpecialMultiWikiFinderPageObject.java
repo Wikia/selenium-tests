@@ -13,9 +13,6 @@ import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
-/**
- * @author łukasz
- */
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
 
   private static final String LIST_OF_LINKS_SELECTOR = ".special > li > a";

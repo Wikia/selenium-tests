@@ -13,9 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 @Test(groups = {"ArticleComments"})
 public class ArticleCommentsTests extends NewTestTemplate {
 
