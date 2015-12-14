@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
@@ -44,6 +45,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_001", "Chat"})
+  @RelatedIssue(issueID = "MAIN-6071")
   public void Chat_001_twoUserEnterChat() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
