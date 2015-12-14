@@ -45,7 +45,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_001", "Chat"})
-  @RelatedIssue(issueID = "MAIN-6071", comment = "Test needs to be updated")
+  @RelatedIssue(issueID = "MAIN-6071")
   public void Chat_001_twoUserEnterChat() {
     switchToWindow(driverOne);
     ChatPageObject chatUserOne = openChatForUser(
