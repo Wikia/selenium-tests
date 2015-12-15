@@ -159,22 +159,22 @@ public class HtmlTitleTests extends NewTestTemplate {
         {
             TEST_WIKI_ES_POKEMON,
             "WikiDex",
-            "WikiDex, la enciclopedia Pokémon - Wikia",
+            "WikiDex - Wikia",
         },
         {
             TEST_WIKI_ES_POKEMON,
             "Lista_de_Pokémon",
-            "Lista de Pokémon - WikiDex, la enciclopedia Pokémon - Wikia",
+            "Lista de Pokémon - WikiDex - Wikia",
         },
         {
             TEST_WIKI_ES_POKEMON,
             "Special:UnusedVideos",
-            "Unused videos - WikiDex, la enciclopedia Pokémon - Wikia",
+            "Unused videos - WikiDex - Wikia",
         },
         {
             TEST_WIKI_ES_POKEMON,
             "Categoría:Regiones",
-            "Categoría:Regiones - WikiDex, la enciclopedia Pokémon - Wikia",
+            "Categoría:Regiones - WikiDex - Wikia",
         },
         // Corporate pages
         {
