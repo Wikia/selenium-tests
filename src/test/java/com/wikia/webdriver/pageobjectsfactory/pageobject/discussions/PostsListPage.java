@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * @ownership Social Wikia
  */
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends BasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".sort")
+  @FindBy(css = "div.sort")
   private WebElement sortEntryPointMobile;
 
   @FindBy(css = ".sort span")
@@ -26,16 +26,16 @@ public class PostsListPage extends WikiBasePageObject {
   @FindBy(css = ".discussion-sort")
   private WebElement sortOptionsMobile;
 
-  @FindBy(css = "li[data-type='latest']")
+  @FindBy(xpath = "//li[text()='Latest']")
   private WebElement latestLinkOnListMobile;
 
-  @FindBy(css = "li[data-type='trending']")
+  @FindBy(xpath = "//li[text()='Trending']")
   private WebElement trendingLinkOnListMobile;
 
-  @FindBy(css = "li[data-type='latest']")
+  @FindBy(xpath = "//li[text()='Latest']")
   private WebElement latestTabDesktop;
 
-  @FindBy(css = "li[data-type='trending']")
+  @FindBy(xpath = "//li[text()='Trending']")
   private WebElement trendingTabDesktop;
 
   private static final String PATH = "d/f/%s";
@@ -91,11 +91,5 @@ public class PostsListPage extends WikiBasePageObject {
     trendingTabDesktop.click();
     return this;
   }
-
-  public JavascriptActions getJavascriptActions() {
-    return this.jsActions;
-  }
-
-
 }
 

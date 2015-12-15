@@ -83,14 +83,22 @@ public class PostsList extends NewTestTemplate {
   public void userCanSortPostsList() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
-    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickOnTrendingLinkMobile().getSortButtonLabel(), "Trending");
+    postsList.waitForLoadingOverlayToDisappear();
+    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
+    Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
   }
 
   public void userCanSwitchBetweenLatestAndTrendingTab () {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickOnLatestTabDesktop();
-    System.out.print(postsList.getJavascriptActions().execute("window.location.href;"));
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
+
+    postsList.clickOnTrendingTabDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }
 }
