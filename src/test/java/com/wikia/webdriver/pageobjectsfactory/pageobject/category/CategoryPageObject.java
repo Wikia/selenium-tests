@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content West Wing
- */
 public class CategoryPageObject extends WikiBasePageObject {
 
     @FindBy(css = "#WikiaPageHeader h1")

@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class SpecialPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".header-column.header-title>h2")

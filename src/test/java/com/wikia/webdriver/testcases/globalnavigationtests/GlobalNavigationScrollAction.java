@@ -6,19 +6,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActi
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class GlobalNavigationScrollAction extends NewTestTemplate{
-	
-	/**
-	 * @author Michal 'justnpT' Nowierski
-	 * 
-	 * Test scrollDown
-	 * 1. Go to Special:WikiActivity and scroll down to the bottom
-	 * 2. Make sure that navbar is still attached on the top
-	 */
-	@Test(
+
+  @Test(
 		groups = {"GlobalNav", "GlobalNav_scrollDown"}
 	)
 	public void scrollDown() {
@@ -28,5 +18,4 @@ public class GlobalNavigationScrollAction extends NewTestTemplate{
 	    wikiActivity.scrollToFooter();
 	    wikiActivity.verifyGlobalNavigation();
 	}
-
 }

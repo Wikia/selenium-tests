@@ -18,9 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class ImageUploadTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)

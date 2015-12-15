@@ -22,12 +22,6 @@ public class BlogTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  /**
-   * @author Karol 'kkarolk' Kujawiak <p/> Test cases: 1. Create blog post using "Create blog post
-   * button" (one case) 2. Create blog post using "Special:CreateBlogPage" (data provider) 3. Edit
-   * existing blog post 4. Delete/Undelete existing blog post 5. Move existing blog post
-   */
-
   @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
   public void BlogTests_001_addFromProfile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

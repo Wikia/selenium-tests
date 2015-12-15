@@ -8,11 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-/**
- * Bartosz 'V.' Bentkowski
- *
- * @ownership Content X-Wing Wikia
- */
 public class GameStarLogo extends NewTestTemplate {
 
   private final static String deWikiName = "de.gta";

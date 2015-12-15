@@ -17,18 +17,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 
 import org.testng.annotations.Test;
 
-
-/**
- * @author Bogna 'bognix' Knychala
- * @author Karol 'kkarolk' Kujawiak
- */
 @Test(groups = "ForgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test()
-  @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
+  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
@@ -103,7 +98,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "MAIN-5638", comment = "manually verify if passwords are reminded")
+  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   public void remindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);

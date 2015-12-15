@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetP
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"PollsnackWidgetTests", "WidgetTests"})
 public class PollsnackTests extends NewTestTemplate {
 

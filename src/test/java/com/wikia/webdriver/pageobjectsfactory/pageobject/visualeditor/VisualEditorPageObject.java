@@ -33,10 +33,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorPageObject extends VisualEditorMenu {
 
   private WebElement mediaNode;

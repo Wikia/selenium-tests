@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
@@ -52,11 +49,5 @@ public class AdsOoyalaObject extends AdsBaseObject {
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  public void verifyFlash() {
-    Boolean hasFlash = (Boolean) jsActions.execute(
-        "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
-    PageObjectLogging.log("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class NetworkTrafficInterceptor extends ProxyServer {
 
   private static final int MAX = 8080;

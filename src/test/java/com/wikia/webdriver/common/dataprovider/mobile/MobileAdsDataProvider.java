@@ -4,14 +4,10 @@ import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
 
-/**
- * Bogna 'bognix' Knychala
- */
 public class MobileAdsDataProvider {
 
-  private MobileAdsDataProvider() {
-
-  }
+    private MobileAdsDataProvider() {
+    }
 
   @DataProvider
   public static Object[][] leaderboardAndPrefooterSlots() {
@@ -191,37 +187,34 @@ public class MobileAdsDataProvider {
             )
         },
         {
-            "avatar",
-            "Avatar_Wiki",
-            "wka.life/_avatar//home",
+            "lego",
+            "LEGO_Wiki",
+            "wka.life/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
                 "\"s0v\":\"lifestyle\"",
-                "\"s0c\":[\"tv\"]",
-                "\"s1\":\"_avatar\"",
+                "\"s0c\":[\"toys\"]",
+                "\"s1\":\"_lego\"",
                 "\"s2\":\"home\"",
                 "\"hostpre\":",
                 "\"ab\":[",
                 "\"dmn\":\"",
-                "\"skin\":\"wikiamobile\"",
+                "\"skin\":\"mercury\"",
                 "\"ar\":\"3:4\"",
-                "\"artid\":\"12516\"",
-                "\"wpage\":\"avatar_wiki\"",
+                "\"artid\":\"1\"",
+                "\"wpage\":\"lego_wiki\"",
                 "\"ref\":\"direct\"",
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"under18\",\"18-24\"]",
-                "\"egnre\":[\"anime\",\"fantasy\"]",
-                "\"media\":[\"tv\"]",
-                "\"eth\":[\"asian\"]",
-                "\"hhi\":[\"0-30\"]",
-                "\"kids\":[\"0-17\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"35-44\",\"kids\",\"teen\"]",
+                "\"media\":[\"movies\"]",
                 "\"sex\":[\"m\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fantasy\",\"cartoon\",\"comics\"]",
-                "\"theme\":[\"magic\"]",
-                "\"esrb\":\"ec\""
+                "\"pform\":[\"xboxone\",\"ps4\",\"ps3\",\"xbox360\",\"pc\"]",
+                "\"gnre\":[\"adventure\",\"3rdpersonshooter\",\"comedy\",\"casual\",\"platformer\"]",
+                "\"theme\":[\"lego\"]",
+                "\"esrb\":[\"everyone\"]"
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",

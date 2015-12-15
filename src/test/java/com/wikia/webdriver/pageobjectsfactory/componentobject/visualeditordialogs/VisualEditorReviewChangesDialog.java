@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")

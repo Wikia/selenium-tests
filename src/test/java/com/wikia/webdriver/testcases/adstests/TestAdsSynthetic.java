@@ -10,10 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsSynthetic extends TemplateNoFirstLoad {
 
   @Test(

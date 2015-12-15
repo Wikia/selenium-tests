@@ -11,9 +11,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class LightboxComponentObject extends BasePageObject {
 
   @FindBy(css = ".lightbox-content")

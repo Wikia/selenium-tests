@@ -15,9 +15,6 @@ import java.util.List;
 
 import javax.json.JsonObject;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class GlobalNavigationClicktracking extends NewTestTemplate {
 
   /**
@@ -29,7 +26,7 @@ public class GlobalNavigationClicktracking extends NewTestTemplate {
    * trigger suggestion mouse click on suggestion - search-suggest click search after suggestion -
    * search-after-suggest-button clear suggestion
    */
-  @RelatedIssue(issueID = "QAART-555",
+  @RelatedIssue(issueID = "MAIN-5917",
       comment = "Automation test is broken. NB Not possible to test manually")
   @Test(groups = {"ClicktrackingGlobalSearch", "ClickTracking", "GlobalNav",
                   "TestGlobalNavClickTracking_001"}, enabled = false)

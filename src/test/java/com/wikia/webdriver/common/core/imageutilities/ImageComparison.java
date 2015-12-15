@@ -13,10 +13,10 @@ import java.util.Arrays;
 
 /**
  * Class containing methods responsible for comparing images using different algorithms.
- *
- * @author Bogna 'bognix' Knychala
  */
 public class ImageComparison {
+
+  private static final int ACCEPTABLE_COLOR_DISTANCE = 10;
 
   /**
    * Compare two images after converting them into byte arrays
@@ -57,7 +57,8 @@ public class ImageComparison {
     int diffCount = 0;
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
-        if (image.getRGB(x, y) != color.getRGB()) {
+        Color pixelColor = new Color(image.getRGB(x,y));
+        if (!areColorsSimilar(pixelColor, color)) {
           diffCount += 1;
         }
       }
@@ -119,5 +120,12 @@ public class ImageComparison {
       }
     }
     return true;
+  }
+
+  private boolean areColorsSimilar(Color c1, Color c2) {
+    double distance = Math.pow(c1.getRed() - c2.getRed(), 2) +
+                      Math.pow(c1.getGreen() - c2.getGreen(), 2) +
+                      Math.pow(c1.getBlue() - c2.getBlue(), 2);
+    return Math.sqrt(distance) < ACCEPTABLE_COLOR_DISTANCE;
   }
 }

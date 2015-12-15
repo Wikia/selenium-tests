@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   @FindBy(css = "a.upphotos[title*='Add a photo']")

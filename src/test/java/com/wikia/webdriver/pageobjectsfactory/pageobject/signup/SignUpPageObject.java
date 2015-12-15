@@ -27,9 +27,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class SignUpPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#WikiaSignupForm input[name='userloginext01']")

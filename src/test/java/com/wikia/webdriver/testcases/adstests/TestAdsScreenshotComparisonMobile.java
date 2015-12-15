@@ -10,9 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
 
   private String testedPage;

@@ -13,9 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   @FindBy(css = "#VideoEmbedLayoutRow")

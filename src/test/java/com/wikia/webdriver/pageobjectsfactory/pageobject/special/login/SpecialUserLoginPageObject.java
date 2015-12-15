@@ -12,10 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
-
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
   private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";

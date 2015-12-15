@@ -12,10 +12,6 @@ import org.testng.Assert;
 
 import java.util.List;
 
-/**
- * @author Michal 'justnpT' Nowierski
- * @author Karol 'kkarolk' Kujawiak
- */
 public class HubBasePageObject extends WikiBasePageObject {
 
   @FindBy(css = "ul.wikia-mosaic-thumb-region img")

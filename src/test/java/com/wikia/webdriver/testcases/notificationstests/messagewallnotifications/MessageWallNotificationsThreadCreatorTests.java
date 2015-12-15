@@ -1,10 +1,6 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -15,10 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak 1. User 5 is posting message on user 6 message wall, 2. User 6
- *         is replying to user 5 message, 3. USer 5 is notified about reply
- */
 public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -70,10 +62,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
       },
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                        + "has more than 50 notifications the veryfing user")
-  public void threadCreatorNotification_verification() {
+ public void threadCreatorNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

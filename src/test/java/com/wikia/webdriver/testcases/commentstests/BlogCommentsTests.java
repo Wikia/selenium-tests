@@ -16,12 +16,6 @@ import org.testng.annotations.Test;
 
 public class BlogCommentsTests extends NewTestTemplate {
 
-  /**
-   * @author Karol 'kkarolk' Kujawiak <p/> Test cases: 1. (Anon) Add comment to the blog post, reply
-   * to the comment 2. (user) Add comment to the blog post, reply to the comment 3. (User) Edit
-   * existing comment, 4. (Staff) Delete existing comment,
-   */
-
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlogComments_001", "BlogCommentsTests"})

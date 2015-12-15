@@ -6,9 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsTaboolaObject extends AdsBaseObject {
 
   public static final String URL_PARAM_TRIGGER = "AbTest.NATIVE_ADS_TABOOLA=YES";

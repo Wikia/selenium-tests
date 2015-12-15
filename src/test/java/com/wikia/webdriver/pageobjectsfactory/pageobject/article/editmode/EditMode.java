@@ -16,9 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class EditMode extends WikiBasePageObject {
 
   @FindBy(css = "#wpSave")

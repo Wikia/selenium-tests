@@ -6,9 +6,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Seo
- */
 public class Our404HandlerTest extends NewTestTemplate {
 
   @java.lang.SuppressWarnings("all") // Lot's of duplication is fine in data providers

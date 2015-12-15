@@ -4,7 +4,6 @@
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -91,9 +90,6 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
       },
       dependsOnMethods = "threadCreatorNotification_setup_3"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                          + "has more than 50 notifications the veryfing user")
   public void threadCreatorNotification_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);

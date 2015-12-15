@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.Customize
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"Toolbar", "CustomizeToolbar"})
 public class CustomizeToolbarTests extends NewTestTemplate {
 

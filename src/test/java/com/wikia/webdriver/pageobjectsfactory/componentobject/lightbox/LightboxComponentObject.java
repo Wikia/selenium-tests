@@ -11,10 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong
- */
 public class LightboxComponentObject extends WikiBasePageObject {
 
   private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;

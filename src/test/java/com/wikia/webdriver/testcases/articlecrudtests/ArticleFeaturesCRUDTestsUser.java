@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -29,7 +30,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleFeaturesCRUDUser"})
@@ -39,6 +39,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void addGallery() {
     new ArticleContent().clear();
 
@@ -60,6 +61,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"Smoke"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void modifyGallery() {
     new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
                               + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
@@ -95,6 +97,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void addSlideshow() {
     new ArticleContent().clear();
 
@@ -112,6 +115,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void modifySlideshow() {
     new ArticleContent().push(
         "<gallery type=\"slideshow\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n"
@@ -148,6 +152,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_005"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void addSlider() {
     new ArticleContent().clear();
 
@@ -165,6 +170,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_005"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void modifySlider() {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
                               + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
@@ -256,6 +262,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6072")
   public void addImage() {
     new ArticleContent().clear();
 

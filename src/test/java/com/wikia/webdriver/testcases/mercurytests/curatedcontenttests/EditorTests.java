@@ -26,9 +26,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 @Test(groups = {"MercuryCuratedEditorTests", "MercuryCuratedContentTests", "Mercury"})
 public class EditorTests extends NewTestTemplate {
 
@@ -47,6 +44,7 @@ public class EditorTests extends NewTestTemplate {
     new CuratedContent().clear();
   }
 
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
@@ -56,13 +54,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isFeaturedContentVisible();
-    PageObjectLogging.log(
-        "Featured Content",
-        MercuryMessages.INVISIBLE_MSG,
-        MercuryMessages.VISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isFeaturedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
@@ -89,7 +82,7 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @RelatedIssue(issueID = "XW-653", comment = "Test is unstable")
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
@@ -100,13 +93,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     SectionFormPageObject section = home.clickAddSection();
@@ -153,6 +141,7 @@ public class EditorTests extends NewTestTemplate {
     ;
   }
 
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
@@ -162,13 +151,8 @@ public class EditorTests extends NewTestTemplate {
     curatedMainPagePageObject
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
-    Boolean result = !curatedMainPagePageObject.isCuratedContentVisible();
-    PageObjectLogging.log(
-        "Curated Content",
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
+    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
+    Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
     ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();

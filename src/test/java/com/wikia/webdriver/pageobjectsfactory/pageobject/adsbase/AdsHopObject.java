@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsHopObject extends AdsBaseObject {
 
   private static final String POST_MESSAGE_SCRIPT_XPATH =

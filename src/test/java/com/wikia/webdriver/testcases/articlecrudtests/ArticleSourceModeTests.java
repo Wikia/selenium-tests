@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -74,6 +75,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_004"})
+  @RelatedIssue(issueID = "MAIN-6073")
   public void RTE_004_ExternalLink() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -171,6 +173,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_013_Slideshow() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -194,6 +197,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_014"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_014_Gallery() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -219,6 +223,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_015_Slider() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -286,6 +291,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @CreationTicket(ticketID = "CONCF-626")
   @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
+  @RelatedIssue(issueID = "MAIN-6037", comment = "Product needs the fix. Check the status of the attached ticket and react")
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);

@@ -13,9 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNa
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class GlobalNavigationSearch extends NewTestTemplate {
 
   private Credentials credentials = Configuration.getCredentials();

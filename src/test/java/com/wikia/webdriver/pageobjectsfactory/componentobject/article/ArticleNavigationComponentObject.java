@@ -9,8 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 /**
  * wikia navigation present on an oasis article page
- *
- * @ownership Content X-Wing Wikia
  */
 public class ArticleNavigationComponentObject extends BasePageObject {
 

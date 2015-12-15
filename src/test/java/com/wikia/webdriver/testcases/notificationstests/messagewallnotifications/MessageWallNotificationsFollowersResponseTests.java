@@ -1,10 +1,6 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,12 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is unfollowing user 6 message wall, 2. User 6 is
- *         writing message on his own message wall, 3. User 5 is following user 6 message wall, 4.
- *         User 6 is replying to his message on his own message wall, 5. User 5 is notified about
- *         user 6 reply
- */
 public class MessageWallNotificationsFollowersResponseTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -104,10 +94,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
       },
       dependsOnMethods = "followerNotificationResponse_setup_4"
   )
-  @RelatedIssue(issueID = "MAIN-5924",
-                comment = "the issue is valid only if the veryfing user "
-                        + "has more than 50 notifications the veryfing user")
-  public void followerNotificationResponse_verification() {
+ public void followerNotificationResponse_verification() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

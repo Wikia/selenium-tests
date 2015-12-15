@@ -19,12 +19,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *         <p/>
- *         1. Write and edit message, 2. Write and remove message, 3. Write and close message,, 4.
- *         Write and quote message, 5. Write and preview message, 6. Write and reply message,
- */
 public class MessageWallTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

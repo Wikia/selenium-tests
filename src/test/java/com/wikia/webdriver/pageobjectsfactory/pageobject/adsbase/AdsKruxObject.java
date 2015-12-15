@@ -12,9 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";

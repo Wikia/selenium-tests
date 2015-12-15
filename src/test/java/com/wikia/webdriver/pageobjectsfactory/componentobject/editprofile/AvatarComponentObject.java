@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class AvatarComponentObject extends EditProfileComponentObject {
 
   @FindBy(css = "#UPPLightboxAvatar")

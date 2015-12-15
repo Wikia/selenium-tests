@@ -3,9 +3,6 @@ package com.wikia.webdriver.common.driverprovider;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class UserAgentsRegistry {
 
   private Map<String, String> userAgentRegistry;

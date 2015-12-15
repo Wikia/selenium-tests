@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering Wikia
- */
 public class Test71MediaNoAdsForUsers extends TemplateNoFirstLoad {
 
   @Test(

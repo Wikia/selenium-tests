@@ -56,9 +56,6 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     return new WikiArticlePageObject(driver);
   }
 
-  /*Author: Michal Nowierski
-   *
-   * */
   public void verifyImportandPageElements() {
     wait.forElementVisible(fromYearField);
     wait.forElementVisible(backToPageLink);

@@ -15,12 +15,6 @@ import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
-/**
- * @author liz_lux
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong
- */
-
 public class FilePagePageObject extends WikiBasePageObject {
 
   public static final int ABOUT_TAB = 0;

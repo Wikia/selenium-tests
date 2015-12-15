@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content X-Wing Wikia
- */
 public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 
   @FindBy(css = ".curated-content-editor-add-item-btn")
