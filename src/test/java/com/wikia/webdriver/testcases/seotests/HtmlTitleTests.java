@@ -25,7 +25,6 @@ public class HtmlTitleTests extends NewTestTemplate {
   @DataProvider
   private Object[][] dataHtmlTitleTest() {
     return new Object[][]{
-        TEST_WIKI_CORPORATE_FROriginal title
         {
             TEST_WIKI_ENGLISH,
             "Sktest123_Wiki",
