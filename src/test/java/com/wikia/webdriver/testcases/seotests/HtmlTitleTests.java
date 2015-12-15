@@ -19,7 +19,7 @@ public class HtmlTitleTests extends NewTestTemplate {
   private static final String TEST_WIKI_CORPORATE = "www";
   private static final String TEST_WIKI_CUSTOM_TITLE = "es.pokemon";
   private static final String TEST_WIKI_ORIGINAL_TITLE = "sktest123";
-  private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH = "poznan";
+  private static final String TEST_WIKI_ORIGINAL_TITLE_WITH_- = "poznan";
   private static final String TEST_WIKI_CURATED_CONTENT = "starwars";
   private static final String TEST_WIKI_DISCUSSION = "fallout";
 
@@ -151,9 +151,9 @@ public class HtmlTitleTests extends NewTestTemplate {
         },
         // Em-dash instead of regular dash for some languages
         {
-            TEST_WIKI_ORIGINAL_TITLE_WITH_EM_DASH,
+            TEST_WIKI_ORIGINAL_TITLE_WITH_-,
             "Ulica_Kazimierza_Wielkiego",
-            "Ulica Kazimierza Wielkiego – Poznańska Wiki – Wikia",
+            "Ulica Kazimierza Wielkiego - Poznańska Wiki - Wikia",
         },
         // Custom title
         {
@@ -180,7 +180,7 @@ public class HtmlTitleTests extends NewTestTemplate {
         {
             TEST_WIKI_CORPORATE,
             "",
-            "Collaborative communities for everyone! - Wikia",
+            "Wikia",
         },
         /* MAIN-5823 {
             TEST_WIKI_CORPORATE,
@@ -200,7 +200,7 @@ public class HtmlTitleTests extends NewTestTemplate {
         {
             TEST_WIKI_CORPORATE_PL,
             "",
-            "Wikia po polsku – Wikia",
+            "Wikia",
         },
     };
   }
