@@ -75,6 +75,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_004"})
+  @RelatedIssue(issueID = "MAIN-6073")
   public void RTE_004_ExternalLink() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -172,6 +173,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_013_Slideshow() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -195,6 +197,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_014"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_014_Gallery() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
@@ -220,6 +223,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
+  @RelatedIssue(issueID = "MAIN-6072")
   public void RTE_015_Slider() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
