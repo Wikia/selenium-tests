@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @ownshership: Content West-Wing
  */
 @Test(groups = {"MercuryPortableInfoboxTests", "Mercury"})
+@Execute(onWikia = "mercuryautomationtesting")
 public class PortableInfoboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
@@ -23,8 +24,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_001")
-  @Execute(onWikia = "mercuryautomationtesting")
-  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -54,8 +53,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_002")
-  @Execute(onWikia = "mercuryautomationtesting")
-  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -77,8 +74,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_003")
-  @Execute(onWikia = "mercuryautomationtesting")
-  @RelatedIssue(issueID = "XW-655")
   public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -96,7 +91,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
-  @Execute(onWikia = "mercuryautomationtesting")
   @RelatedIssue(issueID = "DAT-3085")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
@@ -118,7 +112,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_005")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPortableInfoboxTest_005_SmallImages() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
