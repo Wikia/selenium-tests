@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -184,6 +186,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getChromeInstance() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
+    String onDevice = Configuration.getOnDevice();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
@@ -224,6 +227,12 @@ public class NewDriverProvider {
       chromeOptions.addArguments("process-per-site");
       chromeOptions.addArguments("start-maximized");
       chromeOptions.addArguments("disable-notifications");
+    }
+
+    if (!"false".equals(onDevice)) {
+      Map<String, String> mobileEmulation = new HashMap<>();
+      mobileEmulation.put("deviceName", onDevice);
+      chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
     }
 
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

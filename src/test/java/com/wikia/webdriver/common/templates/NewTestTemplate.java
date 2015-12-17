@@ -50,6 +50,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("disableFlash", methodClass.getAnnotation(Execute.class).disableFlash());
       setTestProperty("browser", methodClass.getAnnotation(Execute.class).browser());
       setTestProperty("browserSize", methodClass.getAnnotation(Execute.class).browserSize());
+      setTestProperty("onDevice", methodClass.getAnnotation(Execute.class).onDevice());
     }
 
     if (method.isAnnotationPresent(Execute.class)) {
@@ -57,6 +58,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       setTestProperty("browser", method.getAnnotation(Execute.class).browser());
       setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
+      setTestProperty("onDevice", method.getAnnotation(Execute.class).onDevice());
     }
 
     prepareURLs();

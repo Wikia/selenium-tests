@@ -16,6 +16,8 @@ public @interface Execute {
 
   String onWikia() default "";
 
+  String onDevice() default "";
+
   /**
    * Restrict the test to be executed on certain driver
    */

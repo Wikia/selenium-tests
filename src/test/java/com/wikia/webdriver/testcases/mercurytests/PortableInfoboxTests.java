@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @ownshership: Content West-Wing
  */
 @Test(groups = {"MercuryPortableInfoboxTests", "Mercury"})
-@Execute(onWikia = "mercuryautomationtesting")
+@Execute(onWikia = "mercuryautomationtesting", onDevice = Device.GOOGLE_NEXUS_5)
 public class PortableInfoboxTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
