@@ -43,12 +43,22 @@ public class NewTestTemplate extends NewTestTemplateCore {
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
+    Class<?> methodClass = method.getDeclaringClass();
+
+    if (methodClass.isAnnotationPresent(Execute.class)) {
+      setTestProperty("wikiName", methodClass.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", methodClass.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("browser", methodClass.getAnnotation(Execute.class).browser());
+      setTestProperty("browserSize", methodClass.getAnnotation(Execute.class).browserSize());
+    }
+
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       setTestProperty("browser", method.getAnnotation(Execute.class).browser());
       setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
     }
+
     prepareURLs();
 
     if(isTestExcludedFromEnv(method)){

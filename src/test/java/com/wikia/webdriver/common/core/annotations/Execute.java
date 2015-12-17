@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * This annotation serves as a holder to test general parameters
  */
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.METHOD})
+@Target(value = {ElementType.METHOD, ElementType.TYPE})
 public @interface Execute {
 
   User asUser() default User.ANONYMOUS;
