@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
 
@@ -86,7 +85,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
-  @RelatedIssue(issueID = "DAT-3085")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
     infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
@@ -100,8 +98,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Check video
     infobox
-        // TODO: uncomment after related issue is done
-        //.clickExpandButton()
         .clickVideo()
         .isLightboxOpened();
   }
