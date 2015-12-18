@@ -89,12 +89,20 @@ import javax.json.JsonReader;
 public class WikiBasePageObject extends BasePageObject {
 
   protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
+  private static final String LOGGED_IN_USER_SELECTOR_CHAT = "#ChatHeader .User span.username";
+  // No way to verify if user is logged in on Fandom, just assuming it's OK
+  private static final String LOGGED_IN_USER_SELECTOR_FANDOM = "a.home-fandom";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=\"%userName%\"]";
+  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=\"%userName%\"]";
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".AccountNavigation a[title*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
-      + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
+      ".AccountNavigation a[title*=\"%userName%\"]";
+  private static final String LOGGED_IN_USER_SELECTOR_WIKIAMOBILE = "img.avatar[alt*=\"%userName%\"]";
+  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_CHAT + ","
+                                                        + LOGGED_IN_USER_SELECTOR_FANDOM + ","
+                                                        + LOGGED_IN_USER_SELECTOR_MERCURY + ","
+                                                        + LOGGED_IN_USER_SELECTOR_MONOBOOK + ","
+                                                        + LOGGED_IN_USER_SELECTOR_OASIS + ","
+                                                        + LOGGED_IN_USER_SELECTOR_WIKIAMOBILE;
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
