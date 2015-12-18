@@ -42,7 +42,7 @@ public class PostsListPage extends WikiBasePageObject {
   private WebElement userPageHeader;
 
   private static final String PATH = "d/f/%s";
-  private static final String DEFAULT_ID = "203236";
+  private static final String DEFAULT_FORUM_ID = "203236";
 
   public PostsListPage(WebDriver driver) {
     super(driver);
@@ -54,7 +54,7 @@ public class PostsListPage extends WikiBasePageObject {
   }
 
   public PostsListPage open() {
-    return open(DEFAULT_ID);
+    return open(DEFAULT_FORUM_ID);
   }
 
   public boolean isPostListEmpty() {
