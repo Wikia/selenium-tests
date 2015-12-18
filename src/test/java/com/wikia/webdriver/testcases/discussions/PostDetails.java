@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetails
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
 public class PostDetails extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
