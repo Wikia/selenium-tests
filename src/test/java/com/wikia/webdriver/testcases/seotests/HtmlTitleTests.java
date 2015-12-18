@@ -206,7 +206,7 @@ public class HtmlTitleTests extends NewTestTemplate {
             TEST_WIKI_CORPORATE,
             "",
             "Wikia - The Home of Fandom",
-            VARIANT_ALL,
+            VARIANT_ONLY_ANONYMOUS,
         },
         {
             TEST_WIKI_CORPORATE,
