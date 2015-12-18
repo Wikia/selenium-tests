@@ -90,8 +90,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_CHAT = "#ChatHeader .User span.username";
-  // No way to verify if user is logged in on Fandom, just assuming it's OK
-  private static final String LOGGED_IN_USER_SELECTOR_FANDOM = "a.home-fandom";
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=\"%userName%\"]";
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=\"%userName%\"]";
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
