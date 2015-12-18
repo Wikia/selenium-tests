@@ -96,7 +96,6 @@ public class WikiBasePageObject extends BasePageObject {
       ".AccountNavigation a[title*=\"%userName%\"]";
   private static final String LOGGED_IN_USER_SELECTOR_WIKIAMOBILE = "img.avatar[alt*=\"%userName%\"]";
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_CHAT + ","
-                                                        + LOGGED_IN_USER_SELECTOR_FANDOM + ","
                                                         + LOGGED_IN_USER_SELECTOR_MERCURY + ","
                                                         + LOGGED_IN_USER_SELECTOR_MONOBOOK + ","
                                                         + LOGGED_IN_USER_SELECTOR_OASIS + ","
