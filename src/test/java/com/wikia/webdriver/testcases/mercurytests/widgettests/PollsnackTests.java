@@ -2,18 +2,22 @@ package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryPollsnackWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class PollsnackTests extends NewTestTemplate {
 
   private static String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "PollsnackMercury/OneWidget";
@@ -21,13 +25,7 @@ public class PollsnackTests extends NewTestTemplate {
   private static String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
   @Test(groups = "MercuryPollsnackWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
@@ -38,7 +36,6 @@ public class PollsnackTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_002")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
@@ -52,7 +49,6 @@ public class PollsnackTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_003")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
@@ -68,7 +64,6 @@ public class PollsnackTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_004")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
@@ -80,7 +75,6 @@ public class PollsnackTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_005")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryPollsnackWidgetTest_005_isErrorPresent() {
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 

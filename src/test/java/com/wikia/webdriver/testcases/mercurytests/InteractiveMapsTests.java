@@ -3,6 +3,9 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -10,22 +13,18 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class InteractiveMapsTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // IMAPT01
-  @Test(groups = {"MercuryInteractiveMapsTest_001", "MercuryInteractiveMapsTests", "Mercury"})
+  @Test(groups = "MercuryInteractiveMapsTest_001")
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
@@ -82,8 +81,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     );
   }
 
-  // IMAPT02
-  @Test(groups = {"MercuryInteractiveMapsTest_002", "MercuryInteractiveMapsTests", "Mercury"})
+  @Test(groups = "MercuryInteractiveMapsTest_002")
+  @Execute(browser = Browser.ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
@@ -210,8 +209,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
     );
   }
 
-  // IMAPT03
-  @Test(groups = {"MercuryInteractiveMapsTest_003", "MercuryInteractiveMapsTests", "Mercury"})
+  @Test(groups = "MercuryInteractiveMapsTest_003")
+  @Execute(browser = Browser.ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);

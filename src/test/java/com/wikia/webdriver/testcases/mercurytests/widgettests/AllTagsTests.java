@@ -2,7 +2,10 @@ package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -23,9 +26,12 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-@Test(groups = {"MercuryAllTagsWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
@@ -34,8 +40,6 @@ public class AllTagsTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-
     widgets = new ArrayList<>();
     widgets.add(new PollsnackWidgetPageObject(driver));
     widgets.add(new SoundCloudWidgetPageObject(driver));
@@ -57,7 +61,6 @@ public class AllTagsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryAllTagsWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
@@ -67,7 +70,6 @@ public class AllTagsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryAllTagsWidgetTest_002")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     new ArticlePageObject(driver)
         .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -79,7 +81,6 @@ public class AllTagsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryAllTagsWidgetTest_003")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 

@@ -3,28 +3,25 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryTOCTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class TOCTests extends NewTestTemplate {
 
   private final static int H2_PADDING_TOP = 40;
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // TOCT01
   @Test(groups = "MercuryTOCTest_001")
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
@@ -92,7 +89,6 @@ public class TOCTests extends NewTestTemplate {
     );
   }
 
-  // TOCT02
   @Test(groups = "MercuryTOCTest_002")
   public void MercuryTOCTest_002_NoH2NoTOC() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
@@ -107,7 +103,6 @@ public class TOCTests extends NewTestTemplate {
     );
   }
 
-  // TOCT03
   @Test(groups = "MercuryTOCTest_003")
   public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
@@ -122,7 +117,6 @@ public class TOCTests extends NewTestTemplate {
     );
   }
 
-  // TOCT04
   @Test(groups = "MercuryTOCTest_004")
   public void MercuryTOCTest_004_RedirectionToHeaderFromCurrentPage() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
@@ -138,7 +132,6 @@ public class TOCTests extends NewTestTemplate {
     );
   }
 
-  // TOCT05
   @Test(groups = "MercuryTOCTest_005")
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);

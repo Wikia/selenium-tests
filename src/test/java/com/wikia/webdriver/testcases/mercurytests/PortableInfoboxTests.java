@@ -1,28 +1,22 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-/**
- * @ownshership: Content West-Wing
- */
-@Test(groups = {"MercuryPortableInfoboxTests", "Mercury"})
-@Execute(onWikia = "mercuryautomationtesting", onDevice = Device.GOOGLE_NEXUS_5)
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class PortableInfoboxTests extends NewTestTemplate {
-
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
 
   @Test(groups = "MercuryPortableInfoboxTest_001")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {

@@ -5,6 +5,8 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -15,21 +17,15 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.MercuryAle
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryCuratedNavigationTests", "MercuryCuratedContentTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_CC,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class NavigationTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
-  }
-
-  // CCT06
   @Test(groups = "MercuryCuratedNavigationTest_001")
   @RelatedIssue(issueID = "XW-687", comment = "java.lang.IndexOutOfBoundsException: Index: 1, Size: 0")
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
@@ -61,7 +57,6 @@ public class NavigationTests extends NewTestTemplate {
     Assertion.assertUrlEqualToCurrentUrl(driver, nextUrl);
   }
 
-  // CCT07
   @Test(groups = "MercuryCuratedNavigationTest_002")
   public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
@@ -80,7 +75,6 @@ public class NavigationTests extends NewTestTemplate {
         .isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
   }
 
-  // CCT11
   @Test(groups = "MercuryCuratedNavigationTest_003")
   @RelatedIssue(issueID = "XW-640")
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
@@ -114,9 +108,7 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
-  // CCT09
   @Test(groups = "MercuryCuratedNavigationTest_004")
-  @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
 
@@ -173,7 +165,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_005")
-  @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedNavigationTest_005_redirectToExistingArticle() {
     ArticlePageObject article = new ArticlePageObject(driver);
     String redirect = WikiTextContent.REDIRECT +

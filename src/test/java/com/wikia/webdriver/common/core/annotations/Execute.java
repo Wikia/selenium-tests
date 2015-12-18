@@ -18,11 +18,6 @@ public @interface Execute {
 
   String onDevice() default "";
 
-  /**
-   * Restrict the test to be executed on certain driver
-   */
-  String allowedDriver() default "";
-
   String disableFlash() default "";
 
   String browserSize() default "";

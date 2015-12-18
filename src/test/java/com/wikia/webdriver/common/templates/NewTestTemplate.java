@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -75,17 +74,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
       NewDriverProvider.setUnstablePageLoadStrategy(true);
-    }
-
-    if (method.isAnnotationPresent(Execute.class)) {
-      String onDriver = method.getAnnotation(Execute.class).allowedDriver();
-      if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
-        String errorMessage = "The test can not be run on driver " + Configuration.getBrowser()
-                              + ". The test is restricted to driver " + onDriver +
-                              " as instructed in the test annotation.";
-        PageObjectLogging.log("allowedDriver annotation", errorMessage, false);
-        throw new SkipException(errorMessage);
-      }
     }
 
     startBrowser();

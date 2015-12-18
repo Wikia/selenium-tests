@@ -2,18 +2,22 @@ package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryGoogleFormWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class GoogleFormTests extends NewTestTemplate {
 
   private static String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
@@ -21,13 +25,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private static String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
@@ -38,7 +36,6 @@ public class GoogleFormTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
@@ -52,7 +49,6 @@ public class GoogleFormTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
@@ -68,7 +64,6 @@ public class GoogleFormTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_004")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
@@ -80,7 +75,6 @@ public class GoogleFormTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_005")
-  @Execute(onWikia = "mercuryautomationtesting")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 

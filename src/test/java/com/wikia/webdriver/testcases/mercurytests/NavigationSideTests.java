@@ -3,29 +3,26 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryNavigationSideTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME
+)
 public class NavigationSideTests extends NewTestTemplate {
 
   private final static String SEARCH_PASS = "Gallery";
   private final static String SEARCH_FAIL = "te";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // NST01
   @Test(groups = "MercuryNavigationSideTest_001")
   public void MercuryNavigationSideTest_001_Open_Navigate_Close() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
@@ -135,7 +132,6 @@ public class NavigationSideTests extends NewTestTemplate {
     );
   }
 
-  // NST02
   @Test(groups = "MercuryNavigationSideTest_002")
   public void MercuryNavigationSideTest_002_SearchInvalidSuggestion_Cancel() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
@@ -205,7 +201,6 @@ public class NavigationSideTests extends NewTestTemplate {
     );
   }
 
-  // NST03
   @Test(groups = "MercuryNavigationSideTest_003")
   public void MercuryNavigationSideTest_003_ValidSuggestionRedirect() {
     NavigationSideComponentObject searchObject = new NavigationSideComponentObject(driver);
@@ -239,10 +234,9 @@ public class NavigationSideTests extends NewTestTemplate {
     );
   }
 
-  // NST04
   // TODO: check article titles instead of url, check that receive at least 3 different articles in 10 attempts
   @RelatedIssue(issueID = "HG-686")
-  @Test(groups = "MercuryNavigationSideTest_001", enabled = false)
+  @Test(groups = "MercuryNavigationSideTest_004", enabled = false)
   public void MercuryNavigationSideTest_004_RandomPageRedirect() {
     NavigationSideComponentObject nav = new NavigationSideComponentObject(driver);
     nav.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);

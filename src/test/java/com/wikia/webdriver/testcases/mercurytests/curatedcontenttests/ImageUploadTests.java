@@ -3,7 +3,8 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.annotations.Driver;
+import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
@@ -18,22 +19,24 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+@Execute(
+    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+    onDevice = Device.GOOGLE_NEXUS_5,
+    browser = Browser.CHROME,
+    asUser = User.STAFF
+)
 public class ImageUploadTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_EMPTY_CC_EDITOR);
     new CuratedContent().clear();
   }
 
   @Test(groups = "MercuryImageUploadTest_001")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-      allowedDriver = Driver.ChromeMobileMercury,
-      asUser = User.STAFF)
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-    
+
     editorHomePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPagePageObject.isCuratedContentVisible();
     curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
