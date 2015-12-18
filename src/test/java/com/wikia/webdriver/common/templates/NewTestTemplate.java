@@ -25,8 +25,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
   /**
    * Return false if test is excluded from running on current test environment
-   * @param method
-   * @return
    */
   private boolean isTestExcludedFromEnv(Method method){
     if (method.isAnnotationPresent(DontRun.class)) {
@@ -90,13 +88,13 @@ public class NewTestTemplate extends NewTestTemplateCore {
     startBrowser();
     setWindowSize();
 
-    if (method.isAnnotationPresent(Execute.class)) {
-      if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
-        loadFirstPage();
-      }
-    } else {
+    if ((!declaringClass.isAnnotationPresent(Execute.class)
+         || declaringClass.getAnnotation(Execute.class).asUser() == User.ANONYMOUS)
+        && (!method.isAnnotationPresent(Execute.class)
+            || method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS)) {
       loadFirstPage();
     }
+
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
   }
