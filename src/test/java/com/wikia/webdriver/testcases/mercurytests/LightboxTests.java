@@ -75,7 +75,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_002")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -175,7 +175,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_003")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -315,7 +315,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_006")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;

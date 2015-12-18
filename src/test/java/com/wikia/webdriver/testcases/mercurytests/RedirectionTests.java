@@ -70,7 +70,7 @@ public class RedirectionTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryRedirectionTest_004")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);

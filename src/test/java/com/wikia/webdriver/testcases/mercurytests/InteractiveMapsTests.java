@@ -82,7 +82,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_002")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
@@ -210,7 +210,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_003")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);

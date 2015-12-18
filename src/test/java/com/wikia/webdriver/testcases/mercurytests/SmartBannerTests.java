@@ -56,7 +56,7 @@ public class SmartBannerTests extends NewTestTemplate {
 
   @Test(groups = "MercurySmartBannerTest_001")
   @RelatedIssue(issueID = "XW-656")
-  @Execute(browser = Browser.APPIUM_ANDROID)
+  @Execute(browser = Browser.CHROME_ANDROID)
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
