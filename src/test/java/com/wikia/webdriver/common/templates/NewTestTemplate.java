@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -42,14 +43,15 @@ public class NewTestTemplate extends NewTestTemplateCore {
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
-    Class<?> methodClass = method.getDeclaringClass();
+    Class<?> declaringClass = method.getDeclaringClass();
+    String browser = Configuration.getBrowser();
 
-    if (methodClass.isAnnotationPresent(Execute.class)) {
-      setTestProperty("wikiName", methodClass.getAnnotation(Execute.class).onWikia());
-      setTestProperty("disableFlash", methodClass.getAnnotation(Execute.class).disableFlash());
-      setTestProperty("browser", methodClass.getAnnotation(Execute.class).browser());
-      setTestProperty("browserSize", methodClass.getAnnotation(Execute.class).browserSize());
-      setTestProperty("onDevice", methodClass.getAnnotation(Execute.class).onDevice());
+    if (declaringClass.isAnnotationPresent(Execute.class)) {
+      setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("browser", declaringClass.getAnnotation(Execute.class).browser());
+      setTestProperty("browserSize", declaringClass.getAnnotation(Execute.class).browserSize());
+      setTestProperty("onDevice", declaringClass.getAnnotation(Execute.class).onDevice());
     }
 
     if (method.isAnnotationPresent(Execute.class)) {
@@ -58,6 +60,15 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("browser", method.getAnnotation(Execute.class).browser());
       setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
       setTestProperty("onDevice", method.getAnnotation(Execute.class).onDevice());
+    }
+
+    String currentBrowser = Configuration.getBrowser();
+
+    if (!browser.equals(currentBrowser)) {
+      PageObjectLogging
+          .logWarning("Parameter override", "Browser parameter changed by annotation\n"
+                                            + "old value: " + browser
+                                            + ", new value: " + currentBrowser);
     }
 
     prepareURLs();
