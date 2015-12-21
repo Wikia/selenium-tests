@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -27,9 +28,12 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (declaringClass.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
-      setTestProperty("browser", declaringClass.getAnnotation(Execute.class).browser());
-      setTestProperty("browserSize", declaringClass.getAnnotation(Execute.class).browserSize());
-      setTestProperty("onDevice", declaringClass.getAnnotation(Execute.class).onDevice());
+    }
+
+    if (declaringClass.isAnnotationPresent(InBrowser.class)) {
+      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browserSize", declaringClass.getAnnotation(InBrowser.class).browserSize());
+      setTestProperty("emulator", declaringClass.getAnnotation(InBrowser.class).emulator());
     }
   }
 
@@ -37,9 +41,12 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
-      setTestProperty("browser", method.getAnnotation(Execute.class).browser());
-      setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
-      setTestProperty("onDevice", method.getAnnotation(Execute.class).onDevice());
+    }
+
+    if (method.isAnnotationPresent(InBrowser.class)) {
+      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
+      setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
     }
   }
 

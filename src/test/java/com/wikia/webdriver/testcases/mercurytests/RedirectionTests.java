@@ -4,9 +4,10 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.core.helpers.Device;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
@@ -20,10 +21,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObje
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@Execute(
-    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
-    onDevice = Device.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class RedirectionTests extends NewTestTemplate {
 
@@ -70,7 +71,7 @@ public class RedirectionTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryRedirectionTest_004")
-  @Execute(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);

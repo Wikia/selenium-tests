@@ -4,8 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.core.helpers.Device;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -17,10 +18,10 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-@Execute(
-    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
-    onDevice = Device.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class InteractiveMapsTests extends NewTestTemplate {
 
@@ -82,7 +83,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_002")
-  @Execute(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
@@ -210,7 +211,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_003")
-  @Execute(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);

@@ -4,9 +4,10 @@ import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.core.helpers.Device;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.ImageGenerator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -21,9 +22,11 @@ import org.testng.annotations.Test;
 
 @Execute(
     onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-    onDevice = Device.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME,
     asUser = User.STAFF
+)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class ImageUploadTests extends NewTestTemplate {
 

@@ -3,8 +3,10 @@ package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -35,10 +37,11 @@ import org.testng.annotations.Test;
 @Test(groups = {"LightboxTest", "Media"})
 public class LightboxTests extends NewTestTemplate {
 
+  private static final String BROWSER_SIZE = "1400x720";
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"LightboxTest_001"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
@@ -47,7 +50,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest_002"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
@@ -56,7 +59,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest_003"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUncategorizedFilesPageObject unusedFiles =
@@ -66,7 +69,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest_004"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
@@ -75,7 +78,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest_005"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -111,7 +114,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Lightbox_006"})
-  @Execute(browserSize = "1400x720", browser = "FF")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -123,7 +126,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"LightboxTest_007"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_007_specialVideo() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -138,7 +141,8 @@ public class LightboxTests extends NewTestTemplate {
    */
   @Test(groups = {"LightboxTest_008"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
-  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720", browser = "FF")
+  @Execute(asUser = User.USER, disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
@@ -156,7 +160,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = {"LightboxTest_009"})
-  @Execute(browser = "FF", browserSize = "1400x720")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

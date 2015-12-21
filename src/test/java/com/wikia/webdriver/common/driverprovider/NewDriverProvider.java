@@ -187,7 +187,7 @@ public class NewDriverProvider {
   private static EventFiringWebDriver getChromeInstance() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
-    String onDevice = Configuration.getOnDevice();
+    String emulator = Configuration.getEmulator();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = "/chromedriver_win32/chromedriver.exe";
@@ -230,9 +230,9 @@ public class NewDriverProvider {
       chromeOptions.addArguments("disable-notifications");
     }
 
-    if (!"false".equals(onDevice)) {
+    if (!"null".equals(emulator)) {
       Map<String, String> mobileEmulation = new HashMap<>();
-      mobileEmulation.put("deviceName", onDevice);
+      mobileEmulation.put("deviceName", emulator);
       chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
     }
 

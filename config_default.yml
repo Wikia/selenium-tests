@@ -26,7 +26,7 @@ extensions: null
 
 # Run on emulated device
 # Example: Google Nexus 5
-onDevice: false
+emulator: null
 
 # Config related with mobile devices
 platform: ANDROID # acceptable values: IOS and ANDROID

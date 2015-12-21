@@ -3,10 +3,11 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.core.helpers.Device;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
@@ -14,10 +15,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 
 import org.testng.annotations.Test;
 
-@Execute(
-    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
-    onDevice = Device.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class SmartBannerTests extends NewTestTemplate {
 
@@ -56,7 +57,7 @@ public class SmartBannerTests extends NewTestTemplate {
 
   @Test(groups = "MercurySmartBannerTest_001")
   @RelatedIssue(issueID = "XW-656")
-  @Execute(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);

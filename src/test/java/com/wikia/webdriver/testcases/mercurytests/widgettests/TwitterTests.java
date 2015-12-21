@@ -5,18 +5,19 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.core.helpers.Device;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
 import org.testng.annotations.Test;
 
-@Execute(
-    onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING,
-    onDevice = Device.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class TwitterTests extends NewTestTemplate {
 
