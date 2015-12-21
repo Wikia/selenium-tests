@@ -23,27 +23,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
   }
 
-  /**
-   * Return false if test is excluded from running on current test environment
-   */
-  private boolean isTestExcludedFromEnv(Method method){
-    if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
-      for (int i = 0; i < excludedEnv.length; i++) {
-        if (Configuration.getEnv().contains(excludedEnv[i])) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  @BeforeMethod(alwaysRun = true)
-  public void start(Method method, Object[] data) {
-    Configuration.clearCustomTestProperties();
-    Class<?> declaringClass = method.getDeclaringClass();
-    String browser = Configuration.getBrowser();
-
+  private void setPropertiesFromAnnotationsOnDeclaringClass(Class<?> declaringClass) {
     if (declaringClass.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
@@ -51,7 +31,9 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("browserSize", declaringClass.getAnnotation(Execute.class).browserSize());
       setTestProperty("onDevice", declaringClass.getAnnotation(Execute.class).onDevice());
     }
+  }
 
+  private void setPropertiesFromAnnotationsOnMethod(Method method) {
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
@@ -59,19 +41,54 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
       setTestProperty("onDevice", method.getAnnotation(Execute.class).onDevice());
     }
+  }
 
+  /**
+   * Return false if test is excluded from running on current test environment
+   */
+  private boolean isTestExcludedFromEnv(Method method){
+    if (method.isAnnotationPresent(DontRun.class)) {
+      String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
+
+      for (String excludedEnv : excludedEnvs) {
+        if (Configuration.getEnv().contains(excludedEnv)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean isNonAnonUserOnDeclaringClass(Class<?> declaringClass) {
+    return declaringClass.isAnnotationPresent(Execute.class) &&
+           declaringClass.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
+  }
+
+  private boolean isNonAnonUserOnMethod(Method method) {
+    return method.isAnnotationPresent(Execute.class) &&
+           method.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
+  }
+
+  @BeforeMethod(alwaysRun = true)
+  public void start(Method method, Object[] data) {
+    Configuration.clearCustomTestProperties();
+    Class<?> declaringClass = method.getDeclaringClass();
+
+    String browser = Configuration.getBrowser();
+    setPropertiesFromAnnotationsOnDeclaringClass(declaringClass);
+    setPropertiesFromAnnotationsOnMethod(method);
     String currentBrowser = Configuration.getBrowser();
 
     if (!browser.equals(currentBrowser)) {
       PageObjectLogging
-          .logWarning("Parameter override", "Browser parameter changed by annotation\n"
-                                            + "old value: " + browser
+          .logWarning("Parameter override", "Browser parameter changed by annotation"
+                                            + ", old value: " + browser
                                             + ", new value: " + currentBrowser);
     }
 
     prepareURLs();
 
-    if(isTestExcludedFromEnv(method)){
+    if (isTestExcludedFromEnv(method)) {
       throw new SkipException(
           "Test can't be run on " + Configuration.getEnv() + " environment");
     }
@@ -88,10 +105,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     startBrowser();
     setWindowSize();
 
-    if ((!declaringClass.isAnnotationPresent(Execute.class)
-         || declaringClass.getAnnotation(Execute.class).asUser() == User.ANONYMOUS)
-        && (!method.isAnnotationPresent(Execute.class)
-            || method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS)) {
+    if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
     }
 
