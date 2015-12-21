@@ -3,8 +3,8 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -47,7 +47,7 @@ public class VEMediaTests extends NewTestTemplate {
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+                                                                    + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -65,7 +65,7 @@ public class VEMediaTests extends NewTestTemplate {
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+                                                                    + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -107,7 +107,7 @@ public class VEMediaTests extends NewTestTemplate {
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+                                                                    + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -130,7 +130,7 @@ public class VEMediaTests extends NewTestTemplate {
   public void VEMediaTests_005_resizeVideoWithHandle() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+                                                                    + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -154,7 +154,7 @@ public class VEMediaTests extends NewTestTemplate {
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+                                                                    + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =

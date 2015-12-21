@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.annotations.Browser;
-import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Device;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.users.CreateUser;
 import com.wikia.webdriver.common.users.TestUser;

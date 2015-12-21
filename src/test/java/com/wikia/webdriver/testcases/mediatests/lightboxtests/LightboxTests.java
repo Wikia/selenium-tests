@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -138,7 +138,7 @@ public class LightboxTests extends NewTestTemplate {
    */
   @Test(groups = {"LightboxTest_008"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
-  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720", browser="FF")
+  @Execute(asUser = User.USER, disableFlash = "false", browserSize = "1400x720", browser = "FF")
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);

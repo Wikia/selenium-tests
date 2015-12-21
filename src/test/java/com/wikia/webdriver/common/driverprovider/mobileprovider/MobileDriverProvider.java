@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.driverprovider.mobileprovider;
 
-import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 import org.openqa.selenium.WebDriver;

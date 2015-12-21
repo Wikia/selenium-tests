@@ -4,9 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.Browser;
-import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Device;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
@@ -21,8 +21,12 @@ import org.testng.annotations.Test;
 public class PolldaddyTests extends NewTestTemplate {
 
   private static String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyMercury/OneWidget";
-  private static String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyMercury/MultipleWidgets";
-  private static String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddymercury/IncorrectWidget";
+  private static String
+      POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "PollDaddyMercury/MultipleWidgets";
+  private static String
+      POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME =
+      "PollDaddymercury/IncorrectWidget";
 
   private static final String MAPS_ARTICLE_NAME = "Map";
 
@@ -31,8 +35,8 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
@@ -41,8 +45,8 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     new NavigationSideComponentObject(driver).navigateToArticle(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
@@ -54,12 +58,12 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-      .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     new NavigationSideComponentObject(driver)
-      .navigateToArticle(MAPS_ARTICLE_NAME)
-      .navigateToArticle(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+        .navigateToArticle(MAPS_ARTICLE_NAME)
+        .navigateToArticle(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -69,8 +73,8 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-      .createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
+        .createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -80,8 +84,8 @@ public class PolldaddyTests extends NewTestTemplate {
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
-      .createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
+        .createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME)
+        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

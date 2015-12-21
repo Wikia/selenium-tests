@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import com.wikia.webdriver.common.core.annotations.Browser;
+import com.wikia.webdriver.common.core.helpers.Browser;
 
 public class AdsFloorAdhesionSkinContext {
 

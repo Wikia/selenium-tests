@@ -4,10 +4,10 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.SEOUtils;
-import com.wikia.webdriver.common.core.annotations.Browser;
-import com.wikia.webdriver.common.core.annotations.Device;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Device;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
@@ -28,9 +28,15 @@ public class SEOTests extends NewTestTemplate {
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
-  private static final String ROBOTS_META_TAG_NOT_PRESENT_MESSAGE = "Robot Meta Tags are set when not supposed to";
-  private static final String ROBOTS_META_TAG_PRESENT_MESSAGE = "Robot Meta Tags are not set when supposed to";
-  private static final String ROBOTS_META_TAG_DIFFERENT_MESSAGE =  "Robot Meta Tags are different than expected";
+  private static final String
+      ROBOTS_META_TAG_NOT_PRESENT_MESSAGE =
+      "Robot Meta Tags are set when not supposed to";
+  private static final String
+      ROBOTS_META_TAG_PRESENT_MESSAGE =
+      "Robot Meta Tags are not set when supposed to";
+  private static final String
+      ROBOTS_META_TAG_DIFFERENT_MESSAGE =
+      "Robot Meta Tags are different than expected";
 
   @RelatedIssue(issueID = "HG-671")
   @Test(groups = "MercurySEOTest_001")

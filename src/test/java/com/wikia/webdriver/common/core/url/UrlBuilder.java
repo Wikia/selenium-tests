@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;

@@ -2,8 +2,8 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -53,6 +53,6 @@ public class EditAccountTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOnWiki(wikiURL);
     login.loginAndVerify(credentials.userNameClosedAccount, credentials.passwordClosedAccount,
-        wikiURL);
+                         wikiURL);
   }
 }

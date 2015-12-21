@@ -2,8 +2,8 @@ package com.wikia.webdriver.common.driverprovider;
 
 
 import com.wikia.webdriver.common.core.ExtHelper;
-import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.android.AndroidDriver;

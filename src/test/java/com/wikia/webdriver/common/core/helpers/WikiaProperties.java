@@ -11,8 +11,6 @@ public class WikiaProperties {
 
   /**
    * Check if current wikia for children
-   * @param webDriver
-   * @return
    */
   public static boolean isWikiForChildren(WebDriver webDriver) {
     Object wikiForChildren = new JavascriptActions(webDriver)

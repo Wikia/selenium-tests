@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.annotations;
+package com.wikia.webdriver.common.core.helpers;
 
 public class Device {
 
