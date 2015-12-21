@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Social Wikia
- */
 public class PostsListPage extends BasePageObject {
 
   @FindBy(css = ".post-detail")
@@ -33,10 +30,10 @@ public class PostsListPage extends BasePageObject {
   private WebElement trendingLinkOnListMobile;
 
   @FindBy(xpath = "//li[text()='Latest']")
-  private WebElement latestTabDesktop;
+  private WebElement latestTabOnDesktop;
 
   @FindBy(xpath = "//li[text()='Trending']")
-  private WebElement trendingTabDesktop;
+  private WebElement trendingTabOnDesktop;
 
   @FindBy(css = ".back-button")
   private WebElement backToWiki;
@@ -70,7 +67,7 @@ public class PostsListPage extends BasePageObject {
     return postList.isEmpty();
   }
 
-  public PostsListPage clickOnSortButtonMobile() {
+  public PostsListPage clickSortButtonOnMobile() {
     sortEntryPointMobile.click();
     return this;
   }
@@ -80,12 +77,12 @@ public class PostsListPage extends BasePageObject {
     return sortOptionsMobile.isDisplayed();
   }
 
-  public PostsListPage clickOnLatestLinkMobile() {
+  public PostsListPage clickLatestLinkOnMobile() {
     latestLinkOnListMobile.click();
     return this;
   }
 
-  public PostsListPage clickOnTrendingLinkMobile() {
+  public PostsListPage clickTrendingLinkOnMobile() {
     trendingLinkOnListMobile.click();
     return this;
   }
@@ -94,13 +91,13 @@ public class PostsListPage extends BasePageObject {
     return labelInSortEntryPointMobile.getText();
   }
 
-  public PostsListPage clickOnLatestTabDesktop() {
-    latestTabDesktop.click();
+  public PostsListPage clickLatestTabOnDesktop() {
+    latestTabOnDesktop.click();
     return this;
   }
 
-  public PostsListPage clickOnTrendingTabDesktop() {
-    trendingTabDesktop.click();
+  public PostsListPage clickTrendingTabOnDesktop() {
+    trendingTabOnDesktop.click();
     return this;
   }
 
@@ -133,4 +130,3 @@ public class PostsListPage extends BasePageObject {
     return userPageHeader.isDisplayed();
   }
 }
-
