@@ -40,7 +40,7 @@ public class LightboxTests extends NewTestTemplate {
   private static final String BROWSER_SIZE = "1400x720";
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"LightboxTest_001"})
+  @Test(groups = "LightboxTest_001")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -49,7 +49,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest_002"})
+  @Test(groups = "LightboxTest_002")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -58,7 +58,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest_003"})
+  @Test(groups = "LightboxTest_003")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -68,7 +68,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest_004"})
+  @Test(groups = "LightboxTest_004")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -77,7 +77,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest_005"})
+  @Test(groups = "LightboxTest_005")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -113,7 +113,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxClosed();
   }
 
-  @Test(groups = {"Lightbox_006"})
+  @Test(groups = "Lightbox_006")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_006_verifyCarousel() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -125,7 +125,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyCarouselLeftDisabled();
   }
 
-  @Test(groups = {"LightboxTest_007"})
+  @Test(groups = "LightboxTest_007")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_007_specialVideo() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -139,7 +139,7 @@ public class LightboxTests extends NewTestTemplate {
    * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file
    * page (logged-in user)
    */
-  @Test(groups = {"LightboxTest_008"})
+  @Test(groups = "LightboxTest_008")
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(asUser = User.USER, disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
@@ -159,7 +159,7 @@ public class LightboxTests extends NewTestTemplate {
    * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file
    * page (logged-in user)
    */
-  @Test(groups = {"LightboxTest_009"})
+  @Test(groups = "LightboxTest_009")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
