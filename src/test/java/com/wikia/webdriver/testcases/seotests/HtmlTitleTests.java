@@ -169,7 +169,7 @@ public class HtmlTitleTests extends NewTestTemplate {
         {
             TEST_WIKI_CORPORATE,
             "",
-            "Wikia",
+            "Wikia - The Home of Fandom",
         },
         /* MAIN-5823 {
             TEST_WIKI_CORPORATE,
