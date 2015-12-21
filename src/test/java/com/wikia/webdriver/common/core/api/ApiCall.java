@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;

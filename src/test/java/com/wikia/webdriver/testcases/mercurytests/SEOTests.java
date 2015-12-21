@@ -4,35 +4,41 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.SEOUtils;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-@Test(groups = {"MercurySEOTests", "Mercury"})
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class SEOTests extends NewTestTemplate {
 
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
   private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
-  private static final String ROBOTS_META_TAG_NOT_PRESENT_MESSAGE = "Robot Meta Tags are set when not supposed to";
-  private static final String ROBOTS_META_TAG_PRESENT_MESSAGE = "Robot Meta Tags are not set when supposed to";
-  private static final String ROBOTS_META_TAG_DIFFERENT_MESSAGE =  "Robot Meta Tags are different than expected";
+  private static final String
+      ROBOTS_META_TAG_NOT_PRESENT_MESSAGE =
+      "Robot Meta Tags are set when not supposed to";
+  private static final String
+      ROBOTS_META_TAG_PRESENT_MESSAGE =
+      "Robot Meta Tags are not set when supposed to";
+  private static final String
+      ROBOTS_META_TAG_DIFFERENT_MESSAGE =
+      "Robot Meta Tags are different than expected";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
-  // SEOT01
   @RelatedIssue(issueID = "HG-671")
   @Test(groups = "MercurySEOTest_001")
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {

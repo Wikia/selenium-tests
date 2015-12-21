@@ -128,6 +128,10 @@ public class Configuration {
     return getProp("mockAds");
   }
 
+  public static String getEmulator() {
+    return getProp("emulator");
+  }
+
   public static Credentials getCredentials() {
     return new Credentials();
   }

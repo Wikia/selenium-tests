@@ -6,9 +6,12 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.CuratedContent;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
@@ -26,7 +29,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@Test(groups = {"MercuryCuratedEditorTests", "MercuryCuratedContentTests", "Mercury"})
+@Execute(
+    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+    asUser = User.STAFF
+)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class EditorTests extends NewTestTemplate {
 
   public static final String ITEM_DISPLAY_NAME = "Templates";
@@ -44,9 +54,8 @@ public class EditorTests extends NewTestTemplate {
     new CuratedContent().clear();
   }
 
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
@@ -82,9 +91,8 @@ public class EditorTests extends NewTestTemplate {
     );
   }
 
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
@@ -141,9 +149,8 @@ public class EditorTests extends NewTestTemplate {
     ;
   }
 
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   @Test(groups = "MercuryCuratedEditorTest_003")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);

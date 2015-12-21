@@ -5,7 +5,10 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.EditorHomePageObject;
@@ -16,15 +19,20 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.
 
 import org.testng.annotations.Test;
 
+@Execute(
+    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+    asUser = User.STAFF
+)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class CropImageTests extends NewTestTemplate {
 
   public static final String SEARCH_IMAGE_QUERY = "U";
 
-  @Test(groups = "CropImageTest_001")
-  @Execute(
-      onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-      asUser = User.STAFF)
-  public void CropImageTest_001_cropOptionInModal() {
+  @Test(groups = "MercuryCropImageTest_001")
+  public void MercuryCropImageTest_001_cropOptionInModal() {
     CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
     curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
 
@@ -50,5 +58,4 @@ public class CropImageTests extends NewTestTemplate {
     imageModal.selectCrop();
     Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");
   }
-
 }
