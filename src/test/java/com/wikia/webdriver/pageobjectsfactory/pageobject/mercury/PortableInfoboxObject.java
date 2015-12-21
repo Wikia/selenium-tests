@@ -40,6 +40,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement videoCaption;
   @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
+  @FindBy(css = ".portable-infobox .linked-gallery button")
+  private List<WebElement> galleryButtonList;
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
   @FindBy(css = ".pi-item .pi-data-label")
@@ -113,6 +115,15 @@ public class PortableInfoboxObject extends BasePageObject {
   public PortableInfoboxObject clickVideo() {
     wait.forElementVisible(video);
     video.click();
+
+    return this;
+  }
+
+  public PortableInfoboxObject clickGalleryButton(int index) {
+    Assertion.assertFalse(galleryButtonList.isEmpty());
+    wait.forElementVisible(galleryButtonList.get(index));
+
+    galleryButtonList.get(index).click();
 
     return this;
   }

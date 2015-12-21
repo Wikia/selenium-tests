@@ -119,7 +119,9 @@ public class HubsTests extends NewTestTemplate {
   /**
    * Verify that links in WikiaBar are working
    */
-  @Test(dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
+  @Test(enabled=false, dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
+  @RelatedIssue(issueID = "MAIN-6092", comment = "Product requested that this test is disabled. New" +
+          "tests will be create wih MAIN-6101")
   public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
     HomePageObject home = new HomePageObject(driver);
     home.logOut(wikiURL);

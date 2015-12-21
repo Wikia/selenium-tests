@@ -62,6 +62,13 @@ public class PostsList extends NewTestTemplate {
   @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+    userCanSwitchBetweenLatestAndTrendingTab();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
     userCanViewMorePosts();
   }
@@ -90,7 +97,6 @@ public class PostsList extends NewTestTemplate {
   /**
    * LOGGED IN USER ON MOBILE SECTION
    */
-
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
@@ -116,6 +122,13 @@ public class PostsList extends NewTestTemplate {
     postsListLoads();
   }
 
+  @Test
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+    userCanSwitchBetweenLatestAndTrendingTab();
+  }
+
   /**
    * TESTING METHODS SECTION
    */
@@ -127,10 +140,24 @@ public class PostsList extends NewTestTemplate {
 
   public void userCanSortPostsList() {
     PostsListPage postsList = new PostsListPage(driver).open();
-    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
-    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickOnTrendingLinkMobile().getSortButtonLabel(), "Trending");
+    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
+    Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
+    postsList.waitForLoadingOverlayToDisappear();
+    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
+    Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
+  }
+
+  public void userCanSwitchBetweenLatestAndTrendingTab() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickLatestTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
+
+    postsList.clickTrendingTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }
 
   public void userCanViewMorePosts() {

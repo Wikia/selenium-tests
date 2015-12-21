@@ -56,7 +56,7 @@ public class UserAndRights extends NewTestTemplate {
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
-  @RelatedIssue(issueID = "QAART-678", comment = "Check the status of the issue and react")
+  @RelatedIssue(issueID = "QAART-703", comment = "Test Manually")
   public void blockedUserShouldBeAbleToChangeEmail() {
     final String newEmailAddress = Configuration.getCredentials().emailQaart2;
     final String oldEmailAddress = Configuration.getCredentials().email;
