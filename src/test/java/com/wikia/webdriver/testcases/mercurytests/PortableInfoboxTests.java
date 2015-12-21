@@ -111,8 +111,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Check video
     infobox
-        // TODO: uncomment after related issue is done
-        //.clickExpandButton()
+        .clickExpandButton()
         .clickVideo()
         .isLightboxOpened();
   }
@@ -126,5 +125,25 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox
         .isTitleAboveImageVisible()
         .isHeroImageCentered();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_006")
+  @Execute(onWikia = "mercuryautomationtesting")
+  public void MercuryPortableInfoboxTest_006_DifferentClickTargets() {
+    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
+    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_3);
+
+    // Check click on main image
+    infobox
+        .clickMainImage()
+        .isLightboxOpened()
+        .closeLightbox()
+        .isInfoboxCollapsed();
+
+    // Check click on "View more" button in gallery in infobox
+    infobox
+        .clickExpandButton()
+        .clickGalleryButton()
+        .isInfoboxExpanded();
   }
 }

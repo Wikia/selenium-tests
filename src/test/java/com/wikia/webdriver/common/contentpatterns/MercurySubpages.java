@@ -18,6 +18,7 @@ public class MercurySubpages {
   public static final String COLON = "Colon:colon:colon";
   public static final String INFOBOX_1 = "Infobox1";
   public static final String INFOBOX_2 = "Infobox2";
+  public static final String INFOBOX_3 = "Infobox3";
 
   /**
    * Legend:
