@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.driverprovider;
 
 
 import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -51,26 +52,26 @@ public class NewDriverProvider {
     browserName = browser;
 
     // If browser equals IE set driver property as IEWebDriver instance
-    if ("IE".equals(browserName)) {
+    if (Browser.INTERNET_EXPLORER.equals(browserName)) {
       driver = getIEInstance();
 
       // If browser contains FF set driver property as FFWebDriver instance
-    } else if ("FF".equals(browserName)) {
+    } else if (Browser.FIREFOX.equals(browserName)) {
       driver = getFFInstance();
 
       // If browser equals CHROME set driver property as ChromeWebDriver instance
-    } else if (browserName.contains("CHROME")) {
+    } else if (browserName.contains(Browser.CHROME)) {
       driver = getChromeInstance();
 
       // If browser equals SAFARI set driver property as SafariWebDriver instance
-    } else if ("SAFARI".equals(browserName)) {
+    } else if (Browser.SAFARI.equals(browserName)) {
       driver = getSafariInstance();
 
-    } else if ("HTMLUNIT".equals(browserName)) {
+    } else if (Browser.HTML_UNIT.equals(browserName)) {
       driver = new EventFiringWebDriver(new HtmlUnitDriver());
-    } else if ("GHOST".equals(browserName)) {
+    } else if (Browser.GHOST.equals(browserName)) {
       driver = getPhantomJSInstance();
-    } else if ("ANDROID".equals(browserName)) {
+    } else if (Browser.CHROME_ANDROID.equals(browserName)) {
       driver = getAndroidInstance();
     } else {
       throw new WebDriverException("Provided driver is not supported.");
@@ -82,10 +83,10 @@ public class NewDriverProvider {
 
   public static void setBrowserUserAgent(String browser, String userAgent) {
     switch (browser.toUpperCase()) {
-      case "FF":
+      case Browser.FIREFOX:
         setFFUserAgent(userAgent);
         break;
-      case "CHROME":
+      case Browser.CHROME:
         setChromeUserAgent(userAgent);
         break;
       default:
@@ -214,7 +215,7 @@ public class NewDriverProvider {
                            .getPath());
 
     // TODO change mobile tests to use @UserAgent annotation
-    if ("CHROMEMOBILEMERCURY".equals(browserName)) {
+    if (Browser.CHROME_MOBILE_MERCURY.equals(browserName)) {
       chromeOptions
           .addArguments("--user-agent=" + userAgentRegistry.getUserAgent("iPhone"));
     }

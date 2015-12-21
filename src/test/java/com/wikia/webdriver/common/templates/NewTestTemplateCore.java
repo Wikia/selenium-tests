@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
@@ -70,7 +71,7 @@ public class NewTestTemplateCore {
     Dimension browserSize = Configuration.getBrowserSize();
     String browser = Configuration.getBrowser();
 
-    if (!browser.contains("ANDROID")) {
+    if (!browser.contains(Browser.CHROME_ANDROID)) {
       if (browserSize != null) {
         driver.manage().window().setSize(browserSize);
       } else {

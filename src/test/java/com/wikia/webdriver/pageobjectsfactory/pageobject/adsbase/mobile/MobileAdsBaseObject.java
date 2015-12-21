@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Browser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -27,7 +28,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     super(driver, page);
     adsComparison = new AdsComparison();
 
-    if ("CHROMEMOBILEMERCURY".equals(Configuration.getBrowser())) {
+    if (Browser.CHROME_MOBILE_MERCURY.equals(Configuration.getBrowser())) {
       verifyMercury();
     }
 
