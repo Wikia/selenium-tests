@@ -143,7 +143,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     // Check click on "View more" button in gallery in infobox
     infobox
         .clickExpandButton()
-        .clickGalleryButton()
+        .clickGalleryButton(0)
         .isInfoboxExpanded();
   }
 }
