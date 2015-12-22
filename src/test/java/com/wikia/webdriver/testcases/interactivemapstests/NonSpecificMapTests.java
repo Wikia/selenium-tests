@@ -37,7 +37,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyCreatedMapTitle(mapTitle);
   }
 
-  @Test(groups = {"NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps"})
   public void NonSpecificMapTests_002_VerifyLoginModalWhenAnon() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -45,7 +45,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     map.verifyLoginModal();
   }
 
-  @Test(groups = {"NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_003_VerifyTemplateSearch() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -85,7 +85,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     specialMap.verifyCorrectPagination();
   }
 
-  @Test(groups = {"NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_006_VerifyLearnMoreLink() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -94,7 +94,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     createMapModal.verifyLearnMoreLinkRedirect(InteractiveMapsContent.LEARN_MORE_LINK);
   }
 
-  @Test(groups = {"NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_007_VerifyCreateCustomMapErrors() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -118,7 +118,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyMapOpened();
   }
 
-  @Test(groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
