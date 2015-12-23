@@ -73,9 +73,6 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] corporatePages() {
     return new Object[][]{
-        {"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
-        {"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
         {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
@@ -93,7 +90,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
         {"it.creepypasta", "Categoria:Creepypasta"},
-        {"wikia", "Wikia"},
         {"wikia", "Video_Games/Lizzunchbox"},
         {"monsterhunter", "MH3U:_Monsters"},
         {"monsterhunter", "Portal:MH3U"},

@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -12,10 +14,12 @@ import org.testng.annotations.Test;
 
 public class PlayingVideoTests extends NewTestTemplate {
 
+  private static final String BROWSER_SIZE = "1400x720";
+
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
-  @Execute(onWikia = "sktest123", disableFlash = "false",
-      browserSize = "1400x720", browser = "FF")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
@@ -35,8 +39,8 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
-  @Execute(disableFlash = "false", onWikia = "sktest123",
-      browserSize = "1400x720", browser = "FF")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
@@ -52,7 +56,8 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
-  @Execute(disableFlash = "false", onWikia = "sktest123", browser = "FF", browserSize = "1400x720")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";
@@ -73,7 +78,8 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @RelatedIssue(issueID = "MAIN-6047", comment = "Test manually")
-  @Execute(disableFlash = "false", onWikia = "sktest123", browserSize = "1400x720", browser = "FF")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";

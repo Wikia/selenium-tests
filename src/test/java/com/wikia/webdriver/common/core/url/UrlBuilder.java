@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -126,7 +127,7 @@ public class UrlBuilder {
   }
 
   private Boolean isMercuryBrowser() {
-    return browser != null && "CHROMEMOBILEMERCURY".equalsIgnoreCase(browser);
+    return browser != null && Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser);
   }
 
   private String composeUrl(String prefix, String wikiName, String suffix) {

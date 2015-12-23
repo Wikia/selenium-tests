@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.driverprovider.mobileprovider;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 
 import org.openqa.selenium.WebDriver;
@@ -21,23 +22,19 @@ public class MobileDriverProvider {
   public WebDriver getDriverInstance() {
     WebDriver driver = null;
 
-    if ("CHROMEMOBILEMERCURY".equals(browser)) {
+    if (Browser.CHROME_MOBILE_MERCURY.equals(browser)) {
       return NewDriverProvider.getDriverInstanceForBrowser(browser);
     }
 
     switch (platform.toUpperCase()) {
-      case "ANDROID":
+      case Browser.CHROME_ANDROID:
         driver = getChromeDriver();
-        break;
-      case "IOS":
-        //@TODO
         break;
       default:
         throw new WebDriverException(
             "Unknown platform provided \n" +
             "Available platforms:" +
-            "\n\t android" +
-            "\n\t ios"
+            "\n\t android"
         );
     }
     return driver;

@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -19,9 +19,7 @@ public class PinMapTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_001_VerifyPinModalContent() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -39,10 +37,8 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap = pinDialog.clickCancelButton();
   }
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -63,9 +59,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPinPopupImageIsVisible();
   }
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
-  @Test(groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_003_VerifyPinCreationErrors() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -86,7 +80,7 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
+      comment = "This maps test should not fail")
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"},
       dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
@@ -102,10 +96,8 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPopUpVisible();
   }
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
+  @Test(enabled = false, groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
       dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
   @Execute(asUser = User.USER)
   public void PinMapTests_005_VerifyDeletePin() {
@@ -124,10 +116,8 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPinNotExists(pinName);
   }
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_006_VerifyChangePinData() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -155,10 +145,8 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.clickOnPin(0);
   }
 
-  @RelatedIssue(issueID = " ",
-          comment = "Functionality is being depracated NO need to test manually")
-  @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
+ @DontRun(env = {"dev", "sandbox", "preview"})
+  @Test(enabled = false, groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -177,7 +165,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.EXTERNAL_LINK);
   }
 
-  @Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
@@ -198,7 +186,7 @@ public class PinMapTests extends NewTestTemplate {
     ));
   }
 
-  @Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_009_VerifyArticlePlaceholder() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

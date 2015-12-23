@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;

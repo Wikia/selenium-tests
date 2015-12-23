@@ -2,7 +2,8 @@ package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
@@ -20,25 +21,29 @@ public class PostsList extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSortPostsList() {
     userCanSortPostsList();
   }
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
   }
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
@@ -48,31 +53,43 @@ public class PostsList extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+    userCanSwitchBetweenLatestAndTrendingTab();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
     userCanViewMorePosts();
   }
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
     backToWiki();
   }
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
@@ -80,15 +97,16 @@ public class PostsList extends NewTestTemplate {
   /**
    * LOGGED IN USER ON MOBILE SECTION
    */
-
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSortPostsList() {
     userCanSortPostsList();
   }
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
@@ -98,9 +116,17 @@ public class PostsList extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
+  }
+
+  @Test
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+    userCanSwitchBetweenLatestAndTrendingTab();
   }
 
   /**
@@ -114,10 +140,24 @@ public class PostsList extends NewTestTemplate {
 
   public void userCanSortPostsList() {
     PostsListPage postsList = new PostsListPage(driver).open();
-    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickOnLatestLinkMobile().getSortButtonLabel(), "Latest");
-    Assertion.assertTrue(postsList.clickOnSortButtonMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickOnTrendingLinkMobile().getSortButtonLabel(), "Trending");
+    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
+    Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
+    postsList.waitForLoadingOverlayToDisappear();
+    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
+    Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
+  }
+
+  public void userCanSwitchBetweenLatestAndTrendingTab() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickLatestTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
+
+    postsList.clickTrendingTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }
 
   public void userCanViewMorePosts() {

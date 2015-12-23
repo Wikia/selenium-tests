@@ -1,7 +1,8 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 
@@ -10,6 +11,8 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"Toolbar", "CustomizeToolbar"})
 public class CustomizeToolbarTests extends NewTestTemplate {
+
+  private static final String BROWSER_SIZE = "800x600";
 
   CustomizedToolbarComponentObject toolbar;
 
@@ -47,7 +50,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
     toolbar.verifyToolOnToolbar(toolPreferences);
   }
 
-  @Test(groups = {"CustomizeToolbar002"})
+  @Test(groups = "CustomizeToolbar002")
   @Execute(asUser = User.USER_2)
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
   public void CustomizeToolbar002_Editing() {
@@ -130,7 +133,8 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CustomizeToolbar007"})
-  @Execute(asUser = User.USER_2, browserSize = "800x600")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browserSize = BROWSER_SIZE)
   public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();

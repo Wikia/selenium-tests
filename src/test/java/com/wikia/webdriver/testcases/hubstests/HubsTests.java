@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.hubstests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
@@ -119,9 +119,9 @@ public class HubsTests extends NewTestTemplate {
   /**
    * Verify that links in WikiaBar are working
    */
-  @Test(dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
-  @RelatedIssue(issueID = "MAIN-6092", comment = "Test manually by clicking on " +
-          "Games, Movies and TV")
+  @Test(enabled=false, dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
+  @RelatedIssue(issueID = "MAIN-6092", comment = "Product requested that this test is disabled. New" +
+          "tests will be create wih MAIN-6101")
   public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
     HomePageObject home = new HomePageObject(driver);
     home.logOut(wikiURL);

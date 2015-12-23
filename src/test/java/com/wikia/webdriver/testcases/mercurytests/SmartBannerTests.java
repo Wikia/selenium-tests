@@ -1,19 +1,44 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class SmartBannerTests extends NewTestTemplate {
+
+  /**
+   * HUB color definition
+   */
+  private enum Colors {
+    LIGHT_GREEN("#94d11f"),
+    LIGHT_ORANGE("#ff7f26"),
+    DARK_ORANGE("#ff5400"),
+    LIGHT_BLUE("#00b7e0"),
+    CYAN("#09d3bf"),
+    YELLOW("#ffd000"),
+    MAGENTA("#c819ad");
+    private String hex;
+
+    private Colors(String hex) {
+      this.hex = hex;
+    }
+  }
 
   /**
    * Wiki name, Main page, HUB color
@@ -30,14 +55,9 @@ public class SmartBannerTests extends NewTestTemplate {
   private static final String BUTTON_NAME_FOR_ANDROID = "Install";
   private static final String BUTTON_NAME_FOR_IOS = "GET";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
-  // SBT01
-  @Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
+  @Test(groups = "MercurySmartBannerTest_001")
   @RelatedIssue(issueID = "XW-656")
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
@@ -88,8 +108,7 @@ public class SmartBannerTests extends NewTestTemplate {
     );
   }
 
-  // SBT02
-  @Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
+  @Test(groups = "MercurySmartBannerTest_002")
   public void MercurySmartBannerTest_002_ThemeColorOnDifferentHubs() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     boolean result;
@@ -113,24 +132,6 @@ public class SmartBannerTests extends NewTestTemplate {
           "is wrong",
           result
       );
-    }
-  }
-
-  /**
-   * HUB color definition
-   */
-  private enum Colors {
-    LIGHT_GREEN("#94d11f"),
-    LIGHT_ORANGE("#ff7f26"),
-    DARK_ORANGE("#ff5400"),
-    LIGHT_BLUE("#00b7e0"),
-    CYAN("#09d3bf"),
-    YELLOW("#ffd000"),
-    MAGENTA("#c819ad");
-    private String hex;
-
-    private Colors(String hex) {
-      this.hex = hex;
     }
   }
 }

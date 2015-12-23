@@ -4,9 +4,11 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.Driver;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -18,12 +20,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAct
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DriverCommand;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class LightboxTests extends NewTestTemplate {
 
   private static final String DIRECTION_LEFT = "left";
@@ -32,14 +37,7 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
   private static final double ACCURACY = 0.83;
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // MT01
-  @Test(groups = {"MercuryLightboxTest_001", "MercuryLightboxTests", "Mercury"})
+  @Test(groups = "MercuryLightboxTest_001")
   public void MercuryLightboxTest_001_Open_Close() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -77,9 +75,8 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  // MT02
-  @Test(groups = {"MercuryLightboxTest_002", "MercuryLightboxTests", "Mercury"})
-  @Execute(allowedDriver = Driver.Android)
+  @Test(groups = "MercuryLightboxTest_002")
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -178,9 +175,8 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  // MT03
-  @Test(groups = {"MercuryLightboxTest_003", "MercuryLightboxTests", "Mercury"})
-  @Execute(allowedDriver = Driver.Android)
+  @Test(groups = "MercuryLightboxTest_003")
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -263,8 +259,7 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  // MT04
-  @Test(groups = {"MercuryLightboxTest_004", "MercuryLightboxTests", "Mercury"})
+  @Test(groups = "MercuryLightboxTest_004")
   public void MercuryLightboxTest_004_UIShow_UIHide() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
@@ -285,10 +280,8 @@ public class LightboxTests extends NewTestTemplate {
     Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
   }
 
-  // MT05
   @RelatedIssue(issueID = "HG-730")
-  @Test(groups = {"MercuryLightboxTest_005", "MercuryLightboxTests", "Mercury"}, enabled = false)
-  @Execute(allowedDriver = Driver.Android)
+  @Test(groups = "MercuryLightboxTest_005", enabled = false)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
     LightboxComponentObject lightbox;
@@ -322,9 +315,8 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  // MT06
-  @Test(groups = {"MercuryLightboxTest_006", "MercuryLightboxTests", "Mercury"})
-  @Execute(allowedDriver = Driver.Android)
+  @Test(groups = "MercuryLightboxTest_006")
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;

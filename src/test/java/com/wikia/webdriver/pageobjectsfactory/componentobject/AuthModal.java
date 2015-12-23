@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.helpers.User;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -2,7 +2,8 @@ package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
 
@@ -18,7 +19,8 @@ public class PostDetails extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -28,7 +30,8 @@ public class PostDetails extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -38,7 +41,8 @@ public class PostDetails extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = MOBILE_RESOLUTION, asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -48,10 +52,12 @@ public class PostDetails extends NewTestTemplate {
    */
 
   @Test
-  @Execute(browserSize = DESKTOP_RESOLUTION, asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
+
   /**
    * TESTING METHODS SECTION
    */

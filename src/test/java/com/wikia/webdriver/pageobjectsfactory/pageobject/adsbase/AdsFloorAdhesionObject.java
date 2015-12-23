@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -79,7 +80,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyThereIsNoWikiaBar(String browser) {
-    if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
+    if (Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser)) {
       // Mercury does not have WikiaBar
       // There should be better way to verify skin - remove it after QAART-608 is done
       PageObjectLogging.log(

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +9,12 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends BasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".sort")
+  @FindBy(css = "div.sort")
   private WebElement sortEntryPointMobile;
 
   @FindBy(css = ".sort span")
@@ -23,11 +23,17 @@ public class PostsListPage extends WikiBasePageObject {
   @FindBy(css = ".discussion-sort")
   private WebElement sortOptionsMobile;
 
-  @FindBy(css = "li[data-type='latest']")
+  @FindBy(xpath = "//li[text()='Latest']")
   private WebElement latestLinkOnListMobile;
 
-  @FindBy(css = "li[data-type='trending']")
+  @FindBy(xpath = "//li[text()='Trending']")
   private WebElement trendingLinkOnListMobile;
+
+  @FindBy(xpath = "//li[text()='Latest']")
+  private WebElement latestTabOnDesktop;
+
+  @FindBy(xpath = "//li[text()='Trending']")
+  private WebElement trendingTabOnDesktop;
 
   @FindBy(css = ".back-button")
   private WebElement backToWiki;
@@ -61,7 +67,7 @@ public class PostsListPage extends WikiBasePageObject {
     return postList.isEmpty();
   }
 
-  public PostsListPage clickOnSortButtonMobile() {
+  public PostsListPage clickSortButtonOnMobile() {
     sortEntryPointMobile.click();
     return this;
   }
@@ -71,18 +77,28 @@ public class PostsListPage extends WikiBasePageObject {
     return sortOptionsMobile.isDisplayed();
   }
 
-  public PostsListPage clickOnLatestLinkMobile() {
+  public PostsListPage clickLatestLinkOnMobile() {
     latestLinkOnListMobile.click();
     return this;
   }
 
-  public PostsListPage clickOnTrendingLinkMobile() {
+  public PostsListPage clickTrendingLinkOnMobile() {
     trendingLinkOnListMobile.click();
     return this;
   }
 
   public String getSortButtonLabel() {
     return labelInSortEntryPointMobile.getText();
+  }
+
+  public PostsListPage clickLatestTabOnDesktop() {
+    latestTabOnDesktop.click();
+    return this;
+  }
+
+  public PostsListPage clickTrendingTabOnDesktop() {
+    trendingTabOnDesktop.click();
+    return this;
   }
 
   public PostsListPage scrollToBottom(WebDriver driver) {

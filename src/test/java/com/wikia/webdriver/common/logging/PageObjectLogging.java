@@ -10,9 +10,9 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -280,10 +280,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     }
 
     Method method = TestContext.getCurrentTestMethod();
-    if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
+    Class<?> declaringClass = method.getDeclaringClass();
+
+    if (TestContext.isIsFirstLoad()) {
+      User user = null;
       TestContext.setFirstLoad(false);
-      User user = method.getAnnotation(Execute.class).asUser();
-      if (user != User.ANONYMOUS) {
+
+      if (declaringClass.isAnnotationPresent(Execute.class)) {
+        user = declaringClass.getAnnotation(Execute.class).asUser();
+      }
+
+      if (method.isAnnotationPresent(Execute.class)) {
+        user = method.getAnnotation(Execute.class).asUser();
+      }
+
+      if (user != null && user != User.ANONYMOUS) {
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject(driver).loginAs(user);
       }

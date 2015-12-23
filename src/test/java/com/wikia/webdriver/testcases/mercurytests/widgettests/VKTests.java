@@ -2,19 +2,24 @@ package com.wikia.webdriver.testcases.mercurytests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryVKWidgetTests", "MercuryWidgetTests", "Mercury"})
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class VKTests extends NewTestTemplate {
 
   private static String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
@@ -22,13 +27,8 @@ public class VKTests extends NewTestTemplate {
   private static String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-  }
-
   @Test(groups = "MercuryVKWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
@@ -39,7 +39,7 @@ public class VKTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryVKWidgetTest_002")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
@@ -53,7 +53,7 @@ public class VKTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryVKWidgetTest_003")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
@@ -69,7 +69,7 @@ public class VKTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryVKWidgetTest_004")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
@@ -86,7 +86,7 @@ public class VKTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryVKWidgetTest_005")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.USER)
+  @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_005_isErrorPresent() {
     VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 

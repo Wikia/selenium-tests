@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
+import com.wikia.webdriver.common.core.helpers.Browser;
+
 public class AdsFloorAdhesionSkinContext {
 
   private static final String OASIS_CREATIVE_ID = "66223683972";
@@ -27,7 +29,7 @@ public class AdsFloorAdhesionSkinContext {
     modalCloseSelector = OASIS_MODAL_CLOSE_CSS;
     slotName = OASIS_SLOT_NAME;
 
-    if ("CHROMEMOBILEMERCURY".equalsIgnoreCase(browser)) {
+    if (Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser)) {
       creativeId = MERCURY_CREATIVE_ID;
       lineItemId = MERCURY_LINE_ITEM_ID;
       modalSelector = MERCURY_MODAL_CSS;

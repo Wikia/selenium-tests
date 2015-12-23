@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.searchtests.intrawiki;
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;

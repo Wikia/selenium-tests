@@ -3,8 +3,8 @@ package com.wikia.webdriver.common.core.api;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 import org.apache.commons.lang3.StringUtils;

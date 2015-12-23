@@ -2,9 +2,10 @@ package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -23,16 +24,41 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
   }
 
+  private void setPropertiesFromAnnotationsOnDeclaringClass(Class<?> declaringClass) {
+    if (declaringClass.isAnnotationPresent(Execute.class)) {
+      setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
+    }
+
+    if (declaringClass.isAnnotationPresent(InBrowser.class)) {
+      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browserSize", declaringClass.getAnnotation(InBrowser.class).browserSize());
+      setTestProperty("emulator", declaringClass.getAnnotation(InBrowser.class).emulator());
+    }
+  }
+
+  private void setPropertiesFromAnnotationsOnMethod(Method method) {
+    if (method.isAnnotationPresent(Execute.class)) {
+      setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
+      setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+    }
+
+    if (method.isAnnotationPresent(InBrowser.class)) {
+      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
+      setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
+    }
+  }
+
   /**
    * Return false if test is excluded from running on current test environment
-   * @param method
-   * @return
    */
   private boolean isTestExcludedFromEnv(Method method){
     if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnv = method.getAnnotation(DontRun.class).env();
-      for (int i = 0; i < excludedEnv.length; i++) {
-        if (Configuration.getEnv().contains(excludedEnv[i])) {
+      String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
+
+      for (String excludedEnv : excludedEnvs) {
+        if (Configuration.getEnv().contains(excludedEnv)) {
           return true;
         }
       }
@@ -40,18 +66,36 @@ public class NewTestTemplate extends NewTestTemplateCore {
     return false;
   }
 
+  private boolean isNonAnonUserOnDeclaringClass(Class<?> declaringClass) {
+    return declaringClass.isAnnotationPresent(Execute.class) &&
+           declaringClass.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
+  }
+
+  private boolean isNonAnonUserOnMethod(Method method) {
+    return method.isAnnotationPresent(Execute.class) &&
+           method.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
+  }
+
   @BeforeMethod(alwaysRun = true)
   public void start(Method method, Object[] data) {
     Configuration.clearCustomTestProperties();
-    if (method.isAnnotationPresent(Execute.class)) {
-      setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
-      setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
-      setTestProperty("browser", method.getAnnotation(Execute.class).browser());
-      setTestProperty("browserSize", method.getAnnotation(Execute.class).browserSize());
+    Class<?> declaringClass = method.getDeclaringClass();
+
+    String browser = Configuration.getBrowser();
+    setPropertiesFromAnnotationsOnDeclaringClass(declaringClass);
+    setPropertiesFromAnnotationsOnMethod(method);
+    String currentBrowser = Configuration.getBrowser();
+
+    if (!browser.equals(currentBrowser)) {
+      PageObjectLogging
+          .logWarning("Parameter override", "Browser parameter changed by annotation"
+                                            + ", old value: " + browser
+                                            + ", new value: " + currentBrowser);
     }
+
     prepareURLs();
 
-    if(isTestExcludedFromEnv(method)){
+    if (isTestExcludedFromEnv(method)) {
       throw new SkipException(
           "Test can't be run on " + Configuration.getEnv() + " environment");
     }
@@ -65,27 +109,13 @@ public class NewTestTemplate extends NewTestTemplateCore {
       NewDriverProvider.setUnstablePageLoadStrategy(true);
     }
 
-    if (method.isAnnotationPresent(Execute.class)) {
-      String onDriver = method.getAnnotation(Execute.class).allowedDriver();
-      if (onDriver.length() > 0 & !onDriver.equalsIgnoreCase(Configuration.getBrowser())) {
-        String errorMessage = "The test can not be run on driver " + Configuration.getBrowser()
-                              + ". The test is restricted to driver " + onDriver +
-                              " as instructed in the test annotation.";
-        PageObjectLogging.log("allowedDriver annotation", errorMessage, false);
-        throw new SkipException(errorMessage);
-      }
-    }
-
     startBrowser();
     setWindowSize();
 
-    if (method.isAnnotationPresent(Execute.class)) {
-      if (method.getAnnotation(Execute.class).asUser() == User.ANONYMOUS) {
-        loadFirstPage();
-      }
-    } else {
+    if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
     }
+
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
   }

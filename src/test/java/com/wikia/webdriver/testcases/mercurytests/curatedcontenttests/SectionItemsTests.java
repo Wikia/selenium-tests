@@ -2,24 +2,22 @@ package com.wikia.webdriver.testcases.mercurytests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.curatedcontent.CuratedContentPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-@Test(groups = {"MercuryCuratedSectionItemsTests", "MercuryCuratedContentTests", "Mercury"})
+@Execute(onWikia = MercuryWikis.MERCURY_CC)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class SectionItemsTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
-  }
-
-  // CCT08
   @Test(groups = "MercuryCuratedSectionItemsTest_001")
   public void MercuryCuratedSectionItemsTest_001_curatedContentItemsAreVisibleAndExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
@@ -37,7 +35,6 @@ public class SectionItemsTests extends NewTestTemplate {
         .isLoadMoreButtonHidden();
   }
 
-  // CCT10
   @Test(groups = "MercuryCuratedSectionItemsTest_002")
   public void MercuryCuratedSectionItemsTest_002_curatedContentItemsAreVisibleAndNotExpandable() {
     CuratedContentPageObject category = new CuratedContentPageObject(driver);

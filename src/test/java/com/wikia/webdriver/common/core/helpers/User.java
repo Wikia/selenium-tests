@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.annotations;
+package com.wikia.webdriver.common.core.helpers;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;

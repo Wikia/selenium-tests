@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;

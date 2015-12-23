@@ -3,16 +3,22 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.CommentsPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class CommentsTests extends NewTestTemplate {
 
   private static final String MEDIA_TYPE_VIDEO = "Video";
@@ -21,14 +27,7 @@ public class CommentsTests extends NewTestTemplate {
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // CT01
-  @Test(groups = {"MercuryCommentsTest_001", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = "MercuryCommentsTest_001")
   @RelatedIssue(issueID = "XW-654")
   public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
     CommentsPageObject comments = new CommentsPageObject(driver);
@@ -100,8 +99,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  // CT02
-  @Test(groups = {"MercuryCommentsTest_002", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = "MercuryCommentsTest_002")
   public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
@@ -165,8 +163,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  // CT03
-  @Test(groups = {"MercuryCommentsTest_003", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = "MercuryCommentsTest_003")
   public void MercuryCommentsTest_003_RepliesListCounter() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
@@ -208,8 +205,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  // CT04
-  @Test(groups = {"MercuryCommentsTest_004", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = "MercuryCommentsTest_004")
   public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.COMMENTS);
@@ -229,8 +225,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  // CT05
-  @Test(groups = {"MercuryCommentsTest_005", "MercuryCommentsTests", "Mercury"})
+  @Test(groups = "MercuryCommentsTest_005")
   public void MercuryCommentsTest_005_Images_Videos() {
     CommentsPageObject comments = new CommentsPageObject(driver);
     comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);

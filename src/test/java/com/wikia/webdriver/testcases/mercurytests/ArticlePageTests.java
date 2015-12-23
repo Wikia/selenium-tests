@@ -3,20 +3,27 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.NavigationSideComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
 
 import org.openqa.selenium.WebDriverException;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
 
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class ArticlePageTests extends NewTestTemplate {
 
   private static final String[]
@@ -24,14 +31,7 @@ public class ArticlePageTests extends NewTestTemplate {
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
        "Privacy Policy", "Feedback"};
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareTest() {
-    driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-    wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_AUTOMATION_TESTING);
-  }
-
-  // APT01
-  @Test(groups = {"MercuryArticleTest_001", "MercuryArticleTests", "Mercury"})
+  @Test(groups = "MercuryArticleTest_001")
   public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -87,8 +87,7 @@ public class ArticlePageTests extends NewTestTemplate {
     }
   }
 
-  // APT02
-  @Test(groups = {"MercuryArticleTest_002", "MercuryArticleTests", "Mercury"})
+  @Test(groups = "MercuryArticleTest_002")
   public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -104,8 +103,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  // APT03
-  @Test(groups = {"MercuryArticleTest_003", "MercuryArticleTests", "Mercury"})
+  @Test(groups = "MercuryArticleTest_003")
   public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.openMercuryArticleByName(wikiURL, MercurySubpages.LINKED_IMAGES);
@@ -123,8 +121,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  // APT04
-  @Test(groups = {"MercuryArticleTest_004", "MercuryArticleTests", "Mercury"})
+  @Test(groups = "MercuryArticleTest_004")
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     articlePage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
@@ -162,8 +159,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  // APT05
-  @Test(groups = {"MercuryArticleTest_005", "MercuryArticleTests", "Mercury"})
+  @Test(groups = "MercuryArticleTest_005")
   @RelatedIssue(issueID = "XW-659")
   public void MercuryArticleTest_005_NavigateToArticleWithColonAndQuestionMark() {
     ArticlePageObject article = new ArticlePageObject(driver);
