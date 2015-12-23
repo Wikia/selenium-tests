@@ -214,6 +214,20 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject isHeroImageSquare() {
+    wait.forElementVisible(mainImage);
+    Assertion.assertEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
+    PageObjectLogging.log("Hero image", "is square", true);
+    return this;
+  }
+
+  public PortableInfoboxObject isNotHeroImageSquare() {
+    wait.forElementVisible(mainImage);
+    Assertion.assertNotEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
+    PageObjectLogging.log("Hero image", "is square", true);
+    return this;
+  }
+
   public PortableInfoboxObject isExternalLinkLabelInURL(String name, String url) {
     Assertion.assertStringContains(url, name);
     PageObjectLogging.log("External links", MercuryMessages.VISIBLE_MSG, true);

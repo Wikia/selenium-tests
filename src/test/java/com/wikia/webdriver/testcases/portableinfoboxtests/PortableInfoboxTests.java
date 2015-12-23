@@ -27,7 +27,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new PortableInfoboxPageObject(driver).open(PageContent.PORTABLE_INFOBOX01)
         .areBoldElementsMoreThanOne().areItalicElementsMoreThanOne().areHeadersMoreThanOne()
         .areQuotationMarksPresented().verifyReferencesPresence().isImagePresented()
-        .isInfoboxTitlePresented();
+        .isInfoboxTitlePresented().areLinksInPoemTagPresented();
   }
 
   @Test(groups = {"PortableInfoboxTests_002", "PortableInfoboxTests_2"})

@@ -132,4 +132,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickGalleryButton(0)
         .isInfoboxExpanded();
   }
+
+  @Test(groups = "MercuryPortableInfoboxTest_007")
+  public void MercuryPortableInfoboxTest_007_HeroImageCropping() {
+    PortableInfoboxObject infobox_tallImage = new PortableInfoboxObject(driver);
+    infobox_tallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infobox_tallImage.isHeroImageSquare();
+
+    PortableInfoboxObject infobox_wideImage = new PortableInfoboxObject(driver);
+    infobox_wideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
+    infobox_wideImage.isNotHeroImageSquare();
+  }
+
 }
