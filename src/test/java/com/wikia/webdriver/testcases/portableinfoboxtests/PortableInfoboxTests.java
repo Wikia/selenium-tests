@@ -49,10 +49,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String internalLinkName = info
         .open(PageContent.PORTABLE_INFOBOX01)
-        .getInternalLinkRedirectTitleWithIndex(1);
+        .getInternalLinkRedirectTitleWithIndex(3);
 
     String internalURL = info
-        .clickInternalLinkWithIndex(1)
+        .clickInternalLinkWithIndex(3)
         .getUrlAfterPageIsLoaded();
 
     info.compareURLAndInternalLink(internalLinkName, internalURL);

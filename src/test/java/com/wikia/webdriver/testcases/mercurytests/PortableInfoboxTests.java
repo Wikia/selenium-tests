@@ -135,13 +135,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_007")
   public void MercuryPortableInfoboxTest_007_HeroImageCropping() {
-    PortableInfoboxObject infobox_tallImage = new PortableInfoboxObject(driver);
-    infobox_tallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
-    infobox_tallImage.isHeroImageSquare();
+    PortableInfoboxObject infoboxTallImage = new PortableInfoboxObject(driver);
+    infoboxTallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infoboxTallImage.isHeroImageSquare();
 
-    PortableInfoboxObject infobox_wideImage = new PortableInfoboxObject(driver);
-    infobox_wideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
-    infobox_wideImage.isNotHeroImageSquare();
+    PortableInfoboxObject infoboxWideImage = new PortableInfoboxObject(driver);
+    infoboxWideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
+    infoboxWideImage.isNotHeroImageSquare();
   }
 
 }
