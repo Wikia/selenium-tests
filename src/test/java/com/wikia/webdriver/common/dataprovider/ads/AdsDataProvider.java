@@ -74,6 +74,8 @@ public class AdsDataProvider {
   public static Object[][] corporatePages() {
     return new Object[][]{
         {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
+        {"fr.wikia", "Wikia", "wka.wikia/_fraccueil//home", "CORP_TOP_LEADERBOARD"},
+        {"pl.wikia", "Wikia", "wka.wikia/_plcorporate//home", "CORP_TOP_LEADERBOARD"},
         {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
         {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
