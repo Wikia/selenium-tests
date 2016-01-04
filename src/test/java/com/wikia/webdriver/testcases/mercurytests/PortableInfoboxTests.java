@@ -80,7 +80,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalURL = infobox
         .clickExternalLink(0)
-        .getUrlFromExternalLinkaAfterPageIsLoaded();
+        .getUrlFromExternalLinkAfterPageIsLoaded();
 
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }

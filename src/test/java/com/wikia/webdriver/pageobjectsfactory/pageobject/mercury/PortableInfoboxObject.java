@@ -34,11 +34,11 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement imageInTabber;
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
-  @FindBy(css = ".portable-infobox .article-video")
+  @FindBy(css = ".portable-infobox .article-video img")
   private WebElement video;
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
-  @FindBy(css = ".pi-title img")
+  @FindBy(css = ".pi-title")
   private WebElement imageInTitle;
   @FindBy(css = ".portable-infobox .linked-gallery button")
   private List<WebElement> galleryButtonList;
@@ -70,7 +70,7 @@ public class PortableInfoboxObject extends BasePageObject {
     return externalLinks.get(index).getText();
   }
 
-  public String getUrlFromExternalLinkaAfterPageIsLoaded() {
+  public String getUrlFromExternalLinkAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);
 
     return driver.getCurrentUrl();
@@ -289,7 +289,7 @@ public class PortableInfoboxObject extends BasePageObject {
         unorderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
-    PageObjectLogging.log("Unordered list labes and value", "have the same margin", true);
+    PageObjectLogging.log("Unordered list labels and value", "have the same margin", true);
 
     return this;
   }
@@ -299,7 +299,7 @@ public class PortableInfoboxObject extends BasePageObject {
         orderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
-    PageObjectLogging.log("Ordered list labes and value", "have the same margin", true);
+    PageObjectLogging.log("Ordered list labels and value", "have the same margin", true);
 
     return this;
   }
