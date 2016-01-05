@@ -69,9 +69,9 @@ public class PostDetailsPage extends WikiBasePageObject{
   }
 
   public String getReplyVoteCount(int index) {
-    WebElement voteCountArea = replyVoteCount.get(index);
-    wait.forElementVisible(voteCountArea);
-    return voteCountArea.getText();
+    WebElement voteArea = replyVoteCount.get(index);
+    wait.forElementVisible(voteArea);
+    return voteArea.getText();
   }
 
   public void waitForPostDetailsVoteCountToChange(String voteCount) {
@@ -79,8 +79,8 @@ public class PostDetailsPage extends WikiBasePageObject{
   }
 
   public void waitForReplyVoteCountToChange(int replyIndex, String voteCount) {
-    WebElement voteCountArea = replyVoteCount.get(replyIndex);
-    wait.forTextNotInElement(voteCountArea, voteCount);
+    WebElement voteArea = replyVoteCount.get(replyIndex);
+    wait.forTextNotInElement(voteArea, voteCount);
   }
 
 }

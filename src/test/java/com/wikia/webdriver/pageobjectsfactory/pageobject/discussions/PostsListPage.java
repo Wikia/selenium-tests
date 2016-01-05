@@ -47,6 +47,12 @@ public class PostsListPage extends BasePageObject {
   @FindBy(css = "#WikiaUserPagesHeader")
   private WebElement userPageHeader;
 
+  @FindBy(css = ".upvote-reply")
+  private List<WebElement> replyUpvoteButton;
+  @FindBy(css = ".replies-list small")
+  private List<WebElement> replyVoteCount;
+
+
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "203236";
 
@@ -128,5 +134,29 @@ public class PostsListPage extends BasePageObject {
 
   public boolean isUserPageHeaderVisible() {
     return userPageHeader.isDisplayed();
+  }
+
+
+  public boolean isUpvoteButtonVisible(int index) {
+    WebElement button = replyUpvoteButton.get(index);
+    wait.forElementVisible(button);
+    return button.isDisplayed();
+  }
+
+  public String getVoteCount(int index) {
+    WebElement voteCountArea = replyVoteCount.get(index);
+    wait.forElementVisible(voteCountArea);
+    return voteCountArea.getText();
+  }
+
+  public void clickUpvoteButton(int replyIndex) {
+    WebElement button = replyUpvoteButton.get(replyIndex);
+    wait.forElementClickable(button);
+    button.click();
+  }
+
+  public void waitForVoteCountToChange(int replyIndex, String voteCount) {
+    WebElement voteArea = replyVoteCount.get(replyIndex);
+    wait.forTextNotInElement(voteArea, voteCount);
   }
 }
