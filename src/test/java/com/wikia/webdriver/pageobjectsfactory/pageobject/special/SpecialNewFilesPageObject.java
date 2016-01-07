@@ -214,7 +214,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   }
 
   public String getNewFilesSpecialPageTitle() {
-	return NEW_FILES_SPECIAL_PAGE_TITLE;
+    return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
 
 }
