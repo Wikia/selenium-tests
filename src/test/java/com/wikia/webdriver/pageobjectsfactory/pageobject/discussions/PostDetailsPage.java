@@ -83,4 +83,15 @@ public class PostDetailsPage extends WikiBasePageObject{
     wait.forTextNotInElement(voteArea, voteCount);
   }
 
+  /**
+   * Wait for the noticeable time lag between vote and vote value change to pass
+   */
+  public void waitForVoteCountChangeTimeLagToPass() {
+    try {
+      //This sleep was introduced because of noticeable lag between vote and vote value change
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 }

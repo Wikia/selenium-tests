@@ -25,6 +25,20 @@ public class PostDetailsUpvote extends NewTestTemplate {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void AnonymousUserOnMobileCanNotVoteForPostDetails() {
+    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void AnonymousUserOnMobileCanNotVoteForFirstReply() {
+    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
   /**
    * LOGGED IN USERS ON DESKTOP SECTION
    */
@@ -85,5 +99,26 @@ public class PostDetailsUpvote extends NewTestTemplate {
     postDetails.waitForReplyVoteCountToChange(replyIndex, secondVoteCount);
     String thirdVoteCount = postDetails.getReplyVoteCount(replyIndex);
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
+  }
+
+  public void postDetailsUpvoteButtonClickDoenstAddAnUpvote() {
+    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
+    postDetails.isUpvoteButtonVisible();
+    String firstVoteCount = postDetails.getPostDetailsVoteCount();
+    postDetails.clickPostDetailsUpvoteButton();
+    postDetails.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = postDetails.getPostDetailsVoteCount();
+    Assertion.assertEquals(firstVoteCount, secondVoteCount);
+  }
+
+  public void firstReplyUpvoteButtonClickDoenstAddAnUpvote() {
+    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
+    int replyIndex = 0;
+    postDetails.isReplyUpvoteButtonVisible(replyIndex);
+    String firstVoteCount = postDetails.getReplyVoteCount(replyIndex);
+    postDetails.clickReplyUpvoteButton(replyIndex);
+    postDetails.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = postDetails.getReplyVoteCount(replyIndex);
+    Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 }
