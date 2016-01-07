@@ -9,14 +9,32 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups = "Discussions")
+@Test(groups = {"Discussions", "PostListUpvote"})
 public class PostsListUpvote extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
-   * LOGGED IN USER ON MOBILE SECTION
+   * ANONYMOUS USER SECTION
+   */
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void AnonymousUserOnMobileCanNotUpvote() {
+    postListUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void AnonymousUserOnDesktopCanNotUpvote() {
+    postListUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
+  /**
+   * LOGGED IN USER SECTION
    */
   @Test
   @Execute(asUser = User.USER_3)
@@ -25,9 +43,6 @@ public class PostsListUpvote extends NewTestTemplate {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  /**
-   * LOGGED IN USER ON DESKTOP SECTION
-   */
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
@@ -35,23 +50,10 @@ public class PostsListUpvote extends NewTestTemplate {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test
-  @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void AnonymousUserOnMobileCanUpvote() {
-    postListUpvoteButtonClickDoenstAddAnUpvote();
-  }
-
-  @Test
-  @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserOnDesktopCanUpvote() {
-    postListUpvoteButtonClickDoenstAddAnUpvote();
-  }
-
   /**
    * TESTING METHODS SECTION
    */
+
   public void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     PostsListPage postList = new PostsListPage(driver).open();
     int replyIndex = 0;

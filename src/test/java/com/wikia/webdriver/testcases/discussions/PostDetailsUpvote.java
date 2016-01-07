@@ -9,21 +9,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetails
 
 import org.testng.annotations.Test;
 
+@Test(groups = {"Discussions", "PostDetailsUpvote"})
 public class PostDetailsUpvote extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
-   * LOGGED IN USERS ON MOBILE SECTION
+   * ANONYMOUS USER SECTION
    */
-
-  @Test
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
 
   @Test
   @Execute(asUser = User.ANONYMOUS)
@@ -34,14 +28,36 @@ public class PostDetailsUpvote extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void AnonymousUserOnDesktopCanNotVoteForPostDetails() {
+    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void AnonymousUserOnMobileCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void AnonymousUserOnDesktopCanNotVoteForFirstReply() {
+    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
   /**
-   * LOGGED IN USERS ON DESKTOP SECTION
+   * LOGGED IN USER
+   * POST DETAILS
    */
+
+  @Test
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void loggedInUserOnMobileCanSeePostDetailsList() {
+    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
+  }
 
   @Test
   @Execute(asUser = User.USER_3)
@@ -50,16 +66,17 @@ public class PostDetailsUpvote extends NewTestTemplate {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
+  /**
+   * LOGGED IN USER
+   * FIRST REPLY
+   */
+
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
-
-  /**
-   * LOGGED IN USERS ON DESKTOP SECTION
-   */
 
   @Test
   @Execute(asUser = User.USER_3)
