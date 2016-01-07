@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponento
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject.NEW_FILES_SPECIAL_PAGE_TITLE;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
@@ -47,7 +48,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   public void FBButton_004_ForcedLoginButton_Visible() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifySpecialPage();
+    specialPage.verifyPageHeader(NEW_FILES_SPECIAL_PAGE_TITLE);
     specialPage.addPhoto();
     specialPage.verifyModalLoginAppeared();
     specialPage.verifyModalFBButtonVisible();

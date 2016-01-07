@@ -28,7 +28,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   public void ForcedLogin_001_newFile() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifySpecialPage();
+    specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
     specialPage.addPhoto();
     specialPage.verifyModalLoginAppeared();
     specialPage.logInViaModal(credentials.userName10, credentials.password10);
@@ -44,7 +44,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   public void ForcedLogin_001_newFile_authModal() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifySpecialPage();
+    specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
     specialPage.addPhoto();
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
