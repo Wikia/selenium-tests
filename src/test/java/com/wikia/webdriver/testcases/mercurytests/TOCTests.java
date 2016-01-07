@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -106,8 +105,6 @@ public class TOCTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTOCTest_003")
-  @RelatedIssue(issueID = "XW-909", comment = "The functionality is broken. User is redirected "
-                                              + "70 pixels higher than section header position")
   public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
