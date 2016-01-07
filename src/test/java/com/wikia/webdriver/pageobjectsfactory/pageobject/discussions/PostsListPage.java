@@ -47,9 +47,9 @@ public class PostsListPage extends BasePageObject {
   @FindBy(css = "#WikiaUserPagesHeader")
   private WebElement userPageHeader;
 
-  @FindBy(css = ".upvote-reply")
+  @FindBy(css = ".icon.upvote")
   private List<WebElement> replyUpvoteButton;
-  @FindBy(css = ".replies-list small")
+  @FindBy(css = ".upvote-area")
   private List<WebElement> replyVoteCount;
 
 
@@ -149,14 +149,26 @@ public class PostsListPage extends BasePageObject {
     return voteCountArea.getText();
   }
 
-  public void clickUpvoteButton(int replyIndex) {
-    WebElement button = replyUpvoteButton.get(replyIndex);
+  public void clickUpvoteButton(int postIndex) {
+    WebElement button = replyUpvoteButton.get(postIndex);
     wait.forElementClickable(button);
     button.click();
   }
 
-  public void waitForVoteCountToChange(int replyIndex, String voteCount) {
-    WebElement voteArea = replyVoteCount.get(replyIndex);
+  public void waitForVoteCountToChange(int postIndex, String voteCount) {
+    WebElement voteArea = replyVoteCount.get(postIndex);
     wait.forTextNotInElement(voteArea, voteCount);
+  }
+
+  /**
+   * Wait for the noticeable time lag between vote and vote value change to pass
+   */
+  public void waitForVoteCountChangeTimeLagToPass() {
+    try {
+      //This sleep was introduced because of noticeable lag between vote and vote value change
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }

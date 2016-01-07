@@ -21,25 +21,37 @@ public class PostsListUpvote extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanSortPostsList() {
+  public void loggedInUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
   /**
    * LOGGED IN USER ON DESKTOP SECTION
    */
-
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+  public void loggedInUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void AnonymousUserOnMobileCanUpvote() {
+    postListUpvoteButtonClickDoenstAddAnUpvote();
+  }
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void AnonymousUserOnDesktopCanUpvote() {
+    postListUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   /**
    * TESTING METHODS SECTION
    */
-
   public void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     PostsListPage postList = new PostsListPage(driver).open();
     int replyIndex = 0;
@@ -53,6 +65,17 @@ public class PostsListUpvote extends NewTestTemplate {
     postList.waitForVoteCountToChange(replyIndex, secondVoteCount);
     String thirdVoteCount = postList.getVoteCount(replyIndex);
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
+  }
+
+  public void postListUpvoteButtonClickDoenstAddAnUpvote() {
+    PostsListPage postList = new PostsListPage(driver).open();
+    int replyIndex = 0;
+    postList.isUpvoteButtonVisible(replyIndex);
+    String firstVoteCount = postList.getVoteCount(replyIndex);
+    postList.clickUpvoteButton(replyIndex);
+    postList.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = postList.getVoteCount(replyIndex);
+    Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
   
 }
