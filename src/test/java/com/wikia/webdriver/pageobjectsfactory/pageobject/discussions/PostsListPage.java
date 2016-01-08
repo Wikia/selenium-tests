@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,9 +50,15 @@ public class PostsListPage extends BasePageObject {
 
   @FindBy(css = ".icon.upvote")
   private List<WebElement> replyUpvoteButton;
+
   @FindBy(css = ".upvote-area")
   private List<WebElement> replyVoteCount;
 
+  @FindBy(css = ".toggle-share")
+  private List<WebElement> toggleShareButton;
+
+  @FindBy(css = ".share-feature")
+  private List<WebElement> shareFeature;
 
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "203236";
@@ -170,5 +177,23 @@ public class PostsListPage extends BasePageObject {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public void clickShareIcon(int postIndex) {
+    WebElement button = toggleShareButton.get(postIndex);
+    wait.forElementClickable(button);
+    button.click();
+  }
+
+  public String[] getSocialIconClasses(int postIndex) {
+    List<WebElement> shareIcon = shareFeature.get(postIndex).findElements(By.cssSelector("a.icon"));
+    int numberOfShareButtons = shareIcon.size();
+    String[] classes = new String[numberOfShareButtons];
+    for (int i = 0; i < numberOfShareButtons; i++) {
+      WebElement icon = shareIcon.get(i);
+      wait.forElementVisible(icon);
+      classes[i] = icon.getAttribute("class").split(" ")[0];
+    }
+    return classes;
   }
 }
