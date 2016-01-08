@@ -140,7 +140,6 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = "LightboxTest_008")
-  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(asUser = User.USER, disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
@@ -160,6 +159,7 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = "LightboxTest_009")
+  @RelatedIssue(issueID = "MAIN-6170", comment = "Test manually")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
