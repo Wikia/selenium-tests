@@ -47,7 +47,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   public void FBButton_004_ForcedLoginButton_Visible() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifySpecialPage();
+    specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
     specialPage.addPhoto();
     specialPage.verifyModalLoginAppeared();
     specialPage.verifyModalFBButtonVisible();
