@@ -135,18 +135,21 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_007")
-  public void MercuryPortableInfoboxTest_007_HeroImageCropping() {
+  public void MercuryPortableInfoboxTest_007_HeroImageTall() {
     PortableInfoboxObject infoboxTallImage = new PortableInfoboxObject(driver);
     infoboxTallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
     infoboxTallImage.isHeroImageSquare();
+  }
 
+  @Test(groups = "MercuryPortableInfoboxTest_008")
+  public void MercuryPortableInfoboxTest_008_HeroImageWide() {
     PortableInfoboxObject infoboxWideImage = new PortableInfoboxObject(driver);
     infoboxWideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
     infoboxWideImage.isNotHeroImageSquare();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_008")
-  public void MercuryPortableInfoboxTest_008_ImageCollection() {
+  @Test(groups = "MercuryPortableInfoboxTest_009")
+  public void MercuryPortableInfoboxTest_009_ImageCollection() {
     PortableInfoboxObject info = new PortableInfoboxObject(driver);
     info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_5);
 
@@ -157,16 +160,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isImageInCollectionVisible();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_009")
-  public void MercuryPortableInfoboxTest_009_HeadersInTOC() {
+  @Test(groups = "MercuryPortableInfoboxTest_010")
+  public void MercuryPortableInfoboxTest_010_HeadersInTOC() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     PortableInfoboxObject info = new PortableInfoboxObject(driver);
     info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
 
-    String headerName = info.getHeaderName(0);
-
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.clickOnTOC();
-    toc.hasTOCitemText(0, headerName);
+    toc.TOCItemNotContainsText(0, info.getHeaderName(0));
   }
-
 }

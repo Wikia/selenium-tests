@@ -79,7 +79,7 @@ public class TableOfContentPageObject extends BasePageObject {
     return !"none".equals(TOCMenu.getCssValue("display"));
   }
 
-  public void hasTOCitemText(int itemIndex, String itemText) {
+  public void TOCItemNotContainsText(int itemIndex, String itemText) {
     Assertion.assertNotEquals(tocItems.get(itemIndex).getText(), itemText);
   }
 }

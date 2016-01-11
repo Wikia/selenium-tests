@@ -141,7 +141,6 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject clickNextImageArrow() {
     wait.forElementVisible(nextImageArrow);
-
     nextImageArrow.click();
 
     return this;
@@ -250,7 +249,7 @@ public class PortableInfoboxObject extends BasePageObject {
   public PortableInfoboxObject isNotHeroImageSquare() {
     wait.forElementVisible(mainImage);
     Assertion.assertNotEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
-    PageObjectLogging.log("Hero image", "is square", true);
+    PageObjectLogging.log("Hero image", "is not square", true);
     return this;
   }
 
