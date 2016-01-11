@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -31,15 +30,17 @@ public class PostsListSharing extends NewTestTemplate {
   @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void AnonymousUserOnMobileSeesSocialNetworkIcons() {
-    sharingIconClickDisplaysSocialNetworkIcons( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});
+  public void socialNetworkIconsAreDisplayedToAnonymousUserOnMobile() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(
+        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
   }
 
   @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserOnDesktopCanNotUpvote() {
-  sharingIconClickDisplaysSocialNetworkIcons( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});}
+  public void socialNetworkIconsAreDisplayedToAnonymousUserOnDesktop() {
+  toggleShareIconClickDisplaysSocialNetworkIcons(
+      new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});}
 
   /**
    * LOGGED IN USER SECTION
@@ -47,26 +48,28 @@ public class PostsListSharing extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanUpvote() {
-  sharingIconClickDisplaysSocialNetworkIcons( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});
+  public void socialNetworkIconsAreDisplayedToLoggedInUserOnMobile() {
+  toggleShareIconClickDisplaysSocialNetworkIcons(
+      new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
   }
 
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanUpvote() {
-    sharingIconClickDisplaysSocialNetworkIcons( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});
+  public void socialNetworkIconsAreDisplayedToLoggedInUserOnDesktop() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(
+        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
   }
 
   /**
    * TESTING METHODS SECTION
    */
 
-  public void sharingIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
+  public void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
     PostsListPage postList = new PostsListPage(driver).open();
     int postIndex = 0;
     postList.clickShareIcon(postIndex);
-    String[] currentSocialNetworks = postList.getSocialIconClasses(postIndex);
+    String[] currentSocialNetworks = postList.getSocialNetworkIconClasses(postIndex);
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
@@ -78,29 +81,5 @@ public class PostsListSharing extends NewTestTemplate {
     }
   }
 
-  @DataProvider(name = "SocialButtonsDataProvider")
-  public final String[][][] SocialButtonsDataProvider() {
-    return new String[][][] {
-        { {credentials.userNameEnglish, credentials.passwordEnglish},
-          {"Facebook", "Twitter", "Reddit", "Tumblr"}},
-        { {credentials.userNameJapanese, credentials.passwordJapanese},
-          {"Facebook", "Twitter", "Google+"}},
-        { {credentials.userNameBrazilianPortuguese, credentials.passwordBrazilianPortuguese},
-          {"Facebook", "Twitter", "Reddit", "Tumblr"}},
-        { {credentials.userNameChinese, credentials.passwordChinese}, {"Facebook", "Sina Weibo"}},
-        { {credentials.userNameGerman, credentials.passwordGerman},
-          {"Facebook", "Twitter", "Tumblr"}},
-        { {credentials.userNameFrench, credentials.passwordFrench}, {"Facebook", "Twitter"}},
-        { {credentials.userNameSpanish, credentials.passwordSpanish},
-          {"Facebook", "Twitter", "Menéame", "Tumblr"}},
-        { {credentials.userNameRussian, credentials.passwordRussian},
-          {"VK", "Facebook", "Odnoklassniki", "Twitter"}},
-        { {credentials.userNamePolish, credentials.passwordPolish},
-          {"Facebook", "Twitter", "NK", "Wykop"}},
-        { {credentials.userNameItalian, credentials.passwordItalian},
-          {"Facebook", "Twitter", "Reddit", "Tumblr"}
-        }
-    };
-  }
 }
 

@@ -55,7 +55,7 @@ public class PostsListPage extends BasePageObject {
   private List<WebElement> replyVoteCount;
 
   @FindBy(css = ".toggle-share")
-  private List<WebElement> toggleShareButton;
+  private List<WebElement> toggleShare;
 
   @FindBy(css = ".share-feature")
   private List<WebElement> shareFeature;
@@ -180,17 +180,17 @@ public class PostsListPage extends BasePageObject {
   }
 
   public void clickShareIcon(int postIndex) {
-    WebElement button = toggleShareButton.get(postIndex);
+    WebElement button = toggleShare.get(postIndex);
     wait.forElementClickable(button);
     button.click();
   }
 
-  public String[] getSocialIconClasses(int postIndex) {
-    List<WebElement> shareIcon = shareFeature.get(postIndex).findElements(By.cssSelector("a.icon"));
-    int numberOfShareButtons = shareIcon.size();
-    String[] classes = new String[numberOfShareButtons];
-    for (int i = 0; i < numberOfShareButtons; i++) {
-      WebElement icon = shareIcon.get(i);
+  public String[] getSocialNetworkIconClasses(int postIndex) {
+    List<WebElement> icons = shareFeature.get(postIndex).findElements(By.cssSelector("a.icon"));
+    int numberOfIcons = icons.size();
+    String[] classes = new String[numberOfIcons];
+    for (int i = 0; i < numberOfIcons; i++) {
+      WebElement icon = icons.get(i);
       wait.forElementVisible(icon);
       classes[i] = icon.getAttribute("class").split(" ")[0];
     }

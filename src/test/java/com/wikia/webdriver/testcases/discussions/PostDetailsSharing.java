@@ -28,8 +28,8 @@ public class PostDetailsSharing extends NewTestTemplate {
   @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserSeesSocialNetworkIcons() {
-    socialNetworkIconsAreDisplayed( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});}
+  public void socialNetworkIconsAreDisplayedToAnonymousUser() {
+    socialNetworkIconsAreDisplayed(new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});}
 
   /**
    * LOGGED IN USER
@@ -38,8 +38,8 @@ public class PostDetailsSharing extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserSeesSocialNetworkIcons() {
-    socialNetworkIconsAreDisplayed( new String[] {"Facebook", "Twitter", "Reddit", "Tumblr"});
+  public void socialNetworkIconsAreDisplayedToLoggedInUser() {
+    socialNetworkIconsAreDisplayed(new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
   }
 
   /**
@@ -48,7 +48,7 @@ public class PostDetailsSharing extends NewTestTemplate {
 
   public void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
-    String[] currentSocialNetworks = postDetails.getSocialIconClasses();
+    String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
