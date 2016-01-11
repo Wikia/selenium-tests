@@ -34,7 +34,7 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement imageInTabber;
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
-  @FindBy(css = ".portable-infobox .article-video img")
+  @FindBy(css = ".portable-infobox .article-video")
   private WebElement video;
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
