@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 /**
  * @ownership Content X-Wing Wikia
  */
+@Test(groups = {"Discussions", "PostDetailsSharing"})
 public class PostDetailsSharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
