@@ -98,6 +98,9 @@ public class PostsListSharing extends NewTestTemplate {
         { {credentials.userNamePolish, credentials.passwordPolish},
           {"Facebook", "Twitter", "NK", "Wykop"}},
         { {credentials.userNameItalian, credentials.passwordItalian},
-          {"Facebook", "Twitter", "Reddit", "Tumblr"}}};
+          {"Facebook", "Twitter", "Reddit", "Tumblr"}
+        }
+    };
+  }
+}
 
-}}

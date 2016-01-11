@@ -20,6 +20,8 @@ public class PostDetailsPage extends WikiBasePageObject{
   private WebElement upvoteArea;
   @FindBy(css = ".replies-list small")
   private List<WebElement> replyVoteCount;
+  @FindBy(css = "a.icon")
+  private List<WebElement> shareIcon;
 
   private static final String PATH = "d/p/%s";
   private static final String DEFAULT_POST_ID = "2621148372316194193";
@@ -93,5 +95,16 @@ public class PostDetailsPage extends WikiBasePageObject{
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public String[] getSocialIconClasses() {
+    int numberOfShareButtons = shareIcon.size();
+    String[] classes = new String[numberOfShareButtons];
+    for (int i = 0; i < numberOfShareButtons; i++) {
+      WebElement icon = shareIcon.get(i);
+      wait.forElementVisible(icon);
+      classes[i] = icon.getAttribute("class").split(" ")[0];
+    }
+    return classes;
   }
 }
