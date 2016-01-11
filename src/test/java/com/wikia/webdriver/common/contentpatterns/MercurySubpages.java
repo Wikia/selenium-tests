@@ -19,6 +19,8 @@ public class MercurySubpages {
   public static final String INFOBOX_1 = "Infobox1";
   public static final String INFOBOX_2 = "Infobox2";
   public static final String INFOBOX_3 = "Infobox3";
+  public static final String INFOBOX_4 = "Infobox4";
+  public static final String INFOBOX_5 = "Infobox5";
 
   /**
    * Legend:
