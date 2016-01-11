@@ -25,9 +25,9 @@ public class ArticlePageObject extends BasePageObject {
   private List<WebElement> footerLinks;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;
-  @FindBy(css = "nav.article-categories-list div")
+  @FindBy(xpath = "//nav/div[node()=\"Categories\"]")
   private WebElement categoryButton;
-  @FindBy(css = "nav.article-categories-list li")
+  @FindBy(xpath = "//nav/div[node()=\"Categories\"]/../ul/li")
   private List<WebElement> categoryList;
   @FindBy(css = ".article-title")
   private WebElement articleTitle;

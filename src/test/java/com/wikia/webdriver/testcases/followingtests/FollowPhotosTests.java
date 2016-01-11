@@ -4,6 +4,7 @@
 package com.wikia.webdriver.testcases.followingtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -38,6 +39,7 @@ public class FollowPhotosTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})
+  @RelatedIssue(issueID = "QAART-711", comment = "Test manually")
   @Execute(asUser = User.USER)
   public void FollowPhoto_003_verify() {
     WikiBasePageObject base = new WikiBasePageObject(driver);

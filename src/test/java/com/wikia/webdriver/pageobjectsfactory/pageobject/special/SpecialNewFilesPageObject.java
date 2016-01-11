@@ -20,6 +20,8 @@ import java.util.Random;
 
 public class SpecialNewFilesPageObject extends SpecialPageObject {
 
+  private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
+
   @FindBy(css = "a.upphotos[title*='Add a photo']")
   private WebElement addPhotoButton;
   @FindBy(css = "input[name='wpUploadFile']")
@@ -209,6 +211,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
     PageObjectLogging.log("getImageKey", "Image key: " + imageKey, true);
     return imageKey;
+  }
+
+  public String getNewFilesSpecialPageTitle() {
+    return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
 
 }
