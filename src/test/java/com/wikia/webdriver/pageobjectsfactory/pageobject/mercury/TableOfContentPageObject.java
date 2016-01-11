@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
+import com.wikia.webdriver.common.core.Assertion;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +23,8 @@ public class TableOfContentPageObject extends BasePageObject {
   private WebElement tocButton;
   @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
   private WebElement tocUnderH1;
+  @FindBy(css = "nav.table-of-contents li")
+  private List<WebElement> tocItems;
 
   public TableOfContentPageObject(WebDriver driver) {
     super(driver);
@@ -73,5 +77,9 @@ public class TableOfContentPageObject extends BasePageObject {
 
   public boolean isTOCMenuVisible() {
     return !"none".equals(TOCMenu.getCssValue("display"));
+  }
+
+  public void hasTOCitemText(int itemIndex, String itemText) {
+    Assertion.assertNotEquals(tocItems.get(itemIndex).getText(), itemText);
   }
 }

@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
+import org.apache.xpath.SourceTree;
 import org.testng.annotations.Test;
 
 /**
@@ -233,12 +234,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .open(PageContent.PORTABLE_INFOBOX02)
         .getDataImageName();
 
-    String articleName = info.getHeaderText();
     CategoryPageObject categoryPage = info.clickCategoryWithIndex(0);
 
     String categoryImageURL = categoryPage.getPageImageURL(
-            categoryPage.getArticleIndexInGalleryByName(articleName)
-        );
+        categoryPage.getArticleIndexInGalleryByName(PageContent.PORTABLE_INFOBOX02)
+    );
 
     info.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
   }

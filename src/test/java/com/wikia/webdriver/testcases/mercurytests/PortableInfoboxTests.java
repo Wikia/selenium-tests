@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
 
@@ -142,6 +143,30 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfoboxObject infoboxWideImage = new PortableInfoboxObject(driver);
     infoboxWideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
     infoboxWideImage.isNotHeroImageSquare();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_008")
+  public void MercuryPortableInfoboxTest_008_ImageCollection() {
+    PortableInfoboxObject info = new PortableInfoboxObject(driver);
+    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_5);
+
+    info.isImageInCollectionVisible()
+        .clickNextImageArrow()
+        .isImageInCollectionVisible()
+        .clickNextImageArrow()
+        .isImageInCollectionVisible();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_009")
+  public void MercuryPortableInfoboxTest_009_HeadersInTOC() {
+    PortableInfoboxObject info = new PortableInfoboxObject(driver);
+    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
+
+    String headerName = info.getHeaderName(0);
+
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    toc.clickOnTOC();
+    toc.hasTOCitemText(0, headerName);
   }
 
 }
