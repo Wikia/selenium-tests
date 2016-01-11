@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
-import org.apache.xpath.SourceTree;
 import org.testng.annotations.Test;
 
 /**

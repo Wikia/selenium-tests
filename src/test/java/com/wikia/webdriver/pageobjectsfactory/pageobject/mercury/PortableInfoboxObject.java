@@ -30,7 +30,7 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement expandButton;
   @FindBy(css = ".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
-  @FindBy(css = ".tabber img")
+  @FindBy(css = ".tabber .article-image")
   private WebElement imageInTabber;
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
@@ -38,7 +38,7 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement video;
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
-  @FindBy(css = ".pi-title")
+  @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
