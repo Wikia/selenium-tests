@@ -171,6 +171,26 @@ public class CommonExpectedConditions {
     };
   }
 
+  /**
+   * An expectation for checking if the given text is not present in the specified element.
+   */
+  public static ExpectedCondition<Boolean> textToBeNotPresentInElement(final WebElement givenElement,
+                                                                    final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        String elementText = givenElement.getText();
+        return !elementText.contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String.format("text ('%s') to be not present in element %s", text,
+                             givenElement.getTagName());
+      }
+    };
+  }
+
   public static ExpectedCondition<Boolean> textToBePresentInElement(
       final List<WebElement> givenElement, final int index, final String text) {
 
@@ -252,6 +272,26 @@ public class CommonExpectedConditions {
       public String toString() {
         return String
             .format("text ('%s') to be present in element %s", text, selectorBy.toString());
+      }
+    };
+  }
+
+  /**
+   * An expectation for checking if the given text is not present in the specified element.
+   */
+  public static ExpectedCondition<Boolean> textToBeNotPresentInElement(final By selectorBy,
+                                                                    final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        String elementText = driver.findElement(selectorBy).getText();
+        return !elementText.contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String
+            .format("text ('%s') to be not present in element %s", text, selectorBy.toString());
       }
     };
   }

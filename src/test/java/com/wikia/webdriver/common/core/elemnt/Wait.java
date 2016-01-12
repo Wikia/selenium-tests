@@ -279,6 +279,34 @@ public class Wait {
     }
   }
 
+  public boolean forTextNotInElement(WebElement element, String text) {
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+    }
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      if (SelectorStack.isContextSet()) {
+        SelectorStack.contextRead();
+        return wait.until(CommonExpectedConditions.textToBeNotPresentInElement(element, text));
+      } else {
+        return forTextNotInElement(SelectorStack.read(), text);
+      }
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextNotInElement(By by, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBeNotPresentInElement(by, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public boolean forTextInElement(By by, String text) {
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {

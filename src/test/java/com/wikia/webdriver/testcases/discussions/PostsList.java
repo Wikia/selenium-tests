@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "Discussions")
+@Test(groups = {"Discussions", "PostList"})
 public class PostsList extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
