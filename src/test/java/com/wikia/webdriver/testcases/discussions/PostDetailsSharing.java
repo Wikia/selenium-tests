@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 public class PostDetailsSharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
-  private static final String MOBILE_RESOLUTION = "600x800";
 
   private Credentials credentials = Configuration.getCredentials();
 
