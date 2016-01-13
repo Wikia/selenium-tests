@@ -63,7 +63,7 @@ public class GlobalNavigationPageObject {
   private WebElement exploreWikiaDropdown;
 
   @FindBy(css = ".global-navigation-2016 .hubs-links a")
-  private List<WebElement> hubLinks;
+  private List<WebElement> hubsLinks;
 
   @FindBy(css = ".wikia-logo__subtitle")
   private WebElement fandomLogo;
@@ -184,6 +184,7 @@ public class GlobalNavigationPageObject {
     if (exploreWikiaDropdownComponent == null) {
       exploreWikiaDropdownComponent = new DropDownComponentObject(driver);
     }
+
     return exploreWikiaDropdownComponent;
   }
 
@@ -194,6 +195,7 @@ public class GlobalNavigationPageObject {
   public List<String> getDropdownLinks() {
     List<String> linksLabels = new ArrayList<>();
     List<WebElement> linksInDropdown = exploreWikiaDropdownComponent.getAllLinksInExploreWikiaDropdown();
+
     for (WebElement link : linksInDropdown) {
       if (link.isDisplayed()) {
         linksLabels.add(link.getText());
@@ -204,16 +206,17 @@ public class GlobalNavigationPageObject {
   }
 
   public void closeDropdown() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("arguments[0].classList.remove('active')", exploreWikiaDropdown);
+    ((JavascriptExecutor) driver)
+            .executeScript("arguments[0].classList.remove('active')", exploreWikiaDropdown);
   }
 
   public boolean areHubsLinksVisible() {
-    for (WebElement hubLink : hubLinks) {
+    for (WebElement hubLink : hubsLinks) {
       if (!hubLink.isDisplayed()) {
         return false;
       }
     }
+
     return true;
   }
 

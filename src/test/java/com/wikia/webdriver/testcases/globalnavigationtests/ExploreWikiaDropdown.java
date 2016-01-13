@@ -11,16 +11,17 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+@Test(groups = {"TestExploreWikiaDropdown", "GlobalNav"})
 public class ExploreWikiaDropdown extends NewTestTemplate {
 
-  private Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
-  private Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1024, 1024);
-  private List<String> EXPECTED_LINKS_BIG_RESOLUTION =
+  private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
+  private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1024, 1024);
+  private static final List<String> EXPECTED_LINKS_BIG_RESOLUTION =
           Arrays.asList("Top Communities", "Community Central", "START A WIKIA");
-  private List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
+  private static final List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
           Arrays.asList("Games", "Movies", "TV", "Top Communities", "Community Central", "START A WIKIA");
 
-  @Test(groups = {"TestExploreWikiaDropdown_001", "TestExploreWikiaDropdown", "GlobalNav"})
+  @Test(groups = {"TestExploreWikiaDropdown_001"})
   public void TestExploreWikiaDropdown_001_dropdownIsPresent() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);

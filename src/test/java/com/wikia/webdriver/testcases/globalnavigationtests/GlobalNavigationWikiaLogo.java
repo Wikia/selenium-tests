@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {"WikiaLogo"})
+@Test(groups = {"WikiaLogo", "GlobalNav"})
 public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
@@ -23,7 +23,7 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
         {"ru.elderscrolls", "ru.wikia"}, {"zh.pad", "zh-tw.wikia"}};
   }
 
-  @Test(groups = {"TestWikiaLogoInGlobalNav_001", "GlobalNav"},
+  @Test(groups = {"TestWikiaLogoInGlobalNav_001"},
       dataProvider = "getCentralWikiaUrlForWiki")
   public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,
       String expectedCentralUrl) {
@@ -36,8 +36,8 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
             .getUrlForWiki(expectedCentralUrl))));
   }
 
-  @Test(groups = {"TestFandomLogo_001", "GlobalNav"})
-  public void TestFandomLogo_001_logoPresentOnENCommunity() {
+  @Test(groups = {"TestWikiaLogoInGlobalNav_002"})
+  public void TestWikiaLogoInGlobalNav_002_fandomLogoPresentOnENCommunity() {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(EN_COMMUNITY));
     GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();

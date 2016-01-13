@@ -6,10 +6,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigat
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"HubLinksInGlobalNav"})
+@Test(groups = {"HubLinksInGlobalNav", "GlobalNav"})
 public class GlobalNavigationHubLinks extends NewTestTemplate {
 
-  @Test(groups = {"TestHubLinksInGlobalNav_001", "GlobalNav"},
+  @Test(groups = {"TestHubLinksInGlobalNav_001"},
   enabled = false)
  public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
     GlobalNavigationPageObject globalNav = new HomePageObject(driver).getGlobalNavigation();
