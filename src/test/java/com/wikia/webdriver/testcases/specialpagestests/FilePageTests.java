@@ -109,9 +109,10 @@ public class FilePageTests extends NewTestTemplate {
    * Verify that a video can be deleted from the File page
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
+  @RelatedIssue(issueID = "QAART-714", comment = "Edge case. If it reoccurs change the video query")
   public void filePage005_deleteFromHistory() {
 
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("music");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("mama mia");
 
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);

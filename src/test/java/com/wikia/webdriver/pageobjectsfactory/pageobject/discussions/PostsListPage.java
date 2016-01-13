@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.discussions;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,6 +47,18 @@ public class PostsListPage extends BasePageObject {
 
   @FindBy(css = "#WikiaUserPagesHeader")
   private WebElement userPageHeader;
+
+  @FindBy(css = ".icon.upvote")
+  private List<WebElement> replyUpvoteButton;
+
+  @FindBy(css = ".upvote-area")
+  private List<WebElement> replyVoteCount;
+
+  @FindBy(css = ".toggle-share")
+  private List<WebElement> toggleShare;
+
+  @FindBy(css = ".share-feature")
+  private List<WebElement> shareFeature;
 
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "203236";
@@ -128,5 +141,59 @@ public class PostsListPage extends BasePageObject {
 
   public boolean isUserPageHeaderVisible() {
     return userPageHeader.isDisplayed();
+  }
+
+
+  public boolean isUpvoteButtonVisible(int index) {
+    WebElement button = replyUpvoteButton.get(index);
+    wait.forElementVisible(button);
+    return button.isDisplayed();
+  }
+
+  public String getVoteCount(int index) {
+    WebElement voteCountArea = replyVoteCount.get(index);
+    wait.forElementVisible(voteCountArea);
+    return voteCountArea.getText();
+  }
+
+  public void clickUpvoteButton(int postIndex) {
+    WebElement button = replyUpvoteButton.get(postIndex);
+    wait.forElementClickable(button);
+    button.click();
+  }
+
+  public void waitForVoteCountToChange(int postIndex, String voteCount) {
+    WebElement voteArea = replyVoteCount.get(postIndex);
+    wait.forTextNotInElement(voteArea, voteCount);
+  }
+
+  /**
+   * Wait for the noticeable time lag between vote and vote value change to pass
+   */
+  public void waitForVoteCountChangeTimeLagToPass() {
+    try {
+      //This sleep was introduced because of noticeable lag between vote and vote value change
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void clickShareIcon(int postIndex) {
+    WebElement button = toggleShare.get(postIndex);
+    wait.forElementClickable(button);
+    button.click();
+  }
+
+  public String[] getSocialNetworkIconClasses(int postIndex) {
+    List<WebElement> icons = shareFeature.get(postIndex).findElements(By.cssSelector("a.icon"));
+    int numberOfIcons = icons.size();
+    String[] classes = new String[numberOfIcons];
+    for (int i = 0; i < numberOfIcons; i++) {
+      WebElement icon = icons.get(i);
+      wait.forElementVisible(icon);
+      classes[i] = icon.getAttribute("class").split(" ")[0];
+    }
+    return classes;
   }
 }

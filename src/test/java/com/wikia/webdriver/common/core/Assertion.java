@@ -83,6 +83,12 @@ public class Assertion extends Assert {
     assertEquals(lowerCurrent, lowerPattern);
   }
 
+  public static void assertEqualsIgnoreCase(String current, String pattern, String message) {
+    String lowerCurrent = current.toLowerCase();
+    String lowerPattern = pattern.toLowerCase();
+    assertEquals(lowerCurrent, lowerPattern, message);
+  }
+
   public static void assertNotEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);

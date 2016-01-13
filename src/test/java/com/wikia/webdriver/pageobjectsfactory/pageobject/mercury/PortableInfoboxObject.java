@@ -40,8 +40,12 @@ public class PortableInfoboxObject extends BasePageObject {
   private WebElement videoCaption;
   @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
+  @FindBy(css = ".pi-image-collection")
+  private WebElement imageInCollection;
   @FindBy(css = ".portable-infobox .linked-gallery button")
   private List<WebElement> galleryButtonList;
+  @FindBy(css = ".image-collection-actions .action-next")
+  private WebElement nextImageArrow;
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
   @FindBy(css = ".pi-item .pi-data-label")
@@ -70,10 +74,17 @@ public class PortableInfoboxObject extends BasePageObject {
     return externalLinks.get(index).getText();
   }
 
-  public String getUrlFromExternalLinkaAfterPageIsLoaded() {
+  public String getUrlFromExternalLinkAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);
 
     return driver.getCurrentUrl();
+  }
+
+  public String getHeaderName(int index) {
+    Assertion.assertFalse(headers.isEmpty());
+    wait.forElementVisible(headers.get(index));
+
+    return headers.get(index).getText();
   }
 
   // TODO: This is not real tap, replace with PerformTouchActions class methods
@@ -124,6 +135,13 @@ public class PortableInfoboxObject extends BasePageObject {
     wait.forElementVisible(galleryButtonList.get(index));
 
     galleryButtonList.get(index).click();
+
+    return this;
+  }
+
+  public PortableInfoboxObject clickNextImageArrow() {
+    wait.forElementVisible(nextImageArrow);
+    nextImageArrow.click();
 
     return this;
   }
@@ -179,6 +197,13 @@ public class PortableInfoboxObject extends BasePageObject {
     return this;
   }
 
+  public PortableInfoboxObject isImageInCollectionVisible() {
+    Assertion.assertEquals(isElementVisible(imageInCollection), true);
+    PageObjectLogging.log("Image in collection", MercuryMessages.VISIBLE_MSG, true);
+
+    return this;
+  }
+
   public PortableInfoboxObject isImageInTabberVisible() {
     Assertion.assertEquals(isElementVisible(imageInTabber), true);
     PageObjectLogging.log("Image in tabber", MercuryMessages.VISIBLE_MSG, true);
@@ -208,9 +233,23 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject isHeroImageCentered() {
-    Assertion.assertEquals(images.get(0).getCssValue("text-align"), "center");
+    Assertion.assertEquals(images.get(0).getCssValue("vertical-align"), "middle");
     PageObjectLogging.log("Hero image", "is centered", true);
 
+    return this;
+  }
+
+  public PortableInfoboxObject isHeroImageSquare() {
+    wait.forElementVisible(mainImage);
+    Assertion.assertEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
+    PageObjectLogging.log("Hero image", "is square", true);
+    return this;
+  }
+
+  public PortableInfoboxObject isNotHeroImageSquare() {
+    wait.forElementVisible(mainImage);
+    Assertion.assertNotEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
+    PageObjectLogging.log("Hero image", "is not square", true);
     return this;
   }
 
@@ -275,7 +314,7 @@ public class PortableInfoboxObject extends BasePageObject {
         unorderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
-    PageObjectLogging.log("Unordered list labes and value", "have the same margin", true);
+    PageObjectLogging.log("Unordered list labels and value", "have the same margin", true);
 
     return this;
   }
@@ -285,7 +324,7 @@ public class PortableInfoboxObject extends BasePageObject {
         orderedLists.get(0).getCssValue("margin"),
         dataValues.get(0).getCssValue("margin")
     );
-    PageObjectLogging.log("Ordered list labes and value", "have the same margin", true);
+    PageObjectLogging.log("Ordered list labels and value", "have the same margin", true);
 
     return this;
   }

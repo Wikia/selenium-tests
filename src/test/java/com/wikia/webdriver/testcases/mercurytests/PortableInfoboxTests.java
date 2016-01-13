@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PortableInfoboxObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
 
@@ -80,7 +81,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalURL = infobox
         .clickExternalLink(0)
-        .getUrlFromExternalLinkaAfterPageIsLoaded();
+        .getUrlFromExternalLinkAfterPageIsLoaded();
 
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
@@ -131,5 +132,41 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickExpandButton()
         .clickGalleryButton(0)
         .isInfoboxExpanded();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_007")
+  public void MercuryPortableInfoboxTest_007_HeroImageTall() {
+    PortableInfoboxObject infoboxTallImage = new PortableInfoboxObject(driver);
+    infoboxTallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    infoboxTallImage.isHeroImageSquare();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_008")
+  public void MercuryPortableInfoboxTest_008_HeroImageWide() {
+    PortableInfoboxObject infoboxWideImage = new PortableInfoboxObject(driver);
+    infoboxWideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
+    infoboxWideImage.isNotHeroImageSquare();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_009")
+  public void MercuryPortableInfoboxTest_009_ImageCollection() {
+    PortableInfoboxObject info = new PortableInfoboxObject(driver);
+    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_5);
+
+    info.isImageInCollectionVisible()
+        .clickNextImageArrow()
+        .isImageInCollectionVisible()
+        .clickNextImageArrow()
+        .isImageInCollectionVisible();
+  }
+
+  @Test(groups = "MercuryPortableInfoboxTest_010")
+  public void MercuryPortableInfoboxTest_010_HeadersInTOC() {
+    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
+    PortableInfoboxObject info = new PortableInfoboxObject(driver);
+    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
+
+    toc.clickOnTOC();
+    toc.TOCItemNotContainsText(0, info.getHeaderName(0));
   }
 }

@@ -51,6 +51,12 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   @FindBy(css = "div.pi-data-value")
   private WebElement horizontalItemValue;
   @FindBy(css = ".pi-navigation")
+  private WebElement poemTag;
+  @FindBy(css = ".poem")
+  private List<WebElement> internalLinksInsidePoemTag;
+  @FindBy(css = ".poem a[href*='redlink']")
+  private List<WebElement> externalLinksInsidePoemTag;
+  @FindBy(css = ".poem .external")
   private List<WebElement> navigationElements;
   @FindBy(css = ".pi-header")
   private List<WebElement> groupHeadersWrappers;
@@ -233,6 +239,13 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public PortableInfoboxPageObject isLightboxPresented() {
     wait.forElementVisible(lightbox);
     Assertion.assertEquals(isElementOnPage(lightbox), true);
+    return this;
+  }
+
+  public PortableInfoboxPageObject areLinksInPoemTagPresented() {
+    wait.forElementVisible(poemTag);
+    Assertion.assertFalse(internalLinksInsidePoemTag.isEmpty());
+    Assertion.assertFalse(externalLinksInsidePoemTag.isEmpty());
     return this;
   }
 
