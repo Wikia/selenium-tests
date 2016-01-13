@@ -209,7 +209,6 @@ public class GlobalNavigationPageObject {
   }
 
   public boolean areHubsLinksVisible() {
-    System.out.println(((JavascriptExecutor) driver).executeScript("return $('.global-navigation-2016 .hubs-links')"));
     for (WebElement hubLink : hubLinks) {
       if (!hubLink.isDisplayed()) {
         return false;
