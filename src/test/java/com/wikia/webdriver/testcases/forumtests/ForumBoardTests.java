@@ -86,7 +86,6 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
-  @RelatedIssue(issueID = "MAIN-6042", comment = "Test manually")
   public void ForumBoardTests_006_followDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
