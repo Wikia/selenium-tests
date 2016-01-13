@@ -45,7 +45,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement titleLink;
   @FindBy(css = ".more-info-button")
   private WebElement moreInfoLink;
-  @FindBy(css = ".WikiaLightbox div.video-media iframe")
+  @FindBy(css = ".WikiaLightbox div.media img")
   private WebElement imageContainer;
   @FindBy(css = "span.carousel-arrow.next")
   private WebElement carouselRight;
