@@ -2,20 +2,16 @@ package com.wikia.webdriver.testcases.globalnavigationtests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class GlobalNavigationSearch extends NewTestTemplate {
-
-  private Credentials credentials = Configuration.getCredentials();
 
   @DataProvider
   public Object[][] getDataForGlobalSearchAnon() {
@@ -35,7 +31,7 @@ public class GlobalNavigationSearch extends NewTestTemplate {
   ) {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-    SearchPageObject search = homePage.getVenusGlobalNav()
+    SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);
 
     String currentUrl = driver.getCurrentUrl();
@@ -62,9 +58,8 @@ public class GlobalNavigationSearch extends NewTestTemplate {
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
     HomePageObject homePage = new HomePageObject(driver);
-    String wikiUrl = urlBuilder.getUrlForWiki(wikiName);
-    homePage.getUrl(wikiUrl);
-    SearchPageObject search = homePage.getVenusGlobalNav()
+    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
+    SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);
 
     String currentUrl = driver.getCurrentUrl();
@@ -88,7 +83,7 @@ public class GlobalNavigationSearch extends NewTestTemplate {
   public void TestGlobalSearchInGlobalNav_003_localSearchDisabled(String wikiName) {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-    VenusGlobalNavPageObject globalNav = homePage.getVenusGlobalNav();
+    GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
 
     Assertion.assertTrue(globalNav.isLocalSearchDisabled());
   }

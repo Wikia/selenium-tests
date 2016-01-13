@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DropDownComponentObject extends WikiBasePageObject {
@@ -46,6 +47,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
   private WebElement signUpLink;
   @FindBy(css = "a[data-id='logout']")
   private WebElement logOutButton;
+  @FindBy(id = "exploreWikiaDropdown")
+  private WebElement exploreWikiaDropdown;
 
   public DropDownComponentObject(WebDriver driver) {
     super(driver);
@@ -62,9 +65,9 @@ public class DropDownComponentObject extends WikiBasePageObject {
         @Override
         public Boolean apply(WebDriver webDriver) {
           if (!driver.findElement(By.cssSelector(LOGIN_DROPDOWN_TRIGGER_CSS)).getAttribute("class")
-              .contains("active")) {
+                  .contains("active")) {
             ((JavascriptExecutor) driver)
-                .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
+                    .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
             return false;
           }
           return true;
@@ -79,9 +82,32 @@ public class DropDownComponentObject extends WikiBasePageObject {
     return this;
   }
 
+  public DropDownComponentObject openDropDownWithEntryPoint(final WebElement entryPoint) {
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver webDriver) {
+          if (!entryPoint.getAttribute("class").contains("active")) {
+            ((JavascriptExecutor) driver)
+                    .executeScript("$(arguments[0]).trigger('click')", entryPoint);
+            return false;
+          }
+          return true;
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+
+    PageObjectLogging.log("DropdownVisible", "Dropdown is visible", true, driver);
+
+    return this;
+  }
+
   public void remindPassword(String userName, String apiToken) {
     Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+            ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     fillUserNameInput(userName);
     wait.forElementVisible(formForgotPasswordLink);
     scrollAndClick(formForgotPasswordLink);
@@ -158,6 +184,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
     String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, newPasswordMsg);
     PageObjectLogging.log("MessageAboutPasswordSent", "Message about new password sent present",
-        true);
+            true);
+  }
+
+  public List<WebElement> getAllLinksInExploreWikiaDropdown() {
+    return exploreWikiaDropdown.findElements(By.cssSelector("a"));
   }
 }
