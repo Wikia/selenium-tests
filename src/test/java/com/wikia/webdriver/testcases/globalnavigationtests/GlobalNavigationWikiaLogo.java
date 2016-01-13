@@ -19,7 +19,7 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {
-    return new Object[][] { {"muppet", "wikia"}, {"de.gta", "de.wikia"},
+    return new Object[][] {{"de.gta", "de.wikia"},
         {"ru.elderscrolls", "ru.wikia"}, {"zh.pad", "zh-tw.wikia"}};
   }
 
