@@ -875,10 +875,16 @@ public class AdsDataProvider {
   public static Object[][] adsMiddlePrefooter() {
     return new Object[][]{
         {
-            "adtest", "", true
+            "adtest",
+            "",
+            new Dimension(1920, 1080),
+            true
         },
         {
-            "adtest", "SyntheticTests/Prefooters", false
+            "adtest",
+            "SyntheticTests/Prefooters",
+            new Dimension(1920, 1080),
+            false
         }
     };
   }
