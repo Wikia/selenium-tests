@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 
 public class AdsEvolveObject extends AdsBaseObject {
 
-  private static final String EVOLVE_SELECTOR = " script[src*=\"4403ad\"]";
+  private static final String EVOLVE_SELECTOR = " [id*='wikia_gpt/4403/ev/wikia_intl']";
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
