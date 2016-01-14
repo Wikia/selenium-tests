@@ -41,7 +41,7 @@ public class Sorting extends NewTestTemplate {
   }
 
   /**
-   * LOGGED IN USER ON MOBILE SECTION
+   * LOGGED IN USERS ON MOBILE SECTION
    */
 
   @Test(groups = {"Sorting_003"})
@@ -52,7 +52,7 @@ public class Sorting extends NewTestTemplate {
   }
 
   /**
-   * LOGGED IN USER ON DESKTOP SECTION
+   * LOGGED IN USERS ON DESKTOP SECTION
    */
 
   @Test(groups = {"Sorting_004"})

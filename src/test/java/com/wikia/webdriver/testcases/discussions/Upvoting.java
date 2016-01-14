@@ -70,7 +70,7 @@ public class Upvoting extends NewTestTemplate {
   }
 
   /**
-   * LOGGED IN USER ON MOBILE SECTION
+   * LOGGED IN USERS ON MOBILE SECTION
    */
 
   @Test(groups = {"Upvoting_007"})
@@ -95,7 +95,7 @@ public class Upvoting extends NewTestTemplate {
   }
 
   /**
-   * LOGGED IN USER ON DESKTOP SECTION
+   * LOGGED IN USERS ON DESKTOP SECTION
    */
 
 

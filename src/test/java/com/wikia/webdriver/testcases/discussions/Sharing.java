@@ -49,7 +49,7 @@ public class Sharing extends NewTestTemplate {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);}
 
   /**
-   * LOGGED IN USER ON MOBILE SECTION
+   * LOGGED IN USERS ON MOBILE SECTION
    */
 
   @Test(groups = {"Sharing_004"})
@@ -60,7 +60,7 @@ public class Sharing extends NewTestTemplate {
   }
 
   /**
-   * LOGGED IN USER ON DESKTOP SECTION
+   * LOGGED IN USERS ON DESKTOP SECTION
    */
 
   @Test(groups = {"Sharing_005"})
