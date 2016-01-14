@@ -79,12 +79,11 @@
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostDetails"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostDetailsSharing"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostDetailsUpvote"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostsList"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostsListSharing"/>
-            <class name="com.wikia.webdriver.testcases.discussions.PostsListUpvote"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Loading"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Navigating"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Sharing"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Sorting"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Upvoting"/>
             <class name="com.wikia.webdriver.testcases.edithubtests.EditHubTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
