@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
+@Test(groups = {"Discussions", "Navigating"})
 public class Navigating extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -18,7 +19,7 @@ public class Navigating extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = {"Discussions", "PostList_004"})
+  @Test(groups = {"Navigating_001"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanClickUsername() {
@@ -29,21 +30,21 @@ public class Navigating extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = {"Discussions", "PostList_008"})
+  @Test(groups = {"Navigating_002"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
     backToWiki();
   }
 
-  @Test(groups = {"Discussions", "PostList_009"})
+  @Test(groups = {"Navigating_003"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
 
-  @Test(groups = {"Discussions", "PostList_010"})
+  @Test(groups = {"Navigating_004"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickUsername() {

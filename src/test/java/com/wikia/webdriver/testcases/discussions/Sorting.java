@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
+@Test(groups = {"Discussions", "Sorting"})
 public class Sorting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -18,7 +19,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = {"Discussions", "PostList_002"})
+  @Test(groups = {"Sorting_001"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSortPostsList() {
@@ -29,7 +30,7 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USER ON MOBILE SECTION
    */
 
-  @Test(groups = {"Discussions", "PostList_011"})
+  @Test(groups = {"Sorting_002"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSortPostsList() {

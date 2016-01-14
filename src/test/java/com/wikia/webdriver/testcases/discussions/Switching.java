@@ -9,17 +9,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
+@Test(groups = {"Discussions", "PostList"})
 public class Switching extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
-  private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
    * ANONS ON DESKTOP SECTION
    */
 
-
-  @Test(groups = {"Discussions", "PostList_006"})
+  @Test(groups = {"Switching_001"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
@@ -30,8 +29,7 @@ public class Switching extends NewTestTemplate {
    * LOGGED IN USER ON DESKTOP SECTION
    */
 
-
-  @Test(groups = {"Discussions", "PostList_014"})
+  @Test(groups = {"Switching_002"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {

@@ -18,6 +18,8 @@ public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
+  private static final String[] en_expected_networks =
+      new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"};
 
   /**
    * ANONYMOUS USER
@@ -27,48 +29,44 @@ public class Sharing extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void socialNetworkIconsAreDisplayedToAnonymousUserOnMobile() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(
-        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
+    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
   }
 
   @Test(groups = {"Sharing_002"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void socialNetworkIconsAreDisplayedToAnonymousUserOnDesktop() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(
-        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});}
+    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);}
 
-  @Test(groups = {"Sharing_001"})
+  @Test(groups = {"Sharing_003"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void socialNetworkIconsAreDisplayedToAnonymousUser() {
-    socialNetworkIconsAreDisplayed(new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});}
+    socialNetworkIconsAreDisplayed(en_expected_networks);}
 
   /**
    * LOGGED IN USER
    */
 
-  @Test(groups = {"Sharing_002"})
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToLoggedInUser() {
-    socialNetworkIconsAreDisplayed(new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
-  }
-
-@Test(groups = {"Sharing_003"})
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToLoggedInUserOnMobile() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(
-        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
-  }
-
   @Test(groups = {"Sharing_004"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void socialNetworkIconsAreDisplayedToLoggedInUser() {
+    socialNetworkIconsAreDisplayed(en_expected_networks);
+  }
+
+@Test(groups = {"Sharing_005"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void socialNetworkIconsAreDisplayedToLoggedInUserOnMobile() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
+  }
+
+  @Test(groups = {"Sharing_006"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void socialNetworkIconsAreDisplayedToLoggedInUserOnDesktop() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(
-        new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"});
+    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
   }
 
   /**
