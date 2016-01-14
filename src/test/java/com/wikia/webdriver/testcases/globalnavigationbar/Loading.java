@@ -27,16 +27,16 @@ public class Loading extends NewTestTemplate{
   private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
 
   @Test(groups = {"globalnavigationbar_Loading_001"})
-	public void scrollDown() {
-            WikiBasePageObject base = new WikiBasePageObject(driver);
-	    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity();
-	    wikiActivity.verifyGlobalNavigation();
-	    wikiActivity.scrollToFooter();
-	    wikiActivity.verifyGlobalNavigation();
-	}
+  public void globalNavigationBarIsFixedOnScroll() {
+    WikiBasePageObject base = new WikiBasePageObject(driver);
+    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity();
+    wikiActivity.verifyGlobalNavigation();
+    wikiActivity.scrollToFooter();
+    wikiActivity.verifyGlobalNavigation();
+  }
 
   @Test(groups = {"globalnavigationbar_Loading_002"})
-  public void TestExploreWikiaDropdown_001_dropdownIsPresent() {
+  public void DropdownContainsExpectedLinksOn1024Resolution() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
     homePage.openWikiPage(this.wikiURL);
@@ -53,7 +53,7 @@ public class Loading extends NewTestTemplate{
   }
 
   @Test(groups = {"globalnavigationbar_Loading_003"})
-  public void TestGameStarLogo_001_gameStarLogoNotPresentOnSmallResolution() {
+  public void gameStarLogoIsNotPresentOn768WidthResolution() {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
@@ -63,7 +63,7 @@ public class Loading extends NewTestTemplate{
   }
 
   @Test(groups = {"globalnavigationbar_Loading_004"})
-  public void TestHubsLinks_001_linksArePresent() {
+  public void linksArePresentOn1024WidthResolution() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
     homePage.openWikiPage(this.wikiURL);

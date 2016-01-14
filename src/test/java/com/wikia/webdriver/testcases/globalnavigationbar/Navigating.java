@@ -25,7 +25,7 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"globalnavigationbar_Navigating_001"},
       dataProvider = "getCentralWikiaUrlForWiki")
-  public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,
+  public void wikiaLogoClickOpensCentralWiki(String wikiName,
       String expectedCentralUrl) {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
@@ -37,7 +37,7 @@ public class Navigating extends NewTestTemplate {
   }
 
   @Test(groups = {"globalnavigationbar_Navigating_002"})
-  public void TestWikiaLogoInGlobalNav_002_fandomLogoPresentOnENCommunity() {
+  public void fandomLogoClickOnEnCommunityOpensFandomWikia() {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(EN_COMMUNITY));
     GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
@@ -53,7 +53,7 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"globalnavigationbar_Navigating_003"},
       enabled = false)
-  public void TestHubLinksInGlobalNav_001_clickHubsLinks() {
+  public void clickOnHubsLinkOpensExpectedHub() {
     GlobalNavigationPageObject globalNav = new HomePageObject(driver).getGlobalNavigation();
 
     for (GlobalNavigationPageObject.Hub hubName : GlobalNavigationPageObject.Hub.values()) {
