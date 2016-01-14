@@ -11,63 +11,72 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 /**
- * @ownership Content X-Wing Wikia
+ * @ownership Social Wikia
  */
 @Test(groups = {"Discussions", "Sharing"})
 public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
-  private static final String[] en_expected_networks =
+  private static final String[] expected_networks_for_english_language =
       new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"};
 
   /**
-   * ANONYMOUS USER
+   * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = {"Sharing_001"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToAnonymousUserOnMobile() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
+  public void anonUserOnMobileCanSeeSocialNetworkIcons() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
+
+  /**
+   * ANONS ON DESKTOP SECTION
+   */
 
   @Test(groups = {"Sharing_002"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToAnonymousUserOnDesktop() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);}
+  public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
   @Test(groups = {"Sharing_003"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToAnonymousUser() {
-    socialNetworkIconsAreDisplayed(en_expected_networks);}
+  public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
+    socialNetworkIconsAreDisplayed(expected_networks_for_english_language);}
 
   /**
-   * LOGGED IN USER
+   * LOGGED IN USER ON MOBILE SECTION
    */
 
   @Test(groups = {"Sharing_004"})
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToLoggedInUser() {
-    socialNetworkIconsAreDisplayed(en_expected_networks);
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
-@Test(groups = {"Sharing_005"})
+  /**
+   * LOGGED IN USER ON DESKTOP SECTION
+   */
+
+  @Test(groups = {"Sharing_005"})
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToLoggedInUserOnMobile() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
+    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
   @Test(groups = {"Sharing_006"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void socialNetworkIconsAreDisplayedToLoggedInUserOnDesktop() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(en_expected_networks);
+  public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
+    socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
+
 
   /**
    * TESTING METHODS SECTION

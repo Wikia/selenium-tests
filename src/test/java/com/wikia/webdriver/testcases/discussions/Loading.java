@@ -11,6 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Social Wikia
+ */
 @Test(groups = {"Discussions", "Loading"})
 public class Loading extends NewTestTemplate {
 

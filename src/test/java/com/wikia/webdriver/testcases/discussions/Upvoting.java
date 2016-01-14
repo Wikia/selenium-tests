@@ -10,6 +10,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Social Wikia
+ */
 @Test(groups = {"Discussions, Upvoting"})
 public class Upvoting extends NewTestTemplate {
 
@@ -17,60 +20,57 @@ public class Upvoting extends NewTestTemplate {
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
-   * ANONYMOUS USER
-   * POST DETAILS
+   * ANONYMOUS USER ON MOBILE SECTION
    */
 
   @Test(groups = {"Upvoting_001"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void AnonymousUserOnMobileCanNotVoteForPostDetails() {
+  public void anonUserOnMobileCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   @Test(groups = {"Upvoting_002"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserOnDesktopCanNotVoteForPostDetails() {
-    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void anonUserOnMobileCanNotVoteForFirstReply() {
+    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   @Test(groups = {"Upvoting_003"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void AnonymousUserOnMobileCanNotVoteForFirstReply() {
-    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+  public void anonUserOnMobileCanNotUpvote() {
+    postListUpvoteButtonClickDoenstAddAnUpvote();
   }
+
+  /**
+   * ANONYMOUS USER ON DESKTOP SECTION
+   */
 
   @Test(groups = {"Upvoting_004"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserOnDesktopCanNotVoteForFirstReply() {
-    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+  public void anonUserOnDesktopCanNotVoteForPostDetails() {
+    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
-
-  /**
-   * ANONYMOUS USER
-   * POST LIST
-   */
 
   @Test(groups = {"Upvoting_005"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void AnonymousUserOnMobileCanNotUpvote() {
-    postListUpvoteButtonClickDoenstAddAnUpvote();
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotVoteForFirstReply() {
+    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   @Test(groups = {"Upvoting_006"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void AnonymousUserOnDesktopCanNotUpvote() {
+  public void anonUserOnDesktopCanNotUpvote() {
     postListUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   /**
-   * LOGGED IN USER
-   * POST DETAILS
+   * LOGGED IN USER ON MOBILE SECTION
    */
 
   @Test(groups = {"Upvoting_007"})
@@ -82,35 +82,35 @@ public class Upvoting extends NewTestTemplate {
 
   @Test(groups = {"Upvoting_008"})
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
-
-  @Test(groups = {"Upvoting_009"})
-  @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = {"Upvoting_010"})
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanVoteForFirstReply() {
-    firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
-
-  /**
-   * LOGGED IN USER
-   * POST LIST
-   */
-
-  @Test(groups = {"Upvoting_011"})
+  @Test(groups = {"Upvoting_009"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
+  }
+
+  /**
+   * LOGGED IN USER ON DESKTOP SECTION
+   */
+
+
+  @Test(groups = {"Upvoting_010"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedInUserOnDesktopCanSeePostDetailsList() {
+    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
+  }
+
+  @Test(groups = {"Upvoting_011"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedInUserOnDesktopCanVoteForFirstReply() {
+    firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
   @Test(groups = {"Upvoting_012"})

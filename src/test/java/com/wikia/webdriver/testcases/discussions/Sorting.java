@@ -9,6 +9,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Social Wikia
+ */
 @Test(groups = {"Discussions", "Sorting"})
 public class Sorting extends NewTestTemplate {
 
@@ -23,30 +26,65 @@ public class Sorting extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSortPostsList() {
-    userCanSortPostsList();
+    userCanSwitchBetweenLatestAndTrendingInDropdown();
+  }
+
+  /**
+   * ANONS ON DESKTOP SECTION
+   */
+
+  @Test(groups = {"Sorting_002"})
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanSortPostList() {
+    userCanSwitchBetweenLatestAndTrendingTab();
   }
 
   /**
    * LOGGED IN USER ON MOBILE SECTION
    */
 
-  @Test(groups = {"Sorting_002"})
+  @Test(groups = {"Sorting_003"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSortPostsList() {
-    userCanSortPostsList();
+    userCanSwitchBetweenLatestAndTrendingInDropdown();
+  }
+
+  /**
+   * LOGGED IN USER ON DESKTOP SECTION
+   */
+
+  @Test(groups = {"Sorting_004"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
+    userCanSwitchBetweenLatestAndTrendingTab();
   }
 
   /**
    * TESTING METHODS SECTION
    */
 
-  public void userCanSortPostsList() {
+  public void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
     postsList.waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
+  }
+
+  public void userCanSwitchBetweenLatestAndTrendingTab() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickLatestTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
+
+    postsList.clickTrendingTabOnDesktop();
+    postsList.waitForLoadingOverlayToDisappear();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }
 }
