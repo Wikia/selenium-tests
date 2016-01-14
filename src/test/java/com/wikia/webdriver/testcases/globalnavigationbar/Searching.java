@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.globalnavigationtests;
+package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,7 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigat
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class GlobalNavigationSearch extends NewTestTemplate {
+@Test(groups = {"globalnavigationbar", "Navigating"})
+    public class Searching extends NewTestTemplate {
 
   @DataProvider
   public Object[][] getDataForGlobalSearchAnon() {
@@ -23,7 +24,7 @@ public class GlobalNavigationSearch extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"TestGlobalSearchInGlobalNav_001", "TestGlobalSearchInGlobalNav", "GlobalNav"},
+      groups = {"globalnavigationbar_Navigating_001"},
       dataProvider = "getDataForGlobalSearchAnon"
   )
   public void TestGlobalSearchInGlobalNav_001_asAnon(
@@ -50,7 +51,7 @@ public class GlobalNavigationSearch extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"TestGlobalSearchInGlobalNav_002", "TestGlobalSearchInGlobalNav", "GlobalNav"},
+      groups = {"globalnavigationbar_Navigating_002"},
       dataProvider = "getDataForGlobalSearchLoggedIn"
   )
   @Execute(asUser = User.USER)
