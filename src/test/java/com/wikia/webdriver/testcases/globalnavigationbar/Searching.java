@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigat
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {"globalnavigationbar", "Navigating"})
+@Test(groups = {"globalnavigationbar", "Searching"})
     public class Searching extends NewTestTemplate {
 
   @DataProvider
@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
   }
 
   @Test(
-      groups = {"globalnavigationbar_Navigating_001"},
+      groups = {"globalnavigationbar_Searching_001"},
       dataProvider = "getDataForGlobalSearchAnon"
   )
   public void TestGlobalSearchInGlobalNav_001_asAnon(
@@ -51,7 +51,7 @@ import org.testng.annotations.Test;
   }
 
   @Test(
-      groups = {"globalnavigationbar_Navigating_002"},
+      groups = {"globalnavigationbar_Searching_002"},
       dataProvider = "getDataForGlobalSearchLoggedIn"
   )
   @Execute(asUser = User.USER)

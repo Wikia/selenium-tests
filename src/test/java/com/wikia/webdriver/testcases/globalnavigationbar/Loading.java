@@ -26,7 +26,7 @@ public class Loading extends NewTestTemplate{
   private final static String deWikiName = "de.gta";
   private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
 
-  @Test(groups = {"Loading_001"})
+  @Test(groups = {"globalnavigationbar_Loading_001"})
 	public void scrollDown() {
             WikiBasePageObject base = new WikiBasePageObject(driver);
 	    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity();
@@ -35,7 +35,7 @@ public class Loading extends NewTestTemplate{
 	    wikiActivity.verifyGlobalNavigation();
 	}
 
-  @Test(groups = {"Loading_002"})
+  @Test(groups = {"globalnavigationbar_Loading_002"})
   public void TestExploreWikiaDropdown_001_dropdownIsPresent() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
@@ -52,7 +52,7 @@ public class Loading extends NewTestTemplate{
     Assertion.assertEquals(globalNav.getDropdownLinks(), EXPECTED_LINKS_SMALL_RESOLUTION);
   }
 
-  @Test(groups = {"Loading_003"})
+  @Test(groups = {"globalnavigationbar_Loading_003"})
   public void TestGameStarLogo_001_gameStarLogoNotPresentOnSmallResolution() {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
@@ -62,7 +62,7 @@ public class Loading extends NewTestTemplate{
                           "GameStar Logo shouldn't be visible");
   }
 
-  @Test(groups = {"Loading_004"})
+  @Test(groups = {"globalnavigationbar_Loading_004"})
   public void TestHubsLinks_001_linksArePresent() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
