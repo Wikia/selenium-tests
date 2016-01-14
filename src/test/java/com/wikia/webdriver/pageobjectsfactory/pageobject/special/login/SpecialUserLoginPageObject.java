@@ -30,6 +30,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement forgotPasswordLink;
   @FindBy(css = ".UserLogin .error-msg")
   private WebElement messagePlaceholder;
+  @FindBy(css = ".login-button.big")
+  private WebElement continueButtonBig;
 
   public SpecialUserLoginPageObject(WebDriver driver) {
     super(driver);
@@ -73,6 +75,11 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     scrollAndClick(forgotPasswordLink);
   }
 
+  private void clickContinueLink() {
+    wait.forElementVisible(continueButtonBig);
+    scrollAndClick(continueButtonBig);
+  }
+
   public void loginAndVerify(String name, String password, String wikiURL) {
     openSpecialUserLogin(wikiURL);
     login(name, password);
@@ -90,6 +97,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
                            ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickForgotPasswordLink();
+  }
+
+  public void remindPasswordNewAuth(String name, String apiToken) {
+    Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
+                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+    typeInUserName(name);
+    clickContinueLink();
   }
 
   public String setNewPassword() {
