@@ -20,7 +20,7 @@ public class Upvoting extends NewTestTemplate {
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
-   * ANONYMOUS USER ON MOBILE SECTION
+   * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = {"Upvoting_001"})
@@ -45,7 +45,7 @@ public class Upvoting extends NewTestTemplate {
   }
 
   /**
-   * ANONYMOUS USER ON DESKTOP SECTION
+   * ANONS ON DESKTOP SECTION
    */
 
   @Test(groups = {"Upvoting_004"})
