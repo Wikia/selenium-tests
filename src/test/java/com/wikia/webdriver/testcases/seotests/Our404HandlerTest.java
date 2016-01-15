@@ -20,12 +20,11 @@ public class Our404HandlerTest extends NewTestTemplate {
         {"pl.gta", "Specjalna:Version", "wiki/Specjalna:Wersja"},
         {"pl.gta", "Specjalna:Wersja", "wiki/Specjalna:Wersja"},
         {"www", "NoSuchPage", "NoSuchPage"},
-// Current code doesn't redirect to non-existing articles:
-//        {"wowwiki", "NoSuchPage", "wiki/NoSuchPage"},
-//        {"muppet", "NoSuchPage", "wiki/NoSuchPage"},
+        {"wowwiki", "NoSuchPage", "wiki/NoSuchPage"},
+        {"muppet", "NoSuchPage", "wiki/NoSuchPage"},
         {"muppet", "wiki/Honeysuckle_Rose", "wiki/Honeysuckle_Rose"},
         {"www", "About", "About"},
-// Does not work on Mercury:
+// Does not work on Mercury (XW-727):
 //        {"www", "wiki/About", "About"},
         {"muppet", "favicon.ico", "http://images.wikia.com/central/images/6/64/Favicon.ico"},
         {"muppet", "index.php?title=Honeysuckle_Rose", "index.php?title=Honeysuckle_Rose"},
@@ -33,9 +32,8 @@ public class Our404HandlerTest extends NewTestTemplate {
         {"muppet", "api.php", "api.php"},
         {"muppet", "Honeysuckle_Rose?action=edit", "wiki/Honeysuckle_Rose?action=edit"},
         {"wikiality", "Help:Achievements", "wiki/Help:Achievements"},
-// Current code doesn't redirect to non-existing articles:
-//        {"kirkburn", "File:Penguin.png", "wiki/File:Penguin.png"},
-//        {"de.gta", "MediaWiki:Edit", "wiki/MediaWiki:Edit"},
+        {"kirkburn", "File:Penguin.png", "wiki/File:Penguin.png"},
+        {"de.gta", "MediaWiki:Edit", "wiki/MediaWiki:Edit"},
         {"gta", "MediaWiki:Edit", "wiki/MediaWiki:Edit"},
     };
   }
