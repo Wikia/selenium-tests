@@ -92,7 +92,7 @@
             <class name="com.wikia.webdriver.testcases.forumtests.ForumEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.forumtests.ForumThreadTests"/>
             <class name="com.wikia.webdriver.testcases.googleconnect.GoogleConnect"/>
-            <class name="com.wikia.webdriver.testcases.globalnavigationbar.Loading"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationbar.Layout"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Searching"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Navigating"/>
             <class name="com.wikia.webdriver.testcases.heromoduletests.HeroModuleTests"/>

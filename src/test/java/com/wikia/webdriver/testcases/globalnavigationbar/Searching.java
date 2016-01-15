@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -24,10 +23,10 @@ import org.testng.annotations.Test;
   }
 
   @Test(
-      groups = {"globalnavigationbar_Searching_001"},
+      groups = {"serachGlobalNavigationBarAsAnon"},
       dataProvider = "getDataForGlobalSearchAnon"
   )
-  public void TestGlobalSearchInGlobalNav_001_asAnon(
+  public void serachGlobalNavigationBarAsAnon(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
     HomePageObject homePage = new HomePageObject(driver);
@@ -51,11 +50,11 @@ import org.testng.annotations.Test;
   }
 
   @Test(
-      groups = {"globalnavigationbar_Searching_002"},
+      groups = {"serachGlobalNavigationBarAsLoggedIn"},
       dataProvider = "getDataForGlobalSearchLoggedIn"
   )
   @Execute(asUser = User.USER)
-  public void TestGlobalSearchInGlobalNav_002_asLoggedIn(
+  public void serachGlobalNavigationBarAsLoggedIn(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
     HomePageObject homePage = new HomePageObject(driver);
@@ -69,23 +68,4 @@ import org.testng.annotations.Test;
     Assertion.assertTrue(search.isResultPresent());
   }
 
-  @DataProvider
-  public Object[][] getWikisWithDisabledLocalSearch() {
-    return new Object[][]{
-        {"de.wikia"},
-        {"wikia"}
-    };
-  }
-
-  @Test(
-      groups = {"TestGlobalSearchInGlobalNav_003", "TestGlobalSearchInGlobalNav", "GlobalNav"},
-      dataProvider = "getWikisWithDisabledLocalSearch"
-  )
-  public void TestGlobalSearchInGlobalNav_003_localSearchDisabled(String wikiName) {
-    HomePageObject homePage = new HomePageObject(driver);
-    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-    GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
-
-    Assertion.assertTrue(globalNav.isLocalSearchDisabled());
-  }
 }
