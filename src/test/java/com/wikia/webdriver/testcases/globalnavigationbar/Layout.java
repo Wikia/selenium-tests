@@ -20,7 +20,7 @@ public class Layout extends NewTestTemplate{
   private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
   private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1024, 1024);
   private static final List<String> EXPECTED_LINKS_BIG_RESOLUTION =
-      Arrays.asList("Top Communities", "Community Central", "START A WIKIA");
+      Arrays.asList("Top Communities", "Community CenFl", "START A WIKIA");
   private static final List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
       Arrays.asList("Games", "Movies", "TV", "Top Communities", "Community Central", "START A WIKIA");
 
@@ -36,8 +36,8 @@ public class Layout extends NewTestTemplate{
     wikiActivity.verifyGlobalNavigation();
   }
 
-  @Test(groups = {"dropdownContainsExpectedLinksOnResolutionTransition"})
-  public void dropdownContainsExpectedLinksOnResolutionTransition() {
+  @Test(groups = {"dropdownContainsExpectedLinksOnResolutionChange"})
+  public void dropdownContainsExpectedLinksOnResolutionChange() {
     HomePageObject homePage = new HomePageObject(driver);
     GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
     homePage.openWikiPage(this.wikiURL);
