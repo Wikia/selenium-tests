@@ -156,7 +156,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] specialPages() {
     return new Object[][]{
-        {"adtest", "Special:Video", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
+        {"adtest", "Special:Videos", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
         {"adtest", "Special:NewFiles", "126608052", "wka.life/_adtest//special",
          "TOP_LEADERBOARD",
@@ -875,10 +875,16 @@ public class AdsDataProvider {
   public static Object[][] adsMiddlePrefooter() {
     return new Object[][]{
         {
-            "adtest", "", true
+            "adtest",
+            "",
+            new Dimension(1920, 1080),
+            true
         },
         {
-            "adtest", "SyntheticTests/Prefooters", false
+            "adtest",
+            "SyntheticTests/Prefooters",
+            new Dimension(1920, 1080),
+            false
         }
     };
   }
