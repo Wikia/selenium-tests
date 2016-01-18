@@ -54,6 +54,13 @@ public class Navigating extends NewTestTemplate {
     clickUsernameLoadsUserPage();
   }
 
+  @Test(groups = {"Navigating_005"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanSeeAppPromotion() {
+    discussionsAppPromotionPresentOnPage();
+  }
+
   /**
    * TESTING METHODS SECTION
    */
@@ -74,5 +81,12 @@ public class Navigating extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUsernameLink();
     Assertion.assertTrue(postsList.isUserPageHeaderVisible());
+  }
+
+  public void discussionsAppPromotionPresentOnPage() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    Assertion.assertTrue(postsList.isAppleLinkDisplayed());
+    Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
+    Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
 }
