@@ -15,25 +15,25 @@ import org.testng.annotations.Test;
 public class Navigating extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
-  private final String FANDOM_URL = "fandom.wikia";
+  private final String FANDOM_ARTICLE_TITLE = "fandom";
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {
-    return new Object[][] {{"de.gta", "de.wikia"},
-        {"ru.elderscrolls", "ru.wikia"}, {"zh.pad", "zh-tw.wikia"}};
+    return new Object[][]{{"de.gta", "de.wikia"},
+            {"ru.elderscrolls", "ru.wikia"}, {"zh.pad", "zh-tw.wikia"}};
   }
 
   @Test(groups = {"wikiaLogoClickOpensCentralWiki"},
-      dataProvider = "getCentralWikiaUrlForWiki")
+          dataProvider = "getCentralWikiaUrlForWiki")
   public void wikiaLogoClickOpensCentralWiki(String wikiName,
-      String expectedCentralUrl) {
+                                             String expectedCentralUrl) {
     HomePageObject homePage = new HomePageObject(driver);
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getGlobalNavigation().clickWikiaLogo();
 
     PageObjectLogging.log("CHECK URL", "Expected: " + urlBuilder.getUrlForWiki(expectedCentralUrl),
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(urlBuilder
-            .getUrlForWiki(expectedCentralUrl))));
+            new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(urlBuilder
+                    .getUrlForWiki(expectedCentralUrl))));
   }
 
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
@@ -46,13 +46,13 @@ public class Navigating extends NewTestTemplate {
 
     globalNav.clickWikiaLogo();
 
-    PageObjectLogging.log("CHECK URL", "Expected: " + urlBuilder.getUrlForWiki(FANDOM_URL),
-            new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(urlBuilder
-                    .getUrlForWiki(FANDOM_URL))));
+    PageObjectLogging.log("CHECK URL", "Expected: " + urlBuilder.getUrlForPath("wikia", FANDOM_ARTICLE_TITLE),
+            new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(
+                    urlBuilder.getUrlForPath("wikia", FANDOM_ARTICLE_TITLE))));
   }
 
   @Test(groups = {"clickOnHubsLinkOpensExpectedHub"},
-      enabled = false)
+          enabled = false)
   public void clickOnHubsLinkOpensExpectedHub() {
     GlobalNavigationPageObject globalNav = new HomePageObject(driver).getGlobalNavigation();
 
