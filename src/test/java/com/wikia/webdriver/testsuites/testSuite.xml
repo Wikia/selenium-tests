@@ -46,7 +46,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestEvolveAds"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsExtraMarkerOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>

@@ -641,18 +641,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsExtraMarkerOasis() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Async/Hop/ExtraMarker?log_level=9&log_group=Wikia.Tracker",
-            "adType=async;method=hop;pos=TOP_RIGHT_BOXAD;",
-            "test-marker=42"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] evolveTestPage() {
     return new Object[][]{{"adtest", "SyntheticTests/Evolve"}};
   }
