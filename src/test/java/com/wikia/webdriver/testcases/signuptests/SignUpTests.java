@@ -99,7 +99,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
+  @RelatedIssue(issueID = "QAART-703", comment = "Sign up while creating a wikia")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     HomePageObject home = new HomePageObject(driver);

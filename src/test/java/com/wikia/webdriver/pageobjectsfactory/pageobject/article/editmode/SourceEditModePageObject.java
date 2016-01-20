@@ -216,7 +216,7 @@ public class SourceEditModePageObject extends EditMode {
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "content was added", true);
+    PageObjectLogging.log("addContent", "the following content was added: "+content, true);
     return this;
   }
 

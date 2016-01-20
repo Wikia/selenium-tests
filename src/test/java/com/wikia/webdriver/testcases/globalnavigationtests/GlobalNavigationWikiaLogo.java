@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.globalnavigationtests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
@@ -20,6 +21,8 @@ public class GlobalNavigationWikiaLogo extends NewTestTemplate {
 
   @Test(groups = {"TestWikiaLogoInGlobalNav_001", "GlobalNav"},
       dataProvider = "getCentralWikiaUrlForWiki")
+  @RelatedIssue(issueID = "MAIN-6253", comment = "make sure that the wikia logo redirect to"
+                                                 + " /fandom url.")
   public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName,
       String expectedCentralUrl) {
     HomePageObject homePage = new HomePageObject(driver);
