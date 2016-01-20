@@ -158,7 +158,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"adtest", "Special:Videos", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"adtest", "Special:NewFiles", "126608052", "wka.life/_adtest//special",
+        {"adtest", "Special:Images", "126608052", "wka.life/_adtest//special",
          "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
