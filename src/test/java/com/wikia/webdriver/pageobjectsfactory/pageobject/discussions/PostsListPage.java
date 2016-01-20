@@ -217,4 +217,12 @@ public class PostsListPage extends BasePageObject {
   public String isPromotionAppTextDisplayed() {
     return appPromotionText.getText();
   }
+
+  public void clickAppleLinkInAppPromotion() {
+    appleAppLink.click();
+  }
+
+  public void clickGooglePlayLinkInAppPromotion() {
+    googlePlayAppLink.click();
+  }
 }

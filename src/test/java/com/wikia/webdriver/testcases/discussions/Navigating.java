@@ -89,4 +89,8 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
     Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
+
+  public void appleLinkInDiscussionsAppPromotionRedirectsProperly() {
+
+  }
 }
