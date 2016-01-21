@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 public class Navigating extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
-  private final String FANDOM_ARTICLE_TITLE = "fandom";
+  private final String FANDOM_URL = "http://fandom.wikia.com/";
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {
@@ -46,9 +46,8 @@ public class Navigating extends NewTestTemplate {
 
     globalNav.clickWikiaLogo();
 
-    PageObjectLogging.log("CHECK URL", "Expected: " + urlBuilder.getUrlForPath("wikia", FANDOM_ARTICLE_TITLE),
-            new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(
-                    urlBuilder.getUrlForPath("wikia", FANDOM_ARTICLE_TITLE))));
+    PageObjectLogging.log("CHECK URL", "Expected: " + FANDOM_URL,
+            new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(FANDOM_URL)));
   }
 
   @Test(groups = {"clickOnHubsLinkOpensExpectedHub"},
