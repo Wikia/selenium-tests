@@ -74,7 +74,7 @@ public class TOCTests extends NewTestTemplate {
 
     toc.clickOnTOCListElement(1);
 
-    result = toc.isUserMovedToRightSection(1);
+    result = toc.isUserMovedToSectionByIndex(2);
     PageObjectLogging.log(
         "TOC redirection",
         "works",
@@ -112,7 +112,7 @@ public class TOCTests extends NewTestTemplate {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
 
-    boolean result = toc.isUserMovedToRightSection(1);
+    boolean result = toc.isUserMovedToSectionByIndex(2);
     PageObjectLogging.log(
         "Redirection to header directly from link",
         "works",
@@ -127,7 +127,7 @@ public class TOCTests extends NewTestTemplate {
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
-    boolean result = toc.isUserMovedToRightSection(1);
+    boolean result = toc.isUserMovedToSectionByIndex(2);
     PageObjectLogging.log(
         "Redirection to header from current page",
         "works",
@@ -143,7 +143,7 @@ public class TOCTests extends NewTestTemplate {
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
     toc.waitForLoadingOverlayToDisappear();
 
-    boolean result = toc.isUserMovedToRightSection(1);
+    boolean result = toc.isUserMovedToSectionByIndex(2);
     PageObjectLogging.log(
         "Redirection to header from other page",
         "works",

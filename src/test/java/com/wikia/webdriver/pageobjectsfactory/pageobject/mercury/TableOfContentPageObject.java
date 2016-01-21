@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,8 @@ public class TableOfContentPageObject extends BasePageObject {
   private WebElement tocUnderH1;
   @FindBy(css = "nav.table-of-contents li")
   private List<WebElement> tocItems;
+
+  private String section_selector = "section.article-body h2[section=\"__index__\"]";
 
   public TableOfContentPageObject(WebDriver driver) {
     super(driver);
@@ -54,16 +57,12 @@ public class TableOfContentPageObject extends BasePageObject {
     listOfLinks.get(index).click();
   }
 
-  public boolean isUserMovedToRightSection(int index) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String h2PosString =
-        js.executeScript(
-            "return Math.floor($('section.article-body h2').eq(" + index + ").offset().top)")
-            .toString();
-    int h2Pos = Integer.parseInt(h2PosString);
-    int windowYPos =
-        Integer.parseInt(js.executeScript("return $(window).scrollTop()").toString());
-    return h2Pos == windowYPos;
+  public boolean isUserMovedToSectionByIndex(int sectionIndex) {
+    String sectionIndexString = String.valueOf(sectionIndex);
+    By sectionBy = By.cssSelector(section_selector.replace("__index__", sectionIndexString));
+    WebElement section = driver.findElement(sectionBy);
+    wait.forElementVisible(section);
+    return true;
   }
 
   public boolean isH2PaddingTopMoreThan(int index, int value) {
