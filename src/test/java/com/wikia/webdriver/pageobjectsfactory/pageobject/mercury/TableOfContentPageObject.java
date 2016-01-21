@@ -57,9 +57,8 @@ public class TableOfContentPageObject extends BasePageObject {
     listOfLinks.get(index).click();
   }
 
-  public boolean isUserMovedToSectionByIndex(int sectionIndex) {
-    String sectionIndexString = String.valueOf(sectionIndex);
-    By sectionBy = By.cssSelector(section_selector.replace("__index__", sectionIndexString));
+  public boolean isUserMovedToSectionByIndex(String sectionIndex) {
+    By sectionBy = By.cssSelector(section_selector.replace("__index__", sectionIndex));
     WebElement section = driver.findElement(sectionBy);
     wait.forElementVisible(section);
     return true;
