@@ -169,7 +169,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   /**
-   * This method will log warning to log file (line in yellow color)
+   * This method will log info to log file (line in blue color)
    */
   public static void logInfo(String description) {
     StringBuilder builder =
