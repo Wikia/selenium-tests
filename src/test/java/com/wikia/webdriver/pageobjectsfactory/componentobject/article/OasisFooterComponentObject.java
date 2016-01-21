@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.article;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

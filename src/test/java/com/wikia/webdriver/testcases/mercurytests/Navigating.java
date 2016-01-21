@@ -24,11 +24,11 @@ public class Navigating extends NewTestTemplate {
   private final static String SEARCH_FAIL = "tee";
 
   @BeforeMethod()
-  public void before() {
+  public void beforeMethod() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
-    topBar.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    navigation.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
   }
 
   @Test()

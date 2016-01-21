@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

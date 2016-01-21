@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,6 +40,7 @@ public class Navigation extends BasePageObject{
   }
 
   public Navigation clickOnSignInRegisterButton() {
+    PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
@@ -138,6 +139,14 @@ public class Navigation extends BasePageObject{
 
     PageObjectLogging.logInfo("Search for query: " + text);
     searchInput.sendKeys(text);
+
+    return this;
+  }
+
+  public Navigation navigateToPage(String pageName) {
+    openSubMenu(1);
+    typeInSearch(pageName);
+    selectSearchSuggestion(0);
 
     return this;
   }
