@@ -31,7 +31,7 @@ public class Navigating extends NewTestTemplate {
     navigation.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
   }
 
-  @Test()
+  @Test(groups = "mercury-navigating-001")
   public void navigating_001_openNavigateClose() {
     topBar.openNavigation();
     navigation.openSubMenu(1);
@@ -39,7 +39,7 @@ public class Navigating extends NewTestTemplate {
     topBar.closeNavigation();
   }
 
-  @Test()
+  @Test(groups = "mercury-navigating-002")
   public void navigating_002_searchValidSuggestionAndOpenIt() {
     topBar.openNavigation();
     navigation.openSubMenu(1);
@@ -47,7 +47,7 @@ public class Navigating extends NewTestTemplate {
     navigation.selectSearchSuggestion(1);
   }
 
-  @Test()
+  @Test(groups = "mercury-navigating-003")
   public void navigating_003_searchInvalidSuggestionAndCloseSearchView() {
     topBar.openNavigation();
     navigation.openSubMenu(1);
@@ -56,7 +56,7 @@ public class Navigating extends NewTestTemplate {
     navigation.cancelSearch();
   }
 
-  @Test()
+  @Test(groups = "mercury-navigating-004")
   public void navigating_004_navigateToPageUsingLocalNav() {
     topBar.openNavigation();
     navigation.openSubMenu(1);
