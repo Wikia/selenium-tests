@@ -168,6 +168,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
+  /**
+   * This method will log warning to log file (line in yellow color)
+   */
+  public static void logInfo(String description) {
+    StringBuilder builder =
+        new StringBuilder().append("<tr class=\"info\"><td>INFO</td><td>"
+                                   + description + "</td><td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
+
   public static void logImage(String command, File image, boolean success) {
     byte[] bytes = new byte[0];
     try {
@@ -417,6 +427,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                 + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
                 + "tr.warning{color:black;background-color:#FEE01E;}"
                 + "tr.error{color:black;background-color:#FFCCCC;}"
+                + "tr.info{color:white;background-color:#78a1c0}"
                 + "tr.step{color:white;background:grey}"
                 + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
                 + "<style>td { border-top: 1px solid grey; } </style></head><body>"
