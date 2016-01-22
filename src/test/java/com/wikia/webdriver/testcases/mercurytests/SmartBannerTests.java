@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.geastures.MobileEmulationTouchActions;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -33,7 +33,7 @@ public class SmartBannerTests extends NewTestTemplate {
     MAGENTA("#c819ad");
     private String hex;
 
-    private Colors(String hex) {
+    Colors(String hex) {
       this.hex = hex;
     }
   }
@@ -57,7 +57,7 @@ public class SmartBannerTests extends NewTestTemplate {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
     banner.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WIKIS[0][1]);
-    MobileEmulationTouchActions touchActions = new MobileEmulationTouchActions(driver);
+    JavascriptActions touchActions = new JavascriptActions(driver);
 
     Assertion.assertTrue(
         banner.isSmartBannerVisible(),
