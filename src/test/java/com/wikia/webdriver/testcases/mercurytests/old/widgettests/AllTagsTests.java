@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
@@ -74,7 +75,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_001")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     init();
-    navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -84,7 +85,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_002")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     topBar.openNavigation();
     navigation.navigateToPage(ARTICLE_NAME);
@@ -97,7 +98,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     topBar.openNavigation();
     navigation.navigateToPage(MAPS_ARTICLE_NAME);

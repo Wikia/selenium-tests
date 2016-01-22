@@ -1,17 +1,18 @@
 package com.wikia.webdriver.elements.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class Navigation extends BasePageObject{
+public class Navigation {
 
   @FindBy(css = ".side-nav-menu__item.main")
   private WebElement signInRegisterButton;
@@ -35,8 +36,17 @@ public class Navigation extends BasePageObject{
 
   private String searchResultClass = ".side-search__results li.mw-content a";
 
+  private WebDriver driver;
+  private Wait wait;
+  private Loading loading;
+
+
   public Navigation(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+    this.loading = new Loading(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public Navigation clickOnSignInRegisterButton() {
@@ -90,7 +100,7 @@ public class Navigation extends BasePageObject{
     WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
     wait.forElementClickable(searchResult);
     searchResult.click();
-    waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     PageObjectLogging.logInfo("Navigation is closed");
     wait.forElementNotVisible(navigationComponent);
@@ -118,7 +128,7 @@ public class Navigation extends BasePageObject{
     WebElement pageLink = localNavPageLinks.get(index);
     wait.forElementClickable(pageLink);
     pageLink.click();
-    waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     PageObjectLogging.logInfo("Navigation is closed");
     wait.forElementNotVisible(navigationComponent);

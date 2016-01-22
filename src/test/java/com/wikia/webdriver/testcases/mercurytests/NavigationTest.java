@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.testng.annotations.Test;
 
@@ -26,7 +27,7 @@ public class NavigationTest extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
-    navigation.openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
+    new BasePageObject(driver).openMercuryArticleByName(wikiURL, MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury-navigating-001")
