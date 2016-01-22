@@ -102,6 +102,6 @@ public class LoginTests extends NewTestTemplate {
     Helios.deleteAllTokens(User.USER_12);
 
     driver.navigate().refresh();
-    Assertion.assertTrue(article.getVenusGlobalNav().isUserLoggedOut());
+    Assertion.assertTrue(article.getGlobalNavigation().isUserLoggedOut());
   }
 }
