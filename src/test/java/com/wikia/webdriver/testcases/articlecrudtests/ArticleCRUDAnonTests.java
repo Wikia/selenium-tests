@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -29,6 +30,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_002"})
+  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_002_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -55,6 +57,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDAnon_004"})
+  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
@@ -67,6 +70,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_005"})
+  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditByURL");
@@ -77,6 +81,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_006"})
+  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditDropdown");
