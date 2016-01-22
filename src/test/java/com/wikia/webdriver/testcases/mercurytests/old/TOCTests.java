@@ -135,8 +135,10 @@ public class TOCTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTOCTest_005")
-  @RelatedIssue(issueID = "XW-1017", comment = "Page scrolls up to top. "
-                                               + "The defect affects the test stability")
+  @RelatedIssue(
+      issueID = "XW-1017",
+      comment = "Page scrolls up to top. The defect affects the test stability"
+  )
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
     TableOfContentPageObject toc = new TableOfContentPageObject(driver);
     toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
