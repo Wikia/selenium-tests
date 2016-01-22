@@ -19,6 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.joda.time.DateTime;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = {"EditingPreferencesTest"})
@@ -81,7 +82,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
                                   Configuration.getCredentials().emailPasswordQaart2);
 
-    Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress());
+    Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress(),
+                           "New email and old email SHOULD NOT be the same");
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
