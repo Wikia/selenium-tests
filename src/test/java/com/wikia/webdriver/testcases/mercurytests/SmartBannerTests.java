@@ -52,23 +52,21 @@ public class SmartBannerTests extends NewTestTemplate {
   };
 
   @Test(groups = "MercurySmartBannerTest_001")
-  @InBrowser(browser = Browser.CHROME_MOBILE_MERCURY)
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
     banner.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WIKIS[0][1]);
-    JavascriptActions touchActions = new JavascriptActions(driver);
+    JavascriptActions jsActions = new JavascriptActions(driver);
 
     Assertion.assertTrue(
         banner.isSmartBannerVisible(),
         "Smart banner is closed"
     );
 
-    Assertion.assertEquals(banner.isButtonVisible() == true, true, "Button is not visible");
-
+    Assertion.assertTrue(banner.isButtonVisible(), "Button is not visible");
 
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
-    touchActions.scrollBy(0, 100);
+    jsActions.scrollBy(0, 100);
 
     boolean result = lastSmartBannerPosition == banner.getSmartBannerPosition();
     PageObjectLogging.log(
