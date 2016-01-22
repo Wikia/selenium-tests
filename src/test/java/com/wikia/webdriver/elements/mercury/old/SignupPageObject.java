@@ -2,6 +2,8 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.elements.mercury.Navigation;
+import com.wikia.webdriver.elements.mercury.TopBar;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
@@ -90,6 +92,7 @@ public class SignupPageObject extends BasePageObject {
   }
 
   public void verifyAvatarAfterSignup() {
+    new TopBar(driver).openNavigation();
     wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
   }
@@ -126,8 +129,10 @@ public class SignupPageObject extends BasePageObject {
 
   public SignupPageObject openMobileSignupPage(String wikiURL) {
     openHome(wikiURL);
-    wait.forElementVisible(newloginButton);
-    newloginButton.click();
+    new TopBar(driver).openNavigation();
+    new Navigation(driver).clickOnSignInRegisterButton();
+//    wait.forElementVisible(newloginButton);
+//    newloginButton.click();
     wait.forElementVisible(signupButton);
     signupButton.click();
     return new SignupPageObject(driver);
