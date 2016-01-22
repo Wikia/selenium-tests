@@ -531,7 +531,7 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
+      wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
           userName.replace(" ", "_"))));
     } finally {
       restoreDeaultImplicitWait();
