@@ -81,6 +81,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
                                   Configuration.getCredentials().emailPasswordQaart2);
 
+    Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress());
+
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
