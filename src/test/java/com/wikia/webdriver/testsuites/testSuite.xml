@@ -65,6 +65,7 @@
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleRTETest"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleSourceModeTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleTOCTests"/>
+            <class name="com.wikia.webdriver.testcases.articlecrudtests.ClicktrackingArticleEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ModalTests"/>
             <class name="com.wikia.webdriver.testcases.blogtests.BlogFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.blogtests.BlogTests"/>
@@ -94,6 +95,7 @@
             <class name="com.wikia.webdriver.testcases.forumtests.ForumThreadTests"/>
             <class name="com.wikia.webdriver.testcases.googleconnect.GoogleConnect"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GameStarLogo"/>
+            <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationClicktracking"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationHubLinks"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationScrollAction"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationtests.GlobalNavigationSearch"/>
