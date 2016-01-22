@@ -87,7 +87,7 @@ public class PortableInfoboxObject extends BasePageObject {
     return headers.get(index).getText();
   }
 
-  // TODO: This is not real tap, replace with PerformTouchActions class methods
+  // TODO: This is not real tap, replace with DeviceTouchActions class methods
   public PortableInfoboxObject tapInfoboxContent() {
     Assertion.assertFalse(dataLabels.isEmpty());
     dataLabels.get(0).click();
