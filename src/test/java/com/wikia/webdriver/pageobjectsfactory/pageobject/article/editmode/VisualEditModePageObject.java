@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -124,16 +123,6 @@ public class VisualEditModePageObject extends EditMode {
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
-  }
-
-  /**
-   * adds new content to an article without clearing the existing content
-   */
-  public void appendContent(String content) {
-    driver.switchTo().frame(iframe);
-    contentInput.sendKeys(content);
-    driver.switchTo().defaultContent();
-    PageObjectLogging.log("appendContent", "content " + content + " added to the article", true);
   }
 
   private void verifyComponent(WebElement component) {
@@ -298,46 +287,6 @@ public class VisualEditModePageObject extends EditMode {
     PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
   }
 
-  /**
-   * Delete unwanted video by its name. Message article page is e.g
-   * http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList This method destination is
-   * exactly related videos message article
-   *
-   * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
-   */
-  public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
-    List<String> videos = new ArrayList<String>();
-    wait.forElementVisible(messageSourceModeTextArea);
-    String sourceText = messageSourceModeTextArea.getText();
-    int index = 0;
-    while (true) {
-      int previousStarIndex = sourceText.indexOf("*", index);
-      int nextStarIndex = sourceText.indexOf("*", previousStarIndex + 1);
-      if (nextStarIndex < 0) {
-        break;
-      }
-      String videoText = sourceText.substring(previousStarIndex, nextStarIndex);
-      if (!videoText.contains(unwantedVideoName)) {
-        videos.add(videoText);
-      }
-      index = previousStarIndex + 1;
-    }
-    wait.forElementVisible(messageSourceModeTextArea);
-    messageSourceModeTextArea.clear();
-    messageSourceModeTextArea.sendKeys("WHITELIST");
-    messageSourceModeTextArea.sendKeys(Keys.ENTER);
-    messageSourceModeTextArea.sendKeys(Keys.ENTER);
-    String builder = "";
-    for (int i = 0; i < videos.size(); i++) {
-      builder += videos.get(i);
-      builder += "\n";
-    }
-    CommonUtils.setClipboardContents(builder);
-    messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    PageObjectLogging.log("deleteUnwantedVideoFromMessage",
-        "Delete all source code on the article", true, driver);
-  }
-
   public void typeCategoryName(String categoryName) {
     wait.forElementVisible(categoryInput);
     CommonUtils.setClipboardContents(categoryName);
@@ -461,10 +410,6 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
-  }
-
-  public void startTracking() {
-    jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
   }
 
   public enum Components {
