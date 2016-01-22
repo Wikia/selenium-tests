@@ -142,7 +142,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.SEOTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.SignupTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.old.SmartBannerTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PollsnackTests"/>
@@ -155,6 +154,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.RedirectionTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.Navigating"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>

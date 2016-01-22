@@ -22,7 +22,7 @@ public class Navigating extends NewTestTemplate {
   private final static String SEARCH_PASS = "Gallery";
   private final static String SEARCH_FAIL = "tee";
 
-  public void init() {
+  private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 

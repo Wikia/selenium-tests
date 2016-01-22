@@ -31,7 +31,7 @@ public class VKTests extends NewTestTemplate {
   private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  public void init() {
+  private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }

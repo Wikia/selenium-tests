@@ -43,7 +43,7 @@ public class AllTagsTests extends NewTestTemplate {
   private static final String MAPS_ARTICLE_NAME = "Map";
   private static List<WidgetPageObject> widgets;
 
-  public void init() {
+  private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }

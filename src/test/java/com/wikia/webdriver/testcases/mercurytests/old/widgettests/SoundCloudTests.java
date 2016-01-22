@@ -29,7 +29,7 @@ public class SoundCloudTests extends NewTestTemplate {
   private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "SoundCloudMercury/MultipleWidgets";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  public void init() {
+  private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }

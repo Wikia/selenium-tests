@@ -33,7 +33,7 @@ public class ArticlePageTests extends NewTestTemplate {
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
        "Privacy Policy", "Feedback"};
 
-  public void init() {
+  private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
