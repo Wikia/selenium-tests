@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.old;
+package com.wikia.webdriver.common.core.geastures;
 
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -7,14 +7,10 @@ import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-public class PerformTouchAction {
+public class DeviceTouchActions {
 
   private WebDriver driver;
   private AndroidDriver mobileDriver;
@@ -22,31 +18,17 @@ public class PerformTouchAction {
   private int nativeHeight = 0;
   private int nativeWidth = 0;
   private int webviewHeight = 0;
-  private int webviewWidth = 0;
   private int ratio = 0;
 
   private int taskbarNativeHeight = 0;
-  private int taskbarNativeWidth = 0;
   private int taskbarWebviewHeight = 0;
-  private int taskbarWebviewWidth = 0;
 
-  private int addressbarNativeHeight = 0;
-  private int addressbarNativeWidth = 0;
   private int addressbarWebviewHeight = 0;
-  private int addressbarWebviewWidth = 0;
 
   private int appNativeHeight = 0;
   private int appNativeWidth = 0;
   private int appWebviewHeight = 0;
   private int appWebviewWidth = 0;
-
-  private int loadedPageHeight = 0;
-  private int loadedPageWidth = 0;
-
-  public static final String DIRECTION_LEFT = "left";
-  public static final String DIRECTION_RIGHT = "right";
-  public static final String DIRECTION_UP = "up";
-  public static final String DIRECTION_DOWN = "down";
 
   public static final String ZOOM_WAY_IN = "in";
   public static final String ZOOM_WAY_OUT = "out";
@@ -54,15 +36,13 @@ public class PerformTouchAction {
   private static final String CONTEXT_NATIVE_APP = "NATIVE_APP";
   private static final String CONTEXT_WEBVIEW_1 = "WEBVIEW_1";
 
-  public PerformTouchAction(WebDriver webDriver) {
-    String methodName = "PerformTouchAction";
+  public DeviceTouchActions(WebDriver webDriver) {
+    String methodName = "DeviceTouchActions";
     mobileDriver = NewDriverProvider.getMobileDriver();
     driver = webDriver;
     JavascriptExecutor js = (JavascriptExecutor) driver;
     addressbarWebviewHeight =
-        Integer.parseInt(js.executeScript("return $(window).height()").toString());
-    addressbarWebviewWidth =
-        Integer.parseInt(js.executeScript("return $(window).width()").toString());
+            Integer.parseInt(js.executeScript("return $(window).height()").toString());
     waitForFinish(5000, methodName);
     switchToContext(CONTEXT_NATIVE_APP, methodName);
     nativeHeight = mobileDriver.manage().window().getSize().height;
@@ -78,20 +58,13 @@ public class PerformTouchAction {
     js.executeScript("window.scrollTo(0, 0)");
     appWebviewHeight = Integer.parseInt(js.executeScript("return $(window).height()").toString());
     appWebviewWidth = Integer.parseInt(js.executeScript("return $(window).width()").toString());
-    loadedPageHeight = Integer.parseInt(js.executeScript("return $(document).height()").toString());
-    loadedPageWidth = Integer.parseInt(js.executeScript("return $(document).width()").toString());
     addressbarWebviewHeight = appWebviewHeight - addressbarWebviewHeight;
     ratio = nativeWidth / appWebviewWidth;
     webviewHeight = nativeHeight / ratio;
-    webviewWidth = appWebviewWidth;
     taskbarWebviewHeight = webviewHeight - appWebviewHeight;
-    taskbarWebviewWidth = webviewWidth;
     taskbarNativeHeight = taskbarWebviewHeight * ratio;
-    taskbarNativeWidth = nativeWidth;
     appNativeWidth = nativeWidth;
     appNativeHeight = nativeHeight - taskbarNativeHeight;
-    addressbarNativeHeight = addressbarWebviewHeight * ratio;
-    addressbarNativeWidth = nativeWidth;
   }
 
   /**
@@ -221,11 +194,7 @@ public class PerformTouchAction {
     int offSet = 0;
     int startXOne = 0;
     int startXTwo = 0;
-    int appFingersSpace = 0;
-    if (fingersSpace >= pixelPath) {
-      appFingersSpace = pixelPath - 2;
-    }
-    appFingersSpace = fingersSpace / 2;
+    int appFingersSpace = fingersSpace / 2;
     if (pixelPath < appNativeWidth) {
       halfPath = pixelPath / 2;
     } else {
@@ -288,57 +257,5 @@ public class PerformTouchAction {
     mobileDriver.tap(1, appPointX, appPointY, duration);
     waitForFinish(waitAfter, methodName);
     switchToContext(CONTEXT_WEBVIEW_1, methodName);
-  }
-
-  /**
-   * It scroll to element then tap on his center. It scroll only vertically so if element need to be
-   * scrolled horizontally it won't work
-   *
-   * @param locator   Use By selector, Example By.cssSelector('img.loaded')
-   * @param index     If locator find more than one element use index to access element you want
-   * @param duration  In milliseconds, Recommend 500
-   * @param waitAfter In milliseconds
-   */
-  public void tapOnWebElement(By locator, int index, int duration, int waitAfter) {
-    String methodName = "tapOnWebElement";
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    WebElement element;
-    if (index > 0) {
-      List<WebElement> elements = driver.findElements(locator);
-      element = elements.get(index);
-    } else {
-      element = driver.findElement(locator);
-    }
-    int elementStartPointX = element.getLocation().getX();
-    int elementHeight = element.getSize().getHeight();
-    int elementWidth = element.getSize().getHeight();
-    int offSetY = loadedPageHeight - element.getLocation().getY() - appWebviewHeight;
-    if (offSetY < 0) {
-      offSetY = -offSetY;
-    } else {
-      offSetY = 0;
-    }
-    js.executeScript("window.scrollTo(0, " + element.getLocation().getY() + ")");
-    int pointX = (elementStartPointX + (elementWidth / 2)) * ratio;
-    int pointY = (taskbarWebviewHeight + (elementHeight / 2) + offSetY) * ratio;
-    switchToContext(CONTEXT_NATIVE_APP, methodName);
-    mobileDriver.tap(1, pointX, pointY, duration);
-    waitForFinish(waitAfter, methodName);
-    switchToContext(CONTEXT_WEBVIEW_1, methodName);
-  }
-
-  /**
-   * Use that method to verify presence of addressbar
-   *
-   * @return Boolean
-   */
-  public boolean isAddressbarPresent() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    if ((appWebviewHeight - Integer
-        .parseInt(js.executeScript("return $(window).height()").toString()))
-        == addressbarWebviewHeight) {
-      return true;
-    }
-    return false;
   }
 }

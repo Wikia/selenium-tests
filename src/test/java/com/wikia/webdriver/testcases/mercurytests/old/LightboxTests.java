@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
@@ -16,7 +17,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.old.GalleryComponentObject;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
-import com.wikia.webdriver.elements.mercury.old.PerformTouchAction;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DriverCommand;
@@ -81,7 +81,7 @@ public class LightboxTests extends NewTestTemplate {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
     gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     lightbox = gallery.clickGalleryImage(0);
 
@@ -181,7 +181,7 @@ public class LightboxTests extends NewTestTemplate {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
     gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     lightbox = gallery.clickGalleryImage(0);
 
@@ -197,7 +197,7 @@ public class LightboxTests extends NewTestTemplate {
     );
 
     File beforeZooming = new Shooter().capturePage(driver);
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 3000);
+    touchAction.zoomInOutPointXY(50, 50, 50, 100, DeviceTouchActions.ZOOM_WAY_IN, 3000);
     File afterZooming = new Shooter().capturePage(driver);
 
     boolean result = !new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
@@ -208,7 +208,7 @@ public class LightboxTests extends NewTestTemplate {
         result
     );
 
-    touchAction.zoomInOutPointXY(50, 50, 50, 140, PerformTouchAction.ZOOM_WAY_OUT, 3000);
+    touchAction.zoomInOutPointXY(50, 50, 50, 140, DeviceTouchActions.ZOOM_WAY_OUT, 3000);
     afterZooming = new Shooter().capturePage(driver);
 
     result = new ImageComparison().areFilesTheSame(beforeZooming, afterZooming, ACCURACY);
@@ -321,7 +321,7 @@ public class LightboxTests extends NewTestTemplate {
     GalleryComponentObject gallery = new GalleryComponentObject(driver);
     LightboxComponentObject lightbox;
     gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     lightbox = gallery.clickGalleryImage(0);
     String direction = DIRECTION_LEFT;

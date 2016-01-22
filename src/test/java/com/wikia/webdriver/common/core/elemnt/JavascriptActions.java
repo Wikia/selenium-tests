@@ -111,4 +111,8 @@ public class JavascriptActions {
       scrollToElement(element);
     }
   }
+
+  public void scrollBy(int x, int y) {
+    js.executeScript("window.scrollBy(arguments[0], arguments[1])", x, y);
+  }
 }

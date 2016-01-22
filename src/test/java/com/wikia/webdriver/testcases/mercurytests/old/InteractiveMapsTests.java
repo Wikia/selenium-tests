@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
@@ -12,7 +13,6 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.old.InteractiveMapsComponentObject;
-import com.wikia.webdriver.elements.mercury.old.PerformTouchAction;
 
 import org.testng.annotations.Test;
 
@@ -87,7 +87,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     maps.clickMapThumbnail();
     maps.switchToMapFrame();
@@ -158,7 +158,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     );
 
     beforeZooming = new Shooter().capturePage(driver);
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_OUT, 5000);
+    touchAction.zoomInOutPointXY(50, 50, 50, 100, DeviceTouchActions.ZOOM_WAY_OUT, 5000);
     afterZooming = new Shooter().capturePage(driver);
 
     Assertion.assertFalse(
@@ -184,7 +184,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     );
 
     beforeZooming = new Shooter().capturePage(driver);
-    touchAction.zoomInOutPointXY(50, 50, 50, 100, PerformTouchAction.ZOOM_WAY_IN, 5000);
+    touchAction.zoomInOutPointXY(50, 50, 50, 100, DeviceTouchActions.ZOOM_WAY_IN, 5000);
     afterZooming = new Shooter().capturePage(driver);
 
     Assertion.assertFalse(
@@ -215,7 +215,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
     maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
+    DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     maps.clickMapThumbnail();
     maps.switchToMapFrame();
