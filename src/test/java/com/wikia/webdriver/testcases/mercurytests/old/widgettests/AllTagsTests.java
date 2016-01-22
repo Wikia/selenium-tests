@@ -60,7 +60,7 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new GoogleFormWidgetPageObject(driver));
     widgets.add(new PolldaddyWidgetPageObject(driver));
 
-    String content = "### " + DateTime.now().getMillis() + " ###";
+    String content = ">>> " + DateTime.now().getMillis() + " <<<";
 
     for (WidgetPageObject widget : widgets) {
       content += widget.getTag();
