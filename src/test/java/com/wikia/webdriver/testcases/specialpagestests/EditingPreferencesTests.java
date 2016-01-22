@@ -19,7 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.joda.time.DateTime;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = {"EditingPreferencesTest"})
