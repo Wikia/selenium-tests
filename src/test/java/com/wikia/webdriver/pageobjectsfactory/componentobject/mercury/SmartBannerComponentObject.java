@@ -29,11 +29,6 @@ public class SmartBannerComponentObject extends BasePageObject {
     closeButton.click();
   }
 
-  public String getButtonName() {
-    wait.forElementVisible(bannerButton);
-    return bannerButton.getText();
-  }
-
   public int getSmartBannerPosition() {
     return smartBanner.getLocation().getY();
   }
@@ -65,5 +60,9 @@ public class SmartBannerComponentObject extends BasePageObject {
     return (smartBannerButtonColor[0] == properColor.getRed()) && (smartBannerButtonColor[1]
                                                                    == properColor.getGreen()) && (
                smartBannerButtonColor[2] == properColor.getBlue());
+  }
+
+  public boolean isButtonVisible() {
+    return bannerButton.isDisplayed();
   }
 }

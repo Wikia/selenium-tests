@@ -4,14 +4,12 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 
 import org.testng.annotations.Test;
 
@@ -35,7 +33,7 @@ public class SmartBannerTests extends NewTestTemplate {
     MAGENTA("#c819ad");
     private String hex;
 
-    private Colors(String hex) {
+    Colors(String hex) {
       this.hex = hex;
     }
   }
@@ -52,43 +50,25 @@ public class SmartBannerTests extends NewTestTemplate {
       {"lego", "LEGO_Wiki", Colors.YELLOW.hex},
       {"ladygaga", "Gagapedia", Colors.MAGENTA.hex}
   };
-  private static final String BUTTON_NAME_FOR_ANDROID = "Install";
-  private static final String BUTTON_NAME_FOR_IOS = "GET";
 
   @Test(groups = "MercurySmartBannerTest_001")
-  @RelatedIssue(issueID = "XW-656")
-  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercurySmartBannerTest_001_ButtonName_FixPosition_Close() {
     SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
     wikiURL = urlBuilder.getUrlForWiki(WIKIS[0][0]);
     banner.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, WIKIS[0][1]);
-    PerformTouchAction touchAction = new PerformTouchAction(driver);
-
-    String buttonName;
+    JavascriptActions jsActions = new JavascriptActions(driver);
 
     Assertion.assertTrue(
         banner.isSmartBannerVisible(),
         "Smart banner is closed"
     );
 
-    if ("ANDROID".equals(Configuration.getPlatform())) {
-      buttonName = BUTTON_NAME_FOR_ANDROID;
-    } else {
-      buttonName = BUTTON_NAME_FOR_IOS;
-    }
-
-    boolean result = banner.getButtonName().equals(buttonName);
-    PageObjectLogging.log(
-        "Button name",
-        "is correct",
-        "is incorrect",
-        result
-    );
+    Assertion.assertTrue(banner.isButtonVisible(), "Button is not visible");
 
     int lastSmartBannerPosition = banner.getSmartBannerPosition();
-    touchAction.swipeFromPointToPoint(50, 90, 50, 40, 500, 3000);
+    jsActions.scrollBy(0, 100);
 
-    result = lastSmartBannerPosition == banner.getSmartBannerPosition();
+    boolean result = lastSmartBannerPosition == banner.getSmartBannerPosition();
     PageObjectLogging.log(
         "Position",
         "is fixed",
