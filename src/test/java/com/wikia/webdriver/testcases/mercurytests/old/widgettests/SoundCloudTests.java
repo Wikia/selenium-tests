@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -30,8 +29,7 @@ public class SoundCloudTests extends NewTestTemplate {
   private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "SoundCloudMercury/MultipleWidgets";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -49,6 +47,7 @@ public class SoundCloudTests extends NewTestTemplate {
 
   @Test(groups = "MercurySoundCloudWidgetTest_002")
   public void MercurySoundCloudWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
 
     widget
@@ -63,6 +62,7 @@ public class SoundCloudTests extends NewTestTemplate {
 
   @Test(groups = "MercurySoundCloudWidgetTest_003")
   public void MercurySoundCloudWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
 
     widget

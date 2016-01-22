@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -31,8 +30,7 @@ public class WeiboTests extends NewTestTemplate {
   private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "WeiboMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -50,6 +48,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
   public void MercuryWeiboWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
     widget
@@ -64,6 +63,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
   public void MercuryWeiboWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     WeiboWidgetPageObject widget = new WeiboWidgetPageObject(driver);
 
     widget

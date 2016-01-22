@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -31,8 +30,7 @@ public class TwitterTests extends NewTestTemplate {
   private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "TwitterMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -50,6 +48,7 @@ public class TwitterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTwitterWidgetTest_002")
   public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
     widget
@@ -64,6 +63,7 @@ public class TwitterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTwitterWidgetTest_003")
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     TwitterWidgetPageObject widget = new TwitterWidgetPageObject(driver);
 
     widget

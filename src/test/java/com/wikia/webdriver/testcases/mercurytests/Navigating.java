@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -23,8 +22,7 @@ public class Navigating extends NewTestTemplate {
   private final static String SEARCH_PASS = "Gallery";
   private final static String SEARCH_FAIL = "tee";
 
-  @BeforeMethod()
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
@@ -33,6 +31,8 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = "mercury-navigating-001")
   public void navigating_001_openNavigateClose() {
+    init();
+
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
@@ -41,6 +41,8 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = "mercury-navigating-002")
   public void navigating_002_searchValidSuggestionAndOpenIt() {
+    init();
+
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.typeInSearch(SEARCH_PASS);
@@ -49,6 +51,8 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = "mercury-navigating-003")
   public void navigating_003_searchInvalidSuggestionAndCloseSearchView() {
+    init();
+
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.typeInSearch(SEARCH_FAIL);
@@ -58,6 +62,8 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = "mercury-navigating-004")
   public void navigating_004_navigateToPageUsingLocalNav() {
+    init();
+
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.openSubMenu(0);

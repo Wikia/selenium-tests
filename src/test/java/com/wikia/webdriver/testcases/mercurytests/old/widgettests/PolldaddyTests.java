@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -31,8 +30,7 @@ public class PolldaddyTests extends NewTestTemplate {
   private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddymercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -50,6 +48,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_002")
   public void MercuryPolldaddyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget
@@ -64,6 +63,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_003")
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
     widget

@@ -43,11 +43,13 @@ public class AllTagsTests extends NewTestTemplate {
   private static final String MAPS_ARTICLE_NAME = "Map";
   private static List<WidgetPageObject> widgets;
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+  }
 
+  @BeforeMethod(alwaysRun = true)
+  public void beforeMethod() {
     widgets = new ArrayList<>();
     widgets.add(new PollsnackWidgetPageObject(driver));
     widgets.add(new SoundCloudWidgetPageObject(driver));
@@ -71,6 +73,7 @@ public class AllTagsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryAllTagsWidgetTest_001")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
+    init();
     navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
@@ -80,6 +83,7 @@ public class AllTagsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryAllTagsWidgetTest_002")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
 
     topBar.openNavigation();
@@ -92,6 +96,7 @@ public class AllTagsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     navigation.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
 
     topBar.openNavigation();

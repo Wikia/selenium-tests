@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -31,8 +30,7 @@ public class PollsnackTests extends NewTestTemplate {
   private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackMercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -50,6 +48,7 @@ public class PollsnackTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPollsnackWidgetTest_002")
   public void MercuryPollsnackWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
     widget
@@ -64,6 +63,7 @@ public class PollsnackTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPollsnackWidgetTest_003")
   public void MercuryPollsnackWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
     widget

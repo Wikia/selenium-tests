@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -31,8 +30,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormercury/IncorrectWidget";
   private static final String MAPS_ARTICLE_NAME = "Map";
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -50,6 +48,7 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    init();
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
     widget
@@ -64,6 +63,7 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    init();
     GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
     widget

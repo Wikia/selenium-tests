@@ -14,7 +14,6 @@ import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
 import org.openqa.selenium.WebDriverException;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.UnsupportedEncodingException;
@@ -34,8 +33,7 @@ public class ArticlePageTests extends NewTestTemplate {
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
        "Privacy Policy", "Feedback"};
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
+  public void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
   }
@@ -170,6 +168,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryArticleTest_005")
   public void MercuryArticleTest_005_NavigateToArticleWithColonAndQuestionMark() {
+    init();
     ArticlePageObject article = new ArticlePageObject(driver);
 
     String encodedQuestionMarkUrl, encodedColonUrl;
