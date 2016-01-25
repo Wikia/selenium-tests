@@ -32,6 +32,10 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement messagePlaceholder;
   @FindBy(css = ".login-button.big")
   private WebElement continueButtonBig;
+  /*this element exists when parameter ?type=forgotPassword is added to the url*/
+  @FindBy(css = "a[href='/wiki/Special:UserLogin']")
+  private WebElement logInLink;
+
 
   public SpecialUserLoginPageObject(WebDriver driver) {
     super(driver);
@@ -126,5 +130,15 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   public void verifyClosedAccountMessage() {
     wait.forElementVisible(messagePlaceholder);
     Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
+  }
+
+  public void askForTemporaryPassword(String name) {
+    typeInUserName(name);
+    clickContinueLink();
+  }
+
+  public void clickLogInLink() {
+    wait.forElementVisible(logInLink);
+    logInLink.click();
   }
 }

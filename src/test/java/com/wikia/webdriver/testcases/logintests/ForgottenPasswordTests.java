@@ -66,6 +66,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.remindPasswordNewAuth(userName, credentials.apiToken);
     login.verifyMessageAboutNewPassword(userName);
+    login.clickLogInLink();
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
