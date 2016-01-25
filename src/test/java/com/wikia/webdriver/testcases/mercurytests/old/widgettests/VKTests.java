@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
@@ -25,6 +26,8 @@ public class VKTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private Navigate navigate;
+  private VKWidgetPageObject widget;
 
   private static final String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
   private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKMercury/MultipleWidgets";
@@ -34,16 +37,17 @@ public class VKTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.navigate = new Navigate(driver);
+    this.widget = new VKWidgetPageObject(driver);
   }
 
   @Test(groups = "MercuryVKWidgetTest_001")
   @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+    init();
 
-    widget
-      .create(VK_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + VK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -52,12 +56,9 @@ public class VKTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    widget
-      .create(VK_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-
+    widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(VK_ONE_WIDGET_ARTICLE_NAME);
 
@@ -68,12 +69,9 @@ public class VKTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
 
-    widget
-      .create(VK_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_ONE_WIDGET_ARTICLE_NAME);
-
+    widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + VK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
     navigation.navigateToPage(MAPS_ARTICLE_NAME);
     topBar.openNavigation();
@@ -85,11 +83,10 @@ public class VKTests extends NewTestTemplate {
   @Test(groups = "MercuryVKWidgetTest_004")
   @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+    init();
 
-    widget
-      .createMultiple(VK_MULTIPLE_WIDGETS_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -102,11 +99,10 @@ public class VKTests extends NewTestTemplate {
   @Test(groups = "MercuryVKWidgetTest_005")
   @Execute(asUser = User.USER)
   public void MercuryVKWidgetTest_005_isErrorPresent() {
-    VKWidgetPageObject widget = new VKWidgetPageObject(driver);
+    init();
 
-    widget
-      .createIncorrect(VK_INCORRECT_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, VK_INCORRECT_WIDGET_ARTICLE_NAME);
+    widget.createIncorrect(VK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + VK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

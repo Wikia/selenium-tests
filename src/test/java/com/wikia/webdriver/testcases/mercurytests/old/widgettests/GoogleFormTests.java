@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
@@ -24,6 +25,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private GoogleFormWidgetPageObject widget;
+  private Navigate navigate;
 
   private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
   private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
@@ -33,15 +36,16 @@ public class GoogleFormTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.widget = new GoogleFormWidgetPageObject(driver);
+    this.navigate = new Navigate(driver);
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
+    init();
 
-    widget
-      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -49,12 +53,9 @@ public class GoogleFormTests extends NewTestTemplate {
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget
-      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-
+    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
@@ -64,12 +65,9 @@ public class GoogleFormTests extends NewTestTemplate {
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
 
-    widget
-      .create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-
+    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
     navigation.navigateToPage(MAPS_ARTICLE_NAME);
     topBar.openNavigation();
@@ -80,22 +78,20 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_004")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
+    init();
 
-    widget
-      .createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_005")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
-    GoogleFormWidgetPageObject widget = new GoogleFormWidgetPageObject(driver);
+    init();
 
-    widget
-      .createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    widget.createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
@@ -24,6 +25,8 @@ public class PolldaddyTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private Navigate navigate;
+  private PolldaddyWidgetPageObject widget;
 
   private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyMercury/OneWidget";
   private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyMercury/MultipleWidgets";
@@ -33,15 +36,16 @@ public class PolldaddyTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.navigate = new Navigate(driver);
+    this.widget = new PolldaddyWidgetPageObject(driver);
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_001")
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
+    init();
 
-    widget
-        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -49,12 +53,9 @@ public class PolldaddyTests extends NewTestTemplate {
   @Test(groups = "MercuryPolldaddyWidgetTest_002")
   public void MercuryPolldaddyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget
-        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-
+    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
@@ -64,12 +65,9 @@ public class PolldaddyTests extends NewTestTemplate {
   @Test(groups = "MercuryPolldaddyWidgetTest_003")
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
 
-    widget
-        .create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
-
+    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
     navigation.navigateToPage(MAPS_ARTICLE_NAME);
     topBar.openNavigation();
@@ -80,22 +78,20 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
+    init();
 
-    widget
-        .createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_005")
   public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
-    PolldaddyWidgetPageObject widget = new PolldaddyWidgetPageObject(driver);
+    init();
 
-    widget
-        .createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
+    widget.createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

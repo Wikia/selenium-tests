@@ -20,8 +20,24 @@ public class Navigate {
     try {
       URL url = new URL(driver.getCurrentUrl());
       String host = url.getHost();
+      String cacheBuster = "?cb=" + DateTime.now().getMillis();
 
-      driver.get("http://" + host + pageName + "?cb=" + DateTime.now().getMillis());
+      driver.get("http://" + host + pageName + cacheBuster);
+    } catch (MalformedURLException e) {
+      PageObjectLogging.logInfo("Url malformed");
+    }
+
+    return this;
+  }
+
+  public Navigate toPage(String pageName, String reference) {
+    try {
+      URL url = new URL(driver.getCurrentUrl());
+      String host = url.getHost();
+      String cacheBuster = "?cb=" + DateTime.now().getMillis();
+      reference = "#" + reference;
+
+      driver.get("http://" + host + pageName + cacheBuster + reference);
     } catch (MalformedURLException e) {
       PageObjectLogging.logInfo("Url malformed");
     }
