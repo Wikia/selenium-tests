@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.Test;
@@ -27,7 +28,7 @@ public class SEOTests extends NewTestTemplate {
 
   private static final List<String> ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW =
       Arrays.asList("noindex", "follow");
-  private static final String MUPPET_MAIN_PAGE = "Muppet_Wiki";
+  private static final String MUPPET_MAIN_PAGE = "/wiki/Muppet_Wiki";
   private static final String
       ROBOTS_META_TAG_NOT_PRESENT_MESSAGE =
       "Robot Meta Tags are set when not supposed to";
@@ -43,7 +44,7 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
     SEOUtils seo = new SEOUtils(driver);
-    seo.openMercuryArticleByName(wikiURL, MUPPET_MAIN_PAGE);
+    new Navigate(driver).toPage(MUPPET_MAIN_PAGE);
 
     //TODO: Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(

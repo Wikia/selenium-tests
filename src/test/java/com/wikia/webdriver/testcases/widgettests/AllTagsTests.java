@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @Test(groups = {"AllTagsWidgetTests", "WidgetTests"})
 public class AllTagsTests extends NewTestTemplate {
 
-  private static final String ARTICLE_NAME = "AllTagsWidget";
+  private static final String ARTICLE_NAME = "/wiki/AllTagsWidget";
   private static ArrayList<WidgetPageObject> widgets;
 
   @BeforeMethod(alwaysRun = true)
@@ -55,7 +55,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "AllTagsWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void AllTagsWidgetTest_001_isLoaded() {
-    new ArticlePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    new Navigate(driver).toPage(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

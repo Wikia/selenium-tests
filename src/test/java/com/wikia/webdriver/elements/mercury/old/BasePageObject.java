@@ -26,42 +26,6 @@ public class BasePageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName + "?cb=" + DateTime.now().getMillis());
-    PageObjectLogging
-        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
-    return new ArticlePageObject(driver);
-  }
-
-  public ArticlePageObject openArticleOnWikiByNameWithCbAndNoAds(String wikiURL,
-                                                                 String articleName) {
-    getUrl(
-        wikiURL + URLsContent.WIKI_DIR + articleName +
-        "?cb=" + DateTime.now().getMillis() +
-        "&noads=1"
-    );
-    PageObjectLogging
-        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
-    return new ArticlePageObject(driver);
-  }
-
-  public ArticlePageObject openMercuryArticleByNameWithNoCacheBuster(String wikiURL,
-                                                                     String articleName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    PageObjectLogging
-        .log("openMercuryArticleByName", "Article" + articleName + " was opened", true);
-    return new ArticlePageObject(driver);
-  }
-
-  public ArticlePageObject openMercuryArticleByName(String wikiURL, String articleName,
-                                                    String hashId) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + articleName +
-           "?cb=" + DateTime.now().getMillis() + "#" + hashId);
-    PageObjectLogging.log("openMercuryArticleByName", "Article" + articleName + " with #" + hashId +
-                                                      " was opened", true);
-    return new ArticlePageObject(driver);
-  }
-
   public void tapOnElement(WebElement element) {
     JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     jsexec.executeScript("arguments[0].click();", element);
