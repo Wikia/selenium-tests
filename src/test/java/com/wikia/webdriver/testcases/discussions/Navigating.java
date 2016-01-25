@@ -83,7 +83,7 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertTrue(postsList.isUserPageHeaderVisible());
   }
 
-  public void discussionsAppPromotionPresentOnPage() {
+  public void discussionsAppPromotionUnitPresentOnPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.isAppleLinkDisplayed());
     Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
@@ -91,6 +91,7 @@ public class Navigating extends NewTestTemplate {
   }
 
   public void appleLinkInDiscussionsAppPromotionRedirectsProperly() {
-
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickAppleLinkInAppPromotion();
   }
 }
