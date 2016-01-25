@@ -14,6 +14,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
@@ -39,10 +40,36 @@ import org.testng.annotations.Test;
 )
 public class EditorTests extends NewTestTemplate {
 
-  public static final String ITEM_DISPLAY_NAME = "Templates";
-  public static final String ITEM_PAGE_NAME = "Category:Templates";
-  public static final String SECTION_DISPLAY_NAME = "New Section";
-  public static final String SEARCH_IMAGE_QUERY = "U";
+  private static final String ITEM_DISPLAY_NAME = "Templates";
+  private static final String ITEM_PAGE_NAME = "Category:Templates";
+  private static final String SECTION_DISPLAY_NAME = "New Section";
+  private static final String SEARCH_IMAGE_QUERY = "U";
+
+  private CuratedMainPagePageObject curatedMainPage;
+  private CuratedContentPageObject curatedContent;
+  private SectionFormPageObject section;
+  private SectionItemListPageObject sectionItem;
+  private CategoryFormPageObject category;
+  private EditorHomePageObject editor;
+  private ItemFormPageObject itemForm;
+  private UploadImageModalComponentObject uploadImage;
+  private SearchForImagePageObject search;
+  private CroppingToolPageObject croppingTool;
+  private Navigate navigate;
+
+  private void init() {
+    this.curatedMainPage = new CuratedMainPagePageObject(driver);
+    this.curatedContent = new CuratedContentPageObject(driver);
+    this.section = new SectionFormPageObject(driver);
+    this.sectionItem = new SectionItemListPageObject(driver);
+    this.category = new CategoryFormPageObject(driver);
+    this.editor = new EditorHomePageObject(driver);
+    this.itemForm = new ItemFormPageObject(driver);
+    this.uploadImage = new UploadImageModalComponentObject(driver);
+    this.search = new SearchForImagePageObject(driver);
+    this.croppingTool = new CroppingToolPageObject(driver);
+    this.navigate = new Navigate(driver);
+  }
 
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
@@ -57,32 +84,31 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTest_001")
   @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+    init();
 
-    curatedMainPagePageObject
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    Boolean result = curatedMainPage.isFeaturedContentVisible();
 
-    Boolean result = curatedMainPagePageObject.isFeaturedContentVisible();
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
-    itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
-    itemFormPageObject.typePageName(ITEM_PAGE_NAME);
-
-    UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
-    SearchForImagePageObject search = upload.clickSearchForImageButton();
+    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    editor.clickAddFeaturedContent();
+    itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
+    itemForm.typePageName(ITEM_PAGE_NAME);
+    itemForm.clickOnImage();
+    uploadImage.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
-    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    search.clickOnImage(0);
     croppingTool.clickDoneButton();
 
-    itemFormPageObject.waitForDeleteButtonToBeVisible();
-    itemFormPageObject.clickDone();
-    editorHomePageObject.waitForAddCategoryButtonToBeVisible();
-    editorHomePageObject.publish();
+    itemForm.waitForDeleteButtonToBeVisible();
+    itemForm.clickDone();
 
-    result = curatedMainPagePageObject.isFeaturedContentVisible();
+    editor.waitForAddCategoryButtonToBeVisible();
+    editor.publish();
+
+    result = curatedMainPage.isFeaturedContentVisible();
+
     PageObjectLogging.log(
         "Featured Content",
         MercuryMessages.VISIBLE_MSG,
@@ -94,44 +120,42 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTest_002")
   @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    CuratedContentPageObject curatedContentPageObject = new CuratedContentPageObject(driver);
-    EditorHomePageObject home = new EditorHomePageObject(driver);
+    init();
 
-    curatedMainPagePageObject
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    Boolean result = curatedMainPage.isCuratedContentVisible();
 
-    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-    SectionFormPageObject section = home.clickAddSection();
+    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    editor.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
-    UploadImageModalComponentObject upload = section.clickOnImage();
-    SearchForImagePageObject search = upload.clickSearchForImageButton();
+    section.clickOnImage();
+    uploadImage.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
-    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    search.clickOnImage(0);
     croppingTool.clickDoneButton();
-    SectionItemListPageObject sectionItems = section.clickDone();
+    section.clickDone();
 
-    CategoryFormPageObject category = sectionItems.clickAddCategory();
+    sectionItem.clickAddCategory();
     category.typeDisplayName(ITEM_DISPLAY_NAME);
     category.typePageName(ITEM_PAGE_NAME);
-    upload = category.clickOnImage();
-    search = upload.clickSearchForImageButton();
+    category.clickOnImage();
+    uploadImage.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
-    croppingTool = search.clickOnImage(0);
+    search.clickOnImage(0);
     croppingTool.clickDoneButton();
+    category.clickDone();
+    sectionItem.verifyItem(ITEM_DISPLAY_NAME);
 
-    sectionItems = category.clickDone();
-    sectionItems.verifyItem(ITEM_DISPLAY_NAME);
+    sectionItem.waitForAddCategoryButtonToBeVisible();
+    sectionItem.clickDone();
 
-    sectionItems.waitForAddCategoryButtonToBeVisible();
-    home = sectionItems.clickDone();
-    home.waitForAddCategoryButtonToBeVisible();
-    home.publish();
+    editor.waitForAddCategoryButtonToBeVisible();
+    editor.publish();
 
-    result = curatedMainPagePageObject.isCuratedContentVisible();
+    result = curatedMainPage.isCuratedContentVisible();
+
     PageObjectLogging.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
@@ -139,45 +163,44 @@ public class EditorTests extends NewTestTemplate {
         result
     );
 
-    curatedContentPageObject.clickOnCuratedContentElementByIndex(0);
-    curatedContentPageObject.waitForLoadingOverlayToDisappear();
+    curatedContent.clickOnCuratedContentElementByIndex(0);
+    curatedContent.waitForLoadingOverlayToDisappear();
 
     Assertion.assertNumber(
-        curatedContentPageObject.getCuratedContentItemsNumber(),
+        curatedContent.getCuratedContentItemsNumber(),
         1,
-        "New section items")
-    ;
+        "New section items"
+    );
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
   @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+    init();
 
-    curatedMainPagePageObject
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    Boolean result = curatedMainPage.isCuratedContentVisible();
 
-    Boolean result = curatedMainPagePageObject.isCuratedContentVisible();
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddCategory();
-    itemFormPageObject.typeDisplayName(ITEM_DISPLAY_NAME);
-    itemFormPageObject.typePageName(ITEM_PAGE_NAME);
-
-    UploadImageModalComponentObject upload = itemFormPageObject.clickOnImage();
-    SearchForImagePageObject search = upload.clickSearchForImageButton();
+    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    editor.clickAddCategory();
+    itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
+    itemForm.typePageName(ITEM_PAGE_NAME);
+    itemForm.clickOnImage();
+    uploadImage.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
-    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    search.clickOnImage(0);
     croppingTool.clickDoneButton();
 
-    itemFormPageObject.waitForDeleteButtonToBeVisible();
-    itemFormPageObject.clickDone();
-    editorHomePageObject.waitForAddCategoryButtonToBeVisible();
-    editorHomePageObject.publish();
+    itemForm.waitForDeleteButtonToBeVisible();
+    itemForm.clickDone();
 
-    result = curatedMainPagePageObject.isCuratedContentVisible();
+    editor.waitForAddCategoryButtonToBeVisible();
+    editor.publish();
+
+    result = curatedMainPage.isCuratedContentVisible();
+
     PageObjectLogging.log(
         "Curated Content",
         MercuryMessages.VISIBLE_MSG,
