@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,13 +44,6 @@ public class HomePageObject extends WikiBasePageObject {
     waitForPageLoad();
 
     return this;
-  }
-
-  public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
-    startWikiButton.click();
-    waitFor.until(ExpectedConditions.presenceOfElementLocated(
-        By.cssSelector("form[name='label-wiki-form']")));
-    return new CreateNewWikiPageObjectStep1(driver);
   }
 
   /**

@@ -21,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
@@ -171,7 +171,7 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
-  private VenusGlobalNavPageObject venusGlobalNav;
+  private GlobalNavigationPageObject globalNavigation;
 
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
@@ -267,7 +267,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
     getUrl(wikiURL);
-    getVenusGlobalNav().signUp();
+    getGlobalNavigation().signUp();
     PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
     return new SignUpPageObject(driver);
   }
@@ -915,12 +915,12 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
-  public VenusGlobalNavPageObject getVenusGlobalNav() {
-    if (venusGlobalNav == null) {
-      venusGlobalNav = new VenusGlobalNavPageObject(driver);
+  public GlobalNavigationPageObject getGlobalNavigation() {
+    if (globalNavigation == null) {
+      globalNavigation = new GlobalNavigationPageObject(driver);
     }
 
-    return venusGlobalNav;
+    return globalNavigation;
   }
 
   public void verifyModalFBButtonVisible() {
@@ -941,7 +941,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public UserProfilePageObject clickOnAvatar() {
-    getVenusGlobalNav().openAccountNAvigation();
+    getGlobalNavigation().openAccountNavigation();
     globalNavigationAvatar.click();
     PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
     return new UserProfilePageObject(driver);

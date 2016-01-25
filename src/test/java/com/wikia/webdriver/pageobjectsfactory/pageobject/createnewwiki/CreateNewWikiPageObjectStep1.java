@@ -1,7 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -36,6 +39,17 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public CreateNewWikiPageObjectStep1(WebDriver driver) {
     super(driver);
+  }
+
+  /**
+   * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki'
+   * is only available on www.wikia.com domain
+   * @return
+   */
+  public CreateNewWikiPageObjectStep1 open(){
+    getUrl(urlBuilder.getUrlForWiki("wikia") + URLsContent.SPECIAL_CREATE_NEW_WIKI);
+
+    return this;
   }
 
   public String getWikiName() {
