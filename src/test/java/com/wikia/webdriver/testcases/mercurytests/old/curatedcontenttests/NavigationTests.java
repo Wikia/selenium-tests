@@ -14,6 +14,8 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
@@ -27,27 +29,45 @@ import org.testng.annotations.Test;
 )
 public class NavigationTests extends NewTestTemplate {
 
+  private CuratedContentPageObject curatedContent;
+  private Navigate navigate;
+  private Loading loading;
+  private ArticlePageObject article;
+  private MercuryAlertComponentObject mercuryError;
+
+  private void init() {
+    this.curatedContent = new CuratedContentPageObject(driver);
+    this.navigate = new Navigate(driver);
+    this.loading = new Loading(driver);
+    this.article = new ArticlePageObject(driver);
+    this.mercuryError = new MercuryAlertComponentObject(
+        driver,
+        MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION
+    );
+  }
+
   @Test(groups = "MercuryCuratedNavigationTest_001")
   @RelatedIssue(issueID = "XW-687", comment = "java.lang.IndexOutOfBoundsException: Index: 1, Size: 0")
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    init();
 
-    category.clickOnCuratedContentElementByIndex(1);
-    category.waitForLoadingOverlayToDisappear();
+    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
 
-    category
+    curatedContent.clickOnCuratedContentElementByIndex(1);
+    loading.handleAsyncPageReload();
+
+    curatedContent
         .isTitleVisible()
         .isLinkToMainPageVisible()
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    String sectionTitle = category.getTitle();
+    String sectionTitle = curatedContent.getTitle();
     String expectedUrlPath = MercuryPaths.ROOT_PATH_CATEGORY + sectionTitle;
     UrlChecker.isPathContainedInCurrentUrl(driver, expectedUrlPath);
 
     String previousUrl = driver.getCurrentUrl();
-    category.navigateToMainPage();
+    curatedContent.navigateToMainPage();
     String nextUrl = driver.getCurrentUrl();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH);
 
@@ -60,114 +80,100 @@ public class NavigationTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedNavigationTest_002")
   public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
-    CuratedContentPageObject section = new CuratedContentPageObject(driver);
-    section.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    init();
 
-    section.clickOnCuratedContentElementByIndex(0);
-    section.waitForLoadingOverlayToDisappear();
+    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
 
-    section
+    curatedContent.clickOnCuratedContentElementByIndex(0);
+    loading.handleAsyncPageReload();
+
+    curatedContent
         .isTitleVisible()
         .isLinkToMainPageVisible()
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    UrlChecker
-        .isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH_SECTION + section.getTitle());
+    UrlChecker.isPathContainedInCurrentUrl(
+        driver, MercuryPaths.ROOT_PATH_SECTION + curatedContent.getTitle());
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")
   @RelatedIssue(issueID = "XW-640")
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category
-        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_ARTICLES)
+    init();
+
+    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_ARTICLES);
+    curatedContent
         .isArticleIconVisible()
-        .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingOverlayToDisappear();
+        .clickOnCuratedContentElementByIndex(0);
+    loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    category
-        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    curatedContent
         .isBlogIconVisible()
-        .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingOverlayToDisappear();
+        .clickOnCuratedContentElementByIndex(0);
+    loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    category
-        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    curatedContent
         .isImageIconVisible()
-        .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingOverlayToDisappear();
+        .clickOnCuratedContentElementByIndex(0);
+    loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    category
-        .openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_BLOGS)
+    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    curatedContent
         .isVideoIconVisible()
-        .clickOnCuratedContentElementByIndex(0)
-        .waitForLoadingOverlayToDisappear();
+        .clickOnCuratedContentElementByIndex(0);
+    loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_004")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
-    CuratedContentPageObject section = new CuratedContentPageObject(driver);
+    init();
 
     String expectedUrl = urlBuilder.getUrlForPathWithoutWiki(
         Configuration.getWikiName(),
         MercurySubpages.CC_CATEGORY_TEMPLATES
     );
-    String testUrl = expectedUrl;
-    section.openWikiPage(testUrl);
-    section.waitForLoadingOverlayToDisappear();
-    Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
+    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_TEMPLATES);
+    loading.handleAsyncPageReload();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = urlBuilder.getUrlForPathWithoutWiki(
         Configuration.getWikiName(),
         MercurySubpages.CC_SECTION_CATEGORIES
     );
-
-    testUrl = expectedUrl;
-    section.openWikiPage(testUrl);
-    section.waitForLoadingOverlayToDisappear();
-    Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
+    navigate.toPage("/" + MercurySubpages.CC_SECTION_CATEGORIES);
+    loading.handleAsyncPageReload();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = urlBuilder.getUrlForPath(
         Configuration.getWikiName(),
         MercurySubpages.CC_MAIN_PAGE
     );
-    testUrl = urlBuilder.getUrlForPathWithoutWiki(
-        Configuration.getWikiName(),
-        MercurySubpages.CC_EMPTY_CATEGORY
-    );
-
-    section.openWikiPage(testUrl);
-    section.waitForLoadingOverlayToDisappear();
-    Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
+    navigate.toPage("/" + MercurySubpages.CC_EMPTY_CATEGORY);
+    curatedContent.waitForLoadingOverlayToDisappear();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = urlBuilder.getUrlForPath(
         Configuration.getWikiName(),
         MercurySubpages.CC_MAIN_PAGE
     );
-    testUrl = urlBuilder.getUrlForPathWithoutWiki(
-        Configuration.getWikiName(),
-        MercurySubpages.CC_NOT_EXISTING_SECTION
-    );
-
-    section.openWikiPage(testUrl);
-    section.waitForLoadingOverlayToDisappear();
-    MercuryAlertComponentObject mercuryError = new MercuryAlertComponentObject(
-        driver,
-        MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION
-    );
+    navigate.toPage("/" + MercurySubpages.CC_NOT_EXISTING_SECTION);
+    curatedContent.waitForLoadingOverlayToDisappear();
 
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
-    Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
+    Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_005")
   public void MercuryCuratedNavigationTest_005_redirectToExistingArticle() {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    init();
+
     String redirect = WikiTextContent.REDIRECT +
                       WikiTextContent.INTERNAL_LINK_OPENING +
                       MercurySubpages.CC_REDIRECT_DESTINATION +
@@ -175,7 +181,8 @@ public class NavigationTests extends NewTestTemplate {
 
     new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
 
-    article.openCuratedMainPage(wikiURL, MercurySubpages.CC_REDIRECT_SOURCE_1);
+    navigate.toPage("/wiki/" + MercurySubpages.CC_REDIRECT_SOURCE_1);
+
     Assertion.assertEqualsIgnoreCase(article.getArticleTitle(),
                                      MercurySubpages.CC_REDIRECT_DESTINATION);
   }
