@@ -71,7 +71,6 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
-  @RelatedIssue(issueID = "QAART-703", comment = "Test Manually")
   public void changeEmailAddress() {
     final String newEmailAddress = Configuration.getCredentials().emailQaart2;
     final String oldEmailAddress = Configuration.getCredentials().email;
