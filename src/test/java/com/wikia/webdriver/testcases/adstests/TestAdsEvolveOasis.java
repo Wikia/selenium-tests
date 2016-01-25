@@ -8,42 +8,42 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject
 
 import org.testng.annotations.Test;
 
-public class TestEvolveAds extends TemplateNoFirstLoad {
+public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
 
   @GeoEdgeBrowserMobProxy(country = "CA")
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_CA(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+  public void adsEvolveOasisCA(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
   }
 
   @GeoEdgeBrowserMobProxy(country = "AU")
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_AU(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+  public void adsEvolveOasisAU(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
   }
 
   @GeoEdgeBrowserMobProxy(country = "NZ")
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_NZ(String wikiName, String article) {
+  public void adsEvolveOasisNZ(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
+  }
+
+  private void adsEvolveOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
     wikiPage.verifyEvolveCall();
@@ -53,7 +53,7 @@ public class TestEvolveAds extends TemplateNoFirstLoad {
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveHopTestPage",
       // wf ADR-254
       enabled = false

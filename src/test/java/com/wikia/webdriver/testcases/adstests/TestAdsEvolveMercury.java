@@ -15,7 +15,7 @@ public class TestAdsEvolveMercury extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
   )
-  public void adsEvolveCAMercury(String wikiName, String article) {
+  public void adsEvolveMercuryCA(String wikiName, String article) {
     adsEvolveMercury(wikiName, article);
   }
 
@@ -24,7 +24,7 @@ public class TestAdsEvolveMercury extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
   )
-  public void adsEvolveAUMercury(String wikiName, String article) {
+  public void adsEvolveMercuryAU(String wikiName, String article) {
     adsEvolveMercury(wikiName, article);
   }
 
@@ -33,7 +33,7 @@ public class TestAdsEvolveMercury extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
   )
-  public void adsEvolveNZMercury(String wikiName, String article) {
+  public void adsEvolveMercuryNZ(String wikiName, String article) {
     adsEvolveMercury(wikiName, article);
   }
 
