@@ -31,6 +31,8 @@ public class PollsnackTests extends NewTestTemplate {
   private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/OneWidget";
   private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollsnackMercury/MultipleWidgets";
   private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/IncorrectWidget";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = POLLSNACK_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -56,7 +58,7 @@ public class PollsnackTests extends NewTestTemplate {
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -68,9 +70,9 @@ public class PollsnackTests extends NewTestTemplate {
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

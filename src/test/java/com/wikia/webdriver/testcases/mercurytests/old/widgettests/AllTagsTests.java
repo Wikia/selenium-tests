@@ -42,6 +42,8 @@ public class AllTagsTests extends NewTestTemplate {
   private Navigate navigate;
 
   private static final String ARTICLE_NAME = "/wiki/AllTagsWidgetMercury";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = ARTICLE_NAME.substring(6);
   private static List<WidgetPageObject> widgets;
 
   private void init() {
@@ -89,7 +91,7 @@ public class AllTagsTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     topBar.openNavigation();
-    navigation.navigateToPage(ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -102,9 +104,9 @@ public class AllTagsTests extends NewTestTemplate {
     navigate.toPage(ARTICLE_NAME);
 
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

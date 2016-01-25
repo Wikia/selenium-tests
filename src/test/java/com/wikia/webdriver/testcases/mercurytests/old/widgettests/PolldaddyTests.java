@@ -31,6 +31,8 @@ public class PolldaddyTests extends NewTestTemplate {
   private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollDaddyMercury/OneWidget";
   private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollDaddyMercury/MultipleWidgets";
   private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollDaddymercury/IncorrectWidget";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -56,7 +58,7 @@ public class PolldaddyTests extends NewTestTemplate {
     widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -68,9 +70,9 @@ public class PolldaddyTests extends NewTestTemplate {
     widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

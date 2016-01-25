@@ -31,6 +31,8 @@ public class TwitterTests extends NewTestTemplate {
   private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/TwitterMercury/OneWidget";
   private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/TwitterMercury/MultipleWidgets";
   private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/TwitterMercury/IncorrectWidget";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -56,7 +58,7 @@ public class TwitterTests extends NewTestTemplate {
     widget.create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
-    navigation.navigateToPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -68,9 +70,9 @@ public class TwitterTests extends NewTestTemplate {
     widget.create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

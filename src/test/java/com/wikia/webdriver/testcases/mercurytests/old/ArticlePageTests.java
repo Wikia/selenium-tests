@@ -14,11 +14,7 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
-import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.Test;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
@@ -178,14 +174,8 @@ public class ArticlePageTests extends NewTestTemplate {
     init();
     ArticlePageObject article = new ArticlePageObject(driver);
 
-    String encodedQuestionMarkUrl, encodedColonUrl;
-
-    try {
-      encodedColonUrl = URLEncoder.encode(MercurySubpages.COLON, "UTF-8");
-      encodedQuestionMarkUrl = URLEncoder.encode(MercurySubpages.QUESTION_MARK, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      throw new WebDriverException("Wrong URL encoding");
-    }
+    String encodedQuestionMarkUrl = "/wiki/Question%3Fmark%3Fquestion";
+    String encodedColonUrl = "/wiki/Colon%3Acolon%3Acolon";
 
     PageObjectLogging.logWarning(
         "Info",
@@ -202,7 +192,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -220,8 +210,8 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+    result = MercurySubpages.QUESTION_MARK.toLowerCase()
+        .contains(article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -245,7 +235,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -264,8 +254,8 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
+        article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -288,7 +278,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -309,8 +299,8 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
+        article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",
@@ -321,7 +311,7 @@ public class ArticlePageTests extends NewTestTemplate {
     PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
 
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.COLON.substring(0, 4));
+    navigation.navigateToPage(MercurySubpages.COLON.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -331,7 +321,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = article.getArticleTitle().toLowerCase().equals(MercurySubpages.COLON.toLowerCase());
+    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for colon",
         "is correct",
@@ -340,7 +330,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.QUESTION_MARK.substring(0, 4));
+    navigation.navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(
@@ -350,8 +340,8 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result =
-        article.getArticleTitle().toLowerCase().equals(MercurySubpages.QUESTION_MARK.toLowerCase());
+    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
+        article.getArticleTitle().toLowerCase());
     PageObjectLogging.log(
         "Article title for question mark",
         "is correct",

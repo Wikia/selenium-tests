@@ -30,6 +30,8 @@ public class SoundCloudTests extends NewTestTemplate {
 
   private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "/wiki/SoundCloudMercury/OneWidget";
   private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/SoundCloudMercury/MultipleWidgets";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -53,9 +55,9 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -67,9 +69,9 @@ public class SoundCloudTests extends NewTestTemplate {
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

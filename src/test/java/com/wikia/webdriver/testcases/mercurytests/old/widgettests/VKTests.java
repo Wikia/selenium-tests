@@ -32,6 +32,8 @@ public class VKTests extends NewTestTemplate {
   private static final String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
   private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKMercury/MultipleWidgets";
   private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = VK_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -59,7 +61,7 @@ public class VKTests extends NewTestTemplate {
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
-    navigation.navigateToPage(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -72,9 +74,9 @@ public class VKTests extends NewTestTemplate {
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.MAP);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
