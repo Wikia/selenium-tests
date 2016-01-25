@@ -33,7 +33,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_001")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Before infobox expanding
     infobox
@@ -62,7 +62,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_002")
   public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // expand by clicking button
     infobox
@@ -83,7 +83,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_003")
   public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     String externalLinkName = infobox
         .clickExpandButton()
@@ -100,7 +100,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_004")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
@@ -119,7 +119,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_005")
   public void MercuryPortableInfoboxTest_005_SmallImages() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_2);
+    navigate.toPage(MercurySubpages.INFOBOX_2);
 
     infobox
         .isTitleAboveImageVisible()
@@ -129,7 +129,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_006")
   public void MercuryPortableInfoboxTest_006_DifferentClickTargets() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_3);
+    navigate.toPage(MercurySubpages.INFOBOX_3);
 
     // Check click on main image
     infobox
@@ -148,7 +148,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_007")
   public void MercuryPortableInfoboxTest_007_HeroImageTall() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     infobox.isHeroImageSquare();
   }
@@ -156,7 +156,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_008")
   public void MercuryPortableInfoboxTest_008_HeroImageWide() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_4);
+    navigate.toPage(MercurySubpages.INFOBOX_4);
 
     infobox.isNotHeroImageSquare();
   }
@@ -164,7 +164,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_009")
   public void MercuryPortableInfoboxTest_009_ImageCollection() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_5);
+    navigate.toPage(MercurySubpages.INFOBOX_5);
 
     infobox.isImageInCollectionVisible()
         .clickNextImageArrow()
@@ -176,7 +176,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "MercuryPortableInfoboxTest_010")
   public void MercuryPortableInfoboxTest_010_HeadersInTOC() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.INFOBOX_2);
+    navigate.toPage(MercurySubpages.INFOBOX_2);
 
     toc.clickOnTOC();
     toc.TOCItemNotContainsText(0, infobox.getHeaderName(0));

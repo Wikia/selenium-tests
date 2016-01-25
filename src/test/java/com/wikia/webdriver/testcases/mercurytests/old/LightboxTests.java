@@ -45,7 +45,7 @@ public class LightboxTests extends NewTestTemplate {
     this.gallery = new GalleryComponentObject(driver);
     this.lightbox = new LightboxComponentObject(driver);
 
-    new Navigate(driver).toPage("/wiki/" + MercurySubpages.GALLERY);
+    new Navigate(driver).toPage(MercurySubpages.GALLERY);
   }
 
   @Test(groups = "MercuryLightboxTest_001")

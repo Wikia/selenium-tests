@@ -36,7 +36,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_001")
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.TOC);
+    navigate.toPage(MercurySubpages.TOC);
 
     Assertion.assertTrue(
         toc.isTOCDisplayed(),
@@ -103,7 +103,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_002")
   public void MercuryTOCTest_002_NoH2NoTOC() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.TOC_WITHOUT_H2);
+    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
     PageObjectLogging.log(
@@ -117,7 +117,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_003")
   public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.TOC, "Second_header");
+    navigate.toPage(MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
     PageObjectLogging.log(
@@ -131,7 +131,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_004")
   public void MercuryTOCTest_004_RedirectionToHeaderFromCurrentPage() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.TOC);
+    navigate.toPage(MercurySubpages.TOC);
 
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
@@ -151,7 +151,7 @@ public class TOCTests extends NewTestTemplate {
   )
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.TOC_WITHOUT_H2);
+    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
 
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
     toc.waitForLoadingOverlayToDisappear();

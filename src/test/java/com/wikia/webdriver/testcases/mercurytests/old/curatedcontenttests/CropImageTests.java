@@ -54,10 +54,10 @@ public class CropImageTests extends NewTestTemplate {
   public void MercuryCropImageTest_001_cropOptionInModal() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPage.isArticleTitleVisible();
 
-    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddFeaturedContent();
     itemForm.clickOnImage();
 

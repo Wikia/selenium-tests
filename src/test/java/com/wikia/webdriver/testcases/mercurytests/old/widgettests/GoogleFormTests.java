@@ -28,10 +28,9 @@ public class GoogleFormTests extends NewTestTemplate {
   private GoogleFormWidgetPageObject widget;
   private Navigate navigate;
 
-  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
-  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
-  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormercury/IncorrectWidget";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormMercury/OneWidget";
+  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/GoogleFormMercury/MultipleWidgets";
+  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/wikiGoogleFormercury/IncorrectWidget";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -45,7 +44,7 @@ public class GoogleFormTests extends NewTestTemplate {
     init();
 
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -55,7 +54,7 @@ public class GoogleFormTests extends NewTestTemplate {
     init();
 
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
@@ -67,9 +66,9 @@ public class GoogleFormTests extends NewTestTemplate {
     init();
 
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
@@ -81,7 +80,7 @@ public class GoogleFormTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -91,7 +90,7 @@ public class GoogleFormTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

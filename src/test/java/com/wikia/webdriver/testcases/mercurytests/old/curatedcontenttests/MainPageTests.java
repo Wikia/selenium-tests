@@ -67,7 +67,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).waitForFooterToBeVisible();
 
     boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
@@ -172,7 +172,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_002_CheckElementsInvisibility() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
 
     boolean result = cc.isArticleTitleVisible();
     PageObjectLogging.log(
@@ -228,7 +228,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_003_CheckElementsForNoTrendingArticles() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.NTACC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.NTACC_MAIN_PAGE);
 
     boolean result = !cc.isTrendingArticlesVisible();
     PageObjectLogging.log(
@@ -308,7 +308,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_004_CheckElementsVisibilityExceptTrendingVideos() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.NTVCC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.NTVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
@@ -372,7 +372,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.NTAVCC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.NTAVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
@@ -452,7 +452,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     String oldUrl = driver.getCurrentUrl();
     curatedContent.clickOnCuratedContentElementByIndex(2);

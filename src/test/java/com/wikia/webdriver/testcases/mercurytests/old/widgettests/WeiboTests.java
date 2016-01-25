@@ -28,10 +28,9 @@ public class WeiboTests extends NewTestTemplate {
   private Navigate navigate;
   private WeiboWidgetPageObject widget;
 
-  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "WeiboMercury/OneWidget";
-  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "WeiboMercury/MultipleWidgets";
-  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "WeiboMercury/IncorrectWidget";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "/wiki/WeiboMercury/OneWidget";
+  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/WeiboMercury/MultipleWidgets";
+  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/WeiboMercury/IncorrectWidget";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -45,7 +44,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -55,7 +54,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
@@ -67,9 +66,9 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
@@ -81,7 +80,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -91,7 +90,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

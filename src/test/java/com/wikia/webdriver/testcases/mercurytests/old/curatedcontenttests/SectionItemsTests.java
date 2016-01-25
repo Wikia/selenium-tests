@@ -34,7 +34,7 @@ public class SectionItemsTests extends NewTestTemplate {
   public void MercuryCuratedSectionItemsTest_001_curatedContentItemsAreVisibleAndExpandable() {
     init();
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_28_ITEMS);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_28_ITEMS);
 
     curatedContent
         .isCurrentNumberOfItemsExpected(24)
@@ -52,7 +52,7 @@ public class SectionItemsTests extends NewTestTemplate {
   public void MercuryCuratedSectionItemsTest_002_curatedContentItemsAreVisibleAndNotExpandable() {
     init();
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_10_ITEMS);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_10_ITEMS);
 
     curatedContent
         .isCurrentNumberOfItemsExpected(10)

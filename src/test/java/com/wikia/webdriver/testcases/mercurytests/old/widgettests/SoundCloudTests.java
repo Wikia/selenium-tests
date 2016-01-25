@@ -28,9 +28,8 @@ public class SoundCloudTests extends NewTestTemplate {
   private SoundCloudWidgetPageObject widget;
   private Navigate navigate;
 
-  private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "SoundCloudMercury/OneWidget";
-  private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "SoundCloudMercury/MultipleWidgets";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "/wiki/SoundCloudMercury/OneWidget";
+  private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/SoundCloudMercury/MultipleWidgets";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -44,7 +43,7 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -54,7 +53,7 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
 
@@ -66,9 +65,9 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
 
@@ -80,7 +79,7 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

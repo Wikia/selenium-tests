@@ -45,7 +45,7 @@ public class ArticlePageTests extends NewTestTemplate {
   public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     boolean result = articlePage.isWikiaLogoVisible();
     PageObjectLogging.log(
@@ -102,7 +102,7 @@ public class ArticlePageTests extends NewTestTemplate {
   public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     articlePage.clickTopContributor(0);
 
@@ -119,7 +119,7 @@ public class ArticlePageTests extends NewTestTemplate {
   public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/" + MercurySubpages.LINKED_IMAGES);
+    navigate.toPage(MercurySubpages.LINKED_IMAGES);
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
@@ -138,7 +138,7 @@ public class ArticlePageTests extends NewTestTemplate {
   public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     Assertion.assertTrue(
         articlePage.isChevronCollapsed(),
@@ -192,7 +192,7 @@ public class ArticlePageTests extends NewTestTemplate {
         "Accessing article directly through URL"
     );
 
-    navigate.toPage("/wiki/" + encodedColonUrl);
+    navigate.toPage(encodedColonUrl);
 
     boolean result = driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -210,7 +210,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    navigate.toPage("/wiki/" + encodedQuestionMarkUrl);
+    navigate.toPage(encodedQuestionMarkUrl);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(

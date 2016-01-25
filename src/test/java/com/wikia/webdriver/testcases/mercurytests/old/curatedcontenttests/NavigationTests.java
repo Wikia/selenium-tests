@@ -51,7 +51,7 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(1);
     loading.handleAsyncPageReload();
@@ -82,7 +82,7 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
     loading.handleAsyncPageReload();
@@ -102,28 +102,28 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
     init();
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_ARTICLES);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_ARTICLES);
     curatedContent
         .isArticleIconVisible()
         .clickOnCuratedContentElementByIndex(0);
     loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_BLOGS);
     curatedContent
         .isBlogIconVisible()
         .clickOnCuratedContentElementByIndex(0);
     loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_BLOGS);
     curatedContent
         .isImageIconVisible()
         .clickOnCuratedContentElementByIndex(0);
     loading.handleAsyncPageReload();
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
 
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_BLOGS);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_BLOGS);
     curatedContent
         .isVideoIconVisible()
         .clickOnCuratedContentElementByIndex(0);
@@ -139,7 +139,7 @@ public class NavigationTests extends NewTestTemplate {
         Configuration.getWikiName(),
         MercurySubpages.CC_CATEGORY_TEMPLATES
     );
-    navigate.toPage("/" + MercurySubpages.CC_CATEGORY_TEMPLATES);
+    navigate.toPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
     loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
@@ -147,7 +147,7 @@ public class NavigationTests extends NewTestTemplate {
         Configuration.getWikiName(),
         MercurySubpages.CC_SECTION_CATEGORIES
     );
-    navigate.toPage("/" + MercurySubpages.CC_SECTION_CATEGORIES);
+    navigate.toPage(MercurySubpages.CC_SECTION_CATEGORIES);
     loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
@@ -155,7 +155,7 @@ public class NavigationTests extends NewTestTemplate {
         Configuration.getWikiName(),
         MercurySubpages.CC_MAIN_PAGE
     );
-    navigate.toPage("/" + MercurySubpages.CC_EMPTY_CATEGORY);
+    navigate.toPage(MercurySubpages.CC_EMPTY_CATEGORY);
     curatedContent.waitForLoadingOverlayToDisappear();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
@@ -163,7 +163,7 @@ public class NavigationTests extends NewTestTemplate {
         Configuration.getWikiName(),
         MercurySubpages.CC_MAIN_PAGE
     );
-    navigate.toPage("/" + MercurySubpages.CC_NOT_EXISTING_SECTION);
+    navigate.toPage(MercurySubpages.CC_NOT_EXISTING_SECTION);
     curatedContent.waitForLoadingOverlayToDisappear();
 
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
@@ -181,7 +181,7 @@ public class NavigationTests extends NewTestTemplate {
 
     new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
 
-    navigate.toPage("/wiki/" + MercurySubpages.CC_REDIRECT_SOURCE_1);
+    navigate.toPage(MercurySubpages.CC_REDIRECT_SOURCE_1);
 
     Assertion.assertEqualsIgnoreCase(article.getArticleTitle(),
                                      MercurySubpages.CC_REDIRECT_DESTINATION);

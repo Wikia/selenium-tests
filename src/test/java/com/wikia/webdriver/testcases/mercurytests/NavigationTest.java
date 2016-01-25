@@ -27,7 +27,7 @@ public class NavigationTest extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
-    new Navigate(driver).toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury-navigating-001")

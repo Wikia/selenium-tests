@@ -33,7 +33,7 @@ public class CommentsTests extends NewTestTemplate {
   private void init() {
     this.comments = new CommentsPageObject(driver);
 
-    new Navigate(driver).toPage("/wiki/" + MercurySubpages.COMMENTS);
+    new Navigate(driver).toPage(MercurySubpages.COMMENTS);
   }
 
   @Test(groups = "MercuryCommentsTest_001")

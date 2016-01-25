@@ -28,10 +28,9 @@ public class PollsnackTests extends NewTestTemplate {
   private PollsnackWidgetPageObject widget;
   private Navigate navigate;
 
-  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "PollsnackMercury/OneWidget";
-  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollsnackMercury/MultipleWidgets";
-  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackMercury/IncorrectWidget";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/OneWidget";
+  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollsnackMercury/MultipleWidgets";
+  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/IncorrectWidget";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -45,7 +44,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -55,7 +54,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
@@ -67,9 +66,9 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
@@ -81,7 +80,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -91,7 +90,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

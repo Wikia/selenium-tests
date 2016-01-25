@@ -32,7 +32,6 @@ public class VKTests extends NewTestTemplate {
   private static final String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
   private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKMercury/MultipleWidgets";
   private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
-  private static final String MAPS_ARTICLE_NAME = "Map";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -47,7 +46,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -58,7 +57,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
     navigation.navigateToPage(VK_ONE_WIDGET_ARTICLE_NAME);
 
@@ -71,9 +70,9 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(VK_ONE_WIDGET_ARTICLE_NAME);
 
@@ -86,7 +85,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -102,7 +101,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(VK_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage("/wiki/" + VK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(VK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

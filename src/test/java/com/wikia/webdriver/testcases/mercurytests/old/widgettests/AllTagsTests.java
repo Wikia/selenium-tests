@@ -41,8 +41,7 @@ public class AllTagsTests extends NewTestTemplate {
   private Navigation navigation;
   private Navigate navigate;
 
-  private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String ARTICLE_NAME = "/wiki/AllTagsWidgetMercury";
   private static List<WidgetPageObject> widgets;
 
   private void init() {
@@ -77,7 +76,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_001")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     init();
-    navigate.toPage("/wiki/" + ARTICLE_NAME);
+    navigate.toPage(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -87,7 +86,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_002")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    navigate.toPage("/wiki/" + MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     topBar.openNavigation();
     navigation.navigateToPage(ARTICLE_NAME);
@@ -100,10 +99,10 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    navigate.toPage("/wiki/" + ARTICLE_NAME);
+    navigate.toPage(ARTICLE_NAME);
 
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(MercurySubpages.MAP);
     topBar.openNavigation();
     navigation.navigateToPage(ARTICLE_NAME);
 

@@ -86,12 +86,12 @@ public class EditorTests extends NewTestTemplate {
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
     Boolean result = curatedMainPage.isFeaturedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddFeaturedContent();
     itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
     itemForm.typePageName(ITEM_PAGE_NAME);
@@ -122,12 +122,12 @@ public class EditorTests extends NewTestTemplate {
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
     Boolean result = curatedMainPage.isCuratedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
     section.clickOnImage();
@@ -178,12 +178,12 @@ public class EditorTests extends NewTestTemplate {
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     init();
 
-    navigate.toPage("/wiki/" + MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
     Boolean result = curatedMainPage.isCuratedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
-    navigate.toPage("/" + MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddCategory();
     itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
     itemForm.typePageName(ITEM_PAGE_NAME);
