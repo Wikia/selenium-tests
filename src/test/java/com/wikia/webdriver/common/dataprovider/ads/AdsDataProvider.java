@@ -158,7 +158,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"adtest", "Special:Videos", "126608052", "wka.life/_adtest//special", "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"adtest", "Special:NewFiles", "126608052", "wka.life/_adtest//special",
+        {"adtest", "Special:Images", "126608052", "wka.life/_adtest//special",
          "TOP_LEADERBOARD",
          "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
     };
@@ -638,18 +638,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {"SyntheticTests/FliteTag"},
         {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
-  public static Object[][] adsExtraMarkerOasis() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Async/Hop/ExtraMarker?log_level=9&log_group=Wikia.Tracker",
-            "adType=async;method=hop;pos=TOP_RIGHT_BOXAD;",
-            "test-marker=42"
-        }
-    };
   }
 
   @DataProvider

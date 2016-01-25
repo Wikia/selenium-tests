@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -77,14 +75,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -251,12 +243,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiCorporateURL);
     PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
     return new HomePageObject(driver);
-  }
-
-  public SpecialContributionsPageObject openContributionsPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CONTRIBUTIONS);
-    PageObjectLogging.log("openContributionsPage", "contributions page is opened", true);
-    return new SpecialContributionsPageObject(driver);
   }
 
   public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
@@ -545,7 +531,7 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
+      wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
           userName.replace(" ", "_"))));
     } finally {
       restoreDeaultImplicitWait();
@@ -844,31 +830,6 @@ public class WikiBasePageObject extends BasePageObject {
         + videoURL + "'}," + "type: 'POST' } );");
   }
 
-  /**
-   * this method should be called after clicktracking test, in order to verify if expected events
-   * were tracked
-   */
-  public void compareTrackedEventsTo(List<JsonObject> expectedEventsList) {
-    jsActions.execute(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
-    List<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
-    List<JsonObject> trackedEventsList;
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    // prepare list of tracked events
-    Object event = js.executeScript("return selenium_popEvent()");
-    StringReader reader = new StringReader(event.toString());
-    JsonReader jsonReader = Json.createReader(reader);
-    while (!(event == null)) {
-      reader = new StringReader(event.toString());
-      jsonReader = Json.createReader(reader);
-      trackedEventsArrayList.add(jsonReader.readObject());
-      // take next tracked event
-      event = js.executeScript("return selenium_popEvent()");
-    }
-    trackedEventsList = trackedEventsArrayList;
-    ClickTrackingSupport support = new ClickTrackingSupport();
-    support.compare(expectedEventsList, trackedEventsList);
-  }
-
   public void verifyVEPublishComplete() {
     waitForElementNotVisibleByElement(veMode);
     waitForElementNotVisibleByElement(focusMode);
@@ -972,18 +933,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyDropDownFBButtonVisible() {
     Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonDropDown));
-  }
-
-  public void verifyAvatarPlaceholder() {
-    // prevent http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp
-    WebElement placeholder = driver.findElement(By.cssSelector(globalNavigationAvatarPlaceholder));
-    wait.forElementVisible(placeholder);
-    PageObjectLogging.log("verifyAvatarPlaceholder", "Avatar placeholder is visible", true);
-  }
-
-  public void verifyAvatarNotPresent() {
-    wait.forElementNotPresent(By.cssSelector("a[data-id='userpage']"));
-    PageObjectLogging.log("verifyAvatarNotPresent", "Avatar is not visible", true);
   }
 
   public void verifyAvatarVisible() {

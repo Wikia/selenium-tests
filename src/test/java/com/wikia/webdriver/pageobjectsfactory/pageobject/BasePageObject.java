@@ -26,8 +26,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -565,19 +563,5 @@ public class BasePageObject {
   public void switchToNewBrowserTab() {
     List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(tabs.get(tabs.size() - 1));
-  }
-
-  /**
-   * @param optionalFilter Optional parameter for filtering logs by specific string.
-   */
-  public List<String> getBrowserLogs(String... optionalFilter) {
-    String filter = optionalFilter.length > 0 ? optionalFilter[0] : "";
-    List<String> result = new ArrayList<>();
-    for (LogEntry logEntry : driver.manage().logs().get(LogType.BROWSER)) {
-      if (filter.isEmpty() || logEntry.getMessage().contains(filter)) {
-        result.add(logEntry.getMessage());
-      }
-    }
-    return result;
   }
 }

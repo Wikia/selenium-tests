@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.testng.annotations.Test;
 

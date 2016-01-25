@@ -354,8 +354,9 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"adtest", "DFP/hop", "DirectGptMobile"},
-        {"adtest", "DFP/hophop", "RemnantGptMobile"}
+        {"adtest", "DFP/hop", "mobile", "\"source\":\"mobile/LB\""},
+        {"adtest", "DFP/hophop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
+        {"adtest", "SyntheticTests/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
     };
   }
 }

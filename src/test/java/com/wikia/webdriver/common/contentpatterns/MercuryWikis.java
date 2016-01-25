@@ -13,6 +13,9 @@ public class MercuryWikis {
   public static final String MERCURY_EMPTY_CC = "mercuryemptycc";
   public static final String MERCURY_EMPTY_CC_EDITOR = "mercuryemptycceditor";
 
+  // Other wikis
+  public static final String MLP = "mlp";
+
   private MercuryWikis() {
   }
 }

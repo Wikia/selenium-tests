@@ -61,6 +61,9 @@ public class MercurySubpages {
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "Mercury_Empty_CC_Editor_Wikia";
 
+  // Articles on mlp.wikia.com
+  public static final String MLP_MAIN_PAGE = "My_Little_Pony_Friendship_is_Magic_Wiki";
+
   private MercurySubpages() {
   }
 }
