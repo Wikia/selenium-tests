@@ -102,9 +102,7 @@ public class SignUpTests extends NewTestTemplate {
   @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
-    HomePageObject home = new HomePageObject(driver);
-    home.openWikiPage(wikiCorporateURL);
-    CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
+    CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
     createNewWiki1.disableCaptcha();
     String wikiName = createNewWiki1.getWikiName();
     createNewWiki1.typeInWikiName(wikiName);
