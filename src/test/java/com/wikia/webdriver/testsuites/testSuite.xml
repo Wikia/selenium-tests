@@ -19,6 +19,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParamOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
