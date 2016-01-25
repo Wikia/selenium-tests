@@ -114,6 +114,8 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
+    } else {
+      loadMainPage();
     }
 
     // Reset unstable page load strategy to default 'false' value
