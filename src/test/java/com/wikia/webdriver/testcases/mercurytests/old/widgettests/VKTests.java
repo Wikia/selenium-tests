@@ -29,9 +29,9 @@ public class VKTests extends NewTestTemplate {
   private Navigate navigate;
   private VKWidgetPageObject widget;
 
-  private static final String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
-  private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKMercury/MultipleWidgets";
-  private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
+  private static final String VK_ONE_WIDGET_ARTICLE_NAME = "/wiki/VKMercury/OneWidget";
+  private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/VKMercury/MultipleWidgets";
+  private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/VKMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = VK_ONE_WIDGET_ARTICLE_NAME.substring(6);
 

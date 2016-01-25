@@ -55,7 +55,7 @@ public class SoundCloudTests extends NewTestTemplate {
     init();
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(QUERY_1);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
     navigation.navigateToPage(QUERY_2);
 
