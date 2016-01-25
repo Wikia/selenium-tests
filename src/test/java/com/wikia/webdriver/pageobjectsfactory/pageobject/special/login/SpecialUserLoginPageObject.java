@@ -132,11 +132,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
   }
 
-  public void askForTemporaryPassword(String name) {
-    typeInUserName(name);
-    clickContinueLink();
-  }
-
   public void clickLogInLink() {
     wait.forElementVisible(logInLink);
     logInLink.click();
