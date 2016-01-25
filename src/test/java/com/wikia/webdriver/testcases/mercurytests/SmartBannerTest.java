@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.SmartBanner;
 
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class SmartBannerTest extends NewTestTemplate {
   private void init() {
     this.smartBanner = new SmartBanner(driver);
 
-    smartBanner.openMercuryArticleByName(wikiURL, MercurySubpages.MLP_MAIN_PAGE);
+    new Navigate(driver).toPage("/wiki/" + MercurySubpages.MLP_MAIN_PAGE);
   }
 
   @Test(groups = "mercury-smart-banner-001")

@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.CommentsPageObject;
 
 import org.testng.annotations.Test;
@@ -27,11 +28,18 @@ public class CommentsTests extends NewTestTemplate {
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
 
+  private CommentsPageObject comments;
+
+  private void init() {
+    this.comments = new CommentsPageObject(driver);
+
+    new Navigate(driver).toPage("/wiki/" + MercurySubpages.COMMENTS);
+  }
+
   @Test(groups = "MercuryCommentsTest_001")
   @RelatedIssue(issueID = "XW-654")
   public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
-    CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
+    init();
 
     Assertion.assertTrue(
         comments.isCommentsListCollapsed(),
@@ -101,8 +109,7 @@ public class CommentsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCommentsTest_002")
   public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
-    CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
+    init();
 
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -165,8 +172,7 @@ public class CommentsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCommentsTest_003")
   public void MercuryCommentsTest_003_RepliesListCounter() {
-    CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
+    init();
 
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -207,8 +213,7 @@ public class CommentsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCommentsTest_004")
   public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
-    CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.COMMENTS);
+    init();
 
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();
@@ -227,8 +232,7 @@ public class CommentsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCommentsTest_005")
   public void MercuryCommentsTest_005_Images_Videos() {
-    CommentsPageObject comments = new CommentsPageObject(driver);
-    comments.openMercuryArticleByName(wikiURL, MercurySubpages.COMMENTS);
+    init();
 
     comments.clickCommentsHeader();
     comments.waitForFirstCommentToBeVisible();

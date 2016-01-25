@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.InteractiveMapsComponentObject;
 
 import org.testng.annotations.Test;
@@ -25,10 +26,17 @@ import java.io.File;
 )
 public class InteractiveMapsTests extends NewTestTemplate {
 
+  private InteractiveMapsComponentObject maps;
+
+  private void init() {
+    this.maps = new InteractiveMapsComponentObject(driver);
+
+    new Navigate(driver).toPage("/wiki/" + MercurySubpages.MAP);
+  }
+
   @Test(groups = "MercuryInteractiveMapsTest_001")
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
+    init();
 
     maps.clickMapThumbnail();
 
@@ -85,8 +93,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = "MercuryInteractiveMapsTest_002")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
+    init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     maps.clickMapThumbnail();
@@ -213,8 +220,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   @Test(groups = "MercuryInteractiveMapsTest_003")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
-    InteractiveMapsComponentObject maps = new InteractiveMapsComponentObject(driver);
-    maps.openMercuryArticleByName(wikiURL, MercurySubpages.MAP);
+    init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     maps.clickMapThumbnail();

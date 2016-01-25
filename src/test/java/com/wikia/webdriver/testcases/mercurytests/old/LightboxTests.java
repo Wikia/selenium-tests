@@ -15,6 +15,7 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.GalleryComponentObject;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 
@@ -37,13 +38,20 @@ public class LightboxTests extends NewTestTemplate {
   private static final String DIRECTION_DOWN = "down";
   private static final double ACCURACY = 0.83;
 
+  private GalleryComponentObject gallery;
+  private LightboxComponentObject lightbox;
+
+  private void init() {
+    this.gallery = new GalleryComponentObject(driver);
+    this.lightbox = new LightboxComponentObject(driver);
+
+    new Navigate(driver).toPage("/wiki/" + MercurySubpages.GALLERY);
+  }
+
   @Test(groups = "MercuryLightboxTest_001")
   public void MercuryLightboxTest_001_Open_Close() {
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    LightboxComponentObject lightbox;
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-
-    lightbox = gallery.clickGalleryImage(0);
+    init();
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),
@@ -78,12 +86,10 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "MercuryLightboxTest_002")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    LightboxComponentObject lightbox;
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
-    lightbox = gallery.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isCurrentImageVisible(),
@@ -178,9 +184,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "MercuryLightboxTest_003")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    LightboxComponentObject lightbox;
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     lightbox = gallery.clickGalleryImage(0);
@@ -261,10 +265,8 @@ public class LightboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryLightboxTest_004")
   public void MercuryLightboxTest_004_UIShow_UIHide() {
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    LightboxComponentObject lightbox;
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
-    lightbox = gallery.clickGalleryImage(0);
+    init();
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(lightbox.isLightboxHeaderDisplayed(), "Lightbox header isn't displayed");
     Assertion.assertTrue(lightbox.isLightboxFooterDisplayed(), "Lightbox footer isn't displayed");
@@ -283,13 +285,11 @@ public class LightboxTests extends NewTestTemplate {
   @RelatedIssue(issueID = "HG-730")
   @Test(groups = "MercuryLightboxTest_005", enabled = false)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
+    init();
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
-    LightboxComponentObject lightbox;
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
 
     String oldUrl = driver.getCurrentUrl();
-    lightbox = gallery.clickGalleryImage(0);
+    gallery.clickGalleryImage(0);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),
@@ -318,9 +318,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "MercuryLightboxTest_006")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
-    GalleryComponentObject gallery = new GalleryComponentObject(driver);
-    LightboxComponentObject lightbox;
-    gallery.openMercuryArticleByName(wikiURL, MercurySubpages.GALLERY);
+    init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
     lightbox = gallery.clickGalleryImage(0);
