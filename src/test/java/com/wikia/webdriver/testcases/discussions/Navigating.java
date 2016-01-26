@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -67,12 +68,16 @@ public class Navigating extends NewTestTemplate {
   public void clickAvatarLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUserAvatar();
-    Assertion.assertTrue(postsList.isUserPageHeaderVisible());
+    Assertion.assertTrue(
+        driver.getCurrentUrl().contains(
+            URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
   public void clickUsernameLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUsernameLink();
-    Assertion.assertTrue(postsList.isUserPageHeaderVisible());
+    Assertion.assertTrue(
+        driver.getCurrentUrl().contains(
+            URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 }
