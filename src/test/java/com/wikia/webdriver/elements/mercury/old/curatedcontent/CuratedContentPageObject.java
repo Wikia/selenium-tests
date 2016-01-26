@@ -30,16 +30,12 @@ public class CuratedContentPageObject extends BasePageObject {
   private List<WebElement> curatedContentItems;
   @FindBy(css = ".load-more-items")
   private WebElement loadMoreButton;
-  @FindBy(css = "#namespace-article")
-  private WebElement articleItemIcon;
-  @FindBy(css = "#namespace-blog")
-  private WebElement blogItemIcon;
-  @FindBy(css = "#namespace-image")
-  private WebElement imageItemIcon;
-  @FindBy(css = "#namespace-video")
-  private WebElement videoItemIcon;
 
   private By loadMoreButtonSelector = By.cssSelector(".load-more-items");
+  private By articleItemIcon = By.cssSelector("#namespace-article");
+  private By blogItemIcon = By.cssSelector("#namespace-blog");
+  private By imageItemIcon = By.cssSelector("#namespace-image");
+  private By videoItemIcon = By.cssSelector("#namespace-video");
 
   private enum Labels {
     ARTICLE("Article wrapper"),
@@ -100,22 +96,22 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   public CuratedContentPageObject isArticleIconVisible() {
-    wait.forElementVisible(articleItemIcon);
+    wait.forElementPresent(articleItemIcon);
     return this;
   }
 
   public CuratedContentPageObject isBlogIconVisible() {
-    wait.forElementVisible(blogItemIcon);
+    wait.forElementPresent(blogItemIcon);
     return this;
   }
 
   public CuratedContentPageObject isImageIconVisible() {
-    wait.forElementVisible(imageItemIcon);
+    wait.forElementPresent(imageItemIcon);
     return this;
   }
 
   public CuratedContentPageObject isVideoIconVisible() {
-    wait.forElementVisible(videoItemIcon);
+    wait.forElementPresent(videoItemIcon);
     return this;
   }
 
