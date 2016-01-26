@@ -15,8 +15,6 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
   @FindBy(css = "input#title")
   protected WebElement pageNameField;
 
-  @FindBy(css = ".sub-head--cancel")
-  protected WebElement backButton;
   @FindBy(css = ".sub-head--done")
   protected WebElement doneButton;
 
@@ -45,8 +43,8 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
   }
 
   public void typePageName(String pageName) {
-    wait.forElementVisible(displayNameField);
-    displayNameField.sendKeys(pageName);
+    wait.forElementVisible(pageNameField);
+    pageNameField.sendKeys(pageName);
   }
 
   public void waitForDeleteButtonToBeVisible() {
