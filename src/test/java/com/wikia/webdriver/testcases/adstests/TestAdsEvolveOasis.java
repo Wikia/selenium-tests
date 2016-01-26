@@ -47,7 +47,7 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
   private void adsEvolveOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+    wikiPage.verifyEvolveCallOasis();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
