@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 
 import java.util.Stack;
 
-/**
- * Created by Ludwik on 2015-07-28.
- */
 public class SelectorStack {
 
   private static Stack<By> byStack = new Stack<>();
@@ -32,5 +29,4 @@ public class SelectorStack {
   public static void write(By selector) {
     byStack.push(selector);
   }
-
 }

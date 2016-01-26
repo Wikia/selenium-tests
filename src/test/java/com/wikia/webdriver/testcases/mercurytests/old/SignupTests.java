@@ -74,7 +74,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private SignupPageObject signUp(TestUser user) {
-    return new SignupPageObject(driver).openMobileSignupPage(wikiURL).signUp(user.getUserName(),
+    return new SignupPageObject(driver).openMobileSignupPage().signUp(user.getUserName(),
         user.getPassword(), user.getEmail(), user.getBirthdate());
   }
 }

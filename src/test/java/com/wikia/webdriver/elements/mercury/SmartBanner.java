@@ -1,23 +1,33 @@
 package com.wikia.webdriver.elements.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class SmartBanner extends BasePageObject {
+public class SmartBanner {
 
   @FindBy(css = ".sb-close")
   private WebElement closeButton;
 
   private By smartBannerComponent = By.cssSelector(".smart-banner");
 
+  private Wait wait;
+  private JavascriptActions jsActions;
+  private WebDriver driver;
+
   public SmartBanner(WebDriver driver) {
-    super(driver);
+    this.wait = new Wait(driver);
+    this.jsActions = new JavascriptActions(driver);
+    this.driver = driver;
+
+    PageFactory.initElements(driver, this);
   }
 
   public SmartBanner close() {

@@ -7,9 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-/**
- * Created by Ludwik on 2015-04-24.
- */
 public class HeliosConfig {
 
   private static String clientSecret;

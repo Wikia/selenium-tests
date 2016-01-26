@@ -1,13 +1,17 @@
 package com.wikia.webdriver.elements.mercury.old;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ArticlePageObject extends BasePageObject {
+public class ArticlePageObject {
 
   @FindBy(css = ".wikia-logo")
   private WebElement wikiaLogo;
@@ -36,9 +40,16 @@ public class ArticlePageObject extends BasePageObject {
   @FindBy(css = ".mstAvaImg")
   private WebElement userAvatar;
 
+  private Wait wait;
+  private WebDriver driver;
+  private JavascriptActions jsActions;
 
   public ArticlePageObject(WebDriver driver) {
-    super(driver);
+    this.wait = new Wait(driver);
+    this.driver = driver;
+    this.jsActions = new JavascriptActions(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public void clickTopContributor(int index) {
@@ -67,20 +78,28 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public boolean isWikiaLogoVisible() {
-    return isElementOnPage(wikiaLogo);
+    wait.forElementVisible(wikiaLogo);
+
+    return true;
   }
 
   public boolean isSearchButtonVisible() {
-    return isElementOnPage(searchButton);
+    wait.forElementVisible(searchButton);
+
+    return true;
   }
 
   public boolean isTopContributorsSectionVisible() {
     jsActions.scrollToElement(topContributorsSection);
-    return isElementOnPage(topContributorsSection);
+    wait.forElementVisible(topContributorsSection);
+
+    return true;
   }
 
   public boolean isTopContributorsThumbVisible(int index) {
-    return isElementOnPage(topContributorsThumbs.get(index));
+    wait.forElementVisible(topContributorsThumbs.get(index));
+
+    return true;
   }
 
   public boolean isFooterLogoVisible() {

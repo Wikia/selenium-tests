@@ -1,5 +1,8 @@
 package com.wikia.webdriver.elements.mercury.old;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -8,10 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CommentsPageObject extends BasePageObject {
+public class CommentsPageObject {
 
   @FindBy(css = ".article-comments > div")
   private WebElement commentsHeader;
@@ -40,18 +44,30 @@ public class CommentsPageObject extends BasePageObject {
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
 
+  private Wait wait;
+  private WebDriver driver;
+  private JavascriptActions jsActions;
+
   public CommentsPageObject(WebDriver driver) {
-    super(driver);
+    this.wait = new Wait(driver);
+    this.driver = driver;
+    this.jsActions = new JavascriptActions(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public void clickCommentsHeader() {
     wait.forElementVisible(commentsHeader);
-    scrollAndClick(commentsHeader);
+    jsActions.scrollElementIntoViewPort(commentsHeader);
+    commentsHeader.click();
   }
 
   public void clickViewReplies(int index) {
-    wait.forElementVisible(showRepliesButtons.get(index));
-    scrollAndClick(showRepliesButtons.get(index));
+    WebElement showRepliesButton = showRepliesButtons.get(index);
+
+    wait.forElementVisible(showRepliesButton);
+    jsActions.scrollElementIntoViewPort(showRepliesButton);
+    showRepliesButton.click();
   }
 
   public void clickNextCommentPageButton() {
@@ -116,19 +132,27 @@ public class CommentsPageObject extends BasePageObject {
   }
 
   public boolean isUserAvatarInComment(int index) {
-    return isElementOnPage(commentsAvatars.get(index));
+    wait.forElementVisible(commentsAvatars.get(index));
+
+    return true;
   }
 
   public boolean isUserUsernameInComment(int index) {
-    return isElementOnPage(commentsUsernames.get(index));
+    wait.forElementVisible(commentsUsernames.get(index));
+
+    return true;
   }
 
   public boolean isTimeStampInComment(int index) {
-    return isElementOnPage(commentsTimeStamps.get(index));
+    wait.forElementVisible(commentsTimeStamps.get(index));
+
+    return true;
   }
 
   public boolean isContentInComment(int index) {
-    return isElementOnPage(commentsContent.get(index));
+    wait.forElementVisible(commentsContent.get(index));
+
+    return true;
   }
 
   public boolean isRepliesListExpanded() {

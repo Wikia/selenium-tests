@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public abstract class WidgetPageObject extends BasePageObject {
+public abstract class WidgetPageObject extends WikiBasePageObject {
 
   @FindBy(css = "strong.error")
   protected WebElement error;

@@ -1,9 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap;
 
-/**
- * Created by kenkouot on 3/19/14.
- */
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;

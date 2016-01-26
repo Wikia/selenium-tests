@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class Loading {
 
@@ -15,6 +16,8 @@ public class Loading {
 
   public Loading(WebDriver driver) {
     this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   /**

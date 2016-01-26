@@ -20,7 +20,9 @@ public class CategoryFormPageObject extends CuratedEditorFormPageObject {
   }
 
   public SectionItemListPageObject clickDone() {
-    waitAndClick(doneButton);
+    wait.forElementVisible(doneButton);
+    doneButton.click();
+
     return new SectionItemListPageObject(driver);
   }
 }

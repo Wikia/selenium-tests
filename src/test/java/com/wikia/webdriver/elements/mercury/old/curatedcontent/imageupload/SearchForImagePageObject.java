@@ -1,23 +1,30 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class SearchForImagePageObject extends BasePageObject {
+public class SearchForImagePageObject {
 
   @FindBy(css = "input#search")
   private WebElement searchInput;
   @FindBys(@FindBy(css = ".search-results img"))
   private List<WebElement> images;
 
+  private Wait wait;
+  private WebDriver driver;
+
   public SearchForImagePageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public void type(String searchPhrase) {
@@ -26,7 +33,11 @@ public class SearchForImagePageObject extends BasePageObject {
   }
 
   public CroppingToolPageObject clickOnImage(int imageIndex) {
-    waitAndClick(images.get(imageIndex));
+    WebElement image = images.get(imageIndex);
+
+    wait.forElementVisible(image);
+    image.click();
+
     return new CroppingToolPageObject(driver);
   }
 }

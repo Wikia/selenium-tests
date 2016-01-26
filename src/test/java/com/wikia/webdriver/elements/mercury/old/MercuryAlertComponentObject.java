@@ -1,17 +1,20 @@
 package com.wikia.webdriver.elements.mercury.old;
 
+import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class MercuryAlertComponentObject extends BasePageObject {
+public class MercuryAlertComponentObject {
 
   @FindBy(css = ".alert-notifications .alert-box")
   protected WebElement alertBox;
 
   private String alertMessage;
 
-  public static enum AlertMessage {
+  public enum AlertMessage {
     NOT_EXISTING_REDIRECT(
         "The link you followed is a redirect, but the page it directs to does not exist."),
     NOT_EXISTING_CATEGORY("Category not found"),
@@ -28,9 +31,13 @@ public class MercuryAlertComponentObject extends BasePageObject {
     }
   }
 
+  private Wait wait;
+
   public MercuryAlertComponentObject(WebDriver driver, AlertMessage message) {
-    super(driver);
-    alertMessage = message.getMessage();
+    this.wait = new Wait(driver);
+    this.alertMessage = message.getMessage();
+
+    PageFactory.initElements(driver, this);
   }
 
   public boolean isAlertMessageVisible() {

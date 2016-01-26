@@ -67,7 +67,7 @@ public class LoginTests extends NewTestTemplate {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn("", Configuration.getCredentials().password10);
 
-    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled(2));
+    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
   @Test(groups = "MercuryLoginTest_005")
@@ -75,13 +75,13 @@ public class LoginTests extends NewTestTemplate {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userName10, "");
 
-    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled(2));
+    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
   @Test(groups = "MercuryLoginTest_006")
   public void MercuryLoginTest_006_closeButtonWorksAndRedirectsProperly() {
     ArticlePageObject homePage = new ArticlePageObject(driver);
-    homePage.openMainPage(wikiURL);
+    driver.get(wikiURL);
     String expectedHomePageTitle = homePage.getArticleTitle();
 
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
@@ -108,8 +108,7 @@ public class LoginTests extends NewTestTemplate {
     JoinPageObject joinPageObject = new JoinPageObject(driver).get();
     String expectedMessage = joinPageObject.getJoinTodayText();
 
-    ArticlePageObject homePage = new ArticlePageObject(driver);
-    homePage.openMainPage(wikiURL);
+    driver.get(wikiURL);
 
     new TopBar(driver).openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();

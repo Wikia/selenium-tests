@@ -10,9 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
 @Test(groups = {"Discussions", "Loading"})
 public class Loading extends NewTestTemplate {
 

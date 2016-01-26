@@ -6,9 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by Ludwik on 08.08.2015.
- */
 public class SpecialVersionPage extends WikiBasePageObject {
 
   public SpecialVersionPage(WebDriver driver) {

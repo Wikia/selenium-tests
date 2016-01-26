@@ -2,6 +2,8 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 
@@ -9,8 +11,9 @@ import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class SignupPageObject extends BasePageObject {
+public class SignupPageObject {
 
   @FindBy(css = "#signupEmail")
   private WebElement signupEmail;
@@ -45,8 +48,16 @@ public class SignupPageObject extends BasePageObject {
   @FindBy(css = ".signup-provider-email")
   private WebElement signupButton;
 
+  private WebDriver driver;
+  private Wait wait;
+  private UrlBuilder urlBuilder;
+
   public SignupPageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.urlBuilder = new UrlBuilder();
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   private SignupPageObject typeEmailAddress(String email) {
@@ -69,10 +80,10 @@ public class SignupPageObject extends BasePageObject {
 
   private SignupPageObject typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
-    scrollAndClick(signupBirthdate);
+    signupBirthdate.click();
 
     wait.forElementVisible(signupBirthMonth);
-    scrollAndClick(signupBirthMonth);
+    signupBirthMonth.click();
     signupBirthMonth.sendKeys(month);
 
     wait.forElementVisible(signupBirthDay);
@@ -88,7 +99,7 @@ public class SignupPageObject extends BasePageObject {
 
   public void register() {
     wait.forElementVisible(signupSubmitButton);
-    scrollAndClick(signupSubmitButton);
+    signupSubmitButton.click();
   }
 
   public void verifyAvatarAfterSignup() {
@@ -127,11 +138,9 @@ public class SignupPageObject extends BasePageObject {
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
   }
 
-  public SignupPageObject openMobileSignupPage(String wikiURL) {
+  public SignupPageObject openMobileSignupPage() {
     new TopBar(driver).openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();
-//    wait.forElementVisible(newloginButton);
-//    newloginButton.click();
     wait.forElementVisible(signupButton);
     signupButton.click();
     return new SignupPageObject(driver);

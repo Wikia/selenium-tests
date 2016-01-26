@@ -1,14 +1,16 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.Loading;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * This class represents all the levels below Curated Main Page
  */
-public class CuratedContentPageObject extends BasePageObject {
+public class CuratedContentPageObject {
 
   @FindBy(css = ".article-wrapper")
   private WebElement articleWrapper;
@@ -54,8 +56,16 @@ public class CuratedContentPageObject extends BasePageObject {
     }
   }
 
+  private WebDriver driver;
+  private Wait wait;
+  private JavascriptActions jsActions;
+
   public CuratedContentPageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+    this.jsActions = new JavascriptActions(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public String getTitle() {

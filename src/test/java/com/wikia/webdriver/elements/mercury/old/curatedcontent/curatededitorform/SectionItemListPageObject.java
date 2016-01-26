@@ -24,12 +24,16 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
   }
 
   public EditorHomePageObject clickDone() {
-    waitAndClick(doneButton);
+    wait.forElementVisible(doneButton);
+    doneButton.click();
+
     return new EditorHomePageObject(driver);
   }
 
   public CategoryFormPageObject clickAddCategory() {
-    waitAndClick(addCategoryButton);
+    wait.forElementVisible(addCategoryButton);
+    addCategoryButton.click();
+
     return new CategoryFormPageObject(driver);
   }
 

@@ -1,21 +1,19 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionFormPageObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
+import org.openqa.selenium.support.PageFactory;
 
 /**
  * This class represents the main editor view on mercury.
  * The editor home is responsible for adding top level curated content items
  */
-public class EditorHomePageObject extends BasePageObject {
+public class EditorHomePageObject {
 
   @FindBy(css = ".sub-head--done")
   private WebElement publishButton;
@@ -25,41 +23,46 @@ public class EditorHomePageObject extends BasePageObject {
   private WebElement addNewSectionButton;
   @FindBy(css = "section:nth-of-type(3) .curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
-  @FindBy(css = "section:nth-of-type(1) .curated-content-editor-row")
-  private List<WebElement> featuredContentItem;
 
-  private By sectionLabel = By.cssSelector(".title");
+  private WebDriver driver;
+  private Wait wait;
 
   public EditorHomePageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public CuratedMainPagePageObject publish() {
-    waitAndClick(publishButton);
+    wait.forElementVisible(publishButton);
+    publishButton.click();
+
     return new CuratedMainPagePageObject(driver);
   }
 
   public ItemFormPageObject clickAddFeaturedContent() {
-    waitAndClick(addFeaturedContentButton);
+    wait.forElementVisible(addFeaturedContentButton);
+    addFeaturedContentButton.click();
+
     return new ItemFormPageObject(driver);
   }
 
   public SectionFormPageObject clickAddSection() {
-    waitAndClick(addNewSectionButton);
+    wait.forElementVisible(addNewSectionButton);
+    addNewSectionButton.click();
+
     return new SectionFormPageObject(driver);
   }
 
   public ItemFormPageObject clickAddCategory() {
-    waitAndClick(addCategoryButton);
+    wait.forElementVisible(addCategoryButton);
+    addCategoryButton.click();
+
     return new ItemFormPageObject(driver);
   }
 
   public void waitForAddCategoryButtonToBeVisible() {
     wait.forElementVisible(addCategoryButton);
-  }
-
-  public SectionFormPageObject clickOnItemByIndex(int itemIndex) {
-    waitAndClick(featuredContentItem.get(itemIndex));
-    return new SectionFormPageObject(driver);
   }
 }
