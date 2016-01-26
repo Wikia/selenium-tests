@@ -25,21 +25,21 @@ public class Layout extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-layout-1")
+  @Test(groups = "discussions-Layout-1")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-layout-2")
+  @Test(groups = "discussions-Layout-2")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-layout-3")
+  @Test(groups = "discussions-Layout-3")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanViewMorePosts() {
@@ -50,21 +50,21 @@ public class Layout extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-layout-4")
+  @Test(groups = "discussions-Layout-4")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-layout-5")
+  @Test(groups = "discussions-Layout-5")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-layout-6")
+  @Test(groups = "discussions-Layout-6")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
@@ -75,14 +75,14 @@ public class Layout extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-layout-7")
+  @Test(groups = "discussions-Layout-7")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-layout-8")
+  @Test(groups = "discussions-Layout-8")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostsList() {
@@ -94,14 +94,14 @@ public class Layout extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-layout-9")
+  @Test(groups = "discussions-Layout-9")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-layout-10")
+  @Test(groups = "discussions-Layout-10")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
