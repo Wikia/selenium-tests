@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -92,7 +93,7 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject navigateToMainPage() {
     clickOnMainPageLink();
-    waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     return this;
   }
 

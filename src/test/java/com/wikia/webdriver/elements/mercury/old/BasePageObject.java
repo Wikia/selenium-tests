@@ -3,13 +3,12 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -24,11 +23,6 @@ public class BasePageObject extends WikiBasePageObject {
 
   public BasePageObject(WebDriver driver) {
     super(driver);
-  }
-
-  public void tapOnElement(WebElement element) {
-    JavascriptExecutor jsexec = (JavascriptExecutor) driver;
-    jsexec.executeScript("arguments[0].click();", element);
   }
 
   /**
@@ -48,24 +42,6 @@ public class BasePageObject extends WikiBasePageObject {
 
   public void waitForWikiaMobileToBeLoaded() {
     wait.forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
-  }
-
-  /**
-   * First waits for loading overlay (the overlay includes lodaing spinner) to be visible and then waits for spinner to be hidden Spinner presence
-   * is optional, when it occurs it must be hidden later
-   */
-  public void waitForLoadingOverlayToDisappear() {
-    boolean spinnerPresent = false;
-    try {
-      wait.forElementVisible(LOADING_SPINNER_BY, 4, 1000);
-      spinnerPresent = true;
-    } catch (TimeoutException e) {
-      PageObjectLogging
-          .log("waitForLoadingOverlayToDisappear", "Lodaing overlay is not visible ", true);
-    }
-    if (spinnerPresent) {
-      wait.forElementNotVisible(LOADING_SPINNER_BY, 4, 3000);
-    }
   }
 
   //TODO: Remove this and use combination from logUrl
@@ -97,9 +73,6 @@ public class BasePageObject extends WikiBasePageObject {
     return new CuratedContentPageObject(driver);
   }
 
-  public void navigateToUrlWithPath(String wikiURL, String path) {
-    getUrl(wikiURL + path);
-  }
 
   private enum Settings {
     TIME_OUT_IN_SEC(5),
@@ -120,10 +93,6 @@ public class BasePageObject extends WikiBasePageObject {
       return false;
     }
     return true;
-  }
-
-  public void openHome(String wikiURL) {
-    getUrl(wikiURL);
   }
 
   protected void waitAndSendKeys(WebElement element, String keys) {

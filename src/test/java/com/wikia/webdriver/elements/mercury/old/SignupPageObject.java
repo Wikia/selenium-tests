@@ -128,7 +128,6 @@ public class SignupPageObject extends BasePageObject {
   }
 
   public SignupPageObject openMobileSignupPage(String wikiURL) {
-    openHome(wikiURL);
     new TopBar(driver).openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();
 //    wait.forElementVisible(newloginButton);

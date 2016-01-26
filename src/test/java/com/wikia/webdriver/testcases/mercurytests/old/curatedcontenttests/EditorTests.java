@@ -15,6 +15,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
@@ -56,6 +57,7 @@ public class EditorTests extends NewTestTemplate {
   private SearchForImagePageObject search;
   private CroppingToolPageObject croppingTool;
   private Navigate navigate;
+  private Loading loading;
 
   private void init() {
     this.curatedMainPage = new CuratedMainPagePageObject(driver);
@@ -69,6 +71,7 @@ public class EditorTests extends NewTestTemplate {
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);
     this.navigate = new Navigate(driver);
+    this.loading = new Loading(driver);
   }
 
   @BeforeMethod(alwaysRun = true)
@@ -164,7 +167,7 @@ public class EditorTests extends NewTestTemplate {
     );
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
-    curatedContent.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     Assertion.assertNumber(
         curatedContent.getCuratedContentItemsNumber(),

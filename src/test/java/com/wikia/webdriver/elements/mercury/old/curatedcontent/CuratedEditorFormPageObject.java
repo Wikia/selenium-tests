@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
@@ -29,7 +30,7 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
   }
 
   public void clickDoneButton() {
-    waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     waitAndClick(doneButton);
   }
 

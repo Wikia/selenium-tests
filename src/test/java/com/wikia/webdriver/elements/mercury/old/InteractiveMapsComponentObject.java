@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -35,8 +36,11 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   @FindBy(css = ".wikia-map > img")
   private WebElement mapThumbnail;
 
+  private JavascriptExecutor jsexec;
+
   public InteractiveMapsComponentObject(WebDriver driver) {
     super(driver);
+    this.jsexec = (JavascriptExecutor) driver;
   }
 
   public void clickMapThumbnail() {
@@ -51,22 +55,22 @@ public class InteractiveMapsComponentObject extends BasePageObject {
 
   public void clickFilterBox() {
     wait.forElementVisible(filterBoxHeader);
-    tapOnElement(filterBoxHeader);
+    jsexec.executeScript("arguments[0].click();", filterBoxHeader);
   }
 
   public void clickZoomIn() {
     wait.forElementVisible(zoomInButton);
-    tapOnElement(zoomInButton);
+    jsexec.executeScript("arguments[0].click();", zoomInButton);
   }
 
   public void clickZoomOut() {
     wait.forElementVisible(zoomOutButton);
-    tapOnElement(zoomOutButton);
+    jsexec.executeScript("arguments[0].click();", zoomOutButton);
   }
 
   public void clickPin() {
     wait.forElementVisible(poiPin);
-    tapOnElement(poiPin);
+    jsexec.executeScript("arguments[0].click();", poiPin);
   }
 
   public boolean isFilterBoxWasExpanded() {

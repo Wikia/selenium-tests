@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests.old;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,10 +10,10 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.elements.mercury.old.LoginPageObject;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
@@ -31,7 +32,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "MercuryLoginTest_001", enabled = false)
   public void MercuryLoginTest_001_validUserCanLogIn() {
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, "Map");
+    new Navigate(driver).toPage(MercurySubpages.MAP);
     String url = driver.getCurrentUrl();
 //    new TopBarComponentObject(driver).clickLogInIcon();
     new LoginPageObject(driver).clickOnSignInButton().logUserIn(

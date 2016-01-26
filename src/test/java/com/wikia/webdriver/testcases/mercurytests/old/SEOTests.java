@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.Test;
@@ -194,7 +195,7 @@ public class SEOTests extends NewTestTemplate {
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
@@ -209,12 +210,12 @@ public class SEOTests extends NewTestTemplate {
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
-    mainPage.waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
         ROBOTS_TAG_ATTRIBUTES_NOINDEX_FOLLOW), ROBOTS_META_TAG_DIFFERENT_MESSAGE);

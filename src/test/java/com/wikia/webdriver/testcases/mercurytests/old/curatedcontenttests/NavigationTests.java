@@ -146,12 +146,12 @@ public class NavigationTests extends NewTestTemplate {
 
     expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_EMPTY_CATEGORY);
-    curatedContent.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_NOT_EXISTING_SECTION);
-    curatedContent.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));

@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
@@ -26,6 +27,7 @@ public class ArticlePageTests extends NewTestTemplate {
   private TopBar topBar;
   private Navigation navigation;
   private Navigate navigate;
+  private Loading loading;
 
   private static final String[] FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
@@ -35,6 +37,7 @@ public class ArticlePageTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate(driver);
+    this.loading = new Loading(driver);
   }
 
   @Test(groups = "MercuryArticleTest_001")
@@ -119,7 +122,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
-    articlePage.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     boolean result = !driver.getCurrentUrl().equals(oldUrl);
     PageObjectLogging.log(
@@ -225,7 +228,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     article.clickOnAnchorInContent(0);
-    article.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -244,7 +247,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     article.clickOnAnchorInContent(0);
-    article.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.Loading;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -65,7 +66,7 @@ public class LightboxComponentObject extends BasePageObject {
   }
 
   public void clickOnImage() {
-    waitForLoadingOverlayToDisappear();
+    new Loading(driver).handleAsyncPageReload();
     waitAndClick(currentImage);
   }
 }
