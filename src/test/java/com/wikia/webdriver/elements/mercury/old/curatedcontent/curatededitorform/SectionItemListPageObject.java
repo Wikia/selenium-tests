@@ -34,7 +34,16 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
   }
 
   public void verifyItem(String itemDisplayName) {
-    verifyTextInListElements(item, itemDisplayNameLocator, itemDisplayName);
+    WebElement innerElem;
+
+    for (WebElement element : item) {
+      wait.forElementVisible(element);
+      innerElem = element.findElement(itemDisplayNameLocator);
+
+      if (innerElem.getText().equals(itemDisplayName)) {
+        return;
+      }
+    }
   }
 
   public void waitForAddCategoryButtonToBeVisible() {
