@@ -58,7 +58,21 @@ public class Navigating extends NewTestTemplate {
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeAppPromotion() {
-    discussionsAppPromotionPresentOnPage();
+    discussionsAppPromotionUnitPresentOnPage();
+  }
+
+  @Test(groups = {"Navigating_006"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
+    appleLinkRedirectsProperly();
+  }
+
+  @Test(groups = {"Navigating_007"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
+    googlePlayLinkRedirectsProperly();
   }
 
   /**
@@ -90,8 +104,20 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
 
-  public void appleLinkInDiscussionsAppPromotionRedirectsProperly() {
+  public void appleLinkRedirectsProperly() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickAppleLinkInAppPromotion();
+    String newWindow = driver.getWindowHandles().toArray()[1].toString();
+    driver.switchTo().window(newWindow);
+    Assertion.assertTrue(driver.getTitle().contains("Wikia Fan App for: Fallout"));
   }
+
+  public void googlePlayLinkRedirectsProperly() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickGooglePlayLinkInAppPromotion();
+    String newWindow = driver.getWindowHandles().toArray()[1].toString();
+    driver.switchTo().window(newWindow);
+    Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
+  }
+
 }
