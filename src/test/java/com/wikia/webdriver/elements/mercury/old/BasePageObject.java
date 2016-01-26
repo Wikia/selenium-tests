@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.old;
 
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -13,17 +12,8 @@ import java.util.List;
 
 public class BasePageObject extends WikiBasePageObject {
 
-  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
-
   public BasePageObject(WebDriver driver) {
     super(driver);
-  }
-
-  //TODO: Remove this and use combination from logUrl
-  //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
-  public boolean isUrlPathEqualTo(String path) {
-    String currentPath = new UrlBuilder().getUrlPath(driver);
-    return currentPath.equals(path);
   }
 
   private enum Settings {
