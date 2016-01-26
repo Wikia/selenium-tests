@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,6 +62,8 @@ public class PortableInfoboxObject extends BasePageObject {
   private List<WebElement> headers;
   @FindBy(css = ".portable-infobox .pi-image img")
   private List<WebElement> images;
+
+  private By imageInTitleSelector = By.cssSelector(".pi-title img");
 
   public PortableInfoboxObject(WebDriver driver) {
     super(driver);
@@ -176,7 +179,7 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject isImageInTitleNotVisible() {
-    Assertion.assertEquals(isElementVisible(imageInTitle), false);
+    wait.forElementNotVisible(imageInTitleSelector);
     PageObjectLogging.log("Main image title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
@@ -197,35 +200,35 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject isImageInCollectionVisible() {
-    Assertion.assertEquals(isElementVisible(imageInCollection), true);
+    wait.forElementVisible(imageInCollection);
     PageObjectLogging.log("Image in collection", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isImageInTabberVisible() {
-    Assertion.assertEquals(isElementVisible(imageInTabber), true);
+    wait.forElementVisible(imageInTabber);
     PageObjectLogging.log("Image in tabber", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isImageCaptionInTabberVisible() {
-    Assertion.assertEquals(isElementVisible(captionInTabber), true);
+    wait.forElementVisible(captionInTabber);
     PageObjectLogging.log("Image caption in tabber", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isVideoVisible() {
-    Assertion.assertEquals(isElementVisible(video), true);
+    wait.forElementVisible(video);
     PageObjectLogging.log("Video", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isVideoCaptionVisible() {
-    Assertion.assertEquals(isElementVisible(videoCaption), true);
+    wait.forElementVisible(videoCaption);
     PageObjectLogging.log("Video caption", MercuryMessages.VISIBLE_MSG, true);
 
     return this;

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -65,7 +64,6 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = "MercurySignupTest_006")
   @Execute(onWikia = "ja.ja-test")
-  @RelatedIssue(issueID = "XW-640")
   public void MercurySignupTest_006_japaneseUserSignup() {
     init();
     String japanName = "ユーザー" + DateTime.now().getMillis();
