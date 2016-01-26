@@ -24,7 +24,7 @@ public class Navigating extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Navigating-1")
+  @Test(groups = "discussions-navigating-1")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanClickUsername() {
@@ -35,21 +35,21 @@ public class Navigating extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Navigating-2")
+  @Test(groups = "discussions-navigating-2")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
     backToWiki();
   }
 
-  @Test(groups = "discussions-Navigating-3")
+  @Test(groups = "discussions-navigating-3")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
 
-  @Test(groups = "discussions-Navigating-4")
+  @Test(groups = "discussions-navigating-4")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickUsername() {

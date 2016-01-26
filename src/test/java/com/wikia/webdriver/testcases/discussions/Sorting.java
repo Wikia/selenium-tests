@@ -23,7 +23,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Sorting-1")
+  @Test(groups = "discussions-sorting-1")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSortPostsList() {
@@ -34,7 +34,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Sorting-2")
+  @Test(groups = "discussions-sorting-2")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
@@ -45,7 +45,7 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Sorting-3")
+  @Test(groups = "discussions-sorting-3")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSortPostsList() {
@@ -56,7 +56,7 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Sorting-4")
+  @Test(groups = "discussions-sorting-4")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {

@@ -26,7 +26,7 @@ public class Sharing extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Sharing-1")
+  @Test(groups = "discussions-sharing-1")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeeSocialNetworkIcons() {
@@ -37,13 +37,13 @@ public class Sharing extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Sharing-2")
+  @Test(groups = "discussions-sharing-2")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
-  @Test(groups = "discussions-Sharing-3")
+  @Test(groups = "discussions-sharing-3")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -53,7 +53,7 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Sharing-4")
+  @Test(groups = "discussions-sharing-4")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
@@ -64,14 +64,14 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Sharing-5")
+  @Test(groups = "discussions-sharing-5")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
-  @Test(groups = "discussions-Sharing-6")
+  @Test(groups = "discussions-sharing-6")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {

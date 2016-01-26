@@ -24,21 +24,21 @@ public class Upvoting extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Upvoting-1")
+  @Test(groups = "discussions-upvoting-1")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-2")
+  @Test(groups = "discussions-upvoting-2")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-3")
+  @Test(groups = "discussions-upvoting-3")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotUpvote() {
@@ -49,21 +49,21 @@ public class Upvoting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Upvoting-4")
+  @Test(groups = "discussions-upvoting-4")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-5")
+  @Test(groups = "discussions-upvoting-5")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-6")
+  @Test(groups = "discussions-upvoting-6")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotUpvote() {
@@ -74,21 +74,21 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-Upvoting-7")
+  @Test(groups = "discussions-upvoting-7")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-8")
+  @Test(groups = "discussions-upvoting-8")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-9")
+  @Test(groups = "discussions-upvoting-9")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanUpvote() {
@@ -99,21 +99,21 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-Upvoting-10")
+  @Test(groups = "discussions-upvoting-10")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-11")
+  @Test(groups = "discussions-upvoting-11")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-Upvoting-12")
+  @Test(groups = "discussions-upvoting-12")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanUpvote() {
