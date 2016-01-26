@@ -107,8 +107,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   public boolean isErrorPresent() {
-    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
+    wait.forElementVisible(error);
+    boolean result =  error.getText().equals(getErrorMessage());
     logVisibility(result);
+
     return result;
   }
 
@@ -125,18 +127,21 @@ public abstract class WidgetPageObject extends BasePageObject {
   protected boolean isWidgetVisible(int widgetIndex) {
     boolean result;
     List<WebElement> widgetIFrameList = getWidgetIFrameList();
+
     if (widgetIFrameList.isEmpty()) {
       result = false;
     } else {
       WebElement widgetIFrame = widgetIFrameList.get(widgetIndex);
-      if (!isElementVisible(widgetIFrame)) {
-        result = false;
-      } else {
-        driver.switchTo().frame(widgetIFrame);
-        result = isElementVisible(getWidgetBody());
-        driver.switchTo().parentFrame();
-      }
+
+      wait.forElementVisible(widgetIFrame);
+      driver.switchTo().frame(widgetIFrame);
+
+      wait.forElementVisible(getWidgetBody());
+      driver.switchTo().parentFrame();
+
+      result = true;
     }
+
     logVisibility(result);
     return result;
   }
