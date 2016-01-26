@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests.old;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.SEOUtils;
@@ -163,7 +162,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     CuratedContentPageObject section = new CuratedContentPageObject(driver);
-    section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
+    //section.openCuratedContentPage(wikiURL, MercurySubpages.CC_SECTION_CATEGORIES);
 
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
@@ -177,7 +176,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
+    //category.openCuratedContentPage(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
 
     Assertion.assertTrue(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_NOT_PRESENT_MESSAGE);
     Assertion.assertTrue(seoUtils.isAttributesListPresentInRobotsMetaTag(
@@ -191,7 +190,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
-    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    //mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);
@@ -206,7 +205,7 @@ public class SEOTests extends NewTestTemplate {
     SEOUtils seoUtils = new SEOUtils(driver);
     wikiURL = urlBuilder.getUrlForWiki(MercuryWikis.MERCURY_CC);
     CuratedContentPageObject mainPage = new CuratedContentPageObject(driver);
-    mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    //mainPage.openCuratedMainPage(wikiURL, MercurySubpages.CC_MAIN_PAGE);
 
     Assertion.assertFalse(seoUtils.isRobotsMetaTagSet(), ROBOTS_META_TAG_PRESENT_MESSAGE);
     mainPage.clickOnCuratedContentElementByIndex(0);

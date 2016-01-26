@@ -1,13 +1,9 @@
 package com.wikia.webdriver.elements.mercury.old;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -50,29 +46,6 @@ public class BasePageObject extends WikiBasePageObject {
     String currentPath = new UrlBuilder().getUrlPath(driver);
     return currentPath.equals(path);
   }
-
-  public CuratedMainPagePageObject openCuratedMainPage(String wikiURL, String mainPage) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + mainPage + "?cb=" + DateTime.now().getMillis());
-    PageObjectLogging
-        .log("openCuratedMainPage", "Curated main page" + mainPage + " was opened", true);
-    return new CuratedMainPagePageObject(driver);
-  }
-
-
-  public CuratedContentPageObject openCuratedContentPage(String wikiURL, String path) {
-    String url;
-    Long currentTime = DateTime.now().getMillis();
-    UrlBuilder builder = new UrlBuilder();
-
-    url = wikiURL + path;
-    url = builder.appendQueryStringToURL(url, "cb=" + currentTime);
-    getUrl(url);
-
-    PageObjectLogging
-        .log("openCuratedContentPage", "Curated content page" + path + " was opened", true);
-    return new CuratedContentPageObject(driver);
-  }
-
 
   private enum Settings {
     TIME_OUT_IN_SEC(5),
