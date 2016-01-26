@@ -40,11 +40,13 @@ public abstract class CuratedEditorFormPageObject extends BasePageObject {
   }
 
   public void typeDisplayName(String displayName) {
-    waitAndSendKeys(displayNameField, displayName);
+    wait.forElementVisible(displayNameField);
+    displayNameField.sendKeys(displayName);
   }
 
   public void typePageName(String pageName) {
-    waitAndSendKeys(pageNameField, pageName);
+    wait.forElementVisible(displayNameField);
+    displayNameField.sendKeys(pageName);
   }
 
   public void waitForDeleteButtonToBeVisible() {

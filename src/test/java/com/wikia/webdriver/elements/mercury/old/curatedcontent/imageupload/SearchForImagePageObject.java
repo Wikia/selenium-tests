@@ -21,7 +21,8 @@ public class SearchForImagePageObject extends BasePageObject {
   }
 
   public void type(String searchPhrase) {
-    waitAndSendKeys(searchInput, searchPhrase);
+    wait.forElementVisible(searchInput);
+    searchInput.sendKeys(searchPhrase);
   }
 
   public CroppingToolPageObject clickOnImage(int imageIndex) {

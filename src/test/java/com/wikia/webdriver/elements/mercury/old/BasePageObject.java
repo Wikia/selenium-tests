@@ -37,11 +37,6 @@ public class BasePageObject extends WikiBasePageObject {
     return true;
   }
 
-  protected void waitAndSendKeys(WebElement element, String keys) {
-    wait.forElementVisible(element);
-    element.sendKeys(keys);
-  }
-
   /**
    * Verify if element inside element of the provided list has given text. This method assumes list
    * element is not the final target of verification This method assumes list element is the parent
