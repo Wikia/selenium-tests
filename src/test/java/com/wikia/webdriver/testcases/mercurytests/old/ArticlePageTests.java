@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -15,6 +16,7 @@ import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -28,6 +30,8 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigation navigation;
   private Navigate navigate;
   private Loading loading;
+
+  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   private static final String[] FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
@@ -161,7 +165,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     articlePage.clickOnCategoryListElement(0);
-    articlePage.waitForWikiaMobileToBeLoaded();
+    new Wait(driver).forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
 
     result = articlePage.isUrlContainingCategoryPage();
     PageObjectLogging.log(

@@ -19,10 +19,6 @@ public class BasePageObject extends WikiBasePageObject {
     super(driver);
   }
 
-  public void waitForWikiaMobileToBeLoaded() {
-    wait.forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
-  }
-
   //TODO: Remove this and use combination from logUrl
   //Ticket: https://wikia-inc.atlassian.net/browse/CONCF-894
   public boolean isUrlPathEqualTo(String path) {
