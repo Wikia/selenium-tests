@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -11,7 +12,7 @@ public class Test71MediaAds extends TemplateNoFirstLoad {
 
   private static final String MEDIA_71_FORCE_RESPONSE = "showroom=billboard&subsite=ingrid";
 
-  @GeoEdgeBrowserMobProxy(country = "DE")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "popularGermanArticles",
@@ -23,7 +24,7 @@ public class Test71MediaAds extends TemplateNoFirstLoad {
     ads71Media.verify71MediaAdsPresent();
   }
 
-  @GeoEdgeBrowserMobProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "popularGermanArticles",

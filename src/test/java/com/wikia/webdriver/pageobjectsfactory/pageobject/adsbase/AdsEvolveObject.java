@@ -17,6 +17,10 @@ public class AdsEvolveObject extends AdsBaseObject {
     super(driver, page, new Dimension(1366, 768));
   }
 
+  public AdsEvolveObject(WebDriver driver) {
+    super(driver);
+  }
+
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
@@ -29,7 +33,7 @@ public class AdsEvolveObject extends AdsBaseObject {
     PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 
-  public void verifyEvolveCall() {
+  public void verifyEvolveCallOasis() {
     verifyEvolveInSlot(AdsContent.TOP_LB);
     verifyEvolveInSlot(AdsContent.MEDREC);
     verifyEvolveInSlot(AdsContent.LEFT_SKYSCRAPPER_2);
@@ -37,6 +41,12 @@ public class AdsEvolveObject extends AdsBaseObject {
     verifyNoEvolveInSlot(AdsContent.FLOATING_MEDREC);
     verifyNoEvolveInSlot(AdsContent.PREFOOTER_LEFT);
     verifyNoEvolveInSlot(AdsContent.PREFOOTER_RIGHT);
+  }
+
+  public void verifyEvolveCallMercury() {
+    verifyEvolveInSlot(AdsContent.MOBILETOP_LB);
+    verifyEvolveInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
+    verifyEvolveInSlot(AdsContent.MOBILE_PREFOOTER);
   }
 
   public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
