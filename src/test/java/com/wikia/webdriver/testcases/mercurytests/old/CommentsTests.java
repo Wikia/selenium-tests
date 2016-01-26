@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -134,7 +135,7 @@ public class CommentsTests extends NewTestTemplate {
     while (comments.isNextCommentPageButtonDisplayed()) {
       numberOfComments -= comments.getNumberOfAllCommentsOnPage();
       comments.clickNextCommentPageButton();
-      comments.waitMilliseconds(2500, "Wait after click on 'Next page' button");
+      new Wait(driver).forXMilliseconds(2500);
     }
 
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
@@ -159,7 +160,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     comments.clickPreviousCommentPageButton();
-    comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
+    new Wait(driver).forXMilliseconds(2500);
 
     result = !comments.isPreviousCommentPageButtonDisplayed();
     PageObjectLogging.log(

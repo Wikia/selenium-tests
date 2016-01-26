@@ -402,4 +402,18 @@ public class Wait {
   private void changeImplicitWait(int value, TimeUnit timeUnit) {
     driver.manage().timeouts().implicitlyWait(value, timeUnit);
   }
+
+  /**
+   * Wait for fixed time
+   *
+   * @param time   - in milliseconds
+   */
+  public void forXMilliseconds(int time) {
+    PageObjectLogging.logInfo("Wait for " + time + " ms");
+    try {
+      Thread.sleep(time);
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("Wait.forXMilliseconds", e, false);
+    }
+  }
 }

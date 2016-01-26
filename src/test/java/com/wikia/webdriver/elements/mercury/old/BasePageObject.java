@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -14,26 +13,10 @@ import java.util.List;
 
 public class BasePageObject extends WikiBasePageObject {
 
-  private static final By LOADING_SPINNER_BY = By.cssSelector(".loading-overlay");
   private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   public BasePageObject(WebDriver driver) {
     super(driver);
-  }
-
-  /**
-   * It will wait and log reason
-   *
-   * @param time   - in milliseconds
-   * @param reason - i.e. Wait for message to disappear
-   */
-  public void waitMilliseconds(int time, String reason) {
-    PageObjectLogging.logWarning("Wait for " + time + " ms", reason);
-    try {
-      Thread.sleep(time);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log(reason, e, false);
-    }
   }
 
   public void waitForWikiaMobileToBeLoaded() {
