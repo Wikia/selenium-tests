@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -11,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
 
-  @GeoEdgeBrowserMobProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForUsers",
       groups = "TestNoAdsForUsers_AU")
   @Execute(asUser = User.USER)
@@ -21,7 +22,7 @@ public class TestNoAdsLoggedInUsers extends TemplateNoFirstLoad {
     wikiPage.verifyNoAdsOnPage();
   }
 
-  @GeoEdgeBrowserMobProxy(country = "VE")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.VENEZUELA)
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "noAdsForUsers",
       groups = "TestNoAdsForUsers_VE")
   @Execute(asUser = User.USER)

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
 
-  @GeoEdgeBrowserMobProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -21,7 +22,7 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
     adsEvolveOasis(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -32,7 +33,7 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
     adsEvolveOasis(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -49,7 +50,7 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
     wikiPage.verifyEvolveCall();
   }
 
-  @GeoEdgeBrowserMobProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,

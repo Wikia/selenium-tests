@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 @Test(groups = "AdsEvolveMercury")
 public class TestAdsEvolveMercury extends MobileTestTemplate {
 
-  @GeoEdgeBrowserMobProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
@@ -19,7 +20,7 @@ public class TestAdsEvolveMercury extends MobileTestTemplate {
     adsEvolveMercury(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
@@ -28,7 +29,7 @@ public class TestAdsEvolveMercury extends MobileTestTemplate {
     adsEvolveMercury(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "evolveTestPage"
