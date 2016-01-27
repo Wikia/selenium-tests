@@ -4,17 +4,15 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 @Test(groups="discussions")
+@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 public class Sorting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -35,7 +33,8 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
+  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList", enabled = false)
+  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
@@ -57,7 +56,8 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab")
+  @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab", enabled = false)
+  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {

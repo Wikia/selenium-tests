@@ -11,11 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 @Test(groups="discussions")
+@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 public class Upvoting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
