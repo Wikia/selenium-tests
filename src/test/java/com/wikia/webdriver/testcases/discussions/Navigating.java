@@ -5,17 +5,15 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
 @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
-
+@Test(groups = "discussions")
 public class Navigating extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -36,14 +34,16 @@ public class Navigating extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki")
+  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki", enabled = false)
+  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
     backToWiki();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar", enabled = false)
+  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
@@ -71,16 +71,16 @@ public class Navigating extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUserAvatar();
     Assertion.assertTrue(
-        driver.getCurrentUrl().contains(
-            URLsContent.USER_PROFILE.replace("%userName%", "")));
+            driver.getCurrentUrl().contains(
+                    URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
   public void clickUsernameLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUsernameLink();
     Assertion.assertTrue(
-        driver.getCurrentUrl().contains(
-            URLsContent.USER_PROFILE.replace("%userName%", "")));
+            driver.getCurrentUrl().contains(
+                    URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 }
 
