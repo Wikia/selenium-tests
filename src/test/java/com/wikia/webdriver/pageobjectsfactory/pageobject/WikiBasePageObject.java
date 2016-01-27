@@ -60,6 +60,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import org.apache.tools.ant.taskdefs.Java;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -526,7 +527,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 
   public void verifyUserLoggedIn(final String userName) {
-    PageObjectLogging.log("Mercury userID", (String)((JavascriptExecutor)driver).executeScript("return M && M.prop('userId')"), true);
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
@@ -734,6 +734,12 @@ public class WikiBasePageObject extends BasePageObject {
       driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
           + DateTime.now().getMillis()));
     }
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    String scriptOut = (String) js.executeScript("return M && M.prop('userId')").toString();
+    System.out.println("********");
+    System.out.println(scriptOut);
+    System.out.println("********");
+    PageObjectLogging.log("Mercury userID", scriptOut, true);
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
         + token, true);
