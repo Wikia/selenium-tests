@@ -27,7 +27,7 @@ public class Sharing extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "anonUserOnMobileCanSeeSocialNetworkIcons")
+  @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeeSocialNetworkIcons() {
@@ -38,13 +38,13 @@ public class Sharing extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "anonUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIconsInPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
-  @Test(groups = "anonUserOnDesktopCanSeeSocialNetworkIcons")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -54,7 +54,7 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "loggedInUserOnMobileCanSeeSocialNetworkIcons")
+  @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
@@ -65,14 +65,14 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
-  @Test(groups = "loggedInUserOnDesktopCanSeeSocialNetworkIcons")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {

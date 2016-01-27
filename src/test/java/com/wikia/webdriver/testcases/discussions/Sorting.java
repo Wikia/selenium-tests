@@ -24,7 +24,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "anonUserOnMobileCanSortPostsList")
+  @Test(groups = "discussions-anonUserOnMobileCanSortPostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSortPostsList() {
@@ -35,7 +35,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "anonUserOnDesktopCanSortPostList")
+  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
@@ -46,7 +46,7 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "loggedInUserOnMobileCanSortPostsList")
+  @Test(groups = "discussions-loggedInUserOnMobileCanSortPostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSortPostsList() {
@@ -57,7 +57,7 @@ public class Sorting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab")
+  @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {

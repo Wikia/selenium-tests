@@ -25,21 +25,21 @@ public class Upvoting extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "anonUserOnMobileCanNotVoteForPostDetails")
+  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "anonUserOnMobileCanNotVoteForFirstReply")
+  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "anonUserOnMobileCanNotUpvote")
+  @Test(groups = "discussions-anonUserOnMobileCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotUpvote() {
@@ -50,21 +50,21 @@ public class Upvoting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "anonUserOnDesktopCanNotVoteForPostDetails")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "anonUserOnDesktopCanNotVoteForFirstReply")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
-  @Test(groups = "anonUserOnDesktopCanNotUpvote")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotUpvote() {
@@ -75,21 +75,21 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "loggedInUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "loggedInUserOnMobileCanVoteForFirstReply")
+  @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "loggedInUserOnMobileCanUpvote")
+  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanUpvote() {
@@ -100,21 +100,21 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "loggedInUserOnDesktopCanSeePostDetailsList")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
     postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "loggedInUserOnDesktopCanVoteForFirstReply")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "loggedInUserOnDesktopCanUpvote")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanUpvote() {
