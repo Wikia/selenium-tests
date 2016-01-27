@@ -44,7 +44,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
-  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRIA)
+  @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "germanArticles",
@@ -54,7 +54,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       networkTrafficInterceptor.startIntercepting();
       String testedPage = urlBuilder.getUrlForPath(wikiName, path);
       AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-      Assertion.assertEquals(adsBaseObject.getCountry(), CountryCode.AUSTRIA);
+      Assertion.assertEquals(adsBaseObject.getCountry(), CountryCode.GERMANY);
 
       assertTrackingPixels(adsBaseObject,
                            URL_BASE_SCRIPT,
