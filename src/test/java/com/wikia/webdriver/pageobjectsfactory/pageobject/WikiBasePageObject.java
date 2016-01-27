@@ -537,6 +537,7 @@ public class WikiBasePageObject extends BasePageObject {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
     }
+    PageObjectLogging.log("Mercury userID", (String)((JavascriptExecutor)driver).executeScript("return M.prop('userId')"), true);
     PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
   }
 
