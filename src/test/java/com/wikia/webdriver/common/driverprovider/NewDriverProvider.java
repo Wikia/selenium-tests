@@ -181,7 +181,7 @@ public class NewDriverProvider {
 
   private static void setFFUserAgent(String userAgent) {
     firefoxProfile.setPreference("general.useragent.override",
-                               \  userAgentRegistry.getUserAgent(userAgent));
+                                 userAgentRegistry.getUserAgent(userAgent));
   }
 
   private static EventFiringWebDriver getChromeInstance() {
