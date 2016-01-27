@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
@@ -24,24 +25,28 @@ public class PollsnackTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private PollsnackWidgetPageObject widget;
+  private Navigate navigate;
 
-  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "PollsnackMercury/OneWidget";
-  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollsnackMercury/MultipleWidgets";
-  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackMercury/IncorrectWidget";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/OneWidget";
+  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollsnackMercury/MultipleWidgets";
+  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollsnackMercury/IncorrectWidget";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = POLLSNACK_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.navigate = new Navigate(driver);
+    this.widget = new PollsnackWidgetPageObject(driver);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_001")
   public void MercuryPollsnackWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
+    init();
 
-    widget
-        .create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -49,14 +54,11 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "MercuryPollsnackWidgetTest_002")
   public void MercuryPollsnackWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    widget
-        .create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-
+    widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -64,38 +66,33 @@ public class PollsnackTests extends NewTestTemplate {
   @Test(groups = "MercuryPollsnackWidgetTest_003")
   public void MercuryPollsnackWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
 
-    widget
-        .create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-
+    widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_004")
   public void MercuryPollsnackWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
+    init();
 
-    widget
-        .createMultiple(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_005")
   public void MercuryPollsnackWidgetTest_005_isErrorPresent() {
-    PollsnackWidgetPageObject widget = new PollsnackWidgetPageObject(driver);
+    init();
 
-    widget
-        .createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME)
-        .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+    widget.createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mercurytests.old;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,10 +10,10 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.elements.mercury.old.LoginPageObject;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
@@ -31,7 +32,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "MercuryLoginTest_001", enabled = false)
   public void MercuryLoginTest_001_validUserCanLogIn() {
-    new BasePageObject(driver).navigateToUrlWithPath(wikiURL, "Map");
+    new Navigate(driver).toPage(MercurySubpages.MAP);
     String url = driver.getCurrentUrl();
 //    new TopBarComponentObject(driver).clickLogInIcon();
     new LoginPageObject(driver).clickOnSignInButton().logUserIn(
@@ -66,7 +67,7 @@ public class LoginTests extends NewTestTemplate {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn("", Configuration.getCredentials().password10);
 
-    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled(2));
+    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
   @Test(groups = "MercuryLoginTest_005")
@@ -74,13 +75,13 @@ public class LoginTests extends NewTestTemplate {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userName10, "");
 
-    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled(2));
+    Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
   @Test(groups = "MercuryLoginTest_006")
   public void MercuryLoginTest_006_closeButtonWorksAndRedirectsProperly() {
     ArticlePageObject homePage = new ArticlePageObject(driver);
-    homePage.openMainPage(wikiURL);
+    driver.get(wikiURL);
     String expectedHomePageTitle = homePage.getArticleTitle();
 
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
@@ -107,8 +108,7 @@ public class LoginTests extends NewTestTemplate {
     JoinPageObject joinPageObject = new JoinPageObject(driver).get();
     String expectedMessage = joinPageObject.getJoinTodayText();
 
-    ArticlePageObject homePage = new ArticlePageObject(driver);
-    homePage.openMainPage(wikiURL);
+    driver.get(wikiURL);
 
     new TopBar(driver).openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();

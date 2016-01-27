@@ -10,6 +10,8 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
@@ -24,10 +26,20 @@ public class TOCTests extends NewTestTemplate {
 
   private final static int H2_PADDING_TOP = 40;
 
+  private TableOfContentPageObject toc;
+  private Navigate navigate;
+  private Loading loading;
+
+  private void init() {
+    this.toc = new TableOfContentPageObject(driver);
+    this.navigate = new Navigate(driver);
+    this.loading = new Loading(driver);
+  }
+
   @Test(groups = "MercuryTOCTest_001")
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
+    init();
+    navigate.toPage(MercurySubpages.TOC);
 
     Assertion.assertTrue(
         toc.isTOCDisplayed(),
@@ -93,8 +105,8 @@ public class TOCTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTOCTest_002")
   public void MercuryTOCTest_002_NoH2NoTOC() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
+    init();
+    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
     PageObjectLogging.log(
@@ -107,8 +119,8 @@ public class TOCTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTOCTest_003")
   public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC, "Second_header");
+    init();
+    navigate.toPage(MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
     PageObjectLogging.log(
@@ -121,8 +133,9 @@ public class TOCTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTOCTest_004")
   public void MercuryTOCTest_004_RedirectionToHeaderFromCurrentPage() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC);
+    init();
+    navigate.toPage(MercurySubpages.TOC);
+
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
@@ -140,10 +153,11 @@ public class TOCTests extends NewTestTemplate {
       comment = "Page scrolls up to top. The defect affects the test stability"
   )
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    toc.openMercuryArticleByName(wikiURL, MercurySubpages.TOC_WITHOUT_H2);
+    init();
+    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
+
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
-    toc.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
     PageObjectLogging.log(

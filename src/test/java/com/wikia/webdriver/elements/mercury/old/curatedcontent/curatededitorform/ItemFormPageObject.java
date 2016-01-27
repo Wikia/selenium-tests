@@ -20,7 +20,9 @@ public class ItemFormPageObject extends CuratedEditorFormPageObject {
   }
 
   public EditorHomePageObject clickDone() {
-    waitAndClick(doneButton);
+    wait.forElementVisible(doneButton);
+    doneButton.click();
+
     return new EditorHomePageObject(driver);
   }
 }

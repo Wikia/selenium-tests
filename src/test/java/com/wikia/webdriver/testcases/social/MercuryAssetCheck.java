@@ -8,9 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.testng.annotations.Test;
 
-/**
- * Created by Ludwik on 2015-08-14.
- */
 public class MercuryAssetCheck extends NewTestTemplate {
 
   @Test(groups = "CheckAssetsOnJoin")

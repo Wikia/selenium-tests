@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
@@ -29,28 +30,45 @@ import org.testng.annotations.Test;
 )
 public class CropImageTests extends NewTestTemplate {
 
-  public static final String SEARCH_IMAGE_QUERY = "U";
+  private static final String SEARCH_IMAGE_QUERY = "U";
+
+  private CuratedMainPagePageObject curatedMainPage;
+  private EditorHomePageObject editor;
+  private ItemFormPageObject itemForm;
+  private UploadImageModalComponentObject imageModal;
+  private SearchForImagePageObject search;
+  private CroppingToolPageObject croppingTool;
+  private Navigate navigate;
+
+  private void init() {
+    this.curatedMainPage = new CuratedMainPagePageObject(driver);
+    this.editor = new EditorHomePageObject(driver);
+    this.itemForm = new ItemFormPageObject(driver);
+    this.imageModal = new UploadImageModalComponentObject(driver);
+    this.search = new SearchForImagePageObject(driver);
+    this.croppingTool = new CroppingToolPageObject(driver);
+    this.navigate = new Navigate(driver);
+  }
 
   @Test(groups = "MercuryCropImageTest_001")
   public void MercuryCropImageTest_001_cropOptionInModal() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    curatedMainPagePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+    init();
 
-    curatedMainPagePageObject.isArticleTitleVisible();
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    curatedMainPage.isArticleTitleVisible();
 
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
-    ItemFormPageObject itemFormPageObject = editorHomePageObject.clickAddFeaturedContent();
-    UploadImageModalComponentObject imageModal = itemFormPageObject.clickOnImage();
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
+    editor.clickAddFeaturedContent();
+    itemForm.clickOnImage();
 
     Assertion.assertFalse(imageModal.isCropOptionEnabled(),
                           "Crop option enabled - Should be disabled");
 
-    SearchForImagePageObject search = imageModal.clickSearchForImageButton();
+    imageModal.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
-    CroppingToolPageObject croppingTool = search.clickOnImage(0);
+    search.clickOnImage(0);
     croppingTool.clickDoneButton();
-    itemFormPageObject.clickOnImage();
+    itemForm.clickOnImage();
 
     Assertion
         .assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");

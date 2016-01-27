@@ -23,12 +23,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class VenusGlobalNavPageObject {
+public class GlobalNavigationPageObject {
 
   private static final String HUBS_XPATH_FORMAT =
-      "//a[./span[@class='label'][contains(text(),'%s')]]";
+          "//a[./span[@class='label'][contains(text(),'%s')]]";
 
   @FindBy(css = ".hubs-entry-point")
   private WebElement menuButton;
@@ -54,12 +56,25 @@ public class VenusGlobalNavPageObject {
   @FindBy(css = "a[data-id='login']")
   private WebElement loginLink;
 
+  @FindBy(id = "exploreWikiaEntryPoint")
+  private WebElement exploreWikiaDropdownEntryPoint;
+
+  @FindBy(id = "exploreWikiaDropdown")
+  private WebElement exploreWikiaDropdown;
+
+  @FindBy(css = ".global-navigation-2016 .hubs-links a")
+  private List<WebElement> hubsLinks;
+
+  @FindBy(css = ".wikia-logo__subtitle")
+  private WebElement fandomLogo;
+
   private WebDriver driver;
   private Wait wait;
 
   private DropDownComponentObject accountNavigation;
+  private DropDownComponentObject exploreWikiaDropdownComponent;
 
-  public VenusGlobalNavPageObject(WebDriver driver) {
+  public GlobalNavigationPageObject(WebDriver driver) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
@@ -72,13 +87,13 @@ public class VenusGlobalNavPageObject {
     new Actions(driver).moveToElement(getDestinationHub(hub)).perform();
 
     new WebDriverWait(driver, 5, 150).until(CommonExpectedConditions
-        .valueToBePresentInElementsAttribute(
-            getDestinationHub(hub), "class", "active"));
+            .valueToBePresentInElementsAttribute(
+                    getDestinationHub(hub), "class", "active"));
     String expectedHref = getHubLink(getDestinationHub(hub));
     getDestinationHub(hub).click();
 
     new WebDriverWait(driver, 30)
-        .until(ExpectedConditions.urlToBe(expectedHref));
+            .until(ExpectedConditions.urlToBe(expectedHref));
 
     return new HubBasePageObject(driver);
   }
@@ -91,7 +106,7 @@ public class VenusGlobalNavPageObject {
     return hub.getAttribute("href");
   }
 
-  private VenusGlobalNavPageObject openHubsMenu() {
+  private GlobalNavigationPageObject openHubsMenu() {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
@@ -100,7 +115,7 @@ public class VenusGlobalNavPageObject {
           try {
             if (!hubsMenu.isDisplayed()) {
               ((JavascriptExecutor) driver)
-                  .executeScript("$j('.hubs-menu-wrapper').trigger('click')");
+                      .executeScript("$j('.hubs-menu-wrapper').trigger('click')");
               return false;
             }
             return true;
@@ -124,7 +139,7 @@ public class VenusGlobalNavPageObject {
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
-          environment));
+              environment));
     }
 
     wikiaLogo.click();
@@ -142,7 +157,7 @@ public class VenusGlobalNavPageObject {
     return getAccountNavigation().openDropDown().clickSignUpLink();
   }
 
-  public DropDownComponentObject openAccountNAvigation() {
+  public DropDownComponentObject openAccountNavigation() {
     return getAccountNavigation().openDropDown();
   }
 
@@ -154,7 +169,7 @@ public class VenusGlobalNavPageObject {
     return !ElementStateHelper.isElementVisible(searchSelect, driver);
   }
 
-  public boolean isUserLoggedOut(){
+  public boolean isUserLoggedOut() {
     return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
   }
 
@@ -165,9 +180,53 @@ public class VenusGlobalNavPageObject {
     return accountNavigation;
   }
 
+  private DropDownComponentObject getExploreWikiaDropdownComponent() {
+    if (exploreWikiaDropdownComponent == null) {
+      exploreWikiaDropdownComponent = new DropDownComponentObject(driver);
+    }
+
+    return exploreWikiaDropdownComponent;
+  }
+
+  public DropDownComponentObject openExploreWikiaDropdown() {
+    return getExploreWikiaDropdownComponent().openDropDownWithEntryPoint(exploreWikiaDropdownEntryPoint);
+  }
+
+  public List<String> getDropdownLinks() {
+    List<String> linksLabels = new ArrayList<>();
+    List<WebElement> linksInDropdown = exploreWikiaDropdownComponent.getAllLinksInExploreWikiaDropdown();
+
+    for (WebElement link : linksInDropdown) {
+      if (link.isDisplayed()) {
+        linksLabels.add(link.getText());
+      }
+    }
+
+    return linksLabels;
+  }
+
+  public void closeDropdown() {
+    ((JavascriptExecutor) driver)
+            .executeScript("arguments[0].classList.remove('active')", exploreWikiaDropdown);
+  }
+
+  public boolean areHubsLinksVisible() {
+    for (WebElement hubLink : hubsLinks) {
+      if (!hubLink.isDisplayed()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public boolean isFandomLogoVisible() {
+    return fandomLogo.isDisplayed();
+  }
+
   public enum Hub {
     COMICS("Comics"), TV("TV"), MOVIES("Movies"), MUSIC("Music"), BOOKS("Books"), GAMES("Games"), LIFESTYLE(
-        "Lifestyle");
+            "Lifestyle");
 
     private final String labelText;
 

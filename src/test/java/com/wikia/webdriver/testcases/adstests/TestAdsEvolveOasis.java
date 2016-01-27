@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -8,52 +9,52 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject
 
 import org.testng.annotations.Test;
 
-public class TestEvolveAds extends TemplateNoFirstLoad {
+public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
 
-  @GeoEdgeBrowserMobProxy(country = "CA")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_CA(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+  public void adsEvolveOasisCA(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "AU")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_AU(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+  public void adsEvolveOasisAU(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "NZ")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveTestPage"
   )
-  public void testEvolveCall_NZ(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveCall();
+  public void adsEvolveOasisNZ(String wikiName, String article) {
+    adsEvolveOasis(wikiName, article);
   }
 
-  @GeoEdgeBrowserMobProxy(country = "CA")
+  private void adsEvolveOasis(String wikiName, String article) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
+    wikiPage.verifyEvolveCallOasis();
+  }
+
+  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestEvolveAds"},
+      groups = "AdsEvolveOasis",
       dataProvider = "evolveHopTestPage",
       // wf ADR-254
       enabled = false

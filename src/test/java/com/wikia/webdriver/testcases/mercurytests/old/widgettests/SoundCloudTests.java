@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
@@ -24,23 +25,27 @@ public class SoundCloudTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private SoundCloudWidgetPageObject widget;
+  private Navigate navigate;
 
-  private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "SoundCloudMercury/OneWidget";
-  private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "SoundCloudMercury/MultipleWidgets";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "/wiki/SoundCloudMercury/OneWidget";
+  private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/SoundCloudMercury/MultipleWidgets";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.navigate = new Navigate(driver);
+    this.widget = new SoundCloudWidgetPageObject(driver);
   }
 
   @Test(groups = "MercurySoundCloudWidgetTest_001")
   public void MercurySoundCloudWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
+    init();
 
-    widget
-      .create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -48,14 +53,11 @@ public class SoundCloudTests extends NewTestTemplate {
   @Test(groups = "MercurySoundCloudWidgetTest_002")
   public void MercurySoundCloudWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
 
-    widget
-      .create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
-
+    widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -63,27 +65,23 @@ public class SoundCloudTests extends NewTestTemplate {
   @Test(groups = "MercurySoundCloudWidgetTest_003")
   public void MercurySoundCloudWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
 
-    widget
-      .create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-
+    widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "MercurySoundcloudWidgetTest_004")
   public void MercurySoundcloudWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    SoundCloudWidgetPageObject widget = new SoundCloudWidgetPageObject(driver);
+    init();
 
-    widget
-      .createMultiple(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME)
-      .openArticleOnWikiByNameWithCbAndNoAds(wikiURL, SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

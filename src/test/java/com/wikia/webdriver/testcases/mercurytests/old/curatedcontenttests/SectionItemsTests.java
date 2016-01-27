@@ -7,6 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.Test;
@@ -18,18 +20,29 @@ import org.testng.annotations.Test;
 )
 public class SectionItemsTests extends NewTestTemplate {
 
+  private CuratedContentPageObject curatedContent;
+  private Navigate navigate;
+  private Loading loading;
+
+  private void init() {
+    this.curatedContent = new CuratedContentPageObject(driver);
+    this.navigate = new Navigate(driver);
+    this.loading = new Loading(driver);
+  }
+
   @Test(groups = "MercuryCuratedSectionItemsTest_001")
   public void MercuryCuratedSectionItemsTest_001_curatedContentItemsAreVisibleAndExpandable() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_28_ITEMS);
+    init();
 
-    category
+    navigate.toPage(MercurySubpages.CC_CATEGORY_28_ITEMS);
+
+    curatedContent
         .isCurrentNumberOfItemsExpected(24)
         .isLoadMoreButtonVisible()
-        .clickOnLoadMoreButton()
-        .waitForLoadingOverlayToDisappear();
+        .clickOnLoadMoreButton();
+    loading.handleAsyncPageReload();
 
-    category
+    curatedContent
         .isCurrentNumberOfItemsExpected(28)
         .areItemsInCuratedContentUnique()
         .isLoadMoreButtonHidden();
@@ -37,10 +50,11 @@ public class SectionItemsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedSectionItemsTest_002")
   public void MercuryCuratedSectionItemsTest_002_curatedContentItemsAreVisibleAndNotExpandable() {
-    CuratedContentPageObject category = new CuratedContentPageObject(driver);
-    category.navigateToUrlWithPath(wikiURL, MercurySubpages.CC_CATEGORY_10_ITEMS);
+    init();
 
-    category
+    navigate.toPage(MercurySubpages.CC_CATEGORY_10_ITEMS);
+
+    curatedContent
         .isCurrentNumberOfItemsExpected(10)
         .isLoadMoreButtonHidden();
   }

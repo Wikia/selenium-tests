@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
 @Test(groups = {"Discussions", "Navigating"})
 public class Navigating extends NewTestTemplate {
 

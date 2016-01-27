@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 )
 public class TestAdsOnCorporatePages extends TemplateNoFirstLoad {
 
-  @GeoEdgeBrowserMobProxy(country = "VE")
+  @GeoEdgeBrowserMobProxy(country = CountryCode.VENEZUELA)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "corporatePages",

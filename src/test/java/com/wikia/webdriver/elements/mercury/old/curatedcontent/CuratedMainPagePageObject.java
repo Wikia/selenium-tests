@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,8 +9,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class CuratedMainPagePageObject extends BasePageObject {
+public class CuratedMainPagePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
@@ -43,8 +45,16 @@ public class CuratedMainPagePageObject extends BasePageObject {
     }
   }
 
+  private WebDriver driver;
+  private Wait wait;
+  private JavascriptActions jsActions;
+
   public CuratedMainPagePageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+    this.jsActions = new JavascriptActions(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public int getElementOffsetTop(String element) {

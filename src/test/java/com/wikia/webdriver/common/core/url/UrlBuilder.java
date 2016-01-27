@@ -2,10 +2,14 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class UrlBuilder {
 
@@ -54,6 +58,19 @@ public class UrlBuilder {
 
   public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
     return getUrlForWiki(wikiName) + wikiPath;
+  }
+
+  public String getUrlForPage(WebDriver driver, String pageName) {
+    try {
+      URL url = new URL(driver.getCurrentUrl());
+      String host = url.getHost();
+
+      return "http://" + host + pageName;
+    } catch (MalformedURLException e) {
+      PageObjectLogging.logInfo("Url malformed");
+    }
+
+    return null;
   }
 
   /**

@@ -10,9 +10,9 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Navigation;
 import com.wikia.webdriver.elements.mercury.TopBar;
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
@@ -39,14 +39,17 @@ public class AllTagsTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
+  private Navigate navigate;
 
-  private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
-  private static final String MAPS_ARTICLE_NAME = "Map";
+  private static final String ARTICLE_NAME = "/wiki/AllTagsWidgetMercury";
+  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_2 = ARTICLE_NAME.substring(6);
   private static List<WidgetPageObject> widgets;
 
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
+    this.navigate = new Navigate(driver);
   }
 
   @BeforeMethod(alwaysRun = true)
@@ -75,7 +78,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_001")
   public void MercuryAllTagsWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     init();
-    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    navigate.toPage(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -85,10 +88,10 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_002")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
-    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.MAIN_PAGE);
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     topBar.openNavigation();
-    navigation.navigateToPage(ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -98,12 +101,12 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
-    new BasePageObject(driver).openArticleOnWikiByNameWithCbAndNoAds(wikiURL, ARTICLE_NAME);
+    navigate.toPage(ARTICLE_NAME);
 
     topBar.openNavigation();
-    navigation.navigateToPage(MAPS_ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_1);
     topBar.openNavigation();
-    navigation.navigateToPage(ARTICLE_NAME);
+    navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

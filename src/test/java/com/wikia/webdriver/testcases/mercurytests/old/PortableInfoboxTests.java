@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
@@ -19,10 +20,20 @@ import org.testng.annotations.Test;
 )
 public class PortableInfoboxTests extends NewTestTemplate {
 
+  private PortableInfoboxObject infobox;
+  private TableOfContentPageObject toc;
+  private Navigate navigate;
+
+  private void init() {
+    this.infobox = new PortableInfoboxObject(driver);
+    this.toc = new TableOfContentPageObject(driver);
+    this.navigate = new Navigate(driver);
+  }
+
   @Test(groups = "MercuryPortableInfoboxTest_001")
   public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Before infobox expanding
     infobox
@@ -50,8 +61,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_002")
   public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // expand by clicking button
     infobox
@@ -71,8 +82,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_003")
   public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     String externalLinkName = infobox
         .clickExpandButton()
@@ -88,8 +99,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_004")
   public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
@@ -107,8 +118,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_005")
   public void MercuryPortableInfoboxTest_005_SmallImages() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_2);
 
     infobox
         .isTitleAboveImageVisible()
@@ -117,8 +128,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_006")
   public void MercuryPortableInfoboxTest_006_DifferentClickTargets() {
-    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-    infobox.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_3);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_3);
 
     // Check click on main image
     infobox
@@ -136,24 +147,26 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_007")
   public void MercuryPortableInfoboxTest_007_HeroImageTall() {
-    PortableInfoboxObject infoboxTallImage = new PortableInfoboxObject(driver);
-    infoboxTallImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_1);
-    infoboxTallImage.isHeroImageSquare();
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_1);
+
+    infobox.isHeroImageSquare();
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_008")
   public void MercuryPortableInfoboxTest_008_HeroImageWide() {
-    PortableInfoboxObject infoboxWideImage = new PortableInfoboxObject(driver);
-    infoboxWideImage.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_4);
-    infoboxWideImage.isNotHeroImageSquare();
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_4);
+
+    infobox.isNotHeroImageSquare();
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_009")
   public void MercuryPortableInfoboxTest_009_ImageCollection() {
-    PortableInfoboxObject info = new PortableInfoboxObject(driver);
-    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_5);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_5);
 
-    info.isImageInCollectionVisible()
+    infobox.isImageInCollectionVisible()
         .clickNextImageArrow()
         .isImageInCollectionVisible()
         .clickNextImageArrow()
@@ -162,11 +175,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPortableInfoboxTest_010")
   public void MercuryPortableInfoboxTest_010_HeadersInTOC() {
-    TableOfContentPageObject toc = new TableOfContentPageObject(driver);
-    PortableInfoboxObject info = new PortableInfoboxObject(driver);
-    info.openArticleOnWikiByNameWithCbAndNoAds(wikiURL, MercurySubpages.INFOBOX_2);
+    init();
+    navigate.toPage(MercurySubpages.INFOBOX_2);
 
     toc.clickOnTOC();
-    toc.TOCItemNotContainsText(0, info.getHeaderName(0));
+    toc.TOCItemNotContainsText(0, infobox.getHeaderName(0));
   }
 }

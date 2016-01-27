@@ -10,6 +10,8 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
@@ -48,14 +50,30 @@ public class MainPageTests extends NewTestTemplate {
     }
   }
 
+  private Navigate navigate;
+  private CuratedMainPagePageObject cc;
+  private CuratedContentPageObject curatedContent;
+  private MercuryAlertComponentObject mercuryAlert;
+  private Loading loading;
+
+  private void init() {
+    this.navigate = new Navigate(driver);
+    this.cc = new CuratedMainPagePageObject(driver);
+    this.curatedContent = new CuratedContentPageObject(driver);
+    this.loading = new Loading(driver);
+    this.mercuryAlert = new MercuryAlertComponentObject(
+        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
+  }
+
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
-    CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
-    cc.openMercuryArticleByName(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    init();
+
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).waitForFooterToBeVisible();
 
-    boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
+    boolean result = driver.getCurrentUrl().contains(urlBuilder.getUrlForPage(driver, ROOT_PATH));
     PageObjectLogging.log(
         "Current URL",
         "is set on " + ROOT_PATH,
@@ -155,8 +173,9 @@ public class MainPageTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedMainPageTest_002")
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC)
   public void MercuryCuratedMainPageTest_002_CheckElementsInvisibility() {
-    CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
-    cc.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
+    init();
+
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
 
     boolean result = cc.isArticleTitleVisible();
     PageObjectLogging.log(
@@ -210,8 +229,9 @@ public class MainPageTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedMainPageTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_NTA_CC)
   public void MercuryCuratedMainPageTest_003_CheckElementsForNoTrendingArticles() {
-    CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
-    cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTACC_MAIN_PAGE);
+    init();
+
+    navigate.toPage(MercurySubpages.NTACC_MAIN_PAGE);
 
     boolean result = !cc.isTrendingArticlesVisible();
     PageObjectLogging.log(
@@ -289,8 +309,9 @@ public class MainPageTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedMainPageTest_004")
   @Execute(onWikia = MercuryWikis.MERCURY_NTV_CC)
   public void MercuryCuratedMainPageTest_004_CheckElementsVisibilityExceptTrendingVideos() {
-    CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
-    cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTVCC_MAIN_PAGE);
+    init();
+
+    navigate.toPage(MercurySubpages.NTVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
@@ -352,8 +373,9 @@ public class MainPageTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedMainPageTest_005")
   @Execute(onWikia = MercuryWikis.MERCURY_NTAV_CC)
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
-    CuratedMainPagePageObject cc = new CuratedMainPagePageObject(driver);
-    cc.openMercuryArticleByName(wikiURL, MercurySubpages.NTAVCC_MAIN_PAGE);
+    init();
+
+    navigate.toPage(MercurySubpages.NTAVCC_MAIN_PAGE);
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
@@ -431,17 +453,15 @@ public class MainPageTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedMainPageTest_006")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
-    CuratedContentPageObject ccp = new CuratedContentPageObject(driver);
-    ccp.openMercuryArticleByNameWithNoCacheBuster(wikiURL, MercurySubpages.CC_MAIN_PAGE);
+    init();
 
-    MercuryAlertComponentObject mercuryAlert = new MercuryAlertComponentObject(
-        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     String oldUrl = driver.getCurrentUrl();
-    ccp.clickOnCuratedContentElementByIndex(2);
+    curatedContent.clickOnCuratedContentElementByIndex(2);
     Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
 
-    ccp.waitForLoadingOverlayToDisappear();
-    Assertion.assertUrlEqualToCurrentUrl(driver, oldUrl);
+    loading.handleAsyncPageReload();
+    Assertion.assertTrue(oldUrl.contains(driver.getCurrentUrl()));
   }
 }

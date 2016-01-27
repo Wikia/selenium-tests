@@ -5,19 +5,18 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.ImageGenerator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.CroppingToolPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(
@@ -30,30 +29,38 @@ import org.testng.annotations.Test;
 )
 public class ImageUploadTests extends NewTestTemplate {
 
-  @BeforeMethod(alwaysRun = true)
-  public void beforeMethod() {
-    new CuratedContent().clear();
+  private CuratedMainPagePageObject curatedMainPage;
+  private CroppingToolPageObject crop;
+  private EditorHomePageObject editor;
+  private ImageGenerator generator;
+  private ItemFormPageObject itemForm;
+  private UploadImageModalComponentObject upload;
+  private Navigate navigate;
+
+  private void init() {
+    this.curatedMainPage = new CuratedMainPagePageObject(driver);
+    this.crop = new CroppingToolPageObject(driver);
+    this.editor = new EditorHomePageObject(driver);
+    this.generator = new ImageGenerator();
+    this.itemForm = new ItemFormPageObject(driver);
+    this.upload = new UploadImageModalComponentObject(driver);
+    this.navigate = new Navigate(driver);
   }
 
   @Test(groups = "MercuryImageUploadTest_001")
   public void MercuryImageUploadTest_001_saveNewPhoto() {
-    CuratedMainPagePageObject curatedMainPagePageObject = new CuratedMainPagePageObject(driver);
-    EditorHomePageObject editorHomePageObject = new EditorHomePageObject(driver);
+    init();
 
-    editorHomePageObject.openMercuryArticleByName(wikiURL, MercurySubpages.ECC_MAIN_PAGE);
-    curatedMainPagePageObject.isCuratedContentVisible();
-    curatedMainPagePageObject.navigateToUrlWithPath(wikiURL, MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    curatedMainPage.isCuratedContentVisible();
 
-    ImageGenerator generator = new ImageGenerator();
+    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
     generator.generateImageWithRandomText();
     String imagePath = generator.getImageAbsolutePath();
 
-    ItemFormPageObject item = editorHomePageObject.clickAddFeaturedContent();
-    UploadImageModalComponentObject upload = item.clickOnImage();
-    CroppingToolPageObject
-        crop =
-        upload.uploadImage(
-            imagePath);
+    editor.clickAddFeaturedContent();
+    itemForm.clickOnImage();
+    upload.uploadImage(imagePath);
     crop.waitForCropperToBeLoaded();
   }
 }

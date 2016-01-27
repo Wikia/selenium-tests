@@ -49,7 +49,7 @@ public class UserAndRights extends NewTestTemplate {
         new WikiBasePageObject(driver).goToArticleDefaultContentEditPage(wikiURL,
             PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
 
-    edit.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     edit.verifyUserLoggedIn(User.BLOCKED_USER);
 
     edit.verifyBlockedUserMessage();
@@ -62,7 +62,7 @@ public class UserAndRights extends NewTestTemplate {
     final String oldEmailAddress = Configuration.getCredentials().email;
 
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
-    editPrefPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();
@@ -108,7 +108,7 @@ public class UserAndRights extends NewTestTemplate {
   public void blockedUserShouldBeAbleToAccessSpecialContactPage() {
     SpecialContactGeneralPage contactPage = new SpecialContactGeneralPage(driver).open();
 
-    contactPage.getVenusGlobalNav().openAccountNAvigation().logIn(User.BLOCKED_USER);
+    contactPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     contactPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     Assertion.assertTrue(contactPage.isLoggedInUserMessageVisible(User.BLOCKED_USER));

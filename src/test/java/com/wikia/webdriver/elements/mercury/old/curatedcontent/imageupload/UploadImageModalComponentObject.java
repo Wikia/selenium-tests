@@ -1,12 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class UploadImageModalComponentObject extends BasePageObject {
+public class UploadImageModalComponentObject {
 
   @FindBy(css = ".modal-dialog li:nth-of-type(3)")
   private WebElement searchForImageButton;
@@ -17,12 +18,20 @@ public class UploadImageModalComponentObject extends BasePageObject {
   @FindBy(css = ".modal-dialog .crop-image")
   private WebElement cropImageButton;
 
+  private Wait wait;
+  private WebDriver driver;
+
   public UploadImageModalComponentObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public SearchForImagePageObject clickSearchForImageButton() {
-    waitAndClick(searchForImageButton);
+    wait.forElementVisible(searchForImageButton);
+    searchForImageButton.click();
+
     return new SearchForImagePageObject(driver);
   }
 
@@ -38,7 +47,9 @@ public class UploadImageModalComponentObject extends BasePageObject {
   }
 
   public CroppingToolPageObject selectCrop() {
-    waitAndClick(cropImageButton);
+    wait.forElementVisible(cropImageButton);
+    cropImageButton.click();
+
     return new CroppingToolPageObject(driver);
   }
 }

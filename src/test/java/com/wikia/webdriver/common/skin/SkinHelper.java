@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.skin;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SkinHelper extends BasePageObject{
+public class SkinHelper extends WikiBasePageObject {
 
   @FindBy(css = "body.skin-oasis")
   private WebElement oasisClassInBody;
