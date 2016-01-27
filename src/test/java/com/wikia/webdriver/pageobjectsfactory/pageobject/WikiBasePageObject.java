@@ -526,6 +526,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 
   public void verifyUserLoggedIn(final String userName) {
+    PageObjectLogging.log("Mercury userID", (String)((JavascriptExecutor)driver).executeScript("return M && M.prop('userId')"), true);
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
@@ -537,7 +538,6 @@ public class WikiBasePageObject extends BasePageObject {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
     }
-    PageObjectLogging.log("Mercury userID", (String)((JavascriptExecutor)driver).executeScript("return M.prop('userId')"), true);
     PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
   }
 
