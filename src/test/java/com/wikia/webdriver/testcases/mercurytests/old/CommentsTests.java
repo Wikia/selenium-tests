@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -13,6 +14,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.CommentsPageObject;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -27,6 +29,8 @@ public class CommentsTests extends NewTestTemplate {
   private static final int NUMBER_OF_COMMENTS_PER_PAGE = 25;
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
+
+  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   private CommentsPageObject comments;
 
@@ -134,7 +138,7 @@ public class CommentsTests extends NewTestTemplate {
     while (comments.isNextCommentPageButtonDisplayed()) {
       numberOfComments -= comments.getNumberOfAllCommentsOnPage();
       comments.clickNextCommentPageButton();
-      comments.waitMilliseconds(2500, "Wait after click on 'Next page' button");
+      new Wait(driver).forXMilliseconds(2500);
     }
 
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
@@ -159,7 +163,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     comments.clickPreviousCommentPageButton();
-    comments.waitMilliseconds(2500, "Wait after click on 'Previous page' button");
+    new Wait(driver).forXMilliseconds(2500);
 
     result = !comments.isPreviousCommentPageButtonDisplayed();
     PageObjectLogging.log(
@@ -219,7 +223,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.waitForFirstCommentToBeVisible();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
-    comments.waitForWikiaMobileToBeLoaded();
+    new Wait(driver).forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
 
     boolean result = username.equals(comments.getUsernameFromUrl());
     PageObjectLogging.log(

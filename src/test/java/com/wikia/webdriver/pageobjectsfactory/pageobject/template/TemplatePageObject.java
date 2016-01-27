@@ -8,10 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Rodriuki on 16/06/15.
- * Created by nikodamn on 20/07/15.
- */
 public class TemplatePageObject extends WikiBasePageObject{
 
     @FindBy (css=".wikia-button #edit")

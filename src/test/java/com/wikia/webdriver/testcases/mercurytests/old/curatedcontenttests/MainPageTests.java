@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.Loading;
 import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
@@ -53,11 +54,13 @@ public class MainPageTests extends NewTestTemplate {
   private CuratedMainPagePageObject cc;
   private CuratedContentPageObject curatedContent;
   private MercuryAlertComponentObject mercuryAlert;
+  private Loading loading;
 
   private void init() {
     this.navigate = new Navigate(driver);
     this.cc = new CuratedMainPagePageObject(driver);
     this.curatedContent = new CuratedContentPageObject(driver);
+    this.loading = new Loading(driver);
     this.mercuryAlert = new MercuryAlertComponentObject(
         driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
   }
@@ -70,7 +73,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).waitForFooterToBeVisible();
 
-    boolean result = cc.isUrlPathEqualTo(ROOT_PATH);
+    boolean result = driver.getCurrentUrl().contains(urlBuilder.getUrlForPage(driver, ROOT_PATH));
     PageObjectLogging.log(
         "Current URL",
         "is set on " + ROOT_PATH,
@@ -458,7 +461,7 @@ public class MainPageTests extends NewTestTemplate {
     curatedContent.clickOnCuratedContentElementByIndex(2);
     Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
 
-    curatedContent.waitForLoadingOverlayToDisappear();
+    loading.handleAsyncPageReload();
     Assertion.assertTrue(oldUrl.contains(driver.getCurrentUrl()));
   }
 }

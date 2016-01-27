@@ -1,12 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
-/**
- * Created by Ludwik Kaźmierczak
- */
-
-/**
- * @desc Wikia wam tabs (hubs)
- */
 public enum WamTab {
   ALL(0, ""), TV(1, "TV"), VIDEO_GAMES(2, "GAMES"), BOOKS(3, "BOOKS"),
   COMICS(4, "COMICS"), MUSIC(6, "MUSIC"), LIFESTYLE(5, "LIFESTYLE"), MOVIES(7, "MOVIES");
@@ -33,9 +26,10 @@ public enum WamTab {
   }
 
   /**
+   * Checks if passed value is in enum
+   *
    * @param value mostly a select-box option
    * @return true if enum has the value; false otherwise
-   * @desc Checks if passed value is in enum
    */
   public static Boolean contains(String value) {
     for (WamTab vids : WamTab.values()) {
@@ -47,4 +41,3 @@ public enum WamTab {
     return false;
   }
 }
-

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -112,7 +113,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
     File beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomOut();
-    maps.waitMilliseconds(5000, "Wait after zoom out");
+    new Wait(driver).forXMilliseconds(5000);
     File afterZooming = new Shooter().capturePage(driver);
 
     Assertion.assertFalse(
@@ -139,7 +140,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
     beforeZooming = new Shooter().capturePage(driver);
     maps.clickZoomIn();
-    maps.waitMilliseconds(5000, "Wait after zoom in");
+    new Wait(driver).forXMilliseconds(5000);
     afterZooming = new Shooter().capturePage(driver);
 
     Assertion.assertFalse(
@@ -251,7 +252,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
         true
     );
 
-    maps.waitMilliseconds(5000, "Wait for filterbox to be scrollable");
+    new Wait(driver).forXMilliseconds(5000);
     touchAction.swipeFromPointToPoint(40, 80, 40, 40, 500, 5000);
     File afterScrolling = new Shooter().capturePage(driver);
 

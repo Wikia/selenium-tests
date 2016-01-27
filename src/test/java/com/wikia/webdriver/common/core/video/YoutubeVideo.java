@@ -5,9 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
-/**
- * Created by Ludwik Kaźmierczak on 2015-02-12.
- */
 public class YoutubeVideo implements Video {
 
   private static final ImmutableMap<String, String> TITLE_SPECIAL_CHARS_TO_REPLACE_WITH_SPACE =

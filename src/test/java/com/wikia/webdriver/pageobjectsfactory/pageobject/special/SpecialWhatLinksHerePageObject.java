@@ -9,9 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-/**
- * Created by Rodriuki on 16/06/15.
- */
 public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   @FindBy(css = "input[name=target]")
   private WebElement pageInputField;

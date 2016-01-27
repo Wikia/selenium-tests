@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
  * @ownership Social Wikia
  */
 @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Test(groups="discussions")
 public class Sorting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -71,7 +72,7 @@ public class Sorting extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
-    postsList.waitForLoadingOverlayToDisappear();
+    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
   }
@@ -79,12 +80,12 @@ public class Sorting extends NewTestTemplate {
   public void userCanSwitchBetweenLatestAndTrendingTab() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickLatestTabOnDesktop();
-    postsList.waitForLoadingOverlayToDisappear();
+    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
 
     postsList.clickTrendingTabOnDesktop();
-    postsList.waitForLoadingOverlayToDisappear();
+    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }

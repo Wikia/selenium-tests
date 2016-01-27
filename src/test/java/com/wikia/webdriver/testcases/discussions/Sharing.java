@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
  * @ownership Social Wikia
  */
 @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Test(groups="discussions")
 public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";

@@ -32,9 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Ludwik on 2015-08-05.
- */
 public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<String, String>();

@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {"globalnavigationbar", "Searching"})
+@Test(groups = {"globalnavigationbar", "globalnavigationbarSearching"})
     public class Searching extends NewTestTemplate {
 
   @DataProvider

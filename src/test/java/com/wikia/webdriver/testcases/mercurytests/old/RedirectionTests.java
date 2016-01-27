@@ -12,10 +12,9 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.old.MercuryFooterComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.ArticleNavigationComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.OasisFooterComponentObject;
-import com.wikia.webdriver.elements.mercury.old.MercuryFooterComponentObject;
-import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -43,7 +42,7 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "MercuryRedirectionTest_001")
   public void MercuryRedirectionTest_001_RedirectFromWWW() {
-    new ArticlePageObject(driver).openWikiPage(url);
+    driver.get(url);
     Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
   }
 
@@ -51,7 +50,7 @@ public class RedirectionTests extends NewTestTemplate {
     ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
 
-    new ArticlePageObject(driver).openWikiPage(url);
+    driver.get(url);
     new MercuryFooterComponentObject(driver).clickFullSiteLink();
     navigation.clickRandomArticle();
 
@@ -75,7 +74,7 @@ public class RedirectionTests extends NewTestTemplate {
     OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
     SkinHelper helper = new SkinHelper(driver);
 
-    new ArticlePageObject(driver).openWikiPage(url);
+    driver.get(url);
     new MercuryFooterComponentObject(driver).clickFullSiteLink();
     oasisFooter.clickMobileSiteLink();
 

@@ -24,17 +24,30 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
   }
 
   public EditorHomePageObject clickDone() {
-    waitAndClick(doneButton);
+    wait.forElementVisible(doneButton);
+    doneButton.click();
+
     return new EditorHomePageObject(driver);
   }
 
   public CategoryFormPageObject clickAddCategory() {
-    waitAndClick(addCategoryButton);
+    wait.forElementVisible(addCategoryButton);
+    addCategoryButton.click();
+
     return new CategoryFormPageObject(driver);
   }
 
   public void verifyItem(String itemDisplayName) {
-    verifyTextInListElements(item, itemDisplayNameLocator, itemDisplayName);
+    WebElement innerElem;
+
+    for (WebElement element : item) {
+      wait.forElementVisible(element);
+      innerElem = element.findElement(itemDisplayNameLocator);
+
+      if (innerElem.getText().equals(itemDisplayName)) {
+        return;
+      }
+    }
   }
 
   public void waitForAddCategoryButtonToBeVisible() {

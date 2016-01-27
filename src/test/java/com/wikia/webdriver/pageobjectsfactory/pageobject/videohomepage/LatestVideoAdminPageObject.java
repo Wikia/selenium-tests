@@ -7,9 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * Created by Liz Lee on 6/18/14.
- */
 public class LatestVideoAdminPageObject extends WikiBasePageObject {
 
   private static final String FEATURE_TAB_CSS = ".left-menu-tabs a[title=Featured]";

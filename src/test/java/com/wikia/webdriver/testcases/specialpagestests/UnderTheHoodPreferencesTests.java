@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import org.testng.annotations.Test;
 
 /**
- * Created by Patrick on 17/07/2015. Create automated test for Under the hood preferences due to
+ * Create automated test for Under the hood preferences due to
  * missed P2 SERVICES-528
  */
 public class UnderTheHoodPreferencesTests extends NewTestTemplate {
