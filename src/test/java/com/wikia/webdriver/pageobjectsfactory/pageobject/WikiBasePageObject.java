@@ -733,8 +733,10 @@ public class WikiBasePageObject extends BasePageObject {
           + DateTime.now().getMillis()));
     }
 
-    String scriptOut = ((JavascriptExecutor) driver).executeScript("return M && M.prop('userId')").toString();
-    PageObjectLogging.log("Mercury userID", scriptOut, true);
+    Object scriptOut = ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
+    if (scriptOut != null) {
+      PageObjectLogging.log("Mercury userID", scriptOut.toString(), true);
+    }
 
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
