@@ -186,6 +186,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.ThemeDesigner"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.UserAndRights"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
+            <class name="com.wikia.webdriver.testcases.templateclassification.Editing"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
