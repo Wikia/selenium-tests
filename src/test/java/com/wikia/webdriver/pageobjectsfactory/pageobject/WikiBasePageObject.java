@@ -26,7 +26,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
@@ -60,7 +59,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-import org.apache.tools.ant.taskdefs.Java;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -734,12 +732,10 @@ public class WikiBasePageObject extends BasePageObject {
       driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
           + DateTime.now().getMillis()));
     }
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String scriptOut = (String) js.executeScript("return M && M.prop('userId')").toString();
-    System.out.println("********");
-    System.out.println(scriptOut);
-    System.out.println("********");
+
+    String scriptOut = ((JavascriptExecutor) driver).executeScript("return M && M.prop('userId')").toString();
     PageObjectLogging.log("Mercury userID", scriptOut, true);
+
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
         + token, true);
