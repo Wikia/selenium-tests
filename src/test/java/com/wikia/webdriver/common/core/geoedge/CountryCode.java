@@ -3,7 +3,6 @@ package com.wikia.webdriver.common.core.geoedge;
 public final class CountryCode {
 
   public static final String AUSTRALIA = "AU";
-  public static final String AUSTRIA = "AT";
   public static final String CANADA = "CA";
   public static final String GERMANY = "DE";
   public static final String JAPAN = "JP";
