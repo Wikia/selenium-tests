@@ -49,7 +49,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideoswap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
@@ -515,14 +514,6 @@ public class WikiBasePageObject extends BasePageObject {
         .log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
     return new SpecialUserLoginPageObject(driver);
   }
-
-  public LicensedVideoSwapPageObject openLicensedVideoSwap(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_LICENSED_VIDEO_SWAP);
-    PageObjectLogging.log("LicensedVideoSwapPageObject", "Special:LicensedVideoSwap opened on: "
-        + wikiURL, true);
-    return new LicensedVideoSwapPageObject(driver);
-  }
-
 
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
