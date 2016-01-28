@@ -176,8 +176,6 @@
             <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck"/>
-            <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests_TwoDrivers"/>
-            <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditAccountTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditingPreferencesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests"/>
