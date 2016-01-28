@@ -26,7 +26,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
@@ -730,8 +729,7 @@ public class WikiBasePageObject extends BasePageObject {
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
     } else {
-      driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
-          + DateTime.now().getMillis()));
+      refreshPageAddingCacheBuster();
     }
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
@@ -950,6 +948,14 @@ public class WikiBasePageObject extends BasePageObject {
   public void redirectToAnotherRandomArticle() {
     String wikiURL = getCurrentUrl().substring(0, getCurrentUrl().indexOf("wiki/"));
     getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
+  }
+
+  /**
+   * Refresh Wiki page, busting the cache( by adding cb=currentTimestamp )
+   */
+  public void refreshPageAddingCacheBuster(){
+    driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
+                                                 "cb=" + DateTime.now().getMillis()));
   }
 
   public enum PositionsVideo {
