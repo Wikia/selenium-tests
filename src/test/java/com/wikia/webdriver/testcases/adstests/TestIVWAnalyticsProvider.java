@@ -59,7 +59,6 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
-  @GeoEdgeBrowserMobProxy(country = CountryCode.UNITED_STATES)
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "germanArticles",
