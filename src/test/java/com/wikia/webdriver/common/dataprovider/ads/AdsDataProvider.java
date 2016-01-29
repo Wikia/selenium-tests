@@ -296,7 +296,6 @@ public class AdsDataProvider {
         {
             "adtest",
             "SyntheticTests/DfpParams",
-            5441,
             "wka.life/_adtest//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
@@ -553,6 +552,35 @@ public class AdsDataProvider {
                 "\"loc\":\"top\"",
                 "\"pos\":\"TOP_RIGHT_BOXAD\"",
                 "\"src\":\"gpt\""
+            )
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] dfpEvolveParamsOasis() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/DfpParams",
+            4403,
+            "ev/wikia_intl/ros/TOP_LEADERBOARD",
+            "TOP_LEADERBOARD",
+            Arrays.asList(
+                "\"s0\":\"life\"",
+                "\"s1\":\"_adtest\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"",
+                "\"wpage\":\"synthetictests/dfpparams\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"esrb\":\"teen\""
+            ),
+            Arrays.asList(
+                "\"sect\":\"ros\"",
+                "\"pos\":\"a\"",
+                "\"site\":\"wikia_intl\""
             )
         }
     };
