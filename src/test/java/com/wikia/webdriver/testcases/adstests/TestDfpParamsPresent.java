@@ -23,13 +23,14 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
   )
   public void dfpParamsPresentSyntheticOasis(String wikiName,
                                              String article,
+                                             Integer dfpClientId,
                                              String adUnit,
                                              String slot,
                                              List<String> pageParams,
                                              List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, slot, "gpt");
+    ads.verifyGptIframe(dfpClientId, adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
 
