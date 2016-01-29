@@ -334,7 +334,18 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    */
   public void verifyGptIframe(String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
+    Integer wikiaDfpClientId = 5441;
+    verifyGptIframe(wikiaDfpClientId, adUnit, slotName, src);
+  }
+
+  /**
+   * Test whether the correct GPT ad unit is called
+   *
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or Turtle
+   * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   */
+  public void verifyGptIframe(Integer dfpClientId, String adUnit, String slotName, String src) {
+    String iframeId = "google_ads_iframe_/" + dfpClientId.toString() + "/" + adUnit + "/" + src + "/" + slotName + "_0";
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
